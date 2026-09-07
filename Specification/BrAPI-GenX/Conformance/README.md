@@ -18,7 +18,7 @@ fixtures live in [`fixtures/`](./fixtures). The probe list is the authority —
 the runner is one execution of it, replaceable by a future BRAVA harness.
 Recorded runs live in [`RESULTS.md`](./RESULTS.md).
 
-## Reference test server
+## Reference test servers
 
 `Scripts/genx_test_server.py` (standard library only, in-memory, no
 persistence, no authentication) implements the skeleton for live execution:
@@ -44,6 +44,12 @@ semantics for L-16/L-17. Packages live under `/fair-packages` with RFC-006
 replay/conflict/embargo semantics for L-18–L-20. Samples live under
 `/telemetry` with RFC-007 batch/replay/conflict/aggregate semantics for
 L-21–L-23.
+
+A second, black-box TypeScript/Bun server
+(`Scripts/genx_test_server_ts.ts`, run with `bun`) implements the RFC-001
+core + RFC-004 inference subset to prove cross-runtime interop (RESULTS.md
+run 9). Canonical JSON there is sorted-keys + compact separators + UTF-8;
+digest agreement with Python holds for ASCII payloads.
 
 ## Probe index
 

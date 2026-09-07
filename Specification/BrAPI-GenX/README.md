@@ -38,3 +38,6 @@ three objects), [RFC-002-Ontology-Governance](./RFC-002-Ontology-Governance.md),
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-19, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).
+
+[ADOPTION.md](./ADOPTION.md) is the incremental adoption guide for V2.1
+servers (order, compat rules, conformance commands, anti-patterns).

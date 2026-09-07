@@ -152,6 +152,47 @@ python Scripts/checkGenXConformance.py \
 # 44 PASS, 0 FAIL, 0 SKIP
 ```
 
+## Run 9 — second implementation, cross-runtime (2026-09-07)
+
+A TypeScript/Bun server (`Scripts/genx_test_server_ts.ts`), written black-box
+from the RFC text, implements the RFC-001 core + RFC-004 inference subset
+(serverinfo both profiles, Jobs, minimal models). Result:
+
+```shell
+bun Scripts/genx_test_server_ts.ts --port 18082 --delay 0.4 &
+python Scripts/checkGenXConformance.py --server http://127.0.0.1:18082/brapi/v3 \
+  --expired-job JOB_EXPIRED --only L-01   # ... L-02 L-03 L-04 L-05 L-06 L-07
+                                          # L-12 L-13 L-14 L-15 L-24
+# 13/13 PASS, including L-14 digest agreement across runtimes and L-24
+```
+
+Key evidence: L-14's `inputsDigest`, computed by Bun crypto over
+TS-canonicalized JSON, matches the Python runner's independent recomputation —
+sorted-keys + compact separators + UTF-8 agrees across runtimes for ASCII
+payloads. Non-ASCII escaping differs (Python `ensure_ascii` vs raw UTF-8):
+D-02's remaining boundary, now precisely located instead of open-ended.
+
+Defect found by the exercise: two NUL bytes inside TS template literals broke
+model lookup (L-14 submit → 400); fixed byte-precisely, suite re-run green.
+No RFC text change was needed — the ambiguity was in my code, not the spec.
+
+## Run 10 — differential + performance (2026-09-07)
+
+```shell
+python Scripts/genx_differential_check.py \
+  --a http://127.0.0.1:18080/brapi/v3 --b http://127.0.0.1:18082/brapi/v3 \
+  --expired-job JOB_EXPIRED
+# differential: 9/9 steps agree (serverinfo agrees under subset-capability rule)
+```
+
+Indicative localhost numbers (debug servers, no production claims):
+
+| Operation | Time |
+|---|---|
+| 1000-point telemetry batch ingest | 0.118 s |
+| Range + mean over 1000 points | 0.027 s |
+| Full 44-probe live suite (delay 0.4 s) | 6.6 s (polling-dominated) |
+
 ## Evidence for open RFC-001 decisions
 
 - Conflict status: the reference server rejects same-key/different-body with
