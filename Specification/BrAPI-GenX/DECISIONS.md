@@ -53,9 +53,10 @@ is reversible without breaking the rest; objections belong against the ID.
 
 ## Verification state
 
-- Static: 20 probes green. Live: 24 probes green vs the reference server
-  (`Scripts/genx_test_server.py`), plus L-06 vs the v21 profile.
-- Eight recorded runs in `Conformance/RESULTS.md`; every static check has
+- Static: 20 probes green. Live: 28 probes green vs the reference server
+  (`Scripts/genx_test_server.py`), plus applicable subsets vs the v21 profile
+  and the TypeScript server.
+- Eleven recorded runs in `Conformance/RESULTS.md`; every static check has
   /tmp mutation evidence proving fail-closed behavior, and L-24 proves
   single-effect idempotency under 8-thread concurrency (control: 8 keys → 8 jobs).
 - A second, black-box TypeScript/Bun implementation passes 13/13 applicable

@@ -68,8 +68,9 @@ conflict (L-13), inference digest binding (L-14), unknown/revoked model
 rejection (L-15), matrix replay (L-16), matrix conflict (L-17), package
 replay (L-18), package conflict (L-19), embargo denial (L-20), telemetry
 replay (L-21), telemetry conflict (L-22), aggregate recomputation (L-23),
-concurrent-submit single effect (L-24). Every static check additionally has
-/tmp mutation evidence; see RESULTS.md run 8.
+concurrent-submit single effect (L-24), list envelopes (L-25), windowed
+buckets (L-26), deprecated warning (L-27), pagination slice (L-28). Every
+static check additionally has /tmp mutation evidence; see RESULTS.md run 8.
 
 ## Status contract
 

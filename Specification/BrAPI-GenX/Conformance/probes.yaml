@@ -463,6 +463,52 @@ probes:
   falsifier: Two distinct jobDbIds for one key.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_submit, concurrent_posts: 8, assert: {single_effect: true}}
+- id: L-25
+  tier: live
+  object: all
+  title: List endpoints return paged envelopes
+  procedure:
+  - GET collection endpoints after creating one job and one model.
+  expectation: Each returns 200 with result.data arrays and pagination totals.
+  falsifier: A collection read failing or missing pagination.
+  calls:
+  - {method: POST, path: /jobs, body_fixture: live_submit, capture_job: true}
+  - {method: POST, path: /models, body_fixture: live_model_submit, capture_model: true}
+  - {method: GET, path: /jobs, assert: {status: 200}}
+  - {method: GET, path: /models, assert: {status: 200}}
+- id: L-26
+  tier: live
+  object: telemetry
+  title: Windowed buckets partition the range
+  procedure:
+  - POST three one-minute-apart points; GET mean buckets with windowSeconds 60.
+  expectation: Three buckets, one sample each.
+  falsifier: Points landing in the wrong buckets or bucket counts disagreeing.
+  calls:
+  - {method: POST, path: /telemetry, body_fixture: live_telemetry_batch, capture_telemetry: true}
+  - {method: GET, path: "/telemetry?deviceDbId={telemetry_device}&sensorDbId=air-temp-01&aggregation=mean&windowSeconds=60", assert: {data_length: 3}}
+- id: L-27
+  tier: live
+  object: modelRegistry
+  title: Deprecated models serve with a warning
+  procedure:
+  - Register a deprecated model; submit inference naming it.
+  expectation: Submit is accepted with 202 and a WARNING status message; the job completes.
+  falsifier: Silent acceptance without warning, or rejection.
+  calls:
+  - {method: POST, path: /models, body_fixture: live_model_deprecated, capture_model_deprecated: true}
+  - {method: POST, path: /jobs, body_fixture: live_inference_deprecated, assert: {status: 202, status_message: WARNING}}
+- id: L-28
+  tier: live
+  object: telemetry
+  title: Collection pagination slices the range
+  procedure:
+  - POST three points; GET page 0 of size 2.
+  expectation: Two rows returned with totalCount 3.
+  falsifier: Wrong slice or wrong totals.
+  calls:
+  - {method: POST, path: /telemetry, body_fixture: live_telemetry_batch, capture_telemetry: true}
+  - {method: GET, path: "/telemetry?deviceDbId={telemetry_device}&page=0&pageSize=2", assert: {data_length: 2, total_count: 3}}
 required_map:
   job_accepted: {schema: Job, required: [jobDbId, jobType, status]}
   job_completed: {schema: Job, required: [jobDbId, jobType, status]}

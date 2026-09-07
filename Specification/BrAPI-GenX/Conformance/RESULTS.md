@@ -207,4 +207,20 @@ Indicative localhost numbers (debug servers, no production claims):
 
 No persistence (restart loses jobs), no authentication (Bearer accepted and
 ignored), single process, expiry sweep untested beyond the pre-seeded
-`JOB_EXPIRED`, no concurrent-key race test. Production claims: none.
+`JOB_EXPIRED`. Concurrency is proven for same-key submits (L-24) only;
+mixed key/type races are untested. Production claims: none.
+
+## Run 11 — coverage closure (2026-09-07)
+
+Four previously unexercised behaviors get probes; no new spec surface:
+
+```shell
+python Scripts/checkGenXConformance.py --server http://127.0.0.1:18080/brapi/v3 \
+  --expired-job JOB_EXPIRED
+# 48 PASS, 0 FAIL, 0 SKIP (L-25 list envelopes, L-26 windowed buckets,
+# L-27 deprecated WARNING, L-28 pagination slice)
+```
+
+L-25 and L-27 also pass against the TypeScript server (subset surface).
+Generic assert kinds added to the runner: `data_length`, `total_count`,
+`status_message`.

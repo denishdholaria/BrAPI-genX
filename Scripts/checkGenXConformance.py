@@ -606,6 +606,9 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
     if any(s.get("capture_model_revoked") for s in calls):
         ctx["live_model_revoked_id"] = None
         ctx["live_model_revoked"] = None
+    if any(s.get("capture_model_deprecated") for s in calls):
+        ctx["live_model_deprecated_id"] = None
+        ctx["live_model_deprecated"] = None
     if any(s.get("capture_matrix") for s in calls):
         ctx["live_matrix_id"] = None
         ctx["live_matrix"] = None
@@ -687,6 +690,15 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         f"test-authority:model:revoked-{uuid.uuid4().hex[:8]}")
                 body["modelDbId"] = ctx["live_model_revoked_id"]
                 body["status"] = "revoked"
+            elif fixture == "live_model_deprecated":
+                body = load_json(
+                    os.path.join(conformance_dir, "fixtures", "model_submit.json")
+                )
+                if not ctx.get("live_model_deprecated_id"):
+                    ctx["live_model_deprecated_id"] = (
+                        f"test-authority:model:deprecated-{uuid.uuid4().hex[:8]}")
+                body["modelDbId"] = ctx["live_model_deprecated_id"]
+                body["status"] = "deprecated"
             elif fixture == "live_matrix_submit":
                 body = load_json(
                     os.path.join(conformance_dir, "fixtures", "matrix_submit.json")
@@ -737,7 +749,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                 point["value"] = round(point["value"] + 10.0, 3)
                 body = [point]
             elif fixture in ("live_inference_submit", "live_inference_revoked",
-                             "live_inference_unknown"):
+                             "live_inference_unknown", "live_inference_deprecated"):
                 if fixture == "live_inference_unknown":
                     model_id, version = "test-authority:model:does-not-exist", "1"
                 elif fixture == "live_inference_revoked":
@@ -746,6 +758,12 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         return results.report(
                             probe["id"], probe["title"], "FAIL", "no revoked model captured")
                     version = ctx["live_model_revoked"][1]
+                elif fixture == "live_inference_deprecated":
+                    model_id = ctx.get("live_model_deprecated_id")
+                    if not model_id or not ctx.get("live_model_deprecated"):
+                        return results.report(
+                            probe["id"], probe["title"], "FAIL", "no deprecated model captured")
+                    version = ctx["live_model_deprecated"][1]
                 else:
                     model_id = ctx.get("live_model_id")
                     if not model_id or not ctx.get("live_model"):
@@ -842,6 +860,12 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         probe["id"], probe["title"], "FAIL", f"submit returned {status}")
                 seen = payload.get("result", {})
                 ctx["live_model_revoked"] = (seen.get("modelDbId"), seen.get("modelVersion"))
+            if step.get("capture_model_deprecated"):
+                if status not in (200, 202):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL", f"submit returned {status}")
+                seen = payload.get("result", {})
+                ctx["live_model_deprecated"] = (seen.get("modelDbId"), seen.get("modelVersion"))
             if step.get("capture_matrix"):
                 if status not in (200, 202):
                     return results.report(
@@ -866,6 +890,25 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                 return results.report(
                     probe["id"], probe["title"], "FAIL",
                     f"expected {assertion['status']}, got {status}")
+            if "data_length" in assertion:
+                rows = payload.get("result", {}).get("data", [])
+                if len(rows) != assertion["data_length"]:
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        f"{len(rows)} rows, expected {assertion['data_length']}")
+            if "total_count" in assertion:
+                total = payload.get("metadata", {}).get("pagination", {}).get("totalCount")
+                if total != assertion["total_count"]:
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        f"totalCount is {total}, expected {assertion['total_count']}")
+            if "status_message" in assertion:
+                levels = [s.get("messageType")
+                          for s in payload.get("metadata", {}).get("status", [])]
+                if assertion["status_message"] not in levels:
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        f"no {assertion['status_message']} status message, got {levels}")
             if assertion.get("same_term"):
                 seen = payload.get("result", {})
                 if (seen.get("variableDbId"), seen.get("version")) != ctx.get("live_term"):
@@ -1014,6 +1057,8 @@ def main():
         "live_model_id": None,
         "live_model_revoked_id": None,
         "live_model_revoked": None,
+        "live_model_deprecated_id": None,
+        "live_model_deprecated": None,
         "live_matrix_id": None,
         "live_matrix": None,
         "live_package_id": None,
