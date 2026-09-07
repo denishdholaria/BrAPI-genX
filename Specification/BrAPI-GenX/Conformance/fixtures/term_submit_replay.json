@@ -1,0 +1,23 @@
+{
+  "variableDbId": "institute-a:variable:CO_334_0000012",
+  "variableName": "Grain yield per plot",
+  "traitDbId": "institute-a:trait:CO_334_0000009",
+  "traitVersion": "1.2",
+  "methodDbId": "institute-a:method:weighing_1",
+  "methodVersion": "3",
+  "scaleDbId": "institute-a:scale:kg_per_plot",
+  "scaleVersion": "1",
+  "version": "1",
+  "status": "active",
+  "ontologyDbId": "CO_334",
+  "documentationURL": "https://institute.org/ontology/variables/CO_334_0000012/v/1",
+  "provenance": {
+    "methodVersion": "CO_334:0000012.3",
+    "algorithm": "curator-review",
+    "algorithmVersion": "review-2",
+    "inputsDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "assumptions": ["weighed dry grain per harvested plot"],
+    "recordedAt": "2026-09-07T00:00:00Z",
+    "actor": "actor:ontology-curator-01"
+  }
+}

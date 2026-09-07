@@ -1,0 +1,44 @@
+components:
+  securitySchemes:
+    GenXAuthorizationToken:
+      bearerFormat: JWT (GenX auth profile, see RFC-001) or opaque token
+      description: Bearer token proving authorization. GenX servers advertising the `oidc` auth profile accept OIDC JWTs; see RFC-001 for the profile. V2.1 semantics are unchanged.
+      scheme: bearer
+      type: http
+info:
+  description: |-
+    BrAPI-GenX is a proposal for the next generation of the Breeding API. Status: draft, not accepted, not normative. V2.1 remains the stable release. See Specification/BrAPI-GenX/RFC-001-GenX-Skeleton.md.
+  title: BrAPI-GenX (proposal)
+  version: '3.0-draft'
+openapi: 3.0.0
+paths: {}
+security:
+- GenXAuthorizationToken: []
+servers:
+- url: https://test-server.brapi.org/brapi/v3
+tags:
+- name: Provenance
+  description: Provenance envelope for observations, analyses, and predictions
+  externalDocs:
+    description: Docs
+    url: https://wiki.brapi.org/
+- name: Jobs
+  description: Asynchronous job execution with idempotency and cancellation
+  externalDocs:
+    description: Docs
+    url: https://wiki.brapi.org/
+- name: Server Info
+  description: Capability negotiation for GenX servers
+  externalDocs:
+    description: Docs
+    url: https://wiki.brapi.org/
+- name: Ontology
+  description: Versioned, namespaced ontology term governance
+  externalDocs:
+    description: Docs
+    url: https://wiki.brapi.org/
+- name: Models
+  description: Model registry and inference binding
+  externalDocs:
+    description: Docs
+    url: https://wiki.brapi.org/

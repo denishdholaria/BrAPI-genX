@@ -1,0 +1,20 @@
+{
+  "entryType": "move",
+  "quantity": "50.000",
+  "units": "kg",
+  "actor": "actor:warehouse-operator-03",
+  "custodian": "actor:seed-operations-manager",
+  "previousCustodian": "actor:field-crew-lead",
+  "locationFrom": "warehouse-a:bay-04",
+  "locationTo": "warehouse-b:bay-01",
+  "occurredAt": "2026-09-07T08:00:00Z",
+  "idempotencyKey": "550e8400-e29b-41d4-a716-446655440001",
+  "description": "Transfer to conditioning plant",
+  "provenance": {
+    "algorithm": "scale-ticket",
+    "algorithmVersion": "ticket-7",
+    "inputsDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "recordedAt": "2026-09-07T08:05:00Z",
+    "actor": "actor:warehouse-operator-03"
+  }
+}

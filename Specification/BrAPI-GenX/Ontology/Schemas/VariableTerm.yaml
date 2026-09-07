@@ -1,0 +1,77 @@
+info:
+  title: BrAPI
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    VariableTerm:
+      type: object
+      description: |-
+        One immutable version of an observation-variable term. A published
+        (variableDbId, version) pair never mutates; conflicting rewrites are
+        rejected with 409 and deprecation is explicit via status/supersededBy.
+      required:
+      - variableDbId
+      - variableName
+      - version
+      - status
+      properties:
+        variableDbId:
+          description: Namespaced term identity `{authority}:{type}:{localId}`
+          type: string
+          example: institute-a:variable:CO_334_0000012
+        variableName:
+          description: Human readable term name
+          type: string
+          example: Grain yield per plot
+        traitDbId:
+          description: Referenced trait identifier, namespaced form SHOULD be used
+          type: string
+          example: institute-a:trait:CO_334_0000009
+        traitVersion:
+          description: Referenced trait version, when known
+          type: string
+          example: '1.2'
+        methodDbId:
+          description: Referenced method identifier, namespaced form SHOULD be used
+          type: string
+          example: institute-a:method:weighing_1
+        methodVersion:
+          description: Referenced method version, when known
+          type: string
+          example: '3'
+        scaleDbId:
+          description: Referenced scale identifier, namespaced form SHOULD be used
+          type: string
+          example: institute-a:scale:kg_per_plot
+        scaleVersion:
+          description: Referenced scale version, when known
+          type: string
+          example: '1'
+        version:
+          description: Term version. Opaque string; ordering semantics are requires-decision (see RFC-002 §5).
+          type: string
+          example: '1'
+        status:
+          description: Lifecycle state. Deprecation is explicit; there is no DELETE.
+          type: string
+          enum:
+          - active
+          - deprecated
+          example: active
+        supersededBy:
+          description: variableDbId of the replacement term, same authority, when status is deprecated
+          type: string
+          example: institute-a:variable:CO_334_0000012b
+        ontologyDbId:
+          description: Owning ontology identifier, when applicable
+          type: string
+          example: CO_334
+        documentationURL:
+          description: Human readable documentation of this term version
+          type: string
+          example: https://institute.org/ontology/variables/CO_334_0000012/v/1
+        provenance:
+          description: Who authored this definition and from what evidence
+          $ref: '#/components/schemas/ProvenanceEnvelope'

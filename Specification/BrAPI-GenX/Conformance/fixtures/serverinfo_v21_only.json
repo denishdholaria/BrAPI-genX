@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "pagination": {},
+    "status": [],
+    "datafiles": []
+  },
+  "result": {
+    "serverName": "A V2.1-only Server",
+    "organizationName": "The Institute",
+    "calls": [
+      {
+        "service": "germplasm/{germplasmDbId}/pedigree",
+        "versions": ["2.0", "2.1"],
+        "methods": ["GET"]
+      },
+      {
+        "service": "germplasm-search",
+        "versions": ["2.0", "2.1"],
+        "methods": ["POST"]
+      }
+    ]
+  }
+}

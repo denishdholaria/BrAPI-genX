@@ -1,0 +1,122 @@
+info:
+  title: BrAPI
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ServerInfoV3:
+      type: object
+      description: |-
+        Capability negotiation document for a GenX server. Keeps every V2.1
+        ServerInfo field and adds generation versions, capabilities, and auth
+        profiles so clients negotiate instead of probing endpoints.
+      required:
+      - calls
+      - brapiVersions
+      - capabilities
+      properties:
+        contactEmail:
+          description: A contact email address for this server management
+          type: string
+          example: contact@institute.org
+        documentationURL:
+          description: A URL to the human readable documentation of an object
+          type: string
+          example: institute.org/server
+        organizationURL:
+          description: The URL of the organization that manages this server and data
+          type: string
+          example: institute.org/home
+        organizationName:
+          description: The name of the organization that manages this server and data
+          type: string
+          example: The Institute
+        serverName:
+          description: The name of this server
+          type: string
+          example: The BrAPI Test Server
+        serverDescription:
+          description: A description of this server
+          type: string
+          example: GenX proposal server. Supported BrAPI Versions - V2.1, V3.0-draft
+        location:
+          description: Physical location of this server (ie. City, Country)
+          type: string
+          example: USA
+        calls:
+          description: Array of available calls on this server (V2.1 semantics, unchanged)
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
+        brapiVersions:
+          description: BrAPI generations served by this server
+          type: array
+          items:
+            type: string
+          example: ['2.1', '3.0-draft']
+        capabilities:
+          description: GenX objects and call families this server implements
+          type: array
+          items:
+            $ref: '#/components/schemas/ServerCapability'
+        authProfiles:
+          description: Authentication profiles this server accepts
+          type: array
+          items:
+            $ref: '#/components/schemas/ServerAuthProfile'
+    ServerCapability:
+      type: object
+      description: One named capability advertised by the server
+      required:
+      - name
+      - versions
+      - methods
+      properties:
+        name:
+          description: Capability name, e.g. provenanceEnvelope, jobs, germplasm
+          type: string
+          example: jobs
+        versions:
+          description: Supported versions of this capability
+          type: array
+          items:
+            type: string
+          example: ['1.0']
+        methods:
+          description: HTTP methods usable with this capability
+          type: array
+          items:
+            type: string
+            enum:
+            - GET
+            - POST
+            - PUT
+            - DELETE
+          example: ['GET', 'POST']
+        scopes:
+          description: Authorization scopes required to use this capability, when applicable
+          type: array
+          items:
+            type: string
+          example: [jobs.submit, jobs.read]
+    ServerAuthProfile:
+      type: object
+      description: One authentication profile the server accepts
+      required:
+      - name
+      properties:
+        name:
+          description: Profile name. `oidc` means OIDC JWT bearer tokens per RFC-001 §6; absence of `oidc` means V2.1 bearer semantics.
+          type: string
+          example: oidc
+        issuer:
+          description: Expected token issuer (`iss`) for this profile, when applicable
+          type: string
+          example: https://login.institute.org/realms/breeding
+        scopes:
+          description: Scopes issued or required under this profile
+          type: array
+          items:
+            type: string
+          example: [openid, brapi]

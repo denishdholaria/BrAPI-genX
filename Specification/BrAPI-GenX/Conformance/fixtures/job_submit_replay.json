@@ -1,0 +1,7 @@
+{
+  "jobType": "germplasm_search",
+  "parameters": {
+    "germplasmNames": ["Germ 01", "Germ 02"]
+  },
+  "idempotencyKey": "550e8400-e29b-41d4-a716-446655440000"
+}

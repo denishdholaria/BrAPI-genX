@@ -1,0 +1,101 @@
+info:
+  title: BrAPI
+  version: ''
+openapi: 3.0.0
+paths:
+  /models:
+    get:
+      summary: List registered model versions
+      description: Get a paged list of model versions across authorities. Filters combine with AND.
+      parameters:
+      - name: modelDbId
+        description: Namespaced model identity `{authority}:model:{localId}`
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - deprecated
+          - revoked
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/ModelArtifactListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - Models
+    post:
+      summary: Register one model version
+      description: |-
+        Unknown modelDbId creates; known id with a new version appends;
+        same (modelDbId, modelVersion) with an identical body replays the
+        existing record; same pair with a different body is rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelArtifactNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/ModelArtifact'
+                required:
+                - metadata
+                - result
+                title: ModelArtifactResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - Models
+components:
+  responses:
+    ModelArtifactListResponse:
+      content:
+        application/json:
+          schema:
+            title: ModelArtifactListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ModelArtifact'
+            required:
+            - metadata
+            - result
+      description: OK

@@ -1,0 +1,106 @@
+info:
+  title: BrAPI
+  version: ''
+openapi: 3.0.0
+paths:
+  /variables:
+    get:
+      summary: List ontology term versions
+      description: Get a paged list of term versions across authorities. Filters combine with AND.
+      parameters:
+      - name: variableDbId
+        description: Namespaced term identity `{authority}:{type}:{localId}`
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: ontologyDbId
+        description: Filter by owning ontology
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - deprecated
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/VariableTermListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - Ontology
+    post:
+      summary: Publish one term version
+      description: |-
+        Unknown variableDbId creates; known id with a new version appends;
+        same (variableDbId, version) with an identical body replays the
+        existing record; same pair with a different body is rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VariableTermNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/VariableTerm'
+                required:
+                - metadata
+                - result
+                title: VariableTermResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - Ontology
+components:
+  responses:
+    VariableTermListResponse:
+      content:
+        application/json:
+          schema:
+            title: VariableTermListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VariableTerm'
+            required:
+            - metadata
+            - result
+      description: OK

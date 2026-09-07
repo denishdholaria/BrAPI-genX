@@ -1,0 +1,123 @@
+info:
+  title: BrAPI
+  version: ''
+openapi: 3.0.0
+paths:
+  /seedlots/{seedLotDbId}/ledger:
+    get:
+      summary: Read a lot's ledger in position order
+      description: "Entries are returned in per-lot position order. Positions are source-local cursors; no global ordering is claimed. Unknown lots follow documented server behavior (reference server returns an empty list)."
+      parameters:
+      - name: seedLotDbId
+        description: Owning seed lot
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: entryType
+        description: Filter by kind of movement
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - adjust
+          - move
+          - handoff
+          - production
+          - planting
+          - trade
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/LotLedgerEntryListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - Seed Lots
+    post:
+      summary: Append one ledger entry
+      description: |-
+        Unknown idempotencyKey appends; known key with an identical body
+        replays the existing entry with zero new effects; known key with a
+        different body is rejected with 409.
+      parameters:
+      - name: seedLotDbId
+        description: Owning seed lot
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Idempotency-Key
+        description: |-
+          Optional replay key (UUID recommended). May alternatively be supplied
+          inside the request body as `idempotencyKey`. The header wins when both
+          are present.
+        in: header
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LotLedgerEntryNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/LotLedgerEntry'
+                required:
+                - metadata
+                - result
+                title: LotLedgerEntryResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - Seed Lots
+components:
+  responses:
+    LotLedgerEntryListResponse:
+      content:
+        application/json:
+          schema:
+            title: LotLedgerEntryListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LotLedgerEntry'
+            required:
+            - metadata
+            - result
+      description: OK

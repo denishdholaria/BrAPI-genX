@@ -1,0 +1,62 @@
+{
+  "metadata": {
+    "pagination": {},
+    "status": [],
+    "datafiles": []
+  },
+  "result": {
+    "serverName": "The BrAPI Test Server",
+    "organizationName": "The Institute",
+    "organizationURL": "institute.org/home",
+    "contactEmail": "contact@institute.org",
+    "documentationURL": "institute.org/server",
+    "location": "USA",
+    "calls": [
+      {
+        "service": "germplasm/{germplasmDbId}/pedigree",
+        "versions": ["2.0", "2.1"],
+        "methods": ["GET"]
+      }
+    ],
+    "brapiVersions": ["2.1", "3.0-draft"],
+    "capabilities": [
+      {
+        "name": "jobs",
+        "versions": ["1.0"],
+        "methods": ["GET", "POST", "DELETE"],
+        "scopes": ["jobs.submit", "jobs.read"]
+      },
+      {
+        "name": "provenanceEnvelope",
+        "versions": ["1.0"],
+        "methods": ["GET", "POST"],
+        "scopes": []
+      },
+      {
+        "name": "ontologyTerms",
+        "versions": ["1.0"],
+        "methods": ["GET", "POST"],
+        "scopes": ["ontology.write"]
+      },
+      {
+        "name": "lotLedger",
+        "versions": ["1.0"],
+        "methods": ["GET", "POST"],
+        "scopes": ["seedlots.ledger.append", "seedlots.ledger.read"]
+      },
+      {
+        "name": "modelRegistry",
+        "versions": ["1.0"],
+        "methods": ["GET", "POST"],
+        "scopes": ["models.register", "models.read", "jobs.infer"]
+      }
+    ],
+    "authProfiles": [
+      {
+        "name": "oidc",
+        "issuer": "https://login.institute.org/realms/breeding",
+        "scopes": ["openid", "brapi"]
+      }
+    ]
+  }
+}

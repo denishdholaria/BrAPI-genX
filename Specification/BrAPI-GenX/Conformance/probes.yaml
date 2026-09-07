@@ -1,0 +1,318 @@
+version: 1
+notes: Authority for GenX conformance. Static probes execute against this repo;
+  live probes execute against a server given via --server and SKIP otherwise.
+probes:
+- id: S-01
+  tier: static
+  object: all
+  title: Every GenX $ref resolves to a defined component
+  check: refs_resolve
+  procedure:
+  - Collect $ref '#/components/<section>/<name>' from all BrAPI-GenX endpoint YAMLs.
+  - Collect definitions from BrAPI-GenX Schemas plus Specification/Components and Specification/OpenAPI-Components Parameters, Responses, Schemas.
+  - Collect read-only definitions from committed V2.1 module files (Specification/BrAPI-*/**/*.yaml); GenX must reference them, never redefine them.
+  expectation: Zero unresolvable references and zero GenX names shadowing a V2.1 or shared component name.
+  falsifier: Any $ref with no matching definition, or any GenX definition colliding with an existing name.
+- id: S-02
+  tier: static
+  object: all
+  title: Fixtures carry the required fields of their schema
+  check: required_fields
+  procedure:
+  - Validate each shaped fixture against the required lists in probes.yaml required_map.
+  expectation: All required fields present with the documented types.
+  falsifier: A fixture missing a required field still passing.
+- id: S-03
+  tier: static
+  object: jobs
+  title: Fixture lifecycle states stay inside the Job status enum
+  check: job_enums
+  procedure:
+  - Check every status value in job fixtures against SUBMITTED, RUNNING, COMPLETED, FAILED, CANCELLED, EXPIRED.
+  - Check every capability methods entry against GET, POST, PUT, DELETE.
+  expectation: No out-of-enum value in fixtures or schemas.
+  falsifier: An out-of-enum status accepted by the check.
+- id: S-04
+  tier: static
+  object: provenance
+  title: Digests in fixtures are lowercase SHA-256 hex
+  check: digest_format
+  procedure:
+  - Match inputsDigest, responseDigest, queryDigest against ^[0-9a-f]{64}$.
+  expectation: Every digest present in fixtures matches.
+  falsifier: A truncated, uppercase, or non-hex digest passing.
+- id: S-05
+  tier: static
+  object: all
+  title: Date-times in fixtures parse as RFC 3339
+  check: datetime_format
+  procedure:
+  - Parse recordedAt, createdAt, updatedAt, expiresAt as RFC 3339 date-times.
+  expectation: Every date-time present parses.
+  falsifier: A non-conforming timestamp passing.
+- id: S-06
+  tier: static
+  object: jobs
+  title: Replay and conflict fixtures stand in the specified relation
+  check: idempotency_relations
+  procedure:
+  - Canonicalize job_submit and job_submit_replay bodies; they must be byte-identical.
+  - job_submit_conflict must share the idempotencyKey and differ in body.
+  expectation: Replay pair identical; conflict pair shares key only.
+  falsifier: Either relation inverted without failing.
+- id: S-07
+  tier: static
+  object: serverInfoV3
+  title: Advertised GenX capabilities are grounded in this directory
+  check: capability_grounding
+  procedure:
+  - For each capability in serverinfov3.json whose name is a GenX object name (jobs, provenanceEnvelope, ontologyTerms), require a matching BrAPI-GenX directory and schema.
+  - Non-GenX capability names are tolerated (existing call families).
+  expectation: No advertised GenX name without a backing schema.
+  falsifier: An unbacked GenX name passing.
+- id: S-08
+  tier: static
+  object: serverInfoV3
+  title: V2.1 fallback fixture keeps the V2.1 Service shape
+  check: v21_fallback_shape
+  procedure:
+  - Check serverinfo_v21_only.json calls entries carry service, versions, methods.
+  expectation: A GenX client can negotiate from calls alone.
+  falsifier: Fallback fixture unreadable under V2.1 rules.
+- id: S-09
+  tier: static
+  object: ontology
+  title: Term fixtures carry the required VariableTerm fields
+  check: required_fields
+  procedure:
+  - Validate term fixtures against the required lists in probes.yaml required_map.
+  expectation: All required fields present with the documented types.
+  falsifier: A fixture missing a required field still passing.
+- id: S-10
+  tier: static
+  object: ontology
+  title: Term identifiers in fixtures are namespaced {authority}:{type}:{localId}
+  check: term_id_format
+  procedure:
+  - Match variableDbId, traitDbId, methodDbId, scaleDbId, supersededBy values in term fixtures against ^[^:/]+:[^:/]+:[^:/]+$.
+  expectation: Every identifier present is namespaced.
+  falsifier: A bare or two-segment identifier passing.
+- id: S-11
+  tier: static
+  object: lotLedger
+  title: Ledger fixtures carry the required LotLedgerEntry fields
+  check: required_fields
+  procedure:
+  - Validate ledger fixtures against the required lists in probes.yaml required_map.
+  expectation: All required fields present with the documented types.
+  falsifier: A fixture missing a required field still passing.
+- id: S-12
+  tier: static
+  object: lotLedger
+  title: Ledger quantities are fixed-scale decimal strings, never floats
+  check: decimal_format
+  procedure:
+  - Match quantity values in ledger fixtures against ^-?\d+(\.\d+)?$ and reject JSON numbers.
+  expectation: Every quantity present is a decimal string.
+  falsifier: A float quantity or a non-numeric string passing.
+- id: S-13
+  tier: static
+  object: modelRegistry
+  title: Model fixtures carry the required ModelArtifact fields
+  check: required_fields
+  procedure:
+  - Validate model fixtures against the required lists in probes.yaml required_map.
+  expectation: All required fields present with the documented types.
+  falsifier: A fixture missing a required field still passing.
+- id: S-14
+  tier: static
+  object: modelRegistry
+  title: Model identities are namespaced and digests are SHA-256 hex
+  check: model_shape
+  procedure:
+  - Match modelDbId values against ^[^:/]+:[^:/]+:[^:/]+$.
+  - Match artifactDigest and trainingDataDigest against ^[0-9a-f]{64}$.
+  - Check status values against the ModelArtifact schema enum.
+  expectation: Every model identifier, digest, and status in fixtures is well-formed.
+  falsifier: A bare id, a non-hex digest, or an out-of-enum status passing.
+- id: L-01
+  tier: live
+  object: jobs
+  title: Replay with same key and body returns the existing job, zero new effects
+  procedure:
+  - POST JobNewRequest with a fresh idempotencyKey; record jobDbId.
+  - POST the identical body and key again.
+  expectation: Second response is 200 or 202 with the same jobDbId and no new job.
+  falsifier: A second jobDbId is issued for the identical replay.
+  calls:
+  - {method: POST, path: /jobs, body_fixture: live_submit, capture_job: true}
+  - {method: POST, path: /jobs, replay_capture: true, assert: {same_jobDbId: true}}
+- id: L-02
+  tier: live
+  object: jobs
+  title: Same key with a different body is a conflict, not a new job
+  procedure:
+  - POST a body under a fresh key; POST a different body under the same key.
+  expectation: Second call is rejected (conflict status; exact code requires-decision per RFC-001 §8) and creates nothing.
+  falsifier: A second job is created or the first is mutated.
+  calls:
+  - {method: POST, path: /jobs, body_fixture: live_submit, capture_job: true}
+  - {method: POST, path: /jobs, body_fixture: live_submit_conflict, assert: {rejected: true}}
+- id: L-03
+  tier: live
+  object: jobs
+  title: Cancelling a terminal job is rejected
+  procedure:
+  - Submit a job, wait for a terminal state, DELETE it.
+  expectation: DELETE is rejected; the terminal state is unchanged on re-GET.
+  falsifier: A terminal job changes state after DELETE.
+  calls:
+  - {method: POST, path: /jobs, body_fixture: live_submit, capture_job: true, wait_terminal: true}
+  - {method: DELETE, path: "/jobs/{jobDbId}", assert: {rejected: true}}
+- id: L-04
+  tier: live
+  object: jobs
+  title: Unknown jobType is rejected at submit
+  procedure:
+  - POST a JobNewRequest with jobType this-door-does-not-exist.
+  expectation: Rejected with 400 and no job created.
+  falsifier: A job is accepted for an unadvertised type.
+  calls:
+  - {method: POST, path: /jobs, body_fixture: live_submit_unknown_type, assert: {status: 400}}
+- id: L-05
+  tier: live
+  object: jobs
+  title: Expired jobs report EXPIRED and refuse result retrieval
+  procedure:
+  - GET a known-expired jobDbId (server-provided fixture id or one aged past expiresAt).
+  expectation: Status EXPIRED; result not served.
+  falsifier: An expired result is served as COMPLETED.
+  calls:
+  - {method: GET, path: "/jobs/{expiredJobDbId}", assert: {body: {'result.status': EXPIRED}}}
+- id: L-06
+  tier: live
+  object: serverInfoV3
+  title: GenX client negotiates against a V2.1-only server via calls
+  procedure:
+  - GET /serverinfo on the target; accept either ServerInfoV3 or V2.1 shape.
+  expectation: V2.1 shape with calls[] is accepted as a valid negotiation outcome; no GenX call is attempted unadvertised.
+  falsifier: Client requires GenX fields to proceed.
+  calls:
+  - {method: GET, path: /serverinfo, assert: {negotiable: true}}
+- id: L-07
+  tier: live
+  object: provenance
+  title: A provenanced payload round-trips with its digests intact
+  procedure:
+  - Submit a job carrying provenanced_observation.json parameters; on COMPLETED, compare echoed provenance digests.
+  expectation: inputsDigest and evidenceLinks survive the round-trip byte-identical.
+  falsifier: Any digest mutated or dropped in transit.
+  calls:
+  - {method: POST, path: /jobs, body_fixture: live_provenanced_submit, capture_job: true, wait_terminal: true}
+  - {method: GET, path: "/jobs/{jobDbId}", assert: {provenance_intact: true}}
+- id: L-08
+  tier: live
+  object: ontology
+  title: Term publish replays identical versions without duplication
+  procedure:
+  - POST a VariableTermNewRequest under a fresh namespaced id; POST the identical body again.
+  expectation: Second response is 200 with the same (variableDbId, version) and no new version.
+  falsifier: A second version is created for the identical replay.
+  calls:
+  - {method: POST, path: /variables, body_fixture: live_term_submit, capture_term: true}
+  - {method: POST, path: /variables, body_fixture: live_term_submit, assert: {same_term: true}}
+- id: L-09
+  tier: live
+  object: ontology
+  title: Conflicting redefinition of a published version is rejected
+  procedure:
+  - POST a term version; POST the same (variableDbId, version) with a different body.
+  expectation: Second call is rejected with 409 and the published version is unchanged on re-GET.
+  falsifier: The published version is mutated or a conflicting version is stored.
+  calls:
+  - {method: POST, path: /variables, body_fixture: live_term_submit, capture_term: true}
+  - {method: POST, path: /variables, body_fixture: live_term_conflict, assert: {status: 409}}
+- id: L-10
+  tier: live
+  object: lotLedger
+  title: Ledger append replays identical entries without duplication
+  procedure:
+  - POST a LotLedgerEntryNewRequest under a fresh lot and idempotencyKey; POST the identical body again; re-GET the ledger.
+  expectation: Second response is 200 with the same entryDbId; the ledger holds exactly one entry with that key.
+  falsifier: A second entry is appended for the identical replay.
+  calls:
+  - {method: POST, path: "/seedlots/{lotDbId}/ledger", body_fixture: live_ledger_submit, capture_ledger: true}
+  - {method: POST, path: "/seedlots/{lotDbId}/ledger", body_fixture: live_ledger_submit, assert: {same_ledger: true}}
+  - {method: GET, path: "/seedlots/{lotDbId}/ledger", assert: {ledger_count: 1}}
+- id: L-11
+  tier: live
+  object: lotLedger
+  title: Conflicting ledger write is rejected and the ledger is unchanged
+  procedure:
+  - POST a ledger entry; POST the same idempotencyKey with a different quantity; re-GET the ledger.
+  expectation: Second call is rejected with 409; the ledger still holds the original entry only.
+  falsifier: The original entry is mutated or a conflicting entry is stored.
+  calls:
+  - {method: POST, path: "/seedlots/{lotDbId}/ledger", body_fixture: live_ledger_submit, capture_ledger: true}
+  - {method: POST, path: "/seedlots/{lotDbId}/ledger", body_fixture: live_ledger_conflict, assert: {status: 409}}
+  - {method: GET, path: "/seedlots/{lotDbId}/ledger", assert: {ledger_count: 1}}
+- id: L-12
+  tier: live
+  object: modelRegistry
+  title: Model registration replays identical versions without duplication
+  procedure:
+  - POST a ModelArtifactNewRequest under a fresh namespaced id; POST the identical body again.
+  expectation: Second response is 200 with the same (modelDbId, modelVersion) and no new version.
+  falsifier: A second version is created for the identical replay.
+  calls:
+  - {method: POST, path: /models, body_fixture: live_model_submit, capture_model: true}
+  - {method: POST, path: /models, body_fixture: live_model_submit, assert: {same_model: true}}
+- id: L-13
+  tier: live
+  object: modelRegistry
+  title: Conflicting artifact under a published version is rejected
+  procedure:
+  - POST a model version; POST the same (modelDbId, modelVersion) with a different artifactDigest.
+  expectation: Second call is rejected with 409 and the published version is unchanged on re-GET.
+  falsifier: The published artifact digest is mutated or a conflicting version is stored.
+  calls:
+  - {method: POST, path: /models, body_fixture: live_model_submit, capture_model: true}
+  - {method: POST, path: /models, body_fixture: live_model_conflict, assert: {status: 409}}
+- id: L-14
+  tier: live
+  object: modelRegistry
+  title: Inference on a registered model binds inputs by digest
+  procedure:
+  - Register a model; submit an inference job naming it; on COMPLETED compare the echoed record.
+  expectation: The record names the registered (modelDbId, modelVersion) and inputsDigest equals SHA-256 over the canonical inputs.
+  falsifier: Missing model identity or an unverifiable inputsDigest.
+  calls:
+  - {method: POST, path: /models, body_fixture: live_model_submit, capture_model: true}
+  - {method: POST, path: /jobs, body_fixture: live_inference_submit, capture_job: true, wait_terminal: true}
+  - {method: GET, path: "/jobs/{jobDbId}", assert: {inference_intact: true}}
+- id: L-15
+  tier: live
+  object: modelRegistry
+  title: Inference on unknown or revoked models is rejected at submit
+  procedure:
+  - Submit inference naming an unregistered model; register a revoked model and submit inference naming it.
+  expectation: Both submits are rejected with 400 and no job runs.
+  falsifier: A job is accepted for an unknown or revoked model.
+  calls:
+  - {method: POST, path: /jobs, body_fixture: live_inference_unknown, assert: {status: 400}}
+  - {method: POST, path: /models, body_fixture: live_model_revoked, capture_model_revoked: true}
+  - {method: POST, path: /jobs, body_fixture: live_inference_revoked, assert: {status: 400}}
+required_map:
+  job_accepted: {schema: Job, required: [jobDbId, jobType, status]}
+  job_completed: {schema: Job, required: [jobDbId, jobType, status]}
+  job_submit: {schema: JobNewRequest, required: [jobType]}
+  provenanced_observation: {schema: ProvenanceEnvelope, required: []}
+  serverinfov3: {schema: ServerInfoV3, required: [calls, brapiVersions, capabilities]}
+  term_submit: {schema: VariableTermNewRequest, required: [variableDbId, variableName, version]}
+  term_accepted: {schema: VariableTerm, required: [variableDbId, variableName, version, status]}
+  ledger_submit: {schema: LotLedgerEntryNewRequest, required: [entryType, quantity, units, actor, occurredAt]}
+  ledger_accepted: {schema: LotLedgerEntry, required: [entryDbId, seedLotDbId, entryType, quantity, units, actor, occurredAt]}
+  model_submit: {schema: ModelArtifactNewRequest, required: [modelDbId, modelName, modelVersion, artifactDigest]}
+  model_accepted: {schema: ModelArtifact, required: [modelDbId, modelName, modelVersion, artifactDigest, status]}
+genx_object_names: [jobs, provenanceEnvelope, ontologyTerms, lotLedger, modelRegistry]
+capability_dirs: {jobs: Jobs, provenanceEnvelope: Provenance, ontologyTerms: Ontology, lotLedger: LotLedger, modelRegistry: Models}

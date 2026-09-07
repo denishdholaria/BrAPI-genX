@@ -1,0 +1,18 @@
+{
+  "modelDbId": "institute-a:model:yield-gblup-wheat",
+  "modelName": "Wheat yield GBLUP 2026",
+  "modelVersion": "7",
+  "artifactDigest": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49c33",
+  "artifactURL": "https://institute.org/models/yield-gblup-wheat/v/7.onnx",
+  "trainingDataDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "metrics": {"rmse": 0.31, "unit": "t_per_hectare"},
+  "framework": "onnx-1.17",
+  "status": "active",
+  "provenance": {
+    "algorithm": "gblup-training",
+    "algorithmVersion": "train-pipeline-4",
+    "inputsDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "recordedAt": "2026-09-07T00:00:00Z",
+    "actor": "actor:model-trainer-01"
+  }
+}

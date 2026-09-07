@@ -1,0 +1,84 @@
+info:
+  title: BrAPI
+  version: ''
+openapi: 3.0.0
+paths:
+  /jobs/{jobDbId}:
+    get:
+      summary: Get the current state of one job
+      description: Returns the Job. Past expiry the server reports status EXPIRED and refuses retrieval of the result.
+      parameters:
+      - name: jobDbId
+        description: Unique identifier of the job on this server
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/Job'
+                required:
+                - metadata
+                - result
+                title: JobResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - Jobs
+    delete:
+      summary: Request cancellation of one job
+      description: Requests cancellation. Terminal states (COMPLETED, FAILED, CANCELLED, EXPIRED) are immutable and their cancellation is rejected.
+      parameters:
+      - name: jobDbId
+        description: Unique identifier of the job on this server
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/Job'
+                required:
+                - metadata
+                - result
+                title: JobResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - Jobs

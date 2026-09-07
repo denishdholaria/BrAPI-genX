@@ -1,0 +1,113 @@
+info:
+  title: BrAPI
+  version: ''
+openapi: 3.0.0
+paths:
+  /jobs:
+    get:
+      summary: List jobs visible to the caller
+      description: Get a paged list of jobs submitted by the caller. Follows standard pagination.
+      parameters:
+      - name: jobType
+        description: Filter by kind of work
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - SUBMITTED
+          - RUNNING
+          - COMPLETED
+          - FAILED
+          - CANCELLED
+          - EXPIRED
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/JobListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - Jobs
+    post:
+      summary: Submit a unit of asynchronous work
+      description: |-
+        Submit work and receive a Job with HTTP 202. When `idempotencyKey` is
+        supplied and was already accepted with a byte-identical body, the
+        server returns the existing Job with zero new effects.
+      parameters:
+      - name: Idempotency-Key
+        description: |-
+          Optional replay key (UUID recommended). May alternatively be supplied
+          inside the request body as `idempotencyKey`. The header wins when both
+          are present.
+        in: header
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobNewRequest'
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/Job'
+                required:
+                - metadata
+                - result
+                title: JobResponse
+                type: object
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - Jobs
+components:
+  responses:
+    JobListResponse:
+      content:
+        application/json:
+          schema:
+            title: JobListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Job'
+            required:
+            - metadata
+            - result
+      description: OK

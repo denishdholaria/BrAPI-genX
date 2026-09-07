@@ -1,0 +1,29 @@
+info:
+  title: BrAPI
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    JobNewRequest:
+      type: object
+      description: Request to start one unit of asynchronous work
+      required:
+      - jobType
+      properties:
+        jobType:
+          description: Kind of work requested. Must be a job type the server advertises.
+          type: string
+          example: germplasm_search
+        parameters:
+          description: Job-type-specific parameters. Structure is defined per job type.
+          type: object
+          example: {germplasmNames: [Germ 01, Germ 02]}
+        idempotencyKey:
+          description: |-
+            Client-supplied key (UUID recommended). Resubmits with an identical
+            body return the existing job with zero new effects. Same key with a
+            different body is a conflict (status code requires-decision, see
+            RFC-001 §8).
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440000

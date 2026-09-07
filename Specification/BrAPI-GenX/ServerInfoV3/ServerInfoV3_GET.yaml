@@ -1,0 +1,50 @@
+info:
+  title: BrAPI
+  version: ''
+openapi: 3.0.0
+paths:
+  /serverinfo:
+    get:
+      description: |-
+        GenX capability negotiation. Served under `/brapi/v3/`.
+
+        Returns the V2.1 ServerInfo fields plus `brapiVersions`,
+        `capabilities`, and `authProfiles` so clients negotiate instead of
+        probing endpoints. V2.1 `GET /serverinfo` under `/brapi/v2/` is
+        unchanged. A GenX client against a V2.1-only server falls back to the
+        V2.1 `calls` array.
+      parameters:
+      - description: Filter the list of endpoints based on the response content type.
+        in: query
+        name: contentType
+        required: false
+        schema:
+          $ref: '#/components/schemas/ContentTypes'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/ServerInfoV3'
+                required:
+                - metadata
+                - result
+                title: ServerInfoV3Response
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      summary: Get the GenX capability document
+      tags:
+      - Server Info

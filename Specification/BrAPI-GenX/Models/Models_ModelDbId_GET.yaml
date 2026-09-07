@@ -1,0 +1,51 @@
+info:
+  title: BrAPI
+  version: ''
+openapi: 3.0.0
+paths:
+  /models/{modelDbId}:
+    get:
+      summary: Get one model (latest created when version is omitted)
+      description: Returns the requested version, or the most recently created version when `version` is omitted.
+      parameters:
+      - name: modelDbId
+        description: Namespaced model identity `{authority}:model:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        description: Model version to fetch
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/ModelArtifact'
+                required:
+                - metadata
+                - result
+                title: ModelArtifactResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - Models

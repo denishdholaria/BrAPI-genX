@@ -1,0 +1,35 @@
+{
+  "observationDbId": "OBS_2201",
+  "observationUnitDbId": "OU_1042",
+  "observationVariableDbId": "CO_334:0000012",
+  "value": "4.2",
+  "provenance": {
+    "methodVersion": "CO_334:0000012.3",
+    "algorithm": "McMaster-Wilhelm GDD",
+    "algorithmVersion": "thermal-time-gdd-1",
+    "inputsDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "assumptions": ["base temperature 10C", "no upper cap"],
+    "uncertainty": {
+      "type": "standard_error",
+      "value": 0.42,
+      "unit": "degree_celsius_day"
+    },
+    "recordedAt": "2026-09-07T00:00:00Z",
+    "actor": "actor:phenotyping-pipeline-02",
+    "sources": [
+      {
+        "sourceType": "observationUnit",
+        "sourceId": "institute-a:observationUnit:OU_1042",
+        "sourceEndpoint": "observationunits/OU_1042"
+      }
+    ],
+    "evidenceLinks": [
+      {
+        "endpoint": "/brapi/v3/jobs/JOB_0091",
+        "schemaVersion": "Job-1",
+        "responseDigest": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+        "queryDigest": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49c33"
+      }
+    ]
+  }
+}

@@ -1,0 +1,111 @@
+info:
+  title: BrAPI
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ProvenanceEnvelope:
+      type: object
+      description: |-
+        Optional embedded provenance for a computed result (observation,
+        analysis, prediction). Absence means "unprovenanced" and must never
+        be treated as an error. Readers must tolerate unknown fields.
+      properties:
+        methodVersion:
+          description: Version of the method that produced this result
+          type: string
+          example: CO_334:0000012.3
+        algorithm:
+          description: Name of the algorithm or kernel used
+          type: string
+          example: McMaster-Wilhelm GDD
+        algorithmVersion:
+          description: Version of the algorithm or kernel used
+          type: string
+          example: thermal-time-gdd-1
+        inputsDigest:
+          description: |-
+            SHA-256 (lowercase hex) over the canonical inputs that produced
+            this result. Canonical form is requires-decision (see RFC-001 §8).
+          type: string
+          example: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+        assumptions:
+          description: Assumptions in force when the result was computed
+          type: array
+          items:
+            type: string
+          example: [base temperature 10C, no upper cap]
+        uncertainty:
+          $ref: '#/components/schemas/Uncertainty'
+        recordedAt:
+          description: When the result was computed. Follows Date/Time Encoding.
+          type: string
+          format: date-time
+          example: '2026-09-07T00:00:00Z'
+        actor:
+          description: Identifier of the actor (human, service, or job) that produced the result
+          type: string
+          example: actor:phenotyping-pipeline-02
+        sources:
+          description: Source records this result derives from
+          type: array
+          items:
+            $ref: '#/components/schemas/ProvenanceSource'
+        evidenceLinks:
+          description: Links binding this result to retrievable evidence
+          type: array
+          items:
+            $ref: '#/components/schemas/EvidenceLink'
+    Uncertainty:
+      type: object
+      description: Quantified uncertainty attached to a result
+      properties:
+        type:
+          description: Uncertainty kind, e.g. standard_error, confidence_interval_95, tolerance
+          type: string
+          example: standard_error
+        value:
+          description: Uncertainty magnitude
+          type: number
+          example: 0.42
+        unit:
+          description: Unit of the uncertainty value, when applicable
+          type: string
+          example: degree_celsius_day
+    ProvenanceSource:
+      type: object
+      description: A source record a result derives from
+      properties:
+        sourceType:
+          description: Kind of source, e.g. observationUnit, variantSet, image, job
+          type: string
+          example: observationUnit
+        sourceId:
+          description: Namespaced identifier `{authority}:{type}:{id}` of the source
+          type: string
+          example: institute-a:observationUnit:OU_1042
+        sourceEndpoint:
+          description: BrAPI endpoint where the source can be retrieved, when applicable
+          type: string
+          example: observationunits/OU_1042
+    EvidenceLink:
+      type: object
+      description: Machine-checkable binding from a result to its evidence
+      properties:
+        endpoint:
+          description: Endpoint that served the evidence
+          type: string
+          example: /brapi/v3/jobs/JOB_0091
+        schemaVersion:
+          description: Schema version of the evidence payload
+          type: string
+          example: Job-1
+        responseDigest:
+          description: SHA-256 (lowercase hex) over the canonical evidence response
+          type: string
+          example: 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
+        queryDigest:
+          description: SHA-256 (lowercase hex) binding the query, identity, and evidence when applicable
+          type: string
+          example: 4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49c33

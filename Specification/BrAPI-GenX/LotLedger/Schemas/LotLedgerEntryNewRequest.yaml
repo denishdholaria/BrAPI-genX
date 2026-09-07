@@ -1,0 +1,75 @@
+info:
+  title: BrAPI
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    LotLedgerEntryNewRequest:
+      type: object
+      description: |-
+        Request to append one ledger entry. Unknown idempotencyKey appends;
+        known key with an identical body replays the existing entry; known
+        key with a different body is rejected with 409.
+      required:
+      - entryType
+      - quantity
+      - units
+      - actor
+      - occurredAt
+      properties:
+        entryType:
+          description: Kind of movement
+          type: string
+          enum:
+          - adjust
+          - move
+          - handoff
+          - production
+          - planting
+          - trade
+          example: move
+        quantity:
+          description: Fixed-scale decimal quantity as a string. Never a float.
+          type: string
+          example: '45.000'
+        units:
+          description: Unit vocabulary for the quantity (count or weight)
+          type: string
+          example: kg
+        actor:
+          description: Who performed the movement
+          type: string
+          example: actor:warehouse-operator-03
+        custodian:
+          description: Current custodian after this entry (custody chain on handoff)
+          type: string
+          example: actor:seed-operations-manager
+        previousCustodian:
+          description: Custodian before this entry
+          type: string
+          example: actor:field-crew-lead
+        locationFrom:
+          description: Origin location, when applicable
+          type: string
+          example: warehouse-a:bay-04
+        locationTo:
+          description: Destination location, when applicable
+          type: string
+          example: warehouse-b:bay-01
+        occurredAt:
+          description: When the movement happened (distinct from record time). Follows Date/Time Encoding.
+          type: string
+          format: date-time
+          example: '2026-09-07T08:00:00Z'
+        idempotencyKey:
+          description: Client-supplied replay key (UUID recommended)
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440001
+        description:
+          description: Human readable note for this entry
+          type: string
+          example: Transfer to conditioning plant
+        provenance:
+          description: Supporting evidence (scale ticket, scan, calibration)
+          $ref: '#/components/schemas/ProvenanceEnvelope'

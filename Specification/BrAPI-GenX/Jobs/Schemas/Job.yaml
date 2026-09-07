@@ -1,0 +1,69 @@
+info:
+  title: BrAPI
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    Job:
+      type: object
+      description: Current state of one unit of asynchronous work
+      required:
+      - jobDbId
+      - jobType
+      - status
+      properties:
+        jobDbId:
+          description: Unique identifier of the job on this server
+          type: string
+          example: JOB_0091
+        jobType:
+          description: |-
+            Kind of work, e.g. search, analysis, export, inference. Servers
+            advertise supported job types as `jobs` capabilities in
+            ServerInfoV3. Unknown job types must be rejected.
+          type: string
+          example: germplasm_search
+        status:
+          description: Lifecycle state. Terminal states are immutable.
+          type: string
+          enum:
+          - SUBMITTED
+          - RUNNING
+          - COMPLETED
+          - FAILED
+          - CANCELLED
+          - EXPIRED
+          example: RUNNING
+        progress:
+          description: Fraction complete in [0, 1], when the server can estimate it
+          type: number
+          minimum: 0
+          maximum: 1
+          example: 0.4
+        createdAt:
+          description: When the job was accepted. Follows Date/Time Encoding.
+          type: string
+          format: date-time
+          example: '2026-09-07T00:00:00Z'
+        updatedAt:
+          description: When the job state last changed. Follows Date/Time Encoding.
+          type: string
+          format: date-time
+          example: '2026-09-07T00:01:00Z'
+        expiresAt:
+          description: When the job record and its result expire. Past expiry the server reports EXPIRED and refuses retrieval.
+          type: string
+          format: date-time
+          example: '2026-09-14T00:00:00Z'
+        idempotencyKey:
+          description: Client-supplied key echoed back when one was given at submit time
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440000
+        result:
+          description: |-
+            Job output when status is COMPLETED. Uses the standard envelope:
+            `result.data` with pagination for record outputs, or
+            `metadata.datafiles` for file outputs.
+          type: object
+          example: {}
