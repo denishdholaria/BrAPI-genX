@@ -1,0 +1,10 @@
+[
+  {
+    "deviceDbId": "station-04",
+    "sensorDbId": "air-temp-01",
+    "timestamp": "2026-09-07T08:02:00Z",
+    "value": 99.9,
+    "unit": "degree_celsius",
+    "quality": "good"
+  }
+]

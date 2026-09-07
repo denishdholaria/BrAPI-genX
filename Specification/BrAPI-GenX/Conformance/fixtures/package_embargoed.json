@@ -1,0 +1,20 @@
+{
+  "packageDbId": "institute-a:package:barley-prebreed-2027",
+  "title": "Barley pre-breeding 2027 advance lines",
+  "identifiers": [
+    {"type": "DOI", "value": "10.18730/8PZQ6"}
+  ],
+  "license": "CC-BY-4.0",
+  "accessRights": "embargoed",
+  "embargoUntil": "2099-01-01T00:00:00Z",
+  "creators": ["actor:breeder-11"],
+  "publisher": "The Institute",
+  "publicationYear": "2027",
+  "payloadRefs": [
+    {
+      "endpoint": "/brapi/v3/jobs/JOB_0102",
+      "schemaVersion": "Job-1",
+      "responseDigest": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"
+    }
+  ]
+}

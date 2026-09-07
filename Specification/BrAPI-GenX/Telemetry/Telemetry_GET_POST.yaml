@@ -1,0 +1,162 @@
+info:
+  title: BrAPI
+  version: ''
+openapi: 3.0.0
+paths:
+  /telemetry:
+    get:
+      summary: Read samples or aggregates over a time range
+      description: |-
+        Points are returned in timestamp order. With aggregation set,
+        TelemetryBucket rows are returned instead, computed deterministically
+        over windowSeconds buckets (default: one bucket over the whole
+        range). Empty ranges yield empty data, never an error.
+      parameters:
+      - name: deviceDbId
+        description: Device to read
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: sensorDbId
+        description: Sensor to read
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: from
+        description: Inclusive range start. Follows Date/Time Encoding.
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: to
+        description: Exclusive range end. Follows Date/Time Encoding.
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: aggregation
+        description: Aggregate function, or none for raw points
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - none
+          - mean
+          - min
+          - max
+          - count
+          default: none
+      - name: windowSeconds
+        description: Bucket width for aggregates. Must be a positive integer.
+        in: query
+        required: false
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          oneOf:
+                          - $ref: '#/components/schemas/TelemetryPoint'
+                          - $ref: '#/components/schemas/TelemetryBucket'
+                    required:
+                    - data
+                required:
+                - metadata
+                - result
+                title: TelemetryListResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - Telemetry
+    post:
+      summary: Append a batch of samples
+      description: |-
+        Takes an array of TelemetryPoint (V2.1 batch style). Reports
+        appended, replayed, and conflicts counts with the conflicting keys.
+        Conflicting elements reject the element, never the batch.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/TelemetryPoint'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/TelemetryBatchResult'
+                required:
+                - metadata
+                - result
+                title: TelemetryBatchResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - Telemetry
+components:
+  schemas:
+    TelemetryBatchResult:
+      type: object
+      description: Ingest counts for one batch. Conflicts name rejected natural keys; they never fail siblings.
+      required:
+      - appended
+      - replayed
+      - conflicts
+      properties:
+        appended:
+          description: New points stored
+          type: integer
+          example: 2
+        replayed:
+          description: Points already stored with identical values
+          type: integer
+          example: 1
+        conflicts:
+          description: Natural keys rejected for disagreeing with stored values
+          type: array
+          items:
+            type: string
+          example: ['station-04/air-temp-01/2026-09-07T08:02:00Z']

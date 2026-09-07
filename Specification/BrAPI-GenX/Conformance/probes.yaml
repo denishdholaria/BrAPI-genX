@@ -135,6 +135,69 @@ probes:
   - Check status values against the ModelArtifact schema enum.
   expectation: Every model identifier, digest, and status in fixtures is well-formed.
   falsifier: A bare id, a non-hex digest, or an out-of-enum status passing.
+- id: S-15
+  tier: static
+  object: variantMatrices
+  title: Matrix fixtures carry the required VariantMatrix fields
+  check: required_fields
+  procedure:
+  - Validate matrix fixtures against the required lists in probes.yaml required_map.
+  expectation: All required fields present with the documented types.
+  falsifier: A fixture missing a required field still passing.
+- id: S-16
+  tier: static
+  object: variantMatrices
+  title: Matrix locations are retrievable URLs and digests are SHA-256 hex
+  check: matrix_shape
+  procedure:
+  - Match matrixDbId values against ^[^:/]+:[^:/]+:[^:/]+$.
+  - Require fileURL to start with https:// or drs://.
+  - Match fileDigest and indexDigest against ^[0-9a-f]{64}$.
+  - Check format values against the VariantMatrix schema enum.
+  expectation: Every location, digest, and format in fixtures is well-formed.
+  falsifier: A relative URL, a non-hex digest, or an out-of-enum format passing.
+- id: S-17
+  tier: static
+  object: fairPackages
+  title: Package fixtures carry the required FAIRPackage fields
+  check: required_fields
+  procedure:
+  - Validate package fixtures against the required lists in probes.yaml required_map.
+  expectation: All required fields present with the documented types.
+  falsifier: A fixture missing a required field still passing.
+- id: S-18
+  tier: static
+  object: fairPackages
+  title: Package licenses, identifiers, and embargoes are well-formed
+  check: package_shape
+  procedure:
+  - Match packageDbId values against ^[^:/]+:[^:/]+:[^:/]+$.
+  - Require license to be a non-empty string.
+  - Match DOI identifier values against ^10\.\d{4,}/.+.
+  - Check accessRights values against the FAIRPackage schema enum.
+  - Parse embargoUntil values as RFC 3339.
+  expectation: Every license, identifier, right, and embargo date in fixtures is well-formed.
+  falsifier: An empty license, a malformed DOI, an out-of-enum right, or a bad date passing.
+- id: S-19
+  tier: static
+  object: telemetry
+  title: Telemetry fixtures carry the required TelemetryPoint fields
+  check: telemetry_required
+  procedure:
+  - Validate every point in the telemetry batch fixtures against deviceDbId, sensorDbId, timestamp, value.
+  expectation: All required fields present on every point.
+  falsifier: A point missing a required field still passing.
+- id: S-20
+  tier: static
+  object: telemetry
+  title: Telemetry values are JSON numbers with valid timestamps and quality
+  check: telemetry_shape
+  procedure:
+  - Require value to be a JSON number (booleans rejected).
+  - Parse timestamp values as RFC 3339.
+  - Check quality values against the TelemetryPoint schema enum.
+  expectation: Every point in fixtures is well-formed.
+  falsifier: A string value, a bad timestamp, or an out-of-enum quality passing.
 - id: L-01
   tier: live
   object: jobs
@@ -302,6 +365,104 @@ probes:
   - {method: POST, path: /jobs, body_fixture: live_inference_unknown, assert: {status: 400}}
   - {method: POST, path: /models, body_fixture: live_model_revoked, capture_model_revoked: true}
   - {method: POST, path: /jobs, body_fixture: live_inference_revoked, assert: {status: 400}}
+- id: L-16
+  tier: live
+  object: variantMatrices
+  title: Matrix registration replays identical records without duplication
+  procedure:
+  - POST a VariantMatrixNewRequest under a fresh namespaced id; POST the identical body again.
+  expectation: Second response is 200 with the same matrixDbId and no new record.
+  falsifier: A second record is created for the identical replay.
+  calls:
+  - {method: POST, path: /variantmatrices, body_fixture: live_matrix_submit, capture_matrix: true}
+  - {method: POST, path: /variantmatrices, body_fixture: live_matrix_submit, assert: {same_matrix: true}}
+- id: L-17
+  tier: live
+  object: variantMatrices
+  title: Mutated bytes under a published id are rejected
+  procedure:
+  - POST a matrix reference; POST the same matrixDbId with a different fileDigest.
+  expectation: Second call is rejected with 409 and the published record is unchanged on re-GET.
+  falsifier: The published digest is mutated or a conflicting record is stored.
+  calls:
+  - {method: POST, path: /variantmatrices, body_fixture: live_matrix_submit, capture_matrix: true}
+  - {method: POST, path: /variantmatrices, body_fixture: live_matrix_conflict, assert: {status: 409}}
+- id: L-18
+  tier: live
+  object: fairPackages
+  title: Package registration replays identical records without duplication
+  procedure:
+  - POST a FAIRPackageNewRequest under a fresh namespaced id; POST the identical body again.
+  expectation: Second response is 200 with the same packageDbId and no new record.
+  falsifier: A second record is created for the identical replay.
+  calls:
+  - {method: POST, path: /fair-packages, body_fixture: live_package_submit, capture_package: true}
+  - {method: POST, path: /fair-packages, body_fixture: live_package_submit, assert: {same_package: true}}
+- id: L-19
+  tier: live
+  object: fairPackages
+  title: Mutated license under a published id is rejected
+  procedure:
+  - POST a package; POST the same packageDbId with a different license.
+  expectation: Second call is rejected with 409 and the published record is unchanged on re-GET.
+  falsifier: The published license is mutated or a conflicting record is stored.
+  calls:
+  - {method: POST, path: /fair-packages, body_fixture: live_package_submit, capture_package: true}
+  - {method: POST, path: /fair-packages, body_fixture: live_package_conflict, assert: {status: 409}}
+- id: L-20
+  tier: live
+  object: fairPackages
+  title: Embargoed packages are denied before expiry
+  procedure:
+  - POST an embargoed package with a far-future embargoUntil; GET it back.
+  expectation: GET is denied with 403 while embargoed.
+  falsifier: An embargoed record is served with 200.
+  calls:
+  - {method: POST, path: /fair-packages, body_fixture: live_package_embargoed, capture_package: true}
+  - {method: GET, path: "/fair-packages/{packageDbId}", assert: {status: 403}}
+- id: L-21
+  tier: live
+  object: telemetry
+  title: Telemetry batch append replays identical points without duplication
+  procedure:
+  - POST a batch of three points; POST the identical batch again.
+  expectation: First response reports appended 3 replayed 0; second reports appended 0 replayed 3.
+  falsifier: A replayed point is stored twice.
+  calls:
+  - {method: POST, path: /telemetry, body_fixture: live_telemetry_batch, capture_telemetry: true, assert: {telemetry_counts: {appended: 3, replayed: 0}}}
+  - {method: POST, path: /telemetry, body_fixture: live_telemetry_batch, assert: {telemetry_counts: {appended: 0, replayed: 3}}}
+- id: L-22
+  tier: live
+  object: telemetry
+  title: Disagreeing value for a stored sample instant is rejected element-wise
+  procedure:
+  - POST a batch; POST a point with the same natural key but a different value.
+  expectation: The conflicting element is named in conflicts with nothing appended; the stored value is unchanged on re-GET.
+  falsifier: The stored value is overwritten or the batch fails wholesale.
+  calls:
+  - {method: POST, path: /telemetry, body_fixture: live_telemetry_batch, capture_telemetry: true}
+  - {method: POST, path: /telemetry, body_fixture: live_telemetry_conflict, assert: {telemetry_counts: {appended: 0, replayed: 0}, telemetry_conflicts: 1}}
+- id: L-23
+  tier: live
+  object: telemetry
+  title: Server aggregates recompute identically from stored points
+  procedure:
+  - POST three known points; GET the mean over their range.
+  expectation: One bucket with sampleCount 3 and value equal to the arithmetic mean within 1e-9.
+  falsifier: An aggregate disagreeing with the stored points.
+  calls:
+  - {method: POST, path: /telemetry, body_fixture: live_telemetry_batch, capture_telemetry: true}
+  - {method: GET, path: "/telemetry?deviceDbId={telemetry_device}&sensorDbId=air-temp-01&from=2026-09-07T08:00:00Z&to=2026-09-07T08:03:00Z&aggregation=mean", assert: {telemetry_mean: 21.7, telemetry_samples: 3}}
+- id: L-24
+  tier: live
+  object: jobs
+  title: Concurrent identical submits yield exactly one job
+  procedure:
+  - POST the identical body and idempotency key from 8 threads at once.
+  expectation: All responses are 2xx with one distinct jobDbId; no second job exists.
+  falsifier: Two distinct jobDbIds for one key.
+  calls:
+  - {method: POST, path: /jobs, body_fixture: live_submit, concurrent_posts: 8, assert: {single_effect: true}}
 required_map:
   job_accepted: {schema: Job, required: [jobDbId, jobType, status]}
   job_completed: {schema: Job, required: [jobDbId, jobType, status]}
@@ -314,5 +475,9 @@ required_map:
   ledger_accepted: {schema: LotLedgerEntry, required: [entryDbId, seedLotDbId, entryType, quantity, units, actor, occurredAt]}
   model_submit: {schema: ModelArtifactNewRequest, required: [modelDbId, modelName, modelVersion, artifactDigest]}
   model_accepted: {schema: ModelArtifact, required: [modelDbId, modelName, modelVersion, artifactDigest, status]}
-genx_object_names: [jobs, provenanceEnvelope, ontologyTerms, lotLedger, modelRegistry]
-capability_dirs: {jobs: Jobs, provenanceEnvelope: Provenance, ontologyTerms: Ontology, lotLedger: LotLedger, modelRegistry: Models}
+  matrix_submit: {schema: VariantMatrixNewRequest, required: [matrixDbId, format, fileURL, fileDigest]}
+  matrix_accepted: {schema: VariantMatrix, required: [matrixDbId, format, fileURL, fileDigest]}
+  package_submit: {schema: FAIRPackageNewRequest, required: [packageDbId, title, license, accessRights]}
+  package_accepted: {schema: FAIRPackage, required: [packageDbId, title, license, accessRights]}
+genx_object_names: [jobs, provenanceEnvelope, ontologyTerms, lotLedger, modelRegistry, variantMatrices, fairPackages, telemetry]
+capability_dirs: {jobs: Jobs, provenanceEnvelope: Provenance, ontologyTerms: Ontology, lotLedger: LotLedger, modelRegistry: Models, variantMatrices: Genomics, fairPackages: FAIR, telemetry: Telemetry}

@@ -42,6 +42,7 @@ except ImportError:  # pragma: no cover
 REF_RE = re.compile(r"""\$ref:\s*['"]?#/components/(\w+)/([\w.-]+)['"]?""")
 DIGEST_RE = re.compile(r"^[0-9a-f]{64}$")
 TERM_ID_RE = re.compile(r"^[^:/]+:[^:/]+:[^:/]+$")
+DOI_RE = re.compile(r"^10\.\d{4,}/.+")
 DECIMAL_RE = re.compile(r"^-?\d+(\.\d+)?$")
 HTTP_METHODS = {"GET", "POST", "PUT", "DELETE"}
 TERMINAL = {"COMPLETED", "FAILED", "CANCELLED", "EXPIRED"}
@@ -365,6 +366,142 @@ def check_model_shape(root, probe, ctx, results):
         results.report(probe["id"], probe["title"], "PASS", f"{checked} fields")
 
 
+def check_matrix_shape(root, probe, ctx, results):
+    conf = os.path.join(root, "Specification", "BrAPI-GenX", "Conformance", "fixtures")
+    schema = load_yaml(
+        os.path.join(root, "Specification", "BrAPI-GenX", "Genomics",
+                     "Schemas", "VariantMatrix.yaml")
+    )
+    allowed_format = set(
+        schema["components"]["schemas"]["VariantMatrix"]["properties"]["format"]["enum"]
+    )
+    problems, checked = [], 0
+    for stem in ("matrix_submit", "matrix_submit_conflict", "matrix_accepted"):
+        doc = load_json(os.path.join(conf, f"{stem}.json"))
+        target = doc.get("result") if isinstance(doc.get("result"), dict) else doc
+        for value in collect_values(target, {"matrixDbId"}):
+            checked += 1
+            if not isinstance(value, str) or not TERM_ID_RE.match(value):
+                problems.append(f"{stem}.json: identifier '{value}' is not namespaced")
+        for value in collect_values(target, {"fileURL", "indexURL"}):
+            checked += 1
+            if not isinstance(value, str) or not value.startswith(("https://", "drs://")):
+                problems.append(f"{stem}.json: URL '{value}' is not retrievable")
+        for value in collect_values(target, {"fileDigest", "indexDigest"}):
+            checked += 1
+            if not isinstance(value, str) or not DIGEST_RE.match(value):
+                problems.append(f"{stem}.json: bad digest '{value}'")
+        for value in collect_values(target, {"format"}):
+            checked += 1
+            if value not in allowed_format:
+                problems.append(f"{stem}.json: format '{value}' outside schema enum")
+    if not checked:
+        problems.append("no matrix fields found in fixtures")
+    if problems:
+        results.report(probe["id"], probe["title"], "FAIL", "; ".join(problems))
+    else:
+        results.report(probe["id"], probe["title"], "PASS", f"{checked} fields")
+
+
+def check_package_shape(root, probe, ctx, results):
+    conf = os.path.join(root, "Specification", "BrAPI-GenX", "Conformance", "fixtures")
+    schema = load_yaml(
+        os.path.join(root, "Specification", "BrAPI-GenX", "FAIR",
+                     "Schemas", "FAIRPackage.yaml")
+    )
+    allowed_rights = set(
+        schema["components"]["schemas"]["FAIRPackage"]["properties"]["accessRights"]["enum"]
+    )
+    problems, checked = [], 0
+    for stem in ("package_submit", "package_submit_conflict", "package_accepted",
+                 "package_embargoed"):
+        doc = load_json(os.path.join(conf, f"{stem}.json"))
+        target = doc.get("result") if isinstance(doc.get("result"), dict) else doc
+        for value in collect_values(target, {"packageDbId"}):
+            checked += 1
+            if not isinstance(value, str) or not TERM_ID_RE.match(value):
+                problems.append(f"{stem}.json: identifier '{value}' is not namespaced")
+        for value in collect_values(target, {"license"}):
+            checked += 1
+            if not isinstance(value, str) or not value.strip():
+                problems.append(f"{stem}.json: license is empty")
+        for ident in collect_values(target, {"identifiers"}):
+            for entry in ident if isinstance(ident, list) else []:
+                if not isinstance(entry, dict):
+                    continue
+                checked += 1
+                if entry.get("type") == "DOI" and not DOI_RE.match(entry.get("value", "")):
+                    problems.append(f"{stem}.json: malformed DOI '{entry.get('value')}'")
+                if not entry.get("value"):
+                    problems.append(f"{stem}.json: identifier without value")
+        for value in collect_values(target, {"accessRights"}):
+            checked += 1
+            if value not in allowed_rights:
+                problems.append(f"{stem}.json: accessRights '{value}' outside schema enum")
+        for value in collect_values(target, {"embargoUntil"}):
+            checked += 1
+            try:
+                parse_rfc3339(value)
+            except Exception:
+                problems.append(f"{stem}.json: bad embargoUntil '{value}'")
+    if not checked:
+        problems.append("no package fields found in fixtures")
+    if problems:
+        results.report(probe["id"], probe["title"], "FAIL", "; ".join(problems))
+    else:
+        results.report(probe["id"], probe["title"], "PASS", f"{checked} fields")
+
+
+def check_telemetry_required(root, probe, ctx, results):
+    conf = os.path.join(root, "Specification", "BrAPI-GenX", "Conformance", "fixtures")
+    problems, checked = [], 0
+    for stem in ("telemetry_batch", "telemetry_batch_replay", "telemetry_batch_conflict"):
+        doc = load_json(os.path.join(conf, f"{stem}.json"))
+        if not isinstance(doc, list):
+            problems.append(f"{stem}.json is not an array")
+            continue
+        for point in doc:
+            checked += 1
+            for field in ("deviceDbId", "sensorDbId", "timestamp", "value"):
+                if field not in point or point[field] is None:
+                    problems.append(f"{stem}.json point missing required '{field}'")
+    if problems:
+        results.report(probe["id"], probe["title"], "FAIL", "; ".join(problems))
+    else:
+        results.report(probe["id"], probe["title"], "PASS", f"{checked} points")
+
+
+def check_telemetry_shape(root, probe, ctx, results):
+    conf = os.path.join(root, "Specification", "BrAPI-GenX", "Conformance", "fixtures")
+    schema = load_yaml(
+        os.path.join(root, "Specification", "BrAPI-GenX", "Telemetry",
+                     "Schemas", "TelemetryPoint.yaml")
+    )
+    allowed_quality = set(
+        schema["components"]["schemas"]["TelemetryPoint"]["properties"]["quality"]["enum"]
+    )
+    problems, checked = [], 0
+    for stem in ("telemetry_batch", "telemetry_batch_replay", "telemetry_batch_conflict"):
+        for point in load_json(os.path.join(conf, f"{stem}.json")):
+            checked += 1
+            value = point.get("value")
+            if isinstance(value, bool) or not isinstance(value, (int, float)):
+                problems.append(f"{stem}.json: value {value!r} is not a JSON number")
+            try:
+                parse_rfc3339(point.get("timestamp", ""))
+            except Exception:
+                problems.append(f"{stem}.json: bad timestamp '{point.get('timestamp')}'")
+            quality = point.get("quality", "good")
+            if quality not in allowed_quality:
+                problems.append(f"{stem}.json: quality '{quality}' outside schema enum")
+    if not checked:
+        problems.append("no telemetry points found in fixtures")
+    if problems:
+        results.report(probe["id"], probe["title"], "FAIL", "; ".join(problems))
+    else:
+        results.report(probe["id"], probe["title"], "PASS", f"{checked} points")
+
+
 def check_v21_fallback_shape(root, probe, ctx, results):
     doc = load_json(
         os.path.join(
@@ -399,6 +536,10 @@ STATIC = {
     "term_id_format": check_term_id_format,
     "decimal_format": check_decimal_format,
     "model_shape": check_model_shape,
+    "matrix_shape": check_matrix_shape,
+    "package_shape": check_package_shape,
+    "telemetry_required": check_telemetry_required,
+    "telemetry_shape": check_telemetry_shape,
 }
 
 
@@ -465,6 +606,15 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
     if any(s.get("capture_model_revoked") for s in calls):
         ctx["live_model_revoked_id"] = None
         ctx["live_model_revoked"] = None
+    if any(s.get("capture_matrix") for s in calls):
+        ctx["live_matrix_id"] = None
+        ctx["live_matrix"] = None
+    if any(s.get("capture_package") for s in calls):
+        ctx["live_package_id"] = None
+        ctx["live_package"] = None
+    if any(s.get("capture_telemetry") for s in calls):
+        ctx["live_device"] = None
+        ctx["live_batch"] = None
     captured = None
     try:
         for step in calls:
@@ -537,6 +687,55 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         f"test-authority:model:revoked-{uuid.uuid4().hex[:8]}")
                 body["modelDbId"] = ctx["live_model_revoked_id"]
                 body["status"] = "revoked"
+            elif fixture == "live_matrix_submit":
+                body = load_json(
+                    os.path.join(conformance_dir, "fixtures", "matrix_submit.json")
+                )
+                if not ctx.get("live_matrix_id"):
+                    ctx["live_matrix_id"] = f"test-authority:matrix:{uuid.uuid4().hex[:8]}"
+                body["matrixDbId"] = ctx["live_matrix_id"]
+            elif fixture == "live_matrix_conflict":
+                body = load_json(
+                    os.path.join(conformance_dir, "fixtures", "matrix_submit_conflict.json")
+                )
+                body["matrixDbId"] = ctx.get("live_matrix_id", body["matrixDbId"])
+            elif fixture == "live_package_submit":
+                body = load_json(
+                    os.path.join(conformance_dir, "fixtures", "package_submit.json")
+                )
+                if not ctx.get("live_package_id"):
+                    ctx["live_package_id"] = f"test-authority:package:{uuid.uuid4().hex[:8]}"
+                body["packageDbId"] = ctx["live_package_id"]
+            elif fixture == "live_package_conflict":
+                body = load_json(
+                    os.path.join(conformance_dir, "fixtures", "package_submit_conflict.json")
+                )
+                body["packageDbId"] = ctx.get("live_package_id", body["packageDbId"])
+            elif fixture == "live_package_embargoed":
+                body = load_json(
+                    os.path.join(conformance_dir, "fixtures", "package_embargoed.json")
+                )
+                if not ctx.get("live_package_id"):
+                    ctx["live_package_id"] = f"test-authority:package:{uuid.uuid4().hex[:8]}"
+                body["packageDbId"] = ctx["live_package_id"]
+            elif fixture == "live_telemetry_batch":
+                if ctx.get("live_batch") is None:
+                    batch = load_json(
+                        os.path.join(conformance_dir, "fixtures", "telemetry_batch.json")
+                    )
+                    device = f"test-station-{uuid.uuid4().hex[:6]}"
+                    for point in batch:
+                        point["deviceDbId"] = device
+                    ctx["live_device"] = device
+                    ctx["live_batch"] = batch
+                body = copy.deepcopy(ctx["live_batch"])
+            elif fixture == "live_telemetry_conflict":
+                if ctx.get("live_batch") is None:
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL", "no batch captured")
+                point = copy.deepcopy(ctx["live_batch"][2])
+                point["value"] = round(point["value"] + 10.0, 3)
+                body = [point]
             elif fixture in ("live_inference_submit", "live_inference_revoked",
                              "live_inference_unknown"):
                 if fixture == "live_inference_unknown":
@@ -573,6 +772,14 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                 if ctx.get("live_lot") is None:
                     return results.report(probe["id"], probe["title"], "FAIL", "no captured lot")
                 path = path.replace("{lotDbId}", ctx["live_lot"])
+            if "{packageDbId}" in path:
+                if ctx.get("live_package_id") is None:
+                    return results.report(probe["id"], probe["title"], "FAIL", "no captured package")
+                path = path.replace("{packageDbId}", ctx["live_package_id"])
+            if "{telemetry_device}" in path:
+                if ctx.get("live_device") is None:
+                    return results.report(probe["id"], probe["title"], "FAIL", "no captured device")
+                path = path.replace("{telemetry_device}", ctx["live_device"])
             if step.get("replay_capture"):
                 # Replay the exact first submission body and key.
                 status, payload = http_call(server, "POST", "/jobs", body=ctx["live_body"], token=token)
@@ -583,6 +790,25 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     probe["id"], probe["title"], "FAIL",
                     f"replay returned jobDbId {payload.get('result', {}).get('jobDbId')}",
                 )
+            if step.get("concurrent_posts"):
+                import concurrent.futures as futures
+                count = int(step["concurrent_posts"])
+                with futures.ThreadPoolExecutor(max_workers=count) as pool:
+                    outcomes = list(pool.map(
+                        lambda _: http_call(server, step["method"], path,
+                                            body=copy.deepcopy(body), token=token),
+                        range(count)))
+                statuses = [s for s, _ in outcomes]
+                ids = {p.get("result", {}).get("jobDbId") for _, p in outcomes}
+                if (len(statuses) != count or any(not (200 <= s < 300) for s in statuses)
+                        or len(ids) != 1 or None in ids):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        f"statuses {statuses}, jobDbIds {sorted(map(str, ids))}")
+                if not step.get("assert", {}).get("single_effect"):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL", "no assertion for concurrent step")
+                continue
             status, payload = http_call(server, step["method"], path, body=body, token=token)
             if step.get("capture_job"):
                 if status not in (200, 202):
@@ -616,6 +842,22 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         probe["id"], probe["title"], "FAIL", f"submit returned {status}")
                 seen = payload.get("result", {})
                 ctx["live_model_revoked"] = (seen.get("modelDbId"), seen.get("modelVersion"))
+            if step.get("capture_matrix"):
+                if status not in (200, 202):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL", f"submit returned {status}")
+                seen = payload.get("result", {})
+                ctx["live_matrix"] = seen.get("matrixDbId")
+            if step.get("capture_package"):
+                if status not in (200, 202):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL", f"submit returned {status}")
+                seen = payload.get("result", {})
+                ctx["live_package"] = seen.get("packageDbId")
+            if step.get("capture_telemetry"):
+                if status not in (200, 202):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL", f"submit returned {status}")
             assertion = step.get("assert", {})
             if assertion.get("rejected") and not (status >= 400):
                 return results.report(
@@ -645,6 +887,51 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         probe["id"], probe["title"], "FAIL",
                         f"replay returned {(seen.get('modelDbId'), seen.get('modelVersion'))}, "
                         f"expected {ctx.get('live_model')}")
+            if assertion.get("same_matrix"):
+                seen = payload.get("result", {})
+                if seen.get("matrixDbId") != ctx.get("live_matrix"):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        f"replay returned {seen.get('matrixDbId')}, "
+                        f"expected {ctx.get('live_matrix')}")
+            if assertion.get("same_package"):
+                seen = payload.get("result", {})
+                if seen.get("packageDbId") != ctx.get("live_package"):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        f"replay returned {seen.get('packageDbId')}, "
+                        f"expected {ctx.get('live_package')}")
+            if "telemetry_counts" in assertion:
+                seen = payload.get("result", {})
+                want = assertion["telemetry_counts"]
+                if (seen.get("appended"), seen.get("replayed")) != (
+                        want.get("appended"), want.get("replayed")):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        f"counts are {(seen.get('appended'), seen.get('replayed'))}, "
+                        f"expected {(want.get('appended'), want.get('replayed'))}")
+            if "telemetry_conflicts" in assertion:
+                seen = payload.get("result", {}).get("conflicts", [])
+                if len(seen) != assertion["telemetry_conflicts"]:
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        f"{len(seen)} conflicts, expected {assertion['telemetry_conflicts']}")
+            if "telemetry_mean" in assertion:
+                rows = payload.get("result", {}).get("data", [])
+                if len(rows) != 1:
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        f"{len(rows)} buckets, expected 1")
+                if rows[0].get("sampleCount") != assertion.get("telemetry_samples"):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        f"sampleCount is {rows[0].get('sampleCount')}, "
+                        f"expected {assertion.get('telemetry_samples')}")
+                if abs(rows[0].get("value", 0) - assertion["telemetry_mean"]) > 1e-9:
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        f"mean is {rows[0].get('value')}, "
+                        f"expected {assertion['telemetry_mean']}")
             if assertion.get("inference_intact"):
                 rows = payload.get("result", {}).get("result", {}).get("data", [])
                 if not rows:
@@ -727,6 +1014,12 @@ def main():
         "live_model_id": None,
         "live_model_revoked_id": None,
         "live_model_revoked": None,
+        "live_matrix_id": None,
+        "live_matrix": None,
+        "live_package_id": None,
+        "live_package": None,
+        "live_device": None,
+        "live_batch": None,
         "live_inference_inputs": None,
     }
     results = Results()

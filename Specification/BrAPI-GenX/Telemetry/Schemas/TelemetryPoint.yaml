@@ -1,0 +1,85 @@
+info:
+  title: BrAPI
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    TelemetryPoint:
+      type: object
+      description: |-
+        One sensor sample. Identity is the natural key
+        (deviceDbId, sensorDbId, timestamp): same key with the same value
+        replays, with a different value it conflicts (409 semantics).
+        Value is a JSON number: sensor floats are measurements, and the
+        decimal-string rule for inventory does not apply here.
+      required:
+      - deviceDbId
+      - sensorDbId
+      - timestamp
+      - value
+      properties:
+        deviceDbId:
+          description: Opaque device identity (registries are out of scope)
+          type: string
+          example: station-04
+        sensorDbId:
+          description: Opaque sensor identity within the device
+          type: string
+          example: air-temp-01
+        timestamp:
+          description: Sample time. Follows Date/Time Encoding.
+          type: string
+          format: date-time
+          example: '2026-09-07T08:00:00Z'
+        value:
+          description: Measured value as a JSON number
+          type: number
+          example: 21.4
+        unit:
+          description: Unit vocabulary for the value
+          type: string
+          example: degree_celsius
+        quality:
+          description: Sample trust flag. Bad marks distrust; it does not delete.
+          type: string
+          enum:
+          - good
+          - suspect
+          - bad
+          default: good
+          example: good
+        provenance:
+          description: Calibration and firmware evidence behind this sample
+          $ref: '#/components/schemas/ProvenanceEnvelope'
+    TelemetryBucket:
+      type: object
+      description: One aggregate bucket over a time window, deterministically computed from stored points.
+      required:
+      - windowStart
+      - aggregation
+      - value
+      - sampleCount
+      properties:
+        windowStart:
+          description: Inclusive window start. Follows Date/Time Encoding.
+          type: string
+          format: date-time
+          example: '2026-09-07T08:00:00Z'
+        aggregation:
+          description: Aggregate function applied
+          type: string
+          enum:
+          - mean
+          - min
+          - max
+          - count
+          example: mean
+        value:
+          description: Aggregate value (sample count for count)
+          type: number
+          example: 21.7
+        sampleCount:
+          description: Points folded into this bucket
+          type: integer
+          example: 3

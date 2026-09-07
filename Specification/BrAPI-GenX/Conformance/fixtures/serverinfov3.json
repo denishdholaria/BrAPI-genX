@@ -49,6 +49,24 @@
         "versions": ["1.0"],
         "methods": ["GET", "POST"],
         "scopes": ["models.register", "models.read", "jobs.infer"]
+      },
+      {
+        "name": "variantMatrices",
+        "versions": ["1.0"],
+        "methods": ["GET", "POST"],
+        "scopes": ["matrices.register", "matrices.read"]
+      },
+      {
+        "name": "fairPackages",
+        "versions": ["1.0"],
+        "methods": ["GET", "POST"],
+        "scopes": ["packages.register", "packages.read"]
+      },
+      {
+        "name": "telemetry",
+        "versions": ["1.0"],
+        "methods": ["GET", "POST"],
+        "scopes": ["telemetry.append", "telemetry.read"]
       }
     ],
     "authProfiles": [

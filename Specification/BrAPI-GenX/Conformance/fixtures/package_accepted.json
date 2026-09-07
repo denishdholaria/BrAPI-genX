@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "pagination": {},
+    "status": [
+      {"message": "FAIR package registered", "messageType": "INFO"}
+    ],
+    "datafiles": []
+  },
+  "result": {
+    "packageDbId": "institute-a:package:wheat-drought-2026",
+    "title": "Wheat drought trial 2026 companion data",
+    "description": "Observations, trial layout, and derived matrices for the 2026 drought panel",
+    "identifiers": [
+      {"type": "DOI", "value": "10.18730/8PZQ5"}
+    ],
+    "license": "CC-BY-4.0",
+    "accessRights": "open",
+    "keywords": ["drought", "wheat", "companion-data"],
+    "creators": ["actor:breeder-07", "actor:data-steward-02"],
+    "publisher": "The Institute",
+    "publicationYear": "2026",
+    "payloadRefs": [
+      {
+        "endpoint": "/brapi/v3/jobs/JOB_0091",
+        "schemaVersion": "Job-1",
+        "responseDigest": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+        "queryDigest": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49c33"
+      }
+    ],
+    "provenance": {
+      "algorithm": "curation-review",
+      "algorithmVersion": "review-3",
+      "inputsDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "recordedAt": "2026-09-07T00:00:00Z",
+      "actor": "actor:data-steward-02"
+    }
+  }
+}

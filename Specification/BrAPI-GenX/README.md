@@ -23,9 +23,18 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `Ontology/` | `VariableTerm` — versioned, namespaced terms; conflicts rejected | Endpoints `POST /variables`, `GET /variables`, `GET /variables/{variableDbId}` |
 | `LotLedger/` | `LotLedgerEntry` — append-only, idempotent lot movements | Endpoints `POST/GET /seedlots/{seedLotDbId}/ledger` |
 | `Models/` | `ModelArtifact` — registered models; inference binds by digest | Endpoints `POST/GET /models`, `GET /models/{modelDbId}`, Jobs `inference` |
+| `Genomics/` | `VariantMatrix` — content-addressed matrix references | Endpoints `POST/GET /variantmatrices`, `GET /variantmatrices/{matrixDbId}` |
+| `FAIR/` | `FAIRPackage` — licensed, embargo-aware payload envelopes | Endpoints `POST/GET /fair-packages`, `GET /fair-packages/{packageDbId}` |
+| `Telemetry/` | `TelemetryPoint` — sensor streams, idempotent ingest, aggregates | Endpoints `POST/GET /telemetry` |
 | `Conformance/` | Probes + fixtures + runner contract (`probes.yaml`) | Static tier runs now; live tier needs `--server` |
 
 RFCs: [RFC-001-GenX-Skeleton](./RFC-001-GenX-Skeleton.md) (principles + first
 three objects), [RFC-002-Ontology-Governance](./RFC-002-Ontology-Governance.md),
 [RFC-003-Seed-Lot-Ledger](./RFC-003-Seed-Lot-Ledger.md),
-[RFC-004-Model-Registry](./RFC-004-Model-Registry.md).
+[RFC-004-Model-Registry](./RFC-004-Model-Registry.md),
+[RFC-005-Variant-Matrix-References](./RFC-005-Variant-Matrix-References.md),
+[RFC-006-FAIR-Packages](./RFC-006-FAIR-Packages.md),
+[RFC-007-Telemetry-Streams](./RFC-007-Telemetry-Streams.md).
+
+[DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-19, need
+authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

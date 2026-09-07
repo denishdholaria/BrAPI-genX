@@ -1,0 +1,25 @@
+{
+  "matrixDbId": "institute-a:matrix:aggwheat-chr2-vcz",
+  "variantSetDbId": "VS_1042",
+  "format": "VCF_ZARR",
+  "fileURL": "drs://institute.org/objects/aggwheat-chr2-vcz",
+  "fileDigest": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49c33",
+  "fileSize": 2725477580,
+  "indexURL": "https://institute.org/matrices/aggwheat-chr2-vcz/region_index",
+  "indexDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sampleCount": 78195,
+  "variantCount": 59880903,
+  "referenceDbId": "REF_0117",
+  "assemblyName": "IWGSC_RefSeq_v2.1",
+  "accessService": {
+    "type": "htsget",
+    "endpoint": "https://institute.org/htsget/variants/aggwheat-chr2-vcz"
+  },
+  "provenance": {
+    "algorithm": "vcf2zarr",
+    "algorithmVersion": "bio2zarr-1.0",
+    "inputsDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "recordedAt": "2026-09-07T00:00:00Z",
+    "actor": "actor:genomics-pipeline-01"
+  }
+}

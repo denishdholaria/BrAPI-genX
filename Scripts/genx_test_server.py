@@ -6,9 +6,11 @@ Implements just enough of the GenX skeleton to execute the live conformance
 tier: Jobs lifecycle with idempotency (L-01..L-05, L-07, L-14, L-15),
 ServerInfoV3 negotiation (L-06), provenance echo for the `analysis` job type,
 versioned ontology terms (L-08, L-09), append-only lot ledgers (L-10, L-11),
-and model registration with digest-bound inference (L-12..L-15). In-memory
-state, no persistence, no authentication (Bearer tokens are accepted and
-ignored).
+model registration with digest-bound inference (L-12..L-15), matrix
+references (L-16, L-17), and FAIR packages with embargo (L-18..L-20), and
+telemetry batch ingest with aggregates (L-21..L-23).
+In-memory state, no persistence, no authentication
+(Bearer tokens are accepted and ignored).
 
 Usage:
     python Scripts/genx_test_server.py [--port 8080] [--profile genx|v21]
@@ -41,6 +43,10 @@ from urllib.parse import parse_qs, urlparse
 
 TERM_ID_RE = re.compile(r"^[^:/]+:[^:/]+:[^:/]+$")
 MODEL_ID_RE = re.compile(r"^[^:/]+:model:[^:/]+$")
+MATRIX_ID_RE = re.compile(r"^[^:/]+:matrix:[^:/]+$")
+PACKAGE_ID_RE = re.compile(r"^[^:/]+:package:[^:/]+$")
+DOI_RE = re.compile(r"^10\.\d{4,}/.+")
+PACKAGE_RIGHTS = ("open", "embargoed", "restricted")
 DECIMAL_RE = re.compile(r"^-?\d+(\.\d+)?$")
 DIGEST_RE = re.compile(r"^[0-9a-f]{64}$")
 LEDGER_TYPES = ("adjust", "move", "handoff", "production", "planting", "trade")
@@ -93,6 +99,11 @@ class Store:
         self.ledger_counter = 0
         self.models = {}  # (modelDbId, modelVersion) -> artifact, insertion ordered
         self.model_order = []
+        self.matrices = {}  # matrixDbId -> record, insertion ordered
+        self.matrix_order = []
+        self.packages = {}  # packageDbId -> record, insertion ordered
+        self.package_order = []
+        self.telemetry = {}  # (deviceDbId, sensorDbId, timestamp) -> point
         past = (datetime.now(timezone.utc) - timedelta(days=1)).strftime("%Y-%m-%dT%H:%M:%SZ")
         self.jobs["JOB_EXPIRED"] = {
             "jobDbId": "JOB_EXPIRED",
@@ -262,6 +273,16 @@ class Handler(BaseHTTPRequestHandler):
             return self._model_list()
         if self._route().startswith("/models/"):
             return self._model_get()
+        if self._route() == "/variantmatrices":
+            return self._matrix_list()
+        if self._route().startswith("/variantmatrices/"):
+            return self._matrix_get()
+        if self._route() == "/fair-packages":
+            return self._package_list()
+        if self._route().startswith("/fair-packages/"):
+            return self._package_get()
+        if self._route() == "/telemetry":
+            return self._telemetry_read()
         return self._send_text(404, f"unknown path {self.path}")
 
     def do_POST(self):
@@ -277,6 +298,12 @@ class Handler(BaseHTTPRequestHandler):
                 return self._ledger_append(parts[1])
         if self._route() == "/models":
             return self._model_publish()
+        if self._route() == "/variantmatrices":
+            return self._matrix_publish()
+        if self._route() == "/fair-packages":
+            return self._package_publish()
+        if self._route() == "/telemetry":
+            return self._telemetry_append()
         return self._send_text(404, f"unknown path {self.path}")
 
     def do_DELETE(self):
@@ -324,6 +351,15 @@ class Handler(BaseHTTPRequestHandler):
                 {"name": "modelRegistry", "versions": ["1.0"],
                  "methods": ["GET", "POST"],
                  "scopes": ["models.register", "models.read", "jobs.infer"]},
+                {"name": "variantMatrices", "versions": ["1.0"],
+                 "methods": ["GET", "POST"],
+                 "scopes": ["matrices.register", "matrices.read"]},
+                {"name": "fairPackages", "versions": ["1.0"],
+                 "methods": ["GET", "POST"],
+                 "scopes": ["packages.register", "packages.read"]},
+                {"name": "telemetry", "versions": ["1.0"],
+                 "methods": ["GET", "POST"],
+                 "scopes": ["telemetry.append", "telemetry.read"]},
             ],
             "authProfiles": [{"name": "none", "scopes": []}],
         }))
@@ -564,6 +600,264 @@ class Handler(BaseHTTPRequestHandler):
         if artifact is None:
             return self._send_text(404, f"unknown model '{mid}'")
         return self._send_json(200, envelope(result=artifact))
+
+    # -- variant matrices -------------------------------------------
+
+    MATRIX_FORMATS = ("VCF", "BCF", "VCF_ZARR", "PLINK_BED", "OTHER")
+
+    def _matrix_publish(self):
+        store = self.server.store
+        body = self._read_json()
+        if body is None:
+            return self._send_text(400, "malformed JSON request object")
+        mid = body.get("matrixDbId") or ""
+        if not MATRIX_ID_RE.match(mid):
+            return self._send_text(400, f"matrixDbId '{mid}' is not namespaced")
+        if body.get("format") not in self.MATRIX_FORMATS:
+            return self._send_text(400, f"unknown format '{body.get('format')}'")
+        url = body.get("fileURL") or ""
+        if not url.startswith(("https://", "drs://")):
+            return self._send_text(400, "fileURL must be https:// or drs://")
+        digest = body.get("fileDigest") or ""
+        if not DIGEST_RE.match(digest):
+            return self._send_text(400, "fileDigest must be SHA-256 hex")
+        record = copy.deepcopy(body)
+        with store.lock:
+            existing = store.matrices.get(mid)
+            if existing is not None:
+                if canonical(existing) == canonical(record):
+                    return self._send_json(200, envelope(
+                        result=existing,
+                        status=[{"message": "Replayed existing matrix reference",
+                                 "messageType": "INFO"}],
+                    ))
+                return self._send_text(
+                    409, f"matrix {mid} already registered with different bytes")
+            store.matrices[mid] = record
+            store.matrix_order.append(mid)
+        return self._send_json(200, envelope(
+            result=record,
+            status=[{"message": "Matrix reference registered", "messageType": "INFO"}],
+        ))
+
+    def _matrix_list(self):
+        store = self.server.store
+        query = self._query()
+        with store.lock:
+            records = [store.matrices[k] for k in store.matrix_order]
+        for field in ("variantSetDbId", "format"):
+            if query.get(field):
+                records = [m for m in records if m.get(field) == query[field]]
+        try:
+            page = max(int(query.get("page", "0")), 0)
+            size = max(int(query.get("pageSize", "1000")), 1)
+        except ValueError:
+            return self._send_text(400, "page and pageSize must be integers")
+        total_pages = (len(records) + size - 1) // size if records else 0
+        return self._send_json(200, envelope(
+            data=records[page * size:(page + 1) * size],
+            pagination={"totalCount": len(records), "pageSize": size,
+                        "totalPages": total_pages, "currentPage": page},
+        ))
+
+    def _matrix_get(self):
+        mid = self._route().split("/variantmatrices/", 1)[1].split("/")[0]
+        record = self.server.store.matrices.get(mid)
+        if record is None:
+            return self._send_text(404, f"unknown matrix '{mid}'")
+        return self._send_json(200, envelope(result=record))
+
+    # -- FAIR packages ----------------------------------------------
+
+    def _package_publish(self):
+        store = self.server.store
+        body = self._read_json()
+        if body is None:
+            return self._send_text(400, "malformed JSON request object")
+        pid = body.get("packageDbId") or ""
+        if not PACKAGE_ID_RE.match(pid):
+            return self._send_text(400, f"packageDbId '{pid}' is not namespaced")
+        if not (body.get("title") or "").strip():
+            return self._send_text(400, "missing title")
+        if not (body.get("license") or "").strip():
+            return self._send_text(400, "missing license")
+        if body.get("accessRights") not in PACKAGE_RIGHTS:
+            return self._send_text(400, f"unknown accessRights '{body.get('accessRights')}'")
+        for ident in body.get("identifiers") or []:
+            if not isinstance(ident, dict) or not ident.get("value"):
+                return self._send_text(400, "identifier without value")
+            if ident.get("type") == "DOI" and not DOI_RE.match(ident["value"]):
+                return self._send_text(400, f"malformed DOI '{ident['value']}'")
+        if body.get("embargoUntil"):
+            try:
+                parse_rfc3339(body["embargoUntil"])
+            except ValueError:
+                return self._send_text(400, "embargoUntil must be RFC 3339")
+        record = copy.deepcopy(body)
+        with store.lock:
+            existing = store.packages.get(pid)
+            if existing is not None:
+                if canonical(existing) == canonical(record):
+                    return self._send_json(200, envelope(
+                        result=existing,
+                        status=[{"message": "Replayed existing package",
+                                 "messageType": "INFO"}],
+                    ))
+                return self._send_text(
+                    409, f"package {pid} already registered with a different body")
+            store.packages[pid] = record
+            store.package_order.append(pid)
+        return self._send_json(200, envelope(
+            result=record,
+            status=[{"message": "FAIR package registered", "messageType": "INFO"}],
+        ))
+
+    def _package_list(self):
+        store = self.server.store
+        query = self._query()
+        with store.lock:
+            records = [store.packages[k] for k in store.package_order]
+        for field in ("accessRights", "license"):
+            if query.get(field):
+                records = [p for p in records if p.get(field) == query[field]]
+        try:
+            page = max(int(query.get("page", "0")), 0)
+            size = max(int(query.get("pageSize", "1000")), 1)
+        except ValueError:
+            return self._send_text(400, "page and pageSize must be integers")
+        total_pages = (len(records) + size - 1) // size if records else 0
+        return self._send_json(200, envelope(
+            data=records[page * size:(page + 1) * size],
+            pagination={"totalCount": len(records), "pageSize": size,
+                        "totalPages": total_pages, "currentPage": page},
+        ))
+
+    def _package_get(self):
+        pid = self._route().split("/fair-packages/", 1)[1].split("/")[0]
+        record = self.server.store.packages.get(pid)
+        if record is None:
+            return self._send_text(404, f"unknown package '{pid}'")
+        if record.get("embargoUntil"):
+            try:
+                embargoed = parse_rfc3339(record["embargoUntil"]) > datetime.now(timezone.utc)
+            except ValueError:
+                embargoed = False
+            if embargoed:
+                return self._send_text(403, f"package '{pid}' is embargoed")
+        return self._send_json(200, envelope(result=record))
+
+    # -- telemetry ----------------------------------------------------
+
+    TELEMETRY_QUALITY = ("good", "suspect", "bad")
+    TELEMETRY_AGG = ("none", "mean", "min", "max", "count")
+
+    def _telemetry_append(self):
+        store = self.server.store
+        body = self._read_json()
+        if not isinstance(body, list):
+            return self._send_text(400, "telemetry batch must be an array")
+        appended, replayed, conflicts = 0, 0, []
+        with store.lock:
+            for point in body:
+                if not isinstance(point, dict):
+                    return self._send_text(400, "telemetry batch elements must be objects")
+                device = point.get("deviceDbId") or ""
+                sensor = point.get("sensorDbId") or ""
+                stamp = point.get("timestamp") or ""
+                value = point.get("value")
+                if not device or not sensor or not stamp or value is None:
+                    return self._send_text(400, "point missing deviceDbId, sensorDbId, timestamp, or value")
+                if isinstance(value, bool) or not isinstance(value, (int, float)):
+                    return self._send_text(400, "point value must be a JSON number")
+                try:
+                    parse_rfc3339(stamp)
+                except ValueError:
+                    return self._send_text(400, "point timestamp must be RFC 3339")
+                record = copy.deepcopy(point)
+                record.setdefault("quality", "good")
+                if record["quality"] not in self.TELEMETRY_QUALITY:
+                    return self._send_text(400, f"unknown quality '{record['quality']}'")
+                key = (device, sensor, stamp)
+                existing = store.telemetry.get(key)
+                if existing is not None:
+                    if existing["value"] == value and canonical(existing) == canonical(record):
+                        replayed += 1
+                    else:
+                        conflicts.append(f"{device}/{sensor}/{stamp}")
+                else:
+                    store.telemetry[key] = record
+                    appended += 1
+        return self._send_json(200, envelope(result={
+            "appended": appended, "replayed": replayed, "conflicts": conflicts}))
+
+    def _telemetry_read(self):
+        store = self.server.store
+        query = self._query()
+        device = query.get("deviceDbId") or ""
+        if not device:
+            return self._send_text(400, "missing deviceDbId")
+        aggregation = query.get("aggregation", "none")
+        if aggregation not in self.TELEMETRY_AGG:
+            return self._send_text(400, f"unknown aggregation '{aggregation}'")
+        try:
+            start = parse_rfc3339(query["from"]) if query.get("from") else None
+            end = parse_rfc3339(query["to"]) if query.get("to") else None
+            window = int(query.get("windowSeconds", "0") or 0)
+        except ValueError:
+            return self._send_text(400, "from, to, and windowSeconds must be valid")
+        if window < 0:
+            return self._send_text(400, "windowSeconds must be non-negative")
+        with store.lock:
+            points = [p for (d, s, _), p in store.telemetry.items()
+                      if d == device
+                      and (not query.get("sensorDbId") or s == query["sensorDbId"])]
+        rows = []
+        for point in points:
+            stamp = parse_rfc3339(point["timestamp"])
+            if start and stamp < start:
+                continue
+            if end and stamp >= end:
+                continue
+            rows.append((stamp, point))
+        rows.sort(key=lambda r: r[0])
+        if aggregation == "none":
+            data = [p for _, p in rows]
+        else:
+            anchor = start or (rows[0][0] if rows else None)
+            buckets = {}
+            for stamp, point in rows:
+                index = 0 if not window else int((stamp - anchor).total_seconds() // window)
+                buckets.setdefault(index, []).append(point["value"])
+            data = []
+            for index in sorted(buckets):
+                values = buckets[index]
+                if aggregation == "mean":
+                    agg_value = sum(values) / len(values)
+                elif aggregation == "min":
+                    agg_value = min(values)
+                elif aggregation == "max":
+                    agg_value = max(values)
+                else:
+                    agg_value = len(values)
+                origin = anchor.timestamp() + index * window if window else anchor.timestamp()
+                data.append({
+                    "windowStart": datetime.fromtimestamp(origin, tz=timezone.utc).strftime(
+                        "%Y-%m-%dT%H:%M:%SZ"),
+                    "aggregation": aggregation,
+                    "value": agg_value,
+                    "sampleCount": len(values),
+                })
+        try:
+            page = max(int(query.get("page", "0")), 0)
+            size = max(int(query.get("pageSize", "1000")), 1)
+        except ValueError:
+            return self._send_text(400, "page and pageSize must be integers")
+        total_pages = (len(data) + size - 1) // size if data else 0
+        return self._send_json(200, envelope(
+            data=data[page * size:(page + 1) * size],
+            pagination={"totalCount": len(data), "pageSize": size,
+                        "totalPages": total_pages, "currentPage": page},
+        ))
 
     # -- seed-lot ledger --------------------------------------------
 

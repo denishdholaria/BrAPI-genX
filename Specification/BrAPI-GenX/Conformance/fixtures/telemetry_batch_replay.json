@@ -1,0 +1,32 @@
+[
+  {
+    "deviceDbId": "station-04",
+    "sensorDbId": "air-temp-01",
+    "timestamp": "2026-09-07T08:00:00Z",
+    "value": 21.4,
+    "unit": "degree_celsius",
+    "quality": "good",
+    "provenance": {
+      "algorithm": "firmware-calibration",
+      "algorithmVersion": "fw-2.3",
+      "recordedAt": "2026-09-07T08:00:01Z",
+      "actor": "actor:station-04"
+    }
+  },
+  {
+    "deviceDbId": "station-04",
+    "sensorDbId": "air-temp-01",
+    "timestamp": "2026-09-07T08:01:00Z",
+    "value": 21.7,
+    "unit": "degree_celsius",
+    "quality": "good"
+  },
+  {
+    "deviceDbId": "station-04",
+    "sensorDbId": "air-temp-01",
+    "timestamp": "2026-09-07T08:02:00Z",
+    "value": 22.0,
+    "unit": "degree_celsius",
+    "quality": "suspect"
+  }
+]

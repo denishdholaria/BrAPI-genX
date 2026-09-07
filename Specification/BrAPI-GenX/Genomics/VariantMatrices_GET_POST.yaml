@@ -1,0 +1,103 @@
+info:
+  title: BrAPI
+  version: ''
+openapi: 3.0.0
+paths:
+  /variantmatrices:
+    get:
+      summary: List registered matrix references
+      description: Get a paged list of matrix references across authorities. Filters combine with AND.
+      parameters:
+      - name: variantSetDbId
+        description: Filter by backing V2.1 VariantSet
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: format
+        description: Filter by matrix layout
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - VCF
+          - BCF
+          - VCF_ZARR
+          - PLINK_BED
+          - OTHER
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/VariantMatrixListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - Variant Matrices
+    post:
+      summary: Register one matrix reference
+      description: |-
+        Unknown matrixDbId creates; known id with an identical body replays
+        the existing record; known id with different bytes is rejected with
+        409. New bytes get a new id.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VariantMatrixNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/VariantMatrix'
+                required:
+                - metadata
+                - result
+                title: VariantMatrixResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - Variant Matrices
+components:
+  responses:
+    VariantMatrixListResponse:
+      content:
+        application/json:
+          schema:
+            title: VariantMatrixListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VariantMatrix'
+            required:
+            - metadata
+            - result
+      description: OK

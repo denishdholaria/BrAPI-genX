@@ -1,0 +1,98 @@
+info:
+  title: BrAPI
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    VariantMatrix:
+      type: object
+      description: |-
+        One immutable reference to an external allele-matrix file. Bytes are
+        immutable under an id: same matrixDbId with different fileDigest is
+        rejected with 409. Retrieval is out of band via fileURL or
+        accessService (DRS/htsget); GenX defines no new transport.
+      required:
+      - matrixDbId
+      - format
+      - fileURL
+      - fileDigest
+      properties:
+        matrixDbId:
+          description: Namespaced matrix identity `{authority}:matrix:{localId}`
+          type: string
+          example: institute-a:matrix:aggwheat-chr2-vcz
+        variantSetDbId:
+          description: Link into V2.1 genotyping when this matrix backs a VariantSet
+          type: string
+          example: VS_1042
+        format:
+          description: Matrix layout. VCF_ZARR follows the VCF Zarr specification; slicing belongs to htsget.
+          type: string
+          enum:
+          - VCF
+          - BCF
+          - VCF_ZARR
+          - PLINK_BED
+          - OTHER
+          example: VCF_ZARR
+        fileURL:
+          description: Retrievable location of the matrix bytes (`https://` or `drs://` per GA4GH DRS)
+          type: string
+          example: drs://institute.org/objects/aggwheat-chr2-vcz
+        fileDigest:
+          description: SHA-256 (lowercase hex) over the matrix bytes
+          type: string
+          example: 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
+        fileSize:
+          description: Size of the matrix bytes
+          type: integer
+          example: 2725477580
+        indexURL:
+          description: Location of the accompanying index, when separate
+          type: string
+          example: https://institute.org/matrices/aggwheat-chr2-vcz/region_index
+        indexDigest:
+          description: SHA-256 (lowercase hex) over the index bytes
+          type: string
+          example: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+        sampleCount:
+          description: Advisory sample dimension for planning; authoritative dimensions come from the bytes
+          type: integer
+          example: 78195
+        variantCount:
+          description: Advisory variant dimension for planning; authoritative dimensions come from the bytes
+          type: integer
+          example: 59880903
+        referenceDbId:
+          description: V2.1 Reference link, when the matrix is aligned to one
+          type: string
+          example: REF_0117
+        assemblyName:
+          description: Assembly the matrix coordinates refer to
+          type: string
+          example: IWGSC_RefSeq_v2.1
+        accessService:
+          $ref: '#/components/schemas/MatrixAccessService'
+        provenance:
+          description: Conversion pipeline and source files behind this matrix
+          $ref: '#/components/schemas/ProvenanceEnvelope'
+    MatrixAccessService:
+      type: object
+      description: Where to stream subsets of the matrix. Sub-setting semantics belong to the named service (htsget ticket endpoints, DRS access).
+      required:
+      - type
+      - endpoint
+      properties:
+        type:
+          description: Service kind
+          type: string
+          enum:
+          - htsget
+          - drs
+          - https
+          example: htsget
+        endpoint:
+          description: Ticket endpoint (htsget) or service base (drs/https)
+          type: string
+          example: https://institute.org/htsget/variants/aggwheat-chr2-vcz

@@ -1,0 +1,45 @@
+info:
+  title: BrAPI
+  version: ''
+openapi: 3.0.0
+paths:
+  /fair-packages/{packageDbId}:
+    get:
+      summary: Get one FAIR package (denied while embargoed)
+      description: Returns the package metadata, or 404. While payloads are embargoed (embargoUntil in the future) the record is denied with 403 to prove the gate exists; the gentler metadata-visible alternative is requires-decision (see RFC-006 §5).
+      parameters:
+      - name: packageDbId
+        description: Namespaced package identity `{authority}:package:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/FAIRPackage'
+                required:
+                - metadata
+                - result
+                title: FAIRPackageResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - FAIR Packages

@@ -1,0 +1,81 @@
+info:
+  title: BrAPI
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    FAIRPackageNewRequest:
+      type: object
+      description: |-
+        Request to register one FAIR package. Unknown packageDbId creates;
+        known id with an identical body replays the existing record; known id
+        with a different body is rejected with 409.
+      required:
+      - packageDbId
+      - title
+      - license
+      - accessRights
+      properties:
+        packageDbId:
+          description: Namespaced package identity `{authority}:package:{localId}`
+          type: string
+          example: institute-a:package:wheat-drought-2026
+        title:
+          description: Citable title of the package
+          type: string
+          example: Wheat drought trial 2026 companion data
+        description:
+          description: Human readable summary
+          type: string
+          example: Observations, trial layout, and derived matrices for the 2026 drought panel
+        identifiers:
+          description: Citation links for this package (asserted, not minted here)
+          type: array
+          items:
+            $ref: '#/components/schemas/PackageIdentifier'
+        license:
+          description: SPDX license expression governing reuse (FAIR R1.1)
+          type: string
+          example: CC-BY-4.0
+        accessRights:
+          description: Access contract for the payloads
+          type: string
+          enum:
+          - open
+          - embargoed
+          - restricted
+          example: open
+        embargoUntil:
+          description: Payload reads are denied with 403 before this date-time. Follows Date/Time Encoding.
+          type: string
+          format: date-time
+          example: '2027-01-01T00:00:00Z'
+        keywords:
+          description: Discovery keywords
+          type: array
+          items:
+            type: string
+          example: [drought, wheat, companion-data]
+        creators:
+          description: Credited creators
+          type: array
+          items:
+            type: string
+          example: [actor:breeder-07, actor:data-steward-02]
+        publisher:
+          description: Publishing organization
+          type: string
+          example: The Institute
+        publicationYear:
+          description: Year of publication as a four-digit string
+          type: string
+          example: '2026'
+        payloadRefs:
+          description: Digest-bound references to the payloads in this package
+          type: array
+          items:
+            $ref: '#/components/schemas/EvidenceLink'
+        provenance:
+          description: Curation history behind this package
+          $ref: '#/components/schemas/ProvenanceEnvelope'

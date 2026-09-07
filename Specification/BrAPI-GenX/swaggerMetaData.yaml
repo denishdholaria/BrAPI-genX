@@ -42,3 +42,18 @@ tags:
   externalDocs:
     description: Docs
     url: https://wiki.brapi.org/
+- name: Variant Matrices
+  description: Content-addressed references to external allele-matrix files
+  externalDocs:
+    description: Docs
+    url: https://wiki.brapi.org/
+- name: FAIR Packages
+  description: Licensed, identified, embargo-aware payload envelopes
+  externalDocs:
+    description: Docs
+    url: https://wiki.brapi.org/
+- name: Telemetry
+  description: Sensor streams with idempotent ingest and aggregates
+  externalDocs:
+    description: Docs
+    url: https://wiki.brapi.org/
