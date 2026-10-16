@@ -5,6 +5,7 @@ openapi: 3.0.0
 paths:
   /fair-packages/{packageDbId}:
     get:
+      operationId: genxGetFairPackageMetadata
       summary: Get one FAIR package (denied while embargoed)
       description: Returns the package metadata, or 404. While payloads are embargoed (embargoUntil in the future) the record is denied with 403 to prove the gate exists; the gentler metadata-visible alternative is requires-decision (see RFC-006 §5).
       parameters:

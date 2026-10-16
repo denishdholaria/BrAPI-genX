@@ -59,7 +59,7 @@ Invariants:
 
 ## 3. Inference as a Job
 
-No new endpoint. Inference runs through RFC-001 Jobs with
+No new endpoint. Inference runs through `POST /brapi/v3/jobs` (`genxSubmitAsyncJob`) from RFC-001 with
 `jobType: inference` and parameters `{modelDbId, modelVersion?, inputs}`:
 
 - Unknown model, unknown version, or `revoked` status → submit rejected

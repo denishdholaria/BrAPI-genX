@@ -5,6 +5,7 @@ openapi: 3.0.0
 paths:
   /serverinfo:
     get:
+      operationId: genxGetServerInfoV3
       description: |-
         GenX capability negotiation. Served under `/brapi/v3/`.
 

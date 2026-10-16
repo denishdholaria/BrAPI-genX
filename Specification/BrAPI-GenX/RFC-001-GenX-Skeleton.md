@@ -10,7 +10,7 @@
 
 BrAPI V2.1 (frozen July 2022, `201` endpoints) standardizes breeding-data
 exchange but has no answer for: method/algorithm versioning and uncertainty on
-results; async work beyond `POST /search` polling; capability negotiation
+results; async work beyond `POST /brapi/v2/search` polling; capability negotiation
 beyond per-call `serverinfo`; multi-tenant SaaS identity; idempotent writes.
 
 These gaps were met independently while implementing BrAPI-backed breeding
@@ -89,19 +89,19 @@ Files: `Jobs/Schemas/Job.yaml`, `Jobs/Schemas/JobNewRequest.yaml`,
 Purpose: give every long-running operation (searches, analyses, exports, model
 inference) one lifecycle: submit → poll → retrieve-or-cancel → expire.
 
-- `POST /jobs` with `JobNewRequest{jobType, parameters, idempotencyKey?}`.
+- `POST /brapi/v3/jobs` (`genxSubmitAsyncJob`) with `JobNewRequest{jobType, parameters, idempotencyKey?}`.
   Returns `202` + `Job`. If `idempotencyKey` was already accepted with a
   byte-identical body, the server must return the existing `Job` with zero new
   effects (replay returns existing).
-- `GET /jobs/{jobDbId}` returns the current `Job{jobDbId, jobType, status,
+- `GET /brapi/v3/jobs/{jobDbId}` (`genxGetAsyncJobById`) returns the current `Job{jobDbId, jobType, status,
   progress, createdAt, updatedAt, expiresAt, result?}`. `status` is one of
   `SUBMITTED, RUNNING, COMPLETED, FAILED, CANCELLED, EXPIRED`.
-- `DELETE /jobs/{jobDbId}` requests cancellation; terminal states are
+- `DELETE /brapi/v3/jobs/{jobDbId}` (`genxRequestAsyncJobCancellation`) requests cancellation; terminal states are
   immutable.
 - `result`, when `COMPLETED`, uses the standard envelope (`result.data` +
   pagination, or `metadata.datafiles` for file outputs).
 
-Relationship to `/search/*`: unchanged. Servers may additionally expose an
+Relationship to V2.1 `/brapi/v2/search/*`: unchanged. Servers may additionally expose an
 async search as a `jobType`, but clients must not assume it. The three V2.0
 search flavors (immediate/saved/async) stay valid; Jobs is the path forward,
 not a retrofit.
@@ -119,8 +119,7 @@ Files: `ServerInfoV3/Schemas/ServerInfoV3.yaml`,
 Purpose: let a client learn, in one call, which BrAPI generations, GenX
 objects, auth profiles, and scopes a server supports.
 
-- `GET /serverinfo` served under `/brapi/v3/` (V2.1 `GET /serverinfo` under
-  `/brapi/v2/` is untouched).
+- `GET /brapi/v3/serverinfo` (`genxGetServerInfoV3`) (V2.1 `GET /brapi/v2/serverinfo` is untouched).
 - `ServerInfoV3` keeps every V2.1 `ServerInfo` field and adds:
   `brapiVersions[]` (e.g. `["2.1", "3.0-draft"]`),
   `capabilities[]{name, versions[], methods[], scopes[]}` where `name` is a

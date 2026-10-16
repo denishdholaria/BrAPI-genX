@@ -60,13 +60,30 @@ Invariants:
 
 ## 3. Endpoints
 
-- `POST /seedlots/{seedLotDbId}/ledger` with `LotLedgerEntryNewRequest` →
+- `POST /brapi/v3/seedlots/{seedLotDbId}/ledger` (`genxAppendSeedLotLedgerEntry`) with `LotLedgerEntryNewRequest` →
   `200` + single entry (create, replay, or `409` conflict with plain-text body).
-- `GET /seedlots/{seedLotDbId}/ledger` with `entryType?` + standard pagination
+- `GET /brapi/v3/seedlots/{seedLotDbId}/ledger` (`genxListSeedLotLedgerEntries`) with `entryType?` + standard pagination
   over `position` order → list of entries.
 
 Both live under the existing `Seed Lots` tag so tag-filtered clients keep
 working.
+
+### Relationship to the V2.1 SeedLotTransaction contract — D-20
+
+This endpoint is an additive GenX ledger contract, **not currently a declared
+wire-compatible replacement** for V2.1 `SeedLotTransaction`. Both can describe
+a real-world movement of seed-lot material, but GenX uses one-lot, ordered
+entries with fixed-scale decimal strings, actor/provenance and replay/conflict
+rules, whereas V2.1 transactions express `fromSeedLotDbId` and
+`toSeedLotDbId` with numeric `amount` and have no equivalent idempotency or
+event-correlation guarantee.
+
+Until D-20 is resolved, implementations must not silently mirror a single
+movement into both streams, claim the streams are equivalent, or sum both as
+independent movements. A compatibility adapter needs an explicit mapping and
+a stable cross-surface event identity; the current proposal does not provide
+that contract. Multi-lot atomicity remains separately unresolved under D-07.
+
 
 ## 4. Hypothesis, falsifier, verification
 

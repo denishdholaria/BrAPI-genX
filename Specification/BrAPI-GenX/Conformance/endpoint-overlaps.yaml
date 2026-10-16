@@ -1,0 +1,104 @@
+schema_version: 1
+api_base_paths:
+  brapi_v21: /brapi/v2
+  genx: /brapi/v3
+
+# A match below is between relative path templates in separate API generations.
+# Full URLs remain distinct because their base paths differ. The entry is still
+# required so humans, generated clients, logs, and AI agents cannot collapse
+# distinct contracts into the same short route name.
+allowed_relative_path_overlaps:
+  - method: GET
+    path: /serverinfo
+    genx_operation_id: genxGetServerInfoV3
+    relationship: versioned-contract-for-same-discovery-purpose
+    risk: medium
+    rationale: >-
+      Both operations discover server capabilities, but V2.1 returns ServerInfo
+      while GenX returns ServerInfoV3 with brapiVersions, capabilities, and
+      authProfiles. Clients must address the intended base path and validate
+      the expected response contract; the payloads are not interchangeable.
+# Semantically adjacent surfaces have different relative paths but can still
+# confuse implementers. These relationships are review guardrails for this non-normative
+# proposal's documentation; they are not claims of wire compatibility.
+semantic_neighbors:
+  - id: SEM-01
+    v21_surface: "GET/POST /brapi/v2/seedlots/transactions; GET /brapi/v2/seedlots/{seedLotDbId}/transactions"
+    genx_surface: "GET/POST /brapi/v3/seedlots/{seedLotDbId}/ledger"
+    v21_resource: SeedLotTransaction
+    genx_resource: LotLedgerEntry
+    relationship: related-real-world-movement-records-not-yet-defined-as-equivalent
+    risk: critical
+    rationale: >-
+      Both can describe seed-lot material movement. GenX adds append-only
+      ordering, decimal-string quantity, actor, provenance, and idempotency,
+      but the current shapes do not provide a proven one-to-one mapping or
+      cross-surface event identity. See deferred decision D-20. Do not silently
+      mirror writes, claim drop-in replacement, or double-count both streams.
+  - id: SEM-02
+    v21_surface: "POST /brapi/v2/search/* and GET /brapi/v2/search/{searchResultsDbId}"
+    genx_surface: "POST /brapi/v3/jobs; GET/DELETE /brapi/v3/jobs/{jobDbId}"
+    v21_resource: BrAPI search lifecycle
+    genx_resource: Job
+    relationship: complementary-general-work-lifecycle
+    risk: high
+    rationale: >-
+      Jobs model general asynchronous work, not a retroactive replacement for
+      V2.1 search contracts. A server may model asynchronous search as a job,
+      but a client must not assume that it does unless advertised.
+  - id: SEM-03
+    v21_surface: "Observation records under /brapi/v2/observations and ObservationVariable definitions under /brapi/v2/variables"
+    genx_surface: "GET/POST /brapi/v3/telemetry"
+    v21_resource: scientific observations tied to breeding studies and units
+    genx_resource: device/sensor time-series samples or aggregates
+    relationship: distinct-resource-families-with-possible-domain-mapping
+    risk: high
+    rationale: >-
+      Telemetry readings are not automatically BrAPI observations. Mapping
+      requires explicit observation-variable, study/unit, timestamp, quality,
+      and provenance rules; clients must not auto-convert them by field-name
+      similarity.
+  - id: SEM-04
+    v21_surface: "VariantSet, Variant, CallSet, and Calls"
+    genx_surface: "GET/POST /brapi/v3/variantmatrices; GET /brapi/v3/variantmatrices/{matrixDbId}"
+    v21_resource: BrAPI genotyping records and calls
+    genx_resource: external matrix metadata/reference
+    relationship: complementary-reference-not-a-data-replacement
+    risk: medium
+    rationale: >-
+      VariantMatrix registers format and content references; it does not mean
+      matrix bytes are returned by the endpoint and does not replace V2.1
+      variant/call resources. Bulk content follows its external retrieval
+      contract.
+  - id: SEM-05
+    v21_surface: "metadata.datafiles and external data-file retrieval in /brapi/v2 responses"
+    genx_surface: "GET/POST /brapi/v3/fair-packages; GET /brapi/v3/fair-packages/{packageDbId}"
+    v21_resource: file references attached to a response/record
+    genx_resource: FAIRPackage metadata and access-policy record
+    relationship: complementary-metadata-not-a-byte-transport
+    risk: medium
+    rationale: >-
+      A FAIRPackage is not a file download endpoint. Its metadata, licensing,
+      embargo, and identifiers do not themselves deliver package bytes.
+  - id: SEM-06
+    v21_surface: "BrAPI-Genotyping OntologyTerm schema (not a route)"
+    genx_surface: "VariableTerm schema exposed through /brapi/v3/variable-terms"
+    v21_resource: lightweight ontology term label/reference
+    genx_resource: versioned observation-variable term definition
+    relationship: distinct-schema-purpose
+    risk: medium
+    rationale: >-
+      VariableTerm is not a replacement or synonym for the V2.1 Genotyping
+      OntologyTerm schema. Keep schema names distinct and do not infer
+      equivalence from the word term.
+  - id: SEM-07
+    v21_surface: "no equivalent model registry or inference endpoint asserted"
+    genx_surface: "GET/POST /brapi/v3/models; GET /brapi/v3/models/{modelDbId}; inference Job via /brapi/v3/jobs"
+    v21_resource: none claimed
+    genx_resource: registered model metadata vs asynchronous execution
+    relationship: two-distinct-genx-resources
+    risk: medium
+    rationale: >-
+      Registering or retrieving a model artifact is not executing it.
+      Inference is submitted through Jobs with an explicit jobType; do not
+      invent a synchronous /models/{id}/infer operation.

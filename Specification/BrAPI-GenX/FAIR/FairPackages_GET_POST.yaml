@@ -5,6 +5,7 @@ openapi: 3.0.0
 paths:
   /fair-packages:
     get:
+      operationId: genxListFairPackageMetadata
       summary: List registered FAIR packages (metadata only)
       description: Get a paged list of package metadata across authorities. Filters combine with AND. Payload bytes are never served here.
       parameters:
@@ -39,6 +40,7 @@ paths:
       tags:
       - FAIR Packages
     post:
+      operationId: genxRegisterFairPackage
       summary: Register one FAIR package
       description: |-
         Unknown packageDbId creates; known id with an identical body replays

@@ -5,6 +5,7 @@ openapi: 3.0.0
 paths:
   /jobs:
     get:
+      operationId: genxListJobs
       summary: List jobs visible to the caller
       description: Get a paged list of jobs submitted by the caller. Follows standard pagination.
       parameters:
@@ -42,6 +43,7 @@ paths:
       tags:
       - Jobs
     post:
+      operationId: genxSubmitAsyncJob
       summary: Submit a unit of asynchronous work
       description: |-
         Submit work and receive a Job with HTTP 202. When `idempotencyKey` is

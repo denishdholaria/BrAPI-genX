@@ -3,9 +3,10 @@ info:
   version: ''
 openapi: 3.0.0
 paths:
-  /variables/{variableDbId}:
+  /variable-terms/{variableDbId}:
     get:
-      summary: Get one term (latest created when version is omitted)
+      operationId: genxGetVariableTermVersion
+      summary: Get a versioned observation-variable term
       description: Returns the requested version, or the most recently created version when `version` is omitted. Version ordering semantics are requires-decision (see RFC-002 §5).
       parameters:
       - name: variableDbId
@@ -48,4 +49,4 @@ paths:
         '404':
           $ref: '#/components/responses/404NotFound'
       tags:
-      - Ontology
+      - VariableTerms

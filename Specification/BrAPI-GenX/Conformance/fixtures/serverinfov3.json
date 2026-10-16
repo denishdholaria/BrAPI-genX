@@ -33,7 +33,7 @@
         "scopes": []
       },
       {
-        "name": "ontologyTerms",
+        "name": "variableTerms",
         "versions": ["1.0"],
         "methods": ["GET", "POST"],
         "scopes": ["ontology.write"]

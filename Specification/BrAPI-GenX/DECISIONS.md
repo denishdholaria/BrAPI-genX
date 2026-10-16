@@ -30,6 +30,7 @@ Nothing here changes V2.1.
 | D-17 | Alert rules, evaluation, delivery | RFC-007 §5 | Prototype vocabulary exists, not standardized | Follow-up RFC |
 | D-18 | Gap-filling, resampling, timezone-of-record | RFC-007 §5 | None; servers document their own | Statistical review + RFC |
 | D-19 | Pangenome graph encodings (no format value claimed) | RFC-005 §5 | None | Format specification maturity |
+| D-20 | Relationship, mapping, authority, and double-counting rules between V2.1 `SeedLotTransaction` and GenX `LotLedgerEntry` | RFC-003 §1/§3; ENDPOINT-IDENTITY.md | Structurally different contracts describe overlapping real-world material movements; no proven shared event identity or one-to-one mapping | Community and implementer decision defining authority, event correlation, mapping loss, and safe dual-read/dual-write behavior |
 
 ## Part B — Taken autonomously (reviewable)
 

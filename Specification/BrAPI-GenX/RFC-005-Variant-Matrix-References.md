@@ -67,11 +67,11 @@ Invariants:
 
 ## 3. Endpoints
 
-- `POST /variantmatrices` with `VariantMatrixNewRequest` → `200` + single
+- `POST /brapi/v3/variantmatrices` (`genxRegisterVariantMatrixReference`) with `VariantMatrixNewRequest` → `200` + single
   record (create, replay, or `409` conflict with plain-text body).
-- `GET /variantmatrices` with `variantSetDbId?`, `format?` filters + standard
+- `GET /brapi/v3/variantmatrices` (`genxListVariantMatrixReferences`) with `variantSetDbId?`, `format?` filters + standard
   pagination → list of records.
-- `GET /variantmatrices/{matrixDbId}` → single record or `404`.
+- `GET /brapi/v3/variantmatrices/{matrixDbId}` (`genxGetVariantMatrixReference`) → single record or `404`.
 
 ## 4. Hypothesis, falsifier, verification
 

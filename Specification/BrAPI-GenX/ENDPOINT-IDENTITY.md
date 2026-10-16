@@ -1,0 +1,129 @@
+# GenX Endpoint Identity and Semantic Collision Guardrails
+
+- Status: **engineering guardrail for a non-normative proposal**; not community ratification.
+- Applies to: every endpoint introduced under the GenX base path `/brapi/v3`, all examples and tests that call it, and any future generated client or AI-agent-facing description.
+- Purpose: prevent two operations from being given names that make them appear interchangeable when they have different request, response, effect, identity, permission, lifecycle, or data-ownership semantics.
+
+## 1. The identity rule
+
+An endpoint must never be identified by a short path fragment alone. The complete operation identity is the tuple:
+
+1. **API generation and base path** (for example, `/brapi/v2` versus `/brapi/v3`);
+2. **HTTP method** and complete route template, including path parameters;
+3. **stable OpenAPI `operationId`**;
+4. **request schema and response schema(s)**;
+5. **semantic action** (read, query, register, publish, append, cancel, or another precisely defined effect);
+6. **resource identity/version rules** and side-effect/idempotency behavior;
+7. **authorization scope/actor/tenant boundary**, when applicable; and
+8. **explicit relationship to any similar existing operation**.
+
+The URI is the dispatch address. The `operationId` is the stable contract-level name used by tooling and client code. Neither can substitute for the other. The OpenAPI Specification requires `operationId` values to be unique within an API description; GenX strengthens this for generated-client safety by requiring every GenX value to start with `genx` and to state a domain-specific action. [OpenAPI Operation Object](https://spec.openapis.org/oas/v3.1.2#operation-object).
+
+**Never refer to an endpoint in a standard, issue, test, log, error report, or agent instruction only as “GET /variables”, “GET /variable-terms”, or “the model endpoint” when generation or behavior matters.** Include the full base path and `operationId`, plus the relevant schema name when discussing payload behavior.
+
+## 2. Naming rules
+
+Every GenX operation must satisfy all of these rules:
+
+- Carry an explicit, case-sensitive `operationId` in its OpenAPI operation object. No inference from filename, HTTP method, summary, or URL is allowed.
+- Start the identifier with `genx`, followed by an action and a domain-specific object, for example `genxGetAsyncJobById`. This keeps GenX names separate from older and future code-generated method names.
+- Use a meaningful business action: distinguish **list** from **get**, **register** from **execute**, **append** from **replace**, and **request cancellation** from **delete the resource**.
+- Make the noun as specific as the returned/changed resource. Avoid generic names such as `getData`, `postThing`, `getVariable`, `createModel`, or `process`.
+- Keep `operationId` stable across editorial changes. Changing it can rename a generated client method even when the URI is unchanged.
+- Do not create two operation IDs for the same method/path semantics, or reuse an operation ID for a new meaning.
+- Require non-empty `summary` and `description`. The description must state what is read/created/changed, relevant request and response types, material side effects/replay behavior, and known non-responsibilities or neighboring operations.
+- Treat path parameters, query parameters, request bodies, response schemas, status codes, ownership, and side effects as contract semantics, not merely documentation.
+- A resource schema name and a collection path do not have to be lexically identical, but any mismatch must be explained in the operation description and semantic relationship register.
+
+The `genx` prefix is a proposal-local engineering convention. It does not claim that the BrAPI community has ratified these names.
+
+## 3. Versioned paths and semantic neighbors
+
+Two operations may share a relative path in separate major API generations. They are different endpoints because their complete base paths and contracts differ. That reuse is safe only when the relationship is documented and client guidance says which schema applies.
+
+Two paths may also be different but represent the same real-world concept (for example, seed-lot “transactions” and a seed-lot “ledger”). Different route strings do **not** prove different meaning. The review must classify each relationship as one of:
+
+- **Same resource, versioned contract** — same purpose across generations, different versioned payload/behavior.
+- **Versioned domain successor with contract differences** — same domain lineage but not wire-interchangeable.
+- **Complementary** — related surfaces with a defined division of responsibility.
+- **Distinct** — similar vocabulary, materially different resources.
+- **Unresolved semantic overlap** — current evidence is insufficient to define an authoritative mapping or a safe dual-write rule. This is an adoption blocker for workflows that would rely on equivalence.
+
+The machine-readable overlap and semantic-neighbor register is `Conformance/endpoint-overlaps.yaml`. Exact path reuse is checked by probe **S-21**. A code change that adds a new overlap must update the register in the same change; an undocumented overlap is a conformance failure, not a review note to handle later.
+
+## 4. Cross-generation cases that must not be collapsed
+
+### Server capability discovery
+
+- V2.1: `GET /brapi/v2/serverinfo` — V2.1 `ServerInfo` contract.
+- GenX: `GET /brapi/v3/serverinfo`, `operationId=genxGetServerInfoV3` — `ServerInfoV3` including `brapiVersions`, `capabilities`, and `authProfiles`.
+
+Both discover a server's surface, but the payloads are not interchangeable. A GenX client may use the documented V2.1 fallback when GenX is absent; it must not call an unadvertised GenX endpoint as a feature probe.
+
+### V2.1 observation variables versus GenX versioned variable terms
+
+- V2.1: `/brapi/v2/variables` returns `ObservationVariable` records, each a unique combination of Trait, Method, and Scale.
+- GenX: `/brapi/v3/variable-terms`, `operationId=genxListVariableTermVersions`, returns versioned, namespaced `VariableTerm` records. The related single-record operation is `genxGetVariableTermVersion`; publication is `genxPublishVariableTermVersion`.
+
+GenX intentionally uses the distinct `/brapi/v3/variable-terms` route rather than reusing `/brapi/v2/variables`. This makes the resource boundary visible in the path itself. The contracts are still domain-adjacent, not interchangeable: V2.1 bulk POST and GenX single-term publication have different request shapes and lifecycle semantics. Generated clients and AI agents must use the base path, route, `operationId`, and schema name together. GenX `VariableTerm` is also **not** the V2.1 Genotyping `OntologyTerm` label/reference schema.
+
+### Seed-lot transaction versus ledger — unresolved and high risk
+
+V2.1 `SeedLotTransaction` and GenX `LotLedgerEntry` can both describe material movement, but their contracts differ materially. V2.1 has transaction-level `fromSeedLotDbId`/`toSeedLotDbId` and numeric `amount`; GenX records per-lot ordered entries with decimal-string `quantity`, actor, and replay/conflict behavior. The GenX proposal does not yet prove a one-to-one mapping, shared event identity, transaction-level atomicity, or a safe mirrored-write contract.
+
+**Until deferred decision D-20 is resolved, no client or implementation may assume that these are equivalent, that one stream is an automatic projection of the other, or that it is safe to write one real-world movement to both streams and count both.** GenX must not be advertised as a drop-in replacement for V2.1 seed-lot transactions.
+
+### Other adjacent surfaces
+
+| GenX surface | Neighboring V2.1 surface | Required distinction |
+|---|---|---|
+| `/brapi/v3/jobs` | `/brapi/v2/search/*` | Jobs is a general asynchronous work lifecycle, not a retrofit of existing search services. Async search as a Job is optional and must be advertised. |
+| `/brapi/v3/telemetry` | Observations and Observation Variables | Telemetry represents device/sensor time-series points or aggregates. It is not automatically a scientific observation tied to a study, observation unit, and observation variable. Mapping requires explicit rules. |
+| `/brapi/v3/variantmatrices` | VariantSet, Variant, CallSet, Calls | A VariantMatrix is external matrix metadata/reference, not an alias for a V2.1 VariantSet and not an endpoint that streams matrix bytes. |
+| `/brapi/v3/fair-packages` | `metadata.datafiles` and external file retrieval | A FAIRPackage describes packaging, licensing, access rights, embargo, and identifiers; it is not a data-byte transport endpoint. |
+| `/brapi/v3/models` | GenX inference Jobs | Registering/getting a model is separate from executing it. Inference is submitted through Jobs with a declared `jobType`; no synchronous infer route is implied. |
+| GenX `ProvenanceEnvelope` | result and source metadata | This is an embedded schema, not a standalone endpoint. Its presence must not cause agents to invent a `/provenance` route. |
+
+## 5. Current operation catalogue
+
+The OpenAPI endpoint files remain the machine-readable source of request/response contracts. The catalogue below is an agent-facing disambiguation index; its boundary column is mandatory guidance, not optional commentary.
+
+| Full route | Method | Stable operation ID | Primary meaning | Boundary / do not infer |
+|---|---|---|---|---|
+| `/brapi/v3/serverinfo` | GET | `genxGetServerInfoV3` | Discover advertised generations, capabilities, and authentication profiles | Not V2.1 `GET /brapi/v2/serverinfo`; a capability must not be assumed available unless advertised. |
+| `/brapi/v3/jobs` | GET | `genxListJobs` | List caller-visible asynchronous jobs | Not a V2.1 search-results resource; a query may be represented as a Job only when the server advertises that behavior. |
+| `/brapi/v3/jobs` | POST | `genxSubmitAsyncJob` | Submit one unit of asynchronous work | Submission is not synchronous execution; model registration and model inference are distinct actions. |
+| `/brapi/v3/jobs/{jobDbId}` | GET | `genxGetAsyncJobById` | Retrieve current job lifecycle/result state | Expired jobs may refuse result retrieval; do not assume a result is indefinitely available. |
+| `/brapi/v3/jobs/{jobDbId}` | DELETE | `genxRequestAsyncJobCancellation` | Request cancellation of one job | Requests cancellation; it does not delete the job record, and terminal states are not rewritten. |
+| `/brapi/v3/variable-terms` | GET | `genxListVariableTermVersions` | List versioned, namespaced variable-term definition records | Not V2.1 `ObservationVariable` records and not the V2.1 Genotyping `OntologyTerm` label/reference schema. |
+| `/brapi/v3/variable-terms` | POST | `genxPublishVariableTermVersion` | Publish one immutable version; identical writes replay and conflicting rewrites are rejected | Not V2.1 bulk publication of `ObservationVariableNewRequest[]`; body cardinality and lifecycle semantics differ. |
+| `/brapi/v3/variable-terms/{variableDbId}` | GET | `genxGetVariableTermVersion` | Retrieve a namespaced VariableTerm by identifier and optional version | `variableDbId` identifies a GenX VariableTerm, not V2.1 `observationVariableDbId`. When `version` is omitted, the current proposal uses most-recently-created; version ordering remains unresolved. |
+| `/brapi/v3/seedlots/{seedLotDbId}/ledger` | GET | `genxListSeedLotLedgerEntries` | List a single lot's ledger entries in source-local position order | Does not establish global chronology or compute an authoritative lot balance; entries are not proven equivalent to V2.1 `SeedLotTransaction` records (D-20). |
+| `/brapi/v3/seedlots/{seedLotDbId}/ledger` | POST | `genxAppendSeedLotLedgerEntry` | Append one entry to one lot with replay/conflict semantics | Append-only and per-lot; not an atomic two-lot transfer. Do not mirror or double-count with V2.1 transactions without resolving D-20. |
+| `/brapi/v3/models` | GET | `genxListModelVersions` | List registered model-version records | Lists registry metadata; does not run inference or imply that a model is approved or safe to execute. |
+| `/brapi/v3/models` | POST | `genxRegisterModelVersion` | Register model metadata/artifact identity and version | Registration does not execute the model, approve it for use, or establish artifact transport/approval policy. |
+| `/brapi/v3/models/{modelDbId}` | GET | `genxGetModelVersion` | Retrieve a registered model version | Retrieval is not inference; inference is submitted as a Job with an explicit `jobType`. |
+| `/brapi/v3/variantmatrices` | GET | `genxListVariantMatrixReferences` | List registered external matrix references | Not an alias for V2.1 `VariantSet`, `Variant`, `CallSet`, or `Calls`; does not return matrix bytes. |
+| `/brapi/v3/variantmatrices` | POST | `genxRegisterVariantMatrixReference` | Register matrix metadata and a content/location reference | Registers a reference; it does not upload or transmit the matrix payload bytes. |
+| `/brapi/v3/variantmatrices/{matrixDbId}` | GET | `genxGetVariantMatrixReference` | Retrieve one matrix-reference record | Returns metadata/reference only; byte retrieval and authorization follow a separate, still decision-sensitive contract. |
+| `/brapi/v3/fair-packages` | GET | `genxListFairPackageMetadata` | List FAIR package metadata | Not a payload download; license/embargo metadata does not itself transport package bytes. |
+| `/brapi/v3/fair-packages` | POST | `genxRegisterFairPackage` | Register package metadata and access-policy declarations | Does not itself ingest payload bytes, mint a DOI, or grant restricted-access approval. |
+| `/brapi/v3/fair-packages/{packageDbId}` | GET | `genxGetFairPackageMetadata` | Retrieve one FAIR package metadata record | Not payload transport; embargo visibility behavior remains an open decision, and the current prototype's behavior is not a normative requirement. |
+| `/brapi/v3/telemetry` | GET | `genxQueryTelemetrySamplesOrAggregates` | Read sensor/device samples or computed aggregates for a time range | Telemetry is not automatically a BrAPI `Observation`; scientific mapping requires explicit study, unit, variable, timestamp, quality, and provenance rules. |
+| `/brapi/v3/telemetry` | POST | `genxAppendTelemetryBatch` | Append a batch of sensor/device samples and report append/replay/conflict outcomes | Append operation, not replacement of a range; identical sample identity may replay, while conflicting content must not silently overwrite. |
+
+`ProvenanceEnvelope` is embedded in result/record schemas and has no standalone route in this proposal.
+
+## 6. Change gate
+
+Before an endpoint or resource is added, renamed, split, merged, or changes meaning, the change must:
+
+1. define a stable operation ID and request/response schema names;
+2. name the domain action and side effects in plain, testable terms;
+3. search both exact route/method reuse and nearby semantic concepts across all relevant API generations;
+4. classify every relation in the register (or state that no material neighbor was found);
+5. explain differences in request shape, response type, identity/version model, error behavior, authorization, idempotency, and data ownership;
+6. add falsifiable static/live probes that would fail if the operations were confused; and
+7. obtain the appropriate community or governance decision for any semantic choice that affects interoperability.
+
+If the review cannot state clearly what an endpoint is **for**, what it is **not for**, and how it differs from its nearest neighboring endpoint, the slice is not ready for implementation or adoption.

@@ -5,6 +5,7 @@ openapi: 3.0.0
 paths:
   /variantmatrices/{matrixDbId}:
     get:
+      operationId: genxGetVariantMatrixReference
       summary: Get one matrix reference
       description: Returns the registered record, or 404. Bytes are retrieved out of band via fileURL or accessService.
       parameters:

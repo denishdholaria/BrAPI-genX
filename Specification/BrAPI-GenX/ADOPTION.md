@@ -6,16 +6,20 @@ step is independently shippable and leaves V2.1 behavior byte-identical.
 
 ## Order
 
-1. **ServerInfoV3** (`ServerInfoV3/`). Serve `GET /serverinfo` under
-   `/brapi/v3/` alongside the untouched V2.1 endpoint. Zero behavior change;
+1. **ServerInfoV3** (`ServerInfoV3/`). Serve `GET /brapi/v3/serverinfo`
+   (`genxGetServerInfoV3`) alongside the untouched V2.1 endpoint
+   `GET /brapi/v2/serverinfo`. Zero behavior change;
    unlocks negotiation for everything below.
 2. **ProvenanceEnvelope** (`Provenance/`). Embed optional `provenance` on
    observations and results first — highest value per line changed, no
    endpoints.
-3. **Jobs** (`Jobs/`). Move long operations (async searches, exports,
-   inference) off search-polling onto submit/poll/cancel with idempotency
-   keys. Keep `/search/*` working.
-4. **Domain objects in any order**: `VariableTerm`, `LotLedgerEntry`,
+3. **Jobs** (`Jobs/`). Submit work via `POST /brapi/v3/jobs`
+   (`genxSubmitAsyncJob`), poll via `GET /brapi/v3/jobs/{jobDbId}`
+   (`genxGetAsyncJobById`), and request cancellation via `DELETE
+   /brapi/v3/jobs/{jobDbId}` (`genxRequestAsyncJobCancellation`). Existing
+   BrAPI V2.1 `/brapi/v2/search/*` contracts remain unchanged; Jobs are not a
+   retroactive replacement for them.
+4. **Domain objects in any order**: `VariableTerm` via `/brapi/v3/variable-terms`, `LotLedgerEntry` via `/brapi/v3/seedlots/{seedLotDbId}/ledger`,
    `ModelArtifact` + inference, `VariantMatrix`, `FAIRPackage`,
    `TelemetryPoint`. Each is additive; implement what your users need.
 

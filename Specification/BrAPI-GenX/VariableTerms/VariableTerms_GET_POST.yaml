@@ -3,13 +3,14 @@ info:
   version: ''
 openapi: 3.0.0
 paths:
-  /variables:
+  /variable-terms:
     get:
-      summary: List ontology term versions
-      description: Get a paged list of term versions across authorities. Filters combine with AND.
+      operationId: genxListVariableTermVersions
+      summary: List versioned observation-variable terms
+      description: Return a paged list of namespaced observation-variable term versions across authorities. All supplied filters combine with AND.
       parameters:
       - name: variableDbId
-        description: Namespaced term identity `{authority}:{type}:{localId}`
+        description: Namespaced VariableTerm identity `{authority}:{type}:{localId}`
         in: query
         required: false
         schema:
@@ -42,9 +43,10 @@ paths:
         '403':
           $ref: '#/components/responses/403Forbidden'
       tags:
-      - Ontology
+      - VariableTerms
     post:
-      summary: Publish one term version
+      operationId: genxPublishVariableTermVersion
+      summary: Publish one immutable observation-variable term version
       description: |-
         Unknown variableDbId creates; known id with a new version appends;
         same (variableDbId, version) with an identical body replays the
@@ -81,7 +83,7 @@ paths:
         '403':
           $ref: '#/components/responses/403Forbidden'
       tags:
-      - Ontology
+      - VariableTerms
 components:
   responses:
     VariableTermListResponse:

@@ -4,6 +4,10 @@
 - Reference server: `Scripts/genx_test_server.py` (stdlib only, in-memory)
 - Runner: `Scripts/checkGenXConformance.py`
 
+## Historical-run scope
+
+Runs 1–12 are recorded results for earlier proposal revisions. They include the former GenX term route `/brapi/v3/variables`. During the endpoint-identity review, the proposed GenX term resource was renamed to `/brapi/v3/variable-terms`, and its specification folder was renamed from `Ontology/` to `VariableTerms/`. Runs 1–12 do **not** validate the renamed route; Run 13 below records the first successful live check of `/brapi/v3/variable-terms`. V2.1 contracts remain unchanged.
+
 ## Runs
 
 ```shell
@@ -224,3 +228,43 @@ python Scripts/checkGenXConformance.py --server http://127.0.0.1:18080/brapi/v3 
 L-25 and L-27 also pass against the TypeScript server (subset surface).
 Generic assert kinds added to the runner: `data_length`, `total_count`,
 `status_message`.
+
+## Run 12 — endpoint identity and semantic overlap guardrail (2026-10-14)
+
+Feature branch: `work/endpoint-identity-clarity`  
+Tested commit: `60df39bd43900674c6957b9c1427b8ba2a3d48fb`  
+[GitHub Actions run](https://github.com/denishdholaria/BrAPI_genX/actions/runs/38557019922)
+
+The new endpoint-identity mutation tests and static conformance checks completed successfully in GitHub Actions:
+
+- Endpoint identity mutation tests: **7 tests passed** (missing operation ID, duplicate operation ID, duplicate normalized route template, unregistered overlap, stale overlap entry, incomplete semantic-neighbor entry, and V2.1/GenX operation-ID collision all fail the checker; the valid control case passes).
+- Static conformance: **21 probes passed, 0 failed**. This includes S-21, which checks stable GenX operation IDs and exact V2.1/GenX relative-path overlap registration.
+- Live conformance probes: **skipped** in this static-only workflow because no `--server` was supplied. This run makes no new claim about reference-server behavior or production readiness.
+
+This result applies to the recorded feature-branch commit only; it is not a merge or standards-ratification event.
+
+## Run 13 — endpoint identity and renamed variable-term route (2026-10-14)
+
+Feature branch: `work/endpoint-identity-clarity`  
+Tested commit: `884420e0b095e4613fc83d40d797cf73d9f95807`  
+[GitHub Actions run](https://github.com/denishdholaria/BrAPI_genX/actions/runs/38559182512)
+
+- Endpoint-identity mutation tests: **10 passed**, including the valid control case and negative cases for missing/duplicate operation IDs, duplicate normalized route templates, stale or missing overlap entries, incomplete semantic-neighbor metadata, V2.1 identifier collisions, and endpoint-catalogue drift.
+- Static conformance: **21 passed, 0 failed**. S-21 found **21 named GenX operations** and **one registered cross-generation relative-path overlap**: `GET /serverinfo`.
+- Live reference-server conformance: **28 passed, 0 failed, 0 skipped**, including L-08/L-09 against the renamed `/brapi/v3/variable-terms` route.
+- The reference server is in-memory and does not provide durable persistence or effective authentication. This run validates the exercised proposal behavior, not production readiness, security posture, performance, or interoperability with an independent third-party implementation.
+
+V2.1 endpoint files were not changed. This is a feature-branch engineering result, not a standards-ratification event.
+
+## Run 14 — explicit endpoint meaning and non-equivalence boundaries (2026-10-14)
+
+Feature branch: `work/endpoint-identity-clarity`  
+Tested commit: `b551142357047dd9c82cedcc207588324190730d`  
+[GitHub Actions conformance run](https://github.com/denishdholaria/BrAPI_genX/actions/runs/38560252431)
+
+- Endpoint-identity mutation tests: **12 passed**. Negative tests include missing/duplicate operation IDs, duplicated normalized route templates, absent/stale overlap records, malformed semantic-neighbor records, cross-generation operation-ID collisions, endpoint-catalogue drift, and missing meaning/boundary text. The valid synthetic control passes.
+- Static conformance: **21 passed, 0 failed**. S-21 verified 21 named GenX operations and one registered cross-generation relative-path overlap, `GET /serverinfo`.
+- Live reference-server conformance: **28 passed, 0 failed, 0 skipped**. These include the renamed `/brapi/v3/variable-terms` replay/conflict behaviors and unrelated existing capability probes.
+- The live target is an in-memory Python reference server. This is evidence for the tested behavior and conformance tooling only; it does not prove durable persistence, effective authentication, production security, third-party interoperability, or standard acceptance.
+
+The separate schema-generation/build workflow also passed on this tested commit: [GitHub Actions run 38560252360](https://github.com/denishdholaria/BrAPI_genX/actions/runs/38560252360). The conformance and schema-generation workflows therefore both pass for the commit cited above. No V2.1 contract file was edited.

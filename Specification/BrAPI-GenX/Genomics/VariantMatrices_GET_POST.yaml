@@ -5,6 +5,7 @@ openapi: 3.0.0
 paths:
   /variantmatrices:
     get:
+      operationId: genxListVariantMatrixReferences
       summary: List registered matrix references
       description: Get a paged list of matrix references across authorities. Filters combine with AND.
       parameters:
@@ -41,6 +42,7 @@ paths:
       tags:
       - Variant Matrices
     post:
+      operationId: genxRegisterVariantMatrixReference
       summary: Register one matrix reference
       description: |-
         Unknown matrixDbId creates; known id with an identical body replays

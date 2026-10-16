@@ -5,6 +5,7 @@ openapi: 3.0.0
 paths:
   /seedlots/{seedLotDbId}/ledger:
     get:
+      operationId: genxListSeedLotLedgerEntries
       summary: Read a lot's ledger in position order
       description: "Entries are returned in per-lot position order. Positions are source-local cursors; no global ordering is claimed. Unknown lots follow documented server behavior (reference server returns an empty list)."
       parameters:
@@ -44,6 +45,7 @@ paths:
       tags:
       - Seed Lots
     post:
+      operationId: genxAppendSeedLotLedgerEntry
       summary: Append one ledger entry
       description: |-
         Unknown idempotencyKey appends; known key with an identical body

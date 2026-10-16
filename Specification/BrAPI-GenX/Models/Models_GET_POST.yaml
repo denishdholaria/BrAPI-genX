@@ -5,6 +5,7 @@ openapi: 3.0.0
 paths:
   /models:
     get:
+      operationId: genxListModelVersions
       summary: List registered model versions
       description: Get a paged list of model versions across authorities. Filters combine with AND.
       parameters:
@@ -39,6 +40,7 @@ paths:
       tags:
       - Models
     post:
+      operationId: genxRegisterModelVersion
       summary: Register one model version
       description: |-
         Unknown modelDbId creates; known id with a new version appends;

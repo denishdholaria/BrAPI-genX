@@ -5,6 +5,7 @@ openapi: 3.0.0
 paths:
   /telemetry:
     get:
+      operationId: genxQueryTelemetrySamplesOrAggregates
       summary: Read samples or aggregates over a time range
       description: |-
         Points are returned in timestamp order. With aggregation set,
@@ -96,6 +97,7 @@ paths:
       tags:
       - Telemetry
     post:
+      operationId: genxAppendTelemetryBatch
       summary: Append a batch of samples
       description: |-
         Takes an array of TelemetryPoint (V2.1 batch style). Reports

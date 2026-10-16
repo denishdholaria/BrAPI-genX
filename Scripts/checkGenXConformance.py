@@ -45,6 +45,7 @@ TERM_ID_RE = re.compile(r"^[^:/]+:[^:/]+:[^:/]+$")
 DOI_RE = re.compile(r"^10\.\d{4,}/.+")
 DECIMAL_RE = re.compile(r"^-?\d+(\.\d+)?$")
 HTTP_METHODS = {"GET", "POST", "PUT", "DELETE"}
+OPENAPI_METHODS = {"GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS", "TRACE"}
 TERMINAL = {"COMPLETED", "FAILED", "CANCELLED", "EXPIRED"}
 
 
@@ -524,7 +525,242 @@ def check_v21_fallback_shape(root, probe, ctx, results):
         results.report(probe["id"], probe["title"], "PASS")
 
 
+
+def normalize_operation_path(path):
+    """Normalize path parameter names for cross-file route comparison."""
+    return re.sub(re.escape("{") + r"[^{}]+" + re.escape("}"), "{}", path)
+
+
+def collect_api_operations(paths):
+    """Read operation identity tuples from OpenAPI YAML files."""
+    operations = []
+    supported_methods = {method.lower() for method in OPENAPI_METHODS}
+    for path in paths:
+        doc = load_yaml(path)
+        path_items = doc.get("paths", {}) if isinstance(doc, dict) else {}
+        if not isinstance(path_items, dict):
+            continue
+        for route, path_item in path_items.items():
+            if not isinstance(path_item, dict):
+                continue
+            for method, operation in path_item.items():
+                if method.lower() not in supported_methods or not isinstance(operation, dict):
+                    continue
+                operations.append({
+                    "method": method.upper(),
+                    "path": normalize_operation_path(route),
+                    "operation_id": operation.get("operationId"),
+                    "summary": operation.get("summary"),
+                    "description": operation.get("description"),
+                    "file": path,
+                })
+    return operations
+
+
+def check_endpoint_identity(root, probe, ctx, results):
+    """Fail closed on unnamed GenX operations or unregistered V2.1 route reuse."""
+    genx_root = os.path.join(root, "Specification", "BrAPI-GenX")
+    genx_files = walk_files(genx_root, "**", "*.yaml")
+    v21_files = []
+    for module in ("BrAPI-Core", "BrAPI-Phenotyping", "BrAPI-Genotyping", "BrAPI-Germplasm"):
+        v21_files.extend(walk_files(root, "Specification", module, "**", "*.yaml"))
+
+    problems = []
+    try:
+        genx_ops = collect_api_operations(genx_files)
+        v21_ops = collect_api_operations(v21_files)
+        register = load_yaml(os.path.join(
+            genx_root, "Conformance", "endpoint-overlaps.yaml"
+        ))
+    except Exception as exc:
+        return results.report(
+            probe["id"], probe["title"], "FAIL",
+            f"could not load API operations/overlap register: {type(exc).__name__}: {exc}"
+        )
+
+    # Operation identifiers are the stable contract names consumed by tools,
+    # generated clients, conformance evidence, and AI agents.
+    ids = {}
+    genx_route_keys = set()
+    for op in genx_ops:
+        op_id = op["operation_id"]
+        where = f"{os.path.relpath(op['file'], root)}: {op['method']} {op['path']}"
+        if not isinstance(op_id, str) or not op_id:
+            problems.append(f"{where} has no operationId")
+        else:
+            if not re.fullmatch(r"genx[A-Z][A-Za-z0-9]*", op_id):
+                problems.append(f"{where} has operationId '{op_id}' outside required genxVerbNoun form")
+            if op_id in ids:
+                problems.append(f"duplicate operationId '{op_id}' in {ids[op_id]} and {where}")
+            else:
+                ids[op_id] = where
+        if not isinstance(op["summary"], str) or not op["summary"].strip():
+            problems.append(f"{where} has no summary")
+        if not isinstance(op["description"], str) or not op["description"].strip():
+            problems.append(f"{where} has no description")
+        route_key = (op["method"], op["path"])
+        if route_key in genx_route_keys:
+            problems.append(f"duplicate GenX method/path template {op['method']} {op['path']}")
+        genx_route_keys.add(route_key)
+
+    # Also check for future collisions with any operation IDs already present
+    # in the V2.1 modules; empty IDs are not part of the uniqueness set.
+    v21_ids = {
+        op["operation_id"] for op in v21_ops
+        if isinstance(op["operation_id"], str) and op["operation_id"]
+    }
+    for op_id in sorted(set(ids) & v21_ids):
+        problems.append(f"GenX operationId '{op_id}' collides with a V2.1 operationId")
+
+    # The human/agent-facing catalogue must describe exactly the same
+    # operations as the machine-readable OpenAPI endpoint files.
+    catalogue_path = os.path.join(genx_root, "ENDPOINT-IDENTITY.md")
+    documented_operations = set()
+    catalogue_rows_seen = set()
+    try:
+        with open(catalogue_path, "r", encoding="utf-8") as catalogue_file:
+            catalogue_lines = catalogue_file.read().splitlines()
+        in_catalogue = False
+        catalogue_header_seen = False
+        expected_catalogue_headers = [
+            "full route", "method", "stable operation id",
+            "primary meaning", "boundary / do not infer",
+        ]
+        for line in catalogue_lines:
+            if line.startswith("## "):
+                in_catalogue = line.strip() == "## 5. Current operation catalogue"
+                continue
+            # Do not interpret adjacent-resource comparison tables as route
+            # inventory rows. Only the explicitly named catalogue is parsed.
+            if not in_catalogue or not line.lstrip().startswith("|"):
+                continue
+            cells = [cell.strip().strip("`") for cell in line.strip().strip("|").split("|")]
+            if not cells:
+                continue
+            if cells[0].lower() == "full route":
+                headers = [cell.strip().lower() for cell in cells]
+                if headers != expected_catalogue_headers:
+                    problems.append(
+                        "endpoint catalogue headers must be Full route | Method | "
+                        "Stable operation ID | Primary meaning | Boundary / do not infer"
+                    )
+                catalogue_header_seen = True
+                continue
+            if not cells[0].startswith("/brapi/v3/"):
+                continue
+            if not catalogue_header_seen:
+                problems.append("endpoint catalogue data appears before its required header row")
+            if len(cells) < 5:
+                problems.append(
+                    f"catalogue row must include a meaning and a boundary / do not infer field: {line}"
+                )
+                continue
+            full_route, method, op_id = cells[0], cells[1].upper(), cells[2]
+            if not cells[3].strip():
+                problems.append(f"catalogue row {method} {full_route} has no primary meaning")
+            if not cells[4].strip():
+                problems.append(f"catalogue row {method} {full_route} has no boundary / do not infer")
+            if not re.fullmatch(r"/brapi/v3/.+", full_route):
+                problems.append(f"catalogue route is not generation-qualified: {full_route}")
+                continue
+            if method not in OPENAPI_METHODS:
+                problems.append(f"catalogue route {full_route} has invalid method '{method}'")
+                continue
+            if not re.fullmatch(r"genx[A-Z][A-Za-z0-9]*", op_id):
+                problems.append(f"catalogue route {method} {full_route} has invalid/missing operationId '{op_id}'")
+                continue
+            triple = (method, normalize_operation_path(full_route[len("/brapi/v3"):]), op_id)
+            if triple in catalogue_rows_seen:
+                problems.append(f"duplicate endpoint catalogue row: {method} {full_route} ({op_id})")
+            catalogue_rows_seen.add(triple)
+            documented_operations.add(triple)
+    except Exception as exc:
+        problems.append(f"could not read endpoint catalogue {os.path.relpath(catalogue_path, root)}: {type(exc).__name__}: {exc}")
+
+    if not catalogue_header_seen:
+        problems.append("endpoint catalogue has no required header row")
+
+    actual_operations = {
+        (op["method"], op["path"], op["operation_id"])
+        for op in genx_ops
+        if isinstance(op["operation_id"], str) and op["operation_id"]
+    }
+    for item in sorted(actual_operations - documented_operations):
+        problems.append(f"GenX operation missing from ENDPOINT-IDENTITY.md: {item[0]} {item[1]} ({item[2]})")
+    for item in sorted(documented_operations - actual_operations):
+        problems.append(f"endpoint catalogue entry has no matching GenX operation: {item[0]} {item[1]} ({item[2]})")
+
+    actual_overlaps = set()
+    v21_route_keys = {(op["method"], op["path"]) for op in v21_ops}
+    for op in genx_ops:
+        key = (op["method"], op["path"])
+        if key in v21_route_keys and isinstance(op["operation_id"], str) and op["operation_id"]:
+            actual_overlaps.add((key[0], key[1], op["operation_id"]))
+
+    expected_overlaps = set()
+    overlap_entries = register.get("allowed_relative_path_overlaps", [])
+    if not isinstance(overlap_entries, list):
+        problems.append("allowed_relative_path_overlaps must be a list")
+        overlap_entries = []
+    for entry in overlap_entries:
+        if not isinstance(entry, dict):
+            problems.append(f"invalid overlap entry: {entry!r}")
+            continue
+        required = ("method", "path", "genx_operation_id", "relationship", "risk", "rationale")
+        missing = [key for key in required if not isinstance(entry.get(key), str) or not entry[key].strip()]
+        if missing:
+            problems.append(f"overlap entry missing/non-empty fields {missing}: {entry!r}")
+            continue
+        triple = (
+            entry["method"].upper(),
+            normalize_operation_path(entry["path"]),
+            entry["genx_operation_id"],
+        )
+        if triple in expected_overlaps:
+            problems.append(f"duplicate overlap-register entry: {triple[0]} {triple[1]} ({triple[2]})")
+        expected_overlaps.add(triple)
+        if entry["risk"] not in {"low", "medium", "high", "critical"}:
+            problems.append(f"overlap entry has unknown risk class '{entry['risk']}'")
+    for extra in sorted(actual_overlaps - expected_overlaps):
+        problems.append(f"unregistered V2.1/GenX route overlap: {extra[0]} {extra[1]} ({extra[2]})")
+    for stale in sorted(expected_overlaps - actual_overlaps):
+        problems.append(f"stale/unverified overlap-register entry: {stale[0]} {stale[1]} ({stale[2]})")
+
+    if register.get("api_base_paths", {}).get("brapi_v21") != "/brapi/v2":
+        problems.append("overlap register must identify the V2.1 base path as /brapi/v2")
+    if register.get("api_base_paths", {}).get("genx") != "/brapi/v3":
+        problems.append("overlap register must identify the GenX base path as /brapi/v3")
+    neighbors = register.get("semantic_neighbors", [])
+    if not isinstance(neighbors, list) or not neighbors:
+        problems.append("overlap register has no semantic-neighbor review entries")
+        neighbors = []
+    seen_neighbor_ids = set()
+    for item in neighbors:
+        if not isinstance(item, dict):
+            problems.append(f"invalid semantic-neighbor entry: {item!r}")
+            continue
+        required = ("id", "v21_surface", "genx_surface", "relationship", "risk", "rationale")
+        missing = [key for key in required if not isinstance(item.get(key), str) or not item[key].strip()]
+        if missing:
+            problems.append(f"semantic-neighbor entry missing/non-empty fields {missing}: {item!r}")
+            continue
+        if item["id"] in seen_neighbor_ids:
+            problems.append(f"duplicate semantic-neighbor id '{item['id']}'")
+        seen_neighbor_ids.add(item["id"])
+        if item["risk"] not in {"low", "medium", "high", "critical"}:
+            problems.append(f"semantic-neighbor '{item['id']}' has unknown risk class '{item['risk']}'")
+
+    if problems:
+        results.report(probe["id"], probe["title"], "FAIL", "; ".join(problems))
+    else:
+        results.report(
+            probe["id"], probe["title"], "PASS",
+            f"{len(genx_ops)} GenX operations named; {len(actual_overlaps)} cross-generation relative-path overlaps registered"
+        )
+
+
 STATIC = {
+    "endpoint_identity": check_endpoint_identity,
     "refs_resolve": check_refs_resolve,
     "required_fields": check_required_fields,
     "job_enums": check_job_enums,

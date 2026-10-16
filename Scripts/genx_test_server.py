@@ -92,8 +92,8 @@ class Store:
         self.counter = 0
         self.ttl = timedelta(days=ttl_days)
         self.delay = delay
-        self.variables = {}  # (variableDbId, version) -> term, insertion ordered
-        self.variable_order = []
+        self.variable_terms = {}  # (variableDbId, version) -> term, insertion ordered
+        self.variable_term_order = []
         self.ledger = {}  # seedLotDbId -> [entries in position order]
         self.ledger_keys = {}  # idempotencyKey -> {"lot": ..., "entryDbId": ..., "body": canonical}
         self.ledger_counter = 0
@@ -261,10 +261,10 @@ class Handler(BaseHTTPRequestHandler):
             return self._job_get()
         if self._route() == "/jobs":
             return self._job_list()
-        if self._route() == "/variables":
-            return self._var_list()
-        if self._route().startswith("/variables/"):
-            return self._var_get()
+        if self._route() == "/variable-terms":
+            return self._variable_term_list()
+        if self._route().startswith("/variable-terms/"):
+            return self._variable_term_get()
         if "/ledger" in self._route():
             parts = self._route().strip("/").split("/")
             if len(parts) == 3 and parts[0] == "seedlots" and parts[2] == "ledger":
@@ -290,8 +290,8 @@ class Handler(BaseHTTPRequestHandler):
             return self._send_text(404, f"unknown path {self.path}")
         if self._route() == "/jobs":
             return self._job_submit()
-        if self._route() == "/variables":
-            return self._var_publish()
+        if self._route() == "/variable-terms":
+            return self._variable_term_publish()
         if "/ledger" in self._route():
             parts = self._route().strip("/").split("/")
             if len(parts) == 3 and parts[0] == "seedlots" and parts[2] == "ledger":
@@ -343,7 +343,7 @@ class Handler(BaseHTTPRequestHandler):
                  "scopes": ["jobs.submit", "jobs.read"]},
                 {"name": "provenanceEnvelope", "versions": ["1.0"],
                  "methods": ["GET", "POST"], "scopes": []},
-                {"name": "ontologyTerms", "versions": ["1.0"],
+                {"name": "variableTerms", "versions": ["1.0"],
                  "methods": ["GET", "POST"], "scopes": ["ontology.write"]},
                 {"name": "lotLedger", "versions": ["1.0"],
                  "methods": ["GET", "POST"],
@@ -442,12 +442,12 @@ class Handler(BaseHTTPRequestHandler):
         cancelled = store.set_status(job["jobDbId"], "CANCELLED")
         return self._send_json(200, envelope(result=cancelled))
 
-    # -- ontology terms -----------------------------------------------
+    # -- versioned variable terms -----------------------------------------------
 
     def _query(self):
         return {k: v[0] for k, v in parse_qs(urlparse(self.path).query).items()}
 
-    def _var_publish(self):
+    def _variable_term_publish(self):
         store = self.server.store
         body = self._read_json()
         if body is None:
@@ -464,7 +464,7 @@ class Handler(BaseHTTPRequestHandler):
             return self._send_text(400, f"unknown status '{term['status']}'")
         key = (vid, version)
         with store.lock:
-            existing = store.variables.get(key)
+            existing = store.variable_terms.get(key)
             if existing is not None:
                 if canonical(existing) == canonical(term):
                     return self._send_json(200, envelope(
@@ -475,18 +475,18 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send_text(
                     409, f"term {vid} version {version} already published "
                          "with a different body")
-            store.variables[key] = term
-            store.variable_order.append(key)
+            store.variable_terms[key] = term
+            store.variable_term_order.append(key)
         return self._send_json(200, envelope(
             result=term,
             status=[{"message": "Term version published", "messageType": "INFO"}],
         ))
 
-    def _var_list(self):
+    def _variable_term_list(self):
         store = self.server.store
         query = self._query()
         with store.lock:
-            terms = [store.variables[k] for k in store.variable_order]
+            terms = [store.variable_terms[k] for k in store.variable_term_order]
         for field in ("variableDbId", "ontologyDbId", "status"):
             if query.get(field):
                 terms = [t for t in terms if t.get(field) == query[field]]
@@ -502,21 +502,21 @@ class Handler(BaseHTTPRequestHandler):
                         "totalPages": total_pages, "currentPage": page},
         ))
 
-    def _var_id(self):
-        return self._route().split("/variables/", 1)[1].split("/")[0]
+    def _variable_term_id(self):
+        return self._route().split("/variable-terms/", 1)[1].split("/")[0]
 
-    def _var_get(self):
+    def _variable_term_get(self):
         store = self.server.store
-        vid = self._var_id()
+        vid = self._variable_term_id()
         version = self._query().get("version")
         with store.lock:
             if version:
-                term = store.variables.get((vid, version))
+                term = store.variable_terms.get((vid, version))
             else:
                 term = None
-                for key in reversed(store.variable_order):
+                for key in reversed(store.variable_term_order):
                     if key[0] == vid:
-                        term = store.variables[key]
+                        term = store.variable_terms[key]
                         break
         if term is None:
             return self._send_text(404, f"unknown term '{vid}'")

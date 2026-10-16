@@ -5,6 +5,7 @@ openapi: 3.0.0
 paths:
   /models/{modelDbId}:
     get:
+      operationId: genxGetModelVersion
       summary: Get one model (latest created when version is omitted)
       description: Returns the requested version, or the most recently created version when `version` is omitted.
       parameters:

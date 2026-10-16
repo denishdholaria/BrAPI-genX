@@ -5,6 +5,7 @@ openapi: 3.0.0
 paths:
   /jobs/{jobDbId}:
     get:
+      operationId: genxGetAsyncJobById
       summary: Get the current state of one job
       description: Returns the Job. Past expiry the server reports status EXPIRED and refuses retrieval of the result.
       parameters:
@@ -44,6 +45,7 @@ paths:
       tags:
       - Jobs
     delete:
+      operationId: genxRequestAsyncJobCancellation
       summary: Request cancellation of one job
       description: Requests cancellation. Terminal states (COMPLETED, FAILED, CANCELLED, EXPIRED) are immutable and their cancellation is rejected.
       parameters:

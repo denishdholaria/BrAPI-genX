@@ -1,4 +1,4 @@
-# RFC-002: Ontology Term Governance
+# RFC-002: Versioned Variable-Term Governance
 
 - Status: **proposal** (not accepted, not normative, grants no implementation authority)
 - Builds on: RFC-001 (compatibility law, `ProvenanceEnvelope`, `409` conflict evidence)
@@ -18,10 +18,10 @@ merged silently).
 
 ## 2. Object — VariableTerm
 
-Files: `Ontology/Schemas/VariableTerm.yaml`,
-`Ontology/Schemas/VariableTermNewRequest.yaml`,
-`Ontology/Variables_GET_POST.yaml`,
-`Ontology/Variables_VariableDbId_GET.yaml`.
+Files: `VariableTerms/Schemas/VariableTerm.yaml`,
+`VariableTerms/Schemas/VariableTermNewRequest.yaml`,
+`VariableTerms/VariableTerms_GET_POST.yaml`,
+`VariableTerms/VariableTerms_VariableDbId_GET.yaml`.
 
 Purpose: give every variable term a namespaced identity, an explicit version,
 and a lifecycle state, so redefinition is a visible `409`, not a silent
@@ -36,7 +36,7 @@ required), `status` (`active`|`deprecated`), `supersededBy?`
 (`ProvenanceEnvelope` from RFC-001 — who authored this definition and from
 what evidence).
 
-Responsibilities: identity, versioning, deprecation links for variable terms.
+Responsibilities: identity, versioning, deprecation links for versioned variable terms.
 Non-responsibilities: defining Trait/Method/Scale objects themselves (their
 DbIds are references here); ontology merging or cross-authority equivalence
 (no `sameAs` in this RFC); full-text ontology search.
@@ -50,17 +50,17 @@ Invariants:
    rejected with `409` (same conflict rule as Jobs idempotency, RFC-001 §5).
 3. New versions never mutate old ones. Deprecation is explicit (`status:
    deprecated` + `supersededBy`); servers perform no hidden transitions.
-4. `GET /variables/{variableDbId}` without `version` returns the most recently
+4. `GET /brapi/v3/variable-terms/{variableDbId}` (`genxGetVariableTermVersion`) without `version` returns the most recently
    created version. Version ordering semantics stay `requires decision` (§6).
 
 ## 3. Endpoints
 
-- `POST /variables` with `VariableTermNewRequest` → `200` + single term.
+- `POST /brapi/v3/variable-terms` (`genxPublishVariableTermVersion`) with `VariableTermNewRequest` → `200` + single term.
   Unknown id creates; known id + new version appends; replay returns existing;
   conflict returns `409` with a plain-text body.
-- `GET /variables` with `variableDbId?`, `ontologyDbId?`, `status?` filters +
+- `GET /brapi/v3/variable-terms` (`genxListVariableTermVersions`) with `variableDbId?`, `ontologyDbId?`, `status?` filters +
   standard pagination → list of terms across versions.
-- `GET /variables/{variableDbId}` with optional `version` → single term
+- `GET /brapi/v3/variable-terms/{variableDbId}` (`genxGetVariableTermVersion`) with optional `version` → single term
   (latest created when omitted) or `404`.
 
 `DELETE` is not defined: terms are deprecated, never deleted, so historical
@@ -68,7 +68,7 @@ observations keep resolvable definitions.
 
 ## 4. Hypothesis, falsifier, verification
 
-- Hypothesis: two organizations can publish same-named variables without
+- Hypothesis: two organizations can publish same-named variable terms without
   collision, and any conflicting redefinition is rejected instead of merged.
 - Falsifier: a conflicting write that mutates a published version; a term
   readable under an authority that did not publish it without namespacing; a
@@ -91,8 +91,8 @@ observations keep resolvable definitions.
 
 ```text
 Specification/BrAPI-GenX/
-  RFC-002-Ontology-Governance.md   this document
-  Ontology/README.md + GroupDescription.md
-    + Schemas/VariableTerm.yaml + Schemas/VariableTermNewRequest.yaml
-    + Variables_GET_POST.yaml + Variables_VariableDbId_GET.yaml
+  RFC-002-Variable-Term-Governance.md   this document
+  VariableTerms/README.md + GroupDescription.md
+    + VariableTerms/Schemas/VariableTerm.yaml + VariableTerms/Schemas/VariableTermNewRequest.yaml
+    + VariableTerms/VariableTerms_GET_POST.yaml + VariableTerms/VariableTerms_VariableDbId_GET.yaml
 ```
