@@ -64,3 +64,36 @@ is reversible without breaking the rest; objections belong against the ID.
   live probes (run 9), including cross-runtime digest agreement.
 - Footprint: only `Specification/BrAPI-GenX/` and two new `Scripts/` files;
   zero changes to V2.1 modules, `BrAPI-Schema/`, `generator/`, `Generated/`.
+
+
+## Additional deferred decisions identified during branch review (2026-10-16)
+
+| ID | Question | Source | Evidence available | What resolves it |
+|---|---|---|---|---|
+| D-21 | ServerInfoV3 capability-to-operation mapping and version-token semantics | RFC-001 §6; ServerInfoV3 schema; CAPABILITY-NEGOTIATION.md | `methods` alone cannot identify routes; `provenanceEnvelope` is an embedded contract. An optional `operations[]` route map is proposed and tested on a branch. | Community/implementer review of mapping shape, requiredness, public operation-ID stability, exact-token negotiation, and unknown/duplicate capability handling |
+| D-22 | Security meaning of capability scopes and authentication profiles | RFC-001 §6; ServerInfoV3 schema; CAPABILITY-NEGOTIATION.md | Capability `scopes` and auth-profile `scopes` are semantically ambiguous. The prototype accepts and ignores bearer tokens and has no effective authorization. | Security/operator review of required versus issued scopes, missing/empty scopes, `none` profile semantics, per-operation enforcement, denial behavior, and independent verification |
+| D-23 | How supported asynchronous `jobType` tokens are advertised and versioned | Jobs schemas; ServerInfoV3 schema; CAPABILITY-NEGOTIATION.md | Optional experimental `jobs.jobTypes[]` lists prototype-supported tokens and is checked against runtime validation. | Implementer/community review of requiredness, older-server compatibility, exact token namespace/case, versioning/deprecation, and a second implementation |
+| D-24 | Idempotency request equivalence and key-source precedence | RFC-001 §8; `Jobs/Schemas/JobNewRequest.yaml`; reference submit handler | RFC prose says byte-identical bodies, while the Python prototype parses JSON and compares a canonicalized object, making whitespace/property order irrelevant. A non-empty `Idempotency-Key` header takes precedence over body `idempotencyKey`, but the body field still participates in the comparison. | Select exact-byte, named structured-JSON, or normalized-command equivalence; specify header/body precedence and whether the body key participates in equivalence. Preserve D-02/profile-version implications |
+| D-25 | Idempotency namespace, retention, expiry, and deployment guarantee | RFC-001 §8; Jobs schemas; prototype store | The key map is process-local and not durable across restart or replicas; retention/reuse rules, tenant/actor scope, and behavior after job expiry are unspecified. | Define key namespace, minimum retention, reuse rules, relationship to job time-to-live (TTL), expiry/conflict behavior, and whether guarantees survive restart or multiple replicas |
+
+The above additions record open questions found during implementation review;
+they do not settle these contract decisions. The reference server and its tests
+are evidence for one prototype only, not a normative or production guarantee.
+
+## Branch reconciliation record (2026-10-16)
+
+- The endpoint-identity foundation was merged to `brapi-V2.1` via PR #1,
+  commit [`f4d654b`](https://github.com/denishdholaria/BrAPI_genX/commit/f4d654b652088c2a7eac2108d4f70ae72fcc98c7).
+- STD-01 and STD-04 remain non-normative proposal branches. Their last recorded
+  conformance runs passed, but must be rerun on the post-consolidation heads
+  before either branch is merged.
+- `work/std-03-idempotency-contract` contains both job-idempotency tests and
+  STD-04 capability-negotiation changes; its branch name understates its
+  scope. Do not merge it as a standalone idempotency slice without separating
+  and retesting the overlapping work.
+- `work/std-03-job-idempotency-semantics` contains no independent commits
+  relative to the endpoint-identity base; keep it as an archival branch until
+  a clean replacement is prepared or its purpose is explicitly retired.
+- `work/development-command-worksheet` contains the development queue and
+  cross-repository evidence register. Review its worksheet content before
+  merging because it predates some of the later decision-log additions.
