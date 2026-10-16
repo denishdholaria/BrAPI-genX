@@ -7,6 +7,9 @@ on:
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
+permissions:
+  contents: read
+
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -16,7 +19,7 @@ jobs:
       commit_message: ${{ steps.check-tag.outputs.commit_message }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4      
+        uses: actions/checkout@v4
       - name: Check last commit message
         id: commit-message
         run: |
@@ -30,23 +33,21 @@ jobs:
       - name: Check Branch with Regex
         id: check-tag
         run: |
-          # Always commit if manually triggered
+          # Generated artifacts are committed only on explicit release branches.
+          # Manual generation validates output but does not bypass the branch policy.
+          regex="^refs/heads/brapi-V[0-9]+\\.[0-9]+$"
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "skip_commit=true" >> "$GITHUB_OUTPUT"
+            echo "commit_message=" >> "$GITHUB_OUTPUT"
+            echo "Manual generation: artifacts are validated but not committed automatically"
+          elif [[ "${{ github.ref }}" =~ $regex ]]; then
             echo "skip_commit=false" >> "$GITHUB_OUTPUT"
-            echo "commit_message=Generate specifications (manually triggered)" >> "$GITHUB_OUTPUT"
-            echo "Manual trigger - WILL commit generated files"
+            echo "commit_message=Apply automatic changes" >> "$GITHUB_OUTPUT"
+            echo "Release branch - WILL commit generated files"
           else
-            # Otherwise, only commit on release branches
-            regex="^refs/heads/brapi-V[0-9]+\.[0-9]+$"
-            if [[ "${{ github.ref }}" =~ $regex ]]; then
-              echo "skip_commit=false" >> "$GITHUB_OUTPUT"
-              echo "commit_message=Apply automatic changes" >> "$GITHUB_OUTPUT"
-              echo "Release branch - WILL commit of generated files"
-            else
-              echo "skip_commit=true" >> "$GITHUB_OUTPUT"
-              echo "commit_message=" >> "$GITHUB_OUTPUT"
-              echo "Normal branch - Will NOT commit of generated files"
-            fi
+            echo "skip_commit=true" >> "$GITHUB_OUTPUT"
+            echo "commit_message=" >> "$GITHUB_OUTPUT"
+            echo "Non-release branch - will not commit generated files"
           fi
   generate:
     runs-on: ubuntu-latest
@@ -55,13 +56,14 @@ jobs:
     steps:
       - name: debug
         run: |
-          echo ${{ needs.check.outputs.skip_job }} 
-          echo ${{ needs.check.outputs.skip_commit }} 
+          echo ${{ needs.check.outputs.skip_job }}
+          echo ${{ needs.check.outputs.skip_commit }}
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ssh-key: ${{ secrets.DEPLOY_KEY }}
+          # Checkout is read-only for this workflow; release write access should
+          # be granted only through an explicitly configured release credential.
       - name: Set up Docker Compose
         uses: docker/setup-compose-action@v1
       - name: Build and run the Docker image
@@ -90,11 +92,8 @@ jobs:
       - name: Compare OpenAPI
         working-directory: ./generator
         run: ./gradlew compareAll
-      - name: Commit generated files
-        if: needs.check.outputs.skip_commit == 'false'
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "${{ needs.check.outputs.commit_message }}"
-          file_pattern: "Specification/Generated/*"
-          commit_user_name: "github-actions[bot]"
-          commit_user_email: "github-actions[bot]@users.noreply.github.com"
+      - name: Verify generated artifacts are unchanged by generation
+        run: git diff --check
+      - name: Report generated artifact changes
+        if: always()
+        run: git status --short -- Specification/Generated/
