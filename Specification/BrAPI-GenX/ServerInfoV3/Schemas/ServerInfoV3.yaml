@@ -84,7 +84,10 @@ components:
             type: string
           example: ['1.0']
         methods:
-          description: HTTP methods usable with this capability
+          description: |-
+            Summary of HTTP methods used by operations belonging to this capability.
+            This is not a route locator and does not imply every method applies to
+            every route. When operations[] is present, it is the explicit route map.
           type: array
           items:
             type: string
@@ -94,12 +97,63 @@ components:
             - PUT
             - DELETE
           example: ['GET', 'POST']
+        jobTypes:
+          description: |-
+            Experimental optional list of exact jobType tokens this server accepts
+            for the jobs capability. This property is meaningful only when name is
+            "jobs". If omitted, clients must not assume a job type is supported.
+          type: array
+          minItems: 1
+          uniqueItems: true
+          items:
+            type: string
+            minLength: 1
+          example: [germplasm_search, analysis, inference]
+        operations:
+          description: |-
+            Experimental additive mapping from this capability to the exact GenX
+            route templates, methods, and stable operation identifiers. Optional
+            for compatibility with earlier proposal documents. Do not infer a
+            route from methods alone when this property is absent.
+          type: array
+          items:
+            $ref: '#/components/schemas/CapabilityOperation'
+          example:
+            - method: POST
+              route: /brapi/v3/jobs
+              operationId: genxSubmitAsyncJob
+            - method: GET
+              route: /brapi/v3/jobs/{jobDbId}
+              operationId: genxGetAsyncJobById
         scopes:
-          description: Authorization scopes required to use this capability, when applicable
+          description: Authorization scopes required to use this capability, when applicable; detailed scope semantics remain under review.
           type: array
           items:
             type: string
           example: [jobs.submit, jobs.read]
+    CapabilityOperation:
+      type: object
+      description: |-
+        One API operation associated with a capability. This experimental mapping
+        identifies a complete route template and operation ID; it does not grant
+        permission or guarantee the caller is authorized to use the operation.
+      required:
+      - method
+      - route
+      - operationId
+      properties:
+        method:
+          type: string
+          enum: [GET, POST, PUT, DELETE]
+          description: HTTP method of the operation.
+        route:
+          type: string
+          description: Full route template, including the /brapi/v3 base prefix.
+          example: /brapi/v3/jobs/{jobDbId}
+        operationId:
+          type: string
+          description: Stable operation identity from the versioned GenX API contract.
+          example: genxGetAsyncJobById
     ServerAuthProfile:
       type: object
       description: One authentication profile the server accepts

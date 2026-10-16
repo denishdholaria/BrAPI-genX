@@ -25,9 +25,14 @@ Inference requires a registered, non-revoked model and returns an echo stub
 whose inputsDigest is genuinely computed; revoked or unknown models are
 rejected at submit.
 
-Idempotency: same key + byte-identical body replays the existing job (200);
-same key + different body is rejected with 409 (evidence for the RFC-001 §8
-requires-decision on the conflict status code).
+Idempotency (prototype behavior): a non-empty Idempotency-Key header takes
+precedence over the body idempotencyKey; otherwise the body field is used. The
+same key + equal Python-canonicalized parsed JSON body replays the existing job
+(200); a different canonical body is rejected with 409. This per-process check,
+job creation, and key-index write are atomic under the in-memory lock. Exact
+request-equivalence rules, key precedence/body interaction, retention, and
+cross-process durability remain unresolved proposal questions (D-24/D-25);
+this does not guarantee distributed or durable idempotency.
 """
 
 import argparse
@@ -114,24 +119,46 @@ class Store:
             "expiresAt": past,
         }
 
+    def _create_unlocked(self, job_type, parameters, key):
+        """Create a job while the caller holds self.lock."""
+        self.counter += 1
+        job_id = f"JOB_{self.counter:04d}"
+        now = utcnow()
+        job = {
+            "jobDbId": job_id,
+            "jobType": job_type,
+            "status": "SUBMITTED",
+            "createdAt": now,
+            "updatedAt": now,
+            "expiresAt": (datetime.now(timezone.utc) + self.ttl).strftime(
+                "%Y-%m-%dT%H:%M:%SZ"),
+        }
+        if key:
+            job["idempotencyKey"] = key
+        self.jobs[job_id] = job
+        return copy.deepcopy(job)
+
     def create(self, job_type, parameters, key):
         with self.lock:
-            self.counter += 1
-            job_id = f"JOB_{self.counter:04d}"
-            now = utcnow()
-            job = {
-                "jobDbId": job_id,
-                "jobType": job_type,
-                "status": "SUBMITTED",
-                "createdAt": now,
-                "updatedAt": now,
-                "expiresAt": (datetime.now(timezone.utc) + self.ttl).strftime(
-                    "%Y-%m-%dT%H:%M:%SZ"),
-            }
+            return self._create_unlocked(job_type, parameters, key)
+
+    def submit_idempotent(self, job_type, parameters, key, body_canonical):
+        """Atomically check the idempotency key, create the job, and publish the key."""
+        with self.lock:
+            seen = self.idempotency.get(key) if key else None
+            if seen:
+                job = copy.deepcopy(self.jobs[seen["jobDbId"]])
+                if seen["body"] == body_canonical:
+                    return job, "replay"
+                return None, "conflict"
+
+            job = self._create_unlocked(job_type, parameters, key)
             if key:
-                job["idempotencyKey"] = key
-            self.jobs[job_id] = job
-            return copy.deepcopy(job)
+                self.idempotency[key] = {
+                    "body": body_canonical,
+                    "jobDbId": job["jobDbId"],
+                }
+            return job, "created"
 
     def get(self, job_id):
         with self.lock:
@@ -338,28 +365,243 @@ class Handler(BaseHTTPRequestHandler):
             ],
             "brapiVersions": ["2.1", "3.0-draft"],
             "capabilities": [
-                {"name": "jobs", "versions": ["1.0"],
-                 "methods": ["GET", "POST", "DELETE"],
-                 "scopes": ["jobs.submit", "jobs.read"]},
-                {"name": "provenanceEnvelope", "versions": ["1.0"],
-                 "methods": ["GET", "POST"], "scopes": []},
-                {"name": "variableTerms", "versions": ["1.0"],
-                 "methods": ["GET", "POST"], "scopes": ["ontology.write"]},
-                {"name": "lotLedger", "versions": ["1.0"],
-                 "methods": ["GET", "POST"],
-                 "scopes": ["seedlots.ledger.append", "seedlots.ledger.read"]},
-                {"name": "modelRegistry", "versions": ["1.0"],
-                 "methods": ["GET", "POST"],
-                 "scopes": ["models.register", "models.read", "jobs.infer"]},
-                {"name": "variantMatrices", "versions": ["1.0"],
-                 "methods": ["GET", "POST"],
-                 "scopes": ["matrices.register", "matrices.read"]},
-                {"name": "fairPackages", "versions": ["1.0"],
-                 "methods": ["GET", "POST"],
-                 "scopes": ["packages.register", "packages.read"]},
-                {"name": "telemetry", "versions": ["1.0"],
-                 "methods": ["GET", "POST"],
-                 "scopes": ["telemetry.append", "telemetry.read"]},
+                {
+                    "name": "jobs",
+                    "versions": [
+                        "1.0"
+                    ],
+                    "methods": [
+                        "GET",
+                        "POST",
+                        "DELETE"
+                    ],
+                    "jobTypes": list(SUPPORTED_JOB_TYPES),
+                    "scopes": [
+                        "jobs.submit",
+                        "jobs.read"
+                    ],
+                    "operations": [
+                        {
+                            "method": "GET",
+                            "route": "/brapi/v3/jobs",
+                            "operationId": "genxListJobs"
+                        },
+                        {
+                            "method": "POST",
+                            "route": "/brapi/v3/jobs",
+                            "operationId": "genxSubmitAsyncJob"
+                        },
+                        {
+                            "method": "GET",
+                            "route": "/brapi/v3/jobs/{jobDbId}",
+                            "operationId": "genxGetAsyncJobById"
+                        },
+                        {
+                            "method": "DELETE",
+                            "route": "/brapi/v3/jobs/{jobDbId}",
+                            "operationId": "genxRequestAsyncJobCancellation"
+                        }
+                    ]
+                },
+                {
+                    "name": "provenanceEnvelope",
+                    "versions": [
+                        "1.0"
+                    ],
+                    "methods": [
+                        "GET",
+                        "POST"
+                    ],
+                    "scopes": [],
+                    "operations": [
+                        {
+                            "method": "POST",
+                            "route": "/brapi/v3/jobs",
+                            "operationId": "genxSubmitAsyncJob"
+                        },
+                        {
+                            "method": "GET",
+                            "route": "/brapi/v3/jobs/{jobDbId}",
+                            "operationId": "genxGetAsyncJobById"
+                        }
+                    ]
+                },
+                {
+                    "name": "variableTerms",
+                    "versions": [
+                        "1.0"
+                    ],
+                    "methods": [
+                        "GET",
+                        "POST"
+                    ],
+                    "scopes": [
+                        "ontology.write"
+                    ],
+                    "operations": [
+                        {
+                            "method": "GET",
+                            "route": "/brapi/v3/variable-terms",
+                            "operationId": "genxListVariableTermVersions"
+                        },
+                        {
+                            "method": "POST",
+                            "route": "/brapi/v3/variable-terms",
+                            "operationId": "genxPublishVariableTermVersion"
+                        },
+                        {
+                            "method": "GET",
+                            "route": "/brapi/v3/variable-terms/{variableDbId}",
+                            "operationId": "genxGetVariableTermVersion"
+                        }
+                    ]
+                },
+                {
+                    "name": "lotLedger",
+                    "versions": [
+                        "1.0"
+                    ],
+                    "methods": [
+                        "GET",
+                        "POST"
+                    ],
+                    "scopes": [
+                        "seedlots.ledger.append",
+                        "seedlots.ledger.read"
+                    ],
+                    "operations": [
+                        {
+                            "method": "GET",
+                            "route": "/brapi/v3/seedlots/{seedLotDbId}/ledger",
+                            "operationId": "genxListSeedLotLedgerEntries"
+                        },
+                        {
+                            "method": "POST",
+                            "route": "/brapi/v3/seedlots/{seedLotDbId}/ledger",
+                            "operationId": "genxAppendSeedLotLedgerEntry"
+                        }
+                    ]
+                },
+                {
+                    "name": "modelRegistry",
+                    "versions": [
+                        "1.0"
+                    ],
+                    "methods": [
+                        "GET",
+                        "POST"
+                    ],
+                    "scopes": [
+                        "models.register",
+                        "models.read",
+                        "jobs.infer"
+                    ],
+                    "operations": [
+                        {
+                            "method": "GET",
+                            "route": "/brapi/v3/models",
+                            "operationId": "genxListModelVersions"
+                        },
+                        {
+                            "method": "POST",
+                            "route": "/brapi/v3/models",
+                            "operationId": "genxRegisterModelVersion"
+                        },
+                        {
+                            "method": "GET",
+                            "route": "/brapi/v3/models/{modelDbId}",
+                            "operationId": "genxGetModelVersion"
+                        }
+                    ]
+                },
+                {
+                    "name": "variantMatrices",
+                    "versions": [
+                        "1.0"
+                    ],
+                    "methods": [
+                        "GET",
+                        "POST"
+                    ],
+                    "scopes": [
+                        "matrices.register",
+                        "matrices.read"
+                    ],
+                    "operations": [
+                        {
+                            "method": "GET",
+                            "route": "/brapi/v3/variantmatrices",
+                            "operationId": "genxListVariantMatrixReferences"
+                        },
+                        {
+                            "method": "POST",
+                            "route": "/brapi/v3/variantmatrices",
+                            "operationId": "genxRegisterVariantMatrixReference"
+                        },
+                        {
+                            "method": "GET",
+                            "route": "/brapi/v3/variantmatrices/{matrixDbId}",
+                            "operationId": "genxGetVariantMatrixReference"
+                        }
+                    ]
+                },
+                {
+                    "name": "fairPackages",
+                    "versions": [
+                        "1.0"
+                    ],
+                    "methods": [
+                        "GET",
+                        "POST"
+                    ],
+                    "scopes": [
+                        "packages.register",
+                        "packages.read"
+                    ],
+                    "operations": [
+                        {
+                            "method": "GET",
+                            "route": "/brapi/v3/fair-packages",
+                            "operationId": "genxListFairPackageMetadata"
+                        },
+                        {
+                            "method": "POST",
+                            "route": "/brapi/v3/fair-packages",
+                            "operationId": "genxRegisterFairPackage"
+                        },
+                        {
+                            "method": "GET",
+                            "route": "/brapi/v3/fair-packages/{packageDbId}",
+                            "operationId": "genxGetFairPackageMetadata"
+                        }
+                    ]
+                },
+                {
+                    "name": "telemetry",
+                    "versions": [
+                        "1.0"
+                    ],
+                    "methods": [
+                        "GET",
+                        "POST"
+                    ],
+                    "scopes": [
+                        "telemetry.append",
+                        "telemetry.read"
+                    ],
+                    "operations": [
+                        {
+                            "method": "GET",
+                            "route": "/brapi/v3/telemetry",
+                            "operationId": "genxQueryTelemetrySamplesOrAggregates"
+                        },
+                        {
+                            "method": "POST",
+                            "route": "/brapi/v3/telemetry",
+                            "operationId": "genxAppendTelemetryBatch"
+                        }
+                    ]
+                }
             ],
             "authProfiles": [{"name": "none", "scopes": []}],
         }))
@@ -395,20 +637,17 @@ class Handler(BaseHTTPRequestHandler):
                                  "messageType": "WARNING"})
         key = self.headers.get("Idempotency-Key") or body.get("idempotencyKey")
         canon = canonical(body)
-        with store.lock:
-            seen = store.idempotency.get(key) if key else None
-            if seen:
-                if seen["body"] == canon:
-                    return self._send_json(200, envelope(
-                        result=store.jobs[seen["jobDbId"]],
-                        status=[{"message": "Replayed existing job",
-                                 "messageType": "INFO"}],
-                    ))
-                return self._send_text(409, "idempotency key already used with a different body")
-        job = store.create(job_type, body.get("parameters") or {}, key)
-        if key:
-            with store.lock:
-                store.idempotency[key] = {"body": canon, "jobDbId": job["jobDbId"]}
+        job, disposition = store.submit_idempotent(
+            job_type, body.get("parameters") or {}, key, canon
+        )
+        if disposition == "conflict":
+            return self._send_text(409, "idempotency key already used with a different body")
+        if disposition == "replay":
+            return self._send_json(200, envelope(
+                result=job,
+                status=[{"message": "Replayed existing job",
+                         "messageType": "INFO"}],
+            ))
         worker = threading.Thread(
             target=run_job,
             args=(store, job["jobDbId"], job_type, body.get("parameters") or {}),

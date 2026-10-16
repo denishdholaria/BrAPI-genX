@@ -12,7 +12,7 @@ Nothing here changes V2.1.
 | ID | Question | Source | Evidence available | What resolves it |
 |---|---|---|---|---|
 | D-01 | HTTP status for same-key/different-body conflicts (`409` proposed) | RFC-001 §8 | Reference server uses `409` + plain text (L-02 etc. green) | Community agreement + `Error_Handling.md` amendment |
-| D-02 | JSON canonical form feeding digests | RFC-001 §8 | Cross-runtime agreement proven for ASCII (Python + Bun, run 9); non-ASCII escaping is the located boundary | Community ratification (JCS RFC 8785 is the natural candidate) |
+| D-02 | JSON canonical form feeding digests | RFC-001 §8 | Experimental Python and TypeScript/Bun candidate corpus covers 12 structured JSON vectors, 2 exact-byte cases, 5 rejection-policy cases, 2 legacy-divergence diagnostics, and 10 mutation failures; no existing helper migrated | Community/implementer review of canonicalization, field-level preimage scope, numeric precision, rejection policy and migration/versioning; explicit ratification |
 | D-03 | OIDC tenant-claim name and scope vocabulary | RFC-001 §8 | None implemented (reference server: auth `none`) | Operator identity decision + second implementation |
 | D-04 | Wiring GenX into `generator/`, `BrAPI-Schema/`, `Generated/` | RFC-001 §8 | GenX dir proven inert to the V2.1 build (Slice H) | Operator build decision |
 | D-05 | Term/model version ordering and comparison | RFC-002 §5 | Omitted-version reads use creation recency | Community versioning rule |

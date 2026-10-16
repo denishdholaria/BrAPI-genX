@@ -268,3 +268,105 @@ Tested commit: `b551142357047dd9c82cedcc207588324190730d`
 - The live target is an in-memory Python reference server. This is evidence for the tested behavior and conformance tooling only; it does not prove durable persistence, effective authentication, production security, third-party interoperability, or standard acceptance.
 
 The separate schema-generation/build workflow also passed on this tested commit: [GitHub Actions run 38560252360](https://github.com/denishdholaria/BrAPI_genX/actions/runs/38560252360). The conformance and schema-generation workflows therefore both pass for the commit cited above. No V2.1 contract file was edited.
+
+
+## Run 15 — ServerInfoV3 capability-to-operation contract (2026-10-15)
+
+Feature branch: `work/std-04-capability-negotiation`  
+Tested commit: `e6784a56052373709aeee4c4369df06d634b90a1`  
+[GitHub Actions conformance run](https://github.com/denishdholaria/BrAPI_genX/actions/runs/38688671323)
+
+- Dedicated capability-negotiation mutation suite: **15 tests passed**. Negative cases include duplicate/unregistered capability names, missing capabilities, duplicate or unregistered versions, false method summaries, stale routes and operation IDs, missing mappings, duplicated operation references, malformed/duplicate scopes, duplicate auth-profile names, and duplicate OpenAPI operation IDs.
+- Existing endpoint-identity mutation tests: **12 passed**.
+- Static conformance: **22 probes passed, 0 failed**, including S-22, which cross-checks exact full route templates, methods, and stable operation IDs against the actual GenX OpenAPI definitions.
+- Live reference-server conformance: **29 probes passed, 0 failed, 0 skipped**, including L-29, which checks live ServerInfoV3 advertisements against the same registry.
+- The separate schema/specification build workflow for this commit passed: [run 38688671310](https://github.com/denishdholaria/BrAPI_genX/actions/runs/38688671310).
+
+The new `operations[]` property is explicitly optional and experimental in the schema. The registry and tests define the current proposal profile, not an accepted BrAPI requirement. D-21 (operation mapping/version tokens) and D-22 (authorization scopes/auth profiles) remain open for implementer and community review. In particular, the reference server is in-memory and does not implement authentication or authorization; passing tests is not evidence of production security or enforcement. No BrAPI V2.1 contract file was modified.
+
+
+## Run 16 — capability registry source-of-truth hardening (2026-10-15)
+
+Feature branch: `work/std-04-capability-negotiation`  
+Tested commit: `444d1e7303e482067e3e06f80e6ad3c499868d21`  
+[GitHub Actions conformance run](https://github.com/denishdholaria/BrAPI_genX/actions/runs/38688966139)  
+[GitHub Actions schema/specification build](https://github.com/denishdholaria/BrAPI_genX/actions/runs/38688966287)
+
+- Capability-negotiation mutation suite: **21 tests passed**. It includes mutations to the advertised document and the registry itself, malformed and duplicate tokens, unsupported routes/methods, incorrect/missing operation identities, and malformed scope/auth-profile shapes.
+- Endpoint-identity mutation suite: **12 tests passed**.
+- Static conformance: **22 probes passed, 0 failed**, including S-22 mapping every advertised capability operation to the checked-in OpenAPI route, method, and operation ID.
+- Live reference-server conformance: **29 probes passed, 0 failed, 0 skipped**, including L-29 comparing the runtime ServerInfoV3 response against the same capability registry.
+- Schema/specification build and generation: **passed**.
+
+The new `operations[]` property and registry remain experimental proposal material. These tests prevent metadata drift; they do not prove client interoperability with an independent implementation or authorize a normative change. D-21 (capability-operation mapping and version semantics) and D-22 (scope/auth-profile semantics and enforcement) remain open. The in-memory server still does not implement authentication/authorization, and no BrAPI V2.1 contract files were changed.
+
+
+## Run 17 — supported job-type advertisement and runtime drift guard (2026-10-15)
+
+Feature branch: `work/std-04-capability-negotiation`  
+Tested commit: `e8f9e106402c5fe3fbb1f395dea20f81b3721006`  
+[GitHub Actions conformance run](https://github.com/denishdholaria/BrAPI_genX/actions/runs/38689928375)  
+[Schema/specification build](https://github.com/denishdholaria/BrAPI_genX/actions/runs/38689928312)
+
+- Capability-negotiation mutation suite: **29 tests passed**. The suite now detects absent, duplicate, malformed, or registry-divergent `jobTypes[]` values, jobTypes attached to non-jobs capabilities, and divergence between the capability registry and the actual `SUPPORTED_JOB_TYPES` constant in the submission validator.
+- Endpoint-identity mutation suite: **12 tests passed**.
+- Static conformance: **22 probes passed, 0 failed**, including S-22's exact operation map and job-type drift check.
+- Live reference-server conformance: **29 probes passed, 0 failed, 0 skipped**, including L-29 validating the live ServerInfoV3 data against the registry.
+- The job-type advertisement now agrees with the current prototype's accepted type tokens: `germplasm_search`, `analysis`, and `inference`; `export` is not advertised by this prototype.
+
+The `jobTypes[]` property is optional and experimental in the schema. Whether a future GenX contract requires it, how older servers are handled, and how job-type names are versioned/deprecated remain open under D-23. These tests verify internal agreement and fail-closed metadata validation; they do not prove third-party interoperability or ratify a standard. D-21 and D-22 also remain open. No V2.1 contract files changed, and the in-memory reference server still has no effective authentication/authorization or durable persistence.
+
+## Run 18 — digest interoperability candidate corpus (2026-10-15)
+
+Feature branch: `work/std-01-digest-vectors`  
+Tested commit: `86fec6494ee95773d8993d7d69cbcc060793cfa1`  
+[GitHub Actions run](https://github.com/denishdholaria/BrAPI_genX/actions/runs/38686137872)
+
+- Shared structured-JSON candidate vectors: **11 passed** independently in Python (`rfc8785==0.1.4`) and TypeScript/Bun (`canonicalize==5.1.0`).
+- Exact-byte digest vectors: **2 passed** in both runtimes.
+- Invalid-input rejection vectors: **4 passed** in both runtimes, including duplicate property names after escape decoding, non-JSON constants, and lone surrogate values.
+- Legacy divergence diagnostics: **2 passed** in both runtimes, confirming different current serializer behavior for non-ASCII text and Unicode property ordering.
+- Endpoint-identity mutation suite: **12 passed**; static GenX conformance: **21 passed, 0 failed**; live reference-server conformance: **28 passed, 0 failed, 0 skipped**.
+
+This verifies two independent implementations against an experimental candidate corpus. It does not migrate either reference server to JCS, resolve D-02, or adopt RFC 8785 for BrAPI. Scientific quantities requiring exact decimal or integer precision must not be silently converted to binary64 JSON numbers. No BrAPI V2.1 contract files changed; the in-memory reference server still has no effective authentication, and no production-readiness claim is made.
+
+
+## Run 19 — digest numeric-boundary hardening (2026-10-15)
+
+Feature branch: `work/std-01-digest-vectors`  
+Tested commit: `3f4518e97eefebf9c8045ef83c789f2142e753ec`  
+[GitHub Actions run](https://github.com/denishdholaria/BrAPI_genX/actions/runs/38686741683)
+
+- Structured JSON candidate corpus: **12 passed** independently in Python and TypeScript/Bun, including the largest interoperable safe integer boundary.
+- Exact-byte digest cases: **2 passed** in both runtimes.
+- Rejection-policy cases: **5 passed** in both runtimes — four JSON/JCS input-constraint cases and one deliberately stricter profile rule that rejects an unsafe integer token before JavaScript can silently round it. The numeric rule is a candidate-profile safeguard, not a claim that the token is invalid JSON.
+- Known legacy serializer divergence diagnostics: **2 passed** in both runtimes.
+- Endpoint-identity mutation tests: **12 passed**; static GenX conformance: **21 passed, 0 failed**; live reference-server conformance: **28 passed, 0 failed, 0 skipped**.
+
+The strict parser is a conformance-test guard, not a production parser or a normative BrAPI rule. RFC 8785/JCS remains an experimental candidate. The currently deployed-in-repository reference-server canonicalization helpers have not been migrated; D-02 remains unresolved pending field-scope, scientific numeric semantics, migration/versioning, and implementer/community review. V2.1 contracts remain unchanged.
+
+
+## Run 20 — digest corpus completeness and mutation resistance (2026-10-15)
+
+Feature branch: `work/std-01-digest-vectors`  
+Tested commit: `7542db0248f21182c5ce95d6146aee2a89880580`  
+[GitHub Actions run](https://github.com/denishdholaria/BrAPI_genX/actions/runs/38687016131)
+
+- Python and TypeScript/Bun independently passed the shared digest corpus: **12 structured JSON vectors, 2 exact-byte cases, 5 rejection-policy cases (four JCS/JSON input constraints plus one conservative numeric hardening rule), and 2 known legacy divergence diagnostics**.
+- Digest corpus mutation tests: **5 deliberate corruptions rejected by both runtimes (10 checks)** — wrong canonical bytes, wrong structured digest, wrong exact-byte digest, removed required edge vector, and duplicate vector identity.
+- Endpoint-identity mutation tests: **12 passed**; static GenX conformance: **21 passed, 0 failed**; live reference-server conformance: **28 passed, 0 failed, 0 skipped**.
+
+This adds evidence that the tests themselves detect deliberate corruption and missing edge-case coverage. The shared corpus still evaluates RFC 8785/JCS as a candidate only; D-02 remains open. Neither current reference-server canonicalization helper has been migrated, and V2.1 contracts remain unchanged. Reference-server constraints continue to apply: no durable persistence or effective authentication.
+
+
+## Run 21 — make strict-profile rejection semantics explicit (2026-10-15)
+
+Feature branch: `work/std-01-digest-vectors`  
+Tested commit: `1fcf062c65faf2ec797899070f9da386011aead5`  
+[GitHub Actions run](https://github.com/denishdholaria/BrAPI_genX/actions/runs/38687419662)
+
+- Python and TypeScript/Bun passed the same corpus: **12 structured JSON vectors, 2 exact-byte cases, 5 rejection-policy cases, and 2 legacy divergence diagnostics**.
+- The rejection vectors now name their rationale and distinguish four JSON/JCS input constraints from the stricter unsafe-integer guard. That guard is an explicit exploratory candidate-profile policy, not a blanket claim that large integers are invalid JSON or a requirement imposed by RFC 8785.
+- Five intentional mutations were rejected by each implementation (10 checks). The run also passed 12 endpoint-identity mutation tests, 21 static GenX probes, and 28 live reference-server probes; no skips or failures.
+
+D-02 remains open. The current Python and TypeScript/Bun reference-server canonicalizers remain unchanged. This run supports the test harness and candidate comparison only; it does not establish third-party agreement or standards acceptance.

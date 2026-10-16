@@ -7,12 +7,12 @@ components:
   schemas:
     JobNewRequest:
       type: object
-      description: Request to start one unit of asynchronous work
+      description: Request to start one unit of asynchronous work; jobType is an exact token accepted by the server
       required:
       - jobType
       properties:
         jobType:
-          description: Kind of work requested. Must be a job type the server advertises.
+          description: Exact job type token requested. In the experimental ServerInfoV3 profile, consult jobs.jobTypes when present; absent lists do not imply support.
           type: string
           example: germplasm_search
         parameters:

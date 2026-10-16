@@ -19,9 +19,10 @@ components:
           example: JOB_0091
         jobType:
           description: |-
-            Kind of work, e.g. search, analysis, export, inference. Servers
-            advertise supported job types as `jobs` capabilities in
-            ServerInfoV3. Unknown job types must be rejected.
+            Exact kind of asynchronous work requested. In the experimental
+            ServerInfoV3 profile, the `jobs` capability can advertise accepted
+            tokens in `jobTypes[]`. If an older server omits that optional list,
+            clients must not assume a type is supported. Unknown types are rejected.
           type: string
           example: germplasm_search
         status:

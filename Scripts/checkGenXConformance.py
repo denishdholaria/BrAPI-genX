@@ -18,6 +18,7 @@ Options:
 """
 
 import argparse
+import ast
 import copy
 import glob
 import hashlib
@@ -276,6 +277,336 @@ def check_idempotency_relations(root, probe, ctx, results):
         results.report(probe["id"], probe["title"], "FAIL", "; ".join(problems))
     else:
         results.report(probe["id"], probe["title"], "PASS")
+
+
+def capability_contract_problems(root, info, registry_path):
+    """Check the experimental ServerInfoV3 operation mapping against OpenAPI."""
+    problems = []
+    try:
+        registry = load_json(registry_path)
+    except Exception as exc:
+        return [f"cannot read capability registry: {type(exc).__name__}: {exc}"]
+
+    if registry.get("schemaVersion") != 1:
+        problems.append("capability registry schemaVersion must be 1")
+    if registry.get("status") != "experimental-review-only":
+        problems.append("capability registry must remain explicitly experimental-review-only")
+    if registry.get("baseRoute") != "/brapi/v3":
+        problems.append("capability registry baseRoute must be /brapi/v3")
+
+    entries = registry.get("capabilities")
+    if not isinstance(entries, list) or not entries:
+        return problems + ["capability registry must contain a non-empty capabilities array"]
+
+    registry_by_name = {}
+    for entry in entries:
+        if not isinstance(entry, dict):
+            problems.append("capability registry contains a non-object entry")
+            continue
+        name = entry.get("name")
+        if not isinstance(name, str) or not name.strip():
+            problems.append("capability registry entry has a missing/blank name")
+            continue
+        if name in registry_by_name:
+            problems.append(f"capability registry has duplicate name '{name}'")
+        registry_by_name[name] = entry
+
+    # Validate the registry itself; a fixture cannot make a malformed source of truth valid.
+    for name, entry in registry_by_name.items():
+        for field in ("versions", "methods"):
+            value = entry.get(field)
+            if not isinstance(value, list) or not value:
+                problems.append(f"capability registry '{name}' {field} must be a non-empty array")
+                continue
+            if any(not isinstance(item, str) or not item.strip() for item in value):
+                problems.append(f"capability registry '{name}' {field} must contain non-empty strings")
+            elif len(value) != len(set(value)):
+                problems.append(f"capability registry '{name}' {field} contains duplicates")
+        job_types = entry.get("jobTypes")
+        if name == "jobs":
+            if not isinstance(job_types, list) or not job_types:
+                problems.append("capability registry 'jobs' jobTypes must be a non-empty array")
+            elif any(not isinstance(item, str) or not item.strip() for item in job_types):
+                problems.append("capability registry 'jobs' jobTypes must contain non-empty strings")
+            elif len(job_types) != len(set(job_types)):
+                problems.append("capability registry 'jobs' jobTypes contains duplicates")
+        elif job_types is not None:
+            problems.append(f"capability registry '{name}' must not declare jobTypes; only the jobs capability can do so")
+
+    result = info.get("result") if isinstance(info, dict) else None
+    if not isinstance(result, dict):
+        return problems + ["ServerInfoV3 fixture/result is not an object"]
+
+    brapi_versions = result.get("brapiVersions")
+    if not isinstance(brapi_versions, list) or not brapi_versions:
+        problems.append("brapiVersions must be a non-empty array")
+    else:
+        if any(not isinstance(v, str) or not v.strip() for v in brapi_versions):
+            problems.append("brapiVersions must contain non-empty opaque strings")
+        if len(brapi_versions) != len(set(v for v in brapi_versions if isinstance(v, str))):
+            problems.append("brapiVersions contains duplicate version tokens")
+
+    capabilities = result.get("capabilities")
+    if not isinstance(capabilities, list):
+        return problems + ["capabilities must be an array"]
+    fixture_by_name = {}
+    for cap in capabilities:
+        if not isinstance(cap, dict):
+            problems.append("capabilities contains a non-object entry")
+            continue
+        name = cap.get("name")
+        if not isinstance(name, str) or not name.strip():
+            problems.append("capability entry has a missing/blank name")
+            continue
+        if name in fixture_by_name:
+            problems.append(f"ServerInfoV3 has duplicate capability name '{name}'")
+        fixture_by_name[name] = cap
+
+    unknown = sorted(set(fixture_by_name) - set(registry_by_name))
+    missing = sorted(set(registry_by_name) - set(fixture_by_name))
+    if unknown:
+        problems.append("advertised capabilities are absent from the experimental registry: " + ", ".join(unknown))
+    if missing:
+        problems.append("registered capabilities absent from ServerInfoV3 fixture: " + ", ".join(missing))
+
+    # Confirm the job type list advertised by the prototype is the same list enforced at submission.
+    jobs_entry = registry_by_name.get("jobs")
+    server_path = os.path.join(root, "Scripts", "genx_test_server.py")
+    try:
+        with open(server_path, encoding="utf-8") as handle:
+            server_ast = ast.parse(handle.read(), filename=server_path)
+        assigned = None
+        for node in server_ast.body:
+            if isinstance(node, ast.Assign) and any(
+                isinstance(target, ast.Name) and target.id == "SUPPORTED_JOB_TYPES"
+                for target in node.targets
+            ):
+                assigned = ast.literal_eval(node.value)
+                break
+        if not isinstance(assigned, (tuple, list)) or not assigned or any(
+            not isinstance(item, str) or not item.strip() for item in assigned
+        ):
+            problems.append("reference server SUPPORTED_JOB_TYPES must be a non-empty sequence of exact strings")
+        elif len(assigned) != len(set(assigned)):
+            problems.append("reference server SUPPORTED_JOB_TYPES contains duplicates")
+        elif jobs_entry is not None and isinstance(jobs_entry.get("jobTypes"), list):
+            registry_types = jobs_entry["jobTypes"]
+            if all(isinstance(item, str) and item.strip() for item in registry_types) and set(assigned) != set(registry_types):
+                problems.append("reference server SUPPORTED_JOB_TYPES differs from the jobs capability registry")
+    except Exception as exc:
+        problems.append(f"cannot validate reference server supported job types: {type(exc).__name__}: {exc}")
+
+    # Build a source-of-truth map from the actual GenX OpenAPI fragments.
+    genx_dir = os.path.join(root, "Specification", "BrAPI-GenX")
+    operation_catalog = {}
+    for yaml_path in glob.glob(os.path.join(genx_dir, "**", "*.yaml"), recursive=True):
+        try:
+            document = load_yaml(yaml_path)
+        except Exception as exc:
+            problems.append(f"cannot parse GenX YAML {os.path.relpath(yaml_path, root)}: {exc}")
+            continue
+        if not isinstance(document, dict):
+            continue
+        paths = document.get("paths")
+        if not isinstance(paths, dict):
+            continue
+        for route, path_item in paths.items():
+            if not isinstance(path_item, dict):
+                continue
+            for method, operation in path_item.items():
+                method_upper = str(method).upper()
+                if method_upper not in OPENAPI_METHODS or not isinstance(operation, dict):
+                    continue
+                operation_id = operation.get("operationId")
+                if not isinstance(operation_id, str) or not operation_id.strip():
+                    continue
+                full_route = "/brapi/v3" + route
+                if operation_id in operation_catalog:
+                    old = operation_catalog[operation_id]
+                    problems.append(
+                        f"OpenAPI operationId '{operation_id}' is duplicated at "
+                        f"{old['method']} {old['route']} and {method_upper} {full_route}"
+                    )
+                else:
+                    operation_catalog[operation_id] = {
+                        "method": method_upper,
+                        "route": full_route,
+                    }
+
+    for name, cap in fixture_by_name.items():
+        entry = registry_by_name.get(name)
+        if entry is None:
+            continue
+
+        for label, value in (("versions", cap.get("versions")), ("methods", cap.get("methods"))):
+            if not isinstance(value, list) or not value:
+                problems.append(f"capability '{name}' {label} must be a non-empty array")
+                continue
+            if any(not isinstance(item, str) or not item.strip() for item in value):
+                problems.append(f"capability '{name}' {label} must contain non-empty strings")
+            string_items = [item for item in value if isinstance(item, str)]
+            if len(string_items) != len(set(string_items)):
+                problems.append(f"capability '{name}' {label} contains duplicates")
+
+        versions = cap.get("versions") if isinstance(cap.get("versions"), list) else []
+        entry_versions = entry.get("versions") if isinstance(entry.get("versions"), list) else []
+        versions_are_strings = all(isinstance(value, str) and value.strip() for value in versions)
+        entry_versions_are_strings = all(isinstance(value, str) and value.strip() for value in entry_versions)
+        if not versions_are_strings:
+            problems.append(f"capability '{name}' version values must be non-empty opaque strings")
+        if not entry_versions_are_strings:
+            problems.append(f"capability registry '{name}' version values must be non-empty opaque strings")
+        if versions_are_strings and entry_versions_are_strings and set(versions) != set(entry_versions):
+            problems.append(f"capability '{name}' versions differ from the experimental registry")
+
+        methods = cap.get("methods") if isinstance(cap.get("methods"), list) else []
+        entry_methods = entry.get("methods") if isinstance(entry.get("methods"), list) else []
+        methods_are_strings = all(isinstance(method, str) for method in methods)
+        entry_methods_are_strings = all(isinstance(method, str) for method in entry_methods)
+        for method in methods + entry_methods:
+            if not isinstance(method, str) or method not in HTTP_METHODS:
+                problems.append(f"capability '{name}' uses unsupported method summary {method!r}")
+        if methods_are_strings and entry_methods_are_strings and set(methods) != set(entry_methods):
+            problems.append(f"capability '{name}' method summary differs from the experimental registry")
+
+        advertised_job_types = cap.get("jobTypes")
+        registered_job_types = entry.get("jobTypes")
+        if name == "jobs":
+            for label, values in (("ServerInfoV3", advertised_job_types), ("registry", registered_job_types)):
+                if not isinstance(values, list) or not values:
+                    problems.append(f"capability '{name}' {label} jobTypes must be a non-empty array in this experimental profile")
+                    continue
+                if any(not isinstance(item, str) or not item.strip() for item in values):
+                    problems.append(f"capability '{name}' {label} jobTypes must contain non-empty exact tokens")
+                elif len(values) != len(set(values)):
+                    problems.append(f"capability '{name}' {label} jobTypes contains duplicates")
+            if (
+                isinstance(advertised_job_types, list)
+                and isinstance(registered_job_types, list)
+                and all(isinstance(item, str) and item.strip() for item in advertised_job_types)
+                and all(isinstance(item, str) and item.strip() for item in registered_job_types)
+                and set(advertised_job_types) != set(registered_job_types)
+            ):
+                problems.append("capability 'jobs' jobTypes differ from the experimental registry")
+        else:
+            if "jobTypes" in cap:
+                problems.append(f"capability '{name}' must not advertise jobTypes; only the jobs capability can do so")
+            if "jobTypes" in entry:
+                problems.append(f"capability registry '{name}' must not declare jobTypes; only the jobs capability can do so")
+
+        for label, source in (("ServerInfoV3", cap), ("registry", entry)):
+            scopes = source.get("scopes")
+            if scopes is None:
+                continue
+            if not isinstance(scopes, list):
+                problems.append(f"capability '{name}' {label} scopes must be an array when present")
+            elif any(not isinstance(scope, str) or not scope.strip() for scope in scopes):
+                problems.append(f"capability '{name}' {label} scopes must contain non-empty strings")
+            elif len(scopes) != len(set(scopes)):
+                problems.append(f"capability '{name}' {label} scopes contains duplicates")
+
+        advertised_ops = cap.get("operations")
+        registered_ops = entry.get("operations")
+        if not isinstance(advertised_ops, list) or not advertised_ops:
+            problems.append(f"capability '{name}' must advertise a non-empty operations array in this experimental profile")
+            continue
+        if not isinstance(registered_ops, list) or not registered_ops:
+            problems.append(f"capability registry '{name}' must contain a non-empty operations array")
+            continue
+
+        def normalize_ops(items, label):
+            normalized = []
+            seen = set()
+            for operation in items:
+                if not isinstance(operation, dict):
+                    problems.append(f"capability '{name}' {label} contains a non-object operation")
+                    continue
+                method = operation.get("method")
+                route = operation.get("route")
+                operation_id = operation.get("operationId")
+                valid = True
+                if not isinstance(method, str) or method not in HTTP_METHODS:
+                    problems.append(f"capability '{name}' {label} has unsupported operation method {method!r}")
+                    valid = False
+                if not isinstance(route, str) or not route.startswith("/brapi/v3/") or "?" in route or "#" in route:
+                    problems.append(f"capability '{name}' {label} route must be a full /brapi/v3 route template, got {route!r}")
+                    valid = False
+                if not isinstance(operation_id, str) or not operation_id.strip():
+                    problems.append(f"capability '{name}' {label} has missing/blank operationId")
+                    valid = False
+                if not valid:
+                    continue
+                key = (method, route, operation_id)
+                if key in seen:
+                    problems.append(f"capability '{name}' {label} has a duplicate operation reference {key!r}")
+                seen.add(key)
+                normalized.append(key)
+                actual = operation_catalog.get(operation_id)
+                if actual is None:
+                    problems.append(f"capability '{name}' {label} references unknown operationId {operation_id!r}")
+                elif actual.get("method") != method or actual.get("route") != route:
+                    problems.append(
+                        f"capability '{name}' {label} operation {operation_id!r} advertises "
+                        f"{method} {route}, but OpenAPI defines {actual.get('method')} {actual.get('route')}"
+                    )
+            return normalized
+
+        normalized_advertised = normalize_ops(advertised_ops, "advertised operations")
+        normalized_registered = normalize_ops(registered_ops, "registry operations")
+        if set(normalized_advertised) != set(normalized_registered):
+            problems.append(f"capability '{name}' operation mapping differs from the experimental registry")
+
+        methods_from_ops = {method for method, _, _ in normalized_advertised}
+        if methods_from_ops != set(methods):
+            problems.append(
+                f"capability '{name}' methods must equal its operations' method union; "
+                f"got {sorted(set(methods))}, expected {sorted(methods_from_ops)}"
+            )
+
+    auth_profiles = result.get("authProfiles", [])
+    if not isinstance(auth_profiles, list):
+        problems.append("authProfiles must be an array when present")
+    else:
+        seen_profiles = set()
+        for profile in auth_profiles:
+            if not isinstance(profile, dict):
+                problems.append("authProfiles contains a non-object entry")
+                continue
+            name = profile.get("name")
+            if not isinstance(name, str) or not name.strip():
+                problems.append("auth profile has a missing/blank name")
+                continue
+            if name in seen_profiles:
+                problems.append(f"authProfiles contains duplicate profile name '{name}'")
+            seen_profiles.add(name)
+            scopes = profile.get("scopes")
+            if scopes is not None and (
+                not isinstance(scopes, list)
+                or any(not isinstance(scope, str) or not scope.strip() for scope in scopes)
+                or (isinstance(scopes, list) and len(scopes) != len(set(scopes)))
+            ):
+                problems.append(f"auth profile '{name}' scopes must be an array of unique non-empty strings when present")
+
+    return problems
+
+
+def check_capability_contract(root, probe, ctx, results):
+    genx = os.path.join(root, "Specification", "BrAPI-GenX")
+    info_path = os.path.join(genx, "Conformance", "fixtures", "serverinfov3.json")
+    registry_path = ctx.get(
+        "capability_registry_path",
+        os.path.join(genx, "Conformance", "capability-registry.json"),
+    )
+    try:
+        info = load_json(info_path)
+        problems = capability_contract_problems(root, info, registry_path)
+    except Exception as exc:
+        problems = [f"{type(exc).__name__}: {exc}"]
+    if problems:
+        results.report(probe["id"], probe["title"], "FAIL", "; ".join(problems))
+    else:
+        results.report(probe["id"], probe["title"], "PASS",
+                       "capability names, version/method summaries, and operation routes match the registry")
 
 
 def check_capability_grounding(root, probe, ctx, results):
@@ -768,6 +1099,7 @@ STATIC = {
     "datetime_format": check_datetime_format,
     "idempotency_relations": check_idempotency_relations,
     "capability_grounding": check_capability_grounding,
+    "capability_contract": check_capability_contract,
     "v21_fallback_shape": check_v21_fallback_shape,
     "term_id_format": check_term_id_format,
     "decimal_format": check_decimal_format,
@@ -1241,6 +1573,18 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     continue
                 return results.report(
                     probe["id"], probe["title"], "FAIL", "serverinfo not negotiable")
+
+            if assertion.get("capability_registry_match"):
+                registry_path = ctx.get("capability_registry_path")
+                problems = capability_contract_problems(
+                    ctx.get("root", "."), payload, registry_path
+                )
+                if problems:
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "live ServerInfoV3 does not match the capability registry: " +
+                        "; ".join(problems)
+                    )
             if "body" in assertion:
                 for dotted, expected in assertion["body"].items():
                     node = payload
@@ -1280,7 +1624,9 @@ def main():
         "required_map": spec.get("required_map", {}),
         "genx_object_names": spec.get("genx_object_names", []),
         "capability_dirs": spec.get("capability_dirs", {}),
+        "capability_registry_path": os.path.join(conf, spec.get("capability_registry", "capability-registry.json")),
         "conformance_dir": conf,
+        "root": root,
         "live_job": None,
         "live_body": None,
         "live_key": None,

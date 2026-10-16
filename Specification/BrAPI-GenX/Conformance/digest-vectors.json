@@ -1,0 +1,144 @@
+{
+  "corpusVersion": 1,
+  "status": "experimental-candidate-not-normative",
+  "candidateProfile": "RFC8785-JCS",
+  "decisionState": "D-02 remains open; these vectors evaluate a candidate and do not ratify it.",
+  "references": [
+    "https://www.rfc-editor.org/rfc/rfc8785.html",
+    "https://www.rfc-editor.org/rfc/rfc7493.html"
+  ],
+  "structuredJsonVectors": [
+    {
+      "id": "object-key-order-and-whitespace",
+      "inputJson": " { \"b\": 2, \"a\": 1 } \n",
+      "expectedCanonicalUtf8": "{\"a\":1,\"b\":2}",
+      "expectedSha256": "43258cff783fe7036d8a43033f830adfc60ec037382473548ac742b888292777"
+    },
+    {
+      "id": "unicode-escaped-input-canonical-unescaped-output",
+      "inputJson": "{\"label\":\"caf\\u00e9 \\ud83c\\udf31\"}",
+      "expectedCanonicalUtf8": "{\"label\":\"café 🌱\"}",
+      "expectedSha256": "ab51b72bb615d3d4d01757516ecc1a646eba00e930951f71ee97354f095a075a"
+    },
+    {
+      "id": "nested-objects-arrays-null-booleans",
+      "inputJson": " { \"z\": {}, \"a\": [3, {\"z\": null, \"a\": true}] } ",
+      "expectedCanonicalUtf8": "{\"a\":[3,{\"a\":true,\"z\":null}],\"z\":{}}",
+      "expectedSha256": "89bab76bdd48af042f5b3cb6098648685e30b68b6a0cd61709470c6bbeaaa90a"
+    },
+    {
+      "id": "string-escaping",
+      "inputJson": "{\"control\":\"\\b\\t\\n\\f\\r\",\"quote\":\"\\\"\",\"slash\":\"/\",\"backslash\":\"\\\\\"}",
+      "expectedCanonicalUtf8": "{\"backslash\":\"\\\\\",\"control\":\"\\b\\t\\n\\f\\r\",\"quote\":\"\\\"\",\"slash\":\"/\"}",
+      "expectedSha256": "bfa57b6b464fdd00ffc805bace37f83b77693b4c979d554471728930338e330e"
+    },
+    {
+      "id": "utf16-property-order",
+      "inputJson": "{\"\\ue000\":1,\"\\ud83d\\ude00\":2}",
+      "expectedCanonicalUtf8": "{\"😀\":2,\"\":1}",
+      "expectedSha256": "28c95d1bbb2209223307e62f489020e8f9e0cfa16adf2daf6d88127a1e8dd22a"
+    },
+    {
+      "id": "number-serialization-and-negative-zero",
+      "inputJson": "{\"n\":[-0,0.000001,1e-7,1e30,4.5,333333333.3333333]}",
+      "expectedCanonicalUtf8": "{\"n\":[0,0.000001,1e-7,1e+30,4.5,333333333.3333333]}",
+      "expectedSha256": "d8831ceaf3dc937744c85b22ffc6d93f4c751189a248560a0dc232f5e1d53c0c"
+    },
+    {
+      "id": "exact-scientific-decimal-represented-as-string",
+      "inputJson": "{\"measurement\":\"0.0000000000000000000000001\"}",
+      "expectedCanonicalUtf8": "{\"measurement\":\"0.0000000000000000000000001\"}",
+      "expectedSha256": "9c3016daa462989eac2235c9a63ff36a5029aa9c2e301601947d4fad4d1f90c8"
+    },
+    {
+      "id": "unicode-composed-form-preserved",
+      "inputJson": "{\"label\":\"é\"}",
+      "expectedCanonicalUtf8": "{\"label\":\"é\"}",
+      "expectedSha256": "59a69e5a8f92914b2096dd10b10431fe5c21baa7990508f95718e2f40fc718db"
+    },
+    {
+      "id": "unicode-decomposed-form-preserved-without-normalization",
+      "inputJson": "{\"label\":\"é\"}",
+      "expectedCanonicalUtf8": "{\"label\":\"é\"}",
+      "expectedSha256": "bf1c0db8e2dcab417156b09650994aeebd8c0275198748bccb42f0b97de669c2"
+    },
+    {
+      "id": "empty-object",
+      "inputJson": "{}",
+      "expectedCanonicalUtf8": "{}",
+      "expectedSha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "id": "empty-array",
+      "inputJson": "[]",
+      "expectedCanonicalUtf8": "[]",
+      "expectedSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "id": "safe-integer-interoperability-boundary",
+      "inputJson": "{\"value\":9007199254740991}",
+      "expectedCanonicalUtf8": "{\"value\":9007199254740991}",
+      "expectedSha256": "16c63bddb910905c4ee8abf36273baa20dba53020dbaf265da5936013ded185d"
+    }
+  ],
+  "exactByteVectors": [
+    {
+      "id": "http-body-whitespace-preserved",
+      "inputUtf8": "{\"a\": 1}\n",
+      "expectedSha256": "e8c628edc9968ef0c668f54e0ba2636b35503357eb1aca0ddc828aeace432f67",
+      "meaning": "Hash exact UTF-8 bytes; do not parse or canonicalize."
+    },
+    {
+      "id": "http-body-key-order-preserved",
+      "inputUtf8": "{\"b\":2,\"a\":1}",
+      "expectedSha256": "3fb75453225c732a76b7899ea2096dda1455189c89817239732182f73fe5a09f",
+      "meaning": "A byte-integrity digest differs from a semantic JSON digest."
+    }
+  ],
+  "legacyDiagnostics": [
+    {
+      "id": "non-ascii-escaping",
+      "inputJson": "{\"label\":\"café 🌱\"}",
+      "pythonLegacyCanonicalUtf8": "{\"label\":\"caf\\u00e9 \\ud83c\\udf31\"}",
+      "typescriptLegacyCanonicalUtf8": "{\"label\":\"café 🌱\"}"
+    },
+    {
+      "id": "unicode-property-order",
+      "inputJson": "{\"\\ue000\":1,\"\\ud83d\\ude00\":2}",
+      "pythonLegacyCanonicalUtf8": "{\"\\ue000\":1,\"\\ud83d\\ude00\":2}",
+      "typescriptLegacyCanonicalUtf8": "{\"😀\":2,\"\":1}"
+    }
+  ],
+  "rejectionVectors": [
+    {
+      "id": "duplicate-property-name",
+      "inputJson": "{\"a\":1,\"a\":2}",
+      "reasonClass": "jcs-input-constraint",
+      "reason": "JCS/I-JSON input constraint: object property names must be unique after JSON string escape decoding."
+    },
+    {
+      "id": "duplicate-property-name-after-unescaping",
+      "inputJson": "{\"a\":1,\"\\u0061\":2}",
+      "reasonClass": "jcs-input-constraint",
+      "reason": "JCS/I-JSON input constraint: a and \\\\u0061 decode to the same property name."
+    },
+    {
+      "id": "non-json-nan-token",
+      "inputJson": "{\"a\":NaN}",
+      "reasonClass": "invalid-json-syntax",
+      "reason": "NaN is not a valid JSON number token."
+    },
+    {
+      "id": "lone-unicode-surrogate",
+      "inputJson": "{\"value\":\"\\ud800\"}",
+      "reasonClass": "jcs-input-constraint",
+      "reason": "JCS/I-JSON input constraint: unpaired surrogate code points are not valid interoperable Unicode strings."
+    },
+    {
+      "id": "integer-outside-safe-interoperability-range",
+      "inputJson": "{\"value\":9007199254740993}",
+      "reasonClass": "candidate-profile-hardening",
+      "reason": "Additional strict-profile policy, not a claim that JSON syntax is invalid: reject this plain-integer token before JavaScript parsing can round it. RFC 7493 warns that integer values above 9007199254740991 are not guaranteed to be treated exactly; exact values should use a schema-defined string representation."
+    }
+  ]
+}

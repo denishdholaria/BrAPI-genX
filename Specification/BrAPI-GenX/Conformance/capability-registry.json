@@ -1,0 +1,249 @@
+{
+  "schemaVersion": 1,
+  "status": "experimental-review-only",
+  "sourceOfTruth": "Specification/BrAPI-GenX/Conformance/capability-registry.json",
+  "baseRoute": "/brapi/v3",
+  "versionPolicy": "Capability version strings are opaque identifiers. Exact token matching only; no lexicographic or semantic-version ordering is defined by this registry.",
+  "methodPolicy": "methods is the set union of the methods named by operations. Array ordering is not semantically significant in this proposal; the registry orders its values deterministically for review. methods is a convenience summary, not a route locator.",
+  "operationPolicy": "operations is proposed additive metadata. Routes are full path templates including /brapi/v3. operationId must match the unique operationId of the checked-in GenX OpenAPI operation. Array order is not semantically significant; duplicate operation references are forbidden.",
+  "securityPolicy": "scope values and authProfiles are advertised vocabulary only in this experimental registry. They do not establish enforcement. See D-22 for unresolved semantics.",
+  "capabilities": [
+    {
+      "name": "jobs",
+      "kind": "endpoint-family",
+      "meaning": "Submit, list, retrieve, and cancel asynchronous jobs.",
+      "boundary": "A job submission is not synchronous execution; listing jobs is not a V2.1 search-results resource. jobTypes lists exact accepted jobType tokens; clients must not infer aliases or support not listed.",
+      "versions": [
+        "1.0"
+      ],
+      "methods": [
+        "DELETE",
+        "GET",
+        "POST"
+      ],
+      "operations": [
+        {
+          "method": "GET",
+          "route": "/brapi/v3/jobs",
+          "operationId": "genxListJobs"
+        },
+        {
+          "method": "POST",
+          "route": "/brapi/v3/jobs",
+          "operationId": "genxSubmitAsyncJob"
+        },
+        {
+          "method": "GET",
+          "route": "/brapi/v3/jobs/{jobDbId}",
+          "operationId": "genxGetAsyncJobById"
+        },
+        {
+          "method": "DELETE",
+          "route": "/brapi/v3/jobs/{jobDbId}",
+          "operationId": "genxRequestAsyncJobCancellation"
+        }
+      ],
+      "jobTypes": [
+        "germplasm_search",
+        "analysis",
+        "inference"
+      ]
+    },
+    {
+      "name": "provenanceEnvelope",
+      "kind": "embedded-contract",
+      "meaning": "A versioned provenance value that may be carried through job submission and retrieval.",
+      "boundary": "This schema has no standalone route. The listed operations are enclosing job operations where the example contract is carried; do not construct /provenanceEnvelope or infer a dedicated resource.",
+      "versions": [
+        "1.0"
+      ],
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "operations": [
+        {
+          "method": "POST",
+          "route": "/brapi/v3/jobs",
+          "operationId": "genxSubmitAsyncJob"
+        },
+        {
+          "method": "GET",
+          "route": "/brapi/v3/jobs/{jobDbId}",
+          "operationId": "genxGetAsyncJobById"
+        }
+      ]
+    },
+    {
+      "name": "variableTerms",
+      "kind": "endpoint-family",
+      "meaning": "Publish, list, and retrieve versioned variable-term definitions.",
+      "boundary": "Not V2.1 ObservationVariable; version ordering remains unresolved.",
+      "versions": [
+        "1.0"
+      ],
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "operations": [
+        {
+          "method": "GET",
+          "route": "/brapi/v3/variable-terms",
+          "operationId": "genxListVariableTermVersions"
+        },
+        {
+          "method": "POST",
+          "route": "/brapi/v3/variable-terms",
+          "operationId": "genxPublishVariableTermVersion"
+        },
+        {
+          "method": "GET",
+          "route": "/brapi/v3/variable-terms/{variableDbId}",
+          "operationId": "genxGetVariableTermVersion"
+        }
+      ]
+    },
+    {
+      "name": "lotLedger",
+      "kind": "endpoint-family",
+      "meaning": "Append and list ledger entries for a seed lot.",
+      "boundary": "Does not establish global chronology or atomic multi-lot transfers; relation to V2.1 SeedLotTransaction remains unresolved (D-20).",
+      "versions": [
+        "1.0"
+      ],
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "operations": [
+        {
+          "method": "GET",
+          "route": "/brapi/v3/seedlots/{seedLotDbId}/ledger",
+          "operationId": "genxListSeedLotLedgerEntries"
+        },
+        {
+          "method": "POST",
+          "route": "/brapi/v3/seedlots/{seedLotDbId}/ledger",
+          "operationId": "genxAppendSeedLotLedgerEntry"
+        }
+      ]
+    },
+    {
+      "name": "modelRegistry",
+      "kind": "endpoint-family",
+      "meaning": "Register, list, and retrieve model-version metadata.",
+      "boundary": "Registration does not execute or approve a model; inference is submitted via Jobs.",
+      "versions": [
+        "1.0"
+      ],
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "operations": [
+        {
+          "method": "GET",
+          "route": "/brapi/v3/models",
+          "operationId": "genxListModelVersions"
+        },
+        {
+          "method": "POST",
+          "route": "/brapi/v3/models",
+          "operationId": "genxRegisterModelVersion"
+        },
+        {
+          "method": "GET",
+          "route": "/brapi/v3/models/{modelDbId}",
+          "operationId": "genxGetModelVersion"
+        }
+      ]
+    },
+    {
+      "name": "variantMatrices",
+      "kind": "endpoint-family",
+      "meaning": "Register, list, and retrieve metadata for external variant-matrix references.",
+      "boundary": "Does not return or upload matrix bytes.",
+      "versions": [
+        "1.0"
+      ],
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "operations": [
+        {
+          "method": "GET",
+          "route": "/brapi/v3/variantmatrices",
+          "operationId": "genxListVariantMatrixReferences"
+        },
+        {
+          "method": "POST",
+          "route": "/brapi/v3/variantmatrices",
+          "operationId": "genxRegisterVariantMatrixReference"
+        },
+        {
+          "method": "GET",
+          "route": "/brapi/v3/variantmatrices/{matrixDbId}",
+          "operationId": "genxGetVariantMatrixReference"
+        }
+      ]
+    },
+    {
+      "name": "fairPackages",
+      "kind": "endpoint-family",
+      "meaning": "Register, list, and retrieve FAIR package metadata.",
+      "boundary": "Metadata registration is not payload transfer, DOI minting, or access-approval workflow.",
+      "versions": [
+        "1.0"
+      ],
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "operations": [
+        {
+          "method": "GET",
+          "route": "/brapi/v3/fair-packages",
+          "operationId": "genxListFairPackageMetadata"
+        },
+        {
+          "method": "POST",
+          "route": "/brapi/v3/fair-packages",
+          "operationId": "genxRegisterFairPackage"
+        },
+        {
+          "method": "GET",
+          "route": "/brapi/v3/fair-packages/{packageDbId}",
+          "operationId": "genxGetFairPackageMetadata"
+        }
+      ]
+    },
+    {
+      "name": "telemetry",
+      "kind": "endpoint-family",
+      "meaning": "Append device/sensor points and query points or aggregates.",
+      "boundary": "Not automatically a BrAPI Observation; scientific observation mapping requires a separate contract.",
+      "versions": [
+        "1.0"
+      ],
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "operations": [
+        {
+          "method": "GET",
+          "route": "/brapi/v3/telemetry",
+          "operationId": "genxQueryTelemetrySamplesOrAggregates"
+        },
+        {
+          "method": "POST",
+          "route": "/brapi/v3/telemetry",
+          "operationId": "genxAppendTelemetryBatch"
+        }
+      ]
+    }
+  ],
+  "jobTypePolicy": "In this experimental profile, only the exact tokens in jobs.jobTypes are declared supported. The list must match the runtime's accepted job types. If an older server omits jobTypes, clients must not infer support; the compatibility and requiredness rule remains under D-23 review."
+}

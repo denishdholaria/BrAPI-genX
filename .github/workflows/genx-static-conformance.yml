@@ -6,6 +6,11 @@ on:
       - 'Specification/BrAPI-GenX/**'
       - 'Scripts/checkGenXConformance.py'
       - 'Scripts/test_endpoint_identity.py'
+      - 'Scripts/test_capability_negotiation.py'
+      - 'Scripts/test_job_idempotency.py'
+      - 'Scripts/test_digest_vectors.py'
+      - 'Scripts/test_digest_vector_mutations.py'
+      - 'Scripts/digest-conformance/**'
       - 'Scripts/genx_test_server.py'
       - '.github/workflows/genx-static-conformance.yml'
   push:
@@ -13,6 +18,11 @@ on:
       - 'Specification/BrAPI-GenX/**'
       - 'Scripts/checkGenXConformance.py'
       - 'Scripts/test_endpoint_identity.py'
+      - 'Scripts/test_capability_negotiation.py'
+      - 'Scripts/test_job_idempotency.py'
+      - 'Scripts/test_digest_vectors.py'
+      - 'Scripts/test_digest_vector_mutations.py'
+      - 'Scripts/digest-conformance/**'
       - 'Scripts/genx_test_server.py'
       - '.github/workflows/genx-static-conformance.yml'
   workflow_dispatch:
@@ -34,10 +44,28 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install static-check dependency
-        run: python -m pip install 'PyYAML==6.0.2'
+      - name: Install conformance dependencies
+        run: python -m pip install 'PyYAML==6.0.2' 'rfc8785==0.1.4'
       - name: Run endpoint-identity mutation tests
         run: python Scripts/test_endpoint_identity.py
+      - name: Run capability-negotiation mutation tests
+        run: python Scripts/test_capability_negotiation.py
+      - name: Run job idempotency concurrency tests
+        run: python Scripts/test_job_idempotency.py
+      - name: Run Python digest golden vectors
+        run: python Scripts/test_digest_vectors.py
+      - name: Set up Bun for independent JavaScript implementation
+        uses: oven-sh/setup-bun@v2
+      - name: Install TypeScript digest test dependency
+        run: |
+          cd Scripts/digest-conformance
+          bun install
+      - name: Run digest corpus mutation tests in both runtimes
+        run: python Scripts/test_digest_vector_mutations.py
+      - name: Run TypeScript digest golden vectors
+        run: |
+          cd Scripts/digest-conformance
+          bun run test
       - name: Run static GenX conformance probes
         run: python Scripts/checkGenXConformance.py
 

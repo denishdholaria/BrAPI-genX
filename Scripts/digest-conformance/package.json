@@ -1,0 +1,11 @@
+{
+  "name": "brapi-genx-digest-conformance",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "bun test-digest-vectors.ts"
+  },
+  "devDependencies": {
+    "canonicalize": "5.1.0"
+  }
+}

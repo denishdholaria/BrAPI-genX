@@ -63,8 +63,11 @@ digest format (S-04), date-time format (S-05), replay/conflict fixture
 relations (S-06), capability advertisement grounding (S-07), V2.1 fallback
 shape (S-08), namespaced term identifiers (S-10), decimal-string quantities
 (S-12), model artifact shape (S-13, S-14), matrix reference shape (S-15, S-16),
-package envelope shape (S-17, S-18), telemetry point shape (S-19, S-20), and
-endpoint identity, operationId uniqueness, and registered overlap checks (S-21).
+package envelope shape (S-17, S-18), telemetry point shape (S-19, S-20), endpoint
+identity/operationId uniqueness/registered overlaps (S-21), and capability-to-operation
+mapping plus advertised job-type validation against the experimental ServerInfoV3
+registry (S-22). S-22 is a review guardrail for this proposal profile, not an accepted
+BrAPI requirement.
 
 Live: idempotent replay (L-01), key conflict (L-02), terminal-cancel rejection
 (L-03), unknown job type (L-04), expiry (L-05), V2.1-only fallback negotiation
@@ -75,10 +78,40 @@ rejection (L-15), matrix replay (L-16), matrix conflict (L-17), package
 replay (L-18), package conflict (L-19), embargo denial (L-20), telemetry
 replay (L-21), telemetry conflict (L-22), aggregate recomputation (L-23),
 concurrent-submit single effect (L-24), list envelopes (L-25), windowed
-buckets (L-26), deprecated warning (L-27), pagination slice (L-28). Older static checks have historical mutation evidence in RESULTS.md run 8. The endpoint-identity guardrail has dedicated synthetic negative tests in `Scripts/test_endpoint_identity.py`.
+buckets (L-26), deprecated warning (L-27), pagination slice (L-28), and live
+capability-advertisement/route-registry agreement including supported job types (L-29). Older static checks have historical mutation evidence in RESULTS.md run 8. The endpoint-identity guardrail has dedicated synthetic negative tests in `Scripts/test_endpoint_identity.py`.
 
 ## Status contract
 
 Each probe reports `PASS`, `FAIL`, or `SKIP` (live without `--server` only).
 Any `FAIL` exits non-zero. No probe may depend on another probe's side
 effects; live probes that create server state use fresh idempotency keys.
+
+
+## ServerInfoV3 capability audit
+
+The experimental [capability registry](./capability-registry.json) maps every example capability to full GenX route templates, HTTP methods, and operation IDs. See [CAPABILITY-NEGOTIATION.md](../ServerInfoV3/CAPABILITY-NEGOTIATION.md) for the findings and review questions. Run the dedicated mutation suite with:
+
+```shell
+python Scripts/test_capability_negotiation.py
+```
+
+The suite proves that duplicate/unregistered capability names, duplicate or changed versions, false method summaries, stale routes/operation IDs, missing maps, wrong/missing/duplicate/malformed job type lists, job-type/runtime drift, malformed scope lists, duplicate auth profiles, and duplicated operation references fail closed. S-22 validates the checked-in fixture against the registry/OpenAPI files; L-29 checks the in-memory reference server’s live advertisement against the same registry. Neither probe treats scopes or auth-profile names as proof of access-control enforcement.
+
+D-21 (operation mapping and version-token semantics), D-22 (scope/auth-profile semantics), and D-23 (job-type advertisement and compatibility) remain deferred. In particular, the reference server accepts and ignores bearer tokens; it is an in-memory conformance prototype, not a secured deployment.
+
+## Digest interoperability candidate (experimental)
+
+The shared vector corpus at [digest-vectors.json](./digest-vectors.json) distinguishes structured-JSON canonicalization from exact-byte integrity digests. Run both independent candidate implementations with:
+
+```shell
+python -m pip install 'rfc8785==0.1.4'
+python Scripts/test_digest_vectors.py
+cd Scripts/digest-conformance && bun install && bun run test
+```
+
+The corpus includes Unicode, UTF-16 property ordering, number formatting, duplicate-key rejection, exact-byte hashes, and known disagreement between the two existing reference-server legacy serializers. RFC 8785 (JSON Canonicalization Scheme) is a candidate under test, not an accepted BrAPI standard; RFC-001 decision D-02 remains open. See [DIGEST-INTEROPERABILITY.md](./DIGEST-INTEROPERABILITY.md). The current reference servers have **not** been migrated by this change.
+
+The [digest-scope inventory](./DIGEST-SCOPE-INVENTORY.md) records the current per-field preimage ambiguity. Passing the candidate vectors is not sufficient to resolve D-02: field meaning, exact input scope, and migration/versioning must also be specified.
+
+The [digest decision brief](./DIGEST-DECISION-BRIEF.md) compares the legacy serializer, JCS candidate, a custom canonicalizer, and exact-byte hashing, and identifies the field-level decisions still requiring implementer/community review.
