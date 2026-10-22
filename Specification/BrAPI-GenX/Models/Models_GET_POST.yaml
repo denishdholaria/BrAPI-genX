@@ -6,6 +6,27 @@ paths:
   /models:
     get:
       operationId: genxListModelVersions
+      x-brapi-den:
+        catalogId: "brapi-den.genx.v3.models.list"
+        classification:
+          primaryDomain: "D7"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List registered model artifact versions and their lifecycle states, including active, deprecated, and revoked."
+        canBeUsedFor:
+          - "Discover registered model identities and versions."
+          - "Select a model version subject to lifecycle status and advertised inference support."
+        mustNotBeUsedFor:
+          - "Running inference or training a model."
+          - "Assuming registration means scientific validation, approval, or endorsement."
+          - "Assuming metrics from different models are directly comparable without defined metric semantics."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterModelVersion"
+          - "genxGetModelVersion"
+          - "genxSubmitAsyncJob"
+        decisions: ["RFC-004", "D-09"]
+        proposalStatus: "draft-non-normative"
       summary: List registered model versions
       description: Get a paged list of model versions across authorities. Filters combine with AND.
       parameters:
@@ -41,6 +62,28 @@ paths:
       - Models
     post:
       operationId: genxRegisterModelVersion
+      x-brapi-den:
+        catalogId: "brapi-den.genx.v3.models.register-version"
+        classification:
+          primaryDomain: "D7"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Register a model artifact version with a namespaced identity, immutable artifact digest, training provenance, metrics, framework, and lifecycle state."
+        canBeUsedFor:
+          - "Publish model metadata and integrity references."
+          - "Create a new version under an existing model identity."
+          - "Record deprecation or revocation status as governed elsewhere."
+        mustNotBeUsedFor:
+          - "Training a model or executing inference."
+          - "Assuming the endpoint uploads model bytes; artifact transport is a separate unresolved contract."
+          - "Treating the revoked flag as an approval or governance workflow."
+        sideEffects: "Creates a model identity or appends a new immutable version when accepted."
+        idempotency: "Same model identity/version and identical body replays; conflicting content for the same version is rejected."
+        semanticNeighbors:
+          - "genxListModelVersions"
+          - "genxGetModelVersion"
+          - "genxSubmitAsyncJob"
+        decisions: ["RFC-004", "D-09", "D-10"]
+        proposalStatus: "draft-non-normative"
       summary: Register one model version
       description: |-
         Unknown modelDbId creates; known id with a new version appends;
