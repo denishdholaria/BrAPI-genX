@@ -8886,11 +8886,1463 @@
       "implementationStatus": "not-verified",
       "semanticNeighborIds": [],
       "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.phenotyping.post.delete.images",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/delete/images",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostDeleteImages",
+      "operationName": "Submit a delete request for `Images`",
+      "brapiModule": "BrAPI-Phenotyping",
+      "brapiTag": "Images",
+      "classification": {
+        "primaryDomain": "D4",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Phenotyping module; resource-specific exceptions may require review.",
+        "officialModule": "BrAPI-Phenotyping"
+      },
+      "purpose": "Submit a delete request for `Images`",
+      "sourceDescription": "Submit a delete request for `Images`",
+      "canBeUsedFor": [
+        "Submit a delete request for `Images`",
+        "Submit a delete request for `Images`"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not treat as read/create/general update; this is a deletion command.",
+        "Deletion scope and retry behavior must follow the operation-specific contract."
+      ],
+      "sideEffects": "Destructive deletion command; exact scope follows the request contract.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "ImageSearchRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "ImageDeleteResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Phenotyping/Images/Delete_Images_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.phenotyping.get.images",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/images",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetImages",
+      "operationName": "Get the image metadata summaries",
+      "brapiModule": "BrAPI-Phenotyping",
+      "brapiTag": "Images",
+      "classification": {
+        "primaryDomain": "D4",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Phenotyping module; resource-specific exceptions may require review.",
+        "officialModule": "BrAPI-Phenotyping"
+      },
+      "purpose": "Get the image metadata summaries",
+      "sourceDescription": "Get filtered set of image metadata\n\nImplementation Notes\n\n- ''imageURL'' should be a complete URL describing the location of the image. There is no BrAPI call for \nretrieving the image content, so it could be on a different path, or a different host.\n\n- ''descriptiveOntologyTerm'' can be thought of as Tags for the image. These could be simple descriptive \nwords, or ontology references, or full ontology URI''s.",
+      "canBeUsedFor": [
+        "Get the image metadata summaries",
+        "Get filtered set of image metadata\n\nImplementation Notes\n\n- ''imageURL'' should be a complete URL describing the location of the image. There is no BrAPI call for \nretrieving the image content, so it could be on a different path, or a different host.\n\n- ''descriptiveOntologyTerm'' can be thought of as Tags for the image. These could be simple descriptive \nwords, or ontology references, or full ontology URI''s."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "ImageListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Phenotyping/Images/Images_GET_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.phenotyping.post.images",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/images",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostImages",
+      "operationName": "Create new image metadata records",
+      "brapiModule": "BrAPI-Phenotyping",
+      "brapiTag": "Images",
+      "classification": {
+        "primaryDomain": "D4",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Phenotyping module; resource-specific exceptions may require review.",
+        "officialModule": "BrAPI-Phenotyping"
+      },
+      "purpose": "Create new image metadata records",
+      "sourceDescription": "Create new image metadata records\n\nImplementation Notes\n\n- This endpoint should be implemented with 'PUT /images/{imageDbId}/imagecontent' for full image upload capability\n\n- ''imageURL'' should be a complete URL describing the location of the image. There is no BrAPI call for retrieving \nthe image content, so it could be on a different path, or a different host.\n\n- ''descriptiveOntologyTerm'' can be thought of as Tags for the image. These could be simple descriptive words, or \nontology references, or full ontology URI's.\n\n- The '/images' calls support a GeoJSON object structure for describing their location. The BrAPI spec for GeoJSON \nonly supports two of the possible geometries; Points and Polygons.\n\n- With most images, the Point geometry should be used, and it should indicate the longitude and latitude of the camera.\n\n- For top down images (ie from drones, cranes, etc), the Point geometry may be used to indicate the longitude and \nlatitude of the centroid of the image content, and the Polygon geometry may be used to indicate the border of the \nimage content.\n\nAn example use case is available on the BrAPI Wiki -> https://wiki.brapi.org/index.php/Image_Upload",
+      "canBeUsedFor": [
+        "Create new image metadata records",
+        "Create new image metadata records\n\nImplementation Notes\n\n- This endpoint should be implemented with 'PUT /images/{imageDbId}/imagecontent' for full image upload capability\n\n- ''imageURL'' should be a complete URL describing the location of the image. There is no BrAPI call for retrieving \nthe image content, so it could be on a different path, or a different host.\n\n- ''descriptiveOntologyTerm'' can be thought of as Tags for the image. These could be simple descriptive words, or \nontology references, or full ontology URI's.\n\n- The '/images' calls support a GeoJSON object structure for describing their location. The BrAPI spec for GeoJSON \nonly supports two of the possible geometries; Points and Polygons.\n\n- With most images, the Point geometry should be used, and it should indicate the longitude and latitude of the camera.\n\n- For top down images (ie from drones, cranes, etc), the Point geometry may be used to indicate the longitude and \nlatitude of the centroid of the image content, and the Polygon geometry may be used to indicate the border of the \nimage content.\n\nAn example use case is available on the BrAPI Wiki -> https://wiki.brapi.org/index.php/Image_Upload"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get operation.",
+        "Do not assume retries are idempotent unless explicitly guaranteed."
+      ],
+      "sideEffects": "State-changing submission or creation as specified; schemas determine exact effect.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "ImageNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "ImageListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Phenotyping/Images/Images_GET_POST.yaml",
+        "inventoryLine": 69,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.phenotyping.get.images.by-imagedbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/images/{imageDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetImagesByImageDbId",
+      "operationName": "Get the an image metadata summary",
+      "brapiModule": "BrAPI-Phenotyping",
+      "brapiTag": "Images",
+      "classification": {
+        "primaryDomain": "D4",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Phenotyping module; resource-specific exceptions may require review.",
+        "officialModule": "BrAPI-Phenotyping"
+      },
+      "purpose": "Get the an image metadata summary",
+      "sourceDescription": "Get one image metadata object\n\nImplementation Notes\n\n- ''imageURL'' should be a complete URL describing the location of the image. There is no BrAPI call for \nretrieving the image content, so it could be on a different path, or a different host.\n\n- ''descriptiveOntologyTerm'' can be thought of as Tags for the image. These could be simple descriptive \nwords, or ontology references, or full ontology URI''s.",
+      "canBeUsedFor": [
+        "Get the an image metadata summary",
+        "Get one image metadata object\n\nImplementation Notes\n\n- ''imageURL'' should be a complete URL describing the location of the image. There is no BrAPI call for \nretrieving the image content, so it could be on a different path, or a different host.\n\n- ''descriptiveOntologyTerm'' can be thought of as Tags for the image. These could be simple descriptive \nwords, or ontology references, or full ontology URI''s."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "ImageSingleResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Phenotyping/Images/Images_ImageDbId_GET_PUT.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.phenotyping.put.images.by-imagedbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "PUT",
+      "path": "/images/{imageDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PutImagesByImageDbId",
+      "operationName": "Update an existing image metadata record",
+      "brapiModule": "BrAPI-Phenotyping",
+      "brapiTag": "Images",
+      "classification": {
+        "primaryDomain": "D4",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Phenotyping module; resource-specific exceptions may require review.",
+        "officialModule": "BrAPI-Phenotyping"
+      },
+      "purpose": "Update an existing image metadata record",
+      "sourceDescription": "Update an existing image metadata record\n\nImplementation Notes\n\n- This endpoint should be implemented with 'PUT /images/{imageDbId}/imagecontent' for full image update capability\n\n- A server may choose to modify the image metadata object based on the actually image which has been uploaded. \n\n- Image data may be stored in a database or file system. Servers should generate and provide the \"imageURL\" as an \nabsolute path for retrieving the image, wherever it happens to live. \n\n- 'descriptiveOntologyTerm' can be thought of as Tags for the image. These could be simple descriptive words, or \nontology references, or full ontology URI's. \n\n- The '/images' calls support a GeoJSON object structure for describing their location. The BrAPI spec for GeoJSON \nonly supports two of the possible geometries; Points and Polygons. \n\n- With most images, the Point geometry should be used, and it should indicate the longitude and latitude of the camera. \n\n- For top down images (ie from drones, cranes, etc), the Point geometry may be used to indicate the longitude and \nlatitude of the centroid of the image content, and the Polygon geometry may be used to indicate the border of the \nimage content.\n\nAn example use case is available on the BrAPI Wiki -> https://wiki.brapi.org/index.php/Image_Upload",
+      "canBeUsedFor": [
+        "Update an existing image metadata record",
+        "Update an existing image metadata record\n\nImplementation Notes\n\n- This endpoint should be implemented with 'PUT /images/{imageDbId}/imagecontent' for full image update capability\n\n- A server may choose to modify the image metadata object based on the actually image which has been uploaded. \n\n- Image data may be stored in a database or file system. Servers should generate and provide the \"imageURL\" as an \nabsolute path for retrieving the image, wherever it happens to live. \n\n- 'descriptiveOntologyTerm' can be thought of as Tags for the image. These could be simple descriptive words, or \nontology references, or full ontology URI's. \n\n- The '/images' calls support a GeoJSON object structure for describing their location. The BrAPI spec for GeoJSON \nonly supports two of the possible geometries; Points and Polygons. \n\n- With most images, the Point geometry should be used, and it should indicate the longitude and latitude of the camera. \n\n- For top down images (ie from drones, cranes, etc), the Point geometry may be used to indicate the longitude and \nlatitude of the centroid of the image content, and the Polygon geometry may be used to indicate the border of the \nimage content.\n\nAn example use case is available on the BrAPI Wiki -> https://wiki.brapi.org/index.php/Image_Upload"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get or generic deletion operation.",
+        "Do not infer merge or concurrency semantics unless specified."
+      ],
+      "sideEffects": "Updates or replaces addressed resource(s) as specified.",
+      "idempotency": "HTTP PUT has idempotent method semantics; exact business effects remain defined by the operation contract.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "ImageNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "ImageSingleResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Phenotyping/Images/Images_ImageDbId_GET_PUT.yaml",
+        "inventoryLine": 40,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.phenotyping.put.images.by-imagedbid.imagecontent",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "PUT",
+      "path": "/images/{imageDbId}/imagecontent",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PutImagesByImageDbIdImagecontent",
+      "operationName": "Attach an image binary file to an existing image metadata record",
+      "brapiModule": "BrAPI-Phenotyping",
+      "brapiTag": "Images",
+      "classification": {
+        "primaryDomain": "D4",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Phenotyping module; resource-specific exceptions may require review.",
+        "officialModule": "BrAPI-Phenotyping"
+      },
+      "purpose": "Attach an image binary file to an existing image metadata record",
+      "sourceDescription": "This endpoint is used to attach an image binary file to an existing image metadata record. All of the other Images endpoints \ndeal with the JSON for image metadata, but 'PUT /images/{imageDbId}/imagecontent' allows you to send any binary file with a Content \nType (MIME) of image/*. When the real image is uploaded, the server may choose to update some of the metadata to reflect the \nreality of the image that was uploaded, and should respond with the updated JSON.\n\nImplementation Notes\n\n- This endpoint should be implemented with 'POST /images' for full image upload capability\n\n- This endpoint should be implemented with 'PUT /images/{imageDbId}' for full image update capability\n\n- A server may choose to modify the image metadata object based on the actually image which has been uploaded by this endpoint. \n\n- Image data may be stored in a database or file system. Servers should generate and provide the \"imageURL\" for retrieving the \n  image binary file. \n\nAn example use case is available on the BrAPI Wiki -> https://wiki.brapi.org/index.php/Image_Upload",
+      "canBeUsedFor": [
+        "Attach an image binary file to an existing image metadata record",
+        "This endpoint is used to attach an image binary file to an existing image metadata record. All of the other Images endpoints \ndeal with the JSON for image metadata, but 'PUT /images/{imageDbId}/imagecontent' allows you to send any binary file with a Content \nType (MIME) of image/*. When the real image is uploaded, the server may choose to update some of the metadata to reflect the \nreality of the image that was uploaded, and should respond with the updated JSON.\n\nImplementation Notes\n\n- This endpoint should be implemented with 'POST /images' for full image upload capability\n\n- This endpoint should be implemented with 'PUT /images/{imageDbId}' for full image update capability\n\n- A server may choose to modify the image metadata object based on the actually image which has been uploaded by this endpoint. \n\n- Image data may be stored in a database or file system. Servers should generate and provide the \"imageURL\" for retrieving the \n  image binary file. \n\nAn example use case is available on the BrAPI Wiki -> https://wiki.brapi.org/index.php/Image_Upload"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get or generic deletion operation.",
+        "Do not infer merge or concurrency semantics unless specified."
+      ],
+      "sideEffects": "Updates or replaces addressed resource(s) as specified.",
+      "idempotency": "HTTP PUT has idempotent method semantics; exact business effects remain defined by the operation contract.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "ImageSingleResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Phenotyping/Images/Images_ImageDbId_ImageContent_PUT.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.phenotyping.post.search.images",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/search/images",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostSearchImages",
+      "operationName": "Submit a search request for `XXEntitiesXX`",
+      "brapiModule": "BrAPI-Phenotyping",
+      "brapiTag": "Images",
+      "classification": {
+        "primaryDomain": "D4",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Phenotyping module; resource-specific exceptions may require review.",
+        "officialModule": "BrAPI-Phenotyping"
+      },
+      "purpose": "Submit a search request for `XXEntitiesXX`",
+      "sourceDescription": "Submit a search request for `XXEntitiesXX`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/XXEntitiesXX/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.\n<br/>\n<br/>\nImage Implementation Notes<br/>\n- `imageURL` should be a complete URL describing the location of the image. There is no BrAPI call for retrieving the image content, so it could be on a different path, or a different host.<br/>\n- `descriptiveOntologyTerm` can be thought of as Tags for the image. These could be simple descriptive words, or ontology references, or full ontology URI's.<br/>",
+      "canBeUsedFor": [
+        "Submit a search request for `XXEntitiesXX`",
+        "Submit a search request for `XXEntitiesXX`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/XXEntitiesXX/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.\n<br/>\n<br/>\nImage Implementation Notes<br/>\n- `imageURL` should be a complete URL describing the location of the image. There is no BrAPI call for retrieving the image content, so it could be on a different path, or a different host.<br/>\n- `descriptiveOntologyTerm` can be thought of as Tags for the image. These could be simple descriptive words, or ontology references, or full ontology URI's.<br/>"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not treat as create/update of searched domain resource; it submits a search request.",
+        "Search replay/deduplication is not asserted unless separately documented."
+      ],
+      "sideEffects": "Submits a search query; a search-results record may be created; domain-resource creation is not implied.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "SearchRequestParametersPaging",
+        "ImageSearchRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "202",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "ImageListResponse",
+        "202AcceptedSearchResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Phenotyping/Images/Search_Images_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.phenotyping.get.search.images.by-searchresultsdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/search/images/{searchResultsDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetSearchImagesBySearchResultsDbId",
+      "operationName": "Get the results of a `Images` search request",
+      "brapiModule": "BrAPI-Phenotyping",
+      "brapiTag": "Images",
+      "classification": {
+        "primaryDomain": "D4",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Phenotyping module; resource-specific exceptions may require review.",
+        "officialModule": "BrAPI-Phenotyping"
+      },
+      "purpose": "Get the results of a `Images` search request",
+      "sourceDescription": "Get the results of a `Images` search request <br/>\nClients should submit a search request using the corresponding `POST /search/images` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.\n<br/>\n<br/>\nImage Implementation Notes<br/>\n- `imageURL` should be a complete URL describing the location of the image. There is no BrAPI call for retrieving the image content, so it could be on a different path, or a different host.<br/>\n- `descriptiveOntologyTerm` can be thought of as Tags for the image. These could be simple descriptive words, or ontology references, or full ontology URI's.<br/>",
+      "canBeUsedFor": [
+        "Get the results of a `Images` search request",
+        "Get the results of a `Images` search request <br/>\nClients should submit a search request using the corresponding `POST /search/images` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.\n<br/>\n<br/>\nImage Implementation Notes<br/>\n- `imageURL` should be a complete URL describing the location of the image. There is no BrAPI call for retrieving the image content, so it could be on a different path, or a different host.<br/>\n- `descriptiveOntologyTerm` can be thought of as Tags for the image. These could be simple descriptive words, or ontology references, or full ontology URI's.<br/>"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to submit a new search; retrieves results for an existing search-results identifier."
+      ],
+      "sideEffects": "Reads previously submitted search results.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "202",
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "202AcceptedSearchResponse",
+        "ImageListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Phenotyping/Images/Search_Images_SearchResultsDbId_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.phenotyping.get.methods",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/methods",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetMethods",
+      "operationName": "Get the Methods",
+      "brapiModule": "BrAPI-Phenotyping",
+      "brapiTag": "Methods",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C4"
+        ],
+        "basis": "inferred-from-route",
+        "reason": "Scientific term definitions are shared semantics, not measured observations.",
+        "officialModule": "BrAPI-Phenotyping"
+      },
+      "purpose": "Get the Methods",
+      "sourceDescription": "Returns a list of Methods available on a server.\n\nAn Observation Variable has 3 critical parts; A Trait being observed, a Method for making the observation, and a Scale on which the observation can be measured and compared with other observations.",
+      "canBeUsedFor": [
+        "Get the Methods",
+        "Returns a list of Methods available on a server.\n\nAn Observation Variable has 3 critical parts; A Trait being observed, a Method for making the observation, and a Scale on which the observation can be measured and compared with other observations."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "MethodListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Phenotyping/Methods/Methods_GET_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.phenotyping.post.methods",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/methods",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostMethods",
+      "operationName": "Add new Methods",
+      "brapiModule": "BrAPI-Phenotyping",
+      "brapiTag": "Methods",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C4"
+        ],
+        "basis": "inferred-from-route",
+        "reason": "Scientific term definitions are shared semantics, not measured observations.",
+        "officialModule": "BrAPI-Phenotyping"
+      },
+      "purpose": "Add new Methods",
+      "sourceDescription": "Create new method objects in the database",
+      "canBeUsedFor": [
+        "Add new Methods",
+        "Create new method objects in the database"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get operation.",
+        "Do not assume retries are idempotent unless explicitly guaranteed."
+      ],
+      "sideEffects": "State-changing submission or creation as specified; schemas determine exact effect.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "MethodNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "MethodListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Phenotyping/Methods/Methods_GET_POST.yaml",
+        "inventoryLine": 46,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.phenotyping.get.methods.by-methoddbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/methods/{methodDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetMethodsByMethodDbId",
+      "operationName": "Get the details for a specific Method",
+      "brapiModule": "BrAPI-Phenotyping",
+      "brapiTag": "Methods",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C4"
+        ],
+        "basis": "inferred-from-route",
+        "reason": "Scientific term definitions are shared semantics, not measured observations.",
+        "officialModule": "BrAPI-Phenotyping"
+      },
+      "purpose": "Get the details for a specific Method",
+      "sourceDescription": "Retrieve details about a specific method\n\nAn Observation Variable has 3 critical parts; A Trait being observed, a Method for making the observation, and a Scale on which the observation can be measured and compared with other observations.",
+      "canBeUsedFor": [
+        "Get the details for a specific Method",
+        "Retrieve details about a specific method\n\nAn Observation Variable has 3 critical parts; A Trait being observed, a Method for making the observation, and a Scale on which the observation can be measured and compared with other observations."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "MethodSingleResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Phenotyping/Methods/Methods_MethodDbId_GET_PUT.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.phenotyping.put.methods.by-methoddbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "PUT",
+      "path": "/methods/{methodDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PutMethodsByMethodDbId",
+      "operationName": "Update an existing Method",
+      "brapiModule": "BrAPI-Phenotyping",
+      "brapiTag": "Methods",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C4"
+        ],
+        "basis": "inferred-from-route",
+        "reason": "Scientific term definitions are shared semantics, not measured observations.",
+        "officialModule": "BrAPI-Phenotyping"
+      },
+      "purpose": "Update an existing Method",
+      "sourceDescription": "Update the details of an existing method",
+      "canBeUsedFor": [
+        "Update an existing Method",
+        "Update the details of an existing method"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get or generic deletion operation.",
+        "Do not infer merge or concurrency semantics unless specified."
+      ],
+      "sideEffects": "Updates or replaces addressed resource(s) as specified.",
+      "idempotency": "HTTP PUT has idempotent method semantics; exact business effects remain defined by the operation contract.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "MethodNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "MethodSingleResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Phenotyping/Methods/Methods_MethodDbId_GET_PUT.yaml",
+        "inventoryLine": 34,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.phenotyping.get.observationlevels",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/observationlevels",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetObservationlevels",
+      "operationName": "Get the Observation Levels",
+      "brapiModule": "BrAPI-Phenotyping",
+      "brapiTag": "Observation Units",
+      "classification": {
+        "primaryDomain": "D4",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Phenotyping module; resource-specific exceptions may require review.",
+        "officialModule": "BrAPI-Phenotyping"
+      },
+      "purpose": "Get the Observation Levels",
+      "sourceDescription": "Call to retrieve the list of supported observation levels. \n\nObservation levels indicate the granularity level at which the measurements are taken. `levelName` defines the level, `levelOrder` defines where that level exists in the hierarchy of levels. `levelOrder`s lower numbers are at the top of the hierarchy (ie field > 0) and higher numbers are at the bottom of the hierarchy (ie plant > 6). \n\nThe values are used to supply the `observationLevel` parameter in the observation unit details call.\n      \nFor more information on Observation Levels, please review the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Observation_Levels\">Observation Levels documentation</a>.",
+      "canBeUsedFor": [
+        "Get the Observation Levels",
+        "Call to retrieve the list of supported observation levels. \n\nObservation levels indicate the granularity level at which the measurements are taken. `levelName` defines the level, `levelOrder` defines where that level exists in the hierarchy of levels. `levelOrder`s lower numbers are at the top of the hierarchy (ie field > 0) and higher numbers are at the bottom of the hierarchy (ie plant > 6). \n\nThe values are used to supply the `observationLevel` parameter in the observation unit details call.\n      \nFor more information on Observation Levels, please review the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Observation_Levels\">Observation Levels documentation</a>."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Phenotyping/ObservationUnits/ObservationLevels_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.phenotyping.get.observationunits",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/observationunits",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetObservationunits",
+      "operationName": "Get a filtered set of Observation Units",
+      "brapiModule": "BrAPI-Phenotyping",
+      "brapiTag": "Observation Units",
+      "classification": {
+        "primaryDomain": "D4",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Phenotyping module; resource-specific exceptions may require review.",
+        "officialModule": "BrAPI-Phenotyping"
+      },
+      "purpose": "Get a filtered set of Observation Units",
+      "sourceDescription": "Get a filtered set of Observation Units",
+      "canBeUsedFor": [
+        "Get a filtered set of Observation Units",
+        "Get a filtered set of Observation Units"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "ObservationUnitListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Phenotyping/ObservationUnits/ObservationUnits_GET_POST_PUT.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.phenotyping.post.observationunits",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/observationunits",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostObservationunits",
+      "operationName": "Add new Observation Units",
+      "brapiModule": "BrAPI-Phenotyping",
+      "brapiTag": "Observation Units",
+      "classification": {
+        "primaryDomain": "D4",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Phenotyping module; resource-specific exceptions may require review.",
+        "officialModule": "BrAPI-Phenotyping"
+      },
+      "purpose": "Add new Observation Units",
+      "sourceDescription": "Add new Observation Units",
+      "canBeUsedFor": [
+        "Add new Observation Units",
+        "Add new Observation Units"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get operation.",
+        "Do not assume retries are idempotent unless explicitly guaranteed."
+      ],
+      "sideEffects": "State-changing submission or creation as specified; schemas determine exact effect.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "ObservationUnitNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "ObservationUnitListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Phenotyping/ObservationUnits/ObservationUnits_GET_POST_PUT.yaml",
+        "inventoryLine": 73,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.phenotyping.put.observationunits",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "PUT",
+      "path": "/observationunits",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PutObservationunits",
+      "operationName": "Update a set of Observation Units",
+      "brapiModule": "BrAPI-Phenotyping",
+      "brapiTag": "Observation Units",
+      "classification": {
+        "primaryDomain": "D4",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Phenotyping module; resource-specific exceptions may require review.",
+        "officialModule": "BrAPI-Phenotyping"
+      },
+      "purpose": "Update a set of Observation Units",
+      "sourceDescription": "Update a set of Observation Units \n\nNote - In strictly typed languages, this structure can be represented as a Map or Dictionary of objects and parsed directly to JSON.",
+      "canBeUsedFor": [
+        "Update a set of Observation Units",
+        "Update a set of Observation Units \n\nNote - In strictly typed languages, this structure can be represented as a Map or Dictionary of objects and parsed directly to JSON."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get or generic deletion operation.",
+        "Do not infer merge or concurrency semantics unless specified."
+      ],
+      "sideEffects": "Updates or replaces addressed resource(s) as specified.",
+      "idempotency": "HTTP PUT has idempotent method semantics; exact business effects remain defined by the operation contract.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "ObservationUnitNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "ObservationUnitListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Phenotyping/ObservationUnits/ObservationUnits_GET_POST_PUT.yaml",
+        "inventoryLine": 96,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.phenotyping.get.observationunits.by-observationunitdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/observationunits/{observationUnitDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetObservationunitsByObservationUnitDbId",
+      "operationName": "Get the details of a specific Observation Unit",
+      "brapiModule": "BrAPI-Phenotyping",
+      "brapiTag": "Observation Units",
+      "classification": {
+        "primaryDomain": "D4",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Phenotyping module; resource-specific exceptions may require review.",
+        "officialModule": "BrAPI-Phenotyping"
+      },
+      "purpose": "Get the details of a specific Observation Unit",
+      "sourceDescription": "Get the details of a specific Observation Unit",
+      "canBeUsedFor": [
+        "Get the details of a specific Observation Unit",
+        "Get the details of a specific Observation Unit"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "ObservationUnitSingleResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Phenotyping/ObservationUnits/ObservationUnits_ObservationUnitDbId_GET_PUT.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.phenotyping.put.observationunits.by-observationunitdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "PUT",
+      "path": "/observationunits/{observationUnitDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PutObservationunitsByObservationUnitDbId",
+      "operationName": "Update an existing Observation Units",
+      "brapiModule": "BrAPI-Phenotyping",
+      "brapiTag": "Observation Units",
+      "classification": {
+        "primaryDomain": "D4",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Phenotyping module; resource-specific exceptions may require review.",
+        "officialModule": "BrAPI-Phenotyping"
+      },
+      "purpose": "Update an existing Observation Units",
+      "sourceDescription": "Update an existing Observation Units",
+      "canBeUsedFor": [
+        "Update an existing Observation Units",
+        "Update an existing Observation Units"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get or generic deletion operation.",
+        "Do not infer merge or concurrency semantics unless specified."
+      ],
+      "sideEffects": "Updates or replaces addressed resource(s) as specified.",
+      "idempotency": "HTTP PUT has idempotent method semantics; exact business effects remain defined by the operation contract.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "ObservationUnitNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "ObservationUnitSingleResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Phenotyping/ObservationUnits/ObservationUnits_ObservationUnitDbId_GET_PUT.yaml",
+        "inventoryLine": 31,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.phenotyping.get.observationunits.table",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/observationunits/table",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetObservationunitsTable",
+      "operationName": "Get a list of Observations in a table format",
+      "brapiModule": "BrAPI-Phenotyping",
+      "brapiTag": "Observation Units",
+      "classification": {
+        "primaryDomain": "D4",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Phenotyping module; resource-specific exceptions may require review.",
+        "officialModule": "BrAPI-Phenotyping"
+      },
+      "purpose": "Get a list of Observations in a table format",
+      "sourceDescription": "<p>This service is designed to retrieve a table for observation values as a matrix of Observation Units and Observation Variables.</p>\n<p>The table may be represented by JSON, CSV, or TSV. The \"Accept\" HTTP header is used for the client to request different return formats. \nBy default, if the \"Accept\" header is not included in the request, the server should return JSON as described below.</p>\n<p>The table is REQUIRED to have the following columns</p>\n<ul>\n  <li>observationUnitDbId - Each row is related to one Observation Unit</li>\n  <li>At least one column with an observationVariableDbId</li>\n</ul>\n<p>The table may have any or all of the following OPTIONAL columns. Included columns are decided by the server developer</p>\n<ul>\n  <li>observationUnitName</li>\n  <li>studyDbId</li>\n  <li>studyName</li>\n  <li>germplasmDbId</li>\n  <li>germplasmName</li>\n  <li>positionCoordinateX</li>\n  <li>positionCoordinateY</li>\n  <li>year</li>\n</ul>\n<p>The table also may have any number of Observation Unit Hierarchy Level columns. For example:</p>\n<ul>\n  <li>field</li>\n  <li>plot</li>\n  <li>sub-plot</li>\n  <li>plant</li>\n  <li>pot</li>\n  <li>block</li>\n  <li>entry</li>\n  <li>rep</li>\n</ul>\n<p>The JSON representation provides a pair of extra arrays for defining the headers of the table. \nThe first array \"headerRow\" will always contain \"observationUnitDbId\" and any or all of the OPTIONAL column header names. \nThe second array \"observationVariables\" contains the names and DbIds for the Observation Variables represented in the table. \nBy appending the two arrays, you can construct the complete header row of the table. </p>\n<p>For CSV and TSV representations of the table, an extra header row is needed to describe both the Observation Variable DbId and the Observation Variable Name for each data column. \nSee the example responses below</p>",
+      "canBeUsedFor": [
+        "Get a list of Observations in a table format",
+        "<p>This service is designed to retrieve a table for observation values as a matrix of Observation Units and Observation Variables.</p>\n<p>The table may be represented by JSON, CSV, or TSV. The \"Accept\" HTTP header is used for the client to request different return formats. \nBy default, if the \"Accept\" header is not included in the request, the server should return JSON as described below.</p>\n<p>The table is REQUIRED to have the following columns</p>\n<ul>\n  <li>observationUnitDbId - Each row is related to one Observation Unit</li>\n  <li>At least one column with an observationVariableDbId</li>\n</ul>\n<p>The table may have any or all of the following OPTIONAL columns. Included columns are decided by the server developer</p>\n<ul>\n  <li>observationUnitName</li>\n  <li>studyDbId</li>\n  <li>studyName</li>\n  <li>germplasmDbId</li>\n  <li>germplasmName</li>\n  <li>positionCoordinateX</li>\n  <li>positionCoordinateY</li>\n  <li>year</li>\n</ul>\n<p>The table also may have any number of Observation Unit Hierarchy Level columns. For example:</p>\n<ul>\n  <li>field</li>\n  <li>plot</li>\n  <li>sub-plot</li>\n  <li>plant</li>\n  <li>pot</li>\n  <li>block</li>\n  <li>entry</li>\n  <li>rep</li>\n</ul>\n<p>The JSON representation provides a pair of extra arrays for defining the headers of the table. \nThe first array \"headerRow\" will always contain \"observationUnitDbId\" and any or all of the OPTIONAL column header names. \nThe second array \"observationVariables\" contains the names and DbIds for the Observation Variables represented in the table. \nBy appending the two arrays, you can construct the complete header row of the table. </p>\n<p>For CSV and TSV representations of the table, an extra header row is needed to describe both the Observation Variable DbId and the Observation Variable Name for each data column. \nSee the example responses below</p>"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "ObservationUnitTableResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Phenotyping/ObservationUnits/ObservationUnits_Table_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.phenotyping.post.search.observationunits",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/search/observationunits",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostSearchObservationunits",
+      "operationName": "Submit a search request for `ObservationUnits`",
+      "brapiModule": "BrAPI-Phenotyping",
+      "brapiTag": "Observation Units",
+      "classification": {
+        "primaryDomain": "D4",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Phenotyping module; resource-specific exceptions may require review.",
+        "officialModule": "BrAPI-Phenotyping"
+      },
+      "purpose": "Submit a search request for `ObservationUnits`",
+      "sourceDescription": "Submit a search request for `ObservationUnits`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/observationunits/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Submit a search request for `ObservationUnits`",
+        "Submit a search request for `ObservationUnits`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/observationunits/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not treat as create/update of searched domain resource; it submits a search request.",
+        "Search replay/deduplication is not asserted unless separately documented."
+      ],
+      "sideEffects": "Submits a search query; a search-results record may be created; domain-resource creation is not implied.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "ObservationUnitSearchRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "202",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "ObservationUnitListResponse",
+        "202AcceptedSearchResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Phenotyping/ObservationUnits/Search_ObservationUnits_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.phenotyping.get.search.observationunits.by-searchresultsdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/search/observationunits/{searchResultsDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetSearchObservationunitsBySearchResultsDbId",
+      "operationName": "Get the results of a `ObservationUnits` search request",
+      "brapiModule": "BrAPI-Phenotyping",
+      "brapiTag": "Observation Units",
+      "classification": {
+        "primaryDomain": "D4",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Phenotyping module; resource-specific exceptions may require review.",
+        "officialModule": "BrAPI-Phenotyping"
+      },
+      "purpose": "Get the results of a `ObservationUnits` search request",
+      "sourceDescription": "Get the results of a `ObservationUnits` search request <br/>\nClients should submit a search request using the corresponding `POST /search/observationunits` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Get the results of a `ObservationUnits` search request",
+        "Get the results of a `ObservationUnits` search request <br/>\nClients should submit a search request using the corresponding `POST /search/observationunits` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to submit a new search; retrieves results for an existing search-results identifier."
+      ],
+      "sideEffects": "Reads previously submitted search results.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "202",
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "202AcceptedSearchResponse",
+        "ObservationUnitListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Phenotyping/ObservationUnits/Search_ObservationUnits_SearchResultsDbId_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.phenotyping.post.search.variables",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/search/variables",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostSearchVariables",
+      "operationName": "Submit a search request for Observation `Variables`",
+      "brapiModule": "BrAPI-Phenotyping",
+      "brapiTag": "Observation Variables",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C4"
+        ],
+        "basis": "inferred-from-route",
+        "reason": "Scientific term definitions are shared semantics, not measured observations.",
+        "officialModule": "BrAPI-Phenotyping"
+      },
+      "purpose": "Submit a search request for Observation `Variables`",
+      "sourceDescription": "Submit a search request for Observation `Variables`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/variables/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Submit a search request for Observation `Variables`",
+        "Submit a search request for Observation `Variables`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/variables/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not treat as create/update of searched domain resource; it submits a search request.",
+        "Search replay/deduplication is not asserted unless separately documented."
+      ],
+      "sideEffects": "Submits a search query; a search-results record may be created; domain-resource creation is not implied.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "ObservationVariableSearchRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "202",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "ObservationVariableListResponse",
+        "202AcceptedSearchResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Phenotyping/ObservationVariables/Search_Variables_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.phenotyping.get.search.variables.by-searchresultsdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/search/variables/{searchResultsDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetSearchVariablesBySearchResultsDbId",
+      "operationName": "Get the results of a Observation `variables` search request",
+      "brapiModule": "BrAPI-Phenotyping",
+      "brapiTag": "Observation Variables",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C4"
+        ],
+        "basis": "inferred-from-route",
+        "reason": "Scientific term definitions are shared semantics, not measured observations.",
+        "officialModule": "BrAPI-Phenotyping"
+      },
+      "purpose": "Get the results of a Observation `variables` search request",
+      "sourceDescription": "Get the results of a Observation `variables` search request <br/>\nClients should submit a search request using the corresponding `POST /search/variables` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Get the results of a Observation `variables` search request",
+        "Get the results of a Observation `variables` search request <br/>\nClients should submit a search request using the corresponding `POST /search/variables` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to submit a new search; retrieves results for an existing search-results identifier."
+      ],
+      "sideEffects": "Reads previously submitted search results.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "202",
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "202AcceptedSearchResponse",
+        "ObservationVariableListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Phenotyping/ObservationVariables/Search_Variables_SearchResultsDbId_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.phenotyping.get.variables",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/variables",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetVariables",
+      "operationName": "Get the Observation Variables",
+      "brapiModule": "BrAPI-Phenotyping",
+      "brapiTag": "Observation Variables",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C4"
+        ],
+        "basis": "inferred-from-route",
+        "reason": "Scientific term definitions are shared semantics, not measured observations.",
+        "officialModule": "BrAPI-Phenotyping"
+      },
+      "purpose": "Get the Observation Variables",
+      "sourceDescription": "Call to retrieve a list of observationVariables available in the system.",
+      "canBeUsedFor": [
+        "Get the Observation Variables",
+        "Call to retrieve a list of observationVariables available in the system."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "ObservationVariableListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Phenotyping/ObservationVariables/Variables_GET_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.phenotyping.post.variables",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/variables",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostVariables",
+      "operationName": "Add new Observation Variables",
+      "brapiModule": "BrAPI-Phenotyping",
+      "brapiTag": "Observation Variables",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C4"
+        ],
+        "basis": "inferred-from-route",
+        "reason": "Scientific term definitions are shared semantics, not measured observations.",
+        "officialModule": "BrAPI-Phenotyping"
+      },
+      "purpose": "Add new Observation Variables",
+      "sourceDescription": "Add new Observation Variables to the system.",
+      "canBeUsedFor": [
+        "Add new Observation Variables",
+        "Add new Observation Variables to the system."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get operation.",
+        "Do not assume retries are idempotent unless explicitly guaranteed."
+      ],
+      "sideEffects": "State-changing submission or creation as specified; schemas determine exact effect.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "ObservationVariableNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "ObservationVariableListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Phenotyping/ObservationVariables/Variables_GET_POST.yaml",
+        "inventoryLine": 66,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
-    "brapiV21EntriesAdded": 153,
+    "brapiV21EntriesAdded": 178,
     "genxEntriesAdded": 0,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
