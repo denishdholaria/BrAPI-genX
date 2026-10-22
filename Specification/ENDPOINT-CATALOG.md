@@ -154,6 +154,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Common Crop Names
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-scientific-vocabulary; Crosswalk note: Common crop names provide controlled cross-domain crop nomenclature; they do not represent an experimental or biological material record.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -209,6 +210,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Lists
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C5 — Data exchange, publication and access; Crosswalk basis: inferred-from-generic-resource-role; Crosswalk note: Generic lists group references selected by a client or workflow; the list itself has no single crop-science domain. Search lifecycle is a cross-cutting facet where applicable.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -240,6 +242,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Lists
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C5 — Data exchange, publication and access; Crosswalk basis: inferred-from-generic-resource-role; Crosswalk note: Generic lists group references selected by a client or workflow; the list itself has no single crop-science domain. Search lifecycle is a cross-cutting facet where applicable.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -271,6 +274,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Lists
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C5 — Data exchange, publication and access; Crosswalk basis: inferred-from-generic-resource-role; Crosswalk note: Generic lists group references selected by a client or workflow; the list itself has no single crop-science domain. Search lifecycle is a cross-cutting facet where applicable.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -302,6 +306,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Lists
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C5 — Data exchange, publication and access; Crosswalk basis: inferred-from-generic-resource-role; Crosswalk note: Generic lists group references selected by a client or workflow; the list itself has no single crop-science domain. Search lifecycle is a cross-cutting facet where applicable.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -333,6 +338,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Lists
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C5 — Data exchange, publication and access; Crosswalk basis: inferred-from-generic-resource-role; Crosswalk note: Generic lists group references selected by a client or workflow; the list itself has no single crop-science domain. Search lifecycle is a cross-cutting facet where applicable.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -364,6 +370,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Lists
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C5 — Data exchange, publication and access; Crosswalk basis: inferred-from-generic-resource-role; Crosswalk note: Generic lists group references selected by a client or workflow; the list itself has no single crop-science domain. Search lifecycle is a cross-cutting facet where applicable.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -397,6 +404,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Locations
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Locations commonly provide the spatial context for trials/studies; confirm in the domain crosswalk.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -432,6 +440,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Locations
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Locations commonly provide the spatial context for trials/studies; confirm in the domain crosswalk.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -467,6 +476,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Locations
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Locations commonly provide the spatial context for trials/studies; confirm in the domain crosswalk.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -502,6 +512,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Locations
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Locations commonly provide the spatial context for trials/studies; confirm in the domain crosswalk.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -537,6 +548,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** People
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery; Crosswalk basis: inferred-from-shared-identity-resource; Crosswalk note: People records can be referenced by multiple scientific and operational domains; classify the relationship's scientific domain on the domain record, not the shared person resource.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -568,6 +580,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** People
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery; Crosswalk basis: inferred-from-shared-identity-resource; Crosswalk note: People records can be referenced by multiple scientific and operational domains; classify the relationship's scientific domain on the domain record, not the shared person resource.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -599,6 +612,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** People
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery; Crosswalk basis: inferred-from-shared-identity-resource; Crosswalk note: People records can be referenced by multiple scientific and operational domains; classify the relationship's scientific domain on the domain record, not the shared person resource.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -630,6 +644,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** People
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery; Crosswalk basis: inferred-from-shared-identity-resource; Crosswalk note: People records can be referenced by multiple scientific and operational domains; classify the relationship's scientific domain on the domain record, not the shared person resource.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -661,6 +676,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Programs
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -692,6 +708,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Programs
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -723,6 +740,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Programs
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -754,6 +772,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Programs
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -785,6 +804,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Lists
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C5 — Data exchange, publication and access, C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-generic-resource-role; Crosswalk note: Generic lists group references selected by a client or workflow; the list itself has no single crop-science domain. Search lifecycle is a cross-cutting facet where applicable.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -826,6 +846,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Lists
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C5 — Data exchange, publication and access, C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-generic-resource-role; Crosswalk note: Generic lists group references selected by a client or workflow; the list itself has no single crop-science domain. Search lifecycle is a cross-cutting facet where applicable.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -868,6 +889,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Locations
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-route; Crosswalk note: Locations commonly provide the spatial context for trials/studies; confirm in the domain crosswalk.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -909,6 +931,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Locations
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-route; Crosswalk note: Locations commonly provide the spatial context for trials/studies; confirm in the domain crosswalk.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -951,6 +974,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** People
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-shared-identity-resource; Crosswalk note: People records can be referenced by multiple scientific and operational domains; classify the relationship's scientific domain on the domain record, not the shared person resource.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -992,6 +1016,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** People
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-shared-identity-resource; Crosswalk note: People records can be referenced by multiple scientific and operational domains; classify the relationship's scientific domain on the domain record, not the shared person resource.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1034,6 +1059,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Programs
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1075,6 +1101,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Programs
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1117,6 +1144,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Studies
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1158,6 +1186,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Studies
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1200,6 +1229,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Trials
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1241,6 +1271,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Trials
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1283,6 +1314,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Seasons
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1324,6 +1356,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Seasons
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1355,6 +1388,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Seasons
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1386,6 +1420,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Seasons
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1417,6 +1452,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Server Info
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery; Crosswalk basis: inferred-from-route; Crosswalk note: Server capability discovery is cross-cutting.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `low`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1510,6 +1546,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Studies
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1545,6 +1582,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Studies
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1588,6 +1626,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Studies
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1623,6 +1662,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Studies
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1654,6 +1694,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Studies
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-experimental-context; Crosswalk note: Study types describe the design/role of breeding or research studies; their controlled labels remain terminology-governed.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1685,6 +1726,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Trials
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1716,6 +1758,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Trials
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1748,6 +1791,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Trials
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1781,6 +1825,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Trials
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1814,6 +1859,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm Attributes
 - **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1845,6 +1891,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm Attributes
 - **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1876,6 +1923,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm Attributes
 - **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1907,6 +1955,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm Attributes
 - **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1938,6 +1987,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm Attributes
 - **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1969,6 +2019,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm Attribute Values
 - **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2000,6 +2051,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm Attribute Values
 - **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2031,6 +2083,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm Attribute Values
 - **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2062,6 +2115,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm Attribute Values
 - **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2093,6 +2147,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2124,6 +2179,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2155,6 +2211,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Crosses
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2186,6 +2243,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Crosses
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2217,6 +2275,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Crosses
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2248,6 +2307,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Crossing Projects
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2279,6 +2339,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Crossing Projects
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2310,6 +2371,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Crossing Projects
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2341,6 +2403,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Crossing Projects
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2372,6 +2435,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm
 - **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2415,6 +2479,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm
 - **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2446,6 +2511,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm
 - **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2477,6 +2543,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm
 - **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2508,6 +2575,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm
 - **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2551,6 +2619,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2586,6 +2655,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2625,6 +2695,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Pedigree
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2656,6 +2727,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Pedigree
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2687,6 +2759,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Pedigree
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2718,6 +2791,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Crosses
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2749,6 +2823,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Crosses
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2780,6 +2855,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Crosses
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2811,6 +2887,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm Attributes
 - **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2852,6 +2929,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm Attributes
 - **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2894,6 +2972,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm Attribute Values
 - **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2935,6 +3014,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm Attribute Values
 - **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2977,6 +3057,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm
 - **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3018,6 +3099,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm
 - **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3060,6 +3142,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Pedigree
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3101,6 +3184,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Pedigree
 - **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3143,6 +3227,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Seed Lots
 - **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3174,6 +3259,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Seed Lots
 - **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3205,6 +3291,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Seed Lots
 - **Proposed BrAPI-Den classification:** D6 — Crop Production and Material Operations; Crosswalk basis: inferred-from-route; Crosswalk note: Seed-lot transactions represent material movement.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3238,6 +3325,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Seed Lots
 - **Proposed BrAPI-Den classification:** D6 — Crop Production and Material Operations; Crosswalk basis: inferred-from-route; Crosswalk note: Seed-lot transactions represent material movement.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3271,6 +3359,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Seed Lots
 - **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3302,6 +3391,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Seed Lots
 - **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3333,6 +3423,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Seed Lots
 - **Proposed BrAPI-Den classification:** D6 — Crop Production and Material Operations; Crosswalk basis: inferred-from-route; Crosswalk note: Seed-lot transactions represent material movement.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3367,6 +3458,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3405,6 +3497,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3437,6 +3530,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3481,6 +3575,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3513,6 +3608,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3545,6 +3641,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3578,6 +3675,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Genome Maps
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3610,6 +3708,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Genome Maps
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3641,6 +3740,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Genome Maps
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3672,6 +3772,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Genome Maps
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3703,6 +3804,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Plates
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3734,6 +3836,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Plates
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3765,6 +3868,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Plates
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3796,6 +3900,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Plates
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3826,6 +3931,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3856,6 +3962,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3888,6 +3995,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3918,6 +4026,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3948,6 +4057,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3979,6 +4089,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Samples
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4010,6 +4121,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Samples
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4041,6 +4153,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Samples
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4072,6 +4185,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Samples
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4103,6 +4217,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Samples
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4136,6 +4251,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Allele Matrix
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4174,6 +4290,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4212,6 +4329,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Calls
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4260,6 +4378,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4304,6 +4423,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Call Sets
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4345,6 +4465,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Call Sets
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4387,6 +4508,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Genome Maps
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4428,6 +4550,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Genome Maps
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4470,6 +4593,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Plates
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4511,6 +4635,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Plates
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4552,6 +4677,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4592,6 +4718,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4633,6 +4760,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4673,6 +4801,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4715,6 +4844,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Samples
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4756,6 +4886,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Samples
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4798,6 +4929,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Variants
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4847,6 +4979,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Variants
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4891,6 +5024,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Variant Sets
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4932,6 +5066,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Variant Sets
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4973,6 +5108,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5005,6 +5141,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5037,6 +5174,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5069,6 +5207,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5102,6 +5241,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Variant Sets
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5134,6 +5274,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5166,6 +5307,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5198,6 +5340,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5230,6 +5373,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5263,6 +5407,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Vendor
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5294,6 +5439,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Vendor
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5325,6 +5471,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Vendor
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5356,6 +5503,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Vendor
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5387,6 +5535,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Vendor
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5418,6 +5567,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Vendor
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5449,6 +5599,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Vendor
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5480,6 +5631,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Vendor
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5513,6 +5665,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Images
 - **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5544,6 +5697,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observations
 - **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5577,6 +5731,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Events
 - **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5608,6 +5763,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Images
 - **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5655,6 +5811,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Images
 - **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5728,6 +5885,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Images
 - **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5775,6 +5933,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Images
 - **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5852,6 +6011,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Images
 - **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5915,6 +6075,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Methods
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5952,6 +6113,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Methods
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5985,6 +6147,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Methods
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6022,6 +6185,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Methods
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6055,6 +6219,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Units
 - **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6098,6 +6263,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observations
 - **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6135,6 +6301,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observations
 - **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6168,6 +6335,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observations
 - **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6209,6 +6377,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observations
 - **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6316,6 +6485,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observations
 - **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6353,6 +6523,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observations
 - **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6386,6 +6557,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Units
 - **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6419,6 +6591,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Units
 - **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6452,6 +6625,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Units
 - **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6489,6 +6663,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Units
 - **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6592,6 +6767,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Units
 - **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6625,6 +6801,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Units
 - **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6658,6 +6835,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Ontologies
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6693,6 +6871,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Ontologies
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6728,6 +6907,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Ontologies
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6763,6 +6943,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Ontologies
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6798,6 +6979,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Scales
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6835,6 +7017,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Scales
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6868,6 +7051,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Scales
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6901,6 +7085,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Scales
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6934,6 +7119,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Images
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance, C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6985,6 +7171,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Images
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance, C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7037,6 +7224,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observations
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance, C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7078,6 +7266,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observations
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance, C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7120,6 +7309,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Units
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance, C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7161,6 +7351,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Units
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance, C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7203,6 +7394,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Variables
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance, C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7244,6 +7436,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Variables
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance, C3 — Asynchronous execution and idempotency; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7286,6 +7479,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Traits
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7323,6 +7517,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Traits
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7356,6 +7551,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Traits
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7393,6 +7589,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Traits
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7426,6 +7623,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Variables
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7459,6 +7657,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Variables
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7492,6 +7691,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Variables
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7525,6 +7725,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Variables
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-scientific-terminology-role; Crosswalk note: This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.
+- **Classification review / confidence:** `provisional-crosswalk-needs-scientific-review` / `medium`
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7564,6 +7765,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **GenX source module:** `FAIR`
 - **Source tag:** FAIR Packages
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -7598,6 +7800,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **GenX source module:** `FAIR`
 - **Source tag:** FAIR Packages
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -7634,6 +7837,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **GenX source module:** `FAIR`
 - **Source tag:** FAIR Packages
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -7669,6 +7873,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **GenX source module:** `Genomics`
 - **Source tag:** Variant Matrices
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -7703,6 +7908,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **GenX source module:** `Genomics`
 - **Source tag:** Variant Matrices
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -7739,6 +7945,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **GenX source module:** `Genomics`
 - **Source tag:** Variant Matrices
 - **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -7773,6 +7980,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **GenX source module:** `Jobs`
 - **Source tag:** Jobs
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C3 — Asynchronous execution and idempotency, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -7807,6 +8015,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **GenX source module:** `Jobs`
 - **Source tag:** Jobs
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -7844,6 +8053,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **GenX source module:** `Jobs`
 - **Source tag:** Jobs
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C3 — Asynchronous execution and idempotency, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -7877,6 +8087,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **GenX source module:** `Jobs`
 - **Source tag:** Jobs
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -7913,6 +8124,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **GenX source module:** `LotLedger`
 - **Source tag:** Seed Lots
 - **Proposed BrAPI-Den classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -7947,6 +8159,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **GenX source module:** `LotLedger`
 - **Source tag:** Seed Lots
 - **Proposed BrAPI-Den classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -7985,6 +8198,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **GenX source module:** `Models`
 - **Source tag:** Models
 - **Proposed BrAPI-Den classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -8019,6 +8233,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **GenX source module:** `Models`
 - **Source tag:** Models
 - **Proposed BrAPI-Den classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -8056,6 +8271,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **GenX source module:** `Models`
 - **Source tag:** Models
 - **Proposed BrAPI-Den classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -8091,6 +8307,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **GenX source module:** `ServerInfoV3`
 - **Source tag:** Server Info
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C8 — Contract conformance and governance, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -8134,6 +8351,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **GenX source module:** `Telemetry`
 - **Source tag:** Telemetry
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Context-dependent: D4 — Phenotyping and Plant Observations, D5 — Environment, Agroecology and Field Context; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C7 — Streaming and temporal aggregation, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -8172,6 +8390,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **GenX source module:** `Telemetry`
 - **Source tag:** Telemetry
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Context-dependent: D4 — Phenotyping and Plant Observations, D5 — Environment, Agroecology and Field Context; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C7 — Streaming and temporal aggregation, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -8211,6 +8430,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **GenX source module:** `VariableTerms`
 - **Source tag:** VariableTerms
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C4 — Scientific terminology governance
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -8245,6 +8465,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **GenX source module:** `VariableTerms`
 - **Source tag:** VariableTerms
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C4 — Scientific terminology governance
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -8282,6 +8503,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **GenX source module:** `VariableTerms`
 - **Source tag:** VariableTerms
 - **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C4 — Scientific terminology governance
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**

@@ -80,6 +80,8 @@ def render_entry(e):
         lines.append("- **GenX source module:** "+BT+m(e.get("genxModule"))+BT)
     if e.get("brapiTag"): lines.append("- **Source tag:** "+m(e["brapiTag"]))
     lines.append("- **Proposed BrAPI-Den classification:** "+m(domain(e)))
+    cl = e.get("classification") or {}
+    lines.append("- **Classification review / confidence:** "+BT+m(cl.get("reviewStatus"))+BT+" / "+BT+m(cl.get("confidence"))+BT)
     lines.append("- **Standard / proposal status:** "+BT+m(e.get("standardStatus"))+BT)
     lines.append("- **Implementation status:** "+BT+m(e.get("implementationStatus"))+BT)
     block(lines,"Purpose",e.get("purpose")); block(lines,"Source contract description",e.get("sourceDescription"))
