@@ -6,6 +6,25 @@ paths:
   /variantmatrices:
     get:
       operationId: genxListVariantMatrixReferences
+      x-brapi-den:
+        catalogId: "brapi-den.genx.v3.variant-matrices.list"
+        classification:
+          primaryDomain: "D3"
+          crossCuttingCapabilities: ["C1", "C2", "C5", "C6", "C9"]
+        purpose: "List registered references to external variant matrices, optionally filtered by VariantSet identity and format."
+        canBeUsedFor:
+          - "Discover matrix metadata, file digests, counts, formats, and retrieval service references."
+          - "Plan external retrieval or subsetting through the declared retrieval service."
+        mustNotBeUsedFor:
+          - "Expecting genotype matrix bytes in the response."
+          - "Treating VariantMatrix as an alias for VariantSet, CallSet, or Calls."
+          - "Assuming the endpoint itself implements matrix slicing or access control for external bytes."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "SEM-04"
+        decisions: ["RFC-005", "D-11", "D-12", "D-19"]
+        proposalStatus: "draft-non-normative"
       summary: List registered matrix references
       description: Get a paged list of matrix references across authorities. Filters combine with AND.
       parameters:
@@ -43,6 +62,25 @@ paths:
       - Variant Matrices
     post:
       operationId: genxRegisterVariantMatrixReference
+      x-brapi-den:
+        catalogId: "brapi-den.genx.v3.variant-matrices.register"
+        classification:
+          primaryDomain: "D3"
+          crossCuttingCapabilities: ["C1", "C2", "C5", "C6", "C9"]
+        purpose: "Register a content-addressed reference to an externally stored genomic variant matrix, including format, location, digest, and optional dimensions and retrieval-service metadata."
+        canBeUsedFor:
+          - "Publish a resolvable reference to VCF, BCF, VCF Zarr, PLINK, or another declared matrix format."
+          - "Bind a matrix identity to immutable content metadata."
+        mustNotBeUsedFor:
+          - "Uploading or returning matrix bytes through this endpoint."
+          - "Replacing V2.1 variant/call resources or claiming drop-in equivalence."
+          - "Assuming a custom matrix slicing protocol or access-authorization scheme is defined here."
+        sideEffects: "Creates a matrix reference if accepted."
+        idempotency: "Identical registration replays; a different body under the same matrix identity is rejected; changed bytes require a new identity."
+        semanticNeighbors:
+          - "SEM-04"
+        decisions: ["RFC-005", "D-11", "D-12", "D-19"]
+        proposalStatus: "draft-non-normative"
       summary: Register one matrix reference
       description: |-
         Unknown matrixDbId creates; known id with an identical body replays
