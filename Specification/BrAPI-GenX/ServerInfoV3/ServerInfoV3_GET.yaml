@@ -6,6 +6,25 @@ paths:
   /serverinfo:
     get:
       operationId: genxGetServerInfoV3
+      x-brapi-den:
+        catalogId: "brapi-den.genx.v3.serverinfo.read"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C8", "C9"]
+        purpose: "Advertise supported API generations, capabilities, and authentication profiles so clients can negotiate behavior before using optional GenX features."
+        canBeUsedFor:
+          - "Discover whether a server advertises GenX and which capabilities/job types it supports."
+          - "Choose a documented V2.1 fallback when GenX is not advertised."
+        mustNotBeUsedFor:
+          - "Proving that every advertised operation is healthy at this instant."
+          - "Calling unadvertised endpoints as feature probes."
+          - "Treating the V2.1 ServerInfo payload and ServerInfoV3 as interchangeable."
+        sideEffects: "Read-only; no domain records are created or changed."
+        idempotency: "Read-only; repeated calls have no intended state-changing effects."
+        semanticNeighbors:
+          - "V2.1 GET /brapi/v2/serverinfo"
+        decisions: ["RFC-001", "A-01"]
+        proposalStatus: "draft-non-normative"
       description: |-
         GenX capability negotiation. Served under `/brapi/v3/`.
 
