@@ -91,7 +91,7 @@ def render_entry(e):
     for item in e.get("mustNotBeUsedFor") or ["No explicit non-goal recorded; manual review required."]:
         parts=str(item).replace("\r\n","\n").split("\n")
         lines.extend(("- " if i==0 else "  ")+p for i,p in enumerate(parts))
-    for label,key in [("Side effects","sideEffects"),("Retry / idempotency","idempotency"),("Parameters recorded in registry","parameters"),("Request schema refs recorded","requestSchemaRefs"),("Response status codes recorded","responseCodes"),("Response schema refs recorded","responseRefs")]:
+    for label,key in [("Side effects","sideEffects"),("Retry / idempotency","idempotency"),("Parameters recorded in registry","parameters"),("Request schema refs recorded","requestSchemaRefs"),("Response status codes recorded","responseCodes"),("Response component refs recorded","responseRefs")]:
         val=lst(e.get(key)) if key in {"parameters","requestSchemaRefs","responseCodes","responseRefs"} else m(e.get(key))
         lines.append("- **"+label+":** "+val)
     if e.get("semanticNeighborIds"): lines.append("- **Semantic relationship IDs / labels:** "+lst(e["semanticNeighborIds"]))
