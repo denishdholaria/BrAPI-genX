@@ -18,6 +18,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
   provides the proposed machine-readable module registry. Both are proposals,
   not BrAPI community ratification.
 - **Master endpoint registry:** [../ENDPOINT-REGISTRY.json](../ENDPOINT-REGISTRY.json) contains 201 released BrAPI v2.1 operations and 21 proposed GenX operations with stable BrAPI-Den catalogue identifiers, source links, semantic metadata, and implementation-evidence status. The generated human catalogue is [../ENDPOINT-CATALOG.md](../ENDPOINT-CATALOG.md), with the source crosswalk in [../BIJMANTRA-CROSSWALK.md](../BIJMANTRA-CROSSWALK.md).
+- The GenX-only generated view is [GENX-ENDPOINT-CATALOG.md](./GENX-ENDPOINT-CATALOG.md); it is a filtered view, not a second source of truth.
 - **Endpoint semantics and catalogue:** [ENDPOINT-CATALOG.md](./ENDPOINT-CATALOG.md) explains every current GenX operation's purpose, supported uses, non-goals, side effects, idempotency, and semantic neighbors. The operation-level `x-brapi-den` metadata is kept alongside each OpenAPI operation and checked by `Scripts/checkGenXEndpointCatalog.py`.
 
 ## Objects
