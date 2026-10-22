@@ -1,27 +1,13 @@
-# BrAPI-GenX Domain Classification Registry
-# Status: proposed, non-normative. BrAPI V2.1 contracts remain unchanged.
-# Every entry has exactly one primary class or is explicitly cross-cutting.
-# Facets are secondary descriptive tags, not assertions of schema equivalence.
-
 version: "0.1.0-proposal"
 classification_document: "CLASSIFICATION.md"
-
 domain_classes:
-  D1:
-    name: "Germplasm and Biological Resources"
-  D2:
-    name: "Breeding Programs and Experimental Design"
-  D3:
-    name: "Genotyping and Molecular Genomics"
-  D4:
-    name: "Phenotyping and Plant Observations"
-  D5:
-    name: "Environment, Agroecology and Field Context"
-  D6:
-    name: "Crop Production and Material Operations"
-  D7:
-    name: "Scientific Analysis, Models and Derived Evidence"
-
+  D1: "Germplasm and Biological Resources"
+  D2: "Breeding Programs and Experimental Design"
+  D3: "Genotyping and Molecular Genomics"
+  D4: "Phenotyping and Plant Observations"
+  D5: "Environment, Agroecology and Field Context"
+  D6: "Crop Production and Material Operations"
+  D7: "Scientific Analysis, Models and Derived Evidence"
 cross_cutting_capabilities:
   C1: "Identity, versioning and capability negotiation"
   C2: "Provenance, evidence and uncertainty"
@@ -32,56 +18,45 @@ cross_cutting_capabilities:
   C7: "Streaming, telemetry and temporal aggregation"
   C8: "Conformance and contract governance"
   C9: "Security, authority and tenancy"
-
 modules:
   - path: "Provenance/"
-    object: "ProvenanceEnvelope"
     primary_class: null
-    cross_cutting: ["C2", "C1", "C6"]
-    rationale: "Reusable embedded evidence contract; not a domain entity or standalone endpoint."
+    cross_cutting: [C2, C1, C6]
+    rationale: "Embedded evidence contract, not a standalone endpoint."
   - path: "Jobs/"
-    object: "Job"
     primary_class: null
-    cross_cutting: ["C3", "C1", "C2", "C9"]
-    rationale: "Execution lifecycle; jobType determines the domain of the underlying work."
+    cross_cutting: [C3, C1, C2, C9]
+    rationale: "Execution lifecycle; job type determines the domain of underlying work."
   - path: "ServerInfoV3/"
-    object: "ServerInfoV3"
     primary_class: null
-    cross_cutting: ["C1", "C8", "C9"]
+    cross_cutting: [C1, C8, C9]
     rationale: "Capability negotiation and server-surface discovery."
   - path: "VariableTerms/"
-    object: "VariableTerm"
     primary_class: null
-    cross_cutting: ["C4", "C1", "C2"]
-    rationale: "Shared terminology governance; not the observation or analysis itself."
+    cross_cutting: [C4, C1, C2]
+    rationale: "Shared scientific terminology governance."
   - path: "LotLedger/"
-    object: "LotLedgerEntry"
-    primary_class: "D6"
-    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
-    rationale: "Append-only traceability of material movement. Not assumed wire-equivalent to V2.1 SeedLotTransaction; see D-20."
+    primary_class: D6
+    cross_cutting: [C1, C2, C3, C6, C9]
+    rationale: "Material movement traceability; not assumed equivalent to V2.1 SeedLotTransaction (D-20)."
   - path: "Models/"
-    object: "ModelArtifact"
-    primary_class: "D7"
-    cross_cutting: ["C1", "C2", "C3", "C5", "C6", "C9"]
-    rationale: "Identity and lifecycle of analytical model artifacts; executing inference is a Job."
+    primary_class: D7
+    cross_cutting: [C1, C2, C3, C5, C6, C9]
+    rationale: "Analytical model artifact identity and lifecycle; inference executes as a Job."
   - path: "Genomics/"
-    object: "VariantMatrix"
-    primary_class: "D3"
-    cross_cutting: ["C1", "C2", "C5", "C6", "C9"]
-    rationale: "External genomic matrix reference and integrity metadata; not VariantSet alias or byte transport."
+    primary_class: D3
+    cross_cutting: [C1, C2, C5, C6, C9]
+    rationale: "External genomic matrix reference and integrity metadata, not byte transport."
   - path: "FAIR/"
-    object: "FAIRPackage"
     primary_class: null
-    cross_cutting: ["C5", "C1", "C2", "C6", "C9"]
-    rationale: "Exchange, publication, license and access envelope around domain payloads."
+    cross_cutting: [C5, C1, C2, C6, C9]
+    rationale: "Publication, licensing and access envelope around domain payloads."
   - path: "Telemetry/"
-    object: "TelemetryPoint"
     primary_class: null
-    context_classes: ["D4", "D5"]
-    cross_cutting: ["C7", "C1", "C2", "C3", "C6", "C9"]
-    rationale: "The existing schema is context-neutral. Classify individual readings by observed phenomenon: environmental readings as D5; plant phenotype readings as D4."
+    context_classes: [D4, D5]
+    cross_cutting: [C7, C1, C2, C3, C6, C9]
+    rationale: "Classify individual readings by phenomenon: environmental readings D5; plant phenotype readings D4."
   - path: "Conformance/"
-    object: "Probes, fixtures and overlap register"
     primary_class: null
-    cross_cutting: ["C8", "C1", "C3"]
-    rationale: "Contract governance and interoperability evidence."
+    cross_cutting: [C8, C1, C3]
+    rationale: "Specification conformance and interoperability evidence."
