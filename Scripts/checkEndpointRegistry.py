@@ -8,6 +8,8 @@ import sys
 from collections import Counter
 from pathlib import Path
 
+import yaml
+
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "Specification" / "ENDPOINT-REGISTRY.json"
 EXPECTED_V21 = 201
@@ -102,6 +104,43 @@ def check() -> list[str]:
             errors.append(f"{cid}: source repository path is missing.")
         elif not (ROOT / src["path"]).is_file():
             errors.append(f"{cid}: source file does not exist in this checkout: {src['path']}")
+        else:
+            source_path = ROOT / src["path"]
+            try:
+                source_document = yaml.safe_load(source_path.read_text(encoding="utf-8"))
+            except Exception as exc:
+                errors.append(f"{cid}: cannot parse source YAML {src['path']}: {exc}")
+                source_document = None
+            if isinstance(source_document, dict):
+                path_item = (source_document.get("paths") or {}).get(e.get("path"))
+                method = str(e.get("method", "")).lower()
+                source_operation = path_item.get(method) if isinstance(path_item, dict) else None
+                if not isinstance(source_operation, dict):
+                    errors.append(f"{cid}: registry method/route does not exist in source YAML: {method.upper()} {e.get('path')}")
+                else:
+                    source_id = source_operation.get("operationId")
+                    if source_id != e.get("operationIdInSource"):
+                        errors.append(f"{cid}: operationIdInSource disagrees with source YAML ({source_id!r}).")
+                    if e.get("apiGeneration") == "genx-v3":
+                        extension = source_operation.get("x-brapi-den")
+                        if not isinstance(extension, dict):
+                            errors.append(f"{cid}: GenX source operation has no x-brapi-den block.")
+                        else:
+                            if extension.get("catalogId") != cid:
+                                errors.append(f"{cid}: x-brapi-den catalogId disagrees with registry.")
+                            source_class = extension.get("classification") or {}
+                            registry_class = e.get("classification") or {}
+                            if source_class.get("primaryDomain") != registry_class.get("primaryDomain"):
+                                errors.append(f"{cid}: x-brapi-den primaryDomain disagrees with registry.")
+                            if sorted(source_class.get("crossCuttingCapabilities") or []) != sorted(registry_class.get("crossCuttingCapabilities") or []):
+                                errors.append(f"{cid}: x-brapi-den crossCuttingCapabilities disagree with registry.")
+                            for field in ("purpose", "sideEffects", "idempotency"):
+                                if extension.get(field) != e.get(field):
+                                    errors.append(f"{cid}: x-brapi-den {field} disagrees with registry.")
+                            if not isinstance(extension.get("canBeUsedFor"), list) or not extension["canBeUsedFor"]:
+                                errors.append(f"{cid}: source x-brapi-den canBeUsedFor is missing or empty.")
+                            if not isinstance(extension.get("mustNotBeUsedFor"), list) or not extension["mustNotBeUsedFor"]:
+                                errors.append(f"{cid}: source x-brapi-den mustNotBeUsedFor is missing or empty.")
 
         cl = e.get("classification")
         if not isinstance(cl, dict):
