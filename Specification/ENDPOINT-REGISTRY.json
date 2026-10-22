@@ -53,10 +53,1214 @@
     "C8": "Contract conformance and governance",
     "C9": "Security, authority and tenancy"
   },
-  "entries": [],
+  "entries": [
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.get.commoncropnames",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/commoncropnames",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetCommoncropnames",
+      "operationName": "Get the Common Crop Names",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Common Crop Names",
+      "classification": {
+        "primaryDomain": null,
+        "basis": "unassigned",
+        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Get the Common Crop Names",
+      "sourceDescription": "List the common crop names for the crops available in a database server. \n\nThis call is ** required ** for multi-crop systems where data from multiple \ncrops may be stored in the same database server. A distinct database server \nis defined by everything in the URL before \"/brapi/v2\", including host \nname and base path.\n\nThis call is recommended for single crop systems to be compatible with \nmulti-crop clients. For a single crop system the response should contain \nan array with exactly 1 element. \n\nThe common crop name can be used as a search parameter for Programs, \nStudies, and Germplasm.",
+      "canBeUsedFor": [
+        "Get the Common Crop Names",
+        "List the common crop names for the crops available in a database server. \n\nThis call is ** required ** for multi-crop systems where data from multiple \ncrops may be stored in the same database server. A distinct database server \nis defined by everything in the URL before \"/brapi/v2\", including host \nname and base path.\n\nThis call is recommended for single crop systems to be compatible with \nmulti-crop clients. For a single crop system the response should contain \nan array with exactly 1 element. \n\nThe common crop name can be used as a search parameter for Programs, \nStudies, and Germplasm."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use this operation to create, update, or delete domain data.",
+        "Do not assume runtime availability from the specification alone."
+      ],
+      "sideEffects": "Read-only retrieval under the published BrAPI v2.1 contract.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Common Crop Names/CommonCropNames_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.get.lists",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/lists",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetLists",
+      "operationName": "Get filtered set of generic lists",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Lists",
+      "classification": {
+        "primaryDomain": null,
+        "basis": "unassigned",
+        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Get filtered set of generic lists",
+      "sourceDescription": "Get filtered set of generic lists",
+      "canBeUsedFor": [
+        "Get filtered set of generic lists",
+        "Get filtered set of generic lists"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use this operation to create, update, or delete domain data.",
+        "Do not assume runtime availability from the specification alone."
+      ],
+      "sideEffects": "Read-only retrieval under the published BrAPI v2.1 contract.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "ListsListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Lists/Lists_GET_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.post.lists",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/lists",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostLists",
+      "operationName": "Create New List Objects",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Lists",
+      "classification": {
+        "primaryDomain": null,
+        "basis": "unassigned",
+        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Create New List Objects",
+      "sourceDescription": "Create new list objects in the database",
+      "canBeUsedFor": [
+        "Create New List Objects",
+        "Create new list objects in the database"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use this operation as a read-only list/get operation.",
+        "Do not assume retries are idempotent unless the operation contract or server explicitly guarantees it."
+      ],
+      "sideEffects": "State-changing submission or creation as specified by this operation; request/response schemas determine the exact effect.",
+      "idempotency": "The source specification does not declare an idempotency key or a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "ListNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "ListsListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Lists/Lists_GET_POST.yaml",
+        "inventoryLine": 54,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.post.lists.by-listdbid.data",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/lists/{listDbId}/data",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostListsByListDbIdData",
+      "operationName": "Add new data members to a specific List",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Lists",
+      "classification": {
+        "primaryDomain": null,
+        "basis": "unassigned",
+        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Add new data members to a specific List",
+      "sourceDescription": "Add new data members to a specific List",
+      "canBeUsedFor": [
+        "Add new data members to a specific List",
+        "Add new data members to a specific List"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use this operation as a read-only list/get operation.",
+        "Do not assume retries are idempotent unless the operation contract or server explicitly guarantees it."
+      ],
+      "sideEffects": "State-changing submission or creation as specified by this operation; request/response schemas determine the exact effect.",
+      "idempotency": "The source specification does not declare an idempotency key or a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Lists/Lists_ListDbId_Data_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.get.lists.by-listdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/lists/{listDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetListsByListDbId",
+      "operationName": "Get the details of a specific List",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Lists",
+      "classification": {
+        "primaryDomain": null,
+        "basis": "unassigned",
+        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Get the details of a specific List",
+      "sourceDescription": "Get a specific generic lists",
+      "canBeUsedFor": [
+        "Get the details of a specific List",
+        "Get a specific generic lists"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use this operation to create, update, or delete domain data.",
+        "Do not assume runtime availability from the specification alone."
+      ],
+      "sideEffects": "Read-only retrieval under the published BrAPI v2.1 contract.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "ListsSingleResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Lists/Lists_ListDbId_GET_PUT.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.put.lists.by-listdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "PUT",
+      "path": "/lists/{listDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PutListsByListDbId",
+      "operationName": "Update an existing generic list",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Lists",
+      "classification": {
+        "primaryDomain": null,
+        "basis": "unassigned",
+        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Update an existing generic list",
+      "sourceDescription": "Update an existing generic list",
+      "canBeUsedFor": [
+        "Update an existing generic list",
+        "Update an existing generic list"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use this operation as a read-only list/get operation or as a generic deletion command.",
+        "Do not infer concurrency control or field-level merge behavior unless the operation contract specifies it."
+      ],
+      "sideEffects": "Updates or replaces the addressed resource(s) as specified by this operation.",
+      "idempotency": "HTTP PUT has idempotent method semantics; exact business effects remain defined by the operation contract.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "ListNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "ListsSingleResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Lists/Lists_ListDbId_GET_PUT.yaml",
+        "inventoryLine": 31,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.post.lists.by-listdbid.items",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/lists/{listDbId}/items",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostListsByListDbIdItems",
+      "operationName": "Add Items to a specific List",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Lists",
+      "classification": {
+        "primaryDomain": null,
+        "basis": "unassigned",
+        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Add Items to a specific List",
+      "sourceDescription": "**Deprecated in v2.1** Please use `POST /lists/{listDbId}/data`. Github issue number #444 \n<br/> Add new data to a specific generic lists",
+      "canBeUsedFor": [
+        "Add Items to a specific List",
+        "**Deprecated in v2.1** Please use `POST /lists/{listDbId}/data`. Github issue number #444 \n<br/> Add new data to a specific generic lists"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use this operation as a read-only list/get operation.",
+        "Do not assume retries are idempotent unless the operation contract or server explicitly guarantees it."
+      ],
+      "sideEffects": "State-changing submission or creation as specified by this operation; request/response schemas determine the exact effect.",
+      "idempotency": "The source specification does not declare an idempotency key or a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Lists/Lists_ListDbId_Items_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.post.search.lists",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/search/lists",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostSearchLists",
+      "operationName": "Submit a search request for Lists",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Lists",
+      "classification": {
+        "primaryDomain": null,
+        "basis": "unassigned",
+        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Submit a search request for Lists",
+      "sourceDescription": "Submit a search request for Lists <br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/lists/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Submit a search request for Lists",
+        "Submit a search request for Lists <br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/lists/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not treat this as creating or updating the searched domain resource; it submits a search request.",
+        "Search request replay/deduplication behavior is not asserted unless separately documented."
+      ],
+      "sideEffects": "Submits a search query; a search-results resource may be created. Domain-resource creation is not implied.",
+      "idempotency": "The source specification does not declare an idempotency key or a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "ListSearchRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "202",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "ListsListResponse",
+        "202AcceptedSearchResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Lists/Search_Lists_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.get.search.lists.by-searchresultsdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/search/lists/{searchResultsDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetSearchListsBySearchResultsDbId",
+      "operationName": "Get the results of a `List` search request",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Lists",
+      "classification": {
+        "primaryDomain": null,
+        "basis": "unassigned",
+        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Get the results of a `List` search request",
+      "sourceDescription": "Get the results of a `List` search request <br/>\nClients should submit a search request using the corresponding `POST /search/lists` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Get the results of a `List` search request",
+        "Get the results of a `List` search request <br/>\nClients should submit a search request using the corresponding `POST /search/lists` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use this operation to submit a new search; it retrieves results for an existing search-results identifier."
+      ],
+      "sideEffects": "Reads previously submitted search results; no domain-resource mutation is implied.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "202",
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "202AcceptedSearchResponse",
+        "ListsListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Lists/Search_Lists_SearchResultsDbId_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.get.locations",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/locations",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetLocations",
+      "operationName": "Get a filtered list of Locations",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Locations",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Locations commonly provide the spatial context for trials/studies; confirm in the domain crosswalk.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Get a filtered list of Locations",
+      "sourceDescription": "Get a list of locations.\n* The `countryCode` is as per [ISO_3166-1_alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) spec.\n* `altitude` is in meters.",
+      "canBeUsedFor": [
+        "Get a filtered list of Locations",
+        "Get a list of locations.\n* The `countryCode` is as per [ISO_3166-1_alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) spec.\n* `altitude` is in meters."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use this operation to create, update, or delete domain data.",
+        "Do not assume runtime availability from the specification alone."
+      ],
+      "sideEffects": "Read-only retrieval under the published BrAPI v2.1 contract.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [
+        "locationType"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "LocationListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Locations/Locations_GET_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.post.locations",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/locations",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostLocations",
+      "operationName": "Create new Locations",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Locations",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Locations commonly provide the spatial context for trials/studies; confirm in the domain crosswalk.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Create new Locations",
+      "sourceDescription": "Add new locations to database\n* The `countryCode` is as per [ISO_3166-1_alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) spec.\n* `altitude` is in meters.",
+      "canBeUsedFor": [
+        "Create new Locations",
+        "Add new locations to database\n* The `countryCode` is as per [ISO_3166-1_alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) spec.\n* `altitude` is in meters."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use this operation as a read-only list/get operation.",
+        "Do not assume retries are idempotent unless the operation contract or server explicitly guarantees it."
+      ],
+      "sideEffects": "State-changing submission or creation as specified by this operation; request/response schemas determine the exact effect.",
+      "idempotency": "The source specification does not declare an idempotency key or a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "LocationNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "LocationListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Locations/Locations_GET_POST.yaml",
+        "inventoryLine": 71,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.get.locations.by-locationdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/locations/{locationDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetLocationsByLocationDbId",
+      "operationName": "Get the details of a specific Location",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Locations",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Locations commonly provide the spatial context for trials/studies; confirm in the domain crosswalk.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Get the details of a specific Location",
+      "sourceDescription": "Get details for a location.\n- The `countryCode` is as per [ISO_3166-1_alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) spec.\n- `altitude` is in meters.'",
+      "canBeUsedFor": [
+        "Get the details of a specific Location",
+        "Get details for a location.\n- The `countryCode` is as per [ISO_3166-1_alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) spec.\n- `altitude` is in meters.'"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use this operation to create, update, or delete domain data.",
+        "Do not assume runtime availability from the specification alone."
+      ],
+      "sideEffects": "Read-only retrieval under the published BrAPI v2.1 contract.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "LocationSingleResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Locations/Locations_LocationDbId_GET_PUT.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.put.locations.by-locationdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "PUT",
+      "path": "/locations/{locationDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PutLocationsByLocationDbId",
+      "operationName": "Update the details for an existing Location",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Locations",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Locations commonly provide the spatial context for trials/studies; confirm in the domain crosswalk.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Update the details for an existing Location",
+      "sourceDescription": "Update the details for an existing location.\n- The `countryCode` is as per [ISO_3166-1_alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) spec.\n- `altitude` is in meters.'",
+      "canBeUsedFor": [
+        "Update the details for an existing Location",
+        "Update the details for an existing location.\n- The `countryCode` is as per [ISO_3166-1_alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) spec.\n- `altitude` is in meters.'"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use this operation as a read-only list/get operation or as a generic deletion command.",
+        "Do not infer concurrency control or field-level merge behavior unless the operation contract specifies it."
+      ],
+      "sideEffects": "Updates or replaces the addressed resource(s) as specified by this operation.",
+      "idempotency": "HTTP PUT has idempotent method semantics; exact business effects remain defined by the operation contract.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "LocationNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "LocationSingleResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Locations/Locations_LocationDbId_GET_PUT.yaml",
+        "inventoryLine": 34,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.post.search.locations",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/search/locations",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostSearchLocations",
+      "operationName": "Submit a search request for `Locations`",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Locations",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Locations commonly provide the spatial context for trials/studies; confirm in the domain crosswalk.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Submit a search request for `Locations`",
+      "sourceDescription": "Submit a search request for `Locations`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/locations/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Submit a search request for `Locations`",
+        "Submit a search request for `Locations`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/locations/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not treat this as creating or updating the searched domain resource; it submits a search request.",
+        "Search request replay/deduplication behavior is not asserted unless separately documented."
+      ],
+      "sideEffects": "Submits a search query; a search-results resource may be created. Domain-resource creation is not implied.",
+      "idempotency": "The source specification does not declare an idempotency key or a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "LocationSearchRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "202",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "LocationListResponse",
+        "202AcceptedSearchResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Locations/Search_Locations_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.get.search.locations.by-searchresultsdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/search/locations/{searchResultsDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetSearchLocationsBySearchResultsDbId",
+      "operationName": "Get the results of a `Locations` search request",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Locations",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Locations commonly provide the spatial context for trials/studies; confirm in the domain crosswalk.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Get the results of a `Locations` search request",
+      "sourceDescription": "Get the results of a `Locations` search request <br/>\nClients should submit a search request using the corresponding `POST /search/location` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Get the results of a `Locations` search request",
+        "Get the results of a `Locations` search request <br/>\nClients should submit a search request using the corresponding `POST /search/location` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use this operation to submit a new search; it retrieves results for an existing search-results identifier."
+      ],
+      "sideEffects": "Reads previously submitted search results; no domain-resource mutation is implied.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "202",
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "202AcceptedSearchResponse",
+        "LocationListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Locations/Search_Locations_SearchResultsDbId_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.get.people",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/people",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetPeople",
+      "operationName": "Get filtered list of People",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "People",
+      "classification": {
+        "primaryDomain": null,
+        "basis": "unassigned",
+        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Get filtered list of People",
+      "sourceDescription": "Get filtered list of people",
+      "canBeUsedFor": [
+        "Get filtered list of People",
+        "Get filtered list of people"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use this operation to create, update, or delete domain data.",
+        "Do not assume runtime availability from the specification alone."
+      ],
+      "sideEffects": "Read-only retrieval under the published BrAPI v2.1 contract.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "PersonListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/People/People_GET_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.post.people",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/people",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostPeople",
+      "operationName": "Create new People",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "People",
+      "classification": {
+        "primaryDomain": null,
+        "basis": "unassigned",
+        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Create new People",
+      "sourceDescription": "Create new People entities. `personDbId` is generated and managed by the server.",
+      "canBeUsedFor": [
+        "Create new People",
+        "Create new People entities. `personDbId` is generated and managed by the server."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use this operation as a read-only list/get operation.",
+        "Do not assume retries are idempotent unless the operation contract or server explicitly guarantees it."
+      ],
+      "sideEffects": "State-changing submission or creation as specified by this operation; request/response schemas determine the exact effect.",
+      "idempotency": "The source specification does not declare an idempotency key or a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "PersonNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "PersonListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/People/People_GET_POST.yaml",
+        "inventoryLine": 54,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.get.people.by-persondbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/people/{personDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetPeopleByPersonDbId",
+      "operationName": "Get the details for a specific Person",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "People",
+      "classification": {
+        "primaryDomain": null,
+        "basis": "unassigned",
+        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Get the details for a specific Person",
+      "sourceDescription": "Get the details for a specific Person",
+      "canBeUsedFor": [
+        "Get the details for a specific Person",
+        "Get the details for a specific Person"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use this operation to create, update, or delete domain data.",
+        "Do not assume runtime availability from the specification alone."
+      ],
+      "sideEffects": "Read-only retrieval under the published BrAPI v2.1 contract.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "PersonSingleResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/People/People_PersonDbId_GET_PUT.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.put.people.by-persondbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "PUT",
+      "path": "/people/{personDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PutPeopleByPersonDbId",
+      "operationName": "Update an existing Person",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "People",
+      "classification": {
+        "primaryDomain": null,
+        "basis": "unassigned",
+        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Update an existing Person",
+      "sourceDescription": "Update an existing Person",
+      "canBeUsedFor": [
+        "Update an existing Person",
+        "Update an existing Person"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use this operation as a read-only list/get operation or as a generic deletion command.",
+        "Do not infer concurrency control or field-level merge behavior unless the operation contract specifies it."
+      ],
+      "sideEffects": "Updates or replaces the addressed resource(s) as specified by this operation.",
+      "idempotency": "HTTP PUT has idempotent method semantics; exact business effects remain defined by the operation contract.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "PersonNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "PersonSingleResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/People/People_PersonDbId_GET_PUT.yaml",
+        "inventoryLine": 31,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.post.search.people",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/search/people",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostSearchPeople",
+      "operationName": "Submit a search request for `People`",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "People",
+      "classification": {
+        "primaryDomain": null,
+        "basis": "unassigned",
+        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Submit a search request for `People`",
+      "sourceDescription": "Submit a search request for `People`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/people/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Submit a search request for `People`",
+        "Submit a search request for `People`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/people/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not treat this as creating or updating the searched domain resource; it submits a search request.",
+        "Search request replay/deduplication behavior is not asserted unless separately documented."
+      ],
+      "sideEffects": "Submits a search query; a search-results resource may be created. Domain-resource creation is not implied.",
+      "idempotency": "The source specification does not declare an idempotency key or a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "PersonSearchRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "202",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "PersonListResponse",
+        "202AcceptedSearchResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/People/Search_People_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.get.search.people.by-searchresultsdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/search/people/{searchResultsDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetSearchPeopleBySearchResultsDbId",
+      "operationName": "Get the results of a `People` search request",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "People",
+      "classification": {
+        "primaryDomain": null,
+        "basis": "unassigned",
+        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Get the results of a `People` search request",
+      "sourceDescription": "Get the results of a `People` search request <br/>\nClients should submit a search request using the corresponding `POST /search/people` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Get the results of a `People` search request",
+        "Get the results of a `People` search request <br/>\nClients should submit a search request using the corresponding `POST /search/people` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use this operation to submit a new search; it retrieves results for an existing search-results identifier."
+      ],
+      "sideEffects": "Reads previously submitted search results; no domain-resource mutation is implied.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "202",
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "202AcceptedSearchResponse",
+        "PersonListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/People/Search_People_SearchResultsDbId_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    }
+  ],
   "buildIntegrity": {
-    "brapiV21InventoryRows": 0,
-    "brapiV21EntriesAdded": 0,
+    "brapiV21InventoryRows": 201,
+    "brapiV21EntriesAdded": 21,
     "genxEntriesAdded": 0,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
