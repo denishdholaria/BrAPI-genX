@@ -12,6 +12,11 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 - Wiring into `generator/` and `BrAPI-Schema/` (built `Generated/` artifacts) is
   deferred as `requires decision` in the RFC. This directory is inert to the
   V2.1 build until that decision is taken.
+- **Classification proposal:** [CLASSIFICATION.md](./CLASSIFICATION.md) defines
+  a scientific domain taxonomy distinct from cross-cutting contract capabilities.
+  [Conformance/domain-classification.yaml](./Conformance/domain-classification.yaml)
+  provides the proposed machine-readable module registry. Both are proposals,
+  not BrAPI community ratification.
 
 ## Objects
 
