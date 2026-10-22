@@ -19,7 +19,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 SPECIFICATION = ROOT / "Specification"
 GENX_ROOT = SPECIFICATION / "BrAPI-GenX"
-CATALOG_PATH = GENX_ROOT / "ENDPOINT-CATALOG.md"
+CATALOG_PATH = GENX_ROOT / "GENX-ENDPOINT-CATALOG.md"
 HTTP_METHODS = {"get", "post", "put", "patch", "delete", "head", "options", "trace"}
 REQUIRED_EXTENSION_FIELDS = {
     "catalogId",
@@ -161,7 +161,7 @@ def validate() -> list[str]:
     else:
         catalogue = CATALOG_PATH.read_text(encoding="utf-8")
         listed_operation_ids = re.findall(
-            r"^- \*\*operationId:\*\* `([^`]+)`", catalogue, flags=re.MULTILINE
+            r"^- \*\*Source OpenAPI operationId:\*\* `([^`]+)`", catalogue, flags=re.MULTILINE
         )
         listed_catalog_ids = re.findall(
             r"^- \*\*Catalogue ID:\*\* `([^`]+)`", catalogue, flags=re.MULTILINE
