@@ -110,7 +110,14 @@ def check() -> list[str]:
             domain = cl.get("primaryDomain")
             if domain is not None and domain not in DOMAINS:
                 errors.append(f"{cid}: invalid primaryDomain {domain!r}.")
-            for cap in cl.get("crossCuttingCapabilities", []):
+            facets = cl.get("crossCuttingCapabilities", [])
+            if domain is None and not facets:
+                errors.append(f"{cid}: null primaryDomain requires at least one crossCuttingCapability; do not leave an operation unclassified.")
+            if cl.get("reviewStatus") not in {"provisional-crosswalk-needs-scientific-review", "defined-in-genx-proposal-community-review-pending"}:
+                errors.append(f"{cid}: classification reviewStatus is missing or unknown.")
+            if cl.get("confidence") not in {"low", "medium", "high"}:
+                errors.append(f"{cid}: classification confidence must be low, medium, or high.")
+            for cap in facets:
                 if cap not in CAPABILITIES:
                     errors.append(f"{cid}: invalid cross-cutting capability {cap!r}.")
             for d in cl.get("contextualDomains", []):
