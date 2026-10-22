@@ -6,6 +6,26 @@ paths:
   /variable-terms:
     get:
       operationId: genxListVariableTermVersions
+      x-brapi-den:
+        catalogId: "brapi-den.genx.v3.variable-terms.list"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C4"]
+        purpose: "List paginated, namespaced versions of observation-variable term definitions, with optional authority, ontology, and lifecycle filters."
+        canBeUsedFor:
+          - "Discover published VariableTerm versions and filter the term registry."
+          - "Resolve which namespaced term definitions are available."
+        mustNotBeUsedFor:
+          - "Treating results as measured observations or trait values."
+          - "Assuming this endpoint implements full Trait, Method, Scale, or ontology-merging lifecycles."
+          - "Assuming terms with similar labels are semantically equivalent."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "V2.1 /brapi/v2/variables"
+          - "V2.1 OntologyTerm schema"
+        decisions: ["RFC-002", "A-03"]
+        proposalStatus: "draft-non-normative"
       summary: List versioned observation-variable terms
       description: Return a paged list of namespaced observation-variable term versions across authorities. All supplied filters combine with AND.
       parameters:
@@ -46,6 +66,28 @@ paths:
       - VariableTerms
     post:
       operationId: genxPublishVariableTermVersion
+      x-brapi-den:
+        catalogId: "brapi-den.genx.v3.variable-terms.publish-version"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C4"]
+        purpose: "Publish a namespaced VariableTerm definition as a new immutable version, creating the term identity when new or appending a version when known."
+        canBeUsedFor:
+          - "Publish a term definition with explicit version and provenance."
+          - "Retry the same publication idempotently."
+          - "Reject conflicting definitions for the same term identity and version."
+        mustNotBeUsedFor:
+          - "Silently editing a published version."
+          - "Deleting a term used by historical observations."
+          - "Merging cross-authority terms or asserting equivalence without a separate mapping contract."
+        sideEffects: "Creates a term or a new immutable term version when valid."
+        idempotency: "Same identity/version plus identical body replays; same pair plus different body is a conflict."
+        semanticNeighbors:
+          - "genxListVariableTermVersions"
+          - "genxGetVariableTermVersion"
+          - "V2.1 /brapi/v2/variables"
+        decisions: ["RFC-002", "A-03"]
+        proposalStatus: "draft-non-normative"
       summary: Publish one immutable observation-variable term version
       description: |-
         Unknown variableDbId creates; known id with a new version appends;
