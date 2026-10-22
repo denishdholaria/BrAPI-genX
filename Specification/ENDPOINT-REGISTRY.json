@@ -1256,11 +1256,1285 @@
       "implementationStatus": "not-verified",
       "semanticNeighborIds": [],
       "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.get.programs",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/programs",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetPrograms",
+      "operationName": "Get a filtered list of breeding Programs",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Programs",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Get a filtered list of breeding Programs",
+      "sourceDescription": "Get a filtered list of breeding Programs. This list can be filtered by common crop name to narrow results to a specific crop.",
+      "canBeUsedFor": [
+        "Get a filtered list of breeding Programs",
+        "Get a filtered list of breeding Programs. This list can be filtered by common crop name to narrow results to a specific crop."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [
+        "abbreviation",
+        "programType"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "ProgramListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Programs/Programs_GET_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.post.programs",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/programs",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostPrograms",
+      "operationName": "Add new breeding Programs to the database",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Programs",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Add new breeding Programs to the database",
+      "sourceDescription": "Add new breeding Programs to the database. The `programDbId` is set by the server, all other fields are take from the request body, or a default value is used.",
+      "canBeUsedFor": [
+        "Add new breeding Programs to the database",
+        "Add new breeding Programs to the database. The `programDbId` is set by the server, all other fields are take from the request body, or a default value is used."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get operation.",
+        "Do not assume retries are idempotent unless explicitly guaranteed."
+      ],
+      "sideEffects": "State-changing submission or creation as specified; request and response schemas determine exact effect.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "ProgramNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "ProgramListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Programs/Programs_GET_POST.yaml",
+        "inventoryLine": 49,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.get.programs.by-programdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/programs/{programDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetProgramsByProgramDbId",
+      "operationName": "Get a breeding Program by Id",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Programs",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Get a breeding Program by Id",
+      "sourceDescription": "Get a single breeding Program by Id. This can be used to quickly get the details of a Program when you have the Id from another entity.",
+      "canBeUsedFor": [
+        "Get a breeding Program by Id",
+        "Get a single breeding Program by Id. This can be used to quickly get the details of a Program when you have the Id from another entity."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [
+        "programDbId"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "ProgramSingleResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Programs/Programs_ProgramDbId_GET_PUT.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.put.programs.by-programdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "PUT",
+      "path": "/programs/{programDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PutProgramsByProgramDbId",
+      "operationName": "Update an existing Program",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Programs",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Update an existing Program",
+      "sourceDescription": "Update the details of an existing breeding Program.",
+      "canBeUsedFor": [
+        "Update an existing Program",
+        "Update the details of an existing breeding Program."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get or generic deletion operation.",
+        "Do not infer field-level merge or concurrency semantics unless specified."
+      ],
+      "sideEffects": "Updates or replaces the addressed resource(s) as specified.",
+      "idempotency": "HTTP PUT has idempotent method semantics; exact business effects remain defined by the operation contract.",
+      "parameters": [
+        "programDbId"
+      ],
+      "requestSchemaRefs": [
+        "ProgramNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "ProgramSingleResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Programs/Programs_ProgramDbId_GET_PUT.yaml",
+        "inventoryLine": 31,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.post.search.programs",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/search/programs",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostSearchPrograms",
+      "operationName": "Submit a search request for `Programs`",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Programs",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Submit a search request for `Programs`",
+      "sourceDescription": "Submit a search request for `Programs`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/programs/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Submit a search request for `Programs`",
+        "Submit a search request for `Programs`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/programs/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not treat this as creating or updating the searched domain resource; it submits a search request.",
+        "Search replay/deduplication is not asserted unless separately documented."
+      ],
+      "sideEffects": "Submits a search query; a search-results record may be created; domain-resource creation is not implied.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "ProgramSearchRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "202",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "ProgramListResponse",
+        "202AcceptedSearchResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Programs/Search_Programs_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.get.search.programs.by-searchresultsdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/search/programs/{searchResultsDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetSearchProgramsBySearchResultsDbId",
+      "operationName": "Get the results of a `Programs` search request",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Programs",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Get the results of a `Programs` search request",
+      "sourceDescription": "Get the results of a `Programs` search request <br/>\nClients should submit a search request using the corresponding `POST /search/programs` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Get the results of a `Programs` search request",
+        "Get the results of a `Programs` search request <br/>\nClients should submit a search request using the corresponding `POST /search/programs` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to submit a new search; retrieves results for an existing search-results identifier."
+      ],
+      "sideEffects": "Reads previously submitted search results.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "202",
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "202AcceptedSearchResponse",
+        "ProgramListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Programs/Search_Programs_SearchResultsDbId_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.get.seasons",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/seasons",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetSeasons",
+      "operationName": "Get the Seasons",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Seasons",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Get the Seasons",
+      "sourceDescription": "Call to retrieve all seasons in the database.\n\nA season is made of 2 parts; the primary year and a term which defines a segment of the year. \nThis could be a traditional season, like \"Spring\" or \"Summer\" or this could be a month, like \n\"May\" or \"June\" or this could be an arbitrary season name which is meaningful to the breeding \nprogram like \"PlantingTime_3\" or \"Season E",
+      "canBeUsedFor": [
+        "Get the Seasons",
+        "Call to retrieve all seasons in the database.\n\nA season is made of 2 parts; the primary year and a term which defines a segment of the year. \nThis could be a traditional season, like \"Spring\" or \"Summer\" or this could be a month, like \n\"May\" or \"June\" or this could be an arbitrary season name which is meaningful to the breeding \nprogram like \"PlantingTime_3\" or \"Season E"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "SeasonListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Seasons/Seasons_GET_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.post.seasons",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/seasons",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostSeasons",
+      "operationName": "POST new Seasons",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Seasons",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "POST new Seasons",
+      "sourceDescription": "Add new season entries to the database",
+      "canBeUsedFor": [
+        "POST new Seasons",
+        "Add new season entries to the database"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get operation.",
+        "Do not assume retries are idempotent unless explicitly guaranteed."
+      ],
+      "sideEffects": "State-changing submission or creation as specified; request and response schemas determine exact effect.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "Season"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "SeasonListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Seasons/Seasons_GET_POST.yaml",
+        "inventoryLine": 59,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.get.seasons.by-seasondbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/seasons/{seasonDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetSeasonsBySeasonDbId",
+      "operationName": "Get the a single Season",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Seasons",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Get the a single Season",
+      "sourceDescription": "Get the a single Season",
+      "canBeUsedFor": [
+        "Get the a single Season",
+        "Get the a single Season"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "SeasonSingleResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Seasons/Seasons_SeasonDbId_GET_PUT.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.put.seasons.by-seasondbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "PUT",
+      "path": "/seasons/{seasonDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PutSeasonsBySeasonDbId",
+      "operationName": "Update existing Seasons",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Seasons",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Update existing Seasons",
+      "sourceDescription": "Update existing Seasons",
+      "canBeUsedFor": [
+        "Update existing Seasons",
+        "Update existing Seasons"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get or generic deletion operation.",
+        "Do not infer field-level merge or concurrency semantics unless specified."
+      ],
+      "sideEffects": "Updates or replaces the addressed resource(s) as specified.",
+      "idempotency": "HTTP PUT has idempotent method semantics; exact business effects remain defined by the operation contract.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "Season"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "SeasonSingleResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Seasons/Seasons_SeasonDbId_GET_PUT.yaml",
+        "inventoryLine": 32,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.get.serverinfo",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/serverinfo",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetServerinfo",
+      "operationName": "Get the list of implemented Calls",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Server Info",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1"
+        ],
+        "basis": "inferred-from-route",
+        "reason": "Server capability discovery is cross-cutting.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Get the list of implemented Calls",
+      "sourceDescription": "Implementation Notes\n\nHaving a consistent structure for the path string of each call is very \nimportant for teams to be able to connect and find errors. Read more on Github.\n\nHere are the rules for the path of each call that should be returned\n\nEvery word in the call path should match the documentation exactly, both in \nspelling and capitalization. Note that path strings are all lower case, but \npath parameters are camel case.\n\nEach path should start relative to \\\"/\\\" and therefore should not include \\\"/\\\"\n\nNo leading or trailing slashes (\\\"/\\\") \n\nPath parameters are wrapped in curly braces (\\\"{}\\\"). The name of the path parameter \nshould be spelled exactly as it is specified in the documentation.\n\nExamples \n\nGOOD   \"call\": \"germplasm/{germplasmDbId}/pedigree\" \n\nBAD    \"call\": \"germplasm/{id}/pedigree\"\n\nBAD    \"call\": \"germplasm/{germplasmDBid}/pedigree\" \n\nBAD    \"call\": \"brapi/v2/germplasm/{germplasmDbId}/pedigree\" \n\nBAD    \"call\": \"/germplasm/{germplasmDbId}/pedigree/\" \n\nBAD    \"call\": \"germplasm/<germplasmDbId>/pedigree",
+      "canBeUsedFor": [
+        "Get the list of implemented Calls",
+        "Implementation Notes\n\nHaving a consistent structure for the path string of each call is very \nimportant for teams to be able to connect and find errors. Read more on Github.\n\nHere are the rules for the path of each call that should be returned\n\nEvery word in the call path should match the documentation exactly, both in \nspelling and capitalization. Note that path strings are all lower case, but \npath parameters are camel case.\n\nEach path should start relative to \\\"/\\\" and therefore should not include \\\"/\\\"\n\nNo leading or trailing slashes (\\\"/\\\") \n\nPath parameters are wrapped in curly braces (\\\"{}\\\"). The name of the path parameter \nshould be spelled exactly as it is specified in the documentation.\n\nExamples \n\nGOOD   \"call\": \"germplasm/{germplasmDbId}/pedigree\" \n\nBAD    \"call\": \"germplasm/{id}/pedigree\"\n\nBAD    \"call\": \"germplasm/{germplasmDBid}/pedigree\" \n\nBAD    \"call\": \"brapi/v2/germplasm/{germplasmDbId}/pedigree\" \n\nBAD    \"call\": \"/germplasm/{germplasmDbId}/pedigree/\" \n\nBAD    \"call\": \"germplasm/<germplasmDbId>/pedigree"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/ServerInfo/ServerInfo_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.post.search.studies",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/search/studies",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostSearchStudies",
+      "operationName": "Submit a search request for `Studies`",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Studies",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Submit a search request for `Studies`",
+      "sourceDescription": "Submit a search request for `Studies`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/studies/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Submit a search request for `Studies`",
+        "Submit a search request for `Studies`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/studies/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not treat this as creating or updating the searched domain resource; it submits a search request.",
+        "Search replay/deduplication is not asserted unless separately documented."
+      ],
+      "sideEffects": "Submits a search query; a search-results record may be created; domain-resource creation is not implied.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "StudySearchRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "202",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "StudyListResponse",
+        "202AcceptedSearchResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Studies/Search_Studies_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.get.search.studies.by-searchresultsdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/search/studies/{searchResultsDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetSearchStudiesBySearchResultsDbId",
+      "operationName": "Get the results of a `Studies` search request",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Studies",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Get the results of a `Studies` search request",
+      "sourceDescription": "Get the results of a `Studies` search request <br/>\nClients should submit a search request using the corresponding `POST /search/studies` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Get the results of a `Studies` search request",
+        "Get the results of a `Studies` search request <br/>\nClients should submit a search request using the corresponding `POST /search/studies` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to submit a new search; retrieves results for an existing search-results identifier."
+      ],
+      "sideEffects": "Reads previously submitted search results.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "202",
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "202AcceptedSearchResponse",
+        "StudyListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Studies/Search_Studies_SearchResultsDbId_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.get.studies",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/studies",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetStudies",
+      "operationName": "Get a filtered list of Studies",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Studies",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Get a filtered list of Studies",
+      "sourceDescription": "Get list of studies\n\nStartDate and endDate should be ISO-8601 format for dates",
+      "canBeUsedFor": [
+        "Get a filtered list of Studies",
+        "Get list of studies\n\nStartDate and endDate should be ISO-8601 format for dates"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "StudyListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Studies/Studies_GET_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.post.studies",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/studies",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostStudies",
+      "operationName": "Create new Studies.",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Studies",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Create new Studies.",
+      "sourceDescription": "Create new studies\n\nImplementation Notes\n\nStartDate and endDate should be ISO-8601 format for dates\n\n`studyDbId` is generated by the server.",
+      "canBeUsedFor": [
+        "Create new Studies.",
+        "Create new studies\n\nImplementation Notes\n\nStartDate and endDate should be ISO-8601 format for dates\n\n`studyDbId` is generated by the server."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get operation.",
+        "Do not assume retries are idempotent unless explicitly guaranteed."
+      ],
+      "sideEffects": "State-changing submission or creation as specified; request and response schemas determine exact effect.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "StudyNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "StudyListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Studies/Studies_GET_POST.yaml",
+        "inventoryLine": 108,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.get.studies.by-studydbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/studies/{studyDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetStudiesByStudyDbId",
+      "operationName": "Get the details for a specific Study",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Studies",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Get the details for a specific Study",
+      "sourceDescription": "Retrieve the information of the study required for field data collection\n\nAn additionalInfo field was added to provide a controlled vocabulary for less common data fields.",
+      "canBeUsedFor": [
+        "Get the details for a specific Study",
+        "Retrieve the information of the study required for field data collection\n\nAn additionalInfo field was added to provide a controlled vocabulary for less common data fields."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "StudySingleResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Studies/Studies_StudyDbId_GET_PUT.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.put.studies.by-studydbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "PUT",
+      "path": "/studies/{studyDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PutStudiesByStudyDbId",
+      "operationName": "Update an existing Study",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Studies",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Update an existing Study",
+      "sourceDescription": "Update an existing Study with new data",
+      "canBeUsedFor": [
+        "Update an existing Study",
+        "Update an existing Study with new data"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get or generic deletion operation.",
+        "Do not infer field-level merge or concurrency semantics unless specified."
+      ],
+      "sideEffects": "Updates or replaces the addressed resource(s) as specified.",
+      "idempotency": "HTTP PUT has idempotent method semantics; exact business effects remain defined by the operation contract.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "StudyNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "StudySingleResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Studies/Studies_StudyDbId_GET_PUT.yaml",
+        "inventoryLine": 34,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.get.studytypes",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/studytypes",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetStudytypes",
+      "operationName": "Get the Study Types",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Studies",
+      "classification": {
+        "primaryDomain": null,
+        "basis": "unassigned",
+        "reason": "Generic shared/reference resource is not assigned to a scientific domain without review.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Get the Study Types",
+      "sourceDescription": "Call to retrieve the list of study types.",
+      "canBeUsedFor": [
+        "Get the Study Types",
+        "Call to retrieve the list of study types."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Studies/StudyTypes_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.post.search.trials",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/search/trials",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostSearchTrials",
+      "operationName": "Submit a search request for `Trials`",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Trials",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Submit a search request for `Trials`",
+      "sourceDescription": "Submit a search request for `Trials`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/trials/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Submit a search request for `Trials`",
+        "Submit a search request for `Trials`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/trials/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not treat this as creating or updating the searched domain resource; it submits a search request.",
+        "Search replay/deduplication is not asserted unless separately documented."
+      ],
+      "sideEffects": "Submits a search query; a search-results record may be created; domain-resource creation is not implied.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "TrialSearchRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "202",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "TrialListResponse",
+        "202AcceptedSearchResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Trials/Search_Trials_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.get.search.trials.by-searchresultsdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/search/trials/{searchResultsDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetSearchTrialsBySearchResultsDbId",
+      "operationName": "Get the results of a `Trials` search request",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Trials",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Get the results of a `Trials` search request",
+      "sourceDescription": "Get the results of a `Trials` search request <br/>\nClients should submit a search request using the corresponding `POST /search/trials` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Get the results of a `Trials` search request",
+        "Get the results of a `Trials` search request <br/>\nClients should submit a search request using the corresponding `POST /search/trials` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to submit a new search; retrieves results for an existing search-results identifier."
+      ],
+      "sideEffects": "Reads previously submitted search results.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "202",
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "202AcceptedSearchResponse",
+        "TrialListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Trials/Search_Trials_SearchResultsDbId_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.get.trials",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/trials",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetTrials",
+      "operationName": "Get a filtered list of Trials",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Trials",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Get a filtered list of Trials",
+      "sourceDescription": "Retrieve a filtered list of breeding Trials. A Trial is a collection of Studies",
+      "canBeUsedFor": [
+        "Get a filtered list of Trials",
+        "Retrieve a filtered list of breeding Trials. A Trial is a collection of Studies"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [
+        "active",
+        "contactDbId",
+        "locationDbId",
+        "searchDateRangeStart",
+        "searchDateRangeEnd",
+        "trialPUI",
+        "sortBy",
+        "sortOrder"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "TrialListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Trials/Trials_GET_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.post.trials",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/trials",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostTrials",
+      "operationName": "Create new trials",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Trials",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Create new trials",
+      "sourceDescription": "Create new breeding Trials. A Trial represents a collection of related Studies. `trialDbId` is generated by the server.",
+      "canBeUsedFor": [
+        "Create new trials",
+        "Create new breeding Trials. A Trial represents a collection of related Studies. `trialDbId` is generated by the server."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get operation.",
+        "Do not assume retries are idempotent unless explicitly guaranteed."
+      ],
+      "sideEffects": "State-changing submission or creation as specified; request and response schemas determine exact effect.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "TrialNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "TrialListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Trials/Trials_GET_POST.yaml",
+        "inventoryLine": 118,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
-    "brapiV21EntriesAdded": 21,
+    "brapiV21EntriesAdded": 43,
     "genxEntriesAdded": 0,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
