@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "1.0.0-draft",
+  "title": "BrAPI-Den Master Endpoint Registry",
+  "status": "proposal-non-normative",
+  "generatedAt": "2026-10-22",
+  "purpose": "Canonical catalog identity and semantic metadata for published BrAPI v2.1 operations and proposed BrAPI-GenX operations. This registry does not prove runtime availability.",
+  "principles": [
+    "OpenAPI route, method, request/response schemas, and documented responses remain authoritative for each wire contract.",
+    "A catalogId is a stable BrAPI-Den registry key. It does not replace an OpenAPI operationId.",
+    "For BrAPI v2.1 operations where the source specification has no operationId, operationIdInSource is null; recommendedOperationId is advisory only.",
+    "Proposed domain classification is a crosswalk, not an official BrAPI community reclassification.",
+    "BijMantra implementation/source evidence is tracked separately from standard contract status.",
+    "A semantic neighbor does not imply equivalence or safe dual-write behavior."
+  ],
+  "sources": {
+    "brapiV21": {
+      "repository": "denishdholaria/BrAPI-Den",
+      "ref": "brapi-V2.1",
+      "inventoryEvidence": "BijMantra endpoints-inventory.md generated 2026-10-17",
+      "expectedOperationCount": 201,
+      "standardModuleCount": 4
+    },
+    "genx": {
+      "repository": "denishdholaria/BrAPI-Den",
+      "ref": "proposal/scientific-domain-classification",
+      "expectedOperationCount": 21,
+      "status": "proposal-non-normative"
+    }
+  },
+  "officialBrapiModules": [
+    "BrAPI-Core",
+    "BrAPI-Germplasm",
+    "BrAPI-Genotyping",
+    "BrAPI-Phenotyping"
+  ],
+  "proposedDomainClasses": {
+    "D1": "Germplasm and Biological Resources",
+    "D2": "Breeding Programs and Experimental Design",
+    "D3": "Genotyping and Molecular Genomics",
+    "D4": "Phenotyping and Plant Observations",
+    "D5": "Environment, Agroecology and Field Context",
+    "D6": "Crop Production and Material Operations",
+    "D7": "Scientific Analysis, Models and Derived Evidence"
+  },
+  "crossCuttingCapabilities": {
+    "C1": "Identity, versioning and capability discovery",
+    "C2": "Provenance, evidence and uncertainty",
+    "C3": "Asynchronous execution and idempotency",
+    "C4": "Scientific terminology governance",
+    "C5": "Data exchange, publication and access",
+    "C6": "Artifact integrity and external references",
+    "C7": "Streaming and temporal aggregation",
+    "C8": "Contract conformance and governance",
+    "C9": "Security, authority and tenancy"
+  },
+  "entries": [],
+  "buildIntegrity": {
+    "brapiV21InventoryRows": 0,
+    "brapiV21EntriesAdded": 0,
+    "genxEntriesAdded": 0,
+    "unmatchedV21InventoryRows": [],
+    "duplicateCatalogIds": [],
+    "duplicateMethodRouteKeys": [],
+    "notes": []
+  }
+}
