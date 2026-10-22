@@ -2530,11 +2530,1109 @@
       "implementationStatus": "not-verified",
       "semanticNeighborIds": [],
       "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.get.trials.by-trialdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/trials/{trialDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetTrialsByTrialDbId",
+      "operationName": "Get the details of a specific Trial",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Trials",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Get the details of a specific Trial",
+      "sourceDescription": "Get the details of a specific Trial",
+      "canBeUsedFor": [
+        "Get the details of a specific Trial",
+        "Get the details of a specific Trial"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "TrialSingleResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Trials/Trials_TrialDbId_GET_PUT.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.core.put.trials.by-trialdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "PUT",
+      "path": "/trials/{trialDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PutTrialsByTrialDbId",
+      "operationName": "Update the details of an existing Trial",
+      "brapiModule": "BrAPI-Core",
+      "brapiTag": "Trials",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
+        "officialModule": "BrAPI-Core"
+      },
+      "purpose": "Update the details of an existing Trial",
+      "sourceDescription": "Update the details of an existing Trial",
+      "canBeUsedFor": [
+        "Update the details of an existing Trial",
+        "Update the details of an existing Trial"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get or generic deletion operation.",
+        "Do not infer merge or concurrency semantics unless specified."
+      ],
+      "sideEffects": "Updates or replaces addressed resource(s) as specified.",
+      "idempotency": "HTTP PUT has idempotent method semantics; exact business effects remain defined by the operation contract.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "TrialNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "TrialSingleResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Core/Trials/Trials_TrialDbId_GET_PUT.yaml",
+        "inventoryLine": 31,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.genotyping.get.allelematrix",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/allelematrix",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetAllelematrix",
+      "operationName": "Use this endpoint to retrieve a two dimensional matrix of genotype data",
+      "brapiModule": "BrAPI-Genotyping",
+      "brapiTag": null,
+      "classification": {
+        "primaryDomain": "D3",
+        "basis": "inferred-from-official-module",
+        "reason": "Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.",
+        "officialModule": "BrAPI-Genotyping"
+      },
+      "purpose": "Use this endpoint to retrieve a two dimensional matrix of genotype data",
+      "sourceDescription": "Use this endpoint to retrieve a two dimensional matrix of genotype data. The response structure is based on the VCF file format, \nbut the search and filter parameters give the ability to slice and merge data sets. This allows the user to return the subset of data they are interested in, \nwithout having to download the entire genotype file.\n<br/>Each row of data (outer array) corresponds to a variant definition, and each column (inner array) corresponds to a callSet.",
+      "canBeUsedFor": [
+        "Use this endpoint to retrieve a two dimensional matrix of genotype data",
+        "Use this endpoint to retrieve a two dimensional matrix of genotype data. The response structure is based on the VCF file format, \nbut the search and filter parameters give the ability to slice and merge data sets. This allows the user to return the subset of data they are interested in, \nwithout having to download the entire genotype file.\n<br/>Each row of data (outer array) corresponds to a variant definition, and each column (inner array) corresponds to a callSet."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "AlleleMatrixResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Genotyping/AlleleMatrix/AlleleMatrix_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.genotyping.post.search.allelematrix",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/search/allelematrix",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostSearchAllelematrix",
+      "operationName": "Submit a search request for a Allele Matrix",
+      "brapiModule": "BrAPI-Genotyping",
+      "brapiTag": "Allele Matrix",
+      "classification": {
+        "primaryDomain": "D3",
+        "basis": "inferred-from-official-module",
+        "reason": "Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.",
+        "officialModule": "BrAPI-Genotyping"
+      },
+      "purpose": "Submit a search request for a Allele Matrix",
+      "sourceDescription": "Use this endpoint to retrieve a two dimensional matrix of genotype data. The response structure is based on the VCF format, but the search and filter parameters give the ability to slice and merge data sets. This allows the user to return the subset of data they are interested in, without having to download the entire genotype file.\n<br/>Each row of data (outer array) corresponds to a variant definition, and each column (inner array) corresponds to a callSet. \n<br/>Search requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. If a server needs more time to process the request, it might respond with a `searchResultsDbId`. Use the corresponding `GET /search/allelematrix/{searchResultsDbId}` to retrieve the results of the search. \n<br/>Review the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Submit a search request for a Allele Matrix",
+        "Use this endpoint to retrieve a two dimensional matrix of genotype data. The response structure is based on the VCF format, but the search and filter parameters give the ability to slice and merge data sets. This allows the user to return the subset of data they are interested in, without having to download the entire genotype file.\n<br/>Each row of data (outer array) corresponds to a variant definition, and each column (inner array) corresponds to a callSet. \n<br/>Search requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. If a server needs more time to process the request, it might respond with a `searchResultsDbId`. Use the corresponding `GET /search/allelematrix/{searchResultsDbId}` to retrieve the results of the search. \n<br/>Review the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not treat as create/update of searched domain resource; it submits a search request.",
+        "Search replay/deduplication is not asserted unless separately documented."
+      ],
+      "sideEffects": "Submits a search query; a search-results record may be created; domain-resource creation is not implied.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "AlleleMatrixSearchRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "202",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "AlleleMatrixResponse",
+        "202AcceptedSearchResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Genotyping/AlleleMatrix/Search_AlleleMatrix_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.genotyping.get.search.allelematrix.by-searchresultsdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/search/allelematrix/{searchResultsDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetSearchAllelematrixBySearchResultsDbId",
+      "operationName": "Get the results of a Allele Matrix search request",
+      "brapiModule": "BrAPI-Genotyping",
+      "brapiTag": null,
+      "classification": {
+        "primaryDomain": "D3",
+        "basis": "inferred-from-official-module",
+        "reason": "Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.",
+        "officialModule": "BrAPI-Genotyping"
+      },
+      "purpose": "Get the results of a Allele Matrix search request",
+      "sourceDescription": "Use this endpoint to retrieve a two dimensional matrix of genotype data. The response structure is based on the VCF format, but the search and filter parameters give the ability to slice and merge data sets. This allows the user to return the subset of data they are interested in, without having to download the entire genotype file.\n<br/>Each row of data (outer array) corresponds to a variant definition, and each column (inner array) corresponds to a callSet. \n<br/>Clients should submit a search request using the corresponding `POST /search/allelematrix` endpoint. Search requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. If a server needs more time to process the request, it might respond with a `searchResultsDbId`. Use this endpoint to retrieve the results of the search. \n<br/>Review the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Get the results of a Allele Matrix search request",
+        "Use this endpoint to retrieve a two dimensional matrix of genotype data. The response structure is based on the VCF format, but the search and filter parameters give the ability to slice and merge data sets. This allows the user to return the subset of data they are interested in, without having to download the entire genotype file.\n<br/>Each row of data (outer array) corresponds to a variant definition, and each column (inner array) corresponds to a callSet. \n<br/>Clients should submit a search request using the corresponding `POST /search/allelematrix` endpoint. Search requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. If a server needs more time to process the request, it might respond with a `searchResultsDbId`. Use this endpoint to retrieve the results of the search. \n<br/>Review the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to submit a new search; retrieves results for an existing search-results identifier."
+      ],
+      "sideEffects": "Reads previously submitted search results.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "202",
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "202AcceptedSearchResponse",
+        "AlleleMatrixResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Genotyping/AlleleMatrix/Search_AlleleMatrix_SearchResultsDbId_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.genotyping.get.callsets.by-callsetdbid.calls",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/callsets/{callSetDbId}/calls",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetCallsetsByCallSetDbIdCalls",
+      "operationName": "Gets a list of `Calls` associated with a `CallSet`.",
+      "brapiModule": "BrAPI-Genotyping",
+      "brapiTag": null,
+      "classification": {
+        "primaryDomain": "D3",
+        "basis": "inferred-from-official-module",
+        "reason": "Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.",
+        "officialModule": "BrAPI-Genotyping"
+      },
+      "purpose": "Gets a list of `Calls` associated with a `CallSet`.",
+      "sourceDescription": "Gets a list of `Calls` associated with a `CallSet`.",
+      "canBeUsedFor": [
+        "Gets a list of `Calls` associated with a `CallSet`.",
+        "Gets a list of `Calls` associated with a `CallSet`."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "CallsListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Genotyping/CallSets/CallSets_CallSetId_Calls_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.genotyping.get.callsets.by-callsetdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/callsets/{callSetDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetCallsetsByCallSetDbId",
+      "operationName": "Gets a `CallSet` by ID.",
+      "brapiModule": "BrAPI-Genotyping",
+      "brapiTag": null,
+      "classification": {
+        "primaryDomain": "D3",
+        "basis": "inferred-from-official-module",
+        "reason": "Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.",
+        "officialModule": "BrAPI-Genotyping"
+      },
+      "purpose": "Gets a `CallSet` by ID.",
+      "sourceDescription": "Gets a `CallSet` by ID.",
+      "canBeUsedFor": [
+        "Gets a `CallSet` by ID.",
+        "Gets a `CallSet` by ID."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Genotyping/CallSets/CallSets_CallSetId_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.genotyping.get.callsets",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/callsets",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetCallsets",
+      "operationName": "Gets a filtered list of `CallSet` JSON objects.",
+      "brapiModule": "BrAPI-Genotyping",
+      "brapiTag": null,
+      "classification": {
+        "primaryDomain": "D3",
+        "basis": "inferred-from-official-module",
+        "reason": "Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.",
+        "officialModule": "BrAPI-Genotyping"
+      },
+      "purpose": "Gets a filtered list of `CallSet` JSON objects.",
+      "sourceDescription": "Gets a filtered list of `CallSet` JSON objects.",
+      "canBeUsedFor": [
+        "Gets a filtered list of `CallSet` JSON objects.",
+        "Gets a filtered list of `CallSet` JSON objects."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [
+        "callSetDbId",
+        "callSetName",
+        "variantSetDbId",
+        "sampleDbId"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "CallSetsListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Genotyping/CallSets/CallSets_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.genotyping.post.search.callsets",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/search/callsets",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostSearchCallsets",
+      "operationName": "Submit a search request for `CallSets`",
+      "brapiModule": "BrAPI-Genotyping",
+      "brapiTag": "Call Sets",
+      "classification": {
+        "primaryDomain": "D3",
+        "basis": "inferred-from-official-module",
+        "reason": "Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.",
+        "officialModule": "BrAPI-Genotyping"
+      },
+      "purpose": "Submit a search request for `CallSets`",
+      "sourceDescription": "Submit a search request for `CallSets` \n<br> Search requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/callsets/{searchResultsDbId}` to retrieve the results of the search. \n<br> Review the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Submit a search request for `CallSets`",
+        "Submit a search request for `CallSets` \n<br> Search requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/callsets/{searchResultsDbId}` to retrieve the results of the search. \n<br> Review the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not treat as create/update of searched domain resource; it submits a search request.",
+        "Search replay/deduplication is not asserted unless separately documented."
+      ],
+      "sideEffects": "Submits a search query; a search-results record may be created; domain-resource creation is not implied.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "CallSetsSearchRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "202",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "CallSetsListResponse",
+        "202AcceptedSearchResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Genotyping/CallSets/Search_CallSets_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.genotyping.get.search.callsets.by-searchresultsdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/search/callsets/{searchResultsDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetSearchCallsetsBySearchResultsDbId",
+      "operationName": "Get the results of a `CallSets` search request",
+      "brapiModule": "BrAPI-Genotyping",
+      "brapiTag": "Call Sets",
+      "classification": {
+        "primaryDomain": "D3",
+        "basis": "inferred-from-official-module",
+        "reason": "Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.",
+        "officialModule": "BrAPI-Genotyping"
+      },
+      "purpose": "Get the results of a `CallSets` search request",
+      "sourceDescription": "Get the results of a `CallSets` search request \n<br> Clients should submit a search request using the corresponding `POST /search/callsets` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. \n<br>Review the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Get the results of a `CallSets` search request",
+        "Get the results of a `CallSets` search request \n<br> Clients should submit a search request using the corresponding `POST /search/callsets` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. \n<br>Review the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to submit a new search; retrieves results for an existing search-results identifier."
+      ],
+      "sideEffects": "Reads previously submitted search results.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "202",
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "202AcceptedSearchResponse",
+        "CallSetsListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Genotyping/CallSets/Search_CallSets_SearchResultsDbId_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.genotyping.get.calls",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/calls",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetCalls",
+      "operationName": "Gets a filtered list of `Calls`",
+      "brapiModule": "BrAPI-Genotyping",
+      "brapiTag": null,
+      "classification": {
+        "primaryDomain": "D3",
+        "basis": "inferred-from-official-module",
+        "reason": "Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.",
+        "officialModule": "BrAPI-Genotyping"
+      },
+      "purpose": "Gets a filtered list of `Calls`",
+      "sourceDescription": "Gets a filtered list of `Call` JSON objects.",
+      "canBeUsedFor": [
+        "Gets a filtered list of `Calls`",
+        "Gets a filtered list of `Call` JSON objects."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "CallsListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Genotyping/Calls/Calls_GET_PUT.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.genotyping.put.calls",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "PUT",
+      "path": "/calls",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PutCalls",
+      "operationName": "Update existing `Calls` with new genotype value or metadata",
+      "brapiModule": "BrAPI-Genotyping",
+      "brapiTag": null,
+      "classification": {
+        "primaryDomain": "D3",
+        "basis": "inferred-from-official-module",
+        "reason": "Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.",
+        "officialModule": "BrAPI-Genotyping"
+      },
+      "purpose": "Update existing `Calls` with new genotype value or metadata",
+      "sourceDescription": "Update existing `Calls` with new genotype value or metadata\n<br/>Implementation Note - \n<br/>A `Call` object does not have a DbId of its own. It is defined by the unique combination of \n`callSetDbId`, `variantDbId`, and `variantSetDbId`. These three fields MUST be present for every \n`call` update request. This endpoint should not allow these fields to be modified for a given \n`call`. Modifying these fields in the database is effectively moving a cell to a different location\nin the genotype matrix. This action is dangerous and can cause data collisions.",
+      "canBeUsedFor": [
+        "Update existing `Calls` with new genotype value or metadata",
+        "Update existing `Calls` with new genotype value or metadata\n<br/>Implementation Note - \n<br/>A `Call` object does not have a DbId of its own. It is defined by the unique combination of \n`callSetDbId`, `variantDbId`, and `variantSetDbId`. These three fields MUST be present for every \n`call` update request. This endpoint should not allow these fields to be modified for a given \n`call`. Modifying these fields in the database is effectively moving a cell to a different location\nin the genotype matrix. This action is dangerous and can cause data collisions."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get or generic deletion operation.",
+        "Do not infer merge or concurrency semantics unless specified."
+      ],
+      "sideEffects": "Updates or replaces addressed resource(s) as specified.",
+      "idempotency": "HTTP PUT has idempotent method semantics; exact business effects remain defined by the operation contract.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "Call"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "CallsListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Genotyping/Calls/Calls_GET_PUT.yaml",
+        "inventoryLine": 69,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.genotyping.post.search.calls",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/search/calls",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostSearchCalls",
+      "operationName": "Submit a search request for `Calls`",
+      "brapiModule": "BrAPI-Genotyping",
+      "brapiTag": "Calls",
+      "classification": {
+        "primaryDomain": "D3",
+        "basis": "inferred-from-official-module",
+        "reason": "Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.",
+        "officialModule": "BrAPI-Genotyping"
+      },
+      "purpose": "Submit a search request for `Calls`",
+      "sourceDescription": "Submit a search request for `Calls`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/calls/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details. \n<br/>\n<br/>\n<strong>NOTE:</strong> This endpoint uses Token based pagination. Please Review the \n<a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Pagination\">Pagination documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Submit a search request for `Calls`",
+        "Submit a search request for `Calls`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/calls/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details. \n<br/>\n<br/>\n<strong>NOTE:</strong> This endpoint uses Token based pagination. Please Review the \n<a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Pagination\">Pagination documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not treat as create/update of searched domain resource; it submits a search request.",
+        "Search replay/deduplication is not asserted unless separately documented."
+      ],
+      "sideEffects": "Submits a search query; a search-results record may be created; domain-resource creation is not implied.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "CallsSearchRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "202",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "CallsListResponse",
+        "202AcceptedSearchResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Genotyping/Calls/Search_Calls_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.genotyping.get.search.calls.by-searchresultsdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/search/calls/{searchResultsDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetSearchCallsBySearchResultsDbId",
+      "operationName": "Get the results of a `Calls` search request",
+      "brapiModule": "BrAPI-Genotyping",
+      "brapiTag": null,
+      "classification": {
+        "primaryDomain": "D3",
+        "basis": "inferred-from-official-module",
+        "reason": "Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.",
+        "officialModule": "BrAPI-Genotyping"
+      },
+      "purpose": "Get the results of a `Calls` search request",
+      "sourceDescription": "Get the results of a `Calls` search request <br/>\nClients should submit a search request using the corresponding `POST /search/calls` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.\n<br/>",
+      "canBeUsedFor": [
+        "Get the results of a `Calls` search request",
+        "Get the results of a `Calls` search request <br/>\nClients should submit a search request using the corresponding `POST /search/calls` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.\n<br/>"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to submit a new search; retrieves results for an existing search-results identifier."
+      ],
+      "sideEffects": "Reads previously submitted search results.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "202",
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "202AcceptedSearchResponse",
+        "CallsListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Genotyping/Calls/Search_Calls_SearchResultsDbId_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.genotyping.get.maps",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/maps",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetMaps",
+      "operationName": "Get the Genomic Maps",
+      "brapiModule": "BrAPI-Genotyping",
+      "brapiTag": "Genome Maps",
+      "classification": {
+        "primaryDomain": "D3",
+        "basis": "inferred-from-official-module",
+        "reason": "Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.",
+        "officialModule": "BrAPI-Genotyping"
+      },
+      "purpose": "Get the Genomic Maps",
+      "sourceDescription": "Get list of maps",
+      "canBeUsedFor": [
+        "Get the Genomic Maps",
+        "Get list of maps"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [
+        "mapDbId",
+        "mapPUI",
+        "scientificName",
+        "type"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Genotyping/GenomeMaps/Maps_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.genotyping.get.maps.by-mapdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/maps/{mapDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetMapsByMapDbId",
+      "operationName": "Get the details of a specific Genomic Map",
+      "brapiModule": "BrAPI-Genotyping",
+      "brapiTag": "Genome Maps",
+      "classification": {
+        "primaryDomain": "D3",
+        "basis": "inferred-from-official-module",
+        "reason": "Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.",
+        "officialModule": "BrAPI-Genotyping"
+      },
+      "purpose": "Get the details of a specific Genomic Map",
+      "sourceDescription": "Provides the number of markers on each linkageGroup and the max position on the linkageGroup",
+      "canBeUsedFor": [
+        "Get the details of a specific Genomic Map",
+        "Provides the number of markers on each linkageGroup and the max position on the linkageGroup"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Genotyping/GenomeMaps/Maps_MapDbId_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.genotyping.get.maps.by-mapdbid.linkagegroups",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/maps/{mapDbId}/linkagegroups",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetMapsByMapDbIdLinkagegroups",
+      "operationName": "Get the Linkage Groups of a specific Genomic Map",
+      "brapiModule": "BrAPI-Genotyping",
+      "brapiTag": "Genome Maps",
+      "classification": {
+        "primaryDomain": "D3",
+        "basis": "inferred-from-official-module",
+        "reason": "Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.",
+        "officialModule": "BrAPI-Genotyping"
+      },
+      "purpose": "Get the Linkage Groups of a specific Genomic Map",
+      "sourceDescription": "Get the Linkage Groups of a specific Genomic Map. A Linkage Group is the BrAPI generic term for a named section of a map. A Linkage Group can represent a Chromosome, Scaffold, or Linkage Group.",
+      "canBeUsedFor": [
+        "Get the Linkage Groups of a specific Genomic Map",
+        "Get the Linkage Groups of a specific Genomic Map. A Linkage Group is the BrAPI generic term for a named section of a map. A Linkage Group can represent a Chromosome, Scaffold, or Linkage Group."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Genotyping/GenomeMaps/Maps_MapDbId_LinkageGroups_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.genotyping.get.markerpositions",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/markerpositions",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetMarkerpositions",
+      "operationName": "Get marker position info",
+      "brapiModule": "BrAPI-Genotyping",
+      "brapiTag": "Genome Maps",
+      "classification": {
+        "primaryDomain": "D3",
+        "basis": "inferred-from-official-module",
+        "reason": "Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.",
+        "officialModule": "BrAPI-Genotyping"
+      },
+      "purpose": "Get marker position info",
+      "sourceDescription": "Get marker position information, based on Map, Linkage Group, and Marker ID",
+      "canBeUsedFor": [
+        "Get marker position info",
+        "Get marker position information, based on Map, Linkage Group, and Marker ID"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [
+        "mapDbId",
+        "linkageGroupName",
+        "variantDbId",
+        "minPosition",
+        "maxPosition"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "MarkerPositionListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Genotyping/GenomeMaps/MarkerPositions_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.genotyping.post.search.markerpositions",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/search/markerpositions",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostSearchMarkerpositions",
+      "operationName": "Submit a search request for `MarkerPositions`",
+      "brapiModule": "BrAPI-Genotyping",
+      "brapiTag": "Genome Maps",
+      "classification": {
+        "primaryDomain": "D3",
+        "basis": "inferred-from-official-module",
+        "reason": "Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.",
+        "officialModule": "BrAPI-Genotyping"
+      },
+      "purpose": "Submit a search request for `MarkerPositions`",
+      "sourceDescription": "Submit a search request for `MarkerPositions`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/markerpositions/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Submit a search request for `MarkerPositions`",
+        "Submit a search request for `MarkerPositions`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/markerpositions/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not treat as create/update of searched domain resource; it submits a search request.",
+        "Search replay/deduplication is not asserted unless separately documented."
+      ],
+      "sideEffects": "Submits a search query; a search-results record may be created; domain-resource creation is not implied.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "MarkerPositionSearchRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "202",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "MarkerPositionListResponse",
+        "202AcceptedSearchResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Genotyping/GenomeMaps/Search_MarkerPositions_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
-    "brapiV21EntriesAdded": 43,
+    "brapiV21EntriesAdded": 62,
     "genxEntriesAdded": 0,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
