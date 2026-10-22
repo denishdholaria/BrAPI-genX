@@ -5,6 +5,7 @@ on:
     paths:
       - 'Specification/BrAPI-GenX/**'
       - 'Scripts/checkGenXConformance.py'
+      - 'Scripts/checkGenXEndpointCatalog.py'
       - 'Scripts/test_endpoint_identity.py'
       - 'Scripts/test_capability_negotiation.py'
       - 'Scripts/test_job_idempotency.py'
@@ -17,6 +18,7 @@ on:
     paths:
       - 'Specification/BrAPI-GenX/**'
       - 'Scripts/checkGenXConformance.py'
+      - 'Scripts/checkGenXEndpointCatalog.py'
       - 'Scripts/test_endpoint_identity.py'
       - 'Scripts/test_capability_negotiation.py'
       - 'Scripts/test_job_idempotency.py'
@@ -68,6 +70,8 @@ jobs:
           bun run test
       - name: Run static GenX conformance probes
         run: python Scripts/checkGenXConformance.py
+      - name: Validate semantic endpoint catalogue
+        run: python Scripts/checkGenXEndpointCatalog.py
 
   live-reference-conformance:
     runs-on: ubuntu-latest
