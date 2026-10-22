@@ -7302,11 +7302,1595 @@
       "implementationStatus": "not-verified",
       "semanticNeighborIds": [],
       "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.germplasm.get.attributevalues",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/attributevalues",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetAttributevalues",
+      "operationName": "Get the Germplasm Attribute Values",
+      "brapiModule": "BrAPI-Germplasm",
+      "brapiTag": "Germplasm Attribute Values",
+      "classification": {
+        "primaryDomain": "D1",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Germplasm module; no stronger route-level crosswalk identified.",
+        "officialModule": "BrAPI-Germplasm"
+      },
+      "purpose": "Get the Germplasm Attribute Values",
+      "sourceDescription": "Get the Germplasm Attribute Values",
+      "canBeUsedFor": [
+        "Get the Germplasm Attribute Values",
+        "Get the Germplasm Attribute Values"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [
+        "attributeValueDbId",
+        "attributeDbId",
+        "attributeName"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "GermplasmAttributeValueListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Germplasm/Germplasm_Attribute_Values/AttributesValues_GET_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.germplasm.post.attributevalues",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/attributevalues",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostAttributevalues",
+      "operationName": "Create new Germplasm Attribute Values",
+      "brapiModule": "BrAPI-Germplasm",
+      "brapiTag": "Germplasm Attribute Values",
+      "classification": {
+        "primaryDomain": "D1",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Germplasm module; no stronger route-level crosswalk identified.",
+        "officialModule": "BrAPI-Germplasm"
+      },
+      "purpose": "Create new Germplasm Attribute Values",
+      "sourceDescription": "Create new Germplasm Attribute Values",
+      "canBeUsedFor": [
+        "Create new Germplasm Attribute Values",
+        "Create new Germplasm Attribute Values"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get operation.",
+        "Do not assume retries are idempotent unless explicitly guaranteed."
+      ],
+      "sideEffects": "State-changing submission or creation as specified; schemas determine exact effect.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "GermplasmAttributeValueNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "GermplasmAttributeValueListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Germplasm/Germplasm_Attribute_Values/AttributesValues_GET_POST.yaml",
+        "inventoryLine": 49,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.germplasm.post.search.attributevalues",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/search/attributevalues",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostSearchAttributevalues",
+      "operationName": "Submit a search request for Germplasm `AttributeValues`",
+      "brapiModule": "BrAPI-Germplasm",
+      "brapiTag": "Germplasm Attribute Values",
+      "classification": {
+        "primaryDomain": "D1",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Germplasm module; no stronger route-level crosswalk identified.",
+        "officialModule": "BrAPI-Germplasm"
+      },
+      "purpose": "Submit a search request for Germplasm `AttributeValues`",
+      "sourceDescription": "Submit a search request for Germplasm `AttributeValues`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/attributevalues/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Submit a search request for Germplasm `AttributeValues`",
+        "Submit a search request for Germplasm `AttributeValues`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/attributevalues/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not treat as create/update of searched domain resource; it submits a search request.",
+        "Search replay/deduplication is not asserted unless separately documented."
+      ],
+      "sideEffects": "Submits a search query; a search-results record may be created; domain-resource creation is not implied.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "GermplasmAttributeValueSearchRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "202",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "GermplasmAttributeValueListResponse",
+        "202AcceptedSearchResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Germplasm/Germplasm_Attribute_Values/Search_AttributeValues_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.germplasm.get.search.attributevalues.by-searchresultsdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/search/attributevalues/{searchResultsDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetSearchAttributevaluesBySearchResultsDbId",
+      "operationName": "Get the results of a Germplasm `AttributeValues` search request",
+      "brapiModule": "BrAPI-Germplasm",
+      "brapiTag": "Germplasm Attribute Values",
+      "classification": {
+        "primaryDomain": "D1",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Germplasm module; no stronger route-level crosswalk identified.",
+        "officialModule": "BrAPI-Germplasm"
+      },
+      "purpose": "Get the results of a Germplasm `AttributeValues` search request",
+      "sourceDescription": "Get the results of a Germplasm `AttributeValues` search request <br/>\nClients should submit a search request using the corresponding `POST /search/attributevalues` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Get the results of a Germplasm `AttributeValues` search request",
+        "Get the results of a Germplasm `AttributeValues` search request <br/>\nClients should submit a search request using the corresponding `POST /search/attributevalues` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to submit a new search; retrieves results for an existing search-results identifier."
+      ],
+      "sideEffects": "Reads previously submitted search results.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "202",
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "202AcceptedSearchResponse",
+        "GermplasmAttributeValueListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Germplasm/Germplasm_Attribute_Values/Search_AttributeValues_SearchResultsDbId_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.germplasm.get.attributes.by-attributedbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/attributes/{attributeDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetAttributesByAttributeDbId",
+      "operationName": "Get the details for a specific Germplasm Attribute",
+      "brapiModule": "BrAPI-Germplasm",
+      "brapiTag": "Germplasm Attributes",
+      "classification": {
+        "primaryDomain": "D1",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Germplasm module; no stronger route-level crosswalk identified.",
+        "officialModule": "BrAPI-Germplasm"
+      },
+      "purpose": "Get the details for a specific Germplasm Attribute",
+      "sourceDescription": "Get the details for a specific Germplasm Attribute",
+      "canBeUsedFor": [
+        "Get the details for a specific Germplasm Attribute",
+        "Get the details for a specific Germplasm Attribute"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [
+        "attributeDbId"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "GermplasmAttributeSingleResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Germplasm/Germplasm_Attributes/Attributes_AttributeDbId_GET_PUT.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.germplasm.put.attributes.by-attributedbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "PUT",
+      "path": "/attributes/{attributeDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PutAttributesByAttributeDbId",
+      "operationName": "Update an existing Germplasm Attribute",
+      "brapiModule": "BrAPI-Germplasm",
+      "brapiTag": "Germplasm Attributes",
+      "classification": {
+        "primaryDomain": "D1",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Germplasm module; no stronger route-level crosswalk identified.",
+        "officialModule": "BrAPI-Germplasm"
+      },
+      "purpose": "Update an existing Germplasm Attribute",
+      "sourceDescription": "Update an existing Germplasm Attribute",
+      "canBeUsedFor": [
+        "Update an existing Germplasm Attribute",
+        "Update an existing Germplasm Attribute"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get or generic deletion operation.",
+        "Do not infer merge or concurrency semantics unless specified."
+      ],
+      "sideEffects": "Updates or replaces addressed resource(s) as specified.",
+      "idempotency": "HTTP PUT has idempotent method semantics; exact business effects remain defined by the operation contract.",
+      "parameters": [
+        "attributeDbId"
+      ],
+      "requestSchemaRefs": [
+        "GermplasmAttributeNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "GermplasmAttributeSingleResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Germplasm/Germplasm_Attributes/Attributes_AttributeDbId_GET_PUT.yaml",
+        "inventoryLine": 31,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.germplasm.get.attributes.categories",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/attributes/categories",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetAttributesCategories",
+      "operationName": "Get the Categories of Germplasm Attributes",
+      "brapiModule": "BrAPI-Germplasm",
+      "brapiTag": "Germplasm Attributes",
+      "classification": {
+        "primaryDomain": "D1",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Germplasm module; no stronger route-level crosswalk identified.",
+        "officialModule": "BrAPI-Germplasm"
+      },
+      "purpose": "Get the Categories of Germplasm Attributes",
+      "sourceDescription": "List all available attribute categories.",
+      "canBeUsedFor": [
+        "Get the Categories of Germplasm Attributes",
+        "List all available attribute categories."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Germplasm/Germplasm_Attributes/Attributes_Categories_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.germplasm.get.attributes",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/attributes",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetAttributes",
+      "operationName": "Get the Germplasm Attributes",
+      "brapiModule": "BrAPI-Germplasm",
+      "brapiTag": "Germplasm Attributes",
+      "classification": {
+        "primaryDomain": "D1",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Germplasm module; no stronger route-level crosswalk identified.",
+        "officialModule": "BrAPI-Germplasm"
+      },
+      "purpose": "Get the Germplasm Attributes",
+      "sourceDescription": "List available attributes.",
+      "canBeUsedFor": [
+        "Get the Germplasm Attributes",
+        "List available attributes."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [
+        "attributeCategory",
+        "attributeDbId",
+        "attributeName",
+        "attributePUI"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "GermplasmAttributeListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Germplasm/Germplasm_Attributes/Attributes_GET_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.germplasm.post.attributes",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/attributes",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostAttributes",
+      "operationName": "Create new Germplasm Attributes",
+      "brapiModule": "BrAPI-Germplasm",
+      "brapiTag": "Germplasm Attributes",
+      "classification": {
+        "primaryDomain": "D1",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Germplasm module; no stronger route-level crosswalk identified.",
+        "officialModule": "BrAPI-Germplasm"
+      },
+      "purpose": "Create new Germplasm Attributes",
+      "sourceDescription": "Create new Germplasm Attributes",
+      "canBeUsedFor": [
+        "Create new Germplasm Attributes",
+        "Create new Germplasm Attributes"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get operation.",
+        "Do not assume retries are idempotent unless explicitly guaranteed."
+      ],
+      "sideEffects": "State-changing submission or creation as specified; schemas determine exact effect.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "GermplasmAttributeNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "GermplasmAttributeListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Germplasm/Germplasm_Attributes/Attributes_GET_POST.yaml",
+        "inventoryLine": 64,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.germplasm.post.search.attributes",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/search/attributes",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostSearchAttributes",
+      "operationName": "Submit a search request for Germplasm `Attributes`",
+      "brapiModule": "BrAPI-Germplasm",
+      "brapiTag": "Germplasm Attributes",
+      "classification": {
+        "primaryDomain": "D1",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Germplasm module; no stronger route-level crosswalk identified.",
+        "officialModule": "BrAPI-Germplasm"
+      },
+      "purpose": "Submit a search request for Germplasm `Attributes`",
+      "sourceDescription": "Submit a search request for Germplasm `Attributes`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/attributes/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Submit a search request for Germplasm `Attributes`",
+        "Submit a search request for Germplasm `Attributes`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/attributes/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not treat as create/update of searched domain resource; it submits a search request.",
+        "Search replay/deduplication is not asserted unless separately documented."
+      ],
+      "sideEffects": "Submits a search query; a search-results record may be created; domain-resource creation is not implied.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "GermplasmAttributeSearchRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "202",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "GermplasmAttributeListResponse",
+        "202AcceptedSearchResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Germplasm/Germplasm_Attributes/Search_Attributes_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.germplasm.get.search.attributes.by-searchresultsdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/search/attributes/{searchResultsDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetSearchAttributesBySearchResultsDbId",
+      "operationName": "Get the results of a Germplasm `Attributes` search request",
+      "brapiModule": "BrAPI-Germplasm",
+      "brapiTag": "Germplasm Attributes",
+      "classification": {
+        "primaryDomain": "D1",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Germplasm module; no stronger route-level crosswalk identified.",
+        "officialModule": "BrAPI-Germplasm"
+      },
+      "purpose": "Get the results of a Germplasm `Attributes` search request",
+      "sourceDescription": "Get the results of a Germplasm `Attributes` search request <br/>\nClients should submit a search request using the corresponding `POST /search/attributes` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Get the results of a Germplasm `Attributes` search request",
+        "Get the results of a Germplasm `Attributes` search request <br/>\nClients should submit a search request using the corresponding `POST /search/attributes` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to submit a new search; retrieves results for an existing search-results identifier."
+      ],
+      "sideEffects": "Reads previously submitted search results.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "202",
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "202AcceptedSearchResponse",
+        "GermplasmAttributeListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Germplasm/Germplasm_Attributes/Search_Attributes_SearchResultsDbId_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.germplasm.get.pedigree",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/pedigree",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetPedigree",
+      "operationName": "Get a filtered list of pedigree nodes which represent a subset of a pedigree tree",
+      "brapiModule": "BrAPI-Germplasm",
+      "brapiTag": "Pedigree",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.",
+        "officialModule": "BrAPI-Germplasm"
+      },
+      "purpose": "Get a filtered list of pedigree nodes which represent a subset of a pedigree tree",
+      "sourceDescription": "Get a filtered list of pedigree nodes which represent a subset of a pedigree tree",
+      "canBeUsedFor": [
+        "Get a filtered list of pedigree nodes which represent a subset of a pedigree tree",
+        "Get a filtered list of pedigree nodes which represent a subset of a pedigree tree"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [
+        "accessionNumber",
+        "collection",
+        "familyCode",
+        "binomialName",
+        "genus",
+        "species",
+        "synonym"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "PedigreeListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Germplasm/Pedigree/Pedigree_GET_POST_PUT.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.germplasm.post.pedigree",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/pedigree",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostPedigree",
+      "operationName": "Send a list of new pedigree nodes to a server",
+      "brapiModule": "BrAPI-Germplasm",
+      "brapiTag": "Pedigree",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.",
+        "officialModule": "BrAPI-Germplasm"
+      },
+      "purpose": "Send a list of new pedigree nodes to a server",
+      "sourceDescription": "Send a list of new pedigree nodes to a server",
+      "canBeUsedFor": [
+        "Send a list of new pedigree nodes to a server",
+        "Send a list of new pedigree nodes to a server"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get operation.",
+        "Do not assume retries are idempotent unless explicitly guaranteed."
+      ],
+      "sideEffects": "State-changing submission or creation as specified; schemas determine exact effect.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "PedigreeNode"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "PedigreeListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Germplasm/Pedigree/Pedigree_GET_POST_PUT.yaml",
+        "inventoryLine": 118,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.germplasm.put.pedigree",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "PUT",
+      "path": "/pedigree",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PutPedigree",
+      "operationName": "Send a list of pedigree nodes to update existing information on a server",
+      "brapiModule": "BrAPI-Germplasm",
+      "brapiTag": "Pedigree",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.",
+        "officialModule": "BrAPI-Germplasm"
+      },
+      "purpose": "Send a list of pedigree nodes to update existing information on a server",
+      "sourceDescription": "Send a list of pedigree nodes to update existing information on a server",
+      "canBeUsedFor": [
+        "Send a list of pedigree nodes to update existing information on a server",
+        "Send a list of pedigree nodes to update existing information on a server"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get or generic deletion operation.",
+        "Do not infer merge or concurrency semantics unless specified."
+      ],
+      "sideEffects": "Updates or replaces addressed resource(s) as specified.",
+      "idempotency": "HTTP PUT has idempotent method semantics; exact business effects remain defined by the operation contract.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "PedigreeNode"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "PedigreeListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Germplasm/Pedigree/Pedigree_GET_POST_PUT.yaml",
+        "inventoryLine": 143,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.germplasm.post.search.pedigree",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/search/pedigree",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostSearchPedigree",
+      "operationName": "Submit a search request for `Pedigree`",
+      "brapiModule": "BrAPI-Germplasm",
+      "brapiTag": "Pedigree",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.",
+        "officialModule": "BrAPI-Germplasm"
+      },
+      "purpose": "Submit a search request for `Pedigree`",
+      "sourceDescription": "Submit a search request for `Pedigree`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/germplasm/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Submit a search request for `Pedigree`",
+        "Submit a search request for `Pedigree`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/germplasm/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not treat as create/update of searched domain resource; it submits a search request.",
+        "Search replay/deduplication is not asserted unless separately documented."
+      ],
+      "sideEffects": "Submits a search query; a search-results record may be created; domain-resource creation is not implied.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "PedigreeSearchRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "202",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "PedigreeListResponse",
+        "202AcceptedSearchResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Germplasm/Pedigree/Search_Pedigree_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.germplasm.get.search.pedigree.by-searchresultsdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/search/pedigree/{searchResultsDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetSearchPedigreeBySearchResultsDbId",
+      "operationName": "Get the results of a `Pedigree` search request",
+      "brapiModule": "BrAPI-Germplasm",
+      "brapiTag": "Pedigree",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.",
+        "officialModule": "BrAPI-Germplasm"
+      },
+      "purpose": "Get the results of a `Pedigree` search request",
+      "sourceDescription": "Get the results of a `Pedigree` search request <br/>\nClients should submit a search request using the corresponding `POST /search/germplasm` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
+      "canBeUsedFor": [
+        "Get the results of a `Pedigree` search request",
+        "Get the results of a `Pedigree` search request <br/>\nClients should submit a search request using the corresponding `POST /search/germplasm` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to submit a new search; retrieves results for an existing search-results identifier."
+      ],
+      "sideEffects": "Reads previously submitted search results.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "202",
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "202AcceptedSearchResponse",
+        "PedigreeListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Germplasm/Pedigree/Search_Pedigree_SearchResultsDbId_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.germplasm.get.plannedcrosses",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/plannedcrosses",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetPlannedcrosses",
+      "operationName": "Get a filtered list of Planned Cross entities",
+      "brapiModule": "BrAPI-Germplasm",
+      "brapiTag": "Crosses",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.",
+        "officialModule": "BrAPI-Germplasm"
+      },
+      "purpose": "Get a filtered list of Planned Cross entities",
+      "sourceDescription": "Get a filtered list of Planned Cross entities.",
+      "canBeUsedFor": [
+        "Get a filtered list of Planned Cross entities",
+        "Get a filtered list of Planned Cross entities."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [
+        "crossingProjectDbId",
+        "crossingProjectName",
+        "plannedCrossDbId",
+        "plannedCrossName",
+        "status"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "PlannedCrossesListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Germplasm/PlannedCrosses/PlannedCrosses_GET_POST_PUT.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.germplasm.post.plannedcrosses",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/plannedcrosses",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostPlannedcrosses",
+      "operationName": "Create new Planned Cross entities on this server",
+      "brapiModule": "BrAPI-Germplasm",
+      "brapiTag": "Crosses",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.",
+        "officialModule": "BrAPI-Germplasm"
+      },
+      "purpose": "Create new Planned Cross entities on this server",
+      "sourceDescription": "Create new Planned Cross entities on this server",
+      "canBeUsedFor": [
+        "Create new Planned Cross entities on this server",
+        "Create new Planned Cross entities on this server"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get operation.",
+        "Do not assume retries are idempotent unless explicitly guaranteed."
+      ],
+      "sideEffects": "State-changing submission or creation as specified; schemas determine exact effect.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "PlannedCrossNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "PlannedCrossesListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Germplasm/PlannedCrosses/PlannedCrosses_GET_POST_PUT.yaml",
+        "inventoryLine": 64,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.germplasm.put.plannedcrosses",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "PUT",
+      "path": "/plannedcrosses",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PutPlannedcrosses",
+      "operationName": "Update existing Planned Cross entities on this server",
+      "brapiModule": "BrAPI-Germplasm",
+      "brapiTag": "Crosses",
+      "classification": {
+        "primaryDomain": "D2",
+        "basis": "inferred-from-route",
+        "reason": "Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.",
+        "officialModule": "BrAPI-Germplasm"
+      },
+      "purpose": "Update existing Planned Cross entities on this server",
+      "sourceDescription": "Update existing Planned Cross entities on this server",
+      "canBeUsedFor": [
+        "Update existing Planned Cross entities on this server",
+        "Update existing Planned Cross entities on this server"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get or generic deletion operation.",
+        "Do not infer merge or concurrency semantics unless specified."
+      ],
+      "sideEffects": "Updates or replaces addressed resource(s) as specified.",
+      "idempotency": "HTTP PUT has idempotent method semantics; exact business effects remain defined by the operation contract.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "PlannedCrossNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "PlannedCrossesListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Germplasm/PlannedCrosses/PlannedCrosses_GET_POST_PUT.yaml",
+        "inventoryLine": 87,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.germplasm.get.seedlots",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/seedlots",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetSeedlots",
+      "operationName": "Get a filtered list of Seed Lot descriptions",
+      "brapiModule": "BrAPI-Germplasm",
+      "brapiTag": "Seed Lots",
+      "classification": {
+        "primaryDomain": "D1",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Germplasm module; no stronger route-level crosswalk identified.",
+        "officialModule": "BrAPI-Germplasm"
+      },
+      "purpose": "Get a filtered list of Seed Lot descriptions",
+      "sourceDescription": "Get a filtered list of Seed Lot descriptions available in a system.",
+      "canBeUsedFor": [
+        "Get a filtered list of Seed Lot descriptions",
+        "Get a filtered list of Seed Lot descriptions available in a system."
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [
+        "seedLotDbId",
+        "crossDbId",
+        "crossName"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "SeedLotListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Germplasm/SeedLots/SeedLots_GET_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.germplasm.post.seedlots",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/seedlots",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostSeedlots",
+      "operationName": "Add new Seed Lot descriptions to a server",
+      "brapiModule": "BrAPI-Germplasm",
+      "brapiTag": "Seed Lots",
+      "classification": {
+        "primaryDomain": "D1",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Germplasm module; no stronger route-level crosswalk identified.",
+        "officialModule": "BrAPI-Germplasm"
+      },
+      "purpose": "Add new Seed Lot descriptions to a server",
+      "sourceDescription": "Add new Seed Lot descriptions to a server",
+      "canBeUsedFor": [
+        "Add new Seed Lot descriptions to a server",
+        "Add new Seed Lot descriptions to a server"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get operation.",
+        "Do not assume retries are idempotent unless explicitly guaranteed."
+      ],
+      "sideEffects": "State-changing submission or creation as specified; schemas determine exact effect.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "SeedLotNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "SeedLotListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Germplasm/SeedLots/SeedLots_GET_POST.yaml",
+        "inventoryLine": 50,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.germplasm.get.seedlots.by-seedlotdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/seedlots/{seedLotDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetSeedlotsBySeedLotDbId",
+      "operationName": "Get a specific Seed Lot",
+      "brapiModule": "BrAPI-Germplasm",
+      "brapiTag": "Seed Lots",
+      "classification": {
+        "primaryDomain": "D1",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Germplasm module; no stronger route-level crosswalk identified.",
+        "officialModule": "BrAPI-Germplasm"
+      },
+      "purpose": "Get a specific Seed Lot",
+      "sourceDescription": "Get a specific Seed Lot by seedLotDbId",
+      "canBeUsedFor": [
+        "Get a specific Seed Lot",
+        "Get a specific Seed Lot by seedLotDbId"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [
+        "seedLotDbId"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "SeedLotSingleResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Germplasm/SeedLots/SeedLots_SeedLotDbId_GET_PUT.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.germplasm.put.seedlots.by-seedlotdbid",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "PUT",
+      "path": "/seedlots/{seedLotDbId}",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PutSeedlotsBySeedLotDbId",
+      "operationName": "Update an existing Seed Lot",
+      "brapiModule": "BrAPI-Germplasm",
+      "brapiTag": "Seed Lots",
+      "classification": {
+        "primaryDomain": "D1",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Germplasm module; no stronger route-level crosswalk identified.",
+        "officialModule": "BrAPI-Germplasm"
+      },
+      "purpose": "Update an existing Seed Lot",
+      "sourceDescription": "Update an existing Seed Lot",
+      "canBeUsedFor": [
+        "Update an existing Seed Lot",
+        "Update an existing Seed Lot"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get or generic deletion operation.",
+        "Do not infer merge or concurrency semantics unless specified."
+      ],
+      "sideEffects": "Updates or replaces addressed resource(s) as specified.",
+      "idempotency": "HTTP PUT has idempotent method semantics; exact business effects remain defined by the operation contract.",
+      "parameters": [
+        "seedLotDbId"
+      ],
+      "requestSchemaRefs": [
+        "SeedLotNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "SeedLotSingleResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Germplasm/SeedLots/SeedLots_SeedLotDbId_GET_PUT.yaml",
+        "inventoryLine": 31,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.germplasm.get.seedlots.by-seedlotdbid.transactions",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/seedlots/{seedLotDbId}/transactions",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetSeedlotsBySeedLotDbIdTransactions",
+      "operationName": "Get all Transactions related to a specific Seed Lot",
+      "brapiModule": "BrAPI-Germplasm",
+      "brapiTag": "Seed Lots",
+      "classification": {
+        "primaryDomain": "D6",
+        "basis": "inferred-from-route",
+        "reason": "Seed-lot transactions represent material movement.",
+        "officialModule": "BrAPI-Germplasm"
+      },
+      "purpose": "Get all Transactions related to a specific Seed Lot",
+      "sourceDescription": "Get all Transactions related to a specific Seed Lot",
+      "canBeUsedFor": [
+        "Get all Transactions related to a specific Seed Lot",
+        "Get all Transactions related to a specific Seed Lot"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [
+        "seedLotDbId",
+        "transactionDbId",
+        "transactionDirection"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "SeedLotTransactionListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Germplasm/SeedLots/SeedLots_SeedLotDbId_Transactions_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.germplasm.get.seedlots.transactions",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/seedlots/transactions",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetSeedlotsTransactions",
+      "operationName": "Get a filtered list of Seed Lot Transactions",
+      "brapiModule": "BrAPI-Germplasm",
+      "brapiTag": "Seed Lots",
+      "classification": {
+        "primaryDomain": "D6",
+        "basis": "inferred-from-route",
+        "reason": "Seed-lot transactions represent material movement.",
+        "officialModule": "BrAPI-Germplasm"
+      },
+      "purpose": "Get a filtered list of Seed Lot Transactions",
+      "sourceDescription": "Get a filtered list of Seed Lot Transactions",
+      "canBeUsedFor": [
+        "Get a filtered list of Seed Lot Transactions",
+        "Get a filtered list of Seed Lot Transactions"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [
+        "transactionDbId",
+        "seedLotDbId",
+        "crossDbId",
+        "crossName"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "SeedLotTransactionListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Germplasm/SeedLots/SeedLots_Transactions_GET_POST.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.germplasm.post.seedlots.transactions",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "POST",
+      "path": "/seedlots/transactions",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21PostSeedlotsTransactions",
+      "operationName": "Add new Seed Lot Transaction to be recorded",
+      "brapiModule": "BrAPI-Germplasm",
+      "brapiTag": "Seed Lots",
+      "classification": {
+        "primaryDomain": "D6",
+        "basis": "inferred-from-route",
+        "reason": "Seed-lot transactions represent material movement.",
+        "officialModule": "BrAPI-Germplasm"
+      },
+      "purpose": "Add new Seed Lot Transaction to be recorded",
+      "sourceDescription": "Add new Seed Lot Transaction to be recorded",
+      "canBeUsedFor": [
+        "Add new Seed Lot Transaction to be recorded",
+        "Add new Seed Lot Transaction to be recorded"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use as a read-only list/get operation.",
+        "Do not assume retries are idempotent unless explicitly guaranteed."
+      ],
+      "sideEffects": "State-changing submission or creation as specified; schemas determine exact effect.",
+      "idempotency": "The source specification does not declare a universal replay guarantee; do not blindly retry after an unknown outcome.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "SeedLotTransactionNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "SeedLotTransactionListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Germplasm/SeedLots/SeedLots_Transactions_GET_POST.yaml",
+        "inventoryLine": 56,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.brapi-v2-1.phenotyping.get.events",
+      "apiGeneration": "brapi-v2.1",
+      "basePath": "/brapi/v2",
+      "method": "GET",
+      "path": "/events",
+      "operationIdInSource": null,
+      "recommendedOperationId": "brapiV21GetEvents",
+      "operationName": "Get the Events",
+      "brapiModule": "BrAPI-Phenotyping",
+      "brapiTag": "Events",
+      "classification": {
+        "primaryDomain": "D4",
+        "basis": "inferred-from-official-module",
+        "reason": "Official Phenotyping module; resource-specific exceptions may require review.",
+        "officialModule": "BrAPI-Phenotyping"
+      },
+      "purpose": "Get the Events",
+      "sourceDescription": "Get list of events",
+      "canBeUsedFor": [
+        "Get the Events",
+        "Get list of events"
+      ],
+      "mustNotBeUsedFor": [
+        "Do not use to create, update, or delete domain data.",
+        "Specification presence does not prove runtime availability."
+      ],
+      "sideEffects": "Read-only retrieval under the released specification.",
+      "idempotency": "Read-only retrieval is safe to repeat without changing domain state.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "brapi-V2.1",
+        "path": "Specification/BrAPI-Phenotyping/Events/Events_GET.yaml",
+        "inventoryLine": 7,
+        "inventoryStatus": "BrAPI v2.1 specification only"
+      },
+      "standardStatus": "released-specification",
+      "implementationStatus": "not-verified",
+      "semanticNeighborIds": [],
+      "semanticReviewStatus": "needs-neighbor-review"
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
-    "brapiV21EntriesAdded": 126,
+    "brapiV21EntriesAdded": 153,
     "genxEntriesAdded": 0,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
