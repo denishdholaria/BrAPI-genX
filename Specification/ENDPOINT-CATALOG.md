@@ -153,7 +153,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Common Crop Names
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Crosswalk basis: unassigned;Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Crosswalk basis: unassigned; Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -208,7 +208,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Lists
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Crosswalk basis: unassigned;Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Crosswalk basis: unassigned; Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -239,7 +239,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Lists
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Crosswalk basis: unassigned;Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Crosswalk basis: unassigned; Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -270,7 +270,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Lists
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Crosswalk basis: unassigned;Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Crosswalk basis: unassigned; Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -301,7 +301,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Lists
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Crosswalk basis: unassigned;Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Crosswalk basis: unassigned; Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -332,7 +332,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Lists
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Crosswalk basis: unassigned;Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Crosswalk basis: unassigned; Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -363,7 +363,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Lists
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Crosswalk basis: unassigned;Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Crosswalk basis: unassigned; Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -396,7 +396,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Locations
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Locations commonly provide the spatial context for trials/studies; confirm in the domain crosswalk.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Locations commonly provide the spatial context for trials/studies; confirm in the domain crosswalk.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -431,7 +431,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Locations
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Locations commonly provide the spatial context for trials/studies; confirm in the domain crosswalk.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Locations commonly provide the spatial context for trials/studies; confirm in the domain crosswalk.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -466,7 +466,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Locations
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Locations commonly provide the spatial context for trials/studies; confirm in the domain crosswalk.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Locations commonly provide the spatial context for trials/studies; confirm in the domain crosswalk.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -501,7 +501,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Locations
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Locations commonly provide the spatial context for trials/studies; confirm in the domain crosswalk.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Locations commonly provide the spatial context for trials/studies; confirm in the domain crosswalk.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -536,7 +536,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** People
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Crosswalk basis: unassigned;Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Crosswalk basis: unassigned; Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -567,7 +567,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** People
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Crosswalk basis: unassigned;Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Crosswalk basis: unassigned; Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -598,7 +598,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** People
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Crosswalk basis: unassigned;Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Crosswalk basis: unassigned; Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -629,7 +629,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** People
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Crosswalk basis: unassigned;Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Crosswalk basis: unassigned; Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -660,7 +660,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Programs
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -691,7 +691,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Programs
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -722,7 +722,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Programs
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -753,7 +753,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Programs
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -784,7 +784,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Lists
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Crosswalk basis: unassigned;Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Crosswalk basis: unassigned; Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -825,7 +825,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Lists
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Crosswalk basis: unassigned;Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Crosswalk basis: unassigned; Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -867,7 +867,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Locations
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Locations commonly provide the spatial context for trials/studies; confirm in the domain crosswalk.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Locations commonly provide the spatial context for trials/studies; confirm in the domain crosswalk.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -908,7 +908,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Locations
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Locations commonly provide the spatial context for trials/studies; confirm in the domain crosswalk.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Locations commonly provide the spatial context for trials/studies; confirm in the domain crosswalk.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -950,7 +950,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** People
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Crosswalk basis: unassigned;Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Crosswalk basis: unassigned; Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -991,7 +991,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** People
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Crosswalk basis: unassigned;Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Crosswalk basis: unassigned; Crosswalk note: Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1033,7 +1033,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Programs
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1074,7 +1074,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Programs
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1116,7 +1116,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Studies
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1157,7 +1157,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Studies
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1199,7 +1199,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Trials
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1240,7 +1240,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Trials
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1282,7 +1282,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Seasons
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1323,7 +1323,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Seasons
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1354,7 +1354,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Seasons
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1385,7 +1385,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Seasons
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1416,7 +1416,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Server Info
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C1 — Identity, versioning and capability discovery;Crosswalk basis: inferred-from-route;Crosswalk note: Server capability discovery is cross-cutting.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery; Crosswalk basis: inferred-from-route; Crosswalk note: Server capability discovery is cross-cutting.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1509,7 +1509,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Studies
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1544,7 +1544,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Studies
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1587,7 +1587,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Studies
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1622,7 +1622,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Studies
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1653,7 +1653,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Studies
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Crosswalk basis: unassigned;Crosswalk note: Generic shared/reference resource is not assigned to a scientific domain without review.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Crosswalk basis: unassigned; Crosswalk note: Generic shared/reference resource is not assigned to a scientific domain without review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1684,7 +1684,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Trials
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1715,7 +1715,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Trials
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1747,7 +1747,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Trials
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1780,7 +1780,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Core
 - **Source tag:** Trials
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Programs, trials, studies and seasons provide breeding/experimental context.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1813,7 +1813,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm Attributes
-- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1844,7 +1844,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm Attributes
-- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1875,7 +1875,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm Attributes
-- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1906,7 +1906,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm Attributes
-- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1937,7 +1937,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm Attributes
-- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1968,7 +1968,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm Attribute Values
-- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -1999,7 +1999,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm Attribute Values
-- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2030,7 +2030,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm Attribute Values
-- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2061,7 +2061,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm Attribute Values
-- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2092,7 +2092,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2123,7 +2123,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2154,7 +2154,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Crosses
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2185,7 +2185,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Crosses
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2216,7 +2216,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Crosses
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2247,7 +2247,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Crossing Projects
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2278,7 +2278,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Crossing Projects
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2309,7 +2309,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Crossing Projects
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2340,7 +2340,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Crossing Projects
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2371,7 +2371,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm
-- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2414,7 +2414,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm
-- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2445,7 +2445,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm
-- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2476,7 +2476,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm
-- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2507,7 +2507,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm
-- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2550,7 +2550,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2585,7 +2585,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2624,7 +2624,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Pedigree
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2655,7 +2655,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Pedigree
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2686,7 +2686,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Pedigree
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2717,7 +2717,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Crosses
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2748,7 +2748,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Crosses
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2779,7 +2779,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Crosses
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2810,7 +2810,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm Attributes
-- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2851,7 +2851,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm Attributes
-- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2893,7 +2893,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm Attribute Values
-- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2934,7 +2934,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm Attribute Values
-- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -2976,7 +2976,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm
-- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3017,7 +3017,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Germplasm
-- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3059,7 +3059,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Pedigree
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3100,7 +3100,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Pedigree
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design;Crosswalk basis: inferred-from-route;Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Crosswalk basis: inferred-from-route; Crosswalk note: Crossing, pedigree, progeny and breeding-method concepts relate to breeding processes.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3142,7 +3142,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Seed Lots
-- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3173,7 +3173,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Seed Lots
-- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3204,7 +3204,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Seed Lots
-- **Proposed BrAPI-Den classification:** D6 — Crop Production and Material Operations;Crosswalk basis: inferred-from-route;Crosswalk note: Seed-lot transactions represent material movement.
+- **Proposed BrAPI-Den classification:** D6 — Crop Production and Material Operations; Crosswalk basis: inferred-from-route; Crosswalk note: Seed-lot transactions represent material movement.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3237,7 +3237,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Seed Lots
-- **Proposed BrAPI-Den classification:** D6 — Crop Production and Material Operations;Crosswalk basis: inferred-from-route;Crosswalk note: Seed-lot transactions represent material movement.
+- **Proposed BrAPI-Den classification:** D6 — Crop Production and Material Operations; Crosswalk basis: inferred-from-route; Crosswalk note: Seed-lot transactions represent material movement.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3270,7 +3270,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Seed Lots
-- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3301,7 +3301,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Seed Lots
-- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
+- **Proposed BrAPI-Den classification:** D1 — Germplasm and Biological Resources; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Germplasm module; no stronger route-level crosswalk identified.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3332,7 +3332,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Germplasm
 - **Source tag:** Seed Lots
-- **Proposed BrAPI-Den classification:** D6 — Crop Production and Material Operations;Crosswalk basis: inferred-from-route;Crosswalk note: Seed-lot transactions represent material movement.
+- **Proposed BrAPI-Den classification:** D6 — Crop Production and Material Operations; Crosswalk basis: inferred-from-route; Crosswalk note: Seed-lot transactions represent material movement.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3366,7 +3366,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **BrAPI-Den operation identity:** `brapiV21GetAllelematrix` (advisory where absent from source)
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3404,7 +3404,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **BrAPI-Den operation identity:** `brapiV21GetCalls` (advisory where absent from source)
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3436,7 +3436,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **BrAPI-Den operation identity:** `brapiV21PutCalls` (advisory where absent from source)
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3480,7 +3480,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **BrAPI-Den operation identity:** `brapiV21GetCallsets` (advisory where absent from source)
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3512,7 +3512,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **BrAPI-Den operation identity:** `brapiV21GetCallsetsByCallSetDbId` (advisory where absent from source)
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3544,7 +3544,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **BrAPI-Den operation identity:** `brapiV21GetCallsetsByCallSetDbIdCalls` (advisory where absent from source)
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3577,7 +3577,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Genome Maps
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3609,7 +3609,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Genome Maps
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3640,7 +3640,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Genome Maps
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3671,7 +3671,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Genome Maps
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3702,7 +3702,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Plates
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3733,7 +3733,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Plates
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3764,7 +3764,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Plates
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3795,7 +3795,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Plates
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3825,7 +3825,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **BrAPI-Den operation identity:** `brapiV21GetReferences` (advisory where absent from source)
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3855,7 +3855,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **BrAPI-Den operation identity:** `brapiV21GetReferencesByReferenceDbId` (advisory where absent from source)
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3887,7 +3887,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **BrAPI-Den operation identity:** `brapiV21GetReferencesByReferenceDbIdBases` (advisory where absent from source)
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3917,7 +3917,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **BrAPI-Den operation identity:** `brapiV21GetReferencesets` (advisory where absent from source)
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3947,7 +3947,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **BrAPI-Den operation identity:** `brapiV21GetReferencesetsByReferenceSetDbId` (advisory where absent from source)
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -3978,7 +3978,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Samples
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4009,7 +4009,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Samples
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4040,7 +4040,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Samples
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4071,7 +4071,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Samples
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4102,7 +4102,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Samples
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4135,7 +4135,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Allele Matrix
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4173,7 +4173,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **BrAPI-Den operation identity:** `brapiV21GetSearchAllelematrixBySearchResultsDbId` (advisory where absent from source)
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4211,7 +4211,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Calls
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4259,7 +4259,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **BrAPI-Den operation identity:** `brapiV21GetSearchCallsBySearchResultsDbId` (advisory where absent from source)
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4303,7 +4303,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Call Sets
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4344,7 +4344,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Call Sets
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4386,7 +4386,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Genome Maps
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4427,7 +4427,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Genome Maps
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4469,7 +4469,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Plates
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4510,7 +4510,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Plates
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4551,7 +4551,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **BrAPI-Den operation identity:** `brapiV21PostSearchReferences` (advisory where absent from source)
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4591,7 +4591,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **BrAPI-Den operation identity:** `brapiV21GetSearchReferencesBySearchResultsDbId` (advisory where absent from source)
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4632,7 +4632,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **BrAPI-Den operation identity:** `brapiV21PostSearchReferencesets` (advisory where absent from source)
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4672,7 +4672,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **BrAPI-Den operation identity:** `brapiV21GetSearchReferencesetsBySearchResultsDbId` (advisory where absent from source)
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4714,7 +4714,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Samples
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4755,7 +4755,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Samples
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4797,7 +4797,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Variants
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4846,7 +4846,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Variants
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4890,7 +4890,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Variant Sets
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4931,7 +4931,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Variant Sets
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -4972,7 +4972,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **BrAPI-Den operation identity:** `brapiV21GetVariants` (advisory where absent from source)
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5004,7 +5004,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **BrAPI-Den operation identity:** `brapiV21GetVariantsByVariantDbId` (advisory where absent from source)
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5036,7 +5036,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **BrAPI-Den operation identity:** `brapiV21GetVariantsByVariantDbIdCalls` (advisory where absent from source)
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5068,7 +5068,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **BrAPI-Den operation identity:** `brapiV21GetVariantsets` (advisory where absent from source)
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5101,7 +5101,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Variant Sets
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5133,7 +5133,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **BrAPI-Den operation identity:** `brapiV21GetVariantsetsByVariantSetDbId` (advisory where absent from source)
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5165,7 +5165,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **BrAPI-Den operation identity:** `brapiV21GetVariantsetsByVariantSetDbIdCalls` (advisory where absent from source)
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5197,7 +5197,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **BrAPI-Den operation identity:** `brapiV21GetVariantsetsByVariantSetDbIdCallsets` (advisory where absent from source)
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5229,7 +5229,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **BrAPI-Den operation identity:** `brapiV21GetVariantsetsByVariantSetDbIdVariants` (advisory where absent from source)
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5262,7 +5262,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Vendor
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5293,7 +5293,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Vendor
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5324,7 +5324,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Vendor
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5355,7 +5355,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Vendor
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5386,7 +5386,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Vendor
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5417,7 +5417,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Vendor
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5448,7 +5448,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Vendor
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5479,7 +5479,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Genotyping
 - **Source tag:** Vendor
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official BrAPI Genotyping module; proposed crosswalk to molecular genomics.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5512,7 +5512,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Images
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5543,7 +5543,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observations
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5576,7 +5576,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Events
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5607,7 +5607,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Images
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5654,7 +5654,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Images
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5727,7 +5727,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Images
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5774,7 +5774,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Images
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5851,7 +5851,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Images
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5914,7 +5914,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Methods
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C4 — Scientific terminology governance;Crosswalk basis: inferred-from-route;Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-route; Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5951,7 +5951,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Methods
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C4 — Scientific terminology governance;Crosswalk basis: inferred-from-route;Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-route; Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -5984,7 +5984,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Methods
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C4 — Scientific terminology governance;Crosswalk basis: inferred-from-route;Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-route; Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6021,7 +6021,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Methods
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C4 — Scientific terminology governance;Crosswalk basis: inferred-from-route;Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-route; Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6054,7 +6054,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Units
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6097,7 +6097,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observations
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6134,7 +6134,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observations
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6167,7 +6167,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observations
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6208,7 +6208,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observations
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6315,7 +6315,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observations
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6352,7 +6352,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observations
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6385,7 +6385,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Units
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6418,7 +6418,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Units
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6451,7 +6451,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Units
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6488,7 +6488,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Units
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6591,7 +6591,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Units
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6624,7 +6624,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Units
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6657,7 +6657,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Ontologies
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C4 — Scientific terminology governance;Crosswalk basis: inferred-from-route;Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-route; Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6692,7 +6692,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Ontologies
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C4 — Scientific terminology governance;Crosswalk basis: inferred-from-route;Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-route; Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6727,7 +6727,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Ontologies
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C4 — Scientific terminology governance;Crosswalk basis: inferred-from-route;Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-route; Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6762,7 +6762,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Ontologies
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C4 — Scientific terminology governance;Crosswalk basis: inferred-from-route;Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-route; Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6797,7 +6797,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Scales
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C4 — Scientific terminology governance;Crosswalk basis: inferred-from-route;Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-route; Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6834,7 +6834,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Scales
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C4 — Scientific terminology governance;Crosswalk basis: inferred-from-route;Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-route; Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6867,7 +6867,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Scales
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C4 — Scientific terminology governance;Crosswalk basis: inferred-from-route;Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-route; Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6900,7 +6900,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Scales
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C4 — Scientific terminology governance;Crosswalk basis: inferred-from-route;Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-route; Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6933,7 +6933,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Images
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -6984,7 +6984,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Images
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7036,7 +7036,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observations
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7077,7 +7077,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observations
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7119,7 +7119,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Units
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7160,7 +7160,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Units
-- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations;Crosswalk basis: inferred-from-official-module;Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
+- **Proposed BrAPI-Den classification:** D4 — Phenotyping and Plant Observations; Crosswalk basis: inferred-from-official-module; Crosswalk note: Official Phenotyping module; resource-specific exceptions may require review.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7202,7 +7202,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Variables
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C4 — Scientific terminology governance;Crosswalk basis: inferred-from-route;Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-route; Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7243,7 +7243,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Variables
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C4 — Scientific terminology governance;Crosswalk basis: inferred-from-route;Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-route; Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7285,7 +7285,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Traits
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C4 — Scientific terminology governance;Crosswalk basis: inferred-from-route;Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-route; Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7322,7 +7322,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Traits
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C4 — Scientific terminology governance;Crosswalk basis: inferred-from-route;Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-route; Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7355,7 +7355,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Traits
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C4 — Scientific terminology governance;Crosswalk basis: inferred-from-route;Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-route; Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7392,7 +7392,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Traits
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C4 — Scientific terminology governance;Crosswalk basis: inferred-from-route;Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-route; Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7425,7 +7425,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Variables
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C4 — Scientific terminology governance;Crosswalk basis: inferred-from-route;Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-route; Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7458,7 +7458,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Variables
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C4 — Scientific terminology governance;Crosswalk basis: inferred-from-route;Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-route; Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7491,7 +7491,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Variables
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C4 — Scientific terminology governance;Crosswalk basis: inferred-from-route;Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-route; Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7524,7 +7524,7 @@ Model registry endpoints manage model metadata and lifecycle. Inference is submi
 - **Source OpenAPI operationId:** not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract.
 - **Official BrAPI module:** BrAPI-Phenotyping
 - **Source tag:** Observation Variables
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C4 — Scientific terminology governance;Crosswalk basis: inferred-from-route;Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C4 — Scientific terminology governance; Crosswalk basis: inferred-from-route; Crosswalk note: Scientific term definitions are shared semantics, not measured observations.
 - **Standard / proposal status:** `released-specification`
 - **Implementation status:** `not-verified`
 **Purpose:**
@@ -7563,7 +7563,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Source OpenAPI operationId:** `genxListFairPackageMetadata`
 - **GenX source module:** `FAIR`
 - **Source tag:** FAIR Packages
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -7597,7 +7597,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Source OpenAPI operationId:** `genxRegisterFairPackage`
 - **GenX source module:** `FAIR`
 - **Source tag:** FAIR Packages
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -7633,7 +7633,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Source OpenAPI operationId:** `genxGetFairPackageMetadata`
 - **GenX source module:** `FAIR`
 - **Source tag:** FAIR Packages
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -7668,7 +7668,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Source OpenAPI operationId:** `genxListVariantMatrixReferences`
 - **GenX source module:** `Genomics`
 - **Source tag:** Variant Matrices
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -7702,7 +7702,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Source OpenAPI operationId:** `genxRegisterVariantMatrixReference`
 - **GenX source module:** `Genomics`
 - **Source tag:** Variant Matrices
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -7738,7 +7738,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Source OpenAPI operationId:** `genxGetVariantMatrixReference`
 - **GenX source module:** `Genomics`
 - **Source tag:** Variant Matrices
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics;Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -7772,7 +7772,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Source OpenAPI operationId:** `genxListJobs`
 - **GenX source module:** `Jobs`
 - **Source tag:** Jobs
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C1 — Identity, versioning and capability discovery, C3 — Asynchronous execution and idempotency, C9 — Security, authority and tenancy
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C3 — Asynchronous execution and idempotency, C9 — Security, authority and tenancy
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -7806,7 +7806,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Source OpenAPI operationId:** `genxSubmitAsyncJob`
 - **GenX source module:** `Jobs`
 - **Source tag:** Jobs
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C9 — Security, authority and tenancy
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C9 — Security, authority and tenancy
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -7843,7 +7843,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Source OpenAPI operationId:** `genxRequestAsyncJobCancellation`
 - **GenX source module:** `Jobs`
 - **Source tag:** Jobs
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C3 — Asynchronous execution and idempotency, C9 — Security, authority and tenancy
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C3 — Asynchronous execution and idempotency, C9 — Security, authority and tenancy
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -7876,7 +7876,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Source OpenAPI operationId:** `genxGetAsyncJobById`
 - **GenX source module:** `Jobs`
 - **Source tag:** Jobs
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C9 — Security, authority and tenancy
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C9 — Security, authority and tenancy
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -7912,7 +7912,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Source OpenAPI operationId:** `genxListSeedLotLedgerEntries`
 - **GenX source module:** `LotLedger`
 - **Source tag:** Seed Lots
-- **Proposed BrAPI-Den classification:** D6 — Crop Production and Material Operations;Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Proposed BrAPI-Den classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -7946,7 +7946,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Source OpenAPI operationId:** `genxAppendSeedLotLedgerEntry`
 - **GenX source module:** `LotLedger`
 - **Source tag:** Seed Lots
-- **Proposed BrAPI-Den classification:** D6 — Crop Production and Material Operations;Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Proposed BrAPI-Den classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -7984,7 +7984,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Source OpenAPI operationId:** `genxListModelVersions`
 - **GenX source module:** `Models`
 - **Source tag:** Models
-- **Proposed BrAPI-Den classification:** D7 — Scientific Analysis, Models and Derived Evidence;Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Proposed BrAPI-Den classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -8018,7 +8018,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Source OpenAPI operationId:** `genxRegisterModelVersion`
 - **GenX source module:** `Models`
 - **Source tag:** Models
-- **Proposed BrAPI-Den classification:** D7 — Scientific Analysis, Models and Derived Evidence;Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Proposed BrAPI-Den classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -8055,7 +8055,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Source OpenAPI operationId:** `genxGetModelVersion`
 - **GenX source module:** `Models`
 - **Source tag:** Models
-- **Proposed BrAPI-Den classification:** D7 — Scientific Analysis, Models and Derived Evidence;Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Proposed BrAPI-Den classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -8090,7 +8090,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Source OpenAPI operationId:** `genxGetServerInfoV3`
 - **GenX source module:** `ServerInfoV3`
 - **Source tag:** Server Info
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C1 — Identity, versioning and capability discovery, C8 — Contract conformance and governance, C9 — Security, authority and tenancy
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C8 — Contract conformance and governance, C9 — Security, authority and tenancy
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -8133,7 +8133,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Source OpenAPI operationId:** `genxQueryTelemetrySamplesOrAggregates`
 - **GenX source module:** `Telemetry`
 - **Source tag:** Telemetry
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Context-dependent: D4 — Phenotyping and Plant Observations, D5 — Environment, Agroecology and Field Context;Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C7 — Streaming and temporal aggregation, C9 — Security, authority and tenancy
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Context-dependent: D4 — Phenotyping and Plant Observations, D5 — Environment, Agroecology and Field Context; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C7 — Streaming and temporal aggregation, C9 — Security, authority and tenancy
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -8171,7 +8171,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Source OpenAPI operationId:** `genxAppendTelemetryBatch`
 - **GenX source module:** `Telemetry`
 - **Source tag:** Telemetry
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Context-dependent: D4 — Phenotyping and Plant Observations, D5 — Environment, Agroecology and Field Context;Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C7 — Streaming and temporal aggregation, C9 — Security, authority and tenancy
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Context-dependent: D4 — Phenotyping and Plant Observations, D5 — Environment, Agroecology and Field Context; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C7 — Streaming and temporal aggregation, C9 — Security, authority and tenancy
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -8210,7 +8210,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Source OpenAPI operationId:** `genxListVariableTermVersions`
 - **GenX source module:** `VariableTerms`
 - **Source tag:** VariableTerms
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C4 — Scientific terminology governance
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C4 — Scientific terminology governance
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -8244,7 +8244,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Source OpenAPI operationId:** `genxPublishVariableTermVersion`
 - **GenX source module:** `VariableTerms`
 - **Source tag:** VariableTerms
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C4 — Scientific terminology governance
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C4 — Scientific terminology governance
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
@@ -8281,7 +8281,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Source OpenAPI operationId:** `genxGetVariableTermVersion`
 - **GenX source module:** `VariableTerms`
 - **Source tag:** VariableTerms
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required;Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C4 — Scientific terminology governance
+- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C4 — Scientific terminology governance
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
