@@ -11699,15 +11699,1464 @@
       "implementationStatus": "not-verified",
       "semanticNeighborIds": [],
       "semanticReviewStatus": "needs-neighbor-review"
+    },
+    {
+      "catalogId": "brapi-den.genx.v3.serverinfo.read",
+      "apiGeneration": "genx-v3",
+      "basePath": "/brapi/v3",
+      "method": "GET",
+      "path": "/serverinfo",
+      "operationIdInSource": "genxGetServerInfoV3",
+      "recommendedOperationId": "genxGetServerInfoV3",
+      "operationName": "Get the GenX capability document",
+      "brapiModule": null,
+      "genxModule": "ServerInfoV3",
+      "brapiTag": "Server Info",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C8",
+          "C9"
+        ]
+      },
+      "purpose": "Advertise supported API generations, capabilities, and authentication profiles so clients can negotiate behavior before using optional GenX features.",
+      "sourceDescription": "GenX capability negotiation. Served under `/brapi/v3/`.\n\nReturns the V2.1 ServerInfo fields plus `brapiVersions`,\n`capabilities`, and `authProfiles` so clients negotiate instead of\nprobing endpoints. V2.1 `GET /serverinfo` under `/brapi/v2/` is\nunchanged. A GenX client against a V2.1-only server falls back to the\nV2.1 `calls` array.",
+      "canBeUsedFor": [
+        "Discover whether a server advertises GenX and which capabilities/job types it supports.",
+        "Choose a documented V2.1 fallback when GenX is not advertised."
+      ],
+      "mustNotBeUsedFor": [
+        "Proving that every advertised operation is healthy at this instant.",
+        "Calling unadvertised endpoints as feature probes.",
+        "Treating the V2.1 ServerInfo payload and ServerInfoV3 as interchangeable."
+      ],
+      "sideEffects": "Read-only; no domain records are created or changed.",
+      "idempotency": "Read-only; repeated calls have no intended state-changing effects.",
+      "parameters": [],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "V2.1 GET /brapi/v2/serverinfo"
+      ],
+      "decisionReferences": [
+        "RFC-001",
+        "A-01"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ServerInfoV3/ServerInfoV3_GET.yaml"
+      },
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending"
+    },
+    {
+      "catalogId": "brapi-den.genx.v3.jobs.list",
+      "apiGeneration": "genx-v3",
+      "basePath": "/brapi/v3",
+      "method": "GET",
+      "path": "/jobs",
+      "operationIdInSource": "genxListJobs",
+      "recommendedOperationId": "genxListJobs",
+      "operationName": "List jobs visible to the caller",
+      "brapiModule": null,
+      "genxModule": "Jobs",
+      "brapiTag": "Jobs",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C3",
+          "C9"
+        ]
+      },
+      "purpose": "Return a paginated list of caller-visible asynchronous jobs, optionally filtered by job type and lifecycle status.",
+      "sourceDescription": "Get a paged list of jobs submitted by the caller. Follows standard pagination.",
+      "canBeUsedFor": [
+        "Show a caller the jobs they submitted and their current lifecycle states.",
+        "Filter jobs by an advertised job type or status."
+      ],
+      "mustNotBeUsedFor": [
+        "List scientific resources such as models, observations, or seed lots.",
+        "Assume V2.1 search-result records are jobs.",
+        "Assume a job type exists unless capability negotiation advertises it."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "jobType",
+        "status"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "JobListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "SEM-02"
+      ],
+      "decisionReferences": [
+        "RFC-001"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Jobs/Jobs_GET_POST.yaml"
+      },
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending"
+    },
+    {
+      "catalogId": "brapi-den.genx.v3.jobs.submit",
+      "apiGeneration": "genx-v3",
+      "basePath": "/brapi/v3",
+      "method": "POST",
+      "path": "/jobs",
+      "operationIdInSource": "genxSubmitAsyncJob",
+      "recommendedOperationId": "genxSubmitAsyncJob",
+      "operationName": "Submit a unit of asynchronous work",
+      "brapiModule": null,
+      "genxModule": "Jobs",
+      "brapiTag": "Jobs",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C2",
+          "C3",
+          "C9"
+        ]
+      },
+      "purpose": "Submit one advertised unit of asynchronous work and receive a Job resource for polling and, when eligible, cancellation.",
+      "sourceDescription": "Submit work and receive a Job with HTTP 202. When `idempotencyKey` is\nsupplied and was already accepted with a byte-identical body, the\nserver returns the existing Job with zero new effects.",
+      "canBeUsedFor": [
+        "Long-running analysis, model inference, and other explicitly advertised job types.",
+        "Replay-safe submission when the same idempotency key and identical request body are retried."
+      ],
+      "mustNotBeUsedFor": [
+        "Expecting synchronous completion in the submit response.",
+        "Submitting an unadvertised or undefined jobType.",
+        "Using one idempotency key for materially different request bodies.",
+        "Using it as an implicit replacement for every V2.1 search endpoint."
+      ],
+      "sideEffects": "May create one Job and dispatch work; identical replay must not create a second effect.",
+      "idempotency": "Same key plus identical body replays the existing Job; same key plus different body is a conflict, not an overwrite.",
+      "parameters": [
+        "Idempotency-Key"
+      ],
+      "requestSchemaRefs": [
+        "JobNewRequest"
+      ],
+      "responseCodes": [
+        "202",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "SEM-02"
+      ],
+      "decisionReferences": [
+        "RFC-001",
+        "A-04",
+        "A-07"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Jobs/Jobs_GET_POST.yaml"
+      },
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending"
+    },
+    {
+      "catalogId": "brapi-den.genx.v3.jobs.get",
+      "apiGeneration": "genx-v3",
+      "basePath": "/brapi/v3",
+      "method": "GET",
+      "path": "/jobs/{jobDbId}",
+      "operationIdInSource": "genxGetAsyncJobById",
+      "recommendedOperationId": "genxGetAsyncJobById",
+      "operationName": "Get the current state of one job",
+      "brapiModule": null,
+      "genxModule": "Jobs",
+      "brapiTag": "Jobs",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C2",
+          "C3",
+          "C9"
+        ]
+      },
+      "purpose": "Read the current state and available result of one asynchronous Job.",
+      "sourceDescription": "Returns the Job. Past expiry the server reports status EXPIRED and refuses retrieval of the result.",
+      "canBeUsedFor": [
+        "Poll a submitted job until it reaches a terminal state.",
+        "Read the result while it remains available under its expiry policy."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming completed results are retained indefinitely.",
+        "Treating an expired job as a failed job or expecting its expired result to be served.",
+        "Fetching a model artifact or a domain object directly."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "jobDbId"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxSubmitAsyncJob",
+        "genxRequestAsyncJobCancellation",
+        "SEM-02"
+      ],
+      "decisionReferences": [
+        "RFC-001"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Jobs/Jobs_JobDbId_GET_DELETE.yaml"
+      },
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending"
+    },
+    {
+      "catalogId": "brapi-den.genx.v3.jobs.request-cancellation",
+      "apiGeneration": "genx-v3",
+      "basePath": "/brapi/v3",
+      "method": "DELETE",
+      "path": "/jobs/{jobDbId}",
+      "operationIdInSource": "genxRequestAsyncJobCancellation",
+      "recommendedOperationId": "genxRequestAsyncJobCancellation",
+      "operationName": "Request cancellation of one job",
+      "brapiModule": null,
+      "genxModule": "Jobs",
+      "brapiTag": "Jobs",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C3",
+          "C9"
+        ]
+      },
+      "purpose": "Request cancellation of a non-terminal asynchronous Job while preserving the Job record and its auditability.",
+      "sourceDescription": "Requests cancellation. Terminal states (COMPLETED, FAILED, CANCELLED, EXPIRED) are immutable and their cancellation is rejected.",
+      "canBeUsedFor": [
+        "Request that queued or running work stop, subject to implementation and execution state."
+      ],
+      "mustNotBeUsedFor": [
+        "Deleting a Job resource or erasing its history.",
+        "Assuming a cancellation request guarantees immediate interruption.",
+        "Changing terminal states such as COMPLETED, FAILED, CANCELLED, or EXPIRED."
+      ],
+      "sideEffects": "May request a lifecycle transition for a non-terminal Job; terminal-state cancellation is rejected.",
+      "idempotency": "The effect is a cancellation request, not resource deletion; clients must re-read the Job state after the request.",
+      "parameters": [
+        "jobDbId"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxGetAsyncJobById"
+      ],
+      "decisionReferences": [
+        "RFC-001"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Jobs/Jobs_JobDbId_GET_DELETE.yaml"
+      },
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending"
+    },
+    {
+      "catalogId": "brapi-den.genx.v3.variable-terms.list",
+      "apiGeneration": "genx-v3",
+      "basePath": "/brapi/v3",
+      "method": "GET",
+      "path": "/variable-terms",
+      "operationIdInSource": "genxListVariableTermVersions",
+      "recommendedOperationId": "genxListVariableTermVersions",
+      "operationName": "List versioned observation-variable terms",
+      "brapiModule": null,
+      "genxModule": "VariableTerms",
+      "brapiTag": "VariableTerms",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4"
+        ]
+      },
+      "purpose": "List paginated, namespaced versions of observation-variable term definitions, with optional authority, ontology, and lifecycle filters.",
+      "sourceDescription": "Return a paged list of namespaced observation-variable term versions across authorities. All supplied filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover published VariableTerm versions and filter the term registry.",
+        "Resolve which namespaced term definitions are available."
+      ],
+      "mustNotBeUsedFor": [
+        "Treating results as measured observations or trait values.",
+        "Assuming this endpoint implements full Trait, Method, Scale, or ontology-merging lifecycles.",
+        "Assuming terms with similar labels are semantically equivalent."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "variableDbId",
+        "ontologyDbId",
+        "status"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "VariableTermListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "V2.1 /brapi/v2/variables",
+        "V2.1 OntologyTerm schema"
+      ],
+      "decisionReferences": [
+        "RFC-002",
+        "A-03"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/VariableTerms/VariableTerms_GET_POST.yaml"
+      },
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending"
+    },
+    {
+      "catalogId": "brapi-den.genx.v3.variable-terms.publish-version",
+      "apiGeneration": "genx-v3",
+      "basePath": "/brapi/v3",
+      "method": "POST",
+      "path": "/variable-terms",
+      "operationIdInSource": "genxPublishVariableTermVersion",
+      "recommendedOperationId": "genxPublishVariableTermVersion",
+      "operationName": "Publish one immutable observation-variable term version",
+      "brapiModule": null,
+      "genxModule": "VariableTerms",
+      "brapiTag": "VariableTerms",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4"
+        ]
+      },
+      "purpose": "Publish a namespaced VariableTerm definition as a new immutable version, creating the term identity when new or appending a version when known.",
+      "sourceDescription": "Unknown variableDbId creates; known id with a new version appends;\nsame (variableDbId, version) with an identical body replays the\nexisting record; same pair with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a term definition with explicit version and provenance.",
+        "Retry the same publication idempotently.",
+        "Reject conflicting definitions for the same term identity and version."
+      ],
+      "mustNotBeUsedFor": [
+        "Silently editing a published version.",
+        "Deleting a term used by historical observations.",
+        "Merging cross-authority terms or asserting equivalence without a separate mapping contract."
+      ],
+      "sideEffects": "Creates a term or a new immutable term version when valid.",
+      "idempotency": "Same identity/version plus identical body replays; same pair plus different body is a conflict.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "VariableTermNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListVariableTermVersions",
+        "genxGetVariableTermVersion",
+        "V2.1 /brapi/v2/variables"
+      ],
+      "decisionReferences": [
+        "RFC-002",
+        "A-03"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/VariableTerms/VariableTerms_GET_POST.yaml"
+      },
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending"
+    },
+    {
+      "catalogId": "brapi-den.genx.v3.variable-terms.get-version",
+      "apiGeneration": "genx-v3",
+      "basePath": "/brapi/v3",
+      "method": "GET",
+      "path": "/variable-terms/{variableDbId}",
+      "operationIdInSource": "genxGetVariableTermVersion",
+      "recommendedOperationId": "genxGetVariableTermVersion",
+      "operationName": "Get a versioned observation-variable term",
+      "brapiModule": null,
+      "genxModule": "VariableTerms",
+      "brapiTag": "VariableTerms",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4"
+        ]
+      },
+      "purpose": "Retrieve a specific VariableTerm version, or the most recently created version when the version query parameter is omitted.",
+      "sourceDescription": "Returns the requested version, or the most recently created version when `version` is omitted. Version ordering semantics are requires-decision (see RFC-002 §5).",
+      "canBeUsedFor": [
+        "Resolve the exact term version referenced by a reproducible analysis when version is supplied.",
+        "Read the latest-created version when no version is supplied."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming omitted-version lookup returns the highest semantic-version number; ordering semantics remain unresolved.",
+        "Treating VariableTerm as the V2.1 OntologyTerm schema.",
+        "Inferring cross-authority equivalence from a matching name."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "variableDbId",
+        "version"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxPublishVariableTermVersion",
+        "V2.1 OntologyTerm schema"
+      ],
+      "decisionReferences": [
+        "RFC-002",
+        "D-05",
+        "D-06",
+        "A-03"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/VariableTerms/VariableTerms_VariableDbId_GET.yaml"
+      },
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending"
+    },
+    {
+      "catalogId": "brapi-den.genx.v3.seed-lot-ledger.list",
+      "apiGeneration": "genx-v3",
+      "basePath": "/brapi/v3",
+      "method": "GET",
+      "path": "/seedlots/{seedLotDbId}/ledger",
+      "operationIdInSource": "genxListSeedLotLedgerEntries",
+      "recommendedOperationId": "genxListSeedLotLedgerEntries",
+      "operationName": "Read a lot's ledger in position order",
+      "brapiModule": null,
+      "genxModule": "LotLedger",
+      "brapiTag": "Seed Lots",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ]
+      },
+      "purpose": "Read a seed lot's append-only movement ledger in position order, with an optional movement-type filter.",
+      "sourceDescription": "Entries are returned in per-lot position order. Positions are source-local cursors; no global ordering is claimed. Unknown lots follow documented server behavior (reference server returns an empty list).",
+      "canBeUsedFor": [
+        "Inspect the entry stream for one lot.",
+        "Reconstruct or audit that lot's history when entries and quantity semantics are valid."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a globally comparable order across lots, servers, or independent streams.",
+        "Treating the ledger as a complete atomic multi-lot transfer transaction.",
+        "Combining with V2.1 SeedLotTransaction records as independent movements or assuming automatic equivalence."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "seedLotDbId",
+        "entryType"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "LotLedgerEntryListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "SEM-01"
+      ],
+      "decisionReferences": [
+        "RFC-003",
+        "D-07",
+        "D-08",
+        "D-20"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/LotLedger/Ledger_GET_POST.yaml"
+      },
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending"
+    },
+    {
+      "catalogId": "brapi-den.genx.v3.seed-lot-ledger.append",
+      "apiGeneration": "genx-v3",
+      "basePath": "/brapi/v3",
+      "method": "POST",
+      "path": "/seedlots/{seedLotDbId}/ledger",
+      "operationIdInSource": "genxAppendSeedLotLedgerEntry",
+      "recommendedOperationId": "genxAppendSeedLotLedgerEntry",
+      "operationName": "Append one ledger entry",
+      "brapiModule": null,
+      "genxModule": "LotLedger",
+      "brapiTag": "Seed Lots",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ]
+      },
+      "purpose": "Append one immutable movement entry to one seed lot's ledger with replay and conflict protection.",
+      "sourceDescription": "Unknown idempotencyKey appends; known key with an identical body\nreplays the existing entry with zero new effects; known key with a\ndifferent body is rejected with 409.",
+      "canBeUsedFor": [
+        "Record a single-lot adjustment, movement, handoff, production, planting, or trade entry.",
+        "Retry an identical entry safely using the same idempotency key."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing ledger entry; corrections require an additional record.",
+        "Assuming multi-lot transfer atomicity.",
+        "Automatically mirroring a movement to V2.1 SeedLotTransaction or double-counting both streams."
+      ],
+      "sideEffects": "Appends one ledger entry when accepted.",
+      "idempotency": "Same key and identical body replays existing entry; same key and different body is rejected as a conflict.",
+      "parameters": [
+        "seedLotDbId",
+        "Idempotency-Key"
+      ],
+      "requestSchemaRefs": [
+        "LotLedgerEntryNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "SEM-01"
+      ],
+      "decisionReferences": [
+        "RFC-003",
+        "D-07",
+        "D-08",
+        "D-20",
+        "A-05",
+        "A-06"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/LotLedger/Ledger_GET_POST.yaml"
+      },
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending"
+    },
+    {
+      "catalogId": "brapi-den.genx.v3.models.list",
+      "apiGeneration": "genx-v3",
+      "basePath": "/brapi/v3",
+      "method": "GET",
+      "path": "/models",
+      "operationIdInSource": "genxListModelVersions",
+      "recommendedOperationId": "genxListModelVersions",
+      "operationName": "List registered model versions",
+      "brapiModule": null,
+      "genxModule": "Models",
+      "brapiTag": "Models",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ]
+      },
+      "purpose": "List registered model artifact versions and their lifecycle states, including active, deprecated, and revoked.",
+      "sourceDescription": "Get a paged list of model versions across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover registered model identities and versions.",
+        "Select a model version subject to lifecycle status and advertised inference support."
+      ],
+      "mustNotBeUsedFor": [
+        "Running inference or training a model.",
+        "Assuming registration means scientific validation, approval, or endorsement.",
+        "Assuming metrics from different models are directly comparable without defined metric semantics."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "modelDbId",
+        "status"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "ModelArtifactListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterModelVersion",
+        "genxGetModelVersion",
+        "genxSubmitAsyncJob"
+      ],
+      "decisionReferences": [
+        "RFC-004",
+        "D-09"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Models/Models_GET_POST.yaml"
+      },
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending"
+    },
+    {
+      "catalogId": "brapi-den.genx.v3.models.register-version",
+      "apiGeneration": "genx-v3",
+      "basePath": "/brapi/v3",
+      "method": "POST",
+      "path": "/models",
+      "operationIdInSource": "genxRegisterModelVersion",
+      "recommendedOperationId": "genxRegisterModelVersion",
+      "operationName": "Register one model version",
+      "brapiModule": null,
+      "genxModule": "Models",
+      "brapiTag": "Models",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ]
+      },
+      "purpose": "Register a model artifact version with a namespaced identity, immutable artifact digest, training provenance, metrics, framework, and lifecycle state.",
+      "sourceDescription": "Unknown modelDbId creates; known id with a new version appends;\nsame (modelDbId, modelVersion) with an identical body replays the\nexisting record; same pair with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish model metadata and integrity references.",
+        "Create a new version under an existing model identity.",
+        "Record deprecation or revocation status as governed elsewhere."
+      ],
+      "mustNotBeUsedFor": [
+        "Training a model or executing inference.",
+        "Assuming the endpoint uploads model bytes; artifact transport is a separate unresolved contract.",
+        "Treating the revoked flag as an approval or governance workflow."
+      ],
+      "sideEffects": "Creates a model identity or appends a new immutable version when accepted.",
+      "idempotency": "Same model identity/version and identical body replays; conflicting content for the same version is rejected.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "ModelArtifactNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListModelVersions",
+        "genxGetModelVersion",
+        "genxSubmitAsyncJob"
+      ],
+      "decisionReferences": [
+        "RFC-004",
+        "D-09",
+        "D-10"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Models/Models_GET_POST.yaml"
+      },
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending"
+    },
+    {
+      "catalogId": "brapi-den.genx.v3.models.get-version",
+      "apiGeneration": "genx-v3",
+      "basePath": "/brapi/v3",
+      "method": "GET",
+      "path": "/models/{modelDbId}",
+      "operationIdInSource": "genxGetModelVersion",
+      "recommendedOperationId": "genxGetModelVersion",
+      "operationName": "Get one model (latest created when version is omitted)",
+      "brapiModule": null,
+      "genxModule": "Models",
+      "brapiTag": "Models",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ]
+      },
+      "purpose": "Retrieve the registered metadata for one model identity/version.",
+      "sourceDescription": "Returns the requested version, or the most recently created version when `version` is omitted.",
+      "canBeUsedFor": [
+        "Inspect artifact digest, training provenance, version, and lifecycle status before selecting an inference model."
+      ],
+      "mustNotBeUsedFor": [
+        "Executing inference or training.",
+        "Assuming model bytes are served by this endpoint.",
+        "Assuming metadata status alone proves scientific fitness for a particular task."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "modelDbId",
+        "version"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterModelVersion",
+        "genxSubmitAsyncJob"
+      ],
+      "decisionReferences": [
+        "RFC-004",
+        "D-09",
+        "D-10"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Models/Models_ModelDbId_GET.yaml"
+      },
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending"
+    },
+    {
+      "catalogId": "brapi-den.genx.v3.variant-matrices.list",
+      "apiGeneration": "genx-v3",
+      "basePath": "/brapi/v3",
+      "method": "GET",
+      "path": "/variantmatrices",
+      "operationIdInSource": "genxListVariantMatrixReferences",
+      "recommendedOperationId": "genxListVariantMatrixReferences",
+      "operationName": "List registered matrix references",
+      "brapiModule": null,
+      "genxModule": "Genomics",
+      "brapiTag": "Variant Matrices",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C5",
+          "C6",
+          "C9"
+        ]
+      },
+      "purpose": "List registered references to external variant matrices, optionally filtered by VariantSet identity and format.",
+      "sourceDescription": "Get a paged list of matrix references across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover matrix metadata, file digests, counts, formats, and retrieval service references.",
+        "Plan external retrieval or subsetting through the declared retrieval service."
+      ],
+      "mustNotBeUsedFor": [
+        "Expecting genotype matrix bytes in the response.",
+        "Treating VariantMatrix as an alias for VariantSet, CallSet, or Calls.",
+        "Assuming the endpoint itself implements matrix slicing or access control for external bytes."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "variantSetDbId",
+        "format"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "VariantMatrixListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "SEM-04"
+      ],
+      "decisionReferences": [
+        "RFC-005",
+        "D-11",
+        "D-12",
+        "D-19"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Genomics/VariantMatrices_GET_POST.yaml"
+      },
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending"
+    },
+    {
+      "catalogId": "brapi-den.genx.v3.variant-matrices.register",
+      "apiGeneration": "genx-v3",
+      "basePath": "/brapi/v3",
+      "method": "POST",
+      "path": "/variantmatrices",
+      "operationIdInSource": "genxRegisterVariantMatrixReference",
+      "recommendedOperationId": "genxRegisterVariantMatrixReference",
+      "operationName": "Register one matrix reference",
+      "brapiModule": null,
+      "genxModule": "Genomics",
+      "brapiTag": "Variant Matrices",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C5",
+          "C6",
+          "C9"
+        ]
+      },
+      "purpose": "Register a content-addressed reference to an externally stored genomic variant matrix, including format, location, digest, and optional dimensions and retrieval-service metadata.",
+      "sourceDescription": "Unknown matrixDbId creates; known id with an identical body replays\nthe existing record; known id with different bytes is rejected with\n409. New bytes get a new id.",
+      "canBeUsedFor": [
+        "Publish a resolvable reference to VCF, BCF, VCF Zarr, PLINK, or another declared matrix format.",
+        "Bind a matrix identity to immutable content metadata."
+      ],
+      "mustNotBeUsedFor": [
+        "Uploading or returning matrix bytes through this endpoint.",
+        "Replacing V2.1 variant/call resources or claiming drop-in equivalence.",
+        "Assuming a custom matrix slicing protocol or access-authorization scheme is defined here."
+      ],
+      "sideEffects": "Creates a matrix reference if accepted.",
+      "idempotency": "Identical registration replays; a different body under the same matrix identity is rejected; changed bytes require a new identity.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "VariantMatrixNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "SEM-04"
+      ],
+      "decisionReferences": [
+        "RFC-005",
+        "D-11",
+        "D-12",
+        "D-19"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Genomics/VariantMatrices_GET_POST.yaml"
+      },
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending"
+    },
+    {
+      "catalogId": "brapi-den.genx.v3.variant-matrices.get",
+      "apiGeneration": "genx-v3",
+      "basePath": "/brapi/v3",
+      "method": "GET",
+      "path": "/variantmatrices/{matrixDbId}",
+      "operationIdInSource": "genxGetVariantMatrixReference",
+      "recommendedOperationId": "genxGetVariantMatrixReference",
+      "operationName": "Get one matrix reference",
+      "brapiModule": null,
+      "genxModule": "Genomics",
+      "brapiTag": "Variant Matrices",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C5",
+          "C6",
+          "C9"
+        ]
+      },
+      "purpose": "Retrieve one registered variant-matrix reference and its integrity and retrieval metadata.",
+      "sourceDescription": "Returns the registered record, or 404. Bytes are retrieved out of band via fileURL or accessService.",
+      "canBeUsedFor": [
+        "Resolve the metadata needed to retrieve and verify external matrix bytes."
+      ],
+      "mustNotBeUsedFor": [
+        "Expecting the matrix file or selected variants to be streamed in the response.",
+        "Treating the matrix reference as a VariantSet or CallSet."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "matrixDbId"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "SEM-04"
+      ],
+      "decisionReferences": [
+        "RFC-005",
+        "D-11",
+        "D-12",
+        "D-19"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Genomics/VariantMatrices_MatrixDbId_GET.yaml"
+      },
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending"
+    },
+    {
+      "catalogId": "brapi-den.genx.v3.fair-packages.list-metadata",
+      "apiGeneration": "genx-v3",
+      "basePath": "/brapi/v3",
+      "method": "GET",
+      "path": "/fair-packages",
+      "operationIdInSource": "genxListFairPackageMetadata",
+      "recommendedOperationId": "genxListFairPackageMetadata",
+      "operationName": "List registered FAIR packages (metadata only)",
+      "brapiModule": null,
+      "genxModule": "FAIR",
+      "brapiTag": "FAIR Packages",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C5",
+          "C6",
+          "C9"
+        ]
+      },
+      "purpose": "List FAIR package metadata with optional access-rights and license filters; the endpoint does not serve payload bytes.",
+      "sourceDescription": "Get a paged list of package metadata across authorities. Filters combine with AND. Payload bytes are never served here.",
+      "canBeUsedFor": [
+        "Discover package citation, licensing, access-rights, embargo, and payload-reference metadata.",
+        "Find packages by supported metadata filters."
+      ],
+      "mustNotBeUsedFor": [
+        "Downloading payload bytes or assuming the package service stores them.",
+        "Minting Digital Object Identifiers (DOIs) or approving restricted-access requests.",
+        "Assuming all embargo policies or metadata-visibility rules have been finalized."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "accessRights",
+        "license"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "FAIRPackageListResponse",
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "SEM-05"
+      ],
+      "decisionReferences": [
+        "RFC-006",
+        "D-13",
+        "D-14",
+        "D-15"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/FAIR/FairPackages_GET_POST.yaml"
+      },
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending"
+    },
+    {
+      "catalogId": "brapi-den.genx.v3.fair-packages.register",
+      "apiGeneration": "genx-v3",
+      "basePath": "/brapi/v3",
+      "method": "POST",
+      "path": "/fair-packages",
+      "operationIdInSource": "genxRegisterFairPackage",
+      "recommendedOperationId": "genxRegisterFairPackage",
+      "operationName": "Register one FAIR package",
+      "brapiModule": null,
+      "genxModule": "FAIR",
+      "brapiTag": "FAIR Packages",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C5",
+          "C6",
+          "C9"
+        ]
+      },
+      "purpose": "Register an identified, licensed, access-controlled package envelope that binds one or more payload references into a citable metadata record.",
+      "sourceDescription": "Unknown packageDbId creates; known id with an identical body replays\nthe existing record; known id with a different body is rejected with\n409.",
+      "canBeUsedFor": [
+        "Record a package title, identifiers, license, access rights, embargo, creators, and payload references.",
+        "Publish a stable metadata envelope around data owned by another service."
+      ],
+      "mustNotBeUsedFor": [
+        "Uploading or storing the payload bytes.",
+        "Minting persistent identifiers or running license negotiation.",
+        "Implementing restricted-access approval workflows."
+      ],
+      "sideEffects": "Creates package metadata if accepted.",
+      "idempotency": "Identical registration replays; conflicting content under the same package identity is rejected.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "FAIRPackageNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "SEM-05"
+      ],
+      "decisionReferences": [
+        "RFC-006",
+        "D-13",
+        "D-14",
+        "D-15"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/FAIR/FairPackages_GET_POST.yaml"
+      },
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending"
+    },
+    {
+      "catalogId": "brapi-den.genx.v3.fair-packages.get-metadata",
+      "apiGeneration": "genx-v3",
+      "basePath": "/brapi/v3",
+      "method": "GET",
+      "path": "/fair-packages/{packageDbId}",
+      "operationIdInSource": "genxGetFairPackageMetadata",
+      "recommendedOperationId": "genxGetFairPackageMetadata",
+      "operationName": "Get one FAIR package (denied while embargoed)",
+      "brapiModule": null,
+      "genxModule": "FAIR",
+      "brapiTag": "FAIR Packages",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C5",
+          "C6",
+          "C9"
+        ]
+      },
+      "purpose": "Retrieve the metadata envelope for one FAIR package subject to the currently specified embargo gate.",
+      "sourceDescription": "Returns the package metadata, or 404. While payloads are embargoed (embargoUntil in the future) the record is denied with 403 to prove the gate exists; the gentler metadata-visible alternative is requires-decision (see RFC-006 §5).",
+      "canBeUsedFor": [
+        "Read package metadata when the access contract permits the request."
+      ],
+      "mustNotBeUsedFor": [
+        "Retrieving payload bytes.",
+        "Assuming embargoed metadata remains visible: the current reference behavior denies the whole record with 403, while the preferred metadata-visible policy remains unresolved.",
+        "Treating this endpoint as an access-request approval workflow."
+      ],
+      "sideEffects": "Read-only; may deny the record while its payload is embargoed under the current proposal behavior.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "packageDbId"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "SEM-05"
+      ],
+      "decisionReferences": [
+        "RFC-006",
+        "D-15"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/FAIR/FairPackages_PackageDbId_GET.yaml"
+      },
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending"
+    },
+    {
+      "catalogId": "brapi-den.genx.v3.telemetry.query",
+      "apiGeneration": "genx-v3",
+      "basePath": "/brapi/v3",
+      "method": "GET",
+      "path": "/telemetry",
+      "operationIdInSource": "genxQueryTelemetrySamplesOrAggregates",
+      "recommendedOperationId": "genxQueryTelemetrySamplesOrAggregates",
+      "operationName": "Read samples or aggregates over a time range",
+      "brapiModule": null,
+      "genxModule": "Telemetry",
+      "brapiTag": "Telemetry",
+      "classification": {
+        "primaryDomain": null,
+        "contextualDomains": [
+          "D4",
+          "D5"
+        ],
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C7",
+          "C9"
+        ]
+      },
+      "purpose": "Read device/sensor samples in timestamp order or calculate deterministic aggregates over a requested time range.",
+      "sourceDescription": "Points are returned in timestamp order. With aggregation set,\nTelemetryBucket rows are returned instead, computed deterministically\nover windowSeconds buckets (default: one bucket over the whole\nrange). Empty ranges yield empty data, never an error.",
+      "canBeUsedFor": [
+        "Retrieve raw telemetry for a device and optional sensor over a time interval.",
+        "Calculate mean, minimum, maximum, or count aggregates in defined windows.",
+        "Use an inclusive from timestamp and exclusive to timestamp."
+      ],
+      "mustNotBeUsedFor": [
+        "Automatically converting every telemetry sample into a BrAPI Observation.",
+        "Assuming implicit links to a study, observation unit, or observation variable.",
+        "Assuming unspecified gap-filling, resampling, or timezone-of-record behavior."
+      ],
+      "sideEffects": "Read-only; aggregates are calculated from stored samples.",
+      "idempotency": "Read-only for an unchanged stored dataset and query; deterministic aggregation rules apply to the same sample set and range.",
+      "parameters": [
+        "deviceDbId",
+        "sensorDbId",
+        "from",
+        "to",
+        "aggregation",
+        "windowSeconds"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "SEM-03"
+      ],
+      "decisionReferences": [
+        "RFC-007",
+        "D-16",
+        "D-17",
+        "D-18"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Telemetry/Telemetry_GET_POST.yaml"
+      },
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending"
+    },
+    {
+      "catalogId": "brapi-den.genx.v3.telemetry.append-batch",
+      "apiGeneration": "genx-v3",
+      "basePath": "/brapi/v3",
+      "method": "POST",
+      "path": "/telemetry",
+      "operationIdInSource": "genxAppendTelemetryBatch",
+      "recommendedOperationId": "genxAppendTelemetryBatch",
+      "operationName": "Append a batch of samples",
+      "brapiModule": null,
+      "genxModule": "Telemetry",
+      "brapiTag": "Telemetry",
+      "classification": {
+        "primaryDomain": null,
+        "contextualDomains": [
+          "D4",
+          "D5"
+        ],
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C7",
+          "C9"
+        ]
+      },
+      "purpose": "Append a batch of timestamped device/sensor samples while reporting newly appended, replayed, and conflicting elements.",
+      "sourceDescription": "Takes an array of TelemetryPoint (V2.1 batch style). Reports\nappended, replayed, and conflicts counts with the conflicting keys.\nConflicting elements reject the element, never the batch.",
+      "canBeUsedFor": [
+        "Ingest sample batches from field or laboratory sensors.",
+        "Retry identical samples without duplicating stored points.",
+        "Reject conflicting values for an already-used device/sensor/timestamp key without discarding unrelated valid batch elements."
+      ],
+      "mustNotBeUsedFor": [
+        "Replacing existing samples silently.",
+        "Assuming the batch is all-or-nothing; conflicts are handled element-wise.",
+        "Treating telemetry as a complete observation record or assuming all samples are environmental."
+      ],
+      "sideEffects": "Appends non-conflicting new points; reports duplicate replays and per-element conflicts.",
+      "idempotency": "Natural key is deviceDbId + sensorDbId + timestamp. Same key and value replays; same key with a different value conflicts.",
+      "parameters": [],
+      "requestSchemaRefs": [
+        "TelemetryPoint"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "SEM-03"
+      ],
+      "decisionReferences": [
+        "RFC-007",
+        "D-16",
+        "D-17",
+        "D-18"
+      ],
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Telemetry/Telemetry_GET_POST.yaml"
+      },
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending"
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 0,
+    "genxEntriesAdded": 21,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
-    "notes": []
+    "notes": [
+      "BrAPI v2.1 source YAMLs do not define operationId in the inspected operations; operationIdInSource remains null and recommendedOperationId is an advisory BrAPI-Den suggestion, not an edit to frozen V2.1 contracts.",
+      "BrAPI-Den D1-D7 mapping for legacy V2.1 operations is a proposed crosswalk inferred from official modules and route semantics, not an endorsed BrAPI reclassification; reviewStatus remains needs-neighbor-review."
+    ]
   }
 }
