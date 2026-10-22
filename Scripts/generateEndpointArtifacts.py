@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "Specification" / "ENDPOINT-REGISTRY.json"
 CATALOGUE = ROOT / "Specification" / "ENDPOINT-CATALOG.md"
 CROSSWALK = ROOT / "Specification" / "BIJMANTRA-CROSSWALK.md"
+GENX_CATALOGUE = ROOT / "Specification" / "BrAPI-GenX" / "GENX-ENDPOINT-CATALOG.md"
 BT = chr(96)
 MODULES = ["BrAPI-Core", "BrAPI-Germplasm", "BrAPI-Genotyping", "BrAPI-Phenotyping"]
 DOMAINS = {
@@ -216,8 +217,32 @@ def render_crosswalk(reg):
     "4. Retain not-verified / not-assessed implementation status until live conformance evidence exists.",""])
     return "\n".join(lines)
 
+def render_genx_catalog(reg):
+    genx = [e for e in reg["entries"] if e.get("apiGeneration") == "genx-v3"]
+    lines = [
+        "# BrAPI-GenX Endpoint Catalogue (Focused View)", "",
+        "> Generated from the master registry by Scripts/generateEndpointArtifacts.py on " + str(reg.get("generatedAt", "unknown date")) + ". Do not edit by hand.", "",
+        "This is a focused view of the 21 proposed GenX operations, not a separate source of truth. The complete catalogue covering BrAPI v2.1 and GenX is the [master endpoint catalogue](../ENDPOINT-CATALOG.md); authoritative structured records live in the [master registry](../ENDPOINT-REGISTRY.json). The [BijMantra crosswalk](../BIJMANTRA-CROSSWALK.md) records source-level implementation candidates without implying runtime availability or contract equivalence.", "",
+        "| Source module | Operation count | Status |", "|---|---:|---|"
+    ]
+    modules = sorted({e.get("genxModule") or "Unclassified" for e in genx})
+    for module in modules:
+        group = [e for e in genx if (e.get("genxModule") or "Unclassified") == module]
+        lines.append("| " + m(module) + " | " + str(len(group)) + " | proposed, non-normative |")
+    lines.extend(["", "## Operations", ""])
+    for module in modules:
+        group = sorted([e for e in genx if (e.get("genxModule") or "Unclassified") == module],
+                       key=lambda e: (e.get("path", ""), e.get("method", ""), e.get("catalogId", "")))
+        lines.extend(["### " + m(module) + " — " + str(len(group)) + " operations", ""])
+        for e in group:
+            lines.extend(render_entry(e))
+    lines.extend(["", "## Non-normative status", "",
+                  "Every operation in this view remains a proposal. This focused catalogue is generated from operation-level x-brapi-den metadata and must not be edited independently. Change the OpenAPI operation metadata and master registry inputs, then regenerate this document and the all-generation catalogue.", ""])
+    return "\n".join(lines)
+
+
 def generate(reg):
-    return {CATALOGUE: render_catalog(reg), CROSSWALK: render_crosswalk(reg)}
+    return {CATALOGUE: render_catalog(reg), GENX_CATALOGUE: render_genx_catalog(reg), CROSSWALK: render_crosswalk(reg)}
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
