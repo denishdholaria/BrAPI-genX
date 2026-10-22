@@ -67,9 +67,13 @@
       "brapiTag": "Common Crop Names",
       "classification": {
         "primaryDomain": null,
-        "basis": "unassigned",
-        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
-        "officialModule": "BrAPI-Core"
+        "crossCuttingCapabilities": [
+          "C4"
+        ],
+        "basis": "inferred-from-scientific-vocabulary",
+        "reason": "Common crop names provide controlled cross-domain crop nomenclature; they do not represent an experimental or biological material record.",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Get the Common Crop Names",
       "sourceDescription": "List the common crop names for the crops available in a database server. \n\nThis call is ** required ** for multi-crop systems where data from multiple \ncrops may be stored in the same database server. A distinct database server \nis defined by everything in the URL before \"/brapi/v2\", including host \nname and base path.\n\nThis call is recommended for single crop systems to be compatible with \nmulti-crop clients. For a single crop system the response should contain \nan array with exactly 1 element. \n\nThe common crop name can be used as a search parameter for Programs, \nStudies, and Germplasm.",
@@ -151,9 +155,14 @@
       "brapiTag": "Lists",
       "classification": {
         "primaryDomain": null,
-        "basis": "unassigned",
-        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
-        "officialModule": "BrAPI-Core"
+        "crossCuttingCapabilities": [
+          "C1",
+          "C5"
+        ],
+        "basis": "inferred-from-generic-resource-role",
+        "reason": "Generic lists group references selected by a client or workflow; the list itself has no single crop-science domain. Search lifecycle is a cross-cutting facet where applicable.",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Get filtered set of generic lists",
       "sourceDescription": "Get filtered set of generic lists",
@@ -236,9 +245,14 @@
       "brapiTag": "Lists",
       "classification": {
         "primaryDomain": null,
-        "basis": "unassigned",
-        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
-        "officialModule": "BrAPI-Core"
+        "crossCuttingCapabilities": [
+          "C1",
+          "C5"
+        ],
+        "basis": "inferred-from-generic-resource-role",
+        "reason": "Generic lists group references selected by a client or workflow; the list itself has no single crop-science domain. Search lifecycle is a cross-cutting facet where applicable.",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Create New List Objects",
       "sourceDescription": "Create new list objects in the database",
@@ -323,9 +337,14 @@
       "brapiTag": "Lists",
       "classification": {
         "primaryDomain": null,
-        "basis": "unassigned",
-        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
-        "officialModule": "BrAPI-Core"
+        "crossCuttingCapabilities": [
+          "C1",
+          "C5"
+        ],
+        "basis": "inferred-from-generic-resource-role",
+        "reason": "Generic lists group references selected by a client or workflow; the list itself has no single crop-science domain. Search lifecycle is a cross-cutting facet where applicable.",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Add new data members to a specific List",
       "sourceDescription": "Add new data members to a specific List",
@@ -409,9 +428,14 @@
       "brapiTag": "Lists",
       "classification": {
         "primaryDomain": null,
-        "basis": "unassigned",
-        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
-        "officialModule": "BrAPI-Core"
+        "crossCuttingCapabilities": [
+          "C1",
+          "C5"
+        ],
+        "basis": "inferred-from-generic-resource-role",
+        "reason": "Generic lists group references selected by a client or workflow; the list itself has no single crop-science domain. Search lifecycle is a cross-cutting facet where applicable.",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Get the details of a specific List",
       "sourceDescription": "Get a specific generic lists",
@@ -496,9 +520,14 @@
       "brapiTag": "Lists",
       "classification": {
         "primaryDomain": null,
-        "basis": "unassigned",
-        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
-        "officialModule": "BrAPI-Core"
+        "crossCuttingCapabilities": [
+          "C1",
+          "C5"
+        ],
+        "basis": "inferred-from-generic-resource-role",
+        "reason": "Generic lists group references selected by a client or workflow; the list itself has no single crop-science domain. Search lifecycle is a cross-cutting facet where applicable.",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Update an existing generic list",
       "sourceDescription": "Update an existing generic list",
@@ -585,9 +614,14 @@
       "brapiTag": "Lists",
       "classification": {
         "primaryDomain": null,
-        "basis": "unassigned",
-        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
-        "officialModule": "BrAPI-Core"
+        "crossCuttingCapabilities": [
+          "C1",
+          "C5"
+        ],
+        "basis": "inferred-from-generic-resource-role",
+        "reason": "Generic lists group references selected by a client or workflow; the list itself has no single crop-science domain. Search lifecycle is a cross-cutting facet where applicable.",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Add Items to a specific List",
       "sourceDescription": "**Deprecated in v2.1** Please use `POST /lists/{listDbId}/data`. Github issue number #444 \n<br/> Add new data to a specific generic lists",
@@ -671,9 +705,15 @@
       "brapiTag": "Lists",
       "classification": {
         "primaryDomain": null,
-        "basis": "unassigned",
-        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
-        "officialModule": "BrAPI-Core"
+        "crossCuttingCapabilities": [
+          "C1",
+          "C5",
+          "C3"
+        ],
+        "basis": "inferred-from-generic-resource-role",
+        "reason": "Generic lists group references selected by a client or workflow; the list itself has no single crop-science domain. Search lifecycle is a cross-cutting facet where applicable.",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Submit a search request for Lists",
       "sourceDescription": "Submit a search request for Lists <br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/lists/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
@@ -815,9 +855,15 @@
       "brapiTag": "Lists",
       "classification": {
         "primaryDomain": null,
-        "basis": "unassigned",
-        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
-        "officialModule": "BrAPI-Core"
+        "crossCuttingCapabilities": [
+          "C1",
+          "C5",
+          "C3"
+        ],
+        "basis": "inferred-from-generic-resource-role",
+        "reason": "Generic lists group references selected by a client or workflow; the list itself has no single crop-science domain. Search lifecycle is a cross-cutting facet where applicable.",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Get the results of a `List` search request",
       "sourceDescription": "Get the results of a `List` search request <br/>\nClients should submit a search request using the corresponding `POST /search/lists` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
@@ -1310,7 +1356,12 @@
         "primaryDomain": "D2",
         "basis": "inferred-from-route",
         "reason": "Locations commonly provide the spatial context for trials/studies; confirm in the domain crosswalk.",
-        "officialModule": "BrAPI-Core"
+        "officialModule": "BrAPI-Core",
+        "crossCuttingCapabilities": [
+          "C3"
+        ],
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Submit a search request for `Locations`",
       "sourceDescription": "Submit a search request for `Locations`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/locations/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
@@ -1454,7 +1505,12 @@
         "primaryDomain": "D2",
         "basis": "inferred-from-route",
         "reason": "Locations commonly provide the spatial context for trials/studies; confirm in the domain crosswalk.",
-        "officialModule": "BrAPI-Core"
+        "officialModule": "BrAPI-Core",
+        "crossCuttingCapabilities": [
+          "C3"
+        ],
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Get the results of a `Locations` search request",
       "sourceDescription": "Get the results of a `Locations` search request <br/>\nClients should submit a search request using the corresponding `POST /search/location` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
@@ -1595,9 +1651,13 @@
       "brapiTag": "People",
       "classification": {
         "primaryDomain": null,
-        "basis": "unassigned",
-        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
-        "officialModule": "BrAPI-Core"
+        "crossCuttingCapabilities": [
+          "C1"
+        ],
+        "basis": "inferred-from-shared-identity-resource",
+        "reason": "People records can be referenced by multiple scientific and operational domains; classify the relationship's scientific domain on the domain record, not the shared person resource.",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Get filtered list of People",
       "sourceDescription": "Get filtered list of people",
@@ -1680,9 +1740,13 @@
       "brapiTag": "People",
       "classification": {
         "primaryDomain": null,
-        "basis": "unassigned",
-        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
-        "officialModule": "BrAPI-Core"
+        "crossCuttingCapabilities": [
+          "C1"
+        ],
+        "basis": "inferred-from-shared-identity-resource",
+        "reason": "People records can be referenced by multiple scientific and operational domains; classify the relationship's scientific domain on the domain record, not the shared person resource.",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Create new People",
       "sourceDescription": "Create new People entities. `personDbId` is generated and managed by the server.",
@@ -1767,9 +1831,13 @@
       "brapiTag": "People",
       "classification": {
         "primaryDomain": null,
-        "basis": "unassigned",
-        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
-        "officialModule": "BrAPI-Core"
+        "crossCuttingCapabilities": [
+          "C1"
+        ],
+        "basis": "inferred-from-shared-identity-resource",
+        "reason": "People records can be referenced by multiple scientific and operational domains; classify the relationship's scientific domain on the domain record, not the shared person resource.",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Get the details for a specific Person",
       "sourceDescription": "Get the details for a specific Person",
@@ -1854,9 +1922,13 @@
       "brapiTag": "People",
       "classification": {
         "primaryDomain": null,
-        "basis": "unassigned",
-        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
-        "officialModule": "BrAPI-Core"
+        "crossCuttingCapabilities": [
+          "C1"
+        ],
+        "basis": "inferred-from-shared-identity-resource",
+        "reason": "People records can be referenced by multiple scientific and operational domains; classify the relationship's scientific domain on the domain record, not the shared person resource.",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Update an existing Person",
       "sourceDescription": "Update an existing Person",
@@ -1943,9 +2015,14 @@
       "brapiTag": "People",
       "classification": {
         "primaryDomain": null,
-        "basis": "unassigned",
-        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
-        "officialModule": "BrAPI-Core"
+        "crossCuttingCapabilities": [
+          "C1",
+          "C3"
+        ],
+        "basis": "inferred-from-shared-identity-resource",
+        "reason": "People records can be referenced by multiple scientific and operational domains; classify the relationship's scientific domain on the domain record, not the shared person resource.",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Submit a search request for `People`",
       "sourceDescription": "Submit a search request for `People`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/people/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
@@ -2087,9 +2164,14 @@
       "brapiTag": "People",
       "classification": {
         "primaryDomain": null,
-        "basis": "unassigned",
-        "reason": "Generic reference, people, or list resource is not assigned to a proposed scientific domain without further review.",
-        "officialModule": "BrAPI-Core"
+        "crossCuttingCapabilities": [
+          "C1",
+          "C3"
+        ],
+        "basis": "inferred-from-shared-identity-resource",
+        "reason": "People records can be referenced by multiple scientific and operational domains; classify the relationship's scientific domain on the domain record, not the shared person resource.",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Get the results of a `People` search request",
       "sourceDescription": "Get the results of a `People` search request <br/>\nClients should submit a search request using the corresponding `POST /search/people` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
@@ -2587,7 +2669,12 @@
         "primaryDomain": "D2",
         "basis": "inferred-from-route",
         "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
-        "officialModule": "BrAPI-Core"
+        "officialModule": "BrAPI-Core",
+        "crossCuttingCapabilities": [
+          "C3"
+        ],
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Submit a search request for `Programs`",
       "sourceDescription": "Submit a search request for `Programs`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/programs/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
@@ -2731,7 +2818,12 @@
         "primaryDomain": "D2",
         "basis": "inferred-from-route",
         "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
-        "officialModule": "BrAPI-Core"
+        "officialModule": "BrAPI-Core",
+        "crossCuttingCapabilities": [
+          "C3"
+        ],
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Get the results of a `Programs` search request",
       "sourceDescription": "Get the results of a `Programs` search request <br/>\nClients should submit a search request using the corresponding `POST /search/programs` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
@@ -3314,7 +3406,12 @@
         "primaryDomain": "D2",
         "basis": "inferred-from-route",
         "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
-        "officialModule": "BrAPI-Core"
+        "officialModule": "BrAPI-Core",
+        "crossCuttingCapabilities": [
+          "C3"
+        ],
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Submit a search request for `Studies`",
       "sourceDescription": "Submit a search request for `Studies`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/studies/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
@@ -3458,7 +3555,12 @@
         "primaryDomain": "D2",
         "basis": "inferred-from-route",
         "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
-        "officialModule": "BrAPI-Core"
+        "officialModule": "BrAPI-Core",
+        "crossCuttingCapabilities": [
+          "C3"
+        ],
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Get the results of a `Studies` search request",
       "sourceDescription": "Get the results of a `Studies` search request <br/>\nClients should submit a search request using the corresponding `POST /search/studies` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
@@ -3946,10 +4048,14 @@
       "brapiModule": "BrAPI-Core",
       "brapiTag": "Studies",
       "classification": {
-        "primaryDomain": null,
-        "basis": "unassigned",
-        "reason": "Generic shared/reference resource is not assigned to a scientific domain without review.",
-        "officialModule": "BrAPI-Core"
+        "primaryDomain": "D2",
+        "crossCuttingCapabilities": [
+          "C4"
+        ],
+        "basis": "inferred-from-experimental-context",
+        "reason": "Study types describe the design/role of breeding or research studies; their controlled labels remain terminology-governed.",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Get the Study Types",
       "sourceDescription": "Call to retrieve the list of study types.",
@@ -4033,7 +4139,12 @@
         "primaryDomain": "D2",
         "basis": "inferred-from-route",
         "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
-        "officialModule": "BrAPI-Core"
+        "officialModule": "BrAPI-Core",
+        "crossCuttingCapabilities": [
+          "C3"
+        ],
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Submit a search request for `Trials`",
       "sourceDescription": "Submit a search request for `Trials`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/trials/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
@@ -4177,7 +4288,12 @@
         "primaryDomain": "D2",
         "basis": "inferred-from-route",
         "reason": "Programs, trials, studies and seasons provide breeding/experimental context.",
-        "officialModule": "BrAPI-Core"
+        "officialModule": "BrAPI-Core",
+        "crossCuttingCapabilities": [
+          "C3"
+        ],
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Get the results of a `Trials` search request",
       "sourceDescription": "Get the results of a `Trials` search request <br/>\nClients should submit a search request using the corresponding `POST /search/trials` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
@@ -16567,10 +16683,16 @@
       "brapiModule": "BrAPI-Phenotyping",
       "brapiTag": "Images",
       "classification": {
-        "primaryDomain": "D4",
-        "basis": "inferred-from-official-module",
-        "reason": "Official Phenotyping module; resource-specific exceptions may require review.",
-        "officialModule": "BrAPI-Phenotyping"
+        "primaryDomain": null,
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "crossCuttingCapabilities": [
+          "C4",
+          "C3"
+        ],
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Submit a search request for `XXEntitiesXX`",
       "sourceDescription": "Submit a search request for `XXEntitiesXX`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/XXEntitiesXX/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.\n<br/>\n<br/>\nImage Implementation Notes<br/>\n- `imageURL` should be a complete URL describing the location of the image. There is no BrAPI call for retrieving the image content, so it could be on a different path, or a different host.<br/>\n- `descriptiveOntologyTerm` can be thought of as Tags for the image. These could be simple descriptive words, or ontology references, or full ontology URI's.<br/>",
@@ -16712,10 +16834,16 @@
       "brapiModule": "BrAPI-Phenotyping",
       "brapiTag": "Images",
       "classification": {
-        "primaryDomain": "D4",
-        "basis": "inferred-from-official-module",
-        "reason": "Official Phenotyping module; resource-specific exceptions may require review.",
-        "officialModule": "BrAPI-Phenotyping"
+        "primaryDomain": null,
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "crossCuttingCapabilities": [
+          "C4",
+          "C3"
+        ],
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Get the results of a `Images` search request",
       "sourceDescription": "Get the results of a `Images` search request <br/>\nClients should submit a search request using the corresponding `POST /search/images` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.\n<br/>\n<br/>\nImage Implementation Notes<br/>\n- `imageURL` should be a complete URL describing the location of the image. There is no BrAPI call for retrieving the image content, so it could be on a different path, or a different host.<br/>\n- `descriptiveOntologyTerm` can be thought of as Tags for the image. These could be simple descriptive words, or ontology references, or full ontology URI's.<br/>",
@@ -16859,9 +16987,11 @@
         "crossCuttingCapabilities": [
           "C4"
         ],
-        "basis": "inferred-from-route",
-        "reason": "Scientific term definitions are shared semantics, not measured observations.",
-        "officialModule": "BrAPI-Phenotyping"
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Get the Methods",
       "sourceDescription": "Returns a list of Methods available on a server.\n\nAn Observation Variable has 3 critical parts; A Trait being observed, a Method for making the observation, and a Scale on which the observation can be measured and compared with other observations.",
@@ -16973,9 +17103,11 @@
         "crossCuttingCapabilities": [
           "C4"
         ],
-        "basis": "inferred-from-route",
-        "reason": "Scientific term definitions are shared semantics, not measured observations.",
-        "officialModule": "BrAPI-Phenotyping"
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Add new Methods",
       "sourceDescription": "Create new method objects in the database",
@@ -17089,9 +17221,11 @@
         "crossCuttingCapabilities": [
           "C4"
         ],
-        "basis": "inferred-from-route",
-        "reason": "Scientific term definitions are shared semantics, not measured observations.",
-        "officialModule": "BrAPI-Phenotyping"
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Get the details for a specific Method",
       "sourceDescription": "Retrieve details about a specific method\n\nAn Observation Variable has 3 critical parts; A Trait being observed, a Method for making the observation, and a Scale on which the observation can be measured and compared with other observations.",
@@ -17205,9 +17339,11 @@
         "crossCuttingCapabilities": [
           "C4"
         ],
-        "basis": "inferred-from-route",
-        "reason": "Scientific term definitions are shared semantics, not measured observations.",
-        "officialModule": "BrAPI-Phenotyping"
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Update an existing Method",
       "sourceDescription": "Update the details of an existing method",
@@ -18091,10 +18227,16 @@
       "brapiModule": "BrAPI-Phenotyping",
       "brapiTag": "Observation Units",
       "classification": {
-        "primaryDomain": "D4",
-        "basis": "inferred-from-official-module",
-        "reason": "Official Phenotyping module; resource-specific exceptions may require review.",
-        "officialModule": "BrAPI-Phenotyping"
+        "primaryDomain": null,
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "crossCuttingCapabilities": [
+          "C4",
+          "C3"
+        ],
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Submit a search request for `ObservationUnits`",
       "sourceDescription": "Submit a search request for `ObservationUnits`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/observationunits/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
@@ -18255,10 +18397,16 @@
       "brapiModule": "BrAPI-Phenotyping",
       "brapiTag": "Observation Units",
       "classification": {
-        "primaryDomain": "D4",
-        "basis": "inferred-from-official-module",
-        "reason": "Official Phenotyping module; resource-specific exceptions may require review.",
-        "officialModule": "BrAPI-Phenotyping"
+        "primaryDomain": null,
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "crossCuttingCapabilities": [
+          "C4",
+          "C3"
+        ],
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Get the results of a `ObservationUnits` search request",
       "sourceDescription": "Get the results of a `ObservationUnits` search request <br/>\nClients should submit a search request using the corresponding `POST /search/observationunits` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
@@ -18420,11 +18568,14 @@
       "classification": {
         "primaryDomain": null,
         "crossCuttingCapabilities": [
-          "C4"
+          "C4",
+          "C3"
         ],
-        "basis": "inferred-from-route",
-        "reason": "Scientific term definitions are shared semantics, not measured observations.",
-        "officialModule": "BrAPI-Phenotyping"
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Submit a search request for Observation `Variables`",
       "sourceDescription": "Submit a search request for Observation `Variables`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/variables/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
@@ -18587,11 +18738,14 @@
       "classification": {
         "primaryDomain": null,
         "crossCuttingCapabilities": [
-          "C4"
+          "C4",
+          "C3"
         ],
-        "basis": "inferred-from-route",
-        "reason": "Scientific term definitions are shared semantics, not measured observations.",
-        "officialModule": "BrAPI-Phenotyping"
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Get the results of a Observation `variables` search request",
       "sourceDescription": "Get the results of a Observation `variables` search request <br/>\nClients should submit a search request using the corresponding `POST /search/variables` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
@@ -18755,9 +18909,11 @@
         "crossCuttingCapabilities": [
           "C4"
         ],
-        "basis": "inferred-from-route",
-        "reason": "Scientific term definitions are shared semantics, not measured observations.",
-        "officialModule": "BrAPI-Phenotyping"
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Get the Observation Variables",
       "sourceDescription": "Call to retrieve a list of observationVariables available in the system.",
@@ -18891,9 +19047,11 @@
         "crossCuttingCapabilities": [
           "C4"
         ],
-        "basis": "inferred-from-route",
-        "reason": "Scientific term definitions are shared semantics, not measured observations.",
-        "officialModule": "BrAPI-Phenotyping"
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Add new Observation Variables",
       "sourceDescription": "Add new Observation Variables to the system.",
@@ -19029,9 +19187,11 @@
         "crossCuttingCapabilities": [
           "C4"
         ],
-        "basis": "inferred-from-route",
-        "reason": "Scientific term definitions are shared semantics, not measured observations.",
-        "officialModule": "BrAPI-Phenotyping"
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Get the details for a specific Observation Variable",
       "sourceDescription": "Retrieve variable details",
@@ -19167,9 +19327,11 @@
         "crossCuttingCapabilities": [
           "C4"
         ],
-        "basis": "inferred-from-route",
-        "reason": "Scientific term definitions are shared semantics, not measured observations.",
-        "officialModule": "BrAPI-Phenotyping"
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Update an existing Observation Variable",
       "sourceDescription": "Update an existing Observation Variable",
@@ -20110,10 +20272,16 @@
       "brapiModule": "BrAPI-Phenotyping",
       "brapiTag": "Observations",
       "classification": {
-        "primaryDomain": "D4",
-        "basis": "inferred-from-official-module",
-        "reason": "Official Phenotyping module; resource-specific exceptions may require review.",
-        "officialModule": "BrAPI-Phenotyping"
+        "primaryDomain": null,
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "crossCuttingCapabilities": [
+          "C4",
+          "C3"
+        ],
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Submit a search request for `Observations`",
       "sourceDescription": "Submit a search request for `Observations`<br/>\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse the corresponding `GET /search/observations/{searchResultsDbId}` to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
@@ -20275,10 +20443,16 @@
       "brapiModule": "BrAPI-Phenotyping",
       "brapiTag": "Observations",
       "classification": {
-        "primaryDomain": "D4",
-        "basis": "inferred-from-official-module",
-        "reason": "Official Phenotyping module; resource-specific exceptions may require review.",
-        "officialModule": "BrAPI-Phenotyping"
+        "primaryDomain": null,
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "crossCuttingCapabilities": [
+          "C4",
+          "C3"
+        ],
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Get the results of a `Observations` search request",
       "sourceDescription": "Get the results of a `Observations` search request <br/>\nClients should submit a search request using the corresponding `POST /search/observations` endpoint.\nSearch requests allow a client to send a complex query for data. However, the server may not respond with the search results immediately. \nIf a server needs more time to process the request, it might respond with a `searchResultsDbId`. \nUse this endpoint to retrieve the results of the search. <br/> \nReview the <a target=\"_blank\" href=\"https://wiki.brapi.org/index.php/Search_Services#POST_Search_Entity\">Search Services documentation</a> for additional implementation details.",
@@ -20442,9 +20616,11 @@
         "crossCuttingCapabilities": [
           "C4"
         ],
-        "basis": "inferred-from-route",
-        "reason": "Scientific term definitions are shared semantics, not measured observations.",
-        "officialModule": "BrAPI-Phenotyping"
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Get a filtered list of Ontologies",
       "sourceDescription": "Retrieve a list of ontologies available in the system. \nEach Ontology record describes the metadata of an existing ontology, it does not include all the terms that are part of that ontology.",
@@ -20556,9 +20732,11 @@
         "crossCuttingCapabilities": [
           "C4"
         ],
-        "basis": "inferred-from-route",
-        "reason": "Scientific term definitions are shared semantics, not measured observations.",
-        "officialModule": "BrAPI-Phenotyping"
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Create a new Ontology record in the database",
       "sourceDescription": "Use this endpoint to create a new Ontology record in the database\nEach Ontology record describes the metadata of an existing ontology, it does not include all the terms that are part of that ontology.",
@@ -20672,9 +20850,11 @@
         "crossCuttingCapabilities": [
           "C4"
         ],
-        "basis": "inferred-from-route",
-        "reason": "Scientific term definitions are shared semantics, not measured observations.",
-        "officialModule": "BrAPI-Phenotyping"
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Get a specific Ontology record by its ontologyDbId",
       "sourceDescription": "Use this endpoint to retrieve a specific Ontology record by its ontologyDbId. \nEach Ontology record describes the metadata of an existing ontology, it does not include all the terms that are part of that ontology.",
@@ -20788,9 +20968,11 @@
         "crossCuttingCapabilities": [
           "C4"
         ],
-        "basis": "inferred-from-route",
-        "reason": "Scientific term definitions are shared semantics, not measured observations.",
-        "officialModule": "BrAPI-Phenotyping"
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Update a specific Ontology record",
       "sourceDescription": "Use this endpoint to update a specific Ontology record. \nEach Ontology record describes the metadata of an existing ontology, it does not include all the terms that are part of that ontology.",
@@ -20906,9 +21088,11 @@
         "crossCuttingCapabilities": [
           "C4"
         ],
-        "basis": "inferred-from-route",
-        "reason": "Scientific term definitions are shared semantics, not measured observations.",
-        "officialModule": "BrAPI-Phenotyping"
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Get the Scales",
       "sourceDescription": "Returns a list of Scales available on a server.\n\nAn Observation Variable has 3 critical parts; A Trait being observed, a Method for making the observation, and a Scale on which the observation can be measured and compared with other observations.",
@@ -21020,9 +21204,11 @@
         "crossCuttingCapabilities": [
           "C4"
         ],
-        "basis": "inferred-from-route",
-        "reason": "Scientific term definitions are shared semantics, not measured observations.",
-        "officialModule": "BrAPI-Phenotyping"
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Add new Scales",
       "sourceDescription": "Create new scale objects in the database",
@@ -21136,9 +21322,11 @@
         "crossCuttingCapabilities": [
           "C4"
         ],
-        "basis": "inferred-from-route",
-        "reason": "Scientific term definitions are shared semantics, not measured observations.",
-        "officialModule": "BrAPI-Phenotyping"
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Get the details of a specific Scale",
       "sourceDescription": "Retrieve details about a specific scale",
@@ -21252,9 +21440,11 @@
         "crossCuttingCapabilities": [
           "C4"
         ],
-        "basis": "inferred-from-route",
-        "reason": "Scientific term definitions are shared semantics, not measured observations.",
-        "officialModule": "BrAPI-Phenotyping"
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Update an existing Scale",
       "sourceDescription": "Update the details of an existing scale",
@@ -21370,9 +21560,11 @@
         "crossCuttingCapabilities": [
           "C4"
         ],
-        "basis": "inferred-from-route",
-        "reason": "Scientific term definitions are shared semantics, not measured observations.",
-        "officialModule": "BrAPI-Phenotyping"
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Get the Traits",
       "sourceDescription": "Call to retrieve a list of traits available in the system and their associated variables.\n\nAn Observation Variable has 3 critical parts; A Trait being observed, a Method for making the observation, and a Scale on which the observation can be measured and compared with other observations.",
@@ -21484,9 +21676,11 @@
         "crossCuttingCapabilities": [
           "C4"
         ],
-        "basis": "inferred-from-route",
-        "reason": "Scientific term definitions are shared semantics, not measured observations.",
-        "officialModule": "BrAPI-Phenotyping"
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Add new Traits",
       "sourceDescription": "Create new trait objects in the database",
@@ -21600,9 +21794,11 @@
         "crossCuttingCapabilities": [
           "C4"
         ],
-        "basis": "inferred-from-route",
-        "reason": "Scientific term definitions are shared semantics, not measured observations.",
-        "officialModule": "BrAPI-Phenotyping"
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Get the details of a specific Trait",
       "sourceDescription": "Retrieve the details of a single trait\n\nAn Observation Variable has 3 critical parts: A Trait being observed, a Method for making the observation, and a Scale on which the observation can be measured and compared with other observations.",
@@ -21716,9 +21912,11 @@
         "crossCuttingCapabilities": [
           "C4"
         ],
-        "basis": "inferred-from-route",
-        "reason": "Scientific term definitions are shared semantics, not measured observations.",
-        "officialModule": "BrAPI-Phenotyping"
+        "basis": "inferred-from-scientific-terminology-role",
+        "reason": "This operation governs or searches scientific term definitions (trait, method, scale, observation variable or ontology), rather than constituting a measured observation. Search lifecycle is a separate cross-cutting facet.",
+        "officialModule": "BrAPI-Phenotyping",
+        "reviewStatus": "provisional-crosswalk-needs-scientific-review",
+        "confidence": "medium"
       },
       "purpose": "Update an existing Trait",
       "sourceDescription": "Update an existing trait",
@@ -21836,7 +22034,9 @@
           "C1",
           "C8",
           "C9"
-        ]
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "proposal-defined"
       },
       "purpose": "Advertise supported API generations, capabilities, and authentication profiles so clients can negotiate behavior before using optional GenX features.",
       "sourceDescription": "GenX capability negotiation. Served under `/brapi/v3/`.\n\nReturns the V2.1 ServerInfo fields plus `brapiVersions`,\n`capabilities`, and `authProfiles` so clients negotiate instead of\nprobing endpoints. V2.1 `GET /serverinfo` under `/brapi/v2/` is\nunchanged. A GenX client against a V2.1-only server falls back to the\nV2.1 `calls` array.",
@@ -21916,7 +22116,9 @@
           "C1",
           "C3",
           "C9"
-        ]
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "proposal-defined"
       },
       "purpose": "Return a paginated list of caller-visible asynchronous jobs, optionally filtered by job type and lifecycle status.",
       "sourceDescription": "Get a paged list of jobs submitted by the caller. Follows standard pagination.",
@@ -22038,7 +22240,9 @@
           "C2",
           "C3",
           "C9"
-        ]
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "proposal-defined"
       },
       "purpose": "Submit one advertised unit of asynchronous work and receive a Job resource for polling and, when eligible, cancellation.",
       "sourceDescription": "Submit work and receive a Job with HTTP 202. When `idempotencyKey` is\nsupplied and was already accepted with a byte-identical body, the\nserver returns the existing Job with zero new effects.",
@@ -22167,7 +22371,9 @@
           "C2",
           "C3",
           "C9"
-        ]
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "proposal-defined"
       },
       "purpose": "Read the current state and available result of one asynchronous Job.",
       "sourceDescription": "Returns the Job. Past expiry the server reports status EXPIRED and refuses retrieval of the result.",
@@ -22294,7 +22500,9 @@
         "crossCuttingCapabilities": [
           "C3",
           "C9"
-        ]
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "proposal-defined"
       },
       "purpose": "Request cancellation of a non-terminal asynchronous Job while preserving the Job record and its auditability.",
       "sourceDescription": "Requests cancellation. Terminal states (COMPLETED, FAILED, CANCELLED, EXPIRED) are immutable and their cancellation is rejected.",
@@ -22416,7 +22624,9 @@
           "C1",
           "C2",
           "C4"
-        ]
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "proposal-defined"
       },
       "purpose": "List paginated, namespaced versions of observation-variable term definitions, with optional authority, ontology, and lifecycle filters.",
       "sourceDescription": "Return a paged list of namespaced observation-variable term versions across authorities. All supplied filters combine with AND.",
@@ -22513,7 +22723,9 @@
           "C1",
           "C2",
           "C4"
-        ]
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "proposal-defined"
       },
       "purpose": "Publish a namespaced VariableTerm definition as a new immutable version, creating the term identity when new or appending a version when known.",
       "sourceDescription": "Unknown variableDbId creates; known id with a new version appends;\nsame (variableDbId, version) with an identical body replays the\nexisting record; same pair with a different body is rejected with 409.",
@@ -22609,7 +22821,9 @@
           "C1",
           "C2",
           "C4"
-        ]
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "proposal-defined"
       },
       "purpose": "Retrieve a specific VariableTerm version, or the most recently created version when the version query parameter is omitted.",
       "sourceDescription": "Returns the requested version, or the most recently created version when `version` is omitted. Version ordering semantics are requires-decision (see RFC-002 §5).",
@@ -22709,7 +22923,9 @@
           "C2",
           "C6",
           "C9"
-        ]
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "proposal-defined"
       },
       "purpose": "Read a seed lot's append-only movement ledger in position order, with an optional movement-type filter.",
       "sourceDescription": "Entries are returned in per-lot position order. Positions are source-local cursors; no global ordering is claimed. Unknown lots follow documented server behavior (reference server returns an empty list).",
@@ -22791,7 +23007,9 @@
           "C3",
           "C6",
           "C9"
-        ]
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "proposal-defined"
       },
       "purpose": "Append one immutable movement entry to one seed lot's ledger with replay and conflict protection.",
       "sourceDescription": "Unknown idempotencyKey appends; known key with an identical body\nreplays the existing entry with zero new effects; known key with a\ndifferent body is rejected with 409.",
@@ -22875,7 +23093,9 @@
           "C2",
           "C6",
           "C9"
-        ]
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "proposal-defined"
       },
       "purpose": "List registered model artifact versions and their lifecycle states, including active, deprecated, and revoked.",
       "sourceDescription": "Get a paged list of model versions across authorities. Filters combine with AND.",
@@ -22956,7 +23176,9 @@
           "C3",
           "C6",
           "C9"
-        ]
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "proposal-defined"
       },
       "purpose": "Register a model artifact version with a namespaced identity, immutable artifact digest, training provenance, metrics, framework, and lifecycle state.",
       "sourceDescription": "Unknown modelDbId creates; known id with a new version appends;\nsame (modelDbId, modelVersion) with an identical body replays the\nexisting record; same pair with a different body is rejected with 409.",
@@ -23036,7 +23258,9 @@
           "C2",
           "C6",
           "C9"
-        ]
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "proposal-defined"
       },
       "purpose": "Retrieve the registered metadata for one model identity/version.",
       "sourceDescription": "Returns the requested version, or the most recently created version when `version` is omitted.",
@@ -23117,7 +23341,9 @@
           "C5",
           "C6",
           "C9"
-        ]
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "proposal-defined"
       },
       "purpose": "List registered references to external variant matrices, optionally filtered by VariantSet identity and format.",
       "sourceDescription": "Get a paged list of matrix references across authorities. Filters combine with AND.",
@@ -23210,7 +23436,9 @@
           "C5",
           "C6",
           "C9"
-        ]
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "proposal-defined"
       },
       "purpose": "Register a content-addressed reference to an externally stored genomic variant matrix, including format, location, digest, and optional dimensions and retrieval-service metadata.",
       "sourceDescription": "Unknown matrixDbId creates; known id with an identical body replays\nthe existing record; known id with different bytes is rejected with\n409. New bytes get a new id.",
@@ -23301,7 +23529,9 @@
           "C5",
           "C6",
           "C9"
-        ]
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "proposal-defined"
       },
       "purpose": "Retrieve one registered variant-matrix reference and its integrity and retrieval metadata.",
       "sourceDescription": "Returns the registered record, or 404. Bytes are retrieved out of band via fileURL or accessService.",
@@ -23392,7 +23622,9 @@
           "C5",
           "C6",
           "C9"
-        ]
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "proposal-defined"
       },
       "purpose": "List FAIR package metadata with optional access-rights and license filters; the endpoint does not serve payload bytes.",
       "sourceDescription": "Get a paged list of package metadata across authorities. Filters combine with AND. Payload bytes are never served here.",
@@ -23470,7 +23702,9 @@
           "C5",
           "C6",
           "C9"
-        ]
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "proposal-defined"
       },
       "purpose": "Register an identified, licensed, access-controlled package envelope that binds one or more payload references into a citable metadata record.",
       "sourceDescription": "Unknown packageDbId creates; known id with an identical body replays\nthe existing record; known id with a different body is rejected with\n409.",
@@ -23546,7 +23780,9 @@
           "C5",
           "C6",
           "C9"
-        ]
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "proposal-defined"
       },
       "purpose": "Retrieve the metadata envelope for one FAIR package subject to the currently specified embargo gate.",
       "sourceDescription": "Returns the package metadata, or 404. While payloads are embargoed (embargoUntil in the future) the record is denied with 403 to prove the gate exists; the gentler metadata-visible alternative is requires-decision (see RFC-006 §5).",
@@ -23625,7 +23861,9 @@
           "C3",
           "C7",
           "C9"
-        ]
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "proposal-defined"
       },
       "purpose": "Read device/sensor samples in timestamp order or calculate deterministic aggregates over a requested time range.",
       "sourceDescription": "Points are returned in timestamp order. With aggregation set,\nTelemetryBucket rows are returned instead, computed deterministically\nover windowSeconds buckets (default: one bucket over the whole\nrange). Empty ranges yield empty data, never an error.",
@@ -23733,7 +23971,9 @@
           "C3",
           "C7",
           "C9"
-        ]
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "proposal-defined"
       },
       "purpose": "Append a batch of timestamped device/sensor samples while reporting newly appended, replayed, and conflicting elements.",
       "sourceDescription": "Takes an array of TelemetryPoint (V2.1 batch style). Reports\nappended, replayed, and conflicts counts with the conflicting keys.\nConflicting elements reject the element, never the batch.",
@@ -23894,7 +24134,39 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 222
+    "totalEntries": 222,
+    "classificationGovernance": {
+      "proposedDomainClasses": [
+        "D1",
+        "D2",
+        "D3",
+        "D4",
+        "D5",
+        "D6",
+        "D7"
+      ],
+      "crossCuttingCapabilities": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "C6",
+        "C7",
+        "C8",
+        "C9"
+      ],
+      "nullPrimaryDomainRequiresFacet": true,
+      "entriesWithNullPrimaryAndNoFacet": 0,
+      "v21ClassificationStatus": "provisional-crosswalk-needs-scientific-review",
+      "genxClassificationStatus": "defined-in-genx-proposal-community-review-pending",
+      "searchEndpointsWithExecutionLifecycleFacet": 20,
+      "notes": [
+        "A null primaryDomain is allowed only for a shared cross-cutting resource and must carry at least one explicit crossCuttingCapability.",
+        "Cross-cutting facets describe contract behavior, not scientific equivalence or implementation support.",
+        "Legacy v2.1 module grouping remains authoritative and unchanged; D1-D7 is a BrAPI-Den crosswalk that requires scientific review."
+      ]
+    }
   },
   "semanticRelationships": [
     {
