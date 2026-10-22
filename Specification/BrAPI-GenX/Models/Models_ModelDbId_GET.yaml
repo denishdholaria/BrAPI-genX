@@ -6,6 +6,25 @@ paths:
   /models/{modelDbId}:
     get:
       operationId: genxGetModelVersion
+      x-brapi-den:
+        catalogId: "brapi-den.genx.v3.models.get-version"
+        classification:
+          primaryDomain: "D7"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve the registered metadata for one model identity/version."
+        canBeUsedFor:
+          - "Inspect artifact digest, training provenance, version, and lifecycle status before selecting an inference model."
+        mustNotBeUsedFor:
+          - "Executing inference or training."
+          - "Assuming model bytes are served by this endpoint."
+          - "Assuming metadata status alone proves scientific fitness for a particular task."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterModelVersion"
+          - "genxSubmitAsyncJob"
+        decisions: ["RFC-004", "D-09", "D-10"]
+        proposalStatus: "draft-non-normative"
       summary: Get one model (latest created when version is omitted)
       description: Returns the requested version, or the most recently created version when `version` is omitted.
       parameters:
