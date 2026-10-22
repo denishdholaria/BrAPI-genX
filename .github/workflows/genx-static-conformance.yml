@@ -4,8 +4,13 @@ on:
   pull_request:
     paths:
       - 'Specification/BrAPI-GenX/**'
+      - 'Specification/ENDPOINT-REGISTRY.json'
+      - 'Specification/ENDPOINT-CATALOG.md'
+      - 'Specification/BIJMANTRA-CROSSWALK.md'
       - 'Scripts/checkGenXConformance.py'
       - 'Scripts/checkGenXEndpointCatalog.py'
+      - 'Scripts/checkEndpointRegistry.py'
+      - 'Scripts/generateEndpointArtifacts.py'
       - 'Scripts/test_endpoint_identity.py'
       - 'Scripts/test_capability_negotiation.py'
       - 'Scripts/test_job_idempotency.py'
@@ -17,8 +22,13 @@ on:
   push:
     paths:
       - 'Specification/BrAPI-GenX/**'
+      - 'Specification/ENDPOINT-REGISTRY.json'
+      - 'Specification/ENDPOINT-CATALOG.md'
+      - 'Specification/BIJMANTRA-CROSSWALK.md'
       - 'Scripts/checkGenXConformance.py'
       - 'Scripts/checkGenXEndpointCatalog.py'
+      - 'Scripts/checkEndpointRegistry.py'
+      - 'Scripts/generateEndpointArtifacts.py'
       - 'Scripts/test_endpoint_identity.py'
       - 'Scripts/test_capability_negotiation.py'
       - 'Scripts/test_job_idempotency.py'
@@ -72,6 +82,10 @@ jobs:
         run: python Scripts/checkGenXConformance.py
       - name: Validate semantic endpoint catalogue
         run: python Scripts/checkGenXEndpointCatalog.py
+      - name: Validate master endpoint registry and semantic links
+        run: python Scripts/checkEndpointRegistry.py
+      - name: Verify generated endpoint catalogue and crosswalk
+        run: python Scripts/generateEndpointArtifacts.py --check
 
   live-reference-conformance:
     runs-on: ubuntu-latest
