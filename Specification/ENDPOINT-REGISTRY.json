@@ -22418,7 +22418,7 @@
           "C9"
         ],
         "reviewStatus": "defined-in-genx-proposal-community-review-pending",
-        "confidence": "proposal-defined"
+        "confidence": "medium"
       },
       "purpose": "Advertise supported API generations, capabilities, and authentication profiles so clients can negotiate behavior before using optional GenX features.",
       "sourceDescription": "GenX capability negotiation. Served under `/brapi/v3/`.\n\nReturns the V2.1 ServerInfo fields plus `brapiVersions`,\n`capabilities`, and `authProfiles` so clients negotiate instead of\nprobing endpoints. V2.1 `GET /serverinfo` under `/brapi/v2/` is\nunchanged. A GenX client against a V2.1-only server falls back to the\nV2.1 `calls` array.",
@@ -22500,7 +22500,7 @@
           "C9"
         ],
         "reviewStatus": "defined-in-genx-proposal-community-review-pending",
-        "confidence": "proposal-defined"
+        "confidence": "medium"
       },
       "purpose": "Return a paginated list of caller-visible asynchronous jobs, optionally filtered by job type and lifecycle status.",
       "sourceDescription": "Get a paged list of jobs submitted by the caller. Follows standard pagination.",
@@ -22624,7 +22624,7 @@
           "C9"
         ],
         "reviewStatus": "defined-in-genx-proposal-community-review-pending",
-        "confidence": "proposal-defined"
+        "confidence": "medium"
       },
       "purpose": "Submit one advertised unit of asynchronous work and receive a Job resource for polling and, when eligible, cancellation.",
       "sourceDescription": "Submit work and receive a Job with HTTP 202. When `idempotencyKey` is\nsupplied and was already accepted with a byte-identical body, the\nserver returns the existing Job with zero new effects.",
@@ -22755,7 +22755,7 @@
           "C9"
         ],
         "reviewStatus": "defined-in-genx-proposal-community-review-pending",
-        "confidence": "proposal-defined"
+        "confidence": "medium"
       },
       "purpose": "Read the current state and available result of one asynchronous Job.",
       "sourceDescription": "Returns the Job. Past expiry the server reports status EXPIRED and refuses retrieval of the result.",
@@ -22884,7 +22884,7 @@
           "C9"
         ],
         "reviewStatus": "defined-in-genx-proposal-community-review-pending",
-        "confidence": "proposal-defined"
+        "confidence": "medium"
       },
       "purpose": "Request cancellation of a non-terminal asynchronous Job while preserving the Job record and its auditability.",
       "sourceDescription": "Requests cancellation. Terminal states (COMPLETED, FAILED, CANCELLED, EXPIRED) are immutable and their cancellation is rejected.",
@@ -23008,7 +23008,7 @@
           "C4"
         ],
         "reviewStatus": "defined-in-genx-proposal-community-review-pending",
-        "confidence": "proposal-defined"
+        "confidence": "medium"
       },
       "purpose": "List paginated, namespaced versions of observation-variable term definitions, with optional authority, ontology, and lifecycle filters.",
       "sourceDescription": "Return a paged list of namespaced observation-variable term versions across authorities. All supplied filters combine with AND.",
@@ -23107,7 +23107,7 @@
           "C4"
         ],
         "reviewStatus": "defined-in-genx-proposal-community-review-pending",
-        "confidence": "proposal-defined"
+        "confidence": "medium"
       },
       "purpose": "Publish a namespaced VariableTerm definition as a new immutable version, creating the term identity when new or appending a version when known.",
       "sourceDescription": "Unknown variableDbId creates; known id with a new version appends;\nsame (variableDbId, version) with an identical body replays the\nexisting record; same pair with a different body is rejected with 409.",
@@ -23205,7 +23205,7 @@
           "C4"
         ],
         "reviewStatus": "defined-in-genx-proposal-community-review-pending",
-        "confidence": "proposal-defined"
+        "confidence": "medium"
       },
       "purpose": "Retrieve a specific VariableTerm version, or the most recently created version when the version query parameter is omitted.",
       "sourceDescription": "Returns the requested version, or the most recently created version when `version` is omitted. Version ordering semantics are requires-decision (see RFC-002 §5).",
@@ -23307,7 +23307,7 @@
           "C9"
         ],
         "reviewStatus": "defined-in-genx-proposal-community-review-pending",
-        "confidence": "proposal-defined"
+        "confidence": "medium"
       },
       "purpose": "Read a seed lot's append-only movement ledger in position order, with an optional movement-type filter.",
       "sourceDescription": "Entries are returned in per-lot position order. Positions are source-local cursors; no global ordering is claimed. Unknown lots follow documented server behavior (reference server returns an empty list).",
@@ -23391,7 +23391,7 @@
           "C9"
         ],
         "reviewStatus": "defined-in-genx-proposal-community-review-pending",
-        "confidence": "proposal-defined"
+        "confidence": "medium"
       },
       "purpose": "Append one immutable movement entry to one seed lot's ledger with replay and conflict protection.",
       "sourceDescription": "Unknown idempotencyKey appends; known key with an identical body\nreplays the existing entry with zero new effects; known key with a\ndifferent body is rejected with 409.",
@@ -23477,7 +23477,7 @@
           "C9"
         ],
         "reviewStatus": "defined-in-genx-proposal-community-review-pending",
-        "confidence": "proposal-defined"
+        "confidence": "medium"
       },
       "purpose": "List registered model artifact versions and their lifecycle states, including active, deprecated, and revoked.",
       "sourceDescription": "Get a paged list of model versions across authorities. Filters combine with AND.",
@@ -23560,7 +23560,7 @@
           "C9"
         ],
         "reviewStatus": "defined-in-genx-proposal-community-review-pending",
-        "confidence": "proposal-defined"
+        "confidence": "medium"
       },
       "purpose": "Register a model artifact version with a namespaced identity, immutable artifact digest, training provenance, metrics, framework, and lifecycle state.",
       "sourceDescription": "Unknown modelDbId creates; known id with a new version appends;\nsame (modelDbId, modelVersion) with an identical body replays the\nexisting record; same pair with a different body is rejected with 409.",
@@ -23642,7 +23642,7 @@
           "C9"
         ],
         "reviewStatus": "defined-in-genx-proposal-community-review-pending",
-        "confidence": "proposal-defined"
+        "confidence": "medium"
       },
       "purpose": "Retrieve the registered metadata for one model identity/version.",
       "sourceDescription": "Returns the requested version, or the most recently created version when `version` is omitted.",
@@ -23725,7 +23725,7 @@
           "C9"
         ],
         "reviewStatus": "defined-in-genx-proposal-community-review-pending",
-        "confidence": "proposal-defined"
+        "confidence": "medium"
       },
       "purpose": "List registered references to external variant matrices, optionally filtered by VariantSet identity and format.",
       "sourceDescription": "Get a paged list of matrix references across authorities. Filters combine with AND.",
@@ -23820,7 +23820,7 @@
           "C9"
         ],
         "reviewStatus": "defined-in-genx-proposal-community-review-pending",
-        "confidence": "proposal-defined"
+        "confidence": "medium"
       },
       "purpose": "Register a content-addressed reference to an externally stored genomic variant matrix, including format, location, digest, and optional dimensions and retrieval-service metadata.",
       "sourceDescription": "Unknown matrixDbId creates; known id with an identical body replays\nthe existing record; known id with different bytes is rejected with\n409. New bytes get a new id.",
@@ -23913,7 +23913,7 @@
           "C9"
         ],
         "reviewStatus": "defined-in-genx-proposal-community-review-pending",
-        "confidence": "proposal-defined"
+        "confidence": "medium"
       },
       "purpose": "Retrieve one registered variant-matrix reference and its integrity and retrieval metadata.",
       "sourceDescription": "Returns the registered record, or 404. Bytes are retrieved out of band via fileURL or accessService.",
@@ -24006,7 +24006,7 @@
           "C9"
         ],
         "reviewStatus": "defined-in-genx-proposal-community-review-pending",
-        "confidence": "proposal-defined"
+        "confidence": "medium"
       },
       "purpose": "List FAIR package metadata with optional access-rights and license filters; the endpoint does not serve payload bytes.",
       "sourceDescription": "Get a paged list of package metadata across authorities. Filters combine with AND. Payload bytes are never served here.",
@@ -24086,7 +24086,7 @@
           "C9"
         ],
         "reviewStatus": "defined-in-genx-proposal-community-review-pending",
-        "confidence": "proposal-defined"
+        "confidence": "medium"
       },
       "purpose": "Register an identified, licensed, access-controlled package envelope that binds one or more payload references into a citable metadata record.",
       "sourceDescription": "Unknown packageDbId creates; known id with an identical body replays\nthe existing record; known id with a different body is rejected with\n409.",
@@ -24164,7 +24164,7 @@
           "C9"
         ],
         "reviewStatus": "defined-in-genx-proposal-community-review-pending",
-        "confidence": "proposal-defined"
+        "confidence": "medium"
       },
       "purpose": "Retrieve the metadata envelope for one FAIR package subject to the currently specified embargo gate.",
       "sourceDescription": "Returns the package metadata, or 404. While payloads are embargoed (embargoUntil in the future) the record is denied with 403 to prove the gate exists; the gentler metadata-visible alternative is requires-decision (see RFC-006 §5).",
@@ -24245,7 +24245,7 @@
           "C9"
         ],
         "reviewStatus": "defined-in-genx-proposal-community-review-pending",
-        "confidence": "proposal-defined"
+        "confidence": "medium"
       },
       "purpose": "Read device/sensor samples in timestamp order or calculate deterministic aggregates over a requested time range.",
       "sourceDescription": "Points are returned in timestamp order. With aggregation set,\nTelemetryBucket rows are returned instead, computed deterministically\nover windowSeconds buckets (default: one bucket over the whole\nrange). Empty ranges yield empty data, never an error.",
@@ -24355,7 +24355,7 @@
           "C9"
         ],
         "reviewStatus": "defined-in-genx-proposal-community-review-pending",
-        "confidence": "proposal-defined"
+        "confidence": "medium"
       },
       "purpose": "Append a batch of timestamped device/sensor samples while reporting newly appended, replayed, and conflicting elements.",
       "sourceDescription": "Takes an array of TelemetryPoint (V2.1 batch style). Reports\nappended, replayed, and conflicts counts with the conflicting keys.\nConflicting elements reject the element, never the batch.",
@@ -24547,7 +24547,12 @@
         "A null primaryDomain is allowed only for a shared cross-cutting resource and must carry at least one explicit crossCuttingCapability.",
         "Cross-cutting facets describe contract behavior, not scientific equivalence or implementation support.",
         "Legacy v2.1 module grouping remains authoritative and unchanged; D1-D7 is a BrAPI-Den crosswalk that requires scientific review."
-      ]
+      ],
+      "confidenceScale": {
+        "low": "Route/module-derived mapping that needs substantial scientific review",
+        "medium": "Plausible mapping from source semantics; still awaiting independent domain review",
+        "high": "Reviewed and approved mapping with recorded rationale; none is asserted high until that review occurs"
+      }
     }
   },
   "semanticRelationships": [
