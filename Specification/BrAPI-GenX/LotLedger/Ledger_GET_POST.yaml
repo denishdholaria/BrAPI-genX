@@ -84,6 +84,25 @@ paths:
           - "SEM-01"
         decisions: ["RFC-003", "D-07", "D-08", "D-20", "A-05", "A-06"]
         proposalStatus: "draft-non-normative"
+      x-brapi-den:
+        catalogId: "brapi-den.genx.v3.seed-lot-ledger.append"
+        classification:
+          primaryDomain: "D6"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Append one immutable movement entry to one seed lot's ledger with replay and conflict protection."
+        canBeUsedFor:
+          - "Record a single-lot adjustment, movement, handoff, production, planting, or trade entry."
+          - "Retry an identical entry safely using the same idempotency key."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing ledger entry; corrections require an additional record."
+          - "Assuming multi-lot transfer atomicity."
+          - "Automatically mirroring a movement to V2.1 SeedLotTransaction or double-counting both streams."
+        sideEffects: "Appends one ledger entry when accepted."
+        idempotency: "Same key and identical body replays existing entry; same key and different body is rejected as a conflict."
+        semanticNeighbors:
+          - "SEM-01"
+        decisions: ["RFC-003", "D-07", "D-08", "D-20", "A-05", "A-06"]
+        proposalStatus: "draft-non-normative"
       summary: Append one ledger entry
       description: |-
         Unknown idempotencyKey appends; known key with an identical body
