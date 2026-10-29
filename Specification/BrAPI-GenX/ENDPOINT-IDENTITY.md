@@ -127,3 +127,25 @@ Before an endpoint or resource is added, renamed, split, merged, or changes mean
 7. obtain the appropriate community or governance decision for any semantic choice that affects interoperability.
 
 If the review cannot state clearly what an endpoint is **for**, what it is **not for**, and how it differs from its nearest neighboring endpoint, the slice is not ready for implementation or adoption.
+
+
+## 6. Semantic catalogue metadata is required
+
+Every GenX OpenAPI operation MUST include an operation-level `x-brapi-den` extension containing:
+
+- a stable, globally unique `catalogId` in the `brapi-den.genx.*` namespace;
+- exactly one primary domain class, or explicit `null` for a cross-cutting operation;
+- the applicable cross-cutting capability facets and any contextual domains;
+- a precise purpose, supported use cases, and explicit non-goals;
+- side effects and idempotency/replay behavior;
+- semantic neighbors and the relevant RFC/decision references; and
+- the current proposal status.
+
+This extension belongs on the operation itself so semantic intent travels with the method, path, request/response schemas, and `operationId`. The human-readable `GENX-ENDPOINT-CATALOG.md` is the navigational view; it must enumerate every operation and catalogue ID exactly once. `Scripts/checkGenXEndpointCatalog.py` rejects missing metadata, duplicate GenX operation or catalogue IDs, route-template collisions, collisions between GenX operation IDs and other BrAPI specification operations, and catalogue coverage drift.
+
+For any semantic description, state both what the operation is for and what it explicitly does not do. Examples of required distinctions are register versus execute, request cancellation versus delete a record, metadata reference versus byte transport, an append-only ledger versus a mutable transaction, and sensor telemetry versus a scientific observation. A matching name or nearby classification is never evidence of interchangeable contracts.
+
+
+## 7. Complete registry and focused views
+
+The focused GenX view is `GENX-ENDPOINT-CATALOG.md`. The all-generation catalogue is at `../ENDPOINT-CATALOG.md`, and the structured master registry is `../ENDPOINT-REGISTRY.json`. All generated views derive from the same registry; operation metadata in the OpenAPI YAML and the master JSON are the contract and governance sources, respectively.

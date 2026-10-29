@@ -6,6 +6,26 @@ paths:
   /variable-terms/{variableDbId}:
     get:
       operationId: genxGetVariableTermVersion
+      x-brapi-den:
+        catalogId: "brapi-den.genx.v3.variable-terms.get-version"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C4"]
+        purpose: "Retrieve a specific VariableTerm version, or the most recently created version when the version query parameter is omitted."
+        canBeUsedFor:
+          - "Resolve the exact term version referenced by a reproducible analysis when version is supplied."
+          - "Read the latest-created version when no version is supplied."
+        mustNotBeUsedFor:
+          - "Assuming omitted-version lookup returns the highest semantic-version number; ordering semantics remain unresolved."
+          - "Treating VariableTerm as the V2.1 OntologyTerm schema."
+          - "Inferring cross-authority equivalence from a matching name."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxPublishVariableTermVersion"
+          - "V2.1 OntologyTerm schema"
+        decisions: ["RFC-002", "D-05", "D-06", "A-03"]
+        proposalStatus: "draft-non-normative"
       summary: Get a versioned observation-variable term
       description: Returns the requested version, or the most recently created version when `version` is omitted. Version ordering semantics are requires-decision (see RFC-002 §5).
       parameters:

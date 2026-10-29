@@ -6,6 +6,23 @@ paths:
   /variantmatrices/{matrixDbId}:
     get:
       operationId: genxGetVariantMatrixReference
+      x-brapi-den:
+        catalogId: "brapi-den.genx.v3.variant-matrices.get"
+        classification:
+          primaryDomain: "D3"
+          crossCuttingCapabilities: ["C1", "C2", "C5", "C6", "C9"]
+        purpose: "Retrieve one registered variant-matrix reference and its integrity and retrieval metadata."
+        canBeUsedFor:
+          - "Resolve the metadata needed to retrieve and verify external matrix bytes."
+        mustNotBeUsedFor:
+          - "Expecting the matrix file or selected variants to be streamed in the response."
+          - "Treating the matrix reference as a VariantSet or CallSet."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "SEM-04"
+        decisions: ["RFC-005", "D-11", "D-12", "D-19"]
+        proposalStatus: "draft-non-normative"
       summary: Get one matrix reference
       description: Returns the registered record, or 404. Bytes are retrieved out of band via fileURL or accessService.
       parameters:

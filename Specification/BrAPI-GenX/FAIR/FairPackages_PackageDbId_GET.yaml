@@ -6,6 +6,24 @@ paths:
   /fair-packages/{packageDbId}:
     get:
       operationId: genxGetFairPackageMetadata
+      x-brapi-den:
+        catalogId: "brapi-den.genx.v3.fair-packages.get-metadata"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C5", "C6", "C9"]
+        purpose: "Retrieve the metadata envelope for one FAIR package subject to the currently specified embargo gate."
+        canBeUsedFor:
+          - "Read package metadata when the access contract permits the request."
+        mustNotBeUsedFor:
+          - "Retrieving payload bytes."
+          - "Assuming embargoed metadata remains visible: the current reference behavior denies the whole record with 403, while the preferred metadata-visible policy remains unresolved."
+          - "Treating this endpoint as an access-request approval workflow."
+        sideEffects: "Read-only; may deny the record while its payload is embargoed under the current proposal behavior."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "SEM-05"
+        decisions: ["RFC-006", "D-15"]
+        proposalStatus: "draft-non-normative"
       summary: Get one FAIR package (denied while embargoed)
       description: Returns the package metadata, or 404. While payloads are embargoed (embargoUntil in the future) the record is denied with 403 to prove the gate exists; the gentler metadata-visible alternative is requires-decision (see RFC-006 §5).
       parameters:

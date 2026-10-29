@@ -6,6 +6,27 @@ paths:
   /telemetry:
     get:
       operationId: genxQueryTelemetrySamplesOrAggregates
+      x-brapi-den:
+        catalogId: "brapi-den.genx.v3.telemetry.query"
+        classification:
+          primaryDomain: null
+          contextualDomains: ["D4", "D5"]
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C7", "C9"]
+        purpose: "Read device/sensor samples in timestamp order or calculate deterministic aggregates over a requested time range."
+        canBeUsedFor:
+          - "Retrieve raw telemetry for a device and optional sensor over a time interval."
+          - "Calculate mean, minimum, maximum, or count aggregates in defined windows."
+          - "Use an inclusive from timestamp and exclusive to timestamp."
+        mustNotBeUsedFor:
+          - "Automatically converting every telemetry sample into a BrAPI Observation."
+          - "Assuming implicit links to a study, observation unit, or observation variable."
+          - "Assuming unspecified gap-filling, resampling, or timezone-of-record behavior."
+        sideEffects: "Read-only; aggregates are calculated from stored samples."
+        idempotency: "Read-only for an unchanged stored dataset and query; deterministic aggregation rules apply to the same sample set and range."
+        semanticNeighbors:
+          - "SEM-03"
+        decisions: ["RFC-007", "D-16", "D-17", "D-18"]
+        proposalStatus: "draft-non-normative"
       summary: Read samples or aggregates over a time range
       description: |-
         Points are returned in timestamp order. With aggregation set,
@@ -98,6 +119,27 @@ paths:
       - Telemetry
     post:
       operationId: genxAppendTelemetryBatch
+      x-brapi-den:
+        catalogId: "brapi-den.genx.v3.telemetry.append-batch"
+        classification:
+          primaryDomain: null
+          contextualDomains: ["D4", "D5"]
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C7", "C9"]
+        purpose: "Append a batch of timestamped device/sensor samples while reporting newly appended, replayed, and conflicting elements."
+        canBeUsedFor:
+          - "Ingest sample batches from field or laboratory sensors."
+          - "Retry identical samples without duplicating stored points."
+          - "Reject conflicting values for an already-used device/sensor/timestamp key without discarding unrelated valid batch elements."
+        mustNotBeUsedFor:
+          - "Replacing existing samples silently."
+          - "Assuming the batch is all-or-nothing; conflicts are handled element-wise."
+          - "Treating telemetry as a complete observation record or assuming all samples are environmental."
+        sideEffects: "Appends non-conflicting new points; reports duplicate replays and per-element conflicts."
+        idempotency: "Natural key is deviceDbId + sensorDbId + timestamp. Same key and value replays; same key with a different value conflicts."
+        semanticNeighbors:
+          - "SEM-03"
+        decisions: ["RFC-007", "D-16", "D-17", "D-18"]
+        proposalStatus: "draft-non-normative"
       summary: Append a batch of samples
       description: |-
         Takes an array of TelemetryPoint (V2.1 batch style). Reports

@@ -6,6 +6,25 @@ paths:
   /fair-packages:
     get:
       operationId: genxListFairPackageMetadata
+      x-brapi-den:
+        catalogId: "brapi-den.genx.v3.fair-packages.list-metadata"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C5", "C6", "C9"]
+        purpose: "List FAIR package metadata with optional access-rights and license filters; the endpoint does not serve payload bytes."
+        canBeUsedFor:
+          - "Discover package citation, licensing, access-rights, embargo, and payload-reference metadata."
+          - "Find packages by supported metadata filters."
+        mustNotBeUsedFor:
+          - "Downloading payload bytes or assuming the package service stores them."
+          - "Minting Digital Object Identifiers (DOIs) or approving restricted-access requests."
+          - "Assuming all embargo policies or metadata-visibility rules have been finalized."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "SEM-05"
+        decisions: ["RFC-006", "D-13", "D-14", "D-15"]
+        proposalStatus: "draft-non-normative"
       summary: List registered FAIR packages (metadata only)
       description: Get a paged list of package metadata across authorities. Filters combine with AND. Payload bytes are never served here.
       parameters:
@@ -41,6 +60,25 @@ paths:
       - FAIR Packages
     post:
       operationId: genxRegisterFairPackage
+      x-brapi-den:
+        catalogId: "brapi-den.genx.v3.fair-packages.register"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C5", "C6", "C9"]
+        purpose: "Register an identified, licensed, access-controlled package envelope that binds one or more payload references into a citable metadata record."
+        canBeUsedFor:
+          - "Record a package title, identifiers, license, access rights, embargo, creators, and payload references."
+          - "Publish a stable metadata envelope around data owned by another service."
+        mustNotBeUsedFor:
+          - "Uploading or storing the payload bytes."
+          - "Minting persistent identifiers or running license negotiation."
+          - "Implementing restricted-access approval workflows."
+        sideEffects: "Creates package metadata if accepted."
+        idempotency: "Identical registration replays; conflicting content under the same package identity is rejected."
+        semanticNeighbors:
+          - "SEM-05"
+        decisions: ["RFC-006", "D-13", "D-14", "D-15"]
+        proposalStatus: "draft-non-normative"
       summary: Register one FAIR package
       description: |-
         Unknown packageDbId creates; known id with an identical body replays

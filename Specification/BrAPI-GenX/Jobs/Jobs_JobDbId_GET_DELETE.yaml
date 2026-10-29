@@ -6,6 +6,27 @@ paths:
   /jobs/{jobDbId}:
     get:
       operationId: genxGetAsyncJobById
+      x-brapi-den:
+        catalogId: "brapi-den.genx.v3.jobs.get"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C2", "C3", "C9"]
+        purpose: "Read the current state and available result of one asynchronous Job."
+        canBeUsedFor:
+          - "Poll a submitted job until it reaches a terminal state."
+          - "Read the result while it remains available under its expiry policy."
+        mustNotBeUsedFor:
+          - "Assuming completed results are retained indefinitely."
+          - "Treating an expired job as a failed job or expecting its expired result to be served."
+          - "Fetching a model artifact or a domain object directly."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxSubmitAsyncJob"
+          - "genxRequestAsyncJobCancellation"
+          - "SEM-02"
+        decisions: ["RFC-001"]
+        proposalStatus: "draft-non-normative"
       summary: Get the current state of one job
       description: Returns the Job. Past expiry the server reports status EXPIRED and refuses retrieval of the result.
       parameters:
@@ -46,6 +67,24 @@ paths:
       - Jobs
     delete:
       operationId: genxRequestAsyncJobCancellation
+      x-brapi-den:
+        catalogId: "brapi-den.genx.v3.jobs.request-cancellation"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C3", "C9"]
+        purpose: "Request cancellation of a non-terminal asynchronous Job while preserving the Job record and its auditability."
+        canBeUsedFor:
+          - "Request that queued or running work stop, subject to implementation and execution state."
+        mustNotBeUsedFor:
+          - "Deleting a Job resource or erasing its history."
+          - "Assuming a cancellation request guarantees immediate interruption."
+          - "Changing terminal states such as COMPLETED, FAILED, CANCELLED, or EXPIRED."
+        sideEffects: "May request a lifecycle transition for a non-terminal Job; terminal-state cancellation is rejected."
+        idempotency: "The effect is a cancellation request, not resource deletion; clients must re-read the Job state after the request."
+        semanticNeighbors:
+          - "genxGetAsyncJobById"
+        decisions: ["RFC-001"]
+        proposalStatus: "draft-non-normative"
       summary: Request cancellation of one job
       description: Requests cancellation. Terminal states (COMPLETED, FAILED, CANCELLED, EXPIRED) are immutable and their cancellation is rejected.
       parameters:

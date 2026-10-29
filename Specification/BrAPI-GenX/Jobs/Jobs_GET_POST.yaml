@@ -6,6 +6,25 @@ paths:
   /jobs:
     get:
       operationId: genxListJobs
+      x-brapi-den:
+        catalogId: "brapi-den.genx.v3.jobs.list"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C3", "C9"]
+        purpose: "Return a paginated list of caller-visible asynchronous jobs, optionally filtered by job type and lifecycle status."
+        canBeUsedFor:
+          - "Show a caller the jobs they submitted and their current lifecycle states."
+          - "Filter jobs by an advertised job type or status."
+        mustNotBeUsedFor:
+          - "List scientific resources such as models, observations, or seed lots."
+          - "Assume V2.1 search-result records are jobs."
+          - "Assume a job type exists unless capability negotiation advertises it."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "SEM-02"
+        decisions: ["RFC-001"]
+        proposalStatus: "draft-non-normative"
       summary: List jobs visible to the caller
       description: Get a paged list of jobs submitted by the caller. Follows standard pagination.
       parameters:
@@ -44,6 +63,26 @@ paths:
       - Jobs
     post:
       operationId: genxSubmitAsyncJob
+      x-brapi-den:
+        catalogId: "brapi-den.genx.v3.jobs.submit"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C2", "C3", "C9"]
+        purpose: "Submit one advertised unit of asynchronous work and receive a Job resource for polling and, when eligible, cancellation."
+        canBeUsedFor:
+          - "Long-running analysis, model inference, and other explicitly advertised job types."
+          - "Replay-safe submission when the same idempotency key and identical request body are retried."
+        mustNotBeUsedFor:
+          - "Expecting synchronous completion in the submit response."
+          - "Submitting an unadvertised or undefined jobType."
+          - "Using one idempotency key for materially different request bodies."
+          - "Using it as an implicit replacement for every V2.1 search endpoint."
+        sideEffects: "May create one Job and dispatch work; identical replay must not create a second effect."
+        idempotency: "Same key plus identical body replays the existing Job; same key plus different body is a conflict, not an overwrite."
+        semanticNeighbors:
+          - "SEM-02"
+        decisions: ["RFC-001", "A-04", "A-07"]
+        proposalStatus: "draft-non-normative"
       summary: Submit a unit of asynchronous work
       description: |-
         Submit work and receive a Job with HTTP 202. When `idempotencyKey` is

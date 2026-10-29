@@ -17,6 +17,9 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
   [Conformance/domain-classification.yaml](./Conformance/domain-classification.yaml)
   provides the proposed machine-readable module registry. Both are proposals,
   not BrAPI community ratification.
+- **Master endpoint registry:** [../ENDPOINT-REGISTRY.json](../ENDPOINT-REGISTRY.json) contains 201 released BrAPI v2.1 operations and 21 proposed GenX operations with stable BrAPI-Den catalogue identifiers, source links, semantic metadata, and implementation-evidence status. The generated human catalogue is [../ENDPOINT-CATALOG.md](../ENDPOINT-CATALOG.md), with the source crosswalk in [../BIJMANTRA-CROSSWALK.md](../BIJMANTRA-CROSSWALK.md).
+- The GenX-only generated view is [GENX-ENDPOINT-CATALOG.md](./GENX-ENDPOINT-CATALOG.md); it is a filtered view, not a second source of truth.
+- **Endpoint semantics and catalogue:** [GENX-ENDPOINT-CATALOG.md](./GENX-ENDPOINT-CATALOG.md) is the generated GenX-only view. The complete all-generation catalogue is [../ENDPOINT-CATALOG.md](../ENDPOINT-CATALOG.md), with canonical structured records in [../ENDPOINT-REGISTRY.json](../ENDPOINT-REGISTRY.json). Each proposed GenX operation carries `x-brapi-den` metadata beside its OpenAPI contract; `Scripts/checkGenXEndpointCatalog.py` checks metadata and focused-catalogue coverage.
 
 ## Objects
 
