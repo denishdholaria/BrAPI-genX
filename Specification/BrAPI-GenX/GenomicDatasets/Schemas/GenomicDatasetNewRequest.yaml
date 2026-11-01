@@ -1,0 +1,103 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    GenomicDatasetNewRequest:
+      type: object
+      description: |-
+        Request to register one genomic dataset. Unknown genomicDatasetDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - genomicDatasetDbId
+      - datasetName
+      - datasetType
+      - referenceAssembly
+      properties:
+        genomicDatasetDbId:
+          description: Namespaced genomic-dataset identity `{authority}:genomic-dataset:{localId}`
+          type: string
+          example: institute-a:genomic-dataset:gd-2026-001
+        datasetName:
+          description: Human readable dataset name
+          type: string
+          example: Wheat exome capture 2026
+        datasetType:
+          description: Class of prepared genomic data
+          type: string
+          enum:
+          - variant-calls
+          - allele-matrix
+          - haplotypes
+          - sequence-reads
+          - marker-set
+          example: variant-calls
+        referenceAssembly:
+          description: Reference assembly version used (e.g. IWGSC RefSeq v2.1)
+          type: string
+          example: IWGSC RefSeq v2.1
+        pipelineName:
+          description: Bioinformatics pipeline name
+          type: string
+          example: gatk-best-practices
+        pipelineVersion:
+          description: Pipeline version
+          type: string
+          example: '4.4.0'
+        inputDigest:
+          description: SHA-256 over canonical pipeline inputs
+          type: string
+          example: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+        outputDigest:
+          description: SHA-256 over canonical pipeline outputs
+          type: string
+          example: 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
+        sampleCount:
+          description: Number of samples in the dataset
+          type: integer
+          example: 320
+        variantCount:
+          description: Number of variants in the dataset
+          type: integer
+          example: 1250000
+        fileFormat:
+          description: Primary file format of the dataset
+          type: string
+          example: VCF
+        accessPolicy:
+          description: Access policy for the dataset
+          type: string
+          enum:
+          - open
+          - restricted
+          - embargoed
+          default: restricted
+          example: restricted
+        releaseStatus:
+          description: Release status of the dataset
+          type: string
+          enum:
+          - draft
+          - released
+          - withdrawn
+          default: draft
+          example: draft
+        supersedes:
+          description: genomicDatasetDbId of the dataset this one replaces
+          type: string
+          example: institute-a:genomic-dataset:gd-2026-000
+        status:
+          description: Lifecycle state of the dataset record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        provenance:
+          description: Evidence and method provenance for the dataset
+          $ref: '#/components/schemas/ProvenanceEnvelope'

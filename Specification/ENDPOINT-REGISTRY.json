@@ -25616,12 +25616,254 @@
         "brapi-genx.genx.v1.phenotype-captures.list",
         "brapi-genx.genx.v1.phenotype-captures.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "GenomicDatasets",
+      "brapiTag": "GenomicDatasets",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/GenomicDatasets/GenomicDatasets_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.genomic-datasets.list",
+      "method": "GET",
+      "path": "/genomic-datasets",
+      "operationIdInSource": "genxListGenomicDatasets",
+      "recommendedOperationId": "genxListGenomicDatasets",
+      "operationName": "List genomic datasets",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C5",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List prepared genomic datasets, optionally filtered by type, reference assembly, or release status.",
+      "sourceDescription": "Get a paged list of genomic datasets across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover genomic datasets and their provenance.",
+        "Select a dataset subject to access policy and release status."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a dataset (use the POST endpoint).",
+        "Assuming a dataset is a BrAPI VariantSet or VariantMatrix.",
+        "Treating the list as a complete genomic repository."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "genomicDatasetDbId",
+        "datasetType",
+        "referenceAssembly",
+        "releaseStatus",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterGenomicDataset",
+        "genxGetGenomicDataset",
+        "genxRegisterVariantMatrixReference"
+      ],
+      "decisionReferences": [
+        "RFC-013"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.genomic-datasets.register",
+        "brapi-genx.genx.v1.genomic-datasets.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "GenomicDatasets",
+      "brapiTag": "GenomicDatasets",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/GenomicDatasets/GenomicDatasets_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.genomic-datasets.register",
+      "method": "POST",
+      "path": "/genomic-datasets",
+      "operationIdInSource": "genxRegisterGenomicDataset",
+      "recommendedOperationId": "genxRegisterGenomicDataset",
+      "operationName": "Register one genomic dataset",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C5",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register a prepared genomic dataset with reference assembly, pipeline provenance, and access policy.",
+      "sourceDescription": "Unknown genomicDatasetDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish dataset metadata and integrity references.",
+        "Create a new version under an existing dataset identity.",
+        "Record release or withdrawal status as governed elsewhere."
+      ],
+      "mustNotBeUsedFor": [
+        "Uploading dataset bytes through this endpoint.",
+        "Assuming registration means scientific validation or approval.",
+        "Treating the dataset as a BrAPI VariantSet or VariantMatrix."
+      ],
+      "sideEffects": "Creates a dataset identity or appends a new immutable version when accepted.",
+      "idempotency": "Same dataset identity/version and identical body replays; conflicting content for the same identity is rejected.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "GenomicDatasetNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListGenomicDatasets",
+        "genxGetGenomicDataset",
+        "genxRegisterVariantMatrixReference"
+      ],
+      "decisionReferences": [
+        "RFC-013"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.genomic-datasets.list",
+        "brapi-genx.genx.v1.genomic-datasets.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "GenomicDatasets",
+      "brapiTag": "GenomicDatasets",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/GenomicDatasets/GenomicDatasets_GenomicDatasetDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.genomic-datasets.get",
+      "method": "GET",
+      "path": "/genomic-datasets/{genomicDatasetDbId}",
+      "operationIdInSource": "genxGetGenomicDataset",
+      "recommendedOperationId": "genxGetGenomicDataset",
+      "operationName": "Get one genomic dataset",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C5",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one registered genomic dataset.",
+      "sourceDescription": "Returns the registered dataset, or 404.",
+      "canBeUsedFor": [
+        "Inspect dataset identity, reference assembly, pipeline provenance, and access policy."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the dataset is a BrAPI VariantSet or VariantMatrix.",
+        "Treating a withdrawn dataset as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "genomicDatasetDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterGenomicDataset",
+        "genxListGenomicDatasets",
+        "genxRegisterVariantMatrixReference"
+      ],
+      "decisionReferences": [
+        "RFC-013"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.genomic-datasets.list",
+        "brapi-genx.genx.v1.genomic-datasets.register"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 36,
+    "genxEntriesAdded": 39,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -25699,7 +25941,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 237,
+    "totalEntries": 240,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

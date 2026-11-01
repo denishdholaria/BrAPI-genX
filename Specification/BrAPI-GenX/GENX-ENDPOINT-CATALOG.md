@@ -8,6 +8,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 |---|---:|---|
 | AnalysisMethods | 3 | proposed, non-normative |
 | FAIR | 3 | proposed, non-normative |
+| GenomicDatasets | 3 | proposed, non-normative |
 | Genomics | 3 | proposed, non-normative |
 | HarvestRecords | 3 | proposed, non-normative |
 | Jobs | 4 | proposed, non-normative |
@@ -233,6 +234,112 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.fair-packages.list-metadata, brapi-genx.genx.v1.fair-packages.register
 - **Relevant RFC / decision references:** RFC-006, D-15
 - **Contract source:** [`Specification/BrAPI-GenX/FAIR/FairPackages_PackageDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/FAIR/FairPackages_PackageDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GenomicDatasets — 3 operations
+
+### GET `/genx/v1/genomic-datasets`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.genomic-datasets.list`
+- **BrAPI-GenX operation identity:** `genxListGenomicDatasets` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListGenomicDatasets`
+- **GenX source module:** `GenomicDatasets`
+- **Source tag:** GenomicDatasets
+- **Proposed BrAPI-GenX classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List prepared genomic datasets, optionally filtered by type, reference assembly, or release status.
+**Source contract description:**
+> Get a paged list of genomic datasets across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover genomic datasets and their provenance.
+- Select a dataset subject to access policy and release status.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a dataset (use the POST endpoint).
+- Assuming a dataset is a BrAPI VariantSet or VariantMatrix.
+- Treating the list as a complete genomic repository.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** genomicDatasetDbId, datasetType, referenceAssembly, releaseStatus, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterGenomicDataset, genxGetGenomicDataset, genxRegisterVariantMatrixReference
+- **Related catalogue IDs:** brapi-genx.genx.v1.genomic-datasets.register, brapi-genx.genx.v1.genomic-datasets.get
+- **Relevant RFC / decision references:** RFC-013
+- **Contract source:** [`Specification/BrAPI-GenX/GenomicDatasets/GenomicDatasets_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/GenomicDatasets/GenomicDatasets_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/genomic-datasets`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.genomic-datasets.register`
+- **BrAPI-GenX operation identity:** `genxRegisterGenomicDataset` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterGenomicDataset`
+- **GenX source module:** `GenomicDatasets`
+- **Source tag:** GenomicDatasets
+- **Proposed BrAPI-GenX classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register a prepared genomic dataset with reference assembly, pipeline provenance, and access policy.
+**Source contract description:**
+> Unknown genomicDatasetDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish dataset metadata and integrity references.
+- Create a new version under an existing dataset identity.
+- Record release or withdrawal status as governed elsewhere.
+**Must not be used for / explicit non-goals:**
+- Uploading dataset bytes through this endpoint.
+- Assuming registration means scientific validation or approval.
+- Treating the dataset as a BrAPI VariantSet or VariantMatrix.
+- **Side effects:** Creates a dataset identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same dataset identity/version and identical body replays; conflicting content for the same identity is rejected.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** GenomicDatasetNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListGenomicDatasets, genxGetGenomicDataset, genxRegisterVariantMatrixReference
+- **Related catalogue IDs:** brapi-genx.genx.v1.genomic-datasets.list, brapi-genx.genx.v1.genomic-datasets.get
+- **Relevant RFC / decision references:** RFC-013
+- **Contract source:** [`Specification/BrAPI-GenX/GenomicDatasets/GenomicDatasets_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/GenomicDatasets/GenomicDatasets_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/genomic-datasets/{genomicDatasetDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.genomic-datasets.get`
+- **BrAPI-GenX operation identity:** `genxGetGenomicDataset` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetGenomicDataset`
+- **GenX source module:** `GenomicDatasets`
+- **Source tag:** GenomicDatasets
+- **Proposed BrAPI-GenX classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one registered genomic dataset.
+**Source contract description:**
+> Returns the registered dataset, or 404.
+**Can be used for:**
+- Inspect dataset identity, reference assembly, pipeline provenance, and access policy.
+**Must not be used for / explicit non-goals:**
+- Assuming the dataset is a BrAPI VariantSet or VariantMatrix.
+- Treating a withdrawn dataset as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** genomicDatasetDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterGenomicDataset, genxListGenomicDatasets, genxRegisterVariantMatrixReference
+- **Related catalogue IDs:** brapi-genx.genx.v1.genomic-datasets.list, brapi-genx.genx.v1.genomic-datasets.register
+- **Relevant RFC / decision references:** RFC-013
+- **Contract source:** [`Specification/BrAPI-GenX/GenomicDatasets/GenomicDatasets_GenomicDatasetDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/GenomicDatasets/GenomicDatasets_GenomicDatasetDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
