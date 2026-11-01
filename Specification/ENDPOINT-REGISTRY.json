@@ -25382,12 +25382,246 @@
         "brapi-genx.genx.v1.harvest-records.list",
         "brapi-genx.genx.v1.harvest-records.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "PhenotypeCapture",
+      "brapiTag": "PhenotypeCapture",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/PhenotypeCapture/PhenotypeCapture_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.phenotype-captures.list",
+      "method": "GET",
+      "path": "/phenotype-captures",
+      "operationIdInSource": "genxListPhenotypeCaptures",
+      "recommendedOperationId": "genxListPhenotypeCaptures",
+      "operationName": "List phenotype captures",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List phenotype capture records, optionally filtered by study, observation unit, or capture method.",
+      "sourceDescription": "Get a paged list of phenotype capture records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover phenotype capture events for a study or observation unit.",
+        "Audit capture workflow, quality flags, and corrections."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a capture (use the POST endpoint).",
+        "Assuming a capture is a BrAPI Observation.",
+        "Treating the list as a complete phenotype dataset."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "studyDbId",
+        "observationUnitDbId",
+        "captureMethod",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordPhenotypeCapture",
+        "genxGetPhenotypeCapture"
+      ],
+      "decisionReferences": [
+        "RFC-012"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.phenotype-captures.record",
+        "brapi-genx.genx.v1.phenotype-captures.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "PhenotypeCapture",
+      "brapiTag": "PhenotypeCapture",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/PhenotypeCapture/PhenotypeCapture_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.phenotype-captures.record",
+      "method": "POST",
+      "path": "/phenotype-captures",
+      "operationIdInSource": "genxRecordPhenotypeCapture",
+      "recommendedOperationId": "genxRecordPhenotypeCapture",
+      "operationName": "Record one phenotype capture",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record one phenotype capture event with entries, quality flags, missingness, and provenance.",
+      "sourceDescription": "Unknown phenotypeCaptureDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Record a capture event for an observation unit.",
+        "Retry an identical capture safely using the same phenotypeCaptureDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing capture; corrections require a new record that supersedes.",
+        "Assuming the capture is a BrAPI Observation.",
+        "Treating the capture as a complete phenotype dataset."
+      ],
+      "sideEffects": "Creates a phenotype capture when accepted.",
+      "idempotency": "Same phenotypeCaptureDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "PhenotypeCaptureNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListPhenotypeCaptures",
+        "genxGetPhenotypeCapture"
+      ],
+      "decisionReferences": [
+        "RFC-012"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.phenotype-captures.list",
+        "brapi-genx.genx.v1.phenotype-captures.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "PhenotypeCapture",
+      "brapiTag": "PhenotypeCapture",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/PhenotypeCapture/PhenotypeCapture_PhenotypeCaptureDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.phenotype-captures.get",
+      "method": "GET",
+      "path": "/phenotype-captures/{phenotypeCaptureDbId}",
+      "operationIdInSource": "genxGetPhenotypeCapture",
+      "recommendedOperationId": "genxGetPhenotypeCapture",
+      "operationName": "Get one phenotype capture",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one recorded phenotype capture event.",
+      "sourceDescription": "Returns the recorded capture, or 404.",
+      "canBeUsedFor": [
+        "Inspect capture entries, quality flags, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the capture is a BrAPI Observation.",
+        "Treating a superseded capture as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "phenotypeCaptureDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordPhenotypeCapture",
+        "genxListPhenotypeCaptures"
+      ],
+      "decisionReferences": [
+        "RFC-012"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.phenotype-captures.list",
+        "brapi-genx.genx.v1.phenotype-captures.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 33,
+    "genxEntriesAdded": 36,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -25465,7 +25699,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 234,
+    "totalEntries": 237,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

@@ -61,6 +61,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | AnalysisMethods / AnalysisMethod | D7 | C1, C2, C3, C6, C9 | Versioned analysis method registry; no BrAPI v2.1 equivalent; execution is via Jobs |
 | WeatherObservations / WeatherObservation | D5 | C1, C2, C3, C6, C7, C9 | Environmental/weather observation records; no BrAPI v2.1 equivalent; complementary to Telemetry |
 | HarvestRecords / HarvestRecord | D6 | C1, C2, C3, C6, C9 | Harvest-event records; no BrAPI v2.1 equivalent; not a SeedLotTransaction |
+| PhenotypeCapture / PhenotypeCapture | D4 | C1, C2, C3, C6, C9 | Phenotype capture events; no BrAPI v2.1 equivalent; not a BrAPI Observation |
 | Conformance | Cross-cutting C8 | C1, C3 | Probes and fixtures establish contract evidence, not scientific-domain data |
 
 ## 5. Relationship to BrAPI V2.1

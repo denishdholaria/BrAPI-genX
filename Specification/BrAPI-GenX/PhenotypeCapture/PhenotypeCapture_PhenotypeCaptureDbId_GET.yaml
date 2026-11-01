@@ -1,0 +1,64 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /phenotype-captures/{phenotypeCaptureDbId}:
+    get:
+      operationId: genxGetPhenotypeCapture
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.phenotype-captures.get"
+        classification:
+          primaryDomain: "D4"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve one recorded phenotype capture event."
+        canBeUsedFor:
+          - "Inspect capture entries, quality flags, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming the capture is a BrAPI Observation."
+          - "Treating a superseded capture as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordPhenotypeCapture"
+          - "genxListPhenotypeCaptures"
+        decisions: ["RFC-012"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one phenotype capture
+      description: Returns the recorded capture, or 404.
+      parameters:
+      - name: phenotypeCaptureDbId
+        description: Namespaced phenotype-capture identity `{authority}:phenotype-capture:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/PhenotypeCapture'
+                required:
+                - metadata
+                - result
+                title: PhenotypeCaptureResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - PhenotypeCapture

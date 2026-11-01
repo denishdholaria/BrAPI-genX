@@ -13,6 +13,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | Jobs | 4 | proposed, non-normative |
 | LotLedger | 2 | proposed, non-normative |
 | Models | 3 | proposed, non-normative |
+| PhenotypeCapture | 3 | proposed, non-normative |
 | SelectionDecisions | 3 | proposed, non-normative |
 | ServerInfoV3 | 1 | proposed, non-normative |
 | Telemetry | 2 | proposed, non-normative |
@@ -771,6 +772,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.jobs.get, brapi-genx.genx.v1.jobs.submit, brapi-genx.genx.v1.models.list, brapi-genx.genx.v1.models.register-version
 - **Relevant RFC / decision references:** RFC-004, D-09, D-10
 - **Contract source:** [`Specification/BrAPI-GenX/Models/Models_ModelDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Models/Models_ModelDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### PhenotypeCapture — 3 operations
+
+### GET `/genx/v1/phenotype-captures`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.phenotype-captures.list`
+- **BrAPI-GenX operation identity:** `genxListPhenotypeCaptures` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListPhenotypeCaptures`
+- **GenX source module:** `PhenotypeCapture`
+- **Source tag:** PhenotypeCapture
+- **Proposed BrAPI-GenX classification:** D4 — Phenotyping and Plant Observations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List phenotype capture records, optionally filtered by study, observation unit, or capture method.
+**Source contract description:**
+> Get a paged list of phenotype capture records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover phenotype capture events for a study or observation unit.
+- Audit capture workflow, quality flags, and corrections.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a capture (use the POST endpoint).
+- Assuming a capture is a BrAPI Observation.
+- Treating the list as a complete phenotype dataset.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** studyDbId, observationUnitDbId, captureMethod, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordPhenotypeCapture, genxGetPhenotypeCapture
+- **Related catalogue IDs:** brapi-genx.genx.v1.phenotype-captures.record, brapi-genx.genx.v1.phenotype-captures.get
+- **Relevant RFC / decision references:** RFC-012
+- **Contract source:** [`Specification/BrAPI-GenX/PhenotypeCapture/PhenotypeCapture_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PhenotypeCapture/PhenotypeCapture_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/phenotype-captures`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.phenotype-captures.record`
+- **BrAPI-GenX operation identity:** `genxRecordPhenotypeCapture` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordPhenotypeCapture`
+- **GenX source module:** `PhenotypeCapture`
+- **Source tag:** PhenotypeCapture
+- **Proposed BrAPI-GenX classification:** D4 — Phenotyping and Plant Observations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one phenotype capture event with entries, quality flags, missingness, and provenance.
+**Source contract description:**
+> Unknown phenotypeCaptureDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Record a capture event for an observation unit.
+- Retry an identical capture safely using the same phenotypeCaptureDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing capture; corrections require a new record that supersedes.
+- Assuming the capture is a BrAPI Observation.
+- Treating the capture as a complete phenotype dataset.
+- **Side effects:** Creates a phenotype capture when accepted.
+- **Retry / idempotency:** Same phenotypeCaptureDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** PhenotypeCaptureNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListPhenotypeCaptures, genxGetPhenotypeCapture
+- **Related catalogue IDs:** brapi-genx.genx.v1.phenotype-captures.list, brapi-genx.genx.v1.phenotype-captures.get
+- **Relevant RFC / decision references:** RFC-012
+- **Contract source:** [`Specification/BrAPI-GenX/PhenotypeCapture/PhenotypeCapture_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PhenotypeCapture/PhenotypeCapture_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/phenotype-captures/{phenotypeCaptureDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.phenotype-captures.get`
+- **BrAPI-GenX operation identity:** `genxGetPhenotypeCapture` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetPhenotypeCapture`
+- **GenX source module:** `PhenotypeCapture`
+- **Source tag:** PhenotypeCapture
+- **Proposed BrAPI-GenX classification:** D4 — Phenotyping and Plant Observations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one recorded phenotype capture event.
+**Source contract description:**
+> Returns the recorded capture, or 404.
+**Can be used for:**
+- Inspect capture entries, quality flags, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the capture is a BrAPI Observation.
+- Treating a superseded capture as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** phenotypeCaptureDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordPhenotypeCapture, genxListPhenotypeCaptures
+- **Related catalogue IDs:** brapi-genx.genx.v1.phenotype-captures.list, brapi-genx.genx.v1.phenotype-captures.record
+- **Relevant RFC / decision references:** RFC-012
+- **Contract source:** [`Specification/BrAPI-GenX/PhenotypeCapture/PhenotypeCapture_PhenotypeCaptureDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PhenotypeCapture/PhenotypeCapture_PhenotypeCaptureDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

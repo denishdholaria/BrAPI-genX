@@ -1,0 +1,150 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /phenotype-captures:
+    get:
+      operationId: genxListPhenotypeCaptures
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.phenotype-captures.list"
+        classification:
+          primaryDomain: "D4"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List phenotype capture records, optionally filtered by study, observation unit, or capture method."
+        canBeUsedFor:
+          - "Discover phenotype capture events for a study or observation unit."
+          - "Audit capture workflow, quality flags, and corrections."
+        mustNotBeUsedFor:
+          - "Creating or changing a capture (use the POST endpoint)."
+          - "Assuming a capture is a BrAPI Observation."
+          - "Treating the list as a complete phenotype dataset."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordPhenotypeCapture"
+          - "genxGetPhenotypeCapture"
+        decisions: ["RFC-012"]
+        proposalStatus: "draft-non-normative"
+      summary: List phenotype captures
+      description: Get a paged list of phenotype capture records across authorities. Filters combine with AND.
+      parameters:
+      - name: studyDbId
+        description: Filter by BrAPI Study / trial context
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: observationUnitDbId
+        description: Filter by BrAPI Observation Unit
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: captureMethod
+        description: Filter by capture method
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - manual
+          - image
+          - sensor
+          - bulk
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/PhenotypeCaptureListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - PhenotypeCapture
+    post:
+      operationId: genxRecordPhenotypeCapture
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.phenotype-captures.record"
+        classification:
+          primaryDomain: "D4"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Record one phenotype capture event with entries, quality flags, missingness, and provenance."
+        canBeUsedFor:
+          - "Record a capture event for an observation unit."
+          - "Retry an identical capture safely using the same phenotypeCaptureDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing capture; corrections require a new record that supersedes."
+          - "Assuming the capture is a BrAPI Observation."
+          - "Treating the capture as a complete phenotype dataset."
+        sideEffects: "Creates a phenotype capture when accepted."
+        idempotency: "Same phenotypeCaptureDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListPhenotypeCaptures"
+          - "genxGetPhenotypeCapture"
+        decisions: ["RFC-012"]
+        proposalStatus: "draft-non-normative"
+      summary: Record one phenotype capture
+      description: |-
+        Unknown phenotypeCaptureDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhenotypeCaptureNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/PhenotypeCapture'
+                required:
+                - metadata
+                - result
+                title: PhenotypeCaptureResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - PhenotypeCapture
+components:
+  responses:
+    PhenotypeCaptureListResponse:
+      content:
+        application/json:
+          schema:
+            title: PhenotypeCaptureListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PhenotypeCapture'
+            required:
+            - metadata
+            - result
+      description: OK

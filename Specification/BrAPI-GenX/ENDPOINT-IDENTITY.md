@@ -123,6 +123,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/harvest-records` | GET | `genxListHarvestRecords` | List recorded harvest events | Does not create or change a record; not a BrAPI SeedLot transaction. |
 | `/genx/v1/harvest-records` | POST | `genxRecordHarvest` | Record one harvest event | Append-only record; replay/conflict semantics; does not imply a yield forecast. |
 | `/genx/v1/harvest-records/{harvestRecordDbId}` | GET | `genxGetHarvestRecord` | Retrieve one recorded harvest event | Does not treat a superseded record as current. |
+| `/genx/v1/phenotype-captures` | GET | `genxListPhenotypeCaptures` | List phenotype capture events | Does not create or change a capture; not a BrAPI Observation. |
+| `/genx/v1/phenotype-captures` | POST | `genxRecordPhenotypeCapture` | Record one phenotype capture event | Append-only record; replay/conflict semantics; does not imply a BrAPI Observation. |
+| `/genx/v1/phenotype-captures/{phenotypeCaptureDbId}` | GET | `genxGetPhenotypeCapture` | Retrieve one phenotype capture event | Does not treat a superseded capture as current. |
 
 `ProvenanceEnvelope` is embedded in result/record schemas and has no standalone route in this proposal.
 
