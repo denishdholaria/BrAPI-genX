@@ -230,6 +230,11 @@ modules:
     primary_class: "D7"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "GWAS result records; BrAPI v2.1 has no equivalent record."
+  - path: "MixedModel/"
+    object: "MixedModelResult"
+    primary_class: "D7"
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Mixed model result records; BrAPI v2.1 has no equivalent record."
   - path: "BulkCapture/"
     object: "BulkCapture"
     primary_class: "D4"

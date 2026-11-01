@@ -1,0 +1,61 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    MixedModelResult:
+      type: object
+      description: |-
+        One immutable mixed model result record. A published
+        (mixedModelResultDbId) record never mutates in place; corrections
+        are recorded as additional results linked by supersedes.
+      required:
+      - mixedModelResultDbId
+      - analysisMethodDbId
+      - status
+      properties:
+        mixedModelResultDbId:
+          description: Namespaced mixed-model-result identity `{authority}:mixed-model-result:{localId}`
+          type: string
+          example: institute-a:mixed-model-result:mmr-2026-001
+        analysisMethodDbId:
+          description: GenX AnalysisMethod used
+          type: string
+          example: institute-a:analysis-method:reml-blup
+        jobDbId:
+          description: GenX Job that produced this result
+          type: string
+          example: institute-a:job:analysis-7
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        traitDbId:
+          description: BrAPI Trait or GenX VariableTerm identifier
+          type: string
+          example: institute-a:trait:grain-yield
+        varianceComponents:
+          description: Estimated variance components
+          type: object
+          example: {genetic: 0.42, residual: 0.18}
+        blupValues:
+          description: BLUP values for genotypes or lines
+          type: object
+          example: {line-42: 0.35, line-43: 0.12}
+        status:
+          description: Lifecycle state of the result record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: mixedModelResultDbId of the result this one replaces
+          type: string
+          example: institute-a:mixed-model-result:mmr-2026-000
+        provenance:
+          description: Evidence and method provenance for the result
+          $ref: '#/components/schemas/ProvenanceEnvelope'

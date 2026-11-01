@@ -1,0 +1,62 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    MixedModelResultNewRequest:
+      type: object
+      description: |-
+        Request to record one mixed model result. Unknown
+        mixedModelResultDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      required:
+      - mixedModelResultDbId
+      - analysisMethodDbId
+      properties:
+        mixedModelResultDbId:
+          description: Namespaced mixed-model-result identity `{authority}:mixed-model-result:{localId}`
+          type: string
+          example: institute-a:mixed-model-result:mmr-2026-001
+        analysisMethodDbId:
+          description: GenX AnalysisMethod used
+          type: string
+          example: institute-a:analysis-method:reml-blup
+        jobDbId:
+          description: GenX Job that produced this result
+          type: string
+          example: institute-a:job:analysis-7
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        traitDbId:
+          description: BrAPI Trait or GenX VariableTerm identifier
+          type: string
+          example: institute-a:trait:grain-yield
+        varianceComponents:
+          description: Estimated variance components
+          type: object
+          example: {genetic: 0.42, residual: 0.18}
+        blupValues:
+          description: BLUP values for genotypes or lines
+          type: object
+          example: {line-42: 0.35, line-43: 0.12}
+        status:
+          description: Lifecycle state of the result record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: mixedModelResultDbId of the result this one replaces
+          type: string
+          example: institute-a:mixed-model-result:mmr-2026-000
+        provenance:
+          description: Evidence and method provenance for the result
+          $ref: '#/components/schemas/ProvenanceEnvelope'
