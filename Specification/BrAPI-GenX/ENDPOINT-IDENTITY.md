@@ -120,6 +120,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/weather-observations` | GET | `genxListWeatherObservations` | List recorded weather/environmental observations | Does not create or change an observation; complementary to Telemetry. |
 | `/genx/v1/weather-observations` | POST | `genxRecordWeatherObservation` | Record one weather/environmental observation | Append-only record; replay/conflict semantics; does not imply a BrAPI Observation. |
 | `/genx/v1/weather-observations/{weatherObservationDbId}` | GET | `genxGetWeatherObservation` | Retrieve one recorded weather/environmental observation | Does not treat a superseded observation as current. |
+| `/genx/v1/harvest-records` | GET | `genxListHarvestRecords` | List recorded harvest events | Does not create or change a record; not a BrAPI SeedLot transaction. |
+| `/genx/v1/harvest-records` | POST | `genxRecordHarvest` | Record one harvest event | Append-only record; replay/conflict semantics; does not imply a yield forecast. |
+| `/genx/v1/harvest-records/{harvestRecordDbId}` | GET | `genxGetHarvestRecord` | Retrieve one recorded harvest event | Does not treat a superseded record as current. |
 
 `ProvenanceEnvelope` is embedded in result/record schemas and has no standalone route in this proposal.
 

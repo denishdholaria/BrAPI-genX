@@ -9,6 +9,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | AnalysisMethods | 3 | proposed, non-normative |
 | FAIR | 3 | proposed, non-normative |
 | Genomics | 3 | proposed, non-normative |
+| HarvestRecords | 3 | proposed, non-normative |
 | Jobs | 4 | proposed, non-normative |
 | LotLedger | 2 | proposed, non-normative |
 | Models | 3 | proposed, non-normative |
@@ -338,6 +339,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.brapi-v2-1.genotyping.get.allelematrix, brapi-genx.brapi-v2-1.genotyping.get.calls, brapi-genx.brapi-v2-1.genotyping.get.callsets, brapi-genx.brapi-v2-1.genotyping.get.callsets.by-callsetdbid, brapi-genx.brapi-v2-1.genotyping.get.callsets.by-callsetdbid.calls, brapi-genx.brapi-v2-1.genotyping.get.variants, brapi-genx.brapi-v2-1.genotyping.get.variants.by-variantdbid, brapi-genx.brapi-v2-1.genotyping.get.variants.by-variantdbid.calls, brapi-genx.brapi-v2-1.genotyping.get.variantsets, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.calls, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.callsets, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.variants, brapi-genx.brapi-v2-1.genotyping.post.variantsets.extract, brapi-genx.brapi-v2-1.genotyping.put.calls, brapi-genx.genx.v1.variant-matrices.list, brapi-genx.genx.v1.variant-matrices.register
 - **Relevant RFC / decision references:** RFC-005, D-11, D-12, D-19
 - **Contract source:** [`Specification/BrAPI-GenX/Genomics/VariantMatrices_MatrixDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Genomics/VariantMatrices_MatrixDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### HarvestRecords — 3 operations
+
+### GET `/genx/v1/harvest-records`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.harvest-records.list`
+- **BrAPI-GenX operation identity:** `genxListHarvestRecords` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListHarvestRecords`
+- **GenX source module:** `HarvestRecords`
+- **Source tag:** HarvestRecords
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List harvest-event records, optionally filtered by study, location, germplasm, or date range.
+**Source contract description:**
+> Get a paged list of harvest records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover harvest outcomes for a study or location.
+- Support yield tracking and seed-lot linkage.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a record (use the POST endpoint).
+- Assuming a harvest record is a BrAPI SeedLot transaction.
+- Treating the list as a complete yield forecast.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** studyDbId, locationDbId, germplasmDbId, harvestedFrom, harvestedTo, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordHarvest, genxGetHarvestRecord
+- **Related catalogue IDs:** brapi-genx.genx.v1.harvest-records.record, brapi-genx.genx.v1.harvest-records.get
+- **Relevant RFC / decision references:** RFC-011
+- **Contract source:** [`Specification/BrAPI-GenX/HarvestRecords/HarvestRecords_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/HarvestRecords/HarvestRecords_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/harvest-records`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.harvest-records.record`
+- **BrAPI-GenX operation identity:** `genxRecordHarvest` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordHarvest`
+- **GenX source module:** `HarvestRecords`
+- **Source tag:** HarvestRecords
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one harvest event with quantity, quality, and provenance.
+**Source contract description:**
+> Unknown harvestRecordDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Record a harvest event for a study, location, and germplasm.
+- Retry an identical record safely using the same harvestRecordDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming the record is a BrAPI SeedLot transaction.
+- Treating the record as a yield forecast or prediction.
+- **Side effects:** Creates a harvest record when accepted.
+- **Retry / idempotency:** Same harvestRecordDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** HarvestRecordNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListHarvestRecords, genxGetHarvestRecord
+- **Related catalogue IDs:** brapi-genx.genx.v1.harvest-records.list, brapi-genx.genx.v1.harvest-records.get
+- **Relevant RFC / decision references:** RFC-011
+- **Contract source:** [`Specification/BrAPI-GenX/HarvestRecords/HarvestRecords_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/HarvestRecords/HarvestRecords_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/harvest-records/{harvestRecordDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.harvest-records.get`
+- **BrAPI-GenX operation identity:** `genxGetHarvestRecord` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetHarvestRecord`
+- **GenX source module:** `HarvestRecords`
+- **Source tag:** HarvestRecords
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one recorded harvest event.
+**Source contract description:**
+> Returns the recorded harvest, or 404.
+**Can be used for:**
+- Inspect harvest quantity, quality, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the record is a BrAPI SeedLot transaction.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** harvestRecordDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordHarvest, genxListHarvestRecords
+- **Related catalogue IDs:** brapi-genx.genx.v1.harvest-records.list, brapi-genx.genx.v1.harvest-records.record
+- **Relevant RFC / decision references:** RFC-011
+- **Contract source:** [`Specification/BrAPI-GenX/HarvestRecords/HarvestRecords_HarvestRecordDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/HarvestRecords/HarvestRecords_HarvestRecordDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

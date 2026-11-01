@@ -1,0 +1,90 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    HarvestRecord:
+      type: object
+      description: |-
+        One immutable harvest-event record. A published
+        (harvestRecordDbId) record never mutates in place; corrections are
+        recorded as additional records linked by supersedes.
+      required:
+      - harvestRecordDbId
+      - harvestedAt
+      - quantity
+      - unit
+      properties:
+        harvestRecordDbId:
+          description: Namespaced harvest-record identity `{authority}:harvest-record:{localId}`
+          type: string
+          example: institute-a:harvest-record:hr-2026-001
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        locationDbId:
+          description: BrAPI Location where the harvest occurred
+          type: string
+          example: institute-a:location:field-12
+        germplasmDbId:
+          description: BrAPI Germplasm harvested
+          type: string
+          example: institute-a:germplasm:line-42
+        seedLotDbId:
+          description: BrAPI SeedLot produced by this harvest, when applicable
+          type: string
+          example: institute-a:seedlot:sl-2026-001
+        harvestedAt:
+          description: Date/time of the harvest (ISO-8601)
+          type: string
+          format: date-time
+          example: '2026-10-24T08:00:00Z'
+        quantity:
+          description: Harvested quantity
+          type: number
+          example: 1250.5
+        unit:
+          description: Unit of measure for quantity
+          type: string
+          example: kg
+        moisture:
+          description: Moisture content at harvest
+          type: number
+          example: 14.2
+        moistureUnit:
+          description: Unit of measure for moisture
+          type: string
+          example: percent
+        qualityGrade:
+          description: Quality grade assigned at harvest
+          type: string
+          example: grade-a
+        areaHarvested:
+          description: Area harvested
+          type: number
+          example: 2.5
+        areaUnit:
+          description: Unit of measure for area
+          type: string
+          example: hectare
+        notes:
+          description: Human-readable notes
+          type: string
+          example: Hand harvest; no lodging observed.
+        supersedes:
+          description: harvestRecordDbId of the record this one replaces
+          type: string
+          example: institute-a:harvest-record:hr-2026-000
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          example: active
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

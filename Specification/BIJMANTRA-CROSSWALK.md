@@ -258,6 +258,9 @@ GenX uses /genx/v1. Relative-route matches below are candidate neighbors only; t
 | `brapi-genx.genx.v1.variant-matrices.list` | `GET /genx/v1/variantmatrices` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
 | `brapi-genx.genx.v1.variant-matrices.register` | `POST /genx/v1/variantmatrices` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
 | `brapi-genx.genx.v1.variant-matrices.get` | `GET /genx/v1/variantmatrices/{matrixDbId}` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
+| `brapi-genx.genx.v1.harvest-records.list` | `GET /genx/v1/harvest-records` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
+| `brapi-genx.genx.v1.harvest-records.record` | `POST /genx/v1/harvest-records` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
+| `brapi-genx.genx.v1.harvest-records.get` | `GET /genx/v1/harvest-records/{harvestRecordDbId}` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
 | `brapi-genx.genx.v1.jobs.list` | `GET /genx/v1/jobs` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
 | `brapi-genx.genx.v1.jobs.submit` | `POST /genx/v1/jobs` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
 | `brapi-genx.genx.v1.jobs.request-cancellation` | `DELETE /genx/v1/jobs/{jobDbId}` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |

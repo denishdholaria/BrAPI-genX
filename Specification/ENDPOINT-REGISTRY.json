@@ -25146,12 +25146,248 @@
         "brapi-genx.genx.v1.weather-observations.list",
         "brapi-genx.genx.v1.weather-observations.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "HarvestRecords",
+      "brapiTag": "HarvestRecords",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/HarvestRecords/HarvestRecords_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.harvest-records.list",
+      "method": "GET",
+      "path": "/harvest-records",
+      "operationIdInSource": "genxListHarvestRecords",
+      "recommendedOperationId": "genxListHarvestRecords",
+      "operationName": "List harvest records",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List harvest-event records, optionally filtered by study, location, germplasm, or date range.",
+      "sourceDescription": "Get a paged list of harvest records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover harvest outcomes for a study or location.",
+        "Support yield tracking and seed-lot linkage."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a record (use the POST endpoint).",
+        "Assuming a harvest record is a BrAPI SeedLot transaction.",
+        "Treating the list as a complete yield forecast."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "studyDbId",
+        "locationDbId",
+        "germplasmDbId",
+        "harvestedFrom",
+        "harvestedTo",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordHarvest",
+        "genxGetHarvestRecord"
+      ],
+      "decisionReferences": [
+        "RFC-011"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.harvest-records.record",
+        "brapi-genx.genx.v1.harvest-records.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "HarvestRecords",
+      "brapiTag": "HarvestRecords",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/HarvestRecords/HarvestRecords_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.harvest-records.record",
+      "method": "POST",
+      "path": "/harvest-records",
+      "operationIdInSource": "genxRecordHarvest",
+      "recommendedOperationId": "genxRecordHarvest",
+      "operationName": "Record one harvest",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record one harvest event with quantity, quality, and provenance.",
+      "sourceDescription": "Unknown harvestRecordDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Record a harvest event for a study, location, and germplasm.",
+        "Retry an identical record safely using the same harvestRecordDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming the record is a BrAPI SeedLot transaction.",
+        "Treating the record as a yield forecast or prediction."
+      ],
+      "sideEffects": "Creates a harvest record when accepted.",
+      "idempotency": "Same harvestRecordDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "HarvestRecordNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListHarvestRecords",
+        "genxGetHarvestRecord"
+      ],
+      "decisionReferences": [
+        "RFC-011"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.harvest-records.list",
+        "brapi-genx.genx.v1.harvest-records.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "HarvestRecords",
+      "brapiTag": "HarvestRecords",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/HarvestRecords/HarvestRecords_HarvestRecordDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.harvest-records.get",
+      "method": "GET",
+      "path": "/harvest-records/{harvestRecordDbId}",
+      "operationIdInSource": "genxGetHarvestRecord",
+      "recommendedOperationId": "genxGetHarvestRecord",
+      "operationName": "Get one harvest record",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one recorded harvest event.",
+      "sourceDescription": "Returns the recorded harvest, or 404.",
+      "canBeUsedFor": [
+        "Inspect harvest quantity, quality, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the record is a BrAPI SeedLot transaction.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "harvestRecordDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordHarvest",
+        "genxListHarvestRecords"
+      ],
+      "decisionReferences": [
+        "RFC-011"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.harvest-records.list",
+        "brapi-genx.genx.v1.harvest-records.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 30,
+    "genxEntriesAdded": 33,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -25229,7 +25465,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 231,
+    "totalEntries": 234,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
