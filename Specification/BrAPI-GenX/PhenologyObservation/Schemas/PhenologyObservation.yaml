@@ -1,0 +1,64 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    PhenologyObservation:
+      type: object
+      description: |-
+        One immutable phenology observation record. A published
+        (phenologyObservationDbId) record never mutates in place; corrections
+        are recorded as additional observations linked by supersedes.
+      required:
+      - phenologyObservationDbId
+      - studyDbId
+      - observationUnitDbId
+      - observedAt
+      - stage
+      - status
+      properties:
+        phenologyObservationDbId:
+          description: Namespaced phenology-observation identity `{authority}:phenology-observation:{localId}`
+          type: string
+          example: institute-a:phenology-observation:po-2026-001
+        studyDbId:
+          description: BrAPI Study / trial context
+          type: string
+          example: institute-a:study:yield-trial-2026
+        observationUnitDbId:
+          description: BrAPI Observation Unit observed
+          type: string
+          example: institute-a:observationunit:ou-42
+        observedAt:
+          description: Date/time of observation (ISO-8601)
+          type: string
+          format: date-time
+          example: '2026-10-24T08:00:00Z'
+        stage:
+          description: Developmental stage name
+          type: string
+          example: flowering
+        bbchCode:
+          description: BBCH growth stage code
+          type: string
+          example: '65'
+        notes:
+          description: Human-readable notes
+          type: string
+          example: 50% of plants at flowering.
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          example: active
+        supersedes:
+          description: phenologyObservationDbId of the observation this one replaces
+          type: string
+          example: institute-a:phenology-observation:po-2026-000
+        provenance:
+          description: Evidence and method provenance for the observation
+          $ref: '#/components/schemas/ProvenanceEnvelope'

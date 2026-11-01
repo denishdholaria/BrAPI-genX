@@ -67,6 +67,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | IrrigationOperation / IrrigationEvent | D6 | C1, C2, C3, C6, C9 | Irrigation event records; no BrAPI v2.1 equivalent |
 | RepeatedMeasurement / MeasurementSeries | D4 | C1, C2, C3, C6, C7, C9 | Repeated measurement series; no BrAPI v2.1 equivalent |
 | FertilizerApplication / FertilizerApplication | D6 | C1, C2, C3, C6, C9 | Fertilizer application records; no BrAPI v2.1 equivalent |
+| PhenologyObservation / PhenologyObservation | D4 | C1, C2, C3, C6, C9 | Phenology observation records; no BrAPI v2.1 equivalent |
 | AnalysisMethods / AnalysisMethod | D7 | C1, C2, C3, C6, C9 | Versioned analysis method registry; no BrAPI v2.1 equivalent; execution is via Jobs |
 | WeatherObservations / WeatherObservation | D5 | C1, C2, C3, C6, C7, C9 | Environmental/weather observation records; no BrAPI v2.1 equivalent; complementary to Telemetry |
 | HarvestRecords / HarvestRecord | D6 | C1, C2, C3, C6, C9 | Harvest-event records; no BrAPI v2.1 equivalent; not a SeedLotTransaction |

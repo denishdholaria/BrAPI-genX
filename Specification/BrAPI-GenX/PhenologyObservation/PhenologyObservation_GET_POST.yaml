@@ -1,0 +1,145 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /phenology-observations:
+    get:
+      operationId: genxListPhenologyObservations
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.phenology-observations.list"
+        classification:
+          primaryDomain: "D4"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List phenology observations, optionally filtered by study, observation unit, or stage."
+        canBeUsedFor:
+          - "Discover phenology observations for a study or observation unit."
+          - "Support phenotyping and monitoring workflows."
+        mustNotBeUsedFor:
+          - "Creating or changing an observation (use the POST endpoint)."
+          - "Assuming an observation is a BrAPI Observation."
+          - "Treating the list as a complete phenotype dataset."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordPhenologyObservation"
+          - "genxGetPhenologyObservation"
+        decisions: ["RFC-027"]
+        proposalStatus: "draft-non-normative"
+      summary: List phenology observations
+      description: Get a paged list of phenology observations across authorities. Filters combine with AND.
+      parameters:
+      - name: studyDbId
+        description: Filter by BrAPI Study / trial context
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: observationUnitDbId
+        description: Filter by BrAPI Observation Unit
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: stage
+        description: Filter by developmental stage
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/PhenologyObservationListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - PhenologyObservation
+    post:
+      operationId: genxRecordPhenologyObservation
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.phenology-observations.record"
+        classification:
+          primaryDomain: "D4"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Record one phenology observation with stage, BBCH code, and provenance."
+        canBeUsedFor:
+          - "Record developmental stage observations for an observation unit."
+          - "Retry an identical observation safely using the same phenologyObservationDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing observation; corrections require a new record that supersedes."
+          - "Assuming the observation is a BrAPI Observation."
+          - "Treating the observation as a complete phenotype dataset."
+        sideEffects: "Creates a phenology observation when accepted."
+        idempotency: "Same phenologyObservationDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListPhenologyObservations"
+          - "genxGetPhenologyObservation"
+        decisions: ["RFC-027"]
+        proposalStatus: "draft-non-normative"
+      summary: Record one phenology observation
+      description: |-
+        Unknown phenologyObservationDbId creates; same id with an identical
+        body replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhenologyObservationNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/PhenologyObservation'
+                required:
+                - metadata
+                - result
+                title: PhenologyObservationResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - PhenologyObservation
+components:
+  responses:
+    PhenologyObservationListResponse:
+      content:
+        application/json:
+          schema:
+            title: PhenologyObservationListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PhenologyObservation'
+            required:
+            - metadata
+            - result
+      description: OK

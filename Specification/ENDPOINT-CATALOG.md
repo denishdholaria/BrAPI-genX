@@ -13,8 +13,8 @@ A catalogue identifier does not replace a source operationId or route. Classific
 | Surface | Operations | Contract status |
 |---|---:|---|
 | BrAPI v2.1 official modules | 201 | Released specification; implementation availability not inferred |
-| BrAPI GenX /genx/v1 | 78 | Proposed, non-normative |
-| **Total** | **279** | Existing contracts plus proposed operations |
+| BrAPI GenX /genx/v1 | 81 | Proposed, non-normative |
+| **Total** | **282** | Existing contracts plus proposed operations |
 
 BijMantra snapshot: 2240 records from the inventory generated 2026-10-17; see [source inventory](https://github.com/denishdholaria/bijmantraorg/blob/main/endpoints-inventory.md) and [crosswalk](./BIJMANTRA-CROSSWALK.md).
 
@@ -9349,6 +9349,111 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
+### PhenologyObservation — 3 operations
+
+### GET `/genx/v1/phenology-observations`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.phenology-observations.list`
+- **BrAPI-GenX operation identity:** `genxListPhenologyObservations` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListPhenologyObservations`
+- **GenX source module:** `PhenologyObservation`
+- **Source tag:** PhenologyObservation
+- **Proposed BrAPI-GenX classification:** D4 — Phenotyping and Plant Observations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List phenology observations, optionally filtered by study, observation unit, or stage.
+**Source contract description:**
+> Get a paged list of phenology observations across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover phenology observations for a study or observation unit.
+- Support phenotyping and monitoring workflows.
+**Must not be used for / explicit non-goals:**
+- Creating or changing an observation (use the POST endpoint).
+- Assuming an observation is a BrAPI Observation.
+- Treating the list as a complete phenotype dataset.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** studyDbId, observationUnitDbId, stage, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordPhenologyObservation, genxGetPhenologyObservation
+- **Related catalogue IDs:** brapi-genx.genx.v1.phenology-observations.record, brapi-genx.genx.v1.phenology-observations.get
+- **Relevant RFC / decision references:** RFC-027
+- **Contract source:** [`Specification/BrAPI-GenX/PhenologyObservation/PhenologyObservation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PhenologyObservation/PhenologyObservation_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/phenology-observations`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.phenology-observations.record`
+- **BrAPI-GenX operation identity:** `genxRecordPhenologyObservation` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordPhenologyObservation`
+- **GenX source module:** `PhenologyObservation`
+- **Source tag:** PhenologyObservation
+- **Proposed BrAPI-GenX classification:** D4 — Phenotyping and Plant Observations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one phenology observation with stage, BBCH code, and provenance.
+**Source contract description:**
+> Unknown phenologyObservationDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Record developmental stage observations for an observation unit.
+- Retry an identical observation safely using the same phenologyObservationDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing observation; corrections require a new record that supersedes.
+- Assuming the observation is a BrAPI Observation.
+- Treating the observation as a complete phenotype dataset.
+- **Side effects:** Creates a phenology observation when accepted.
+- **Retry / idempotency:** Same phenologyObservationDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** PhenologyObservationNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListPhenologyObservations, genxGetPhenologyObservation
+- **Related catalogue IDs:** brapi-genx.genx.v1.phenology-observations.list, brapi-genx.genx.v1.phenology-observations.get
+- **Relevant RFC / decision references:** RFC-027
+- **Contract source:** [`Specification/BrAPI-GenX/PhenologyObservation/PhenologyObservation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PhenologyObservation/PhenologyObservation_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/phenology-observations/{phenologyObservationDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.phenology-observations.get`
+- **BrAPI-GenX operation identity:** `genxGetPhenologyObservation` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetPhenologyObservation`
+- **GenX source module:** `PhenologyObservation`
+- **Source tag:** PhenologyObservation
+- **Proposed BrAPI-GenX classification:** D4 — Phenotyping and Plant Observations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one phenology observation.
+**Source contract description:**
+> Returns the recorded observation, or 404.
+**Can be used for:**
+- Inspect developmental stage, BBCH code, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the observation is a BrAPI Observation.
+- Treating a superseded observation as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** phenologyObservationDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordPhenologyObservation, genxListPhenologyObservations
+- **Related catalogue IDs:** brapi-genx.genx.v1.phenology-observations.list, brapi-genx.genx.v1.phenology-observations.record
+- **Relevant RFC / decision references:** RFC-027
+- **Contract source:** [`Specification/BrAPI-GenX/PhenologyObservation/PhenologyObservation_PhenologyObservationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PhenologyObservation/PhenologyObservation_PhenologyObservationDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
 ### PhenotypeCapture — 3 operations
 
 ### GET `/genx/v1/phenotype-captures`
@@ -10534,6 +10639,6 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - Unique full-base-path/method/route keys: `True`.
 - Unique source/advisory operation identifiers where present: `True`.
 - BrAPI v2.1 inventory rows resolved to source YAML operations: 201 / 201.
-- GenX operations documented: 78.
+- GenX operations documented: 81.
 
 See [BIJMANTRA-CROSSWALK.md](./BIJMANTRA-CROSSWALK.md) for inventory evidence and semantic boundaries.

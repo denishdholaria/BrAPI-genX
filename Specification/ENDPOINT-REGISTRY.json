@@ -28904,12 +28904,246 @@
         "brapi-genx.genx.v1.fertilizer-applications.list",
         "brapi-genx.genx.v1.fertilizer-applications.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "PhenologyObservation",
+      "brapiTag": "PhenologyObservation",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/PhenologyObservation/PhenologyObservation_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.phenology-observations.list",
+      "method": "GET",
+      "path": "/phenology-observations",
+      "operationIdInSource": "genxListPhenologyObservations",
+      "recommendedOperationId": "genxListPhenologyObservations",
+      "operationName": "List phenology observations",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List phenology observations, optionally filtered by study, observation unit, or stage.",
+      "sourceDescription": "Get a paged list of phenology observations across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover phenology observations for a study or observation unit.",
+        "Support phenotyping and monitoring workflows."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing an observation (use the POST endpoint).",
+        "Assuming an observation is a BrAPI Observation.",
+        "Treating the list as a complete phenotype dataset."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "studyDbId",
+        "observationUnitDbId",
+        "stage",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordPhenologyObservation",
+        "genxGetPhenologyObservation"
+      ],
+      "decisionReferences": [
+        "RFC-027"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.phenology-observations.record",
+        "brapi-genx.genx.v1.phenology-observations.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "PhenologyObservation",
+      "brapiTag": "PhenologyObservation",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/PhenologyObservation/PhenologyObservation_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.phenology-observations.record",
+      "method": "POST",
+      "path": "/phenology-observations",
+      "operationIdInSource": "genxRecordPhenologyObservation",
+      "recommendedOperationId": "genxRecordPhenologyObservation",
+      "operationName": "Record one phenology observation",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record one phenology observation with stage, BBCH code, and provenance.",
+      "sourceDescription": "Unknown phenologyObservationDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Record developmental stage observations for an observation unit.",
+        "Retry an identical observation safely using the same phenologyObservationDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing observation; corrections require a new record that supersedes.",
+        "Assuming the observation is a BrAPI Observation.",
+        "Treating the observation as a complete phenotype dataset."
+      ],
+      "sideEffects": "Creates a phenology observation when accepted.",
+      "idempotency": "Same phenologyObservationDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "PhenologyObservationNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListPhenologyObservations",
+        "genxGetPhenologyObservation"
+      ],
+      "decisionReferences": [
+        "RFC-027"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.phenology-observations.list",
+        "brapi-genx.genx.v1.phenology-observations.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "PhenologyObservation",
+      "brapiTag": "PhenologyObservation",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/PhenologyObservation/PhenologyObservation_PhenologyObservationDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.phenology-observations.get",
+      "method": "GET",
+      "path": "/phenology-observations/{phenologyObservationDbId}",
+      "operationIdInSource": "genxGetPhenologyObservation",
+      "recommendedOperationId": "genxGetPhenologyObservation",
+      "operationName": "Get one phenology observation",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one phenology observation.",
+      "sourceDescription": "Returns the recorded observation, or 404.",
+      "canBeUsedFor": [
+        "Inspect developmental stage, BBCH code, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the observation is a BrAPI Observation.",
+        "Treating a superseded observation as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "phenologyObservationDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordPhenologyObservation",
+        "genxListPhenologyObservations"
+      ],
+      "decisionReferences": [
+        "RFC-027"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.phenology-observations.list",
+        "brapi-genx.genx.v1.phenology-observations.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 78,
+    "genxEntriesAdded": 81,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -28987,7 +29221,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 279,
+    "totalEntries": 282,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
