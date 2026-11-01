@@ -1,0 +1,153 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /fertilizer-applications:
+    get:
+      operationId: genxListFertilizerApplications
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.fertilizer-applications.list"
+        classification:
+          primaryDomain: "D6"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List fertilizer application records, optionally filtered by location, study, or date range."
+        canBeUsedFor:
+          - "Discover fertilizer applications for a location or study."
+          - "Support nutrient-use auditing and crop models."
+        mustNotBeUsedFor:
+          - "Creating or changing an application (use the POST endpoint)."
+          - "Assuming an application is a BrAPI Location."
+          - "Treating the list as a complete nutrient record."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordFertilizerApplication"
+          - "genxGetFertilizerApplication"
+        decisions: ["RFC-026"]
+        proposalStatus: "draft-non-normative"
+      summary: List fertilizer applications
+      description: Get a paged list of fertilizer applications across authorities. Filters combine with AND.
+      parameters:
+      - name: locationDbId
+        description: Filter by BrAPI Location
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: studyDbId
+        description: Filter by BrAPI Study / trial context
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: appliedFrom
+        description: Start of application time range (ISO-8601)
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: appliedTo
+        description: End of application time range (ISO-8601)
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/FertilizerApplicationListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - FertilizerApplication
+    post:
+      operationId: genxRecordFertilizerApplication
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.fertilizer-applications.record"
+        classification:
+          primaryDomain: "D6"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Record one fertilizer application with product, quantity, and provenance."
+        canBeUsedFor:
+          - "Record nutrient application for a location or study."
+          - "Retry an identical application safely using the same fertilizerApplicationDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing application; corrections require a new record that supersedes."
+          - "Assuming the application is a BrAPI Location."
+          - "Treating the application as a complete nutrient record."
+        sideEffects: "Creates a fertilizer application when accepted."
+        idempotency: "Same fertilizerApplicationDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListFertilizerApplications"
+          - "genxGetFertilizerApplication"
+        decisions: ["RFC-026"]
+        proposalStatus: "draft-non-normative"
+      summary: Record one fertilizer application
+      description: |-
+        Unknown fertilizerApplicationDbId creates; same id with an identical
+        body replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FertilizerApplicationNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/FertilizerApplication'
+                required:
+                - metadata
+                - result
+                title: FertilizerApplicationResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - FertilizerApplication
+components:
+  responses:
+    FertilizerApplicationListResponse:
+      content:
+        application/json:
+          schema:
+            title: FertilizerApplicationListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FertilizerApplication'
+            required:
+            - metadata
+            - result
+      description: OK

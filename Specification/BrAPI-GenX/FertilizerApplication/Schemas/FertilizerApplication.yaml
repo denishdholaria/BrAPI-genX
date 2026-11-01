@@ -1,0 +1,72 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    FertilizerApplication:
+      type: object
+      description: |-
+        One immutable fertilizer-application record. A published
+        (fertilizerApplicationDbId) record never mutates in place; corrections
+        are recorded as additional records linked by supersedes.
+      required:
+      - fertilizerApplicationDbId
+      - appliedAt
+      - product
+      - quantity
+      - unit
+      - status
+      properties:
+        fertilizerApplicationDbId:
+          description: Namespaced fertilizer-application identity `{authority}:fertilizer-application:{localId}`
+          type: string
+          example: institute-a:fertilizer-application:fa-2026-001
+        locationDbId:
+          description: BrAPI Location where application occurred
+          type: string
+          example: institute-a:location:field-12
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        appliedAt:
+          description: Date/time of application (ISO-8601)
+          type: string
+          format: date-time
+          example: '2026-10-24T06:00:00Z'
+        product:
+          description: Fertilizer product name
+          type: string
+          example: urea-46-0-0
+        quantity:
+          description: Quantity applied
+          type: number
+          example: 50
+        unit:
+          description: Unit of measure for quantity
+          type: string
+          example: kg_per_hectare
+        method:
+          description: Application method
+          type: string
+          example: broadcast
+        notes:
+          description: Human-readable notes
+          type: string
+          example: Applied before planting.
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          example: active
+        supersedes:
+          description: fertilizerApplicationDbId of the record this one replaces
+          type: string
+          example: institute-a:fertilizer-application:fa-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

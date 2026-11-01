@@ -45,6 +45,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `SoilProfile/` | `SoilProfile` — soil profile records (texture, chemistry, moisture, nutrients, provenance) | `GET /genx/v1/soil-profiles` (`genxListSoilProfiles`); `POST /genx/v1/soil-profiles` (`genxRegisterSoilProfile`); `GET /genx/v1/soil-profiles/{soilProfileDbId}` (`genxGetSoilProfile`) |
 | `IrrigationOperation/` | `IrrigationEvent` — irrigation event records (volume, duration, method, provenance) | `GET /genx/v1/irrigation-operations` (`genxListIrrigations`); `POST /genx/v1/irrigation-operations` (`genxRecordIrrigation`); `GET /genx/v1/irrigation-operations/{irrigationEventDbId}` (`genxGetIrrigation`) |
 | `RepeatedMeasurement/` | `MeasurementSeries` — repeated measurement series (time-ordered values, quality flags, provenance) | `GET /genx/v1/repeated-measurements` (`genxListMeasurementSeries`); `POST /genx/v1/repeated-measurements` (`genxRecordMeasurementSeries`); `GET /genx/v1/repeated-measurements/{measurementSeriesDbId}` (`genxGetMeasurementSeries`) |
+| `FertilizerApplication/` | `FertilizerApplication` — fertilizer application records (product, quantity, method, provenance) | `GET /genx/v1/fertilizer-applications` (`genxListFertilizerApplications`); `POST /genx/v1/fertilizer-applications` (`genxRecordFertilizerApplication`); `GET /genx/v1/fertilizer-applications/{fertilizerApplicationDbId}` (`genxGetFertilizerApplication`) |
 | `AnalysisMethods/` | `AnalysisMethod` — versioned analysis method registry (identity, type, contracts, lifecycle) | `GET /genx/v1/analysis-methods` (`genxListAnalysisMethods`); `POST /genx/v1/analysis-methods` (`genxRegisterAnalysisMethod`); `GET /genx/v1/analysis-methods/{analysisMethodDbId}` (`genxGetAnalysisMethod`) |
 | `WeatherObservations/` | `WeatherObservation` — environmental/weather observation records (measurements, quality, provenance) | `GET /genx/v1/weather-observations` (`genxListWeatherObservations`); `POST /genx/v1/weather-observations` (`genxRecordWeatherObservation`); `GET /genx/v1/weather-observations/{weatherObservationDbId}` (`genxGetWeatherObservation`) |
 | `HarvestRecords/` | `HarvestRecord` — harvest-event records (quantity, quality, moisture, provenance) | `GET /genx/v1/harvest-records` (`genxListHarvestRecords`); `POST /genx/v1/harvest-records` (`genxRecordHarvest`); `GET /genx/v1/harvest-records/{harvestRecordDbId}` (`genxGetHarvestRecord`) |
@@ -81,7 +82,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-022-Speed-Breeding](./RFC-022-Speed-Breeding.md),
 [RFC-023-Soil-Profile](./RFC-023-Soil-Profile.md),
 [RFC-024-Irrigation-Operation](./RFC-024-Irrigation-Operation.md),
-[RFC-025-Repeated-Measurement](./RFC-025-Repeated-Measurement.md).
+[RFC-025-Repeated-Measurement](./RFC-025-Repeated-Measurement.md),
+[RFC-026-Fertilizer-Application](./RFC-026-Fertilizer-Application.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

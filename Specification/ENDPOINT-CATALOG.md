@@ -13,8 +13,8 @@ A catalogue identifier does not replace a source operationId or route. Classific
 | Surface | Operations | Contract status |
 |---|---:|---|
 | BrAPI v2.1 official modules | 201 | Released specification; implementation availability not inferred |
-| BrAPI GenX /genx/v1 | 75 | Proposed, non-normative |
-| **Total** | **276** | Existing contracts plus proposed operations |
+| BrAPI GenX /genx/v1 | 78 | Proposed, non-normative |
+| **Total** | **279** | Existing contracts plus proposed operations |
 
 BijMantra snapshot: 2240 records from the inventory generated 2026-10-17; see [source inventory](https://github.com/denishdholaria/bijmantraorg/blob/main/endpoints-inventory.md) and [crosswalk](./BIJMANTRA-CROSSWALK.md).
 
@@ -8284,6 +8284,111 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
+### FertilizerApplication — 3 operations
+
+### GET `/genx/v1/fertilizer-applications`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.fertilizer-applications.list`
+- **BrAPI-GenX operation identity:** `genxListFertilizerApplications` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListFertilizerApplications`
+- **GenX source module:** `FertilizerApplication`
+- **Source tag:** FertilizerApplication
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List fertilizer application records, optionally filtered by location, study, or date range.
+**Source contract description:**
+> Get a paged list of fertilizer applications across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover fertilizer applications for a location or study.
+- Support nutrient-use auditing and crop models.
+**Must not be used for / explicit non-goals:**
+- Creating or changing an application (use the POST endpoint).
+- Assuming an application is a BrAPI Location.
+- Treating the list as a complete nutrient record.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** locationDbId, studyDbId, appliedFrom, appliedTo, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordFertilizerApplication, genxGetFertilizerApplication
+- **Related catalogue IDs:** brapi-genx.genx.v1.fertilizer-applications.record, brapi-genx.genx.v1.fertilizer-applications.get
+- **Relevant RFC / decision references:** RFC-026
+- **Contract source:** [`Specification/BrAPI-GenX/FertilizerApplication/FertilizerApplication_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/FertilizerApplication/FertilizerApplication_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/fertilizer-applications`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.fertilizer-applications.record`
+- **BrAPI-GenX operation identity:** `genxRecordFertilizerApplication` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordFertilizerApplication`
+- **GenX source module:** `FertilizerApplication`
+- **Source tag:** FertilizerApplication
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one fertilizer application with product, quantity, and provenance.
+**Source contract description:**
+> Unknown fertilizerApplicationDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Record nutrient application for a location or study.
+- Retry an identical application safely using the same fertilizerApplicationDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing application; corrections require a new record that supersedes.
+- Assuming the application is a BrAPI Location.
+- Treating the application as a complete nutrient record.
+- **Side effects:** Creates a fertilizer application when accepted.
+- **Retry / idempotency:** Same fertilizerApplicationDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** FertilizerApplicationNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListFertilizerApplications, genxGetFertilizerApplication
+- **Related catalogue IDs:** brapi-genx.genx.v1.fertilizer-applications.list, brapi-genx.genx.v1.fertilizer-applications.get
+- **Relevant RFC / decision references:** RFC-026
+- **Contract source:** [`Specification/BrAPI-GenX/FertilizerApplication/FertilizerApplication_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/FertilizerApplication/FertilizerApplication_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/fertilizer-applications/{fertilizerApplicationDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.fertilizer-applications.get`
+- **BrAPI-GenX operation identity:** `genxGetFertilizerApplication` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetFertilizerApplication`
+- **GenX source module:** `FertilizerApplication`
+- **Source tag:** FertilizerApplication
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one recorded fertilizer application.
+**Source contract description:**
+> Returns the recorded application, or 404.
+**Can be used for:**
+- Inspect fertilizer product, quantity, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the application is a BrAPI Location.
+- Treating a superseded application as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** fertilizerApplicationDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordFertilizerApplication, genxListFertilizerApplications
+- **Related catalogue IDs:** brapi-genx.genx.v1.fertilizer-applications.list, brapi-genx.genx.v1.fertilizer-applications.record
+- **Relevant RFC / decision references:** RFC-026
+- **Contract source:** [`Specification/BrAPI-GenX/FertilizerApplication/FertilizerApplication_FertilizerApplicationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/FertilizerApplication/FertilizerApplication_FertilizerApplicationDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
 ### GenebankStorage — 3 operations
 
 ### GET `/genx/v1/genebank-storage`
@@ -10429,6 +10534,6 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - Unique full-base-path/method/route keys: `True`.
 - Unique source/advisory operation identifiers where present: `True`.
 - BrAPI v2.1 inventory rows resolved to source YAML operations: 201 / 201.
-- GenX operations documented: 75.
+- GenX operations documented: 78.
 
 See [BIJMANTRA-CROSSWALK.md](./BIJMANTRA-CROSSWALK.md) for inventory evidence and semantic boundaries.

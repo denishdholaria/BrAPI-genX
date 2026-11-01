@@ -28669,12 +28669,247 @@
         "brapi-genx.genx.v1.repeated-measurements.list",
         "brapi-genx.genx.v1.repeated-measurements.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "FertilizerApplication",
+      "brapiTag": "FertilizerApplication",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/FertilizerApplication/FertilizerApplication_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.fertilizer-applications.list",
+      "method": "GET",
+      "path": "/fertilizer-applications",
+      "operationIdInSource": "genxListFertilizerApplications",
+      "recommendedOperationId": "genxListFertilizerApplications",
+      "operationName": "List fertilizer applications",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List fertilizer application records, optionally filtered by location, study, or date range.",
+      "sourceDescription": "Get a paged list of fertilizer applications across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover fertilizer applications for a location or study.",
+        "Support nutrient-use auditing and crop models."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing an application (use the POST endpoint).",
+        "Assuming an application is a BrAPI Location.",
+        "Treating the list as a complete nutrient record."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "locationDbId",
+        "studyDbId",
+        "appliedFrom",
+        "appliedTo",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordFertilizerApplication",
+        "genxGetFertilizerApplication"
+      ],
+      "decisionReferences": [
+        "RFC-026"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.fertilizer-applications.record",
+        "brapi-genx.genx.v1.fertilizer-applications.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "FertilizerApplication",
+      "brapiTag": "FertilizerApplication",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/FertilizerApplication/FertilizerApplication_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.fertilizer-applications.record",
+      "method": "POST",
+      "path": "/fertilizer-applications",
+      "operationIdInSource": "genxRecordFertilizerApplication",
+      "recommendedOperationId": "genxRecordFertilizerApplication",
+      "operationName": "Record one fertilizer application",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record one fertilizer application with product, quantity, and provenance.",
+      "sourceDescription": "Unknown fertilizerApplicationDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Record nutrient application for a location or study.",
+        "Retry an identical application safely using the same fertilizerApplicationDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing application; corrections require a new record that supersedes.",
+        "Assuming the application is a BrAPI Location.",
+        "Treating the application as a complete nutrient record."
+      ],
+      "sideEffects": "Creates a fertilizer application when accepted.",
+      "idempotency": "Same fertilizerApplicationDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "FertilizerApplicationNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListFertilizerApplications",
+        "genxGetFertilizerApplication"
+      ],
+      "decisionReferences": [
+        "RFC-026"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.fertilizer-applications.list",
+        "brapi-genx.genx.v1.fertilizer-applications.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "FertilizerApplication",
+      "brapiTag": "FertilizerApplication",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/FertilizerApplication/FertilizerApplication_FertilizerApplicationDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.fertilizer-applications.get",
+      "method": "GET",
+      "path": "/fertilizer-applications/{fertilizerApplicationDbId}",
+      "operationIdInSource": "genxGetFertilizerApplication",
+      "recommendedOperationId": "genxGetFertilizerApplication",
+      "operationName": "Get one fertilizer application",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one recorded fertilizer application.",
+      "sourceDescription": "Returns the recorded application, or 404.",
+      "canBeUsedFor": [
+        "Inspect fertilizer product, quantity, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the application is a BrAPI Location.",
+        "Treating a superseded application as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "fertilizerApplicationDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordFertilizerApplication",
+        "genxListFertilizerApplications"
+      ],
+      "decisionReferences": [
+        "RFC-026"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.fertilizer-applications.list",
+        "brapi-genx.genx.v1.fertilizer-applications.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 75,
+    "genxEntriesAdded": 78,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -28752,7 +28987,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 276,
+    "totalEntries": 279,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

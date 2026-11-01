@@ -125,6 +125,11 @@ modules:
     primary_class: "D4"
     cross_cutting: ["C1", "C2", "C3", "C6", "C7", "C9"]
     rationale: "Repeated measurement series; BrAPI v2.1 has no equivalent record."
+  - path: "FertilizerApplication/"
+    object: "FertilizerApplication"
+    primary_class: "D6"
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Fertilizer application records; BrAPI v2.1 has no equivalent record."
   - path: "AnalysisMethods/"
     object: "AnalysisMethod"
     primary_class: "D7"
