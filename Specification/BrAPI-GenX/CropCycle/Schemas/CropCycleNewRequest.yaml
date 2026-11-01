@@ -1,0 +1,58 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    CropCycleNewRequest:
+      type: object
+      description: |-
+        Request to register one crop cycle. Unknown cropCycleDbId creates;
+        same id with an identical body replays the existing record; same id
+        with a different body is rejected with 409.
+      required:
+      - cropCycleDbId
+      properties:
+        cropCycleDbId:
+          description: Namespaced crop-cycle identity `{authority}:crop-cycle:{localId}`
+          type: string
+          example: institute-a:crop-cycle:cc-2026-001
+        locationDbId:
+          description: BrAPI Location where the cycle occurred
+          type: string
+          example: institute-a:location:field-12
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        cropName:
+          description: Crop or species name
+          type: string
+          example: wheat
+        plantingDate:
+          description: Planting date (ISO-8601)
+          type: string
+          format: date
+          example: '2026-03-15'
+        harvestDate:
+          description: Harvest date (ISO-8601)
+          type: string
+          format: date
+          example: '2026-07-20'
+        status:
+          description: Lifecycle state of the cycle record
+          type: string
+          enum:
+          - active
+          - completed
+          - superseded
+          default: active
+          example: active
+        supersedes:
+          description: cropCycleDbId of the cycle this one replaces
+          type: string
+          example: institute-a:crop-cycle:cc-2026-000
+        provenance:
+          description: Evidence and method provenance for the cycle
+          $ref: '#/components/schemas/ProvenanceEnvelope'

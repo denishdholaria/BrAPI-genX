@@ -13,8 +13,8 @@ A catalogue identifier does not replace a source operationId or route. Classific
 | Surface | Operations | Contract status |
 |---|---:|---|
 | BrAPI v2.1 official modules | 201 | Released specification; implementation availability not inferred |
-| BrAPI GenX /genx/v1 | 84 | Proposed, non-normative |
-| **Total** | **285** | Existing contracts plus proposed operations |
+| BrAPI GenX /genx/v1 | 87 | Proposed, non-normative |
+| **Total** | **288** | Existing contracts plus proposed operations |
 
 BijMantra snapshot: 2240 records from the inventory generated 2026-10-17; see [source inventory](https://github.com/denishdholaria/bijmantraorg/blob/main/endpoints-inventory.md) and [crosswalk](./BIJMANTRA-CROSSWALK.md).
 
@@ -7966,6 +7966,111 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
+### CropCycle — 3 operations
+
+### GET `/genx/v1/crop-cycles`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.crop-cycles.list`
+- **BrAPI-GenX operation identity:** `genxListCropCycles` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListCropCycles`
+- **GenX source module:** `CropCycle`
+- **Source tag:** CropCycle
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List crop cycles, optionally filtered by location, study, or status.
+**Source contract description:**
+> Get a paged list of crop cycles across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover crop cycles for a location or study.
+- Support agronomy and crop model inputs.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a cycle (use the POST endpoint).
+- Assuming a cycle is a BrAPI Study.
+- Treating the list as a complete crop record.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** locationDbId, studyDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterCropCycle, genxGetCropCycle
+- **Related catalogue IDs:** brapi-genx.genx.v1.crop-cycles.register, brapi-genx.genx.v1.crop-cycles.get
+- **Relevant RFC / decision references:** RFC-029
+- **Contract source:** [`Specification/BrAPI-GenX/CropCycle/CropCycle_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CropCycle/CropCycle_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/crop-cycles`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.crop-cycles.register`
+- **BrAPI-GenX operation identity:** `genxRegisterCropCycle` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterCropCycle`
+- **GenX source module:** `CropCycle`
+- **Source tag:** CropCycle
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register a crop cycle with planting/harvest dates and provenance.
+**Source contract description:**
+> Unknown cropCycleDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish crop cycle metadata.
+- Create a new version under an existing cycle identity.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing cycle; corrections require a new record that supersedes.
+- Assuming the cycle is a BrAPI Study.
+- Treating the cycle as a complete crop record.
+- **Side effects:** Creates a cycle identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same cycle identity and identical body replays; conflicting content for the same identity is rejected.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** CropCycleNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListCropCycles, genxGetCropCycle
+- **Related catalogue IDs:** brapi-genx.genx.v1.crop-cycles.list, brapi-genx.genx.v1.crop-cycles.get
+- **Relevant RFC / decision references:** RFC-029
+- **Contract source:** [`Specification/BrAPI-GenX/CropCycle/CropCycle_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CropCycle/CropCycle_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/crop-cycles/{cropCycleDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.crop-cycles.get`
+- **BrAPI-GenX operation identity:** `genxGetCropCycle` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetCropCycle`
+- **GenX source module:** `CropCycle`
+- **Source tag:** CropCycle
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one crop cycle.
+**Source contract description:**
+> Returns the registered cycle, or 404.
+**Can be used for:**
+- Inspect planting/harvest dates and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the cycle is a BrAPI Study.
+- Treating a superseded cycle as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** cropCycleDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterCropCycle, genxListCropCycles
+- **Related catalogue IDs:** brapi-genx.genx.v1.crop-cycles.list, brapi-genx.genx.v1.crop-cycles.register
+- **Relevant RFC / decision references:** RFC-029
+- **Contract source:** [`Specification/BrAPI-GenX/CropCycle/CropCycle_CropCycleDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CropCycle/CropCycle_CropCycleDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
 ### DoubledHaploid — 3 operations
 
 ### GET `/genx/v1/doubled-haploid-programs`
@@ -10744,6 +10849,6 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - Unique full-base-path/method/route keys: `True`.
 - Unique source/advisory operation identifiers where present: `True`.
 - BrAPI v2.1 inventory rows resolved to source YAML operations: 201 / 201.
-- GenX operations documented: 84.
+- GenX operations documented: 87.
 
 See [BIJMANTRA-CROSSWALK.md](./BIJMANTRA-CROSSWALK.md) for inventory evidence and semantic boundaries.

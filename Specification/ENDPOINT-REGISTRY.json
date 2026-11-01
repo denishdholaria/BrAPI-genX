@@ -29372,12 +29372,246 @@
         "brapi-genx.genx.v1.parent-candidate-selections.list",
         "brapi-genx.genx.v1.parent-candidate-selections.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CropCycle",
+      "brapiTag": "CropCycle",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CropCycle/CropCycle_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.crop-cycles.list",
+      "method": "GET",
+      "path": "/crop-cycles",
+      "operationIdInSource": "genxListCropCycles",
+      "recommendedOperationId": "genxListCropCycles",
+      "operationName": "List crop cycles",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List crop cycles, optionally filtered by location, study, or status.",
+      "sourceDescription": "Get a paged list of crop cycles across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover crop cycles for a location or study.",
+        "Support agronomy and crop model inputs."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a cycle (use the POST endpoint).",
+        "Assuming a cycle is a BrAPI Study.",
+        "Treating the list as a complete crop record."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "locationDbId",
+        "studyDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterCropCycle",
+        "genxGetCropCycle"
+      ],
+      "decisionReferences": [
+        "RFC-029"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.crop-cycles.register",
+        "brapi-genx.genx.v1.crop-cycles.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CropCycle",
+      "brapiTag": "CropCycle",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CropCycle/CropCycle_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.crop-cycles.register",
+      "method": "POST",
+      "path": "/crop-cycles",
+      "operationIdInSource": "genxRegisterCropCycle",
+      "recommendedOperationId": "genxRegisterCropCycle",
+      "operationName": "Register one crop cycle",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register a crop cycle with planting/harvest dates and provenance.",
+      "sourceDescription": "Unknown cropCycleDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish crop cycle metadata.",
+        "Create a new version under an existing cycle identity."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing cycle; corrections require a new record that supersedes.",
+        "Assuming the cycle is a BrAPI Study.",
+        "Treating the cycle as a complete crop record."
+      ],
+      "sideEffects": "Creates a cycle identity or appends a new immutable version when accepted.",
+      "idempotency": "Same cycle identity and identical body replays; conflicting content for the same identity is rejected.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "CropCycleNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListCropCycles",
+        "genxGetCropCycle"
+      ],
+      "decisionReferences": [
+        "RFC-029"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.crop-cycles.list",
+        "brapi-genx.genx.v1.crop-cycles.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CropCycle",
+      "brapiTag": "CropCycle",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CropCycle/CropCycle_CropCycleDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.crop-cycles.get",
+      "method": "GET",
+      "path": "/crop-cycles/{cropCycleDbId}",
+      "operationIdInSource": "genxGetCropCycle",
+      "recommendedOperationId": "genxGetCropCycle",
+      "operationName": "Get one crop cycle",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one crop cycle.",
+      "sourceDescription": "Returns the registered cycle, or 404.",
+      "canBeUsedFor": [
+        "Inspect planting/harvest dates and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the cycle is a BrAPI Study.",
+        "Treating a superseded cycle as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "cropCycleDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterCropCycle",
+        "genxListCropCycles"
+      ],
+      "decisionReferences": [
+        "RFC-029"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.crop-cycles.list",
+        "brapi-genx.genx.v1.crop-cycles.register"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 84,
+    "genxEntriesAdded": 87,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -29455,7 +29689,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 285,
+    "totalEntries": 288,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

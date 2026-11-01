@@ -147,6 +147,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/parent-candidate-selections` | GET | `genxListParentCandidateSelections` | List parent candidate selections | Does not create or change a record; not a BrAPI Germplasm or Cross. |
 | `/genx/v1/parent-candidate-selections` | POST | `genxRecordParentCandidateSelection` | Record one parent candidate selection | Append-only record; replay/conflict semantics. |
 | `/genx/v1/parent-candidate-selections/{parentCandidateSelectionDbId}` | GET | `genxGetParentCandidateSelection` | Retrieve one parent candidate selection | Does not treat a superseded record as current. |
+| `/genx/v1/crop-cycles` | GET | `genxListCropCycles` | List crop cycles | Does not create or change a cycle; not a BrAPI Study. |
+| `/genx/v1/crop-cycles` | POST | `genxRegisterCropCycle` | Register one crop cycle | Append-only record; replay/conflict semantics. |
+| `/genx/v1/crop-cycles/{cropCycleDbId}` | GET | `genxGetCropCycle` | Retrieve one crop cycle | Does not treat a superseded cycle as current. |
 | `/genx/v1/analysis-methods` | GET | `genxListAnalysisMethods` | List registered analysis method versions | Does not execute an analysis; not a BrAPI v2.1 resource. |
 | `/genx/v1/analysis-methods` | POST | `genxRegisterAnalysisMethod` | Register one analysis method version | Does not execute or validate the method; replay/conflict semantics. |
 | `/genx/v1/analysis-methods/{analysisMethodDbId}` | GET | `genxGetAnalysisMethod` | Retrieve one registered analysis method version | Does not execute an analysis; revoked methods deny new jobs. |
