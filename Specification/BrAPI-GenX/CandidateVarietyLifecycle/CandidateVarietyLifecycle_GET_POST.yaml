@@ -1,0 +1,146 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /candidate-varieties:
+    get:
+      operationId: genxListCandidateVarieties
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.candidate-varieties.list"
+        classification:
+          primaryDomain: "D2"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List candidate variety lifecycle records, optionally filtered by program or status."
+        canBeUsedFor:
+          - "Discover candidate varieties in a breeding program."
+          - "Support breeding and registration planning."
+        mustNotBeUsedFor:
+          - "Creating or changing a record (use the POST endpoint)."
+          - "Assuming a record is a BrAPI Program."
+          - "Treating the list as a complete breeding program record."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterCandidateVariety"
+          - "genxGetCandidateVariety"
+        decisions: ["RFC-039"]
+        proposalStatus: "draft-non-normative"
+      summary: List candidate varieties
+      description: Get a paged list of candidate varieties across authorities. Filters combine with AND.
+      parameters:
+      - name: programDbId
+        description: Filter by BrAPI Program (breeding program)
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - candidate
+          - submitted
+          - registered
+          - released
+          - withdrawn
+          - superseded
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/CandidateVarietyListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - CandidateVarietyLifecycle
+    post:
+      operationId: genxRegisterCandidateVariety
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.candidate-varieties.register"
+        classification:
+          primaryDomain: "D2"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Register a candidate variety with status and provenance."
+        canBeUsedFor:
+          - "Publish candidate variety metadata."
+          - "Create a new version under an existing identity."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing record; corrections require a new record that supersedes."
+          - "Assuming the record is a BrAPI Program."
+          - "Treating the record as an approved variety."
+        sideEffects: "Creates a candidate variety identity or appends a new immutable version when accepted."
+        idempotency: "Same identity and identical body replays; conflicting content for the same identity is rejected."
+        semanticNeighbors:
+          - "genxListCandidateVarieties"
+          - "genxGetCandidateVariety"
+        decisions: ["RFC-039"]
+        proposalStatus: "draft-non-normative"
+      summary: Register one candidate variety
+      description: |-
+        Unknown candidateVarietyDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CandidateVarietyNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/CandidateVariety'
+                required:
+                - metadata
+                - result
+                title: CandidateVarietyResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - CandidateVarietyLifecycle
+components:
+  responses:
+    CandidateVarietyListResponse:
+      content:
+        application/json:
+          schema:
+            title: CandidateVarietyListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CandidateVariety'
+            required:
+            - metadata
+            - result
+      description: OK

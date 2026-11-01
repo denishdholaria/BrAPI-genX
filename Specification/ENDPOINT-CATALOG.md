@@ -13,8 +13,8 @@ A catalogue identifier does not replace a source operationId or route. Classific
 | Surface | Operations | Contract status |
 |---|---:|---|
 | BrAPI v2.1 official modules | 201 | Released specification; implementation availability not inferred |
-| BrAPI GenX /genx/v1 | 114 | Proposed, non-normative |
-| **Total** | **315** | Existing contracts plus proposed operations |
+| BrAPI GenX /genx/v1 | 117 | Proposed, non-normative |
+| **Total** | **318** | Existing contracts plus proposed operations |
 
 BijMantra snapshot: 2240 records from the inventory generated 2026-10-17; see [source inventory](https://github.com/denishdholaria/bijmantraorg/blob/main/endpoints-inventory.md) and [crosswalk](./BIJMANTRA-CROSSWALK.md).
 
@@ -7966,6 +7966,111 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
+### CandidateVarietyLifecycle — 3 operations
+
+### GET `/genx/v1/candidate-varieties`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.candidate-varieties.list`
+- **BrAPI-GenX operation identity:** `genxListCandidateVarieties` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListCandidateVarieties`
+- **GenX source module:** `CandidateVarietyLifecycle`
+- **Source tag:** CandidateVarietyLifecycle
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List candidate variety lifecycle records, optionally filtered by program or status.
+**Source contract description:**
+> Get a paged list of candidate varieties across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover candidate varieties in a breeding program.
+- Support breeding and registration planning.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a record (use the POST endpoint).
+- Assuming a record is a BrAPI Program.
+- Treating the list as a complete breeding program record.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** programDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterCandidateVariety, genxGetCandidateVariety
+- **Related catalogue IDs:** brapi-genx.genx.v1.candidate-varieties.register, brapi-genx.genx.v1.candidate-varieties.get
+- **Relevant RFC / decision references:** RFC-039
+- **Contract source:** [`Specification/BrAPI-GenX/CandidateVarietyLifecycle/CandidateVarietyLifecycle_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CandidateVarietyLifecycle/CandidateVarietyLifecycle_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/candidate-varieties`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.candidate-varieties.register`
+- **BrAPI-GenX operation identity:** `genxRegisterCandidateVariety` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterCandidateVariety`
+- **GenX source module:** `CandidateVarietyLifecycle`
+- **Source tag:** CandidateVarietyLifecycle
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register a candidate variety with status and provenance.
+**Source contract description:**
+> Unknown candidateVarietyDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish candidate variety metadata.
+- Create a new version under an existing identity.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming the record is a BrAPI Program.
+- Treating the record as an approved variety.
+- **Side effects:** Creates a candidate variety identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same identity and identical body replays; conflicting content for the same identity is rejected.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** CandidateVarietyNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListCandidateVarieties, genxGetCandidateVariety
+- **Related catalogue IDs:** brapi-genx.genx.v1.candidate-varieties.list, brapi-genx.genx.v1.candidate-varieties.get
+- **Relevant RFC / decision references:** RFC-039
+- **Contract source:** [`Specification/BrAPI-GenX/CandidateVarietyLifecycle/CandidateVarietyLifecycle_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CandidateVarietyLifecycle/CandidateVarietyLifecycle_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/candidate-varieties/{candidateVarietyDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.candidate-varieties.get`
+- **BrAPI-GenX operation identity:** `genxGetCandidateVariety` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetCandidateVariety`
+- **GenX source module:** `CandidateVarietyLifecycle`
+- **Source tag:** CandidateVarietyLifecycle
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one candidate variety lifecycle record.
+**Source contract description:**
+> Returns the registered record, or 404.
+**Can be used for:**
+- Inspect status and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the record is a BrAPI Program.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** candidateVarietyDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterCandidateVariety, genxListCandidateVarieties
+- **Related catalogue IDs:** brapi-genx.genx.v1.candidate-varieties.list, brapi-genx.genx.v1.candidate-varieties.register
+- **Relevant RFC / decision references:** RFC-039
+- **Contract source:** [`Specification/BrAPI-GenX/CandidateVarietyLifecycle/CandidateVarietyLifecycle_CandidateVarietyDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CandidateVarietyLifecycle/CandidateVarietyLifecycle_CandidateVarietyDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
 ### ClimateNormals — 3 operations
 
 ### GET `/genx/v1/climate-normals`
@@ -11356,7 +11461,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
 - **Semantic relationship IDs / labels:** genxRecordTillage, genxListTillageRecords
-- **Related catalogue IDs:** brapi-genx.genx.v1.tillage-records.list, brapi-genx.genx.v1.tillage-records.register
+- **Related catalogue IDs:** brapi-genx.genx.v1.tillage-records.list, brapi-genx.genx.v1.tillage-records.record
 - **Relevant RFC / decision references:** RFC-038
 - **Contract source:** [`Specification/BrAPI-GenX/Tillage/Tillage_TillageRecordDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Tillage/Tillage_TillageRecordDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
@@ -11794,6 +11899,6 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - Unique full-base-path/method/route keys: `True`.
 - Unique source/advisory operation identifiers where present: `True`.
 - BrAPI v2.1 inventory rows resolved to source YAML operations: 201 / 201.
-- GenX operations documented: 114.
+- GenX operations documented: 117.
 
 See [BIJMANTRA-CROSSWALK.md](./BIJMANTRA-CROSSWALK.md) for inventory evidence and semantic boundaries.

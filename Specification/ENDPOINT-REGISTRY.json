@@ -31713,12 +31713,245 @@
         "brapi-genx.genx.v1.tillage-records.list",
         "brapi-genx.genx.v1.tillage-records.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CandidateVarietyLifecycle",
+      "brapiTag": "CandidateVarietyLifecycle",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CandidateVarietyLifecycle/CandidateVarietyLifecycle_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.candidate-varieties.list",
+      "method": "GET",
+      "path": "/candidate-varieties",
+      "operationIdInSource": "genxListCandidateVarieties",
+      "recommendedOperationId": "genxListCandidateVarieties",
+      "operationName": "List candidate varieties",
+      "classification": {
+        "primaryDomain": "D2",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List candidate variety lifecycle records, optionally filtered by program or status.",
+      "sourceDescription": "Get a paged list of candidate varieties across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover candidate varieties in a breeding program.",
+        "Support breeding and registration planning."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a record (use the POST endpoint).",
+        "Assuming a record is a BrAPI Program.",
+        "Treating the list as a complete breeding program record."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "programDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterCandidateVariety",
+        "genxGetCandidateVariety"
+      ],
+      "decisionReferences": [
+        "RFC-039"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.candidate-varieties.register",
+        "brapi-genx.genx.v1.candidate-varieties.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CandidateVarietyLifecycle",
+      "brapiTag": "CandidateVarietyLifecycle",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CandidateVarietyLifecycle/CandidateVarietyLifecycle_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.candidate-varieties.register",
+      "method": "POST",
+      "path": "/candidate-varieties",
+      "operationIdInSource": "genxRegisterCandidateVariety",
+      "recommendedOperationId": "genxRegisterCandidateVariety",
+      "operationName": "Register one candidate variety",
+      "classification": {
+        "primaryDomain": "D2",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register a candidate variety with status and provenance.",
+      "sourceDescription": "Unknown candidateVarietyDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish candidate variety metadata.",
+        "Create a new version under an existing identity."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming the record is a BrAPI Program.",
+        "Treating the record as an approved variety."
+      ],
+      "sideEffects": "Creates a candidate variety identity or appends a new immutable version when accepted.",
+      "idempotency": "Same identity and identical body replays; conflicting content for the same identity is rejected.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "CandidateVarietyNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListCandidateVarieties",
+        "genxGetCandidateVariety"
+      ],
+      "decisionReferences": [
+        "RFC-039"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.candidate-varieties.list",
+        "brapi-genx.genx.v1.candidate-varieties.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CandidateVarietyLifecycle",
+      "brapiTag": "CandidateVarietyLifecycle",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CandidateVarietyLifecycle/CandidateVarietyLifecycle_CandidateVarietyDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.candidate-varieties.get",
+      "method": "GET",
+      "path": "/candidate-varieties/{candidateVarietyDbId}",
+      "operationIdInSource": "genxGetCandidateVariety",
+      "recommendedOperationId": "genxGetCandidateVariety",
+      "operationName": "Get one candidate variety",
+      "classification": {
+        "primaryDomain": "D2",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one candidate variety lifecycle record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect status and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the record is a BrAPI Program.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "candidateVarietyDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterCandidateVariety",
+        "genxListCandidateVarieties"
+      ],
+      "decisionReferences": [
+        "RFC-039"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.candidate-varieties.list",
+        "brapi-genx.genx.v1.candidate-varieties.register"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 114,
+    "genxEntriesAdded": 117,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -31796,7 +32029,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 315,
+    "totalEntries": 318,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
