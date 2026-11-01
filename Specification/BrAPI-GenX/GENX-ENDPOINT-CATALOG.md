@@ -46,6 +46,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | Telemetry | 2 | proposed, non-normative |
 | Tillage | 3 | proposed, non-normative |
 | VariableTerms | 3 | proposed, non-normative |
+| VcfImport | 3 | proposed, non-normative |
 | ViabilityTesting | 3 | proposed, non-normative |
 | WeatherForecast | 3 | proposed, non-normative |
 | WeatherObservations | 3 | proposed, non-normative |
@@ -4186,6 +4187,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.brapi-v2-1.phenotyping.get.methods, brapi-genx.brapi-v2-1.phenotyping.get.methods.by-methoddbid, brapi-genx.brapi-v2-1.phenotyping.get.ontologies, brapi-genx.brapi-v2-1.phenotyping.get.ontologies.by-ontologydbid, brapi-genx.brapi-v2-1.phenotyping.get.scales, brapi-genx.brapi-v2-1.phenotyping.get.scales.by-scaledbid, brapi-genx.brapi-v2-1.phenotyping.get.traits, brapi-genx.brapi-v2-1.phenotyping.get.traits.by-traitdbid, brapi-genx.brapi-v2-1.phenotyping.get.variables, brapi-genx.brapi-v2-1.phenotyping.get.variables.by-observationvariabledbid, brapi-genx.brapi-v2-1.phenotyping.post.methods, brapi-genx.brapi-v2-1.phenotyping.post.ontologies, brapi-genx.brapi-v2-1.phenotyping.post.scales, brapi-genx.brapi-v2-1.phenotyping.post.traits, brapi-genx.brapi-v2-1.phenotyping.post.variables, brapi-genx.brapi-v2-1.phenotyping.put.methods.by-methoddbid, brapi-genx.brapi-v2-1.phenotyping.put.ontologies.by-ontologydbid, brapi-genx.brapi-v2-1.phenotyping.put.scales.by-scaledbid, brapi-genx.brapi-v2-1.phenotyping.put.traits.by-traitdbid, brapi-genx.brapi-v2-1.phenotyping.put.variables.by-observationvariabledbid, brapi-genx.genx.v1.variable-terms.list, brapi-genx.genx.v1.variable-terms.publish-version
 - **Relevant RFC / decision references:** RFC-002, D-05, D-06, A-03
 - **Contract source:** [`Specification/BrAPI-GenX/VariableTerms/VariableTerms_VariableDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/VariableTerms/VariableTerms_VariableDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### VcfImport — 3 operations
+
+### GET `/genx/v1/vcf-imports`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.vcf-imports.list`
+- **BrAPI-GenX operation identity:** `genxListVcfImports` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListVcfImports`
+- **GenX source module:** `VcfImport`
+- **Source tag:** VcfImport
+- **Proposed BrAPI-GenX classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List VCF import records, optionally filtered by dataset or status.
+**Source contract description:**
+> Get a paged list of VCF imports across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover VCF imports for a genomic dataset.
+- Support genotyping provenance and auditing.
+**Must not be used for / explicit non-goals:**
+- Creating or changing an import (use the POST endpoint).
+- Assuming an import is a BrAPI VariantSet.
+- Treating the list as a complete genomic repository.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** genomicDatasetDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordVcfImport, genxGetVcfImport, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.vcf-imports.record, brapi-genx.genx.v1.vcf-imports.get
+- **Relevant RFC / decision references:** RFC-043
+- **Contract source:** [`Specification/BrAPI-GenX/VcfImport/VcfImport_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/VcfImport/VcfImport_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/vcf-imports`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.vcf-imports.record`
+- **BrAPI-GenX operation identity:** `genxRecordVcfImport` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordVcfImport`
+- **GenX source module:** `VcfImport`
+- **Source tag:** VcfImport
+- **Proposed BrAPI-GenX classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one VCF import with source format and provenance.
+**Source contract description:**
+> Unknown vcfImportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Record ingestion of a VCF or other variant file.
+- Retry an identical import safely using the same vcfImportDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing import; corrections require a new record that supersedes.
+- Assuming the import is a BrAPI VariantSet.
+- Treating the import as a complete genomic repository.
+- **Side effects:** Creates a VCF import when accepted.
+- **Retry / idempotency:** Same vcfImportDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** VcfImportNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListVcfImports, genxGetVcfImport, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.vcf-imports.list, brapi-genx.genx.v1.vcf-imports.get
+- **Relevant RFC / decision references:** RFC-043
+- **Contract source:** [`Specification/BrAPI-GenX/VcfImport/VcfImport_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/VcfImport/VcfImport_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/vcf-imports/{vcfImportDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.vcf-imports.get`
+- **BrAPI-GenX operation identity:** `genxGetVcfImport` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetVcfImport`
+- **GenX source module:** `VcfImport`
+- **Source tag:** VcfImport
+- **Proposed BrAPI-GenX classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one VCF import record.
+**Source contract description:**
+> Returns the recorded import, or 404.
+**Can be used for:**
+- Inspect import source, counts, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the import is a BrAPI VariantSet.
+- Treating a superseded import as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** vcfImportDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordVcfImport, genxListVcfImports, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.vcf-imports.list, brapi-genx.genx.v1.vcf-imports.record
+- **Relevant RFC / decision references:** RFC-043
+- **Contract source:** [`Specification/BrAPI-GenX/VcfImport/VcfImport_VcfImportDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/VcfImport/VcfImport_VcfImportDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

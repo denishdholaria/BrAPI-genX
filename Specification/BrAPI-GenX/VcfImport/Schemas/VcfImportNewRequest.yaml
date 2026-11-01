@@ -1,0 +1,64 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    VcfImportNewRequest:
+      type: object
+      description: |-
+        Request to record one VCF import. Unknown vcfImportDbId
+        creates; same id with an identical body replays the existing
+        record; same id with a different body is rejected with 409.
+      required:
+      - vcfImportDbId
+      - genomicDatasetDbId
+      - importedAt
+      - sourceFormat
+      properties:
+        vcfImportDbId:
+          description: Namespaced VCF-import identity `{authority}:vcf-import:{localId}`
+          type: string
+          example: institute-a:vcf-import:vi-2026-001
+        genomicDatasetDbId:
+          description: GenX GenomicDataset produced by this import
+          type: string
+          example: institute-a:genomic-dataset:gd-2026-001
+        importedAt:
+          description: Date/time of import (ISO-8601)
+          type: string
+          format: date-time
+          example: '2026-10-24T08:00:00Z'
+        sourceFormat:
+          description: Source file format
+          type: string
+          example: VCF
+        sourceFile:
+          description: Source file reference or URL
+          type: string
+          example: https://institute.org/data/wheat-2026.vcf.gz
+        variantCount:
+          description: Number of variants imported
+          type: integer
+          example: 1250000
+        sampleCount:
+          description: Number of samples imported
+          type: integer
+          example: 320
+        status:
+          description: Lifecycle state of the import record
+          type: string
+          enum:
+          - active
+          - superseded
+          - failed
+          default: active
+          example: active
+        supersedes:
+          description: vcfImportDbId of the import this one replaces
+          type: string
+          example: institute-a:vcf-import:vi-2026-000
+        provenance:
+          description: Evidence and method provenance for the import
+          $ref: '#/components/schemas/ProvenanceEnvelope'

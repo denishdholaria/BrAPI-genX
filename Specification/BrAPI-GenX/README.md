@@ -72,6 +72,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `CandidateVarietyLifecycle/` | `CandidateVariety` — candidate variety lifecycle records (status, registration, provenance) | `GET /genx/v1/candidate-varieties` (`genxListCandidateVarieties`); `POST /genx/v1/candidate-varieties` (`genxRegisterCandidateVariety`); `GET /genx/v1/candidate-varieties/{candidateVarietyDbId}` (`genxGetCandidateVariety`) |
 | `Acquisition/` | `AcquisitionRecord` — acquisition records (source, method, provenance) | `GET /genx/v1/acquisitions` (`genxListAcquisitions`); `POST /genx/v1/acquisitions` (`genxRecordAcquisition`); `GET /genx/v1/acquisitions/{acquisitionRecordDbId}` (`genxGetAcquisition`) |
 | `ExtremeWeather/` | `ExtremeWeatherEvent` — extreme weather event records (type, severity, provenance) | `GET /genx/v1/extreme-weather-events` (`genxListExtremeWeatherEvents`); `POST /genx/v1/extreme-weather-events` (`genxRecordExtremeWeather`); `GET /genx/v1/extreme-weather-events/{extremeWeatherEventDbId}` (`genxGetExtremeWeatherEvent`) |
+| `VcfImport/` | `VcfImport` — VCF import records (source format, counts, provenance) | `GET /genx/v1/vcf-imports` (`genxListVcfImports`); `POST /genx/v1/vcf-imports` (`genxRecordVcfImport`); `GET /genx/v1/vcf-imports/{vcfImportDbId}` (`genxGetVcfImport`) |
 | `Conformance/` | Probes + fixtures + runner contract (`probes.yaml`) | Static tier runs now; live tier needs `--server` |
 
 RFCs: [RFC-001-GenX-Skeleton](./RFC-001-GenX-Skeleton.md) (principles + first
@@ -115,7 +116,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-039-Candidate-Variety-Lifecycle](./RFC-039-Candidate-Variety-Lifecycle.md),
 [RFC-040-Bulk-Capture](./RFC-040-Bulk-Capture.md),
 [RFC-041-Acquisition](./RFC-041-Acquisition.md),
-[RFC-042-Extreme-Weather](./RFC-042-Extreme-Weather.md).
+[RFC-042-Extreme-Weather](./RFC-042-Extreme-Weather.md),
+[RFC-043-Vcf-Import](./RFC-043-Vcf-Import.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

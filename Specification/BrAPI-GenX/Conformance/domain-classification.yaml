@@ -205,6 +205,11 @@ modules:
     primary_class: "D5"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Extreme weather event records; BrAPI v2.1 has no equivalent record."
+  - path: "VcfImport/"
+    object: "VcfImport"
+    primary_class: "D3"
+    cross_cutting: ["C1", "C2", "C3", "C5", "C6", "C9"]
+    rationale: "VCF import records; BrAPI v2.1 has no equivalent record."
   - path: "BulkCapture/"
     object: "BulkCapture"
     primary_class: "D4"

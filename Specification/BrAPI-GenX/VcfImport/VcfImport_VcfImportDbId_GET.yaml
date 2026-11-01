@@ -1,0 +1,65 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /vcf-imports/{vcfImportDbId}:
+    get:
+      operationId: genxGetVcfImport
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.vcf-imports.get"
+        classification:
+          primaryDomain: "D3"
+          crossCuttingCapabilities: ["C1", "C2", "C5", "C6", "C9"]
+        purpose: "Retrieve one VCF import record."
+        canBeUsedFor:
+          - "Inspect import source, counts, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming the import is a BrAPI VariantSet."
+          - "Treating a superseded import as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordVcfImport"
+          - "genxListVcfImports"
+          - "genxRegisterGenomicDataset"
+        decisions: ["RFC-043"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one VCF import
+      description: Returns the recorded import, or 404.
+      parameters:
+      - name: vcfImportDbId
+        description: Namespaced VCF-import identity `{authority}:vcf-import:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/VcfImport'
+                required:
+                - metadata
+                - result
+                title: VcfImportResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - VcfImport
