@@ -8,6 +8,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 |---|---:|---|
 | AnalysisMethods | 3 | proposed, non-normative |
 | BreedingPipeline | 3 | proposed, non-normative |
+| ClimateNormals | 3 | proposed, non-normative |
 | CropCycle | 3 | proposed, non-normative |
 | DoubledHaploid | 3 | proposed, non-normative |
 | ExperimentalDesign | 3 | proposed, non-normative |
@@ -250,6 +251,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.breeding-pipelines.list, brapi-genx.genx.v1.breeding-pipelines.register
 - **Relevant RFC / decision references:** RFC-014
 - **Contract source:** [`Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_BreedingPipelineDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_BreedingPipelineDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### ClimateNormals — 3 operations
+
+### GET `/genx/v1/climate-normals`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.climate-normals.list`
+- **BrAPI-GenX operation identity:** `genxListClimateNormals` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListClimateNormals`
+- **GenX source module:** `ClimateNormals`
+- **Source tag:** ClimateNormals
+- **Proposed BrAPI-GenX classification:** D5 — Environment, Agroecology and Field Context; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List climate normal records, optionally filtered by location, variable, or period.
+**Source contract description:**
+> Get a paged list of climate normals across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover long-term climate averages for a location.
+- Support crop models and agronomy planning.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a normal (use the POST endpoint).
+- Assuming a normal is a BrAPI Location.
+- Treating the list as a complete climate record.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** locationDbId, variableDbId, period, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterClimateNormal, genxGetClimateNormal
+- **Related catalogue IDs:** brapi-genx.genx.v1.climate-normals.register, brapi-genx.genx.v1.climate-normals.get
+- **Relevant RFC / decision references:** RFC-033
+- **Contract source:** [`Specification/BrAPI-GenX/ClimateNormals/ClimateNormals_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ClimateNormals/ClimateNormals_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/climate-normals`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.climate-normals.register`
+- **BrAPI-GenX operation identity:** `genxRegisterClimateNormal` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterClimateNormal`
+- **GenX source module:** `ClimateNormals`
+- **Source tag:** ClimateNormals
+- **Proposed BrAPI-GenX classification:** D5 — Environment, Agroecology and Field Context; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register a climate normal with mean/min/max and provenance.
+**Source contract description:**
+> Unknown climateNormalDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish climate normal metadata.
+- Create a new version under an existing normal identity.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing normal; corrections require a new record that supersedes.
+- Assuming the normal is a BrAPI Location.
+- Treating the normal as a complete climate record.
+- **Side effects:** Creates a climate normal identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same identity and identical body replays; conflicting content for the same identity is rejected.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** ClimateNormalNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListClimateNormals, genxGetClimateNormal
+- **Related catalogue IDs:** brapi-genx.genx.v1.climate-normals.list, brapi-genx.genx.v1.climate-normals.get
+- **Relevant RFC / decision references:** RFC-033
+- **Contract source:** [`Specification/BrAPI-GenX/ClimateNormals/ClimateNormals_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ClimateNormals/ClimateNormals_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/climate-normals/{climateNormalDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.climate-normals.get`
+- **BrAPI-GenX operation identity:** `genxGetClimateNormal` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetClimateNormal`
+- **GenX source module:** `ClimateNormals`
+- **Source tag:** ClimateNormals
+- **Proposed BrAPI-GenX classification:** D5 — Environment, Agroecology and Field Context; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one climate normal.
+**Source contract description:**
+> Returns the registered normal, or 404.
+**Can be used for:**
+- Inspect mean/min/max and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the normal is a BrAPI Location.
+- Treating a superseded normal as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** climateNormalDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterClimateNormal, genxListClimateNormals
+- **Related catalogue IDs:** brapi-genx.genx.v1.climate-normals.list, brapi-genx.genx.v1.climate-normals.register
+- **Relevant RFC / decision references:** RFC-033
+- **Contract source:** [`Specification/BrAPI-GenX/ClimateNormals/ClimateNormals_ClimateNormalDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ClimateNormals/ClimateNormals_ClimateNormalDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

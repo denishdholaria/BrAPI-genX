@@ -30311,12 +30311,246 @@
         "brapi-genx.genx.v1.image-metadata.list",
         "brapi-genx.genx.v1.image-metadata.register"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ClimateNormals",
+      "brapiTag": "ClimateNormals",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ClimateNormals/ClimateNormals_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.climate-normals.list",
+      "method": "GET",
+      "path": "/climate-normals",
+      "operationIdInSource": "genxListClimateNormals",
+      "recommendedOperationId": "genxListClimateNormals",
+      "operationName": "List climate normals",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List climate normal records, optionally filtered by location, variable, or period.",
+      "sourceDescription": "Get a paged list of climate normals across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover long-term climate averages for a location.",
+        "Support crop models and agronomy planning."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a normal (use the POST endpoint).",
+        "Assuming a normal is a BrAPI Location.",
+        "Treating the list as a complete climate record."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "locationDbId",
+        "variableDbId",
+        "period",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterClimateNormal",
+        "genxGetClimateNormal"
+      ],
+      "decisionReferences": [
+        "RFC-033"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.climate-normals.register",
+        "brapi-genx.genx.v1.climate-normals.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ClimateNormals",
+      "brapiTag": "ClimateNormals",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ClimateNormals/ClimateNormals_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.climate-normals.register",
+      "method": "POST",
+      "path": "/climate-normals",
+      "operationIdInSource": "genxRegisterClimateNormal",
+      "recommendedOperationId": "genxRegisterClimateNormal",
+      "operationName": "Register one climate normal",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register a climate normal with mean/min/max and provenance.",
+      "sourceDescription": "Unknown climateNormalDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish climate normal metadata.",
+        "Create a new version under an existing normal identity."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing normal; corrections require a new record that supersedes.",
+        "Assuming the normal is a BrAPI Location.",
+        "Treating the normal as a complete climate record."
+      ],
+      "sideEffects": "Creates a climate normal identity or appends a new immutable version when accepted.",
+      "idempotency": "Same identity and identical body replays; conflicting content for the same identity is rejected.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "ClimateNormalNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListClimateNormals",
+        "genxGetClimateNormal"
+      ],
+      "decisionReferences": [
+        "RFC-033"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.climate-normals.list",
+        "brapi-genx.genx.v1.climate-normals.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ClimateNormals",
+      "brapiTag": "ClimateNormals",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ClimateNormals/ClimateNormals_ClimateNormalDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.climate-normals.get",
+      "method": "GET",
+      "path": "/climate-normals/{climateNormalDbId}",
+      "operationIdInSource": "genxGetClimateNormal",
+      "recommendedOperationId": "genxGetClimateNormal",
+      "operationName": "Get one climate normal",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one climate normal.",
+      "sourceDescription": "Returns the registered normal, or 404.",
+      "canBeUsedFor": [
+        "Inspect mean/min/max and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the normal is a BrAPI Location.",
+        "Treating a superseded normal as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "climateNormalDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterClimateNormal",
+        "genxListClimateNormals"
+      ],
+      "decisionReferences": [
+        "RFC-033"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.climate-normals.list",
+        "brapi-genx.genx.v1.climate-normals.register"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 96,
+    "genxEntriesAdded": 99,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -30394,7 +30628,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 297,
+    "totalEntries": 300,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

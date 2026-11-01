@@ -1,0 +1,145 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /climate-normals:
+    get:
+      operationId: genxListClimateNormals
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.climate-normals.list"
+        classification:
+          primaryDomain: "D5"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List climate normal records, optionally filtered by location, variable, or period."
+        canBeUsedFor:
+          - "Discover long-term climate averages for a location."
+          - "Support crop models and agronomy planning."
+        mustNotBeUsedFor:
+          - "Creating or changing a normal (use the POST endpoint)."
+          - "Assuming a normal is a BrAPI Location."
+          - "Treating the list as a complete climate record."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterClimateNormal"
+          - "genxGetClimateNormal"
+        decisions: ["RFC-033"]
+        proposalStatus: "draft-non-normative"
+      summary: List climate normals
+      description: Get a paged list of climate normals across authorities. Filters combine with AND.
+      parameters:
+      - name: locationDbId
+        description: Filter by BrAPI Location
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: variableDbId
+        description: Filter by measured variable
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: period
+        description: Filter by reference period (e.g. 1991-2020)
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/ClimateNormalListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - ClimateNormals
+    post:
+      operationId: genxRegisterClimateNormal
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.climate-normals.register"
+        classification:
+          primaryDomain: "D5"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Register a climate normal with mean/min/max and provenance."
+        canBeUsedFor:
+          - "Publish climate normal metadata."
+          - "Create a new version under an existing normal identity."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing normal; corrections require a new record that supersedes."
+          - "Assuming the normal is a BrAPI Location."
+          - "Treating the normal as a complete climate record."
+        sideEffects: "Creates a climate normal identity or appends a new immutable version when accepted."
+        idempotency: "Same identity and identical body replays; conflicting content for the same identity is rejected."
+        semanticNeighbors:
+          - "genxListClimateNormals"
+          - "genxGetClimateNormal"
+        decisions: ["RFC-033"]
+        proposalStatus: "draft-non-normative"
+      summary: Register one climate normal
+      description: |-
+        Unknown climateNormalDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClimateNormalNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/ClimateNormal'
+                required:
+                - metadata
+                - result
+                title: ClimateNormalResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - ClimateNormals
+components:
+  responses:
+    ClimateNormalListResponse:
+      content:
+        application/json:
+          schema:
+            title: ClimateNormalListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ClimateNormal'
+            required:
+            - metadata
+            - result
+      description: OK

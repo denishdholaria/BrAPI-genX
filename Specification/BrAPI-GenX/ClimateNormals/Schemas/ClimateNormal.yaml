@@ -1,0 +1,67 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ClimateNormal:
+      type: object
+      description: |-
+        One immutable climate normal record. A published
+        (climateNormalDbId) record never mutates in place; corrections are
+        recorded as additional records linked by supersedes.
+      required:
+      - climateNormalDbId
+      - locationDbId
+      - period
+      - variableDbId
+      - mean
+      - status
+      properties:
+        climateNormalDbId:
+          description: Namespaced climate-normal identity `{authority}:climate-normal:{localId}`
+          type: string
+          example: institute-a:climate-normal:cn-2026-001
+        locationDbId:
+          description: BrAPI Location for the normal
+          type: string
+          example: institute-a:location:field-12
+        period:
+          description: Reference period (e.g. 1991-2020)
+          type: string
+          example: 1991-2020
+        variableDbId:
+          description: BrAPI Observation Variable or GenX VariableTerm identifier
+          type: string
+          example: institute-a:variable:air-temperature
+        mean:
+          description: Mean value over the period
+          type: number
+          example: 18.2
+        min:
+          description: Minimum value over the period
+          type: number
+          example: 5.1
+        max:
+          description: Maximum value over the period
+          type: number
+          example: 32.4
+        unit:
+          description: Unit of measure
+          type: string
+          example: celsius
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          example: active
+        supersedes:
+          description: climateNormalDbId of the record this one replaces
+          type: string
+          example: institute-a:climate-normal:cn-2026-000
+        provenance:
+          description: Evidence and method provenance for the normal
+          $ref: '#/components/schemas/ProvenanceEnvelope'
