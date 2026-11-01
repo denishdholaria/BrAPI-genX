@@ -1,0 +1,72 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    AnalysisMethodNewRequest:
+      type: object
+      description: |-
+        Request to register one analysis method version. Unknown
+        analysisMethodDbId creates; known id with a new version appends; same
+        (analysisMethodDbId, methodVersion) with an identical body replays the
+        existing record; same pair with a different body is rejected with 409.
+      required:
+      - analysisMethodDbId
+      - methodName
+      - methodVersion
+      - methodType
+      properties:
+        analysisMethodDbId:
+          description: Namespaced analysis-method identity `{authority}:analysis-method:{localId}`
+          type: string
+          example: institute-a:analysis-method:gwas-fastlmm
+        methodName:
+          description: Human readable method name
+          type: string
+          example: Fast-LMM GWAS
+        methodVersion:
+          description: Method version. Opaque string.
+          type: string
+          example: '2.1'
+        methodType:
+          description: Class of analysis performed
+          type: string
+          example: gwas
+        description:
+          description: What the method computes and its assumptions
+          type: string
+          example: Linear mixed model GWAS for quantitative traits.
+        inputSchemaRef:
+          description: Reference to the accepted input schema or contract
+          type: string
+          example: brapi-genx:contract:gwas-input-v1
+        outputSchemaRef:
+          description: Reference to the produced result schema or contract
+          type: string
+          example: brapi-genx:contract:gwas-result-v1
+        parameters:
+          description: Method-defined parameter schema or defaults
+          type: object
+          example: {mafThreshold: 0.05, pValueThreshold: 0.000001}
+        framework:
+          description: Runtime or platform the method targets
+          type: string
+          example: python-3.12
+        status:
+          description: Lifecycle state at registration time
+          type: string
+          enum:
+          - active
+          - deprecated
+          - revoked
+          default: active
+          example: active
+        supersededBy:
+          description: analysisMethodDbId of the replacement method, same authority
+          type: string
+          example: institute-a:analysis-method:gwas-fastlmm-v3
+        provenance:
+          description: Who defined this method, on what evidence, with which code version
+          $ref: '#/components/schemas/ProvenanceEnvelope'

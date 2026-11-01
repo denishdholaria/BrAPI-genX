@@ -1,0 +1,71 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /analysis-methods/{analysisMethodDbId}:
+    get:
+      operationId: genxGetAnalysisMethod
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.analysis-methods.get"
+        classification:
+          primaryDomain: "D7"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve one registered analysis method version."
+        canBeUsedFor:
+          - "Inspect method identity, version, type, contracts, and lifecycle status before selecting an analysis."
+        mustNotBeUsedFor:
+          - "Executing an analysis."
+          - "Assuming method metadata alone proves scientific fitness for a particular task."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterAnalysisMethod"
+          - "genxListAnalysisMethods"
+          - "genxSubmitAsyncJob"
+        decisions: ["RFC-009"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one analysis method (latest created when version is omitted)
+      description: Returns the requested version, or the most recently created version when `version` is omitted.
+      parameters:
+      - name: analysisMethodDbId
+        description: Namespaced analysis-method identity `{authority}:analysis-method:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        description: Method version to fetch
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/AnalysisMethod'
+                required:
+                - metadata
+                - result
+                title: AnalysisMethodResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - AnalysisMethods

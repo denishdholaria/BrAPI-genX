@@ -249,6 +249,9 @@ GenX uses /genx/v1. Relative-route matches below are candidate neighbors only; t
 
 | GenX catalogue ID | Method and route | Relative candidates | Interpretation |
 |---|---|---:|---|
+| `brapi-genx.genx.v1.analysis-methods.list` | `GET /genx/v1/analysis-methods` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
+| `brapi-genx.genx.v1.analysis-methods.register` | `POST /genx/v1/analysis-methods` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
+| `brapi-genx.genx.v1.analysis-methods.get` | `GET /genx/v1/analysis-methods/{analysisMethodDbId}` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
 | `brapi-genx.genx.v1.fair-packages.list-metadata` | `GET /genx/v1/fair-packages` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
 | `brapi-genx.genx.v1.fair-packages.register` | `POST /genx/v1/fair-packages` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
 | `brapi-genx.genx.v1.fair-packages.get-metadata` | `GET /genx/v1/fair-packages/{packageDbId}` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |

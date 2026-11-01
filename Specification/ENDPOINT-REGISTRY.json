@@ -24665,12 +24665,251 @@
         "brapi-genx.genx.v1.selection-decisions.list",
         "brapi-genx.genx.v1.selection-decisions.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "AnalysisMethods",
+      "brapiTag": "AnalysisMethods",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/AnalysisMethods/AnalysisMethods_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.analysis-methods.list",
+      "method": "GET",
+      "path": "/analysis-methods",
+      "operationIdInSource": "genxListAnalysisMethods",
+      "recommendedOperationId": "genxListAnalysisMethods",
+      "operationName": "List registered analysis methods",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List registered analysis method versions and their lifecycle states.",
+      "sourceDescription": "Get a paged list of analysis method versions across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover registered analysis methods and versions.",
+        "Select a method version subject to lifecycle status and advertised support."
+      ],
+      "mustNotBeUsedFor": [
+        "Executing an analysis (use GenX Jobs).",
+        "Assuming registration means scientific validation, approval, or endorsement.",
+        "Assuming metrics or results from different methods are directly comparable."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "analysisMethodDbId",
+        "methodType",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterAnalysisMethod",
+        "genxGetAnalysisMethod",
+        "genxSubmitAsyncJob"
+      ],
+      "decisionReferences": [
+        "RFC-009"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.analysis-methods.register",
+        "brapi-genx.genx.v1.analysis-methods.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "AnalysisMethods",
+      "brapiTag": "AnalysisMethods",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/AnalysisMethods/AnalysisMethods_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.analysis-methods.register",
+      "method": "POST",
+      "path": "/analysis-methods",
+      "operationIdInSource": "genxRegisterAnalysisMethod",
+      "recommendedOperationId": "genxRegisterAnalysisMethod",
+      "operationName": "Register one analysis method version",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register an analysis method version with identity, version, type, input/output contracts, and lifecycle state.",
+      "sourceDescription": "Unknown analysisMethodDbId creates; known id with a new version appends; same (analysisMethodDbId, methodVersion) with an identical body replays the existing record; same pair with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish method metadata and integrity references.",
+        "Create a new version under an existing method identity.",
+        "Record deprecation or revocation status as governed elsewhere."
+      ],
+      "mustNotBeUsedFor": [
+        "Executing an analysis.",
+        "Assuming registration means scientific validation, approval, or endorsement.",
+        "Assuming methods with similar types are interchangeable."
+      ],
+      "sideEffects": "Creates a method identity or appends a new immutable version when accepted.",
+      "idempotency": "Same method identity/version and identical body replays; conflicting content for the same version is rejected.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "AnalysisMethodNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListAnalysisMethods",
+        "genxGetAnalysisMethod",
+        "genxSubmitAsyncJob"
+      ],
+      "decisionReferences": [
+        "RFC-009"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.analysis-methods.list",
+        "brapi-genx.genx.v1.analysis-methods.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "AnalysisMethods",
+      "brapiTag": "AnalysisMethods",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/AnalysisMethods/AnalysisMethods_AnalysisMethodDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.analysis-methods.get",
+      "method": "GET",
+      "path": "/analysis-methods/{analysisMethodDbId}",
+      "operationIdInSource": "genxGetAnalysisMethod",
+      "recommendedOperationId": "genxGetAnalysisMethod",
+      "operationName": "Get one analysis method version",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one registered analysis method version.",
+      "sourceDescription": "Returns the requested version, or the most recently created version when `version` is omitted.",
+      "canBeUsedFor": [
+        "Inspect method identity, version, type, contracts, and lifecycle status before selecting an analysis."
+      ],
+      "mustNotBeUsedFor": [
+        "Executing an analysis.",
+        "Assuming method metadata alone proves scientific fitness for a particular task."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "analysisMethodDbId",
+        "version",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterAnalysisMethod",
+        "genxListAnalysisMethods",
+        "genxSubmitAsyncJob"
+      ],
+      "decisionReferences": [
+        "RFC-009"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.analysis-methods.list",
+        "brapi-genx.genx.v1.analysis-methods.register"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 24,
+    "genxEntriesAdded": 27,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -24748,7 +24987,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 225,
+    "totalEntries": 228,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

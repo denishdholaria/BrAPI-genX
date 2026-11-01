@@ -1,0 +1,72 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    AnalysisMethod:
+      type: object
+      description: |-
+        One immutable version of a registered analysis method. A published
+        (analysisMethodDbId, methodVersion) pair never mutates; the
+        implementationRef and input/output contracts of a published version
+        never change; revoked is terminal and denies use in new jobs.
+      required:
+      - analysisMethodDbId
+      - methodName
+      - methodVersion
+      - methodType
+      - status
+      properties:
+        analysisMethodDbId:
+          description: Namespaced analysis-method identity `{authority}:analysis-method:{localId}`
+          type: string
+          example: institute-a:analysis-method:gwas-fastlmm
+        methodName:
+          description: Human readable method name
+          type: string
+          example: Fast-LMM GWAS
+        methodVersion:
+          description: Method version. Opaque string.
+          type: string
+          example: '2.1'
+        methodType:
+          description: Class of analysis performed
+          type: string
+          example: gwas
+        description:
+          description: What the method computes and its assumptions
+          type: string
+          example: Linear mixed model GWAS for quantitative traits.
+        inputSchemaRef:
+          description: Reference to the accepted input schema or contract
+          type: string
+          example: brapi-genx:contract:gwas-input-v1
+        outputSchemaRef:
+          description: Reference to the produced result schema or contract
+          type: string
+          example: brapi-genx:contract:gwas-result-v1
+        parameters:
+          description: Method-defined parameter schema or defaults. Comparability across methods is out of scope.
+          type: object
+          example: {mafThreshold: 0.05, pValueThreshold: 0.000001}
+        implementationRef:
+          description: Code, container, or service reference that executes the method
+          type: string
+          example: institute-a/compute/gwas-fastlmm:2.1
+        status:
+          description: Lifecycle state. Revoked is terminal and denies use in new jobs; deprecated serves with a warning.
+          type: string
+          enum:
+          - active
+          - deprecated
+          - revoked
+          example: active
+        supersededBy:
+          description: analysisMethodDbId of the replacement method, same authority
+          type: string
+          example: institute-a:analysis-method:gwas-fastlmm-v3
+        provenance:
+          description: Who defined this method, on what evidence, with which code version
+          $ref: '#/components/schemas/ProvenanceEnvelope'

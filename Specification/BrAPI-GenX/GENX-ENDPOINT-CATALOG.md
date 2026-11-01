@@ -6,6 +6,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 
 | Source module | Operation count | Status |
 |---|---:|---|
+| AnalysisMethods | 3 | proposed, non-normative |
 | FAIR | 3 | proposed, non-normative |
 | Genomics | 3 | proposed, non-normative |
 | Jobs | 4 | proposed, non-normative |
@@ -17,6 +18,112 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | VariableTerms | 3 | proposed, non-normative |
 
 ## Operations
+
+### AnalysisMethods — 3 operations
+
+### GET `/genx/v1/analysis-methods`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.analysis-methods.list`
+- **BrAPI-GenX operation identity:** `genxListAnalysisMethods` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListAnalysisMethods`
+- **GenX source module:** `AnalysisMethods`
+- **Source tag:** AnalysisMethods
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List registered analysis method versions and their lifecycle states.
+**Source contract description:**
+> Get a paged list of analysis method versions across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover registered analysis methods and versions.
+- Select a method version subject to lifecycle status and advertised support.
+**Must not be used for / explicit non-goals:**
+- Executing an analysis (use GenX Jobs).
+- Assuming registration means scientific validation, approval, or endorsement.
+- Assuming metrics or results from different methods are directly comparable.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** analysisMethodDbId, methodType, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterAnalysisMethod, genxGetAnalysisMethod, genxSubmitAsyncJob
+- **Related catalogue IDs:** brapi-genx.genx.v1.analysis-methods.register, brapi-genx.genx.v1.analysis-methods.get
+- **Relevant RFC / decision references:** RFC-009
+- **Contract source:** [`Specification/BrAPI-GenX/AnalysisMethods/AnalysisMethods_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/AnalysisMethods/AnalysisMethods_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/analysis-methods`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.analysis-methods.register`
+- **BrAPI-GenX operation identity:** `genxRegisterAnalysisMethod` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterAnalysisMethod`
+- **GenX source module:** `AnalysisMethods`
+- **Source tag:** AnalysisMethods
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register an analysis method version with identity, version, type, input/output contracts, and lifecycle state.
+**Source contract description:**
+> Unknown analysisMethodDbId creates; known id with a new version appends; same (analysisMethodDbId, methodVersion) with an identical body replays the existing record; same pair with a different body is rejected with 409.
+**Can be used for:**
+- Publish method metadata and integrity references.
+- Create a new version under an existing method identity.
+- Record deprecation or revocation status as governed elsewhere.
+**Must not be used for / explicit non-goals:**
+- Executing an analysis.
+- Assuming registration means scientific validation, approval, or endorsement.
+- Assuming methods with similar types are interchangeable.
+- **Side effects:** Creates a method identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same method identity/version and identical body replays; conflicting content for the same version is rejected.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** AnalysisMethodNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListAnalysisMethods, genxGetAnalysisMethod, genxSubmitAsyncJob
+- **Related catalogue IDs:** brapi-genx.genx.v1.analysis-methods.list, brapi-genx.genx.v1.analysis-methods.get
+- **Relevant RFC / decision references:** RFC-009
+- **Contract source:** [`Specification/BrAPI-GenX/AnalysisMethods/AnalysisMethods_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/AnalysisMethods/AnalysisMethods_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/analysis-methods/{analysisMethodDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.analysis-methods.get`
+- **BrAPI-GenX operation identity:** `genxGetAnalysisMethod` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetAnalysisMethod`
+- **GenX source module:** `AnalysisMethods`
+- **Source tag:** AnalysisMethods
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one registered analysis method version.
+**Source contract description:**
+> Returns the requested version, or the most recently created version when `version` is omitted.
+**Can be used for:**
+- Inspect method identity, version, type, contracts, and lifecycle status before selecting an analysis.
+**Must not be used for / explicit non-goals:**
+- Executing an analysis.
+- Assuming method metadata alone proves scientific fitness for a particular task.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** analysisMethodDbId, version, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterAnalysisMethod, genxListAnalysisMethods, genxSubmitAsyncJob
+- **Related catalogue IDs:** brapi-genx.genx.v1.analysis-methods.list, brapi-genx.genx.v1.analysis-methods.register
+- **Relevant RFC / decision references:** RFC-009
+- **Contract source:** [`Specification/BrAPI-GenX/AnalysisMethods/AnalysisMethods_AnalysisMethodDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/AnalysisMethods/AnalysisMethods_AnalysisMethodDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
 ### FAIR — 3 operations
 
