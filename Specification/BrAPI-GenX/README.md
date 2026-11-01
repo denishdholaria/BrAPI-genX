@@ -49,6 +49,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `CropCycle/` | `CropCycle` — crop cycle records (planting/harvest dates, crop, provenance) | `GET /genx/v1/crop-cycles` (`genxListCropCycles`); `POST /genx/v1/crop-cycles` (`genxRegisterCropCycle`); `GET /genx/v1/crop-cycles/{cropCycleDbId}` (`genxGetCropCycle`) |
 | `Quarantine/` | `QuarantineRecord` — quarantine records (reason, status, release, provenance) | `GET /genx/v1/quarantine-records` (`genxListQuarantineRecords`); `POST /genx/v1/quarantine-records` (`genxRecordQuarantine`); `GET /genx/v1/quarantine-records/{quarantineRecordDbId}` (`genxGetQuarantineRecord`) |
 | `WeatherForecast/` | `WeatherForecast` — weather forecast records (predicted conditions, validity window, provenance) | `GET /genx/v1/weather-forecasts` (`genxListWeatherForecasts`); `POST /genx/v1/weather-forecasts` (`genxRegisterWeatherForecast`); `GET /genx/v1/weather-forecasts/{weatherForecastDbId}` (`genxGetWeatherForecast`) |
+| `PopulationAdvancement/` | `PopulationAdvancement` — population advancement records (stages, dates, provenance) | `GET /genx/v1/population-advancements` (`genxListPopulationAdvancements`); `POST /genx/v1/population-advancements` (`genxRecordPopulationAdvancement`); `GET /genx/v1/population-advancements/{populationAdvancementDbId}` (`genxGetPopulationAdvancement`) |
 | `ImageMetadata/` | `ImageMetadata` — image metadata records (capture details, camera, resolution, provenance) | `GET /genx/v1/image-metadata` (`genxListImageMetadata`); `POST /genx/v1/image-metadata` (`genxRegisterImageMetadata`); `GET /genx/v1/image-metadata/{imageMetadataDbId}` (`genxGetImageMetadata`) |
 | `ClimateNormals/` | `ClimateNormal` — climate normal records (mean/min/max, period, provenance) | `GET /genx/v1/climate-normals` (`genxListClimateNormals`); `POST /genx/v1/climate-normals` (`genxRegisterClimateNormal`); `GET /genx/v1/climate-normals/{climateNormalDbId}` (`genxGetClimateNormal`) |
 | `SafetyDuplication/` | `SafetyDuplication` — safety duplication records (backup site, quantity, provenance) | `GET /genx/v1/safety-duplications` (`genxListSafetyDuplications`); `POST /genx/v1/safety-duplications` (`genxRegisterSafetyDuplication`); `GET /genx/v1/safety-duplications/{safetyDuplicationDbId}` (`genxGetSafetyDuplication`) |
@@ -99,7 +100,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-031-Weather-Forecast](./RFC-031-Weather-Forecast.md),
 [RFC-032-Image-Metadata](./RFC-032-Image-Metadata.md),
 [RFC-033-Climate-Normals](./RFC-033-Climate-Normals.md),
-[RFC-034-Safety-Duplication](./RFC-034-Safety-Duplication.md).
+[RFC-034-Safety-Duplication](./RFC-034-Safety-Duplication.md),
+[RFC-035-Population-Advancement](./RFC-035-Population-Advancement.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

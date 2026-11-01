@@ -27,6 +27,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | ParentCandidateSelection | 3 | proposed, non-normative |
 | PhenologyObservation | 3 | proposed, non-normative |
 | PhenotypeCapture | 3 | proposed, non-normative |
+| PopulationAdvancement | 3 | proposed, non-normative |
 | ProgenyRecords | 3 | proposed, non-normative |
 | Quarantine | 3 | proposed, non-normative |
 | RepeatedMeasurement | 3 | proposed, non-normative |
@@ -2265,6 +2266,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.phenotype-captures.list, brapi-genx.genx.v1.phenotype-captures.record
 - **Relevant RFC / decision references:** RFC-012
 - **Contract source:** [`Specification/BrAPI-GenX/PhenotypeCapture/PhenotypeCapture_PhenotypeCaptureDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PhenotypeCapture/PhenotypeCapture_PhenotypeCaptureDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### PopulationAdvancement — 3 operations
+
+### GET `/genx/v1/population-advancements`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.population-advancements.list`
+- **BrAPI-GenX operation identity:** `genxListPopulationAdvancements` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListPopulationAdvancements`
+- **GenX source module:** `PopulationAdvancement`
+- **Source tag:** PopulationAdvancement
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List population advancement records, optionally filtered by program, population, or status.
+**Source contract description:**
+> Get a paged list of population advancements across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover population advancements within a breeding program.
+- Support breeding planning and auditing.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a record (use the POST endpoint).
+- Assuming a record is a BrAPI Program.
+- Treating the list as a complete breeding program record.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** programDbId, populationDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordPopulationAdvancement, genxGetPopulationAdvancement
+- **Related catalogue IDs:** brapi-genx.genx.v1.population-advancements.record, brapi-genx.genx.v1.population-advancements.get
+- **Relevant RFC / decision references:** RFC-035
+- **Contract source:** [`Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/population-advancements`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.population-advancements.record`
+- **BrAPI-GenX operation identity:** `genxRecordPopulationAdvancement` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordPopulationAdvancement`
+- **GenX source module:** `PopulationAdvancement`
+- **Source tag:** PopulationAdvancement
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one population advancement with stages and provenance.
+**Source contract description:**
+> Unknown populationAdvancementDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Record population advancement within a breeding program.
+- Retry an identical record safely using the same populationAdvancementDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming the record is a BrAPI Program.
+- Treating the record as a complete breeding program record.
+- **Side effects:** Creates a population advancement when accepted.
+- **Retry / idempotency:** Same populationAdvancementDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** PopulationAdvancementNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListPopulationAdvancements, genxGetPopulationAdvancement
+- **Related catalogue IDs:** brapi-genx.genx.v1.population-advancements.list, brapi-genx.genx.v1.population-advancements.get
+- **Relevant RFC / decision references:** RFC-035
+- **Contract source:** [`Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/population-advancements/{populationAdvancementDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.population-advancements.get`
+- **BrAPI-GenX operation identity:** `genxGetPopulationAdvancement` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetPopulationAdvancement`
+- **GenX source module:** `PopulationAdvancement`
+- **Source tag:** PopulationAdvancement
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one population advancement record.
+**Source contract description:**
+> Returns the recorded advancement, or 404.
+**Can be used for:**
+- Inspect stages, dates, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the record is a BrAPI Program.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** populationAdvancementDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordPopulationAdvancement, genxListPopulationAdvancements
+- **Related catalogue IDs:** brapi-genx.genx.v1.population-advancements.list, brapi-genx.genx.v1.population-advancements.record
+- **Relevant RFC / decision references:** RFC-035
+- **Contract source:** [`Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_PopulationAdvancementDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_PopulationAdvancementDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

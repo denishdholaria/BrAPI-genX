@@ -75,6 +75,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | ImageMetadata / ImageMetadata | D4 | C1, C2, C3, C6, C9 | Image metadata records; no BrAPI v2.1 equivalent |
 | ClimateNormals / ClimateNormal | D5 | C1, C2, C3, C6, C9 | Climate normal records; no BrAPI v2.1 equivalent |
 | SafetyDuplication / SafetyDuplication | D1 | C1, C2, C3, C6, C9 | Safety duplication records; no BrAPI v2.1 equivalent |
+| PopulationAdvancement / PopulationAdvancement | D2 | C1, C2, C3, C6, C9 | Population advancement records; no BrAPI v2.1 equivalent |
 | AnalysisMethods / AnalysisMethod | D7 | C1, C2, C3, C6, C9 | Versioned analysis method registry; no BrAPI v2.1 equivalent; execution is via Jobs |
 | WeatherObservations / WeatherObservation | D5 | C1, C2, C3, C6, C7, C9 | Environmental/weather observation records; no BrAPI v2.1 equivalent; complementary to Telemetry |
 | HarvestRecords / HarvestRecord | D6 | C1, C2, C3, C6, C9 | Harvest-event records; no BrAPI v2.1 equivalent; not a SeedLotTransaction |

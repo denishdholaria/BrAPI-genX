@@ -30778,12 +30778,246 @@
         "brapi-genx.genx.v1.safety-duplications.list",
         "brapi-genx.genx.v1.safety-duplications.register"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "PopulationAdvancement",
+      "brapiTag": "PopulationAdvancement",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.population-advancements.list",
+      "method": "GET",
+      "path": "/population-advancements",
+      "operationIdInSource": "genxListPopulationAdvancements",
+      "recommendedOperationId": "genxListPopulationAdvancements",
+      "operationName": "List population advancements",
+      "classification": {
+        "primaryDomain": "D2",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List population advancement records, optionally filtered by program, population, or status.",
+      "sourceDescription": "Get a paged list of population advancements across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover population advancements within a breeding program.",
+        "Support breeding planning and auditing."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a record (use the POST endpoint).",
+        "Assuming a record is a BrAPI Program.",
+        "Treating the list as a complete breeding program record."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "programDbId",
+        "populationDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordPopulationAdvancement",
+        "genxGetPopulationAdvancement"
+      ],
+      "decisionReferences": [
+        "RFC-035"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.population-advancements.record",
+        "brapi-genx.genx.v1.population-advancements.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "PopulationAdvancement",
+      "brapiTag": "PopulationAdvancement",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.population-advancements.record",
+      "method": "POST",
+      "path": "/population-advancements",
+      "operationIdInSource": "genxRecordPopulationAdvancement",
+      "recommendedOperationId": "genxRecordPopulationAdvancement",
+      "operationName": "Record one population advancement",
+      "classification": {
+        "primaryDomain": "D2",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record one population advancement with stages and provenance.",
+      "sourceDescription": "Unknown populationAdvancementDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Record population advancement within a breeding program.",
+        "Retry an identical record safely using the same populationAdvancementDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming the record is a BrAPI Program.",
+        "Treating the record as a complete breeding program record."
+      ],
+      "sideEffects": "Creates a population advancement when accepted.",
+      "idempotency": "Same populationAdvancementDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "PopulationAdvancementNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListPopulationAdvancements",
+        "genxGetPopulationAdvancement"
+      ],
+      "decisionReferences": [
+        "RFC-035"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.population-advancements.list",
+        "brapi-genx.genx.v1.population-advancements.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "PopulationAdvancement",
+      "brapiTag": "PopulationAdvancement",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_PopulationAdvancementDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.population-advancements.get",
+      "method": "GET",
+      "path": "/population-advancements/{populationAdvancementDbId}",
+      "operationIdInSource": "genxGetPopulationAdvancement",
+      "recommendedOperationId": "genxGetPopulationAdvancement",
+      "operationName": "Get one population advancement",
+      "classification": {
+        "primaryDomain": "D2",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one population advancement record.",
+      "sourceDescription": "Returns the recorded advancement, or 404.",
+      "canBeUsedFor": [
+        "Inspect stages, dates, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the record is a BrAPI Program.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "populationAdvancementDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordPopulationAdvancement",
+        "genxListPopulationAdvancements"
+      ],
+      "decisionReferences": [
+        "RFC-035"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.population-advancements.list",
+        "brapi-genx.genx.v1.population-advancements.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 102,
+    "genxEntriesAdded": 105,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -30861,7 +31095,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 303,
+    "totalEntries": 306,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
