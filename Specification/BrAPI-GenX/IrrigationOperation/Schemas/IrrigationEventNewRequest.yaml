@@ -1,0 +1,70 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    IrrigationEventNewRequest:
+      type: object
+      description: |-
+        Request to record one irrigation event. Unknown irrigationEventDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - irrigationEventDbId
+      - irrigatedAt
+      - method
+      properties:
+        irrigationEventDbId:
+          description: Namespaced irrigation-event identity `{authority}:irrigation-event:{localId}`
+          type: string
+          example: institute-a:irrigation-event:ie-2026-001
+        locationDbId:
+          description: BrAPI Location where irrigation occurred
+          type: string
+          example: institute-a:location:field-12
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        irrigatedAt:
+          description: Date/time of irrigation (ISO-8601)
+          type: string
+          format: date-time
+          example: '2026-10-24T06:00:00Z'
+        method:
+          description: Irrigation method
+          type: string
+          example: drip
+        volume:
+          description: Volume of water applied
+          type: number
+          example: 1200
+        volumeUnit:
+          description: Unit of measure for volume
+          type: string
+          example: liters
+        duration:
+          description: Duration in minutes
+          type: integer
+          example: 45
+        notes:
+          description: Human-readable notes
+          type: string
+          example: Morning irrigation; no runoff observed.
+        status:
+          description: Lifecycle state of the event record
+          type: string
+          enum:
+          - active
+          - superseded
+          default: active
+          example: active
+        supersedes:
+          description: irrigationEventDbId of the event this one replaces
+          type: string
+          example: institute-a:irrigation-event:ie-2026-000
+        provenance:
+          description: Evidence and method provenance for the event
+          $ref: '#/components/schemas/ProvenanceEnvelope'

@@ -132,6 +132,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/soil-profiles` | GET | `genxListSoilProfiles` | List soil profiles | Does not create or change a profile; not a BrAPI Location. |
 | `/genx/v1/soil-profiles` | POST | `genxRegisterSoilProfile` | Register one soil profile | Append-only record; replay/conflict semantics. |
 | `/genx/v1/soil-profiles/{soilProfileDbId}` | GET | `genxGetSoilProfile` | Retrieve one soil profile | Does not treat a superseded profile as current. |
+| `/genx/v1/irrigation-operations` | GET | `genxListIrrigations` | List irrigation events | Does not create or change an event; not a BrAPI Location. |
+| `/genx/v1/irrigation-operations` | POST | `genxRecordIrrigation` | Record one irrigation event | Append-only record; replay/conflict semantics. |
+| `/genx/v1/irrigation-operations/{irrigationEventDbId}` | GET | `genxGetIrrigation` | Retrieve one irrigation event | Does not treat a superseded event as current. |
 | `/genx/v1/analysis-methods` | GET | `genxListAnalysisMethods` | List registered analysis method versions | Does not execute an analysis; not a BrAPI v2.1 resource. |
 | `/genx/v1/analysis-methods` | POST | `genxRegisterAnalysisMethod` | Register one analysis method version | Does not execute or validate the method; replay/conflict semantics. |
 | `/genx/v1/analysis-methods/{analysisMethodDbId}` | GET | `genxGetAnalysisMethod` | Retrieve one registered analysis method version | Does not execute an analysis; revoked methods deny new jobs. |

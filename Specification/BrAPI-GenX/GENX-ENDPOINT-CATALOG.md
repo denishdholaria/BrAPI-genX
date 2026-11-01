@@ -15,6 +15,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | GenomicDatasets | 3 | proposed, non-normative |
 | Genomics | 3 | proposed, non-normative |
 | HarvestRecords | 3 | proposed, non-normative |
+| IrrigationOperation | 3 | proposed, non-normative |
 | Jobs | 4 | proposed, non-normative |
 | LotLedger | 2 | proposed, non-normative |
 | MeasurementMethods | 3 | proposed, non-normative |
@@ -982,6 +983,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.harvest-records.list, brapi-genx.genx.v1.harvest-records.record
 - **Relevant RFC / decision references:** RFC-011
 - **Contract source:** [`Specification/BrAPI-GenX/HarvestRecords/HarvestRecords_HarvestRecordDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/HarvestRecords/HarvestRecords_HarvestRecordDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### IrrigationOperation — 3 operations
+
+### GET `/genx/v1/irrigation-operations`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.irrigation-operations.list`
+- **BrAPI-GenX operation identity:** `genxListIrrigations` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListIrrigations`
+- **GenX source module:** `IrrigationOperation`
+- **Source tag:** IrrigationOperation
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List irrigation events, optionally filtered by location, study, or date range.
+**Source contract description:**
+> Get a paged list of irrigation events across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover irrigation events for a location or study.
+- Support water-use auditing and crop models.
+**Must not be used for / explicit non-goals:**
+- Creating or changing an event (use the POST endpoint).
+- Assuming an event is a BrAPI Location.
+- Treating the list as a complete water-use record.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** locationDbId, studyDbId, irrigatedFrom, irrigatedTo, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordIrrigation, genxGetIrrigation
+- **Related catalogue IDs:** brapi-genx.genx.v1.irrigation-operations.record, brapi-genx.genx.v1.irrigation-operations.get
+- **Relevant RFC / decision references:** RFC-024
+- **Contract source:** [`Specification/BrAPI-GenX/IrrigationOperation/IrrigationOperation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/IrrigationOperation/IrrigationOperation_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/irrigation-operations`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.irrigation-operations.record`
+- **BrAPI-GenX operation identity:** `genxRecordIrrigation` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordIrrigation`
+- **GenX source module:** `IrrigationOperation`
+- **Source tag:** IrrigationOperation
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one irrigation event with volume, duration, and provenance.
+**Source contract description:**
+> Unknown irrigationEventDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Record water application for a location or study.
+- Retry an identical event safely using the same irrigationEventDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing event; corrections require a new record that supersedes.
+- Assuming the event is a BrAPI Location.
+- Treating the event as a complete water-use record.
+- **Side effects:** Creates an irrigation event when accepted.
+- **Retry / idempotency:** Same irrigationEventDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** IrrigationEventNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListIrrigations, genxGetIrrigation
+- **Related catalogue IDs:** brapi-genx.genx.v1.irrigation-operations.list, brapi-genx.genx.v1.irrigation-operations.get
+- **Relevant RFC / decision references:** RFC-024
+- **Contract source:** [`Specification/BrAPI-GenX/IrrigationOperation/IrrigationOperation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/IrrigationOperation/IrrigationOperation_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/irrigation-operations/{irrigationEventDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.irrigation-operations.get`
+- **BrAPI-GenX operation identity:** `genxGetIrrigation` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetIrrigation`
+- **GenX source module:** `IrrigationOperation`
+- **Source tag:** IrrigationOperation
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one recorded irrigation event.
+**Source contract description:**
+> Returns the recorded event, or 404.
+**Can be used for:**
+- Inspect irrigation volume, duration, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the event is a BrAPI Location.
+- Treating a superseded event as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** irrigationEventDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordIrrigation, genxListIrrigations
+- **Related catalogue IDs:** brapi-genx.genx.v1.irrigation-operations.list, brapi-genx.genx.v1.irrigation-operations.record
+- **Relevant RFC / decision references:** RFC-024
+- **Contract source:** [`Specification/BrAPI-GenX/IrrigationOperation/IrrigationOperation_IrrigationEventDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/IrrigationOperation/IrrigationOperation_IrrigationEventDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

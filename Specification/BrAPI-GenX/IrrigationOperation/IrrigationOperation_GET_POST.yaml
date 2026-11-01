@@ -1,0 +1,153 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /irrigation-operations:
+    get:
+      operationId: genxListIrrigations
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.irrigation-operations.list"
+        classification:
+          primaryDomain: "D6"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List irrigation events, optionally filtered by location, study, or date range."
+        canBeUsedFor:
+          - "Discover irrigation events for a location or study."
+          - "Support water-use auditing and crop models."
+        mustNotBeUsedFor:
+          - "Creating or changing an event (use the POST endpoint)."
+          - "Assuming an event is a BrAPI Location."
+          - "Treating the list as a complete water-use record."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordIrrigation"
+          - "genxGetIrrigation"
+        decisions: ["RFC-024"]
+        proposalStatus: "draft-non-normative"
+      summary: List irrigation events
+      description: Get a paged list of irrigation events across authorities. Filters combine with AND.
+      parameters:
+      - name: locationDbId
+        description: Filter by BrAPI Location
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: studyDbId
+        description: Filter by BrAPI Study / trial context
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: irrigatedFrom
+        description: Start of irrigation time range (ISO-8601)
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: irrigatedTo
+        description: End of irrigation time range (ISO-8601)
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/IrrigationEventListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - IrrigationOperation
+    post:
+      operationId: genxRecordIrrigation
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.irrigation-operations.record"
+        classification:
+          primaryDomain: "D6"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Record one irrigation event with volume, duration, and provenance."
+        canBeUsedFor:
+          - "Record water application for a location or study."
+          - "Retry an identical event safely using the same irrigationEventDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing event; corrections require a new record that supersedes."
+          - "Assuming the event is a BrAPI Location."
+          - "Treating the event as a complete water-use record."
+        sideEffects: "Creates an irrigation event when accepted."
+        idempotency: "Same irrigationEventDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListIrrigations"
+          - "genxGetIrrigation"
+        decisions: ["RFC-024"]
+        proposalStatus: "draft-non-normative"
+      summary: Record one irrigation
+      description: |-
+        Unknown irrigationEventDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IrrigationEventNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/IrrigationEvent'
+                required:
+                - metadata
+                - result
+                title: IrrigationEventResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - IrrigationOperation
+components:
+  responses:
+    IrrigationEventListResponse:
+      content:
+        application/json:
+          schema:
+            title: IrrigationEventListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/IrrigationEvent'
+            required:
+            - metadata
+            - result
+      description: OK
