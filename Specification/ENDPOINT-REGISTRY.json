@@ -27498,12 +27498,245 @@
         "brapi-genx.genx.v1.doubled-haploid-programs.list",
         "brapi-genx.genx.v1.doubled-haploid-programs.register"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ViabilityTesting",
+      "brapiTag": "ViabilityTesting",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ViabilityTesting/ViabilityTesting_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.viability-tests.list",
+      "method": "GET",
+      "path": "/viability-tests",
+      "operationIdInSource": "genxListViabilityTests",
+      "recommendedOperationId": "genxListViabilityTests",
+      "operationName": "List viability tests",
+      "classification": {
+        "primaryDomain": "D1",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List viability/germination tests, optionally filtered by seed lot or status.",
+      "sourceDescription": "Get a paged list of viability tests across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover viability results for conserved seed lots.",
+        "Support conservation planning and auditing."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a test (use the POST endpoint).",
+        "Assuming a test is a BrAPI SeedLot transaction.",
+        "Treating the list as a complete conservation record."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "seedLotDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordViabilityTest",
+        "genxGetViabilityTest"
+      ],
+      "decisionReferences": [
+        "RFC-021"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.viability-tests.record",
+        "brapi-genx.genx.v1.viability-tests.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ViabilityTesting",
+      "brapiTag": "ViabilityTesting",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ViabilityTesting/ViabilityTesting_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.viability-tests.record",
+      "method": "POST",
+      "path": "/viability-tests",
+      "operationIdInSource": "genxRecordViabilityTest",
+      "recommendedOperationId": "genxRecordViabilityTest",
+      "operationName": "Record one viability test",
+      "classification": {
+        "primaryDomain": "D1",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record one viability/germination test with results and provenance.",
+      "sourceDescription": "Unknown viabilityTestDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Record viability results for a seed lot.",
+        "Retry an identical test safely using the same viabilityTestDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing test; corrections require a new record that supersedes.",
+        "Assuming the test is a BrAPI SeedLot transaction.",
+        "Treating the test as a complete conservation record."
+      ],
+      "sideEffects": "Creates a viability test when accepted.",
+      "idempotency": "Same viabilityTestDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "ViabilityTestNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListViabilityTests",
+        "genxGetViabilityTest"
+      ],
+      "decisionReferences": [
+        "RFC-021"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.viability-tests.list",
+        "brapi-genx.genx.v1.viability-tests.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ViabilityTesting",
+      "brapiTag": "ViabilityTesting",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ViabilityTesting/ViabilityTesting_ViabilityTestDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.viability-tests.get",
+      "method": "GET",
+      "path": "/viability-tests/{viabilityTestDbId}",
+      "operationIdInSource": "genxGetViabilityTest",
+      "recommendedOperationId": "genxGetViabilityTest",
+      "operationName": "Get one viability test",
+      "classification": {
+        "primaryDomain": "D1",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one recorded viability/germination test.",
+      "sourceDescription": "Returns the recorded test, or 404.",
+      "canBeUsedFor": [
+        "Inspect viability results and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the test is a BrAPI SeedLot transaction.",
+        "Treating a superseded test as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "viabilityTestDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordViabilityTest",
+        "genxListViabilityTests"
+      ],
+      "decisionReferences": [
+        "RFC-021"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.viability-tests.list",
+        "brapi-genx.genx.v1.viability-tests.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 60,
+    "genxEntriesAdded": 63,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -27581,7 +27814,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 261,
+    "totalEntries": 264,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

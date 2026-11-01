@@ -1,0 +1,62 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ViabilityTestNewRequest:
+      type: object
+      description: |-
+        Request to record one viability/germination test. Unknown
+        viabilityTestDbId creates; same id with an identical body replays
+        the existing record; same id with a different body is rejected with 409.
+      required:
+      - viabilityTestDbId
+      - seedLotDbId
+      - testDate
+      properties:
+        viabilityTestDbId:
+          description: Namespaced viability-test identity `{authority}:viability-test:{localId}`
+          type: string
+          example: institute-a:viability-test:vt-2026-001
+        seedLotDbId:
+          description: BrAPI SeedLot tested
+          type: string
+          example: institute-a:seedlot:sl-2026-001
+        testDate:
+          description: Date of the test (ISO-8601)
+          type: string
+          format: date
+          example: '2026-10-24'
+        germinationPercent:
+          description: Germination percentage
+          type: number
+          example: 92.5
+        viabilityPercent:
+          description: Viability percentage
+          type: number
+          example: 95.0
+        sampleSize:
+          description: Number of seeds tested
+          type: integer
+          example: 100
+        method:
+          description: Test method used
+          type: string
+          example: standard-germination
+        status:
+          description: Lifecycle state of the test record
+          type: string
+          enum:
+          - active
+          - superseded
+          default: active
+          example: active
+        supersedes:
+          description: viabilityTestDbId of the test this one replaces
+          type: string
+          example: institute-a:viability-test:vt-2026-000
+        provenance:
+          description: Evidence and method provenance for the test
+          $ref: '#/components/schemas/ProvenanceEnvelope'

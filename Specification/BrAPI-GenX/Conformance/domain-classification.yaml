@@ -135,6 +135,11 @@ modules:
     primary_class: "D1"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Genebank storage location records; BrAPI v2.1 has no equivalent record."
+  - path: "ViabilityTesting/"
+    object: "ViabilityTest"
+    primary_class: "D1"
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Viability/germination test records; BrAPI v2.1 has no equivalent record."
   - path: "ResearchAssets/"
     object: "ResearchAsset"
     primary_class: null

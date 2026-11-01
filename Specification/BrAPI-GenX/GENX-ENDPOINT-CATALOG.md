@@ -26,6 +26,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | ServerInfoV3 | 1 | proposed, non-normative |
 | Telemetry | 2 | proposed, non-normative |
 | VariableTerms | 3 | proposed, non-normative |
+| ViabilityTesting | 3 | proposed, non-normative |
 | WeatherObservations | 3 | proposed, non-normative |
 
 ## Operations
@@ -2064,6 +2065,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.brapi-v2-1.phenotyping.get.methods, brapi-genx.brapi-v2-1.phenotyping.get.methods.by-methoddbid, brapi-genx.brapi-v2-1.phenotyping.get.ontologies, brapi-genx.brapi-v2-1.phenotyping.get.ontologies.by-ontologydbid, brapi-genx.brapi-v2-1.phenotyping.get.scales, brapi-genx.brapi-v2-1.phenotyping.get.scales.by-scaledbid, brapi-genx.brapi-v2-1.phenotyping.get.traits, brapi-genx.brapi-v2-1.phenotyping.get.traits.by-traitdbid, brapi-genx.brapi-v2-1.phenotyping.get.variables, brapi-genx.brapi-v2-1.phenotyping.get.variables.by-observationvariabledbid, brapi-genx.brapi-v2-1.phenotyping.post.methods, brapi-genx.brapi-v2-1.phenotyping.post.ontologies, brapi-genx.brapi-v2-1.phenotyping.post.scales, brapi-genx.brapi-v2-1.phenotyping.post.traits, brapi-genx.brapi-v2-1.phenotyping.post.variables, brapi-genx.brapi-v2-1.phenotyping.put.methods.by-methoddbid, brapi-genx.brapi-v2-1.phenotyping.put.ontologies.by-ontologydbid, brapi-genx.brapi-v2-1.phenotyping.put.scales.by-scaledbid, brapi-genx.brapi-v2-1.phenotyping.put.traits.by-traitdbid, brapi-genx.brapi-v2-1.phenotyping.put.variables.by-observationvariabledbid, brapi-genx.genx.v1.variable-terms.list, brapi-genx.genx.v1.variable-terms.publish-version
 - **Relevant RFC / decision references:** RFC-002, D-05, D-06, A-03
 - **Contract source:** [`Specification/BrAPI-GenX/VariableTerms/VariableTerms_VariableDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/VariableTerms/VariableTerms_VariableDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### ViabilityTesting — 3 operations
+
+### GET `/genx/v1/viability-tests`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.viability-tests.list`
+- **BrAPI-GenX operation identity:** `genxListViabilityTests` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListViabilityTests`
+- **GenX source module:** `ViabilityTesting`
+- **Source tag:** ViabilityTesting
+- **Proposed BrAPI-GenX classification:** D1 — Germplasm and Biological Resources; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List viability/germination tests, optionally filtered by seed lot or status.
+**Source contract description:**
+> Get a paged list of viability tests across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover viability results for conserved seed lots.
+- Support conservation planning and auditing.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a test (use the POST endpoint).
+- Assuming a test is a BrAPI SeedLot transaction.
+- Treating the list as a complete conservation record.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** seedLotDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordViabilityTest, genxGetViabilityTest
+- **Related catalogue IDs:** brapi-genx.genx.v1.viability-tests.record, brapi-genx.genx.v1.viability-tests.get
+- **Relevant RFC / decision references:** RFC-021
+- **Contract source:** [`Specification/BrAPI-GenX/ViabilityTesting/ViabilityTesting_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ViabilityTesting/ViabilityTesting_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/viability-tests`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.viability-tests.record`
+- **BrAPI-GenX operation identity:** `genxRecordViabilityTest` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordViabilityTest`
+- **GenX source module:** `ViabilityTesting`
+- **Source tag:** ViabilityTesting
+- **Proposed BrAPI-GenX classification:** D1 — Germplasm and Biological Resources; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one viability/germination test with results and provenance.
+**Source contract description:**
+> Unknown viabilityTestDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Record viability results for a seed lot.
+- Retry an identical test safely using the same viabilityTestDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing test; corrections require a new record that supersedes.
+- Assuming the test is a BrAPI SeedLot transaction.
+- Treating the test as a complete conservation record.
+- **Side effects:** Creates a viability test when accepted.
+- **Retry / idempotency:** Same viabilityTestDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** ViabilityTestNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListViabilityTests, genxGetViabilityTest
+- **Related catalogue IDs:** brapi-genx.genx.v1.viability-tests.list, brapi-genx.genx.v1.viability-tests.get
+- **Relevant RFC / decision references:** RFC-021
+- **Contract source:** [`Specification/BrAPI-GenX/ViabilityTesting/ViabilityTesting_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ViabilityTesting/ViabilityTesting_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/viability-tests/{viabilityTestDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.viability-tests.get`
+- **BrAPI-GenX operation identity:** `genxGetViabilityTest` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetViabilityTest`
+- **GenX source module:** `ViabilityTesting`
+- **Source tag:** ViabilityTesting
+- **Proposed BrAPI-GenX classification:** D1 — Germplasm and Biological Resources; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one recorded viability/germination test.
+**Source contract description:**
+> Returns the recorded test, or 404.
+**Can be used for:**
+- Inspect viability results and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the test is a BrAPI SeedLot transaction.
+- Treating a superseded test as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** viabilityTestDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordViabilityTest, genxListViabilityTests
+- **Related catalogue IDs:** brapi-genx.genx.v1.viability-tests.list, brapi-genx.genx.v1.viability-tests.record
+- **Relevant RFC / decision references:** RFC-021
+- **Contract source:** [`Specification/BrAPI-GenX/ViabilityTesting/ViabilityTesting_ViabilityTestDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ViabilityTesting/ViabilityTesting_ViabilityTestDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

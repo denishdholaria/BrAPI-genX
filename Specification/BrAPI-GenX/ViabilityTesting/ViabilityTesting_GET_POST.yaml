@@ -1,0 +1,142 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /viability-tests:
+    get:
+      operationId: genxListViabilityTests
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.viability-tests.list"
+        classification:
+          primaryDomain: "D1"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List viability/germination tests, optionally filtered by seed lot or status."
+        canBeUsedFor:
+          - "Discover viability results for conserved seed lots."
+          - "Support conservation planning and auditing."
+        mustNotBeUsedFor:
+          - "Creating or changing a test (use the POST endpoint)."
+          - "Assuming a test is a BrAPI SeedLot transaction."
+          - "Treating the list as a complete conservation record."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordViabilityTest"
+          - "genxGetViabilityTest"
+        decisions: ["RFC-021"]
+        proposalStatus: "draft-non-normative"
+      summary: List viability tests
+      description: Get a paged list of viability tests across authorities. Filters combine with AND.
+      parameters:
+      - name: seedLotDbId
+        description: Filter by BrAPI SeedLot
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - superseded
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/ViabilityTestListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - ViabilityTesting
+    post:
+      operationId: genxRecordViabilityTest
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.viability-tests.record"
+        classification:
+          primaryDomain: "D1"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Record one viability/germination test with results and provenance."
+        canBeUsedFor:
+          - "Record viability results for a seed lot."
+          - "Retry an identical test safely using the same viabilityTestDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing test; corrections require a new record that supersedes."
+          - "Assuming the test is a BrAPI SeedLot transaction."
+          - "Treating the test as a complete conservation record."
+        sideEffects: "Creates a viability test when accepted."
+        idempotency: "Same viabilityTestDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListViabilityTests"
+          - "genxGetViabilityTest"
+        decisions: ["RFC-021"]
+        proposalStatus: "draft-non-normative"
+      summary: Record one viability test
+      description: |-
+        Unknown viabilityTestDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ViabilityTestNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/ViabilityTest'
+                required:
+                - metadata
+                - result
+                title: ViabilityTestResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - ViabilityTesting
+components:
+  responses:
+    ViabilityTestListResponse:
+      content:
+        application/json:
+          schema:
+            title: ViabilityTestListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ViabilityTest'
+            required:
+            - metadata
+            - result
+      description: OK
