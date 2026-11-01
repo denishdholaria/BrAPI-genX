@@ -180,6 +180,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/candidate-varieties` | GET | `genxListCandidateVarieties` | List candidate varieties | Does not create or change a record; not a BrAPI Program. |
 | `/genx/v1/candidate-varieties` | POST | `genxRegisterCandidateVariety` | Register one candidate variety | Append-only record; replay/conflict semantics. |
 | `/genx/v1/candidate-varieties/{candidateVarietyDbId}` | GET | `genxGetCandidateVariety` | Retrieve one candidate variety | Does not treat a superseded record as current. |
+| `/genx/v1/bulk-captures` | GET | `genxListBulkCaptures` | List bulk captures | Does not create or change a capture; not a BrAPI Observation. |
+| `/genx/v1/bulk-captures` | POST | `genxRecordBulkCapture` | Record one bulk capture | Append-only record; replay/conflict semantics. |
+| `/genx/v1/bulk-captures/{bulkCaptureDbId}` | GET | `genxGetBulkCapture` | Retrieve one bulk capture | Does not treat a superseded capture as current. |
 | `/genx/v1/analysis-methods` | GET | `genxListAnalysisMethods` | List registered analysis method versions | Does not execute an analysis; not a BrAPI v2.1 resource. |
 | `/genx/v1/analysis-methods` | POST | `genxRegisterAnalysisMethod` | Register one analysis method version | Does not execute or validate the method; replay/conflict semantics. |
 | `/genx/v1/analysis-methods/{analysisMethodDbId}` | GET | `genxGetAnalysisMethod` | Retrieve one registered analysis method version | Does not execute an analysis; revoked methods deny new jobs. |

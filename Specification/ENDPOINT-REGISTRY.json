@@ -31946,12 +31946,245 @@
         "brapi-genx.genx.v1.candidate-varieties.list",
         "brapi-genx.genx.v1.candidate-varieties.register"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "BulkCapture",
+      "brapiTag": "BulkCapture",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/BulkCapture/BulkCapture_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.bulk-captures.list",
+      "method": "GET",
+      "path": "/bulk-captures",
+      "operationIdInSource": "genxListBulkCaptures",
+      "recommendedOperationId": "genxListBulkCaptures",
+      "operationName": "List bulk captures",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List bulk capture records, optionally filtered by study or status.",
+      "sourceDescription": "Get a paged list of bulk captures across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover bulk capture events for a study.",
+        "Support phenotyping and auditing workflows."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a capture (use the POST endpoint).",
+        "Assuming a capture is a BrAPI Observation.",
+        "Treating the list as a complete phenotype dataset."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "studyDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordBulkCapture",
+        "genxGetBulkCapture"
+      ],
+      "decisionReferences": [
+        "RFC-040"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.bulk-captures.record",
+        "brapi-genx.genx.v1.bulk-captures.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "BulkCapture",
+      "brapiTag": "BulkCapture",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/BulkCapture/BulkCapture_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.bulk-captures.record",
+      "method": "POST",
+      "path": "/bulk-captures",
+      "operationIdInSource": "genxRecordBulkCapture",
+      "recommendedOperationId": "genxRecordBulkCapture",
+      "operationName": "Record one bulk capture",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record one bulk capture event with entries and provenance.",
+      "sourceDescription": "Unknown bulkCaptureDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Record batch capture of observations for a study.",
+        "Retry an identical capture safely using the same bulkCaptureDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing capture; corrections require a new record that supersedes.",
+        "Assuming the capture is a BrAPI Observation.",
+        "Treating the capture as a complete phenotype dataset."
+      ],
+      "sideEffects": "Creates a bulk capture when accepted.",
+      "idempotency": "Same bulkCaptureDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "BulkCaptureNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListBulkCaptures",
+        "genxGetBulkCapture"
+      ],
+      "decisionReferences": [
+        "RFC-040"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.bulk-captures.list",
+        "brapi-genx.genx.v1.bulk-captures.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "BulkCapture",
+      "brapiTag": "BulkCapture",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/BulkCapture/BulkCapture_BulkCaptureDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.bulk-captures.get",
+      "method": "GET",
+      "path": "/bulk-captures/{bulkCaptureDbId}",
+      "operationIdInSource": "genxGetBulkCapture",
+      "recommendedOperationId": "genxGetBulkCapture",
+      "operationName": "Get one bulk capture",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one bulk capture record.",
+      "sourceDescription": "Returns the recorded capture, or 404.",
+      "canBeUsedFor": [
+        "Inspect capture entries and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the capture is a BrAPI Observation.",
+        "Treating a superseded capture as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "bulkCaptureDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordBulkCapture",
+        "genxListBulkCaptures"
+      ],
+      "decisionReferences": [
+        "RFC-040"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.bulk-captures.list",
+        "brapi-genx.genx.v1.bulk-captures.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 117,
+    "genxEntriesAdded": 120,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -32029,7 +32262,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 318,
+    "totalEntries": 321,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

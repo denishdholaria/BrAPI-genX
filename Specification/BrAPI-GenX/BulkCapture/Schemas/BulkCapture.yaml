@@ -1,0 +1,81 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    BulkCapture:
+      type: object
+      description: |-
+        One immutable bulk capture record. A published
+        (bulkCaptureDbId) record never mutates in place; corrections are
+        recorded as additional captures linked by supersedes.
+      required:
+      - bulkCaptureDbId
+      - studyDbId
+      - capturedAt
+      - entries
+      - status
+      properties:
+        bulkCaptureDbId:
+          description: Namespaced bulk-capture identity `{authority}:bulk-capture:{localId}`
+          type: string
+          example: institute-a:bulk-capture:bc-2026-001
+        studyDbId:
+          description: BrAPI Study / trial context
+          type: string
+          example: institute-a:study:yield-trial-2026
+        capturedAt:
+          description: Timestamp of the capture (ISO-8601)
+          type: string
+          format: date-time
+          example: '2026-10-24T08:00:00Z'
+        entries:
+          description: Captured observation entries with quality and missingness
+          type: array
+          items:
+            type: object
+            required:
+            - variableDbId
+            properties:
+              observationUnitDbId:
+                description: BrAPI Observation Unit
+                type: string
+                example: institute-a:observationunit:ou-42
+              variableDbId:
+                description: BrAPI Observation Variable or GenX VariableTerm identifier
+                type: string
+                example: institute-a:variable:grain-yield
+              value:
+                description: Observed value (null when missing)
+                type: number
+                nullable: true
+                example: 4.2
+              unit:
+                description: Unit of measure
+                type: string
+                example: t_per_hectare
+              qualityFlag:
+                description: Quality status of the entry
+                type: string
+                enum:
+                - valid
+                - suspect
+                - invalid
+                - missing
+                example: valid
+        status:
+          description: Lifecycle state of the capture record
+          type: string
+          enum:
+          - active
+          - superseded
+          example: active
+        supersedes:
+          description: bulkCaptureDbId of the capture this one replaces
+          type: string
+          example: institute-a:bulk-capture:bc-2026-000
+        provenance:
+          description: Evidence and method provenance for the capture
+          $ref: '#/components/schemas/ProvenanceEnvelope'
