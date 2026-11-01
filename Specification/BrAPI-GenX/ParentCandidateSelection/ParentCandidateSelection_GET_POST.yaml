@@ -1,0 +1,145 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /parent-candidate-selections:
+    get:
+      operationId: genxListParentCandidateSelections
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.parent-candidate-selections.list"
+        classification:
+          primaryDomain: "D2"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List parent candidate selection records, optionally filtered by program, candidate, or decision."
+        canBeUsedFor:
+          - "Discover parent candidate selections for a breeding program."
+          - "Support breeding planning and auditing."
+        mustNotBeUsedFor:
+          - "Creating or changing a record (use the POST endpoint)."
+          - "Assuming a record is a BrAPI Germplasm or Cross."
+          - "Treating the list as a complete breeding program record."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordParentCandidateSelection"
+          - "genxGetParentCandidateSelection"
+        decisions: ["RFC-028"]
+        proposalStatus: "draft-non-normative"
+      summary: List parent candidate selections
+      description: Get a paged list of parent candidate selections across authorities. Filters combine with AND.
+      parameters:
+      - name: programDbId
+        description: Filter by BrAPI Program (breeding program)
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: candidateGermplasmDbId
+        description: Filter by candidate BrAPI Germplasm
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: selected
+        description: Filter by selection outcome
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/ParentCandidateSelectionListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - ParentCandidateSelection
+    post:
+      operationId: genxRecordParentCandidateSelection
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.parent-candidate-selections.record"
+        classification:
+          primaryDomain: "D2"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Record one parent candidate selection with criterion and provenance."
+        canBeUsedFor:
+          - "Record a parent candidate selection verdict."
+          - "Retry an identical record safely using the same parentCandidateSelectionDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing record; corrections require a new record that supersedes."
+          - "Assuming the record is a BrAPI Germplasm or Cross."
+          - "Treating the record as a complete breeding program record."
+        sideEffects: "Creates a parent candidate selection when accepted."
+        idempotency: "Same parentCandidateSelectionDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListParentCandidateSelections"
+          - "genxGetParentCandidateSelection"
+        decisions: ["RFC-028"]
+        proposalStatus: "draft-non-normative"
+      summary: Record one parent candidate selection
+      description: |-
+        Unknown parentCandidateSelectionDbId creates; same id with an
+        identical body replays the existing record; same id with a
+        different body is rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParentCandidateSelectionNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/ParentCandidateSelection'
+                required:
+                - metadata
+                - result
+                title: ParentCandidateSelectionResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - ParentCandidateSelection
+components:
+  responses:
+    ParentCandidateSelectionListResponse:
+      content:
+        application/json:
+          schema:
+            title: ParentCandidateSelectionListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ParentCandidateSelection'
+            required:
+            - metadata
+            - result
+      description: OK

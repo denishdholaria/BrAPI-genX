@@ -47,6 +47,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `RepeatedMeasurement/` | `MeasurementSeries` — repeated measurement series (time-ordered values, quality flags, provenance) | `GET /genx/v1/repeated-measurements` (`genxListMeasurementSeries`); `POST /genx/v1/repeated-measurements` (`genxRecordMeasurementSeries`); `GET /genx/v1/repeated-measurements/{measurementSeriesDbId}` (`genxGetMeasurementSeries`) |
 | `FertilizerApplication/` | `FertilizerApplication` — fertilizer application records (product, quantity, method, provenance) | `GET /genx/v1/fertilizer-applications` (`genxListFertilizerApplications`); `POST /genx/v1/fertilizer-applications` (`genxRecordFertilizerApplication`); `GET /genx/v1/fertilizer-applications/{fertilizerApplicationDbId}` (`genxGetFertilizerApplication`) |
 | `PhenologyObservation/` | `PhenologyObservation` — phenology observation records (stage, BBCH code, provenance) | `GET /genx/v1/phenology-observations` (`genxListPhenologyObservations`); `POST /genx/v1/phenology-observations` (`genxRecordPhenologyObservation`); `GET /genx/v1/phenology-observations/{phenologyObservationDbId}` (`genxGetPhenologyObservation`) |
+| `ParentCandidateSelection/` | `ParentCandidateSelection` — parent candidate selection records (criterion, outcome, provenance) | `GET /genx/v1/parent-candidate-selections` (`genxListParentCandidateSelections`); `POST /genx/v1/parent-candidate-selections` (`genxRecordParentCandidateSelection`); `GET /genx/v1/parent-candidate-selections/{parentCandidateSelectionDbId}` (`genxGetParentCandidateSelection`) |
 | `AnalysisMethods/` | `AnalysisMethod` — versioned analysis method registry (identity, type, contracts, lifecycle) | `GET /genx/v1/analysis-methods` (`genxListAnalysisMethods`); `POST /genx/v1/analysis-methods` (`genxRegisterAnalysisMethod`); `GET /genx/v1/analysis-methods/{analysisMethodDbId}` (`genxGetAnalysisMethod`) |
 | `WeatherObservations/` | `WeatherObservation` — environmental/weather observation records (measurements, quality, provenance) | `GET /genx/v1/weather-observations` (`genxListWeatherObservations`); `POST /genx/v1/weather-observations` (`genxRecordWeatherObservation`); `GET /genx/v1/weather-observations/{weatherObservationDbId}` (`genxGetWeatherObservation`) |
 | `HarvestRecords/` | `HarvestRecord` — harvest-event records (quantity, quality, moisture, provenance) | `GET /genx/v1/harvest-records` (`genxListHarvestRecords`); `POST /genx/v1/harvest-records` (`genxRecordHarvest`); `GET /genx/v1/harvest-records/{harvestRecordDbId}` (`genxGetHarvestRecord`) |
@@ -85,7 +86,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-024-Irrigation-Operation](./RFC-024-Irrigation-Operation.md),
 [RFC-025-Repeated-Measurement](./RFC-025-Repeated-Measurement.md),
 [RFC-026-Fertilizer-Application](./RFC-026-Fertilizer-Application.md),
-[RFC-027-Phenology-Observation](./RFC-027-Phenology-Observation.md).
+[RFC-027-Phenology-Observation](./RFC-027-Phenology-Observation.md),
+[RFC-028-Parent-Candidate-Selection](./RFC-028-Parent-Candidate-Selection.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

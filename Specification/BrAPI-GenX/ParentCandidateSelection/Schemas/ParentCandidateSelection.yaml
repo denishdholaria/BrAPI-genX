@@ -1,0 +1,58 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ParentCandidateSelection:
+      type: object
+      description: |-
+        One immutable parent candidate selection record. A published
+        (parentCandidateSelectionDbId) record never mutates in place;
+        corrections are recorded as additional records linked by supersedes.
+      required:
+      - parentCandidateSelectionDbId
+      - programDbId
+      - candidateGermplasmDbId
+      - selected
+      - status
+      properties:
+        parentCandidateSelectionDbId:
+          description: Namespaced parent-candidate-selection identity `{authority}:parent-candidate-selection:{localId}`
+          type: string
+          example: institute-a:parent-candidate-selection:pcs-2026-001
+        programDbId:
+          description: BrAPI Program (breeding program)
+          type: string
+          example: institute-a:program:wheat-breeding
+        candidateGermplasmDbId:
+          description: BrAPI Germplasm candidate under evaluation
+          type: string
+          example: institute-a:germplasm:line-42
+        selectionCriterion:
+          description: Criterion or index used to reach the verdict
+          type: string
+          example: combining-ability-index-2026
+        selected:
+          description: Whether the candidate was selected as a parent
+          type: boolean
+          example: true
+        rationale:
+          description: Human-readable justification
+          type: string
+          example: Selected for high combining ability and disease resistance.
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          example: active
+        supersedes:
+          description: parentCandidateSelectionDbId of the record this one replaces
+          type: string
+          example: institute-a:parent-candidate-selection:pcs-2026-000
+        provenance:
+          description: Evidence and method provenance for the selection
+          $ref: '#/components/schemas/ProvenanceEnvelope'

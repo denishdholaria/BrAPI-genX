@@ -21,6 +21,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | LotLedger | 2 | proposed, non-normative |
 | MeasurementMethods | 3 | proposed, non-normative |
 | Models | 3 | proposed, non-normative |
+| ParentCandidateSelection | 3 | proposed, non-normative |
 | PhenologyObservation | 3 | proposed, non-normative |
 | PhenotypeCapture | 3 | proposed, non-normative |
 | ProgenyRecords | 3 | proposed, non-normative |
@@ -1628,6 +1629,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.jobs.get, brapi-genx.genx.v1.jobs.submit, brapi-genx.genx.v1.models.list, brapi-genx.genx.v1.models.register-version
 - **Relevant RFC / decision references:** RFC-004, D-09, D-10
 - **Contract source:** [`Specification/BrAPI-GenX/Models/Models_ModelDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Models/Models_ModelDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### ParentCandidateSelection — 3 operations
+
+### GET `/genx/v1/parent-candidate-selections`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.parent-candidate-selections.list`
+- **BrAPI-GenX operation identity:** `genxListParentCandidateSelections` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListParentCandidateSelections`
+- **GenX source module:** `ParentCandidateSelection`
+- **Source tag:** ParentCandidateSelection
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List parent candidate selection records, optionally filtered by program, candidate, or decision.
+**Source contract description:**
+> Get a paged list of parent candidate selections across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover parent candidate selections for a breeding program.
+- Support breeding planning and auditing.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a record (use the POST endpoint).
+- Assuming a record is a BrAPI Germplasm or Cross.
+- Treating the list as a complete breeding program record.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** programDbId, candidateGermplasmDbId, selected, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordParentCandidateSelection, genxGetParentCandidateSelection
+- **Related catalogue IDs:** brapi-genx.genx.v1.parent-candidate-selections.record, brapi-genx.genx.v1.parent-candidate-selections.get
+- **Relevant RFC / decision references:** RFC-028
+- **Contract source:** [`Specification/BrAPI-GenX/ParentCandidateSelection/ParentCandidateSelection_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ParentCandidateSelection/ParentCandidateSelection_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/parent-candidate-selections`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.parent-candidate-selections.record`
+- **BrAPI-GenX operation identity:** `genxRecordParentCandidateSelection` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordParentCandidateSelection`
+- **GenX source module:** `ParentCandidateSelection`
+- **Source tag:** ParentCandidateSelection
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one parent candidate selection with criterion and provenance.
+**Source contract description:**
+> Unknown parentCandidateSelectionDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Record a parent candidate selection verdict.
+- Retry an identical record safely using the same parentCandidateSelectionDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming the record is a BrAPI Germplasm or Cross.
+- Treating the record as a complete breeding program record.
+- **Side effects:** Creates a parent candidate selection when accepted.
+- **Retry / idempotency:** Same parentCandidateSelectionDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** ParentCandidateSelectionNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListParentCandidateSelections, genxGetParentCandidateSelection
+- **Related catalogue IDs:** brapi-genx.genx.v1.parent-candidate-selections.list, brapi-genx.genx.v1.parent-candidate-selections.get
+- **Relevant RFC / decision references:** RFC-028
+- **Contract source:** [`Specification/BrAPI-GenX/ParentCandidateSelection/ParentCandidateSelection_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ParentCandidateSelection/ParentCandidateSelection_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/parent-candidate-selections/{parentCandidateSelectionDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.parent-candidate-selections.get`
+- **BrAPI-GenX operation identity:** `genxGetParentCandidateSelection` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetParentCandidateSelection`
+- **GenX source module:** `ParentCandidateSelection`
+- **Source tag:** ParentCandidateSelection
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one parent candidate selection.
+**Source contract description:**
+> Returns the recorded selection, or 404.
+**Can be used for:**
+- Inspect selection criterion, outcome, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the record is a BrAPI Germplasm or Cross.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** parentCandidateSelectionDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordParentCandidateSelection, genxListParentCandidateSelections
+- **Related catalogue IDs:** brapi-genx.genx.v1.parent-candidate-selections.list, brapi-genx.genx.v1.parent-candidate-selections.record
+- **Relevant RFC / decision references:** RFC-028
+- **Contract source:** [`Specification/BrAPI-GenX/ParentCandidateSelection/ParentCandidateSelection_ParentCandidateSelectionDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ParentCandidateSelection/ParentCandidateSelection_ParentCandidateSelectionDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
