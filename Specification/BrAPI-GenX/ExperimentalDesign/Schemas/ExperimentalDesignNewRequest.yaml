@@ -1,0 +1,79 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ExperimentalDesignNewRequest:
+      type: object
+      description: |-
+        Request to register one experimental design. Unknown
+        experimentalDesignDbId creates; same id with an identical body replays
+        the existing record; same id with a different body is rejected with 409.
+      required:
+      - experimentalDesignDbId
+      - studyDbId
+      - designType
+      properties:
+        experimentalDesignDbId:
+          description: Namespaced experimental-design identity `{authority}:experimental-design:{localId}`
+          type: string
+          example: institute-a:experimental-design:ed-2026-001
+        studyDbId:
+          description: BrAPI Study this design belongs to
+          type: string
+          example: institute-a:study:yield-trial-2026
+        designType:
+          description: Design type
+          type: string
+          example: RCBD
+        replicationCount:
+          description: Number of replications
+          type: integer
+          example: 3
+        blockSize:
+          description: Block or plot size
+          type: integer
+          example: 10
+        randomizationSeed:
+          description: Seed used for randomization
+          type: string
+          example: '42'
+        treatmentAssignments:
+          description: Treatment-to-plot assignments
+          type: array
+          items:
+            type: object
+            properties:
+              plotId:
+                type: string
+                example: plot-01
+              treatment:
+                type: string
+                example: variety-A
+              replication:
+                type: integer
+                example: 1
+              block:
+                type: integer
+                example: 1
+        notes:
+          description: Human-readable notes
+          type: string
+          example: Alpha-lattice with 3 replications.
+        status:
+          description: Lifecycle state of the design record
+          type: string
+          enum:
+          - active
+          - superseded
+          default: active
+          example: active
+        supersedes:
+          description: experimentalDesignDbId of the design this one replaces
+          type: string
+          example: institute-a:experimental-design:ed-2026-000
+        provenance:
+          description: Evidence and method provenance for the design
+          $ref: '#/components/schemas/ProvenanceEnvelope'

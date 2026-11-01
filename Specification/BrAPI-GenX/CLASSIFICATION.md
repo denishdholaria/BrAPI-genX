@@ -59,6 +59,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | Telemetry / TelemetryPoint | Context-dependent: D5 for environmental sensor readings; D4 for plant/phenotyping measurements | C1, C2, C3, C6, C7, C9 | Do not infer that all telemetry is an Observation or all telemetry is environmental data |
 | SelectionDecisions / SelectionDecision | D2 | C1, C2, C3, C9 | Breeding selection verdicts; no BrAPI v2.1 equivalent; corrections are additional superseding records |
 | BreedingPipeline / BreedingPipeline | D2 | C1, C2, C3, C6, C9 | Breeding pipeline definitions with stage gates; no BrAPI v2.1 equivalent |
+| ExperimentalDesign / ExperimentalDesign | D2 | C1, C2, C3, C6, C9 | Trial layout, replication, randomization, treatment assignment; no BrAPI v2.1 equivalent |
 | AnalysisMethods / AnalysisMethod | D7 | C1, C2, C3, C6, C9 | Versioned analysis method registry; no BrAPI v2.1 equivalent; execution is via Jobs |
 | WeatherObservations / WeatherObservation | D5 | C1, C2, C3, C6, C7, C9 | Environmental/weather observation records; no BrAPI v2.1 equivalent; complementary to Telemetry |
 | HarvestRecords / HarvestRecord | D6 | C1, C2, C3, C6, C9 | Harvest-event records; no BrAPI v2.1 equivalent; not a SeedLotTransaction |

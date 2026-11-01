@@ -117,6 +117,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/breeding-pipelines` | GET | `genxListBreedingPipelines` | List breeding pipeline definitions | Does not create or change a pipeline; not a BrAPI Program or Study. |
 | `/genx/v1/breeding-pipelines` | POST | `genxRegisterBreedingPipeline` | Register one breeding pipeline definition | Append-only record; replay/conflict semantics; does not imply an approved plan. |
 | `/genx/v1/breeding-pipelines/{breedingPipelineDbId}` | GET | `genxGetBreedingPipeline` | Retrieve one breeding pipeline definition | Does not treat a superseded pipeline as current. |
+| `/genx/v1/experimental-designs` | GET | `genxListExperimentalDesigns` | List experimental design records | Does not create or change a design; not a BrAPI Study. |
+| `/genx/v1/experimental-designs` | POST | `genxRegisterExperimentalDesign` | Register one experimental design record | Append-only record; replay/conflict semantics. |
+| `/genx/v1/experimental-designs/{experimentalDesignDbId}` | GET | `genxGetExperimentalDesign` | Retrieve one experimental design record | Does not treat a superseded design as current. |
 | `/genx/v1/analysis-methods` | GET | `genxListAnalysisMethods` | List registered analysis method versions | Does not execute an analysis; not a BrAPI v2.1 resource. |
 | `/genx/v1/analysis-methods` | POST | `genxRegisterAnalysisMethod` | Register one analysis method version | Does not execute or validate the method; replay/conflict semantics. |
 | `/genx/v1/analysis-methods/{analysisMethodDbId}` | GET | `genxGetAnalysisMethod` | Retrieve one registered analysis method version | Does not execute an analysis; revoked methods deny new jobs. |

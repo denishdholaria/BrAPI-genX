@@ -1,0 +1,64 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /experimental-designs/{experimentalDesignDbId}:
+    get:
+      operationId: genxGetExperimentalDesign
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.experimental-designs.get"
+        classification:
+          primaryDomain: "D2"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve one registered experimental design."
+        canBeUsedFor:
+          - "Inspect design type, replication, randomization, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming the design is a BrAPI Study."
+          - "Treating a superseded design as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterExperimentalDesign"
+          - "genxListExperimentalDesigns"
+        decisions: ["RFC-018"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one experimental design
+      description: Returns the registered design, or 404.
+      parameters:
+      - name: experimentalDesignDbId
+        description: Namespaced experimental-design identity `{authority}:experimental-design:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/ExperimentalDesign'
+                required:
+                - metadata
+                - result
+                title: ExperimentalDesignResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - ExperimentalDesign

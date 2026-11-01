@@ -26798,12 +26798,245 @@
         "brapi-genx.genx.v1.measurement-methods.list",
         "brapi-genx.genx.v1.measurement-methods.register"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ExperimentalDesign",
+      "brapiTag": "ExperimentalDesign",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ExperimentalDesign/ExperimentalDesign_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.experimental-designs.list",
+      "method": "GET",
+      "path": "/experimental-designs",
+      "operationIdInSource": "genxListExperimentalDesigns",
+      "recommendedOperationId": "genxListExperimentalDesigns",
+      "operationName": "List experimental designs",
+      "classification": {
+        "primaryDomain": "D2",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List experimental design records, optionally filtered by study or design type.",
+      "sourceDescription": "Get a paged list of experimental designs across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover trial layouts, replication, and randomization.",
+        "Support experimental planning and auditing."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a design (use the POST endpoint).",
+        "Assuming a design is a BrAPI Study or Observation Unit.",
+        "Treating the list as a complete trial record."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "studyDbId",
+        "designType",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterExperimentalDesign",
+        "genxGetExperimentalDesign"
+      ],
+      "decisionReferences": [
+        "RFC-018"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.experimental-designs.register",
+        "brapi-genx.genx.v1.experimental-designs.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ExperimentalDesign",
+      "brapiTag": "ExperimentalDesign",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ExperimentalDesign/ExperimentalDesign_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.experimental-designs.register",
+      "method": "POST",
+      "path": "/experimental-designs",
+      "operationIdInSource": "genxRegisterExperimentalDesign",
+      "recommendedOperationId": "genxRegisterExperimentalDesign",
+      "operationName": "Register one experimental design",
+      "classification": {
+        "primaryDomain": "D2",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register an experimental design with layout, replication, randomization, and provenance.",
+      "sourceDescription": "Unknown experimentalDesignDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish trial layout and treatment assignment.",
+        "Create a new version under an existing design identity."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing design; corrections require a new record that supersedes.",
+        "Assuming the design is a BrAPI Study.",
+        "Treating the design as an approved protocol."
+      ],
+      "sideEffects": "Creates a design identity or appends a new immutable version when accepted.",
+      "idempotency": "Same design identity and identical body replays; conflicting content for the same identity is rejected.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "ExperimentalDesignNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListExperimentalDesigns",
+        "genxGetExperimentalDesign"
+      ],
+      "decisionReferences": [
+        "RFC-018"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.experimental-designs.list",
+        "brapi-genx.genx.v1.experimental-designs.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ExperimentalDesign",
+      "brapiTag": "ExperimentalDesign",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ExperimentalDesign/ExperimentalDesign_ExperimentalDesignDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.experimental-designs.get",
+      "method": "GET",
+      "path": "/experimental-designs/{experimentalDesignDbId}",
+      "operationIdInSource": "genxGetExperimentalDesign",
+      "recommendedOperationId": "genxGetExperimentalDesign",
+      "operationName": "Get one experimental design",
+      "classification": {
+        "primaryDomain": "D2",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one registered experimental design.",
+      "sourceDescription": "Returns the registered design, or 404.",
+      "canBeUsedFor": [
+        "Inspect design type, replication, randomization, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the design is a BrAPI Study.",
+        "Treating a superseded design as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "experimentalDesignDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterExperimentalDesign",
+        "genxListExperimentalDesigns"
+      ],
+      "decisionReferences": [
+        "RFC-018"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.experimental-designs.list",
+        "brapi-genx.genx.v1.experimental-designs.register"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 51,
+    "genxEntriesAdded": 54,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -26881,7 +27114,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 252,
+    "totalEntries": 255,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

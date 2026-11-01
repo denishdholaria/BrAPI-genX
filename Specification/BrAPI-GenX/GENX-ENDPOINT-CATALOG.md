@@ -8,6 +8,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 |---|---:|---|
 | AnalysisMethods | 3 | proposed, non-normative |
 | BreedingPipeline | 3 | proposed, non-normative |
+| ExperimentalDesign | 3 | proposed, non-normative |
 | FAIR | 3 | proposed, non-normative |
 | GenebankStorage | 3 | proposed, non-normative |
 | GenomicDatasets | 3 | proposed, non-normative |
@@ -235,6 +236,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.breeding-pipelines.list, brapi-genx.genx.v1.breeding-pipelines.register
 - **Relevant RFC / decision references:** RFC-014
 - **Contract source:** [`Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_BreedingPipelineDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_BreedingPipelineDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### ExperimentalDesign — 3 operations
+
+### GET `/genx/v1/experimental-designs`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.experimental-designs.list`
+- **BrAPI-GenX operation identity:** `genxListExperimentalDesigns` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListExperimentalDesigns`
+- **GenX source module:** `ExperimentalDesign`
+- **Source tag:** ExperimentalDesign
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List experimental design records, optionally filtered by study or design type.
+**Source contract description:**
+> Get a paged list of experimental designs across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover trial layouts, replication, and randomization.
+- Support experimental planning and auditing.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a design (use the POST endpoint).
+- Assuming a design is a BrAPI Study or Observation Unit.
+- Treating the list as a complete trial record.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** studyDbId, designType, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterExperimentalDesign, genxGetExperimentalDesign
+- **Related catalogue IDs:** brapi-genx.genx.v1.experimental-designs.register, brapi-genx.genx.v1.experimental-designs.get
+- **Relevant RFC / decision references:** RFC-018
+- **Contract source:** [`Specification/BrAPI-GenX/ExperimentalDesign/ExperimentalDesign_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ExperimentalDesign/ExperimentalDesign_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/experimental-designs`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.experimental-designs.register`
+- **BrAPI-GenX operation identity:** `genxRegisterExperimentalDesign` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterExperimentalDesign`
+- **GenX source module:** `ExperimentalDesign`
+- **Source tag:** ExperimentalDesign
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register an experimental design with layout, replication, randomization, and provenance.
+**Source contract description:**
+> Unknown experimentalDesignDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish trial layout and treatment assignment.
+- Create a new version under an existing design identity.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing design; corrections require a new record that supersedes.
+- Assuming the design is a BrAPI Study.
+- Treating the design as an approved protocol.
+- **Side effects:** Creates a design identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same design identity and identical body replays; conflicting content for the same identity is rejected.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** ExperimentalDesignNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListExperimentalDesigns, genxGetExperimentalDesign
+- **Related catalogue IDs:** brapi-genx.genx.v1.experimental-designs.list, brapi-genx.genx.v1.experimental-designs.get
+- **Relevant RFC / decision references:** RFC-018
+- **Contract source:** [`Specification/BrAPI-GenX/ExperimentalDesign/ExperimentalDesign_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ExperimentalDesign/ExperimentalDesign_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/experimental-designs/{experimentalDesignDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.experimental-designs.get`
+- **BrAPI-GenX operation identity:** `genxGetExperimentalDesign` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetExperimentalDesign`
+- **GenX source module:** `ExperimentalDesign`
+- **Source tag:** ExperimentalDesign
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one registered experimental design.
+**Source contract description:**
+> Returns the registered design, or 404.
+**Can be used for:**
+- Inspect design type, replication, randomization, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the design is a BrAPI Study.
+- Treating a superseded design as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** experimentalDesignDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterExperimentalDesign, genxListExperimentalDesigns
+- **Related catalogue IDs:** brapi-genx.genx.v1.experimental-designs.list, brapi-genx.genx.v1.experimental-designs.register
+- **Relevant RFC / decision references:** RFC-018
+- **Contract source:** [`Specification/BrAPI-GenX/ExperimentalDesign/ExperimentalDesign_ExperimentalDesignDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ExperimentalDesign/ExperimentalDesign_ExperimentalDesignDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

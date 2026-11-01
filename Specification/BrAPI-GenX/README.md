@@ -37,6 +37,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `Genomics/` | `VariantMatrix` — content-addressed matrix references | `GET /genx/v1/variantmatrices` (`genxListVariantMatrixReferences`); `POST /genx/v1/variantmatrices` (`genxRegisterVariantMatrixReference`); `GET /genx/v1/variantmatrices/{matrixDbId}` (`genxGetVariantMatrixReference`) |
 | `SelectionDecisions/` | `SelectionDecision` — breeding selection verdicts (selected/rejected/deferred/advanced) | `GET /genx/v1/selection-decisions` (`genxListSelectionDecisions`); `POST /genx/v1/selection-decisions` (`genxRecordSelectionDecision`); `GET /genx/v1/selection-decisions/{selectionDecisionDbId}` (`genxGetSelectionDecision`) |
 | `BreedingPipeline/` | `BreedingPipeline` — breeding pipeline definitions with ordered stage gates | `GET /genx/v1/breeding-pipelines` (`genxListBreedingPipelines`); `POST /genx/v1/breeding-pipelines` (`genxRegisterBreedingPipeline`); `GET /genx/v1/breeding-pipelines/{breedingPipelineDbId}` (`genxGetBreedingPipeline`) |
+| `ExperimentalDesign/` | `ExperimentalDesign` — trial layout, replication, randomization, and treatment assignment | `GET /genx/v1/experimental-designs` (`genxListExperimentalDesigns`); `POST /genx/v1/experimental-designs` (`genxRegisterExperimentalDesign`); `GET /genx/v1/experimental-designs/{experimentalDesignDbId}` (`genxGetExperimentalDesign`) |
 | `AnalysisMethods/` | `AnalysisMethod` — versioned analysis method registry (identity, type, contracts, lifecycle) | `GET /genx/v1/analysis-methods` (`genxListAnalysisMethods`); `POST /genx/v1/analysis-methods` (`genxRegisterAnalysisMethod`); `GET /genx/v1/analysis-methods/{analysisMethodDbId}` (`genxGetAnalysisMethod`) |
 | `WeatherObservations/` | `WeatherObservation` — environmental/weather observation records (measurements, quality, provenance) | `GET /genx/v1/weather-observations` (`genxListWeatherObservations`); `POST /genx/v1/weather-observations` (`genxRecordWeatherObservation`); `GET /genx/v1/weather-observations/{weatherObservationDbId}` (`genxGetWeatherObservation`) |
 | `HarvestRecords/` | `HarvestRecord` — harvest-event records (quantity, quality, moisture, provenance) | `GET /genx/v1/harvest-records` (`genxListHarvestRecords`); `POST /genx/v1/harvest-records` (`genxRecordHarvest`); `GET /genx/v1/harvest-records/{harvestRecordDbId}` (`genxGetHarvestRecord`) |
@@ -65,7 +66,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-014-Breeding-Pipeline](./RFC-014-Breeding-Pipeline.md),
 [RFC-015-Genebank-Storage](./RFC-015-Genebank-Storage.md),
 [RFC-016-Research-Assets](./RFC-016-Research-Assets.md),
-[RFC-017-Measurement-Methods](./RFC-017-Measurement-Methods.md).
+[RFC-017-Measurement-Methods](./RFC-017-Measurement-Methods.md),
+[RFC-018-Experimental-Design](./RFC-018-Experimental-Design.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).
