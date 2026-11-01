@@ -1,0 +1,61 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    QuarantineRecordNewRequest:
+      type: object
+      description: |-
+        Request to record one quarantine. Unknown quarantineRecordDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - quarantineRecordDbId
+      - seedLotDbId
+      - quarantinedAt
+      - reason
+      properties:
+        quarantineRecordDbId:
+          description: Namespaced quarantine-record identity `{authority}:quarantine-record:{localId}`
+          type: string
+          example: institute-a:quarantine-record:qr-2026-001
+        seedLotDbId:
+          description: BrAPI SeedLot quarantined
+          type: string
+          example: institute-a:seedlot:sl-2026-001
+        quarantinedAt:
+          description: Date/time of quarantine (ISO-8601)
+          type: string
+          format: date-time
+          example: '2026-10-24T08:00:00Z'
+        reason:
+          description: Reason for quarantine
+          type: string
+          example: Suspected seed-borne pathogen.
+        status:
+          description: Lifecycle state of the quarantine record
+          type: string
+          enum:
+          - active
+          - released
+          - superseded
+          default: active
+          example: active
+        releasedAt:
+          description: Date/time of release (ISO-8601)
+          type: string
+          format: date-time
+          example: '2026-11-01T08:00:00Z'
+        notes:
+          description: Human-readable notes
+          type: string
+          example: Released after negative test results.
+        supersedes:
+          description: quarantineRecordDbId of the record this one replaces
+          type: string
+          example: institute-a:quarantine-record:qr-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

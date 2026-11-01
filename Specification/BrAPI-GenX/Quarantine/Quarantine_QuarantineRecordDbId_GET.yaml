@@ -1,0 +1,64 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /quarantine-records/{quarantineRecordDbId}:
+    get:
+      operationId: genxGetQuarantineRecord
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.quarantine-records.get"
+        classification:
+          primaryDomain: "D1"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve one quarantine record."
+        canBeUsedFor:
+          - "Inspect quarantine reason, status, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming the record is a BrAPI SeedLot transaction."
+          - "Treating a superseded record as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordQuarantine"
+          - "genxListQuarantineRecords"
+        decisions: ["RFC-030"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one quarantine record
+      description: Returns the recorded quarantine, or 404.
+      parameters:
+      - name: quarantineRecordDbId
+        description: Namespaced quarantine-record identity `{authority}:quarantine-record:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/QuarantineRecord'
+                required:
+                - metadata
+                - result
+                title: QuarantineRecordResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - Quarantine
