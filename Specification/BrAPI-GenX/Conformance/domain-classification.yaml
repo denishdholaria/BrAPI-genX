@@ -80,6 +80,11 @@ modules:
     context_classes: ["D4", "D5"]
     cross_cutting: ["C7", "C1", "C2", "C3", "C6", "C9"]
     rationale: "The existing schema is context-neutral. Classify individual readings by observed phenomenon: environmental readings as D5; plant phenotype readings as D4."
+  - path: "SelectionDecisions/"
+    object: "SelectionDecision"
+    primary_class: "D2"
+    cross_cutting: ["C1", "C2", "C3", "C9"]
+    rationale: "Breeding selection verdicts; BrAPI v2.1 has no equivalent record."
   - path: "Conformance/"
     object: "Probes, fixtures and overlap register"
     primary_class: null

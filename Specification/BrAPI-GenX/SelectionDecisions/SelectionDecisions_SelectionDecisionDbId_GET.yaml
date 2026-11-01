@@ -1,0 +1,64 @@
+info:
+  title: BrAPI
+  version: ''
+openapi: 3.0.0
+paths:
+  /selection-decisions/{selectionDecisionDbId}:
+    get:
+      operationId: genxGetSelectionDecision
+      x-brapi-den:
+        catalogId: "brapi-den.genx.v3.selection-decisions.get"
+        classification:
+          primaryDomain: "D2"
+          crossCuttingCapabilities: ["C1", "C2", "C9"]
+        purpose: "Retrieve one recorded breeding selection decision."
+        canBeUsedFor:
+          - "Inspect a verdict, its candidate, criterion, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming the decision is the only or final authority for release."
+          - "Treating a superseded decision as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordSelectionDecision"
+          - "genxListSelectionDecisions"
+        decisions: ["RFC-008"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one selection decision
+      description: Returns the recorded decision, or 404.
+      parameters:
+      - name: selectionDecisionDbId
+        description: Namespaced selection-decision identity `{authority}:selection-decision:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/SelectionDecision'
+                required:
+                - metadata
+                - result
+                title: SelectionDecisionResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - SelectionDecisions

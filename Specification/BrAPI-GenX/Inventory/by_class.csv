@@ -1,0 +1,11 @@
+class_code,class_name,endpoint_count
+P,"Platform / Non-scientific (app, auth, infra, collaboration, etc.)",836
+D2,Breeding Programs & Experimental Design,240
+D3,Genotyping & Molecular Genomics,164
+D5,"Environment, Agroecology & Field Context",160
+D7,"Scientific Analysis, Models & Derived Evidence",127
+D4,Phenotyping & Plant Observations,124
+D6,Crop Production & Material Operations,94
+D1,Germplasm & Biological Resources,76
+C4,Terminology & Semantic Governance,19
+C1,"Identity, versioning & capability negotiation",9

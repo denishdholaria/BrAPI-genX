@@ -111,6 +111,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/brapi/v3/fair-packages/{packageDbId}` | GET | `genxGetFairPackageMetadata` | Retrieve one FAIR package metadata record | Not payload transport; embargo visibility behavior remains an open decision, and the current prototype's behavior is not a normative requirement. |
 | `/brapi/v3/telemetry` | GET | `genxQueryTelemetrySamplesOrAggregates` | Read sensor/device samples or computed aggregates for a time range | Telemetry is not automatically a BrAPI `Observation`; scientific mapping requires explicit study, unit, variable, timestamp, quality, and provenance rules. |
 | `/brapi/v3/telemetry` | POST | `genxAppendTelemetryBatch` | Append a batch of sensor/device samples and report append/replay/conflict outcomes | Append operation, not replacement of a range; identical sample identity may replay, while conflicting content must not silently overwrite. |
+| `/brapi/v3/selection-decisions` | GET | `genxListSelectionDecisions` | List recorded breeding selection decisions | Does not create or change a verdict; not a BrAPI v2.1 program/trial/observation resource. |
+| `/brapi/v3/selection-decisions` | POST | `genxRecordSelectionDecision` | Record one breeding selection verdict | Append-only verdict record; does not imply release, registration, or commercial approval; replay/conflict semantics. |
+| `/brapi/v3/selection-decisions/{selectionDecisionDbId}` | GET | `genxGetSelectionDecision` | Retrieve one recorded breeding selection decision | Does not treat a superseded decision as current; not a BrAPI v2.1 resource. |
 
 `ProvenanceEnvelope` is embedded in result/record schemas and has no standalone route in this proposal.
 

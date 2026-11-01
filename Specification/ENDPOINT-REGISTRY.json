@@ -23208,7 +23208,7 @@
         "confidence": "medium"
       },
       "purpose": "Retrieve a specific VariableTerm version, or the most recently created version when the version query parameter is omitted.",
-      "sourceDescription": "Returns the requested version, or the most recently created version when `version` is omitted. Version ordering semantics are requires-decision (see RFC-002 §5).",
+      "sourceDescription": "Returns the requested version, or the most recently created version when `version` is omitted. Version ordering semantics are requires-decision (see RFC-002 \u00a75).",
       "canBeUsedFor": [
         "Resolve the exact term version referenced by a reproducible analysis when version is supplied.",
         "Read the latest-created version when no version is supplied."
@@ -24167,7 +24167,7 @@
         "confidence": "medium"
       },
       "purpose": "Retrieve the metadata envelope for one FAIR package subject to the currently specified embargo gate.",
-      "sourceDescription": "Returns the package metadata, or 404. While payloads are embargoed (embargoUntil in the future) the record is denied with 403 to prove the gate exists; the gentler metadata-visible alternative is requires-decision (see RFC-006 §5).",
+      "sourceDescription": "Returns the package metadata, or 404. While payloads are embargoed (embargoUntil in the future) the record is denied with 403 to prove the gate exists; the gentler metadata-visible alternative is requires-decision (see RFC-006 \u00a75).",
       "canBeUsedFor": [
         "Read package metadata when the access contract permits the request."
       ],
@@ -24432,6 +24432,238 @@
         "brapi-den.brapi-v2-1.phenotyping.put.observationunits.by-observationunitdbid",
         "brapi-den.brapi-v2-1.phenotyping.put.variables.by-observationvariabledbid",
         "brapi-den.genx.v3.telemetry.query"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v3",
+      "basePath": "/brapi/v3",
+      "brapiModule": null,
+      "genxModule": "SelectionDecisions",
+      "brapiTag": "SelectionDecisions",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-den.genx.v3.selection-decisions.list",
+      "method": "GET",
+      "path": "/selection-decisions",
+      "operationIdInSource": "genxListSelectionDecisions",
+      "recommendedOperationId": "genxListSelectionDecisions",
+      "operationName": "List selection decisions",
+      "classification": {
+        "primaryDomain": "D2",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List recorded breeding selection decisions, optionally filtered by program, study, candidate, or verdict.",
+      "sourceDescription": "Get a paged list of selection decisions across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover selection verdicts for a breeding program or trial.",
+        "Audit breeding history and candidate advancement."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a verdict (use the POST endpoint).",
+        "Assuming a decision implies release or commercial approval.",
+        "Treating the list as a complete breeding program record."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "programDbId",
+        "studyDbId",
+        "candidateGermplasmDbId",
+        "decision",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordSelectionDecision",
+        "genxGetSelectionDecision"
+      ],
+      "decisionReferences": [
+        "RFC-008"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-den.genx.v3.selection-decisions.record",
+        "brapi-den.genx.v3.selection-decisions.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v3",
+      "basePath": "/brapi/v3",
+      "brapiModule": null,
+      "genxModule": "SelectionDecisions",
+      "brapiTag": "SelectionDecisions",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-den.genx.v3.selection-decisions.record",
+      "method": "POST",
+      "path": "/selection-decisions",
+      "operationIdInSource": "genxRecordSelectionDecision",
+      "recommendedOperationId": "genxRecordSelectionDecision",
+      "operationName": "Record one selection decision",
+      "classification": {
+        "primaryDomain": "D2",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record one breeding selection verdict with candidate, criterion, evidence inputs, and provenance.",
+      "sourceDescription": "Unknown selectionDecisionDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Record a selected/rejected/deferred/advanced verdict for a candidate.",
+        "Retry an identical decision safely using the same selectionDecisionDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing decision; corrections require a new record that supersedes.",
+        "Assuming the decision grants release, registration, or commercial approval.",
+        "Treating the verdict as an automated breeding recommendation."
+      ],
+      "sideEffects": "Creates a selection decision when accepted.",
+      "idempotency": "Same selectionDecisionDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "SelectionDecisionNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListSelectionDecisions",
+        "genxGetSelectionDecision"
+      ],
+      "decisionReferences": [
+        "RFC-008"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-den.genx.v3.selection-decisions.list",
+        "brapi-den.genx.v3.selection-decisions.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v3",
+      "basePath": "/brapi/v3",
+      "brapiModule": null,
+      "genxModule": "SelectionDecisions",
+      "brapiTag": "SelectionDecisions",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-Den",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_SelectionDecisionDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-den.genx.v3.selection-decisions.get",
+      "method": "GET",
+      "path": "/selection-decisions/{selectionDecisionDbId}",
+      "operationIdInSource": "genxGetSelectionDecision",
+      "recommendedOperationId": "genxGetSelectionDecision",
+      "operationName": "Get one selection decision",
+      "classification": {
+        "primaryDomain": "D2",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one recorded breeding selection decision.",
+      "sourceDescription": "Returns the recorded decision, or 404.",
+      "canBeUsedFor": [
+        "Inspect a verdict, its candidate, criterion, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the decision is the only or final authority for release.",
+        "Treating a superseded decision as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "selectionDecisionDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordSelectionDecision",
+        "genxListSelectionDecisions"
+      ],
+      "decisionReferences": [
+        "RFC-008"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-den.genx.v3.selection-decisions.list",
+        "brapi-den.genx.v3.selection-decisions.record"
       ]
     }
   ],

@@ -17,6 +17,9 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
   [Conformance/domain-classification.yaml](./Conformance/domain-classification.yaml)
   provides the proposed machine-readable module registry. Both are proposals,
   not BrAPI community ratification.
+- **Endpoint inventory:** [Inventory/](./Inventory/) contains a generated, reviewable
+  mapping of ~1,849 legacy Bijmantra endpoints to the proposed D1–D7 / C* classes
+  (see `Inventory/README.md`), to help plan which next-generation specs to author.
 - **Master endpoint registry:** [../ENDPOINT-REGISTRY.json](../ENDPOINT-REGISTRY.json) contains 201 released BrAPI v2.1 operations and 21 proposed GenX operations with stable BrAPI-Den catalogue identifiers, source links, semantic metadata, and implementation-evidence status. The generated human catalogue is [../ENDPOINT-CATALOG.md](../ENDPOINT-CATALOG.md), with the source crosswalk in [../BIJMANTRA-CROSSWALK.md](../BIJMANTRA-CROSSWALK.md).
 - The GenX-only generated view is [GENX-ENDPOINT-CATALOG.md](./GENX-ENDPOINT-CATALOG.md); it is a filtered view, not a second source of truth.
 - **Endpoint semantics and catalogue:** [GENX-ENDPOINT-CATALOG.md](./GENX-ENDPOINT-CATALOG.md) is the generated GenX-only view. The complete all-generation catalogue is [../ENDPOINT-CATALOG.md](../ENDPOINT-CATALOG.md), with canonical structured records in [../ENDPOINT-REGISTRY.json](../ENDPOINT-REGISTRY.json). Each proposed GenX operation carries `x-brapi-den` metadata beside its OpenAPI contract; `Scripts/checkGenXEndpointCatalog.py` checks metadata and focused-catalogue coverage.
@@ -32,6 +35,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `LotLedger/` | `LotLedgerEntry` — append-only, idempotent lot movements | `GET /brapi/v3/seedlots/{seedLotDbId}/ledger` (`genxListSeedLotLedgerEntries`); `POST /brapi/v3/seedlots/{seedLotDbId}/ledger` (`genxAppendSeedLotLedgerEntry`) |
 | `Models/` | `ModelArtifact` — registered models; inference binds by digest | `GET /brapi/v3/models` (`genxListModelVersions`); `POST /brapi/v3/models` (`genxRegisterModelVersion`); `GET /brapi/v3/models/{modelDbId}` (`genxGetModelVersion`); execute inference through `POST /brapi/v3/jobs` (`genxSubmitAsyncJob`) with a declared inference `jobType` |
 | `Genomics/` | `VariantMatrix` — content-addressed matrix references | `GET /brapi/v3/variantmatrices` (`genxListVariantMatrixReferences`); `POST /brapi/v3/variantmatrices` (`genxRegisterVariantMatrixReference`); `GET /brapi/v3/variantmatrices/{matrixDbId}` (`genxGetVariantMatrixReference`) |
+| `SelectionDecisions/` | `SelectionDecision` — breeding selection verdicts (selected/rejected/deferred/advanced) | `GET /brapi/v3/selection-decisions` (`genxListSelectionDecisions`); `POST /brapi/v3/selection-decisions` (`genxRecordSelectionDecision`); `GET /brapi/v3/selection-decisions/{selectionDecisionDbId}` (`genxGetSelectionDecision`) |
 | `FAIR/` | `FAIRPackage` — licensed, embargo-aware payload envelopes | `GET /brapi/v3/fair-packages` (`genxListFairPackageMetadata`); `POST /brapi/v3/fair-packages` (`genxRegisterFairPackage`); `GET /brapi/v3/fair-packages/{packageDbId}` (`genxGetFairPackageMetadata`) |
 | `Telemetry/` | `TelemetryPoint` — sensor streams, idempotent ingest, aggregates | `GET /brapi/v3/telemetry` (`genxQueryTelemetrySamplesOrAggregates`); `POST /brapi/v3/telemetry` (`genxAppendTelemetryBatch`) |
 | `Conformance/` | Probes + fixtures + runner contract (`probes.yaml`) | Static tier runs now; live tier needs `--server` |
@@ -42,7 +46,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-004-Model-Registry](./RFC-004-Model-Registry.md),
 [RFC-005-Variant-Matrix-References](./RFC-005-Variant-Matrix-References.md),
 [RFC-006-FAIR-Packages](./RFC-006-FAIR-Packages.md),
-[RFC-007-Telemetry-Streams](./RFC-007-Telemetry-Streams.md).
+[RFC-007-Telemetry-Streams](./RFC-007-Telemetry-Streams.md),
+[RFC-008-Selection-Decisions](./RFC-008-Selection-Decisions.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

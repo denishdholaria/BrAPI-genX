@@ -1,0 +1,156 @@
+info:
+  title: BrAPI
+  version: ''
+openapi: 3.0.0
+paths:
+  /selection-decisions:
+    get:
+      operationId: genxListSelectionDecisions
+      x-brapi-den:
+        catalogId: "brapi-den.genx.v3.selection-decisions.list"
+        classification:
+          primaryDomain: "D2"
+          crossCuttingCapabilities: ["C1", "C2", "C9"]
+        purpose: "List recorded breeding selection decisions, optionally filtered by program, study, candidate, or verdict."
+        canBeUsedFor:
+          - "Discover selection verdicts for a breeding program or trial."
+          - "Audit breeding history and candidate advancement."
+        mustNotBeUsedFor:
+          - "Creating or changing a verdict (use the POST endpoint)."
+          - "Assuming a decision implies release or commercial approval."
+          - "Treating the list as a complete breeding program record."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordSelectionDecision"
+          - "genxGetSelectionDecision"
+        decisions: ["RFC-008"]
+        proposalStatus: "draft-non-normative"
+      summary: List selection decisions
+      description: Get a paged list of selection decisions across authorities. Filters combine with AND.
+      parameters:
+      - name: programDbId
+        description: Filter by BrAPI Program (breeding program)
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: studyDbId
+        description: Filter by BrAPI Study / trial context
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: candidateGermplasmDbId
+        description: Filter by candidate BrAPI Germplasm
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: decision
+        description: Filter by verdict
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - selected
+          - rejected
+          - deferred
+          - advanced
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/SelectionDecisionListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - SelectionDecisions
+    post:
+      operationId: genxRecordSelectionDecision
+      x-brapi-den:
+        catalogId: "brapi-den.genx.v3.selection-decisions.record"
+        classification:
+          primaryDomain: "D2"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C9"]
+        purpose: "Record one breeding selection verdict with candidate, criterion, evidence inputs, and provenance."
+        canBeUsedFor:
+          - "Record a selected/rejected/deferred/advanced verdict for a candidate."
+          - "Retry an identical decision safely using the same selectionDecisionDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing decision; corrections require a new record that supersedes."
+          - "Assuming the decision grants release, registration, or commercial approval."
+          - "Treating the verdict as an automated breeding recommendation."
+        sideEffects: "Creates a selection decision when accepted."
+        idempotency: "Same selectionDecisionDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListSelectionDecisions"
+          - "genxGetSelectionDecision"
+        decisions: ["RFC-008"]
+        proposalStatus: "draft-non-normative"
+      summary: Record one selection decision
+      description: |-
+        Unknown selectionDecisionDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SelectionDecisionNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/SelectionDecision'
+                required:
+                - metadata
+                - result
+                title: SelectionDecisionResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - SelectionDecisions
+components:
+  responses:
+    SelectionDecisionListResponse:
+      content:
+        application/json:
+          schema:
+            title: SelectionDecisionListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SelectionDecision'
+            required:
+            - metadata
+            - result
+      description: OK

@@ -264,6 +264,9 @@ GenX uses /brapi/v3. Relative-route matches below are candidate neighbors only; 
 | `brapi-den.genx.v3.models.list` | `GET /brapi/v3/models` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
 | `brapi-den.genx.v3.models.register-version` | `POST /brapi/v3/models` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
 | `brapi-den.genx.v3.models.get-version` | `GET /brapi/v3/models/{modelDbId}` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
+| `brapi-den.genx.v3.selection-decisions.list` | `GET /brapi/v3/selection-decisions` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
+| `brapi-den.genx.v3.selection-decisions.record` | `POST /brapi/v3/selection-decisions` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
+| `brapi-den.genx.v3.selection-decisions.get` | `GET /brapi/v3/selection-decisions/{selectionDecisionDbId}` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
 | `brapi-den.genx.v3.serverinfo.read` | `GET /brapi/v3/serverinfo` | 1 | Same relative method/path appears in BijMantra's static inventory. Do not infer V3 wiring, contract equivalence, or runtime mounting. |
 | `brapi-den.genx.v3.telemetry.query` | `GET /brapi/v3/telemetry` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
 | `brapi-den.genx.v3.telemetry.append-batch` | `POST /brapi/v3/telemetry` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |

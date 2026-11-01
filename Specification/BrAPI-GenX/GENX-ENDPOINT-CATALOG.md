@@ -11,6 +11,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | Jobs | 4 | proposed, non-normative |
 | LotLedger | 2 | proposed, non-normative |
 | Models | 3 | proposed, non-normative |
+| SelectionDecisions | 3 | proposed, non-normative |
 | ServerInfoV3 | 1 | proposed, non-normative |
 | Telemetry | 2 | proposed, non-normative |
 | VariableTerms | 3 | proposed, non-normative |
@@ -556,6 +557,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-den.genx.v3.jobs.get, brapi-den.genx.v3.jobs.submit, brapi-den.genx.v3.models.list, brapi-den.genx.v3.models.register-version
 - **Relevant RFC / decision references:** RFC-004, D-09, D-10
 - **Contract source:** [`Specification/BrAPI-GenX/Models/Models_ModelDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Models/Models_ModelDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### SelectionDecisions — 3 operations
+
+### GET `/brapi/v3/selection-decisions`
+
+- **Catalogue ID:** `brapi-den.genx.v3.selection-decisions.list`
+- **BrAPI-Den operation identity:** `genxListSelectionDecisions` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListSelectionDecisions`
+- **GenX source module:** `SelectionDecisions`
+- **Source tag:** SelectionDecisions
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List recorded breeding selection decisions, optionally filtered by program, study, candidate, or verdict.
+**Source contract description:**
+> Get a paged list of selection decisions across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover selection verdicts for a breeding program or trial.
+- Audit breeding history and candidate advancement.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a verdict (use the POST endpoint).
+- Assuming a decision implies release or commercial approval.
+- Treating the list as a complete breeding program record.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** programDbId, studyDbId, candidateGermplasmDbId, decision, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordSelectionDecision, genxGetSelectionDecision
+- **Related catalogue IDs:** brapi-den.genx.v3.selection-decisions.record, brapi-den.genx.v3.selection-decisions.get
+- **Relevant RFC / decision references:** RFC-008
+- **Contract source:** [`Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/brapi/v3/selection-decisions`
+
+- **Catalogue ID:** `brapi-den.genx.v3.selection-decisions.record`
+- **BrAPI-Den operation identity:** `genxRecordSelectionDecision` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordSelectionDecision`
+- **GenX source module:** `SelectionDecisions`
+- **Source tag:** SelectionDecisions
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one breeding selection verdict with candidate, criterion, evidence inputs, and provenance.
+**Source contract description:**
+> Unknown selectionDecisionDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Record a selected/rejected/deferred/advanced verdict for a candidate.
+- Retry an identical decision safely using the same selectionDecisionDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing decision; corrections require a new record that supersedes.
+- Assuming the decision grants release, registration, or commercial approval.
+- Treating the verdict as an automated breeding recommendation.
+- **Side effects:** Creates a selection decision when accepted.
+- **Retry / idempotency:** Same selectionDecisionDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** SelectionDecisionNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListSelectionDecisions, genxGetSelectionDecision
+- **Related catalogue IDs:** brapi-den.genx.v3.selection-decisions.list, brapi-den.genx.v3.selection-decisions.get
+- **Relevant RFC / decision references:** RFC-008
+- **Contract source:** [`Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/brapi/v3/selection-decisions/{selectionDecisionDbId}`
+
+- **Catalogue ID:** `brapi-den.genx.v3.selection-decisions.get`
+- **BrAPI-Den operation identity:** `genxGetSelectionDecision` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetSelectionDecision`
+- **GenX source module:** `SelectionDecisions`
+- **Source tag:** SelectionDecisions
+- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one recorded breeding selection decision.
+**Source contract description:**
+> Returns the recorded decision, or 404.
+**Can be used for:**
+- Inspect a verdict, its candidate, criterion, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the decision is the only or final authority for release.
+- Treating a superseded decision as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** selectionDecisionDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordSelectionDecision, genxListSelectionDecisions
+- **Related catalogue IDs:** brapi-den.genx.v3.selection-decisions.list, brapi-den.genx.v3.selection-decisions.record
+- **Relevant RFC / decision references:** RFC-008
+- **Contract source:** [`Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_SelectionDecisionDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_SelectionDecisionDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

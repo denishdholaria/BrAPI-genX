@@ -57,6 +57,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | Genomics / VariantMatrix | D3 | C1, C2, C5, C6, C9 | External matrix reference, not VariantSet alias and not byte transport |
 | FAIR / FAIRPackage | Cross-cutting C5 | C1, C2, C6, C9 | Packaging, license and access envelope; class of payload is unchanged |
 | Telemetry / TelemetryPoint | Context-dependent: D5 for environmental sensor readings; D4 for plant/phenotyping measurements | C1, C2, C3, C6, C7, C9 | Do not infer that all telemetry is an Observation or all telemetry is environmental data |
+| SelectionDecisions / SelectionDecision | D2 | C1, C2, C3, C9 | Breeding selection verdicts; no BrAPI v2.1 equivalent; corrections are additional superseding records |
 | Conformance | Cross-cutting C8 | C1, C3 | Probes and fixtures establish contract evidence, not scientific-domain data |
 
 ## 5. Relationship to BrAPI V2.1

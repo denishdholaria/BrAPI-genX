@@ -1,0 +1,68 @@
+# BrAPI-Den vs Ambika Ideal Module Catalog — Gap Register
+
+- Status: proposal / working register, non-normative.
+- Purpose: identify Ambika capabilities that are **not** present in BrAPI v2.1 and therefore
+  are candidates for additive BrAPI-Den (GenX) endpoint specs, without disturbing the
+  BrAPI v2.1 standard set or implying equivalence.
+- Source: `Ambika/ideal-module-catalog/` (24 domain groups, 47 packs, 402 modules).
+- Rule: a capability already standardized in BrAPI v2.1 keeps its official V2.1 location and
+  contract. GenX specs are additive (`/brapi/v3/...`) and optional.
+
+## Coverage key
+
+- **Covered** — BrAPI v2.1 has a substantially equivalent resource/operation.
+- **Partial** — BrAPI v2.1 covers an adjacent/parent resource; the Ambika capability is a gap.
+- **None** — no BrAPI v2.1 coverage; candidate for GenX or out of BrAPI scope.
+- **Disposition**: `GenX-candidate` (scientific interoperability), `Platform` (cross-cutting/product),
+  `Out-of-scope` (business/UI/ops not appropriate for BrAPI).
+
+## Domain-group gap matrix
+
+| # | Ambika domain group | Modules | BrAPI v2.1 | Disposition | Notes / first GenX candidates |
+|---:|---|---:|---|---|---|
+| 1 | A-platform_foundation_and_trust | 27 | None | Platform | Identity/tenancy/policy/audit; mostly cross-cutting (C1, C9). Candidate: capability negotiation/identity extensions only. |
+| 2 | B-reference_data_and_organizational_research_context | 14 | Partial | GenX-candidate | Programs/studies/locations/seasons/people/lists covered. Gaps: project/funding, reusable lists/cohorts, calendars, location geometry, taxon names, reference data versioning. |
+| 3 | C-germplasm_and_genetic_resources | 10 | Partial | GenX-candidate | Accessions/samples/seed lots covered. Gaps: collecting missions, conservation membership, MCPD adapter, duplicate review, crosswalks. |
+| 4 | D-genebank_seed_lots_and_material_custody | 21 | None | GenX-candidate | Seed-lot ledger exists (GenX). Gaps: storage/conservation, viability, quarantine, sample custody/transfer, retention/disposal. |
+| 5 | E-plant_breeding_and_variety_development | 15 | Partial | GenX-candidate | Crosses/trials/pedigree covered. Gaps: breeding pipeline/stage gates, selection decisions (GenX started), doubled haploid, speed breeding, population advancement, progeny/family. |
+| 6 | F-trials_studies_and_experimental_design | 12 | Partial | GenX-candidate | Studies/trials/observation units covered. Gaps: block/replication/randomization, treatment assignment, plot identity, experimental protocol/design, field book definition, trial network/MET design. |
+| 7 | G-trait_semantics_ontologies_and_reference_vocabulary | 11 | Partial | GenX-candidate | Traits/variables/methods/scales/ontologies covered. Gaps: crop-specific trait dictionary, developmental stage vocab, external vocab sync, measurement method catalogue, units/quantity semantics, terminology versioning/provenance. |
+| 8 | H-phenotyping_field_observations_and_plant_measurements | 12 | Partial | GenX-candidate | Observations/units/images/events covered. Gaps: capture workflow, quality flags/corrections, value/missingness, repeated measurement/time series, phenology observations, bulk capture, image metadata linkage. |
+| 9 | I-genotyping_sequencing_and_genomic_data | 19 | Partial | GenX-candidate | Variants/callsets/calls/references/maps/markers/plates/samples/allele matrices covered. Gaps: assay/plate workflow, QC reports, genotype call semantics, marker/probe registry, VCF import/export, vendor order/result ingestion, genomic dataset release/access, reference assembly versioning, bioinformatics pipeline provenance. |
+| 10 | J-scientific_compute_statistics_and_analytical_results | 26 | None | GenX-candidate | No BrAPI coverage. Gaps: analysis method registry/versions, GWAS/QTL, mixed models/BLUP, heritability, stability, GxE, genomic prediction, kinship, LD/haplotype, PCA, GDD, reproducible job contracts, result provenance/uncertainty. |
+| 11 | K-field_agronomy_and_crop_operations | 19 | None | GenX-candidate | No BrAPI coverage. Gaps: farm/site reference, crop cycle/rotation, sowing/planting, irrigation, fertilizer/fertigation, tillage, harvest/yield, field scouting/work orders, yield maps, operational field boundary/history. |
+| 12 | L-environment_soil_weather_and_climate | 11 | None | GenX-candidate | No BrAPI coverage (locations only). Gaps: weather station/observation, forecast, climate normals/extremes, soil profile/texture/chemistry/moisture, carbon stock/emissions, water balance, environmental treatments/stress, provenance/quality. |
+| 13 | M-geospatial_earth_observation_and_sensing | 22 | None | GenX-candidate | No BrAPI coverage. Gaps: CRS/transforms, spatial index/geometry validation, field/plot/station geometry, spatial query/zonal stats, vector/raster catalogues, satellite/UAV metadata, vegetation index pipeline, cloud masking, telemetry ingestion/normalization, sensor device registry, calibration/quality, edge gateway health. |
+| 14 | N-crop_health_plant_protection_and_integrated_pest_management | 11 | None | GenX-candidate | No BrAPI coverage. Gaps: disease/pest observations and scouting, diagnostic evidence, spray application records, IPM strategies, thresholds/alerts, disease resistance characterization, abiotic stress observations, crop health image/model results. |
+| 15 | O-advisory_forecasting_and_decision_support | 11 | None | GenX-candidate | No BrAPI coverage. Gaps: crop/variety recommendation, sowing window, irrigation/water advice, nutrient advice, pest/disease risk advisory, yield forecast delivery, crop suitability/site selection, human review accept/reject, explanation/uncertainty/evidence, outcome feedback/evaluation, constraints/local rules. |
+| 16 | P-variety_regulation_intellectual_property_and_legal_rights | 16 | None | Out-of-scope | Regulatory/IP business domain. Candidate only for evidence bundles/access policy; otherwise product API. |
+| 17 | Q-seed_production_quality_and_commercial_inventory | 16 | None | Out-of-scope | Commercial production/quality/fulfilment. Candidate only for lot traceability interoperability; otherwise product API. |
+| 18 | R-marketplace_sales_and_customer_operations | 10 | None | Out-of-scope | Sales/commerce. Not BrAPI scientific interoperability. |
+| 19 | S-research_assets_knowledge_and_publication | 19 | None | GenX-candidate | FAIR packages exist (GenX). Gaps: research asset registry, persistent identifiers/DOI, dataset/model artifact catalogue, protocol/method library, license/access metadata, publication review/release, embargo management, biodiversity occurrence/specimen export, evidence packs. |
+| 20 | T-data_stewardship_interoperability_and_synchronization | 25 | None | Platform | Import/validation/dedup/crosswalk/sync/replay. Mostly product/platform; GenX-relevant: idempotency/replay already in Jobs; schema mapping adapters. |
+| 21 | U-collaboration_tasks_and_workflow | 12 | None | Platform | Collaboration/workflow. Not BrAPI scientific interoperability. |
+| 22 | V-reevu_and_ai_assisted_scientific_work | 25 | None | Platform | AI/runtime/model lifecycle/inference provenance. GenX-relevant: model registry exists; inference via Jobs. |
+| 23 | W-administration_developer_experience_and_operations | 25 | None | Platform | Admin/dev/ops. GenX-relevant: serverinfo, capability negotiation, conformance. |
+| 24 | X-client_experiences | 13 | None | Out-of-scope | UI composition; no API ownership. |
+
+## Suggested GenX sequencing (scientific gaps first)
+
+1. **D2 Breeding pipeline & selection** — started with `SelectionDecisions` (RFC-008). Next: breeding pipeline/stage gates, population/line advancement, progeny/family, doubled haploid, speed breeding, parent candidate selection, crossing schedule/worklist.
+2. **D7 Scientific compute & analysis results** — method registry/versions, result provenance/uncertainty, reproducible job contracts; builds on GenX `Jobs` and `Models`.
+3. **D5 Environment & weather/soil** — weather station/observation, forecast, climate normals, soil profile, carbon/emissions, water balance; builds on GenX `Telemetry`.
+4. **D6 Field agronomy & harvest** — farm/site, crop cycle, sowing/planting, irrigation, fertilizer, harvest/yield, yield maps.
+5. **D4 Phenotyping capture workflow** — capture/entry, quality flags/corrections, value/missingness, repeated measurement/time series, bulk capture, image metadata linkage.
+6. **D3 Genomics pipeline provenance** — VCF import/export, reference assembly versioning, bioinformatics pipeline provenance, genomic dataset release/access.
+7. **D1 Genebank storage/conservation** — storage location/capacity, viability/germination, quarantine, safety duplication, regeneration, sample custody/transfer, retention/disposal.
+8. **S Research assets & publication** — builds on GenX `FAIRPackage`; add research asset registry, persistent identifiers/DOI, dataset/model catalogue, protocol/method library, embargo management.
+9. **G Terminology depth** — builds on GenX `VariableTerm`; add units/quantity semantics, measurement method catalogue, developmental stage vocab, external vocab sync, terminology versioning/provenance.
+10. **B/F reference data & experimental design depth** — project/funding, reusable lists/cohorts, calendars/time, location geometry, taxon names, block/replication/randomization, treatment assignment, plot identity, experimental protocol/design, field book definition, trial network/MET design.
+
+## Rules for adding new GenX specs
+
+- Only add an object when BrAPI v2.1 has no substantially equivalent resource.
+- Reuse BrAPI v2.1 identifiers (Program, Study, Germplasm, Observation, etc.) by reference; do not duplicate them.
+- Follow the GenX module pattern: `README.md`, `GroupDescription.md`, `Schemas/*`, `*_GET_POST.yaml`, `*_DbId_GET.yaml`, RFC, classification registry entry, endpoint registry entry, generated catalog update.
+- Run `BrAPI-Den/Scripts/checkGenXEndpointCatalog.py` after changes.
+- Classify each new module/operation in `Conformance/domain-classification.yaml` with exactly one primary domain class or explicit cross-cutting.
+- Keep platform/business/UI modules out of BrAPI scientific classes.
