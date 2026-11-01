@@ -1,0 +1,66 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ImageMetadata:
+      type: object
+      description: |-
+        One immutable image metadata record. A published
+        (imageMetadataDbId) record never mutates in place; corrections are
+        recorded as additional records linked by supersedes.
+      required:
+      - imageMetadataDbId
+      - imageDbId
+      - capturedAt
+      - status
+      properties:
+        imageMetadataDbId:
+          description: Namespaced image-metadata identity `{authority}:image-metadata:{localId}`
+          type: string
+          example: institute-a:image-metadata:im-2026-001
+        imageDbId:
+          description: BrAPI Image identifier
+          type: string
+          example: institute-a:image:img-001
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        observationUnitDbId:
+          description: BrAPI Observation Unit, when applicable
+          type: string
+          example: institute-a:observationunit:ou-42
+        capturedAt:
+          description: Date/time of capture (ISO-8601)
+          type: string
+          format: date-time
+          example: '2026-10-24T08:00:00Z'
+        camera:
+          description: Camera or device used
+          type: string
+          example: Canon EOS R5
+        resolution:
+          description: Image resolution
+          type: string
+          example: 4096x2160
+        notes:
+          description: Human-readable notes
+          type: string
+          example: Top-down view of plot.
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          example: active
+        supersedes:
+          description: imageMetadataDbId of the record this one replaces
+          type: string
+          example: institute-a:image-metadata:im-2026-000
+        provenance:
+          description: Evidence and method provenance for the image
+          $ref: '#/components/schemas/ProvenanceEnvelope'

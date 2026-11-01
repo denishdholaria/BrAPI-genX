@@ -30077,12 +30077,246 @@
         "brapi-genx.genx.v1.weather-forecasts.list",
         "brapi-genx.genx.v1.weather-forecasts.register"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ImageMetadata",
+      "brapiTag": "ImageMetadata",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ImageMetadata/ImageMetadata_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.image-metadata.list",
+      "method": "GET",
+      "path": "/image-metadata",
+      "operationIdInSource": "genxListImageMetadata",
+      "recommendedOperationId": "genxListImageMetadata",
+      "operationName": "List image metadata",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List image metadata records, optionally filtered by study, observation unit, or status.",
+      "sourceDescription": "Get a paged list of image metadata records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover image metadata for a study or observation unit.",
+        "Support phenotyping and image analysis workflows."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing metadata (use the POST endpoint).",
+        "Assuming metadata is a BrAPI Image.",
+        "Treating the list as a complete image repository."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "studyDbId",
+        "observationUnitDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterImageMetadata",
+        "genxGetImageMetadata"
+      ],
+      "decisionReferences": [
+        "RFC-032"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.image-metadata.register",
+        "brapi-genx.genx.v1.image-metadata.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ImageMetadata",
+      "brapiTag": "ImageMetadata",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ImageMetadata/ImageMetadata_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.image-metadata.register",
+      "method": "POST",
+      "path": "/image-metadata",
+      "operationIdInSource": "genxRegisterImageMetadata",
+      "recommendedOperationId": "genxRegisterImageMetadata",
+      "operationName": "Register one image metadata",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register image metadata with capture details and provenance.",
+      "sourceDescription": "Unknown imageMetadataDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish image capture metadata.",
+        "Create a new version under an existing image metadata identity."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming metadata is a BrAPI Image.",
+        "Treating metadata as a complete image repository."
+      ],
+      "sideEffects": "Creates an image metadata identity or appends a new immutable version when accepted.",
+      "idempotency": "Same identity and identical body replays; conflicting content for the same identity is rejected.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "ImageMetadataNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListImageMetadata",
+        "genxGetImageMetadata"
+      ],
+      "decisionReferences": [
+        "RFC-032"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.image-metadata.list",
+        "brapi-genx.genx.v1.image-metadata.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ImageMetadata",
+      "brapiTag": "ImageMetadata",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ImageMetadata/ImageMetadata_ImageMetadataDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.image-metadata.get",
+      "method": "GET",
+      "path": "/image-metadata/{imageMetadataDbId}",
+      "operationIdInSource": "genxGetImageMetadata",
+      "recommendedOperationId": "genxGetImageMetadata",
+      "operationName": "Get one image metadata",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one image metadata record.",
+      "sourceDescription": "Returns the registered metadata, or 404.",
+      "canBeUsedFor": [
+        "Inspect capture details and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming metadata is a BrAPI Image.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "imageMetadataDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterImageMetadata",
+        "genxListImageMetadata"
+      ],
+      "decisionReferences": [
+        "RFC-032"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.image-metadata.list",
+        "brapi-genx.genx.v1.image-metadata.register"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 93,
+    "genxEntriesAdded": 96,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -30160,7 +30394,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 294,
+    "totalEntries": 297,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

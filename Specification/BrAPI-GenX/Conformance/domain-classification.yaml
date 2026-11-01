@@ -155,6 +155,11 @@ modules:
     primary_class: "D5"
     cross_cutting: ["C1", "C2", "C3", "C6", "C7", "C9"]
     rationale: "Weather forecast records; BrAPI v2.1 has no equivalent record."
+  - path: "ImageMetadata/"
+    object: "ImageMetadata"
+    primary_class: "D4"
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Image metadata records; BrAPI v2.1 has no equivalent record."
   - path: "AnalysisMethods/"
     object: "AnalysisMethod"
     primary_class: "D7"

@@ -72,6 +72,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | CropCycle / CropCycle | D6 | C1, C2, C3, C6, C9 | Crop cycle records; no BrAPI v2.1 equivalent |
 | Quarantine / QuarantineRecord | D1 | C1, C2, C3, C6, C9 | Quarantine records; no BrAPI v2.1 equivalent |
 | WeatherForecast / WeatherForecast | D5 | C1, C2, C3, C6, C7, C9 | Weather forecast records; no BrAPI v2.1 equivalent |
+| ImageMetadata / ImageMetadata | D4 | C1, C2, C3, C6, C9 | Image metadata records; no BrAPI v2.1 equivalent |
 | AnalysisMethods / AnalysisMethod | D7 | C1, C2, C3, C6, C9 | Versioned analysis method registry; no BrAPI v2.1 equivalent; execution is via Jobs |
 | WeatherObservations / WeatherObservation | D5 | C1, C2, C3, C6, C7, C9 | Environmental/weather observation records; no BrAPI v2.1 equivalent; complementary to Telemetry |
 | HarvestRecords / HarvestRecord | D6 | C1, C2, C3, C6, C9 | Harvest-event records; no BrAPI v2.1 equivalent; not a SeedLotTransaction |

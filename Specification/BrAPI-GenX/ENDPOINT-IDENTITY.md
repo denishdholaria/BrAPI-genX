@@ -156,6 +156,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/weather-forecasts` | GET | `genxListWeatherForecasts` | List weather forecasts | Does not create or change a forecast; not a BrAPI Location. |
 | `/genx/v1/weather-forecasts` | POST | `genxRegisterWeatherForecast` | Register one weather forecast | Append-only record; replay/conflict semantics. |
 | `/genx/v1/weather-forecasts/{weatherForecastDbId}` | GET | `genxGetWeatherForecast` | Retrieve one weather forecast | Does not treat a superseded forecast as current. |
+| `/genx/v1/image-metadata` | GET | `genxListImageMetadata` | List image metadata records | Does not create or change metadata; not a BrAPI Image. |
+| `/genx/v1/image-metadata` | POST | `genxRegisterImageMetadata` | Register one image metadata record | Append-only record; replay/conflict semantics. |
+| `/genx/v1/image-metadata/{imageMetadataDbId}` | GET | `genxGetImageMetadata` | Retrieve one image metadata record | Does not treat a superseded record as current. |
 | `/genx/v1/analysis-methods` | GET | `genxListAnalysisMethods` | List registered analysis method versions | Does not execute an analysis; not a BrAPI v2.1 resource. |
 | `/genx/v1/analysis-methods` | POST | `genxRegisterAnalysisMethod` | Register one analysis method version | Does not execute or validate the method; replay/conflict semantics. |
 | `/genx/v1/analysis-methods/{analysisMethodDbId}` | GET | `genxGetAnalysisMethod` | Retrieve one registered analysis method version | Does not execute an analysis; revoked methods deny new jobs. |
