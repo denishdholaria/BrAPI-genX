@@ -107,7 +107,7 @@ jobs:
           from urllib.request import urlopen
           for attempt in range(30):
               try:
-                  with urlopen("http://127.0.0.1:18080/brapi/v3/serverinfo", timeout=1) as response:
+                  with urlopen("http://127.0.0.1:18080/genx/v1/serverinfo", timeout=1) as response:
                       if response.status == 200:
                           break
               except Exception:
@@ -116,7 +116,7 @@ jobs:
               raise SystemExit("GenX reference server failed to become ready")
           PY
       - name: Run live GenX conformance probes
-        run: python Scripts/checkGenXConformance.py --server http://127.0.0.1:18080/brapi/v3 --expired-job JOB_EXPIRED
+        run: python Scripts/checkGenXConformance.py --server http://127.0.0.1:18080/genx/v1 --expired-job JOB_EXPIRED
       - name: Stop in-memory GenX reference server
         if: always()
         run: |

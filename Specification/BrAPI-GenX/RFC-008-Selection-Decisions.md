@@ -19,9 +19,9 @@ their evidence.
 
 ## 3. Endpoints
 
-- `GET /brapi/v3/selection-decisions` (`genxListSelectionDecisions`)
-- `POST /brapi/v3/selection-decisions` (`genxRecordSelectionDecision`)
-- `GET /brapi/v3/selection-decisions/{selectionDecisionDbId}` (`genxGetSelectionDecision`)
+- `GET /genx/v1/selection-decisions` (`genxListSelectionDecisions`)
+- `POST /genx/v1/selection-decisions` (`genxRecordSelectionDecision`)
+- `GET /genx/v1/selection-decisions/{selectionDecisionDbId}` (`genxGetSelectionDecision`)
 
 ## 4. Compatibility law
 

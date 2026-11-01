@@ -159,7 +159,7 @@ function runJob(jobId: string, jobType: string, params: Record<string, unknown>)
 }
 
 function stripPrefix(path: string): string {
-  for (const prefix of ["/brapi/v3", "/brapi/v2"]) {
+  for (const prefix of ["/genx/v1", "/brapi/v2"]) {
     if (path === prefix || path.startsWith(prefix + "/")) return path.slice(prefix.length) || "/";
   }
   return path;

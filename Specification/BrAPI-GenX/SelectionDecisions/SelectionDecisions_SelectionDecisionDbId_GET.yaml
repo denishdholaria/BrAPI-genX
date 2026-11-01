@@ -1,13 +1,13 @@
 info:
-  title: BrAPI
+  title: BrAPI-GenX API
   version: ''
 openapi: 3.0.0
 paths:
   /selection-decisions/{selectionDecisionDbId}:
     get:
       operationId: genxGetSelectionDecision
-      x-brapi-den:
-        catalogId: "brapi-den.genx.v3.selection-decisions.get"
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.selection-decisions.get"
         classification:
           primaryDomain: "D2"
           crossCuttingCapabilities: ["C1", "C2", "C9"]

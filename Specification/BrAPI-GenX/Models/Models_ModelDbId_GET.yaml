@@ -1,13 +1,13 @@
 info:
-  title: BrAPI
+  title: BrAPI-GenX API
   version: ''
 openapi: 3.0.0
 paths:
   /models/{modelDbId}:
     get:
       operationId: genxGetModelVersion
-      x-brapi-den:
-        catalogId: "brapi-den.genx.v3.models.get-version"
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.models.get-version"
         classification:
           primaryDomain: "D7"
           crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]

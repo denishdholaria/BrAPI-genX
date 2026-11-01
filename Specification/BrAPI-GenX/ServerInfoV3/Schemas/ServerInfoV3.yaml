@@ -1,5 +1,5 @@
 info:
-  title: BrAPI
+  title: BrAPI-GenX API
   version: ''
 openapi: 3.0.0
 paths: {}
@@ -120,10 +120,10 @@ components:
             $ref: '#/components/schemas/CapabilityOperation'
           example:
             - method: POST
-              route: /brapi/v3/jobs
+              route: /genx/v1/jobs
               operationId: genxSubmitAsyncJob
             - method: GET
-              route: /brapi/v3/jobs/{jobDbId}
+              route: /genx/v1/jobs/{jobDbId}
               operationId: genxGetAsyncJobById
         scopes:
           description: Authorization scopes required to use this capability, when applicable; detailed scope semantics remain under review.
@@ -148,8 +148,8 @@ components:
           description: HTTP method of the operation.
         route:
           type: string
-          description: Full route template, including the /brapi/v3 base prefix.
-          example: /brapi/v3/jobs/{jobDbId}
+          description: Full route template, including the /genx/v1 base prefix.
+          example: /genx/v1/jobs/{jobDbId}
         operationId:
           type: string
           description: Stable operation identity from the versioned GenX API contract.

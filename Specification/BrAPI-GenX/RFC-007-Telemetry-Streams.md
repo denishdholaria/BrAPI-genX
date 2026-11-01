@@ -55,7 +55,7 @@ Invariants:
    value replays with zero new effects. Same key + different value is
    rejected with `409` — two observers disagreeing about one sample instant
    is a conflict, not an overwrite.
-2. `POST /brapi/v3/telemetry` (`genxAppendTelemetryBatch`) takes an array (V2.1 batch style) and reports
+2. `POST /genx/v1/telemetry` (`genxAppendTelemetryBatch`) takes an array (V2.1 batch style) and reports
    `{appended, replayed}` counts. Batch mates conflicting with stored points
    fail the batch element-wise: conflicting elements are rejected and named,
    non-conflicting ones commit. (Element-wise semantics documented in the
@@ -66,10 +66,10 @@ Invariants:
 
 ## 3. Endpoints
 
-- `POST /brapi/v3/telemetry` (`genxAppendTelemetryBatch`) with an array of `TelemetryPoint` → `200` +
+- `POST /genx/v1/telemetry` (`genxAppendTelemetryBatch`) with an array of `TelemetryPoint` → `200` +
   `{appended, replayed, conflicts[]}`. Conflicts reject the element, not the
   batch.
-- `GET /brapi/v3/telemetry` (`genxQueryTelemetrySamplesOrAggregates`) with `deviceDbId` (required), `sensorDbId?`, `from?`,
+- `GET /genx/v1/telemetry` (`genxQueryTelemetrySamplesOrAggregates`) with `deviceDbId` (required), `sensorDbId?`, `from?`,
   `to?` (RFC 3339), `aggregation?` (`none`|`mean`|`min`|`max`|`count`,
   default `none`), `windowSeconds?` + standard pagination → points
   (`aggregation: none`) or `TelemetryBucket` rows.

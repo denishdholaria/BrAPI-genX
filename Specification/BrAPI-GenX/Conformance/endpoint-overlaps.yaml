@@ -1,7 +1,7 @@
 schema_version: 1
 api_base_paths:
   brapi_v21: /brapi/v2
-  genx: /brapi/v3
+  genx: /genx/v1
 
 # A match below is between relative path templates in separate API generations.
 # Full URLs remain distinct because their base paths differ. The entry is still
@@ -24,7 +24,7 @@ allowed_relative_path_overlaps:
 semantic_neighbors:
   - id: SEM-01
     v21_surface: "GET/POST /brapi/v2/seedlots/transactions; GET /brapi/v2/seedlots/{seedLotDbId}/transactions"
-    genx_surface: "GET/POST /brapi/v3/seedlots/{seedLotDbId}/ledger"
+    genx_surface: "GET/POST /genx/v1/seedlots/{seedLotDbId}/ledger"
     v21_resource: SeedLotTransaction
     genx_resource: LotLedgerEntry
     relationship: related-real-world-movement-records-not-yet-defined-as-equivalent
@@ -37,7 +37,7 @@ semantic_neighbors:
       mirror writes, claim drop-in replacement, or double-count both streams.
   - id: SEM-02
     v21_surface: "POST /brapi/v2/search/* and GET /brapi/v2/search/{searchResultsDbId}"
-    genx_surface: "POST /brapi/v3/jobs; GET/DELETE /brapi/v3/jobs/{jobDbId}"
+    genx_surface: "POST /genx/v1/jobs; GET/DELETE /genx/v1/jobs/{jobDbId}"
     v21_resource: BrAPI search lifecycle
     genx_resource: Job
     relationship: complementary-general-work-lifecycle
@@ -48,7 +48,7 @@ semantic_neighbors:
       but a client must not assume that it does unless advertised.
   - id: SEM-03
     v21_surface: "Observation records under /brapi/v2/observations and ObservationVariable definitions under /brapi/v2/variables"
-    genx_surface: "GET/POST /brapi/v3/telemetry"
+    genx_surface: "GET/POST /genx/v1/telemetry"
     v21_resource: scientific observations tied to breeding studies and units
     genx_resource: device/sensor time-series samples or aggregates
     relationship: distinct-resource-families-with-possible-domain-mapping
@@ -60,7 +60,7 @@ semantic_neighbors:
       similarity.
   - id: SEM-04
     v21_surface: "VariantSet, Variant, CallSet, and Calls"
-    genx_surface: "GET/POST /brapi/v3/variantmatrices; GET /brapi/v3/variantmatrices/{matrixDbId}"
+    genx_surface: "GET/POST /genx/v1/variantmatrices; GET /genx/v1/variantmatrices/{matrixDbId}"
     v21_resource: BrAPI genotyping records and calls
     genx_resource: external matrix metadata/reference
     relationship: complementary-reference-not-a-data-replacement
@@ -72,7 +72,7 @@ semantic_neighbors:
       contract.
   - id: SEM-05
     v21_surface: "metadata.datafiles and external data-file retrieval in /brapi/v2 responses"
-    genx_surface: "GET/POST /brapi/v3/fair-packages; GET /brapi/v3/fair-packages/{packageDbId}"
+    genx_surface: "GET/POST /genx/v1/fair-packages; GET /genx/v1/fair-packages/{packageDbId}"
     v21_resource: file references attached to a response/record
     genx_resource: FAIRPackage metadata and access-policy record
     relationship: complementary-metadata-not-a-byte-transport
@@ -82,7 +82,7 @@ semantic_neighbors:
       embargo, and identifiers do not themselves deliver package bytes.
   - id: SEM-06
     v21_surface: "BrAPI-Genotyping OntologyTerm schema (not a route)"
-    genx_surface: "VariableTerm schema exposed through /brapi/v3/variable-terms"
+    genx_surface: "VariableTerm schema exposed through /genx/v1/variable-terms"
     v21_resource: lightweight ontology term label/reference
     genx_resource: versioned observation-variable term definition
     relationship: distinct-schema-purpose
@@ -93,7 +93,7 @@ semantic_neighbors:
       equivalence from the word term.
   - id: SEM-07
     v21_surface: "no equivalent model registry or inference endpoint asserted"
-    genx_surface: "GET/POST /brapi/v3/models; GET /brapi/v3/models/{modelDbId}; inference Job via /brapi/v3/jobs"
+    genx_surface: "GET/POST /genx/v1/models; GET /genx/v1/models/{modelDbId}; inference Job via /genx/v1/jobs"
     v21_resource: none claimed
     genx_resource: registered model metadata vs asynchronous execution
     relationship: two-distinct-genx-resources

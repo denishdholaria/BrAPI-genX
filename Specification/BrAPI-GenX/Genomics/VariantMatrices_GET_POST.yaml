@@ -1,13 +1,13 @@
 info:
-  title: BrAPI
+  title: BrAPI-GenX API
   version: ''
 openapi: 3.0.0
 paths:
   /variantmatrices:
     get:
       operationId: genxListVariantMatrixReferences
-      x-brapi-den:
-        catalogId: "brapi-den.genx.v3.variant-matrices.list"
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.variant-matrices.list"
         classification:
           primaryDomain: "D3"
           crossCuttingCapabilities: ["C1", "C2", "C5", "C6", "C9"]
@@ -62,8 +62,8 @@ paths:
       - Variant Matrices
     post:
       operationId: genxRegisterVariantMatrixReference
-      x-brapi-den:
-        catalogId: "brapi-den.genx.v3.variant-matrices.register"
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.variant-matrices.register"
         classification:
           primaryDomain: "D3"
           crossCuttingCapabilities: ["C1", "C2", "C5", "C6", "C9"]

@@ -1,5 +1,5 @@
 info:
-  title: BrAPI
+  title: BrAPI-GenX API
   version: ''
 openapi: 3.0.0
 paths: {}
@@ -96,7 +96,7 @@ components:
         endpoint:
           description: Endpoint that served the evidence
           type: string
-          example: /brapi/v3/jobs/JOB_0091
+          example: /genx/v1/jobs/JOB_0091
         schemaVersion:
           description: Schema version of the evidence payload
           type: string

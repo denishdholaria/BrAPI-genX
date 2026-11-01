@@ -1,13 +1,13 @@
 info:
-  title: BrAPI
+  title: BrAPI-GenX API
   version: ''
 openapi: 3.0.0
 paths:
   /jobs:
     get:
       operationId: genxListJobs
-      x-brapi-den:
-        catalogId: "brapi-den.genx.v3.jobs.list"
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.jobs.list"
         classification:
           primaryDomain: null
           crossCuttingCapabilities: ["C1", "C3", "C9"]
@@ -63,8 +63,8 @@ paths:
       - Jobs
     post:
       operationId: genxSubmitAsyncJob
-      x-brapi-den:
-        catalogId: "brapi-den.genx.v3.jobs.submit"
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.jobs.submit"
         classification:
           primaryDomain: null
           crossCuttingCapabilities: ["C2", "C3", "C9"]

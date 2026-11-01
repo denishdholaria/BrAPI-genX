@@ -1,62 +1,91 @@
-# BrAPI V2.1
-The Breeding API (BrAPI) is a Standardized RESTful Web Service API Specification for communicating Plant Breeding Data. BrAPI allows for easy data sharing between databases and tools involved in plant breeding.
+# BrAPI-GenX
 
-## Versions
+**BrAPI-GenX** is an independently governed project for developing, exploring, and
+extending approaches to breeding data interoperability. It builds on the plant
+breeding community's standards while distinguishing its own extensions,
+experimental capabilities, and independently developed features.
 
-### V2
+BrAPI-GenX is **not** the official BrAPI specification, an officially endorsed
+BrAPI release, or a replacement for the community's specification. Official
+BrAPI terminology, version identifiers, and routes remain intact.
 
-BrAPI V2 is divided into four modules:
+## Identity and naming
 
-**BrAPI Core** - The BrAPI Core module contains high level entities used for organization and management. This includes Programs, Trials, Studies, Locations, People, and Lists
+The canonical identity and naming standard is
+[`docs/project/PROJECT_IDENTITY.md`](./docs/project/PROJECT_IDENTITY.md). In
+summary:
 
-**BrAPI Phenotyping** - The BrAPI Phenotyping module contains entities related to phenotypic observations. This includes Observation Units, Observations, Observation Variables, Traits, Scales, Methods, and Images
+- Official project name: **BrAPI-GenX**
+- Repository slug / technical identifier: `brapi-genx`
+- Rust module identifier: `brapi_genx`
+- Configuration prefix: `BRAPI_GENX_`
+- OpenAPI specification title: **BrAPI-GenX API**
+- GenX-native API namespace: **`/genx/v1/`**
 
-**BrAPI Genotyping** - The BrAPI Genotyping module contains entities related to genotyping analysis. This includes Samples, Markers, Variant Sets, Variants, Call Sets, Calls, References, Reads, and Vendor Orders
+Legacy names (BrAPI-Den, BrAPI_Den, brapi_den, and provisional variants) are
+retired as active identities. Historical references may be preserved for
+attribution, migration, or compatibility.
 
-**BrAPI Germplasm** - The BrAPI Germplasm module contains entities related to germplasm management. This includes Germplasm, Germplasm Attributes, Seed Lots, Crosses, Pedigree, and Progeny
+## Relationship with official BrAPI
 
-| Version | Status | Release Date | SwaggerHub | Apiary | Notes |
-|---------|--------|--------------|------------|--------|-------|
-|[V2.1](https://github.com/plantbreeding/API/tree/V2.0) |Released |July 1, 2022 | | | [Release Notes](https://github.com/plantbreeding/API/releases/tag/V2.1) / [Change File](https://github.com/plantbreeding/API/releases/download/V2.1/BrAPI_V2-1_Release_Notes.xlsx)|
-| | | |[BrAPI Core](https://app.swaggerhub.com/apis/PlantBreedingAPI/BrAPI-Core/2.1)               |[BrAPI Core](https://brapicore21.docs.apiary.io) | |
-| | | |[BrAPI Phenotyping](https://app.swaggerhub.com/apis/PlantBreedingAPI/BrAPI-Phenotyping/2.1) |[BrAPI Phenotyping](https://brapiphenotyping21.docs.apiary.io) | |
-| | | |[BrAPI Genotyping](https://app.swaggerhub.com/apis/PlantBreedingAPI/BrAPI-Genotyping/2.1)   |[BrAPI Genotyping](https://brapigenotyping21.docs.apiary.io) | |
-| | | |[BrAPI Germplasm](https://app.swaggerhub.com/apis/PlantBreedingAPI/BrAPI-Germplasm/2.1)     |[BrAPI Germplasm](https://brapigermplasm21.docs.apiary.io) | |
-|[V2.0](https://github.com/plantbreeding/API/tree/brapi-V2.0) |Released |Mar 11, 2020 | | | [Release Notes](https://github.com/plantbreeding/API/releases/tag/V2.0) / [Change File](https://github.com/plantbreeding/API/releases/download/V2.0/BrAPI_V2-0_Release_Notes.xlsx)|
-| | | |[BrAPI Core](https://app.swaggerhub.com/apis/PlantBreedingAPI/BrAPI-Core/2.0)               |[BrAPI Core](https://brapicore20.docs.apiary.io) | |
-| | | |[BrAPI Phenotyping](https://app.swaggerhub.com/apis/PlantBreedingAPI/BrAPI-Phenotyping/2.0) |[BrAPI Phenotyping](https://brapiphenotyping20.docs.apiary.io) | |
-| | | |[BrAPI Genotyping](https://app.swaggerhub.com/apis/PlantBreedingAPI/BrAPI-Genotyping/2.0)   |[BrAPI Genotyping](https://brapigenotyping20.docs.apiary.io) | |
-| | | |[BrAPI Germplasm](https://app.swaggerhub.com/apis/PlantBreedingAPI/BrAPI-Germplasm/2.0)     |[BrAPI Germplasm](https://brapigermplasm20.docs.apiary.io) | |
+- **BrAPI** — the established community-driven Breeding Application Programming
+  Interface specification and ecosystem.
+- **Official BrAPI v3** — the community's official third major version,
+  governed by the BrAPI community.
+- **BrAPI-GenX** — this independently governed project.
 
-### V1
+GenX-native endpoints use `/genx/v1/`. Official BrAPI-versioned routes are used
+only where they implement the corresponding official specification and that use
+is justified by actual compatibility requirements. GenX never redefines an
+official BrAPI route or version identifier to represent a proprietary extension.
 
-Version | Status | Release Date | SwaggerHub | Apiary | Notes
---|--|--|--|--|--
-[V1.3](https://github.com/plantbreeding/API/tree/brapi-V1.3) | Archived | Nov 01, 2018 |[Archive-1.3](https://app.swaggerhub.com/apis/PlantBreedingAPI/BrAPI/1.3) | [Archive-1.3](https://brapiarchive13.docs.apiary.io/#) | [Release Notes](https://github.com/plantbreeding/API/releases/tag/V1.3) / [Change File]()
-[V1.2](https://github.com/plantbreeding/API/tree/brapi-V1.2) | Archived | Apr 27, 2018 |[Archive-1.2](https://app.swaggerhub.com/apis/PlantBreedingAPI/BrAPI/1.2) | [Archive-1.2](https://brapiarchive12.docs.apiary.io/#) | [Release Notes](https://github.com/plantbreeding/API/releases/tag/V1.2) / [Change File](https://github.com/plantbreeding/API/files/1964628/BrAPI_V1-2_Release_Notes.xlsx)
-[V1.1](https://github.com/plantbreeding/API/tree/brapi-V1.1) | Archived | Jan 26, 2018 |                                                                          | [Archive-1.1](https://brapiarchive11.docs.apiary.io/#) | [Release Notes](https://github.com/plantbreeding/API/releases/tag/V1.1) / [Change File](https://github.com/plantbreeding/API/files/1668289/BrAPI_V1-1_Release_Notes.xlsx)
-[V1.0](https://github.com/plantbreeding/API/tree/brapi-V1.0) | Archived | Nov 13, 2017 |                                                                          | [Archive-1.0](https://brapiarchive10.docs.apiary.io/#) | [Release Notes](https://github.com/plantbreeding/API/releases/tag/V1.0)
+## Repository layout
 
-## General Reference Documentation
-- [URL Structure](https://wiki.brapi.org/index.php/RESTfulness)
-- [Response Structure](https://wiki.brapi.org/index.php/Response_Structure)
-- [Date/Time Encoding](https://wiki.brapi.org/index.php/Dates_and_Times)
-- [Location Encoding](https://wiki.brapi.org/index.php/Location_Coordinates)
-- [Error Handling](https://wiki.brapi.org/index.php/Error_Handling)
-- [Search Services](https://wiki.brapi.org/index.php/Search_Services)
+- `Specification/` — endpoint registry, OpenAPI specifications, generated
+  catalogues, and crosswalks.
+  - `Specification/BrAPI-GenX/` — GenX proposal specifications (non-normative
+    until explicitly accepted).
+  - `Specification/BrAPI-GenX/Conformance/` — probes, fixtures, and the
+    machine-readable domain classification registry.
+  - `Specification/BrAPI-GenX/Inventory/` — generated endpoint-to-class inventory.
+  - `Specification/BrAPI-GenX/AMBIKA-GAP-REGISTER.md` — gap analysis against the
+    Ambika ideal module catalog.
+- `Scripts/` — generation and conformance-check scripts.
+- `docs/project/PROJECT_IDENTITY.md` — authoritative identity and naming standard.
+- `generator/`, `Wiki/`, `docker/` — supporting tooling and documentation.
 
+## Status
 
+BrAPI-GenX specifications are **proposals** unless explicitly accepted and
+ratified. They are additive and optional: a client using official BrAPI must
+keep working against a GenX-aware server, and a GenX client must tolerate a
+server that does not implement a GenX object. Nothing here changes official BrAPI
+v2.1 behavior.
 
-## Resources
-[Brapi.org](https://brapi.org) - The home of all things BrAPI
+## Validation
 
-[BrAPI On Apiary](https://brapi.docs.apiary.io/#) - Apiary documentation of BrAPI
+From the repository root:
 
-[BrAPI On SwaggerHub](https://app.swaggerhub.com/apis/PlantBreedingAPI/BrAPI) - SwaggerHub documentation of BrAPI
+```bash
+python3 Scripts/checkGenXEndpointCatalog.py
+python3 Scripts/checkEndpointRegistry.py
+python3 Scripts/checkGenXConformance.py
+```
 
-[BrAPI Community Forum](https://forum.brapi.org) - Consult with BrAPI experts from all over the world
+The first two validate catalogue/registry consistency. The third runs static
+conformance probes; live probes require `--server`.
 
-[BRAVA](http://webapps.ipk-gatersleben.de/brapivalidator/) - Test your BrAPI Server with this robust test client
+## Versioning
 
-[BrAPI Test Server](https://test-server.brapi.org) - Test your BrAPI Client against sample data
+BrAPI-GenX has an independent versioning policy. Its version must not be confused
+with the version of the official BrAPI specification. Compatibility, extensions,
+experimental endpoints, and breaking changes are managed under this independent
+policy. See `docs/project/PROJECT_IDENTITY.md`.
 
+## Contribution guidance
+
+- Preserve official BrAPI terminology and identifiers.
+- Do not introduce competing aliases or provisional names.
+- Classify every new GenX module, schema, and operation in
+  `Specification/BrAPI-GenX/Conformance/domain-classification.yaml`.
+- Follow the GenX module pattern and run the checks above before submitting.

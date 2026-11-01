@@ -70,7 +70,7 @@ class EndpointIdentityGuardrailTests(unittest.TestCase):
             "schema_version": 1,
             "api_base_paths": {
                 "brapi_v21": "/brapi/v2",
-                "genx": "/brapi/v3",
+                "genx": "/genx/v1",
             },
             "allowed_relative_path_overlaps": [
                 {
@@ -86,7 +86,7 @@ class EndpointIdentityGuardrailTests(unittest.TestCase):
                 {
                     "id": "SEM-TEST-01",
                     "v21_surface": "GET /brapi/v2/variables/{observationVariableDbId}",
-                    "genx_surface": "GET /brapi/v3/variable-terms/{variableDbId}",
+                    "genx_surface": "GET /genx/v1/variable-terms/{variableDbId}",
                     "relationship": "domain-neighbor-distinct-route-and-contract",
                     "risk": "high",
                     "rationale": "The resource, route, and payload contracts are not interchangeable.",
@@ -96,8 +96,8 @@ class EndpointIdentityGuardrailTests(unittest.TestCase):
         self.catalogue_rows = [
             "| Full route | Method | Stable operation ID | Primary meaning | Boundary / do not infer |",
             "|---|---|---|---|---|",
-            "| `/brapi/v3/serverinfo` | GET | `genxGetServerInfoV3` | Discover GenX capabilities | Not interchangeable with V2.1 serverinfo. |",
-            "| `/brapi/v3/variable-terms/{variableDbId}` | GET | `genxGetVariableTermVersion` | Retrieve a versioned variable term | Not V2.1 ObservationVariable. |",
+            "| `/genx/v1/serverinfo` | GET | `genxGetServerInfoV3` | Discover GenX capabilities | Not interchangeable with V2.1 serverinfo. |",
+            "| `/genx/v1/variable-terms/{variableDbId}` | GET | `genxGetVariableTermVersion` | Retrieve a versioned variable term | Not V2.1 ObservationVariable. |",
         ]
         self._write_fixtures()
 
@@ -177,7 +177,7 @@ class EndpointIdentityGuardrailTests(unittest.TestCase):
             }
         }
         self.catalogue_rows.append(
-            "| `/brapi/v3/variable-terms/{anotherVariableId}` | GET | `genxGetAnotherVariableTerm` | Duplicate route | Same normalized route template; must fail. |"
+            "| `/genx/v1/variable-terms/{anotherVariableId}` | GET | `genxGetAnotherVariableTerm` | Duplicate route | Same normalized route template; must fail. |"
         )
         self._write_fixtures()
         self.assertGreater(self._run_check().failures, 0)
@@ -191,7 +191,7 @@ class EndpointIdentityGuardrailTests(unittest.TestCase):
 
     def test_catalogue_operation_id_mismatch_fails(self):
         self.catalogue_rows[3] = (
-            "| `/brapi/v3/variable-terms/{variableDbId}` | GET | "
+            "| `/genx/v1/variable-terms/{variableDbId}` | GET | "
             "`genxGetWrongVariableTermVersion` | Retrieve a term | Wrong ID is being tested. |"
         )
         self._write_fixtures()
@@ -204,7 +204,7 @@ class EndpointIdentityGuardrailTests(unittest.TestCase):
 
     def test_catalogue_row_without_boundary_fails(self):
         self.catalogue_rows[3] = (
-            "| `/brapi/v3/variable-terms/{variableDbId}` | GET | "
+            "| `/genx/v1/variable-terms/{variableDbId}` | GET | "
             "`genxGetVariableTermVersion` | Retrieve a versioned variable term |"
         )
         self._write_fixtures()
@@ -212,7 +212,7 @@ class EndpointIdentityGuardrailTests(unittest.TestCase):
 
     def test_catalogue_row_without_primary_meaning_fails(self):
         self.catalogue_rows[3] = (
-            "| `/brapi/v3/variable-terms/{variableDbId}` | GET | "
+            "| `/genx/v1/variable-terms/{variableDbId}` | GET | "
             "`genxGetVariableTermVersion` | | Not a V2.1 ObservationVariable. |"
         )
         self._write_fixtures()

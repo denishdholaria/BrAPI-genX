@@ -47,8 +47,8 @@ this RFC, and this RFC imposes nothing on BijMantra.
 1. V2.1 is frozen. No GenX change may alter V2.1 request/response semantics.
 2. GenX objects are additive and optional in both directions (server may omit,
    client must tolerate absence).
-3. GenX lives under `/brapi/v3/` (see `GeneralInfo/URL_Structure.md` pattern:
-   `https://<server>/brapi/v3/<endpoint>`). V2.1 keeps `/brapi/v2/`.
+3. GenX lives under `/genx/v1/` (see `GeneralInfo/URL_Structure.md` pattern:
+   `https://<server>/genx/v1/<endpoint>`). V2.1 keeps `/brapi/v2/`.
 4. Standard response envelope (`metadata`/`result`, pagination, `datafiles`,
    `status`) is unchanged. GenX schemas compose into it.
 5. HTTP status codes follow `GeneralInfo/Error_Handling.md`. The one proposed
@@ -89,14 +89,14 @@ Files: `Jobs/Schemas/Job.yaml`, `Jobs/Schemas/JobNewRequest.yaml`,
 Purpose: give every long-running operation (searches, analyses, exports, model
 inference) one lifecycle: submit → poll → retrieve-or-cancel → expire.
 
-- `POST /brapi/v3/jobs` (`genxSubmitAsyncJob`) with `JobNewRequest{jobType, parameters, idempotencyKey?}`.
+- `POST /genx/v1/jobs` (`genxSubmitAsyncJob`) with `JobNewRequest{jobType, parameters, idempotencyKey?}`.
   Returns `202` + `Job`. If `idempotencyKey` was already accepted with a
   byte-identical body, the server must return the existing `Job` with zero new
   effects (replay returns existing).
-- `GET /brapi/v3/jobs/{jobDbId}` (`genxGetAsyncJobById`) returns the current `Job{jobDbId, jobType, status,
+- `GET /genx/v1/jobs/{jobDbId}` (`genxGetAsyncJobById`) returns the current `Job{jobDbId, jobType, status,
   progress, createdAt, updatedAt, expiresAt, result?}`. `status` is one of
   `SUBMITTED, RUNNING, COMPLETED, FAILED, CANCELLED, EXPIRED`.
-- `DELETE /brapi/v3/jobs/{jobDbId}` (`genxRequestAsyncJobCancellation`) requests cancellation; terminal states are
+- `DELETE /genx/v1/jobs/{jobDbId}` (`genxRequestAsyncJobCancellation`) requests cancellation; terminal states are
   immutable.
 - `result`, when `COMPLETED`, uses the standard envelope (`result.data` +
   pagination, or `metadata.datafiles` for file outputs).
@@ -119,7 +119,7 @@ Files: `ServerInfoV3/Schemas/ServerInfoV3.yaml`,
 Purpose: let a client learn, in one call, which BrAPI generations, GenX
 objects, auth profiles, and scopes a server supports.
 
-- `GET /brapi/v3/serverinfo` (`genxGetServerInfoV3`) (V2.1 `GET /brapi/v2/serverinfo` is untouched).
+- `GET /genx/v1/serverinfo` (`genxGetServerInfoV3`) (V2.1 `GET /brapi/v2/serverinfo` is untouched).
 - `ServerInfoV3` keeps every V2.1 `ServerInfo` field and adds:
   `brapiVersions[]` (e.g. `["2.1", "3.0-draft"]`),
   `capabilities[]{name, versions[], methods[], scopes[]}` where `name` is a

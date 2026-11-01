@@ -1,4 +1,4 @@
-# BrAPI-Den Scientific Domain Classification
+# BrAPI-GenX Scientific Domain Classification
 
 - Status: proposed taxonomy for review; non-normative until explicitly accepted.
 - Scope: classification of the BrAPI-GenX specification modules, not a claim of BrAPI community endorsement.
@@ -12,7 +12,7 @@ This avoids placing fundamentally different concepts—such as plant genetic mat
 
 ## 2. Proposed top-level taxonomy
 
-The proposal uses seven domain classes plus a separate cross-cutting layer. This is a classification for the expanded BrAPI-Den scope, not an attempt to rename the existing four BrAPI V2.1 groups.
+The proposal uses seven domain classes plus a separate cross-cutting layer. This is a classification for the expanded BrAPI-GenX scope, not an attempt to rename the existing four BrAPI V2.1 groups.
 
 | Code | Class | Scientific/operational boundary | Typical content |
 |---|---|---|---|
@@ -69,7 +69,7 @@ Keep the existing BrAPI V2.1 categories and contracts unchanged:
 - BrAPI-Genotyping
 - BrAPI-Phenotyping
 
-The proposed D1–D7 taxonomy is a broader BrAPI-Den classification for the expanded proposal. It is not a retrospective reclassification of the BrAPI community's published groups and should not be described as officially endorsed by the BrAPI community.
+The proposed D1–D7 taxonomy is a broader BrAPI-GenX classification for the expanded proposal. It is not a retrospective reclassification of the BrAPI community's published groups and should not be described as officially endorsed by the BrAPI community.
 
 Crosswalk rules:
 - A resource already standardized in V2.1 retains its official V2.1 location and contract.

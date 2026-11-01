@@ -1,13 +1,13 @@
 info:
-  title: BrAPI
+  title: BrAPI-GenX API
   version: ''
 openapi: 3.0.0
 paths:
   /jobs/{jobDbId}:
     get:
       operationId: genxGetAsyncJobById
-      x-brapi-den:
-        catalogId: "brapi-den.genx.v3.jobs.get"
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.jobs.get"
         classification:
           primaryDomain: null
           crossCuttingCapabilities: ["C2", "C3", "C9"]
@@ -67,8 +67,8 @@ paths:
       - Jobs
     delete:
       operationId: genxRequestAsyncJobCancellation
-      x-brapi-den:
-        catalogId: "brapi-den.genx.v3.jobs.request-cancellation"
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.jobs.request-cancellation"
         classification:
           primaryDomain: null
           crossCuttingCapabilities: ["C3", "C9"]

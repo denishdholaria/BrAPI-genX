@@ -39,7 +39,7 @@ is reversible without breaking the rest; objections belong against the ID.
 
 | ID | Decision | Rationale |
 |---|---|---|
-| A-01 | GenX lives under `/brapi/v3/`, V2.1 frozen | Community major-version convention |
+| A-01 | GenX lives under `/genx/v1/`, V2.1 frozen | Community major-version convention |
 | A-02 | Zero shadowing of V2.1/shared component names (S-01 enforces) | Caught 2 real collisions (`AuthorizationToken`, `OntologyTerm`) |
 | A-03 | `VariableTerm`, not `OntologyTerm`, for the governance object | V2.1 Genotyping owns `OntologyTerm` (GA4GH label, different semantics) |
 | A-04 | Replay returns `200`, first submit `202` | Distinguishes replay observably; L-probes assert it |

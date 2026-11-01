@@ -290,7 +290,7 @@ probes:
   object: variableTerms
   title: Versioned variable-term publication replays an identical version without duplication
   procedure:
-  - POST a VariableTermNewRequest to /brapi/v3/variable-terms under a fresh namespaced id; POST the identical body again.
+  - POST a VariableTermNewRequest to /genx/v1/variable-terms under a fresh namespaced id; POST the identical body again.
   expectation: Second response is 200 with the same (variableDbId, version) and no new version.
   falsifier: A second version is created for the identical replay.
   calls:
@@ -301,7 +301,7 @@ probes:
   object: variableTerms
   title: Conflicting rewrite of a published variable-term version is rejected
   procedure:
-  - POST to /brapi/v3/variable-terms; POST the same (variableDbId, version) with a different body.
+  - POST to /genx/v1/variable-terms; POST the same (variableDbId, version) with a different body.
   expectation: Second call is rejected with 409 and the published version is unchanged on re-GET.
   falsifier: The published version is mutated or a conflicting version is stored.
   calls:

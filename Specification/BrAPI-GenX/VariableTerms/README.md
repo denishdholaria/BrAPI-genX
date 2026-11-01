@@ -3,11 +3,11 @@
 Versioned, namespaced variable terms. Conflicting redefinitions are rejected,
 never merged silently.
 
-- `POST /brapi/v3/variable-terms` (`genxPublishVariableTermVersion`) creates a term version (`Schemas/VariableTermNewRequest.yaml`).
+- `POST /genx/v1/variable-terms` (`genxPublishVariableTermVersion`) creates a term version (`Schemas/VariableTermNewRequest.yaml`).
   Same `(variableDbId, version)` + identical body replays the existing record;
   same pair + different body is rejected with `409`.
-- `GET /brapi/v3/variable-terms` (`genxListVariableTermVersions`) lists terms across versions with standard pagination.
-- `GET /brapi/v3/variable-terms/{variableDbId}` (`genxGetVariableTermVersion`) fetches one term (latest created when
+- `GET /genx/v1/variable-terms` (`genxListVariableTermVersions`) lists terms across versions with standard pagination.
+- `GET /genx/v1/variable-terms/{variableDbId}` (`genxGetVariableTermVersion`) fetches one term (latest created when
   `version` is omitted) or `404`.
 
 There is no `DELETE`: terms are deprecated explicitly (`status: deprecated` +

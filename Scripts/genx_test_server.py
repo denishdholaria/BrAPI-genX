@@ -246,7 +246,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def _route(self):
         path = urlparse(self.path).path
-        for prefix in ("/brapi/v3", "/brapi/v2"):
+        for prefix in ("/genx/v1", "/brapi/v2"):
             if path == prefix or path.startswith(prefix + "/"):
                 path = path[len(prefix):] or "/"
                 break
@@ -383,22 +383,22 @@ class Handler(BaseHTTPRequestHandler):
                     "operations": [
                         {
                             "method": "GET",
-                            "route": "/brapi/v3/jobs",
+                            "route": "/genx/v1/jobs",
                             "operationId": "genxListJobs"
                         },
                         {
                             "method": "POST",
-                            "route": "/brapi/v3/jobs",
+                            "route": "/genx/v1/jobs",
                             "operationId": "genxSubmitAsyncJob"
                         },
                         {
                             "method": "GET",
-                            "route": "/brapi/v3/jobs/{jobDbId}",
+                            "route": "/genx/v1/jobs/{jobDbId}",
                             "operationId": "genxGetAsyncJobById"
                         },
                         {
                             "method": "DELETE",
-                            "route": "/brapi/v3/jobs/{jobDbId}",
+                            "route": "/genx/v1/jobs/{jobDbId}",
                             "operationId": "genxRequestAsyncJobCancellation"
                         }
                     ]
@@ -416,12 +416,12 @@ class Handler(BaseHTTPRequestHandler):
                     "operations": [
                         {
                             "method": "POST",
-                            "route": "/brapi/v3/jobs",
+                            "route": "/genx/v1/jobs",
                             "operationId": "genxSubmitAsyncJob"
                         },
                         {
                             "method": "GET",
-                            "route": "/brapi/v3/jobs/{jobDbId}",
+                            "route": "/genx/v1/jobs/{jobDbId}",
                             "operationId": "genxGetAsyncJobById"
                         }
                     ]
@@ -441,17 +441,17 @@ class Handler(BaseHTTPRequestHandler):
                     "operations": [
                         {
                             "method": "GET",
-                            "route": "/brapi/v3/variable-terms",
+                            "route": "/genx/v1/variable-terms",
                             "operationId": "genxListVariableTermVersions"
                         },
                         {
                             "method": "POST",
-                            "route": "/brapi/v3/variable-terms",
+                            "route": "/genx/v1/variable-terms",
                             "operationId": "genxPublishVariableTermVersion"
                         },
                         {
                             "method": "GET",
-                            "route": "/brapi/v3/variable-terms/{variableDbId}",
+                            "route": "/genx/v1/variable-terms/{variableDbId}",
                             "operationId": "genxGetVariableTermVersion"
                         }
                     ]
@@ -472,12 +472,12 @@ class Handler(BaseHTTPRequestHandler):
                     "operations": [
                         {
                             "method": "GET",
-                            "route": "/brapi/v3/seedlots/{seedLotDbId}/ledger",
+                            "route": "/genx/v1/seedlots/{seedLotDbId}/ledger",
                             "operationId": "genxListSeedLotLedgerEntries"
                         },
                         {
                             "method": "POST",
-                            "route": "/brapi/v3/seedlots/{seedLotDbId}/ledger",
+                            "route": "/genx/v1/seedlots/{seedLotDbId}/ledger",
                             "operationId": "genxAppendSeedLotLedgerEntry"
                         }
                     ]
@@ -499,17 +499,17 @@ class Handler(BaseHTTPRequestHandler):
                     "operations": [
                         {
                             "method": "GET",
-                            "route": "/brapi/v3/models",
+                            "route": "/genx/v1/models",
                             "operationId": "genxListModelVersions"
                         },
                         {
                             "method": "POST",
-                            "route": "/brapi/v3/models",
+                            "route": "/genx/v1/models",
                             "operationId": "genxRegisterModelVersion"
                         },
                         {
                             "method": "GET",
-                            "route": "/brapi/v3/models/{modelDbId}",
+                            "route": "/genx/v1/models/{modelDbId}",
                             "operationId": "genxGetModelVersion"
                         }
                     ]
@@ -530,17 +530,17 @@ class Handler(BaseHTTPRequestHandler):
                     "operations": [
                         {
                             "method": "GET",
-                            "route": "/brapi/v3/variantmatrices",
+                            "route": "/genx/v1/variantmatrices",
                             "operationId": "genxListVariantMatrixReferences"
                         },
                         {
                             "method": "POST",
-                            "route": "/brapi/v3/variantmatrices",
+                            "route": "/genx/v1/variantmatrices",
                             "operationId": "genxRegisterVariantMatrixReference"
                         },
                         {
                             "method": "GET",
-                            "route": "/brapi/v3/variantmatrices/{matrixDbId}",
+                            "route": "/genx/v1/variantmatrices/{matrixDbId}",
                             "operationId": "genxGetVariantMatrixReference"
                         }
                     ]
@@ -561,17 +561,17 @@ class Handler(BaseHTTPRequestHandler):
                     "operations": [
                         {
                             "method": "GET",
-                            "route": "/brapi/v3/fair-packages",
+                            "route": "/genx/v1/fair-packages",
                             "operationId": "genxListFairPackageMetadata"
                         },
                         {
                             "method": "POST",
-                            "route": "/brapi/v3/fair-packages",
+                            "route": "/genx/v1/fair-packages",
                             "operationId": "genxRegisterFairPackage"
                         },
                         {
                             "method": "GET",
-                            "route": "/brapi/v3/fair-packages/{packageDbId}",
+                            "route": "/genx/v1/fair-packages/{packageDbId}",
                             "operationId": "genxGetFairPackageMetadata"
                         }
                     ]
@@ -592,12 +592,12 @@ class Handler(BaseHTTPRequestHandler):
                     "operations": [
                         {
                             "method": "GET",
-                            "route": "/brapi/v3/telemetry",
+                            "route": "/genx/v1/telemetry",
                             "operationId": "genxQueryTelemetrySamplesOrAggregates"
                         },
                         {
                             "method": "POST",
-                            "route": "/brapi/v3/telemetry",
+                            "route": "/genx/v1/telemetry",
                             "operationId": "genxAppendTelemetryBatch"
                         }
                     ]

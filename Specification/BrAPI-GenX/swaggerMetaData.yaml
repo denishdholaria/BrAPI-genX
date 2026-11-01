@@ -15,7 +15,7 @@ paths: {}
 security:
 - GenXAuthorizationToken: []
 servers:
-- url: https://test-server.brapi.org/brapi/v3
+- url: https://test-server.brapi.org/genx/v1
 tags:
 - name: Provenance
   description: Provenance envelope for observations, analyses, and predictions

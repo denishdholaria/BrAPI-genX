@@ -9,8 +9,8 @@ statuses, envelopes, and conflict behavior must agree byte-for-byte.
 
 Usage:
     python Scripts/genx_differential_check.py \
-      --a http://127.0.0.1:18080/brapi/v3 \
-      --b http://127.0.0.1:18082/brapi/v3 \
+      --a http://127.0.0.1:18080/genx/v1 \
+      --b http://127.0.0.1:18082/genx/v1 \
       --expired-job JOB_EXPIRED
 """
 

@@ -50,17 +50,17 @@ Invariants:
    rejected with `409` (same conflict rule as Jobs idempotency, RFC-001 §5).
 3. New versions never mutate old ones. Deprecation is explicit (`status:
    deprecated` + `supersededBy`); servers perform no hidden transitions.
-4. `GET /brapi/v3/variable-terms/{variableDbId}` (`genxGetVariableTermVersion`) without `version` returns the most recently
+4. `GET /genx/v1/variable-terms/{variableDbId}` (`genxGetVariableTermVersion`) without `version` returns the most recently
    created version. Version ordering semantics stay `requires decision` (§6).
 
 ## 3. Endpoints
 
-- `POST /brapi/v3/variable-terms` (`genxPublishVariableTermVersion`) with `VariableTermNewRequest` → `200` + single term.
+- `POST /genx/v1/variable-terms` (`genxPublishVariableTermVersion`) with `VariableTermNewRequest` → `200` + single term.
   Unknown id creates; known id + new version appends; replay returns existing;
   conflict returns `409` with a plain-text body.
-- `GET /brapi/v3/variable-terms` (`genxListVariableTermVersions`) with `variableDbId?`, `ontologyDbId?`, `status?` filters +
+- `GET /genx/v1/variable-terms` (`genxListVariableTermVersions`) with `variableDbId?`, `ontologyDbId?`, `status?` filters +
   standard pagination → list of terms across versions.
-- `GET /brapi/v3/variable-terms/{variableDbId}` (`genxGetVariableTermVersion`) with optional `version` → single term
+- `GET /genx/v1/variable-terms/{variableDbId}` (`genxGetVariableTermVersion`) with optional `version` → single term
   (latest created when omitted) or `404`.
 
 `DELETE` is not defined: terms are deprecated, never deleted, so historical

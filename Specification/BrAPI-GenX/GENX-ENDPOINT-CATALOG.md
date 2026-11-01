@@ -20,14 +20,14 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 
 ### FAIR — 3 operations
 
-### GET `/brapi/v3/fair-packages`
+### GET `/genx/v1/fair-packages`
 
-- **Catalogue ID:** `brapi-den.genx.v3.fair-packages.list-metadata`
-- **BrAPI-Den operation identity:** `genxListFairPackageMetadata` (advisory where absent from source)
+- **Catalogue ID:** `brapi-genx.genx.v1.fair-packages.list-metadata`
+- **BrAPI-GenX operation identity:** `genxListFairPackageMetadata` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxListFairPackageMetadata`
 - **GenX source module:** `FAIR`
 - **Source tag:** FAIR Packages
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
 - **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
@@ -49,20 +49,20 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** FAIRPackageListResponse, 400BadRequest, 401Unauthorized, 403Forbidden
 - **Semantic relationship IDs / labels:** SEM-05
-- **Related catalogue IDs:** brapi-den.genx.v3.fair-packages.get-metadata, brapi-den.genx.v3.fair-packages.register
+- **Related catalogue IDs:** brapi-genx.genx.v1.fair-packages.get-metadata, brapi-genx.genx.v1.fair-packages.register
 - **Relevant RFC / decision references:** RFC-006, D-13, D-14, D-15
 - **Contract source:** [`Specification/BrAPI-GenX/FAIR/FairPackages_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/FAIR/FairPackages_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
-### POST `/brapi/v3/fair-packages`
+### POST `/genx/v1/fair-packages`
 
-- **Catalogue ID:** `brapi-den.genx.v3.fair-packages.register`
-- **BrAPI-Den operation identity:** `genxRegisterFairPackage` (advisory where absent from source)
+- **Catalogue ID:** `brapi-genx.genx.v1.fair-packages.register`
+- **BrAPI-GenX operation identity:** `genxRegisterFairPackage` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxRegisterFairPackage`
 - **GenX source module:** `FAIR`
 - **Source tag:** FAIR Packages
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
 - **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
@@ -86,20 +86,20 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
 - **Semantic relationship IDs / labels:** SEM-05
-- **Related catalogue IDs:** brapi-den.genx.v3.fair-packages.get-metadata, brapi-den.genx.v3.fair-packages.list-metadata
+- **Related catalogue IDs:** brapi-genx.genx.v1.fair-packages.get-metadata, brapi-genx.genx.v1.fair-packages.list-metadata
 - **Relevant RFC / decision references:** RFC-006, D-13, D-14, D-15
 - **Contract source:** [`Specification/BrAPI-GenX/FAIR/FairPackages_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/FAIR/FairPackages_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
-### GET `/brapi/v3/fair-packages/{packageDbId}`
+### GET `/genx/v1/fair-packages/{packageDbId}`
 
-- **Catalogue ID:** `brapi-den.genx.v3.fair-packages.get-metadata`
-- **BrAPI-Den operation identity:** `genxGetFairPackageMetadata` (advisory where absent from source)
+- **Catalogue ID:** `brapi-genx.genx.v1.fair-packages.get-metadata`
+- **BrAPI-GenX operation identity:** `genxGetFairPackageMetadata` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxGetFairPackageMetadata`
 - **GenX source module:** `FAIR`
 - **Source tag:** FAIR Packages
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
 - **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
@@ -120,7 +120,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
 - **Semantic relationship IDs / labels:** SEM-05
-- **Related catalogue IDs:** brapi-den.genx.v3.fair-packages.list-metadata, brapi-den.genx.v3.fair-packages.register
+- **Related catalogue IDs:** brapi-genx.genx.v1.fair-packages.list-metadata, brapi-genx.genx.v1.fair-packages.register
 - **Relevant RFC / decision references:** RFC-006, D-15
 - **Contract source:** [`Specification/BrAPI-GenX/FAIR/FairPackages_PackageDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/FAIR/FairPackages_PackageDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
@@ -128,14 +128,14 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 
 ### Genomics — 3 operations
 
-### GET `/brapi/v3/variantmatrices`
+### GET `/genx/v1/variantmatrices`
 
-- **Catalogue ID:** `brapi-den.genx.v3.variant-matrices.list`
-- **BrAPI-Den operation identity:** `genxListVariantMatrixReferences` (advisory where absent from source)
+- **Catalogue ID:** `brapi-genx.genx.v1.variant-matrices.list`
+- **BrAPI-GenX operation identity:** `genxListVariantMatrixReferences` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxListVariantMatrixReferences`
 - **GenX source module:** `Genomics`
 - **Source tag:** Variant Matrices
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Proposed BrAPI-GenX classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
 - **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
@@ -157,20 +157,20 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** VariantMatrixListResponse, 400BadRequest, 401Unauthorized, 403Forbidden
 - **Semantic relationship IDs / labels:** SEM-04
-- **Related catalogue IDs:** brapi-den.brapi-v2-1.genotyping.get.allelematrix, brapi-den.brapi-v2-1.genotyping.get.calls, brapi-den.brapi-v2-1.genotyping.get.callsets, brapi-den.brapi-v2-1.genotyping.get.callsets.by-callsetdbid, brapi-den.brapi-v2-1.genotyping.get.callsets.by-callsetdbid.calls, brapi-den.brapi-v2-1.genotyping.get.variants, brapi-den.brapi-v2-1.genotyping.get.variants.by-variantdbid, brapi-den.brapi-v2-1.genotyping.get.variants.by-variantdbid.calls, brapi-den.brapi-v2-1.genotyping.get.variantsets, brapi-den.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid, brapi-den.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.calls, brapi-den.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.callsets, brapi-den.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.variants, brapi-den.brapi-v2-1.genotyping.post.variantsets.extract, brapi-den.brapi-v2-1.genotyping.put.calls, brapi-den.genx.v3.variant-matrices.get, brapi-den.genx.v3.variant-matrices.register
+- **Related catalogue IDs:** brapi-genx.brapi-v2-1.genotyping.get.allelematrix, brapi-genx.brapi-v2-1.genotyping.get.calls, brapi-genx.brapi-v2-1.genotyping.get.callsets, brapi-genx.brapi-v2-1.genotyping.get.callsets.by-callsetdbid, brapi-genx.brapi-v2-1.genotyping.get.callsets.by-callsetdbid.calls, brapi-genx.brapi-v2-1.genotyping.get.variants, brapi-genx.brapi-v2-1.genotyping.get.variants.by-variantdbid, brapi-genx.brapi-v2-1.genotyping.get.variants.by-variantdbid.calls, brapi-genx.brapi-v2-1.genotyping.get.variantsets, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.calls, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.callsets, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.variants, brapi-genx.brapi-v2-1.genotyping.post.variantsets.extract, brapi-genx.brapi-v2-1.genotyping.put.calls, brapi-genx.genx.v1.variant-matrices.get, brapi-genx.genx.v1.variant-matrices.register
 - **Relevant RFC / decision references:** RFC-005, D-11, D-12, D-19
 - **Contract source:** [`Specification/BrAPI-GenX/Genomics/VariantMatrices_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Genomics/VariantMatrices_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
-### POST `/brapi/v3/variantmatrices`
+### POST `/genx/v1/variantmatrices`
 
-- **Catalogue ID:** `brapi-den.genx.v3.variant-matrices.register`
-- **BrAPI-Den operation identity:** `genxRegisterVariantMatrixReference` (advisory where absent from source)
+- **Catalogue ID:** `brapi-genx.genx.v1.variant-matrices.register`
+- **BrAPI-GenX operation identity:** `genxRegisterVariantMatrixReference` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxRegisterVariantMatrixReference`
 - **GenX source module:** `Genomics`
 - **Source tag:** Variant Matrices
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Proposed BrAPI-GenX classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
 - **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
@@ -194,20 +194,20 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
 - **Semantic relationship IDs / labels:** SEM-04
-- **Related catalogue IDs:** brapi-den.brapi-v2-1.genotyping.get.allelematrix, brapi-den.brapi-v2-1.genotyping.get.calls, brapi-den.brapi-v2-1.genotyping.get.callsets, brapi-den.brapi-v2-1.genotyping.get.callsets.by-callsetdbid, brapi-den.brapi-v2-1.genotyping.get.callsets.by-callsetdbid.calls, brapi-den.brapi-v2-1.genotyping.get.variants, brapi-den.brapi-v2-1.genotyping.get.variants.by-variantdbid, brapi-den.brapi-v2-1.genotyping.get.variants.by-variantdbid.calls, brapi-den.brapi-v2-1.genotyping.get.variantsets, brapi-den.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid, brapi-den.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.calls, brapi-den.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.callsets, brapi-den.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.variants, brapi-den.brapi-v2-1.genotyping.post.variantsets.extract, brapi-den.brapi-v2-1.genotyping.put.calls, brapi-den.genx.v3.variant-matrices.get, brapi-den.genx.v3.variant-matrices.list
+- **Related catalogue IDs:** brapi-genx.brapi-v2-1.genotyping.get.allelematrix, brapi-genx.brapi-v2-1.genotyping.get.calls, brapi-genx.brapi-v2-1.genotyping.get.callsets, brapi-genx.brapi-v2-1.genotyping.get.callsets.by-callsetdbid, brapi-genx.brapi-v2-1.genotyping.get.callsets.by-callsetdbid.calls, brapi-genx.brapi-v2-1.genotyping.get.variants, brapi-genx.brapi-v2-1.genotyping.get.variants.by-variantdbid, brapi-genx.brapi-v2-1.genotyping.get.variants.by-variantdbid.calls, brapi-genx.brapi-v2-1.genotyping.get.variantsets, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.calls, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.callsets, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.variants, brapi-genx.brapi-v2-1.genotyping.post.variantsets.extract, brapi-genx.brapi-v2-1.genotyping.put.calls, brapi-genx.genx.v1.variant-matrices.get, brapi-genx.genx.v1.variant-matrices.list
 - **Relevant RFC / decision references:** RFC-005, D-11, D-12, D-19
 - **Contract source:** [`Specification/BrAPI-GenX/Genomics/VariantMatrices_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Genomics/VariantMatrices_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
-### GET `/brapi/v3/variantmatrices/{matrixDbId}`
+### GET `/genx/v1/variantmatrices/{matrixDbId}`
 
-- **Catalogue ID:** `brapi-den.genx.v3.variant-matrices.get`
-- **BrAPI-Den operation identity:** `genxGetVariantMatrixReference` (advisory where absent from source)
+- **Catalogue ID:** `brapi-genx.genx.v1.variant-matrices.get`
+- **BrAPI-GenX operation identity:** `genxGetVariantMatrixReference` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxGetVariantMatrixReference`
 - **GenX source module:** `Genomics`
 - **Source tag:** Variant Matrices
-- **Proposed BrAPI-Den classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Proposed BrAPI-GenX classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
 - **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
@@ -227,7 +227,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
 - **Semantic relationship IDs / labels:** SEM-04
-- **Related catalogue IDs:** brapi-den.brapi-v2-1.genotyping.get.allelematrix, brapi-den.brapi-v2-1.genotyping.get.calls, brapi-den.brapi-v2-1.genotyping.get.callsets, brapi-den.brapi-v2-1.genotyping.get.callsets.by-callsetdbid, brapi-den.brapi-v2-1.genotyping.get.callsets.by-callsetdbid.calls, brapi-den.brapi-v2-1.genotyping.get.variants, brapi-den.brapi-v2-1.genotyping.get.variants.by-variantdbid, brapi-den.brapi-v2-1.genotyping.get.variants.by-variantdbid.calls, brapi-den.brapi-v2-1.genotyping.get.variantsets, brapi-den.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid, brapi-den.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.calls, brapi-den.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.callsets, brapi-den.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.variants, brapi-den.brapi-v2-1.genotyping.post.variantsets.extract, brapi-den.brapi-v2-1.genotyping.put.calls, brapi-den.genx.v3.variant-matrices.list, brapi-den.genx.v3.variant-matrices.register
+- **Related catalogue IDs:** brapi-genx.brapi-v2-1.genotyping.get.allelematrix, brapi-genx.brapi-v2-1.genotyping.get.calls, brapi-genx.brapi-v2-1.genotyping.get.callsets, brapi-genx.brapi-v2-1.genotyping.get.callsets.by-callsetdbid, brapi-genx.brapi-v2-1.genotyping.get.callsets.by-callsetdbid.calls, brapi-genx.brapi-v2-1.genotyping.get.variants, brapi-genx.brapi-v2-1.genotyping.get.variants.by-variantdbid, brapi-genx.brapi-v2-1.genotyping.get.variants.by-variantdbid.calls, brapi-genx.brapi-v2-1.genotyping.get.variantsets, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.calls, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.callsets, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.variants, brapi-genx.brapi-v2-1.genotyping.post.variantsets.extract, brapi-genx.brapi-v2-1.genotyping.put.calls, brapi-genx.genx.v1.variant-matrices.list, brapi-genx.genx.v1.variant-matrices.register
 - **Relevant RFC / decision references:** RFC-005, D-11, D-12, D-19
 - **Contract source:** [`Specification/BrAPI-GenX/Genomics/VariantMatrices_MatrixDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Genomics/VariantMatrices_MatrixDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
@@ -235,14 +235,14 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 
 ### Jobs — 4 operations
 
-### GET `/brapi/v3/jobs`
+### GET `/genx/v1/jobs`
 
-- **Catalogue ID:** `brapi-den.genx.v3.jobs.list`
-- **BrAPI-Den operation identity:** `genxListJobs` (advisory where absent from source)
+- **Catalogue ID:** `brapi-genx.genx.v1.jobs.list`
+- **BrAPI-GenX operation identity:** `genxListJobs` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxListJobs`
 - **GenX source module:** `Jobs`
 - **Source tag:** Jobs
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C3 — Asynchronous execution and idempotency, C9 — Security, authority and tenancy
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C3 — Asynchronous execution and idempotency, C9 — Security, authority and tenancy
 - **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
@@ -264,20 +264,20 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** JobListResponse, 400BadRequest, 401Unauthorized, 403Forbidden
 - **Semantic relationship IDs / labels:** SEM-02
-- **Related catalogue IDs:** brapi-den.brapi-v2-1.core.get.search.lists.by-searchresultsdbid, brapi-den.brapi-v2-1.core.get.search.locations.by-searchresultsdbid, brapi-den.brapi-v2-1.core.get.search.people.by-searchresultsdbid, brapi-den.brapi-v2-1.core.get.search.programs.by-searchresultsdbid, brapi-den.brapi-v2-1.core.get.search.studies.by-searchresultsdbid, brapi-den.brapi-v2-1.core.get.search.trials.by-searchresultsdbid, brapi-den.brapi-v2-1.core.post.search.lists, brapi-den.brapi-v2-1.core.post.search.locations, brapi-den.brapi-v2-1.core.post.search.people, brapi-den.brapi-v2-1.core.post.search.programs, brapi-den.brapi-v2-1.core.post.search.studies, brapi-den.brapi-v2-1.core.post.search.trials, brapi-den.brapi-v2-1.genotyping.get.search.allelematrix.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.calls.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.callsets.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.markerpositions.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.plates.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.references.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.referencesets.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.samples.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.variants.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.variantsets.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.post.search.allelematrix, brapi-den.brapi-v2-1.genotyping.post.search.calls, brapi-den.brapi-v2-1.genotyping.post.search.callsets, brapi-den.brapi-v2-1.genotyping.post.search.markerpositions, brapi-den.brapi-v2-1.genotyping.post.search.plates, brapi-den.brapi-v2-1.genotyping.post.search.references, brapi-den.brapi-v2-1.genotyping.post.search.referencesets, brapi-den.brapi-v2-1.genotyping.post.search.samples, brapi-den.brapi-v2-1.genotyping.post.search.variants, brapi-den.brapi-v2-1.genotyping.post.search.variantsets, brapi-den.brapi-v2-1.germplasm.get.search.attributes.by-searchresultsdbid, brapi-den.brapi-v2-1.germplasm.get.search.attributevalues.by-searchresultsdbid, brapi-den.brapi-v2-1.germplasm.get.search.germplasm.by-searchresultsdbid, brapi-den.brapi-v2-1.germplasm.get.search.pedigree.by-searchresultsdbid, brapi-den.brapi-v2-1.germplasm.post.search.attributes, brapi-den.brapi-v2-1.germplasm.post.search.attributevalues, brapi-den.brapi-v2-1.germplasm.post.search.germplasm, brapi-den.brapi-v2-1.germplasm.post.search.pedigree, brapi-den.brapi-v2-1.phenotyping.get.search.images.by-searchresultsdbid, brapi-den.brapi-v2-1.phenotyping.get.search.observations.by-searchresultsdbid, brapi-den.brapi-v2-1.phenotyping.get.search.observationunits.by-searchresultsdbid, brapi-den.brapi-v2-1.phenotyping.get.search.variables.by-searchresultsdbid, brapi-den.brapi-v2-1.phenotyping.post.search.images, brapi-den.brapi-v2-1.phenotyping.post.search.observations, brapi-den.brapi-v2-1.phenotyping.post.search.observationunits, brapi-den.brapi-v2-1.phenotyping.post.search.variables, brapi-den.genx.v3.jobs.get, brapi-den.genx.v3.jobs.request-cancellation, brapi-den.genx.v3.jobs.submit
+- **Related catalogue IDs:** brapi-genx.brapi-v2-1.core.get.search.lists.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.locations.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.people.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.programs.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.studies.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.trials.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.post.search.lists, brapi-genx.brapi-v2-1.core.post.search.locations, brapi-genx.brapi-v2-1.core.post.search.people, brapi-genx.brapi-v2-1.core.post.search.programs, brapi-genx.brapi-v2-1.core.post.search.studies, brapi-genx.brapi-v2-1.core.post.search.trials, brapi-genx.brapi-v2-1.genotyping.get.search.allelematrix.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.calls.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.callsets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.markerpositions.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.plates.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.references.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.referencesets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.samples.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.variants.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.variantsets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.post.search.allelematrix, brapi-genx.brapi-v2-1.genotyping.post.search.calls, brapi-genx.brapi-v2-1.genotyping.post.search.callsets, brapi-genx.brapi-v2-1.genotyping.post.search.markerpositions, brapi-genx.brapi-v2-1.genotyping.post.search.plates, brapi-genx.brapi-v2-1.genotyping.post.search.references, brapi-genx.brapi-v2-1.genotyping.post.search.referencesets, brapi-genx.brapi-v2-1.genotyping.post.search.samples, brapi-genx.brapi-v2-1.genotyping.post.search.variants, brapi-genx.brapi-v2-1.genotyping.post.search.variantsets, brapi-genx.brapi-v2-1.germplasm.get.search.attributes.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.attributevalues.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.germplasm.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.pedigree.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.post.search.attributes, brapi-genx.brapi-v2-1.germplasm.post.search.attributevalues, brapi-genx.brapi-v2-1.germplasm.post.search.germplasm, brapi-genx.brapi-v2-1.germplasm.post.search.pedigree, brapi-genx.brapi-v2-1.phenotyping.get.search.images.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.observations.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.observationunits.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.variables.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.post.search.images, brapi-genx.brapi-v2-1.phenotyping.post.search.observations, brapi-genx.brapi-v2-1.phenotyping.post.search.observationunits, brapi-genx.brapi-v2-1.phenotyping.post.search.variables, brapi-genx.genx.v1.jobs.get, brapi-genx.genx.v1.jobs.request-cancellation, brapi-genx.genx.v1.jobs.submit
 - **Relevant RFC / decision references:** RFC-001
 - **Contract source:** [`Specification/BrAPI-GenX/Jobs/Jobs_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Jobs/Jobs_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
-### POST `/brapi/v3/jobs`
+### POST `/genx/v1/jobs`
 
-- **Catalogue ID:** `brapi-den.genx.v3.jobs.submit`
-- **BrAPI-Den operation identity:** `genxSubmitAsyncJob` (advisory where absent from source)
+- **Catalogue ID:** `brapi-genx.genx.v1.jobs.submit`
+- **BrAPI-GenX operation identity:** `genxSubmitAsyncJob` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxSubmitAsyncJob`
 - **GenX source module:** `Jobs`
 - **Source tag:** Jobs
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C9 — Security, authority and tenancy
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C9 — Security, authority and tenancy
 - **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
@@ -302,20 +302,20 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Response status codes recorded:** 202, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
 - **Semantic relationship IDs / labels:** SEM-02, SEM-07
-- **Related catalogue IDs:** brapi-den.brapi-v2-1.core.get.search.lists.by-searchresultsdbid, brapi-den.brapi-v2-1.core.get.search.locations.by-searchresultsdbid, brapi-den.brapi-v2-1.core.get.search.people.by-searchresultsdbid, brapi-den.brapi-v2-1.core.get.search.programs.by-searchresultsdbid, brapi-den.brapi-v2-1.core.get.search.studies.by-searchresultsdbid, brapi-den.brapi-v2-1.core.get.search.trials.by-searchresultsdbid, brapi-den.brapi-v2-1.core.post.search.lists, brapi-den.brapi-v2-1.core.post.search.locations, brapi-den.brapi-v2-1.core.post.search.people, brapi-den.brapi-v2-1.core.post.search.programs, brapi-den.brapi-v2-1.core.post.search.studies, brapi-den.brapi-v2-1.core.post.search.trials, brapi-den.brapi-v2-1.genotyping.get.search.allelematrix.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.calls.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.callsets.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.markerpositions.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.plates.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.references.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.referencesets.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.samples.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.variants.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.variantsets.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.post.search.allelematrix, brapi-den.brapi-v2-1.genotyping.post.search.calls, brapi-den.brapi-v2-1.genotyping.post.search.callsets, brapi-den.brapi-v2-1.genotyping.post.search.markerpositions, brapi-den.brapi-v2-1.genotyping.post.search.plates, brapi-den.brapi-v2-1.genotyping.post.search.references, brapi-den.brapi-v2-1.genotyping.post.search.referencesets, brapi-den.brapi-v2-1.genotyping.post.search.samples, brapi-den.brapi-v2-1.genotyping.post.search.variants, brapi-den.brapi-v2-1.genotyping.post.search.variantsets, brapi-den.brapi-v2-1.germplasm.get.search.attributes.by-searchresultsdbid, brapi-den.brapi-v2-1.germplasm.get.search.attributevalues.by-searchresultsdbid, brapi-den.brapi-v2-1.germplasm.get.search.germplasm.by-searchresultsdbid, brapi-den.brapi-v2-1.germplasm.get.search.pedigree.by-searchresultsdbid, brapi-den.brapi-v2-1.germplasm.post.search.attributes, brapi-den.brapi-v2-1.germplasm.post.search.attributevalues, brapi-den.brapi-v2-1.germplasm.post.search.germplasm, brapi-den.brapi-v2-1.germplasm.post.search.pedigree, brapi-den.brapi-v2-1.phenotyping.get.search.images.by-searchresultsdbid, brapi-den.brapi-v2-1.phenotyping.get.search.observations.by-searchresultsdbid, brapi-den.brapi-v2-1.phenotyping.get.search.observationunits.by-searchresultsdbid, brapi-den.brapi-v2-1.phenotyping.get.search.variables.by-searchresultsdbid, brapi-den.brapi-v2-1.phenotyping.post.search.images, brapi-den.brapi-v2-1.phenotyping.post.search.observations, brapi-den.brapi-v2-1.phenotyping.post.search.observationunits, brapi-den.brapi-v2-1.phenotyping.post.search.variables, brapi-den.genx.v3.jobs.get, brapi-den.genx.v3.jobs.list, brapi-den.genx.v3.jobs.request-cancellation, brapi-den.genx.v3.models.get-version, brapi-den.genx.v3.models.list, brapi-den.genx.v3.models.register-version
+- **Related catalogue IDs:** brapi-genx.brapi-v2-1.core.get.search.lists.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.locations.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.people.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.programs.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.studies.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.trials.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.post.search.lists, brapi-genx.brapi-v2-1.core.post.search.locations, brapi-genx.brapi-v2-1.core.post.search.people, brapi-genx.brapi-v2-1.core.post.search.programs, brapi-genx.brapi-v2-1.core.post.search.studies, brapi-genx.brapi-v2-1.core.post.search.trials, brapi-genx.brapi-v2-1.genotyping.get.search.allelematrix.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.calls.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.callsets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.markerpositions.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.plates.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.references.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.referencesets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.samples.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.variants.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.variantsets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.post.search.allelematrix, brapi-genx.brapi-v2-1.genotyping.post.search.calls, brapi-genx.brapi-v2-1.genotyping.post.search.callsets, brapi-genx.brapi-v2-1.genotyping.post.search.markerpositions, brapi-genx.brapi-v2-1.genotyping.post.search.plates, brapi-genx.brapi-v2-1.genotyping.post.search.references, brapi-genx.brapi-v2-1.genotyping.post.search.referencesets, brapi-genx.brapi-v2-1.genotyping.post.search.samples, brapi-genx.brapi-v2-1.genotyping.post.search.variants, brapi-genx.brapi-v2-1.genotyping.post.search.variantsets, brapi-genx.brapi-v2-1.germplasm.get.search.attributes.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.attributevalues.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.germplasm.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.pedigree.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.post.search.attributes, brapi-genx.brapi-v2-1.germplasm.post.search.attributevalues, brapi-genx.brapi-v2-1.germplasm.post.search.germplasm, brapi-genx.brapi-v2-1.germplasm.post.search.pedigree, brapi-genx.brapi-v2-1.phenotyping.get.search.images.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.observations.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.observationunits.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.variables.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.post.search.images, brapi-genx.brapi-v2-1.phenotyping.post.search.observations, brapi-genx.brapi-v2-1.phenotyping.post.search.observationunits, brapi-genx.brapi-v2-1.phenotyping.post.search.variables, brapi-genx.genx.v1.jobs.get, brapi-genx.genx.v1.jobs.list, brapi-genx.genx.v1.jobs.request-cancellation, brapi-genx.genx.v1.models.get-version, brapi-genx.genx.v1.models.list, brapi-genx.genx.v1.models.register-version
 - **Relevant RFC / decision references:** RFC-001, A-04, A-07
 - **Contract source:** [`Specification/BrAPI-GenX/Jobs/Jobs_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Jobs/Jobs_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
-### DELETE `/brapi/v3/jobs/{jobDbId}`
+### DELETE `/genx/v1/jobs/{jobDbId}`
 
-- **Catalogue ID:** `brapi-den.genx.v3.jobs.request-cancellation`
-- **BrAPI-Den operation identity:** `genxRequestAsyncJobCancellation` (advisory where absent from source)
+- **Catalogue ID:** `brapi-genx.genx.v1.jobs.request-cancellation`
+- **BrAPI-GenX operation identity:** `genxRequestAsyncJobCancellation` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxRequestAsyncJobCancellation`
 - **GenX source module:** `Jobs`
 - **Source tag:** Jobs
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C3 — Asynchronous execution and idempotency, C9 — Security, authority and tenancy
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C3 — Asynchronous execution and idempotency, C9 — Security, authority and tenancy
 - **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
@@ -336,20 +336,20 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
 - **Semantic relationship IDs / labels:** genxGetAsyncJobById, SEM-02
-- **Related catalogue IDs:** brapi-den.brapi-v2-1.core.get.search.lists.by-searchresultsdbid, brapi-den.brapi-v2-1.core.get.search.locations.by-searchresultsdbid, brapi-den.brapi-v2-1.core.get.search.people.by-searchresultsdbid, brapi-den.brapi-v2-1.core.get.search.programs.by-searchresultsdbid, brapi-den.brapi-v2-1.core.get.search.studies.by-searchresultsdbid, brapi-den.brapi-v2-1.core.get.search.trials.by-searchresultsdbid, brapi-den.brapi-v2-1.core.post.search.lists, brapi-den.brapi-v2-1.core.post.search.locations, brapi-den.brapi-v2-1.core.post.search.people, brapi-den.brapi-v2-1.core.post.search.programs, brapi-den.brapi-v2-1.core.post.search.studies, brapi-den.brapi-v2-1.core.post.search.trials, brapi-den.brapi-v2-1.genotyping.get.search.allelematrix.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.calls.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.callsets.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.markerpositions.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.plates.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.references.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.referencesets.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.samples.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.variants.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.variantsets.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.post.search.allelematrix, brapi-den.brapi-v2-1.genotyping.post.search.calls, brapi-den.brapi-v2-1.genotyping.post.search.callsets, brapi-den.brapi-v2-1.genotyping.post.search.markerpositions, brapi-den.brapi-v2-1.genotyping.post.search.plates, brapi-den.brapi-v2-1.genotyping.post.search.references, brapi-den.brapi-v2-1.genotyping.post.search.referencesets, brapi-den.brapi-v2-1.genotyping.post.search.samples, brapi-den.brapi-v2-1.genotyping.post.search.variants, brapi-den.brapi-v2-1.genotyping.post.search.variantsets, brapi-den.brapi-v2-1.germplasm.get.search.attributes.by-searchresultsdbid, brapi-den.brapi-v2-1.germplasm.get.search.attributevalues.by-searchresultsdbid, brapi-den.brapi-v2-1.germplasm.get.search.germplasm.by-searchresultsdbid, brapi-den.brapi-v2-1.germplasm.get.search.pedigree.by-searchresultsdbid, brapi-den.brapi-v2-1.germplasm.post.search.attributes, brapi-den.brapi-v2-1.germplasm.post.search.attributevalues, brapi-den.brapi-v2-1.germplasm.post.search.germplasm, brapi-den.brapi-v2-1.germplasm.post.search.pedigree, brapi-den.brapi-v2-1.phenotyping.get.search.images.by-searchresultsdbid, brapi-den.brapi-v2-1.phenotyping.get.search.observations.by-searchresultsdbid, brapi-den.brapi-v2-1.phenotyping.get.search.observationunits.by-searchresultsdbid, brapi-den.brapi-v2-1.phenotyping.get.search.variables.by-searchresultsdbid, brapi-den.brapi-v2-1.phenotyping.post.search.images, brapi-den.brapi-v2-1.phenotyping.post.search.observations, brapi-den.brapi-v2-1.phenotyping.post.search.observationunits, brapi-den.brapi-v2-1.phenotyping.post.search.variables, brapi-den.genx.v3.jobs.get, brapi-den.genx.v3.jobs.list, brapi-den.genx.v3.jobs.submit
+- **Related catalogue IDs:** brapi-genx.brapi-v2-1.core.get.search.lists.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.locations.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.people.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.programs.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.studies.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.trials.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.post.search.lists, brapi-genx.brapi-v2-1.core.post.search.locations, brapi-genx.brapi-v2-1.core.post.search.people, brapi-genx.brapi-v2-1.core.post.search.programs, brapi-genx.brapi-v2-1.core.post.search.studies, brapi-genx.brapi-v2-1.core.post.search.trials, brapi-genx.brapi-v2-1.genotyping.get.search.allelematrix.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.calls.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.callsets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.markerpositions.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.plates.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.references.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.referencesets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.samples.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.variants.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.variantsets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.post.search.allelematrix, brapi-genx.brapi-v2-1.genotyping.post.search.calls, brapi-genx.brapi-v2-1.genotyping.post.search.callsets, brapi-genx.brapi-v2-1.genotyping.post.search.markerpositions, brapi-genx.brapi-v2-1.genotyping.post.search.plates, brapi-genx.brapi-v2-1.genotyping.post.search.references, brapi-genx.brapi-v2-1.genotyping.post.search.referencesets, brapi-genx.brapi-v2-1.genotyping.post.search.samples, brapi-genx.brapi-v2-1.genotyping.post.search.variants, brapi-genx.brapi-v2-1.genotyping.post.search.variantsets, brapi-genx.brapi-v2-1.germplasm.get.search.attributes.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.attributevalues.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.germplasm.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.pedigree.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.post.search.attributes, brapi-genx.brapi-v2-1.germplasm.post.search.attributevalues, brapi-genx.brapi-v2-1.germplasm.post.search.germplasm, brapi-genx.brapi-v2-1.germplasm.post.search.pedigree, brapi-genx.brapi-v2-1.phenotyping.get.search.images.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.observations.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.observationunits.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.variables.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.post.search.images, brapi-genx.brapi-v2-1.phenotyping.post.search.observations, brapi-genx.brapi-v2-1.phenotyping.post.search.observationunits, brapi-genx.brapi-v2-1.phenotyping.post.search.variables, brapi-genx.genx.v1.jobs.get, brapi-genx.genx.v1.jobs.list, brapi-genx.genx.v1.jobs.submit
 - **Relevant RFC / decision references:** RFC-001
 - **Contract source:** [`Specification/BrAPI-GenX/Jobs/Jobs_JobDbId_GET_DELETE.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Jobs/Jobs_JobDbId_GET_DELETE.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
-### GET `/brapi/v3/jobs/{jobDbId}`
+### GET `/genx/v1/jobs/{jobDbId}`
 
-- **Catalogue ID:** `brapi-den.genx.v3.jobs.get`
-- **BrAPI-Den operation identity:** `genxGetAsyncJobById` (advisory where absent from source)
+- **Catalogue ID:** `brapi-genx.genx.v1.jobs.get`
+- **BrAPI-GenX operation identity:** `genxGetAsyncJobById` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxGetAsyncJobById`
 - **GenX source module:** `Jobs`
 - **Source tag:** Jobs
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C9 — Security, authority and tenancy
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C9 — Security, authority and tenancy
 - **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
@@ -371,7 +371,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
 - **Semantic relationship IDs / labels:** genxSubmitAsyncJob, genxRequestAsyncJobCancellation, SEM-02, SEM-07
-- **Related catalogue IDs:** brapi-den.brapi-v2-1.core.get.search.lists.by-searchresultsdbid, brapi-den.brapi-v2-1.core.get.search.locations.by-searchresultsdbid, brapi-den.brapi-v2-1.core.get.search.people.by-searchresultsdbid, brapi-den.brapi-v2-1.core.get.search.programs.by-searchresultsdbid, brapi-den.brapi-v2-1.core.get.search.studies.by-searchresultsdbid, brapi-den.brapi-v2-1.core.get.search.trials.by-searchresultsdbid, brapi-den.brapi-v2-1.core.post.search.lists, brapi-den.brapi-v2-1.core.post.search.locations, brapi-den.brapi-v2-1.core.post.search.people, brapi-den.brapi-v2-1.core.post.search.programs, brapi-den.brapi-v2-1.core.post.search.studies, brapi-den.brapi-v2-1.core.post.search.trials, brapi-den.brapi-v2-1.genotyping.get.search.allelematrix.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.calls.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.callsets.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.markerpositions.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.plates.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.references.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.referencesets.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.samples.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.variants.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.get.search.variantsets.by-searchresultsdbid, brapi-den.brapi-v2-1.genotyping.post.search.allelematrix, brapi-den.brapi-v2-1.genotyping.post.search.calls, brapi-den.brapi-v2-1.genotyping.post.search.callsets, brapi-den.brapi-v2-1.genotyping.post.search.markerpositions, brapi-den.brapi-v2-1.genotyping.post.search.plates, brapi-den.brapi-v2-1.genotyping.post.search.references, brapi-den.brapi-v2-1.genotyping.post.search.referencesets, brapi-den.brapi-v2-1.genotyping.post.search.samples, brapi-den.brapi-v2-1.genotyping.post.search.variants, brapi-den.brapi-v2-1.genotyping.post.search.variantsets, brapi-den.brapi-v2-1.germplasm.get.search.attributes.by-searchresultsdbid, brapi-den.brapi-v2-1.germplasm.get.search.attributevalues.by-searchresultsdbid, brapi-den.brapi-v2-1.germplasm.get.search.germplasm.by-searchresultsdbid, brapi-den.brapi-v2-1.germplasm.get.search.pedigree.by-searchresultsdbid, brapi-den.brapi-v2-1.germplasm.post.search.attributes, brapi-den.brapi-v2-1.germplasm.post.search.attributevalues, brapi-den.brapi-v2-1.germplasm.post.search.germplasm, brapi-den.brapi-v2-1.germplasm.post.search.pedigree, brapi-den.brapi-v2-1.phenotyping.get.search.images.by-searchresultsdbid, brapi-den.brapi-v2-1.phenotyping.get.search.observations.by-searchresultsdbid, brapi-den.brapi-v2-1.phenotyping.get.search.observationunits.by-searchresultsdbid, brapi-den.brapi-v2-1.phenotyping.get.search.variables.by-searchresultsdbid, brapi-den.brapi-v2-1.phenotyping.post.search.images, brapi-den.brapi-v2-1.phenotyping.post.search.observations, brapi-den.brapi-v2-1.phenotyping.post.search.observationunits, brapi-den.brapi-v2-1.phenotyping.post.search.variables, brapi-den.genx.v3.jobs.list, brapi-den.genx.v3.jobs.request-cancellation, brapi-den.genx.v3.jobs.submit, brapi-den.genx.v3.models.get-version, brapi-den.genx.v3.models.list, brapi-den.genx.v3.models.register-version
+- **Related catalogue IDs:** brapi-genx.brapi-v2-1.core.get.search.lists.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.locations.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.people.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.programs.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.studies.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.trials.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.post.search.lists, brapi-genx.brapi-v2-1.core.post.search.locations, brapi-genx.brapi-v2-1.core.post.search.people, brapi-genx.brapi-v2-1.core.post.search.programs, brapi-genx.brapi-v2-1.core.post.search.studies, brapi-genx.brapi-v2-1.core.post.search.trials, brapi-genx.brapi-v2-1.genotyping.get.search.allelematrix.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.calls.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.callsets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.markerpositions.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.plates.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.references.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.referencesets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.samples.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.variants.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.variantsets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.post.search.allelematrix, brapi-genx.brapi-v2-1.genotyping.post.search.calls, brapi-genx.brapi-v2-1.genotyping.post.search.callsets, brapi-genx.brapi-v2-1.genotyping.post.search.markerpositions, brapi-genx.brapi-v2-1.genotyping.post.search.plates, brapi-genx.brapi-v2-1.genotyping.post.search.references, brapi-genx.brapi-v2-1.genotyping.post.search.referencesets, brapi-genx.brapi-v2-1.genotyping.post.search.samples, brapi-genx.brapi-v2-1.genotyping.post.search.variants, brapi-genx.brapi-v2-1.genotyping.post.search.variantsets, brapi-genx.brapi-v2-1.germplasm.get.search.attributes.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.attributevalues.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.germplasm.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.pedigree.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.post.search.attributes, brapi-genx.brapi-v2-1.germplasm.post.search.attributevalues, brapi-genx.brapi-v2-1.germplasm.post.search.germplasm, brapi-genx.brapi-v2-1.germplasm.post.search.pedigree, brapi-genx.brapi-v2-1.phenotyping.get.search.images.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.observations.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.observationunits.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.variables.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.post.search.images, brapi-genx.brapi-v2-1.phenotyping.post.search.observations, brapi-genx.brapi-v2-1.phenotyping.post.search.observationunits, brapi-genx.brapi-v2-1.phenotyping.post.search.variables, brapi-genx.genx.v1.jobs.list, brapi-genx.genx.v1.jobs.request-cancellation, brapi-genx.genx.v1.jobs.submit, brapi-genx.genx.v1.models.get-version, brapi-genx.genx.v1.models.list, brapi-genx.genx.v1.models.register-version
 - **Relevant RFC / decision references:** RFC-001
 - **Contract source:** [`Specification/BrAPI-GenX/Jobs/Jobs_JobDbId_GET_DELETE.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Jobs/Jobs_JobDbId_GET_DELETE.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
@@ -379,14 +379,14 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 
 ### LotLedger — 2 operations
 
-### GET `/brapi/v3/seedlots/{seedLotDbId}/ledger`
+### GET `/genx/v1/seedlots/{seedLotDbId}/ledger`
 
-- **Catalogue ID:** `brapi-den.genx.v3.seed-lot-ledger.list`
-- **BrAPI-Den operation identity:** `genxListSeedLotLedgerEntries` (advisory where absent from source)
+- **Catalogue ID:** `brapi-genx.genx.v1.seed-lot-ledger.list`
+- **BrAPI-GenX operation identity:** `genxListSeedLotLedgerEntries` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxListSeedLotLedgerEntries`
 - **GenX source module:** `LotLedger`
 - **Source tag:** Seed Lots
-- **Proposed BrAPI-Den classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
 - **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
@@ -408,20 +408,20 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** LotLedgerEntryListResponse, 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
 - **Semantic relationship IDs / labels:** SEM-01
-- **Related catalogue IDs:** brapi-den.brapi-v2-1.germplasm.get.seedlots.by-seedlotdbid.transactions, brapi-den.brapi-v2-1.germplasm.get.seedlots.transactions, brapi-den.brapi-v2-1.germplasm.post.seedlots.transactions, brapi-den.genx.v3.seed-lot-ledger.append
+- **Related catalogue IDs:** brapi-genx.brapi-v2-1.germplasm.get.seedlots.by-seedlotdbid.transactions, brapi-genx.brapi-v2-1.germplasm.get.seedlots.transactions, brapi-genx.brapi-v2-1.germplasm.post.seedlots.transactions, brapi-genx.genx.v1.seed-lot-ledger.append
 - **Relevant RFC / decision references:** RFC-003, D-07, D-08, D-20
 - **Contract source:** [`Specification/BrAPI-GenX/LotLedger/Ledger_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/LotLedger/Ledger_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
-### POST `/brapi/v3/seedlots/{seedLotDbId}/ledger`
+### POST `/genx/v1/seedlots/{seedLotDbId}/ledger`
 
-- **Catalogue ID:** `brapi-den.genx.v3.seed-lot-ledger.append`
-- **BrAPI-Den operation identity:** `genxAppendSeedLotLedgerEntry` (advisory where absent from source)
+- **Catalogue ID:** `brapi-genx.genx.v1.seed-lot-ledger.append`
+- **BrAPI-GenX operation identity:** `genxAppendSeedLotLedgerEntry` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxAppendSeedLotLedgerEntry`
 - **GenX source module:** `LotLedger`
 - **Source tag:** Seed Lots
-- **Proposed BrAPI-Den classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
 - **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
@@ -445,7 +445,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
 - **Semantic relationship IDs / labels:** SEM-01
-- **Related catalogue IDs:** brapi-den.brapi-v2-1.germplasm.get.seedlots.by-seedlotdbid.transactions, brapi-den.brapi-v2-1.germplasm.get.seedlots.transactions, brapi-den.brapi-v2-1.germplasm.post.seedlots.transactions, brapi-den.genx.v3.seed-lot-ledger.list
+- **Related catalogue IDs:** brapi-genx.brapi-v2-1.germplasm.get.seedlots.by-seedlotdbid.transactions, brapi-genx.brapi-v2-1.germplasm.get.seedlots.transactions, brapi-genx.brapi-v2-1.germplasm.post.seedlots.transactions, brapi-genx.genx.v1.seed-lot-ledger.list
 - **Relevant RFC / decision references:** RFC-003, D-07, D-08, D-20, A-05, A-06
 - **Contract source:** [`Specification/BrAPI-GenX/LotLedger/Ledger_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/LotLedger/Ledger_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
@@ -453,14 +453,14 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 
 ### Models — 3 operations
 
-### GET `/brapi/v3/models`
+### GET `/genx/v1/models`
 
-- **Catalogue ID:** `brapi-den.genx.v3.models.list`
-- **BrAPI-Den operation identity:** `genxListModelVersions` (advisory where absent from source)
+- **Catalogue ID:** `brapi-genx.genx.v1.models.list`
+- **BrAPI-GenX operation identity:** `genxListModelVersions` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxListModelVersions`
 - **GenX source module:** `Models`
 - **Source tag:** Models
-- **Proposed BrAPI-Den classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
 - **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
@@ -482,20 +482,20 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** ModelArtifactListResponse, 400BadRequest, 401Unauthorized, 403Forbidden
 - **Semantic relationship IDs / labels:** genxRegisterModelVersion, genxGetModelVersion, genxSubmitAsyncJob, SEM-07
-- **Related catalogue IDs:** brapi-den.genx.v3.jobs.get, brapi-den.genx.v3.jobs.submit, brapi-den.genx.v3.models.get-version, brapi-den.genx.v3.models.register-version
+- **Related catalogue IDs:** brapi-genx.genx.v1.jobs.get, brapi-genx.genx.v1.jobs.submit, brapi-genx.genx.v1.models.get-version, brapi-genx.genx.v1.models.register-version
 - **Relevant RFC / decision references:** RFC-004, D-09
 - **Contract source:** [`Specification/BrAPI-GenX/Models/Models_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Models/Models_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
-### POST `/brapi/v3/models`
+### POST `/genx/v1/models`
 
-- **Catalogue ID:** `brapi-den.genx.v3.models.register-version`
-- **BrAPI-Den operation identity:** `genxRegisterModelVersion` (advisory where absent from source)
+- **Catalogue ID:** `brapi-genx.genx.v1.models.register-version`
+- **BrAPI-GenX operation identity:** `genxRegisterModelVersion` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxRegisterModelVersion`
 - **GenX source module:** `Models`
 - **Source tag:** Models
-- **Proposed BrAPI-Den classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
 - **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
@@ -520,20 +520,20 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
 - **Semantic relationship IDs / labels:** genxListModelVersions, genxGetModelVersion, genxSubmitAsyncJob, SEM-07
-- **Related catalogue IDs:** brapi-den.genx.v3.jobs.get, brapi-den.genx.v3.jobs.submit, brapi-den.genx.v3.models.get-version, brapi-den.genx.v3.models.list
+- **Related catalogue IDs:** brapi-genx.genx.v1.jobs.get, brapi-genx.genx.v1.jobs.submit, brapi-genx.genx.v1.models.get-version, brapi-genx.genx.v1.models.list
 - **Relevant RFC / decision references:** RFC-004, D-09, D-10
 - **Contract source:** [`Specification/BrAPI-GenX/Models/Models_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Models/Models_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
-### GET `/brapi/v3/models/{modelDbId}`
+### GET `/genx/v1/models/{modelDbId}`
 
-- **Catalogue ID:** `brapi-den.genx.v3.models.get-version`
-- **BrAPI-Den operation identity:** `genxGetModelVersion` (advisory where absent from source)
+- **Catalogue ID:** `brapi-genx.genx.v1.models.get-version`
+- **BrAPI-GenX operation identity:** `genxGetModelVersion` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxGetModelVersion`
 - **GenX source module:** `Models`
 - **Source tag:** Models
-- **Proposed BrAPI-Den classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
 - **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
@@ -554,7 +554,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
 - **Semantic relationship IDs / labels:** genxRegisterModelVersion, genxSubmitAsyncJob, SEM-07
-- **Related catalogue IDs:** brapi-den.genx.v3.jobs.get, brapi-den.genx.v3.jobs.submit, brapi-den.genx.v3.models.list, brapi-den.genx.v3.models.register-version
+- **Related catalogue IDs:** brapi-genx.genx.v1.jobs.get, brapi-genx.genx.v1.jobs.submit, brapi-genx.genx.v1.models.list, brapi-genx.genx.v1.models.register-version
 - **Relevant RFC / decision references:** RFC-004, D-09, D-10
 - **Contract source:** [`Specification/BrAPI-GenX/Models/Models_ModelDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Models/Models_ModelDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
@@ -562,14 +562,14 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 
 ### SelectionDecisions — 3 operations
 
-### GET `/brapi/v3/selection-decisions`
+### GET `/genx/v1/selection-decisions`
 
-- **Catalogue ID:** `brapi-den.genx.v3.selection-decisions.list`
-- **BrAPI-Den operation identity:** `genxListSelectionDecisions` (advisory where absent from source)
+- **Catalogue ID:** `brapi-genx.genx.v1.selection-decisions.list`
+- **BrAPI-GenX operation identity:** `genxListSelectionDecisions` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxListSelectionDecisions`
 - **GenX source module:** `SelectionDecisions`
 - **Source tag:** SelectionDecisions
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C9 — Security, authority and tenancy
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C9 — Security, authority and tenancy
 - **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
@@ -591,20 +591,20 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
 - **Semantic relationship IDs / labels:** genxRecordSelectionDecision, genxGetSelectionDecision
-- **Related catalogue IDs:** brapi-den.genx.v3.selection-decisions.record, brapi-den.genx.v3.selection-decisions.get
+- **Related catalogue IDs:** brapi-genx.genx.v1.selection-decisions.record, brapi-genx.genx.v1.selection-decisions.get
 - **Relevant RFC / decision references:** RFC-008
 - **Contract source:** [`Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
-### POST `/brapi/v3/selection-decisions`
+### POST `/genx/v1/selection-decisions`
 
-- **Catalogue ID:** `brapi-den.genx.v3.selection-decisions.record`
-- **BrAPI-Den operation identity:** `genxRecordSelectionDecision` (advisory where absent from source)
+- **Catalogue ID:** `brapi-genx.genx.v1.selection-decisions.record`
+- **BrAPI-GenX operation identity:** `genxRecordSelectionDecision` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxRecordSelectionDecision`
 - **GenX source module:** `SelectionDecisions`
 - **Source tag:** SelectionDecisions
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C9 — Security, authority and tenancy
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C9 — Security, authority and tenancy
 - **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
@@ -626,20 +626,20 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
 - **Semantic relationship IDs / labels:** genxListSelectionDecisions, genxGetSelectionDecision
-- **Related catalogue IDs:** brapi-den.genx.v3.selection-decisions.list, brapi-den.genx.v3.selection-decisions.get
+- **Related catalogue IDs:** brapi-genx.genx.v1.selection-decisions.list, brapi-genx.genx.v1.selection-decisions.get
 - **Relevant RFC / decision references:** RFC-008
 - **Contract source:** [`Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
-### GET `/brapi/v3/selection-decisions/{selectionDecisionDbId}`
+### GET `/genx/v1/selection-decisions/{selectionDecisionDbId}`
 
-- **Catalogue ID:** `brapi-den.genx.v3.selection-decisions.get`
-- **BrAPI-Den operation identity:** `genxGetSelectionDecision` (advisory where absent from source)
+- **Catalogue ID:** `brapi-genx.genx.v1.selection-decisions.get`
+- **BrAPI-GenX operation identity:** `genxGetSelectionDecision` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxGetSelectionDecision`
 - **GenX source module:** `SelectionDecisions`
 - **Source tag:** SelectionDecisions
-- **Proposed BrAPI-Den classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C9 — Security, authority and tenancy
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C9 — Security, authority and tenancy
 - **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
@@ -659,7 +659,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
 - **Semantic relationship IDs / labels:** genxRecordSelectionDecision, genxListSelectionDecisions
-- **Related catalogue IDs:** brapi-den.genx.v3.selection-decisions.list, brapi-den.genx.v3.selection-decisions.record
+- **Related catalogue IDs:** brapi-genx.genx.v1.selection-decisions.list, brapi-genx.genx.v1.selection-decisions.record
 - **Relevant RFC / decision references:** RFC-008
 - **Contract source:** [`Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_SelectionDecisionDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_SelectionDecisionDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
@@ -667,21 +667,21 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 
 ### ServerInfoV3 — 1 operations
 
-### GET `/brapi/v3/serverinfo`
+### GET `/genx/v1/serverinfo`
 
-- **Catalogue ID:** `brapi-den.genx.v3.serverinfo.read`
-- **BrAPI-Den operation identity:** `genxGetServerInfoV3` (advisory where absent from source)
+- **Catalogue ID:** `brapi-genx.genx.v1.serverinfo.read`
+- **BrAPI-GenX operation identity:** `genxGetServerInfoV3` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxGetServerInfoV3`
 - **GenX source module:** `ServerInfoV3`
 - **Source tag:** Server Info
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C8 — Contract conformance and governance, C9 — Security, authority and tenancy
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C8 — Contract conformance and governance, C9 — Security, authority and tenancy
 - **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
 > Advertise supported API generations, capabilities, and authentication profiles so clients can negotiate behavior before using optional GenX features.
 **Source contract description:**
-> GenX capability negotiation. Served under `/brapi/v3/`.
+> GenX capability negotiation. Served under `/genx/v1/`.
 >
 > Returns the V2.1 ServerInfo fields plus `brapiVersions`,
 > `capabilities`, and `authProfiles` so clients negotiate instead of
@@ -702,7 +702,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
 - **Semantic relationship IDs / labels:** V2.1 GET /brapi/v2/serverinfo, OVERLAP-01
-- **Related catalogue IDs:** brapi-den.brapi-v2-1.core.get.serverinfo
+- **Related catalogue IDs:** brapi-genx.brapi-v2-1.core.get.serverinfo
 - **Relevant RFC / decision references:** RFC-001, A-01
 - **Contract source:** [`Specification/BrAPI-GenX/ServerInfoV3/ServerInfoV3_GET.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ServerInfoV3/ServerInfoV3_GET.yaml)
 - **BijMantra relative-route candidates:** 1. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
@@ -711,14 +711,14 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 
 ### Telemetry — 2 operations
 
-### GET `/brapi/v3/telemetry`
+### GET `/genx/v1/telemetry`
 
-- **Catalogue ID:** `brapi-den.genx.v3.telemetry.query`
-- **BrAPI-Den operation identity:** `genxQueryTelemetrySamplesOrAggregates` (advisory where absent from source)
+- **Catalogue ID:** `brapi-genx.genx.v1.telemetry.query`
+- **BrAPI-GenX operation identity:** `genxQueryTelemetrySamplesOrAggregates` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxQueryTelemetrySamplesOrAggregates`
 - **GenX source module:** `Telemetry`
 - **Source tag:** Telemetry
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Context-dependent: D4 — Phenotyping and Plant Observations, D5 — Environment, Agroecology and Field Context; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C7 — Streaming and temporal aggregation, C9 — Security, authority and tenancy
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Context-dependent: D4 — Phenotyping and Plant Observations, D5 — Environment, Agroecology and Field Context; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C7 — Streaming and temporal aggregation, C9 — Security, authority and tenancy
 - **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
@@ -744,20 +744,20 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
 - **Semantic relationship IDs / labels:** SEM-03
-- **Related catalogue IDs:** brapi-den.brapi-v2-1.phenotyping.get.observations, brapi-den.brapi-v2-1.phenotyping.get.observations.by-observationdbid, brapi-den.brapi-v2-1.phenotyping.get.observations.table, brapi-den.brapi-v2-1.phenotyping.get.observationunits, brapi-den.brapi-v2-1.phenotyping.get.observationunits.by-observationunitdbid, brapi-den.brapi-v2-1.phenotyping.get.observationunits.table, brapi-den.brapi-v2-1.phenotyping.get.search.observations.by-searchresultsdbid, brapi-den.brapi-v2-1.phenotyping.get.search.observationunits.by-searchresultsdbid, brapi-den.brapi-v2-1.phenotyping.get.search.variables.by-searchresultsdbid, brapi-den.brapi-v2-1.phenotyping.get.variables, brapi-den.brapi-v2-1.phenotyping.get.variables.by-observationvariabledbid, brapi-den.brapi-v2-1.phenotyping.post.delete.observations, brapi-den.brapi-v2-1.phenotyping.post.observations, brapi-den.brapi-v2-1.phenotyping.post.observationunits, brapi-den.brapi-v2-1.phenotyping.post.search.observations, brapi-den.brapi-v2-1.phenotyping.post.search.observationunits, brapi-den.brapi-v2-1.phenotyping.post.search.variables, brapi-den.brapi-v2-1.phenotyping.post.variables, brapi-den.brapi-v2-1.phenotyping.put.observations, brapi-den.brapi-v2-1.phenotyping.put.observations.by-observationdbid, brapi-den.brapi-v2-1.phenotyping.put.observationunits, brapi-den.brapi-v2-1.phenotyping.put.observationunits.by-observationunitdbid, brapi-den.brapi-v2-1.phenotyping.put.variables.by-observationvariabledbid, brapi-den.genx.v3.telemetry.append-batch
+- **Related catalogue IDs:** brapi-genx.brapi-v2-1.phenotyping.get.observations, brapi-genx.brapi-v2-1.phenotyping.get.observations.by-observationdbid, brapi-genx.brapi-v2-1.phenotyping.get.observations.table, brapi-genx.brapi-v2-1.phenotyping.get.observationunits, brapi-genx.brapi-v2-1.phenotyping.get.observationunits.by-observationunitdbid, brapi-genx.brapi-v2-1.phenotyping.get.observationunits.table, brapi-genx.brapi-v2-1.phenotyping.get.search.observations.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.observationunits.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.variables.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.variables, brapi-genx.brapi-v2-1.phenotyping.get.variables.by-observationvariabledbid, brapi-genx.brapi-v2-1.phenotyping.post.delete.observations, brapi-genx.brapi-v2-1.phenotyping.post.observations, brapi-genx.brapi-v2-1.phenotyping.post.observationunits, brapi-genx.brapi-v2-1.phenotyping.post.search.observations, brapi-genx.brapi-v2-1.phenotyping.post.search.observationunits, brapi-genx.brapi-v2-1.phenotyping.post.search.variables, brapi-genx.brapi-v2-1.phenotyping.post.variables, brapi-genx.brapi-v2-1.phenotyping.put.observations, brapi-genx.brapi-v2-1.phenotyping.put.observations.by-observationdbid, brapi-genx.brapi-v2-1.phenotyping.put.observationunits, brapi-genx.brapi-v2-1.phenotyping.put.observationunits.by-observationunitdbid, brapi-genx.brapi-v2-1.phenotyping.put.variables.by-observationvariabledbid, brapi-genx.genx.v1.telemetry.append-batch
 - **Relevant RFC / decision references:** RFC-007, D-16, D-17, D-18
 - **Contract source:** [`Specification/BrAPI-GenX/Telemetry/Telemetry_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Telemetry/Telemetry_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
-### POST `/brapi/v3/telemetry`
+### POST `/genx/v1/telemetry`
 
-- **Catalogue ID:** `brapi-den.genx.v3.telemetry.append-batch`
-- **BrAPI-Den operation identity:** `genxAppendTelemetryBatch` (advisory where absent from source)
+- **Catalogue ID:** `brapi-genx.genx.v1.telemetry.append-batch`
+- **BrAPI-GenX operation identity:** `genxAppendTelemetryBatch` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxAppendTelemetryBatch`
 - **GenX source module:** `Telemetry`
 - **Source tag:** Telemetry
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Context-dependent: D4 — Phenotyping and Plant Observations, D5 — Environment, Agroecology and Field Context; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C7 — Streaming and temporal aggregation, C9 — Security, authority and tenancy
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Context-dependent: D4 — Phenotyping and Plant Observations, D5 — Environment, Agroecology and Field Context; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C7 — Streaming and temporal aggregation, C9 — Security, authority and tenancy
 - **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
@@ -782,7 +782,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
 - **Semantic relationship IDs / labels:** SEM-03
-- **Related catalogue IDs:** brapi-den.brapi-v2-1.phenotyping.get.observations, brapi-den.brapi-v2-1.phenotyping.get.observations.by-observationdbid, brapi-den.brapi-v2-1.phenotyping.get.observations.table, brapi-den.brapi-v2-1.phenotyping.get.observationunits, brapi-den.brapi-v2-1.phenotyping.get.observationunits.by-observationunitdbid, brapi-den.brapi-v2-1.phenotyping.get.observationunits.table, brapi-den.brapi-v2-1.phenotyping.get.search.observations.by-searchresultsdbid, brapi-den.brapi-v2-1.phenotyping.get.search.observationunits.by-searchresultsdbid, brapi-den.brapi-v2-1.phenotyping.get.search.variables.by-searchresultsdbid, brapi-den.brapi-v2-1.phenotyping.get.variables, brapi-den.brapi-v2-1.phenotyping.get.variables.by-observationvariabledbid, brapi-den.brapi-v2-1.phenotyping.post.delete.observations, brapi-den.brapi-v2-1.phenotyping.post.observations, brapi-den.brapi-v2-1.phenotyping.post.observationunits, brapi-den.brapi-v2-1.phenotyping.post.search.observations, brapi-den.brapi-v2-1.phenotyping.post.search.observationunits, brapi-den.brapi-v2-1.phenotyping.post.search.variables, brapi-den.brapi-v2-1.phenotyping.post.variables, brapi-den.brapi-v2-1.phenotyping.put.observations, brapi-den.brapi-v2-1.phenotyping.put.observations.by-observationdbid, brapi-den.brapi-v2-1.phenotyping.put.observationunits, brapi-den.brapi-v2-1.phenotyping.put.observationunits.by-observationunitdbid, brapi-den.brapi-v2-1.phenotyping.put.variables.by-observationvariabledbid, brapi-den.genx.v3.telemetry.query
+- **Related catalogue IDs:** brapi-genx.brapi-v2-1.phenotyping.get.observations, brapi-genx.brapi-v2-1.phenotyping.get.observations.by-observationdbid, brapi-genx.brapi-v2-1.phenotyping.get.observations.table, brapi-genx.brapi-v2-1.phenotyping.get.observationunits, brapi-genx.brapi-v2-1.phenotyping.get.observationunits.by-observationunitdbid, brapi-genx.brapi-v2-1.phenotyping.get.observationunits.table, brapi-genx.brapi-v2-1.phenotyping.get.search.observations.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.observationunits.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.variables.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.variables, brapi-genx.brapi-v2-1.phenotyping.get.variables.by-observationvariabledbid, brapi-genx.brapi-v2-1.phenotyping.post.delete.observations, brapi-genx.brapi-v2-1.phenotyping.post.observations, brapi-genx.brapi-v2-1.phenotyping.post.observationunits, brapi-genx.brapi-v2-1.phenotyping.post.search.observations, brapi-genx.brapi-v2-1.phenotyping.post.search.observationunits, brapi-genx.brapi-v2-1.phenotyping.post.search.variables, brapi-genx.brapi-v2-1.phenotyping.post.variables, brapi-genx.brapi-v2-1.phenotyping.put.observations, brapi-genx.brapi-v2-1.phenotyping.put.observations.by-observationdbid, brapi-genx.brapi-v2-1.phenotyping.put.observationunits, brapi-genx.brapi-v2-1.phenotyping.put.observationunits.by-observationunitdbid, brapi-genx.brapi-v2-1.phenotyping.put.variables.by-observationvariabledbid, brapi-genx.genx.v1.telemetry.query
 - **Relevant RFC / decision references:** RFC-007, D-16, D-17, D-18
 - **Contract source:** [`Specification/BrAPI-GenX/Telemetry/Telemetry_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Telemetry/Telemetry_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
@@ -790,14 +790,14 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 
 ### VariableTerms — 3 operations
 
-### GET `/brapi/v3/variable-terms`
+### GET `/genx/v1/variable-terms`
 
-- **Catalogue ID:** `brapi-den.genx.v3.variable-terms.list`
-- **BrAPI-Den operation identity:** `genxListVariableTermVersions` (advisory where absent from source)
+- **Catalogue ID:** `brapi-genx.genx.v1.variable-terms.list`
+- **BrAPI-GenX operation identity:** `genxListVariableTermVersions` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxListVariableTermVersions`
 - **GenX source module:** `VariableTerms`
 - **Source tag:** VariableTerms
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C4 — Scientific terminology governance
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C4 — Scientific terminology governance
 - **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
@@ -819,20 +819,20 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** VariableTermListResponse, 400BadRequest, 401Unauthorized, 403Forbidden
 - **Semantic relationship IDs / labels:** V2.1 /brapi/v2/variables, V2.1 OntologyTerm schema, SEM-06
-- **Related catalogue IDs:** brapi-den.brapi-v2-1.phenotyping.get.methods, brapi-den.brapi-v2-1.phenotyping.get.methods.by-methoddbid, brapi-den.brapi-v2-1.phenotyping.get.ontologies, brapi-den.brapi-v2-1.phenotyping.get.ontologies.by-ontologydbid, brapi-den.brapi-v2-1.phenotyping.get.scales, brapi-den.brapi-v2-1.phenotyping.get.scales.by-scaledbid, brapi-den.brapi-v2-1.phenotyping.get.traits, brapi-den.brapi-v2-1.phenotyping.get.traits.by-traitdbid, brapi-den.brapi-v2-1.phenotyping.get.variables, brapi-den.brapi-v2-1.phenotyping.get.variables.by-observationvariabledbid, brapi-den.brapi-v2-1.phenotyping.post.methods, brapi-den.brapi-v2-1.phenotyping.post.ontologies, brapi-den.brapi-v2-1.phenotyping.post.scales, brapi-den.brapi-v2-1.phenotyping.post.traits, brapi-den.brapi-v2-1.phenotyping.post.variables, brapi-den.brapi-v2-1.phenotyping.put.methods.by-methoddbid, brapi-den.brapi-v2-1.phenotyping.put.ontologies.by-ontologydbid, brapi-den.brapi-v2-1.phenotyping.put.scales.by-scaledbid, brapi-den.brapi-v2-1.phenotyping.put.traits.by-traitdbid, brapi-den.brapi-v2-1.phenotyping.put.variables.by-observationvariabledbid, brapi-den.genx.v3.variable-terms.get-version, brapi-den.genx.v3.variable-terms.publish-version
+- **Related catalogue IDs:** brapi-genx.brapi-v2-1.phenotyping.get.methods, brapi-genx.brapi-v2-1.phenotyping.get.methods.by-methoddbid, brapi-genx.brapi-v2-1.phenotyping.get.ontologies, brapi-genx.brapi-v2-1.phenotyping.get.ontologies.by-ontologydbid, brapi-genx.brapi-v2-1.phenotyping.get.scales, brapi-genx.brapi-v2-1.phenotyping.get.scales.by-scaledbid, brapi-genx.brapi-v2-1.phenotyping.get.traits, brapi-genx.brapi-v2-1.phenotyping.get.traits.by-traitdbid, brapi-genx.brapi-v2-1.phenotyping.get.variables, brapi-genx.brapi-v2-1.phenotyping.get.variables.by-observationvariabledbid, brapi-genx.brapi-v2-1.phenotyping.post.methods, brapi-genx.brapi-v2-1.phenotyping.post.ontologies, brapi-genx.brapi-v2-1.phenotyping.post.scales, brapi-genx.brapi-v2-1.phenotyping.post.traits, brapi-genx.brapi-v2-1.phenotyping.post.variables, brapi-genx.brapi-v2-1.phenotyping.put.methods.by-methoddbid, brapi-genx.brapi-v2-1.phenotyping.put.ontologies.by-ontologydbid, brapi-genx.brapi-v2-1.phenotyping.put.scales.by-scaledbid, brapi-genx.brapi-v2-1.phenotyping.put.traits.by-traitdbid, brapi-genx.brapi-v2-1.phenotyping.put.variables.by-observationvariabledbid, brapi-genx.genx.v1.variable-terms.get-version, brapi-genx.genx.v1.variable-terms.publish-version
 - **Relevant RFC / decision references:** RFC-002, A-03
 - **Contract source:** [`Specification/BrAPI-GenX/VariableTerms/VariableTerms_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/VariableTerms/VariableTerms_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
-### POST `/brapi/v3/variable-terms`
+### POST `/genx/v1/variable-terms`
 
-- **Catalogue ID:** `brapi-den.genx.v3.variable-terms.publish-version`
-- **BrAPI-Den operation identity:** `genxPublishVariableTermVersion` (advisory where absent from source)
+- **Catalogue ID:** `brapi-genx.genx.v1.variable-terms.publish-version`
+- **BrAPI-GenX operation identity:** `genxPublishVariableTermVersion` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxPublishVariableTermVersion`
 - **GenX source module:** `VariableTerms`
 - **Source tag:** VariableTerms
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C4 — Scientific terminology governance
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C4 — Scientific terminology governance
 - **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
@@ -857,20 +857,20 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
 - **Semantic relationship IDs / labels:** genxListVariableTermVersions, genxGetVariableTermVersion, V2.1 /brapi/v2/variables, SEM-06
-- **Related catalogue IDs:** brapi-den.brapi-v2-1.phenotyping.get.methods, brapi-den.brapi-v2-1.phenotyping.get.methods.by-methoddbid, brapi-den.brapi-v2-1.phenotyping.get.ontologies, brapi-den.brapi-v2-1.phenotyping.get.ontologies.by-ontologydbid, brapi-den.brapi-v2-1.phenotyping.get.scales, brapi-den.brapi-v2-1.phenotyping.get.scales.by-scaledbid, brapi-den.brapi-v2-1.phenotyping.get.traits, brapi-den.brapi-v2-1.phenotyping.get.traits.by-traitdbid, brapi-den.brapi-v2-1.phenotyping.get.variables, brapi-den.brapi-v2-1.phenotyping.get.variables.by-observationvariabledbid, brapi-den.brapi-v2-1.phenotyping.post.methods, brapi-den.brapi-v2-1.phenotyping.post.ontologies, brapi-den.brapi-v2-1.phenotyping.post.scales, brapi-den.brapi-v2-1.phenotyping.post.traits, brapi-den.brapi-v2-1.phenotyping.post.variables, brapi-den.brapi-v2-1.phenotyping.put.methods.by-methoddbid, brapi-den.brapi-v2-1.phenotyping.put.ontologies.by-ontologydbid, brapi-den.brapi-v2-1.phenotyping.put.scales.by-scaledbid, brapi-den.brapi-v2-1.phenotyping.put.traits.by-traitdbid, brapi-den.brapi-v2-1.phenotyping.put.variables.by-observationvariabledbid, brapi-den.genx.v3.variable-terms.get-version, brapi-den.genx.v3.variable-terms.list
+- **Related catalogue IDs:** brapi-genx.brapi-v2-1.phenotyping.get.methods, brapi-genx.brapi-v2-1.phenotyping.get.methods.by-methoddbid, brapi-genx.brapi-v2-1.phenotyping.get.ontologies, brapi-genx.brapi-v2-1.phenotyping.get.ontologies.by-ontologydbid, brapi-genx.brapi-v2-1.phenotyping.get.scales, brapi-genx.brapi-v2-1.phenotyping.get.scales.by-scaledbid, brapi-genx.brapi-v2-1.phenotyping.get.traits, brapi-genx.brapi-v2-1.phenotyping.get.traits.by-traitdbid, brapi-genx.brapi-v2-1.phenotyping.get.variables, brapi-genx.brapi-v2-1.phenotyping.get.variables.by-observationvariabledbid, brapi-genx.brapi-v2-1.phenotyping.post.methods, brapi-genx.brapi-v2-1.phenotyping.post.ontologies, brapi-genx.brapi-v2-1.phenotyping.post.scales, brapi-genx.brapi-v2-1.phenotyping.post.traits, brapi-genx.brapi-v2-1.phenotyping.post.variables, brapi-genx.brapi-v2-1.phenotyping.put.methods.by-methoddbid, brapi-genx.brapi-v2-1.phenotyping.put.ontologies.by-ontologydbid, brapi-genx.brapi-v2-1.phenotyping.put.scales.by-scaledbid, brapi-genx.brapi-v2-1.phenotyping.put.traits.by-traitdbid, brapi-genx.brapi-v2-1.phenotyping.put.variables.by-observationvariabledbid, brapi-genx.genx.v1.variable-terms.get-version, brapi-genx.genx.v1.variable-terms.list
 - **Relevant RFC / decision references:** RFC-002, A-03
 - **Contract source:** [`Specification/BrAPI-GenX/VariableTerms/VariableTerms_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/VariableTerms/VariableTerms_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
-### GET `/brapi/v3/variable-terms/{variableDbId}`
+### GET `/genx/v1/variable-terms/{variableDbId}`
 
-- **Catalogue ID:** `brapi-den.genx.v3.variable-terms.get-version`
-- **BrAPI-Den operation identity:** `genxGetVariableTermVersion` (advisory where absent from source)
+- **Catalogue ID:** `brapi-genx.genx.v1.variable-terms.get-version`
+- **BrAPI-GenX operation identity:** `genxGetVariableTermVersion` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxGetVariableTermVersion`
 - **GenX source module:** `VariableTerms`
 - **Source tag:** VariableTerms
-- **Proposed BrAPI-Den classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C4 — Scientific terminology governance
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C4 — Scientific terminology governance
 - **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
@@ -892,7 +892,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
 - **Semantic relationship IDs / labels:** genxPublishVariableTermVersion, V2.1 OntologyTerm schema, SEM-06
-- **Related catalogue IDs:** brapi-den.brapi-v2-1.phenotyping.get.methods, brapi-den.brapi-v2-1.phenotyping.get.methods.by-methoddbid, brapi-den.brapi-v2-1.phenotyping.get.ontologies, brapi-den.brapi-v2-1.phenotyping.get.ontologies.by-ontologydbid, brapi-den.brapi-v2-1.phenotyping.get.scales, brapi-den.brapi-v2-1.phenotyping.get.scales.by-scaledbid, brapi-den.brapi-v2-1.phenotyping.get.traits, brapi-den.brapi-v2-1.phenotyping.get.traits.by-traitdbid, brapi-den.brapi-v2-1.phenotyping.get.variables, brapi-den.brapi-v2-1.phenotyping.get.variables.by-observationvariabledbid, brapi-den.brapi-v2-1.phenotyping.post.methods, brapi-den.brapi-v2-1.phenotyping.post.ontologies, brapi-den.brapi-v2-1.phenotyping.post.scales, brapi-den.brapi-v2-1.phenotyping.post.traits, brapi-den.brapi-v2-1.phenotyping.post.variables, brapi-den.brapi-v2-1.phenotyping.put.methods.by-methoddbid, brapi-den.brapi-v2-1.phenotyping.put.ontologies.by-ontologydbid, brapi-den.brapi-v2-1.phenotyping.put.scales.by-scaledbid, brapi-den.brapi-v2-1.phenotyping.put.traits.by-traitdbid, brapi-den.brapi-v2-1.phenotyping.put.variables.by-observationvariabledbid, brapi-den.genx.v3.variable-terms.list, brapi-den.genx.v3.variable-terms.publish-version
+- **Related catalogue IDs:** brapi-genx.brapi-v2-1.phenotyping.get.methods, brapi-genx.brapi-v2-1.phenotyping.get.methods.by-methoddbid, brapi-genx.brapi-v2-1.phenotyping.get.ontologies, brapi-genx.brapi-v2-1.phenotyping.get.ontologies.by-ontologydbid, brapi-genx.brapi-v2-1.phenotyping.get.scales, brapi-genx.brapi-v2-1.phenotyping.get.scales.by-scaledbid, brapi-genx.brapi-v2-1.phenotyping.get.traits, brapi-genx.brapi-v2-1.phenotyping.get.traits.by-traitdbid, brapi-genx.brapi-v2-1.phenotyping.get.variables, brapi-genx.brapi-v2-1.phenotyping.get.variables.by-observationvariabledbid, brapi-genx.brapi-v2-1.phenotyping.post.methods, brapi-genx.brapi-v2-1.phenotyping.post.ontologies, brapi-genx.brapi-v2-1.phenotyping.post.scales, brapi-genx.brapi-v2-1.phenotyping.post.traits, brapi-genx.brapi-v2-1.phenotyping.post.variables, brapi-genx.brapi-v2-1.phenotyping.put.methods.by-methoddbid, brapi-genx.brapi-v2-1.phenotyping.put.ontologies.by-ontologydbid, brapi-genx.brapi-v2-1.phenotyping.put.scales.by-scaledbid, brapi-genx.brapi-v2-1.phenotyping.put.traits.by-traitdbid, brapi-genx.brapi-v2-1.phenotyping.put.variables.by-observationvariabledbid, brapi-genx.genx.v1.variable-terms.list, brapi-genx.genx.v1.variable-terms.publish-version
 - **Relevant RFC / decision references:** RFC-002, D-05, D-06, A-03
 - **Contract source:** [`Specification/BrAPI-GenX/VariableTerms/VariableTerms_VariableDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/VariableTerms/VariableTerms_VariableDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
@@ -901,4 +901,4 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 
 ## Non-normative status
 
-Every operation in this view remains a proposal. This focused catalogue is generated from operation-level x-brapi-den metadata and must not be edited independently. Change the OpenAPI operation metadata and master registry inputs, then regenerate this document and the all-generation catalogue.
+Every operation in this view remains a proposal. This focused catalogue is generated from operation-level x-brapi-genx metadata and must not be edited independently. Change the OpenAPI operation metadata and master registry inputs, then regenerate this document and the all-generation catalogue.

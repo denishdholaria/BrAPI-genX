@@ -13,7 +13,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "Specification" / "ENDPOINT-REGISTRY.json"
 EXPECTED_V21 = 201
-EXPECTED_GENX = 21
+EXPECTED_GENX = 24
 DOMAINS = {f"D{i}" for i in range(1, 8)}
 CAPABILITIES = {f"C{i}" for i in range(1, 10)}
 
@@ -33,9 +33,9 @@ def check() -> list[str]:
     if not isinstance(entries, list):
         return ["Registry field 'entries' must be a list."]
     v21 = [e for e in entries if e.get("apiGeneration") == "brapi-v2.1"]
-    genx = [e for e in entries if e.get("apiGeneration") == "genx-v3"]
+    genx = [e for e in entries if e.get("apiGeneration") == "genx-v1"]
     unknown_generations = [e.get("apiGeneration") for e in entries
-                           if e.get("apiGeneration") not in {"brapi-v2.1", "genx-v3"}]
+                           if e.get("apiGeneration") not in {"brapi-v2.1", "genx-v1"}]
     if unknown_generations:
         errors.append(f"Unknown API generations found: {unknown_generations[:5]}")
     if len(v21) != EXPECTED_V21:
@@ -60,9 +60,9 @@ def check() -> list[str]:
             if cid in id_to_entry:
                 errors.append(f"Duplicate catalogue ID: {cid}")
             id_to_entry[cid] = e
-            if e.get("apiGeneration") == "brapi-v2.1" and not cid.startswith("brapi-den.brapi-v2-1."):
+            if e.get("apiGeneration") == "brapi-v2.1" and not cid.startswith("brapi-genx.brapi-v2-1."):
                 errors.append(f"v2.1 entry uses unexpected catalogue namespace: {cid}")
-            if e.get("apiGeneration") == "genx-v3" and not cid.startswith("brapi-den.genx.v3."):
+            if e.get("apiGeneration") == "genx-v1" and not cid.startswith("brapi-genx.genx.v1."):
                 errors.append(f"GenX entry uses unexpected catalogue namespace: {cid}")
 
         method, path, base = e.get("method"), e.get("path"), e.get("basePath")
@@ -86,7 +86,7 @@ def check() -> list[str]:
                 errors.append(f"{cid}: the inspected v2.1 source should be recorded with null operationIdInSource; do not silently rewrite frozen source contracts.")
             if not str(recid).startswith("brapiV21"):
                 errors.append(f"{cid}: v2.1 recommendedOperationId must be clearly separated from GenX names.")
-        elif e.get("apiGeneration") == "genx-v3":
+        elif e.get("apiGeneration") == "genx-v1":
             if not isinstance(opid, str) or not opid.startswith("genx"):
                 errors.append(f"{cid}: GenX source operationId must be explicitly present and begin with 'genx'.")
         if opid:
@@ -121,26 +121,26 @@ def check() -> list[str]:
                     source_id = source_operation.get("operationId")
                     if source_id != e.get("operationIdInSource"):
                         errors.append(f"{cid}: operationIdInSource disagrees with source YAML ({source_id!r}).")
-                    if e.get("apiGeneration") == "genx-v3":
-                        extension = source_operation.get("x-brapi-den")
+                    if e.get("apiGeneration") == "genx-v1":
+                        extension = source_operation.get("x-brapi-genx")
                         if not isinstance(extension, dict):
-                            errors.append(f"{cid}: GenX source operation has no x-brapi-den block.")
+                            errors.append(f"{cid}: GenX source operation has no x-brapi-genx block.")
                         else:
                             if extension.get("catalogId") != cid:
-                                errors.append(f"{cid}: x-brapi-den catalogId disagrees with registry.")
+                                errors.append(f"{cid}: x-brapi-genx catalogId disagrees with registry.")
                             source_class = extension.get("classification") or {}
                             registry_class = e.get("classification") or {}
                             if source_class.get("primaryDomain") != registry_class.get("primaryDomain"):
-                                errors.append(f"{cid}: x-brapi-den primaryDomain disagrees with registry.")
+                                errors.append(f"{cid}: x-brapi-genx primaryDomain disagrees with registry.")
                             if sorted(source_class.get("crossCuttingCapabilities") or []) != sorted(registry_class.get("crossCuttingCapabilities") or []):
-                                errors.append(f"{cid}: x-brapi-den crossCuttingCapabilities disagree with registry.")
+                                errors.append(f"{cid}: x-brapi-genx crossCuttingCapabilities disagree with registry.")
                             for field in ("purpose", "sideEffects", "idempotency"):
                                 if extension.get(field) != e.get(field):
-                                    errors.append(f"{cid}: x-brapi-den {field} disagrees with registry.")
+                                    errors.append(f"{cid}: x-brapi-genx {field} disagrees with registry.")
                             if not isinstance(extension.get("canBeUsedFor"), list) or not extension["canBeUsedFor"]:
-                                errors.append(f"{cid}: source x-brapi-den canBeUsedFor is missing or empty.")
+                                errors.append(f"{cid}: source x-brapi-genx canBeUsedFor is missing or empty.")
                             if not isinstance(extension.get("mustNotBeUsedFor"), list) or not extension["mustNotBeUsedFor"]:
-                                errors.append(f"{cid}: source x-brapi-den mustNotBeUsedFor is missing or empty.")
+                                errors.append(f"{cid}: source x-brapi-genx mustNotBeUsedFor is missing or empty.")
 
         cl = e.get("classification")
         if not isinstance(cl, dict):
@@ -178,7 +178,7 @@ def check() -> list[str]:
                     errors.append(f"{cid}: BrAPI-specific declaration count is inconsistent.")
             if cw.get("runtimeAvailability") != "not-verified":
                 errors.append(f"{cid}: runtime availability must remain not-verified.")
-        elif e.get("apiGeneration") == "genx-v3":
+        elif e.get("apiGeneration") == "genx-v1":
             if not isinstance(cw.get("relativePathCandidates"), list):
                 errors.append(f"{cid}: GenX relativePathCandidates must be a list.")
 
@@ -253,7 +253,7 @@ def main() -> int:
             print("- " + error)
         return 1
     registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
-    print("Endpoint registry passed structural checks: 201 BrAPI v2.1 entries, 21 proposed GenX entries, unique identities/routes, complete source links, and resolved semantic-neighbor IDs.")
+    print("Endpoint registry passed structural checks: 201 BrAPI v2.1 entries, 24 proposed GenX entries, unique identities/routes, complete source links, and resolved semantic-neighbor IDs.")
     return 0
 
 

@@ -16,7 +16,7 @@ A third ambiguity is security-related: `ServerCapability.scopes` is described as
 
 The machine-readable [capability registry](./capability-registry.json) lists every current GenX capability and its operation surfaces. The experimental optional `operations[]` property in `ServerCapability` mirrors that information using:
 
-- `route`: full route template, including `/brapi/v3`;
+- `route`: full route template, including `/genx/v1`;
 - `method`: HTTP method;
 - `operationId`: stable operation identity already catalogued in [ENDPOINT-IDENTITY.md](../ENDPOINT-IDENTITY.md).
 

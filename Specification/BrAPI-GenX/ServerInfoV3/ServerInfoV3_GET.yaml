@@ -1,13 +1,13 @@
 info:
-  title: BrAPI
+  title: BrAPI-GenX API
   version: ''
 openapi: 3.0.0
 paths:
   /serverinfo:
     get:
       operationId: genxGetServerInfoV3
-      x-brapi-den:
-        catalogId: "brapi-den.genx.v3.serverinfo.read"
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.serverinfo.read"
         classification:
           primaryDomain: null
           crossCuttingCapabilities: ["C1", "C8", "C9"]
@@ -26,7 +26,7 @@ paths:
         decisions: ["RFC-001", "A-01"]
         proposalStatus: "draft-non-normative"
       description: |-
-        GenX capability negotiation. Served under `/brapi/v3/`.
+        GenX capability negotiation. Served under `/genx/v1/`.
 
         Returns the V2.1 ServerInfo fields plus `brapiVersions`,
         `capabilities`, and `authProfiles` so clients negotiate instead of

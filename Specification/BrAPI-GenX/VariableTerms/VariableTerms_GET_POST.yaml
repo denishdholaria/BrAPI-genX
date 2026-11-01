@@ -1,13 +1,13 @@
 info:
-  title: BrAPI
+  title: BrAPI-GenX API
   version: ''
 openapi: 3.0.0
 paths:
   /variable-terms:
     get:
       operationId: genxListVariableTermVersions
-      x-brapi-den:
-        catalogId: "brapi-den.genx.v3.variable-terms.list"
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.variable-terms.list"
         classification:
           primaryDomain: null
           crossCuttingCapabilities: ["C1", "C2", "C4"]
@@ -66,8 +66,8 @@ paths:
       - VariableTerms
     post:
       operationId: genxPublishVariableTermVersion
-      x-brapi-den:
-        catalogId: "brapi-den.genx.v3.variable-terms.publish-version"
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.variable-terms.publish-version"
         classification:
           primaryDomain: null
           crossCuttingCapabilities: ["C1", "C2", "C4"]

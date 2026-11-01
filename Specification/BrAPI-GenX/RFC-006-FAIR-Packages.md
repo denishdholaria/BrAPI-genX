@@ -62,11 +62,11 @@ Invariants:
 
 ## 3. Endpoints
 
-- `POST /brapi/v3/fair-packages` (`genxRegisterFairPackage`) with `FAIRPackageNewRequest` → `200` + single
+- `POST /genx/v1/fair-packages` (`genxRegisterFairPackage`) with `FAIRPackageNewRequest` → `200` + single
   package (create, replay, or `409` conflict with plain-text body).
-- `GET /brapi/v3/fair-packages` (`genxListFairPackageMetadata`) with `accessRights?`, `license?` filters + standard
+- `GET /genx/v1/fair-packages` (`genxListFairPackageMetadata`) with `accessRights?`, `license?` filters + standard
   pagination → list of packages (metadata only, never payload bytes).
-- `GET /brapi/v3/fair-packages/{packageDbId}` (`genxGetFairPackageMetadata`) → single package metadata, or `403`
+- `GET /genx/v1/fair-packages/{packageDbId}` (`genxGetFairPackageMetadata`) → single package metadata, or `403`
   while its payloads are embargoed... precisely: metadata always serves;
   servers MUST NOT serve `payloadRefs` resolution while embargoed. Since this
   API serves metadata (not bytes), the `403` applies to any future payload

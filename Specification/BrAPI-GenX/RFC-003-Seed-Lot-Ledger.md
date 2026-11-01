@@ -60,9 +60,9 @@ Invariants:
 
 ## 3. Endpoints
 
-- `POST /brapi/v3/seedlots/{seedLotDbId}/ledger` (`genxAppendSeedLotLedgerEntry`) with `LotLedgerEntryNewRequest` →
+- `POST /genx/v1/seedlots/{seedLotDbId}/ledger` (`genxAppendSeedLotLedgerEntry`) with `LotLedgerEntryNewRequest` →
   `200` + single entry (create, replay, or `409` conflict with plain-text body).
-- `GET /brapi/v3/seedlots/{seedLotDbId}/ledger` (`genxListSeedLotLedgerEntries`) with `entryType?` + standard pagination
+- `GET /genx/v1/seedlots/{seedLotDbId}/ledger` (`genxListSeedLotLedgerEntries`) with `entryType?` + standard pagination
   over `position` order → list of entries.
 
 Both live under the existing `Seed Lots` tag so tag-filtered clients keep

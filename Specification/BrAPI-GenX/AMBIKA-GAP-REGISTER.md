@@ -1,12 +1,12 @@
-# BrAPI-Den vs Ambika Ideal Module Catalog — Gap Register
+# BrAPI-GenX vs Ambika Ideal Module Catalog — Gap Register
 
 - Status: proposal / working register, non-normative.
 - Purpose: identify Ambika capabilities that are **not** present in BrAPI v2.1 and therefore
-  are candidates for additive BrAPI-Den (GenX) endpoint specs, without disturbing the
+  are candidates for additive BrAPI-GenX (GenX) endpoint specs, without disturbing the
   BrAPI v2.1 standard set or implying equivalence.
 - Source: `Ambika/ideal-module-catalog/` (24 domain groups, 47 packs, 402 modules).
 - Rule: a capability already standardized in BrAPI v2.1 keeps its official V2.1 location and
-  contract. GenX specs are additive (`/brapi/v3/...`) and optional.
+  contract. GenX specs are additive (`/genx/v1/...`) and optional.
 
 ## Coverage key
 
@@ -63,6 +63,6 @@
 - Only add an object when BrAPI v2.1 has no substantially equivalent resource.
 - Reuse BrAPI v2.1 identifiers (Program, Study, Germplasm, Observation, etc.) by reference; do not duplicate them.
 - Follow the GenX module pattern: `README.md`, `GroupDescription.md`, `Schemas/*`, `*_GET_POST.yaml`, `*_DbId_GET.yaml`, RFC, classification registry entry, endpoint registry entry, generated catalog update.
-- Run `BrAPI-Den/Scripts/checkGenXEndpointCatalog.py` after changes.
+- Run `BrAPI-GenX/Scripts/checkGenXEndpointCatalog.py` after changes.
 - Classify each new module/operation in `Conformance/domain-classification.yaml` with exactly one primary domain class or explicit cross-cutting.
 - Keep platform/business/UI modules out of BrAPI scientific classes.

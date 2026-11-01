@@ -10,7 +10,7 @@ establish production readiness.
 | Tier | Needs | Run |
 |---|---|---|
 | `static` (S-01…S-21) | this repo only | `python Scripts/checkGenXConformance.py` from the `BrAPI_genX` root |
-| `live` (L-01…L-28) | a GenX test server | `python Scripts/checkGenXConformance.py --server https://host/brapi/v3` |
+| `live` (L-01…L-28) | a GenX test server | `python Scripts/checkGenXConformance.py --server https://host/genx/v1` |
 
 Static probes run by default. Live probes `SKIP` without `--server` and fail
 closed with it. Run the endpoint-identity negative tests separately with
@@ -28,26 +28,26 @@ persistence, no authentication) implements the skeleton for live execution:
 ```shell
 python Scripts/genx_test_server.py --port 8080 --profile genx &
 python Scripts/checkGenXConformance.py \
-  --server http://127.0.0.1:8080/brapi/v3 --expired-job JOB_EXPIRED
+  --server http://127.0.0.1:8080/genx/v1 --expired-job JOB_EXPIRED
 ```
 
 `--profile v21` serves the V2.1-only shape for probe L-06. Supported job
 types: `germplasm_search`, `analysis` (echoes `parameters.observation` for
 L-07). `JOB_EXPIRED` is pre-seeded for L-05. Same-key/different-body is
-rejected with `409` (evidence for RFC-001 §8 decision #1). Versioned `VariableTerm` records are exposed under `/brapi/v3/variable-terms`:
+rejected with `409` (evidence for RFC-001 §8 decision #1). Versioned `VariableTerm` records are exposed under `/genx/v1/variable-terms`:
 `genxListVariableTermVersions` lists, `genxPublishVariableTermVersion` publishes
 one immutable version, and `genxGetVariableTermVersion` retrieves one. These
-are not the V2.1 `ObservationVariable` contract: the routes are intentionally distinct, `/brapi/v2/variables` versus `/brapi/v3/variable-terms`.
+are not the V2.1 `ObservationVariable` contract: the routes are intentionally distinct, `/brapi/v2/variables` versus `/genx/v1/variable-terms`.
 See [`ENDPOINT-IDENTITY.md`](../ENDPOINT-IDENTITY.md). Lot
-ledger entries use `/brapi/v3/seedlots/{seedLotDbId}/ledger` with RFC-003
+ledger entries use `/genx/v1/seedlots/{seedLotDbId}/ledger` with RFC-003
 append/replay/conflict semantics for L-10/L-11 (lots auto-provisioned).
-Models live under `/brapi/v3/models` with RFC-004 replay/conflict semantics for
+Models live under `/genx/v1/models` with RFC-004 replay/conflict semantics for
 L-12/L-13; `inference` jobs bind to registered models for L-14/L-15 (the
 reference `outputs.echo` stub exists only to prove digest binding). Matrix
-references live under `/brapi/v3/variantmatrices` with RFC-005 replay/conflict
-semantics for L-16/L-17. Packages live under `/brapi/v3/fair-packages` with RFC-006
+references live under `/genx/v1/variantmatrices` with RFC-005 replay/conflict
+semantics for L-16/L-17. Packages live under `/genx/v1/fair-packages` with RFC-006
 replay/conflict/embargo semantics for L-18–L-20. Samples live under
-`/brapi/v3/telemetry` with RFC-007 batch/replay/conflict/aggregate semantics for
+`/genx/v1/telemetry` with RFC-007 batch/replay/conflict/aggregate semantics for
 L-21–L-23.
 
 A second, black-box TypeScript/Bun server

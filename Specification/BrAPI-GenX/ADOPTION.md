@@ -6,26 +6,26 @@ step is independently shippable and leaves V2.1 behavior byte-identical.
 
 ## Order
 
-1. **ServerInfoV3** (`ServerInfoV3/`). Serve `GET /brapi/v3/serverinfo`
+1. **ServerInfoV3** (`ServerInfoV3/`). Serve `GET /genx/v1/serverinfo`
    (`genxGetServerInfoV3`) alongside the untouched V2.1 endpoint
    `GET /brapi/v2/serverinfo`. Zero behavior change;
    unlocks negotiation for everything below.
 2. **ProvenanceEnvelope** (`Provenance/`). Embed optional `provenance` on
    observations and results first — highest value per line changed, no
    endpoints.
-3. **Jobs** (`Jobs/`). Submit work via `POST /brapi/v3/jobs`
-   (`genxSubmitAsyncJob`), poll via `GET /brapi/v3/jobs/{jobDbId}`
+3. **Jobs** (`Jobs/`). Submit work via `POST /genx/v1/jobs`
+   (`genxSubmitAsyncJob`), poll via `GET /genx/v1/jobs/{jobDbId}`
    (`genxGetAsyncJobById`), and request cancellation via `DELETE
-   /brapi/v3/jobs/{jobDbId}` (`genxRequestAsyncJobCancellation`). Existing
+   /genx/v1/jobs/{jobDbId}` (`genxRequestAsyncJobCancellation`). Existing
    BrAPI V2.1 `/brapi/v2/search/*` contracts remain unchanged; Jobs are not a
    retroactive replacement for them.
-4. **Domain objects in any order**: `VariableTerm` via `/brapi/v3/variable-terms`, `LotLedgerEntry` via `/brapi/v3/seedlots/{seedLotDbId}/ledger`,
+4. **Domain objects in any order**: `VariableTerm` via `/genx/v1/variable-terms`, `LotLedgerEntry` via `/genx/v1/seedlots/{seedLotDbId}/ledger`,
    `ModelArtifact` + inference, `VariantMatrix`, `FAIRPackage`,
    `TelemetryPoint`. Each is additive; implement what your users need.
 
 ## Compatibility rules (from RFC-001 §3)
 
-V2.1 frozen; `/brapi/v3/` base; standard envelope unchanged; no shadowing of
+V2.1 frozen; `/genx/v1/` base; standard envelope unchanged; no shadowing of
 V2.1 component names (run S-01). Until D-01 (conflict status) resolves,
 servers SHOULD use `409` and clients MUST treat any `4xx` on a keyed write as
 a possible conflict and re-read before retrying.
@@ -38,7 +38,7 @@ python Scripts/checkGenXConformance.py
 
 # Live tier against staging
 python Scripts/genx_test_server.py --port 8080 --profile genx &  # reference behavior
-python Scripts/checkGenXConformance.py --server https://staging/brapi/v3 --expired-job JOB_EXPIRED
+python Scripts/checkGenXConformance.py --server https://staging/genx/v1 --expired-job JOB_EXPIRED
 
 # With two implementations, differential-test them
 python Scripts/genx_differential_check.py --a URL_A --b URL_B --expired-job JOB_EXPIRED

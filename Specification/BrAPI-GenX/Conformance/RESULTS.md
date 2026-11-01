@@ -6,7 +6,7 @@
 
 ## Historical-run scope
 
-Runs 1–12 are recorded results for earlier proposal revisions. They include the former GenX term route `/brapi/v3/variables`. During the endpoint-identity review, the proposed GenX term resource was renamed to `/brapi/v3/variable-terms`, and its specification folder was renamed from `Ontology/` to `VariableTerms/`. Runs 1–12 do **not** validate the renamed route; Run 13 below records the first successful live check of `/brapi/v3/variable-terms`. V2.1 contracts remain unchanged.
+Runs 1–12 are recorded results for earlier proposal revisions. They include the former GenX term route `/genx/v1/variables`. During the endpoint-identity review, the proposed GenX term resource was renamed to `/genx/v1/variable-terms`, and its specification folder was renamed from `Ontology/` to `VariableTerms/`. Runs 1–12 do **not** validate the renamed route; Run 13 below records the first successful live check of `/genx/v1/variable-terms`. V2.1 contracts remain unchanged.
 
 ## Runs
 
@@ -16,7 +16,7 @@ python Scripts/checkGenXConformance.py
 
 python Scripts/genx_test_server.py --port 18080 --delay 0.4 &
 python Scripts/checkGenXConformance.py \
-  --server http://127.0.0.1:18080/brapi/v3 --expired-job JOB_EXPIRED
+  --server http://127.0.0.1:18080/genx/v1 --expired-job JOB_EXPIRED
 # 15 PASS, 0 FAIL, 0 SKIP
 
 python Scripts/genx_test_server.py --port 18081 --profile v21 &
@@ -33,7 +33,7 @@ python Scripts/checkGenXConformance.py
 
 python Scripts/genx_test_server.py --port 18080 --delay 0.4 &
 python Scripts/checkGenXConformance.py \
-  --server http://127.0.0.1:18080/brapi/v3 --expired-job JOB_EXPIRED
+  --server http://127.0.0.1:18080/genx/v1 --expired-job JOB_EXPIRED
 # 19 PASS, 0 FAIL, 0 SKIP (L-08 term replay, L-09 term 409 conflict)
 
 python Scripts/checkGenXConformance.py \
@@ -54,7 +54,7 @@ python Scripts/checkGenXConformance.py
 
 python Scripts/genx_test_server.py --port 18080 --delay 0.4 &
 python Scripts/checkGenXConformance.py \
-  --server http://127.0.0.1:18080/brapi/v3 --expired-job JOB_EXPIRED
+  --server http://127.0.0.1:18080/genx/v1 --expired-job JOB_EXPIRED
 # 23 PASS, 0 FAIL, 0 SKIP (L-10 ledger replay, L-11 ledger 409 conflict)
 ```
 
@@ -71,7 +71,7 @@ python Scripts/checkGenXConformance.py
 
 python Scripts/genx_test_server.py --port 18080 --delay 0.4 &
 python Scripts/checkGenXConformance.py \
-  --server http://127.0.0.1:18080/brapi/v3 --expired-job JOB_EXPIRED
+  --server http://127.0.0.1:18080/genx/v1 --expired-job JOB_EXPIRED
 # 29 PASS, 0 FAIL, 0 SKIP (L-12 model replay, L-13 artifact 409,
 # L-14 inference digest binding with recomputed SHA-256, L-15 unknown/revoked 400)
 ```
@@ -88,7 +88,7 @@ python Scripts/checkGenXConformance.py
 
 python Scripts/genx_test_server.py --port 18080 --delay 0.4 &
 python Scripts/checkGenXConformance.py \
-  --server http://127.0.0.1:18080/brapi/v3 --expired-job JOB_EXPIRED
+  --server http://127.0.0.1:18080/genx/v1 --expired-job JOB_EXPIRED
 # 33 PASS, 0 FAIL, 0 SKIP (L-16 matrix replay, L-17 mutated-bytes 409)
 ```
 
@@ -105,7 +105,7 @@ python Scripts/checkGenXConformance.py
 
 python Scripts/genx_test_server.py --port 18080 --delay 0.4 &
 python Scripts/checkGenXConformance.py \
-  --server http://127.0.0.1:18080/brapi/v3 --expired-job JOB_EXPIRED
+  --server http://127.0.0.1:18080/genx/v1 --expired-job JOB_EXPIRED
 # 38 PASS, 0 FAIL, 0 SKIP (L-18 package replay, L-19 license 409,
 # L-20 embargo 403 on far-future embargoUntil)
 ```
@@ -123,7 +123,7 @@ python Scripts/checkGenXConformance.py
 
 python Scripts/genx_test_server.py --port 18080 --delay 0.4 &
 python Scripts/checkGenXConformance.py \
-  --server http://127.0.0.1:18080/brapi/v3 --expired-job JOB_EXPIRED
+  --server http://127.0.0.1:18080/genx/v1 --expired-job JOB_EXPIRED
 # 43 PASS, 0 FAIL, 0 SKIP (L-21 batch replay counts, L-22 element-wise
 # conflict, L-23 mean recomputation within 1e-9)
 ```
@@ -152,7 +152,7 @@ python Scripts/checkGenXConformance.py
 
 python Scripts/genx_test_server.py --port 18080 --delay 0.4 &
 python Scripts/checkGenXConformance.py \
-  --server http://127.0.0.1:18080/brapi/v3 --expired-job JOB_EXPIRED
+  --server http://127.0.0.1:18080/genx/v1 --expired-job JOB_EXPIRED
 # 44 PASS, 0 FAIL, 0 SKIP
 ```
 
@@ -164,7 +164,7 @@ from the RFC text, implements the RFC-001 core + RFC-004 inference subset
 
 ```shell
 bun Scripts/genx_test_server_ts.ts --port 18082 --delay 0.4 &
-python Scripts/checkGenXConformance.py --server http://127.0.0.1:18082/brapi/v3 \
+python Scripts/checkGenXConformance.py --server http://127.0.0.1:18082/genx/v1 \
   --expired-job JOB_EXPIRED --only L-01   # ... L-02 L-03 L-04 L-05 L-06 L-07
                                           # L-12 L-13 L-14 L-15 L-24
 # 13/13 PASS, including L-14 digest agreement across runtimes and L-24
@@ -184,7 +184,7 @@ No RFC text change was needed — the ambiguity was in my code, not the spec.
 
 ```shell
 python Scripts/genx_differential_check.py \
-  --a http://127.0.0.1:18080/brapi/v3 --b http://127.0.0.1:18082/brapi/v3 \
+  --a http://127.0.0.1:18080/genx/v1 --b http://127.0.0.1:18082/genx/v1 \
   --expired-job JOB_EXPIRED
 # differential: 9/9 steps agree (serverinfo agrees under subset-capability rule)
 ```
@@ -219,7 +219,7 @@ mixed key/type races are untested. Production claims: none.
 Four previously unexercised behaviors get probes; no new spec surface:
 
 ```shell
-python Scripts/checkGenXConformance.py --server http://127.0.0.1:18080/brapi/v3 \
+python Scripts/checkGenXConformance.py --server http://127.0.0.1:18080/genx/v1 \
   --expired-job JOB_EXPIRED
 # 48 PASS, 0 FAIL, 0 SKIP (L-25 list envelopes, L-26 windowed buckets,
 # L-27 deprecated WARNING, L-28 pagination slice)
@@ -251,7 +251,7 @@ Tested commit: `884420e0b095e4613fc83d40d797cf73d9f95807`
 
 - Endpoint-identity mutation tests: **10 passed**, including the valid control case and negative cases for missing/duplicate operation IDs, duplicate normalized route templates, stale or missing overlap entries, incomplete semantic-neighbor metadata, V2.1 identifier collisions, and endpoint-catalogue drift.
 - Static conformance: **21 passed, 0 failed**. S-21 found **21 named GenX operations** and **one registered cross-generation relative-path overlap**: `GET /serverinfo`.
-- Live reference-server conformance: **28 passed, 0 failed, 0 skipped**, including L-08/L-09 against the renamed `/brapi/v3/variable-terms` route.
+- Live reference-server conformance: **28 passed, 0 failed, 0 skipped**, including L-08/L-09 against the renamed `/genx/v1/variable-terms` route.
 - The reference server is in-memory and does not provide durable persistence or effective authentication. This run validates the exercised proposal behavior, not production readiness, security posture, performance, or interoperability with an independent third-party implementation.
 
 V2.1 endpoint files were not changed. This is a feature-branch engineering result, not a standards-ratification event.
@@ -264,7 +264,7 @@ Tested commit: `b551142357047dd9c82cedcc207588324190730d`
 
 - Endpoint-identity mutation tests: **12 passed**. Negative tests include missing/duplicate operation IDs, duplicated normalized route templates, absent/stale overlap records, malformed semantic-neighbor records, cross-generation operation-ID collisions, endpoint-catalogue drift, and missing meaning/boundary text. The valid synthetic control passes.
 - Static conformance: **21 passed, 0 failed**. S-21 verified 21 named GenX operations and one registered cross-generation relative-path overlap, `GET /serverinfo`.
-- Live reference-server conformance: **28 passed, 0 failed, 0 skipped**. These include the renamed `/brapi/v3/variable-terms` replay/conflict behaviors and unrelated existing capability probes.
+- Live reference-server conformance: **28 passed, 0 failed, 0 skipped**. These include the renamed `/genx/v1/variable-terms` replay/conflict behaviors and unrelated existing capability probes.
 - The live target is an in-memory Python reference server. This is evidence for the tested behavior and conformance tooling only; it does not prove durable persistence, effective authentication, production security, third-party interoperability, or standard acceptance.
 
 The separate schema-generation/build workflow also passed on this tested commit: [GitHub Actions run 38560252360](https://github.com/denishdholaria/BrAPI_genX/actions/runs/38560252360). The conformance and schema-generation workflows therefore both pass for the commit cited above. No V2.1 contract file was edited.

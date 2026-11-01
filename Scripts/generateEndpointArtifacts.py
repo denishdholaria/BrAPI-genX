@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate BrAPI-Den endpoint documentation from the canonical JSON registry."""
+"""Generate BrAPI-GenX endpoint documentation from the canonical JSON registry."""
 from __future__ import annotations
 import argparse, json, sys
 from pathlib import Path
@@ -39,7 +39,7 @@ RUST = [
  ("Phenotype observations","BrAPI /observations and /observationunits","Rust /api/v2/phenotype/observations and /api/v2/phenotype/units","Potential domain correspondence; unit identities, variables, studies, value semantics, and response contracts require explicit mapping."),
  ("Scientific terminology","BrAPI /variables, /traits, /methods, /scales","Rust /api/v2/ontology/{variables,traits,methods,scales}","Related terminology responsibilities; object models and lifecycle rules are not asserted to be interchangeable."),
  ("Breeding and trial context","BrAPI /programs, /trials, /studies, /seasons, /locations","Rust /api/v2/trials/{programs,studies,seasons,trials,locations}","Related domain surfaces under a different boundary; compare object semantics and authority before reuse."),
- ("Asynchronous scientific work","GenX /brapi/v3/jobs; model inference is a declared job type","Rust /api/v2/compute/jobs and /api/v2/polyglot/jobs","Potentially complementary execution surfaces; no equivalent identifiers, lifecycle mapping, or safe result conversion is established."),
+ ("Asynchronous scientific work","GenX /genx/v1/jobs; model inference is a declared job type","Rust /api/v2/compute/jobs and /api/v2/polyglot/jobs","Potentially complementary execution surfaces; no equivalent identifiers, lifecycle mapping, or safe result conversion is established."),
 ]
 
 def m(v):
@@ -70,7 +70,7 @@ def domain(e):
 def render_entry(e):
     lines=["### "+m(e.get("method"))+" "+BT+m(e.get("basePath","")+e.get("path",""))+BT,""]
     lines.append("- **Catalogue ID:** "+BT+m(e.get("catalogId"))+BT)
-    lines.append("- **BrAPI-Den operation identity:** "+BT+m(e.get("recommendedOperationId"))+BT+" (advisory where absent from source)")
+    lines.append("- **BrAPI-GenX operation identity:** "+BT+m(e.get("recommendedOperationId"))+BT+" (advisory where absent from source)")
     if e.get("apiGeneration")=="brapi-v2.1":
         so=e.get("operationIdInSource")
         lines.append("- **Source OpenAPI operationId:** "+(BT+m(so)+BT if so else "not defined in the inspected BrAPI v2.1 source operation. The recommended identifier is advisory only and does not amend the released contract."))
@@ -79,7 +79,7 @@ def render_entry(e):
         lines.append("- **Source OpenAPI operationId:** "+BT+m(e.get("operationIdInSource"))+BT)
         lines.append("- **GenX source module:** "+BT+m(e.get("genxModule"))+BT)
     if e.get("brapiTag"): lines.append("- **Source tag:** "+m(e["brapiTag"]))
-    lines.append("- **Proposed BrAPI-Den classification:** "+m(domain(e)))
+    lines.append("- **Proposed BrAPI-GenX classification:** "+m(domain(e)))
     cl = e.get("classification") or {}
     lines.append("- **Classification review / confidence:** "+BT+m(cl.get("reviewStatus"))+BT+" / "+BT+m(cl.get("confidence"))+BT)
     lines.append("- **Standard / proposal status:** "+BT+m(e.get("standardStatus"))+BT)
@@ -125,16 +125,16 @@ def render_entry(e):
     return lines
 
 def render_catalog(reg):
-    entries=reg["entries"]; v21=[e for e in entries if e.get("apiGeneration")=="brapi-v2.1"]; genx=[e for e in entries if e.get("apiGeneration")=="genx-v3"]
+    entries=reg["entries"]; v21=[e for e in entries if e.get("apiGeneration")=="brapi-v2.1"]; genx=[e for e in entries if e.get("apiGeneration")=="genx-v1"]
     snap=reg.get("buildIntegrity",{}).get("bijmantraInventorySnapshot",{})
-    lines=["# BrAPI-Den Master Endpoint Catalogue","",
+    lines=["# BrAPI-GenX Master Endpoint Catalogue","",
     "> Generated from [ENDPOINT-REGISTRY.json](./ENDPOINT-REGISTRY.json) by Scripts/generateEndpointArtifacts.py on "+str(reg.get("generatedAt","unknown date"))+". Do not edit by hand.","",
     "## Purpose and authority","",
     "This catalogue is the human-readable index for operation contracts and semantic boundaries. Source OpenAPI operations remain authoritative for wire contracts. The JSON registry is authoritative for catalogue identity, proposed crosswalk metadata, implementation-evidence status, and semantic-neighbor relationships.","",
-    "A catalogue identifier does not replace a source operationId or route. Classification is a BrAPI-Den crosswalk, not an official BrAPI community reclassification. Static source declarations do not prove that an endpoint is mounted, reachable, secure, or conformant.","",
+    "A catalogue identifier does not replace a source operationId or route. Classification is a BrAPI-GenX crosswalk, not an official BrAPI community reclassification. Static source declarations do not prove that an endpoint is mounted, reachable, secure, or conformant.","",
     "## Coverage","","| Surface | Operations | Contract status |","|---|---:|---|",
     "| BrAPI v2.1 official modules | "+str(len(v21))+" | Released specification; implementation availability not inferred |",
-    "| BrAPI GenX /brapi/v3 | "+str(len(genx))+" | Proposed, non-normative |",
+    "| BrAPI GenX /genx/v1 | "+str(len(genx))+" | Proposed, non-normative |",
     "| **Total** | **"+str(len(entries))+"** | Existing contracts plus proposed operations |","",
     "BijMantra snapshot: "+str(snap.get("declaredTotalRows","unknown"))+" records from the inventory generated "+str(snap.get("generatedDate","unknown"))+"; see [source inventory](https://github.com/denishdholaria/bijmantraorg/blob/main/endpoints-inventory.md) and [crosswalk](./BIJMANTRA-CROSSWALK.md).","",
     "## Identity and review rules","",
@@ -158,7 +158,7 @@ def render_catalog(reg):
         group=sorted([e for e in v21 if e.get("brapiModule")==module],key=lambda e:(e.get("path",""),e.get("method",""),e.get("catalogId","")))
         lines.extend(["### "+module+" — "+str(len(group))+" operations",""])
         for e in group: lines.extend(render_entry(e))
-    lines.extend(["## BrAPI GenX — proposed /brapi/v3 operations","","Every operation below is proposal-only. Reference-test-server evidence is not community acceptance or production deployment.",""])
+    lines.extend(["## BrAPI GenX — proposed /genx/v1 operations","","Every operation below is proposal-only. Reference-test-server evidence is not community acceptance or production deployment.",""])
     for module in sorted({e.get("genxModule") or "Unclassified" for e in genx}):
         group=sorted([e for e in genx if (e.get("genxModule") or "Unclassified")==module],key=lambda e:(e.get("path",""),e.get("method",""),e.get("catalogId","")))
         lines.extend(["### "+module+" — "+str(len(group))+" operations",""])
@@ -175,11 +175,11 @@ def render_catalog(reg):
 
 def render_crosswalk(reg):
     entries=reg["entries"]; v21=sorted([e for e in entries if e.get("apiGeneration")=="brapi-v2.1"],key=lambda e:(e.get("brapiModule") or "",e.get("path",""),e.get("method","")))
-    genx=sorted([e for e in entries if e.get("apiGeneration")=="genx-v3"],key=lambda e:(e.get("genxModule") or "",e.get("path",""),e.get("method","")))
+    genx=sorted([e for e in entries if e.get("apiGeneration")=="genx-v1"],key=lambda e:(e.get("genxModule") or "",e.get("path",""),e.get("method","")))
     bi=reg.get("buildIntegrity",{}); snap=bi.get("bijmantraInventorySnapshot",{}); x=bi.get("v21PythonCrosswalk",{})
-    lines=["# BrAPI-Den ↔ BijMantra Endpoint Crosswalk","",
+    lines=["# BrAPI-GenX ↔ BijMantra Endpoint Crosswalk","",
     "> Generated from [ENDPOINT-REGISTRY.json](./ENDPOINT-REGISTRY.json) by Scripts/generateEndpointArtifacts.py on "+str(reg.get("generatedAt","unknown date"))+". Do not edit by hand.","",
-    "## Scope and evidence boundaries","","This crosswalk uses the static [BijMantra endpoint inventory](https://github.com/denishdholaria/bijmantraorg/blob/main/endpoints-inventory.md), generated on 2026-10-17, and the BrAPI-Den specifications. It compares source declarations and contract paths; it is not a report of successful HTTP probes or production deployment.","",
+    "## Scope and evidence boundaries","","This crosswalk uses the static [BijMantra endpoint inventory](https://github.com/denishdholaria/bijmantraorg/blob/main/endpoints-inventory.md), generated on 2026-10-17, and the BrAPI-GenX specifications. It compares source declarations and contract paths; it is not a report of successful HTTP probes or production deployment.","",
     "A relative method/path match means the same HTTP verb and relative route template appear after parameter names are normalized. It does not prove that request/response schemas, identity models, authorization, side effects, error semantics, retry behavior, or data ownership are compatible.","",
     "## Inventory reconciliation","","| Inventory surface | Declared rows | Interpretation |","|---|---:|---|",
     "| Legacy Python route table | "+str(snap.get("declaredPythonTableRows","—"))+" | Includes "+str(snap.get("websocketRowsInPythonTable","—"))+" WebSocket row; "+str(snap.get("pythonHttpRouteDeclarations","—"))+" are HTTP declarations; static source only. |",
@@ -202,7 +202,7 @@ def render_crosswalk(reg):
     "| Catalogue ID | Method and route | BrAPI source candidates | Other source candidates |","|---|---|---:|---:|"])
     for c in x.get("sameRouteCollisions",[]):
         lines.append("| "+BT+m(c.get("catalogId"))+BT+" | "+BT+m(c.get("method"))+" "+m(c.get("path"))+BT+" | "+str(c.get("brapiSpecific",0))+" | "+str(c.get("other",0))+" |")
-    lines.extend(["","## BrAPI GenX ↔ BijMantra static route candidates","","GenX uses /brapi/v3. Relative-route matches below are candidate neighbors only; they do not prove v3 wiring, runtime mounting, or contract equivalence.","",
+    lines.extend(["","## BrAPI GenX ↔ BijMantra static route candidates","","GenX uses /genx/v1. Relative-route matches below are candidate neighbors only; they do not prove v3 wiring, runtime mounting, or contract equivalence.","",
     "| GenX catalogue ID | Method and route | Relative candidates | Interpretation |","|---|---|---:|---|"])
     for e in genx:
         cw=e.get("bijmantraCrosswalk") or {}; cand=cw.get("relativePathCandidates") or []
@@ -220,7 +220,7 @@ def render_crosswalk(reg):
     return "\n".join(lines)
 
 def render_genx_catalog(reg):
-    genx = [e for e in reg["entries"] if e.get("apiGeneration") == "genx-v3"]
+    genx = [e for e in reg["entries"] if e.get("apiGeneration") == "genx-v1"]
     lines = [
         "# BrAPI-GenX Endpoint Catalogue (Focused View)", "",
         "> Generated from the master registry by Scripts/generateEndpointArtifacts.py on " + str(reg.get("generatedAt", "unknown date")) + ". Do not edit by hand.", "",
@@ -239,7 +239,7 @@ def render_genx_catalog(reg):
         for e in group:
             lines.extend(render_entry(e))
     lines.extend(["", "## Non-normative status", "",
-                  "Every operation in this view remains a proposal. This focused catalogue is generated from operation-level x-brapi-den metadata and must not be edited independently. Change the OpenAPI operation metadata and master registry inputs, then regenerate this document and the all-generation catalogue.", ""])
+                  "Every operation in this view remains a proposal. This focused catalogue is generated from operation-level x-brapi-genx metadata and must not be edited independently. Change the OpenAPI operation metadata and master registry inputs, then regenerate this document and the all-generation catalogue.", ""])
     return "\n".join(lines)
 
 

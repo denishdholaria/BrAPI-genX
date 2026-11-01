@@ -1,10 +1,10 @@
-# BrAPI-Den Endpoint Inventory (generated from Bijmantra legacy backend)
+# BrAPI-GenX Endpoint Inventory (generated from Bijmantra legacy backend)
 
 - Status: **generated working inventory / proposal**, non-normative. Review required.
 - Source: `bijmantraOrg/backend` FastAPI app (brain-wired modules), extracted 2026-11-01.
 - Scope: all registered HTTP routes (auth, BrAPI v2.1, product `/api/v2/*`). Socket.IO and static mounts excluded.
 - Purpose: give a single organized view of ~1,849 legacy endpoints, map them to the proposed
-  BrAPI-Den scientific domain classes (D1–D7) and cross-cutting capabilities (C*), and expose
+  BrAPI-GenX scientific domain classes (D1–D7) and cross-cutting capabilities (C*), and expose
   clashes/duplicates so GenX specs can be planned without guessing.
 
 ## Totals
@@ -17,7 +17,7 @@
 | OpenAPI metadata | 1 |
 | **Total** | **1,849** |
 
-## By proposed BrAPI-Den class
+## By proposed BrAPI-GenX class
 
 | Code | Class | Endpoints | Share |
 |---|---|---:|---:|
@@ -96,13 +96,13 @@ Exact duplicate method+path registrations (4):
 - `GET /api/v2/crop-calendar/growth-stages` (×2)
 - `GET /api/v2/audit/security` (×2)
 
-These are the same kind of collision BrAPI-Den `ENDPOINT-IDENTITY.md` guards against. Resolve before promoting any of them into a GenX spec.
+These are the same kind of collision BrAPI-GenX `ENDPOINT-IDENTITY.md` guards against. Resolve before promoting any of them into a GenX spec.
 
 ## Where to work next (suggested)
 
 1. **Spec the missing scientific domains first**: D1, D2, D4, D5 (in that order of legacy mass and standards gap). D2 has the largest un-spec'd surface (240) and the most BrAPI v2 overlap (trials/studies/programs/crosses).
 2. **Deepen existing GenX modules** where legacy surface is large: D3 (genotyping/markers/variants), D6 (seed-bank, inventory, harvest, warehouse), D7 (analytics, breeding-value, selection-decisions, GWAS/QTL).
-3. **Do not force the 836 platform endpoints into scientific GenX classes.** Keep them as BrAPI-Den platform extensions or leave them in the product API; classify them as `P` / cross-cutting (C9 security, C3 jobs, C5 FAIR where applicable).
+3. **Do not force the 836 platform endpoints into scientific GenX classes.** Keep them as BrAPI-GenX platform extensions or leave them in the product API; classify them as `P` / cross-cutting (C9 security, C3 jobs, C5 FAIR where applicable).
 4. **Resolve the 4 duplicate routes** and any semantic overlaps with BrAPI v2 (see `Conformance/endpoint-overlaps.yaml` pattern) before adding new operationIds.
 5. **Use `Conformance/domain-classification.yaml`** as the registry template; every new GenX module/schema/operation must be classified or explicitly marked cross-cutting, with no duplicate primary owners.
 

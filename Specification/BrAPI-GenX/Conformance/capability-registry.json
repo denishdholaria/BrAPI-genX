@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "status": "experimental-review-only",
   "sourceOfTruth": "Specification/BrAPI-GenX/Conformance/capability-registry.json",
-  "baseRoute": "/brapi/v3",
+  "baseRoute": "/genx/v1",
   "versionPolicy": "Capability version strings are opaque identifiers. Exact token matching only; no lexicographic or semantic-version ordering is defined by this registry.",
   "methodPolicy": "methods is the set union of the methods named by operations. Array ordering is not semantically significant in this proposal; the registry orders its values deterministically for review. methods is a convenience summary, not a route locator.",
-  "operationPolicy": "operations is proposed additive metadata. Routes are full path templates including /brapi/v3. operationId must match the unique operationId of the checked-in GenX OpenAPI operation. Array order is not semantically significant; duplicate operation references are forbidden.",
+  "operationPolicy": "operations is proposed additive metadata. Routes are full path templates including /genx/v1. operationId must match the unique operationId of the checked-in GenX OpenAPI operation. Array order is not semantically significant; duplicate operation references are forbidden.",
   "securityPolicy": "scope values and authProfiles are advertised vocabulary only in this experimental registry. They do not establish enforcement. See D-22 for unresolved semantics.",
   "capabilities": [
     {
@@ -24,22 +24,22 @@
       "operations": [
         {
           "method": "GET",
-          "route": "/brapi/v3/jobs",
+          "route": "/genx/v1/jobs",
           "operationId": "genxListJobs"
         },
         {
           "method": "POST",
-          "route": "/brapi/v3/jobs",
+          "route": "/genx/v1/jobs",
           "operationId": "genxSubmitAsyncJob"
         },
         {
           "method": "GET",
-          "route": "/brapi/v3/jobs/{jobDbId}",
+          "route": "/genx/v1/jobs/{jobDbId}",
           "operationId": "genxGetAsyncJobById"
         },
         {
           "method": "DELETE",
-          "route": "/brapi/v3/jobs/{jobDbId}",
+          "route": "/genx/v1/jobs/{jobDbId}",
           "operationId": "genxRequestAsyncJobCancellation"
         }
       ],
@@ -64,12 +64,12 @@
       "operations": [
         {
           "method": "POST",
-          "route": "/brapi/v3/jobs",
+          "route": "/genx/v1/jobs",
           "operationId": "genxSubmitAsyncJob"
         },
         {
           "method": "GET",
-          "route": "/brapi/v3/jobs/{jobDbId}",
+          "route": "/genx/v1/jobs/{jobDbId}",
           "operationId": "genxGetAsyncJobById"
         }
       ]
@@ -89,17 +89,17 @@
       "operations": [
         {
           "method": "GET",
-          "route": "/brapi/v3/variable-terms",
+          "route": "/genx/v1/variable-terms",
           "operationId": "genxListVariableTermVersions"
         },
         {
           "method": "POST",
-          "route": "/brapi/v3/variable-terms",
+          "route": "/genx/v1/variable-terms",
           "operationId": "genxPublishVariableTermVersion"
         },
         {
           "method": "GET",
-          "route": "/brapi/v3/variable-terms/{variableDbId}",
+          "route": "/genx/v1/variable-terms/{variableDbId}",
           "operationId": "genxGetVariableTermVersion"
         }
       ]
@@ -119,12 +119,12 @@
       "operations": [
         {
           "method": "GET",
-          "route": "/brapi/v3/seedlots/{seedLotDbId}/ledger",
+          "route": "/genx/v1/seedlots/{seedLotDbId}/ledger",
           "operationId": "genxListSeedLotLedgerEntries"
         },
         {
           "method": "POST",
-          "route": "/brapi/v3/seedlots/{seedLotDbId}/ledger",
+          "route": "/genx/v1/seedlots/{seedLotDbId}/ledger",
           "operationId": "genxAppendSeedLotLedgerEntry"
         }
       ]
@@ -144,17 +144,17 @@
       "operations": [
         {
           "method": "GET",
-          "route": "/brapi/v3/models",
+          "route": "/genx/v1/models",
           "operationId": "genxListModelVersions"
         },
         {
           "method": "POST",
-          "route": "/brapi/v3/models",
+          "route": "/genx/v1/models",
           "operationId": "genxRegisterModelVersion"
         },
         {
           "method": "GET",
-          "route": "/brapi/v3/models/{modelDbId}",
+          "route": "/genx/v1/models/{modelDbId}",
           "operationId": "genxGetModelVersion"
         }
       ]
@@ -174,17 +174,17 @@
       "operations": [
         {
           "method": "GET",
-          "route": "/brapi/v3/variantmatrices",
+          "route": "/genx/v1/variantmatrices",
           "operationId": "genxListVariantMatrixReferences"
         },
         {
           "method": "POST",
-          "route": "/brapi/v3/variantmatrices",
+          "route": "/genx/v1/variantmatrices",
           "operationId": "genxRegisterVariantMatrixReference"
         },
         {
           "method": "GET",
-          "route": "/brapi/v3/variantmatrices/{matrixDbId}",
+          "route": "/genx/v1/variantmatrices/{matrixDbId}",
           "operationId": "genxGetVariantMatrixReference"
         }
       ]
@@ -204,17 +204,17 @@
       "operations": [
         {
           "method": "GET",
-          "route": "/brapi/v3/fair-packages",
+          "route": "/genx/v1/fair-packages",
           "operationId": "genxListFairPackageMetadata"
         },
         {
           "method": "POST",
-          "route": "/brapi/v3/fair-packages",
+          "route": "/genx/v1/fair-packages",
           "operationId": "genxRegisterFairPackage"
         },
         {
           "method": "GET",
-          "route": "/brapi/v3/fair-packages/{packageDbId}",
+          "route": "/genx/v1/fair-packages/{packageDbId}",
           "operationId": "genxGetFairPackageMetadata"
         }
       ]
@@ -234,12 +234,12 @@
       "operations": [
         {
           "method": "GET",
-          "route": "/brapi/v3/telemetry",
+          "route": "/genx/v1/telemetry",
           "operationId": "genxQueryTelemetrySamplesOrAggregates"
         },
         {
           "method": "POST",
-          "route": "/brapi/v3/telemetry",
+          "route": "/genx/v1/telemetry",
           "operationId": "genxAppendTelemetryBatch"
         }
       ]

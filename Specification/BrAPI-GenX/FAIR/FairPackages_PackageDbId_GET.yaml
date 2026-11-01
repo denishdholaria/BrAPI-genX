@@ -1,13 +1,13 @@
 info:
-  title: BrAPI
+  title: BrAPI-GenX API
   version: ''
 openapi: 3.0.0
 paths:
   /fair-packages/{packageDbId}:
     get:
       operationId: genxGetFairPackageMetadata
-      x-brapi-den:
-        catalogId: "brapi-den.genx.v3.fair-packages.get-metadata"
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.fair-packages.get-metadata"
         classification:
           primaryDomain: null
           crossCuttingCapabilities: ["C1", "C2", "C5", "C6", "C9"]

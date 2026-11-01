@@ -7,13 +7,13 @@ provenance of the decision, so that breeding history is auditable and
 reproducible. BrAPI v2.1 has no equivalent record; programs, trials, and
 observations exist, but the verdict and its rationale do not.
 
-- `POST /brapi/v3/selection-decisions` (`genxRecordSelectionDecision`) records
+- `POST /genx/v1/selection-decisions` (`genxRecordSelectionDecision`) records
   one `SelectionDecision` (`Schemas/SelectionDecisionNewRequest.yaml`). Same
   `selectionDecisionDbId` + identical body replays; different body is
   rejected with `409`.
-- `GET /brapi/v3/selection-decisions` (`genxListSelectionDecisions`) lists
+- `GET /genx/v1/selection-decisions` (`genxListSelectionDecisions`) lists
   decisions, optionally filtered by program, study, candidate, or decision.
-- `GET /brapi/v3/selection-decisions/{selectionDecisionDbId}`
+- `GET /genx/v1/selection-decisions/{selectionDecisionDbId}`
   (`genxGetSelectionDecision`) retrieves one decision.
 
 Details and falsifiers: `../RFC-008-Selection-Decisions.md`.

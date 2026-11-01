@@ -42,10 +42,10 @@ def capability(name, methods, operations, scopes=None):
 
 def baseline():
     jobs_ops = [
-        operation("GET", "/brapi/v3/jobs", "genxListJobs"),
-        operation("POST", "/brapi/v3/jobs", "genxSubmitAsyncJob"),
+        operation("GET", "/genx/v1/jobs", "genxListJobs"),
+        operation("POST", "/genx/v1/jobs", "genxSubmitAsyncJob"),
     ]
-    embedded_ops = [operation("POST", "/brapi/v3/jobs", "genxSubmitAsyncJob")]
+    embedded_ops = [operation("POST", "/genx/v1/jobs", "genxSubmitAsyncJob")]
     caps = [
         capability("jobs", ["GET", "POST"], jobs_ops, ["jobs.read", "jobs.submit"]),
         capability("provenanceEnvelope", ["POST"], embedded_ops, []),
@@ -54,7 +54,7 @@ def baseline():
         "schemaVersion": 1,
         "status": "experimental-review-only",
         "sourceOfTruth": "Specification/BrAPI-GenX/Conformance/capability-registry.json",
-        "baseRoute": "/brapi/v3",
+        "baseRoute": "/genx/v1",
         "versionPolicy": "Exact opaque tokens.",
         "methodPolicy": "Union of methods from operations.",
         "operationPolicy": "Experimental explicit route map.",
@@ -135,7 +135,7 @@ class CapabilityNegotiationGuardrailTests(unittest.TestCase):
     def test_unregistered_advertised_capability_fails(self):
         self.fixture["result"]["capabilities"].append(
             capability("mysteryCapability", ["GET"], [
-                operation("GET", "/brapi/v3/jobs", "genxListJobs")
+                operation("GET", "/genx/v1/jobs", "genxListJobs")
             ])
         )
         self.assertTrue(self._problems())
@@ -208,7 +208,7 @@ class CapabilityNegotiationGuardrailTests(unittest.TestCase):
         self.assertTrue(self._problems())
 
     def test_stale_route_template_fails(self):
-        self.fixture["result"]["capabilities"][0]["operations"][0]["route"] = "/brapi/v3/missing"
+        self.fixture["result"]["capabilities"][0]["operations"][0]["route"] = "/genx/v1/missing"
         self.assertTrue(self._problems())
 
     def test_operation_method_wrong_type_fails_closed(self):

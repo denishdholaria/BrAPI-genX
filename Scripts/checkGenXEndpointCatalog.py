@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Validate that every BrAPI-GenX operation is uniquely and explicitly catalogued.
 
-The OpenAPI operation is authoritative for the wire contract. Its x-brapi-den
+The OpenAPI operation is authoritative for the wire contract. Its x-brapi-genx
 extension is authoritative for domain classification and semantic boundaries.
 The human-readable ENDPOINT-CATALOG.md must enumerate the same operation and
 catalog identifiers.
@@ -91,13 +91,13 @@ def validate() -> list[str]:
             if not re.fullmatch(r"genx[A-Z][A-Za-z0-9]+", operation_id):
                 errors.append(f"{operation_id}: operationId must follow genxVerbNoun-style casing")
 
-            extension = operation.get("x-brapi-den")
+            extension = operation.get("x-brapi-genx")
             if not isinstance(extension, dict):
-                errors.append(f"{operation_id}: missing operation-level x-brapi-den metadata")
+                errors.append(f"{operation_id}: missing operation-level x-brapi-genx metadata")
                 continue
             missing = REQUIRED_EXTENSION_FIELDS - extension.keys()
             if missing:
-                errors.append(f"{operation_id}: x-brapi-den missing fields {sorted(missing)}")
+                errors.append(f"{operation_id}: x-brapi-genx missing fields {sorted(missing)}")
                 continue
 
             classification = extension.get("classification")
@@ -134,7 +134,7 @@ def validate() -> list[str]:
             catalog_id = extension.get("catalogId")
             if isinstance(catalog_id, str):
                 catalog_ids.append(catalog_id)
-                if not catalog_id.startswith("brapi-den.genx."):
+                if not catalog_id.startswith("brapi-genx.genx."):
                     errors.append(f"{operation_id}: catalogId must use the brapi-den.genx namespace")
 
     duplicate_operation_ids = sorted(key for key, count in Counter(operation_ids).items() if count > 1)

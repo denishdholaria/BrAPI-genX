@@ -9,11 +9,11 @@ authority; this script is one execution of it.
 
 Usage:
     python Scripts/checkGenXConformance.py [--root <workspace_root>]
-    python Scripts/checkGenXConformance.py --server https://host/brapi/v3 [--expired-job JOB_0000]
+    python Scripts/checkGenXConformance.py --server https://host/genx/v1 [--expired-job JOB_0000]
 
 Options:
     --root         Root of the BrAPI workspace (default: current directory)
-    --server       Base URL of a GenX server, e.g. https://host/brapi/v3
+    --server       Base URL of a GenX server, e.g. https://host/genx/v1
     --expired-job  A known-expired jobDbId for probe L-05 (else L-05 skips)
 """
 
@@ -291,8 +291,8 @@ def capability_contract_problems(root, info, registry_path):
         problems.append("capability registry schemaVersion must be 1")
     if registry.get("status") != "experimental-review-only":
         problems.append("capability registry must remain explicitly experimental-review-only")
-    if registry.get("baseRoute") != "/brapi/v3":
-        problems.append("capability registry baseRoute must be /brapi/v3")
+    if registry.get("baseRoute") != "/genx/v1":
+        problems.append("capability registry baseRoute must be /genx/v1")
 
     entries = registry.get("capabilities")
     if not isinstance(entries, list) or not entries:
@@ -420,7 +420,7 @@ def capability_contract_problems(root, info, registry_path):
                 operation_id = operation.get("operationId")
                 if not isinstance(operation_id, str) or not operation_id.strip():
                     continue
-                full_route = "/brapi/v3" + route
+                full_route = "/genx/v1" + route
                 if operation_id in operation_catalog:
                     old = operation_catalog[operation_id]
                     problems.append(
@@ -528,8 +528,8 @@ def capability_contract_problems(root, info, registry_path):
                 if not isinstance(method, str) or method not in HTTP_METHODS:
                     problems.append(f"capability '{name}' {label} has unsupported operation method {method!r}")
                     valid = False
-                if not isinstance(route, str) or not route.startswith("/brapi/v3/") or "?" in route or "#" in route:
-                    problems.append(f"capability '{name}' {label} route must be a full /brapi/v3 route template, got {route!r}")
+                if not isinstance(route, str) or not route.startswith("/genx/v1/") or "?" in route or "#" in route:
+                    problems.append(f"capability '{name}' {label} route must be a full /genx/v1 route template, got {route!r}")
                     valid = False
                 if not isinstance(operation_id, str) or not operation_id.strip():
                     problems.append(f"capability '{name}' {label} has missing/blank operationId")
@@ -977,7 +977,7 @@ def check_endpoint_identity(root, probe, ctx, results):
                     )
                 catalogue_header_seen = True
                 continue
-            if not cells[0].startswith("/brapi/v3/"):
+            if not cells[0].startswith("/genx/v1/"):
                 continue
             if not catalogue_header_seen:
                 problems.append("endpoint catalogue data appears before its required header row")
@@ -991,7 +991,7 @@ def check_endpoint_identity(root, probe, ctx, results):
                 problems.append(f"catalogue row {method} {full_route} has no primary meaning")
             if not cells[4].strip():
                 problems.append(f"catalogue row {method} {full_route} has no boundary / do not infer")
-            if not re.fullmatch(r"/brapi/v3/.+", full_route):
+            if not re.fullmatch(r"/genx/v1/.+", full_route):
                 problems.append(f"catalogue route is not generation-qualified: {full_route}")
                 continue
             if method not in OPENAPI_METHODS:
@@ -1000,7 +1000,7 @@ def check_endpoint_identity(root, probe, ctx, results):
             if not re.fullmatch(r"genx[A-Z][A-Za-z0-9]*", op_id):
                 problems.append(f"catalogue route {method} {full_route} has invalid/missing operationId '{op_id}'")
                 continue
-            triple = (method, normalize_operation_path(full_route[len("/brapi/v3"):]), op_id)
+            triple = (method, normalize_operation_path(full_route[len("/genx/v1"):]), op_id)
             if triple in catalogue_rows_seen:
                 problems.append(f"duplicate endpoint catalogue row: {method} {full_route} ({op_id})")
             catalogue_rows_seen.add(triple)
@@ -1059,8 +1059,8 @@ def check_endpoint_identity(root, probe, ctx, results):
 
     if register.get("api_base_paths", {}).get("brapi_v21") != "/brapi/v2":
         problems.append("overlap register must identify the V2.1 base path as /brapi/v2")
-    if register.get("api_base_paths", {}).get("genx") != "/brapi/v3":
-        problems.append("overlap register must identify the GenX base path as /brapi/v3")
+    if register.get("api_base_paths", {}).get("genx") != "/genx/v1":
+        problems.append("overlap register must identify the GenX base path as /genx/v1")
     neighbors = register.get("semantic_neighbors", [])
     if not isinstance(neighbors, list) or not neighbors:
         problems.append("overlap register has no semantic-neighbor review entries")
