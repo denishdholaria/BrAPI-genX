@@ -162,6 +162,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/climate-normals` | GET | `genxListClimateNormals` | List climate normal records | Does not create or change a normal; not a BrAPI Location. |
 | `/genx/v1/climate-normals` | POST | `genxRegisterClimateNormal` | Register one climate normal | Append-only record; replay/conflict semantics. |
 | `/genx/v1/climate-normals/{climateNormalDbId}` | GET | `genxGetClimateNormal` | Retrieve one climate normal | Does not treat a superseded normal as current. |
+| `/genx/v1/safety-duplications` | GET | `genxListSafetyDuplications` | List safety duplications | Does not create or change a record; not a BrAPI SeedLot transaction. |
+| `/genx/v1/safety-duplications` | POST | `genxRegisterSafetyDuplication` | Register one safety duplication | Append-only record; replay/conflict semantics. |
+| `/genx/v1/safety-duplications/{safetyDuplicationDbId}` | GET | `genxGetSafetyDuplication` | Retrieve one safety duplication | Does not treat a superseded record as current. |
 | `/genx/v1/analysis-methods` | GET | `genxListAnalysisMethods` | List registered analysis method versions | Does not execute an analysis; not a BrAPI v2.1 resource. |
 | `/genx/v1/analysis-methods` | POST | `genxRegisterAnalysisMethod` | Register one analysis method version | Does not execute or validate the method; replay/conflict semantics. |
 | `/genx/v1/analysis-methods/{analysisMethodDbId}` | GET | `genxGetAnalysisMethod` | Retrieve one registered analysis method version | Does not execute an analysis; revoked methods deny new jobs. |

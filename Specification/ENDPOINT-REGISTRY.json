@@ -30545,12 +30545,245 @@
         "brapi-genx.genx.v1.climate-normals.list",
         "brapi-genx.genx.v1.climate-normals.register"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "SafetyDuplication",
+      "brapiTag": "SafetyDuplication",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/SafetyDuplication/SafetyDuplication_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.safety-duplications.list",
+      "method": "GET",
+      "path": "/safety-duplications",
+      "operationIdInSource": "genxListSafetyDuplications",
+      "recommendedOperationId": "genxListSafetyDuplications",
+      "operationName": "List safety duplications",
+      "classification": {
+        "primaryDomain": "D1",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List safety duplication records, optionally filtered by seed lot or status.",
+      "sourceDescription": "Get a paged list of safety duplications across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover safety duplications for conserved material.",
+        "Support conservation planning and auditing."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a record (use the POST endpoint).",
+        "Assuming a record is a BrAPI SeedLot transaction.",
+        "Treating the list as a complete conservation record."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "seedLotDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterSafetyDuplication",
+        "genxGetSafetyDuplication"
+      ],
+      "decisionReferences": [
+        "RFC-034"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.safety-duplications.register",
+        "brapi-genx.genx.v1.safety-duplications.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "SafetyDuplication",
+      "brapiTag": "SafetyDuplication",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/SafetyDuplication/SafetyDuplication_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.safety-duplications.register",
+      "method": "POST",
+      "path": "/safety-duplications",
+      "operationIdInSource": "genxRegisterSafetyDuplication",
+      "recommendedOperationId": "genxRegisterSafetyDuplication",
+      "operationName": "Register one safety duplication",
+      "classification": {
+        "primaryDomain": "D1",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register a safety duplication with backup site, quantity, and provenance.",
+      "sourceDescription": "Unknown safetyDuplicationDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish safety duplication metadata.",
+        "Create a new version under an existing identity."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming the record is a BrAPI SeedLot transaction.",
+        "Treating the record as a complete conservation record."
+      ],
+      "sideEffects": "Creates a safety duplication identity or appends a new immutable version when accepted.",
+      "idempotency": "Same identity and identical body replays; conflicting content for the same identity is rejected.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "SafetyDuplicationNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListSafetyDuplications",
+        "genxGetSafetyDuplication"
+      ],
+      "decisionReferences": [
+        "RFC-034"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.safety-duplications.list",
+        "brapi-genx.genx.v1.safety-duplications.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "SafetyDuplication",
+      "brapiTag": "SafetyDuplication",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/SafetyDuplication/SafetyDuplication_SafetyDuplicationDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.safety-duplications.get",
+      "method": "GET",
+      "path": "/safety-duplications/{safetyDuplicationDbId}",
+      "operationIdInSource": "genxGetSafetyDuplication",
+      "recommendedOperationId": "genxGetSafetyDuplication",
+      "operationName": "Get one safety duplication",
+      "classification": {
+        "primaryDomain": "D1",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one safety duplication record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect backup site, quantity, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the record is a BrAPI SeedLot transaction.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "safetyDuplicationDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterSafetyDuplication",
+        "genxListSafetyDuplications"
+      ],
+      "decisionReferences": [
+        "RFC-034"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.safety-duplications.list",
+        "brapi-genx.genx.v1.safety-duplications.register"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 99,
+    "genxEntriesAdded": 102,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -30628,7 +30861,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 300,
+    "totalEntries": 303,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

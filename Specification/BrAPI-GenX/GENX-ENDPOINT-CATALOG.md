@@ -31,6 +31,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | Quarantine | 3 | proposed, non-normative |
 | RepeatedMeasurement | 3 | proposed, non-normative |
 | ResearchAssets | 3 | proposed, non-normative |
+| SafetyDuplication | 3 | proposed, non-normative |
 | SelectionDecisions | 3 | proposed, non-normative |
 | ServerInfoV3 | 1 | proposed, non-normative |
 | SoilProfile | 3 | proposed, non-normative |
@@ -2684,6 +2685,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.research-assets.list, brapi-genx.genx.v1.research-assets.register
 - **Relevant RFC / decision references:** RFC-016
 - **Contract source:** [`Specification/BrAPI-GenX/ResearchAssets/ResearchAssets_ResearchAssetDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ResearchAssets/ResearchAssets_ResearchAssetDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### SafetyDuplication — 3 operations
+
+### GET `/genx/v1/safety-duplications`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.safety-duplications.list`
+- **BrAPI-GenX operation identity:** `genxListSafetyDuplications` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListSafetyDuplications`
+- **GenX source module:** `SafetyDuplication`
+- **Source tag:** SafetyDuplication
+- **Proposed BrAPI-GenX classification:** D1 — Germplasm and Biological Resources; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List safety duplication records, optionally filtered by seed lot or status.
+**Source contract description:**
+> Get a paged list of safety duplications across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover safety duplications for conserved material.
+- Support conservation planning and auditing.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a record (use the POST endpoint).
+- Assuming a record is a BrAPI SeedLot transaction.
+- Treating the list as a complete conservation record.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** seedLotDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterSafetyDuplication, genxGetSafetyDuplication
+- **Related catalogue IDs:** brapi-genx.genx.v1.safety-duplications.register, brapi-genx.genx.v1.safety-duplications.get
+- **Relevant RFC / decision references:** RFC-034
+- **Contract source:** [`Specification/BrAPI-GenX/SafetyDuplication/SafetyDuplication_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/SafetyDuplication/SafetyDuplication_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/safety-duplications`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.safety-duplications.register`
+- **BrAPI-GenX operation identity:** `genxRegisterSafetyDuplication` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterSafetyDuplication`
+- **GenX source module:** `SafetyDuplication`
+- **Source tag:** SafetyDuplication
+- **Proposed BrAPI-GenX classification:** D1 — Germplasm and Biological Resources; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register a safety duplication with backup site, quantity, and provenance.
+**Source contract description:**
+> Unknown safetyDuplicationDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish safety duplication metadata.
+- Create a new version under an existing identity.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming the record is a BrAPI SeedLot transaction.
+- Treating the record as a complete conservation record.
+- **Side effects:** Creates a safety duplication identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same identity and identical body replays; conflicting content for the same identity is rejected.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** SafetyDuplicationNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListSafetyDuplications, genxGetSafetyDuplication
+- **Related catalogue IDs:** brapi-genx.genx.v1.safety-duplications.list, brapi-genx.genx.v1.safety-duplications.get
+- **Relevant RFC / decision references:** RFC-034
+- **Contract source:** [`Specification/BrAPI-GenX/SafetyDuplication/SafetyDuplication_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/SafetyDuplication/SafetyDuplication_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/safety-duplications/{safetyDuplicationDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.safety-duplications.get`
+- **BrAPI-GenX operation identity:** `genxGetSafetyDuplication` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetSafetyDuplication`
+- **GenX source module:** `SafetyDuplication`
+- **Source tag:** SafetyDuplication
+- **Proposed BrAPI-GenX classification:** D1 — Germplasm and Biological Resources; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one safety duplication record.
+**Source contract description:**
+> Returns the registered record, or 404.
+**Can be used for:**
+- Inspect backup site, quantity, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the record is a BrAPI SeedLot transaction.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** safetyDuplicationDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterSafetyDuplication, genxListSafetyDuplications
+- **Related catalogue IDs:** brapi-genx.genx.v1.safety-duplications.list, brapi-genx.genx.v1.safety-duplications.register
+- **Relevant RFC / decision references:** RFC-034
+- **Contract source:** [`Specification/BrAPI-GenX/SafetyDuplication/SafetyDuplication_SafetyDuplicationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/SafetyDuplication/SafetyDuplication_SafetyDuplicationDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

@@ -1,0 +1,60 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    SafetyDuplicationNewRequest:
+      type: object
+      description: |-
+        Request to record one safety duplication. Unknown
+        safetyDuplicationDbId creates; same id with an identical body replays
+        the existing record; same id with a different body is rejected with
+        409.
+      required:
+      - safetyDuplicationDbId
+      - seedLotDbId
+      - backupSite
+      - duplicatedAt
+      properties:
+        safetyDuplicationDbId:
+          description: Namespaced safety-duplication identity `{authority}:safety-duplication:{localId}`
+          type: string
+          example: institute-a:safety-duplication:sd-2026-001
+        seedLotDbId:
+          description: BrAPI SeedLot duplicated
+          type: string
+          example: institute-a:seedlot:sl-2026-001
+        backupSite:
+          description: Backup site or facility name
+          type: string
+          example: Svalbard Global Seed Vault
+        duplicatedAt:
+          description: Date/time of duplication (ISO-8601)
+          type: string
+          format: date-time
+          example: '2026-10-24T08:00:00Z'
+        quantity:
+          description: Quantity duplicated
+          type: number
+          example: 500
+        unit:
+          description: Unit of measure for quantity
+          type: string
+          example: seeds
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          default: active
+          example: active
+        supersedes:
+          description: safetyDuplicationDbId of the record this one replaces
+          type: string
+          example: institute-a:safety-duplication:sd-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
