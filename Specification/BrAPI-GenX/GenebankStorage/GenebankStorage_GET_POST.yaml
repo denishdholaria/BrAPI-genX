@@ -1,0 +1,149 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /genebank-storage:
+    get:
+      operationId: genxListStorageLocations
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.genebank-storage.list"
+        classification:
+          primaryDomain: "D1"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List genebank storage locations, optionally filtered by facility, vault, or status."
+        canBeUsedFor:
+          - "Discover storage locations and their capacity."
+          - "Support conservation planning and auditing."
+        mustNotBeUsedFor:
+          - "Creating or changing a location (use the POST endpoint)."
+          - "Assuming a location implies a BrAPI SeedLot transaction."
+          - "Treating the list as a complete conservation record."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterStorageLocation"
+          - "genxGetStorageLocation"
+        decisions: ["RFC-015"]
+        proposalStatus: "draft-non-normative"
+      summary: List storage locations
+      description: Get a paged list of genebank storage locations across authorities. Filters combine with AND.
+      parameters:
+      - name: facilityName
+        description: Filter by genebank facility
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: vaultName
+        description: Filter by vault or room
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - decommissioned
+          - superseded
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/StorageLocationListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - GenebankStorage
+    post:
+      operationId: genxRegisterStorageLocation
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.genebank-storage.register"
+        classification:
+          primaryDomain: "D1"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Register a genebank storage location with capacity, environment, and provenance."
+        canBeUsedFor:
+          - "Publish storage location metadata."
+          - "Create a new version under an existing location identity."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing location; corrections require a new record that supersedes."
+          - "Assuming the location is a BrAPI SeedLot."
+          - "Treating the location as a complete conservation record."
+        sideEffects: "Creates a storage location identity or appends a new immutable version when accepted."
+        idempotency: "Same location identity and identical body replays; conflicting content for the same identity is rejected."
+        semanticNeighbors:
+          - "genxListStorageLocations"
+          - "genxGetStorageLocation"
+        decisions: ["RFC-015"]
+        proposalStatus: "draft-non-normative"
+      summary: Register one storage location
+      description: |-
+        Unknown storageLocationDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StorageLocationNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/StorageLocation'
+                required:
+                - metadata
+                - result
+                title: StorageLocationResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - GenebankStorage
+components:
+  responses:
+    StorageLocationListResponse:
+      content:
+        application/json:
+          schema:
+            title: StorageLocationListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/StorageLocation'
+            required:
+            - metadata
+            - result
+      description: OK

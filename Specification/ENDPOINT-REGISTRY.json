@@ -26091,12 +26091,246 @@
         "brapi-genx.genx.v1.breeding-pipelines.list",
         "brapi-genx.genx.v1.breeding-pipelines.register"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "GenebankStorage",
+      "brapiTag": "GenebankStorage",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/GenebankStorage/GenebankStorage_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.genebank-storage.list",
+      "method": "GET",
+      "path": "/genebank-storage",
+      "operationIdInSource": "genxListStorageLocations",
+      "recommendedOperationId": "genxListStorageLocations",
+      "operationName": "List storage locations",
+      "classification": {
+        "primaryDomain": "D1",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List genebank storage locations, optionally filtered by facility, vault, or status.",
+      "sourceDescription": "Get a paged list of genebank storage locations across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover storage locations and their capacity.",
+        "Support conservation planning and auditing."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a location (use the POST endpoint).",
+        "Assuming a location implies a BrAPI SeedLot transaction.",
+        "Treating the list as a complete conservation record."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "facilityName",
+        "vaultName",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterStorageLocation",
+        "genxGetStorageLocation"
+      ],
+      "decisionReferences": [
+        "RFC-015"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.genebank-storage.register",
+        "brapi-genx.genx.v1.genebank-storage.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "GenebankStorage",
+      "brapiTag": "GenebankStorage",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/GenebankStorage/GenebankStorage_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.genebank-storage.register",
+      "method": "POST",
+      "path": "/genebank-storage",
+      "operationIdInSource": "genxRegisterStorageLocation",
+      "recommendedOperationId": "genxRegisterStorageLocation",
+      "operationName": "Register one storage location",
+      "classification": {
+        "primaryDomain": "D1",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register a genebank storage location with capacity, environment, and provenance.",
+      "sourceDescription": "Unknown storageLocationDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish storage location metadata.",
+        "Create a new version under an existing location identity."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing location; corrections require a new record that supersedes.",
+        "Assuming the location is a BrAPI SeedLot.",
+        "Treating the location as a complete conservation record."
+      ],
+      "sideEffects": "Creates a storage location identity or appends a new immutable version when accepted.",
+      "idempotency": "Same location identity and identical body replays; conflicting content for the same identity is rejected.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "StorageLocationNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListStorageLocations",
+        "genxGetStorageLocation"
+      ],
+      "decisionReferences": [
+        "RFC-015"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.genebank-storage.list",
+        "brapi-genx.genx.v1.genebank-storage.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "GenebankStorage",
+      "brapiTag": "GenebankStorage",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/GenebankStorage/GenebankStorage_StorageLocationDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.genebank-storage.get",
+      "method": "GET",
+      "path": "/genebank-storage/{storageLocationDbId}",
+      "operationIdInSource": "genxGetStorageLocation",
+      "recommendedOperationId": "genxGetStorageLocation",
+      "operationName": "Get one storage location",
+      "classification": {
+        "primaryDomain": "D1",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one genebank storage location.",
+      "sourceDescription": "Returns the registered location, or 404.",
+      "canBeUsedFor": [
+        "Inspect storage capacity, environment, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the location is a BrAPI SeedLot.",
+        "Treating a decommissioned location as active."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "storageLocationDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterStorageLocation",
+        "genxListStorageLocations"
+      ],
+      "decisionReferences": [
+        "RFC-015"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.genebank-storage.list",
+        "brapi-genx.genx.v1.genebank-storage.register"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 42,
+    "genxEntriesAdded": 45,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -26174,7 +26408,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 243,
+    "totalEntries": 246,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

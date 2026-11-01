@@ -1,0 +1,77 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    StorageLocationNewRequest:
+      type: object
+      description: |-
+        Request to register one genebank storage location. Unknown
+        storageLocationDbId creates; same id with an identical body replays
+        the existing record; same id with a different body is rejected with 409.
+      required:
+      - storageLocationDbId
+      - facilityName
+      properties:
+        storageLocationDbId:
+          description: Namespaced storage-location identity `{authority}:storage-location:{localId}`
+          type: string
+          example: institute-a:storage-location:sl-01
+        facilityName:
+          description: Genebank facility name
+          type: string
+          example: Central Genebank Vault A
+        vaultName:
+          description: Vault or room name
+          type: string
+          example: Vault 1
+        storageUnitId:
+          description: Storage unit or shelf identifier
+          type: string
+          example: shelf-12
+        capacity:
+          description: Capacity of the storage unit
+          type: number
+          example: 10000
+        capacityUnit:
+          description: Unit of measure for capacity
+          type: string
+          example: samples
+        currentCount:
+          description: Current number of samples stored
+          type: integer
+          example: 4200
+        temperature:
+          description: Storage temperature
+          type: number
+          example: -18
+        temperatureUnit:
+          description: Unit of measure for temperature
+          type: string
+          example: celsius
+        humidity:
+          description: Storage humidity
+          type: number
+          example: 15
+        humidityUnit:
+          description: Unit of measure for humidity
+          type: string
+          example: percent
+        status:
+          description: Lifecycle state of the storage location
+          type: string
+          enum:
+          - active
+          - decommissioned
+          - superseded
+          default: active
+          example: active
+        supersedes:
+          description: storageLocationDbId of the location this one replaces
+          type: string
+          example: institute-a:storage-location:sl-00
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

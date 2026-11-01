@@ -115,6 +115,11 @@ modules:
     primary_class: "D3"
     cross_cutting: ["C1", "C2", "C3", "C5", "C6", "C9"]
     rationale: "Prepared genomic dataset records; BrAPI v2.1 has no equivalent record."
+  - path: "GenebankStorage/"
+    object: "StorageLocation"
+    primary_class: "D1"
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Genebank storage location records; BrAPI v2.1 has no equivalent record."
   - path: "Conformance/"
     object: "Probes, fixtures and overlap register"
     primary_class: null

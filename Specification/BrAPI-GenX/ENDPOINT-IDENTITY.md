@@ -132,6 +132,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/genomic-datasets` | GET | `genxListGenomicDatasets` | List prepared genomic datasets | Does not create or change a dataset; not a BrAPI VariantSet or VariantMatrix. |
 | `/genx/v1/genomic-datasets` | POST | `genxRegisterGenomicDataset` | Register one prepared genomic dataset | Append-only record; replay/conflict semantics; does not upload dataset bytes. |
 | `/genx/v1/genomic-datasets/{genomicDatasetDbId}` | GET | `genxGetGenomicDataset` | Retrieve one prepared genomic dataset | Does not treat a withdrawn dataset as current. |
+| `/genx/v1/genebank-storage` | GET | `genxListStorageLocations` | List genebank storage locations | Does not create or change a location; not a BrAPI SeedLot. |
+| `/genx/v1/genebank-storage` | POST | `genxRegisterStorageLocation` | Register one genebank storage location | Append-only record; replay/conflict semantics. |
+| `/genx/v1/genebank-storage/{storageLocationDbId}` | GET | `genxGetStorageLocation` | Retrieve one genebank storage location | Does not treat a decommissioned location as active. |
 
 `ProvenanceEnvelope` is embedded in result/record schemas and has no standalone route in this proposal.
 
