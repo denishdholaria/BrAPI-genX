@@ -1,0 +1,64 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /speed-breeding-protocols/{speedBreedingProtocolDbId}:
+    get:
+      operationId: genxGetSpeedBreedingProtocol
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.speed-breeding-protocols.get"
+        classification:
+          primaryDomain: "D2"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve one speed breeding protocol."
+        canBeUsedFor:
+          - "Inspect protocol conditions, generation time, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming the protocol is a BrAPI Program."
+          - "Treating a superseded protocol as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterSpeedBreedingProtocol"
+          - "genxListSpeedBreedingProtocols"
+        decisions: ["RFC-022"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one speed breeding protocol
+      description: Returns the registered protocol, or 404.
+      parameters:
+      - name: speedBreedingProtocolDbId
+        description: Namespaced speed-breeding-protocol identity `{authority}:speed-breeding-protocol:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/SpeedBreedingProtocol'
+                required:
+                - metadata
+                - result
+                title: SpeedBreedingProtocolResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - SpeedBreeding

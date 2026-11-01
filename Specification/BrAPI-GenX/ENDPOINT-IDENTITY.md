@@ -126,6 +126,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/doubled-haploid-programs` | GET | `genxListDoubledHaploidPrograms` | List doubled haploid programs | Does not create or change a program; not a BrAPI Program. |
 | `/genx/v1/doubled-haploid-programs` | POST | `genxRegisterDoubledHaploidProgram` | Register one doubled haploid program | Append-only record; replay/conflict semantics. |
 | `/genx/v1/doubled-haploid-programs/{doubledHaploidProgramDbId}` | GET | `genxGetDoubledHaploidProgram` | Retrieve one doubled haploid program | Does not treat a superseded program as current. |
+| `/genx/v1/speed-breeding-protocols` | GET | `genxListSpeedBreedingProtocols` | List speed breeding protocols | Does not create or change a protocol; not a BrAPI Program. |
+| `/genx/v1/speed-breeding-protocols` | POST | `genxRegisterSpeedBreedingProtocol` | Register one speed breeding protocol | Append-only record; replay/conflict semantics. |
+| `/genx/v1/speed-breeding-protocols/{speedBreedingProtocolDbId}` | GET | `genxGetSpeedBreedingProtocol` | Retrieve one speed breeding protocol | Does not treat a superseded protocol as current. |
 | `/genx/v1/analysis-methods` | GET | `genxListAnalysisMethods` | List registered analysis method versions | Does not execute an analysis; not a BrAPI v2.1 resource. |
 | `/genx/v1/analysis-methods` | POST | `genxRegisterAnalysisMethod` | Register one analysis method version | Does not execute or validate the method; replay/conflict semantics. |
 | `/genx/v1/analysis-methods/{analysisMethodDbId}` | GET | `genxGetAnalysisMethod` | Retrieve one registered analysis method version | Does not execute an analysis; revoked methods deny new jobs. |

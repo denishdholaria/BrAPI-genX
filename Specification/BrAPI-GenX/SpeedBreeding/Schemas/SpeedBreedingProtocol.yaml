@@ -1,0 +1,66 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    SpeedBreedingProtocol:
+      type: object
+      description: |-
+        One immutable speed breeding protocol record. A published
+        (speedBreedingProtocolDbId) record never mutates in place; corrections
+        are recorded as additional records linked by supersedes.
+      required:
+      - speedBreedingProtocolDbId
+      - programDbId
+      - protocolName
+      - status
+      properties:
+        speedBreedingProtocolDbId:
+          description: Namespaced speed-breeding-protocol identity `{authority}:speed-breeding-protocol:{localId}`
+          type: string
+          example: institute-a:speed-breeding-protocol:sbp-2026-001
+        programDbId:
+          description: BrAPI Program (breeding program)
+          type: string
+          example: institute-a:program:wheat-breeding
+        protocolName:
+          description: Human readable protocol name
+          type: string
+          example: Wheat speed breeding 2026
+        lightRegime:
+          description: Light regime description
+          type: string
+          example: 22h light / 2h dark
+        temperatureRegime:
+          description: Temperature regime description
+          type: string
+          example: 22C day / 17C night
+        photoperiod:
+          description: Photoperiod in hours
+          type: number
+          example: 22
+        generationTime:
+          description: Generation time in days
+          type: integer
+          example: 60
+        description:
+          description: What the protocol achieves and its scope
+          type: string
+          example: Accelerated wheat development under controlled conditions.
+        status:
+          description: Lifecycle state of the protocol record
+          type: string
+          enum:
+          - active
+          - deprecated
+          - superseded
+          example: active
+        supersedes:
+          description: speedBreedingProtocolDbId of the protocol this one replaces
+          type: string
+          example: institute-a:speed-breeding-protocol:sbp-2026-000
+        provenance:
+          description: Evidence and method provenance for the protocol
+          $ref: '#/components/schemas/ProvenanceEnvelope'

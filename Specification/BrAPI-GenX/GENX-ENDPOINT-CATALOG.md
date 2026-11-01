@@ -24,6 +24,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | ResearchAssets | 3 | proposed, non-normative |
 | SelectionDecisions | 3 | proposed, non-normative |
 | ServerInfoV3 | 1 | proposed, non-normative |
+| SpeedBreeding | 3 | proposed, non-normative |
 | Telemetry | 2 | proposed, non-normative |
 | VariableTerms | 3 | proposed, non-normative |
 | ViabilityTesting | 3 | proposed, non-normative |
@@ -1878,6 +1879,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **BijMantra relative-route candidates:** 1. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - [backend/app/api/brapi/v2/core/serverinfo.py](https://github.com/denishdholaria/bijmantraorg/blob/main/backend/app/api/brapi/v2/core/serverinfo.py#L145) — `get_server_info`; brapi-adapter-source-declaration.
   - Interpretation: Same relative method/path appears in BijMantra's static inventory. Do not infer V3 wiring, contract equivalence, or runtime mounting.
+
+### SpeedBreeding — 3 operations
+
+### GET `/genx/v1/speed-breeding-protocols`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.speed-breeding-protocols.list`
+- **BrAPI-GenX operation identity:** `genxListSpeedBreedingProtocols` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListSpeedBreedingProtocols`
+- **GenX source module:** `SpeedBreeding`
+- **Source tag:** SpeedBreeding
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List speed breeding protocols, optionally filtered by program or status.
+**Source contract description:**
+> Get a paged list of speed breeding protocols across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover speed breeding protocols and their conditions.
+- Support breeding program planning and auditing.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a protocol (use the POST endpoint).
+- Assuming a protocol is a BrAPI Program.
+- Treating the list as a complete breeding program record.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** programDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterSpeedBreedingProtocol, genxGetSpeedBreedingProtocol
+- **Related catalogue IDs:** brapi-genx.genx.v1.speed-breeding-protocols.register, brapi-genx.genx.v1.speed-breeding-protocols.get
+- **Relevant RFC / decision references:** RFC-022
+- **Contract source:** [`Specification/BrAPI-GenX/SpeedBreeding/SpeedBreeding_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/SpeedBreeding/SpeedBreeding_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/speed-breeding-protocols`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.speed-breeding-protocols.register`
+- **BrAPI-GenX operation identity:** `genxRegisterSpeedBreedingProtocol` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterSpeedBreedingProtocol`
+- **GenX source module:** `SpeedBreeding`
+- **Source tag:** SpeedBreeding
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register a speed breeding protocol with conditions, generation time, and provenance.
+**Source contract description:**
+> Unknown speedBreedingProtocolDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish speed breeding protocol metadata.
+- Create a new version under an existing protocol identity.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing protocol; corrections require a new record that supersedes.
+- Assuming the protocol is a BrAPI Program.
+- Treating the protocol as an approved breeding plan.
+- **Side effects:** Creates a protocol identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same protocol identity and identical body replays; conflicting content for the same identity is rejected.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** SpeedBreedingProtocolNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListSpeedBreedingProtocols, genxGetSpeedBreedingProtocol
+- **Related catalogue IDs:** brapi-genx.genx.v1.speed-breeding-protocols.list, brapi-genx.genx.v1.speed-breeding-protocols.get
+- **Relevant RFC / decision references:** RFC-022
+- **Contract source:** [`Specification/BrAPI-GenX/SpeedBreeding/SpeedBreeding_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/SpeedBreeding/SpeedBreeding_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/speed-breeding-protocols/{speedBreedingProtocolDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.speed-breeding-protocols.get`
+- **BrAPI-GenX operation identity:** `genxGetSpeedBreedingProtocol` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetSpeedBreedingProtocol`
+- **GenX source module:** `SpeedBreeding`
+- **Source tag:** SpeedBreeding
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one speed breeding protocol.
+**Source contract description:**
+> Returns the registered protocol, or 404.
+**Can be used for:**
+- Inspect protocol conditions, generation time, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the protocol is a BrAPI Program.
+- Treating a superseded protocol as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** speedBreedingProtocolDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterSpeedBreedingProtocol, genxListSpeedBreedingProtocols
+- **Related catalogue IDs:** brapi-genx.genx.v1.speed-breeding-protocols.list, brapi-genx.genx.v1.speed-breeding-protocols.register
+- **Relevant RFC / decision references:** RFC-022
+- **Contract source:** [`Specification/BrAPI-GenX/SpeedBreeding/SpeedBreeding_SpeedBreedingProtocolDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/SpeedBreeding/SpeedBreeding_SpeedBreedingProtocolDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
 ### Telemetry — 2 operations
 

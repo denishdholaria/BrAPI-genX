@@ -41,6 +41,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `ProgenyRecords/` | `ProgenyRecord` — progeny/family links with parents, generation, and provenance | `GET /genx/v1/progeny-records` (`genxListProgenyRecords`); `POST /genx/v1/progeny-records` (`genxRecordProgeny`); `GET /genx/v1/progeny-records/{progenyRecordDbId}` (`genxGetProgenyRecord`) |
 | `DoubledHaploid/` | `DoubledHaploidProgram` — doubled haploid program records (method, donor, counts, provenance) | `GET /genx/v1/doubled-haploid-programs` (`genxListDoubledHaploidPrograms`); `POST /genx/v1/doubled-haploid-programs` (`genxRegisterDoubledHaploidProgram`); `GET /genx/v1/doubled-haploid-programs/{doubledHaploidProgramDbId}` (`genxGetDoubledHaploidProgram`) |
 | `ViabilityTesting/` | `ViabilityTest` — viability/germination test records (results, method, provenance) | `GET /genx/v1/viability-tests` (`genxListViabilityTests`); `POST /genx/v1/viability-tests` (`genxRecordViabilityTest`); `GET /genx/v1/viability-tests/{viabilityTestDbId}` (`genxGetViabilityTest`) |
+| `SpeedBreeding/` | `SpeedBreedingProtocol` — speed breeding protocol records (conditions, generation time, provenance) | `GET /genx/v1/speed-breeding-protocols` (`genxListSpeedBreedingProtocols`); `POST /genx/v1/speed-breeding-protocols` (`genxRegisterSpeedBreedingProtocol`); `GET /genx/v1/speed-breeding-protocols/{speedBreedingProtocolDbId}` (`genxGetSpeedBreedingProtocol`) |
 | `AnalysisMethods/` | `AnalysisMethod` — versioned analysis method registry (identity, type, contracts, lifecycle) | `GET /genx/v1/analysis-methods` (`genxListAnalysisMethods`); `POST /genx/v1/analysis-methods` (`genxRegisterAnalysisMethod`); `GET /genx/v1/analysis-methods/{analysisMethodDbId}` (`genxGetAnalysisMethod`) |
 | `WeatherObservations/` | `WeatherObservation` — environmental/weather observation records (measurements, quality, provenance) | `GET /genx/v1/weather-observations` (`genxListWeatherObservations`); `POST /genx/v1/weather-observations` (`genxRecordWeatherObservation`); `GET /genx/v1/weather-observations/{weatherObservationDbId}` (`genxGetWeatherObservation`) |
 | `HarvestRecords/` | `HarvestRecord` — harvest-event records (quantity, quality, moisture, provenance) | `GET /genx/v1/harvest-records` (`genxListHarvestRecords`); `POST /genx/v1/harvest-records` (`genxRecordHarvest`); `GET /genx/v1/harvest-records/{harvestRecordDbId}` (`genxGetHarvestRecord`) |
@@ -73,7 +74,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-018-Experimental-Design](./RFC-018-Experimental-Design.md),
 [RFC-019-Progeny-Records](./RFC-019-Progeny-Records.md),
 [RFC-020-Doubled-Haploid](./RFC-020-Doubled-Haploid.md),
-[RFC-021-Viability-Testing](./RFC-021-Viability-Testing.md).
+[RFC-021-Viability-Testing](./RFC-021-Viability-Testing.md),
+[RFC-022-Speed-Breeding](./RFC-022-Speed-Breeding.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

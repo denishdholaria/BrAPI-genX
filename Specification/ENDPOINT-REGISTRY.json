@@ -27731,12 +27731,245 @@
         "brapi-genx.genx.v1.viability-tests.list",
         "brapi-genx.genx.v1.viability-tests.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "SpeedBreeding",
+      "brapiTag": "SpeedBreeding",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/SpeedBreeding/SpeedBreeding_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.speed-breeding-protocols.list",
+      "method": "GET",
+      "path": "/speed-breeding-protocols",
+      "operationIdInSource": "genxListSpeedBreedingProtocols",
+      "recommendedOperationId": "genxListSpeedBreedingProtocols",
+      "operationName": "List speed breeding protocols",
+      "classification": {
+        "primaryDomain": "D2",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List speed breeding protocols, optionally filtered by program or status.",
+      "sourceDescription": "Get a paged list of speed breeding protocols across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover speed breeding protocols and their conditions.",
+        "Support breeding program planning and auditing."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a protocol (use the POST endpoint).",
+        "Assuming a protocol is a BrAPI Program.",
+        "Treating the list as a complete breeding program record."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "programDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterSpeedBreedingProtocol",
+        "genxGetSpeedBreedingProtocol"
+      ],
+      "decisionReferences": [
+        "RFC-022"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.speed-breeding-protocols.register",
+        "brapi-genx.genx.v1.speed-breeding-protocols.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "SpeedBreeding",
+      "brapiTag": "SpeedBreeding",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/SpeedBreeding/SpeedBreeding_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.speed-breeding-protocols.register",
+      "method": "POST",
+      "path": "/speed-breeding-protocols",
+      "operationIdInSource": "genxRegisterSpeedBreedingProtocol",
+      "recommendedOperationId": "genxRegisterSpeedBreedingProtocol",
+      "operationName": "Register one speed breeding protocol",
+      "classification": {
+        "primaryDomain": "D2",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register a speed breeding protocol with conditions, generation time, and provenance.",
+      "sourceDescription": "Unknown speedBreedingProtocolDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish speed breeding protocol metadata.",
+        "Create a new version under an existing protocol identity."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing protocol; corrections require a new record that supersedes.",
+        "Assuming the protocol is a BrAPI Program.",
+        "Treating the protocol as an approved breeding plan."
+      ],
+      "sideEffects": "Creates a protocol identity or appends a new immutable version when accepted.",
+      "idempotency": "Same protocol identity and identical body replays; conflicting content for the same identity is rejected.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "SpeedBreedingProtocolNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListSpeedBreedingProtocols",
+        "genxGetSpeedBreedingProtocol"
+      ],
+      "decisionReferences": [
+        "RFC-022"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.speed-breeding-protocols.list",
+        "brapi-genx.genx.v1.speed-breeding-protocols.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "SpeedBreeding",
+      "brapiTag": "SpeedBreeding",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/SpeedBreeding/SpeedBreeding_SpeedBreedingProtocolDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.speed-breeding-protocols.get",
+      "method": "GET",
+      "path": "/speed-breeding-protocols/{speedBreedingProtocolDbId}",
+      "operationIdInSource": "genxGetSpeedBreedingProtocol",
+      "recommendedOperationId": "genxGetSpeedBreedingProtocol",
+      "operationName": "Get one speed breeding protocol",
+      "classification": {
+        "primaryDomain": "D2",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one speed breeding protocol.",
+      "sourceDescription": "Returns the registered protocol, or 404.",
+      "canBeUsedFor": [
+        "Inspect protocol conditions, generation time, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the protocol is a BrAPI Program.",
+        "Treating a superseded protocol as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "speedBreedingProtocolDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterSpeedBreedingProtocol",
+        "genxListSpeedBreedingProtocols"
+      ],
+      "decisionReferences": [
+        "RFC-022"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.speed-breeding-protocols.list",
+        "brapi-genx.genx.v1.speed-breeding-protocols.register"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 63,
+    "genxEntriesAdded": 66,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -27814,7 +28047,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 264,
+    "totalEntries": 267,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
