@@ -15,6 +15,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | HarvestRecords | 3 | proposed, non-normative |
 | Jobs | 4 | proposed, non-normative |
 | LotLedger | 2 | proposed, non-normative |
+| MeasurementMethods | 3 | proposed, non-normative |
 | Models | 3 | proposed, non-normative |
 | PhenotypeCapture | 3 | proposed, non-normative |
 | ResearchAssets | 3 | proposed, non-normative |
@@ -983,6 +984,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.brapi-v2-1.germplasm.get.seedlots.by-seedlotdbid.transactions, brapi-genx.brapi-v2-1.germplasm.get.seedlots.transactions, brapi-genx.brapi-v2-1.germplasm.post.seedlots.transactions, brapi-genx.genx.v1.seed-lot-ledger.list
 - **Relevant RFC / decision references:** RFC-003, D-07, D-08, D-20, A-05, A-06
 - **Contract source:** [`Specification/BrAPI-GenX/LotLedger/Ledger_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/LotLedger/Ledger_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### MeasurementMethods — 3 operations
+
+### GET `/genx/v1/measurement-methods`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.measurement-methods.list`
+- **BrAPI-GenX operation identity:** `genxListMeasurementMethods` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListMeasurementMethods`
+- **GenX source module:** `MeasurementMethods`
+- **Source tag:** MeasurementMethods
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C4 — Scientific terminology governance, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List measurement method definitions, optionally filtered by type or status.
+**Source contract description:**
+> Get a paged list of measurement methods across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover measurement methods and their procedures.
+- Support terminology and method governance.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a method (use the POST endpoint).
+- Assuming a method is a BrAPI Method or Scale.
+- Treating the list as a complete method catalogue.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** methodType, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterMeasurementMethod, genxGetMeasurementMethod
+- **Related catalogue IDs:** brapi-genx.genx.v1.measurement-methods.register, brapi-genx.genx.v1.measurement-methods.get
+- **Relevant RFC / decision references:** RFC-017
+- **Contract source:** [`Specification/BrAPI-GenX/MeasurementMethods/MeasurementMethods_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/MeasurementMethods/MeasurementMethods_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/measurement-methods`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.measurement-methods.register`
+- **BrAPI-GenX operation identity:** `genxRegisterMeasurementMethod` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterMeasurementMethod`
+- **GenX source module:** `MeasurementMethods`
+- **Source tag:** MeasurementMethods
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C4 — Scientific terminology governance, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register a measurement method with procedure, equipment, precision, and provenance.
+**Source contract description:**
+> Unknown measurementMethodDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish measurement method definitions.
+- Create a new version under an existing method identity.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing method; corrections require a new record that supersedes.
+- Assuming the method is a BrAPI Method.
+- Treating the method as an approved protocol.
+- **Side effects:** Creates a method identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same method identity and identical body replays; conflicting content for the same identity is rejected.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** MeasurementMethodNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListMeasurementMethods, genxGetMeasurementMethod
+- **Related catalogue IDs:** brapi-genx.genx.v1.measurement-methods.list, brapi-genx.genx.v1.measurement-methods.get
+- **Relevant RFC / decision references:** RFC-017
+- **Contract source:** [`Specification/BrAPI-GenX/MeasurementMethods/MeasurementMethods_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/MeasurementMethods/MeasurementMethods_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/measurement-methods/{measurementMethodDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.measurement-methods.get`
+- **BrAPI-GenX operation identity:** `genxGetMeasurementMethod` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetMeasurementMethod`
+- **GenX source module:** `MeasurementMethods`
+- **Source tag:** MeasurementMethods
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C4 — Scientific terminology governance, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one registered measurement method.
+**Source contract description:**
+> Returns the registered method, or 404.
+**Can be used for:**
+- Inspect method procedure, equipment, precision, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the method is a BrAPI Method.
+- Treating a superseded method as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** measurementMethodDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterMeasurementMethod, genxListMeasurementMethods
+- **Related catalogue IDs:** brapi-genx.genx.v1.measurement-methods.list, brapi-genx.genx.v1.measurement-methods.register
+- **Relevant RFC / decision references:** RFC-017
+- **Contract source:** [`Specification/BrAPI-GenX/MeasurementMethods/MeasurementMethods_MeasurementMethodDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/MeasurementMethods/MeasurementMethods_MeasurementMethodDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

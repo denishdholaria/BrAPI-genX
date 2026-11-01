@@ -138,6 +138,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/research-assets` | GET | `genxListResearchAssets` | List research asset records | Does not create or change an asset; not a BrAPI data resource. |
 | `/genx/v1/research-assets` | POST | `genxRegisterResearchAsset` | Register one research asset | Append-only record; replay/conflict semantics; does not mint a persistent identifier. |
 | `/genx/v1/research-assets/{researchAssetDbId}` | GET | `genxGetResearchAsset` | Retrieve one research asset record | Does not treat a withdrawn asset as current. |
+| `/genx/v1/measurement-methods` | GET | `genxListMeasurementMethods` | List measurement method definitions | Does not create or change a method; not a BrAPI Method. |
+| `/genx/v1/measurement-methods` | POST | `genxRegisterMeasurementMethod` | Register one measurement method definition | Append-only record; replay/conflict semantics. |
+| `/genx/v1/measurement-methods/{measurementMethodDbId}` | GET | `genxGetMeasurementMethod` | Retrieve one measurement method definition | Does not treat a superseded method as current. |
 
 `ProvenanceEnvelope` is embedded in result/record schemas and has no standalone route in this proposal.
 

@@ -26565,12 +26565,245 @@
         "brapi-genx.genx.v1.research-assets.list",
         "brapi-genx.genx.v1.research-assets.register"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "MeasurementMethods",
+      "brapiTag": "MeasurementMethods",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/MeasurementMethods/MeasurementMethods_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.measurement-methods.list",
+      "method": "GET",
+      "path": "/measurement-methods",
+      "operationIdInSource": "genxListMeasurementMethods",
+      "recommendedOperationId": "genxListMeasurementMethods",
+      "operationName": "List measurement methods",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List measurement method definitions, optionally filtered by type or status.",
+      "sourceDescription": "Get a paged list of measurement methods across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover measurement methods and their procedures.",
+        "Support terminology and method governance."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a method (use the POST endpoint).",
+        "Assuming a method is a BrAPI Method or Scale.",
+        "Treating the list as a complete method catalogue."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "methodType",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterMeasurementMethod",
+        "genxGetMeasurementMethod"
+      ],
+      "decisionReferences": [
+        "RFC-017"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.measurement-methods.register",
+        "brapi-genx.genx.v1.measurement-methods.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "MeasurementMethods",
+      "brapiTag": "MeasurementMethods",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/MeasurementMethods/MeasurementMethods_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.measurement-methods.register",
+      "method": "POST",
+      "path": "/measurement-methods",
+      "operationIdInSource": "genxRegisterMeasurementMethod",
+      "recommendedOperationId": "genxRegisterMeasurementMethod",
+      "operationName": "Register one measurement method",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register a measurement method with procedure, equipment, precision, and provenance.",
+      "sourceDescription": "Unknown measurementMethodDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish measurement method definitions.",
+        "Create a new version under an existing method identity."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing method; corrections require a new record that supersedes.",
+        "Assuming the method is a BrAPI Method.",
+        "Treating the method as an approved protocol."
+      ],
+      "sideEffects": "Creates a method identity or appends a new immutable version when accepted.",
+      "idempotency": "Same method identity and identical body replays; conflicting content for the same identity is rejected.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "MeasurementMethodNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListMeasurementMethods",
+        "genxGetMeasurementMethod"
+      ],
+      "decisionReferences": [
+        "RFC-017"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.measurement-methods.list",
+        "brapi-genx.genx.v1.measurement-methods.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "MeasurementMethods",
+      "brapiTag": "MeasurementMethods",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/MeasurementMethods/MeasurementMethods_MeasurementMethodDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.measurement-methods.get",
+      "method": "GET",
+      "path": "/measurement-methods/{measurementMethodDbId}",
+      "operationIdInSource": "genxGetMeasurementMethod",
+      "recommendedOperationId": "genxGetMeasurementMethod",
+      "operationName": "Get one measurement method",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one registered measurement method.",
+      "sourceDescription": "Returns the registered method, or 404.",
+      "canBeUsedFor": [
+        "Inspect method procedure, equipment, precision, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the method is a BrAPI Method.",
+        "Treating a superseded method as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "measurementMethodDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterMeasurementMethod",
+        "genxListMeasurementMethods"
+      ],
+      "decisionReferences": [
+        "RFC-017"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.measurement-methods.list",
+        "brapi-genx.genx.v1.measurement-methods.register"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 48,
+    "genxEntriesAdded": 51,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -26648,7 +26881,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 249,
+    "totalEntries": 252,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

@@ -66,6 +66,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | GenomicDatasets / GenomicDataset | D3 | C1, C2, C3, C5, C6, C9 | Prepared genomic dataset records; no BrAPI v2.1 equivalent; not a VariantSet or VariantMatrix |
 | GenebankStorage / StorageLocation | D1 | C1, C2, C3, C6, C9 | Genebank storage location records; no BrAPI v2.1 equivalent |
 | ResearchAssets / ResearchAsset | (none, cross-cutting) | C1, C2, C3, C5, C6, C9 | Research asset records; no BrAPI v2.1 equivalent; builds on FAIRPackage |
+| MeasurementMethods / MeasurementMethod | (none, cross-cutting) | C1, C2, C3, C4, C9 | Measurement method definitions; no BrAPI v2.1 equivalent; terminology governance |
 | Conformance | Cross-cutting C8 | C1, C3 | Probes and fixtures establish contract evidence, not scientific-domain data |
 
 ## 5. Relationship to BrAPI V2.1

@@ -44,6 +44,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `GenomicDatasets/` | `GenomicDataset` — prepared genomic dataset records (reference assembly, pipeline provenance, access policy, release status) | `GET /genx/v1/genomic-datasets` (`genxListGenomicDatasets`); `POST /genx/v1/genomic-datasets` (`genxRegisterGenomicDataset`); `GET /genx/v1/genomic-datasets/{genomicDatasetDbId}` (`genxGetGenomicDataset`) |
 | `GenebankStorage/` | `StorageLocation` — genebank storage location records (capacity, environment, provenance) | `GET /genx/v1/genebank-storage` (`genxListStorageLocations`); `POST /genx/v1/genebank-storage` (`genxRegisterStorageLocation`); `GET /genx/v1/genebank-storage/{storageLocationDbId}` (`genxGetStorageLocation`) |
 | `ResearchAssets/` | `ResearchAsset` — research asset records (type, title, license, access policy, persistent identifier, provenance) | `GET /genx/v1/research-assets` (`genxListResearchAssets`); `POST /genx/v1/research-assets` (`genxRegisterResearchAsset`); `GET /genx/v1/research-assets/{researchAssetDbId}` (`genxGetResearchAsset`) |
+| `MeasurementMethods/` | `MeasurementMethod` — measurement method definitions (procedure, equipment, precision, provenance) | `GET /genx/v1/measurement-methods` (`genxListMeasurementMethods`); `POST /genx/v1/measurement-methods` (`genxRegisterMeasurementMethod`); `GET /genx/v1/measurement-methods/{measurementMethodDbId}` (`genxGetMeasurementMethod`) |
 | `FAIR/` | `FAIRPackage` — licensed, embargo-aware payload envelopes | `GET /genx/v1/fair-packages` (`genxListFairPackageMetadata`); `POST /genx/v1/fair-packages` (`genxRegisterFairPackage`); `GET /genx/v1/fair-packages/{packageDbId}` (`genxGetFairPackageMetadata`) |
 | `Telemetry/` | `TelemetryPoint` — sensor streams, idempotent ingest, aggregates | `GET /genx/v1/telemetry` (`genxQueryTelemetrySamplesOrAggregates`); `POST /genx/v1/telemetry` (`genxAppendTelemetryBatch`) |
 | `Conformance/` | Probes + fixtures + runner contract (`probes.yaml`) | Static tier runs now; live tier needs `--server` |
@@ -63,7 +64,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-013-Genomic-Datasets](./RFC-013-Genomic-Datasets.md),
 [RFC-014-Breeding-Pipeline](./RFC-014-Breeding-Pipeline.md),
 [RFC-015-Genebank-Storage](./RFC-015-Genebank-Storage.md),
-[RFC-016-Research-Assets](./RFC-016-Research-Assets.md).
+[RFC-016-Research-Assets](./RFC-016-Research-Assets.md),
+[RFC-017-Measurement-Methods](./RFC-017-Measurement-Methods.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

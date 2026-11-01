@@ -1,0 +1,65 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    MeasurementMethod:
+      type: object
+      description: |-
+        One immutable measurement method definition. A published
+        (measurementMethodDbId) record never mutates in place; corrections are
+        recorded as additional methods linked by supersedes.
+      required:
+      - measurementMethodDbId
+      - methodName
+      - status
+      properties:
+        measurementMethodDbId:
+          description: Namespaced measurement-method identity `{authority}:measurement-method:{localId}`
+          type: string
+          example: institute-a:measurement-method:mm-001
+        methodName:
+          description: Human readable method name
+          type: string
+          example: Hand-held NDVI measurement
+        methodType:
+          description: Class of measurement (destructive, non-destructive, image-derived, etc.)
+          type: string
+          example: non-destructive
+        description:
+          description: What the method measures and its scope
+          type: string
+          example: Measures NDVI using a hand-held sensor at canopy level.
+        procedure:
+          description: Step-by-step procedure
+          type: string
+          example: Take three readings per plot at 10:00 local time.
+        equipment:
+          description: Equipment used
+          type: string
+          example: Trimble GreenSeeker
+        precision:
+          description: Stated precision or tolerance
+          type: string
+          example: +/- 0.02 NDVI
+        unit:
+          description: Unit of measure for the result
+          type: string
+          example: ndvi
+        status:
+          description: Lifecycle state of the method record
+          type: string
+          enum:
+          - active
+          - deprecated
+          - superseded
+          example: active
+        supersedes:
+          description: measurementMethodDbId of the method this one replaces
+          type: string
+          example: institute-a:measurement-method:mm-000
+        provenance:
+          description: Evidence and method provenance
+          $ref: '#/components/schemas/ProvenanceEnvelope'
