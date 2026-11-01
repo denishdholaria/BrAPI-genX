@@ -1,0 +1,63 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    CrossingScheduleNewRequest:
+      type: object
+      description: |-
+        Request to register one crossing schedule. Unknown
+        crossingScheduleDbId creates; same id with an identical body replays
+        the existing record; same id with a different body is rejected with 409.
+      required:
+      - crossingScheduleDbId
+      - programDbId
+      - scheduledDate
+      - parents
+      properties:
+        crossingScheduleDbId:
+          description: Namespaced crossing-schedule identity `{authority}:crossing-schedule:{localId}`
+          type: string
+          example: institute-a:crossing-schedule:cs-2026-001
+        programDbId:
+          description: BrAPI Program (breeding program)
+          type: string
+          example: institute-a:program:wheat-breeding
+        scheduledDate:
+          description: Scheduled date for crosses (ISO-8601)
+          type: string
+          format: date
+          example: '2026-10-24'
+        parents:
+          description: Parent germplasm identifiers to be crossed
+          type: array
+          items:
+            type: string
+          example: [institute-a:germplasm:parent-1, institute-a:germplasm:parent-2]
+        matingDesign:
+          description: Mating design (e.g. biparental, testcross)
+          type: string
+          example: biparental
+        notes:
+          description: Human-readable notes
+          type: string
+          example: Scheduled for greenhouse crossing.
+        status:
+          description: Lifecycle state of the schedule
+          type: string
+          enum:
+          - planned
+          - completed
+          - cancelled
+          - superseded
+          default: planned
+          example: planned
+        supersedes:
+          description: crossingScheduleDbId of the schedule this one replaces
+          type: string
+          example: institute-a:crossing-schedule:cs-2026-000
+        provenance:
+          description: Evidence and method provenance for the schedule
+          $ref: '#/components/schemas/ProvenanceEnvelope'

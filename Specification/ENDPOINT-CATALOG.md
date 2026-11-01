@@ -13,8 +13,8 @@ A catalogue identifier does not replace a source operationId or route. Classific
 | Surface | Operations | Contract status |
 |---|---:|---|
 | BrAPI v2.1 official modules | 201 | Released specification; implementation availability not inferred |
-| BrAPI GenX /genx/v1 | 108 | Proposed, non-normative |
-| **Total** | **309** | Existing contracts plus proposed operations |
+| BrAPI GenX /genx/v1 | 111 | Proposed, non-normative |
+| **Total** | **312** | Existing contracts plus proposed operations |
 
 BijMantra snapshot: 2240 records from the inventory generated 2026-10-17; see [source inventory](https://github.com/denishdholaria/bijmantraorg/blob/main/endpoints-inventory.md) and [crosswalk](./BIJMANTRA-CROSSWALK.md).
 
@@ -8176,6 +8176,111 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
+### CrossingSchedule — 3 operations
+
+### GET `/genx/v1/crossing-schedules`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.crossing-schedules.list`
+- **BrAPI-GenX operation identity:** `genxListCrossingSchedules` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListCrossingSchedules`
+- **GenX source module:** `CrossingSchedule`
+- **Source tag:** CrossingSchedule
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List crossing schedules, optionally filtered by program or status.
+**Source contract description:**
+> Get a paged list of crossing schedules across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover planned crosses for a breeding program.
+- Support breeding planning and auditing.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a schedule (use the POST endpoint).
+- Assuming a schedule is a BrAPI Cross or CrossingProject.
+- Treating the list as a complete breeding program record.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** programDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterCrossingSchedule, genxGetCrossingSchedule
+- **Related catalogue IDs:** brapi-genx.genx.v1.crossing-schedules.register, brapi-genx.genx.v1.crossing-schedules.get
+- **Relevant RFC / decision references:** RFC-037
+- **Contract source:** [`Specification/BrAPI-GenX/CrossingSchedule/CrossingSchedule_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CrossingSchedule/CrossingSchedule_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/crossing-schedules`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.crossing-schedules.register`
+- **BrAPI-GenX operation identity:** `genxRegisterCrossingSchedule` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterCrossingSchedule`
+- **GenX source module:** `CrossingSchedule`
+- **Source tag:** CrossingSchedule
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register a crossing schedule with parents, date, and provenance.
+**Source contract description:**
+> Unknown crossingScheduleDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish planned cross schedules.
+- Create a new version under an existing schedule identity.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing schedule; corrections require a new record that supersedes.
+- Assuming the schedule is a BrAPI Cross or CrossingProject.
+- Treating the schedule as an approved breeding plan.
+- **Side effects:** Creates a schedule identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same identity and identical body replays; conflicting content for the same identity is rejected.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** CrossingScheduleNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListCrossingSchedules, genxGetCrossingSchedule
+- **Related catalogue IDs:** brapi-genx.genx.v1.crossing-schedules.list, brapi-genx.genx.v1.crossing-schedules.get
+- **Relevant RFC / decision references:** RFC-037
+- **Contract source:** [`Specification/BrAPI-GenX/CrossingSchedule/CrossingSchedule_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CrossingSchedule/CrossingSchedule_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/crossing-schedules/{crossingScheduleDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.crossing-schedules.get`
+- **BrAPI-GenX operation identity:** `genxGetCrossingSchedule` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetCrossingSchedule`
+- **GenX source module:** `CrossingSchedule`
+- **Source tag:** CrossingSchedule
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one crossing schedule.
+**Source contract description:**
+> Returns the registered schedule, or 404.
+**Can be used for:**
+- Inspect parents, date, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the schedule is a BrAPI Cross or CrossingProject.
+- Treating a superseded schedule as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** crossingScheduleDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterCrossingSchedule, genxListCrossingSchedules
+- **Related catalogue IDs:** brapi-genx.genx.v1.crossing-schedules.list, brapi-genx.genx.v1.crossing-schedules.register
+- **Relevant RFC / decision references:** RFC-037
+- **Contract source:** [`Specification/BrAPI-GenX/CrossingSchedule/CrossingSchedule_CrossingScheduleDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CrossingSchedule/CrossingSchedule_CrossingScheduleDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
 ### DoubledHaploid — 3 operations
 
 ### GET `/genx/v1/doubled-haploid-programs`
@@ -11584,6 +11689,6 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - Unique full-base-path/method/route keys: `True`.
 - Unique source/advisory operation identifiers where present: `True`.
 - BrAPI v2.1 inventory rows resolved to source YAML operations: 201 / 201.
-- GenX operations documented: 108.
+- GenX operations documented: 111.
 
 See [BIJMANTRA-CROSSWALK.md](./BIJMANTRA-CROSSWALK.md) for inventory evidence and semantic boundaries.

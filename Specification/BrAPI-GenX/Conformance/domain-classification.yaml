@@ -180,6 +180,11 @@ modules:
     primary_class: "D2"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Population advancement records; BrAPI v2.1 has no equivalent record."
+  - path: "CrossingSchedule/"
+    object: "CrossingSchedule"
+    primary_class: "D2"
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Crossing schedule records; BrAPI v2.1 has no equivalent record."
   - path: "AnalysisMethods/"
     object: "AnalysisMethod"
     primary_class: "D7"

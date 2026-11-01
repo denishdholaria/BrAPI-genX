@@ -1,0 +1,64 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /crossing-schedules/{crossingScheduleDbId}:
+    get:
+      operationId: genxGetCrossingSchedule
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.crossing-schedules.get"
+        classification:
+          primaryDomain: "D2"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve one crossing schedule."
+        canBeUsedFor:
+          - "Inspect parents, date, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming the schedule is a BrAPI Cross or CrossingProject."
+          - "Treating a superseded schedule as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterCrossingSchedule"
+          - "genxListCrossingSchedules"
+        decisions: ["RFC-037"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one crossing schedule
+      description: Returns the registered schedule, or 404.
+      parameters:
+      - name: crossingScheduleDbId
+        description: Namespaced crossing-schedule identity `{authority}:crossing-schedule:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/CrossingSchedule'
+                required:
+                - metadata
+                - result
+                title: CrossingScheduleResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - CrossingSchedule

@@ -31245,12 +31245,245 @@
         "brapi-genx.genx.v1.regeneration-records.list",
         "brapi-genx.genx.v1.regeneration-records.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CrossingSchedule",
+      "brapiTag": "CrossingSchedule",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CrossingSchedule/CrossingSchedule_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.crossing-schedules.list",
+      "method": "GET",
+      "path": "/crossing-schedules",
+      "operationIdInSource": "genxListCrossingSchedules",
+      "recommendedOperationId": "genxListCrossingSchedules",
+      "operationName": "List crossing schedules",
+      "classification": {
+        "primaryDomain": "D2",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List crossing schedules, optionally filtered by program or status.",
+      "sourceDescription": "Get a paged list of crossing schedules across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover planned crosses for a breeding program.",
+        "Support breeding planning and auditing."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a schedule (use the POST endpoint).",
+        "Assuming a schedule is a BrAPI Cross or CrossingProject.",
+        "Treating the list as a complete breeding program record."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "programDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterCrossingSchedule",
+        "genxGetCrossingSchedule"
+      ],
+      "decisionReferences": [
+        "RFC-037"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.crossing-schedules.register",
+        "brapi-genx.genx.v1.crossing-schedules.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CrossingSchedule",
+      "brapiTag": "CrossingSchedule",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CrossingSchedule/CrossingSchedule_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.crossing-schedules.register",
+      "method": "POST",
+      "path": "/crossing-schedules",
+      "operationIdInSource": "genxRegisterCrossingSchedule",
+      "recommendedOperationId": "genxRegisterCrossingSchedule",
+      "operationName": "Register one crossing schedule",
+      "classification": {
+        "primaryDomain": "D2",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register a crossing schedule with parents, date, and provenance.",
+      "sourceDescription": "Unknown crossingScheduleDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish planned cross schedules.",
+        "Create a new version under an existing schedule identity."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing schedule; corrections require a new record that supersedes.",
+        "Assuming the schedule is a BrAPI Cross or CrossingProject.",
+        "Treating the schedule as an approved breeding plan."
+      ],
+      "sideEffects": "Creates a schedule identity or appends a new immutable version when accepted.",
+      "idempotency": "Same identity and identical body replays; conflicting content for the same identity is rejected.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "CrossingScheduleNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListCrossingSchedules",
+        "genxGetCrossingSchedule"
+      ],
+      "decisionReferences": [
+        "RFC-037"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.crossing-schedules.list",
+        "brapi-genx.genx.v1.crossing-schedules.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CrossingSchedule",
+      "brapiTag": "CrossingSchedule",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CrossingSchedule/CrossingSchedule_CrossingScheduleDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.crossing-schedules.get",
+      "method": "GET",
+      "path": "/crossing-schedules/{crossingScheduleDbId}",
+      "operationIdInSource": "genxGetCrossingSchedule",
+      "recommendedOperationId": "genxGetCrossingSchedule",
+      "operationName": "Get one crossing schedule",
+      "classification": {
+        "primaryDomain": "D2",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one crossing schedule.",
+      "sourceDescription": "Returns the registered schedule, or 404.",
+      "canBeUsedFor": [
+        "Inspect parents, date, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the schedule is a BrAPI Cross or CrossingProject.",
+        "Treating a superseded schedule as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "crossingScheduleDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterCrossingSchedule",
+        "genxListCrossingSchedules"
+      ],
+      "decisionReferences": [
+        "RFC-037"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.crossing-schedules.list",
+        "brapi-genx.genx.v1.crossing-schedules.register"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 108,
+    "genxEntriesAdded": 111,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -31328,7 +31561,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 309,
+    "totalEntries": 312,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

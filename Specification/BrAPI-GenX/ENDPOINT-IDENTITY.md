@@ -171,6 +171,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/population-advancements` | GET | `genxListPopulationAdvancements` | List population advancements | Does not create or change a record; not a BrAPI Program. |
 | `/genx/v1/population-advancements` | POST | `genxRecordPopulationAdvancement` | Record one population advancement | Append-only record; replay/conflict semantics. |
 | `/genx/v1/population-advancements/{populationAdvancementDbId}` | GET | `genxGetPopulationAdvancement` | Retrieve one population advancement | Does not treat a superseded record as current. |
+| `/genx/v1/crossing-schedules` | GET | `genxListCrossingSchedules` | List crossing schedules | Does not create or change a schedule; not a BrAPI Cross or CrossingProject. |
+| `/genx/v1/crossing-schedules` | POST | `genxRegisterCrossingSchedule` | Register one crossing schedule | Append-only record; replay/conflict semantics. |
+| `/genx/v1/crossing-schedules/{crossingScheduleDbId}` | GET | `genxGetCrossingSchedule` | Retrieve one crossing schedule | Does not treat a superseded schedule as current. |
 | `/genx/v1/analysis-methods` | GET | `genxListAnalysisMethods` | List registered analysis method versions | Does not execute an analysis; not a BrAPI v2.1 resource. |
 | `/genx/v1/analysis-methods` | POST | `genxRegisterAnalysisMethod` | Register one analysis method version | Does not execute or validate the method; replay/conflict semantics. |
 | `/genx/v1/analysis-methods/{analysisMethodDbId}` | GET | `genxGetAnalysisMethod` | Retrieve one registered analysis method version | Does not execute an analysis; revoked methods deny new jobs. |
