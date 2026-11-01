@@ -31478,12 +31478,247 @@
         "brapi-genx.genx.v1.crossing-schedules.list",
         "brapi-genx.genx.v1.crossing-schedules.register"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Tillage",
+      "brapiTag": "Tillage",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Tillage/Tillage_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.tillage-records.list",
+      "method": "GET",
+      "path": "/tillage-records",
+      "operationIdInSource": "genxListTillageRecords",
+      "recommendedOperationId": "genxListTillageRecords",
+      "operationName": "List tillage records",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List tillage records, optionally filtered by location, study, or date range.",
+      "sourceDescription": "Get a paged list of tillage records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover tillage events for a location or study.",
+        "Support agronomy and crop model inputs."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a record (use the POST endpoint).",
+        "Assuming a record is a BrAPI Location.",
+        "Treating the list as a complete soil record."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "locationDbId",
+        "studyDbId",
+        "tilledFrom",
+        "tilledTo",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordTillage",
+        "genxGetTillage"
+      ],
+      "decisionReferences": [
+        "RFC-038"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.tillage-records.record",
+        "brapi-genx.genx.v1.tillage-records.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Tillage",
+      "brapiTag": "Tillage",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Tillage/Tillage_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.tillage-records.record",
+      "method": "POST",
+      "path": "/tillage-records",
+      "operationIdInSource": "genxRecordTillage",
+      "recommendedOperationId": "genxRecordTillage",
+      "operationName": "Record one tillage",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record one tillage event with method, depth, and provenance.",
+      "sourceDescription": "Unknown tillageRecordDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Record soil preparation for a location or study.",
+        "Retry an identical event safely using the same tillageRecordDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming the record is a BrAPI Location.",
+        "Treating the record as a complete soil record."
+      ],
+      "sideEffects": "Creates a tillage record when accepted.",
+      "idempotency": "Same tillageRecordDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "TillageRecordNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListTillageRecords",
+        "genxGetTillage"
+      ],
+      "decisionReferences": [
+        "RFC-038"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.tillage-records.list",
+        "brapi-genx.genx.v1.tillage-records.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Tillage",
+      "brapiTag": "Tillage",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Tillage/Tillage_TillageRecordDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.tillage-records.get",
+      "method": "GET",
+      "path": "/tillage-records/{tillageRecordDbId}",
+      "operationIdInSource": "genxGetTillage",
+      "recommendedOperationId": "genxGetTillage",
+      "operationName": "Get one tillage record",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one tillage record.",
+      "sourceDescription": "Returns the recorded tillage, or 404.",
+      "canBeUsedFor": [
+        "Inspect tillage method, depth, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the record is a BrAPI Location.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "tillageRecordDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordTillage",
+        "genxListTillageRecords"
+      ],
+      "decisionReferences": [
+        "RFC-038"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.tillage-records.list",
+        "brapi-genx.genx.v1.tillage-records.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 111,
+    "genxEntriesAdded": 114,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -31561,7 +31796,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 312,
+    "totalEntries": 315,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

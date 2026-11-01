@@ -1,0 +1,66 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    TillageRecordNewRequest:
+      type: object
+      description: |-
+        Request to record one tillage event. Unknown tillageRecordDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - tillageRecordDbId
+      - tilledAt
+      - method
+      properties:
+        tillageRecordDbId:
+          description: Namespaced tillage-record identity `{authority}:tillage-record:{localId}`
+          type: string
+          example: institute-a:tillage-record:tr-2026-001
+        locationDbId:
+          description: BrAPI Location where tillage occurred
+          type: string
+          example: institute-a:location:field-12
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        tilledAt:
+          description: Date/time of tillage (ISO-8601)
+          type: string
+          format: date-time
+          example: '2026-10-24T06:00:00Z'
+        method:
+          description: Tillage method
+          type: string
+          example: conventional
+        depth:
+          description: Tillage depth
+          type: number
+          example: 20
+        depthUnit:
+          description: Unit of measure for depth
+          type: string
+          example: cm
+        notes:
+          description: Human-readable notes
+          type: string
+          example: Pre-planting tillage.
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          default: active
+          example: active
+        supersedes:
+          description: tillageRecordDbId of the record this one replaces
+          type: string
+          example: institute-a:tillage-record:tr-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

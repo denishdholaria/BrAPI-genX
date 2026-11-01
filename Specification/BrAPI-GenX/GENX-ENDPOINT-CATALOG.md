@@ -40,6 +40,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | SoilProfile | 3 | proposed, non-normative |
 | SpeedBreeding | 3 | proposed, non-normative |
 | Telemetry | 2 | proposed, non-normative |
+| Tillage | 3 | proposed, non-normative |
 | VariableTerms | 3 | proposed, non-normative |
 | ViabilityTesting | 3 | proposed, non-normative |
 | WeatherForecast | 3 | proposed, non-normative |
@@ -3546,6 +3547,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.brapi-v2-1.phenotyping.get.observations, brapi-genx.brapi-v2-1.phenotyping.get.observations.by-observationdbid, brapi-genx.brapi-v2-1.phenotyping.get.observations.table, brapi-genx.brapi-v2-1.phenotyping.get.observationunits, brapi-genx.brapi-v2-1.phenotyping.get.observationunits.by-observationunitdbid, brapi-genx.brapi-v2-1.phenotyping.get.observationunits.table, brapi-genx.brapi-v2-1.phenotyping.get.search.observations.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.observationunits.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.variables.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.variables, brapi-genx.brapi-v2-1.phenotyping.get.variables.by-observationvariabledbid, brapi-genx.brapi-v2-1.phenotyping.post.delete.observations, brapi-genx.brapi-v2-1.phenotyping.post.observations, brapi-genx.brapi-v2-1.phenotyping.post.observationunits, brapi-genx.brapi-v2-1.phenotyping.post.search.observations, brapi-genx.brapi-v2-1.phenotyping.post.search.observationunits, brapi-genx.brapi-v2-1.phenotyping.post.search.variables, brapi-genx.brapi-v2-1.phenotyping.post.variables, brapi-genx.brapi-v2-1.phenotyping.put.observations, brapi-genx.brapi-v2-1.phenotyping.put.observations.by-observationdbid, brapi-genx.brapi-v2-1.phenotyping.put.observationunits, brapi-genx.brapi-v2-1.phenotyping.put.observationunits.by-observationunitdbid, brapi-genx.brapi-v2-1.phenotyping.put.variables.by-observationvariabledbid, brapi-genx.genx.v1.telemetry.query
 - **Relevant RFC / decision references:** RFC-007, D-16, D-17, D-18
 - **Contract source:** [`Specification/BrAPI-GenX/Telemetry/Telemetry_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Telemetry/Telemetry_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### Tillage — 3 operations
+
+### GET `/genx/v1/tillage-records`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.tillage-records.list`
+- **BrAPI-GenX operation identity:** `genxListTillageRecords` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListTillageRecords`
+- **GenX source module:** `Tillage`
+- **Source tag:** Tillage
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List tillage records, optionally filtered by location, study, or date range.
+**Source contract description:**
+> Get a paged list of tillage records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover tillage events for a location or study.
+- Support agronomy and crop model inputs.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a record (use the POST endpoint).
+- Assuming a record is a BrAPI Location.
+- Treating the list as a complete soil record.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** locationDbId, studyDbId, tilledFrom, tilledTo, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordTillage, genxGetTillage
+- **Related catalogue IDs:** brapi-genx.genx.v1.tillage-records.record, brapi-genx.genx.v1.tillage-records.get
+- **Relevant RFC / decision references:** RFC-038
+- **Contract source:** [`Specification/BrAPI-GenX/Tillage/Tillage_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Tillage/Tillage_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/tillage-records`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.tillage-records.record`
+- **BrAPI-GenX operation identity:** `genxRecordTillage` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordTillage`
+- **GenX source module:** `Tillage`
+- **Source tag:** Tillage
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one tillage event with method, depth, and provenance.
+**Source contract description:**
+> Unknown tillageRecordDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Record soil preparation for a location or study.
+- Retry an identical event safely using the same tillageRecordDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming the record is a BrAPI Location.
+- Treating the record as a complete soil record.
+- **Side effects:** Creates a tillage record when accepted.
+- **Retry / idempotency:** Same tillageRecordDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** TillageRecordNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListTillageRecords, genxGetTillage
+- **Related catalogue IDs:** brapi-genx.genx.v1.tillage-records.list, brapi-genx.genx.v1.tillage-records.get
+- **Relevant RFC / decision references:** RFC-038
+- **Contract source:** [`Specification/BrAPI-GenX/Tillage/Tillage_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Tillage/Tillage_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/tillage-records/{tillageRecordDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.tillage-records.get`
+- **BrAPI-GenX operation identity:** `genxGetTillage` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetTillage`
+- **GenX source module:** `Tillage`
+- **Source tag:** Tillage
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one tillage record.
+**Source contract description:**
+> Returns the recorded tillage, or 404.
+**Can be used for:**
+- Inspect tillage method, depth, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the record is a BrAPI Location.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** tillageRecordDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordTillage, genxListTillageRecords
+- **Related catalogue IDs:** brapi-genx.genx.v1.tillage-records.list, brapi-genx.genx.v1.tillage-records.register
+- **Relevant RFC / decision references:** RFC-038
+- **Contract source:** [`Specification/BrAPI-GenX/Tillage/Tillage_TillageRecordDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Tillage/Tillage_TillageRecordDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

@@ -1,0 +1,153 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /tillage-records:
+    get:
+      operationId: genxListTillageRecords
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.tillage-records.list"
+        classification:
+          primaryDomain: "D6"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List tillage records, optionally filtered by location, study, or date range."
+        canBeUsedFor:
+          - "Discover tillage events for a location or study."
+          - "Support agronomy and crop model inputs."
+        mustNotBeUsedFor:
+          - "Creating or changing a record (use the POST endpoint)."
+          - "Assuming a record is a BrAPI Location."
+          - "Treating the list as a complete soil record."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordTillage"
+          - "genxGetTillage"
+        decisions: ["RFC-038"]
+        proposalStatus: "draft-non-normative"
+      summary: List tillage records
+      description: Get a paged list of tillage records across authorities. Filters combine with AND.
+      parameters:
+      - name: locationDbId
+        description: Filter by BrAPI Location
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: studyDbId
+        description: Filter by BrAPI Study / trial context
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: tilledFrom
+        description: Start of tillage time range (ISO-8601)
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: tilledTo
+        description: End of tillage time range (ISO-8601)
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/TillageRecordListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - Tillage
+    post:
+      operationId: genxRecordTillage
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.tillage-records.record"
+        classification:
+          primaryDomain: "D6"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Record one tillage event with method, depth, and provenance."
+        canBeUsedFor:
+          - "Record soil preparation for a location or study."
+          - "Retry an identical event safely using the same tillageRecordDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing record; corrections require a new record that supersedes."
+          - "Assuming the record is a BrAPI Location."
+          - "Treating the record as a complete soil record."
+        sideEffects: "Creates a tillage record when accepted."
+        idempotency: "Same tillageRecordDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListTillageRecords"
+          - "genxGetTillage"
+        decisions: ["RFC-038"]
+        proposalStatus: "draft-non-normative"
+      summary: Record one tillage
+      description: |-
+        Unknown tillageRecordDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TillageRecordNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/TillageRecord'
+                required:
+                - metadata
+                - result
+                title: TillageRecordResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - Tillage
+components:
+  responses:
+    TillageRecordListResponse:
+      content:
+        application/json:
+          schema:
+            title: TillageRecordListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TillageRecord'
+            required:
+            - metadata
+            - result
+      description: OK

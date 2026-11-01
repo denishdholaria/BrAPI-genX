@@ -78,6 +78,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | Regeneration / RegenerationRecord | D1 | C1, C2, C3, C6, C9 | Regeneration records; no BrAPI v2.1 equivalent |
 | PopulationAdvancement / PopulationAdvancement | D2 | C1, C2, C3, C6, C9 | Population advancement records; no BrAPI v2.1 equivalent |
 | CrossingSchedule / CrossingSchedule | D2 | C1, C2, C3, C6, C9 | Crossing schedule records; no BrAPI v2.1 equivalent |
+| Tillage / TillageRecord | D6 | C1, C2, C3, C6, C9 | Tillage records; no BrAPI v2.1 equivalent |
 | AnalysisMethods / AnalysisMethod | D7 | C1, C2, C3, C6, C9 | Versioned analysis method registry; no BrAPI v2.1 equivalent; execution is via Jobs |
 | WeatherObservations / WeatherObservation | D5 | C1, C2, C3, C6, C7, C9 | Environmental/weather observation records; no BrAPI v2.1 equivalent; complementary to Telemetry |
 | HarvestRecords / HarvestRecord | D6 | C1, C2, C3, C6, C9 | Harvest-event records; no BrAPI v2.1 equivalent; not a SeedLotTransaction |
