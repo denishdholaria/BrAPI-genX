@@ -1,0 +1,57 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    GxeAnalysisResult:
+      type: object
+      description: |-
+        One immutable GxE analysis result record. A published
+        (gxeAnalysisResultDbId) record never mutates in place; corrections
+        are recorded as additional results linked by supersedes.
+      required:
+      - gxeAnalysisResultDbId
+      - analysisMethodDbId
+      - status
+      properties:
+        gxeAnalysisResultDbId:
+          description: Namespaced GxE-analysis-result identity `{authority}:gxe-analysis-result:{localId}`
+          type: string
+          example: institute-a:gxe-analysis-result:gxer-2026-001
+        analysisMethodDbId:
+          description: GenX AnalysisMethod used
+          type: string
+          example: institute-a:analysis-method:ammi
+        jobDbId:
+          description: GenX Job that produced this result
+          type: string
+          example: institute-a:job:analysis-7
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        traitDbId:
+          description: BrAPI Trait or GenX VariableTerm identifier
+          type: string
+          example: institute-a:trait:grain-yield
+        gxeEffect:
+          description: Genotype-by-environment interaction effect
+          type: object
+          example: {significant: true, pValue: 0.001}
+        status:
+          description: Lifecycle state of the result record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: gxeAnalysisResultDbId of the result this one replaces
+          type: string
+          example: institute-a:gxe-analysis-result:gxer-2026-000
+        provenance:
+          description: Evidence and method provenance for the result
+          $ref: '#/components/schemas/ProvenanceEnvelope'

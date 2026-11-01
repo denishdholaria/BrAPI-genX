@@ -1,0 +1,151 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /gxe-analyses:
+    get:
+      operationId: genxListGxeAnalyses
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.gxe-analyses.list"
+        classification:
+          primaryDomain: "D7"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List GxE analysis results, optionally filtered by method, study, or status."
+        canBeUsedFor:
+          - "Discover GxE results for a study or method."
+          - "Support scientific reproducibility and auditing."
+        mustNotBeUsedFor:
+          - "Creating or changing a result (use the POST endpoint)."
+          - "Assuming a result is a BrAPI data resource."
+          - "Treating the list as a complete analysis repository."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordGxeAnalysis"
+          - "genxGetGxeAnalysis"
+          - "genxRegisterAnalysisMethod"
+        decisions: ["RFC-051"]
+        proposalStatus: "draft-non-normative"
+      summary: List GxE analyses
+      description: Get a paged list of GxE analyses across authorities. Filters combine with AND.
+      parameters:
+      - name: analysisMethodDbId
+        description: Filter by GenX AnalysisMethod
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: studyDbId
+        description: Filter by BrAPI Study / trial context
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/GxeAnalysisResultListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - GxeAnalysis
+    post:
+      operationId: genxRecordGxeAnalysis
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.gxe-analyses.record"
+        classification:
+          primaryDomain: "D7"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Record one GxE analysis result with interaction effect and provenance."
+        canBeUsedFor:
+          - "Publish GxE analysis result metadata."
+          - "Retry an identical result safely using the same gxeAnalysisResultDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing result; corrections require a new record that supersedes."
+          - "Assuming the result is a BrAPI data resource."
+          - "Treating the result as scientific validation or approval."
+        sideEffects: "Creates a GxE analysis result when accepted."
+        idempotency: "Same gxeAnalysisResultDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListGxeAnalyses"
+          - "genxGetGxeAnalysis"
+          - "genxRegisterAnalysisMethod"
+        decisions: ["RFC-051"]
+        proposalStatus: "draft-non-normative"
+      summary: Record one GxE analysis
+      description: |-
+        Unknown gxeAnalysisResultDbId creates; same id with an identical
+        body replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GxeAnalysisResultNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/GxeAnalysisResult'
+                required:
+                - metadata
+                - result
+                title: GxeAnalysisResultResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - GxeAnalysis
+components:
+  responses:
+    GxeAnalysisResultListResponse:
+      content:
+        application/json:
+          schema:
+            title: GxeAnalysisResultListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GxeAnalysisResult'
+            required:
+            - metadata
+            - result
+      description: OK
