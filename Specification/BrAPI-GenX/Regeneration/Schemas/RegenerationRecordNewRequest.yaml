@@ -1,0 +1,60 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    RegenerationRecordNewRequest:
+      type: object
+      description: |-
+        Request to record one regeneration. Unknown
+        regenerationRecordDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      required:
+      - regenerationRecordDbId
+      - seedLotDbId
+      - regeneratedAt
+      - method
+      properties:
+        regenerationRecordDbId:
+          description: Namespaced regeneration-record identity `{authority}:regeneration-record:{localId}`
+          type: string
+          example: institute-a:regeneration-record:rr-2026-001
+        seedLotDbId:
+          description: BrAPI SeedLot regenerated
+          type: string
+          example: institute-a:seedlot:sl-2026-001
+        regeneratedAt:
+          description: Date/time of regeneration (ISO-8601)
+          type: string
+          format: date-time
+          example: '2026-10-24T08:00:00Z'
+        method:
+          description: Regeneration method used
+          type: string
+          example: controlled-pollination
+        quantity:
+          description: Quantity produced
+          type: number
+          example: 2000
+        unit:
+          description: Unit of measure for quantity
+          type: string
+          example: seeds
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          default: active
+          example: active
+        supersedes:
+          description: regenerationRecordDbId of the record this one replaces
+          type: string
+          example: institute-a:regeneration-record:rr-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

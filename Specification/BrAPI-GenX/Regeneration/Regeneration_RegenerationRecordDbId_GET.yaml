@@ -1,0 +1,64 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /regeneration-records/{regenerationRecordDbId}:
+    get:
+      operationId: genxGetRegeneration
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.regeneration-records.get"
+        classification:
+          primaryDomain: "D1"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve one regeneration record."
+        canBeUsedFor:
+          - "Inspect regeneration method, quantity, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming the record is a BrAPI SeedLot transaction."
+          - "Treating a superseded record as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordRegeneration"
+          - "genxListRegenerations"
+        decisions: ["RFC-036"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one regeneration
+      description: Returns the recorded regeneration, or 404.
+      parameters:
+      - name: regenerationRecordDbId
+        description: Namespaced regeneration-record identity `{authority}:regeneration-record:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/RegenerationRecord'
+                required:
+                - metadata
+                - result
+                title: RegenerationRecordResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - Regeneration

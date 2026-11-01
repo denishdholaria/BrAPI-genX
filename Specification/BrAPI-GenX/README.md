@@ -53,6 +53,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `ImageMetadata/` | `ImageMetadata` — image metadata records (capture details, camera, resolution, provenance) | `GET /genx/v1/image-metadata` (`genxListImageMetadata`); `POST /genx/v1/image-metadata` (`genxRegisterImageMetadata`); `GET /genx/v1/image-metadata/{imageMetadataDbId}` (`genxGetImageMetadata`) |
 | `ClimateNormals/` | `ClimateNormal` — climate normal records (mean/min/max, period, provenance) | `GET /genx/v1/climate-normals` (`genxListClimateNormals`); `POST /genx/v1/climate-normals` (`genxRegisterClimateNormal`); `GET /genx/v1/climate-normals/{climateNormalDbId}` (`genxGetClimateNormal`) |
 | `SafetyDuplication/` | `SafetyDuplication` — safety duplication records (backup site, quantity, provenance) | `GET /genx/v1/safety-duplications` (`genxListSafetyDuplications`); `POST /genx/v1/safety-duplications` (`genxRegisterSafetyDuplication`); `GET /genx/v1/safety-duplications/{safetyDuplicationDbId}` (`genxGetSafetyDuplication`) |
+| `Regeneration/` | `RegenerationRecord` — regeneration records (method, quantity, provenance) | `GET /genx/v1/regeneration-records` (`genxListRegenerations`); `POST /genx/v1/regeneration-records` (`genxRecordRegeneration`); `GET /genx/v1/regeneration-records/{regenerationRecordDbId}` (`genxGetRegeneration`) |
 | `PhenologyObservation/` | `PhenologyObservation` — phenology observation records (stage, BBCH code, provenance) | `GET /genx/v1/phenology-observations` (`genxListPhenologyObservations`); `POST /genx/v1/phenology-observations` (`genxRecordPhenologyObservation`); `GET /genx/v1/phenology-observations/{phenologyObservationDbId}` (`genxGetPhenologyObservation`) |
 | `ParentCandidateSelection/` | `ParentCandidateSelection` — parent candidate selection records (criterion, outcome, provenance) | `GET /genx/v1/parent-candidate-selections` (`genxListParentCandidateSelections`); `POST /genx/v1/parent-candidate-selections` (`genxRecordParentCandidateSelection`); `GET /genx/v1/parent-candidate-selections/{parentCandidateSelectionDbId}` (`genxGetParentCandidateSelection`) |
 | `AnalysisMethods/` | `AnalysisMethod` — versioned analysis method registry (identity, type, contracts, lifecycle) | `GET /genx/v1/analysis-methods` (`genxListAnalysisMethods`); `POST /genx/v1/analysis-methods` (`genxRegisterAnalysisMethod`); `GET /genx/v1/analysis-methods/{analysisMethodDbId}` (`genxGetAnalysisMethod`) |
@@ -101,7 +102,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-032-Image-Metadata](./RFC-032-Image-Metadata.md),
 [RFC-033-Climate-Normals](./RFC-033-Climate-Normals.md),
 [RFC-034-Safety-Duplication](./RFC-034-Safety-Duplication.md),
-[RFC-035-Population-Advancement](./RFC-035-Population-Advancement.md).
+[RFC-035-Population-Advancement](./RFC-035-Population-Advancement.md),
+[RFC-036-Regeneration](./RFC-036-Regeneration.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

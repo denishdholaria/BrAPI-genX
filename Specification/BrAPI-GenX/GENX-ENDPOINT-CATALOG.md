@@ -30,6 +30,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | PopulationAdvancement | 3 | proposed, non-normative |
 | ProgenyRecords | 3 | proposed, non-normative |
 | Quarantine | 3 | proposed, non-normative |
+| Regeneration | 3 | proposed, non-normative |
 | RepeatedMeasurement | 3 | proposed, non-normative |
 | ResearchAssets | 3 | proposed, non-normative |
 | SafetyDuplication | 3 | proposed, non-normative |
@@ -2581,6 +2582,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.quarantine-records.list, brapi-genx.genx.v1.quarantine-records.record
 - **Relevant RFC / decision references:** RFC-030
 - **Contract source:** [`Specification/BrAPI-GenX/Quarantine/Quarantine_QuarantineRecordDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Quarantine/Quarantine_QuarantineRecordDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### Regeneration — 3 operations
+
+### GET `/genx/v1/regeneration-records`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.regeneration-records.list`
+- **BrAPI-GenX operation identity:** `genxListRegenerations` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListRegenerations`
+- **GenX source module:** `Regeneration`
+- **Source tag:** Regeneration
+- **Proposed BrAPI-GenX classification:** D1 — Germplasm and Biological Resources; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List regeneration records, optionally filtered by seed lot or status.
+**Source contract description:**
+> Get a paged list of regeneration records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover regeneration events for conserved material.
+- Support conservation planning and auditing.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a record (use the POST endpoint).
+- Assuming a record is a BrAPI SeedLot transaction.
+- Treating the list as a complete conservation record.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** seedLotDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordRegeneration, genxGetRegeneration
+- **Related catalogue IDs:** brapi-genx.genx.v1.regeneration-records.record, brapi-genx.genx.v1.regeneration-records.get
+- **Relevant RFC / decision references:** RFC-036
+- **Contract source:** [`Specification/BrAPI-GenX/Regeneration/Regeneration_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Regeneration/Regeneration_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/regeneration-records`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.regeneration-records.record`
+- **BrAPI-GenX operation identity:** `genxRecordRegeneration` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordRegeneration`
+- **GenX source module:** `Regeneration`
+- **Source tag:** Regeneration
+- **Proposed BrAPI-GenX classification:** D1 — Germplasm and Biological Resources; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one regeneration event with method, quantity, and provenance.
+**Source contract description:**
+> Unknown regenerationRecordDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Record regeneration of conserved material.
+- Retry an identical record safely using the same regenerationRecordDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming the record is a BrAPI SeedLot transaction.
+- Treating the record as a complete conservation record.
+- **Side effects:** Creates a regeneration record when accepted.
+- **Retry / idempotency:** Same regenerationRecordDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** RegenerationRecordNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListRegenerations, genxGetRegeneration
+- **Related catalogue IDs:** brapi-genx.genx.v1.regeneration-records.list, brapi-genx.genx.v1.regeneration-records.get
+- **Relevant RFC / decision references:** RFC-036
+- **Contract source:** [`Specification/BrAPI-GenX/Regeneration/Regeneration_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Regeneration/Regeneration_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/regeneration-records/{regenerationRecordDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.regeneration-records.get`
+- **BrAPI-GenX operation identity:** `genxGetRegeneration` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetRegeneration`
+- **GenX source module:** `Regeneration`
+- **Source tag:** Regeneration
+- **Proposed BrAPI-GenX classification:** D1 — Germplasm and Biological Resources; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one regeneration record.
+**Source contract description:**
+> Returns the recorded regeneration, or 404.
+**Can be used for:**
+- Inspect regeneration method, quantity, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the record is a BrAPI SeedLot transaction.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** regenerationRecordDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordRegeneration, genxListRegenerations
+- **Related catalogue IDs:** brapi-genx.genx.v1.regeneration-records.list, brapi-genx.genx.v1.regeneration-records.record
+- **Relevant RFC / decision references:** RFC-036
+- **Contract source:** [`Specification/BrAPI-GenX/Regeneration/Regeneration_RegenerationRecordDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Regeneration/Regeneration_RegenerationRecordDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

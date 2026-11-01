@@ -1,0 +1,142 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /regeneration-records:
+    get:
+      operationId: genxListRegenerations
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.regeneration-records.list"
+        classification:
+          primaryDomain: "D1"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List regeneration records, optionally filtered by seed lot or status."
+        canBeUsedFor:
+          - "Discover regeneration events for conserved material."
+          - "Support conservation planning and auditing."
+        mustNotBeUsedFor:
+          - "Creating or changing a record (use the POST endpoint)."
+          - "Assuming a record is a BrAPI SeedLot transaction."
+          - "Treating the list as a complete conservation record."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordRegeneration"
+          - "genxGetRegeneration"
+        decisions: ["RFC-036"]
+        proposalStatus: "draft-non-normative"
+      summary: List regenerations
+      description: Get a paged list of regeneration records across authorities. Filters combine with AND.
+      parameters:
+      - name: seedLotDbId
+        description: Filter by BrAPI SeedLot
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - superseded
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/RegenerationRecordListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - Regeneration
+    post:
+      operationId: genxRecordRegeneration
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.regeneration-records.record"
+        classification:
+          primaryDomain: "D1"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Record one regeneration event with method, quantity, and provenance."
+        canBeUsedFor:
+          - "Record regeneration of conserved material."
+          - "Retry an identical record safely using the same regenerationRecordDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing record; corrections require a new record that supersedes."
+          - "Assuming the record is a BrAPI SeedLot transaction."
+          - "Treating the record as a complete conservation record."
+        sideEffects: "Creates a regeneration record when accepted."
+        idempotency: "Same regenerationRecordDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListRegenerations"
+          - "genxGetRegeneration"
+        decisions: ["RFC-036"]
+        proposalStatus: "draft-non-normative"
+      summary: Record one regeneration
+      description: |-
+        Unknown regenerationRecordDbId creates; same id with an identical
+        body replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegenerationRecordNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/RegenerationRecord'
+                required:
+                - metadata
+                - result
+                title: RegenerationRecordResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - Regeneration
+components:
+  responses:
+    RegenerationRecordListResponse:
+      content:
+        application/json:
+          schema:
+            title: RegenerationRecordListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RegenerationRecord'
+            required:
+            - metadata
+            - result
+      description: OK
