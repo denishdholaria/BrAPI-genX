@@ -6,6 +6,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 
 | Source module | Operation count | Status |
 |---|---:|---|
+| Acquisition | 3 | proposed, non-normative |
 | AnalysisMethods | 3 | proposed, non-normative |
 | BreedingPipeline | 3 | proposed, non-normative |
 | BulkCapture | 3 | proposed, non-normative |
@@ -49,6 +50,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | WeatherObservations | 3 | proposed, non-normative |
 
 ## Operations
+
+### Acquisition — 3 operations
+
+### GET `/genx/v1/acquisitions`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.acquisitions.list`
+- **BrAPI-GenX operation identity:** `genxListAcquisitions` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListAcquisitions`
+- **GenX source module:** `Acquisition`
+- **Source tag:** Acquisition
+- **Proposed BrAPI-GenX classification:** D1 — Germplasm and Biological Resources; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List acquisition records, optionally filtered by seed lot or status.
+**Source contract description:**
+> Get a paged list of acquisition records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover acquisition events for conserved material.
+- Support conservation planning and auditing.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a record (use the POST endpoint).
+- Assuming a record is a BrAPI SeedLot transaction.
+- Treating the list as a complete conservation record.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** seedLotDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordAcquisition, genxGetAcquisition
+- **Related catalogue IDs:** brapi-genx.genx.v1.acquisitions.record, brapi-genx.genx.v1.acquisitions.get
+- **Relevant RFC / decision references:** RFC-041
+- **Contract source:** [`Specification/BrAPI-GenX/Acquisition/Acquisition_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Acquisition/Acquisition_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/acquisitions`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.acquisitions.record`
+- **BrAPI-GenX operation identity:** `genxRecordAcquisition` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordAcquisition`
+- **GenX source module:** `Acquisition`
+- **Source tag:** Acquisition
+- **Proposed BrAPI-GenX classification:** D1 — Germplasm and Biological Resources; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one acquisition event with source and provenance.
+**Source contract description:**
+> Unknown acquisitionRecordDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Record intake of conserved material.
+- Retry an identical record safely using the same acquisitionRecordDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming the record is a BrAPI SeedLot transaction.
+- Treating the record as a complete conservation record.
+- **Side effects:** Creates an acquisition record when accepted.
+- **Retry / idempotency:** Same acquisitionRecordDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** AcquisitionRecordNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListAcquisitions, genxGetAcquisition
+- **Related catalogue IDs:** brapi-genx.genx.v1.acquisitions.list, brapi-genx.genx.v1.acquisitions.get
+- **Relevant RFC / decision references:** RFC-041
+- **Contract source:** [`Specification/BrAPI-GenX/Acquisition/Acquisition_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Acquisition/Acquisition_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/acquisitions/{acquisitionRecordDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.acquisitions.get`
+- **BrAPI-GenX operation identity:** `genxGetAcquisition` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetAcquisition`
+- **GenX source module:** `Acquisition`
+- **Source tag:** Acquisition
+- **Proposed BrAPI-GenX classification:** D1 — Germplasm and Biological Resources; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one acquisition record.
+**Source contract description:**
+> Returns the recorded acquisition, or 404.
+**Can be used for:**
+- Inspect acquisition source and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the record is a BrAPI SeedLot transaction.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** acquisitionRecordDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordAcquisition, genxListAcquisitions
+- **Related catalogue IDs:** brapi-genx.genx.v1.acquisitions.list, brapi-genx.genx.v1.acquisitions.record
+- **Relevant RFC / decision references:** RFC-041
+- **Contract source:** [`Specification/BrAPI-GenX/Acquisition/Acquisition_AcquisitionRecordDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Acquisition/Acquisition_AcquisitionRecordDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
 ### AnalysisMethods — 3 operations
 

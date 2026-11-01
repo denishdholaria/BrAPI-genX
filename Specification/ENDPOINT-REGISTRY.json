@@ -32179,12 +32179,245 @@
         "brapi-genx.genx.v1.bulk-captures.list",
         "brapi-genx.genx.v1.bulk-captures.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Acquisition",
+      "brapiTag": "Acquisition",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Acquisition/Acquisition_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.acquisitions.list",
+      "method": "GET",
+      "path": "/acquisitions",
+      "operationIdInSource": "genxListAcquisitions",
+      "recommendedOperationId": "genxListAcquisitions",
+      "operationName": "List acquisitions",
+      "classification": {
+        "primaryDomain": "D1",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List acquisition records, optionally filtered by seed lot or status.",
+      "sourceDescription": "Get a paged list of acquisition records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover acquisition events for conserved material.",
+        "Support conservation planning and auditing."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a record (use the POST endpoint).",
+        "Assuming a record is a BrAPI SeedLot transaction.",
+        "Treating the list as a complete conservation record."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "seedLotDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordAcquisition",
+        "genxGetAcquisition"
+      ],
+      "decisionReferences": [
+        "RFC-041"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.acquisitions.record",
+        "brapi-genx.genx.v1.acquisitions.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Acquisition",
+      "brapiTag": "Acquisition",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Acquisition/Acquisition_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.acquisitions.record",
+      "method": "POST",
+      "path": "/acquisitions",
+      "operationIdInSource": "genxRecordAcquisition",
+      "recommendedOperationId": "genxRecordAcquisition",
+      "operationName": "Record one acquisition",
+      "classification": {
+        "primaryDomain": "D1",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record one acquisition event with source and provenance.",
+      "sourceDescription": "Unknown acquisitionRecordDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Record intake of conserved material.",
+        "Retry an identical record safely using the same acquisitionRecordDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming the record is a BrAPI SeedLot transaction.",
+        "Treating the record as a complete conservation record."
+      ],
+      "sideEffects": "Creates an acquisition record when accepted.",
+      "idempotency": "Same acquisitionRecordDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "AcquisitionRecordNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListAcquisitions",
+        "genxGetAcquisition"
+      ],
+      "decisionReferences": [
+        "RFC-041"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.acquisitions.list",
+        "brapi-genx.genx.v1.acquisitions.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Acquisition",
+      "brapiTag": "Acquisition",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Acquisition/Acquisition_AcquisitionRecordDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.acquisitions.get",
+      "method": "GET",
+      "path": "/acquisitions/{acquisitionRecordDbId}",
+      "operationIdInSource": "genxGetAcquisition",
+      "recommendedOperationId": "genxGetAcquisition",
+      "operationName": "Get one acquisition",
+      "classification": {
+        "primaryDomain": "D1",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one acquisition record.",
+      "sourceDescription": "Returns the recorded acquisition, or 404.",
+      "canBeUsedFor": [
+        "Inspect acquisition source and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the record is a BrAPI SeedLot transaction.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "acquisitionRecordDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordAcquisition",
+        "genxListAcquisitions"
+      ],
+      "decisionReferences": [
+        "RFC-041"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.acquisitions.list",
+        "brapi-genx.genx.v1.acquisitions.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 120,
+    "genxEntriesAdded": 123,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -32262,7 +32495,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 321,
+    "totalEntries": 324,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

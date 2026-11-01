@@ -1,0 +1,59 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    AcquisitionRecord:
+      type: object
+      description: |-
+        One immutable acquisition record. A published
+        (acquisitionRecordDbId) record never mutates in place; corrections
+        are recorded as additional records linked by supersedes.
+      required:
+      - acquisitionRecordDbId
+      - seedLotDbId
+      - acquiredAt
+      - source
+      - status
+      properties:
+        acquisitionRecordDbId:
+          description: Namespaced acquisition-record identity `{authority}:acquisition-record:{localId}`
+          type: string
+          example: institute-a:acquisition-record:aq-2026-001
+        seedLotDbId:
+          description: BrAPI SeedLot acquired
+          type: string
+          example: institute-a:seedlot:sl-2026-001
+        acquiredAt:
+          description: Date/time of acquisition (ISO-8601)
+          type: string
+          format: date-time
+          example: '2026-10-24T08:00:00Z'
+        source:
+          description: Source of the acquired material
+          type: string
+          example: collecting-mission
+        method:
+          description: Acquisition method
+          type: string
+          example: field-collection
+        notes:
+          description: Human-readable notes
+          type: string
+          example: Collected from farmer field.
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          example: active
+        supersedes:
+          description: acquisitionRecordDbId of the record this one replaces
+          type: string
+          example: institute-a:acquisition-record:aq-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

@@ -1,0 +1,64 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /acquisitions/{acquisitionRecordDbId}:
+    get:
+      operationId: genxGetAcquisition
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.acquisitions.get"
+        classification:
+          primaryDomain: "D1"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve one acquisition record."
+        canBeUsedFor:
+          - "Inspect acquisition source and provenance."
+        mustNotBeUsedFor:
+          - "Assuming the record is a BrAPI SeedLot transaction."
+          - "Treating a superseded record as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordAcquisition"
+          - "genxListAcquisitions"
+        decisions: ["RFC-041"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one acquisition
+      description: Returns the recorded acquisition, or 404.
+      parameters:
+      - name: acquisitionRecordDbId
+        description: Namespaced acquisition-record identity `{authority}:acquisition-record:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/AcquisitionRecord'
+                required:
+                - metadata
+                - result
+                title: AcquisitionRecordResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - Acquisition
