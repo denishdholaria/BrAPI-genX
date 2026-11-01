@@ -1,0 +1,157 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /research-assets:
+    get:
+      operationId: genxListResearchAssets
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.research-assets.list"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C5", "C6", "C9"]
+        purpose: "List research asset records, optionally filtered by type, license, or access policy."
+        canBeUsedFor:
+          - "Discover research assets and their metadata."
+          - "Support publication and citation workflows."
+        mustNotBeUsedFor:
+          - "Creating or changing an asset (use the POST endpoint)."
+          - "Assuming an asset is a BrAPI data resource."
+          - "Treating the list as a complete repository."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterResearchAsset"
+          - "genxGetResearchAsset"
+          - "genxRegisterFairPackage"
+        decisions: ["RFC-016"]
+        proposalStatus: "draft-non-normative"
+      summary: List research assets
+      description: Get a paged list of research assets across authorities. Filters combine with AND.
+      parameters:
+      - name: assetType
+        description: Filter by asset class
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - dataset
+          - model
+          - protocol
+          - report
+          - evidence-pack
+      - name: license
+        description: Filter by license
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: accessPolicy
+        description: Filter by access policy
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - open
+          - restricted
+          - embargoed
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/ResearchAssetListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - ResearchAssets
+    post:
+      operationId: genxRegisterResearchAsset
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.research-assets.register"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C5", "C6", "C9"]
+        purpose: "Register a research asset with type, title, license, access policy, and persistent identifier."
+        canBeUsedFor:
+          - "Publish research asset metadata."
+          - "Create a new version under an existing asset identity."
+        mustNotBeUsedFor:
+          - "Uploading payload bytes through this endpoint."
+          - "Assuming registration mints a persistent identifier."
+          - "Treating the asset as a BrAPI data resource."
+        sideEffects: "Creates a research asset identity or appends a new immutable version when accepted."
+        idempotency: "Same asset identity and identical body replays; conflicting content for the same identity is rejected."
+        semanticNeighbors:
+          - "genxListResearchAssets"
+          - "genxGetResearchAsset"
+          - "genxRegisterFairPackage"
+        decisions: ["RFC-016"]
+        proposalStatus: "draft-non-normative"
+      summary: Register one research asset
+      description: |-
+        Unknown researchAssetDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResearchAssetNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/ResearchAsset'
+                required:
+                - metadata
+                - result
+                title: ResearchAssetResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - ResearchAssets
+components:
+  responses:
+    ResearchAssetListResponse:
+      content:
+        application/json:
+          schema:
+            title: ResearchAssetListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ResearchAsset'
+            required:
+            - metadata
+            - result
+      description: OK

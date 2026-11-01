@@ -26325,12 +26325,252 @@
         "brapi-genx.genx.v1.genebank-storage.list",
         "brapi-genx.genx.v1.genebank-storage.register"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ResearchAssets",
+      "brapiTag": "ResearchAssets",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ResearchAssets/ResearchAssets_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.research-assets.list",
+      "method": "GET",
+      "path": "/research-assets",
+      "operationIdInSource": "genxListResearchAssets",
+      "recommendedOperationId": "genxListResearchAssets",
+      "operationName": "List research assets",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C5",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List research asset records, optionally filtered by type, license, or access policy.",
+      "sourceDescription": "Get a paged list of research assets across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover research assets and their metadata.",
+        "Support publication and citation workflows."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing an asset (use the POST endpoint).",
+        "Assuming an asset is a BrAPI data resource.",
+        "Treating the list as a complete repository."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "assetType",
+        "license",
+        "accessPolicy",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterResearchAsset",
+        "genxGetResearchAsset",
+        "genxRegisterFairPackage"
+      ],
+      "decisionReferences": [
+        "RFC-016"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.research-assets.register",
+        "brapi-genx.genx.v1.research-assets.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ResearchAssets",
+      "brapiTag": "ResearchAssets",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ResearchAssets/ResearchAssets_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.research-assets.register",
+      "method": "POST",
+      "path": "/research-assets",
+      "operationIdInSource": "genxRegisterResearchAsset",
+      "recommendedOperationId": "genxRegisterResearchAsset",
+      "operationName": "Register one research asset",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C5",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register a research asset with type, title, license, access policy, and persistent identifier.",
+      "sourceDescription": "Unknown researchAssetDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish research asset metadata.",
+        "Create a new version under an existing asset identity."
+      ],
+      "mustNotBeUsedFor": [
+        "Uploading payload bytes through this endpoint.",
+        "Assuming registration mints a persistent identifier.",
+        "Treating the asset as a BrAPI data resource."
+      ],
+      "sideEffects": "Creates a research asset identity or appends a new immutable version when accepted.",
+      "idempotency": "Same asset identity and identical body replays; conflicting content for the same identity is rejected.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "ResearchAssetNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListResearchAssets",
+        "genxGetResearchAsset",
+        "genxRegisterFairPackage"
+      ],
+      "decisionReferences": [
+        "RFC-016"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.research-assets.list",
+        "brapi-genx.genx.v1.research-assets.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ResearchAssets",
+      "brapiTag": "ResearchAssets",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ResearchAssets/ResearchAssets_ResearchAssetDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.research-assets.get",
+      "method": "GET",
+      "path": "/research-assets/{researchAssetDbId}",
+      "operationIdInSource": "genxGetResearchAsset",
+      "recommendedOperationId": "genxGetResearchAsset",
+      "operationName": "Get one research asset",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C5",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one registered research asset.",
+      "sourceDescription": "Returns the registered asset, or 404.",
+      "canBeUsedFor": [
+        "Inspect asset metadata, license, access policy, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the asset is a BrAPI data resource.",
+        "Treating a withdrawn asset as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "researchAssetDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterResearchAsset",
+        "genxListResearchAssets",
+        "genxRegisterFairPackage"
+      ],
+      "decisionReferences": [
+        "RFC-016"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.research-assets.list",
+        "brapi-genx.genx.v1.research-assets.register"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 45,
+    "genxEntriesAdded": 48,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -26408,7 +26648,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 246,
+    "totalEntries": 249,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

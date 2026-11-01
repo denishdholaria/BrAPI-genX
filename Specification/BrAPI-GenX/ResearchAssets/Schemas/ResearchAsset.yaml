@@ -1,0 +1,92 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ResearchAsset:
+      type: object
+      description: |-
+        One immutable research asset record. A published
+        (researchAssetDbId) record never mutates in place; corrections are
+        recorded as additional assets linked by supersedes.
+      required:
+      - researchAssetDbId
+      - assetType
+      - title
+      - license
+      - accessPolicy
+      - status
+      properties:
+        researchAssetDbId:
+          description: Namespaced research-asset identity `{authority}:research-asset:{localId}`
+          type: string
+          example: institute-a:research-asset:ra-2026-001
+        assetType:
+          description: Class of research asset
+          type: string
+          enum:
+          - dataset
+          - model
+          - protocol
+          - report
+          - evidence-pack
+          example: dataset
+        title:
+          description: Human readable asset title
+          type: string
+          example: Wheat yield trial dataset 2026
+        creators:
+          description: Creators or authors of the asset
+          type: array
+          items:
+            type: string
+          example: [Dr. Jane Doe, Dr. John Smith]
+        description:
+          description: What the asset contains and its scope
+          type: string
+          example: Phenotype and genotype data from the 2026 yield trial.
+        license:
+          description: License applied to the asset
+          type: string
+          example: CC-BY-4.0
+        accessPolicy:
+          description: Access policy for the asset
+          type: string
+          enum:
+          - open
+          - restricted
+          - embargoed
+          example: open
+        embargoUntil:
+          description: Embargo end date (ISO-8601), when applicable
+          type: string
+          format: date
+          example: '2027-01-01'
+        persistentIdentifier:
+          description: Persistent identifier (e.g. DOI) when minted
+          type: string
+          example: 10.5281/zenodo.1234567
+        payloadReferences:
+          description: References to payload bytes or files
+          type: array
+          items:
+            type: string
+          example: [https://institute.org/data/wheat-2026.zip]
+        status:
+          description: Lifecycle state of the asset record
+          type: string
+          enum:
+          - draft
+          - published
+          - withdrawn
+          - superseded
+          example: draft
+        supersedes:
+          description: researchAssetDbId of the asset this one replaces
+          type: string
+          example: institute-a:research-asset:ra-2026-000
+        provenance:
+          description: Evidence and method provenance for the asset
+          $ref: '#/components/schemas/ProvenanceEnvelope'

@@ -135,6 +135,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/genebank-storage` | GET | `genxListStorageLocations` | List genebank storage locations | Does not create or change a location; not a BrAPI SeedLot. |
 | `/genx/v1/genebank-storage` | POST | `genxRegisterStorageLocation` | Register one genebank storage location | Append-only record; replay/conflict semantics. |
 | `/genx/v1/genebank-storage/{storageLocationDbId}` | GET | `genxGetStorageLocation` | Retrieve one genebank storage location | Does not treat a decommissioned location as active. |
+| `/genx/v1/research-assets` | GET | `genxListResearchAssets` | List research asset records | Does not create or change an asset; not a BrAPI data resource. |
+| `/genx/v1/research-assets` | POST | `genxRegisterResearchAsset` | Register one research asset | Append-only record; replay/conflict semantics; does not mint a persistent identifier. |
+| `/genx/v1/research-assets/{researchAssetDbId}` | GET | `genxGetResearchAsset` | Retrieve one research asset record | Does not treat a withdrawn asset as current. |
 
 `ProvenanceEnvelope` is embedded in result/record schemas and has no standalone route in this proposal.
 
