@@ -192,6 +192,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/vcf-imports` | GET | `genxListVcfImports` | List VCF import records | Does not create or change an import; not a BrAPI VariantSet. |
 | `/genx/v1/vcf-imports` | POST | `genxRecordVcfImport` | Record one VCF import | Append-only record; replay/conflict semantics. |
 | `/genx/v1/vcf-imports/{vcfImportDbId}` | GET | `genxGetVcfImport` | Retrieve one VCF import record | Does not treat a superseded import as current. |
+| `/genx/v1/analysis-results` | GET | `genxListAnalysisResults` | List analysis result records | Does not create or change a result; not a BrAPI data resource. |
+| `/genx/v1/analysis-results` | POST | `genxRecordAnalysisResult` | Record one analysis result | Append-only record; replay/conflict semantics. |
+| `/genx/v1/analysis-results/{analysisResultDbId}` | GET | `genxGetAnalysisResult` | Retrieve one analysis result record | Does not treat a superseded result as current. |
 | `/genx/v1/bulk-captures` | GET | `genxListBulkCaptures` | List bulk captures | Does not create or change a capture; not a BrAPI Observation. |
 | `/genx/v1/bulk-captures` | POST | `genxRecordBulkCapture` | Record one bulk capture | Append-only record; replay/conflict semantics. |
 | `/genx/v1/bulk-captures/{bulkCaptureDbId}` | GET | `genxGetBulkCapture` | Retrieve one bulk capture | Does not treat a superseded capture as current. |

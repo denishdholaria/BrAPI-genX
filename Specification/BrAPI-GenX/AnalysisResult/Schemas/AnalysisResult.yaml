@@ -1,0 +1,57 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    AnalysisResult:
+      type: object
+      description: |-
+        One immutable analysis result record. A published
+        (analysisResultDbId) record never mutates in place; corrections
+        are recorded as additional results linked by supersedes.
+      required:
+      - analysisResultDbId
+      - analysisMethodDbId
+      - status
+      properties:
+        analysisResultDbId:
+          description: Namespaced analysis-result identity `{authority}:analysis-result:{localId}`
+          type: string
+          example: institute-a:analysis-result:ar-2026-001
+        analysisMethodDbId:
+          description: GenX AnalysisMethod used
+          type: string
+          example: institute-a:analysis-method:gwas-fastlmm
+        jobDbId:
+          description: GenX Job that produced this result
+          type: string
+          example: institute-a:job:analysis-7
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        resultData:
+          description: Result payload (method-defined structure)
+          type: object
+          example: {significantMarkers: 12, topPValue: 0.000001}
+        uncertainty:
+          description: Uncertainty or confidence information
+          type: object
+          example: {standardError: 0.05}
+        status:
+          description: Lifecycle state of the result record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: analysisResultDbId of the result this one replaces
+          type: string
+          example: institute-a:analysis-result:ar-2026-000
+        provenance:
+          description: Evidence and method provenance for the result
+          $ref: '#/components/schemas/ProvenanceEnvelope'
