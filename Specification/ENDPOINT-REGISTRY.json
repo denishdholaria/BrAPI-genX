@@ -34302,12 +34302,249 @@
         "brapi-genx.genx.v1.stability-analyses.list",
         "brapi-genx.genx.v1.stability-analyses.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Heritability",
+      "brapiTag": "Heritability",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Heritability/Heritability_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.heritability-estimates.list",
+      "method": "GET",
+      "path": "/heritability-estimates",
+      "operationIdInSource": "genxListHeritabilityEstimates",
+      "recommendedOperationId": "genxListHeritabilityEstimates",
+      "operationName": "List heritability estimates",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List heritability estimates, optionally filtered by method, study, or status.",
+      "sourceDescription": "Get a paged list of heritability estimates across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover heritability estimates for a study or method.",
+        "Support scientific reproducibility and auditing."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing an estimate (use the POST endpoint).",
+        "Assuming an estimate is a BrAPI data resource.",
+        "Treating the list as a complete analysis repository."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "analysisMethodDbId",
+        "studyDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordHeritability",
+        "genxGetHeritabilityEstimate",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-050"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.heritability-estimates.record",
+        "brapi-genx.genx.v1.heritability-estimates.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Heritability",
+      "brapiTag": "Heritability",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Heritability/Heritability_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.heritability-estimates.record",
+      "method": "POST",
+      "path": "/heritability-estimates",
+      "operationIdInSource": "genxRecordHeritability",
+      "recommendedOperationId": "genxRecordHeritability",
+      "operationName": "Record one heritability estimate",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record one heritability estimate with value and provenance.",
+      "sourceDescription": "Unknown heritabilityEstimateDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish heritability estimate metadata.",
+        "Retry an identical estimate safely using the same heritabilityEstimateDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing estimate; corrections require a new record that supersedes.",
+        "Assuming the estimate is a BrAPI data resource.",
+        "Treating the estimate as scientific validation or approval."
+      ],
+      "sideEffects": "Creates a heritability estimate when accepted.",
+      "idempotency": "Same heritabilityEstimateDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "HeritabilityEstimateNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListHeritabilityEstimates",
+        "genxGetHeritabilityEstimate",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-050"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.heritability-estimates.list",
+        "brapi-genx.genx.v1.heritability-estimates.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Heritability",
+      "brapiTag": "Heritability",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Heritability/Heritability_HeritabilityEstimateDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.heritability-estimates.get",
+      "method": "GET",
+      "path": "/heritability-estimates/{heritabilityEstimateDbId}",
+      "operationIdInSource": "genxGetHeritabilityEstimate",
+      "recommendedOperationId": "genxGetHeritabilityEstimate",
+      "operationName": "Get one heritability estimate",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one heritability estimate.",
+      "sourceDescription": "Returns the recorded estimate, or 404.",
+      "canBeUsedFor": [
+        "Inspect heritability value and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the estimate is a BrAPI data resource.",
+        "Treating a superseded estimate as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "heritabilityEstimateDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordHeritability",
+        "genxListHeritabilityEstimates",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-050"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.heritability-estimates.list",
+        "brapi-genx.genx.v1.heritability-estimates.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 147,
+    "genxEntriesAdded": 150,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -34385,7 +34622,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 348,
+    "totalEntries": 351,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

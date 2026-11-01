@@ -1,0 +1,57 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    HeritabilityEstimate:
+      type: object
+      description: |-
+        One immutable heritability estimate record. A published
+        (heritabilityEstimateDbId) record never mutates in place; corrections
+        are recorded as additional estimates linked by supersedes.
+      required:
+      - heritabilityEstimateDbId
+      - analysisMethodDbId
+      - status
+      properties:
+        heritabilityEstimateDbId:
+          description: Namespaced heritability-estimate identity `{authority}:heritability-estimate:{localId}`
+          type: string
+          example: institute-a:heritability-estimate:he-2026-001
+        analysisMethodDbId:
+          description: GenX AnalysisMethod used
+          type: string
+          example: institute-a:analysis-method:reml
+        jobDbId:
+          description: GenX Job that produced this estimate
+          type: string
+          example: institute-a:job:analysis-7
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        traitDbId:
+          description: BrAPI Trait or GenX VariableTerm identifier
+          type: string
+          example: institute-a:trait:grain-yield
+        heritabilityValue:
+          description: Estimated heritability value
+          type: number
+          example: 0.42
+        status:
+          description: Lifecycle state of the estimate record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: heritabilityEstimateDbId of the estimate this one replaces
+          type: string
+          example: institute-a:heritability-estimate:he-2026-000
+        provenance:
+          description: Evidence and method provenance for the estimate
+          $ref: '#/components/schemas/ProvenanceEnvelope'

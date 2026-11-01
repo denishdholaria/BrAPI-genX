@@ -1,0 +1,65 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /heritability-estimates/{heritabilityEstimateDbId}:
+    get:
+      operationId: genxGetHeritabilityEstimate
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.heritability-estimates.get"
+        classification:
+          primaryDomain: "D7"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve one heritability estimate."
+        canBeUsedFor:
+          - "Inspect heritability value and provenance."
+        mustNotBeUsedFor:
+          - "Assuming the estimate is a BrAPI data resource."
+          - "Treating a superseded estimate as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordHeritability"
+          - "genxListHeritabilityEstimates"
+          - "genxRegisterAnalysisMethod"
+        decisions: ["RFC-050"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one heritability estimate
+      description: Returns the recorded estimate, or 404.
+      parameters:
+      - name: heritabilityEstimateDbId
+        description: Namespaced heritability-estimate identity `{authority}:heritability-estimate:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/HeritabilityEstimate'
+                required:
+                - metadata
+                - result
+                title: HeritabilityEstimateResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - Heritability
