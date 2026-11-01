@@ -1,0 +1,145 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /genetic-gains:
+    get:
+      operationId: genxListGeneticGains
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.genetic-gains.list"
+        classification:
+          primaryDomain: "D7"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List genetic gain records, optionally filtered by program, trait, or period."
+        canBeUsedFor:
+          - "Discover genetic gain estimates for a breeding program."
+          - "Support breeding progress reporting."
+        mustNotBeUsedFor:
+          - "Creating or changing a record (use the POST endpoint)."
+          - "Assuming a record is a BrAPI Program."
+          - "Treating the list as a complete breeding program record."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordGeneticGain"
+          - "genxGetGeneticGain"
+        decisions: ["RFC-046"]
+        proposalStatus: "draft-non-normative"
+      summary: List genetic gains
+      description: Get a paged list of genetic gain records across authorities. Filters combine with AND.
+      parameters:
+      - name: programDbId
+        description: Filter by BrAPI Program (breeding program)
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: traitDbId
+        description: Filter by BrAPI Trait or GenX VariableTerm
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: period
+        description: Filter by reference period
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/GeneticGainRecordListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - GeneticGain
+    post:
+      operationId: genxRecordGeneticGain
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.genetic-gains.record"
+        classification:
+          primaryDomain: "D7"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Record one genetic gain estimate with value and provenance."
+        canBeUsedFor:
+          - "Publish genetic gain estimates."
+          - "Retry an identical record safely using the same geneticGainRecordDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing record; corrections require a new record that supersedes."
+          - "Assuming the record is a BrAPI Program."
+          - "Treating the record as scientific validation or approval."
+        sideEffects: "Creates a genetic gain record when accepted."
+        idempotency: "Same geneticGainRecordDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListGeneticGains"
+          - "genxGetGeneticGain"
+        decisions: ["RFC-046"]
+        proposalStatus: "draft-non-normative"
+      summary: Record one genetic gain
+      description: |-
+        Unknown geneticGainRecordDbId creates; same id with an identical
+        body replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GeneticGainRecordNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/GeneticGainRecord'
+                required:
+                - metadata
+                - result
+                title: GeneticGainRecordResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - GeneticGain
+components:
+  responses:
+    GeneticGainRecordListResponse:
+      content:
+        application/json:
+          schema:
+            title: GeneticGainRecordListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GeneticGainRecord'
+            required:
+            - metadata
+            - result
+      description: OK

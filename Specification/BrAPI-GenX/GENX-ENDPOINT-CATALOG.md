@@ -21,6 +21,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | FAIR | 3 | proposed, non-normative |
 | FertilizerApplication | 3 | proposed, non-normative |
 | GenebankStorage | 3 | proposed, non-normative |
+| GeneticGain | 3 | proposed, non-normative |
 | GenomicDatasets | 3 | proposed, non-normative |
 | Genomics | 3 | proposed, non-normative |
 | HarvestRecords | 3 | proposed, non-normative |
@@ -1631,6 +1632,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.genebank-storage.list, brapi-genx.genx.v1.genebank-storage.register
 - **Relevant RFC / decision references:** RFC-015
 - **Contract source:** [`Specification/BrAPI-GenX/GenebankStorage/GenebankStorage_StorageLocationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/GenebankStorage/GenebankStorage_StorageLocationDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GeneticGain — 3 operations
+
+### GET `/genx/v1/genetic-gains`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.genetic-gains.list`
+- **BrAPI-GenX operation identity:** `genxListGeneticGains` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListGeneticGains`
+- **GenX source module:** `GeneticGain`
+- **Source tag:** GeneticGain
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List genetic gain records, optionally filtered by program, trait, or period.
+**Source contract description:**
+> Get a paged list of genetic gain records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover genetic gain estimates for a breeding program.
+- Support breeding progress reporting.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a record (use the POST endpoint).
+- Assuming a record is a BrAPI Program.
+- Treating the list as a complete breeding program record.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** programDbId, traitDbId, period, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordGeneticGain, genxGetGeneticGain
+- **Related catalogue IDs:** brapi-genx.genx.v1.genetic-gains.record, brapi-genx.genx.v1.genetic-gains.get
+- **Relevant RFC / decision references:** RFC-046
+- **Contract source:** [`Specification/BrAPI-GenX/GeneticGain/GeneticGain_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/GeneticGain/GeneticGain_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/genetic-gains`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.genetic-gains.record`
+- **BrAPI-GenX operation identity:** `genxRecordGeneticGain` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordGeneticGain`
+- **GenX source module:** `GeneticGain`
+- **Source tag:** GeneticGain
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one genetic gain estimate with value and provenance.
+**Source contract description:**
+> Unknown geneticGainRecordDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish genetic gain estimates.
+- Retry an identical record safely using the same geneticGainRecordDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming the record is a BrAPI Program.
+- Treating the record as scientific validation or approval.
+- **Side effects:** Creates a genetic gain record when accepted.
+- **Retry / idempotency:** Same geneticGainRecordDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** GeneticGainRecordNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListGeneticGains, genxGetGeneticGain
+- **Related catalogue IDs:** brapi-genx.genx.v1.genetic-gains.list, brapi-genx.genx.v1.genetic-gains.get
+- **Relevant RFC / decision references:** RFC-046
+- **Contract source:** [`Specification/BrAPI-GenX/GeneticGain/GeneticGain_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/GeneticGain/GeneticGain_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/genetic-gains/{geneticGainRecordDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.genetic-gains.get`
+- **BrAPI-GenX operation identity:** `genxGetGeneticGain` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetGeneticGain`
+- **GenX source module:** `GeneticGain`
+- **Source tag:** GeneticGain
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one genetic gain record.
+**Source contract description:**
+> Returns the recorded gain, or 404.
+**Can be used for:**
+- Inspect gain value, method, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the record is a BrAPI Program.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** geneticGainRecordDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordGeneticGain, genxListGeneticGains
+- **Related catalogue IDs:** brapi-genx.genx.v1.genetic-gains.list, brapi-genx.genx.v1.genetic-gains.record
+- **Relevant RFC / decision references:** RFC-046
+- **Contract source:** [`Specification/BrAPI-GenX/GeneticGain/GeneticGain_GeneticGainRecordDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/GeneticGain/GeneticGain_GeneticGainRecordDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
