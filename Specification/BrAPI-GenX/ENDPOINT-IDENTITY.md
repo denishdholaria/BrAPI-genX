@@ -135,6 +135,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/irrigation-operations` | GET | `genxListIrrigations` | List irrigation events | Does not create or change an event; not a BrAPI Location. |
 | `/genx/v1/irrigation-operations` | POST | `genxRecordIrrigation` | Record one irrigation event | Append-only record; replay/conflict semantics. |
 | `/genx/v1/irrigation-operations/{irrigationEventDbId}` | GET | `genxGetIrrigation` | Retrieve one irrigation event | Does not treat a superseded event as current. |
+| `/genx/v1/repeated-measurements` | GET | `genxListMeasurementSeries` | List repeated measurement series | Does not create or change a series; not a BrAPI Observation. |
+| `/genx/v1/repeated-measurements` | POST | `genxRecordMeasurementSeries` | Record one repeated measurement series | Append-only record; replay/conflict semantics. |
+| `/genx/v1/repeated-measurements/{measurementSeriesDbId}` | GET | `genxGetMeasurementSeries` | Retrieve one repeated measurement series | Does not treat a superseded series as current. |
 | `/genx/v1/analysis-methods` | GET | `genxListAnalysisMethods` | List registered analysis method versions | Does not execute an analysis; not a BrAPI v2.1 resource. |
 | `/genx/v1/analysis-methods` | POST | `genxRegisterAnalysisMethod` | Register one analysis method version | Does not execute or validate the method; replay/conflict semantics. |
 | `/genx/v1/analysis-methods/{analysisMethodDbId}` | GET | `genxGetAnalysisMethod` | Retrieve one registered analysis method version | Does not execute an analysis; revoked methods deny new jobs. |

@@ -1,0 +1,145 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /repeated-measurements:
+    get:
+      operationId: genxListMeasurementSeries
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.repeated-measurements.list"
+        classification:
+          primaryDomain: "D4"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C7", "C9"]
+        purpose: "List repeated measurement series, optionally filtered by study, observation unit, or variable."
+        canBeUsedFor:
+          - "Discover time-series measurements for an observation unit."
+          - "Support phenotyping and monitoring workflows."
+        mustNotBeUsedFor:
+          - "Creating or changing a series (use the POST endpoint)."
+          - "Assuming a series is a BrAPI Observation."
+          - "Treating the list as a complete phenotype dataset."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordMeasurementSeries"
+          - "genxGetMeasurementSeries"
+        decisions: ["RFC-025"]
+        proposalStatus: "draft-non-normative"
+      summary: List measurement series
+      description: Get a paged list of measurement series across authorities. Filters combine with AND.
+      parameters:
+      - name: studyDbId
+        description: Filter by BrAPI Study / trial context
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: observationUnitDbId
+        description: Filter by BrAPI Observation Unit
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: variableDbId
+        description: Filter by BrAPI Observation Variable or GenX VariableTerm
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/MeasurementSeriesListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - RepeatedMeasurement
+    post:
+      operationId: genxRecordMeasurementSeries
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.repeated-measurements.record"
+        classification:
+          primaryDomain: "D4"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C7", "C9"]
+        purpose: "Record a repeated measurement series with time-ordered values and quality flags."
+        canBeUsedFor:
+          - "Record time-series measurements for an observation unit."
+          - "Retry an identical series safely using the same measurementSeriesDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing series; corrections require a new record that supersedes."
+          - "Assuming the series is a BrAPI Observation."
+          - "Treating the series as a complete phenotype dataset."
+        sideEffects: "Creates a measurement series when accepted."
+        idempotency: "Same measurementSeriesDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListMeasurementSeries"
+          - "genxGetMeasurementSeries"
+        decisions: ["RFC-025"]
+        proposalStatus: "draft-non-normative"
+      summary: Record one measurement series
+      description: |-
+        Unknown measurementSeriesDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MeasurementSeriesNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/MeasurementSeries'
+                required:
+                - metadata
+                - result
+                title: MeasurementSeriesResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - RepeatedMeasurement
+components:
+  responses:
+    MeasurementSeriesListResponse:
+      content:
+        application/json:
+          schema:
+            title: MeasurementSeriesListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MeasurementSeries'
+            required:
+            - metadata
+            - result
+      description: OK

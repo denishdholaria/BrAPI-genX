@@ -28432,12 +28432,249 @@
         "brapi-genx.genx.v1.irrigation-operations.list",
         "brapi-genx.genx.v1.irrigation-operations.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "RepeatedMeasurement",
+      "brapiTag": "RepeatedMeasurement",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/RepeatedMeasurement/RepeatedMeasurement_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.repeated-measurements.list",
+      "method": "GET",
+      "path": "/repeated-measurements",
+      "operationIdInSource": "genxListMeasurementSeries",
+      "recommendedOperationId": "genxListMeasurementSeries",
+      "operationName": "List measurement series",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C7",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List repeated measurement series, optionally filtered by study, observation unit, or variable.",
+      "sourceDescription": "Get a paged list of measurement series across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover time-series measurements for an observation unit.",
+        "Support phenotyping and monitoring workflows."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a series (use the POST endpoint).",
+        "Assuming a series is a BrAPI Observation.",
+        "Treating the list as a complete phenotype dataset."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "studyDbId",
+        "observationUnitDbId",
+        "variableDbId",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordMeasurementSeries",
+        "genxGetMeasurementSeries"
+      ],
+      "decisionReferences": [
+        "RFC-025"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.repeated-measurements.record",
+        "brapi-genx.genx.v1.repeated-measurements.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "RepeatedMeasurement",
+      "brapiTag": "RepeatedMeasurement",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/RepeatedMeasurement/RepeatedMeasurement_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.repeated-measurements.record",
+      "method": "POST",
+      "path": "/repeated-measurements",
+      "operationIdInSource": "genxRecordMeasurementSeries",
+      "recommendedOperationId": "genxRecordMeasurementSeries",
+      "operationName": "Record one measurement series",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C7",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record a repeated measurement series with time-ordered values and quality flags.",
+      "sourceDescription": "Unknown measurementSeriesDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Record time-series measurements for an observation unit.",
+        "Retry an identical series safely using the same measurementSeriesDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing series; corrections require a new record that supersedes.",
+        "Assuming the series is a BrAPI Observation.",
+        "Treating the series as a complete phenotype dataset."
+      ],
+      "sideEffects": "Creates a measurement series when accepted.",
+      "idempotency": "Same measurementSeriesDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "MeasurementSeriesNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListMeasurementSeries",
+        "genxGetMeasurementSeries"
+      ],
+      "decisionReferences": [
+        "RFC-025"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.repeated-measurements.list",
+        "brapi-genx.genx.v1.repeated-measurements.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "RepeatedMeasurement",
+      "brapiTag": "RepeatedMeasurement",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/RepeatedMeasurement/RepeatedMeasurement_MeasurementSeriesDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.repeated-measurements.get",
+      "method": "GET",
+      "path": "/repeated-measurements/{measurementSeriesDbId}",
+      "operationIdInSource": "genxGetMeasurementSeries",
+      "recommendedOperationId": "genxGetMeasurementSeries",
+      "operationName": "Get one measurement series",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C7",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one repeated measurement series.",
+      "sourceDescription": "Returns the recorded series, or 404.",
+      "canBeUsedFor": [
+        "Inspect time-ordered measurements and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the series is a BrAPI Observation.",
+        "Treating a superseded series as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "measurementSeriesDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordMeasurementSeries",
+        "genxListMeasurementSeries"
+      ],
+      "decisionReferences": [
+        "RFC-025"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.repeated-measurements.list",
+        "brapi-genx.genx.v1.repeated-measurements.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 72,
+    "genxEntriesAdded": 75,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -28515,7 +28752,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 273,
+    "totalEntries": 276,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

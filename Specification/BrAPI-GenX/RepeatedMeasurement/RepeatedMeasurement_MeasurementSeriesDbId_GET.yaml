@@ -1,0 +1,64 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /repeated-measurements/{measurementSeriesDbId}:
+    get:
+      operationId: genxGetMeasurementSeries
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.repeated-measurements.get"
+        classification:
+          primaryDomain: "D4"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C7", "C9"]
+        purpose: "Retrieve one repeated measurement series."
+        canBeUsedFor:
+          - "Inspect time-ordered measurements and provenance."
+        mustNotBeUsedFor:
+          - "Assuming the series is a BrAPI Observation."
+          - "Treating a superseded series as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordMeasurementSeries"
+          - "genxListMeasurementSeries"
+        decisions: ["RFC-025"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one measurement series
+      description: Returns the recorded series, or 404.
+      parameters:
+      - name: measurementSeriesDbId
+        description: Namespaced measurement-series identity `{authority}:measurement-series:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/MeasurementSeries'
+                required:
+                - metadata
+                - result
+                title: MeasurementSeriesResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - RepeatedMeasurement

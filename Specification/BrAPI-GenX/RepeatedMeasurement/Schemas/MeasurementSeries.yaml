@@ -1,0 +1,82 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    MeasurementSeries:
+      type: object
+      description: |-
+        One immutable repeated-measurement series record. A published
+        (measurementSeriesDbId) record never mutates in place; corrections
+        are recorded as additional series linked by supersedes.
+      required:
+      - measurementSeriesDbId
+      - studyDbId
+      - observationUnitDbId
+      - variableDbId
+      - measurements
+      - status
+      properties:
+        measurementSeriesDbId:
+          description: Namespaced measurement-series identity `{authority}:measurement-series:{localId}`
+          type: string
+          example: institute-a:measurement-series:ms-2026-001
+        studyDbId:
+          description: BrAPI Study / trial context
+          type: string
+          example: institute-a:study:yield-trial-2026
+        observationUnitDbId:
+          description: BrAPI Observation Unit measured
+          type: string
+          example: institute-a:observationunit:ou-42
+        variableDbId:
+          description: BrAPI Observation Variable or GenX VariableTerm identifier
+          type: string
+          example: institute-a:variable:grain-yield
+        measurements:
+          description: Time-ordered measurements
+          type: array
+          items:
+            type: object
+            required:
+            - timestamp
+            - value
+            properties:
+              timestamp:
+                description: Measurement timestamp (ISO-8601)
+                type: string
+                format: date-time
+                example: '2026-10-24T08:00:00Z'
+              value:
+                description: Measured value
+                type: number
+                example: 4.2
+              unit:
+                description: Unit of measure
+                type: string
+                example: t_per_hectare
+              qualityFlag:
+                description: Quality status of the measurement
+                type: string
+                enum:
+                - valid
+                - suspect
+                - invalid
+                - missing
+                example: valid
+        status:
+          description: Lifecycle state of the series record
+          type: string
+          enum:
+          - active
+          - superseded
+          example: active
+        supersedes:
+          description: measurementSeriesDbId of the series this one replaces
+          type: string
+          example: institute-a:measurement-series:ms-2026-000
+        provenance:
+          description: Evidence and method provenance for the series
+          $ref: '#/components/schemas/ProvenanceEnvelope'
