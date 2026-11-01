@@ -31,6 +31,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | ImageMetadata | 3 | proposed, non-normative |
 | IrrigationOperation | 3 | proposed, non-normative |
 | Jobs | 4 | proposed, non-normative |
+| Kinship | 3 | proposed, non-normative |
 | LotLedger | 2 | proposed, non-normative |
 | MeasurementMethods | 3 | proposed, non-normative |
 | MixedModel | 3 | proposed, non-normative |
@@ -2729,6 +2730,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.brapi-v2-1.core.get.search.lists.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.locations.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.people.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.programs.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.studies.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.trials.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.post.search.lists, brapi-genx.brapi-v2-1.core.post.search.locations, brapi-genx.brapi-v2-1.core.post.search.people, brapi-genx.brapi-v2-1.core.post.search.programs, brapi-genx.brapi-v2-1.core.post.search.studies, brapi-genx.brapi-v2-1.core.post.search.trials, brapi-genx.brapi-v2-1.genotyping.get.search.allelematrix.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.calls.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.callsets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.markerpositions.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.plates.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.references.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.referencesets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.samples.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.variants.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.variantsets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.post.search.allelematrix, brapi-genx.brapi-v2-1.genotyping.post.search.calls, brapi-genx.brapi-v2-1.genotyping.post.search.callsets, brapi-genx.brapi-v2-1.genotyping.post.search.markerpositions, brapi-genx.brapi-v2-1.genotyping.post.search.plates, brapi-genx.brapi-v2-1.genotyping.post.search.references, brapi-genx.brapi-v2-1.genotyping.post.search.referencesets, brapi-genx.brapi-v2-1.genotyping.post.search.samples, brapi-genx.brapi-v2-1.genotyping.post.search.variants, brapi-genx.brapi-v2-1.genotyping.post.search.variantsets, brapi-genx.brapi-v2-1.germplasm.get.search.attributes.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.attributevalues.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.germplasm.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.pedigree.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.post.search.attributes, brapi-genx.brapi-v2-1.germplasm.post.search.attributevalues, brapi-genx.brapi-v2-1.germplasm.post.search.germplasm, brapi-genx.brapi-v2-1.germplasm.post.search.pedigree, brapi-genx.brapi-v2-1.phenotyping.get.search.images.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.observations.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.observationunits.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.variables.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.post.search.images, brapi-genx.brapi-v2-1.phenotyping.post.search.observations, brapi-genx.brapi-v2-1.phenotyping.post.search.observationunits, brapi-genx.brapi-v2-1.phenotyping.post.search.variables, brapi-genx.genx.v1.jobs.list, brapi-genx.genx.v1.jobs.request-cancellation, brapi-genx.genx.v1.jobs.submit, brapi-genx.genx.v1.models.get-version, brapi-genx.genx.v1.models.list, brapi-genx.genx.v1.models.register-version
 - **Relevant RFC / decision references:** RFC-001
 - **Contract source:** [`Specification/BrAPI-GenX/Jobs/Jobs_JobDbId_GET_DELETE.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Jobs/Jobs_JobDbId_GET_DELETE.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### Kinship — 3 operations
+
+### GET `/genx/v1/kinship-matrices`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.kinship-matrices.list`
+- **BrAPI-GenX operation identity:** `genxListKinshipMatrices` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListKinshipMatrices`
+- **GenX source module:** `Kinship`
+- **Source tag:** Kinship
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List kinship matrix records, optionally filtered by method, study, or status.
+**Source contract description:**
+> Get a paged list of kinship matrices across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover kinship matrices for a study or method.
+- Support genomic analysis and auditing.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a matrix (use the POST endpoint).
+- Assuming a matrix is a BrAPI data resource.
+- Treating the list as a complete analysis repository.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** analysisMethodDbId, studyDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterKinshipMatrix, genxGetKinshipMatrix, genxRegisterAnalysisMethod
+- **Related catalogue IDs:** brapi-genx.genx.v1.kinship-matrices.register, brapi-genx.genx.v1.kinship-matrices.get
+- **Relevant RFC / decision references:** RFC-052
+- **Contract source:** [`Specification/BrAPI-GenX/Kinship/Kinship_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Kinship/Kinship_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/kinship-matrices`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.kinship-matrices.register`
+- **BrAPI-GenX operation identity:** `genxRegisterKinshipMatrix` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterKinshipMatrix`
+- **GenX source module:** `Kinship`
+- **Source tag:** Kinship
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register a kinship matrix with method, storage reference, and provenance.
+**Source contract description:**
+> Unknown kinshipMatrixDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish kinship matrix metadata.
+- Create a new version under an existing matrix identity.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing matrix; corrections require a new record that supersedes.
+- Assuming the matrix is a BrAPI data resource.
+- Treating the matrix as scientific validation or approval.
+- **Side effects:** Creates a kinship matrix identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same identity and identical body replays; conflicting content for the same identity is rejected.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** KinshipMatrixNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListKinshipMatrices, genxGetKinshipMatrix, genxRegisterAnalysisMethod
+- **Related catalogue IDs:** brapi-genx.genx.v1.kinship-matrices.list, brapi-genx.genx.v1.kinship-matrices.get
+- **Relevant RFC / decision references:** RFC-052
+- **Contract source:** [`Specification/BrAPI-GenX/Kinship/Kinship_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Kinship/Kinship_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/kinship-matrices/{kinshipMatrixDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.kinship-matrices.get`
+- **BrAPI-GenX operation identity:** `genxGetKinshipMatrix` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetKinshipMatrix`
+- **GenX source module:** `Kinship`
+- **Source tag:** Kinship
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C5 — Data exchange, publication and access, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one kinship matrix.
+**Source contract description:**
+> Returns the registered matrix, or 404.
+**Can be used for:**
+- Inspect matrix reference, digest, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the matrix is a BrAPI data resource.
+- Treating a superseded matrix as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** kinshipMatrixDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterKinshipMatrix, genxListKinshipMatrices, genxRegisterAnalysisMethod
+- **Related catalogue IDs:** brapi-genx.genx.v1.kinship-matrices.list, brapi-genx.genx.v1.kinship-matrices.register
+- **Relevant RFC / decision references:** RFC-052
+- **Contract source:** [`Specification/BrAPI-GenX/Kinship/Kinship_KinshipMatrixDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Kinship/Kinship_KinshipMatrixDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

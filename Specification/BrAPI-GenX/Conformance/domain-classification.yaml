@@ -250,6 +250,11 @@ modules:
     primary_class: "D7"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "GxE analysis result records; BrAPI v2.1 has no equivalent record."
+  - path: "Kinship/"
+    object: "KinshipMatrix"
+    primary_class: "D7"
+    cross_cutting: ["C1", "C2", "C3", "C5", "C6", "C9"]
+    rationale: "Kinship matrix records; BrAPI v2.1 has no equivalent record."
   - path: "BulkCapture/"
     object: "BulkCapture"
     primary_class: "D4"

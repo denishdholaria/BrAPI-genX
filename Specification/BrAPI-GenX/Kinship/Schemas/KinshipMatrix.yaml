@@ -1,0 +1,57 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    KinshipMatrix:
+      type: object
+      description: |-
+        One immutable kinship matrix record. A published
+        (kinshipMatrixDbId) record never mutates in place; corrections are
+        recorded as additional matrices linked by supersedes.
+      required:
+      - kinshipMatrixDbId
+      - analysisMethodDbId
+      - status
+      properties:
+        kinshipMatrixDbId:
+          description: Namespaced kinship-matrix identity `{authority}:kinship-matrix:{localId}`
+          type: string
+          example: institute-a:kinship-matrix:km-2026-001
+        analysisMethodDbId:
+          description: GenX AnalysisMethod used
+          type: string
+          example: institute-a:analysis-method:vanraden
+        jobDbId:
+          description: GenX Job that produced this matrix
+          type: string
+          example: institute-a:job:analysis-7
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        matrixRef:
+          description: Reference to the matrix bytes or storage location
+          type: string
+          example: https://institute.org/matrices/kinship-2026.bin
+        matrixDigest:
+          description: SHA-256 over the matrix bytes
+          type: string
+          example: 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
+        status:
+          description: Lifecycle state of the matrix record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: kinshipMatrixDbId of the matrix this one replaces
+          type: string
+          example: institute-a:kinship-matrix:km-2026-000
+        provenance:
+          description: Evidence and method provenance for the matrix
+          $ref: '#/components/schemas/ProvenanceEnvelope'

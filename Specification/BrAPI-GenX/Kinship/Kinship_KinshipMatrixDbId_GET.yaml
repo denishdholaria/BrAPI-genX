@@ -1,0 +1,65 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /kinship-matrices/{kinshipMatrixDbId}:
+    get:
+      operationId: genxGetKinshipMatrix
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.kinship-matrices.get"
+        classification:
+          primaryDomain: "D7"
+          crossCuttingCapabilities: ["C1", "C2", "C5", "C6", "C9"]
+        purpose: "Retrieve one kinship matrix."
+        canBeUsedFor:
+          - "Inspect matrix reference, digest, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming the matrix is a BrAPI data resource."
+          - "Treating a superseded matrix as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterKinshipMatrix"
+          - "genxListKinshipMatrices"
+          - "genxRegisterAnalysisMethod"
+        decisions: ["RFC-052"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one kinship matrix
+      description: Returns the registered matrix, or 404.
+      parameters:
+      - name: kinshipMatrixDbId
+        description: Namespaced kinship-matrix identity `{authority}:kinship-matrix:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/KinshipMatrix'
+                required:
+                - metadata
+                - result
+                title: KinshipMatrixResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - Kinship
