@@ -1,0 +1,68 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ProgenyRecordNewRequest:
+      type: object
+      description: |-
+        Request to record one progeny/family link. Unknown progenyRecordDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - progenyRecordDbId
+      - programDbId
+      - progenyDbId
+      - parentDbIds
+      properties:
+        progenyRecordDbId:
+          description: Namespaced progeny-record identity `{authority}:progeny-record:{localId}`
+          type: string
+          example: institute-a:progeny-record:pr-2026-001
+        programDbId:
+          description: BrAPI Program (breeding program)
+          type: string
+          example: institute-a:program:wheat-breeding
+        progenyDbId:
+          description: BrAPI Germplasm of the progeny
+          type: string
+          example: institute-a:germplasm:line-42
+        parentDbIds:
+          description: BrAPI Germplasm identifiers of the parents
+          type: array
+          items:
+            type: string
+          example: [institute-a:germplasm:parent-1, institute-a:germplasm:parent-2]
+        generation:
+          description: Generation (e.g. F1, F2, BC1)
+          type: string
+          example: F2
+        familyId:
+          description: Family or cross identifier
+          type: string
+          example: family-2026-042
+        crossDbId:
+          description: BrAPI Cross identifier, when applicable
+          type: string
+          example: institute-a:cross:cross-2026-042
+        notes:
+          description: Human-readable notes
+          type: string
+          example: Selected from F1 population.
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          default: active
+          example: active
+        supersedes:
+          description: progenyRecordDbId of the record this one replaces
+          type: string
+          example: institute-a:progeny-record:pr-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

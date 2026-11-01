@@ -19,6 +19,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | MeasurementMethods | 3 | proposed, non-normative |
 | Models | 3 | proposed, non-normative |
 | PhenotypeCapture | 3 | proposed, non-normative |
+| ProgenyRecords | 3 | proposed, non-normative |
 | ResearchAssets | 3 | proposed, non-normative |
 | SelectionDecisions | 3 | proposed, non-normative |
 | ServerInfoV3 | 1 | proposed, non-normative |
@@ -1409,6 +1410,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.phenotype-captures.list, brapi-genx.genx.v1.phenotype-captures.record
 - **Relevant RFC / decision references:** RFC-012
 - **Contract source:** [`Specification/BrAPI-GenX/PhenotypeCapture/PhenotypeCapture_PhenotypeCaptureDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PhenotypeCapture/PhenotypeCapture_PhenotypeCaptureDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### ProgenyRecords — 3 operations
+
+### GET `/genx/v1/progeny-records`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.progeny-records.list`
+- **BrAPI-GenX operation identity:** `genxListProgenyRecords` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListProgenyRecords`
+- **GenX source module:** `ProgenyRecords`
+- **Source tag:** ProgenyRecords
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List progeny/family records, optionally filtered by program, parent, or generation.
+**Source contract description:**
+> Get a paged list of progeny records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover progeny and family links within a breeding program.
+- Support pedigree and lineage auditing.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a record (use the POST endpoint).
+- Assuming a record is a BrAPI Pedigree or Cross.
+- Treating the list as a complete breeding program record.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** programDbId, parentDbId, generation, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordProgeny, genxGetProgenyRecord
+- **Related catalogue IDs:** brapi-genx.genx.v1.progeny-records.record, brapi-genx.genx.v1.progeny-records.get
+- **Relevant RFC / decision references:** RFC-019
+- **Contract source:** [`Specification/BrAPI-GenX/ProgenyRecords/ProgenyRecords_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ProgenyRecords/ProgenyRecords_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/progeny-records`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.progeny-records.record`
+- **BrAPI-GenX operation identity:** `genxRecordProgeny` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordProgeny`
+- **GenX source module:** `ProgenyRecords`
+- **Source tag:** ProgenyRecords
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one progeny/family link with parents, generation, and provenance.
+**Source contract description:**
+> Unknown progenyRecordDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Record a progeny/family link within a breeding program.
+- Retry an identical record safely using the same progenyRecordDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming the record is a BrAPI Pedigree or Cross.
+- Treating the record as a complete breeding program record.
+- **Side effects:** Creates a progeny record when accepted.
+- **Retry / idempotency:** Same progenyRecordDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** ProgenyRecordNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListProgenyRecords, genxGetProgenyRecord
+- **Related catalogue IDs:** brapi-genx.genx.v1.progeny-records.list, brapi-genx.genx.v1.progeny-records.get
+- **Relevant RFC / decision references:** RFC-019
+- **Contract source:** [`Specification/BrAPI-GenX/ProgenyRecords/ProgenyRecords_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ProgenyRecords/ProgenyRecords_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/progeny-records/{progenyRecordDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.progeny-records.get`
+- **BrAPI-GenX operation identity:** `genxGetProgenyRecord` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetProgenyRecord`
+- **GenX source module:** `ProgenyRecords`
+- **Source tag:** ProgenyRecords
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one recorded progeny/family link.
+**Source contract description:**
+> Returns the recorded progeny, or 404.
+**Can be used for:**
+- Inspect progeny, parents, generation, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the record is a BrAPI Pedigree or Cross.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** progenyRecordDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordProgeny, genxListProgenyRecords
+- **Related catalogue IDs:** brapi-genx.genx.v1.progeny-records.list, brapi-genx.genx.v1.progeny-records.register
+- **Relevant RFC / decision references:** RFC-019
+- **Contract source:** [`Specification/BrAPI-GenX/ProgenyRecords/ProgenyRecords_ProgenyRecordDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ProgenyRecords/ProgenyRecords_ProgenyRecordDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

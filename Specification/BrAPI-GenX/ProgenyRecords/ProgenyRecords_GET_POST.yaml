@@ -1,0 +1,145 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /progeny-records:
+    get:
+      operationId: genxListProgenyRecords
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.progeny-records.list"
+        classification:
+          primaryDomain: "D2"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List progeny/family records, optionally filtered by program, parent, or generation."
+        canBeUsedFor:
+          - "Discover progeny and family links within a breeding program."
+          - "Support pedigree and lineage auditing."
+        mustNotBeUsedFor:
+          - "Creating or changing a record (use the POST endpoint)."
+          - "Assuming a record is a BrAPI Pedigree or Cross."
+          - "Treating the list as a complete breeding program record."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordProgeny"
+          - "genxGetProgenyRecord"
+        decisions: ["RFC-019"]
+        proposalStatus: "draft-non-normative"
+      summary: List progeny records
+      description: Get a paged list of progeny records across authorities. Filters combine with AND.
+      parameters:
+      - name: programDbId
+        description: Filter by BrAPI Program (breeding program)
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: parentDbId
+        description: Filter by parent BrAPI Germplasm
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: generation
+        description: Filter by generation (e.g. F1, F2, BC1)
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/ProgenyRecordListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - ProgenyRecords
+    post:
+      operationId: genxRecordProgeny
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.progeny-records.record"
+        classification:
+          primaryDomain: "D2"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Record one progeny/family link with parents, generation, and provenance."
+        canBeUsedFor:
+          - "Record a progeny/family link within a breeding program."
+          - "Retry an identical record safely using the same progenyRecordDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing record; corrections require a new record that supersedes."
+          - "Assuming the record is a BrAPI Pedigree or Cross."
+          - "Treating the record as a complete breeding program record."
+        sideEffects: "Creates a progeny record when accepted."
+        idempotency: "Same progenyRecordDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListProgenyRecords"
+          - "genxGetProgenyRecord"
+        decisions: ["RFC-019"]
+        proposalStatus: "draft-non-normative"
+      summary: Record one progeny
+      description: |-
+        Unknown progenyRecordDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProgenyRecordNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/ProgenyRecord'
+                required:
+                - metadata
+                - result
+                title: ProgenyRecordResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - ProgenyRecords
+components:
+  responses:
+    ProgenyRecordListResponse:
+      content:
+        application/json:
+          schema:
+            title: ProgenyRecordListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ProgenyRecord'
+            required:
+            - metadata
+            - result
+      description: OK
