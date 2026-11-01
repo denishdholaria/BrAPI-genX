@@ -7,6 +7,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | Source module | Operation count | Status |
 |---|---:|---|
 | AnalysisMethods | 3 | proposed, non-normative |
+| BreedingPipeline | 3 | proposed, non-normative |
 | FAIR | 3 | proposed, non-normative |
 | GenomicDatasets | 3 | proposed, non-normative |
 | Genomics | 3 | proposed, non-normative |
@@ -126,6 +127,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.analysis-methods.list, brapi-genx.genx.v1.analysis-methods.register
 - **Relevant RFC / decision references:** RFC-009
 - **Contract source:** [`Specification/BrAPI-GenX/AnalysisMethods/AnalysisMethods_AnalysisMethodDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/AnalysisMethods/AnalysisMethods_AnalysisMethodDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### BreedingPipeline — 3 operations
+
+### GET `/genx/v1/breeding-pipelines`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.breeding-pipelines.list`
+- **BrAPI-GenX operation identity:** `genxListBreedingPipelines` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListBreedingPipelines`
+- **GenX source module:** `BreedingPipeline`
+- **Source tag:** BreedingPipeline
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List breeding pipeline definitions, optionally filtered by program or status.
+**Source contract description:**
+> Get a paged list of breeding pipelines across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover breeding pipelines and their stage gates.
+- Support breeding program planning and auditing.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a pipeline (use the POST endpoint).
+- Assuming a pipeline is a BrAPI Program or Study.
+- Treating the list as a complete breeding program record.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** programDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterBreedingPipeline, genxGetBreedingPipeline
+- **Related catalogue IDs:** brapi-genx.genx.v1.breeding-pipelines.register, brapi-genx.genx.v1.breeding-pipelines.get
+- **Relevant RFC / decision references:** RFC-014
+- **Contract source:** [`Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/breeding-pipelines`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.breeding-pipelines.register`
+- **BrAPI-GenX operation identity:** `genxRegisterBreedingPipeline` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterBreedingPipeline`
+- **GenX source module:** `BreedingPipeline`
+- **Source tag:** BreedingPipeline
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register a breeding pipeline with stages, entry/exit criteria, and provenance.
+**Source contract description:**
+> Unknown breedingPipelineDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish pipeline stage-gate definitions.
+- Create a new version under an existing pipeline identity.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing pipeline; corrections require a new record that supersedes.
+- Assuming the pipeline is a BrAPI Program or Study.
+- Treating the pipeline as an approved breeding plan.
+- **Side effects:** Creates a pipeline identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same pipeline identity and identical body replays; conflicting content for the same identity is rejected.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** BreedingPipelineNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListBreedingPipelines, genxGetBreedingPipeline
+- **Related catalogue IDs:** brapi-genx.genx.v1.breeding-pipelines.list, brapi-genx.genx.v1.breeding-pipelines.get
+- **Relevant RFC / decision references:** RFC-014
+- **Contract source:** [`Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/breeding-pipelines/{breedingPipelineDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.breeding-pipelines.get`
+- **BrAPI-GenX operation identity:** `genxGetBreedingPipeline` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetBreedingPipeline`
+- **GenX source module:** `BreedingPipeline`
+- **Source tag:** BreedingPipeline
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one registered breeding pipeline.
+**Source contract description:**
+> Returns the registered pipeline, or 404.
+**Can be used for:**
+- Inspect pipeline stages, criteria, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the pipeline is a BrAPI Program or Study.
+- Treating a superseded pipeline as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** breedingPipelineDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterBreedingPipeline, genxListBreedingPipelines
+- **Related catalogue IDs:** brapi-genx.genx.v1.breeding-pipelines.list, brapi-genx.genx.v1.breeding-pipelines.register
+- **Relevant RFC / decision references:** RFC-014
+- **Contract source:** [`Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_BreedingPipelineDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_BreedingPipelineDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

@@ -1,0 +1,80 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    BreedingPipeline:
+      type: object
+      description: |-
+        One immutable breeding pipeline definition. A published
+        (breedingPipelineDbId) record never mutates in place; corrections
+        are recorded as additional pipelines linked by supersedes.
+      required:
+      - breedingPipelineDbId
+      - programDbId
+      - pipelineName
+      - stages
+      - status
+      properties:
+        breedingPipelineDbId:
+          description: Namespaced breeding-pipeline identity `{authority}:breeding-pipeline:{localId}`
+          type: string
+          example: institute-a:breeding-pipeline:bp-wheat-2026
+        programDbId:
+          description: BrAPI Program (breeding program) this pipeline belongs to
+          type: string
+          example: institute-a:program:wheat-breeding
+        pipelineName:
+          description: Human readable pipeline name
+          type: string
+          example: Wheat yield improvement pipeline 2026
+        description:
+          description: What the pipeline produces and its scope
+          type: string
+          example: From F1 to released variety.
+        stages:
+          description: Ordered stage gates of the pipeline
+          type: array
+          items:
+            type: object
+            required:
+            - stageName
+            - stageOrder
+            properties:
+              stageName:
+                description: Name of the stage
+                type: string
+                example: F2 advancement
+              stageOrder:
+                description: Position of the stage in the pipeline
+                type: integer
+                example: 2
+              entryCriteria:
+                description: Conditions to enter the stage
+                type: string
+                example: Minimum 100 F1 plants available.
+              exitCriteria:
+                description: Conditions to exit the stage
+                type: string
+                example: Selected lines meet yield threshold.
+              selectionMethod:
+                description: Selection method applied at this stage
+                type: string
+                example: phenotypic
+        status:
+          description: Lifecycle state of the pipeline record
+          type: string
+          enum:
+          - active
+          - deprecated
+          - superseded
+          example: active
+        supersedes:
+          description: breedingPipelineDbId of the pipeline this one replaces
+          type: string
+          example: institute-a:breeding-pipeline:bp-wheat-2025
+        provenance:
+          description: Evidence and method provenance for the pipeline
+          $ref: '#/components/schemas/ProvenanceEnvelope'

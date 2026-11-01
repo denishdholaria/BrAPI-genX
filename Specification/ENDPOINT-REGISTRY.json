@@ -25858,12 +25858,245 @@
         "brapi-genx.genx.v1.genomic-datasets.list",
         "brapi-genx.genx.v1.genomic-datasets.register"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "BreedingPipeline",
+      "brapiTag": "BreedingPipeline",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.breeding-pipelines.list",
+      "method": "GET",
+      "path": "/breeding-pipelines",
+      "operationIdInSource": "genxListBreedingPipelines",
+      "recommendedOperationId": "genxListBreedingPipelines",
+      "operationName": "List breeding pipelines",
+      "classification": {
+        "primaryDomain": "D2",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List breeding pipeline definitions, optionally filtered by program or status.",
+      "sourceDescription": "Get a paged list of breeding pipelines across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover breeding pipelines and their stage gates.",
+        "Support breeding program planning and auditing."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a pipeline (use the POST endpoint).",
+        "Assuming a pipeline is a BrAPI Program or Study.",
+        "Treating the list as a complete breeding program record."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "programDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterBreedingPipeline",
+        "genxGetBreedingPipeline"
+      ],
+      "decisionReferences": [
+        "RFC-014"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.breeding-pipelines.register",
+        "brapi-genx.genx.v1.breeding-pipelines.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "BreedingPipeline",
+      "brapiTag": "BreedingPipeline",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.breeding-pipelines.register",
+      "method": "POST",
+      "path": "/breeding-pipelines",
+      "operationIdInSource": "genxRegisterBreedingPipeline",
+      "recommendedOperationId": "genxRegisterBreedingPipeline",
+      "operationName": "Register one breeding pipeline",
+      "classification": {
+        "primaryDomain": "D2",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register a breeding pipeline with stages, entry/exit criteria, and provenance.",
+      "sourceDescription": "Unknown breedingPipelineDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish pipeline stage-gate definitions.",
+        "Create a new version under an existing pipeline identity."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing pipeline; corrections require a new record that supersedes.",
+        "Assuming the pipeline is a BrAPI Program or Study.",
+        "Treating the pipeline as an approved breeding plan."
+      ],
+      "sideEffects": "Creates a pipeline identity or appends a new immutable version when accepted.",
+      "idempotency": "Same pipeline identity and identical body replays; conflicting content for the same identity is rejected.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "BreedingPipelineNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListBreedingPipelines",
+        "genxGetBreedingPipeline"
+      ],
+      "decisionReferences": [
+        "RFC-014"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.breeding-pipelines.list",
+        "brapi-genx.genx.v1.breeding-pipelines.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "BreedingPipeline",
+      "brapiTag": "BreedingPipeline",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_BreedingPipelineDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.breeding-pipelines.get",
+      "method": "GET",
+      "path": "/breeding-pipelines/{breedingPipelineDbId}",
+      "operationIdInSource": "genxGetBreedingPipeline",
+      "recommendedOperationId": "genxGetBreedingPipeline",
+      "operationName": "Get one breeding pipeline",
+      "classification": {
+        "primaryDomain": "D2",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one registered breeding pipeline.",
+      "sourceDescription": "Returns the registered pipeline, or 404.",
+      "canBeUsedFor": [
+        "Inspect pipeline stages, criteria, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the pipeline is a BrAPI Program or Study.",
+        "Treating a superseded pipeline as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "breedingPipelineDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterBreedingPipeline",
+        "genxListBreedingPipelines"
+      ],
+      "decisionReferences": [
+        "RFC-014"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.breeding-pipelines.list",
+        "brapi-genx.genx.v1.breeding-pipelines.register"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 39,
+    "genxEntriesAdded": 42,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -25941,7 +26174,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 240,
+    "totalEntries": 243,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
