@@ -14,10 +14,9 @@
 - **GenX-native API namespace:** `/genx/v1/`
 - **Git references and technical identifiers:** brapi-genx
 
-BrAPI-GenX is the single canonical project identity. Legacy names (BrAPI-Den,
-BrAPI_Den, brapi_den, BrAPI GenX, brapi-genx variants used as provisional names)
-are retired as active identities. Historical references may be preserved for
-attribution, migration, or compatibility.
+BrAPI-GenX is the single canonical project identity. Previous provisional and
+legacy names are retired as active identities. Historical references may be
+preserved for attribution, migration, or compatibility.
 
 ## 2. Naming conventions
 

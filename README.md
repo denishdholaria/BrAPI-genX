@@ -22,9 +22,8 @@ summary:
 - OpenAPI specification title: **BrAPI-GenX API**
 - GenX-native API namespace: **`/genx/v1/`**
 
-Legacy names (BrAPI-Den, BrAPI_Den, brapi_den, and provisional variants) are
-retired as active identities. Historical references may be preserved for
-attribution, migration, or compatibility.
+Legacy and provisional names are retired as active identities. Historical
+references may be preserved for attribution, migration, or compatibility.
 
 ## Relationship with official BrAPI
 
