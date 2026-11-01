@@ -1,0 +1,61 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    GwasResultNewRequest:
+      type: object
+      description: |-
+        Request to record one GWAS result. Unknown gwasResultDbId
+        creates; same id with an identical body replays the existing
+        record; same id with a different body is rejected with 409.
+      required:
+      - gwasResultDbId
+      - analysisMethodDbId
+      properties:
+        gwasResultDbId:
+          description: Namespaced GWAS-result identity `{authority}:gwas-result:{localId}`
+          type: string
+          example: institute-a:gwas-result:gr-2026-001
+        analysisMethodDbId:
+          description: GenX AnalysisMethod used
+          type: string
+          example: institute-a:analysis-method:gwas-fastlmm
+        jobDbId:
+          description: GenX Job that produced this result
+          type: string
+          example: institute-a:job:analysis-7
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        significantMarkers:
+          description: Number of significant markers
+          type: integer
+          example: 12
+        topPValue:
+          description: Top (smallest) p-value
+          type: number
+          example: 0.000001
+        resultData:
+          description: Result payload (method-defined structure)
+          type: object
+          example: {significantMarkers: 12, topPValue: 0.000001}
+        status:
+          description: Lifecycle state of the result record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: gwasResultDbId of the result this one replaces
+          type: string
+          example: institute-a:gwas-result:gr-2026-000
+        provenance:
+          description: Evidence and method provenance for the result
+          $ref: '#/components/schemas/ProvenanceEnvelope'

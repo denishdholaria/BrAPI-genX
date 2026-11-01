@@ -75,6 +75,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `PhenotypeAnnotation/` | `PhenotypeAnnotation` — phenotype annotation records (score, variable, provenance) | `GET /genx/v1/phenotype-annotations` (`genxListPhenotypeAnnotations`); `POST /genx/v1/phenotype-annotations` (`genxRecordPhenotypeAnnotation`); `GET /genx/v1/phenotype-annotations/{phenotypeAnnotationDbId}` (`genxGetPhenotypeAnnotation`) |
 | `ExtremeWeather/` | `ExtremeWeatherEvent` — extreme weather event records (type, severity, provenance) | `GET /genx/v1/extreme-weather-events` (`genxListExtremeWeatherEvents`); `POST /genx/v1/extreme-weather-events` (`genxRecordExtremeWeather`); `GET /genx/v1/extreme-weather-events/{extremeWeatherEventDbId}` (`genxGetExtremeWeatherEvent`) |
 | `VcfImport/` | `VcfImport` — VCF import records (source format, counts, provenance) | `GET /genx/v1/vcf-imports` (`genxListVcfImports`); `POST /genx/v1/vcf-imports` (`genxRecordVcfImport`); `GET /genx/v1/vcf-imports/{vcfImportDbId}` (`genxGetVcfImport`) |
+| `GwasResult/` | `GwasResult` — GWAS result records (significant markers, top p-value, provenance) | `GET /genx/v1/gwas-results` (`genxListGwasResults`); `POST /genx/v1/gwas-results` (`genxRecordGwasResult`); `GET /genx/v1/gwas-results/{gwasResultDbId}` (`genxGetGwasResult`) |
 | `AnalysisResult/` | `AnalysisResult` — analysis result records (method, job, payload, provenance) | `GET /genx/v1/analysis-results` (`genxListAnalysisResults`); `POST /genx/v1/analysis-results` (`genxRecordAnalysisResult`); `GET /genx/v1/analysis-results/{analysisResultDbId}` (`genxGetAnalysisResult`) |
 | `Conformance/` | Probes + fixtures + runner contract (`probes.yaml`) | Static tier runs now; live tier needs `--server` |
 
@@ -123,7 +124,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-043-Vcf-Import](./RFC-043-Vcf-Import.md),
 [RFC-044-Phenotype-Annotation](./RFC-044-Phenotype-Annotation.md),
 [RFC-045-Analysis-Result](./RFC-045-Analysis-Result.md),
-[RFC-046-Genetic-Gain](./RFC-046-Genetic-Gain.md).
+[RFC-046-Genetic-Gain](./RFC-046-Genetic-Gain.md),
+[RFC-047-Gwas-Result](./RFC-047-Gwas-Result.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

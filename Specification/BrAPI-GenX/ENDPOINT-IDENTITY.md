@@ -198,6 +198,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/genetic-gains` | GET | `genxListGeneticGains` | List genetic gain records | Does not create or change a record; not a BrAPI Program. |
 | `/genx/v1/genetic-gains` | POST | `genxRecordGeneticGain` | Record one genetic gain | Append-only record; replay/conflict semantics. |
 | `/genx/v1/genetic-gains/{geneticGainRecordDbId}` | GET | `genxGetGeneticGain` | Retrieve one genetic gain record | Does not treat a superseded record as current. |
+| `/genx/v1/gwas-results` | GET | `genxListGwasResults` | List GWAS result records | Does not create or change a result; not a BrAPI data resource. |
+| `/genx/v1/gwas-results` | POST | `genxRecordGwasResult` | Record one GWAS result | Append-only record; replay/conflict semantics. |
+| `/genx/v1/gwas-results/{gwasResultDbId}` | GET | `genxGetGwasResult` | Retrieve one GWAS result record | Does not treat a superseded result as current. |
 | `/genx/v1/bulk-captures` | GET | `genxListBulkCaptures` | List bulk captures | Does not create or change a capture; not a BrAPI Observation. |
 | `/genx/v1/bulk-captures` | POST | `genxRecordBulkCapture` | Record one bulk capture | Append-only record; replay/conflict semantics. |
 | `/genx/v1/bulk-captures/{bulkCaptureDbId}` | GET | `genxGetBulkCapture` | Retrieve one bulk capture | Does not treat a superseded capture as current. |
