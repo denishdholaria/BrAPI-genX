@@ -1,0 +1,58 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    StabilityAnalysisResultNewRequest:
+      type: object
+      description: |-
+        Request to record one stability analysis result. Unknown
+        stabilityAnalysisResultDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      required:
+      - stabilityAnalysisResultDbId
+      - analysisMethodDbId
+      properties:
+        stabilityAnalysisResultDbId:
+          description: Namespaced stability-analysis-result identity `{authority}:stability-analysis-result:{localId}`
+          type: string
+          example: institute-a:stability-analysis-result:sar-2026-001
+        analysisMethodDbId:
+          description: GenX AnalysisMethod used
+          type: string
+          example: institute-a:analysis-method:ammi
+        jobDbId:
+          description: GenX Job that produced this result
+          type: string
+          example: institute-a:job:analysis-7
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        traitDbId:
+          description: BrAPI Trait or GenX VariableTerm identifier
+          type: string
+          example: institute-a:trait:grain-yield
+        stabilityIndex:
+          description: Stability index value
+          type: number
+          example: 0.85
+        status:
+          description: Lifecycle state of the result record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: stabilityAnalysisResultDbId of the result this one replaces
+          type: string
+          example: institute-a:stability-analysis-result:sar-2026-000
+        provenance:
+          description: Evidence and method provenance for the result
+          $ref: '#/components/schemas/ProvenanceEnvelope'

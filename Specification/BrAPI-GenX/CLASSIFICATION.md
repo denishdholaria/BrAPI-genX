@@ -88,6 +88,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | GeneticGain / GeneticGainRecord | D7 | C1, C2, C3, C6, C9 | Genetic gain records; no BrAPI v2.1 equivalent |
 | GwasResult / GwasResult | D7 | C1, C2, C3, C6, C9 | GWAS result records; no BrAPI v2.1 equivalent |
 | MixedModel / MixedModelResult | D7 | C1, C2, C3, C6, C9 | Mixed model result records; no BrAPI v2.1 equivalent |
+| StabilityAnalysis / StabilityAnalysisResult | D7 | C1, C2, C3, C6, C9 | Stability analysis result records; no BrAPI v2.1 equivalent |
 | BulkCapture / BulkCapture | D4 | C1, C2, C3, C6, C9 | Bulk capture records; no BrAPI v2.1 equivalent |
 | AnalysisMethods / AnalysisMethod | D7 | C1, C2, C3, C6, C9 | Versioned analysis method registry; no BrAPI v2.1 equivalent; execution is via Jobs |
 | WeatherObservations / WeatherObservation | D5 | C1, C2, C3, C6, C7, C9 | Environmental/weather observation records; no BrAPI v2.1 equivalent; complementary to Telemetry |

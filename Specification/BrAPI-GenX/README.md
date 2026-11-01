@@ -72,6 +72,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `CandidateVarietyLifecycle/` | `CandidateVariety` — candidate variety lifecycle records (status, registration, provenance) | `GET /genx/v1/candidate-varieties` (`genxListCandidateVarieties`); `POST /genx/v1/candidate-varieties` (`genxRegisterCandidateVariety`); `GET /genx/v1/candidate-varieties/{candidateVarietyDbId}` (`genxGetCandidateVariety`) |
 | `Acquisition/` | `AcquisitionRecord` — acquisition records (source, method, provenance) | `GET /genx/v1/acquisitions` (`genxListAcquisitions`); `POST /genx/v1/acquisitions` (`genxRecordAcquisition`); `GET /genx/v1/acquisitions/{acquisitionRecordDbId}` (`genxGetAcquisition`) |
 | `GeneticGain/` | `GeneticGainRecord` — genetic gain records (value, trait, period, provenance) | `GET /genx/v1/genetic-gains` (`genxListGeneticGains`); `POST /genx/v1/genetic-gains` (`genxRecordGeneticGain`); `GET /genx/v1/genetic-gains/{geneticGainRecordDbId}` (`genxGetGeneticGain`) |
+| `StabilityAnalysis/` | `StabilityAnalysisResult` — stability analysis results (index, provenance) | `GET /genx/v1/stability-analyses` (`genxListStabilityAnalyses`); `POST /genx/v1/stability-analyses` (`genxRecordStabilityAnalysis`); `GET /genx/v1/stability-analyses/{stabilityAnalysisResultDbId}` (`genxGetStabilityAnalysis`) |
 | `PhenotypeAnnotation/` | `PhenotypeAnnotation` — phenotype annotation records (score, variable, provenance) | `GET /genx/v1/phenotype-annotations` (`genxListPhenotypeAnnotations`); `POST /genx/v1/phenotype-annotations` (`genxRecordPhenotypeAnnotation`); `GET /genx/v1/phenotype-annotations/{phenotypeAnnotationDbId}` (`genxGetPhenotypeAnnotation`) |
 | `ExtremeWeather/` | `ExtremeWeatherEvent` — extreme weather event records (type, severity, provenance) | `GET /genx/v1/extreme-weather-events` (`genxListExtremeWeatherEvents`); `POST /genx/v1/extreme-weather-events` (`genxRecordExtremeWeather`); `GET /genx/v1/extreme-weather-events/{extremeWeatherEventDbId}` (`genxGetExtremeWeatherEvent`) |
 | `VcfImport/` | `VcfImport` — VCF import records (source format, counts, provenance) | `GET /genx/v1/vcf-imports` (`genxListVcfImports`); `POST /genx/v1/vcf-imports` (`genxRecordVcfImport`); `GET /genx/v1/vcf-imports/{vcfImportDbId}` (`genxGetVcfImport`) |
@@ -127,7 +128,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-045-Analysis-Result](./RFC-045-Analysis-Result.md),
 [RFC-046-Genetic-Gain](./RFC-046-Genetic-Gain.md),
 [RFC-047-Gwas-Result](./RFC-047-Gwas-Result.md),
-[RFC-048-Mixed-Model](./RFC-048-Mixed-Model.md).
+[RFC-048-Mixed-Model](./RFC-048-Mixed-Model.md),
+[RFC-049-Stability-Analysis](./RFC-049-Stability-Analysis.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

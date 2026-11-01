@@ -34065,12 +34065,249 @@
         "brapi-genx.genx.v1.mixed-model-results.list",
         "brapi-genx.genx.v1.mixed-model-results.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "StabilityAnalysis",
+      "brapiTag": "StabilityAnalysis",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/StabilityAnalysis/StabilityAnalysis_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.stability-analyses.list",
+      "method": "GET",
+      "path": "/stability-analyses",
+      "operationIdInSource": "genxListStabilityAnalyses",
+      "recommendedOperationId": "genxListStabilityAnalyses",
+      "operationName": "List stability analyses",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List stability analysis results, optionally filtered by method, study, or status.",
+      "sourceDescription": "Get a paged list of stability analyses across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover stability results for a study or method.",
+        "Support scientific reproducibility and auditing."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a result (use the POST endpoint).",
+        "Assuming a result is a BrAPI data resource.",
+        "Treating the list as a complete analysis repository."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "analysisMethodDbId",
+        "studyDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordStabilityAnalysis",
+        "genxGetStabilityAnalysis",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-049"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.stability-analyses.record",
+        "brapi-genx.genx.v1.stability-analyses.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "StabilityAnalysis",
+      "brapiTag": "StabilityAnalysis",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/StabilityAnalysis/StabilityAnalysis_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.stability-analyses.record",
+      "method": "POST",
+      "path": "/stability-analyses",
+      "operationIdInSource": "genxRecordStabilityAnalysis",
+      "recommendedOperationId": "genxRecordStabilityAnalysis",
+      "operationName": "Record one stability analysis",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record one stability analysis result with index and provenance.",
+      "sourceDescription": "Unknown stabilityAnalysisResultDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish stability analysis result metadata.",
+        "Retry an identical result safely using the same stabilityAnalysisResultDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing result; corrections require a new record that supersedes.",
+        "Assuming the result is a BrAPI data resource.",
+        "Treating the result as scientific validation or approval."
+      ],
+      "sideEffects": "Creates a stability analysis result when accepted.",
+      "idempotency": "Same stabilityAnalysisResultDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "StabilityAnalysisResultNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListStabilityAnalyses",
+        "genxGetStabilityAnalysis",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-049"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.stability-analyses.list",
+        "brapi-genx.genx.v1.stability-analyses.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "StabilityAnalysis",
+      "brapiTag": "StabilityAnalysis",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/StabilityAnalysis/StabilityAnalysis_StabilityAnalysisResultDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.stability-analyses.get",
+      "method": "GET",
+      "path": "/stability-analyses/{stabilityAnalysisResultDbId}",
+      "operationIdInSource": "genxGetStabilityAnalysis",
+      "recommendedOperationId": "genxGetStabilityAnalysis",
+      "operationName": "Get one stability analysis",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one stability analysis result.",
+      "sourceDescription": "Returns the recorded result, or 404.",
+      "canBeUsedFor": [
+        "Inspect stability index and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the result is a BrAPI data resource.",
+        "Treating a superseded result as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "stabilityAnalysisResultDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordStabilityAnalysis",
+        "genxListStabilityAnalyses",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-049"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.stability-analyses.list",
+        "brapi-genx.genx.v1.stability-analyses.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 144,
+    "genxEntriesAdded": 147,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -34148,7 +34385,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 345,
+    "totalEntries": 348,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

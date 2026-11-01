@@ -1,0 +1,57 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    StabilityAnalysisResult:
+      type: object
+      description: |-
+        One immutable stability analysis result record. A published
+        (stabilityAnalysisResultDbId) record never mutates in place;
+        corrections are recorded as additional results linked by supersedes.
+      required:
+      - stabilityAnalysisResultDbId
+      - analysisMethodDbId
+      - status
+      properties:
+        stabilityAnalysisResultDbId:
+          description: Namespaced stability-analysis-result identity `{authority}:stability-analysis-result:{localId}`
+          type: string
+          example: institute-a:stability-analysis-result:sar-2026-001
+        analysisMethodDbId:
+          description: GenX AnalysisMethod used
+          type: string
+          example: institute-a:analysis-method:ammi
+        jobDbId:
+          description: GenX Job that produced this result
+          type: string
+          example: institute-a:job:analysis-7
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        traitDbId:
+          description: BrAPI Trait or GenX VariableTerm identifier
+          type: string
+          example: institute-a:trait:grain-yield
+        stabilityIndex:
+          description: Stability index value
+          type: number
+          example: 0.85
+        status:
+          description: Lifecycle state of the result record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: stabilityAnalysisResultDbId of the result this one replaces
+          type: string
+          example: institute-a:stability-analysis-result:sar-2026-000
+        provenance:
+          description: Evidence and method provenance for the result
+          $ref: '#/components/schemas/ProvenanceEnvelope'

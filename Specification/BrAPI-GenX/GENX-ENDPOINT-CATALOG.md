@@ -48,6 +48,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | ServerInfoV3 | 1 | proposed, non-normative |
 | SoilProfile | 3 | proposed, non-normative |
 | SpeedBreeding | 3 | proposed, non-normative |
+| StabilityAnalysis | 3 | proposed, non-normative |
 | Telemetry | 2 | proposed, non-normative |
 | Tillage | 3 | proposed, non-normative |
 | VariableTerms | 3 | proposed, non-normative |
@@ -4423,6 +4424,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.speed-breeding-protocols.list, brapi-genx.genx.v1.speed-breeding-protocols.register
 - **Relevant RFC / decision references:** RFC-022
 - **Contract source:** [`Specification/BrAPI-GenX/SpeedBreeding/SpeedBreeding_SpeedBreedingProtocolDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/SpeedBreeding/SpeedBreeding_SpeedBreedingProtocolDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### StabilityAnalysis — 3 operations
+
+### GET `/genx/v1/stability-analyses`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.stability-analyses.list`
+- **BrAPI-GenX operation identity:** `genxListStabilityAnalyses` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListStabilityAnalyses`
+- **GenX source module:** `StabilityAnalysis`
+- **Source tag:** StabilityAnalysis
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List stability analysis results, optionally filtered by method, study, or status.
+**Source contract description:**
+> Get a paged list of stability analyses across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover stability results for a study or method.
+- Support scientific reproducibility and auditing.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a result (use the POST endpoint).
+- Assuming a result is a BrAPI data resource.
+- Treating the list as a complete analysis repository.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** analysisMethodDbId, studyDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordStabilityAnalysis, genxGetStabilityAnalysis, genxRegisterAnalysisMethod
+- **Related catalogue IDs:** brapi-genx.genx.v1.stability-analyses.record, brapi-genx.genx.v1.stability-analyses.get
+- **Relevant RFC / decision references:** RFC-049
+- **Contract source:** [`Specification/BrAPI-GenX/StabilityAnalysis/StabilityAnalysis_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/StabilityAnalysis/StabilityAnalysis_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/stability-analyses`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.stability-analyses.record`
+- **BrAPI-GenX operation identity:** `genxRecordStabilityAnalysis` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordStabilityAnalysis`
+- **GenX source module:** `StabilityAnalysis`
+- **Source tag:** StabilityAnalysis
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one stability analysis result with index and provenance.
+**Source contract description:**
+> Unknown stabilityAnalysisResultDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish stability analysis result metadata.
+- Retry an identical result safely using the same stabilityAnalysisResultDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing result; corrections require a new record that supersedes.
+- Assuming the result is a BrAPI data resource.
+- Treating the result as scientific validation or approval.
+- **Side effects:** Creates a stability analysis result when accepted.
+- **Retry / idempotency:** Same stabilityAnalysisResultDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** StabilityAnalysisResultNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListStabilityAnalyses, genxGetStabilityAnalysis, genxRegisterAnalysisMethod
+- **Related catalogue IDs:** brapi-genx.genx.v1.stability-analyses.list, brapi-genx.genx.v1.stability-analyses.get
+- **Relevant RFC / decision references:** RFC-049
+- **Contract source:** [`Specification/BrAPI-GenX/StabilityAnalysis/StabilityAnalysis_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/StabilityAnalysis/StabilityAnalysis_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/stability-analyses/{stabilityAnalysisResultDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.stability-analyses.get`
+- **BrAPI-GenX operation identity:** `genxGetStabilityAnalysis` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetStabilityAnalysis`
+- **GenX source module:** `StabilityAnalysis`
+- **Source tag:** StabilityAnalysis
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one stability analysis result.
+**Source contract description:**
+> Returns the recorded result, or 404.
+**Can be used for:**
+- Inspect stability index and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the result is a BrAPI data resource.
+- Treating a superseded result as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** stabilityAnalysisResultDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordStabilityAnalysis, genxListStabilityAnalyses, genxRegisterAnalysisMethod
+- **Related catalogue IDs:** brapi-genx.genx.v1.stability-analyses.list, brapi-genx.genx.v1.stability-analyses.record
+- **Relevant RFC / decision references:** RFC-049
+- **Contract source:** [`Specification/BrAPI-GenX/StabilityAnalysis/StabilityAnalysis_StabilityAnalysisResultDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/StabilityAnalysis/StabilityAnalysis_StabilityAnalysisResultDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
