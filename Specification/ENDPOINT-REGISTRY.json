@@ -27265,12 +27265,245 @@
         "brapi-genx.genx.v1.progeny-records.list",
         "brapi-genx.genx.v1.progeny-records.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "DoubledHaploid",
+      "brapiTag": "DoubledHaploid",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/DoubledHaploid/DoubledHaploid_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.doubled-haploid-programs.list",
+      "method": "GET",
+      "path": "/doubled-haploid-programs",
+      "operationIdInSource": "genxListDoubledHaploidPrograms",
+      "recommendedOperationId": "genxListDoubledHaploidPrograms",
+      "operationName": "List doubled haploid programs",
+      "classification": {
+        "primaryDomain": "D2",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List doubled haploid programs, optionally filtered by program or status.",
+      "sourceDescription": "Get a paged list of doubled haploid programs across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover doubled haploid programs and their counts.",
+        "Support breeding program planning and auditing."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a program (use the POST endpoint).",
+        "Assuming a program is a BrAPI Program.",
+        "Treating the list as a complete breeding program record."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "programDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterDoubledHaploidProgram",
+        "genxGetDoubledHaploidProgram"
+      ],
+      "decisionReferences": [
+        "RFC-020"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.doubled-haploid-programs.register",
+        "brapi-genx.genx.v1.doubled-haploid-programs.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "DoubledHaploid",
+      "brapiTag": "DoubledHaploid",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/DoubledHaploid/DoubledHaploid_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.doubled-haploid-programs.register",
+      "method": "POST",
+      "path": "/doubled-haploid-programs",
+      "operationIdInSource": "genxRegisterDoubledHaploidProgram",
+      "recommendedOperationId": "genxRegisterDoubledHaploidProgram",
+      "operationName": "Register one doubled haploid program",
+      "classification": {
+        "primaryDomain": "D2",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register a doubled haploid program with method, donor, counts, and provenance.",
+      "sourceDescription": "Unknown doubledHaploidProgramDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish doubled haploid program metadata.",
+        "Create a new version under an existing program identity."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing program; corrections require a new record that supersedes.",
+        "Assuming the program is a BrAPI Program.",
+        "Treating the program as an approved breeding plan."
+      ],
+      "sideEffects": "Creates a program identity or appends a new immutable version when accepted.",
+      "idempotency": "Same program identity and identical body replays; conflicting content for the same identity is rejected.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "DoubledHaploidProgramNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListDoubledHaploidPrograms",
+        "genxGetDoubledHaploidProgram"
+      ],
+      "decisionReferences": [
+        "RFC-020"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.doubled-haploid-programs.list",
+        "brapi-genx.genx.v1.doubled-haploid-programs.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "DoubledHaploid",
+      "brapiTag": "DoubledHaploid",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/DoubledHaploid/DoubledHaploid_DoubledHaploidProgramDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.doubled-haploid-programs.get",
+      "method": "GET",
+      "path": "/doubled-haploid-programs/{doubledHaploidProgramDbId}",
+      "operationIdInSource": "genxGetDoubledHaploidProgram",
+      "recommendedOperationId": "genxGetDoubledHaploidProgram",
+      "operationName": "Get one doubled haploid program",
+      "classification": {
+        "primaryDomain": "D2",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one doubled haploid program.",
+      "sourceDescription": "Returns the registered program, or 404.",
+      "canBeUsedFor": [
+        "Inspect method, donor, counts, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the program is a BrAPI Program.",
+        "Treating a superseded program as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "doubledHaploidProgramDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterDoubledHaploidProgram",
+        "genxListDoubledHaploidPrograms"
+      ],
+      "decisionReferences": [
+        "RFC-020"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.doubled-haploid-programs.list",
+        "brapi-genx.genx.v1.doubled-haploid-programs.register"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 57,
+    "genxEntriesAdded": 60,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -27348,7 +27581,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 258,
+    "totalEntries": 261,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

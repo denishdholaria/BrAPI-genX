@@ -13,8 +13,8 @@ A catalogue identifier does not replace a source operationId or route. Classific
 | Surface | Operations | Contract status |
 |---|---:|---|
 | BrAPI v2.1 official modules | 201 | Released specification; implementation availability not inferred |
-| BrAPI GenX /genx/v1 | 57 | Proposed, non-normative |
-| **Total** | **258** | Existing contracts plus proposed operations |
+| BrAPI GenX /genx/v1 | 60 | Proposed, non-normative |
+| **Total** | **261** | Existing contracts plus proposed operations |
 
 BijMantra snapshot: 2240 records from the inventory generated 2026-10-17; see [source inventory](https://github.com/denishdholaria/bijmantraorg/blob/main/endpoints-inventory.md) and [crosswalk](./BIJMANTRA-CROSSWALK.md).
 
@@ -7966,6 +7966,111 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
+### DoubledHaploid — 3 operations
+
+### GET `/genx/v1/doubled-haploid-programs`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.doubled-haploid-programs.list`
+- **BrAPI-GenX operation identity:** `genxListDoubledHaploidPrograms` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListDoubledHaploidPrograms`
+- **GenX source module:** `DoubledHaploid`
+- **Source tag:** DoubledHaploid
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List doubled haploid programs, optionally filtered by program or status.
+**Source contract description:**
+> Get a paged list of doubled haploid programs across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover doubled haploid programs and their counts.
+- Support breeding program planning and auditing.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a program (use the POST endpoint).
+- Assuming a program is a BrAPI Program.
+- Treating the list as a complete breeding program record.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** programDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterDoubledHaploidProgram, genxGetDoubledHaploidProgram
+- **Related catalogue IDs:** brapi-genx.genx.v1.doubled-haploid-programs.register, brapi-genx.genx.v1.doubled-haploid-programs.get
+- **Relevant RFC / decision references:** RFC-020
+- **Contract source:** [`Specification/BrAPI-GenX/DoubledHaploid/DoubledHaploid_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/DoubledHaploid/DoubledHaploid_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/doubled-haploid-programs`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.doubled-haploid-programs.register`
+- **BrAPI-GenX operation identity:** `genxRegisterDoubledHaploidProgram` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterDoubledHaploidProgram`
+- **GenX source module:** `DoubledHaploid`
+- **Source tag:** DoubledHaploid
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register a doubled haploid program with method, donor, counts, and provenance.
+**Source contract description:**
+> Unknown doubledHaploidProgramDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish doubled haploid program metadata.
+- Create a new version under an existing program identity.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing program; corrections require a new record that supersedes.
+- Assuming the program is a BrAPI Program.
+- Treating the program as an approved breeding plan.
+- **Side effects:** Creates a program identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same program identity and identical body replays; conflicting content for the same identity is rejected.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** DoubledHaploidProgramNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListDoubledHaploidPrograms, genxGetDoubledHaploidProgram
+- **Related catalogue IDs:** brapi-genx.genx.v1.doubled-haploid-programs.list, brapi-genx.genx.v1.doubled-haploid-programs.get
+- **Relevant RFC / decision references:** RFC-020
+- **Contract source:** [`Specification/BrAPI-GenX/DoubledHaploid/DoubledHaploid_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/DoubledHaploid/DoubledHaploid_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/doubled-haploid-programs/{doubledHaploidProgramDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.doubled-haploid-programs.get`
+- **BrAPI-GenX operation identity:** `genxGetDoubledHaploidProgram` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetDoubledHaploidProgram`
+- **GenX source module:** `DoubledHaploid`
+- **Source tag:** DoubledHaploid
+- **Proposed BrAPI-GenX classification:** D2 — Breeding Programs and Experimental Design; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one doubled haploid program.
+**Source contract description:**
+> Returns the registered program, or 404.
+**Can be used for:**
+- Inspect method, donor, counts, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the program is a BrAPI Program.
+- Treating a superseded program as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** doubledHaploidProgramDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterDoubledHaploidProgram, genxListDoubledHaploidPrograms
+- **Related catalogue IDs:** brapi-genx.genx.v1.doubled-haploid-programs.list, brapi-genx.genx.v1.doubled-haploid-programs.register
+- **Relevant RFC / decision references:** RFC-020
+- **Contract source:** [`Specification/BrAPI-GenX/DoubledHaploid/DoubledHaploid_DoubledHaploidProgramDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/DoubledHaploid/DoubledHaploid_DoubledHaploidProgramDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
 ### ExperimentalDesign — 3 operations
 
 ### GET `/genx/v1/experimental-designs`
@@ -9238,7 +9343,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
 - **Semantic relationship IDs / labels:** genxRecordProgeny, genxListProgenyRecords
-- **Related catalogue IDs:** brapi-genx.genx.v1.progeny-records.list, brapi-genx.genx.v1.progeny-records.register
+- **Related catalogue IDs:** brapi-genx.genx.v1.progeny-records.list, brapi-genx.genx.v1.progeny-records.record
 - **Relevant RFC / decision references:** RFC-019
 - **Contract source:** [`Specification/BrAPI-GenX/ProgenyRecords/ProgenyRecords_ProgenyRecordDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ProgenyRecords/ProgenyRecords_ProgenyRecordDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
@@ -9799,6 +9904,6 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - Unique full-base-path/method/route keys: `True`.
 - Unique source/advisory operation identifiers where present: `True`.
 - BrAPI v2.1 inventory rows resolved to source YAML operations: 201 / 201.
-- GenX operations documented: 57.
+- GenX operations documented: 60.
 
 See [BIJMANTRA-CROSSWALK.md](./BIJMANTRA-CROSSWALK.md) for inventory evidence and semantic boundaries.

@@ -1,0 +1,69 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    DoubledHaploidProgramNewRequest:
+      type: object
+      description: |-
+        Request to register one doubled haploid program. Unknown
+        doubledHaploidProgramDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      required:
+      - doubledHaploidProgramDbId
+      - programDbId
+      - method
+      properties:
+        doubledHaploidProgramDbId:
+          description: Namespaced doubled-haploid-program identity `{authority}:doubled-haploid-program:{localId}`
+          type: string
+          example: institute-a:doubled-haploid-program:dh-2026-001
+        programDbId:
+          description: BrAPI Program (breeding program)
+          type: string
+          example: institute-a:program:wheat-breeding
+        method:
+          description: Haploid induction method
+          type: string
+          example: maize-tailor
+        donorGermplasmDbId:
+          description: BrAPI Germplasm donor
+          type: string
+          example: institute-a:germplasm:donor-1
+        haploidCount:
+          description: Number of haploids induced
+          type: integer
+          example: 120
+        doubledCount:
+          description: Number of doubled haploids produced
+          type: integer
+          example: 85
+        startedAt:
+          description: Start date (ISO-8601)
+          type: string
+          format: date
+          example: '2026-03-01'
+        completedAt:
+          description: Completion date (ISO-8601)
+          type: string
+          format: date
+          example: '2026-09-15'
+        status:
+          description: Lifecycle state of the program record
+          type: string
+          enum:
+          - active
+          - completed
+          - superseded
+          default: active
+          example: active
+        supersedes:
+          description: doubledHaploidProgramDbId of the program this one replaces
+          type: string
+          example: institute-a:doubled-haploid-program:dh-2026-000
+        provenance:
+          description: Evidence and method provenance for the program
+          $ref: '#/components/schemas/ProvenanceEnvelope'

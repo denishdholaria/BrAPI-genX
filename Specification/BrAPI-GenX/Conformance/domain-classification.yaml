@@ -100,6 +100,11 @@ modules:
     primary_class: "D2"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Progeny/family links with parents, generation, and provenance; BrAPI v2.1 has no equivalent record."
+  - path: "DoubledHaploid/"
+    object: "DoubledHaploidProgram"
+    primary_class: "D2"
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Doubled haploid program records; BrAPI v2.1 has no equivalent record."
   - path: "AnalysisMethods/"
     object: "AnalysisMethod"
     primary_class: "D7"
