@@ -153,6 +153,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/quarantine-records` | GET | `genxListQuarantineRecords` | List quarantine records | Does not create or change a record; not a BrAPI SeedLot transaction. |
 | `/genx/v1/quarantine-records` | POST | `genxRecordQuarantine` | Record one quarantine | Append-only record; replay/conflict semantics. |
 | `/genx/v1/quarantine-records/{quarantineRecordDbId}` | GET | `genxGetQuarantineRecord` | Retrieve one quarantine record | Does not treat a superseded record as current. |
+| `/genx/v1/weather-forecasts` | GET | `genxListWeatherForecasts` | List weather forecasts | Does not create or change a forecast; not a BrAPI Location. |
+| `/genx/v1/weather-forecasts` | POST | `genxRegisterWeatherForecast` | Register one weather forecast | Append-only record; replay/conflict semantics. |
+| `/genx/v1/weather-forecasts/{weatherForecastDbId}` | GET | `genxGetWeatherForecast` | Retrieve one weather forecast | Does not treat a superseded forecast as current. |
 | `/genx/v1/analysis-methods` | GET | `genxListAnalysisMethods` | List registered analysis method versions | Does not execute an analysis; not a BrAPI v2.1 resource. |
 | `/genx/v1/analysis-methods` | POST | `genxRegisterAnalysisMethod` | Register one analysis method version | Does not execute or validate the method; replay/conflict semantics. |
 | `/genx/v1/analysis-methods/{analysisMethodDbId}` | GET | `genxGetAnalysisMethod` | Retrieve one registered analysis method version | Does not execute an analysis; revoked methods deny new jobs. |

@@ -36,6 +36,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | Telemetry | 2 | proposed, non-normative |
 | VariableTerms | 3 | proposed, non-normative |
 | ViabilityTesting | 3 | proposed, non-normative |
+| WeatherForecast | 3 | proposed, non-normative |
 | WeatherObservations | 3 | proposed, non-normative |
 
 ## Operations
@@ -3124,6 +3125,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.viability-tests.list, brapi-genx.genx.v1.viability-tests.record
 - **Relevant RFC / decision references:** RFC-021
 - **Contract source:** [`Specification/BrAPI-GenX/ViabilityTesting/ViabilityTesting_ViabilityTestDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ViabilityTesting/ViabilityTesting_ViabilityTestDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### WeatherForecast — 3 operations
+
+### GET `/genx/v1/weather-forecasts`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.weather-forecasts.list`
+- **BrAPI-GenX operation identity:** `genxListWeatherForecasts` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListWeatherForecasts`
+- **GenX source module:** `WeatherForecast`
+- **Source tag:** WeatherForecast
+- **Proposed BrAPI-GenX classification:** D5 — Environment, Agroecology and Field Context; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C7 — Streaming and temporal aggregation, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List weather forecasts, optionally filtered by station, location, or validity window.
+**Source contract description:**
+> Get a paged list of weather forecasts across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover predicted environmental conditions for a location.
+- Support crop models and agronomy planning.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a forecast (use the POST endpoint).
+- Assuming a forecast is a BrAPI Location.
+- Treating the list as a complete climate record.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** stationDbId, locationDbId, validFrom, validTo, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterWeatherForecast, genxGetWeatherForecast
+- **Related catalogue IDs:** brapi-genx.genx.v1.weather-forecasts.register, brapi-genx.genx.v1.weather-forecasts.get
+- **Relevant RFC / decision references:** RFC-031
+- **Contract source:** [`Specification/BrAPI-GenX/WeatherForecast/WeatherForecast_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/WeatherForecast/WeatherForecast_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/weather-forecasts`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.weather-forecasts.register`
+- **BrAPI-GenX operation identity:** `genxRegisterWeatherForecast` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterWeatherForecast`
+- **GenX source module:** `WeatherForecast`
+- **Source tag:** WeatherForecast
+- **Proposed BrAPI-GenX classification:** D5 — Environment, Agroecology and Field Context; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C7 — Streaming and temporal aggregation, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register a weather forecast with predicted measurements and provenance.
+**Source contract description:**
+> Unknown weatherForecastDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish forecast metadata.
+- Create a new version under an existing forecast identity.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing forecast; corrections require a new record that supersedes.
+- Assuming the forecast is a BrAPI Location.
+- Treating the forecast as a complete climate record.
+- **Side effects:** Creates a forecast identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same forecast identity and identical body replays; conflicting content for the same identity is rejected.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** WeatherForecastNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListWeatherForecasts, genxGetWeatherForecast
+- **Related catalogue IDs:** brapi-genx.genx.v1.weather-forecasts.list, brapi-genx.genx.v1.weather-forecasts.get
+- **Relevant RFC / decision references:** RFC-031
+- **Contract source:** [`Specification/BrAPI-GenX/WeatherForecast/WeatherForecast_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/WeatherForecast/WeatherForecast_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/weather-forecasts/{weatherForecastDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.weather-forecasts.get`
+- **BrAPI-GenX operation identity:** `genxGetWeatherForecast` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetWeatherForecast`
+- **GenX source module:** `WeatherForecast`
+- **Source tag:** WeatherForecast
+- **Proposed BrAPI-GenX classification:** D5 — Environment, Agroecology and Field Context; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C7 — Streaming and temporal aggregation, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one weather forecast.
+**Source contract description:**
+> Returns the registered forecast, or 404.
+**Can be used for:**
+- Inspect predicted conditions and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the forecast is a BrAPI Location.
+- Treating a superseded forecast as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** weatherForecastDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterWeatherForecast, genxListWeatherForecasts
+- **Related catalogue IDs:** brapi-genx.genx.v1.weather-forecasts.list, brapi-genx.genx.v1.weather-forecasts.register
+- **Relevant RFC / decision references:** RFC-031
+- **Contract source:** [`Specification/BrAPI-GenX/WeatherForecast/WeatherForecast_WeatherForecastDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/WeatherForecast/WeatherForecast_WeatherForecastDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

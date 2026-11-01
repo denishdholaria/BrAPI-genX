@@ -29839,12 +29839,250 @@
         "brapi-genx.genx.v1.quarantine-records.list",
         "brapi-genx.genx.v1.quarantine-records.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "WeatherForecast",
+      "brapiTag": "WeatherForecast",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/WeatherForecast/WeatherForecast_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.weather-forecasts.list",
+      "method": "GET",
+      "path": "/weather-forecasts",
+      "operationIdInSource": "genxListWeatherForecasts",
+      "recommendedOperationId": "genxListWeatherForecasts",
+      "operationName": "List weather forecasts",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C7",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List weather forecasts, optionally filtered by station, location, or validity window.",
+      "sourceDescription": "Get a paged list of weather forecasts across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover predicted environmental conditions for a location.",
+        "Support crop models and agronomy planning."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a forecast (use the POST endpoint).",
+        "Assuming a forecast is a BrAPI Location.",
+        "Treating the list as a complete climate record."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "stationDbId",
+        "locationDbId",
+        "validFrom",
+        "validTo",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterWeatherForecast",
+        "genxGetWeatherForecast"
+      ],
+      "decisionReferences": [
+        "RFC-031"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.weather-forecasts.register",
+        "brapi-genx.genx.v1.weather-forecasts.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "WeatherForecast",
+      "brapiTag": "WeatherForecast",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/WeatherForecast/WeatherForecast_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.weather-forecasts.register",
+      "method": "POST",
+      "path": "/weather-forecasts",
+      "operationIdInSource": "genxRegisterWeatherForecast",
+      "recommendedOperationId": "genxRegisterWeatherForecast",
+      "operationName": "Register one weather forecast",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C7",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register a weather forecast with predicted measurements and provenance.",
+      "sourceDescription": "Unknown weatherForecastDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish forecast metadata.",
+        "Create a new version under an existing forecast identity."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing forecast; corrections require a new record that supersedes.",
+        "Assuming the forecast is a BrAPI Location.",
+        "Treating the forecast as a complete climate record."
+      ],
+      "sideEffects": "Creates a forecast identity or appends a new immutable version when accepted.",
+      "idempotency": "Same forecast identity and identical body replays; conflicting content for the same identity is rejected.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "WeatherForecastNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListWeatherForecasts",
+        "genxGetWeatherForecast"
+      ],
+      "decisionReferences": [
+        "RFC-031"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.weather-forecasts.list",
+        "brapi-genx.genx.v1.weather-forecasts.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "WeatherForecast",
+      "brapiTag": "WeatherForecast",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/WeatherForecast/WeatherForecast_WeatherForecastDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.weather-forecasts.get",
+      "method": "GET",
+      "path": "/weather-forecasts/{weatherForecastDbId}",
+      "operationIdInSource": "genxGetWeatherForecast",
+      "recommendedOperationId": "genxGetWeatherForecast",
+      "operationName": "Get one weather forecast",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C7",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one weather forecast.",
+      "sourceDescription": "Returns the registered forecast, or 404.",
+      "canBeUsedFor": [
+        "Inspect predicted conditions and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the forecast is a BrAPI Location.",
+        "Treating a superseded forecast as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "weatherForecastDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterWeatherForecast",
+        "genxListWeatherForecasts"
+      ],
+      "decisionReferences": [
+        "RFC-031"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.weather-forecasts.list",
+        "brapi-genx.genx.v1.weather-forecasts.register"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 90,
+    "genxEntriesAdded": 93,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -29922,7 +30160,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 291,
+    "totalEntries": 294,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

@@ -1,0 +1,87 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    WeatherForecastNewRequest:
+      type: object
+      description: |-
+        Request to register one weather forecast. Unknown
+        weatherForecastDbId creates; same id with an identical body replays
+        the existing record; same id with a different body is rejected with 409.
+      required:
+      - weatherForecastDbId
+      - forecastedAt
+      - validFrom
+      - validTo
+      - measurements
+      properties:
+        weatherForecastDbId:
+          description: Namespaced weather-forecast identity `{authority}:weather-forecast:{localId}`
+          type: string
+          example: institute-a:weather-forecast:wf-2026-001
+        stationDbId:
+          description: Weather station or model identity
+          type: string
+          example: institute-a:station:ws-07
+        locationDbId:
+          description: BrAPI Location for the forecast
+          type: string
+          example: institute-a:location:field-12
+        forecastedAt:
+          description: Timestamp when the forecast was issued (ISO-8601)
+          type: string
+          format: date-time
+          example: '2026-10-24T06:00:00Z'
+        validFrom:
+          description: Start of validity window (ISO-8601)
+          type: string
+          format: date-time
+          example: '2026-10-24T00:00:00Z'
+        validTo:
+          description: End of validity window (ISO-8601)
+          type: string
+          format: date-time
+          example: '2026-10-25T00:00:00Z'
+        measurements:
+          description: Predicted environmental variables
+          type: array
+          items:
+            type: object
+            required:
+            - variableDbId
+            - value
+            properties:
+              variableDbId:
+                description: BrAPI Observation Variable or GenX VariableTerm identifier
+                type: string
+                example: institute-a:variable:air-temperature
+              value:
+                description: Predicted value
+                type: number
+                example: 24.0
+              unit:
+                description: Unit of measure
+                type: string
+                example: celsius
+        source:
+          description: Forecast source or model
+          type: string
+          example: ecmwf
+        status:
+          description: Lifecycle state of the forecast record
+          type: string
+          enum:
+          - active
+          - superseded
+          default: active
+          example: active
+        supersedes:
+          description: weatherForecastDbId of the forecast this one replaces
+          type: string
+          example: institute-a:weather-forecast:wf-2026-000
+        provenance:
+          description: Evidence and method provenance for the forecast
+          $ref: '#/components/schemas/ProvenanceEnvelope'

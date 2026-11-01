@@ -1,0 +1,153 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /weather-forecasts:
+    get:
+      operationId: genxListWeatherForecasts
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.weather-forecasts.list"
+        classification:
+          primaryDomain: "D5"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C7", "C9"]
+        purpose: "List weather forecasts, optionally filtered by station, location, or validity window."
+        canBeUsedFor:
+          - "Discover predicted environmental conditions for a location."
+          - "Support crop models and agronomy planning."
+        mustNotBeUsedFor:
+          - "Creating or changing a forecast (use the POST endpoint)."
+          - "Assuming a forecast is a BrAPI Location."
+          - "Treating the list as a complete climate record."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterWeatherForecast"
+          - "genxGetWeatherForecast"
+        decisions: ["RFC-031"]
+        proposalStatus: "draft-non-normative"
+      summary: List weather forecasts
+      description: Get a paged list of weather forecasts across authorities. Filters combine with AND.
+      parameters:
+      - name: stationDbId
+        description: Filter by weather station or model
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: locationDbId
+        description: Filter by BrAPI Location
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: validFrom
+        description: Start of validity window (ISO-8601)
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: validTo
+        description: End of validity window (ISO-8601)
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/WeatherForecastListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - WeatherForecast
+    post:
+      operationId: genxRegisterWeatherForecast
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.weather-forecasts.register"
+        classification:
+          primaryDomain: "D5"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C7", "C9"]
+        purpose: "Register a weather forecast with predicted measurements and provenance."
+        canBeUsedFor:
+          - "Publish forecast metadata."
+          - "Create a new version under an existing forecast identity."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing forecast; corrections require a new record that supersedes."
+          - "Assuming the forecast is a BrAPI Location."
+          - "Treating the forecast as a complete climate record."
+        sideEffects: "Creates a forecast identity or appends a new immutable version when accepted."
+        idempotency: "Same forecast identity and identical body replays; conflicting content for the same identity is rejected."
+        semanticNeighbors:
+          - "genxListWeatherForecasts"
+          - "genxGetWeatherForecast"
+        decisions: ["RFC-031"]
+        proposalStatus: "draft-non-normative"
+      summary: Register one weather forecast
+      description: |-
+        Unknown weatherForecastDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WeatherForecastNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/WeatherForecast'
+                required:
+                - metadata
+                - result
+                title: WeatherForecastResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - WeatherForecast
+components:
+  responses:
+    WeatherForecastListResponse:
+      content:
+        application/json:
+          schema:
+            title: WeatherForecastListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/WeatherForecast'
+            required:
+            - metadata
+            - result
+      description: OK
