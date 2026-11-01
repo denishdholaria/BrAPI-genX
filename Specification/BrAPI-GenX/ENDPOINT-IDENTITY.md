@@ -183,6 +183,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/acquisitions` | GET | `genxListAcquisitions` | List acquisition records | Does not create or change a record; not a BrAPI SeedLot transaction. |
 | `/genx/v1/acquisitions` | POST | `genxRecordAcquisition` | Record one acquisition | Append-only record; replay/conflict semantics. |
 | `/genx/v1/acquisitions/{acquisitionRecordDbId}` | GET | `genxGetAcquisition` | Retrieve one acquisition record | Does not treat a superseded record as current. |
+| `/genx/v1/extreme-weather-events` | GET | `genxListExtremeWeatherEvents` | List extreme weather events | Does not create or change an event; not a BrAPI Location. |
+| `/genx/v1/extreme-weather-events` | POST | `genxRecordExtremeWeather` | Record one extreme weather event | Append-only record; replay/conflict semantics. |
+| `/genx/v1/extreme-weather-events/{extremeWeatherEventDbId}` | GET | `genxGetExtremeWeatherEvent` | Retrieve one extreme weather event | Does not treat a superseded event as current. |
 | `/genx/v1/bulk-captures` | GET | `genxListBulkCaptures` | List bulk captures | Does not create or change a capture; not a BrAPI Observation. |
 | `/genx/v1/bulk-captures` | POST | `genxRecordBulkCapture` | Record one bulk capture | Append-only record; replay/conflict semantics. |
 | `/genx/v1/bulk-captures/{bulkCaptureDbId}` | GET | `genxGetBulkCapture` | Retrieve one bulk capture | Does not treat a superseded capture as current. |

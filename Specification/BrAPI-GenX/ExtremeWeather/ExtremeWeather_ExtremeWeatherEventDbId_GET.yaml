@@ -1,0 +1,64 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /extreme-weather-events/{extremeWeatherEventDbId}:
+    get:
+      operationId: genxGetExtremeWeatherEvent
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.extreme-weather-events.get"
+        classification:
+          primaryDomain: "D5"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve one extreme weather event."
+        canBeUsedFor:
+          - "Inspect event type, severity, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming the event is a BrAPI Location."
+          - "Treating a superseded event as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordExtremeWeather"
+          - "genxListExtremeWeatherEvents"
+        decisions: ["RFC-042"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one extreme weather event
+      description: Returns the recorded event, or 404.
+      parameters:
+      - name: extremeWeatherEventDbId
+        description: Namespaced extreme-weather-event identity `{authority}:extreme-weather-event:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/ExtremeWeatherEvent'
+                required:
+                - metadata
+                - result
+                title: ExtremeWeatherEventResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - ExtremeWeather

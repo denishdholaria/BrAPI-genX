@@ -32412,12 +32412,246 @@
         "brapi-genx.genx.v1.acquisitions.list",
         "brapi-genx.genx.v1.acquisitions.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ExtremeWeather",
+      "brapiTag": "ExtremeWeather",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ExtremeWeather/ExtremeWeather_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.extreme-weather-events.list",
+      "method": "GET",
+      "path": "/extreme-weather-events",
+      "operationIdInSource": "genxListExtremeWeatherEvents",
+      "recommendedOperationId": "genxListExtremeWeatherEvents",
+      "operationName": "List extreme weather events",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List extreme weather events, optionally filtered by location, type, or severity.",
+      "sourceDescription": "Get a paged list of extreme weather events across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover extreme weather events for a location.",
+        "Support risk assessment and crop models."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing an event (use the POST endpoint).",
+        "Assuming an event is a BrAPI Location.",
+        "Treating the list as a complete climate record."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "locationDbId",
+        "eventType",
+        "severity",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordExtremeWeather",
+        "genxGetExtremeWeatherEvent"
+      ],
+      "decisionReferences": [
+        "RFC-042"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.extreme-weather-events.record",
+        "brapi-genx.genx.v1.extreme-weather-events.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ExtremeWeather",
+      "brapiTag": "ExtremeWeather",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ExtremeWeather/ExtremeWeather_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.extreme-weather-events.record",
+      "method": "POST",
+      "path": "/extreme-weather-events",
+      "operationIdInSource": "genxRecordExtremeWeather",
+      "recommendedOperationId": "genxRecordExtremeWeather",
+      "operationName": "Record one extreme weather event",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record one extreme weather event with type, severity, and provenance.",
+      "sourceDescription": "Unknown extremeWeatherEventDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Record severe weather events for a location.",
+        "Retry an identical event safely using the same extremeWeatherEventDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing event; corrections require a new record that supersedes.",
+        "Assuming the event is a BrAPI Location.",
+        "Treating the event as a complete climate record."
+      ],
+      "sideEffects": "Creates an extreme weather event when accepted.",
+      "idempotency": "Same extremeWeatherEventDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "ExtremeWeatherEventNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListExtremeWeatherEvents",
+        "genxGetExtremeWeatherEvent"
+      ],
+      "decisionReferences": [
+        "RFC-042"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.extreme-weather-events.list",
+        "brapi-genx.genx.v1.extreme-weather-events.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ExtremeWeather",
+      "brapiTag": "ExtremeWeather",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ExtremeWeather/ExtremeWeather_ExtremeWeatherEventDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.extreme-weather-events.get",
+      "method": "GET",
+      "path": "/extreme-weather-events/{extremeWeatherEventDbId}",
+      "operationIdInSource": "genxGetExtremeWeatherEvent",
+      "recommendedOperationId": "genxGetExtremeWeatherEvent",
+      "operationName": "Get one extreme weather event",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one extreme weather event.",
+      "sourceDescription": "Returns the recorded event, or 404.",
+      "canBeUsedFor": [
+        "Inspect event type, severity, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the event is a BrAPI Location.",
+        "Treating a superseded event as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "extremeWeatherEventDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordExtremeWeather",
+        "genxListExtremeWeatherEvents"
+      ],
+      "decisionReferences": [
+        "RFC-042"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.extreme-weather-events.list",
+        "brapi-genx.genx.v1.extreme-weather-events.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 123,
+    "genxEntriesAdded": 126,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -32495,7 +32729,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 324,
+    "totalEntries": 327,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

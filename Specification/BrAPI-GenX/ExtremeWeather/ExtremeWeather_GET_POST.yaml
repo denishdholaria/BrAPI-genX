@@ -1,0 +1,150 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /extreme-weather-events:
+    get:
+      operationId: genxListExtremeWeatherEvents
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.extreme-weather-events.list"
+        classification:
+          primaryDomain: "D5"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List extreme weather events, optionally filtered by location, type, or severity."
+        canBeUsedFor:
+          - "Discover extreme weather events for a location."
+          - "Support risk assessment and crop models."
+        mustNotBeUsedFor:
+          - "Creating or changing an event (use the POST endpoint)."
+          - "Assuming an event is a BrAPI Location."
+          - "Treating the list as a complete climate record."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordExtremeWeather"
+          - "genxGetExtremeWeatherEvent"
+        decisions: ["RFC-042"]
+        proposalStatus: "draft-non-normative"
+      summary: List extreme weather events
+      description: Get a paged list of extreme weather events across authorities. Filters combine with AND.
+      parameters:
+      - name: locationDbId
+        description: Filter by BrAPI Location
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: eventType
+        description: Filter by event type
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: severity
+        description: Filter by severity level
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - low
+          - moderate
+          - high
+          - extreme
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/ExtremeWeatherEventListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - ExtremeWeather
+    post:
+      operationId: genxRecordExtremeWeather
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.extreme-weather-events.record"
+        classification:
+          primaryDomain: "D5"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Record one extreme weather event with type, severity, and provenance."
+        canBeUsedFor:
+          - "Record severe weather events for a location."
+          - "Retry an identical event safely using the same extremeWeatherEventDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing event; corrections require a new record that supersedes."
+          - "Assuming the event is a BrAPI Location."
+          - "Treating the event as a complete climate record."
+        sideEffects: "Creates an extreme weather event when accepted."
+        idempotency: "Same extremeWeatherEventDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListExtremeWeatherEvents"
+          - "genxGetExtremeWeatherEvent"
+        decisions: ["RFC-042"]
+        proposalStatus: "draft-non-normative"
+      summary: Record one extreme weather event
+      description: |-
+        Unknown extremeWeatherEventDbId creates; same id with an identical
+        body replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExtremeWeatherEventNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/ExtremeWeatherEvent'
+                required:
+                - metadata
+                - result
+                title: ExtremeWeatherEventResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - ExtremeWeather
+components:
+  responses:
+    ExtremeWeatherEventListResponse:
+      content:
+        application/json:
+          schema:
+            title: ExtremeWeatherEventListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ExtremeWeatherEvent'
+            required:
+            - metadata
+            - result
+      description: OK

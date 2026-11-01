@@ -1,0 +1,64 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ExtremeWeatherEvent:
+      type: object
+      description: |-
+        One immutable extreme weather event record. A published
+        (extremeWeatherEventDbId) record never mutates in place; corrections
+        are recorded as additional records linked by supersedes.
+      required:
+      - extremeWeatherEventDbId
+      - locationDbId
+      - occurredAt
+      - eventType
+      - status
+      properties:
+        extremeWeatherEventDbId:
+          description: Namespaced extreme-weather-event identity `{authority}:extreme-weather-event:{localId}`
+          type: string
+          example: institute-a:extreme-weather-event:ewe-2026-001
+        locationDbId:
+          description: BrAPI Location where the event occurred
+          type: string
+          example: institute-a:location:field-12
+        occurredAt:
+          description: Date/time of the event (ISO-8601)
+          type: string
+          format: date-time
+          example: '2026-10-24T08:00:00Z'
+        eventType:
+          description: Type of extreme weather event
+          type: string
+          example: drought
+        severity:
+          description: Severity level
+          type: string
+          enum:
+          - low
+          - moderate
+          - high
+          - extreme
+          example: high
+        description:
+          description: Human-readable description
+          type: string
+          example: Severe drought during grain filling.
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          example: active
+        supersedes:
+          description: extremeWeatherEventDbId of the record this one replaces
+          type: string
+          example: institute-a:extreme-weather-event:ewe-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
