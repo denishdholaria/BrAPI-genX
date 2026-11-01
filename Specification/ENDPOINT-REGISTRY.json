@@ -27964,12 +27964,245 @@
         "brapi-genx.genx.v1.speed-breeding-protocols.list",
         "brapi-genx.genx.v1.speed-breeding-protocols.register"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "SoilProfile",
+      "brapiTag": "SoilProfile",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/SoilProfile/SoilProfile_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.soil-profiles.list",
+      "method": "GET",
+      "path": "/soil-profiles",
+      "operationIdInSource": "genxListSoilProfiles",
+      "recommendedOperationId": "genxListSoilProfiles",
+      "operationName": "List soil profiles",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List soil profiles, optionally filtered by location or status.",
+      "sourceDescription": "Get a paged list of soil profiles across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover soil conditions for a location.",
+        "Support agronomy and crop model inputs."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a profile (use the POST endpoint).",
+        "Assuming a profile is a BrAPI Location.",
+        "Treating the list as a complete soil survey."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "locationDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterSoilProfile",
+        "genxGetSoilProfile"
+      ],
+      "decisionReferences": [
+        "RFC-023"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.soil-profiles.register",
+        "brapi-genx.genx.v1.soil-profiles.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "SoilProfile",
+      "brapiTag": "SoilProfile",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/SoilProfile/SoilProfile_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.soil-profiles.register",
+      "method": "POST",
+      "path": "/soil-profiles",
+      "operationIdInSource": "genxRegisterSoilProfile",
+      "recommendedOperationId": "genxRegisterSoilProfile",
+      "operationName": "Register one soil profile",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register a soil profile with texture, chemistry, moisture, and provenance.",
+      "sourceDescription": "Unknown soilProfileDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish soil profile metadata.",
+        "Create a new version under an existing profile identity."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing profile; corrections require a new record that supersedes.",
+        "Assuming the profile is a BrAPI Location.",
+        "Treating the profile as a complete soil survey."
+      ],
+      "sideEffects": "Creates a profile identity or appends a new immutable version when accepted.",
+      "idempotency": "Same profile identity and identical body replays; conflicting content for the same identity is rejected.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "SoilProfileNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListSoilProfiles",
+        "genxGetSoilProfile"
+      ],
+      "decisionReferences": [
+        "RFC-023"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.soil-profiles.list",
+        "brapi-genx.genx.v1.soil-profiles.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "SoilProfile",
+      "brapiTag": "SoilProfile",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/SoilProfile/SoilProfile_SoilProfileDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.soil-profiles.get",
+      "method": "GET",
+      "path": "/soil-profiles/{soilProfileDbId}",
+      "operationIdInSource": "genxGetSoilProfile",
+      "recommendedOperationId": "genxGetSoilProfile",
+      "operationName": "Get one soil profile",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one soil profile.",
+      "sourceDescription": "Returns the registered profile, or 404.",
+      "canBeUsedFor": [
+        "Inspect soil texture, chemistry, moisture, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the profile is a BrAPI Location.",
+        "Treating a superseded profile as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "soilProfileDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterSoilProfile",
+        "genxListSoilProfiles"
+      ],
+      "decisionReferences": [
+        "RFC-023"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.soil-profiles.list",
+        "brapi-genx.genx.v1.soil-profiles.register"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 66,
+    "genxEntriesAdded": 69,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -28047,7 +28280,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 267,
+    "totalEntries": 270,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

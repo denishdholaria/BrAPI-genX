@@ -110,6 +110,11 @@ modules:
     primary_class: "D2"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Speed breeding protocol records; BrAPI v2.1 has no equivalent record."
+  - path: "SoilProfile/"
+    object: "SoilProfile"
+    primary_class: "D5"
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Soil profile records; BrAPI v2.1 has no equivalent record."
   - path: "AnalysisMethods/"
     object: "AnalysisMethod"
     primary_class: "D7"

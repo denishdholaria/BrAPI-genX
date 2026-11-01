@@ -1,0 +1,80 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    SoilProfile:
+      type: object
+      description: |-
+        One immutable soil profile record. A published
+        (soilProfileDbId) record never mutates in place; corrections are
+        recorded as additional profiles linked by supersedes.
+      required:
+      - soilProfileDbId
+      - locationDbId
+      - sampledAt
+      - status
+      properties:
+        soilProfileDbId:
+          description: Namespaced soil-profile identity `{authority}:soil-profile:{localId}`
+          type: string
+          example: institute-a:soil-profile:sp-2026-001
+        locationDbId:
+          description: BrAPI Location where the sample was taken
+          type: string
+          example: institute-a:location:field-12
+        sampledAt:
+          description: Date/time of sampling (ISO-8601)
+          type: string
+          format: date-time
+          example: '2026-10-24T08:00:00Z'
+        texture:
+          description: Soil texture class
+          type: string
+          example: loam
+        ph:
+          description: Soil pH
+          type: number
+          example: 6.5
+        organicMatter:
+          description: Organic matter percentage
+          type: number
+          example: 2.3
+        moisture:
+          description: Soil moisture percentage
+          type: number
+          example: 18.5
+        nutrients:
+          description: Measured nutrient values
+          type: array
+          items:
+            type: object
+            required:
+            - nutrient
+            - value
+            properties:
+              nutrient:
+                type: string
+                example: nitrogen
+              value:
+                type: number
+                example: 12.4
+              unit:
+                type: string
+                example: ppm
+        status:
+          description: Lifecycle state of the profile record
+          type: string
+          enum:
+          - active
+          - superseded
+          example: active
+        supersedes:
+          description: soilProfileDbId of the profile this one replaces
+          type: string
+          example: institute-a:soil-profile:sp-2026-000
+        provenance:
+          description: Evidence and method provenance for the profile
+          $ref: '#/components/schemas/ProvenanceEnvelope'
