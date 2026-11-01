@@ -1,0 +1,145 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /phenotype-annotations:
+    get:
+      operationId: genxListPhenotypeAnnotations
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.phenotype-annotations.list"
+        classification:
+          primaryDomain: "D4"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List phenotype annotation records, optionally filtered by study, observation unit, or variable."
+        canBeUsedFor:
+          - "Discover phenotype annotations for a study or observation unit."
+          - "Support phenotyping and auditing workflows."
+        mustNotBeUsedFor:
+          - "Creating or changing an annotation (use the POST endpoint)."
+          - "Assuming an annotation is a BrAPI Observation."
+          - "Treating the list as a complete phenotype dataset."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordPhenotypeAnnotation"
+          - "genxGetPhenotypeAnnotation"
+        decisions: ["RFC-044"]
+        proposalStatus: "draft-non-normative"
+      summary: List phenotype annotations
+      description: Get a paged list of phenotype annotations across authorities. Filters combine with AND.
+      parameters:
+      - name: studyDbId
+        description: Filter by BrAPI Study / trial context
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: observationUnitDbId
+        description: Filter by BrAPI Observation Unit
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: variableDbId
+        description: Filter by BrAPI Observation Variable or GenX VariableTerm
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/PhenotypeAnnotationListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - PhenotypeAnnotation
+    post:
+      operationId: genxRecordPhenotypeAnnotation
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.phenotype-annotations.record"
+        classification:
+          primaryDomain: "D4"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Record one phenotype annotation with score and provenance."
+        canBeUsedFor:
+          - "Record scored or annotated observations for an observation unit."
+          - "Retry an identical annotation safely using the same phenotypeAnnotationDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing annotation; corrections require a new record that supersedes."
+          - "Assuming the annotation is a BrAPI Observation."
+          - "Treating the annotation as a complete phenotype dataset."
+        sideEffects: "Creates a phenotype annotation when accepted."
+        idempotency: "Same phenotypeAnnotationDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListPhenotypeAnnotations"
+          - "genxGetPhenotypeAnnotation"
+        decisions: ["RFC-044"]
+        proposalStatus: "draft-non-normative"
+      summary: Record one phenotype annotation
+      description: |-
+        Unknown phenotypeAnnotationDbId creates; same id with an identical
+        body replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhenotypeAnnotationNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/PhenotypeAnnotation'
+                required:
+                - metadata
+                - result
+                title: PhenotypeAnnotationResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - PhenotypeAnnotation
+components:
+  responses:
+    PhenotypeAnnotationListResponse:
+      content:
+        application/json:
+          schema:
+            title: PhenotypeAnnotationListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PhenotypeAnnotation'
+            required:
+            - metadata
+            - result
+      description: OK

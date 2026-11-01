@@ -1,0 +1,64 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /phenotype-annotations/{phenotypeAnnotationDbId}:
+    get:
+      operationId: genxGetPhenotypeAnnotation
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.phenotype-annotations.get"
+        classification:
+          primaryDomain: "D4"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve one phenotype annotation."
+        canBeUsedFor:
+          - "Inspect annotation, score, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming the annotation is a BrAPI Observation."
+          - "Treating a superseded annotation as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordPhenotypeAnnotation"
+          - "genxListPhenotypeAnnotations"
+        decisions: ["RFC-044"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one phenotype annotation
+      description: Returns the recorded annotation, or 404.
+      parameters:
+      - name: phenotypeAnnotationDbId
+        description: Namespaced phenotype-annotation identity `{authority}:phenotype-annotation:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/PhenotypeAnnotation'
+                required:
+                - metadata
+                - result
+                title: PhenotypeAnnotationResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - PhenotypeAnnotation

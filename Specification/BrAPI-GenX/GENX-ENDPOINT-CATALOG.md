@@ -31,6 +31,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | Models | 3 | proposed, non-normative |
 | ParentCandidateSelection | 3 | proposed, non-normative |
 | PhenologyObservation | 3 | proposed, non-normative |
+| PhenotypeAnnotation | 3 | proposed, non-normative |
 | PhenotypeCapture | 3 | proposed, non-normative |
 | PopulationAdvancement | 3 | proposed, non-normative |
 | ProgenyRecords | 3 | proposed, non-normative |
@@ -2694,6 +2695,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.phenology-observations.list, brapi-genx.genx.v1.phenology-observations.record
 - **Relevant RFC / decision references:** RFC-027
 - **Contract source:** [`Specification/BrAPI-GenX/PhenologyObservation/PhenologyObservation_PhenologyObservationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PhenologyObservation/PhenologyObservation_PhenologyObservationDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### PhenotypeAnnotation — 3 operations
+
+### GET `/genx/v1/phenotype-annotations`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.phenotype-annotations.list`
+- **BrAPI-GenX operation identity:** `genxListPhenotypeAnnotations` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListPhenotypeAnnotations`
+- **GenX source module:** `PhenotypeAnnotation`
+- **Source tag:** PhenotypeAnnotation
+- **Proposed BrAPI-GenX classification:** D4 — Phenotyping and Plant Observations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List phenotype annotation records, optionally filtered by study, observation unit, or variable.
+**Source contract description:**
+> Get a paged list of phenotype annotations across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover phenotype annotations for a study or observation unit.
+- Support phenotyping and auditing workflows.
+**Must not be used for / explicit non-goals:**
+- Creating or changing an annotation (use the POST endpoint).
+- Assuming an annotation is a BrAPI Observation.
+- Treating the list as a complete phenotype dataset.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** studyDbId, observationUnitDbId, variableDbId, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordPhenotypeAnnotation, genxGetPhenotypeAnnotation
+- **Related catalogue IDs:** brapi-genx.genx.v1.phenotype-annotations.record, brapi-genx.genx.v1.phenotype-annotations.get
+- **Relevant RFC / decision references:** RFC-044
+- **Contract source:** [`Specification/BrAPI-GenX/PhenotypeAnnotation/PhenotypeAnnotation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PhenotypeAnnotation/PhenotypeAnnotation_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/phenotype-annotations`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.phenotype-annotations.record`
+- **BrAPI-GenX operation identity:** `genxRecordPhenotypeAnnotation` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordPhenotypeAnnotation`
+- **GenX source module:** `PhenotypeAnnotation`
+- **Source tag:** PhenotypeAnnotation
+- **Proposed BrAPI-GenX classification:** D4 — Phenotyping and Plant Observations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one phenotype annotation with score and provenance.
+**Source contract description:**
+> Unknown phenotypeAnnotationDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Record scored or annotated observations for an observation unit.
+- Retry an identical annotation safely using the same phenotypeAnnotationDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing annotation; corrections require a new record that supersedes.
+- Assuming the annotation is a BrAPI Observation.
+- Treating the annotation as a complete phenotype dataset.
+- **Side effects:** Creates a phenotype annotation when accepted.
+- **Retry / idempotency:** Same phenotypeAnnotationDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** PhenotypeAnnotationNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListPhenotypeAnnotations, genxGetPhenotypeAnnotation
+- **Related catalogue IDs:** brapi-genx.genx.v1.phenotype-annotations.list, brapi-genx.genx.v1.phenotype-annotations.get
+- **Relevant RFC / decision references:** RFC-044
+- **Contract source:** [`Specification/BrAPI-GenX/PhenotypeAnnotation/PhenotypeAnnotation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PhenotypeAnnotation/PhenotypeAnnotation_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/phenotype-annotations/{phenotypeAnnotationDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.phenotype-annotations.get`
+- **BrAPI-GenX operation identity:** `genxGetPhenotypeAnnotation` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetPhenotypeAnnotation`
+- **GenX source module:** `PhenotypeAnnotation`
+- **Source tag:** PhenotypeAnnotation
+- **Proposed BrAPI-GenX classification:** D4 — Phenotyping and Plant Observations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one phenotype annotation.
+**Source contract description:**
+> Returns the recorded annotation, or 404.
+**Can be used for:**
+- Inspect annotation, score, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the annotation is a BrAPI Observation.
+- Treating a superseded annotation as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** phenotypeAnnotationDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordPhenotypeAnnotation, genxListPhenotypeAnnotations
+- **Related catalogue IDs:** brapi-genx.genx.v1.phenotype-annotations.list, brapi-genx.genx.v1.phenotype-annotations.record
+- **Relevant RFC / decision references:** RFC-044
+- **Contract source:** [`Specification/BrAPI-GenX/PhenotypeAnnotation/PhenotypeAnnotation_PhenotypeAnnotationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PhenotypeAnnotation/PhenotypeAnnotation_PhenotypeAnnotationDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

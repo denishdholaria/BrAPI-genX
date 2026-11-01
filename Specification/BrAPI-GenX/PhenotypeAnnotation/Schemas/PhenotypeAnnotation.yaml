@@ -1,0 +1,68 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    PhenotypeAnnotation:
+      type: object
+      description: |-
+        One immutable phenotype annotation record. A published
+        (phenotypeAnnotationDbId) record never mutates in place; corrections
+        are recorded as additional records linked by supersedes.
+      required:
+      - phenotypeAnnotationDbId
+      - studyDbId
+      - observationUnitDbId
+      - variableDbId
+      - annotation
+      - status
+      properties:
+        phenotypeAnnotationDbId:
+          description: Namespaced phenotype-annotation identity `{authority}:phenotype-annotation:{localId}`
+          type: string
+          example: institute-a:phenotype-annotation:pa-2026-001
+        studyDbId:
+          description: BrAPI Study / trial context
+          type: string
+          example: institute-a:study:yield-trial-2026
+        observationUnitDbId:
+          description: BrAPI Observation Unit annotated
+          type: string
+          example: institute-a:observationunit:ou-42
+        variableDbId:
+          description: BrAPI Observation Variable or GenX VariableTerm identifier
+          type: string
+          example: institute-a:variable:grain-yield
+        annotation:
+          description: Annotation or score value
+          type: string
+          example: high
+        annotator:
+          description: Actor recording the annotation
+          type: string
+          example: breeder-42
+        annotatedAt:
+          description: Date/time of annotation (ISO-8601)
+          type: string
+          format: date-time
+          example: '2026-10-24T08:00:00Z'
+        notes:
+          description: Human-readable notes
+          type: string
+          example: Observed high yield under drought.
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          example: active
+        supersedes:
+          description: phenotypeAnnotationDbId of the record this one replaces
+          type: string
+          example: institute-a:phenotype-annotation:pa-2026-000
+        provenance:
+          description: Evidence and method provenance for the annotation
+          $ref: '#/components/schemas/ProvenanceEnvelope'

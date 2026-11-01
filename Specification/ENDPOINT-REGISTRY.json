@@ -32885,12 +32885,246 @@
         "brapi-genx.genx.v1.vcf-imports.list",
         "brapi-genx.genx.v1.vcf-imports.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "PhenotypeAnnotation",
+      "brapiTag": "PhenotypeAnnotation",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/PhenotypeAnnotation/PhenotypeAnnotation_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.phenotype-annotations.list",
+      "method": "GET",
+      "path": "/phenotype-annotations",
+      "operationIdInSource": "genxListPhenotypeAnnotations",
+      "recommendedOperationId": "genxListPhenotypeAnnotations",
+      "operationName": "List phenotype annotations",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List phenotype annotation records, optionally filtered by study, observation unit, or variable.",
+      "sourceDescription": "Get a paged list of phenotype annotations across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover phenotype annotations for a study or observation unit.",
+        "Support phenotyping and auditing workflows."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing an annotation (use the POST endpoint).",
+        "Assuming an annotation is a BrAPI Observation.",
+        "Treating the list as a complete phenotype dataset."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "studyDbId",
+        "observationUnitDbId",
+        "variableDbId",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordPhenotypeAnnotation",
+        "genxGetPhenotypeAnnotation"
+      ],
+      "decisionReferences": [
+        "RFC-044"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.phenotype-annotations.record",
+        "brapi-genx.genx.v1.phenotype-annotations.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "PhenotypeAnnotation",
+      "brapiTag": "PhenotypeAnnotation",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/PhenotypeAnnotation/PhenotypeAnnotation_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.phenotype-annotations.record",
+      "method": "POST",
+      "path": "/phenotype-annotations",
+      "operationIdInSource": "genxRecordPhenotypeAnnotation",
+      "recommendedOperationId": "genxRecordPhenotypeAnnotation",
+      "operationName": "Record one phenotype annotation",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record one phenotype annotation with score and provenance.",
+      "sourceDescription": "Unknown phenotypeAnnotationDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Record scored or annotated observations for an observation unit.",
+        "Retry an identical annotation safely using the same phenotypeAnnotationDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing annotation; corrections require a new record that supersedes.",
+        "Assuming the annotation is a BrAPI Observation.",
+        "Treating the annotation as a complete phenotype dataset."
+      ],
+      "sideEffects": "Creates a phenotype annotation when accepted.",
+      "idempotency": "Same phenotypeAnnotationDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "PhenotypeAnnotationNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListPhenotypeAnnotations",
+        "genxGetPhenotypeAnnotation"
+      ],
+      "decisionReferences": [
+        "RFC-044"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.phenotype-annotations.list",
+        "brapi-genx.genx.v1.phenotype-annotations.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "PhenotypeAnnotation",
+      "brapiTag": "PhenotypeAnnotation",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/PhenotypeAnnotation/PhenotypeAnnotation_PhenotypeAnnotationDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.phenotype-annotations.get",
+      "method": "GET",
+      "path": "/phenotype-annotations/{phenotypeAnnotationDbId}",
+      "operationIdInSource": "genxGetPhenotypeAnnotation",
+      "recommendedOperationId": "genxGetPhenotypeAnnotation",
+      "operationName": "Get one phenotype annotation",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one phenotype annotation.",
+      "sourceDescription": "Returns the recorded annotation, or 404.",
+      "canBeUsedFor": [
+        "Inspect annotation, score, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the annotation is a BrAPI Observation.",
+        "Treating a superseded annotation as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "phenotypeAnnotationDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordPhenotypeAnnotation",
+        "genxListPhenotypeAnnotations"
+      ],
+      "decisionReferences": [
+        "RFC-044"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.phenotype-annotations.list",
+        "brapi-genx.genx.v1.phenotype-annotations.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 129,
+    "genxEntriesAdded": 132,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -32968,7 +33202,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 330,
+    "totalEntries": 333,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

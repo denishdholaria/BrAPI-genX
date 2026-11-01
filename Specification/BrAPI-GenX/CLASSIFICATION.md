@@ -81,6 +81,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | Tillage / TillageRecord | D6 | C1, C2, C3, C6, C9 | Tillage records; no BrAPI v2.1 equivalent |
 | CandidateVarietyLifecycle / CandidateVariety | D2 | C1, C2, C3, C6, C9 | Candidate variety lifecycle records; no BrAPI v2.1 equivalent |
 | Acquisition / AcquisitionRecord | D1 | C1, C2, C3, C6, C9 | Acquisition records; no BrAPI v2.1 equivalent |
+| PhenotypeAnnotation / PhenotypeAnnotation | D4 | C1, C2, C3, C6, C9 | Phenotype annotation records; no BrAPI v2.1 equivalent |
 | ExtremeWeather / ExtremeWeatherEvent | D5 | C1, C2, C3, C6, C9 | Extreme weather event records; no BrAPI v2.1 equivalent |
 | VcfImport / VcfImport | D3 | C1, C2, C3, C5, C6, C9 | VCF import records; no BrAPI v2.1 equivalent |
 | BulkCapture / BulkCapture | D4 | C1, C2, C3, C6, C9 | Bulk capture records; no BrAPI v2.1 equivalent |
