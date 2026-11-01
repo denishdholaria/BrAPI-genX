@@ -276,6 +276,9 @@ GenX uses /genx/v1. Relative-route matches below are candidate neighbors only; t
 | `brapi-genx.genx.v1.variable-terms.list` | `GET /genx/v1/variable-terms` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
 | `brapi-genx.genx.v1.variable-terms.publish-version` | `POST /genx/v1/variable-terms` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
 | `brapi-genx.genx.v1.variable-terms.get-version` | `GET /genx/v1/variable-terms/{variableDbId}` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
+| `brapi-genx.genx.v1.weather-observations.list` | `GET /genx/v1/weather-observations` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
+| `brapi-genx.genx.v1.weather-observations.record` | `POST /genx/v1/weather-observations` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
+| `brapi-genx.genx.v1.weather-observations.get` | `GET /genx/v1/weather-observations/{weatherObservationDbId}` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
 
 ## Rust platform contract comparisons
 

@@ -117,6 +117,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/analysis-methods` | GET | `genxListAnalysisMethods` | List registered analysis method versions | Does not execute an analysis; not a BrAPI v2.1 resource. |
 | `/genx/v1/analysis-methods` | POST | `genxRegisterAnalysisMethod` | Register one analysis method version | Does not execute or validate the method; replay/conflict semantics. |
 | `/genx/v1/analysis-methods/{analysisMethodDbId}` | GET | `genxGetAnalysisMethod` | Retrieve one registered analysis method version | Does not execute an analysis; revoked methods deny new jobs. |
+| `/genx/v1/weather-observations` | GET | `genxListWeatherObservations` | List recorded weather/environmental observations | Does not create or change an observation; complementary to Telemetry. |
+| `/genx/v1/weather-observations` | POST | `genxRecordWeatherObservation` | Record one weather/environmental observation | Append-only record; replay/conflict semantics; does not imply a BrAPI Observation. |
+| `/genx/v1/weather-observations/{weatherObservationDbId}` | GET | `genxGetWeatherObservation` | Retrieve one recorded weather/environmental observation | Does not treat a superseded observation as current. |
 
 `ProvenanceEnvelope` is embedded in result/record schemas and has no standalone route in this proposal.
 

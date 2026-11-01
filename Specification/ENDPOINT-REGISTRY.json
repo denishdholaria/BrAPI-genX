@@ -24904,12 +24904,254 @@
         "brapi-genx.genx.v1.analysis-methods.list",
         "brapi-genx.genx.v1.analysis-methods.register"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "WeatherObservations",
+      "brapiTag": "WeatherObservations",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/WeatherObservations/WeatherObservations_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.weather-observations.list",
+      "method": "GET",
+      "path": "/weather-observations",
+      "operationIdInSource": "genxListWeatherObservations",
+      "recommendedOperationId": "genxListWeatherObservations",
+      "operationName": "List weather observations",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C7",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List recorded weather/environmental observations, optionally filtered by station, location, variable, or time range.",
+      "sourceDescription": "Get a paged list of weather/environmental observations across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover environmental conditions for a location or station.",
+        "Provide environmental context for trials, studies, and crop models."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing an observation (use the POST endpoint).",
+        "Assuming an observation is a BrAPI scientific Observation.",
+        "Treating the list as a complete climate record."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "stationDbId",
+        "locationDbId",
+        "variableDbId",
+        "observedFrom",
+        "observedTo",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordWeatherObservation",
+        "genxGetWeatherObservation",
+        "genxQueryTelemetrySamplesOrAggregates"
+      ],
+      "decisionReferences": [
+        "RFC-010"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.weather-observations.record",
+        "brapi-genx.genx.v1.weather-observations.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "WeatherObservations",
+      "brapiTag": "WeatherObservations",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/WeatherObservations/WeatherObservations_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.weather-observations.record",
+      "method": "POST",
+      "path": "/weather-observations",
+      "operationIdInSource": "genxRecordWeatherObservation",
+      "recommendedOperationId": "genxRecordWeatherObservation",
+      "operationName": "Record one weather observation",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C7",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record one weather/environmental observation with measurements, quality flag, and provenance.",
+      "sourceDescription": "Unknown weatherObservationDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Record measured environmental conditions at a station or location.",
+        "Retry an identical observation safely using the same weatherObservationDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing observation; corrections require a new record that supersedes.",
+        "Assuming the observation is a BrAPI scientific Observation.",
+        "Treating the record as a complete climate or forecast product."
+      ],
+      "sideEffects": "Creates a weather observation when accepted.",
+      "idempotency": "Same weatherObservationDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "WeatherObservationNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListWeatherObservations",
+        "genxGetWeatherObservation",
+        "genxAppendTelemetryBatch"
+      ],
+      "decisionReferences": [
+        "RFC-010"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.weather-observations.list",
+        "brapi-genx.genx.v1.weather-observations.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "WeatherObservations",
+      "brapiTag": "WeatherObservations",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/WeatherObservations/WeatherObservations_WeatherObservationDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.weather-observations.get",
+      "method": "GET",
+      "path": "/weather-observations/{weatherObservationDbId}",
+      "operationIdInSource": "genxGetWeatherObservation",
+      "recommendedOperationId": "genxGetWeatherObservation",
+      "operationName": "Get one weather observation",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C7",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one recorded weather/environmental observation.",
+      "sourceDescription": "Returns the recorded observation, or 404.",
+      "canBeUsedFor": [
+        "Inspect measured environmental conditions and their provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the observation is a BrAPI scientific Observation.",
+        "Treating a superseded observation as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "weatherObservationDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordWeatherObservation",
+        "genxListWeatherObservations",
+        "genxQueryTelemetrySamplesOrAggregates"
+      ],
+      "decisionReferences": [
+        "RFC-010"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.weather-observations.list",
+        "brapi-genx.genx.v1.weather-observations.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 27,
+    "genxEntriesAdded": 30,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -24987,7 +25229,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 228,
+    "totalEntries": 231,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

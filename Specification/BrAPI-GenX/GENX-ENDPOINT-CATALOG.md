@@ -16,6 +16,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | ServerInfoV3 | 1 | proposed, non-normative |
 | Telemetry | 2 | proposed, non-normative |
 | VariableTerms | 3 | proposed, non-normative |
+| WeatherObservations | 3 | proposed, non-normative |
 
 ## Operations
 
@@ -1002,6 +1003,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.brapi-v2-1.phenotyping.get.methods, brapi-genx.brapi-v2-1.phenotyping.get.methods.by-methoddbid, brapi-genx.brapi-v2-1.phenotyping.get.ontologies, brapi-genx.brapi-v2-1.phenotyping.get.ontologies.by-ontologydbid, brapi-genx.brapi-v2-1.phenotyping.get.scales, brapi-genx.brapi-v2-1.phenotyping.get.scales.by-scaledbid, brapi-genx.brapi-v2-1.phenotyping.get.traits, brapi-genx.brapi-v2-1.phenotyping.get.traits.by-traitdbid, brapi-genx.brapi-v2-1.phenotyping.get.variables, brapi-genx.brapi-v2-1.phenotyping.get.variables.by-observationvariabledbid, brapi-genx.brapi-v2-1.phenotyping.post.methods, brapi-genx.brapi-v2-1.phenotyping.post.ontologies, brapi-genx.brapi-v2-1.phenotyping.post.scales, brapi-genx.brapi-v2-1.phenotyping.post.traits, brapi-genx.brapi-v2-1.phenotyping.post.variables, brapi-genx.brapi-v2-1.phenotyping.put.methods.by-methoddbid, brapi-genx.brapi-v2-1.phenotyping.put.ontologies.by-ontologydbid, brapi-genx.brapi-v2-1.phenotyping.put.scales.by-scaledbid, brapi-genx.brapi-v2-1.phenotyping.put.traits.by-traitdbid, brapi-genx.brapi-v2-1.phenotyping.put.variables.by-observationvariabledbid, brapi-genx.genx.v1.variable-terms.list, brapi-genx.genx.v1.variable-terms.publish-version
 - **Relevant RFC / decision references:** RFC-002, D-05, D-06, A-03
 - **Contract source:** [`Specification/BrAPI-GenX/VariableTerms/VariableTerms_VariableDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/VariableTerms/VariableTerms_VariableDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### WeatherObservations — 3 operations
+
+### GET `/genx/v1/weather-observations`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.weather-observations.list`
+- **BrAPI-GenX operation identity:** `genxListWeatherObservations` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListWeatherObservations`
+- **GenX source module:** `WeatherObservations`
+- **Source tag:** WeatherObservations
+- **Proposed BrAPI-GenX classification:** D5 — Environment, Agroecology and Field Context; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C7 — Streaming and temporal aggregation, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List recorded weather/environmental observations, optionally filtered by station, location, variable, or time range.
+**Source contract description:**
+> Get a paged list of weather/environmental observations across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover environmental conditions for a location or station.
+- Provide environmental context for trials, studies, and crop models.
+**Must not be used for / explicit non-goals:**
+- Creating or changing an observation (use the POST endpoint).
+- Assuming an observation is a BrAPI scientific Observation.
+- Treating the list as a complete climate record.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** stationDbId, locationDbId, variableDbId, observedFrom, observedTo, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordWeatherObservation, genxGetWeatherObservation, genxQueryTelemetrySamplesOrAggregates
+- **Related catalogue IDs:** brapi-genx.genx.v1.weather-observations.record, brapi-genx.genx.v1.weather-observations.get
+- **Relevant RFC / decision references:** RFC-010
+- **Contract source:** [`Specification/BrAPI-GenX/WeatherObservations/WeatherObservations_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/WeatherObservations/WeatherObservations_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/weather-observations`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.weather-observations.record`
+- **BrAPI-GenX operation identity:** `genxRecordWeatherObservation` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordWeatherObservation`
+- **GenX source module:** `WeatherObservations`
+- **Source tag:** WeatherObservations
+- **Proposed BrAPI-GenX classification:** D5 — Environment, Agroecology and Field Context; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C7 — Streaming and temporal aggregation, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one weather/environmental observation with measurements, quality flag, and provenance.
+**Source contract description:**
+> Unknown weatherObservationDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Record measured environmental conditions at a station or location.
+- Retry an identical observation safely using the same weatherObservationDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing observation; corrections require a new record that supersedes.
+- Assuming the observation is a BrAPI scientific Observation.
+- Treating the record as a complete climate or forecast product.
+- **Side effects:** Creates a weather observation when accepted.
+- **Retry / idempotency:** Same weatherObservationDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** WeatherObservationNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListWeatherObservations, genxGetWeatherObservation, genxAppendTelemetryBatch
+- **Related catalogue IDs:** brapi-genx.genx.v1.weather-observations.list, brapi-genx.genx.v1.weather-observations.get
+- **Relevant RFC / decision references:** RFC-010
+- **Contract source:** [`Specification/BrAPI-GenX/WeatherObservations/WeatherObservations_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/WeatherObservations/WeatherObservations_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/weather-observations/{weatherObservationDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.weather-observations.get`
+- **BrAPI-GenX operation identity:** `genxGetWeatherObservation` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetWeatherObservation`
+- **GenX source module:** `WeatherObservations`
+- **Source tag:** WeatherObservations
+- **Proposed BrAPI-GenX classification:** D5 — Environment, Agroecology and Field Context; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C7 — Streaming and temporal aggregation, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one recorded weather/environmental observation.
+**Source contract description:**
+> Returns the recorded observation, or 404.
+**Can be used for:**
+- Inspect measured environmental conditions and their provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the observation is a BrAPI scientific Observation.
+- Treating a superseded observation as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** weatherObservationDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordWeatherObservation, genxListWeatherObservations, genxQueryTelemetrySamplesOrAggregates
+- **Related catalogue IDs:** brapi-genx.genx.v1.weather-observations.list, brapi-genx.genx.v1.weather-observations.record
+- **Relevant RFC / decision references:** RFC-010
+- **Contract source:** [`Specification/BrAPI-GenX/WeatherObservations/WeatherObservations_WeatherObservationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/WeatherObservations/WeatherObservations_WeatherObservationDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

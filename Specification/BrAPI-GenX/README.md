@@ -37,6 +37,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `Genomics/` | `VariantMatrix` — content-addressed matrix references | `GET /genx/v1/variantmatrices` (`genxListVariantMatrixReferences`); `POST /genx/v1/variantmatrices` (`genxRegisterVariantMatrixReference`); `GET /genx/v1/variantmatrices/{matrixDbId}` (`genxGetVariantMatrixReference`) |
 | `SelectionDecisions/` | `SelectionDecision` — breeding selection verdicts (selected/rejected/deferred/advanced) | `GET /genx/v1/selection-decisions` (`genxListSelectionDecisions`); `POST /genx/v1/selection-decisions` (`genxRecordSelectionDecision`); `GET /genx/v1/selection-decisions/{selectionDecisionDbId}` (`genxGetSelectionDecision`) |
 | `AnalysisMethods/` | `AnalysisMethod` — versioned analysis method registry (identity, type, contracts, lifecycle) | `GET /genx/v1/analysis-methods` (`genxListAnalysisMethods`); `POST /genx/v1/analysis-methods` (`genxRegisterAnalysisMethod`); `GET /genx/v1/analysis-methods/{analysisMethodDbId}` (`genxGetAnalysisMethod`) |
+| `WeatherObservations/` | `WeatherObservation` — environmental/weather observation records (measurements, quality, provenance) | `GET /genx/v1/weather-observations` (`genxListWeatherObservations`); `POST /genx/v1/weather-observations` (`genxRecordWeatherObservation`); `GET /genx/v1/weather-observations/{weatherObservationDbId}` (`genxGetWeatherObservation`) |
 | `FAIR/` | `FAIRPackage` — licensed, embargo-aware payload envelopes | `GET /genx/v1/fair-packages` (`genxListFairPackageMetadata`); `POST /genx/v1/fair-packages` (`genxRegisterFairPackage`); `GET /genx/v1/fair-packages/{packageDbId}` (`genxGetFairPackageMetadata`) |
 | `Telemetry/` | `TelemetryPoint` — sensor streams, idempotent ingest, aggregates | `GET /genx/v1/telemetry` (`genxQueryTelemetrySamplesOrAggregates`); `POST /genx/v1/telemetry` (`genxAppendTelemetryBatch`) |
 | `Conformance/` | Probes + fixtures + runner contract (`probes.yaml`) | Static tier runs now; live tier needs `--server` |
@@ -49,7 +50,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-006-FAIR-Packages](./RFC-006-FAIR-Packages.md),
 [RFC-007-Telemetry-Streams](./RFC-007-Telemetry-Streams.md),
 [RFC-008-Selection-Decisions](./RFC-008-Selection-Decisions.md),
-[RFC-009-Analysis-Methods](./RFC-009-Analysis-Methods.md).
+[RFC-009-Analysis-Methods](./RFC-009-Analysis-Methods.md),
+[RFC-010-Weather-Observations](./RFC-010-Weather-Observations.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

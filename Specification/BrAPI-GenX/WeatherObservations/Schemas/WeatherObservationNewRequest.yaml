@@ -1,0 +1,85 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    WeatherObservationNewRequest:
+      type: object
+      description: |-
+        Request to record one weather/environmental observation. Unknown
+        weatherObservationDbId creates; same id with an identical body replays
+        the existing record; same id with a different body is rejected with 409.
+      required:
+      - weatherObservationDbId
+      - observedAt
+      - measurements
+      properties:
+        weatherObservationDbId:
+          description: Namespaced weather-observation identity `{authority}:weather-observation:{localId}`
+          type: string
+          example: institute-a:weather-observation:wo-2026-001
+        stationDbId:
+          description: Weather station or sensor device identity
+          type: string
+          example: institute-a:station:ws-07
+        locationDbId:
+          description: BrAPI Location where the observation was taken
+          type: string
+          example: institute-a:location:field-12
+        observedAt:
+          description: Timestamp of the observation (ISO-8601)
+          type: string
+          format: date-time
+          example: '2026-10-24T12:00:00Z'
+        measurements:
+          description: Measured environmental variables for this observation
+          type: array
+          items:
+            type: object
+            required:
+            - variableDbId
+            - value
+            properties:
+              variableDbId:
+                description: BrAPI Observation Variable or GenX VariableTerm identifier
+                type: string
+                example: institute-a:variable:air-temperature
+              value:
+                description: Measured value
+                type: number
+                example: 23.4
+              unit:
+                description: Unit of measure
+                type: string
+                example: celsius
+        qualityFlag:
+          description: Quality status of the observation
+          type: string
+          enum:
+          - valid
+          - suspect
+          - invalid
+          - missing
+          default: valid
+          example: valid
+        source:
+          description: Origin of the data (station, satellite, model, manual)
+          type: string
+          example: station
+        supersedes:
+          description: weatherObservationDbId of the observation this one replaces
+          type: string
+          example: institute-a:weather-observation:wo-2026-000
+        status:
+          description: Lifecycle state of the observation record
+          type: string
+          enum:
+          - active
+          - superseded
+          default: active
+          example: active
+        provenance:
+          description: Evidence and method provenance for the observation
+          $ref: '#/components/schemas/ProvenanceEnvelope'

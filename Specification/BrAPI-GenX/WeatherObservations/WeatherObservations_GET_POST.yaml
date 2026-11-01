@@ -1,0 +1,161 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /weather-observations:
+    get:
+      operationId: genxListWeatherObservations
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.weather-observations.list"
+        classification:
+          primaryDomain: "D5"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C7", "C9"]
+        purpose: "List recorded weather/environmental observations, optionally filtered by station, location, variable, or time range."
+        canBeUsedFor:
+          - "Discover environmental conditions for a location or station."
+          - "Provide environmental context for trials, studies, and crop models."
+        mustNotBeUsedFor:
+          - "Creating or changing an observation (use the POST endpoint)."
+          - "Assuming an observation is a BrAPI scientific Observation."
+          - "Treating the list as a complete climate record."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordWeatherObservation"
+          - "genxGetWeatherObservation"
+          - "genxQueryTelemetrySamplesOrAggregates"
+        decisions: ["RFC-010"]
+        proposalStatus: "draft-non-normative"
+      summary: List weather observations
+      description: Get a paged list of weather/environmental observations across authorities. Filters combine with AND.
+      parameters:
+      - name: stationDbId
+        description: Filter by weather station or sensor device
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: locationDbId
+        description: Filter by BrAPI Location
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: variableDbId
+        description: Filter by measured variable
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: observedFrom
+        description: Start of observation time range (ISO-8601)
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: observedTo
+        description: End of observation time range (ISO-8601)
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/WeatherObservationListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - WeatherObservations
+    post:
+      operationId: genxRecordWeatherObservation
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.weather-observations.record"
+        classification:
+          primaryDomain: "D5"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C7", "C9"]
+        purpose: "Record one weather/environmental observation with measurements, quality flag, and provenance."
+        canBeUsedFor:
+          - "Record measured environmental conditions at a station or location."
+          - "Retry an identical observation safely using the same weatherObservationDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing observation; corrections require a new record that supersedes."
+          - "Assuming the observation is a BrAPI scientific Observation."
+          - "Treating the record as a complete climate or forecast product."
+        sideEffects: "Creates a weather observation when accepted."
+        idempotency: "Same weatherObservationDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListWeatherObservations"
+          - "genxGetWeatherObservation"
+          - "genxAppendTelemetryBatch"
+        decisions: ["RFC-010"]
+        proposalStatus: "draft-non-normative"
+      summary: Record one weather observation
+      description: |-
+        Unknown weatherObservationDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WeatherObservationNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/WeatherObservation'
+                required:
+                - metadata
+                - result
+                title: WeatherObservationResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - WeatherObservations
+components:
+  responses:
+    WeatherObservationListResponse:
+      content:
+        application/json:
+          schema:
+            title: WeatherObservationListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/WeatherObservation'
+            required:
+            - metadata
+            - result
+      description: OK
