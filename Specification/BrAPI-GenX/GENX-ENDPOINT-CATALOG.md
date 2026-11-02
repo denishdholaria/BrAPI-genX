@@ -64,6 +64,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | Telemetry | 2 | proposed, non-normative |
 | Tillage | 3 | proposed, non-normative |
 | VariableTerms | 3 | proposed, non-normative |
+| VariantAnnotation | 3 | proposed, non-normative |
 | VcfImport | 3 | proposed, non-normative |
 | ViabilityTesting | 3 | proposed, non-normative |
 | WeatherForecast | 3 | proposed, non-normative |
@@ -6095,6 +6096,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.brapi-v2-1.phenotyping.get.methods, brapi-genx.brapi-v2-1.phenotyping.get.methods.by-methoddbid, brapi-genx.brapi-v2-1.phenotyping.get.ontologies, brapi-genx.brapi-v2-1.phenotyping.get.ontologies.by-ontologydbid, brapi-genx.brapi-v2-1.phenotyping.get.scales, brapi-genx.brapi-v2-1.phenotyping.get.scales.by-scaledbid, brapi-genx.brapi-v2-1.phenotyping.get.traits, brapi-genx.brapi-v2-1.phenotyping.get.traits.by-traitdbid, brapi-genx.brapi-v2-1.phenotyping.get.variables, brapi-genx.brapi-v2-1.phenotyping.get.variables.by-observationvariabledbid, brapi-genx.brapi-v2-1.phenotyping.post.methods, brapi-genx.brapi-v2-1.phenotyping.post.ontologies, brapi-genx.brapi-v2-1.phenotyping.post.scales, brapi-genx.brapi-v2-1.phenotyping.post.traits, brapi-genx.brapi-v2-1.phenotyping.post.variables, brapi-genx.brapi-v2-1.phenotyping.put.methods.by-methoddbid, brapi-genx.brapi-v2-1.phenotyping.put.ontologies.by-ontologydbid, brapi-genx.brapi-v2-1.phenotyping.put.scales.by-scaledbid, brapi-genx.brapi-v2-1.phenotyping.put.traits.by-traitdbid, brapi-genx.brapi-v2-1.phenotyping.put.variables.by-observationvariabledbid, brapi-genx.genx.v1.variable-terms.list, brapi-genx.genx.v1.variable-terms.publish-version
 - **Relevant RFC / decision references:** RFC-002, D-05, D-06, A-03
 - **Contract source:** [`Specification/BrAPI-GenX/VariableTerms/VariableTerms_VariableDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/VariableTerms/VariableTerms_VariableDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### VariantAnnotation — 3 operations
+
+### GET `/genx/v1/variant-annotations`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.variant-annotations.list`
+- **BrAPI-GenX operation identity:** `genxListVariantAnnotations` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListVariantAnnotations`
+- **GenX source module:** `VariantAnnotation`
+- **Source tag:** VariantAnnotation
+- **Proposed BrAPI-GenX classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List variant annotation records, optionally filtered by method, study, or status.
+**Source contract description:**
+> Get a paged list of variant annotations across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover variant annotations for a study or method.
+- Support genotyping interpretation auditing.
+**Must not be used for / explicit non-goals:**
+- Creating or changing an annotation (use the POST endpoint).
+- Assuming an annotation is a BrAPI data resource.
+- Treating the list as a complete annotation repository.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** analysisMethodDbId, studyDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordVariantAnnotation, genxGetVariantAnnotation, genxRegisterAnalysisMethod
+- **Related catalogue IDs:** brapi-genx.genx.v1.variant-annotations.record, brapi-genx.genx.v1.variant-annotations.get
+- **Relevant RFC / decision references:** RFC-062
+- **Contract source:** [`Specification/BrAPI-GenX/VariantAnnotation/VariantAnnotation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/VariantAnnotation/VariantAnnotation_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/variant-annotations`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.variant-annotations.record`
+- **BrAPI-GenX operation identity:** `genxRecordVariantAnnotation` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordVariantAnnotation`
+- **GenX source module:** `VariantAnnotation`
+- **Source tag:** VariantAnnotation
+- **Proposed BrAPI-GenX classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one variant annotation with annotations and provenance.
+**Source contract description:**
+> Unknown variantAnnotationDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish variant annotation metadata and payload references.
+- Retry an identical annotation safely using the same variantAnnotationDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing annotation; corrections require a new record that supersedes.
+- Assuming the annotation is a BrAPI data resource.
+- Treating the annotation as scientific validation or approval.
+- **Side effects:** Creates a variant annotation when accepted.
+- **Retry / idempotency:** Same variantAnnotationDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** VariantAnnotationNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListVariantAnnotations, genxGetVariantAnnotation, genxRegisterAnalysisMethod
+- **Related catalogue IDs:** brapi-genx.genx.v1.variant-annotations.list, brapi-genx.genx.v1.variant-annotations.get
+- **Relevant RFC / decision references:** RFC-062
+- **Contract source:** [`Specification/BrAPI-GenX/VariantAnnotation/VariantAnnotation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/VariantAnnotation/VariantAnnotation_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/variant-annotations/{variantAnnotationDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.variant-annotations.get`
+- **BrAPI-GenX operation identity:** `genxGetVariantAnnotation` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetVariantAnnotation`
+- **GenX source module:** `VariantAnnotation`
+- **Source tag:** VariantAnnotation
+- **Proposed BrAPI-GenX classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one variant annotation.
+**Source contract description:**
+> Returns the recorded annotation, or 404.
+**Can be used for:**
+- Inspect functional annotations and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the annotation is a BrAPI data resource.
+- Treating a superseded annotation as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** variantAnnotationDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordVariantAnnotation, genxListVariantAnnotations, genxRegisterAnalysisMethod
+- **Related catalogue IDs:** brapi-genx.genx.v1.variant-annotations.list, brapi-genx.genx.v1.variant-annotations.record
+- **Relevant RFC / decision references:** RFC-062
+- **Contract source:** [`Specification/BrAPI-GenX/VariantAnnotation/VariantAnnotation_VariantAnnotationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/VariantAnnotation/VariantAnnotation_VariantAnnotationDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

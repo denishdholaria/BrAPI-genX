@@ -37152,12 +37152,249 @@
         "brapi-genx.genx.v1.assay-designs.list",
         "brapi-genx.genx.v1.assay-designs.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "VariantAnnotation",
+      "brapiTag": "VariantAnnotation",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/VariantAnnotation/VariantAnnotation_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.variant-annotations.list",
+      "method": "GET",
+      "path": "/variant-annotations",
+      "operationIdInSource": "genxListVariantAnnotations",
+      "recommendedOperationId": "genxListVariantAnnotations",
+      "operationName": "List variant annotations",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List variant annotation records, optionally filtered by method, study, or status.",
+      "sourceDescription": "Get a paged list of variant annotations across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover variant annotations for a study or method.",
+        "Support genotyping interpretation auditing."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing an annotation (use the POST endpoint).",
+        "Assuming an annotation is a BrAPI data resource.",
+        "Treating the list as a complete annotation repository."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "analysisMethodDbId",
+        "studyDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordVariantAnnotation",
+        "genxGetVariantAnnotation",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-062"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.variant-annotations.record",
+        "brapi-genx.genx.v1.variant-annotations.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "VariantAnnotation",
+      "brapiTag": "VariantAnnotation",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/VariantAnnotation/VariantAnnotation_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.variant-annotations.record",
+      "method": "POST",
+      "path": "/variant-annotations",
+      "operationIdInSource": "genxRecordVariantAnnotation",
+      "recommendedOperationId": "genxRecordVariantAnnotation",
+      "operationName": "Record one variant annotation",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record one variant annotation with annotations and provenance.",
+      "sourceDescription": "Unknown variantAnnotationDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish variant annotation metadata and payload references.",
+        "Retry an identical annotation safely using the same variantAnnotationDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing annotation; corrections require a new record that supersedes.",
+        "Assuming the annotation is a BrAPI data resource.",
+        "Treating the annotation as scientific validation or approval."
+      ],
+      "sideEffects": "Creates a variant annotation when accepted.",
+      "idempotency": "Same variantAnnotationDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "VariantAnnotationNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListVariantAnnotations",
+        "genxGetVariantAnnotation",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-062"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.variant-annotations.list",
+        "brapi-genx.genx.v1.variant-annotations.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "VariantAnnotation",
+      "brapiTag": "VariantAnnotation",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/VariantAnnotation/VariantAnnotation_VariantAnnotationDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.variant-annotations.get",
+      "method": "GET",
+      "path": "/variant-annotations/{variantAnnotationDbId}",
+      "operationIdInSource": "genxGetVariantAnnotation",
+      "recommendedOperationId": "genxGetVariantAnnotation",
+      "operationName": "Get one variant annotation",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one variant annotation.",
+      "sourceDescription": "Returns the recorded annotation, or 404.",
+      "canBeUsedFor": [
+        "Inspect functional annotations and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the annotation is a BrAPI data resource.",
+        "Treating a superseded annotation as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "variantAnnotationDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordVariantAnnotation",
+        "genxListVariantAnnotations",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-062"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.variant-annotations.list",
+        "brapi-genx.genx.v1.variant-annotations.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 183,
+    "genxEntriesAdded": 186,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -37235,7 +37472,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 384,
+    "totalEntries": 387,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

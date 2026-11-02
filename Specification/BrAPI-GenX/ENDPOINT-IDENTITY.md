@@ -243,6 +243,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/assay-designs` | GET | `genxListAssayDesigns` | List assay designs | Does not create or change a design; not a BrAPI data resource. |
 | `/genx/v1/assay-designs` | POST | `genxRecordAssayDesign` | Record one assay design | Append-only record; replay/conflict semantics. |
 | `/genx/v1/assay-designs/{assayDesignDbId}` | GET | `genxGetAssayDesign` | Retrieve one assay design | Does not treat a superseded design as current. |
+| `/genx/v1/variant-annotations` | GET | `genxListVariantAnnotations` | List variant annotations | Does not create or change an annotation; not a BrAPI data resource. |
+| `/genx/v1/variant-annotations` | POST | `genxRecordVariantAnnotation` | Record one variant annotation | Append-only record; replay/conflict semantics. |
+| `/genx/v1/variant-annotations/{variantAnnotationDbId}` | GET | `genxGetVariantAnnotation` | Retrieve one variant annotation | Does not treat a superseded annotation as current. |
 | `/genx/v1/bulk-captures` | GET | `genxListBulkCaptures` | List bulk captures | Does not create or change a capture; not a BrAPI Observation. |
 | `/genx/v1/bulk-captures` | POST | `genxRecordBulkCapture` | Record one bulk capture | Append-only record; replay/conflict semantics. |
 | `/genx/v1/bulk-captures/{bulkCaptureDbId}` | GET | `genxGetBulkCapture` | Retrieve one bulk capture | Does not treat a superseded capture as current. |
