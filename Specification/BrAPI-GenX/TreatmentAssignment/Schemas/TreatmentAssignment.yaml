@@ -1,0 +1,44 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    TreatmentAssignment:
+      type: object
+      description: |-
+        One immutable treatment assignment record. A published
+        (treatmentAssignmentDbId) record never mutates in place; corrections
+        are recorded as additional records linked by supersedes.
+      required:
+      - treatmentAssignmentDbId
+      - status
+      properties:
+        treatmentAssignmentDbId:
+          description: Namespaced treatment-assignment identity `{authority}:treatment-assignment:{localId}`
+          type: string
+          example: institute-a:treatment-assignment:ta-2026-001
+        fieldDbId:
+          description: Field or site reference
+          type: string
+          example: field-001
+        treatment:
+          description: Treatment assigned
+          type: string
+          example: drought-stress
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: treatmentAssignmentDbId of the record this one replaces
+          type: string
+          example: institute-a:treatment-assignment:ta-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

@@ -83,6 +83,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | D6 | Operational field boundary and history | `FieldBoundary/` | RFC-075 |
 | N | Spray application records | `SprayApplication/` | RFC-081 |
 | D6 | Field scouting / work orders | `FieldScouting/` | RFC-074 |
+| F | Treatment assignment | `TreatmentAssignment/` | RFC-106 |
 | D6 | Yield maps | `YieldMap/` | RFC-070 |
 | D6 | Sowing / planting | `PlantingOperation/` | RFC-066 |
 | D5 | Carbon stock | `CarbonStock/` | RFC-067 |

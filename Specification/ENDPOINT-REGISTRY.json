@@ -47521,12 +47521,248 @@
         "brapi-genx.genx.v1.crosswalks.list",
         "brapi-genx.genx.v1.crosswalks.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "TreatmentAssignment",
+      "brapiTag": "TreatmentAssignment",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/TreatmentAssignment/TreatmentAssignment_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.treatment-assignments.list",
+      "method": "GET",
+      "path": "/treatment-assignments",
+      "operationIdInSource": "genxListTreatmentAssignments",
+      "recommendedOperationId": "genxListTreatmentAssignments",
+      "operationName": "List treatment assignments",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List treatment assignment records, optionally filtered by field or status.",
+      "sourceDescription": "Get a paged list of treatment assignment records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover treatment assignments for a field.",
+        "Support experimental design."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a record (use the POST endpoint).",
+        "Assuming a record is a BrAPI Observation.",
+        "Treating the list as a complete history."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "fieldDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterTreatmentAssignment",
+        "genxGetTreatmentAssignment",
+        "genxRegisterFieldScouting"
+      ],
+      "decisionReferences": [
+        "RFC-106"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.treatment-assignments.record",
+        "brapi-genx.genx.v1.treatment-assignments.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "TreatmentAssignment",
+      "brapiTag": "TreatmentAssignment",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/TreatmentAssignment/TreatmentAssignment_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.treatment-assignments.record",
+      "method": "POST",
+      "path": "/treatment-assignments",
+      "operationIdInSource": "genxRegisterTreatmentAssignment",
+      "recommendedOperationId": "genxRegisterTreatmentAssignment",
+      "operationName": "Register one treatment assignment",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one treatment assignment record with field linkage and provenance.",
+      "sourceDescription": "Unknown treatmentAssignmentDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a treatment assignment for a field.",
+        "Retry an identical record safely using the same treatmentAssignmentDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming a record is a BrAPI Observation.",
+        "Asserting that the assignment is validated or endorsed."
+      ],
+      "sideEffects": "Creates a treatment assignment identity or appends a new immutable version when accepted.",
+      "idempotency": "Same treatmentAssignmentDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "TreatmentAssignmentNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListTreatmentAssignments",
+        "genxGetTreatmentAssignment",
+        "genxRegisterFieldScouting"
+      ],
+      "decisionReferences": [
+        "RFC-106"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.treatment-assignments.list",
+        "brapi-genx.genx.v1.treatment-assignments.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "TreatmentAssignment",
+      "brapiTag": "TreatmentAssignment",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/TreatmentAssignment/TreatmentAssignment_TreatmentAssignmentDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.treatment-assignments.get",
+      "method": "GET",
+      "path": "/treatment-assignments/{treatmentAssignmentDbId}",
+      "operationIdInSource": "genxGetTreatmentAssignment",
+      "recommendedOperationId": "genxGetTreatmentAssignment",
+      "operationName": "Get one treatment assignment",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one treatment assignment record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect field linkage, treatment, status, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a record is a BrAPI Observation.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "treatmentAssignmentDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterTreatmentAssignment",
+        "genxListTreatmentAssignments",
+        "genxRegisterFieldScouting"
+      ],
+      "decisionReferences": [
+        "RFC-106"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.treatment-assignments.list",
+        "brapi-genx.genx.v1.treatment-assignments.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 315,
+    "genxEntriesAdded": 318,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -47604,7 +47840,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 516,
+    "totalEntries": 519,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -47905,5 +48141,5 @@
       ]
     }
   ],
-  "totalEntries": 516
+  "totalEntries": 519
 }
