@@ -60,6 +60,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | D4 | Phenotype capture / entry | `PhenotypeCapture/` | RFC-012 |
 | D4 | Capture workflow | `CaptureWorkflow/` | RFC-110 |
 | D4 | Quality flags / corrections | `QualityFlag/` | RFC-111 |
+| D4 | Value / missingness | `ValueMissingness/` | RFC-112 |
 | D4 | Confirmations / corrections | `PhenotypeAnnotation/` | RFC-044 |
 | D4 | Repeated measurement / time series | `RepeatedMeasurement/` | RFC-025 |
 | D4 | Bulk capture | `BulkCapture/` | RFC-040 |

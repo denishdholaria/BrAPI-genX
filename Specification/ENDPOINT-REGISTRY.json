@@ -48934,12 +48934,247 @@
         "brapi-genx.genx.v1.quality-flags.list",
         "brapi-genx.genx.v1.quality-flags.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ValueMissingness",
+      "brapiTag": "ValueMissingness",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ValueMissingness/ValueMissingness_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.value-missingness.list",
+      "method": "GET",
+      "path": "/value-missingness",
+      "operationIdInSource": "genxListValueMissingness",
+      "recommendedOperationId": "genxListValueMissingness",
+      "operationName": "List value and missingness",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List value and missingness records, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of value and missingness records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover value and missingness records.",
+        "Support phenotyping value and missingness."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a record (use the POST endpoint).",
+        "Assuming a record is a BrAPI Observation.",
+        "Treating the list as a complete history."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterValueMissingness",
+        "genxGetValueMissingness",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-112"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.value-missingness.record",
+        "brapi-genx.genx.v1.value-missingness.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ValueMissingness",
+      "brapiTag": "ValueMissingness",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ValueMissingness/ValueMissingness_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.value-missingness.record",
+      "method": "POST",
+      "path": "/value-missingness",
+      "operationIdInSource": "genxRegisterValueMissingness",
+      "recommendedOperationId": "genxRegisterValueMissingness",
+      "operationName": "Register one value and missingness",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one value and missingness record with provenance.",
+      "sourceDescription": "Unknown valueMissingnessDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a value and missingness record.",
+        "Retry an identical record safely using the same valueMissingnessDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming a record is a BrAPI Observation.",
+        "Asserting that the record is validated or endorsed."
+      ],
+      "sideEffects": "Creates a value and missingness identity or appends a new immutable version when accepted.",
+      "idempotency": "Same valueMissingnessDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "ValueMissingnessNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListValueMissingness",
+        "genxGetValueMissingness",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-112"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.value-missingness.list",
+        "brapi-genx.genx.v1.value-missingness.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ValueMissingness",
+      "brapiTag": "ValueMissingness",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ValueMissingness/ValueMissingness_ValueMissingnessDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.value-missingness.get",
+      "method": "GET",
+      "path": "/value-missingness/{valueMissingnessDbId}",
+      "operationIdInSource": "genxGetValueMissingness",
+      "recommendedOperationId": "genxGetValueMissingness",
+      "operationName": "Get one value and missingness",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one value and missingness record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect value, missingness, status, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a record is a BrAPI Observation.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "valueMissingnessDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterValueMissingness",
+        "genxListValueMissingness",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-112"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.value-missingness.list",
+        "brapi-genx.genx.v1.value-missingness.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 333,
+    "genxEntriesAdded": 336,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -49017,7 +49252,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 534,
+    "totalEntries": 537,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -49318,5 +49553,5 @@
       ]
     }
   ],
-  "totalEntries": 534
+  "totalEntries": 537
 }

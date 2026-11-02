@@ -1,0 +1,44 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ValueMissingnessNewRequest:
+      type: object
+      description: |-
+        Request to register one value and missingness record. Unknown
+        valueMissingnessDbId creates; same id with an identical body replays
+        the existing record; same id with a different body is rejected with 409.
+      required:
+      - valueMissingnessDbId
+      properties:
+        valueMissingnessDbId:
+          description: Namespaced value-missingness identity `{authority}:value-missingness:{localId}`
+          type: string
+          example: institute-a:value-missingness:vm-2026-001
+        value:
+          description: Observed value
+          type: string
+          example: 12.5
+        missing:
+          description: Whether the value is missing
+          type: boolean
+          example: false
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: valueMissingnessDbId of the record this one replaces
+          type: string
+          example: institute-a:value-missingness:vm-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

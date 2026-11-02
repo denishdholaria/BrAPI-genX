@@ -330,6 +330,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/quality-flags` | GET | `genxListQualityFlags` | List quality flags | Does not create or change a record; not a BrAPI Observation. |
 | `/genx/v1/quality-flags` | POST | `genxRegisterQualityFlag` | Register one quality flag | Append-only record; replay/conflict semantics. |
 | `/genx/v1/quality-flags/{qualityFlagDbId}` | GET | `genxGetQualityFlag` | Retrieve one quality flag | Does not treat a superseded record as current. |
+| `/genx/v1/value-missingness` | GET | `genxListValueMissingness` | List value and missingness | Does not create or change a record; not a BrAPI Observation. |
+| `/genx/v1/value-missingness` | POST | `genxRegisterValueMissingness` | Register one value and missingness | Append-only record; replay/conflict semantics. |
+| `/genx/v1/value-missingness/{valueMissingnessDbId}` | GET | `genxGetValueMissingness` | Retrieve one value and missingness | Does not treat a superseded record as current. |
 | `/genx/v1/genomic-datasets` | GET | `genxListGenomicDatasets` | List prepared genomic datasets | Does not create or change a dataset; not a BrAPI VariantSet or VariantMatrix. |
 | `/genx/v1/genomic-datasets` | POST | `genxRegisterGenomicDataset` | Register one prepared genomic dataset | Append-only record; replay/conflict semantics; does not upload dataset bytes. |
 | `/genx/v1/genomic-datasets/{genomicDatasetDbId}` | GET | `genxGetGenomicDataset` | Retrieve one prepared genomic dataset | Does not treat a withdrawn dataset as current. |
