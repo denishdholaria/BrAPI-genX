@@ -42586,12 +42586,247 @@
         "brapi-genx.genx.v1.terminology-versions.list",
         "brapi-genx.genx.v1.terminology-versions.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "OntologyTerm",
+      "brapiTag": "OntologyTerm",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/OntologyTerm/OntologyTerm_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.ontology-terms.list",
+      "method": "GET",
+      "path": "/ontology-terms",
+      "operationIdInSource": "genxListOntologyTerms",
+      "recommendedOperationId": "genxListOntologyTerms",
+      "operationName": "List ontology terms",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List ontology term and synonym entries, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of ontology term and synonym entries across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover ontology terms and synonyms.",
+        "Support ontology mapping and terminology governance."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing an entry (use the POST endpoint).",
+        "Assuming an entry is a BrAPI Observation.",
+        "Treating the list as a complete ontology."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterOntologyTerm",
+        "genxGetOntologyTerm",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-085"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.ontology-terms.record",
+        "brapi-genx.genx.v1.ontology-terms.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "OntologyTerm",
+      "brapiTag": "OntologyTerm",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/OntologyTerm/OntologyTerm_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.ontology-terms.record",
+      "method": "POST",
+      "path": "/ontology-terms",
+      "operationIdInSource": "genxRegisterOntologyTerm",
+      "recommendedOperationId": "genxRegisterOntologyTerm",
+      "operationName": "Register one ontology term entry",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one ontology term or synonym entry with provenance.",
+      "sourceDescription": "Unknown ontologyTermDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish an ontology term or synonym.",
+        "Retry an identical entry safely using the same ontologyTermDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing entry; corrections require a new record that supersedes.",
+        "Assuming an entry is a BrAPI Observation.",
+        "Asserting that the entry is validated or endorsed."
+      ],
+      "sideEffects": "Creates an ontology term identity or appends a new immutable version when accepted.",
+      "idempotency": "Same ontologyTermDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "OntologyTermRecordNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListOntologyTerms",
+        "genxGetOntologyTerm",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-085"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.ontology-terms.list",
+        "brapi-genx.genx.v1.ontology-terms.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "OntologyTerm",
+      "brapiTag": "OntologyTerm",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/OntologyTerm/OntologyTerm_OntologyTermDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.ontology-terms.get",
+      "method": "GET",
+      "path": "/ontology-terms/{ontologyTermDbId}",
+      "operationIdInSource": "genxGetOntologyTerm",
+      "recommendedOperationId": "genxGetOntologyTerm",
+      "operationName": "Get one ontology term entry",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one ontology term or synonym entry.",
+      "sourceDescription": "Returns the registered entry, or 404.",
+      "canBeUsedFor": [
+        "Inspect term, synonyms, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming an entry is a BrAPI Observation.",
+        "Treating a superseded entry as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "ontologyTermDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterOntologyTerm",
+        "genxListOntologyTerms",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-085"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.ontology-terms.list",
+        "brapi-genx.genx.v1.ontology-terms.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 252,
+    "genxEntriesAdded": 255,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -42669,7 +42904,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 453,
+    "totalEntries": 456,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -42970,5 +43205,5 @@
       ]
     }
   ],
-  "totalEntries": 453
+  "totalEntries": 456
 }

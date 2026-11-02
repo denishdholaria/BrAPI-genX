@@ -1,0 +1,50 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    OntologyTermRecord:
+      type: object
+      description: |-
+        One immutable ontology term or synonym entry. A published
+        (ontologyTermDbId) record never mutates in place; corrections are
+        recorded as additional entries linked by supersedes.
+      required:
+      - ontologyTermDbId
+      - status
+      properties:
+        ontologyTermDbId:
+          description: Namespaced ontology-term identity `{authority}:ontology-term:{localId}`
+          type: string
+          example: institute-a:ontology-term:ot-2026-001
+        term:
+          description: Ontology term
+          type: string
+          example: wheat
+        synonyms:
+          description: Synonyms for the term
+          type: array
+          items:
+            type: string
+          example: ["Triticum aestivum"]
+        ontology:
+          description: Source ontology name
+          type: string
+          example: AGROVOC
+        status:
+          description: Lifecycle state of the entry
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: ontologyTermDbId of the entry this one replaces
+          type: string
+          example: institute-a:ontology-term:ot-2026-000
+        provenance:
+          description: Evidence and method provenance for the entry
+          $ref: '#/components/schemas/ProvenanceEnvelope'

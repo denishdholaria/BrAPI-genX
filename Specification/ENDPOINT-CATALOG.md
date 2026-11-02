@@ -13,8 +13,8 @@ A catalogue identifier does not replace a source operationId or route. Classific
 | Surface | Operations | Contract status |
 |---|---:|---|
 | BrAPI v2.1 official modules | 201 | Released specification; implementation availability not inferred |
-| BrAPI GenX /genx/v1 | 252 | Proposed, non-normative |
-| **Total** | **453** | Existing contracts plus proposed operations |
+| BrAPI GenX /genx/v1 | 255 | Proposed, non-normative |
+| **Total** | **456** | Existing contracts plus proposed operations |
 
 BijMantra snapshot: 2240 records from the inventory generated 2026-10-17; see [source inventory](https://github.com/denishdholaria/bijmantraorg/blob/main/endpoints-inventory.md) and [crosswalk](./BIJMANTRA-CROSSWALK.md).
 
@@ -13024,6 +13024,111 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
+### OntologyTerm — 3 operations
+
+### GET `/genx/v1/ontology-terms`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.ontology-terms.list`
+- **BrAPI-GenX operation identity:** `genxListOntologyTerms` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListOntologyTerms`
+- **GenX source module:** `OntologyTerm`
+- **Source tag:** OntologyTerm
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C4 — Scientific terminology governance, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List ontology term and synonym entries, optionally filtered by status.
+**Source contract description:**
+> Get a paged list of ontology term and synonym entries across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover ontology terms and synonyms.
+- Support ontology mapping and terminology governance.
+**Must not be used for / explicit non-goals:**
+- Creating or changing an entry (use the POST endpoint).
+- Assuming an entry is a BrAPI Observation.
+- Treating the list as a complete ontology.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterOntologyTerm, genxGetOntologyTerm, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.ontology-terms.record, brapi-genx.genx.v1.ontology-terms.get
+- **Relevant RFC / decision references:** RFC-085
+- **Contract source:** [`Specification/BrAPI-GenX/OntologyTerm/OntologyTerm_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/OntologyTerm/OntologyTerm_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/ontology-terms`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.ontology-terms.record`
+- **BrAPI-GenX operation identity:** `genxRegisterOntologyTerm` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterOntologyTerm`
+- **GenX source module:** `OntologyTerm`
+- **Source tag:** OntologyTerm
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C4 — Scientific terminology governance, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register one ontology term or synonym entry with provenance.
+**Source contract description:**
+> Unknown ontologyTermDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish an ontology term or synonym.
+- Retry an identical entry safely using the same ontologyTermDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing entry; corrections require a new record that supersedes.
+- Assuming an entry is a BrAPI Observation.
+- Asserting that the entry is validated or endorsed.
+- **Side effects:** Creates an ontology term identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same ontologyTermDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** OntologyTermRecordNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListOntologyTerms, genxGetOntologyTerm, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.ontology-terms.list, brapi-genx.genx.v1.ontology-terms.get
+- **Relevant RFC / decision references:** RFC-085
+- **Contract source:** [`Specification/BrAPI-GenX/OntologyTerm/OntologyTerm_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/OntologyTerm/OntologyTerm_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/ontology-terms/{ontologyTermDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.ontology-terms.get`
+- **BrAPI-GenX operation identity:** `genxGetOntologyTerm` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetOntologyTerm`
+- **GenX source module:** `OntologyTerm`
+- **Source tag:** OntologyTerm
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C4 — Scientific terminology governance, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one ontology term or synonym entry.
+**Source contract description:**
+> Returns the registered entry, or 404.
+**Can be used for:**
+- Inspect term, synonyms, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming an entry is a BrAPI Observation.
+- Treating a superseded entry as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** ontologyTermDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterOntologyTerm, genxListOntologyTerms, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.ontology-terms.list, brapi-genx.genx.v1.ontology-terms.record
+- **Relevant RFC / decision references:** RFC-085
+- **Contract source:** [`Specification/BrAPI-GenX/OntologyTerm/OntologyTerm_OntologyTermDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/OntologyTerm/OntologyTerm_OntologyTermDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
 ### ParentCandidateSelection — 3 operations
 
 ### GET `/genx/v1/parent-candidate-selections`
@@ -16624,6 +16729,6 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - Unique full-base-path/method/route keys: `True`.
 - Unique source/advisory operation identifiers where present: `True`.
 - BrAPI v2.1 inventory rows resolved to source YAML operations: 201 / 201.
-- GenX operations documented: 252.
+- GenX operations documented: 255.
 
 See [BIJMANTRA-CROSSWALK.md](./BIJMANTRA-CROSSWALK.md) for inventory evidence and semantic boundaries.

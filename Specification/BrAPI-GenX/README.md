@@ -70,6 +70,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `UnitsAndQuantity/` | `UnitsAndQuantity` — units and quantity semantics entries (unit, quantity, definition, provenance) | `GET /genx/v1/units-and-quantities` (`genxListUnitsAndQuantities`); `POST /genx/v1/units-and-quantities` (`genxRegisterUnitsAndQuantity`); `GET /genx/v1/units-and-quantities/{unitsAndQuantityDbId}` (`genxGetUnitsAndQuantity`) |
 | `ExternalVocabulary/` | `ExternalVocabulary` — external vocabulary sync entries (source, target, mapping, provenance) | `GET /genx/v1/external-vocabularies` (`genxListExternalVocabularies`); `POST /genx/v1/external-vocabularies` (`genxRegisterExternalVocabulary`); `GET /genx/v1/external-vocabularies/{externalVocabularyDbId}` (`genxGetExternalVocabulary`) |
 | `TerminologyVersion/` | `TerminologyVersion` — terminology version entries (terminology, version, provenance) | `GET /genx/v1/terminology-versions` (`genxListTerminologyVersions`); `POST /genx/v1/terminology-versions` (`genxRegisterTerminologyVersion`); `GET /genx/v1/terminology-versions/{terminologyVersionDbId}` (`genxGetTerminologyVersion`) |
+| `OntologyTerm/` | `OntologyTermRecord` — ontology term and synonym entries (term, synonyms, ontology, provenance) | `GET /genx/v1/ontology-terms` (`genxListOntologyTerms`); `POST /genx/v1/ontology-terms` (`genxRegisterOntologyTerm`); `GET /genx/v1/ontology-terms/{ontologyTermDbId}` (`genxGetOntologyTerm`) |
 | `TaxonName/` | `TaxonName` — taxon name and synonym entries (scientific name, synonyms, provenance) | `GET /genx/v1/taxon-names` (`genxListTaxonNames`); `POST /genx/v1/taxon-names` (`genxRegisterTaxonName`); `GET /genx/v1/taxon-names/{taxonNameDbId}` (`genxGetTaxonName`) |
 | `FAIR/` | `FAIRPackage` — licensed, embargo-aware payload envelopes | `GET /genx/v1/fair-packages` (`genxListFairPackageMetadata`); `POST /genx/v1/fair-packages` (`genxRegisterFairPackage`); `GET /genx/v1/fair-packages/{packageDbId}` (`genxGetFairPackageMetadata`) |
 | `Telemetry/` | `TelemetryPoint` — sensor streams, idempotent ingest, aggregates | `GET /genx/v1/telemetry` (`genxQueryTelemetrySamplesOrAggregates`); `POST /genx/v1/telemetry` (`genxAppendTelemetryBatch`) |
@@ -199,7 +200,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-081-Spray-Application](./RFC-081-Spray-Application.md),
 [RFC-082-Units-And-Quantity](./RFC-082-Units-And-Quantity.md),
 [RFC-083-External-Vocabulary](./RFC-083-External-Vocabulary.md),
-[RFC-084-Terminology-Version](./RFC-084-Terminology-Version.md).
+[RFC-084-Terminology-Version](./RFC-084-Terminology-Version.md),
+[RFC-085-Ontology-Term](./RFC-085-Ontology-Term.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).
