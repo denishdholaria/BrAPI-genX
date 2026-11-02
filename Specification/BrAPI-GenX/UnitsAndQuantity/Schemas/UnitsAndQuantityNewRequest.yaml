@@ -1,0 +1,48 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    UnitsAndQuantityNewRequest:
+      type: object
+      description: |-
+        Request to register one units and quantity semantics entry. Unknown
+        unitsAndQuantityDbId creates; same id with an identical body replays
+        the existing record; same id with a different body is rejected with 409.
+      required:
+      - unitsAndQuantityDbId
+      properties:
+        unitsAndQuantityDbId:
+          description: Namespaced units-and-quantity identity `{authority}:units-and-quantity:{localId}`
+          type: string
+          example: institute-a:units-and-quantity:uq-2026-001
+        unit:
+          description: Unit symbol or name
+          type: string
+          example: kg/ha
+        quantity:
+          description: Quantity kind
+          type: string
+          example: mass per area
+        definition:
+          description: Definition of the unit/quantity
+          type: string
+          example: kilograms per hectare
+        status:
+          description: Lifecycle state of the entry
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: unitsAndQuantityDbId of the entry this one replaces
+          type: string
+          example: institute-a:units-and-quantity:uq-2026-000
+        provenance:
+          description: Evidence and method provenance for the entry
+          $ref: '#/components/schemas/ProvenanceEnvelope'

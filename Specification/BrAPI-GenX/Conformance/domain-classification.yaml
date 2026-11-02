@@ -445,6 +445,11 @@ modules:
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C4", "C9"]
     rationale: "Developmental stage vocabulary entries; BrAPI v2.1 has no equivalent record."
+  - path: "UnitsAndQuantity/"
+    object: "UnitsAndQuantity"
+    primary_class: null
+    cross_cutting: ["C1", "C2", "C3", "C4", "C9"]
+    rationale: "Units and quantity semantics entries; BrAPI v2.1 has no equivalent record."
   - path: "TaxonName/"
     object: "TaxonName"
     primary_class: null

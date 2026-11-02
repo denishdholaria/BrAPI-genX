@@ -92,6 +92,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | D5 | Water balance | `WaterBalance/` | RFC-068 |
 | B | Taxon names and synonyms | `TaxonName/` | RFC-080 |
 | G | Developmental stage vocabulary | `DevelopmentalStage/` | RFC-079 |
+| G | Units and quantity semantics | `UnitsAndQuantity/` | RFC-082 |
 | I | Genomic dataset release/access | `GenomicDatasets/` | RFC-013 |
 | S | FAIR packages | `FAIR/` | RFC-006 |
 | S | Research asset registry, persistent identifiers / DOI, license/access, embargo | `ResearchAssets/` | RFC-016 |
@@ -109,7 +110,7 @@ D5 row 12 named gaps are now covered (emissions, soil texture/chemistry/moisture
 6. **D3 Genomics pipeline provenance** — VCF import/export, reference assembly versioning, bioinformatics pipeline provenance, genomic dataset release/access.
 7. **D1 Genebank storage/conservation** — storage location/capacity, viability/germination, quarantine, safety duplication, regeneration, sample custody/transfer, retention/disposal.
 8. **S Research assets & publication** — builds on GenX `FAIRPackage`; add research asset registry, persistent identifiers/DOI, dataset/model catalogue, protocol/method library, embargo management.
-9. **G Terminology depth** — builds on GenX `VariableTerm`; add units/quantity semantics, measurement method catalogue, external vocab sync, terminology versioning/provenance.
+9. **G Terminology depth** — builds on GenX `VariableTerm`; add measurement method catalogue, external vocab sync, terminology versioning/provenance.
 10. **B/F reference data & experimental design depth** — project/funding, reusable lists/cohorts, calendars/time, location geometry, block/replication/randomization, treatment assignment, plot identity, experimental protocol/design, field book definition, trial network/MET design.
 
 ## Rules for adding new GenX specs

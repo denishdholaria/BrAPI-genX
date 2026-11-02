@@ -1,0 +1,48 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    UnitsAndQuantity:
+      type: object
+      description: |-
+        One immutable units and quantity semantics entry. A published
+        (unitsAndQuantityDbId) record never mutates in place; corrections
+        are recorded as additional entries linked by supersedes.
+      required:
+      - unitsAndQuantityDbId
+      - status
+      properties:
+        unitsAndQuantityDbId:
+          description: Namespaced units-and-quantity identity `{authority}:units-and-quantity:{localId}`
+          type: string
+          example: institute-a:units-and-quantity:uq-2026-001
+        unit:
+          description: Unit symbol or name
+          type: string
+          example: kg/ha
+        quantity:
+          description: Quantity kind
+          type: string
+          example: mass per area
+        definition:
+          description: Definition of the unit/quantity
+          type: string
+          example: kilograms per hectare
+        status:
+          description: Lifecycle state of the entry
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: unitsAndQuantityDbId of the entry this one replaces
+          type: string
+          example: institute-a:units-and-quantity:uq-2026-000
+        provenance:
+          description: Evidence and method provenance for the entry
+          $ref: '#/components/schemas/ProvenanceEnvelope'

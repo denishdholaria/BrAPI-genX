@@ -41881,12 +41881,247 @@
         "brapi-genx.genx.v1.spray-applications.list",
         "brapi-genx.genx.v1.spray-applications.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "UnitsAndQuantity",
+      "brapiTag": "UnitsAndQuantity",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/UnitsAndQuantity/UnitsAndQuantity_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.units-and-quantities.list",
+      "method": "GET",
+      "path": "/units-and-quantities",
+      "operationIdInSource": "genxListUnitsAndQuantities",
+      "recommendedOperationId": "genxListUnitsAndQuantities",
+      "operationName": "List units and quantities",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List units and quantity semantics entries, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of units and quantity semantics entries across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover unit and quantity conventions.",
+        "Support measurement and terminology governance."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing an entry (use the POST endpoint).",
+        "Assuming an entry is a BrAPI Observation.",
+        "Treating the list as a complete unit catalogue."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterUnitsAndQuantity",
+        "genxGetUnitsAndQuantity",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-082"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.units-and-quantities.record",
+        "brapi-genx.genx.v1.units-and-quantities.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "UnitsAndQuantity",
+      "brapiTag": "UnitsAndQuantity",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/UnitsAndQuantity/UnitsAndQuantity_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.units-and-quantities.record",
+      "method": "POST",
+      "path": "/units-and-quantities",
+      "operationIdInSource": "genxRegisterUnitsAndQuantity",
+      "recommendedOperationId": "genxRegisterUnitsAndQuantity",
+      "operationName": "Register one units and quantity entry",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one units and quantity semantics entry with provenance.",
+      "sourceDescription": "Unknown unitsAndQuantityDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a unit or quantity convention.",
+        "Retry an identical entry safely using the same unitsAndQuantityDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing entry; corrections require a new record that supersedes.",
+        "Assuming an entry is a BrAPI Observation.",
+        "Asserting that the entry is validated or endorsed."
+      ],
+      "sideEffects": "Creates a units-and-quantity identity or appends a new immutable version when accepted.",
+      "idempotency": "Same unitsAndQuantityDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "UnitsAndQuantityNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListUnitsAndQuantities",
+        "genxGetUnitsAndQuantity",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-082"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.units-and-quantities.list",
+        "brapi-genx.genx.v1.units-and-quantities.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "UnitsAndQuantity",
+      "brapiTag": "UnitsAndQuantity",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/UnitsAndQuantity/UnitsAndQuantity_UnitsAndQuantityDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.units-and-quantities.get",
+      "method": "GET",
+      "path": "/units-and-quantities/{unitsAndQuantityDbId}",
+      "operationIdInSource": "genxGetUnitsAndQuantity",
+      "recommendedOperationId": "genxGetUnitsAndQuantity",
+      "operationName": "Get one units and quantity entry",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one units and quantity semantics entry.",
+      "sourceDescription": "Returns the registered entry, or 404.",
+      "canBeUsedFor": [
+        "Inspect unit, quantity, definition, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming an entry is a BrAPI Observation.",
+        "Treating a superseded entry as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "unitsAndQuantityDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterUnitsAndQuantity",
+        "genxListUnitsAndQuantities",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-082"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.units-and-quantities.list",
+        "brapi-genx.genx.v1.units-and-quantities.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 243,
+    "genxEntriesAdded": 246,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -41964,7 +42199,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 444,
+    "totalEntries": 447,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -42265,5 +42500,5 @@
       ]
     }
   ],
-  "totalEntries": 444
+  "totalEntries": 447
 }

@@ -330,6 +330,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/developmental-stages` | GET | `genxListDevelopmentalStages` | List developmental stages | Does not create or change an entry; not a BrAPI data resource. |
 | `/genx/v1/developmental-stages` | POST | `genxRegisterDevelopmentalStage` | Register one developmental stage | Append-only record; replay/conflict semantics. |
 | `/genx/v1/developmental-stages/{developmentalStageDbId}` | GET | `genxGetDevelopmentalStage` | Retrieve one developmental stage | Does not treat a superseded entry as current. |
+| `/genx/v1/units-and-quantities` | GET | `genxListUnitsAndQuantities` | List units and quantities | Does not create or change an entry; not a BrAPI data resource. |
+| `/genx/v1/units-and-quantities` | POST | `genxRegisterUnitsAndQuantity` | Register one units and quantity entry | Append-only record; replay/conflict semantics. |
+| `/genx/v1/units-and-quantities/{unitsAndQuantityDbId}` | GET | `genxGetUnitsAndQuantity` | Retrieve one units and quantity entry | Does not treat a superseded entry as current. |
 | `/genx/v1/taxon-names` | GET | `genxListTaxonNames` | List taxon names | Does not create or change an entry; not a BrAPI data resource. |
 | `/genx/v1/taxon-names` | POST | `genxRegisterTaxonName` | Register one taxon name | Append-only record; replay/conflict semantics. |
 | `/genx/v1/taxon-names/{taxonNameDbId}` | GET | `genxGetTaxonName` | Retrieve one taxon name | Does not treat a superseded entry as current. |

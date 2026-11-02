@@ -1,0 +1,139 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /units-and-quantities:
+    get:
+      operationId: genxListUnitsAndQuantities
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.units-and-quantities.list"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C4", "C9"]
+        purpose: "List units and quantity semantics entries, optionally filtered by status."
+        canBeUsedFor:
+          - "Discover unit and quantity conventions."
+          - "Support measurement and terminology governance."
+        mustNotBeUsedFor:
+          - "Creating or changing an entry (use the POST endpoint)."
+          - "Assuming an entry is a BrAPI Observation."
+          - "Treating the list as a complete unit catalogue."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterUnitsAndQuantity"
+          - "genxGetUnitsAndQuantity"
+          - "genxPublishVariableTermVersion"
+        decisions: ["RFC-082"]
+        proposalStatus: "draft-non-normative"
+      summary: List units and quantities
+      description: Get a paged list of units and quantity semantics entries across authorities. Filters combine with AND.
+      parameters:
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/UnitsAndQuantityListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - UnitsAndQuantity
+    post:
+      operationId: genxRegisterUnitsAndQuantity
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.units-and-quantities.record"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C4", "C9"]
+        purpose: "Register one units and quantity semantics entry with provenance."
+        canBeUsedFor:
+          - "Publish a unit or quantity convention."
+          - "Retry an identical entry safely using the same unitsAndQuantityDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing entry; corrections require a new record that supersedes."
+          - "Assuming an entry is a BrAPI Observation."
+          - "Asserting that the entry is validated or endorsed."
+        sideEffects: "Creates a units-and-quantity identity or appends a new immutable version when accepted."
+        idempotency: "Same unitsAndQuantityDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListUnitsAndQuantities"
+          - "genxGetUnitsAndQuantity"
+          - "genxPublishVariableTermVersion"
+        decisions: ["RFC-082"]
+        proposalStatus: "draft-non-normative"
+      summary: Register one units and quantity entry
+      description: |-
+        Unknown unitsAndQuantityDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UnitsAndQuantityNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/UnitsAndQuantity'
+                required:
+                - metadata
+                - result
+                title: UnitsAndQuantityResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - UnitsAndQuantity
+components:
+  responses:
+    UnitsAndQuantityListResponse:
+      content:
+        application/json:
+          schema:
+            title: UnitsAndQuantityListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UnitsAndQuantity'
+            required:
+            - metadata
+            - result
+      description: OK
