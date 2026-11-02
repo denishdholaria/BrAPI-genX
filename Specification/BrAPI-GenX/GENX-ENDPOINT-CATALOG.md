@@ -32,6 +32,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | CropTraitDictionary | 3 | proposed, non-normative |
 | CrossingSchedule | 3 | proposed, non-normative |
 | Crosswalk | 3 | proposed, non-normative |
+| CrsTransform | 3 | proposed, non-normative |
 | CustodyTransfer | 3 | proposed, non-normative |
 | DevelopmentalStage | 3 | proposed, non-normative |
 | DiagnosticEvidence | 3 | proposed, non-normative |
@@ -2877,6 +2878,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.crosswalks.list, brapi-genx.genx.v1.crosswalks.record
 - **Relevant RFC / decision references:** RFC-105
 - **Contract source:** [`Specification/BrAPI-GenX/Crosswalk/Crosswalk_CrosswalkDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Crosswalk/Crosswalk_CrosswalkDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### CrsTransform — 3 operations
+
+### GET `/genx/v1/crs-transforms`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.crs-transforms.list`
+- **BrAPI-GenX operation identity:** `genxListCrsTransforms` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListCrsTransforms`
+- **GenX source module:** `CrsTransform`
+- **Source tag:** CrsTransform
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List crstransform records, optionally filtered by status.
+**Source contract description:**
+> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover artifactcatalogues.
+- Support VCF import/export.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a record (use the POST endpoint).
+- Assuming a record is a BrAPI data resource.
+- Treating the list as a complete history.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterCrsTransform, genxGetCrsTransform, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.crs-transforms.record, brapi-genx.genx.v1.crs-transforms.get
+- **Relevant RFC / decision references:** RFC-140
+- **Contract source:** [`Specification/BrAPI-GenX/CrsTransform/CrsTransform_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CrsTransform/CrsTransform_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/crs-transforms`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.crs-transforms.record`
+- **BrAPI-GenX operation identity:** `genxRegisterCrsTransform` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterCrsTransform`
+- **GenX source module:** `CrsTransform`
+- **Source tag:** CrsTransform
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register one crstransform record with provenance.
+**Source contract description:**
+> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish a artifactcatalogue.
+- Retry an identical record safely using the same vcfExportDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming a record is a BrAPI data resource.
+- Asserting that the export is validated or endorsed.
+- **Side effects:** Creates a crstransform identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same crsTransformDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** CrsTransformNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListCrsTransforms, genxGetCrsTransform, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.crs-transforms.list, brapi-genx.genx.v1.crs-transforms.get
+- **Relevant RFC / decision references:** RFC-140
+- **Contract source:** [`Specification/BrAPI-GenX/CrsTransform/CrsTransform_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CrsTransform/CrsTransform_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/crs-transforms/{crsTransformDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.crs-transforms.get`
+- **BrAPI-GenX operation identity:** `genxGetCrsTransform` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetCrsTransform`
+- **GenX source module:** `CrsTransform`
+- **Source tag:** CrsTransform
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one crstransform record.
+**Source contract description:**
+> Returns the registered record, or 404.
+**Can be used for:**
+- Inspect export, status, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming a record is a BrAPI data resource.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** crsTransformDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterCrsTransform, genxListCrsTransforms, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.crs-transforms.list, brapi-genx.genx.v1.crs-transforms.record
+- **Relevant RFC / decision references:** RFC-140
+- **Contract source:** [`Specification/BrAPI-GenX/CrsTransform/CrsTransform_CrsTransformDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CrsTransform/CrsTransform_CrsTransformDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -7664,7 +7770,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> List localconstraint records, optionally filtered by status.
+> List local constraint records, optionally filtered by status.
 **Source contract description:**
 > Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
 **Can be used for:**
@@ -7699,7 +7805,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> Register one localconstraint record with provenance.
+> Register one local constraint record with provenance.
 **Source contract description:**
 > Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
 **Can be used for:**
@@ -7709,7 +7815,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
 - Asserting that the export is validated or endorsed.
-- **Side effects:** Creates a localconstraint identity or appends a new immutable version when accepted.
+- **Side effects:** Creates a local constraint identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same localConstraintDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
 - **Request schema refs recorded:** LocalConstraintNewRequest
@@ -7734,7 +7840,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> Retrieve one localconstraint record.
+> Retrieve one local constraint record.
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**

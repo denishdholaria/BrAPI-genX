@@ -1,0 +1,52 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    CrsTransform:
+      type: object
+      description: |-
+        One immutable CRS transform record. A published (crsTransformDbId) record
+        never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - crsTransformDbId
+      - status
+      properties:
+        crsTransformDbId:
+          description: Namespaced CRS-transform identity `{authority}:crs-transform:{localId}`
+          type: string
+          example: institute-a:crs-transform:ct-2026-001
+        sourceCrs:
+          description: Source CRS
+          type: string
+          example: EPSG:4326
+        targetCrs:
+          description: Target CRS
+          type: string
+          example: EPSG:3857
+        transformMethod:
+          description: Transform method
+          type: string
+          example: reprojection
+        parameters:
+          description: Transform parameters
+          type: string
+          example: {}
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: crsTransformDbId of the record this one replaces
+          type: string
+          example: institute-a:crs-transform:ct-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
