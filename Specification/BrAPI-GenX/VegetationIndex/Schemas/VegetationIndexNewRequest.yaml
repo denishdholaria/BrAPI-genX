@@ -1,0 +1,56 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    VegetationIndexNewRequest:
+      type: object
+      description: |-
+        Request to register one vegetation index record. Unknown vegetationIndexDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - vegetationIndexDbId
+      properties:
+        vegetationIndexDbId:
+          description: Namespaced vegetation-index identity `{authority}:vegetation-index:{localId}`
+          type: string
+          example: institute-a:vegetation-index:vi-2026-001
+        indexType:
+          description: Type of vegetation index
+          type: string
+          example: NDVI
+        indexName:
+          description: Name of the vegetation index
+          type: string
+          example: ndvi-2026
+        acquisitionDate:
+          description: Acquisition date
+          type: string
+          example: "2026-05-01"
+        crs:
+          description: Coordinate reference system
+          type: string
+          example: EPSG:4326
+        resolution:
+          description: Spatial resolution
+          type: string
+          example: "30m"
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: vegetationIndexDbId of the record this one replaces
+          type: string
+          example: institute-a:vegetation-index:vi-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

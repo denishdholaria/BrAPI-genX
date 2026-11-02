@@ -1,0 +1,56 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    VegetationIndex:
+      type: object
+      description: |-
+        One immutable vegetation index record. A published (vegetationIndexDbId) record
+        never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - vegetationIndexDbId
+      - status
+      properties:
+        vegetationIndexDbId:
+          description: Namespaced vegetation-index identity `{authority}:vegetation-index:{localId}`
+          type: string
+          example: institute-a:vegetation-index:vi-2026-001
+        indexType:
+          description: Type of vegetation index
+          type: string
+          example: NDVI
+        indexName:
+          description: Name of the vegetation index
+          type: string
+          example: ndvi-2026
+        acquisitionDate:
+          description: Acquisition date
+          type: string
+          example: "2026-05-01"
+        crs:
+          description: Coordinate reference system
+          type: string
+          example: EPSG:4326
+        resolution:
+          description: Spatial resolution
+          type: string
+          example: "30m"
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: vegetationIndexDbId of the record this one replaces
+          type: string
+          example: institute-a:vegetation-index:vi-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
