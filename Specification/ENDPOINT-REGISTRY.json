@@ -42351,12 +42351,247 @@
         "brapi-genx.genx.v1.external-vocabularies.list",
         "brapi-genx.genx.v1.external-vocabularies.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "TerminologyVersion",
+      "brapiTag": "TerminologyVersion",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/TerminologyVersion/TerminologyVersion_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.terminology-versions.list",
+      "method": "GET",
+      "path": "/terminology-versions",
+      "operationIdInSource": "genxListTerminologyVersions",
+      "recommendedOperationId": "genxListTerminologyVersions",
+      "operationName": "List terminology versions",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List terminology version entries, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of terminology version entries across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover terminology version entries.",
+        "Support terminology versioning and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing an entry (use the POST endpoint).",
+        "Assuming an entry is a BrAPI Observation.",
+        "Treating the list as a complete version catalogue."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterTerminologyVersion",
+        "genxGetTerminologyVersion",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-084"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.terminology-versions.record",
+        "brapi-genx.genx.v1.terminology-versions.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "TerminologyVersion",
+      "brapiTag": "TerminologyVersion",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/TerminologyVersion/TerminologyVersion_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.terminology-versions.record",
+      "method": "POST",
+      "path": "/terminology-versions",
+      "operationIdInSource": "genxRegisterTerminologyVersion",
+      "recommendedOperationId": "genxRegisterTerminologyVersion",
+      "operationName": "Register one terminology version entry",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one terminology version entry with provenance.",
+      "sourceDescription": "Unknown terminologyVersionDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a terminology version entry.",
+        "Retry an identical entry safely using the same terminologyVersionDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing entry; corrections require a new record that supersedes.",
+        "Assuming an entry is a BrAPI Observation.",
+        "Asserting that the entry is validated or endorsed."
+      ],
+      "sideEffects": "Creates a terminology version identity or appends a new immutable version when accepted.",
+      "idempotency": "Same terminologyVersionDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "TerminologyVersionNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListTerminologyVersions",
+        "genxGetTerminologyVersion",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-084"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.terminology-versions.list",
+        "brapi-genx.genx.v1.terminology-versions.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "TerminologyVersion",
+      "brapiTag": "TerminologyVersion",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/TerminologyVersion/TerminologyVersion_TerminologyVersionDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.terminology-versions.get",
+      "method": "GET",
+      "path": "/terminology-versions/{terminologyVersionDbId}",
+      "operationIdInSource": "genxGetTerminologyVersion",
+      "recommendedOperationId": "genxGetTerminologyVersion",
+      "operationName": "Get one terminology version entry",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one terminology version entry.",
+      "sourceDescription": "Returns the registered entry, or 404.",
+      "canBeUsedFor": [
+        "Inspect version, provenance, and status."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming an entry is a BrAPI Observation.",
+        "Treating a superseded entry as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "terminologyVersionDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterTerminologyVersion",
+        "genxListTerminologyVersions",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-084"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.terminology-versions.list",
+        "brapi-genx.genx.v1.terminology-versions.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 249,
+    "genxEntriesAdded": 252,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -42434,7 +42669,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 450,
+    "totalEntries": 453,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -42735,5 +42970,5 @@
       ]
     }
   ],
-  "totalEntries": 450
+  "totalEntries": 453
 }

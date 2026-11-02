@@ -336,6 +336,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/external-vocabularies` | GET | `genxListExternalVocabularies` | List external vocabularies | Does not create or change an entry; not a BrAPI data resource. |
 | `/genx/v1/external-vocabularies` | POST | `genxRegisterExternalVocabulary` | Register one external vocabulary entry | Append-only record; replay/conflict semantics. |
 | `/genx/v1/external-vocabularies/{externalVocabularyDbId}` | GET | `genxGetExternalVocabulary` | Retrieve one external vocabulary entry | Does not treat a superseded entry as current. |
+| `/genx/v1/terminology-versions` | GET | `genxListTerminologyVersions` | List terminology versions | Does not create or change an entry; not a BrAPI data resource. |
+| `/genx/v1/terminology-versions` | POST | `genxRegisterTerminologyVersion` | Register one terminology version entry | Append-only record; replay/conflict semantics. |
+| `/genx/v1/terminology-versions/{terminologyVersionDbId}` | GET | `genxGetTerminologyVersion` | Retrieve one terminology version entry | Does not treat a superseded entry as current. |
 | `/genx/v1/taxon-names` | GET | `genxListTaxonNames` | List taxon names | Does not create or change an entry; not a BrAPI data resource. |
 | `/genx/v1/taxon-names` | POST | `genxRegisterTaxonName` | Register one taxon name | Append-only record; replay/conflict semantics. |
 | `/genx/v1/taxon-names/{taxonNameDbId}` | GET | `genxGetTaxonName` | Retrieve one taxon name | Does not treat a superseded entry as current. |

@@ -132,6 +132,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | DevelopmentalStage / DevelopmentalStage | (none, cross-cutting) | C1, C2, C3, C4, C9 | Developmental stage vocabulary entries; no BrAPI v2.1 equivalent; terminology governance |
 | UnitsAndQuantity / UnitsAndQuantity | (none, cross-cutting) | C1, C2, C3, C4, C9 | Units and quantity semantics entries; no BrAPI v2.1 equivalent; terminology governance |
 | ExternalVocabulary / ExternalVocabulary | (none, cross-cutting) | C1, C2, C3, C4, C9 | External vocabulary sync entries; no BrAPI v2.1 equivalent; terminology governance |
+| TerminologyVersion / TerminologyVersion | (none, cross-cutting) | C1, C2, C3, C4, C9 | Terminology version entries; no BrAPI v2.1 equivalent; terminology governance |
 | TaxonName / TaxonName | (none, cross-cutting) | C1, C2, C3, C4, C9 | Taxon name and synonym entries; no BrAPI v2.1 equivalent; terminology governance |
 | Conformance | Cross-cutting C8 | C1, C3 | Probes and fixtures establish contract evidence, not scientific-domain data |
 

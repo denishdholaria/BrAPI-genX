@@ -455,6 +455,11 @@ modules:
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C4", "C9"]
     rationale: "External vocabulary sync entries; BrAPI v2.1 has no equivalent record."
+  - path: "TerminologyVersion/"
+    object: "TerminologyVersion"
+    primary_class: null
+    cross_cutting: ["C1", "C2", "C3", "C4", "C9"]
+    rationale: "Terminology version entries; BrAPI v2.1 has no equivalent record."
   - path: "TaxonName/"
     object: "TaxonName"
     primary_class: null

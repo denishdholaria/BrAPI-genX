@@ -1,0 +1,44 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    TerminologyVersion:
+      type: object
+      description: |-
+        One immutable terminology version entry. A published
+        (terminologyVersionDbId) record never mutates in place; corrections
+        are recorded as additional entries linked by supersedes.
+      required:
+      - terminologyVersionDbId
+      - status
+      properties:
+        terminologyVersionDbId:
+          description: Namespaced terminology-version identity `{authority}:terminology-version:{localId}`
+          type: string
+          example: institute-a:terminology-version:tv-2026-001
+        terminology:
+          description: Terminology or vocabulary name
+          type: string
+          example: BBCH
+        version:
+          description: Version label
+          type: string
+          example: 1.0
+        provenance:
+          description: Evidence and method provenance for the entry
+          $ref: '#/components/schemas/ProvenanceEnvelope'
+        status:
+          description: Lifecycle state of the entry
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: terminologyVersionDbId of the entry this one replaces
+          type: string
+          example: institute-a:terminology-version:tv-2026-000

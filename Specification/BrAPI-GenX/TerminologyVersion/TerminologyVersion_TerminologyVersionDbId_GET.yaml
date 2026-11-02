@@ -1,0 +1,65 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /terminology-versions/{terminologyVersionDbId}:
+    get:
+      operationId: genxGetTerminologyVersion
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.terminology-versions.get"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C4", "C9"]
+        purpose: "Retrieve one terminology version entry."
+        canBeUsedFor:
+          - "Inspect version, provenance, and status."
+        mustNotBeUsedFor:
+          - "Assuming an entry is a BrAPI Observation."
+          - "Treating a superseded entry as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterTerminologyVersion"
+          - "genxListTerminologyVersions"
+          - "genxPublishVariableTermVersion"
+        decisions: ["RFC-084"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one terminology version
+      description: Returns the registered entry, or 404.
+      parameters:
+      - name: terminologyVersionDbId
+        description: Namespaced terminology-version identity `{authority}:terminology-version:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/TerminologyVersion'
+                required:
+                - metadata
+                - result
+                title: TerminologyVersionResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - TerminologyVersion
