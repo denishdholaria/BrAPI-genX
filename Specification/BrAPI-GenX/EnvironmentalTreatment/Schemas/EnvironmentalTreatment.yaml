@@ -1,0 +1,48 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    EnvironmentalTreatment:
+      type: object
+      description: |-
+        One immutable environmental treatment or stress exposure record. A
+        published (environmentalTreatmentDbId) record never mutates in place;
+        corrections are recorded as additional records linked by supersedes.
+      required:
+      - environmentalTreatmentDbId
+      - status
+      properties:
+        environmentalTreatmentDbId:
+          description: Namespaced environmental-treatment identity `{authority}:environmental-treatment:{localId}`
+          type: string
+          example: institute-a:environmental-treatment:et-2026-001
+        siteDbId:
+          description: Site or location reference
+          type: string
+          example: site-001
+        treatmentType:
+          description: Type of environmental treatment or stress exposure
+          type: string
+          example: drought-stress
+        exposure:
+          description: Exposure level or duration
+          type: string
+          example: 14 days at 40% field capacity
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: environmentalTreatmentDbId of the record this one replaces
+          type: string
+          example: institute-a:environmental-treatment:et-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

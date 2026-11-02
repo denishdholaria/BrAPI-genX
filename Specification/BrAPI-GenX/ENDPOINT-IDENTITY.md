@@ -276,6 +276,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/soil-chemistry` | GET | `genxListSoilChemistry` | List soil chemistry records | Does not create or change a record; not a BrAPI Observation. |
 | `/genx/v1/soil-chemistry` | POST | `genxRegisterSoilChemistry` | Register one soil chemistry record | Append-only record; replay/conflict semantics. |
 | `/genx/v1/soil-chemistry/{soilChemistryDbId}` | GET | `genxGetSoilChemistry` | Retrieve one soil chemistry record | Does not treat a superseded record as current. |
+| `/genx/v1/environmental-treatments` | GET | `genxListEnvironmentalTreatments` | List environmental treatments | Does not create or change a record; not a BrAPI Observation. |
+| `/genx/v1/environmental-treatments` | POST | `genxRegisterEnvironmentalTreatment` | Register one environmental treatment record | Append-only record; replay/conflict semantics. |
+| `/genx/v1/environmental-treatments/{environmentalTreatmentDbId}` | GET | `genxGetEnvironmentalTreatment` | Retrieve one environmental treatment record | Does not treat a superseded record as current. |
 | `/genx/v1/water-balances` | GET | `genxListWaterBalances` | List water balances | Does not create or change a record; not a BrAPI Observation. |
 | `/genx/v1/water-balances` | POST | `genxRecordWaterBalance` | Record one water balance period | Append-only record; replay/conflict semantics. |
 | `/genx/v1/water-balances/{waterBalanceDbId}` | GET | `genxGetWaterBalance` | Retrieve one water balance record | Does not treat a superseded record as current. |

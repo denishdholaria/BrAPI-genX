@@ -1,0 +1,49 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    EnvironmentalTreatmentNewRequest:
+      type: object
+      description: |-
+        Request to register one environmental treatment or stress exposure
+        record. Unknown environmentalTreatmentDbId creates; same id with an
+        identical body replays the existing record; same id with a different
+        body is rejected with 409.
+      required:
+      - environmentalTreatmentDbId
+      properties:
+        environmentalTreatmentDbId:
+          description: Namespaced environmental-treatment identity `{authority}:environmental-treatment:{localId}`
+          type: string
+          example: institute-a:environmental-treatment:et-2026-001
+        siteDbId:
+          description: Site or location reference
+          type: string
+          example: site-001
+        treatmentType:
+          description: Type of environmental treatment or stress exposure
+          type: string
+          example: drought-stress
+        exposure:
+          description: Exposure level or duration
+          type: string
+          example: 14 days at 40% field capacity
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: environmentalTreatmentDbId of the record this one replaces
+          type: string
+          example: institute-a:environmental-treatment:et-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

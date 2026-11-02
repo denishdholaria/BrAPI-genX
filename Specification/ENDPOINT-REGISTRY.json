@@ -40938,12 +40938,248 @@
         "brapi-genx.genx.v1.soil-chemistry.list",
         "brapi-genx.genx.v1.soil-chemistry.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "EnvironmentalTreatment",
+      "brapiTag": "EnvironmentalTreatment",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/EnvironmentalTreatment/EnvironmentalTreatment_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.environmental-treatments.list",
+      "method": "GET",
+      "path": "/environmental-treatments",
+      "operationIdInSource": "genxListEnvironmentalTreatments",
+      "recommendedOperationId": "genxListEnvironmentalTreatments",
+      "operationName": "List environmental treatments",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List environmental treatment and stress exposure records, optionally filtered by site or status.",
+      "sourceDescription": "Get a paged list of environmental treatment and stress exposure records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover environmental treatments and stress exposures for a site.",
+        "Support climate and stress analysis."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a treatment record (use the POST endpoint).",
+        "Assuming a record is a BrAPI Observation.",
+        "Treating the list as a complete treatment history."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "siteDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterEnvironmentalTreatment",
+        "genxGetEnvironmentalTreatment",
+        "genxRecordExtremeWeather"
+      ],
+      "decisionReferences": [
+        "RFC-078"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.environmental-treatments.record",
+        "brapi-genx.genx.v1.environmental-treatments.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "EnvironmentalTreatment",
+      "brapiTag": "EnvironmentalTreatment",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/EnvironmentalTreatment/EnvironmentalTreatment_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.environmental-treatments.record",
+      "method": "POST",
+      "path": "/environmental-treatments",
+      "operationIdInSource": "genxRegisterEnvironmentalTreatment",
+      "recommendedOperationId": "genxRegisterEnvironmentalTreatment",
+      "operationName": "Register one environmental treatment record",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one environmental treatment or stress exposure record with site linkage and provenance.",
+      "sourceDescription": "Unknown environmentalTreatmentDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish environmental treatments and stress exposures for a site.",
+        "Retry an identical record safely using the same environmentalTreatmentDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming a record is a BrAPI Observation.",
+        "Asserting that the treatment is validated or effective."
+      ],
+      "sideEffects": "Creates an environmental treatment identity or appends a new immutable version when accepted.",
+      "idempotency": "Same environmentalTreatmentDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "EnvironmentalTreatmentNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListEnvironmentalTreatments",
+        "genxGetEnvironmentalTreatment",
+        "genxRecordExtremeWeather"
+      ],
+      "decisionReferences": [
+        "RFC-078"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.environmental-treatments.list",
+        "brapi-genx.genx.v1.environmental-treatments.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "EnvironmentalTreatment",
+      "brapiTag": "EnvironmentalTreatment",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/EnvironmentalTreatment/EnvironmentalTreatment_EnvironmentalTreatmentDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.environmental-treatments.get",
+      "method": "GET",
+      "path": "/environmental-treatments/{environmentalTreatmentDbId}",
+      "operationIdInSource": "genxGetEnvironmentalTreatment",
+      "recommendedOperationId": "genxGetEnvironmentalTreatment",
+      "operationName": "Get one environmental treatment record",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one environmental treatment or stress exposure record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect site linkage, treatment type, exposure, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a record is a BrAPI Observation.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "environmentalTreatmentDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterEnvironmentalTreatment",
+        "genxListEnvironmentalTreatments",
+        "genxRecordExtremeWeather"
+      ],
+      "decisionReferences": [
+        "RFC-078"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.environmental-treatments.list",
+        "brapi-genx.genx.v1.environmental-treatments.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 231,
+    "genxEntriesAdded": 234,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -41021,7 +41257,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 432,
+    "totalEntries": 435,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -41322,5 +41558,5 @@
       ]
     }
   ],
-  "totalEntries": 432
+  "totalEntries": 435
 }

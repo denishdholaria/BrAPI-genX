@@ -21,6 +21,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | DisposalRecord | 3 | proposed, non-normative |
 | DoubledHaploid | 3 | proposed, non-normative |
 | Emissions | 3 | proposed, non-normative |
+| EnvironmentalTreatment | 3 | proposed, non-normative |
 | ExperimentalDesign | 3 | proposed, non-normative |
 | ExpressionQtl | 3 | proposed, non-normative |
 | ExtremeWeather | 3 | proposed, non-normative |
@@ -1660,6 +1661,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.emissions.list, brapi-genx.genx.v1.emissions.record
 - **Relevant RFC / decision references:** RFC-076
 - **Contract source:** [`Specification/BrAPI-GenX/Emissions/Emissions_EmissionsDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Emissions/Emissions_EmissionsDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### EnvironmentalTreatment — 3 operations
+
+### GET `/genx/v1/environmental-treatments`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.environmental-treatments.list`
+- **BrAPI-GenX operation identity:** `genxListEnvironmentalTreatments` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListEnvironmentalTreatments`
+- **GenX source module:** `EnvironmentalTreatment`
+- **Source tag:** EnvironmentalTreatment
+- **Proposed BrAPI-GenX classification:** D5 — Environment, Agroecology and Field Context; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List environmental treatment and stress exposure records, optionally filtered by site or status.
+**Source contract description:**
+> Get a paged list of environmental treatment and stress exposure records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover environmental treatments and stress exposures for a site.
+- Support climate and stress analysis.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a treatment record (use the POST endpoint).
+- Assuming a record is a BrAPI Observation.
+- Treating the list as a complete treatment history.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** siteDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterEnvironmentalTreatment, genxGetEnvironmentalTreatment, genxRecordExtremeWeather
+- **Related catalogue IDs:** brapi-genx.genx.v1.environmental-treatments.record, brapi-genx.genx.v1.environmental-treatments.get
+- **Relevant RFC / decision references:** RFC-078
+- **Contract source:** [`Specification/BrAPI-GenX/EnvironmentalTreatment/EnvironmentalTreatment_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/EnvironmentalTreatment/EnvironmentalTreatment_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/environmental-treatments`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.environmental-treatments.record`
+- **BrAPI-GenX operation identity:** `genxRegisterEnvironmentalTreatment` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterEnvironmentalTreatment`
+- **GenX source module:** `EnvironmentalTreatment`
+- **Source tag:** EnvironmentalTreatment
+- **Proposed BrAPI-GenX classification:** D5 — Environment, Agroecology and Field Context; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register one environmental treatment or stress exposure record with site linkage and provenance.
+**Source contract description:**
+> Unknown environmentalTreatmentDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish environmental treatments and stress exposures for a site.
+- Retry an identical record safely using the same environmentalTreatmentDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming a record is a BrAPI Observation.
+- Asserting that the treatment is validated or effective.
+- **Side effects:** Creates an environmental treatment identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same environmentalTreatmentDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** EnvironmentalTreatmentNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListEnvironmentalTreatments, genxGetEnvironmentalTreatment, genxRecordExtremeWeather
+- **Related catalogue IDs:** brapi-genx.genx.v1.environmental-treatments.list, brapi-genx.genx.v1.environmental-treatments.get
+- **Relevant RFC / decision references:** RFC-078
+- **Contract source:** [`Specification/BrAPI-GenX/EnvironmentalTreatment/EnvironmentalTreatment_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/EnvironmentalTreatment/EnvironmentalTreatment_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/environmental-treatments/{environmentalTreatmentDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.environmental-treatments.get`
+- **BrAPI-GenX operation identity:** `genxGetEnvironmentalTreatment` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetEnvironmentalTreatment`
+- **GenX source module:** `EnvironmentalTreatment`
+- **Source tag:** EnvironmentalTreatment
+- **Proposed BrAPI-GenX classification:** D5 — Environment, Agroecology and Field Context; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one environmental treatment or stress exposure record.
+**Source contract description:**
+> Returns the registered record, or 404.
+**Can be used for:**
+- Inspect site linkage, treatment type, exposure, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming a record is a BrAPI Observation.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** environmentalTreatmentDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterEnvironmentalTreatment, genxListEnvironmentalTreatments, genxRecordExtremeWeather
+- **Related catalogue IDs:** brapi-genx.genx.v1.environmental-treatments.list, brapi-genx.genx.v1.environmental-treatments.record
+- **Relevant RFC / decision references:** RFC-078
+- **Contract source:** [`Specification/BrAPI-GenX/EnvironmentalTreatment/EnvironmentalTreatment_EnvironmentalTreatmentDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/EnvironmentalTreatment/EnvironmentalTreatment_EnvironmentalTreatmentDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
