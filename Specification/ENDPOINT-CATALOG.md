@@ -13,8 +13,8 @@ A catalogue identifier does not replace a source operationId or route. Classific
 | Surface | Operations | Contract status |
 |---|---:|---|
 | BrAPI v2.1 official modules | 201 | Released specification; implementation availability not inferred |
-| BrAPI GenX /genx/v1 | 288 | Proposed, non-normative |
-| **Total** | **489** | Existing contracts plus proposed operations |
+| BrAPI GenX /genx/v1 | 291 | Proposed, non-normative |
+| **Total** | **492** | Existing contracts plus proposed operations |
 
 BijMantra snapshot: 2240 records from the inventory generated 2026-10-17; see [source inventory](https://github.com/denishdholaria/bijmantraorg/blob/main/endpoints-inventory.md) and [crosswalk](./BIJMANTRA-CROSSWALK.md).
 
@@ -14284,6 +14284,111 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
+### PersonReference — 3 operations
+
+### GET `/genx/v1/person-references`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.person-references.list`
+- **BrAPI-GenX operation identity:** `genxListPersonReferences` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListPersonReferences`
+- **GenX source module:** `PersonReference`
+- **Source tag:** PersonReference
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List person reference entries, optionally filtered by status.
+**Source contract description:**
+> Get a paged list of person reference entries across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover person references.
+- Support reference data.
+**Must not be used for / explicit non-goals:**
+- Creating or changing an entry (use the POST endpoint).
+- Assuming an entry is a BrAPI Person.
+- Treating the list as a complete catalogue.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterPersonReference, genxGetPersonReference, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.person-references.record, brapi-genx.genx.v1.person-references.get
+- **Relevant RFC / decision references:** RFC-097
+- **Contract source:** [`Specification/BrAPI-GenX/PersonReference/PersonReference_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PersonReference/PersonReference_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/person-references`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.person-references.record`
+- **BrAPI-GenX operation identity:** `genxRegisterPersonReference` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterPersonReference`
+- **GenX source module:** `PersonReference`
+- **Source tag:** PersonReference
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register one person reference entry with provenance.
+**Source contract description:**
+> Unknown personReferenceDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish a person reference.
+- Retry an identical entry safely using the same personReferenceDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing entry; corrections require a new record that supersedes.
+- Assuming an entry is a BrAPI Person.
+- Asserting that the entry is validated or endorsed.
+- **Side effects:** Creates a person reference identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same personReferenceDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** PersonReferenceNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListPersonReferences, genxGetPersonReference, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.person-references.list, brapi-genx.genx.v1.person-references.get
+- **Relevant RFC / decision references:** RFC-097
+- **Contract source:** [`Specification/BrAPI-GenX/PersonReference/PersonReference_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PersonReference/PersonReference_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/person-references/{personReferenceDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.person-references.get`
+- **BrAPI-GenX operation identity:** `genxGetPersonReference` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetPersonReference`
+- **GenX source module:** `PersonReference`
+- **Source tag:** PersonReference
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one person reference entry.
+**Source contract description:**
+> Returns the registered entry, or 404.
+**Can be used for:**
+- Inspect person identity, name, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming an entry is a BrAPI Person.
+- Treating a superseded entry as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** personReferenceDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterPersonReference, genxListPersonReferences, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.person-references.list, brapi-genx.genx.v1.person-references.record
+- **Relevant RFC / decision references:** RFC-097
+- **Contract source:** [`Specification/BrAPI-GenX/PersonReference/PersonReference_PersonReferenceDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PersonReference/PersonReference_PersonReferenceDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
 ### PhenologyObservation — 3 operations
 
 ### GET `/genx/v1/phenology-observations`
@@ -17884,6 +17989,6 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - Unique full-base-path/method/route keys: `True`.
 - Unique source/advisory operation identifiers where present: `True`.
 - BrAPI v2.1 inventory rows resolved to source YAML operations: 201 / 201.
-- GenX operations documented: 288.
+- GenX operations documented: 291.
 
 See [BIJMANTRA-CROSSWALK.md](./BIJMANTRA-CROSSWALK.md) for inventory evidence and semantic boundaries.

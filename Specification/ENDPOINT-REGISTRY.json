@@ -45406,12 +45406,247 @@
         "brapi-genx.genx.v1.institution-codes.list",
         "brapi-genx.genx.v1.institution-codes.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "PersonReference",
+      "brapiTag": "PersonReference",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/PersonReference/PersonReference_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.person-references.list",
+      "method": "GET",
+      "path": "/person-references",
+      "operationIdInSource": "genxListPersonReferences",
+      "recommendedOperationId": "genxListPersonReferences",
+      "operationName": "List person references",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List person reference entries, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of person reference entries across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover person references.",
+        "Support reference data."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing an entry (use the POST endpoint).",
+        "Assuming an entry is a BrAPI Person.",
+        "Treating the list as a complete catalogue."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterPersonReference",
+        "genxGetPersonReference",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-097"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.person-references.record",
+        "brapi-genx.genx.v1.person-references.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "PersonReference",
+      "brapiTag": "PersonReference",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/PersonReference/PersonReference_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.person-references.record",
+      "method": "POST",
+      "path": "/person-references",
+      "operationIdInSource": "genxRegisterPersonReference",
+      "recommendedOperationId": "genxRegisterPersonReference",
+      "operationName": "Register one person reference",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one person reference entry with provenance.",
+      "sourceDescription": "Unknown personReferenceDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a person reference.",
+        "Retry an identical entry safely using the same personReferenceDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing entry; corrections require a new record that supersedes.",
+        "Assuming an entry is a BrAPI Person.",
+        "Asserting that the entry is validated or endorsed."
+      ],
+      "sideEffects": "Creates a person reference identity or appends a new immutable version when accepted.",
+      "idempotency": "Same personReferenceDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "PersonReferenceNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListPersonReferences",
+        "genxGetPersonReference",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-097"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.person-references.list",
+        "brapi-genx.genx.v1.person-references.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "PersonReference",
+      "brapiTag": "PersonReference",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/PersonReference/PersonReference_PersonReferenceDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.person-references.get",
+      "method": "GET",
+      "path": "/person-references/{personReferenceDbId}",
+      "operationIdInSource": "genxGetPersonReference",
+      "recommendedOperationId": "genxGetPersonReference",
+      "operationName": "Get one person reference",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one person reference entry.",
+      "sourceDescription": "Returns the registered entry, or 404.",
+      "canBeUsedFor": [
+        "Inspect person identity, name, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming an entry is a BrAPI Person.",
+        "Treating a superseded entry as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "personReferenceDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterPersonReference",
+        "genxListPersonReferences",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-097"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.person-references.list",
+        "brapi-genx.genx.v1.person-references.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 288,
+    "genxEntriesAdded": 291,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -45489,7 +45724,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 489,
+    "totalEntries": 492,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -45790,5 +46025,5 @@
       ]
     }
   ],
-  "totalEntries": 489
+  "totalEntries": 492
 }

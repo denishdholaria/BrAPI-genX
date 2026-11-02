@@ -1,0 +1,65 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /person-references/{personReferenceDbId}:
+    get:
+      operationId: genxGetPersonReference
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.person-references.get"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve one person reference entry."
+        canBeUsedFor:
+          - "Inspect person identity, name, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming an entry is a BrAPI Germplasm."
+          - "Treating a superseded entry as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterPersonReference"
+          - "genxListPersonReferences"
+          - "genxPublishVariableTermVersion"
+        decisions: ["RFC-097"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one person reference
+      description: Returns the registered entry, or 404.
+      parameters:
+      - name: personReferenceDbId
+        description: Namespaced person-reference identity `{authority}:person-reference:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/PersonReference'
+                required:
+                - metadata
+                - result
+                title: PersonReferenceResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - PersonReference

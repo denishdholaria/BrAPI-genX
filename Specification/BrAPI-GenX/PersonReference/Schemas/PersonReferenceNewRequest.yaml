@@ -1,0 +1,44 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    PersonReferenceNewRequest:
+      type: object
+      description: |-
+        Request to register one person reference entry. Unknown
+        personReferenceDbId creates; same id with an identical body replays
+        the existing record; same id with a different body is rejected with 409.
+      required:
+      - personReferenceDbId
+      properties:
+        personReferenceDbId:
+          description: Namespaced person-reference identity `{authority}:person-reference:{localId}`
+          type: string
+          example: institute-a:person-reference:pr-2026-001
+        name:
+          description: Person name
+          type: string
+          example: Jane Doe
+        role:
+          description: Role or affiliation
+          type: string
+          example: breeder
+        status:
+          description: Lifecycle state of the entry
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: personReferenceDbId of the entry this one replaces
+          type: string
+          example: institute-a:person-reference:pr-2026-000
+        provenance:
+          description: Evidence and method provenance for the entry
+          $ref: '#/components/schemas/ProvenanceEnvelope'

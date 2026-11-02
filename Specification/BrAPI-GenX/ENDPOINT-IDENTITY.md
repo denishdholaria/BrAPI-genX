@@ -378,6 +378,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/institution-codes` | GET | `genxListInstitutionCodes` | List institution codes | Does not create or change an entry; not a BrAPI data resource. |
 | `/genx/v1/institution-codes` | POST | `genxRegisterInstitutionCode` | Register one institution code | Append-only record; replay/conflict semantics. |
 | `/genx/v1/institution-codes/{institutionCodeDbId}` | GET | `genxGetInstitutionCode` | Retrieve one institution code | Does not treat a superseded entry as current. |
+| `/genx/v1/person-references` | GET | `genxListPersonReferences` | List person references | Does not create or change an entry; not a BrAPI data resource. |
+| `/genx/v1/person-references` | POST | `genxRegisterPersonReference` | Register one person reference | Append-only record; replay/conflict semantics. |
+| `/genx/v1/person-references/{personReferenceDbId}` | GET | `genxGetPersonReference` | Retrieve one person reference | Does not treat a superseded entry as current. |
 
 `ProvenanceEnvelope` is embedded in result/record schemas and has no standalone route in this proposal.
 

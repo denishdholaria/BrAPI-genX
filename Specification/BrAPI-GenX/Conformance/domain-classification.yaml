@@ -525,6 +525,11 @@ modules:
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C4", "C9"]
     rationale: "Institution and collection code entries; BrAPI v2.1 has no equivalent record."
+  - path: "PersonReference/"
+    object: "PersonReference"
+    primary_class: null
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Person reference entries; BrAPI v2.1 has no equivalent record."
   - path: "Conformance/"
     object: "Probes, fixtures and overlap register"
     primary_class: null

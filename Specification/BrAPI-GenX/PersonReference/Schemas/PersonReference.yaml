@@ -1,0 +1,44 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    PersonReference:
+      type: object
+      description: |-
+        One immutable person reference entry. A published
+        (personReferenceDbId) record never mutates in place; corrections are
+        recorded as additional entries linked by supersedes.
+      required:
+      - personReferenceDbId
+      - status
+      properties:
+        personReferenceDbId:
+          description: Namespaced person-reference identity `{authority}:person-reference:{localId}`
+          type: string
+          example: institute-a:person-reference:pr-2026-001
+        name:
+          description: Person name
+          type: string
+          example: Jane Doe
+        role:
+          description: Role or affiliation
+          type: string
+          example: breeder
+        status:
+          description: Lifecycle state of the entry
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: personReferenceDbId of the entry this one replaces
+          type: string
+          example: institute-a:person-reference:pr-2026-000
+        provenance:
+          description: Evidence and method provenance for the entry
+          $ref: '#/components/schemas/ProvenanceEnvelope'
