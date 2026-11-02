@@ -310,6 +310,11 @@ modules:
     primary_class: "D6"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Field book definition records; BrAPI v2.1 has no equivalent record."
+  - path: "TrialNetwork/"
+    object: "TrialNetwork"
+    primary_class: "D6"
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Trial network and MET design records; BrAPI v2.1 has no equivalent record."
   - path: "FieldBoundary/"
     object: "FieldBoundary"
     primary_class: "D6"

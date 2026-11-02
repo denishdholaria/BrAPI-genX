@@ -298,6 +298,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/field-books` | GET | `genxListFieldBooks` | List field books | Does not create or change a record; not a BrAPI Observation. |
 | `/genx/v1/field-books` | POST | `genxRegisterFieldBook` | Register one field book | Append-only record; replay/conflict semantics. |
 | `/genx/v1/field-books/{fieldBookDbId}` | GET | `genxGetFieldBook` | Retrieve one field book | Does not treat a superseded record as current. |
+| `/genx/v1/trial-networks` | GET | `genxListTrialNetworks` | List trial networks | Does not create or change a record; not a BrAPI Observation. |
+| `/genx/v1/trial-networks` | POST | `genxRegisterTrialNetwork` | Register one trial network | Append-only record; replay/conflict semantics. |
+| `/genx/v1/trial-networks/{trialNetworkDbId}` | GET | `genxGetTrialNetwork` | Retrieve one trial network | Does not treat a superseded record as current. |
 | `/genx/v1/field-boundaries` | GET | `genxListFieldBoundaries` | List field boundaries | Does not create or change a boundary; not a BrAPI Location. |
 | `/genx/v1/field-boundaries` | POST | `genxRegisterFieldBoundary` | Register one field boundary record | Append-only record; replay/conflict semantics. |
 | `/genx/v1/field-boundaries/{fieldBoundaryDbId}` | GET | `genxGetFieldBoundary` | Retrieve one field boundary record | Does not treat a superseded boundary as current. |

@@ -1,0 +1,40 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    TrialNetwork:
+      type: object
+      description: |-
+        One immutable trial network or MET design record. A published
+        (trialNetworkDbId) record never mutates in place; corrections are
+        recorded as additional records linked by supersedes.
+      required:
+      - trialNetworkDbId
+      - status
+      properties:
+        trialNetworkDbId:
+          description: Namespaced trial-network identity `{authority}:trial-network:{localId}`
+          type: string
+          example: institute-a:trial-network:tn-2026-001
+        name:
+          description: Trial network or MET design name
+          type: string
+          example: Multi-environment trial 2026
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: trialNetworkDbId of the record this one replaces
+          type: string
+          example: institute-a:trial-network:tn-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

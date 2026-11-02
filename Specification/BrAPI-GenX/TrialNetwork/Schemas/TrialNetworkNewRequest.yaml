@@ -1,0 +1,40 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    TrialNetworkNewRequest:
+      type: object
+      description: |-
+        Request to register one trial network or MET design record. Unknown
+        trialNetworkDbId creates; same id with an identical body replays the
+        existing record; same id with a different body is rejected with 409.
+      required:
+      - trialNetworkDbId
+      properties:
+        trialNetworkDbId:
+          description: Namespaced trial-network identity `{authority}:trial-network:{localId}`
+          type: string
+          example: institute-a:trial-network:tn-2026-001
+        name:
+          description: Trial network or MET design name
+          type: string
+          example: Multi-environment trial 2026
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: trialNetworkDbId of the record this one replaces
+          type: string
+          example: institute-a:trial-network:tn-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
