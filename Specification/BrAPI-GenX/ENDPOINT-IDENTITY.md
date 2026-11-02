@@ -261,6 +261,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/carbon-stocks` | GET | `genxListCarbonStocks` | List carbon stocks | Does not create or change a record; not a BrAPI Observation. |
 | `/genx/v1/carbon-stocks` | POST | `genxRecordCarbonStock` | Record one carbon stock observation | Append-only record; replay/conflict semantics. |
 | `/genx/v1/carbon-stocks/{carbonStockDbId}` | GET | `genxGetCarbonStock` | Retrieve one carbon stock record | Does not treat a superseded record as current. |
+| `/genx/v1/water-balances` | GET | `genxListWaterBalances` | List water balances | Does not create or change a record; not a BrAPI Observation. |
+| `/genx/v1/water-balances` | POST | `genxRecordWaterBalance` | Record one water balance period | Append-only record; replay/conflict semantics. |
+| `/genx/v1/water-balances/{waterBalanceDbId}` | GET | `genxGetWaterBalance` | Retrieve one water balance record | Does not treat a superseded record as current. |
 | `/genx/v1/bulk-captures` | GET | `genxListBulkCaptures` | List bulk captures | Does not create or change a capture; not a BrAPI Observation. |
 | `/genx/v1/bulk-captures` | POST | `genxRecordBulkCapture` | Record one bulk capture | Append-only record; replay/conflict semantics. |
 | `/genx/v1/bulk-captures/{bulkCaptureDbId}` | GET | `genxGetBulkCapture` | Retrieve one bulk capture | Does not treat a superseded capture as current. |

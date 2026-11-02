@@ -1,0 +1,78 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    WaterBalance:
+      type: object
+      description: |-
+        One immutable water balance record for a location and period. A
+        published (waterBalanceDbId) record never mutates in place;
+        corrections are recorded as additional records linked by supersedes.
+      required:
+      - waterBalanceDbId
+      - status
+      properties:
+        waterBalanceDbId:
+          description: Namespaced water-balance identity `{authority}:water-balance:{localId}`
+          type: string
+          example: institute-a:water-balance:wb-2026-001
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:irrigation-trial-2026
+        locationDbId:
+          description: BrAPI Location the balance applies to, when applicable
+          type: string
+          example: institute-a:location:field-12
+        periodStart:
+          description: Start of the balance period (ISO 8601 date or date-time)
+          type: string
+          format: date
+          example: '2026-05-01'
+        periodEnd:
+          description: End of the balance period (ISO 8601 date or date-time)
+          type: string
+          format: date
+          example: '2026-05-31'
+        precipitationMm:
+          description: Precipitation input over the period, in millimetres
+          type: number
+          example: 84.5
+        irrigationMm:
+          description: Irrigation input over the period, in millimetres
+          type: number
+          example: 60
+        evapotranspirationMm:
+          description: Evapotranspiration output over the period, in millimetres
+          type: number
+          example: 122.3
+        runoffMm:
+          description: Runoff output over the period, in millimetres
+          type: number
+          example: 4.1
+        drainageMm:
+          description: Deep drainage output over the period, in millimetres
+          type: number
+          example: 9.6
+        storageChangeMm:
+          description: Change in stored soil water over the period, in millimetres
+          type: number
+          example: 8.5
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: waterBalanceDbId of the record this one replaces
+          type: string
+          example: institute-a:water-balance:wb-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
