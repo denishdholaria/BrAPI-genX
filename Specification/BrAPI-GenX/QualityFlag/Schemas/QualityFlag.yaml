@@ -1,0 +1,40 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    QualityFlag:
+      type: object
+      description: |-
+        One immutable quality flag record. A published (qualityFlagDbId)
+        record never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - qualityFlagDbId
+      - status
+      properties:
+        qualityFlagDbId:
+          description: Namespaced quality-flag identity `{authority}:quality-flag:{localId}`
+          type: string
+          example: institute-a:quality-flag:qf-2026-001
+        flag:
+          description: Quality flag value
+          type: string
+          example: suspect
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: qualityFlagDbId of the record this one replaces
+          type: string
+          example: institute-a:quality-flag:qf-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

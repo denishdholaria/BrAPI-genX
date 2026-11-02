@@ -48699,12 +48699,247 @@
         "brapi-genx.genx.v1.capture-workflows.list",
         "brapi-genx.genx.v1.capture-workflows.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "QualityFlag",
+      "brapiTag": "QualityFlag",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/QualityFlag/QualityFlag_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.quality-flags.list",
+      "method": "GET",
+      "path": "/quality-flags",
+      "operationIdInSource": "genxListQualityFlags",
+      "recommendedOperationId": "genxListQualityFlags",
+      "operationName": "List quality flags",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List quality flag records, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of quality flag records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover quality flags.",
+        "Support phenotyping quality flags."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a record (use the POST endpoint).",
+        "Assuming a record is a BrAPI Observation.",
+        "Treating the list as a complete history."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterQualityFlag",
+        "genxGetQualityFlag",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-111"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.quality-flags.record",
+        "brapi-genx.genx.v1.quality-flags.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "QualityFlag",
+      "brapiTag": "QualityFlag",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/QualityFlag/QualityFlag_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.quality-flags.record",
+      "method": "POST",
+      "path": "/quality-flags",
+      "operationIdInSource": "genxRegisterQualityFlag",
+      "recommendedOperationId": "genxRegisterQualityFlag",
+      "operationName": "Register one quality flag",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one quality flag record with provenance.",
+      "sourceDescription": "Unknown qualityFlagDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a quality flag.",
+        "Retry an identical record safely using the same qualityFlagDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming a record is a BrAPI Observation.",
+        "Asserting that the flag is validated or endorsed."
+      ],
+      "sideEffects": "Creates a quality flag identity or appends a new immutable version when accepted.",
+      "idempotency": "Same qualityFlagDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "QualityFlagNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListQualityFlags",
+        "genxGetQualityFlag",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-111"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.quality-flags.list",
+        "brapi-genx.genx.v1.quality-flags.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "QualityFlag",
+      "brapiTag": "QualityFlag",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/QualityFlag/QualityFlag_QualityFlagDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.quality-flags.get",
+      "method": "GET",
+      "path": "/quality-flags/{qualityFlagDbId}",
+      "operationIdInSource": "genxGetQualityFlag",
+      "recommendedOperationId": "genxGetQualityFlag",
+      "operationName": "Get one quality flag",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one quality flag record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect flag, status, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a record is a BrAPI Observation.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "qualityFlagDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterQualityFlag",
+        "genxListQualityFlags",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-111"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.quality-flags.list",
+        "brapi-genx.genx.v1.quality-flags.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 330,
+    "genxEntriesAdded": 333,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -48782,7 +49017,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 531,
+    "totalEntries": 534,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -49083,5 +49318,5 @@
       ]
     }
   ],
-  "totalEntries": 531
+  "totalEntries": 534
 }

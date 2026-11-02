@@ -440,6 +440,11 @@ modules:
     primary_class: "D4"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Capture workflow records; BrAPI v2.1 has no equivalent record."
+  - path: "QualityFlag/"
+    object: "QualityFlag"
+    primary_class: "D4"
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Quality flag records; BrAPI v2.1 has no equivalent record."
   - path: "GenomicDatasets/"
     object: "GenomicDataset"
     primary_class: "D3"

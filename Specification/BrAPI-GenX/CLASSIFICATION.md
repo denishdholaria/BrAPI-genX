@@ -129,6 +129,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | HarvestRecords / HarvestRecord | D6 | C1, C2, C3, C6, C9 | Harvest-event records; no BrAPI v2.1 equivalent; not a SeedLotTransaction |
 | PhenotypeCapture / PhenotypeCapture | D4 | C1, C2, C3, C6, C9 | Phenotype capture events; no BrAPI v2.1 equivalent; not a BrAPI Observation |
 | CaptureWorkflow / CaptureWorkflow | D4 | C1, C2, C3, C6, C9 | Capture workflow records; no BrAPI v2.1 equivalent |
+| QualityFlag / QualityFlag | D4 | C1, C2, C3, C6, C9 | Quality flag records; no BrAPI v2.1 equivalent |
 | GenomicDatasets / GenomicDataset | D3 | C1, C2, C3, C5, C6, C9 | Prepared genomic dataset records; no BrAPI v2.1 equivalent; not a VariantSet or VariantMatrix |
 | GenebankStorage / StorageLocation | D1 | C1, C2, C3, C6, C9 | Genebank storage location records; no BrAPI v2.1 equivalent |
 | ViabilityTesting / ViabilityTest | D1 | C1, C2, C3, C6, C9 | Viability/germination test records; no BrAPI v2.1 equivalent |

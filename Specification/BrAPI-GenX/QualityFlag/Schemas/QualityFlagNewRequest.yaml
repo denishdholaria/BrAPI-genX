@@ -1,0 +1,40 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    QualityFlagNewRequest:
+      type: object
+      description: |-
+        Request to register one quality flag record. Unknown qualityFlagDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - qualityFlagDbId
+      properties:
+        qualityFlagDbId:
+          description: Namespaced quality-flag identity `{authority}:quality-flag:{localId}`
+          type: string
+          example: institute-a:quality-flag:qf-2026-001
+        flag:
+          description: Quality flag value
+          type: string
+          example: suspect
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: qualityFlagDbId of the record this one replaces
+          type: string
+          example: institute-a:quality-flag:qf-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
