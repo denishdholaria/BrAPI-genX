@@ -1,0 +1,139 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /research-programs:
+    get:
+      operationId: genxListResearchPrograms
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.research-programs.list"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List research program records, optionally filtered by status."
+        canBeUsedFor:
+          - "Discover research-programs and funding references."
+          - "Support research organization."
+        mustNotBeUsedFor:
+          - "Creating or changing a research-program (use the POST endpoint)."
+          - "Assuming a research-program is a BrAPI Study."
+          - "Treating the list as a complete research-program catalogue."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterResearchProgram"
+          - "genxGetResearchProgram"
+          - "genxPublishVariableTermVersion"
+        decisions: ["RFC-098"]
+        proposalStatus: "draft-non-normative"
+      summary: List research-programs
+      description: Get a paged list of research-program and funding reference records across authorities. Filters combine with AND.
+      parameters:
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/ResearchProgramListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - ResearchProgram
+    post:
+      operationId: genxRegisterResearchProgram
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.research-programs.record"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Register one research program record with provenance."
+        canBeUsedFor:
+          - "Publish a research-program or funding reference."
+          - "Retry an identical record safely using the same researchProgramDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing record; corrections require a new record that supersedes."
+          - "Assuming a research-program is a BrAPI Study."
+          - "Asserting that the research-program is validated or endorsed."
+        sideEffects: "Creates a research program identity or appends a new immutable version when accepted."
+        idempotency: "Same researchProgramDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListResearchPrograms"
+          - "genxGetResearchProgram"
+          - "genxPublishVariableTermVersion"
+        decisions: ["RFC-098"]
+        proposalStatus: "draft-non-normative"
+      summary: Register one research-program
+      description: |-
+        Unknown researchProgramDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResearchProgramNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/ResearchProgram'
+                required:
+                - metadata
+                - result
+                title: ResearchProgramResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - ResearchProgram
+components:
+  responses:
+    ResearchProgramListResponse:
+      content:
+        application/json:
+          schema:
+            title: ResearchProgramListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ResearchProgram'
+            required:
+            - metadata
+            - result
+      description: OK

@@ -1,0 +1,40 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ResearchProgram:
+      type: object
+      description: |-
+        One immutable research program record. A published
+        (researchProgramDbId) record never mutates in place; corrections are
+        recorded as additional records linked by supersedes.
+      required:
+      - researchProgramDbId
+      - status
+      properties:
+        researchProgramDbId:
+          description: Namespaced research-program identity `{authority}:research-program:{localId}`
+          type: string
+          example: institute-a:research-program:rp-2026-001
+        title:
+          description: Program title
+          type: string
+          example: Genomics for yield improvement
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: researchProgramDbId of the record this one replaces
+          type: string
+          example: institute-a:research-program:rp-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
