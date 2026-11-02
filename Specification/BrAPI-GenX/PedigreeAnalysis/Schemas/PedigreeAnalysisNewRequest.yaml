@@ -1,0 +1,53 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    PedigreeAnalysisNewRequest:
+      type: object
+      description: |-
+        Request to record one pedigree analysis result. Unknown pedigreeAnalysisDbId
+        creates; same id with an identical body replays the existing
+        record; same id with a different body is rejected with 409.
+      required:
+      - pedigreeAnalysisDbId
+      - analysisMethodDbId
+      properties:
+        pedigreeAnalysisDbId:
+          description: Namespaced pedigree-analysis identity `{authority}:pedigree-analysis:{localId}`
+          type: string
+          example: institute-a:pedigree-analysis:pa-2026-001
+        analysisMethodDbId:
+          description: GenX AnalysisMethod used
+          type: string
+          example: institute-a:analysis-method:pedigree
+        jobDbId:
+          description: GenX Job that produced this result
+          type: string
+          example: institute-a:job:analysis-7
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        pedigreeMetrics:
+          description: Pedigree-derived metrics
+          type: object
+          example: {inbreeding: 0.05, kinship: 0.25}
+        status:
+          description: Lifecycle state of the result record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: pedigreeAnalysisDbId of the result this one replaces
+          type: string
+          example: institute-a:pedigree-analysis:pa-2026-000
+        provenance:
+          description: Evidence and method provenance for the result
+          $ref: '#/components/schemas/ProvenanceEnvelope'

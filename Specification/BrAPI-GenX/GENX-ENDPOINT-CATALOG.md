@@ -44,6 +44,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | Models | 3 | proposed, non-normative |
 | ParentCandidateSelection | 3 | proposed, non-normative |
 | PcaResult | 3 | proposed, non-normative |
+| PedigreeAnalysis | 3 | proposed, non-normative |
 | PhenologyObservation | 3 | proposed, non-normative |
 | PhenotypeAnnotation | 3 | proposed, non-normative |
 | PhenotypeCapture | 3 | proposed, non-normative |
@@ -4075,6 +4076,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.pca-results.list, brapi-genx.genx.v1.pca-results.record
 - **Relevant RFC / decision references:** RFC-053
 - **Contract source:** [`Specification/BrAPI-GenX/PcaResult/PcaResult_PcaResultDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PcaResult/PcaResult_PcaResultDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### PedigreeAnalysis — 3 operations
+
+### GET `/genx/v1/pedigree-analyses`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.pedigree-analyses.list`
+- **BrAPI-GenX operation identity:** `genxListPedigreeAnalyses` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListPedigreeAnalyses`
+- **GenX source module:** `PedigreeAnalysis`
+- **Source tag:** PedigreeAnalysis
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List pedigree analysis result records, optionally filtered by method, study, or status.
+**Source contract description:**
+> Get a paged list of pedigree analyses across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover pedigree analyses for a study or method.
+- Support scientific reproducibility and auditing.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a result (use the POST endpoint).
+- Assuming a result is a BrAPI data resource.
+- Treating the list as a complete analysis repository.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** analysisMethodDbId, studyDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordPedigreeAnalysis, genxGetPedigreeAnalysis, genxRegisterAnalysisMethod
+- **Related catalogue IDs:** brapi-genx.genx.v1.pedigree-analyses.record, brapi-genx.genx.v1.pedigree-analyses.get
+- **Relevant RFC / decision references:** RFC-060
+- **Contract source:** [`Specification/BrAPI-GenX/PedigreeAnalysis/PedigreeAnalysis_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PedigreeAnalysis/PedigreeAnalysis_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/pedigree-analyses`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.pedigree-analyses.record`
+- **BrAPI-GenX operation identity:** `genxRecordPedigreeAnalysis` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordPedigreeAnalysis`
+- **GenX source module:** `PedigreeAnalysis`
+- **Source tag:** PedigreeAnalysis
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one pedigree analysis result with metrics and provenance.
+**Source contract description:**
+> Unknown pedigreeAnalysisDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish pedigree analysis result metadata and payload references.
+- Retry an identical result safely using the same pedigreeAnalysisDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing result; corrections require a new record that supersedes.
+- Assuming the result is a BrAPI data resource.
+- Treating the result as scientific validation or approval.
+- **Side effects:** Creates a pedigree analysis result when accepted.
+- **Retry / idempotency:** Same pedigreeAnalysisDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** PedigreeAnalysisNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListPedigreeAnalyses, genxGetPedigreeAnalysis, genxRegisterAnalysisMethod
+- **Related catalogue IDs:** brapi-genx.genx.v1.pedigree-analyses.list, brapi-genx.genx.v1.pedigree-analyses.get
+- **Relevant RFC / decision references:** RFC-060
+- **Contract source:** [`Specification/BrAPI-GenX/PedigreeAnalysis/PedigreeAnalysis_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PedigreeAnalysis/PedigreeAnalysis_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/pedigree-analyses/{pedigreeAnalysisDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.pedigree-analyses.get`
+- **BrAPI-GenX operation identity:** `genxGetPedigreeAnalysis` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetPedigreeAnalysis`
+- **GenX source module:** `PedigreeAnalysis`
+- **Source tag:** PedigreeAnalysis
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one pedigree analysis result.
+**Source contract description:**
+> Returns the recorded result, or 404.
+**Can be used for:**
+- Inspect pedigree metrics and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the result is a BrAPI data resource.
+- Treating a superseded result as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** pedigreeAnalysisDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordPedigreeAnalysis, genxListPedigreeAnalyses, genxRegisterAnalysisMethod
+- **Related catalogue IDs:** brapi-genx.genx.v1.pedigree-analyses.list, brapi-genx.genx.v1.pedigree-analyses.record
+- **Relevant RFC / decision references:** RFC-060
+- **Contract source:** [`Specification/BrAPI-GenX/PedigreeAnalysis/PedigreeAnalysis_PedigreeAnalysisDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PedigreeAnalysis/PedigreeAnalysis_PedigreeAnalysisDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

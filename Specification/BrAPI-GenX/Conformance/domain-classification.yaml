@@ -290,6 +290,11 @@ modules:
     primary_class: "D7"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Haplotype analysis result records; BrAPI v2.1 has no equivalent record."
+  - path: "PedigreeAnalysis/"
+    object: "PedigreeAnalysis"
+    primary_class: "D7"
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Pedigree analysis result records; BrAPI v2.1 has no equivalent record."
   - path: "BulkCapture/"
     object: "BulkCapture"
     primary_class: "D4"

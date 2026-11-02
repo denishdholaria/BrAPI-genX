@@ -36678,12 +36678,249 @@
         "brapi-genx.genx.v1.haplotype-analyses.list",
         "brapi-genx.genx.v1.haplotype-analyses.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "PedigreeAnalysis",
+      "brapiTag": "PedigreeAnalysis",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/PedigreeAnalysis/PedigreeAnalysis_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.pedigree-analyses.list",
+      "method": "GET",
+      "path": "/pedigree-analyses",
+      "operationIdInSource": "genxListPedigreeAnalyses",
+      "recommendedOperationId": "genxListPedigreeAnalyses",
+      "operationName": "List pedigree analyses",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List pedigree analysis result records, optionally filtered by method, study, or status.",
+      "sourceDescription": "Get a paged list of pedigree analyses across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover pedigree analyses for a study or method.",
+        "Support scientific reproducibility and auditing."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a result (use the POST endpoint).",
+        "Assuming a result is a BrAPI data resource.",
+        "Treating the list as a complete analysis repository."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "analysisMethodDbId",
+        "studyDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordPedigreeAnalysis",
+        "genxGetPedigreeAnalysis",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-060"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.pedigree-analyses.record",
+        "brapi-genx.genx.v1.pedigree-analyses.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "PedigreeAnalysis",
+      "brapiTag": "PedigreeAnalysis",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/PedigreeAnalysis/PedigreeAnalysis_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.pedigree-analyses.record",
+      "method": "POST",
+      "path": "/pedigree-analyses",
+      "operationIdInSource": "genxRecordPedigreeAnalysis",
+      "recommendedOperationId": "genxRecordPedigreeAnalysis",
+      "operationName": "Record one pedigree analysis result",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record one pedigree analysis result with metrics and provenance.",
+      "sourceDescription": "Unknown pedigreeAnalysisDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish pedigree analysis result metadata and payload references.",
+        "Retry an identical result safely using the same pedigreeAnalysisDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing result; corrections require a new record that supersedes.",
+        "Assuming the result is a BrAPI data resource.",
+        "Treating the result as scientific validation or approval."
+      ],
+      "sideEffects": "Creates a pedigree analysis result when accepted.",
+      "idempotency": "Same pedigreeAnalysisDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "PedigreeAnalysisNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListPedigreeAnalyses",
+        "genxGetPedigreeAnalysis",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-060"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.pedigree-analyses.list",
+        "brapi-genx.genx.v1.pedigree-analyses.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "PedigreeAnalysis",
+      "brapiTag": "PedigreeAnalysis",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/PedigreeAnalysis/PedigreeAnalysis_PedigreeAnalysisDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.pedigree-analyses.get",
+      "method": "GET",
+      "path": "/pedigree-analyses/{pedigreeAnalysisDbId}",
+      "operationIdInSource": "genxGetPedigreeAnalysis",
+      "recommendedOperationId": "genxGetPedigreeAnalysis",
+      "operationName": "Get one pedigree analysis result",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one pedigree analysis result.",
+      "sourceDescription": "Returns the recorded result, or 404.",
+      "canBeUsedFor": [
+        "Inspect pedigree metrics and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the result is a BrAPI data resource.",
+        "Treating a superseded result as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "pedigreeAnalysisDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordPedigreeAnalysis",
+        "genxListPedigreeAnalyses",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-060"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.pedigree-analyses.list",
+        "brapi-genx.genx.v1.pedigree-analyses.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 177,
+    "genxEntriesAdded": 180,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -36761,7 +36998,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 378,
+    "totalEntries": 381,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

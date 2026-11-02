@@ -237,6 +237,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/haplotype-analyses` | GET | `genxListHaplotypeAnalyses` | List haplotype analyses | Does not create or change a result; not a BrAPI data resource. |
 | `/genx/v1/haplotype-analyses` | POST | `genxRecordHaplotypeAnalysis` | Record one haplotype analysis result | Append-only record; replay/conflict semantics. |
 | `/genx/v1/haplotype-analyses/{haplotypeAnalysisDbId}` | GET | `genxGetHaplotypeAnalysis` | Retrieve one haplotype analysis result | Does not treat a superseded result as current. |
+| `/genx/v1/pedigree-analyses` | GET | `genxListPedigreeAnalyses` | List pedigree analyses | Does not create or change a result; not a BrAPI data resource. |
+| `/genx/v1/pedigree-analyses` | POST | `genxRecordPedigreeAnalysis` | Record one pedigree analysis result | Append-only record; replay/conflict semantics. |
+| `/genx/v1/pedigree-analyses/{pedigreeAnalysisDbId}` | GET | `genxGetPedigreeAnalysis` | Retrieve one pedigree analysis result | Does not treat a superseded result as current. |
 | `/genx/v1/bulk-captures` | GET | `genxListBulkCaptures` | List bulk captures | Does not create or change a capture; not a BrAPI Observation. |
 | `/genx/v1/bulk-captures` | POST | `genxRecordBulkCapture` | Record one bulk capture | Append-only record; replay/conflict semantics. |
 | `/genx/v1/bulk-captures/{bulkCaptureDbId}` | GET | `genxGetBulkCapture` | Retrieve one bulk capture | Does not treat a superseded capture as current. |
