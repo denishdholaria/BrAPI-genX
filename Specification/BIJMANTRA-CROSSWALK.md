@@ -450,6 +450,9 @@ GenX uses /genx/v1. Relative-route matches below are candidate neighbors only; t
 | `brapi-genx.genx.v1.vcf-imports.list` | `GET /genx/v1/vcf-imports` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
 | `brapi-genx.genx.v1.vcf-imports.record` | `POST /genx/v1/vcf-imports` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
 | `brapi-genx.genx.v1.vcf-imports.get` | `GET /genx/v1/vcf-imports/{vcfImportDbId}` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
+| `brapi-genx.genx.v1.vendor-orders.list` | `GET /genx/v1/vendor-orders` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
+| `brapi-genx.genx.v1.vendor-orders.record` | `POST /genx/v1/vendor-orders` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
+| `brapi-genx.genx.v1.vendor-orders.get` | `GET /genx/v1/vendor-orders/{vendorOrderDbId}` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
 | `brapi-genx.genx.v1.viability-tests.list` | `GET /genx/v1/viability-tests` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
 | `brapi-genx.genx.v1.viability-tests.record` | `POST /genx/v1/viability-tests` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |
 | `brapi-genx.genx.v1.viability-tests.get` | `GET /genx/v1/viability-tests/{viabilityTestDbId}` | 0 | No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence. |

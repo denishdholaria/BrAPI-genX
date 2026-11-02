@@ -81,6 +81,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `VariantAnnotation/` | `VariantAnnotation` — variant annotation records (functional annotations, provenance) | `GET /genx/v1/variant-annotations` (`genxListVariantAnnotations`); `POST /genx/v1/variant-annotations` (`genxRecordVariantAnnotation`); `GET /genx/v1/variant-annotations/{variantAnnotationDbId}` (`genxGetVariantAnnotation`) |
 | `GenotypeQc/` | `GenotypeQcReport` — genotype QC report records (metrics, thresholds, provenance) | `GET /genx/v1/genotype-qc-reports` (`genxListGenotypeQcReports`); `POST /genx/v1/genotype-qc-reports` (`genxRecordGenotypeQcReport`); `GET /genx/v1/genotype-qc-reports/{genotypeQcReportDbId}` (`genxGetGenotypeQcReport`) |
 | `GenotypeCallSemantics/` | `GenotypeCallSemantics` — genotype call semantics records (missing-call policy, zygosity encoding, provenance) | `GET /genx/v1/genotype-call-semantics` (`genxListGenotypeCallSemantics`); `POST /genx/v1/genotype-call-semantics` (`genxRegisterGenotypeCallSemantics`); `GET /genx/v1/genotype-call-semantics/{genotypeCallSemanticsDbId}` (`genxGetGenotypeCallSemantics`) |
+| `VendorOrder/` | `VendorOrderRecord` — vendor genotyping order records (vendor, platform, sample count, provenance) | `GET /genx/v1/vendor-orders` (`genxListVendorOrders`); `POST /genx/v1/vendor-orders` (`genxRegisterVendorOrder`); `GET /genx/v1/vendor-orders/{vendorOrderDbId}` (`genxGetVendorOrder`) |
 | `MarkerProbe/` | `MarkerProbe` — marker probe records (marker linkage, platform, sequence, provenance) | `GET /genx/v1/marker-probes` (`genxListMarkerProbes`); `POST /genx/v1/marker-probes` (`genxRegisterMarkerProbe`); `GET /genx/v1/marker-probes/{markerProbeDbId}` (`genxGetMarkerProbe`) |
 | `DisposalRecord/` | `DisposalRecord` — disposal records (reason, method, quantity, provenance) | `GET /genx/v1/disposal-records` (`genxListDisposalRecords`); `POST /genx/v1/disposal-records` (`genxRecordDisposalRecord`); `GET /genx/v1/disposal-records/{disposalRecordDbId}` (`genxGetDisposalRecord`) |
 | `PlantingOperation/` | `PlantingOperation` — planting operation records (date, method, rate, provenance) | `GET /genx/v1/planting-operations` (`genxListPlantingOperations`); `POST /genx/v1/planting-operations` (`genxRecordPlantingOperation`); `GET /genx/v1/planting-operations/{plantingOperationDbId}` (`genxGetPlantingOperation`) |
@@ -175,7 +176,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-069-Farm](./RFC-069-Farm.md),
 [RFC-070-Yield-Map](./RFC-070-Yield-Map.md),
 [RFC-071-Marker-Probe](./RFC-071-Marker-Probe.md),
-[RFC-072-Genotype-Call-Semantics](./RFC-072-Genotype-Call-Semantics.md).
+[RFC-072-Genotype-Call-Semantics](./RFC-072-Genotype-Call-Semantics.md),
+[RFC-073-Vendor-Order](./RFC-073-Vendor-Order.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

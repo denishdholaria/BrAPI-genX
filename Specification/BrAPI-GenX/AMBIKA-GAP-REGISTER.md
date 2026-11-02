@@ -76,6 +76,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | D1 | Sample custody / transfer | `CustodyTransfer/` | RFC-063 |
 | D3 | Genotype QC reports | `GenotypeQc/` | RFC-064 |
 | D3 | Genotype call and missing call semantics | `GenotypeCallSemantics/` | RFC-072 |
+| D3 | Vendor order submission and result ingestion | `VendorOrder/` | RFC-073 |
 | D3 | Marker/probe registry | `MarkerProbe/` | RFC-071 |
 | D1 | Retention / disposal | `DisposalRecord/` | RFC-065 |
 | D6 | Farm / site reference | `Farm/` | RFC-069 |
@@ -87,7 +88,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | S | FAIR packages | `FAIR/` | RFC-006 |
 | S | Research asset registry, persistent identifiers / DOI, license/access, embargo | `ResearchAssets/` | RFC-016 |
 
-Still open in D3 row 9: vendor order/result ingestion. D1 row 4 named gaps are now covered. Still open
+D3 row 9 named gaps are now covered (genotype call semantics, marker/probe registry, vendor order/result ingestion). D1 row 4 named gaps are now covered. Still open
 in D5 row 12: emissions, soil texture/chemistry/moisture depth, environmental
 treatments/stress.
 

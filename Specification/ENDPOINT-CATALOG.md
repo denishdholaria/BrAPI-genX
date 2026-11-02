@@ -13,8 +13,8 @@ A catalogue identifier does not replace a source operationId or route. Classific
 | Surface | Operations | Contract status |
 |---|---:|---|
 | BrAPI v2.1 official modules | 201 | Released specification; implementation availability not inferred |
-| BrAPI GenX /genx/v1 | 216 | Proposed, non-normative |
-| **Total** | **417** | Existing contracts plus proposed operations |
+| BrAPI GenX /genx/v1 | 219 | Proposed, non-normative |
+| **Total** | **420** | Existing contracts plus proposed operations |
 
 BijMantra snapshot: 2240 records from the inventory generated 2026-10-17; see [source inventory](https://github.com/denishdholaria/bijmantraorg/blob/main/endpoints-inventory.md) and [crosswalk](./BIJMANTRA-CROSSWALK.md).
 
@@ -14832,6 +14832,111 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
+### VendorOrder — 3 operations
+
+### GET `/genx/v1/vendor-orders`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.vendor-orders.list`
+- **BrAPI-GenX operation identity:** `genxListVendorOrders` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListVendorOrders`
+- **GenX source module:** `VendorOrder`
+- **Source tag:** VendorOrder
+- **Proposed BrAPI-GenX classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List vendor genotyping orders, optionally filtered by vendor or status.
+**Source contract description:**
+> Get a paged list of vendor genotyping orders across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover genotyping orders submitted to a vendor.
+- Support vendor result ingestion and traceability.
+**Must not be used for / explicit non-goals:**
+- Creating or changing an order (use the POST endpoint).
+- Assuming an order result is a BrAPI VariantCall set.
+- Treating the list as a complete genotyping history.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** vendor, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterVendorOrder, genxGetVendorOrder, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.vendor-orders.record, brapi-genx.genx.v1.vendor-orders.get
+- **Relevant RFC / decision references:** RFC-073
+- **Contract source:** [`Specification/BrAPI-GenX/VendorOrder/VendorOrder_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/VendorOrder/VendorOrder_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/vendor-orders`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.vendor-orders.record`
+- **BrAPI-GenX operation identity:** `genxRegisterVendorOrder` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterVendorOrder`
+- **GenX source module:** `VendorOrder`
+- **Source tag:** VendorOrder
+- **Proposed BrAPI-GenX classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register one vendor genotyping order with vendor, platform, and provenance.
+**Source contract description:**
+> Unknown vendorOrderDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish a vendor genotyping order and its sample count.
+- Retry an identical order safely using the same vendorOrderDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing order; corrections require a new record that supersedes.
+- Assuming the order result is a BrAPI VariantCall set.
+- Asserting that the order is fulfilled or validated.
+- **Side effects:** Creates a vendor order identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same vendorOrderDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** VendorOrderRecordNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListVendorOrders, genxGetVendorOrder, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.vendor-orders.list, brapi-genx.genx.v1.vendor-orders.get
+- **Relevant RFC / decision references:** RFC-073
+- **Contract source:** [`Specification/BrAPI-GenX/VendorOrder/VendorOrder_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/VendorOrder/VendorOrder_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/vendor-orders/{vendorOrderDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.vendor-orders.get`
+- **BrAPI-GenX operation identity:** `genxGetVendorOrder` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetVendorOrder`
+- **GenX source module:** `VendorOrder`
+- **Source tag:** VendorOrder
+- **Proposed BrAPI-GenX classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one vendor genotyping order.
+**Source contract description:**
+> Returns the registered order, or 404.
+**Can be used for:**
+- Inspect vendor, platform, sample count, status, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the order result is a BrAPI VariantCall set.
+- Treating a superseded order as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** vendorOrderDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterVendorOrder, genxListVendorOrders, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.vendor-orders.list, brapi-genx.genx.v1.vendor-orders.record
+- **Relevant RFC / decision references:** RFC-073
+- **Contract source:** [`Specification/BrAPI-GenX/VendorOrder/VendorOrder_VendorOrderDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/VendorOrder/VendorOrder_VendorOrderDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
 ### ViabilityTesting — 3 operations
 
 ### GET `/genx/v1/viability-tests`
@@ -15364,6 +15469,6 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - Unique full-base-path/method/route keys: `True`.
 - Unique source/advisory operation identifiers where present: `True`.
 - BrAPI v2.1 inventory rows resolved to source YAML operations: 201 / 201.
-- GenX operations documented: 216.
+- GenX operations documented: 219.
 
 See [BIJMANTRA-CROSSWALK.md](./BIJMANTRA-CROSSWALK.md) for inventory evidence and semantic boundaries.

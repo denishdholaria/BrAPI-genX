@@ -240,6 +240,11 @@ modules:
     primary_class: "D3"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Genotype call semantics records; BrAPI v2.1 has no equivalent record."
+  - path: "VendorOrder/"
+    object: "VendorOrderRecord"
+    primary_class: "D3"
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Vendor genotyping order records; BrAPI v2.1 has no equivalent record."
   - path: "MarkerProbe/"
     object: "MarkerProbe"
     primary_class: "D3"

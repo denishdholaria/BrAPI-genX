@@ -39758,12 +39758,248 @@
         "brapi-genx.genx.v1.genotype-call-semantics.list",
         "brapi-genx.genx.v1.genotype-call-semantics.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "VendorOrder",
+      "brapiTag": "VendorOrder",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/VendorOrder/VendorOrder_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.vendor-orders.list",
+      "method": "GET",
+      "path": "/vendor-orders",
+      "operationIdInSource": "genxListVendorOrders",
+      "recommendedOperationId": "genxListVendorOrders",
+      "operationName": "List vendor genotyping orders",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List vendor genotyping orders, optionally filtered by vendor or status.",
+      "sourceDescription": "Get a paged list of vendor genotyping orders across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover genotyping orders submitted to a vendor.",
+        "Support vendor result ingestion and traceability."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing an order (use the POST endpoint).",
+        "Assuming an order result is a BrAPI VariantCall set.",
+        "Treating the list as a complete genotyping history."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "vendor",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterVendorOrder",
+        "genxGetVendorOrder",
+        "genxRegisterGenomicDataset"
+      ],
+      "decisionReferences": [
+        "RFC-073"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.vendor-orders.record",
+        "brapi-genx.genx.v1.vendor-orders.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "VendorOrder",
+      "brapiTag": "VendorOrder",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/VendorOrder/VendorOrder_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.vendor-orders.record",
+      "method": "POST",
+      "path": "/vendor-orders",
+      "operationIdInSource": "genxRegisterVendorOrder",
+      "recommendedOperationId": "genxRegisterVendorOrder",
+      "operationName": "Register one vendor genotyping order",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one vendor genotyping order with vendor, platform, and provenance.",
+      "sourceDescription": "Unknown vendorOrderDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a vendor genotyping order and its sample count.",
+        "Retry an identical order safely using the same vendorOrderDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing order; corrections require a new record that supersedes.",
+        "Assuming the order result is a BrAPI VariantCall set.",
+        "Asserting that the order is fulfilled or validated."
+      ],
+      "sideEffects": "Creates a vendor order identity or appends a new immutable version when accepted.",
+      "idempotency": "Same vendorOrderDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "VendorOrderRecordNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListVendorOrders",
+        "genxGetVendorOrder",
+        "genxRegisterGenomicDataset"
+      ],
+      "decisionReferences": [
+        "RFC-073"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.vendor-orders.list",
+        "brapi-genx.genx.v1.vendor-orders.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "VendorOrder",
+      "brapiTag": "VendorOrder",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/VendorOrder/VendorOrder_VendorOrderDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.vendor-orders.get",
+      "method": "GET",
+      "path": "/vendor-orders/{vendorOrderDbId}",
+      "operationIdInSource": "genxGetVendorOrder",
+      "recommendedOperationId": "genxGetVendorOrder",
+      "operationName": "Get one vendor genotyping order",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one vendor genotyping order.",
+      "sourceDescription": "Returns the registered order, or 404.",
+      "canBeUsedFor": [
+        "Inspect vendor, platform, sample count, status, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the order result is a BrAPI VariantCall set.",
+        "Treating a superseded order as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "vendorOrderDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterVendorOrder",
+        "genxListVendorOrders",
+        "genxRegisterGenomicDataset"
+      ],
+      "decisionReferences": [
+        "RFC-073"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.vendor-orders.list",
+        "brapi-genx.genx.v1.vendor-orders.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 216,
+    "genxEntriesAdded": 219,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -39841,7 +40077,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 417,
+    "totalEntries": 420,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -40142,5 +40378,5 @@
       ]
     }
   ],
-  "totalEntries": 417
+  "totalEntries": 420
 }

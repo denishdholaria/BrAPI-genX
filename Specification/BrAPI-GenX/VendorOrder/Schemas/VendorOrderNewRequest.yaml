@@ -1,0 +1,52 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    VendorOrderRecordNewRequest:
+      type: object
+      description: |-
+        Request to register one vendor genotyping order. Unknown
+        vendorOrderDbId creates; same id with an identical body replays the
+        existing record; same id with a different body is rejected with 409.
+      required:
+      - vendorOrderDbId
+      properties:
+        vendorOrderDbId:
+          description: Namespaced vendor-order identity `{authority}:vendor-order:{localId}`
+          type: string
+          example: institute-a:vendor-order:vo-2026-001
+        vendor:
+          description: Genotyping vendor or service provider
+          type: string
+          example: vendor-x
+        platform:
+          description: Genotyping platform requested
+          type: string
+          example: vendor-x-array-v3
+        sampleCount:
+          description: Number of samples in the order
+          type: integer
+          example: 96
+        resultIngestedAt:
+          description: Timestamp when results were ingested, when applicable
+          type: string
+          example: 2026-10-01T12:00:00Z
+        status:
+          description: Lifecycle state of the order record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: vendorOrderDbId of the record this one replaces
+          type: string
+          example: institute-a:vendor-order:vo-2026-000
+        provenance:
+          description: Evidence and method provenance for the order
+          $ref: '#/components/schemas/ProvenanceEnvelope'

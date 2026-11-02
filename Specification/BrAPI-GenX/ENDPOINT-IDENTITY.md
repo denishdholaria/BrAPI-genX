@@ -255,6 +255,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/genotype-call-semantics` | GET | `genxListGenotypeCallSemantics` | List genotype call semantics | Does not create or change a record; not a BrAPI data resource. |
 | `/genx/v1/genotype-call-semantics` | POST | `genxRegisterGenotypeCallSemantics` | Register one genotype call semantics record | Append-only record; replay/conflict semantics. |
 | `/genx/v1/genotype-call-semantics/{genotypeCallSemanticsDbId}` | GET | `genxGetGenotypeCallSemantics` | Retrieve one genotype call semantics record | Does not treat a superseded record as current. |
+| `/genx/v1/vendor-orders` | GET | `genxListVendorOrders` | List vendor genotyping orders | Does not create or change an order; not a BrAPI data resource. |
+| `/genx/v1/vendor-orders` | POST | `genxRegisterVendorOrder` | Register one vendor genotyping order | Append-only record; replay/conflict semantics. |
+| `/genx/v1/vendor-orders/{vendorOrderDbId}` | GET | `genxGetVendorOrder` | Retrieve one vendor genotyping order | Does not treat a superseded order as current. |
 | `/genx/v1/marker-probes` | GET | `genxListMarkerProbes` | List marker probes | Does not create or change a probe; not a BrAPI Marker. |
 | `/genx/v1/marker-probes` | POST | `genxRegisterMarkerProbe` | Register one marker probe | Append-only record; replay/conflict semantics. |
 | `/genx/v1/marker-probes/{markerProbeDbId}` | GET | `genxGetMarkerProbe` | Retrieve one marker probe | Does not treat a superseded probe as current. |
