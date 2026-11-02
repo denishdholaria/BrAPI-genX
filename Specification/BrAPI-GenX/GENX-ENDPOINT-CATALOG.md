@@ -30,6 +30,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | Genomics | 3 | proposed, non-normative |
 | GwasResult | 3 | proposed, non-normative |
 | GxeAnalysis | 3 | proposed, non-normative |
+| HaplotypeAnalysis | 3 | proposed, non-normative |
 | HarvestRecords | 3 | proposed, non-normative |
 | Heritability | 3 | proposed, non-normative |
 | ImageMetadata | 3 | proposed, non-normative |
@@ -2592,6 +2593,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.gxe-analyses.list, brapi-genx.genx.v1.gxe-analyses.record
 - **Relevant RFC / decision references:** RFC-051
 - **Contract source:** [`Specification/BrAPI-GenX/GxeAnalysis/GxeAnalysis_GxeAnalysisResultDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/GxeAnalysis/GxeAnalysis_GxeAnalysisResultDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### HaplotypeAnalysis — 3 operations
+
+### GET `/genx/v1/haplotype-analyses`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.haplotype-analyses.list`
+- **BrAPI-GenX operation identity:** `genxListHaplotypeAnalyses` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListHaplotypeAnalyses`
+- **GenX source module:** `HaplotypeAnalysis`
+- **Source tag:** HaplotypeAnalysis
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List haplotype analysis result records, optionally filtered by method, study, or status.
+**Source contract description:**
+> Get a paged list of haplotype analyses across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover haplotype analyses for a study or method.
+- Support scientific reproducibility and auditing.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a result (use the POST endpoint).
+- Assuming a result is a BrAPI data resource.
+- Treating the list as a complete analysis repository.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** analysisMethodDbId, studyDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordHaplotypeAnalysis, genxGetHaplotypeAnalysis, genxRegisterAnalysisMethod
+- **Related catalogue IDs:** brapi-genx.genx.v1.haplotype-analyses.record, brapi-genx.genx.v1.haplotype-analyses.get
+- **Relevant RFC / decision references:** RFC-059
+- **Contract source:** [`Specification/BrAPI-GenX/HaplotypeAnalysis/HaplotypeAnalysis_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/HaplotypeAnalysis/HaplotypeAnalysis_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/haplotype-analyses`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.haplotype-analyses.record`
+- **BrAPI-GenX operation identity:** `genxRecordHaplotypeAnalysis` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordHaplotypeAnalysis`
+- **GenX source module:** `HaplotypeAnalysis`
+- **Source tag:** HaplotypeAnalysis
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one haplotype analysis result with haplotypes and provenance.
+**Source contract description:**
+> Unknown haplotypeAnalysisDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish haplotype analysis result metadata and payload references.
+- Retry an identical result safely using the same haplotypeAnalysisDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing result; corrections require a new record that supersedes.
+- Assuming the result is a BrAPI data resource.
+- Treating the result as scientific validation or approval.
+- **Side effects:** Creates a haplotype analysis result when accepted.
+- **Retry / idempotency:** Same haplotypeAnalysisDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** HaplotypeAnalysisNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListHaplotypeAnalyses, genxGetHaplotypeAnalysis, genxRegisterAnalysisMethod
+- **Related catalogue IDs:** brapi-genx.genx.v1.haplotype-analyses.list, brapi-genx.genx.v1.haplotype-analyses.get
+- **Relevant RFC / decision references:** RFC-059
+- **Contract source:** [`Specification/BrAPI-GenX/HaplotypeAnalysis/HaplotypeAnalysis_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/HaplotypeAnalysis/HaplotypeAnalysis_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/haplotype-analyses/{haplotypeAnalysisDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.haplotype-analyses.get`
+- **BrAPI-GenX operation identity:** `genxGetHaplotypeAnalysis` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetHaplotypeAnalysis`
+- **GenX source module:** `HaplotypeAnalysis`
+- **Source tag:** HaplotypeAnalysis
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one haplotype analysis result.
+**Source contract description:**
+> Returns the recorded result, or 404.
+**Can be used for:**
+- Inspect haplotypes and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the result is a BrAPI data resource.
+- Treating a superseded result as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** haplotypeAnalysisDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordHaplotypeAnalysis, genxListHaplotypeAnalyses, genxRegisterAnalysisMethod
+- **Related catalogue IDs:** brapi-genx.genx.v1.haplotype-analyses.list, brapi-genx.genx.v1.haplotype-analyses.record
+- **Relevant RFC / decision references:** RFC-059
+- **Contract source:** [`Specification/BrAPI-GenX/HaplotypeAnalysis/HaplotypeAnalysis_HaplotypeAnalysisDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/HaplotypeAnalysis/HaplotypeAnalysis_HaplotypeAnalysisDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

@@ -98,6 +98,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | GenomicRelationship / GenomicRelationship | D7 | C1, C2, C3, C5, C6, C9 | Genomic relationship matrix records; no BrAPI v2.1 equivalent |
 | MethylationAnalysis / MethylationAnalysis | D7 | C1, C2, C3, C6, C9 | Methylation analysis result records; no BrAPI v2.1 equivalent |
 | ExpressionQtl / ExpressionQtl | D7 | C1, C2, C3, C6, C9 | Expression QTL result records; no BrAPI v2.1 equivalent |
+| HaplotypeAnalysis / HaplotypeAnalysis | D7 | C1, C2, C3, C6, C9 | Haplotype analysis result records; no BrAPI v2.1 equivalent |
 | BulkCapture / BulkCapture | D4 | C1, C2, C3, C6, C9 | Bulk capture records; no BrAPI v2.1 equivalent |
 | AnalysisMethods / AnalysisMethod | D7 | C1, C2, C3, C6, C9 | Versioned analysis method registry; no BrAPI v2.1 equivalent; execution is via Jobs |
 | WeatherObservations / WeatherObservation | D5 | C1, C2, C3, C6, C7, C9 | Environmental/weather observation records; no BrAPI v2.1 equivalent; complementary to Telemetry |

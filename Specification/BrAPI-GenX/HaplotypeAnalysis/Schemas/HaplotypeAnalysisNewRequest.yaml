@@ -1,0 +1,53 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    HaplotypeAnalysisNewRequest:
+      type: object
+      description: |-
+        Request to record one haplotype analysis result. Unknown haplotypeAnalysisDbId
+        creates; same id with an identical body replays the existing
+        record; same id with a different body is rejected with 409.
+      required:
+      - haplotypeAnalysisDbId
+      - analysisMethodDbId
+      properties:
+        haplotypeAnalysisDbId:
+          description: Namespaced haplotype-analysis identity `{authority}:haplotype-analysis:{localId}`
+          type: string
+          example: institute-a:haplotype-analysis:ha-2026-001
+        analysisMethodDbId:
+          description: GenX AnalysisMethod used
+          type: string
+          example: institute-a:analysis-method:haplotype
+        jobDbId:
+          description: GenX Job that produced this result
+          type: string
+          example: institute-a:job:analysis-7
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        haplotypes:
+          description: Haplotype blocks or segments
+          type: object
+          example: {chr1: [{start: 100, end: 200, haplotype: H1}]}
+        status:
+          description: Lifecycle state of the result record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: haplotypeAnalysisDbId of the result this one replaces
+          type: string
+          example: institute-a:haplotype-analysis:ha-2026-000
+        provenance:
+          description: Evidence and method provenance for the result
+          $ref: '#/components/schemas/ProvenanceEnvelope'

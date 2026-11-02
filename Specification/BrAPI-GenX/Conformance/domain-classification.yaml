@@ -285,6 +285,11 @@ modules:
     primary_class: "D7"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Expression QTL result records; BrAPI v2.1 has no equivalent record."
+  - path: "HaplotypeAnalysis/"
+    object: "HaplotypeAnalysis"
+    primary_class: "D7"
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Haplotype analysis result records; BrAPI v2.1 has no equivalent record."
   - path: "BulkCapture/"
     object: "BulkCapture"
     primary_class: "D4"

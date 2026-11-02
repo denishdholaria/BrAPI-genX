@@ -87,6 +87,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `GenomicRelationship/` | `GenomicRelationship` — genomic relationship matrix records (method, storage reference, provenance) | `GET /genx/v1/genomic-relationships` (`genxListGenomicRelationships`); `POST /genx/v1/genomic-relationships` (`genxRegisterGenomicRelationship`); `GET /genx/v1/genomic-relationships/{genomicRelationshipDbId}` (`genxGetGenomicRelationship`) |
 | `MethylationAnalysis/` | `MethylationAnalysis` — methylation analysis result records (regions, provenance) | `GET /genx/v1/methylation-analyses` (`genxListMethylationAnalyses`); `POST /genx/v1/methylation-analyses` (`genxRecordMethylationAnalysis`); `GET /genx/v1/methylation-analyses/{methylationAnalysisDbId}` (`genxGetMethylationAnalysis`) |
 | `ExpressionQtl/` | `ExpressionQtl` — expression QTL result records (QTLs, provenance) | `GET /genx/v1/expression-qtls` (`genxListExpressionQtls`); `POST /genx/v1/expression-qtls` (`genxRecordExpressionQtl`); `GET /genx/v1/expression-qtls/{expressionQtlDbId}` (`genxGetExpressionQtl`) |
+| `HaplotypeAnalysis/` | `HaplotypeAnalysis` — haplotype analysis result records (haplotypes, provenance) | `GET /genx/v1/haplotype-analyses` (`genxListHaplotypeAnalyses`); `POST /genx/v1/haplotype-analyses` (`genxRecordHaplotypeAnalysis`); `GET /genx/v1/haplotype-analyses/{haplotypeAnalysisDbId}` (`genxGetHaplotypeAnalysis`) |
 | `AnalysisResult/` | `AnalysisResult` — analysis result records (method, job, payload, provenance) | `GET /genx/v1/analysis-results` (`genxListAnalysisResults`); `POST /genx/v1/analysis-results` (`genxRecordAnalysisResult`); `GET /genx/v1/analysis-results/{analysisResultDbId}` (`genxGetAnalysisResult`) |
 | `Conformance/` | Probes + fixtures + runner contract (`probes.yaml`) | Static tier runs now; live tier needs `--server` |
 
@@ -147,7 +148,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-055-Genomic-Selection](./RFC-055-Genomic-Selection.md),
 [RFC-056-Genomic-Relationship](./RFC-056-Genomic-Relationship.md),
 [RFC-057-Methylation-Analysis](./RFC-057-Methylation-Analysis.md),
-[RFC-058-Expression-Qtl](./RFC-058-Expression-Qtl.md).
+[RFC-058-Expression-Qtl](./RFC-058-Expression-Qtl.md),
+[RFC-059-Haplotype-Analysis](./RFC-059-Haplotype-Analysis.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).
