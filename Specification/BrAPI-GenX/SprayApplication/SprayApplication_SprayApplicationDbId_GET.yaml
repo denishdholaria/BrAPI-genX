@@ -1,0 +1,65 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /spray-applications/{sprayApplicationDbId}:
+    get:
+      operationId: genxGetSprayApplication
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.spray-applications.get"
+        classification:
+          primaryDomain: "D6"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve one spray application record."
+        canBeUsedFor:
+          - "Inspect field linkage, product, rate, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming a spray record is a BrAPI Observation."
+          - "Treating a superseded record as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterSprayApplication"
+          - "genxListSprayApplications"
+          - "genxRegisterFieldScouting"
+        decisions: ["RFC-081"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one spray application
+      description: Returns the registered record, or 404.
+      parameters:
+      - name: sprayApplicationDbId
+        description: Namespaced spray-application identity `{authority}:spray-application:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/SprayApplication'
+                required:
+                - metadata
+                - result
+                title: SprayApplicationResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - SprayApplication

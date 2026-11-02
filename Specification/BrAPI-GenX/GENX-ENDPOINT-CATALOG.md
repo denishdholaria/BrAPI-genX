@@ -74,6 +74,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | SoilChemistry | 3 | proposed, non-normative |
 | SoilProfile | 3 | proposed, non-normative |
 | SpeedBreeding | 3 | proposed, non-normative |
+| SprayApplication | 3 | proposed, non-normative |
 | StabilityAnalysis | 3 | proposed, non-normative |
 | TaxonName | 3 | proposed, non-normative |
 | Telemetry | 2 | proposed, non-normative |
@@ -7185,6 +7186,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.speed-breeding-protocols.list, brapi-genx.genx.v1.speed-breeding-protocols.register
 - **Relevant RFC / decision references:** RFC-022
 - **Contract source:** [`Specification/BrAPI-GenX/SpeedBreeding/SpeedBreeding_SpeedBreedingProtocolDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/SpeedBreeding/SpeedBreeding_SpeedBreedingProtocolDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### SprayApplication — 3 operations
+
+### GET `/genx/v1/spray-applications`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.spray-applications.list`
+- **BrAPI-GenX operation identity:** `genxListSprayApplications` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListSprayApplications`
+- **GenX source module:** `SprayApplication`
+- **Source tag:** SprayApplication
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List spray application records, optionally filtered by field or status.
+**Source contract description:**
+> Get a paged list of spray application records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover spray applications for a field.
+- Support crop health and IPM tracking.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a spray record (use the POST endpoint).
+- Assuming a spray record is a BrAPI Observation.
+- Treating the list as a complete spray history.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** fieldDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterSprayApplication, genxGetSprayApplication, genxRegisterFieldScouting
+- **Related catalogue IDs:** brapi-genx.genx.v1.spray-applications.record, brapi-genx.genx.v1.spray-applications.get
+- **Relevant RFC / decision references:** RFC-081
+- **Contract source:** [`Specification/BrAPI-GenX/SprayApplication/SprayApplication_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/SprayApplication/SprayApplication_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/spray-applications`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.spray-applications.record`
+- **BrAPI-GenX operation identity:** `genxRegisterSprayApplication` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterSprayApplication`
+- **GenX source module:** `SprayApplication`
+- **Source tag:** SprayApplication
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register one spray application record with field linkage and provenance.
+**Source contract description:**
+> Unknown sprayApplicationDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish a spray application for a field.
+- Retry an identical record safely using the same sprayApplicationDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming a spray record is a BrAPI Observation.
+- Asserting that the spray is validated or effective.
+- **Side effects:** Creates a spray application identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same sprayApplicationDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** SprayApplicationNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListSprayApplications, genxGetSprayApplication, genxRegisterFieldScouting
+- **Related catalogue IDs:** brapi-genx.genx.v1.spray-applications.list, brapi-genx.genx.v1.spray-applications.get
+- **Relevant RFC / decision references:** RFC-081
+- **Contract source:** [`Specification/BrAPI-GenX/SprayApplication/SprayApplication_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/SprayApplication/SprayApplication_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/spray-applications/{sprayApplicationDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.spray-applications.get`
+- **BrAPI-GenX operation identity:** `genxGetSprayApplication` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetSprayApplication`
+- **GenX source module:** `SprayApplication`
+- **Source tag:** SprayApplication
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one spray application record.
+**Source contract description:**
+> Returns the registered record, or 404.
+**Can be used for:**
+- Inspect field linkage, product, rate, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming a spray record is a BrAPI Observation.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** sprayApplicationDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterSprayApplication, genxListSprayApplications, genxRegisterFieldScouting
+- **Related catalogue IDs:** brapi-genx.genx.v1.spray-applications.list, brapi-genx.genx.v1.spray-applications.record
+- **Relevant RFC / decision references:** RFC-081
+- **Contract source:** [`Specification/BrAPI-GenX/SprayApplication/SprayApplication_SprayApplicationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/SprayApplication/SprayApplication_SprayApplicationDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

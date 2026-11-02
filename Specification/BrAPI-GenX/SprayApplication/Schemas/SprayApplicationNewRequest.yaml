@@ -1,0 +1,52 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    SprayApplicationNewRequest:
+      type: object
+      description: |-
+        Request to register one spray application record. Unknown
+        sprayApplicationDbId creates; same id with an identical body replays
+        the existing record; same id with a different body is rejected with 409.
+      required:
+      - sprayApplicationDbId
+      properties:
+        sprayApplicationDbId:
+          description: Namespaced spray-application identity `{authority}:spray-application:{localId}`
+          type: string
+          example: institute-a:spray-application:sa-2026-001
+        fieldDbId:
+          description: Field or site reference
+          type: string
+          example: field-001
+        product:
+          description: Spray product or active ingredient
+          type: string
+          example: fungicide-x
+        rate:
+          description: Application rate
+          type: string
+          example: 1.5 L/ha
+        appliedAt:
+          description: Timestamp of application
+          type: string
+          example: 2026-10-01T08:00:00Z
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: sprayApplicationDbId of the record this one replaces
+          type: string
+          example: institute-a:spray-application:sa-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

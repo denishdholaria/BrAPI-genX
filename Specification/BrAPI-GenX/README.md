@@ -95,6 +95,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `Farm/` | `Farm` — farm and site reference records (locations, area, provenance) | `GET /genx/v1/farms` (`genxListFarms`); `POST /genx/v1/farms` (`genxRegisterFarm`); `GET /genx/v1/farms/{farmDbId}` (`genxGetFarm`) |
 | `FieldScouting/` | `FieldScouting` — field scouting and work order records (type, observations, provenance) | `GET /genx/v1/field-scouting` (`genxListFieldScouting`); `POST /genx/v1/field-scouting` (`genxRegisterFieldScouting`); `GET /genx/v1/field-scouting/{fieldScoutingDbId}` (`genxGetFieldScouting`) |
 | `FieldBoundary/` | `FieldBoundary` — operational field boundary and history records (version, geometry reference, provenance) | `GET /genx/v1/field-boundaries` (`genxListFieldBoundaries`); `POST /genx/v1/field-boundaries` (`genxRegisterFieldBoundary`); `GET /genx/v1/field-boundaries/{fieldBoundaryDbId}` (`genxGetFieldBoundary`) |
+| `SprayApplication/` | `SprayApplication` — spray application records (product, rate, timestamp, provenance) | `GET /genx/v1/spray-applications` (`genxListSprayApplications`); `POST /genx/v1/spray-applications` (`genxRegisterSprayApplication`); `GET /genx/v1/spray-applications/{sprayApplicationDbId}` (`genxGetSprayApplication`) |
 | `YieldMap/` | `YieldMap` — yield map records (storage reference, resolution, digest, provenance) | `GET /genx/v1/yield-maps` (`genxListYieldMaps`); `POST /genx/v1/yield-maps` (`genxRegisterYieldMap`); `GET /genx/v1/yield-maps/{yieldMapDbId}` (`genxGetYieldMap`) |
 | `MixedModel/` | `MixedModelResult` — mixed model result records (variance components, BLUPs, provenance) | `GET /genx/v1/mixed-model-results` (`genxListMixedModelResults`); `POST /genx/v1/mixed-model-results` (`genxRecordMixedModelResult`); `GET /genx/v1/mixed-model-results/{mixedModelResultDbId}` (`genxGetMixedModelResult`) |
 | `Heritability/` | `HeritabilityEstimate` — heritability estimate records (value, provenance) | `GET /genx/v1/heritability-estimates` (`genxListHeritabilityEstimates`); `POST /genx/v1/heritability-estimates` (`genxRecordHeritability`); `GET /genx/v1/heritability-estimates/{heritabilityEstimateDbId}` (`genxGetHeritabilityEstimate`) |
@@ -191,7 +192,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-077-Soil-Chemistry](./RFC-077-Soil-Chemistry.md),
 [RFC-078-Environmental-Treatment](./RFC-078-Environmental-Treatment.md),
 [RFC-079-Developmental-Stage](./RFC-079-Developmental-Stage.md),
-[RFC-080-Taxon-Name](./RFC-080-Taxon-Name.md).
+[RFC-080-Taxon-Name](./RFC-080-Taxon-Name.md),
+[RFC-081-Spray-Application](./RFC-081-Spray-Application.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

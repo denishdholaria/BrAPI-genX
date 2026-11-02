@@ -81,6 +81,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | D1 | Retention / disposal | `DisposalRecord/` | RFC-065 |
 | D6 | Farm / site reference | `Farm/` | RFC-069 |
 | D6 | Operational field boundary and history | `FieldBoundary/` | RFC-075 |
+| N | Spray application records | `SprayApplication/` | RFC-081 |
 | D6 | Field scouting / work orders | `FieldScouting/` | RFC-074 |
 | D6 | Yield maps | `YieldMap/` | RFC-070 |
 | D6 | Sowing / planting | `PlantingOperation/` | RFC-066 |

@@ -41645,12 +41645,248 @@
         "brapi-genx.genx.v1.taxon-names.list",
         "brapi-genx.genx.v1.taxon-names.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "SprayApplication",
+      "brapiTag": "SprayApplication",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/SprayApplication/SprayApplication_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.spray-applications.list",
+      "method": "GET",
+      "path": "/spray-applications",
+      "operationIdInSource": "genxListSprayApplications",
+      "recommendedOperationId": "genxListSprayApplications",
+      "operationName": "List spray applications",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List spray application records, optionally filtered by field or status.",
+      "sourceDescription": "Get a paged list of spray application records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover spray applications for a field.",
+        "Support crop health and IPM tracking."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a spray record (use the POST endpoint).",
+        "Assuming a spray record is a BrAPI Observation.",
+        "Treating the list as a complete spray history."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "fieldDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterSprayApplication",
+        "genxGetSprayApplication",
+        "genxRegisterFieldScouting"
+      ],
+      "decisionReferences": [
+        "RFC-081"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.spray-applications.record",
+        "brapi-genx.genx.v1.spray-applications.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "SprayApplication",
+      "brapiTag": "SprayApplication",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/SprayApplication/SprayApplication_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.spray-applications.record",
+      "method": "POST",
+      "path": "/spray-applications",
+      "operationIdInSource": "genxRegisterSprayApplication",
+      "recommendedOperationId": "genxRegisterSprayApplication",
+      "operationName": "Register one spray application",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one spray application record with field linkage and provenance.",
+      "sourceDescription": "Unknown sprayApplicationDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a spray application for a field.",
+        "Retry an identical record safely using the same sprayApplicationDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming a spray record is a BrAPI Observation.",
+        "Asserting that the spray is validated or effective."
+      ],
+      "sideEffects": "Creates a spray application identity or appends a new immutable version when accepted.",
+      "idempotency": "Same sprayApplicationDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "SprayApplicationNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListSprayApplications",
+        "genxGetSprayApplication",
+        "genxRegisterFieldScouting"
+      ],
+      "decisionReferences": [
+        "RFC-081"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.spray-applications.list",
+        "brapi-genx.genx.v1.spray-applications.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "SprayApplication",
+      "brapiTag": "SprayApplication",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/SprayApplication/SprayApplication_SprayApplicationDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.spray-applications.get",
+      "method": "GET",
+      "path": "/spray-applications/{sprayApplicationDbId}",
+      "operationIdInSource": "genxGetSprayApplication",
+      "recommendedOperationId": "genxGetSprayApplication",
+      "operationName": "Get one spray application",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one spray application record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect field linkage, product, rate, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a spray record is a BrAPI Observation.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "sprayApplicationDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterSprayApplication",
+        "genxListSprayApplications",
+        "genxRegisterFieldScouting"
+      ],
+      "decisionReferences": [
+        "RFC-081"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.spray-applications.list",
+        "brapi-genx.genx.v1.spray-applications.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 240,
+    "genxEntriesAdded": 243,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -41728,7 +41964,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 441,
+    "totalEntries": 444,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -42029,5 +42265,5 @@
       ]
     }
   ],
-  "totalEntries": 441
+  "totalEntries": 444
 }
