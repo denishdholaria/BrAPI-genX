@@ -1,0 +1,65 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /genomic-predictions/{genomicPredictionDbId}:
+    get:
+      operationId: genxGetGenomicPrediction
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.genomic-predictions.get"
+        classification:
+          primaryDomain: "D7"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve one genomic prediction result."
+        canBeUsedFor:
+          - "Inspect predictions, accuracy, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming the result is a BrAPI data resource."
+          - "Treating a superseded result as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordGenomicPrediction"
+          - "genxListGenomicPredictions"
+          - "genxRegisterAnalysisMethod"
+        decisions: ["RFC-054"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one genomic prediction result
+      description: Returns the recorded result, or 404.
+      parameters:
+      - name: genomicPredictionDbId
+        description: Namespaced genomic-prediction identity `{authority}:genomic-prediction:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/GenomicPrediction'
+                required:
+                - metadata
+                - result
+                title: GenomicPredictionResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - GenomicPrediction

@@ -260,6 +260,11 @@ modules:
     primary_class: "D7"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "PCA result records; BrAPI v2.1 has no equivalent record."
+  - path: "GenomicPrediction/"
+    object: "GenomicPrediction"
+    primary_class: "D7"
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Genomic prediction result records; BrAPI v2.1 has no equivalent record."
   - path: "BulkCapture/"
     object: "BulkCapture"
     primary_class: "D4"

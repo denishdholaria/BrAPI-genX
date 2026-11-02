@@ -82,6 +82,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `GwasResult/` | `GwasResult` — GWAS result records (significant markers, top p-value, provenance) | `GET /genx/v1/gwas-results` (`genxListGwasResults`); `POST /genx/v1/gwas-results` (`genxRecordGwasResult`); `GET /genx/v1/gwas-results/{gwasResultDbId}` (`genxGetGwasResult`) |
 | `Kinship/` | `KinshipMatrix` — kinship matrix records (method, storage reference, provenance) | `GET /genx/v1/kinship-matrices` (`genxListKinshipMatrices`); `POST /genx/v1/kinship-matrices` (`genxRegisterKinshipMatrix`); `GET /genx/v1/kinship-matrices/{kinshipMatrixDbId}` (`genxGetKinshipMatrix`) |
 | `PcaResult/` | `PcaResult` — PCA result records (components, explained variance, provenance) | `GET /genx/v1/pca-results` (`genxListPcaResults`); `POST /genx/v1/pca-results` (`genxRecordPcaResult`); `GET /genx/v1/pca-results/{pcaResultDbId}` (`genxGetPcaResult`) |
+| `GenomicPrediction/` | `GenomicPrediction` — genomic prediction result records (predictions, accuracy, provenance) | `GET /genx/v1/genomic-predictions` (`genxListGenomicPredictions`); `POST /genx/v1/genomic-predictions` (`genxRecordGenomicPrediction`); `GET /genx/v1/genomic-predictions/{genomicPredictionDbId}` (`genxGetGenomicPrediction`) |
 | `AnalysisResult/` | `AnalysisResult` — analysis result records (method, job, payload, provenance) | `GET /genx/v1/analysis-results` (`genxListAnalysisResults`); `POST /genx/v1/analysis-results` (`genxRecordAnalysisResult`); `GET /genx/v1/analysis-results/{analysisResultDbId}` (`genxGetAnalysisResult`) |
 | `Conformance/` | Probes + fixtures + runner contract (`probes.yaml`) | Static tier runs now; live tier needs `--server` |
 
@@ -137,7 +138,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-050-Heritability](./RFC-050-Heritability.md),
 [RFC-051-Gxe-Analysis](./RFC-051-Gxe-Analysis.md),
 [RFC-052-Kinship](./RFC-052-Kinship.md),
-[RFC-053-Pca-Result](./RFC-053-Pca-Result.md).
+[RFC-053-Pca-Result](./RFC-053-Pca-Result.md),
+[RFC-054-Genomic-Prediction](./RFC-054-Genomic-Prediction.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

@@ -1,0 +1,61 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    GenomicPrediction:
+      type: object
+      description: |-
+        One immutable genomic prediction result record. A published
+        (genomicPredictionDbId) record never mutates in place; corrections are
+        recorded as additional results linked by supersedes.
+      required:
+      - genomicPredictionDbId
+      - analysisMethodDbId
+      - status
+      properties:
+        genomicPredictionDbId:
+          description: Namespaced genomic-prediction identity `{authority}:genomic-prediction:{localId}`
+          type: string
+          example: institute-a:genomic-prediction:gp-2026-001
+        analysisMethodDbId:
+          description: GenX AnalysisMethod used
+          type: string
+          example: institute-a:analysis-method:gblup
+        jobDbId:
+          description: GenX Job that produced this result
+          type: string
+          example: institute-a:job:analysis-7
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        traitDbId:
+          description: BrAPI Trait predicted, when applicable
+          type: string
+          example: institute-a:trait:yield
+        predictions:
+          description: Predicted values keyed by germplasmDbId
+          type: object
+          example: {germplasm-a: 1.2, germplasm-b: 0.9}
+        accuracy:
+          description: Predictive accuracy of the model
+          type: number
+          example: 0.72
+        status:
+          description: Lifecycle state of the result record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: genomicPredictionDbId of the result this one replaces
+          type: string
+          example: institute-a:genomic-prediction:gp-2026-000
+        provenance:
+          description: Evidence and method provenance for the result
+          $ref: '#/components/schemas/ProvenanceEnvelope'
