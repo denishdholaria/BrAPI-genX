@@ -231,6 +231,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/methylation-analyses` | GET | `genxListMethylationAnalyses` | List methylation analyses | Does not create or change a result; not a BrAPI data resource. |
 | `/genx/v1/methylation-analyses` | POST | `genxRecordMethylationAnalysis` | Record one methylation analysis result | Append-only record; replay/conflict semantics. |
 | `/genx/v1/methylation-analyses/{methylationAnalysisDbId}` | GET | `genxGetMethylationAnalysis` | Retrieve one methylation analysis result | Does not treat a superseded result as current. |
+| `/genx/v1/expression-qtls` | GET | `genxListExpressionQtls` | List expression QTLs | Does not create or change a result; not a BrAPI data resource. |
+| `/genx/v1/expression-qtls` | POST | `genxRecordExpressionQtl` | Record one expression QTL result | Append-only record; replay/conflict semantics. |
+| `/genx/v1/expression-qtls/{expressionQtlDbId}` | GET | `genxGetExpressionQtl` | Retrieve one expression QTL result | Does not treat a superseded result as current. |
 | `/genx/v1/bulk-captures` | GET | `genxListBulkCaptures` | List bulk captures | Does not create or change a capture; not a BrAPI Observation. |
 | `/genx/v1/bulk-captures` | POST | `genxRecordBulkCapture` | Record one bulk capture | Append-only record; replay/conflict semantics. |
 | `/genx/v1/bulk-captures/{bulkCaptureDbId}` | GET | `genxGetBulkCapture` | Retrieve one bulk capture | Does not treat a superseded capture as current. |

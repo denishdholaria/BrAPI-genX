@@ -1,0 +1,151 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /expression-qtls:
+    get:
+      operationId: genxListExpressionQtls
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.expression-qtls.list"
+        classification:
+          primaryDomain: "D7"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List expression QTL result records, optionally filtered by method, study, or status."
+        canBeUsedFor:
+          - "Discover expression QTL results for a study or method."
+          - "Support scientific reproducibility and auditing."
+        mustNotBeUsedFor:
+          - "Creating or changing a result (use the POST endpoint)."
+          - "Assuming a result is a BrAPI data resource."
+          - "Treating the list as a complete analysis repository."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordExpressionQtl"
+          - "genxGetExpressionQtl"
+          - "genxRegisterAnalysisMethod"
+        decisions: ["RFC-058"]
+        proposalStatus: "draft-non-normative"
+      summary: List expression QTL results
+      description: Get a paged list of expression QTL results across authorities. Filters combine with AND.
+      parameters:
+      - name: analysisMethodDbId
+        description: Filter by GenX AnalysisMethod
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: studyDbId
+        description: Filter by BrAPI Study / trial context
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/ExpressionQtlListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - ExpressionQtl
+    post:
+      operationId: genxRecordExpressionQtl
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.expression-qtls.record"
+        classification:
+          primaryDomain: "D7"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Record one expression QTL result with QTLs and provenance."
+        canBeUsedFor:
+          - "Publish expression QTL result metadata and payload references."
+          - "Retry an identical result safely using the same expressionQtlDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing result; corrections require a new record that supersedes."
+          - "Assuming the result is a BrAPI data resource."
+          - "Treating the result as scientific validation or approval."
+        sideEffects: "Creates an expression QTL result when accepted."
+        idempotency: "Same expressionQtlDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListExpressionQtls"
+          - "genxGetExpressionQtl"
+          - "genxRegisterAnalysisMethod"
+        decisions: ["RFC-058"]
+        proposalStatus: "draft-non-normative"
+      summary: Record one expression QTL result
+      description: |-
+        Unknown expressionQtlDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpressionQtlNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/ExpressionQtl'
+                required:
+                - metadata
+                - result
+                title: ExpressionQtlResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - ExpressionQtl
+components:
+  responses:
+    ExpressionQtlListResponse:
+      content:
+        application/json:
+          schema:
+            title: ExpressionQtlListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ExpressionQtl'
+            required:
+            - metadata
+            - result
+      description: OK

@@ -1,0 +1,53 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ExpressionQtlNewRequest:
+      type: object
+      description: |-
+        Request to record one expression QTL result. Unknown expressionQtlDbId
+        creates; same id with an identical body replays the existing
+        record; same id with a different body is rejected with 409.
+      required:
+      - expressionQtlDbId
+      - analysisMethodDbId
+      properties:
+        expressionQtlDbId:
+          description: Namespaced expression-QTL identity `{authority}:expression-qtl:{localId}`
+          type: string
+          example: institute-a:expression-qtl:eqtl-2026-001
+        analysisMethodDbId:
+          description: GenX AnalysisMethod used
+          type: string
+          example: institute-a:analysis-method:eqtl
+        jobDbId:
+          description: GenX Job that produced this result
+          type: string
+          example: institute-a:job:analysis-7
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        qtls:
+          description: Expression QTL records
+          type: object
+          example: {gene-a: {marker: m1, pValue: 1e-8}}
+        status:
+          description: Lifecycle state of the result record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: expressionQtlDbId of the result this one replaces
+          type: string
+          example: institute-a:expression-qtl:eqtl-2026-000
+        provenance:
+          description: Evidence and method provenance for the result
+          $ref: '#/components/schemas/ProvenanceEnvelope'

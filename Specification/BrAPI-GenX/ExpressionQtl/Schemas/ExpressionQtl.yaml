@@ -1,0 +1,53 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ExpressionQtl:
+      type: object
+      description: |-
+        One immutable expression QTL result record. A published
+        (expressionQtlDbId) record never mutates in place; corrections are
+        recorded as additional results linked by supersedes.
+      required:
+      - expressionQtlDbId
+      - analysisMethodDbId
+      - status
+      properties:
+        expressionQtlDbId:
+          description: Namespaced expression-QTL identity `{authority}:expression-qtl:{localId}`
+          type: string
+          example: institute-a:expression-qtl:eqtl-2026-001
+        analysisMethodDbId:
+          description: GenX AnalysisMethod used
+          type: string
+          example: institute-a:analysis-method:eqtl
+        jobDbId:
+          description: GenX Job that produced this result
+          type: string
+          example: institute-a:job:analysis-7
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        qtls:
+          description: Expression QTL records
+          type: object
+          example: {gene-a: {marker: m1, pValue: 1e-8}}
+        status:
+          description: Lifecycle state of the result record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: expressionQtlDbId of the result this one replaces
+          type: string
+          example: institute-a:expression-qtl:eqtl-2026-000
+        provenance:
+          description: Evidence and method provenance for the result
+          $ref: '#/components/schemas/ProvenanceEnvelope'

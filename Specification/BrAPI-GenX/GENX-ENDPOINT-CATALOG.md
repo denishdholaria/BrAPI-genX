@@ -17,6 +17,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | CrossingSchedule | 3 | proposed, non-normative |
 | DoubledHaploid | 3 | proposed, non-normative |
 | ExperimentalDesign | 3 | proposed, non-normative |
+| ExpressionQtl | 3 | proposed, non-normative |
 | ExtremeWeather | 3 | proposed, non-normative |
 | FAIR | 3 | proposed, non-normative |
 | FertilizerApplication | 3 | proposed, non-normative |
@@ -1220,6 +1221,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.experimental-designs.list, brapi-genx.genx.v1.experimental-designs.register
 - **Relevant RFC / decision references:** RFC-018
 - **Contract source:** [`Specification/BrAPI-GenX/ExperimentalDesign/ExperimentalDesign_ExperimentalDesignDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ExperimentalDesign/ExperimentalDesign_ExperimentalDesignDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### ExpressionQtl — 3 operations
+
+### GET `/genx/v1/expression-qtls`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.expression-qtls.list`
+- **BrAPI-GenX operation identity:** `genxListExpressionQtls` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListExpressionQtls`
+- **GenX source module:** `ExpressionQtl`
+- **Source tag:** ExpressionQtl
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List expression QTL result records, optionally filtered by method, study, or status.
+**Source contract description:**
+> Get a paged list of expression QTLs across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover expression QTLs for a study or method.
+- Support scientific reproducibility and auditing.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a result (use the POST endpoint).
+- Assuming a result is a BrAPI data resource.
+- Treating the list as a complete analysis repository.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** analysisMethodDbId, studyDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordExpressionQtl, genxGetExpressionQtl, genxRegisterAnalysisMethod
+- **Related catalogue IDs:** brapi-genx.genx.v1.expression-qtls.record, brapi-genx.genx.v1.expression-qtls.get
+- **Relevant RFC / decision references:** RFC-058
+- **Contract source:** [`Specification/BrAPI-GenX/ExpressionQtl/ExpressionQtl_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ExpressionQtl/ExpressionQtl_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/expression-qtls`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.expression-qtls.record`
+- **BrAPI-GenX operation identity:** `genxRecordExpressionQtl` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordExpressionQtl`
+- **GenX source module:** `ExpressionQtl`
+- **Source tag:** ExpressionQtl
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one expression QTL result with QTLs and provenance.
+**Source contract description:**
+> Unknown expressionQtlDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish expression QTL result metadata and payload references.
+- Retry an identical result safely using the same expressionQtlDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing result; corrections require a new record that supersedes.
+- Assuming the result is a BrAPI data resource.
+- Treating the result as scientific validation or approval.
+- **Side effects:** Creates an expression QTL result when accepted.
+- **Retry / idempotency:** Same expressionQtlDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** ExpressionQtlNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListExpressionQtls, genxGetExpressionQtl, genxRegisterAnalysisMethod
+- **Related catalogue IDs:** brapi-genx.genx.v1.expression-qtls.list, brapi-genx.genx.v1.expression-qtls.get
+- **Relevant RFC / decision references:** RFC-058
+- **Contract source:** [`Specification/BrAPI-GenX/ExpressionQtl/ExpressionQtl_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ExpressionQtl/ExpressionQtl_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/expression-qtls/{expressionQtlDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.expression-qtls.get`
+- **BrAPI-GenX operation identity:** `genxGetExpressionQtl` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetExpressionQtl`
+- **GenX source module:** `ExpressionQtl`
+- **Source tag:** ExpressionQtl
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one expression QTL result.
+**Source contract description:**
+> Returns the recorded result, or 404.
+**Can be used for:**
+- Inspect QTLs and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the result is a BrAPI data resource.
+- Treating a superseded result as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** expressionQtlDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordExpressionQtl, genxListExpressionQtls, genxRegisterAnalysisMethod
+- **Related catalogue IDs:** brapi-genx.genx.v1.expression-qtls.list, brapi-genx.genx.v1.expression-qtls.record
+- **Relevant RFC / decision references:** RFC-058
+- **Contract source:** [`Specification/BrAPI-GenX/ExpressionQtl/ExpressionQtl_ExpressionQtlDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ExpressionQtl/ExpressionQtl_ExpressionQtlDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

@@ -36204,12 +36204,249 @@
         "brapi-genx.genx.v1.methylation-analyses.list",
         "brapi-genx.genx.v1.methylation-analyses.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ExpressionQtl",
+      "brapiTag": "ExpressionQtl",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ExpressionQtl/ExpressionQtl_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.expression-qtls.list",
+      "method": "GET",
+      "path": "/expression-qtls",
+      "operationIdInSource": "genxListExpressionQtls",
+      "recommendedOperationId": "genxListExpressionQtls",
+      "operationName": "List expression QTLs",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List expression QTL result records, optionally filtered by method, study, or status.",
+      "sourceDescription": "Get a paged list of expression QTLs across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover expression QTLs for a study or method.",
+        "Support scientific reproducibility and auditing."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a result (use the POST endpoint).",
+        "Assuming a result is a BrAPI data resource.",
+        "Treating the list as a complete analysis repository."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "analysisMethodDbId",
+        "studyDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordExpressionQtl",
+        "genxGetExpressionQtl",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-058"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.expression-qtls.record",
+        "brapi-genx.genx.v1.expression-qtls.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ExpressionQtl",
+      "brapiTag": "ExpressionQtl",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ExpressionQtl/ExpressionQtl_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.expression-qtls.record",
+      "method": "POST",
+      "path": "/expression-qtls",
+      "operationIdInSource": "genxRecordExpressionQtl",
+      "recommendedOperationId": "genxRecordExpressionQtl",
+      "operationName": "Record one expression QTL result",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record one expression QTL result with QTLs and provenance.",
+      "sourceDescription": "Unknown expressionQtlDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish expression QTL result metadata and payload references.",
+        "Retry an identical result safely using the same expressionQtlDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing result; corrections require a new record that supersedes.",
+        "Assuming the result is a BrAPI data resource.",
+        "Treating the result as scientific validation or approval."
+      ],
+      "sideEffects": "Creates an expression QTL result when accepted.",
+      "idempotency": "Same expressionQtlDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "ExpressionQtlNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListExpressionQtls",
+        "genxGetExpressionQtl",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-058"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.expression-qtls.list",
+        "brapi-genx.genx.v1.expression-qtls.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ExpressionQtl",
+      "brapiTag": "ExpressionQtl",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ExpressionQtl/ExpressionQtl_ExpressionQtlDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.expression-qtls.get",
+      "method": "GET",
+      "path": "/expression-qtls/{expressionQtlDbId}",
+      "operationIdInSource": "genxGetExpressionQtl",
+      "recommendedOperationId": "genxGetExpressionQtl",
+      "operationName": "Get one expression QTL result",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one expression QTL result.",
+      "sourceDescription": "Returns the recorded result, or 404.",
+      "canBeUsedFor": [
+        "Inspect QTLs and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the result is a BrAPI data resource.",
+        "Treating a superseded result as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "expressionQtlDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordExpressionQtl",
+        "genxListExpressionQtls",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-058"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.expression-qtls.list",
+        "brapi-genx.genx.v1.expression-qtls.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 171,
+    "genxEntriesAdded": 174,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -36287,7 +36524,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 372,
+    "totalEntries": 375,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
