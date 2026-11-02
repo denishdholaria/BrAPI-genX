@@ -13,8 +13,8 @@ A catalogue identifier does not replace a source operationId or route. Classific
 | Surface | Operations | Contract status |
 |---|---:|---|
 | BrAPI v2.1 official modules | 201 | Released specification; implementation availability not inferred |
-| BrAPI GenX /genx/v1 | 267 | Proposed, non-normative |
-| **Total** | **468** | Existing contracts plus proposed operations |
+| BrAPI GenX /genx/v1 | 270 | Proposed, non-normative |
+| **Total** | **471** | Existing contracts plus proposed operations |
 
 BijMantra snapshot: 2240 records from the inventory generated 2026-10-17; see [source inventory](https://github.com/denishdholaria/bijmantraorg/blob/main/endpoints-inventory.md) and [crosswalk](./BIJMANTRA-CROSSWALK.md).
 
@@ -14914,6 +14914,111 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
+### ReusableList — 3 operations
+
+### GET `/genx/v1/reusable-lists`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.reusable-lists.list`
+- **BrAPI-GenX operation identity:** `genxListReusableLists` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListReusableLists`
+- **GenX source module:** `ReusableList`
+- **Source tag:** ReusableList
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List reusable list and cohort records, optionally filtered by status.
+**Source contract description:**
+> Get a paged list of reusable list and cohort records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover reusable lists and cohorts.
+- Support reference data and research organization.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a list (use the POST endpoint).
+- Assuming a list is a BrAPI Study.
+- Treating the list as a complete catalogue.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterReusableList, genxGetReusableList, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.reusable-lists.record, brapi-genx.genx.v1.reusable-lists.get
+- **Relevant RFC / decision references:** RFC-090
+- **Contract source:** [`Specification/BrAPI-GenX/ReusableList/ReusableList_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ReusableList/ReusableList_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/reusable-lists`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.reusable-lists.record`
+- **BrAPI-GenX operation identity:** `genxRegisterReusableList` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterReusableList`
+- **GenX source module:** `ReusableList`
+- **Source tag:** ReusableList
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register one reusable list or cohort record with provenance.
+**Source contract description:**
+> Unknown reusableListDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish a reusable list or cohort.
+- Retry an identical record safely using the same reusableListDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming a list is a BrAPI Study.
+- Asserting that the list is validated or endorsed.
+- **Side effects:** Creates a reusable list identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same reusableListDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** ReusableListNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListReusableLists, genxGetReusableList, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.reusable-lists.list, brapi-genx.genx.v1.reusable-lists.get
+- **Relevant RFC / decision references:** RFC-090
+- **Contract source:** [`Specification/BrAPI-GenX/ReusableList/ReusableList_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ReusableList/ReusableList_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/reusable-lists/{reusableListDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.reusable-lists.get`
+- **BrAPI-GenX operation identity:** `genxGetReusableList` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetReusableList`
+- **GenX source module:** `ReusableList`
+- **Source tag:** ReusableList
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one reusable list or cohort record.
+**Source contract description:**
+> Returns the registered record, or 404.
+**Can be used for:**
+- Inspect list identity, members, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming a list is a BrAPI Study.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** reusableListDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterReusableList, genxListReusableLists, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.reusable-lists.list, brapi-genx.genx.v1.reusable-lists.record
+- **Relevant RFC / decision references:** RFC-090
+- **Contract source:** [`Specification/BrAPI-GenX/ReusableList/ReusableList_ReusableListDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ReusableList/ReusableList_ReusableListDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
 ### SafetyDuplication — 3 operations
 
 ### GET `/genx/v1/safety-duplications`
@@ -17149,6 +17254,6 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - Unique full-base-path/method/route keys: `True`.
 - Unique source/advisory operation identifiers where present: `True`.
 - BrAPI v2.1 inventory rows resolved to source YAML operations: 201 / 201.
-- GenX operations documented: 267.
+- GenX operations documented: 270.
 
 See [BIJMANTRA-CROSSWALK.md](./BIJMANTRA-CROSSWALK.md) for inventory evidence and semantic boundaries.

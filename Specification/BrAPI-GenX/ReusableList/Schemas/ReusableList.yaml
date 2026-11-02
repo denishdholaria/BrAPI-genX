@@ -1,0 +1,46 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ReusableList:
+      type: object
+      description: |-
+        One immutable reusable list or cohort record. A published
+        (reusableListDbId) record never mutates in place; corrections are
+        recorded as additional records linked by supersedes.
+      required:
+      - reusableListDbId
+      - status
+      properties:
+        reusableListDbId:
+          description: Namespaced reusable-list identity `{authority}:reusable-list:{localId}`
+          type: string
+          example: institute-a:reusable-list:rl-2026-001
+        name:
+          description: Name of the list or cohort
+          type: string
+          example: drought-tolerant panel
+        members:
+          description: Members of the list
+          type: array
+          items:
+            type: string
+          example: ["g1", "g2"]
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: reusableListDbId of the record this one replaces
+          type: string
+          example: institute-a:reusable-list:rl-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

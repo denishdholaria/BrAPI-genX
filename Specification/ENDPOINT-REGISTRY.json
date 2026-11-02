@@ -43761,12 +43761,247 @@
         "brapi-genx.genx.v1.projects.list",
         "brapi-genx.genx.v1.projects.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ReusableList",
+      "brapiTag": "ReusableList",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ReusableList/ReusableList_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.reusable-lists.list",
+      "method": "GET",
+      "path": "/reusable-lists",
+      "operationIdInSource": "genxListReusableLists",
+      "recommendedOperationId": "genxListReusableLists",
+      "operationName": "List reusable lists",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List reusable list and cohort records, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of reusable list and cohort records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover reusable lists and cohorts.",
+        "Support reference data and research organization."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a list (use the POST endpoint).",
+        "Assuming a list is a BrAPI Study.",
+        "Treating the list as a complete catalogue."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterReusableList",
+        "genxGetReusableList",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-090"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.reusable-lists.record",
+        "brapi-genx.genx.v1.reusable-lists.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ReusableList",
+      "brapiTag": "ReusableList",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ReusableList/ReusableList_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.reusable-lists.record",
+      "method": "POST",
+      "path": "/reusable-lists",
+      "operationIdInSource": "genxRegisterReusableList",
+      "recommendedOperationId": "genxRegisterReusableList",
+      "operationName": "Register one reusable list",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one reusable list or cohort record with provenance.",
+      "sourceDescription": "Unknown reusableListDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a reusable list or cohort.",
+        "Retry an identical record safely using the same reusableListDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming a list is a BrAPI Study.",
+        "Asserting that the list is validated or endorsed."
+      ],
+      "sideEffects": "Creates a reusable list identity or appends a new immutable version when accepted.",
+      "idempotency": "Same reusableListDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "ReusableListNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListReusableLists",
+        "genxGetReusableList",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-090"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.reusable-lists.list",
+        "brapi-genx.genx.v1.reusable-lists.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ReusableList",
+      "brapiTag": "ReusableList",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ReusableList/ReusableList_ReusableListDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.reusable-lists.get",
+      "method": "GET",
+      "path": "/reusable-lists/{reusableListDbId}",
+      "operationIdInSource": "genxGetReusableList",
+      "recommendedOperationId": "genxGetReusableList",
+      "operationName": "Get one reusable list",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one reusable list or cohort record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect list identity, members, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a list is a BrAPI Study.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "reusableListDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterReusableList",
+        "genxListReusableLists",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-090"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.reusable-lists.list",
+        "brapi-genx.genx.v1.reusable-lists.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 267,
+    "genxEntriesAdded": 270,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -43844,7 +44079,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 468,
+    "totalEntries": 471,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -44145,5 +44380,5 @@
       ]
     }
   ],
-  "totalEntries": 468
+  "totalEntries": 471
 }

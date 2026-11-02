@@ -485,6 +485,11 @@ modules:
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Project and funding reference records; BrAPI v2.1 has no equivalent record."
+  - path: "ReusableList/"
+    object: "ReusableList"
+    primary_class: null
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Reusable list and cohort records; BrAPI v2.1 has no equivalent record."
   - path: "TaxonName/"
     object: "TaxonName"
     primary_class: null
