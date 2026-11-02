@@ -39994,12 +39994,248 @@
         "brapi-genx.genx.v1.vendor-orders.list",
         "brapi-genx.genx.v1.vendor-orders.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "FieldScouting",
+      "brapiTag": "FieldScouting",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/FieldScouting/FieldScouting_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.field-scouting.list",
+      "method": "GET",
+      "path": "/field-scouting",
+      "operationIdInSource": "genxListFieldScouting",
+      "recommendedOperationId": "genxListFieldScouting",
+      "operationName": "List field scouting records",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List field scouting and work order records, optionally filtered by field or status.",
+      "sourceDescription": "Get a paged list of field scouting and work order records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover scouting observations and work orders for a field.",
+        "Support crop health and task tracking."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a scouting record (use the POST endpoint).",
+        "Assuming a scouting record is a BrAPI Observation.",
+        "Treating the list as a complete scouting history."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "fieldDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterFieldScouting",
+        "genxGetFieldScouting",
+        "genxRegisterFarm"
+      ],
+      "decisionReferences": [
+        "RFC-074"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.field-scouting.record",
+        "brapi-genx.genx.v1.field-scouting.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "FieldScouting",
+      "brapiTag": "FieldScouting",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/FieldScouting/FieldScouting_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.field-scouting.record",
+      "method": "POST",
+      "path": "/field-scouting",
+      "operationIdInSource": "genxRegisterFieldScouting",
+      "recommendedOperationId": "genxRegisterFieldScouting",
+      "operationName": "Register one field scouting record",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one field scouting or work order record with field linkage and provenance.",
+      "sourceDescription": "Unknown fieldScoutingDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a scouting observation or work order for a field.",
+        "Retry an identical record safely using the same fieldScoutingDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming a scouting record is a BrAPI Observation.",
+        "Asserting that the work order is completed or validated."
+      ],
+      "sideEffects": "Creates a field scouting identity or appends a new immutable version when accepted.",
+      "idempotency": "Same fieldScoutingDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "FieldScoutingNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListFieldScouting",
+        "genxGetFieldScouting",
+        "genxRegisterFarm"
+      ],
+      "decisionReferences": [
+        "RFC-074"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.field-scouting.list",
+        "brapi-genx.genx.v1.field-scouting.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "FieldScouting",
+      "brapiTag": "FieldScouting",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/FieldScouting/FieldScouting_FieldScoutingDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.field-scouting.get",
+      "method": "GET",
+      "path": "/field-scouting/{fieldScoutingDbId}",
+      "operationIdInSource": "genxGetFieldScouting",
+      "recommendedOperationId": "genxGetFieldScouting",
+      "operationName": "Get one field scouting record",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one field scouting or work order record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect field linkage, scouting details, status, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a scouting record is a BrAPI Observation.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "fieldScoutingDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterFieldScouting",
+        "genxListFieldScouting",
+        "genxRegisterFarm"
+      ],
+      "decisionReferences": [
+        "RFC-074"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.field-scouting.list",
+        "brapi-genx.genx.v1.field-scouting.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 219,
+    "genxEntriesAdded": 222,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -40077,7 +40313,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 420,
+    "totalEntries": 423,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -40378,5 +40614,5 @@
       ]
     }
   ],
-  "totalEntries": 420
+  "totalEntries": 423
 }

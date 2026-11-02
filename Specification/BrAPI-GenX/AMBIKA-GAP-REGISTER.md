@@ -80,6 +80,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | D3 | Marker/probe registry | `MarkerProbe/` | RFC-071 |
 | D1 | Retention / disposal | `DisposalRecord/` | RFC-065 |
 | D6 | Farm / site reference | `Farm/` | RFC-069 |
+| D6 | Field scouting / work orders | `FieldScouting/` | RFC-074 |
 | D6 | Yield maps | `YieldMap/` | RFC-070 |
 | D6 | Sowing / planting | `PlantingOperation/` | RFC-066 |
 | D5 | Carbon stock | `CarbonStock/` | RFC-067 |
@@ -88,7 +89,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | S | FAIR packages | `FAIR/` | RFC-006 |
 | S | Research asset registry, persistent identifiers / DOI, license/access, embargo | `ResearchAssets/` | RFC-016 |
 
-D3 row 9 named gaps are now covered (genotype call semantics, marker/probe registry, vendor order/result ingestion). D1 row 4 named gaps are now covered. Still open
+D3 row 9 named gaps are now covered (genotype call semantics, marker/probe registry, vendor order/result ingestion). D1 row 4 named gaps are now covered. Still open in D6 row 11: operational field boundary/history. Still open
 in D5 row 12: emissions, soil texture/chemistry/moisture depth, environmental
 treatments/stress.
 

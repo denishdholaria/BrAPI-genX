@@ -1,0 +1,145 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /field-scouting:
+    get:
+      operationId: genxListFieldScouting
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.field-scouting.list"
+        classification:
+          primaryDomain: "D6"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List field scouting and work order records, optionally filtered by field or status."
+        canBeUsedFor:
+          - "Discover scouting observations and work orders for a field."
+          - "Support crop health and task tracking."
+        mustNotBeUsedFor:
+          - "Creating or changing a scouting record (use the POST endpoint)."
+          - "Assuming a scouting record is a BrAPI Observation."
+          - "Treating the list as a complete scouting history."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterFieldScouting"
+          - "genxGetFieldScouting"
+          - "genxRegisterFarm"
+        decisions: ["RFC-074"]
+        proposalStatus: "draft-non-normative"
+      summary: List field scouting records
+      description: Get a paged list of field scouting and work order records across authorities. Filters combine with AND.
+      parameters:
+      - name: fieldDbId
+        description: Filter by field or site reference
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/FieldScoutingListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - FieldScouting
+    post:
+      operationId: genxRegisterFieldScouting
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.field-scouting.record"
+        classification:
+          primaryDomain: "D6"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Register one field scouting or work order record with field linkage and provenance."
+        canBeUsedFor:
+          - "Publish a scouting observation or work order for a field."
+          - "Retry an identical record safely using the same fieldScoutingDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing record; corrections require a new record that supersedes."
+          - "Assuming a scouting record is a BrAPI Observation."
+          - "Asserting that the work order is completed or validated."
+        sideEffects: "Creates a field scouting identity or appends a new immutable version when accepted."
+        idempotency: "Same fieldScoutingDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListFieldScouting"
+          - "genxGetFieldScouting"
+          - "genxRegisterFarm"
+        decisions: ["RFC-074"]
+        proposalStatus: "draft-non-normative"
+      summary: Register one field scouting record
+      description: |-
+        Unknown fieldScoutingDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FieldScoutingNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/FieldScouting'
+                required:
+                - metadata
+                - result
+                title: FieldScoutingResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - FieldScouting
+components:
+  responses:
+    FieldScoutingListResponse:
+      content:
+        application/json:
+          schema:
+            title: FieldScoutingListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FieldScouting'
+            required:
+            - metadata
+            - result
+      description: OK

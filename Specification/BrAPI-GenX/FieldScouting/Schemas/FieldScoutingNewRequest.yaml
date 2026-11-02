@@ -1,0 +1,48 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    FieldScoutingNewRequest:
+      type: object
+      description: |-
+        Request to register one field scouting or work order record. Unknown
+        fieldScoutingDbId creates; same id with an identical body replays the
+        existing record; same id with a different body is rejected with 409.
+      required:
+      - fieldScoutingDbId
+      properties:
+        fieldScoutingDbId:
+          description: Namespaced field-scouting identity `{authority}:field-scouting:{localId}`
+          type: string
+          example: institute-a:field-scouting:fs-2026-001
+        fieldDbId:
+          description: BrAPI/GenX field or site reference
+          type: string
+          example: field-001
+        scoutingType:
+          description: Type of scouting or work order
+          type: string
+          example: pest-scouting
+        observations:
+          description: Scouting observations or task notes
+          type: string
+          example: Aphid pressure moderate in north block
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: fieldScoutingDbId of the record this one replaces
+          type: string
+          example: institute-a:field-scouting:fs-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

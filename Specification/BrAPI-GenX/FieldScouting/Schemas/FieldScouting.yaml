@@ -1,0 +1,48 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    FieldScouting:
+      type: object
+      description: |-
+        One immutable field scouting or work order record. A published
+        (fieldScoutingDbId) record never mutates in place; corrections are
+        recorded as additional records linked by supersedes.
+      required:
+      - fieldScoutingDbId
+      - status
+      properties:
+        fieldScoutingDbId:
+          description: Namespaced field-scouting identity `{authority}:field-scouting:{localId}`
+          type: string
+          example: institute-a:field-scouting:fs-2026-001
+        fieldDbId:
+          description: BrAPI/GenX field or site reference
+          type: string
+          example: field-001
+        scoutingType:
+          description: Type of scouting or work order
+          type: string
+          example: pest-scouting
+        observations:
+          description: Scouting observations or task notes
+          type: string
+          example: Aphid pressure moderate in north block
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: fieldScoutingDbId of the record this one replaces
+          type: string
+          example: institute-a:field-scouting:fs-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
