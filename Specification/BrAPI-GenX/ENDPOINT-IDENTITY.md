@@ -240,6 +240,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/crop-health-images` | GET | `genxListCropHealthImages` | List crop health images | Does not create or change a record; not a BrAPI data resource. |
 | `/genx/v1/crop-health-images` | POST | `genxRegisterCropHealthImage` | Register one crop health image | Append-only record; replay/conflict semantics. |
 | `/genx/v1/crop-health-images/{cropHealthImageDbId}` | GET | `genxGetCropHealthImage` | Retrieve one crop health image | Does not treat a superseded record as current. |
+| `/genx/v1/crop-recommendations` | GET | `genxListCropRecommendations` | List crop recommendations | Does not create or change a record; not a BrAPI data resource. |
+| `/genx/v1/crop-recommendations` | POST | `genxRegisterCropRecommendation` | Register one crop recommendation | Append-only record; replay/conflict semantics. |
+| `/genx/v1/crop-recommendations/{cropRecommendationDbId}` | GET | `genxGetCropRecommendation` | Retrieve one crop recommendation | Does not treat a superseded record as current. |
 | `/genx/v1/analysis-results` | GET | `genxListAnalysisResults` | List analysis result records | Does not create or change a result; not a BrAPI data resource. |
 | `/genx/v1/analysis-results` | POST | `genxRecordAnalysisResult` | Record one analysis result | Append-only record; replay/conflict semantics. |
 | `/genx/v1/analysis-results/{analysisResultDbId}` | GET | `genxGetAnalysisResult` | Retrieve one analysis result record | Does not treat a superseded result as current. |

@@ -69,6 +69,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | N | Threshold alerts for pests/disease | `ThresholdAlert/` | RFC-126 |
 | N | Disease resistance characterization | `DiseaseResistance/` | RFC-127 |
 | N | Crop health image results | `CropHealthImage/` | RFC-128 |
+| O | Crop/variety recommendation | `CropRecommendation/` | RFC-129 |
 | D3 | Genomic dataset release/access, reference assembly versioning, pipeline provenance | `GenomicDatasets/` | RFC-013 |
 | D3 | Assay / plate workflow (design side) | `AssayDesign/` | RFC-061 |
 | D3 | Assay / plate workflow (execution side) | `AssayExecution/` | RFC-113 |

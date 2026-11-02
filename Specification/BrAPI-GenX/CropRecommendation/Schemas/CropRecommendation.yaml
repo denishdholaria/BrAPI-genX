@@ -1,0 +1,56 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    CropRecommendation:
+      type: object
+      description: |-
+        One immutable crop recommendation record. A published (cropRecommendationDbId) record
+        never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - cropRecommendationDbId
+      - status
+      properties:
+        cropRecommendationDbId:
+          description: Namespaced crop-recommendation identity `{authority}:crop-recommendation:{localId}`
+          type: string
+          example: institute-a:crop-recommendation:cr-2026-001
+        recommendationType:
+          description: Type of recommendation
+          type: string
+          example: variety
+        recommendedVariety:
+          description: Recommended variety
+          type: string
+          example: hybrid-maize-01
+        recommendedPractice:
+          description: Recommended agronomic practice
+          type: string
+          example: optimized spacing
+        regionOrZone:
+          description: Region or zone the recommendation applies to
+          type: string
+          example: zone-3
+        season:
+          description: Season the recommendation applies to
+          type: string
+          example: 2026 main season
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: cropRecommendationDbId of the record this one replaces
+          type: string
+          example: institute-a:crop-recommendation:cr-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
