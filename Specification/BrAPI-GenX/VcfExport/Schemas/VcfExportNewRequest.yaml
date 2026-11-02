@@ -1,0 +1,40 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    VcfExportNewRequest:
+      type: object
+      description: |-
+        Request to register one VCF export record. Unknown vcfExportDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - vcfExportDbId
+      properties:
+        vcfExportDbId:
+          description: Namespaced VCF-export identity `{authority}:vcf-export:{localId}`
+          type: string
+          example: institute-a:vcf-export:ve-2026-001
+        format:
+          description: Export format
+          type: string
+          example: VCF
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: vcfExportDbId of the record this one replaces
+          type: string
+          example: institute-a:vcf-export:ve-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

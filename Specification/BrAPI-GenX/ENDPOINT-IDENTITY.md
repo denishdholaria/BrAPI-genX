@@ -195,6 +195,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/vcf-imports` | GET | `genxListVcfImports` | List VCF import records | Does not create or change an import; not a BrAPI VariantSet. |
 | `/genx/v1/vcf-imports` | POST | `genxRecordVcfImport` | Record one VCF import | Append-only record; replay/conflict semantics. |
 | `/genx/v1/vcf-imports/{vcfImportDbId}` | GET | `genxGetVcfImport` | Retrieve one VCF import record | Does not treat a superseded import as current. |
+| `/genx/v1/vcf-exports` | GET | `genxListVcfExports` | List VCF exports | Does not create or change a record; not a BrAPI data resource. |
+| `/genx/v1/vcf-exports` | POST | `genxRegisterVcfExport` | Register one VCF export | Append-only record; replay/conflict semantics. |
+| `/genx/v1/vcf-exports/{vcfExportDbId}` | GET | `genxGetVcfExport` | Retrieve one VCF export | Does not treat a superseded record as current. |
 | `/genx/v1/analysis-results` | GET | `genxListAnalysisResults` | List analysis result records | Does not create or change a result; not a BrAPI data resource. |
 | `/genx/v1/analysis-results` | POST | `genxRecordAnalysisResult` | Record one analysis result | Append-only record; replay/conflict semantics. |
 | `/genx/v1/analysis-results/{analysisResultDbId}` | GET | `genxGetAnalysisResult` | Retrieve one analysis result record | Does not treat a superseded result as current. |

@@ -1,0 +1,40 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    VcfExport:
+      type: object
+      description: |-
+        One immutable VCF export record. A published (vcfExportDbId) record
+        never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - vcfExportDbId
+      - status
+      properties:
+        vcfExportDbId:
+          description: Namespaced VCF-export identity `{authority}:vcf-export:{localId}`
+          type: string
+          example: institute-a:vcf-export:ve-2026-001
+        format:
+          description: Export format
+          type: string
+          example: VCF
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: vcfExportDbId of the record this one replaces
+          type: string
+          example: institute-a:vcf-export:ve-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

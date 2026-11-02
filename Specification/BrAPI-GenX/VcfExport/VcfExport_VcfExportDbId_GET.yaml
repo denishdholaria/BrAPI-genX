@@ -1,0 +1,65 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /vcf-exports/{vcfExportDbId}:
+    get:
+      operationId: genxGetVcfExport
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.vcf-exports.get"
+        classification:
+          primaryDomain: "D3"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve one VCF export record."
+        canBeUsedFor:
+          - "Inspect export, status, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming a record is a BrAPI Observation."
+          - "Treating a superseded record as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterVcfExport"
+          - "genxListVcfExports"
+          - "genxRegisterFarm"
+        decisions: ["RFC-114"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one VCF export
+      description: Returns the registered record, or 404.
+      parameters:
+      - name: vcfExportDbId
+        description: Namespaced vcf-exports identity `{authority}:vcf-exports:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/VcfExport'
+                required:
+                - metadata
+                - result
+                title: VcfExportResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - VcfExport

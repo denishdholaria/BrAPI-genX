@@ -85,6 +85,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | PhenotypeAnnotation / PhenotypeAnnotation | D4 | C1, C2, C3, C6, C9 | Phenotype annotation records; no BrAPI v2.1 equivalent |
 | ExtremeWeather / ExtremeWeatherEvent | D5 | C1, C2, C3, C6, C9 | Extreme weather event records; no BrAPI v2.1 equivalent |
 | VcfImport / VcfImport | D3 | C1, C2, C3, C5, C6, C9 | VCF import records; no BrAPI v2.1 equivalent |
+| VcfExport / VcfExport | D3 | C1, C2, C3, C6, C9 | VCF export records; no BrAPI v2.1 equivalent |
 | AssayDesign / AssayDesign | D3 | C1, C2, C3, C6, C9 | Assay design records; no BrAPI v2.1 equivalent |
 | AssayExecution / AssayExecution | D3 | C1, C2, C3, C6, C9 | Assay execution records; no BrAPI v2.1 equivalent |
 | VariantAnnotation / VariantAnnotation | D3 | C1, C2, C3, C6, C9 | Variant annotation records; no BrAPI v2.1 equivalent |

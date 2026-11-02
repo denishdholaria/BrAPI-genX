@@ -49404,12 +49404,247 @@
         "brapi-genx.genx.v1.assay-executions.list",
         "brapi-genx.genx.v1.assay-executions.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "VcfExport",
+      "brapiTag": "VcfExport",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/VcfExport/VcfExport_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.vcf-exports.list",
+      "method": "GET",
+      "path": "/vcf-exports",
+      "operationIdInSource": "genxListVcfExports",
+      "recommendedOperationId": "genxListVcfExports",
+      "operationName": "List VCF exports",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List VCF export records, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of VCF export records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover VCF exports.",
+        "Support VCF import/export."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a record (use the POST endpoint).",
+        "Assuming a record is a BrAPI data resource.",
+        "Treating the list as a complete history."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterVcfExport",
+        "genxGetVcfExport",
+        "genxRecordVcfImport"
+      ],
+      "decisionReferences": [
+        "RFC-114"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.vcf-exports.record",
+        "brapi-genx.genx.v1.vcf-exports.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "VcfExport",
+      "brapiTag": "VcfExport",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/VcfExport/VcfExport_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.vcf-exports.record",
+      "method": "POST",
+      "path": "/vcf-exports",
+      "operationIdInSource": "genxRegisterVcfExport",
+      "recommendedOperationId": "genxRegisterVcfExport",
+      "operationName": "Register one VCF export",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one VCF export record with provenance.",
+      "sourceDescription": "Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a VCF export.",
+        "Retry an identical record safely using the same vcfExportDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming a record is a BrAPI data resource.",
+        "Asserting that the export is validated or endorsed."
+      ],
+      "sideEffects": "Creates a VCF export identity or appends a new immutable version when accepted.",
+      "idempotency": "Same vcfExportDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "VcfExportNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListVcfExports",
+        "genxGetVcfExport",
+        "genxRecordVcfImport"
+      ],
+      "decisionReferences": [
+        "RFC-114"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.vcf-exports.list",
+        "brapi-genx.genx.v1.vcf-exports.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "VcfExport",
+      "brapiTag": "VcfExport",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/VcfExport/VcfExport_VcfExportDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.vcf-exports.get",
+      "method": "GET",
+      "path": "/vcf-exports/{vcfExportDbId}",
+      "operationIdInSource": "genxGetVcfExport",
+      "recommendedOperationId": "genxGetVcfExport",
+      "operationName": "Get one VCF export",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one VCF export record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect export, status, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a record is a BrAPI data resource.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "vcfExportDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterVcfExport",
+        "genxListVcfExports",
+        "genxRecordVcfImport"
+      ],
+      "decisionReferences": [
+        "RFC-114"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.vcf-exports.list",
+        "brapi-genx.genx.v1.vcf-exports.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 339,
+    "genxEntriesAdded": 342,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -49487,7 +49722,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 540,
+    "totalEntries": 543,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -49788,5 +50023,5 @@
       ]
     }
   ],
-  "totalEntries": 540
+  "totalEntries": 543
 }

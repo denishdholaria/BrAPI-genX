@@ -106,6 +106,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `PhenotypeAnnotation/` | `PhenotypeAnnotation` — phenotype annotation records (score, variable, provenance) | `GET /genx/v1/phenotype-annotations` (`genxListPhenotypeAnnotations`); `POST /genx/v1/phenotype-annotations` (`genxRecordPhenotypeAnnotation`); `GET /genx/v1/phenotype-annotations/{phenotypeAnnotationDbId}` (`genxGetPhenotypeAnnotation`) |
 | `ExtremeWeather/` | `ExtremeWeatherEvent` — extreme weather event records (type, severity, provenance) | `GET /genx/v1/extreme-weather-events` (`genxListExtremeWeatherEvents`); `POST /genx/v1/extreme-weather-events` (`genxRecordExtremeWeather`); `GET /genx/v1/extreme-weather-events/{extremeWeatherEventDbId}` (`genxGetExtremeWeatherEvent`) |
 | `VcfImport/` | `VcfImport` — VCF import records (source format, counts, provenance) | `GET /genx/v1/vcf-imports` (`genxListVcfImports`); `POST /genx/v1/vcf-imports` (`genxRecordVcfImport`); `GET /genx/v1/vcf-imports/{vcfImportDbId}` (`genxGetVcfImport`) |
+| `VcfExport/` | `VcfExport` — VCF export records (status, provenance) | `GET /genx/v1/vcf-exports` (`genxListVcfExports`); `POST /genx/v1/vcf-exports` (`genxRegisterVcfExport`); `GET /genx/v1/vcf-exports/{vcfExportDbId}` (`genxGetVcfExport`) |
 | `AssayDesign/` | `AssayDesign` — assay design records (platform, marker count, provenance) | `GET /genx/v1/assay-designs` (`genxListAssayDesigns`); `POST /genx/v1/assay-designs` (`genxRecordAssayDesign`); `GET /genx/v1/assay-designs/{assayDesignDbId}` (`genxGetAssayDesign`) |
 | `AssayExecution/` | `AssayExecution` — assay execution records (assay reference, provenance) | `GET /genx/v1/assay-executions` (`genxListAssayExecutions`); `POST /genx/v1/assay-executions` (`genxRegisterAssayExecution`); `GET /genx/v1/assay-executions/{assayExecutionDbId}` (`genxGetAssayExecution`) |
 | `VariantAnnotation/` | `VariantAnnotation` — variant annotation records (functional annotations, provenance) | `GET /genx/v1/variant-annotations` (`genxListVariantAnnotations`); `POST /genx/v1/variant-annotations` (`genxRecordVariantAnnotation`); `GET /genx/v1/variant-annotations/{variantAnnotationDbId}` (`genxGetVariantAnnotation`) |
@@ -257,7 +258,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-110-Capture-Workflow](./RFC-110-Capture-Workflow.md),
 [RFC-111-Quality-Flag](./RFC-111-Quality-Flag.md),
 [RFC-112-Value-Missingness](./RFC-112-Value-Missingness.md),
-[RFC-113-Assay-Execution](./RFC-113-Assay-Execution.md).
+[RFC-113-Assay-Execution](./RFC-113-Assay-Execution.md),
+[RFC-114-Vcf-Export](./RFC-114-Vcf-Export.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).
