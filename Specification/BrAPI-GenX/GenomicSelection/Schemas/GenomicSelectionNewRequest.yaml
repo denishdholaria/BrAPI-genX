@@ -1,0 +1,59 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    GenomicSelectionNewRequest:
+      type: object
+      description: |-
+        Request to record one genomic selection result. Unknown genomicSelectionDbId
+        creates; same id with an identical body replays the existing
+        record; same id with a different body is rejected with 409.
+      required:
+      - genomicSelectionDbId
+      - analysisMethodDbId
+      properties:
+        genomicSelectionDbId:
+          description: Namespaced genomic-selection identity `{authority}:genomic-selection:{localId}`
+          type: string
+          example: institute-a:genomic-selection:gs-2026-001
+        analysisMethodDbId:
+          description: GenX AnalysisMethod used
+          type: string
+          example: institute-a:analysis-method:genomic-selection
+        jobDbId:
+          description: GenX Job that produced this result
+          type: string
+          example: institute-a:job:analysis-7
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        selectedGermplasm:
+          description: Selected germplasmDbIds
+          type: array
+          items:
+            type: string
+          example: [germplasm-a, germplasm-b]
+        selectionThreshold:
+          description: Selection threshold applied
+          type: number
+          example: 0.5
+        status:
+          description: Lifecycle state of the result record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: genomicSelectionDbId of the result this one replaces
+          type: string
+          example: institute-a:genomic-selection:gs-2026-000
+        provenance:
+          description: Evidence and method provenance for the result
+          $ref: '#/components/schemas/ProvenanceEnvelope'

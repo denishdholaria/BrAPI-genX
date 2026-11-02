@@ -24,6 +24,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | GeneticGain | 3 | proposed, non-normative |
 | GenomicDatasets | 3 | proposed, non-normative |
 | GenomicPrediction | 3 | proposed, non-normative |
+| GenomicSelection | 3 | proposed, non-normative |
 | Genomics | 3 | proposed, non-normative |
 | GwasResult | 3 | proposed, non-normative |
 | GxeAnalysis | 3 | proposed, non-normative |
@@ -1956,6 +1957,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.genomic-predictions.list, brapi-genx.genx.v1.genomic-predictions.record
 - **Relevant RFC / decision references:** RFC-054
 - **Contract source:** [`Specification/BrAPI-GenX/GenomicPrediction/GenomicPrediction_GenomicPredictionDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/GenomicPrediction/GenomicPrediction_GenomicPredictionDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GenomicSelection — 3 operations
+
+### GET `/genx/v1/genomic-selections`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.genomic-selections.list`
+- **BrAPI-GenX operation identity:** `genxListGenomicSelections` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListGenomicSelections`
+- **GenX source module:** `GenomicSelection`
+- **Source tag:** GenomicSelection
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List genomic selection result records, optionally filtered by method, study, or status.
+**Source contract description:**
+> Get a paged list of genomic selection results across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover genomic selection results for a study or method.
+- Support scientific reproducibility and auditing.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a result (use the POST endpoint).
+- Assuming a result is a BrAPI data resource.
+- Treating the list as a complete analysis repository.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** analysisMethodDbId, studyDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordGenomicSelection, genxGetGenomicSelection, genxRegisterAnalysisMethod
+- **Related catalogue IDs:** brapi-genx.genx.v1.genomic-selections.record, brapi-genx.genx.v1.genomic-selections.get
+- **Relevant RFC / decision references:** RFC-055
+- **Contract source:** [`Specification/BrAPI-GenX/GenomicSelection/GenomicSelection_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/GenomicSelection/GenomicSelection_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/genomic-selections`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.genomic-selections.record`
+- **BrAPI-GenX operation identity:** `genxRecordGenomicSelection` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordGenomicSelection`
+- **GenX source module:** `GenomicSelection`
+- **Source tag:** GenomicSelection
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one genomic selection result with selections and provenance.
+**Source contract description:**
+> Unknown genomicSelectionDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish genomic selection result metadata and payload references.
+- Retry an identical result safely using the same genomicSelectionDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing result; corrections require a new record that supersedes.
+- Assuming the result is a BrAPI data resource.
+- Treating the result as scientific validation or approval.
+- **Side effects:** Creates a genomic selection result when accepted.
+- **Retry / idempotency:** Same genomicSelectionDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** GenomicSelectionNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListGenomicSelections, genxGetGenomicSelection, genxRegisterAnalysisMethod
+- **Related catalogue IDs:** brapi-genx.genx.v1.genomic-selections.list, brapi-genx.genx.v1.genomic-selections.get
+- **Relevant RFC / decision references:** RFC-055
+- **Contract source:** [`Specification/BrAPI-GenX/GenomicSelection/GenomicSelection_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/GenomicSelection/GenomicSelection_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/genomic-selections/{genomicSelectionDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.genomic-selections.get`
+- **BrAPI-GenX operation identity:** `genxGetGenomicSelection` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetGenomicSelection`
+- **GenX source module:** `GenomicSelection`
+- **Source tag:** GenomicSelection
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one genomic selection result.
+**Source contract description:**
+> Returns the recorded result, or 404.
+**Can be used for:**
+- Inspect selections, threshold, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the result is a BrAPI data resource.
+- Treating a superseded result as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** genomicSelectionDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordGenomicSelection, genxListGenomicSelections, genxRegisterAnalysisMethod
+- **Related catalogue IDs:** brapi-genx.genx.v1.genomic-selections.list, brapi-genx.genx.v1.genomic-selections.record
+- **Relevant RFC / decision references:** RFC-055
+- **Contract source:** [`Specification/BrAPI-GenX/GenomicSelection/GenomicSelection_GenomicSelectionDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/GenomicSelection/GenomicSelection_GenomicSelectionDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

@@ -35490,12 +35490,249 @@
         "brapi-genx.genx.v1.genomic-predictions.list",
         "brapi-genx.genx.v1.genomic-predictions.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "GenomicSelection",
+      "brapiTag": "GenomicSelection",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/GenomicSelection/GenomicSelection_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.genomic-selections.list",
+      "method": "GET",
+      "path": "/genomic-selections",
+      "operationIdInSource": "genxListGenomicSelections",
+      "recommendedOperationId": "genxListGenomicSelections",
+      "operationName": "List genomic selections",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List genomic selection result records, optionally filtered by method, study, or status.",
+      "sourceDescription": "Get a paged list of genomic selection results across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover genomic selection results for a study or method.",
+        "Support scientific reproducibility and auditing."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a result (use the POST endpoint).",
+        "Assuming a result is a BrAPI data resource.",
+        "Treating the list as a complete analysis repository."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "analysisMethodDbId",
+        "studyDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordGenomicSelection",
+        "genxGetGenomicSelection",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-055"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.genomic-selections.record",
+        "brapi-genx.genx.v1.genomic-selections.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "GenomicSelection",
+      "brapiTag": "GenomicSelection",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/GenomicSelection/GenomicSelection_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.genomic-selections.record",
+      "method": "POST",
+      "path": "/genomic-selections",
+      "operationIdInSource": "genxRecordGenomicSelection",
+      "recommendedOperationId": "genxRecordGenomicSelection",
+      "operationName": "Record one genomic selection result",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record one genomic selection result with selections and provenance.",
+      "sourceDescription": "Unknown genomicSelectionDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish genomic selection result metadata and payload references.",
+        "Retry an identical result safely using the same genomicSelectionDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing result; corrections require a new record that supersedes.",
+        "Assuming the result is a BrAPI data resource.",
+        "Treating the result as scientific validation or approval."
+      ],
+      "sideEffects": "Creates a genomic selection result when accepted.",
+      "idempotency": "Same genomicSelectionDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "GenomicSelectionNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListGenomicSelections",
+        "genxGetGenomicSelection",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-055"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.genomic-selections.list",
+        "brapi-genx.genx.v1.genomic-selections.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "GenomicSelection",
+      "brapiTag": "GenomicSelection",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/GenomicSelection/GenomicSelection_GenomicSelectionDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.genomic-selections.get",
+      "method": "GET",
+      "path": "/genomic-selections/{genomicSelectionDbId}",
+      "operationIdInSource": "genxGetGenomicSelection",
+      "recommendedOperationId": "genxGetGenomicSelection",
+      "operationName": "Get one genomic selection result",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one genomic selection result.",
+      "sourceDescription": "Returns the recorded result, or 404.",
+      "canBeUsedFor": [
+        "Inspect selections, threshold, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the result is a BrAPI data resource.",
+        "Treating a superseded result as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "genomicSelectionDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordGenomicSelection",
+        "genxListGenomicSelections",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-055"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.genomic-selections.list",
+        "brapi-genx.genx.v1.genomic-selections.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 162,
+    "genxEntriesAdded": 165,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -35573,7 +35810,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 363,
+    "totalEntries": 366,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
