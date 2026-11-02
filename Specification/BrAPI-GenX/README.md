@@ -84,6 +84,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `PcaResult/` | `PcaResult` — PCA result records (components, explained variance, provenance) | `GET /genx/v1/pca-results` (`genxListPcaResults`); `POST /genx/v1/pca-results` (`genxRecordPcaResult`); `GET /genx/v1/pca-results/{pcaResultDbId}` (`genxGetPcaResult`) |
 | `GenomicPrediction/` | `GenomicPrediction` — genomic prediction result records (predictions, accuracy, provenance) | `GET /genx/v1/genomic-predictions` (`genxListGenomicPredictions`); `POST /genx/v1/genomic-predictions` (`genxRecordGenomicPrediction`); `GET /genx/v1/genomic-predictions/{genomicPredictionDbId}` (`genxGetGenomicPrediction`) |
 | `GenomicSelection/` | `GenomicSelection` — genomic selection result records (selections, threshold, provenance) | `GET /genx/v1/genomic-selections` (`genxListGenomicSelections`); `POST /genx/v1/genomic-selections` (`genxRecordGenomicSelection`); `GET /genx/v1/genomic-selections/{genomicSelectionDbId}` (`genxGetGenomicSelection`) |
+| `GenomicRelationship/` | `GenomicRelationship` — genomic relationship matrix records (method, storage reference, provenance) | `GET /genx/v1/genomic-relationships` (`genxListGenomicRelationships`); `POST /genx/v1/genomic-relationships` (`genxRegisterGenomicRelationship`); `GET /genx/v1/genomic-relationships/{genomicRelationshipDbId}` (`genxGetGenomicRelationship`) |
 | `AnalysisResult/` | `AnalysisResult` — analysis result records (method, job, payload, provenance) | `GET /genx/v1/analysis-results` (`genxListAnalysisResults`); `POST /genx/v1/analysis-results` (`genxRecordAnalysisResult`); `GET /genx/v1/analysis-results/{analysisResultDbId}` (`genxGetAnalysisResult`) |
 | `Conformance/` | Probes + fixtures + runner contract (`probes.yaml`) | Static tier runs now; live tier needs `--server` |
 
@@ -141,7 +142,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-052-Kinship](./RFC-052-Kinship.md),
 [RFC-053-Pca-Result](./RFC-053-Pca-Result.md),
 [RFC-054-Genomic-Prediction](./RFC-054-Genomic-Prediction.md),
-[RFC-055-Genomic-Selection](./RFC-055-Genomic-Selection.md).
+[RFC-055-Genomic-Selection](./RFC-055-Genomic-Selection.md),
+[RFC-056-Genomic-Relationship](./RFC-056-Genomic-Relationship.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

@@ -1,0 +1,57 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    GenomicRelationshipNewRequest:
+      type: object
+      description: |-
+        Request to register one genomic relationship matrix. Unknown genomicRelationshipDbId
+        creates; same id with an identical body replays the existing
+        record; same id with a different body is rejected with 409.
+      required:
+      - genomicRelationshipDbId
+      - analysisMethodDbId
+      properties:
+        genomicRelationshipDbId:
+          description: Namespaced genomic-relationship identity `{authority}:genomic-relationship:{localId}`
+          type: string
+          example: institute-a:genomic-relationship:gr-2026-001
+        analysisMethodDbId:
+          description: GenX AnalysisMethod used
+          type: string
+          example: institute-a:analysis-method:genomic-relationship
+        jobDbId:
+          description: GenX Job that produced this matrix
+          type: string
+          example: institute-a:job:analysis-7
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        matrixRef:
+          description: Reference to stored matrix payload
+          type: string
+          example: s3://bucket/genomic-relationship/gr-2026-001.parquet
+        digest:
+          description: Content digest of the matrix payload
+          type: string
+          example: sha256:abc123
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: genomicRelationshipDbId of the record this one replaces
+          type: string
+          example: institute-a:genomic-relationship:gr-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

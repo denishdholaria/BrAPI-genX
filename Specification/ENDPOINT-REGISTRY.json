@@ -35727,12 +35727,252 @@
         "brapi-genx.genx.v1.genomic-selections.list",
         "brapi-genx.genx.v1.genomic-selections.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "GenomicRelationship",
+      "brapiTag": "GenomicRelationship",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/GenomicRelationship/GenomicRelationship_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.genomic-relationships.list",
+      "method": "GET",
+      "path": "/genomic-relationships",
+      "operationIdInSource": "genxListGenomicRelationships",
+      "recommendedOperationId": "genxListGenomicRelationships",
+      "operationName": "List genomic relationships",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C5",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List genomic relationship matrix records, optionally filtered by method, study, or status.",
+      "sourceDescription": "Get a paged list of genomic relationships across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover genomic relationships for a study or method.",
+        "Support genomic analysis and auditing."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a matrix (use the POST endpoint).",
+        "Assuming a matrix is a BrAPI data resource.",
+        "Treating the list as a complete analysis repository."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "analysisMethodDbId",
+        "studyDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterGenomicRelationship",
+        "genxGetGenomicRelationship",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-056"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.genomic-relationships.register",
+        "brapi-genx.genx.v1.genomic-relationships.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "GenomicRelationship",
+      "brapiTag": "GenomicRelationship",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/GenomicRelationship/GenomicRelationship_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.genomic-relationships.register",
+      "method": "POST",
+      "path": "/genomic-relationships",
+      "operationIdInSource": "genxRegisterGenomicRelationship",
+      "recommendedOperationId": "genxRegisterGenomicRelationship",
+      "operationName": "Register one genomic relationship",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C5",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register a genomic relationship matrix with method, storage reference, and provenance.",
+      "sourceDescription": "Unknown genomicRelationshipDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish genomic relationship matrix metadata.",
+        "Create a new version under an existing matrix identity."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing matrix; corrections require a new record that supersedes.",
+        "Assuming the matrix is a BrAPI data resource.",
+        "Treating the matrix as scientific validation or approval."
+      ],
+      "sideEffects": "Creates a genomic relationship matrix identity or appends a new immutable version when accepted.",
+      "idempotency": "Same identity and identical body replays; conflicting content for the same identity is rejected.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "GenomicRelationshipNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListGenomicRelationships",
+        "genxGetGenomicRelationship",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-056"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.genomic-relationships.list",
+        "brapi-genx.genx.v1.genomic-relationships.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "GenomicRelationship",
+      "brapiTag": "GenomicRelationship",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/GenomicRelationship/GenomicRelationship_GenomicRelationshipDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.genomic-relationships.get",
+      "method": "GET",
+      "path": "/genomic-relationships/{genomicRelationshipDbId}",
+      "operationIdInSource": "genxGetGenomicRelationship",
+      "recommendedOperationId": "genxGetGenomicRelationship",
+      "operationName": "Get one genomic relationship",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C5",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one genomic relationship matrix.",
+      "sourceDescription": "Returns the registered matrix, or 404.",
+      "canBeUsedFor": [
+        "Inspect matrix reference, digest, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the matrix is a BrAPI data resource.",
+        "Treating a superseded matrix as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "genomicRelationshipDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterGenomicRelationship",
+        "genxListGenomicRelationships",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-056"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.genomic-relationships.list",
+        "brapi-genx.genx.v1.genomic-relationships.register"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 165,
+    "genxEntriesAdded": 168,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -35810,7 +36050,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 366,
+    "totalEntries": 369,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
