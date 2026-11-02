@@ -125,6 +125,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | ResearchProgram | 3 | proposed, non-normative |
 | ReusableList | 3 | proposed, non-normative |
 | SafetyDuplication | 3 | proposed, non-normative |
+| SchemaMapping | 3 | proposed, non-normative |
 | SelectionDecisions | 3 | proposed, non-normative |
 | SensorDevice | 3 | proposed, non-normative |
 | ServerInfoV3 | 1 | proposed, non-normative |
@@ -4049,9 +4050,9 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 
 ### EdgeGatewayHealth — 3 operations
 
-### GET `/genx/v1/edge-gateway-health`
+### GET `/genx/v1/edge-gateway-healths`
 
-- **Catalogue ID:** `brapi-genx.genx.v1.edge-gateway-health.list`
+- **Catalogue ID:** `brapi-genx.genx.v1.edge-gateway-healths.list`
 - **BrAPI-GenX operation identity:** `genxListEdgeGatewayHealths` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxListEdgeGatewayHealths`
 - **GenX source module:** `EdgeGatewayHealth`
@@ -4061,7 +4062,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> List edgegatewayhealth records, optionally filtered by status.
+> List edge gateway health records, optionally filtered by status.
 **Source contract description:**
 > Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
 **Can be used for:**
@@ -4078,15 +4079,15 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
 - **Semantic relationship IDs / labels:** genxRegisterEdgeGatewayHealth, genxGetEdgeGatewayHealth, genxRegisterGenomicDataset
-- **Related catalogue IDs:** brapi-genx.genx.v1.edge-gateway-health.record, brapi-genx.genx.v1.edge-gateway-health.get
+- **Related catalogue IDs:** brapi-genx.genx.v1.edge-gateway-healths.record, brapi-genx.genx.v1.edge-gateway-healths.get
 - **Relevant RFC / decision references:** RFC-151
 - **Contract source:** [`Specification/BrAPI-GenX/EdgeGatewayHealth/EdgeGatewayHealth_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/EdgeGatewayHealth/EdgeGatewayHealth_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
-### POST `/genx/v1/edge-gateway-health`
+### POST `/genx/v1/edge-gateway-healths`
 
-- **Catalogue ID:** `brapi-genx.genx.v1.edge-gateway-health.record`
+- **Catalogue ID:** `brapi-genx.genx.v1.edge-gateway-healths.record`
 - **BrAPI-GenX operation identity:** `genxRegisterEdgeGatewayHealth` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxRegisterEdgeGatewayHealth`
 - **GenX source module:** `EdgeGatewayHealth`
@@ -4096,7 +4097,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> Register one edgegatewayhealth record with provenance.
+> Register one edge gateway health record with provenance.
 **Source contract description:**
 > Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
 **Can be used for:**
@@ -4106,22 +4107,22 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
 - Asserting that the export is validated or endorsed.
-- **Side effects:** Creates a edgegatewayhealth identity or appends a new immutable version when accepted.
+- **Side effects:** Creates a edge gateway health identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same edgeGatewayHealthDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
 - **Request schema refs recorded:** EdgeGatewayHealthNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
 - **Semantic relationship IDs / labels:** genxListEdgeGatewayHealths, genxGetEdgeGatewayHealth, genxRegisterGenomicDataset
-- **Related catalogue IDs:** brapi-genx.genx.v1.edge-gateway-health.list, brapi-genx.genx.v1.edge-gateway-health.get
+- **Related catalogue IDs:** brapi-genx.genx.v1.edge-gateway-healths.list, brapi-genx.genx.v1.edge-gateway-healths.get
 - **Relevant RFC / decision references:** RFC-151
 - **Contract source:** [`Specification/BrAPI-GenX/EdgeGatewayHealth/EdgeGatewayHealth_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/EdgeGatewayHealth/EdgeGatewayHealth_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
-### GET `/genx/v1/edge-gateway-health/{edgeGatewayHealthDbId}`
+### GET `/genx/v1/edge-gateway-healths/{edgeGatewayHealthDbId}`
 
-- **Catalogue ID:** `brapi-genx.genx.v1.edge-gateway-health.get`
+- **Catalogue ID:** `brapi-genx.genx.v1.edge-gateway-healths.get`
 - **BrAPI-GenX operation identity:** `genxGetEdgeGatewayHealth` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxGetEdgeGatewayHealth`
 - **GenX source module:** `EdgeGatewayHealth`
@@ -4131,7 +4132,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> Retrieve one edgegatewayhealth record.
+> Retrieve one edge gateway health record.
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
@@ -4146,7 +4147,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
 - **Semantic relationship IDs / labels:** genxRegisterEdgeGatewayHealth, genxListEdgeGatewayHealths, genxRegisterGenomicDataset
-- **Related catalogue IDs:** brapi-genx.genx.v1.edge-gateway-health.list, brapi-genx.genx.v1.edge-gateway-health.record
+- **Related catalogue IDs:** brapi-genx.genx.v1.edge-gateway-healths.list, brapi-genx.genx.v1.edge-gateway-healths.record
 - **Relevant RFC / decision references:** RFC-151
 - **Contract source:** [`Specification/BrAPI-GenX/EdgeGatewayHealth/EdgeGatewayHealth_EdgeGatewayHealthDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/EdgeGatewayHealth/EdgeGatewayHealth_EdgeGatewayHealthDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
@@ -12672,6 +12673,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.safety-duplications.list, brapi-genx.genx.v1.safety-duplications.register
 - **Relevant RFC / decision references:** RFC-034
 - **Contract source:** [`Specification/BrAPI-GenX/SafetyDuplication/SafetyDuplication_SafetyDuplicationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/SafetyDuplication/SafetyDuplication_SafetyDuplicationDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### SchemaMapping — 3 operations
+
+### GET `/genx/v1/schema-mappings`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.schema-mappings.list`
+- **BrAPI-GenX operation identity:** `genxListSchemaMappings` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListSchemaMappings`
+- **GenX source module:** `SchemaMapping`
+- **Source tag:** SchemaMapping
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List schemamapping records, optionally filtered by status.
+**Source contract description:**
+> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover artifactcatalogues.
+- Support VCF import/export.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a record (use the POST endpoint).
+- Assuming a record is a BrAPI data resource.
+- Treating the list as a complete history.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterSchemaMapping, genxGetSchemaMapping, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.schema-mappings.record, brapi-genx.genx.v1.schema-mappings.get
+- **Relevant RFC / decision references:** RFC-152
+- **Contract source:** [`Specification/BrAPI-GenX/SchemaMapping/SchemaMapping_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/SchemaMapping/SchemaMapping_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/schema-mappings`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.schema-mappings.record`
+- **BrAPI-GenX operation identity:** `genxRegisterSchemaMapping` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterSchemaMapping`
+- **GenX source module:** `SchemaMapping`
+- **Source tag:** SchemaMapping
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register one schemamapping record with provenance.
+**Source contract description:**
+> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish a artifactcatalogue.
+- Retry an identical record safely using the same vcfExportDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming a record is a BrAPI data resource.
+- Asserting that the export is validated or endorsed.
+- **Side effects:** Creates a schemamapping identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same schemaMappingDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** SchemaMappingNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListSchemaMappings, genxGetSchemaMapping, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.schema-mappings.list, brapi-genx.genx.v1.schema-mappings.get
+- **Relevant RFC / decision references:** RFC-152
+- **Contract source:** [`Specification/BrAPI-GenX/SchemaMapping/SchemaMapping_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/SchemaMapping/SchemaMapping_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/schema-mappings/{schemaMappingDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.schema-mappings.get`
+- **BrAPI-GenX operation identity:** `genxGetSchemaMapping` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetSchemaMapping`
+- **GenX source module:** `SchemaMapping`
+- **Source tag:** SchemaMapping
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one schemamapping record.
+**Source contract description:**
+> Returns the registered record, or 404.
+**Can be used for:**
+- Inspect export, status, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming a record is a BrAPI data resource.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** schemaMappingDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterSchemaMapping, genxListSchemaMappings, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.schema-mappings.list, brapi-genx.genx.v1.schema-mappings.record
+- **Relevant RFC / decision references:** RFC-152
+- **Contract source:** [`Specification/BrAPI-GenX/SchemaMapping/SchemaMapping_SchemaMappingDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/SchemaMapping/SchemaMapping_SchemaMappingDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

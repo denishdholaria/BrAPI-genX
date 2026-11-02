@@ -116,6 +116,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | VegetationIndex / VegetationIndex | (none, cross-cutting) | C1, C2, C3, C6, C9 | Vegetation index records; no BrAPI v2.1 equivalent |
 | RemoteSensingMetadata / RemoteSensingMetadata | (none, cross-cutting) | C1, C2, C3, C6, C9 | Remote sensing metadata records; no BrAPI v2.1 equivalent |
 | EdgeGatewayHealth / EdgeGatewayHealth | (none, cross-cutting) | C1, C2, C3, C6, C9 | Edge gateway health records; no BrAPI v2.1 equivalent |
+| SchemaMapping / SchemaMapping | (none, cross-cutting) | C1, C2, C3, C6, C9 | Schema mapping records; no BrAPI v2.1 equivalent |
 | SensorDevice / SensorDevice | (none, cross-cutting) | C1, C2, C3, C6, C9 | Sensor device records; no BrAPI v2.1 equivalent |
 | SpatialIndex / SpatialIndex | (none, cross-cutting) | C1, C2, C3, C6, C9 | Spatial index records; no BrAPI v2.1 equivalent |
 | CalibrationQuality / CalibrationQuality | (none, cross-cutting) | C1, C2, C3, C6, C9 | Calibration quality records; no BrAPI v2.1 equivalent |

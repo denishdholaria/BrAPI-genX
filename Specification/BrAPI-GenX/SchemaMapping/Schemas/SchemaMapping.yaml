@@ -1,0 +1,52 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    SchemaMapping:
+      type: object
+      description: |-
+        One immutable schema mapping record. A published (schemaMappingDbId) record
+        never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - schemaMappingDbId
+      - status
+      properties:
+        schemaMappingDbId:
+          description: Namespaced schema-mapping identity `{authority}:schema-mapping:{localId}`
+          type: string
+          example: institute-a:schema-mapping:sm-2026-001
+        schemaType:
+          description: Type of schema mapping
+          type: string
+          example: variant-to-observation
+        sourceSchema:
+          description: Source schema identifier
+          type: string
+          example: institute-a:source-schema:ss-2026-001
+        targetSchema:
+          description: Target schema identifier
+          type: string
+          example: institute-a:target-schema:ts-2026-001
+        mappingRules:
+          description: Mapping rules definition
+          type: string
+          example: field1->fieldA, field2->fieldB
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: schemaMappingDbId of the record this one replaces
+          type: string
+          example: institute-a:schema-mapping:sm-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

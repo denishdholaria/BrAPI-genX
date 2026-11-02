@@ -142,6 +142,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `CalibrationQuality/` | `CalibrationQuality` — calibration quality records (type, date, factor) | `GET /genx/v1/calibration-qualities` (`genxListCalibrationQualitys`); `POST /genx/v1/calibration-qualities` (`genxRegisterCalibrationQuality`); `GET /genx/v1/calibration-qualities/{calibrationQualityDbId}` (`genxGetCalibrationQuality`) |
 | `CloudMask/` | `CloudMask` — cloud mask records (type, acquisition date, resolution) | `GET /genx/v1/cloud-masks` (`genxListCloudMasks`); `POST /genx/v1/cloud-masks` (`genxRegisterCloudMask`); `GET /genx/v1/cloud-masks/{cloudMaskDbId}` (`genxGetCloudMask`) |
 | `EdgeGatewayHealth/` | `EdgeGatewayHealth` — edge gateway health records (type, device ID, health status) | `GET /genx/v1/edge-gateway-healths` (`genxListEdgeGatewayHealths`); `POST /genx/v1/edge-gateway-healths` (`genxRegisterEdgeGatewayHealth`); `GET /genx/v1/edge-gateway-healths/{edgeGatewayHealthDbId}` (`genxGetEdgeGatewayHealth`) |
+| `SchemaMapping/` | `SchemaMapping` — schema mapping records (type, source, target) | `GET /genx/v1/schema-mappings` (`genxListSchemaMappings`); `POST /genx/v1/schema-mappings` (`genxRegisterSchemaMapping`); `GET /genx/v1/schema-mappings/{schemaMappingDbId}` (`genxGetSchemaMapping`) |
 | `RasterCatalogue/` | `RasterCatalogue` — raster catalogue records (type, resolution, CRS) | `GET /genx/v1/raster-catalogues` (`genxListRasterCatalogues`); `POST /genx/v1/raster-catalogues` (`genxRegisterRasterCatalogue`); `GET /genx/v1/raster-catalogues/{rasterCatalogueDbId}` (`genxGetRasterCatalogue`) |
 | `FieldGeometry/` | `FieldGeometry` — field geometry records (type, geometry, area) | `GET /genx/v1/field-geometries` (`genxListFieldGeometries`); `POST /genx/v1/field-geometries` (`genxRegisterFieldGeometry`); `GET /genx/v1/field-geometries/{fieldGeometryDbId}` (`genxGetFieldGeometry`) |
 | `AssayDesign/` | `AssayDesign` — assay design records (platform, marker count, provenance) | `GET /genx/v1/assay-designs` (`genxListAssayDesigns`); `POST /genx/v1/assay-designs` (`genxRecordAssayDesign`); `GET /genx/v1/assay-designs/{assayDesignDbId}` (`genxGetAssayDesign`) |
@@ -332,7 +333,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-147-CloudMask](./RFC-147-CloudMask.md),
 [RFC-148-TelemetryNormalization](./RFC-148-TelemetryNormalization.md),
 [RFC-149-SensorDevice](./RFC-149-SensorDevice.md),
-[RFC-151-EdgeGatewayHealth](./RFC-151-EdgeGatewayHealth.md).
+[RFC-151-EdgeGatewayHealth](./RFC-151-EdgeGatewayHealth.md),
+[RFC-152-SchemaMapping](./RFC-152-SchemaMapping.md).
 [RFC-150-CalibrationQuality](./RFC-150-CalibrationQuality.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
