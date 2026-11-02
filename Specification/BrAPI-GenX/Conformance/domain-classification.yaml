@@ -320,6 +320,11 @@ modules:
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Pest/disease risk records; BrAPI v2.1 has no equivalent record."
+  - path: "YieldForecast/"
+    object: "YieldForecast"
+    primary_class: null
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Yield forecast records; BrAPI v2.1 has no equivalent record."
   - path: "AssayDesign/"
     object: "AssayDesign"
     primary_class: "D3"

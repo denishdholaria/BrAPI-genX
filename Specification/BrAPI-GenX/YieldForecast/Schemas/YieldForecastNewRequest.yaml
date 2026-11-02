@@ -1,0 +1,56 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    YieldForecastNewRequest:
+      type: object
+      description: |-
+        Request to register one yield forecast record. Unknown yieldForecastDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - yieldForecastDbId
+      properties:
+        yieldForecastDbId:
+          description: Namespaced yield-forecast identity `{authority}:yield-forecast:{localId}`
+          type: string
+          example: institute-a:yield-forecast:yf-2026-001
+        forecastType:
+          description: Type of yield forecast
+          type: string
+          example: end-of-season
+        forecastValue:
+          description: Forecasted yield value
+          type: string
+          example: "8.5t/ha"
+        forecastDate:
+          description: Date of the forecast
+          type: string
+          example: "2026-06-01"
+        horizon:
+          description: Forecast horizon
+          type: string
+          example: 90 days
+        regionOrZone:
+          description: Region or zone the forecast applies to
+          type: string
+          example: zone-3
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: yieldForecastDbId of the record this one replaces
+          type: string
+          example: institute-a:yield-forecast:yf-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

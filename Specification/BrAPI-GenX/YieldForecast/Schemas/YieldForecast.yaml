@@ -1,0 +1,56 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    YieldForecast:
+      type: object
+      description: |-
+        One immutable yield forecast record. A published (yieldForecastDbId) record
+        never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - yieldForecastDbId
+      - status
+      properties:
+        yieldForecastDbId:
+          description: Namespaced yield-forecast identity `{authority}:yield-forecast:{localId}`
+          type: string
+          example: institute-a:yield-forecast:yf-2026-001
+        forecastType:
+          description: Type of yield forecast
+          type: string
+          example: end-of-season
+        forecastValue:
+          description: Forecasted yield value
+          type: string
+          example: "8.5t/ha"
+        forecastDate:
+          description: Date of the forecast
+          type: string
+          example: "2026-06-01"
+        horizon:
+          description: Forecast horizon
+          type: string
+          example: 90 days
+        regionOrZone:
+          description: Region or zone the forecast applies to
+          type: string
+          example: zone-3
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: yieldForecastDbId of the record this one replaces
+          type: string
+          example: institute-a:yield-forecast:yf-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

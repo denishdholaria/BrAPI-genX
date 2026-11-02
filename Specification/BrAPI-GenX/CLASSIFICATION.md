@@ -105,6 +105,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | IrrigationAdvice / IrrigationAdvice | (none, cross-cutting) | C1, C2, C3, C6, C9 | Irrigation advice records; no BrAPI v2.1 equivalent |
 | NutrientAdvice / NutrientAdvice | (none, cross-cutting) | C1, C2, C3, C6, C9 | Nutrient advice records; no BrAPI v2.1 equivalent |
 | PestDiseaseRisk / PestDiseaseRisk | (none, cross-cutting) | C1, C2, C3, C6, C9 | Pest/disease risk records; no BrAPI v2.1 equivalent |
+| YieldForecast / YieldForecast | (none, cross-cutting) | C1, C2, C3, C6, C9 | Yield forecast records; no BrAPI v2.1 equivalent |
 | AssayDesign / AssayDesign | D3 | C1, C2, C3, C6, C9 | Assay design records; no BrAPI v2.1 equivalent |
 | AssayExecution / AssayExecution | D3 | C1, C2, C3, C6, C9 | Assay execution records; no BrAPI v2.1 equivalent |
 | VariantAnnotation / VariantAnnotation | D3 | C1, C2, C3, C6, C9 | Variant annotation records; no BrAPI v2.1 equivalent |

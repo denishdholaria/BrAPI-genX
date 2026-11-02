@@ -54104,12 +54104,247 @@
         "brapi-genx.genx.v1.pest-disease-risks.list",
         "brapi-genx.genx.v1.pest-disease-risks.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "YieldForecast",
+      "brapiTag": "YieldForecast",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/YieldForecast/YieldForecast_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.yield-forecasts.list",
+      "method": "GET",
+      "path": "/yield-forecasts",
+      "operationIdInSource": "genxListYieldForecasts",
+      "recommendedOperationId": "genxListYieldForecasts",
+      "operationName": "List ArtifactCatalogues",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List yield forecast records, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover artifactcatalogues.",
+        "Support VCF import/export."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a record (use the POST endpoint).",
+        "Assuming a record is a BrAPI data resource.",
+        "Treating the list as a complete history."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterYieldForecast",
+        "genxGetYieldForecast",
+        "genxRegisterGenomicDataset"
+      ],
+      "decisionReferences": [
+        "RFC-134"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.yield-forecasts.record",
+        "brapi-genx.genx.v1.yield-forecasts.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "YieldForecast",
+      "brapiTag": "YieldForecast",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/YieldForecast/YieldForecast_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.yield-forecasts.record",
+      "method": "POST",
+      "path": "/yield-forecasts",
+      "operationIdInSource": "genxRegisterYieldForecast",
+      "recommendedOperationId": "genxRegisterYieldForecast",
+      "operationName": "Register one ArtifactCatalogue",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one yield forecast record with provenance.",
+      "sourceDescription": "Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a artifactcatalogue.",
+        "Retry an identical record safely using the same vcfExportDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming a record is a BrAPI data resource.",
+        "Asserting that the export is validated or endorsed."
+      ],
+      "sideEffects": "Creates a yield forecast identity or appends a new immutable version when accepted.",
+      "idempotency": "Same yieldForecastDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "YieldForecastNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListYieldForecasts",
+        "genxGetYieldForecast",
+        "genxRegisterGenomicDataset"
+      ],
+      "decisionReferences": [
+        "RFC-134"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.yield-forecasts.list",
+        "brapi-genx.genx.v1.yield-forecasts.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "YieldForecast",
+      "brapiTag": "YieldForecast",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/YieldForecast/YieldForecast_YieldForecastDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.yield-forecasts.get",
+      "method": "GET",
+      "path": "/yield-forecasts/{yieldForecastDbId}",
+      "operationIdInSource": "genxGetYieldForecast",
+      "recommendedOperationId": "genxGetYieldForecast",
+      "operationName": "Get one ArtifactCatalogue",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one yield forecast record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect export, status, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a record is a BrAPI data resource.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "yieldForecastDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterYieldForecast",
+        "genxListYieldForecasts",
+        "genxRegisterGenomicDataset"
+      ],
+      "decisionReferences": [
+        "RFC-134"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.yield-forecasts.list",
+        "brapi-genx.genx.v1.yield-forecasts.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 399,
+    "genxEntriesAdded": 402,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -54187,7 +54422,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 600,
+    "totalEntries": 603,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -54488,5 +54723,5 @@
       ]
     }
   ],
-  "totalEntries": 600
+  "totalEntries": 603
 }
