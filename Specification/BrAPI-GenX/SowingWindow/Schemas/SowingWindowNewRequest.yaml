@@ -1,0 +1,56 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    SowingWindowNewRequest:
+      type: object
+      description: |-
+        Request to register one sowing window record. Unknown sowingWindowDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - sowingWindowDbId
+      properties:
+        sowingWindowDbId:
+          description: Namespaced sowing-window identity `{authority}:sowing-window:{localId}`
+          type: string
+          example: institute-a:sowing-window:sw-2026-001
+        windowType:
+          description: Type of sowing window
+          type: string
+          example: optimal
+        recommendedSowingDate:
+          description: Recommended sowing date
+          type: string
+          example: "2026-10-15"
+        endDate:
+          description: End of the sowing window
+          type: string
+          example: "2026-11-15"
+        regionOrZone:
+          description: Region or zone the window applies to
+          type: string
+          example: zone-3
+        cropType:
+          description: Crop type the window applies to
+          type: string
+          example: maize
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: sowingWindowDbId of the record this one replaces
+          type: string
+          example: institute-a:sowing-window:sw-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
