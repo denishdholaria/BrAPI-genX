@@ -37,6 +37,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | Kinship | 3 | proposed, non-normative |
 | LotLedger | 2 | proposed, non-normative |
 | MeasurementMethods | 3 | proposed, non-normative |
+| MethylationAnalysis | 3 | proposed, non-normative |
 | MixedModel | 3 | proposed, non-normative |
 | Models | 3 | proposed, non-normative |
 | ParentCandidateSelection | 3 | proposed, non-normative |
@@ -3333,6 +3334,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.measurement-methods.list, brapi-genx.genx.v1.measurement-methods.register
 - **Relevant RFC / decision references:** RFC-017
 - **Contract source:** [`Specification/BrAPI-GenX/MeasurementMethods/MeasurementMethods_MeasurementMethodDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/MeasurementMethods/MeasurementMethods_MeasurementMethodDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### MethylationAnalysis — 3 operations
+
+### GET `/genx/v1/methylation-analyses`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.methylation-analyses.list`
+- **BrAPI-GenX operation identity:** `genxListMethylationAnalyses` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListMethylationAnalyses`
+- **GenX source module:** `MethylationAnalysis`
+- **Source tag:** MethylationAnalysis
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List methylation analysis result records, optionally filtered by method, study, or status.
+**Source contract description:**
+> Get a paged list of methylation analyses across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover methylation analyses for a study or method.
+- Support scientific reproducibility and auditing.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a result (use the POST endpoint).
+- Assuming a result is a BrAPI data resource.
+- Treating the list as a complete analysis repository.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** analysisMethodDbId, studyDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordMethylationAnalysis, genxGetMethylationAnalysis, genxRegisterAnalysisMethod
+- **Related catalogue IDs:** brapi-genx.genx.v1.methylation-analyses.record, brapi-genx.genx.v1.methylation-analyses.get
+- **Relevant RFC / decision references:** RFC-057
+- **Contract source:** [`Specification/BrAPI-GenX/MethylationAnalysis/MethylationAnalysis_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/MethylationAnalysis/MethylationAnalysis_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/methylation-analyses`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.methylation-analyses.record`
+- **BrAPI-GenX operation identity:** `genxRecordMethylationAnalysis` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordMethylationAnalysis`
+- **GenX source module:** `MethylationAnalysis`
+- **Source tag:** MethylationAnalysis
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one methylation analysis result with regions and provenance.
+**Source contract description:**
+> Unknown methylationAnalysisDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish methylation analysis result metadata and payload references.
+- Retry an identical result safely using the same methylationAnalysisDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing result; corrections require a new record that supersedes.
+- Assuming the result is a BrAPI data resource.
+- Treating the result as scientific validation or approval.
+- **Side effects:** Creates a methylation analysis result when accepted.
+- **Retry / idempotency:** Same methylationAnalysisDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** MethylationAnalysisNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListMethylationAnalyses, genxGetMethylationAnalysis, genxRegisterAnalysisMethod
+- **Related catalogue IDs:** brapi-genx.genx.v1.methylation-analyses.list, brapi-genx.genx.v1.methylation-analyses.get
+- **Relevant RFC / decision references:** RFC-057
+- **Contract source:** [`Specification/BrAPI-GenX/MethylationAnalysis/MethylationAnalysis_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/MethylationAnalysis/MethylationAnalysis_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/methylation-analyses/{methylationAnalysisDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.methylation-analyses.get`
+- **BrAPI-GenX operation identity:** `genxGetMethylationAnalysis` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetMethylationAnalysis`
+- **GenX source module:** `MethylationAnalysis`
+- **Source tag:** MethylationAnalysis
+- **Proposed BrAPI-GenX classification:** D7 — Scientific Analysis, Models and Derived Evidence; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one methylation analysis result.
+**Source contract description:**
+> Returns the recorded result, or 404.
+**Can be used for:**
+- Inspect regions and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the result is a BrAPI data resource.
+- Treating a superseded result as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** methylationAnalysisDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordMethylationAnalysis, genxListMethylationAnalyses, genxRegisterAnalysisMethod
+- **Related catalogue IDs:** brapi-genx.genx.v1.methylation-analyses.list, brapi-genx.genx.v1.methylation-analyses.record
+- **Relevant RFC / decision references:** RFC-057
+- **Contract source:** [`Specification/BrAPI-GenX/MethylationAnalysis/MethylationAnalysis_MethylationAnalysisDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/MethylationAnalysis/MethylationAnalysis_MethylationAnalysisDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

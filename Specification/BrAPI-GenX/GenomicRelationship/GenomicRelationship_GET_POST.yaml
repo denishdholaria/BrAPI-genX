@@ -11,7 +11,7 @@ paths:
         classification:
           primaryDomain: "D7"
           crossCuttingCapabilities: ["C1", "C2", "C5", "C6", "C9"]
-        purpose: "List genomic relationship records, optionally filtered by method, study, or status."
+        purpose: "List genomic relationship matrix records, optionally filtered by method, study, or status."
         canBeUsedFor:
           - "Discover genomic relationships for a study or method."
           - "Support genomic analysis and auditing."
@@ -73,7 +73,7 @@ paths:
         classification:
           primaryDomain: "D7"
           crossCuttingCapabilities: ["C1", "C2", "C3", "C5", "C6", "C9"]
-        purpose: "Register a genomic relationship with method, storage reference, and provenance."
+        purpose: "Register a genomic relationship matrix with method, storage reference, and provenance."
         canBeUsedFor:
           - "Publish genomic relationship metadata."
           - "Create a new version under an existing matrix identity."

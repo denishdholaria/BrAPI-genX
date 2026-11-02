@@ -11,7 +11,7 @@ paths:
         classification:
           primaryDomain: "D7"
           crossCuttingCapabilities: ["C1", "C2", "C5", "C6", "C9"]
-        purpose: "Retrieve one genomic relationship."
+        purpose: "Retrieve one genomic relationship matrix."
         canBeUsedFor:
           - "Inspect matrix reference, digest, and provenance."
         mustNotBeUsedFor:

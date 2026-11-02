@@ -1,0 +1,53 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    MethylationAnalysis:
+      type: object
+      description: |-
+        One immutable methylation analysis result record. A published
+        (methylationAnalysisDbId) record never mutates in place; corrections are
+        recorded as additional results linked by supersedes.
+      required:
+      - methylationAnalysisDbId
+      - analysisMethodDbId
+      - status
+      properties:
+        methylationAnalysisDbId:
+          description: Namespaced methylation-analysis identity `{authority}:methylation-analysis:{localId}`
+          type: string
+          example: institute-a:methylation-analysis:ma-2026-001
+        analysisMethodDbId:
+          description: GenX AnalysisMethod used
+          type: string
+          example: institute-a:analysis-method:methylation
+        jobDbId:
+          description: GenX Job that produced this result
+          type: string
+          example: institute-a:job:analysis-7
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        regions:
+          description: Methylation regions or sites
+          type: object
+          example: {chr1: {start: 100, end: 200, level: 0.8}}
+        status:
+          description: Lifecycle state of the result record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: methylationAnalysisDbId of the result this one replaces
+          type: string
+          example: institute-a:methylation-analysis:ma-2026-000
+        provenance:
+          description: Evidence and method provenance for the result
+          $ref: '#/components/schemas/ProvenanceEnvelope'
