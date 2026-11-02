@@ -107,6 +107,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `ExtremeWeather/` | `ExtremeWeatherEvent` — extreme weather event records (type, severity, provenance) | `GET /genx/v1/extreme-weather-events` (`genxListExtremeWeatherEvents`); `POST /genx/v1/extreme-weather-events` (`genxRecordExtremeWeather`); `GET /genx/v1/extreme-weather-events/{extremeWeatherEventDbId}` (`genxGetExtremeWeatherEvent`) |
 | `VcfImport/` | `VcfImport` — VCF import records (source format, counts, provenance) | `GET /genx/v1/vcf-imports` (`genxListVcfImports`); `POST /genx/v1/vcf-imports` (`genxRecordVcfImport`); `GET /genx/v1/vcf-imports/{vcfImportDbId}` (`genxGetVcfImport`) |
 | `AssayDesign/` | `AssayDesign` — assay design records (platform, marker count, provenance) | `GET /genx/v1/assay-designs` (`genxListAssayDesigns`); `POST /genx/v1/assay-designs` (`genxRecordAssayDesign`); `GET /genx/v1/assay-designs/{assayDesignDbId}` (`genxGetAssayDesign`) |
+| `AssayExecution/` | `AssayExecution` — assay execution records (assay reference, provenance) | `GET /genx/v1/assay-executions` (`genxListAssayExecutions`); `POST /genx/v1/assay-executions` (`genxRegisterAssayExecution`); `GET /genx/v1/assay-executions/{assayExecutionDbId}` (`genxGetAssayExecution`) |
 | `VariantAnnotation/` | `VariantAnnotation` — variant annotation records (functional annotations, provenance) | `GET /genx/v1/variant-annotations` (`genxListVariantAnnotations`); `POST /genx/v1/variant-annotations` (`genxRecordVariantAnnotation`); `GET /genx/v1/variant-annotations/{variantAnnotationDbId}` (`genxGetVariantAnnotation`) |
 | `GenotypeQc/` | `GenotypeQcReport` — genotype QC report records (metrics, thresholds, provenance) | `GET /genx/v1/genotype-qc-reports` (`genxListGenotypeQcReports`); `POST /genx/v1/genotype-qc-reports` (`genxRecordGenotypeQcReport`); `GET /genx/v1/genotype-qc-reports/{genotypeQcReportDbId}` (`genxGetGenotypeQcReport`) |
 | `GenotypeCallSemantics/` | `GenotypeCallSemantics` — genotype call semantics records (missing-call policy, zygosity encoding, provenance) | `GET /genx/v1/genotype-call-semantics` (`genxListGenotypeCallSemantics`); `POST /genx/v1/genotype-call-semantics` (`genxRegisterGenotypeCallSemantics`); `GET /genx/v1/genotype-call-semantics/{genotypeCallSemanticsDbId}` (`genxGetGenotypeCallSemantics`) |
@@ -255,7 +256,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-109-Trial-Network](./RFC-109-Trial-Network.md),
 [RFC-110-Capture-Workflow](./RFC-110-Capture-Workflow.md),
 [RFC-111-Quality-Flag](./RFC-111-Quality-Flag.md),
-[RFC-112-Value-Missingness](./RFC-112-Value-Missingness.md).
+[RFC-112-Value-Missingness](./RFC-112-Value-Missingness.md),
+[RFC-113-Assay-Execution](./RFC-113-Assay-Execution.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

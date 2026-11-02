@@ -49169,12 +49169,247 @@
         "brapi-genx.genx.v1.value-missingness.list",
         "brapi-genx.genx.v1.value-missingness.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "AssayExecution",
+      "brapiTag": "AssayExecution",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/AssayExecution/AssayExecution_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.assay-executions.list",
+      "method": "GET",
+      "path": "/assay-executions",
+      "operationIdInSource": "genxListAssayExecutions",
+      "recommendedOperationId": "genxListAssayExecutions",
+      "operationName": "List assay executions",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List assay execution records, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of assay execution records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover assay executions.",
+        "Support genotyping assay workflow."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a record (use the POST endpoint).",
+        "Assuming a record is a BrAPI data resource.",
+        "Treating the list as a complete history."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterAssayExecution",
+        "genxGetAssayExecution",
+        "genxRecordAssayDesign"
+      ],
+      "decisionReferences": [
+        "RFC-113"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.assay-executions.record",
+        "brapi-genx.genx.v1.assay-executions.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "AssayExecution",
+      "brapiTag": "AssayExecution",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/AssayExecution/AssayExecution_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.assay-executions.record",
+      "method": "POST",
+      "path": "/assay-executions",
+      "operationIdInSource": "genxRegisterAssayExecution",
+      "recommendedOperationId": "genxRegisterAssayExecution",
+      "operationName": "Register one assay execution",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one assay execution record with provenance.",
+      "sourceDescription": "Unknown assayExecutionDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish an assay execution.",
+        "Retry an identical record safely using the same assayExecutionDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming a record is a BrAPI data resource.",
+        "Asserting that the execution is validated or endorsed."
+      ],
+      "sideEffects": "Creates an assay execution identity or appends a new immutable version when accepted.",
+      "idempotency": "Same assayExecutionDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "AssayExecutionNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListAssayExecutions",
+        "genxGetAssayExecution",
+        "genxRecordAssayDesign"
+      ],
+      "decisionReferences": [
+        "RFC-113"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.assay-executions.list",
+        "brapi-genx.genx.v1.assay-executions.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "AssayExecution",
+      "brapiTag": "AssayExecution",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/AssayExecution/AssayExecution_AssayExecutionDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.assay-executions.get",
+      "method": "GET",
+      "path": "/assay-executions/{assayExecutionDbId}",
+      "operationIdInSource": "genxGetAssayExecution",
+      "recommendedOperationId": "genxGetAssayExecution",
+      "operationName": "Get one assay execution",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one assay execution record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect assay, status, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a record is a BrAPI data resource.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "assayExecutionDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterAssayExecution",
+        "genxListAssayExecutions",
+        "genxRecordAssayDesign"
+      ],
+      "decisionReferences": [
+        "RFC-113"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.assay-executions.list",
+        "brapi-genx.genx.v1.assay-executions.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 336,
+    "genxEntriesAdded": 339,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -49252,7 +49487,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 537,
+    "totalEntries": 540,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -49553,5 +49788,5 @@
       ]
     }
   ],
-  "totalEntries": 537
+  "totalEntries": 540
 }

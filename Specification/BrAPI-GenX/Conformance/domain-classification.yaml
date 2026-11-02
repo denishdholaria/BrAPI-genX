@@ -225,6 +225,11 @@ modules:
     primary_class: "D3"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Assay design records; BrAPI v2.1 has no equivalent record."
+  - path: "AssayExecution/"
+    object: "AssayExecution"
+    primary_class: "D3"
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Assay execution records; BrAPI v2.1 has no equivalent record."
   - path: "VariantAnnotation/"
     object: "VariantAnnotation"
     primary_class: "D3"

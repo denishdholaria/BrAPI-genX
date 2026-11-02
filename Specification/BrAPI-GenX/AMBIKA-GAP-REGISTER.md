@@ -56,6 +56,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | D3 | VCF import / export (import side) | `VcfImport/` | RFC-043 |
 | D3 | Genomic dataset release/access, reference assembly versioning, pipeline provenance | `GenomicDatasets/` | RFC-013 |
 | D3 | Assay / plate workflow (design side) | `AssayDesign/` | RFC-061 |
+| D3 | Assay / plate workflow (execution side) | `AssayExecution/` | RFC-113 |
 | D3 | Variant functional annotation | `VariantAnnotation/` | RFC-062 |
 | D4 | Phenotype capture / entry | `PhenotypeCapture/` | RFC-012 |
 | D4 | Capture workflow | `CaptureWorkflow/` | RFC-110 |

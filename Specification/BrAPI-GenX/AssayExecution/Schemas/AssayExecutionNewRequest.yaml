@@ -1,0 +1,40 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    AssayExecutionNewRequest:
+      type: object
+      description: |-
+        Request to register one assay execution record. Unknown
+        assayExecutionDbId creates; same id with an identical body replays
+        the existing record; same id with a different body is rejected with 409.
+      required:
+      - assayExecutionDbId
+      properties:
+        assayExecutionDbId:
+          description: Namespaced assay-execution identity `{authority}:assay-execution:{localId}`
+          type: string
+          example: institute-a:assay-execution:ae-2026-001
+        assayDbId:
+          description: Assay design reference
+          type: string
+          example: assay-001
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: assayExecutionDbId of the record this one replaces
+          type: string
+          example: institute-a:assay-execution:ae-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
