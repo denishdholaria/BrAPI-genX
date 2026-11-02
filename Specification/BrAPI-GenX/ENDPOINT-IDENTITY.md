@@ -279,6 +279,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/spatial-indexes` | GET | `genxListSpatialIndexes` | List spatial indexes | Does not create or change a record; not a BrAPI data resource. |
 | `/genx/v1/spatial-indexes` | POST | `genxRegisterSpatialIndex` | Register one spatial index | Append-only record; replay/conflict semantics. |
 | `/genx/v1/spatial-indexes/{spatialIndexDbId}` | GET | `genxGetSpatialIndex` | Retrieve one spatial index | Does not treat a superseded record as current. |
+| `/genx/v1/spatial-queries` | GET | `genxListSpatialQueries` | List spatial queries | Does not create or change a record; not a BrAPI data resource. |
+| `/genx/v1/spatial-queries` | POST | `genxRegisterSpatialQuery` | Register one spatial query | Append-only record; replay/conflict semantics. |
+| `/genx/v1/spatial-queries/{spatialQueryDbId}` | GET | `genxGetSpatialQuery` | Retrieve one spatial query | Does not treat a superseded record as current. |
 | `/genx/v1/field-geometries` | GET | `genxListFieldGeometries` | List field geometries | Does not create or change a record; not a BrAPI data resource. |
 | `/genx/v1/field-geometries` | POST | `genxRegisterFieldGeometry` | Register one field geometry | Append-only record; replay/conflict semantics. |
 | `/genx/v1/field-geometries/{fieldGeometryDbId}` | GET | `genxGetFieldGeometry` | Retrieve one field geometry | Does not treat a superseded record as current. |

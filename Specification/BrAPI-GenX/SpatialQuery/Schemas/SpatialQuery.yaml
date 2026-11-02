@@ -1,0 +1,51 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    SpatialQuery:
+      type: object
+      description: |-
+        One immutable spatial query record. A published (spatialQueryDbId) record
+        never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - spatialQueryDbId
+      - status
+      properties:
+        spatialQueryDbId:
+          description: Namespaced spatial-query identity `{authority}:spatial-query:{localId}`
+          type: string
+          example: institute-a:spatial-query:sq-2026-001
+        queryType:
+          description: Type of spatial query
+          type: string
+          example: zonal statistics
+        queryGeometry:
+          description: Query geometry (GeoJSON geometry object)
+          type: object
+        queryParams:
+          description: Query parameters
+          type: string
+          example: {}
+        resultReference:
+          description: Reference to query results
+          type: string
+          example: institute-a:spatial-query-result:sqr-2026-001
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: spatialQueryDbId of the record this one replaces
+          type: string
+          example: institute-a:spatial-query:sq-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
