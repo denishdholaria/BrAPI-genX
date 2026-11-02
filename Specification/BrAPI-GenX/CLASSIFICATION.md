@@ -91,6 +91,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | ExperimentalProtocol / ExperimentalProtocol | D2 | C1, C2, C3, C6, C9 | Experimental protocol records; no BrAPI v2.1 equivalent |
 | ArtifactCatalogue / ArtifactCatalogue | (none, cross-cutting) | C1, C2, C3, C6, C9 | Artifact catalogue records; no BrAPI v2.1 equivalent |
 | ProtocolLibrary / ProtocolLibrary | (none, cross-cutting) | C1, C2, C3, C6, C9 | Protocol library records; no BrAPI v2.1 equivalent |
+| PublicationReview / PublicationReview | (none, cross-cutting) | C1, C2, C3, C6, C9 | Publication review records; no BrAPI v2.1 equivalent |
 | AssayDesign / AssayDesign | D3 | C1, C2, C3, C6, C9 | Assay design records; no BrAPI v2.1 equivalent |
 | AssayExecution / AssayExecution | D3 | C1, C2, C3, C6, C9 | Assay execution records; no BrAPI v2.1 equivalent |
 | VariantAnnotation / VariantAnnotation | D3 | C1, C2, C3, C6, C9 | Variant annotation records; no BrAPI v2.1 equivalent |

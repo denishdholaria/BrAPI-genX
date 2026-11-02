@@ -1,0 +1,52 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    PublicationReviewNewRequest:
+      type: object
+      description: |-
+        Request to register one publication review record. Unknown publicationReviewDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - publicationReviewDbId
+      properties:
+        publicationReviewDbId:
+          description: Namespaced publication-review identity `{authority}:publication-review:{localId}`
+          type: string
+          example: institute-a:publication-review:pr-2026-001
+        publicationTitle:
+          description: Title of the publication
+          type: string
+          example: Genomic selection for drought tolerance
+        publicationType:
+          description: Type of publication
+          type: string
+          example: journal article
+        venue:
+          description: Publication venue (journal, conference, etc.)
+          type: string
+          example: Theoretical and Applied Genetics
+        year:
+          description: Publication year
+          type: string
+          example: "2026"
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: publicationReviewDbId of the record this one replaces
+          type: string
+          example: institute-a:publication-review:pr-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
