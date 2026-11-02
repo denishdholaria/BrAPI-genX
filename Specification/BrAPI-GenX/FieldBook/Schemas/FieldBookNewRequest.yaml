@@ -1,0 +1,44 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    FieldBookNewRequest:
+      type: object
+      description: |-
+        Request to register one field book definition record. Unknown
+        fieldBookDbId creates; same id with an identical body replays the
+        existing record; same id with a different body is rejected with 409.
+      required:
+      - fieldBookDbId
+      properties:
+        fieldBookDbId:
+          description: Namespaced field-book identity `{authority}:field-book:{localId}`
+          type: string
+          example: institute-a:field-book:fb-2026-001
+        fieldDbId:
+          description: Field or site reference
+          type: string
+          example: field-001
+        definition:
+          description: Field book definition
+          type: string
+          example: Standard field book v1
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: fieldBookDbId of the record this one replaces
+          type: string
+          example: institute-a:field-book:fb-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

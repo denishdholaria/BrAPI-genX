@@ -120,6 +120,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `FieldScouting/` | `FieldScouting` — field scouting and work order records (type, observations, provenance) | `GET /genx/v1/field-scouting` (`genxListFieldScouting`); `POST /genx/v1/field-scouting` (`genxRegisterFieldScouting`); `GET /genx/v1/field-scouting/{fieldScoutingDbId}` (`genxGetFieldScouting`) |
 | `TreatmentAssignment/` | `TreatmentAssignment` — treatment assignment records (field, treatment, provenance) | `GET /genx/v1/treatment-assignments` (`genxListTreatmentAssignments`); `POST /genx/v1/treatment-assignments` (`genxRegisterTreatmentAssignment`); `GET /genx/v1/treatment-assignments/{treatmentAssignmentDbId}` (`genxGetTreatmentAssignment`) |
 | `Plot/` | `Plot` — plot identity records (field, plot name, provenance) | `GET /genx/v1/plots` (`genxListPlots`); `POST /genx/v1/plots` (`genxRegisterPlot`); `GET /genx/v1/plots/{plotDbId}` (`genxGetPlot`) |
+| `FieldBook/` | `FieldBook` — field book definition records (field, definition, provenance) | `GET /genx/v1/field-books` (`genxListFieldBooks`); `POST /genx/v1/field-books` (`genxRegisterFieldBook`); `GET /genx/v1/field-books/{fieldBookDbId}` (`genxGetFieldBook`) |
 | `FieldBoundary/` | `FieldBoundary` — operational field boundary and history records (version, geometry reference, provenance) | `GET /genx/v1/field-boundaries` (`genxListFieldBoundaries`); `POST /genx/v1/field-boundaries` (`genxRegisterFieldBoundary`); `GET /genx/v1/field-boundaries/{fieldBoundaryDbId}` (`genxGetFieldBoundary`) |
 | `SprayApplication/` | `SprayApplication` — spray application records (product, rate, timestamp, provenance) | `GET /genx/v1/spray-applications` (`genxListSprayApplications`); `POST /genx/v1/spray-applications` (`genxRegisterSprayApplication`); `GET /genx/v1/spray-applications/{sprayApplicationDbId}` (`genxGetSprayApplication`) |
 | `YieldMap/` | `YieldMap` — yield map records (storage reference, resolution, digest, provenance) | `GET /genx/v1/yield-maps` (`genxListYieldMaps`); `POST /genx/v1/yield-maps` (`genxRegisterYieldMap`); `GET /genx/v1/yield-maps/{yieldMapDbId}` (`genxGetYieldMap`) |
@@ -245,7 +246,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-104-Duplicate-Review](./RFC-104-Duplicate-Review.md),
 [RFC-105-Crosswalk](./RFC-105-Crosswalk.md),
 [RFC-106-Treatment-Assignment](./RFC-106-Treatment-Assignment.md),
-[RFC-107-Plot](./RFC-107-Plot.md).
+[RFC-107-Plot](./RFC-107-Plot.md),
+[RFC-108-Field-Book](./RFC-108-Field-Book.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).
