@@ -46111,12 +46111,247 @@
         "brapi-genx.genx.v1.capability-metadata.list",
         "brapi-genx.genx.v1.capability-metadata.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ResearchLocation",
+      "brapiTag": "ResearchLocation",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ResearchLocation/ResearchLocation_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.research-locations.list",
+      "method": "GET",
+      "path": "/research-locations",
+      "operationIdInSource": "genxListResearchLocations",
+      "recommendedOperationId": "genxListResearchLocations",
+      "operationName": "List research locations",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List research location records, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of research location records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover research locations.",
+        "Support research organization."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a record (use the POST endpoint).",
+        "Assuming a record is a BrAPI Location.",
+        "Treating the list as a complete catalogue."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterResearchLocation",
+        "genxGetResearchLocation",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-100"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.research-locations.record",
+        "brapi-genx.genx.v1.research-locations.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ResearchLocation",
+      "brapiTag": "ResearchLocation",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ResearchLocation/ResearchLocation_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.research-locations.record",
+      "method": "POST",
+      "path": "/research-locations",
+      "operationIdInSource": "genxRegisterResearchLocation",
+      "recommendedOperationId": "genxRegisterResearchLocation",
+      "operationName": "Register one research location",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one research location record with provenance.",
+      "sourceDescription": "Unknown researchLocationDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a research location.",
+        "Retry an identical record safely using the same researchLocationDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming a record is a BrAPI Location.",
+        "Asserting that the record is validated or endorsed."
+      ],
+      "sideEffects": "Creates a research location identity or appends a new immutable version when accepted.",
+      "idempotency": "Same researchLocationDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "ResearchLocationNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListResearchLocations",
+        "genxGetResearchLocation",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-100"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.research-locations.list",
+        "brapi-genx.genx.v1.research-locations.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ResearchLocation",
+      "brapiTag": "ResearchLocation",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ResearchLocation/ResearchLocation_ResearchLocationDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.research-locations.get",
+      "method": "GET",
+      "path": "/research-locations/{researchLocationDbId}",
+      "operationIdInSource": "genxGetResearchLocation",
+      "recommendedOperationId": "genxGetResearchLocation",
+      "operationName": "Get one research location",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one research location record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect location identity and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a record is a BrAPI Location.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "researchLocationDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterResearchLocation",
+        "genxListResearchLocations",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-100"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.research-locations.list",
+        "brapi-genx.genx.v1.research-locations.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 297,
+    "genxEntriesAdded": 300,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -46194,7 +46429,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 498,
+    "totalEntries": 501,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -46495,5 +46730,5 @@
       ]
     }
   ],
-  "totalEntries": 498
+  "totalEntries": 501
 }

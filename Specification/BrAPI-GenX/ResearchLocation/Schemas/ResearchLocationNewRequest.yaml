@@ -1,0 +1,40 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ResearchLocationNewRequest:
+      type: object
+      description: |-
+        Request to register one research location record. Unknown
+        researchLocationDbId creates; same id with an identical body replays
+        the existing record; same id with a different body is rejected with 409.
+      required:
+      - researchLocationDbId
+      properties:
+        researchLocationDbId:
+          description: Namespaced research-location identity `{authority}:research-location:{localId}`
+          type: string
+          example: institute-a:research-location:rl-2026-001
+        name:
+          description: Location name
+          type: string
+          example: Field station A
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: researchLocationDbId of the record this one replaces
+          type: string
+          example: institute-a:research-location:rl-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

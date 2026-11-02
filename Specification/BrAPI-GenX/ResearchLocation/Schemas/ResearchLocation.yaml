@@ -1,0 +1,40 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ResearchLocation:
+      type: object
+      description: |-
+        One immutable research location record. A published
+        (researchLocationDbId) record never mutates in place; corrections
+        are recorded as additional records linked by supersedes.
+      required:
+      - researchLocationDbId
+      - status
+      properties:
+        researchLocationDbId:
+          description: Namespaced research-location identity `{authority}:research-location:{localId}`
+          type: string
+          example: institute-a:research-location:rl-2026-001
+        name:
+          description: Location name
+          type: string
+          example: Field station A
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: researchLocationDbId of the record this one replaces
+          type: string
+          example: institute-a:research-location:rl-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

@@ -387,6 +387,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/capability-metadata` | GET | `genxListCapabilityMetadata` | List capability metadata | Does not create or change a record; not a BrAPI data resource. |
 | `/genx/v1/capability-metadata` | POST | `genxRegisterCapabilityMetadata` | Register one capability metadata | Append-only record; replay/conflict semantics. |
 | `/genx/v1/capability-metadata/{capabilityMetadataDbId}` | GET | `genxGetCapabilityMetadata` | Retrieve one capability metadata | Does not treat a superseded record as current. |
+| `/genx/v1/research-locations` | GET | `genxListResearchLocations` | List research locations | Does not create or change a record; not a BrAPI data resource. |
+| `/genx/v1/research-locations` | POST | `genxRegisterResearchLocation` | Register one research location | Append-only record; replay/conflict semantics. |
+| `/genx/v1/research-locations/{researchLocationDbId}` | GET | `genxGetResearchLocation` | Retrieve one research location | Does not treat a superseded record as current. |
 
 `ProvenanceEnvelope` is embedded in result/record schemas and has no standalone route in this proposal.
 
