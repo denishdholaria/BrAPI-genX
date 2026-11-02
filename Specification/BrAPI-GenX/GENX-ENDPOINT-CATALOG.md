@@ -25,6 +25,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | EnvironmentalTreatment | 3 | proposed, non-normative |
 | ExperimentalDesign | 3 | proposed, non-normative |
 | ExpressionQtl | 3 | proposed, non-normative |
+| ExternalVocabulary | 3 | proposed, non-normative |
 | ExtremeWeather | 3 | proposed, non-normative |
 | FAIR | 3 | proposed, non-normative |
 | Farm | 3 | proposed, non-normative |
@@ -2085,6 +2086,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.expression-qtls.list, brapi-genx.genx.v1.expression-qtls.record
 - **Relevant RFC / decision references:** RFC-058
 - **Contract source:** [`Specification/BrAPI-GenX/ExpressionQtl/ExpressionQtl_ExpressionQtlDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ExpressionQtl/ExpressionQtl_ExpressionQtlDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### ExternalVocabulary — 3 operations
+
+### GET `/genx/v1/external-vocabularies`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.external-vocabularies.list`
+- **BrAPI-GenX operation identity:** `genxListExternalVocabularies` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListExternalVocabularies`
+- **GenX source module:** `ExternalVocabulary`
+- **Source tag:** ExternalVocabulary
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C4 — Scientific terminology governance, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List external vocabulary sync entries, optionally filtered by status.
+**Source contract description:**
+> Get a paged list of external vocabulary sync entries across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover external vocabulary sync entries.
+- Support external vocabulary synchronization.
+**Must not be used for / explicit non-goals:**
+- Creating or changing an entry (use the POST endpoint).
+- Assuming an entry is a BrAPI Observation.
+- Treating the list as a complete vocabulary.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterExternalVocabulary, genxGetExternalVocabulary, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.external-vocabularies.record, brapi-genx.genx.v1.external-vocabularies.get
+- **Relevant RFC / decision references:** RFC-083
+- **Contract source:** [`Specification/BrAPI-GenX/ExternalVocabulary/ExternalVocabulary_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ExternalVocabulary/ExternalVocabulary_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/external-vocabularies`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.external-vocabularies.record`
+- **BrAPI-GenX operation identity:** `genxRegisterExternalVocabulary` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterExternalVocabulary`
+- **GenX source module:** `ExternalVocabulary`
+- **Source tag:** ExternalVocabulary
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C4 — Scientific terminology governance, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register one external vocabulary sync entry with provenance.
+**Source contract description:**
+> Unknown externalVocabularyDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish an external vocabulary sync entry.
+- Retry an identical entry safely using the same externalVocabularyDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing entry; corrections require a new record that supersedes.
+- Assuming an entry is a BrAPI Observation.
+- Asserting that the entry is validated or endorsed.
+- **Side effects:** Creates an external vocabulary identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same externalVocabularyDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** ExternalVocabularyNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListExternalVocabularies, genxGetExternalVocabulary, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.external-vocabularies.list, brapi-genx.genx.v1.external-vocabularies.get
+- **Relevant RFC / decision references:** RFC-083
+- **Contract source:** [`Specification/BrAPI-GenX/ExternalVocabulary/ExternalVocabulary_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ExternalVocabulary/ExternalVocabulary_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/external-vocabularies/{externalVocabularyDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.external-vocabularies.get`
+- **BrAPI-GenX operation identity:** `genxGetExternalVocabulary` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetExternalVocabulary`
+- **GenX source module:** `ExternalVocabulary`
+- **Source tag:** ExternalVocabulary
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C4 — Scientific terminology governance, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one external vocabulary sync entry.
+**Source contract description:**
+> Returns the registered entry, or 404.
+**Can be used for:**
+- Inspect source, target, mapping, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming an entry is a BrAPI Observation.
+- Treating a superseded entry as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** externalVocabularyDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterExternalVocabulary, genxListExternalVocabularies, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.external-vocabularies.list, brapi-genx.genx.v1.external-vocabularies.record
+- **Relevant RFC / decision references:** RFC-083
+- **Contract source:** [`Specification/BrAPI-GenX/ExternalVocabulary/ExternalVocabulary_ExternalVocabularyDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ExternalVocabulary/ExternalVocabulary_ExternalVocabularyDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

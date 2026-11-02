@@ -1,0 +1,65 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /external-vocabularies/{externalVocabularyDbId}:
+    get:
+      operationId: genxGetExternalVocabulary
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.external-vocabularies.get"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C4", "C9"]
+        purpose: "Retrieve one external vocabulary sync entry."
+        canBeUsedFor:
+          - "Inspect source, target, mapping, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming an entry is a BrAPI Observation."
+          - "Treating a superseded entry as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterExternalVocabulary"
+          - "genxListExternalVocabularies"
+          - "genxPublishVariableTermVersion"
+        decisions: ["RFC-083"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one external vocabulary
+      description: Returns the registered entry, or 404.
+      parameters:
+      - name: externalVocabularyDbId
+        description: Namespaced external-vocabulary identity `{authority}:external-vocabulary:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/ExternalVocabulary'
+                required:
+                - metadata
+                - result
+                title: ExternalVocabularyResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - ExternalVocabulary

@@ -42116,12 +42116,247 @@
         "brapi-genx.genx.v1.units-and-quantities.list",
         "brapi-genx.genx.v1.units-and-quantities.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ExternalVocabulary",
+      "brapiTag": "ExternalVocabulary",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ExternalVocabulary/ExternalVocabulary_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.external-vocabularies.list",
+      "method": "GET",
+      "path": "/external-vocabularies",
+      "operationIdInSource": "genxListExternalVocabularies",
+      "recommendedOperationId": "genxListExternalVocabularies",
+      "operationName": "List external vocabularies",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List external vocabulary sync entries, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of external vocabulary sync entries across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover external vocabulary sync entries.",
+        "Support external vocabulary synchronization."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing an entry (use the POST endpoint).",
+        "Assuming an entry is a BrAPI Observation.",
+        "Treating the list as a complete vocabulary."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterExternalVocabulary",
+        "genxGetExternalVocabulary",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-083"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.external-vocabularies.record",
+        "brapi-genx.genx.v1.external-vocabularies.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ExternalVocabulary",
+      "brapiTag": "ExternalVocabulary",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ExternalVocabulary/ExternalVocabulary_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.external-vocabularies.record",
+      "method": "POST",
+      "path": "/external-vocabularies",
+      "operationIdInSource": "genxRegisterExternalVocabulary",
+      "recommendedOperationId": "genxRegisterExternalVocabulary",
+      "operationName": "Register one external vocabulary entry",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one external vocabulary sync entry with provenance.",
+      "sourceDescription": "Unknown externalVocabularyDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish an external vocabulary sync entry.",
+        "Retry an identical entry safely using the same externalVocabularyDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing entry; corrections require a new record that supersedes.",
+        "Assuming an entry is a BrAPI Observation.",
+        "Asserting that the entry is validated or endorsed."
+      ],
+      "sideEffects": "Creates an external vocabulary identity or appends a new immutable version when accepted.",
+      "idempotency": "Same externalVocabularyDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "ExternalVocabularyNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListExternalVocabularies",
+        "genxGetExternalVocabulary",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-083"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.external-vocabularies.list",
+        "brapi-genx.genx.v1.external-vocabularies.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ExternalVocabulary",
+      "brapiTag": "ExternalVocabulary",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ExternalVocabulary/ExternalVocabulary_ExternalVocabularyDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.external-vocabularies.get",
+      "method": "GET",
+      "path": "/external-vocabularies/{externalVocabularyDbId}",
+      "operationIdInSource": "genxGetExternalVocabulary",
+      "recommendedOperationId": "genxGetExternalVocabulary",
+      "operationName": "Get one external vocabulary entry",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one external vocabulary sync entry.",
+      "sourceDescription": "Returns the registered entry, or 404.",
+      "canBeUsedFor": [
+        "Inspect source, target, mapping, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming an entry is a BrAPI Observation.",
+        "Treating a superseded entry as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "externalVocabularyDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterExternalVocabulary",
+        "genxListExternalVocabularies",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-083"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.external-vocabularies.list",
+        "brapi-genx.genx.v1.external-vocabularies.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 246,
+    "genxEntriesAdded": 249,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -42199,7 +42434,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 447,
+    "totalEntries": 450,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -42500,5 +42735,5 @@
       ]
     }
   ],
-  "totalEntries": 447
+  "totalEntries": 450
 }

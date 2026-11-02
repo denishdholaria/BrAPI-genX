@@ -1,0 +1,48 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ExternalVocabulary:
+      type: object
+      description: |-
+        One immutable external vocabulary sync entry. A published
+        (externalVocabularyDbId) record never mutates in place; corrections
+        are recorded as additional entries linked by supersedes.
+      required:
+      - externalVocabularyDbId
+      - status
+      properties:
+        externalVocabularyDbId:
+          description: Namespaced external-vocabulary identity `{authority}:external-vocabulary:{localId}`
+          type: string
+          example: institute-a:external-vocabulary:ev-2026-001
+        source:
+          description: Source vocabulary system
+          type: string
+          example: AGROVOC
+        target:
+          description: Target vocabulary system
+          type: string
+          example: GenX
+        mapping:
+          description: Mapping or sync details
+          type: object
+          example: {sourceTerm: "wheat", targetTerm: "Triticum aestivum"}
+        status:
+          description: Lifecycle state of the entry
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: externalVocabularyDbId of the entry this one replaces
+          type: string
+          example: institute-a:external-vocabulary:ev-2026-000
+        provenance:
+          description: Evidence and method provenance for the entry
+          $ref: '#/components/schemas/ProvenanceEnvelope'
