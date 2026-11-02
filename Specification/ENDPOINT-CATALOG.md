@@ -9858,9 +9858,9 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 
 ### ConformanceProbe — 3 operations
 
-### GET `/genx/v1/capability-negotiations`
+### GET `/genx/v1/conformance-probes`
 
-- **Catalogue ID:** `brapi-genx.genx.v1.capability-negotiations.list`
+- **Catalogue ID:** `brapi-genx.genx.v1.conformance-probes.list`
 - **BrAPI-GenX operation identity:** `genxListConformanceProbes` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxListConformanceProbes`
 - **GenX source module:** `ConformanceProbe`
@@ -9870,7 +9870,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> List conformanceprobe records, optionally filtered by status.
+> List conformance probe records, optionally filtered by status.
 **Source contract description:**
 > Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
 **Can be used for:**
@@ -9887,15 +9887,15 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
 - **Semantic relationship IDs / labels:** genxRegisterConformanceProbe, genxGetConformanceProbe, genxRegisterGenomicDataset
-- **Related catalogue IDs:** brapi-genx.genx.v1.capability-negotiations.record, brapi-genx.genx.v1.capability-negotiations.get
+- **Related catalogue IDs:** brapi-genx.genx.v1.conformance-probes.record, brapi-genx.genx.v1.conformance-probes.get
 - **Relevant RFC / decision references:** RFC-155
 - **Contract source:** [`Specification/BrAPI-GenX/ConformanceProbe/ConformanceProbe_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ConformanceProbe/ConformanceProbe_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
-### POST `/genx/v1/capability-negotiations`
+### POST `/genx/v1/conformance-probes`
 
-- **Catalogue ID:** `brapi-genx.genx.v1.capability-negotiations.record`
+- **Catalogue ID:** `brapi-genx.genx.v1.conformance-probes.record`
 - **BrAPI-GenX operation identity:** `genxRegisterConformanceProbe` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxRegisterConformanceProbe`
 - **GenX source module:** `ConformanceProbe`
@@ -9905,7 +9905,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> Register one conformanceprobe record with provenance.
+> Register one conformance probe record with provenance.
 **Source contract description:**
 > Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
 **Can be used for:**
@@ -9915,22 +9915,22 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
 - Asserting that the export is validated or endorsed.
-- **Side effects:** Creates a conformanceprobe identity or appends a new immutable version when accepted.
+- **Side effects:** Creates a conformance probe identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same conformanceProbeDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
 - **Request schema refs recorded:** ConformanceProbeNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
 - **Semantic relationship IDs / labels:** genxListConformanceProbes, genxGetConformanceProbe, genxRegisterGenomicDataset
-- **Related catalogue IDs:** brapi-genx.genx.v1.capability-negotiations.list, brapi-genx.genx.v1.capability-negotiations.get
+- **Related catalogue IDs:** brapi-genx.genx.v1.conformance-probes.list, brapi-genx.genx.v1.conformance-probes.get
 - **Relevant RFC / decision references:** RFC-155
 - **Contract source:** [`Specification/BrAPI-GenX/ConformanceProbe/ConformanceProbe_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ConformanceProbe/ConformanceProbe_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
-### GET `/genx/v1/capability-negotiations/{conformanceProbeDbId}`
+### GET `/genx/v1/conformance-probes/{conformanceProbeDbId}`
 
-- **Catalogue ID:** `brapi-genx.genx.v1.capability-negotiations.get`
+- **Catalogue ID:** `brapi-genx.genx.v1.conformance-probes.get`
 - **BrAPI-GenX operation identity:** `genxGetConformanceProbe` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxGetConformanceProbe`
 - **GenX source module:** `ConformanceProbe`
@@ -9940,7 +9940,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> Retrieve one conformanceprobe record.
+> Retrieve one conformance probe record.
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
@@ -9955,7 +9955,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
 - **Semantic relationship IDs / labels:** genxRegisterConformanceProbe, genxListConformanceProbes, genxRegisterGenomicDataset
-- **Related catalogue IDs:** brapi-genx.genx.v1.capability-negotiations.list, brapi-genx.genx.v1.capability-negotiations.record
+- **Related catalogue IDs:** brapi-genx.genx.v1.conformance-probes.list, brapi-genx.genx.v1.conformance-probes.record
 - **Relevant RFC / decision references:** RFC-155
 - **Contract source:** [`Specification/BrAPI-GenX/ConformanceProbe/ConformanceProbe_ConformanceProbeDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ConformanceProbe/ConformanceProbe_ConformanceProbeDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
