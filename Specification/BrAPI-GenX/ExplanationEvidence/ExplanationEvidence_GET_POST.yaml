@@ -1,0 +1,137 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /explanation-evidences:
+    get:
+      operationId: genxListExplanationEvidences
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.explanation-evidences.list"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List explanation evidence records, optionally filtered by status."
+        canBeUsedFor:
+          - "Discover explanation evidences."
+          - "Support dataset/model artefact discovery."
+        mustNotBeUsedFor:
+          - "Creating or changing a record (use the POST endpoint)."
+          - "Assuming a record is a BrAPI data resource."
+          - "Treating the list as a complete history."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterExplanationEvidence"
+          - "genxGetExplanationEvidence"
+          - "genxRegisterFarm"
+        decisions: ["RFC-137"]
+        proposalStatus: "draft-non-normative"
+      summary: List explanation evidences
+      description: Get a paged list of explanation evidence records across authorities. Filters combine with AND.
+      parameters:
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/ExplanationEvidenceListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - ExplanationEvidence
+    post:
+      operationId: genxRegisterExplanationEvidence
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.explanation-evidences.record"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Register one explanation evidence record with provenance."
+        canBeUsedFor:
+          - "Publish a explanation evidence."
+          - "Retry an identical record safely using the same explanationEvidenceDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing record; corrections require a new record that supersedes."
+          - "Assuming a record is a BrAPI data resource."
+          - "Asserting that the catalogue is validated or endorsed."
+        sideEffects: "Creates a explanation evidence identity or appends a new immutable version when accepted."
+        idempotency: "Same explanationEvidenceDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListExplanationEvidences"
+          - "genxGetExplanationEvidence"
+          - "genxRegisterFarm"
+        decisions: ["RFC-137"]
+        proposalStatus: "draft-non-normative"
+      summary: Register one explanation evidence
+      description: Register one explanation evidence record with provenance.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExplanationEvidenceNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/ExplanationEvidence'
+                required:
+                - metadata
+                - result
+                title: ExplanationEvidenceResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - ExplanationEvidence
+components:
+  responses:
+    ExplanationEvidenceListResponse:
+      content:
+        application/json:
+          schema:
+            title: ExplanationEvidenceListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ExplanationEvidence'
+            required:
+            - metadata
+            - result
+      description: OK

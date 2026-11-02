@@ -77,6 +77,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | O | Yield forecast | `YieldForecast/` | RFC-134 |
 | O | Crop suitability | `CropSuitability/` | RFC-135 |
 | O | Human review | `HumanReview/` | RFC-136 |
+| O | Explanation evidence | `ExplanationEvidence/` | RFC-137 |
 | D3 | Genomic dataset release/access, reference assembly versioning, pipeline provenance | `GenomicDatasets/` | RFC-013 |
 | D3 | Assay / plate workflow (design side) | `AssayDesign/` | RFC-061 |
 | D3 | Assay / plate workflow (execution side) | `AssayExecution/` | RFC-113 |

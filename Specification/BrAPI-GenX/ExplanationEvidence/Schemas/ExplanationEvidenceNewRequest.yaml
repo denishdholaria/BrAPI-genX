@@ -1,0 +1,52 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ExplanationEvidenceNewRequest:
+      type: object
+      description: |-
+        Request to register one explanation evidence record. Unknown explanationEvidenceDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - explanationEvidenceDbId
+      properties:
+        explanationEvidenceDbId:
+          description: Namespaced explanation-evidence identity `{authority}:explanation-evidence:{localId}`
+          type: string
+          example: institute-a:explanation-evidence:ee-2026-001
+        evidenceType:
+          description: Type of explanation evidence
+          type: string
+          example: feature importance
+        explanation:
+          description: Explanation text
+          type: string
+          example: Yield driven by rainfall and nitrogen
+        uncertainty:
+          description: Uncertainty of the explanation
+          type: string
+          example: medium
+        confidence:
+          description: Confidence in the explanation
+          type: string
+          example: high
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: explanationEvidenceDbId of the record this one replaces
+          type: string
+          example: institute-a:explanation-evidence:ee-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

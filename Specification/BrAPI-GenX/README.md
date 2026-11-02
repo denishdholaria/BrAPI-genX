@@ -129,6 +129,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `YieldForecast/` | `YieldForecast` — yield forecast records (type, value, horizon) | `GET /genx/v1/yield-forecasts` (`genxListYieldForecasts`); `POST /genx/v1/yield-forecasts` (`genxRegisterYieldForecast`); `GET /genx/v1/yield-forecasts/{yieldForecastDbId}` (`genxGetYieldForecast`) |
 | `CropSuitability/` | `CropSuitability` — crop suitability records (type, score, zone) | `GET /genx/v1/crop-suitabilities` (`genxListCropSuitabilities`); `POST /genx/v1/crop-suitabilities` (`genxRegisterCropSuitability`); `GET /genx/v1/crop-suitabilities/{cropSuitabilityDbId}` (`genxGetCropSuitability`) |
 | `HumanReview/` | `HumanReview` — human review records (type, decision, comments) | `GET /genx/v1/human-reviews` (`genxListHumanReviews`); `POST /genx/v1/human-reviews` (`genxRegisterHumanReview`); `GET /genx/v1/human-reviews/{humanReviewDbId}` (`genxGetHumanReview`) |
+| `ExplanationEvidence/` | `ExplanationEvidence` — explanation evidence records (type, uncertainty, confidence) | `GET /genx/v1/explanation-evidences` (`genxListExplanationEvidences`); `POST /genx/v1/explanation-evidences` (`genxRegisterExplanationEvidence`); `GET /genx/v1/explanation-evidences/{explanationEvidenceDbId}` (`genxGetExplanationEvidence`) |
 | `AssayDesign/` | `AssayDesign` — assay design records (platform, marker count, provenance) | `GET /genx/v1/assay-designs` (`genxListAssayDesigns`); `POST /genx/v1/assay-designs` (`genxRecordAssayDesign`); `GET /genx/v1/assay-designs/{assayDesignDbId}` (`genxGetAssayDesign`) |
 | `AssayExecution/` | `AssayExecution` — assay execution records (assay reference, provenance) | `GET /genx/v1/assay-executions` (`genxListAssayExecutions`); `POST /genx/v1/assay-executions` (`genxRegisterAssayExecution`); `GET /genx/v1/assay-executions/{assayExecutionDbId}` (`genxGetAssayExecution`) |
 | `VariantAnnotation/` | `VariantAnnotation` — variant annotation records (functional annotations, provenance) | `GET /genx/v1/variant-annotations` (`genxListVariantAnnotations`); `POST /genx/v1/variant-annotations` (`genxRecordVariantAnnotation`); `GET /genx/v1/variant-annotations/{variantAnnotationDbId}` (`genxGetVariantAnnotation`) |
@@ -303,7 +304,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-133-PestDiseaseRisk](./RFC-133-PestDiseaseRisk.md),
 [RFC-134-YieldForecast](./RFC-134-YieldForecast.md),
 [RFC-135-CropSuitability](./RFC-135-CropSuitability.md),
-[RFC-136-HumanReview](./RFC-136-HumanReview.md).
+[RFC-136-HumanReview](./RFC-136-HumanReview.md),
+[RFC-137-ExplanationEvidence](./RFC-137-ExplanationEvidence.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).
