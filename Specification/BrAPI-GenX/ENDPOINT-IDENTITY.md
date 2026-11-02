@@ -402,6 +402,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/duplicate-reviews` | GET | `genxListDuplicateReviews` | List duplicate reviews | Does not create or change a record; not a BrAPI data resource. |
 | `/genx/v1/duplicate-reviews` | POST | `genxRegisterDuplicateReview` | Register one duplicate review | Append-only record; replay/conflict semantics. |
 | `/genx/v1/duplicate-reviews/{duplicateReviewDbId}` | GET | `genxGetDuplicateReview` | Retrieve one duplicate review | Does not treat a superseded record as current. |
+| `/genx/v1/crosswalks` | GET | `genxListCrosswalks` | List crosswalks | Does not create or change a record; not a BrAPI data resource. |
+| `/genx/v1/crosswalks` | POST | `genxRegisterCrosswalk` | Register one crosswalk | Append-only record; replay/conflict semantics. |
+| `/genx/v1/crosswalks/{crosswalkDbId}` | GET | `genxGetCrosswalk` | Retrieve one crosswalk | Does not treat a superseded record as current. |
 
 `ProvenanceEnvelope` is embedded in result/record schemas and has no standalone route in this proposal.
 

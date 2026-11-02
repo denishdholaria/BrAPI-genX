@@ -47286,12 +47286,247 @@
         "brapi-genx.genx.v1.duplicate-reviews.list",
         "brapi-genx.genx.v1.duplicate-reviews.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Crosswalk",
+      "brapiTag": "Crosswalk",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Crosswalk/Crosswalk_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.crosswalks.list",
+      "method": "GET",
+      "path": "/crosswalks",
+      "operationIdInSource": "genxListCrosswalks",
+      "recommendedOperationId": "genxListCrosswalks",
+      "operationName": "List crosswalks",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List crosswalk records, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of crosswalk records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover crosswalks.",
+        "Support crosswalks and reference data."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a record (use the POST endpoint).",
+        "Assuming a record is a BrAPI data resource.",
+        "Treating the list as a complete catalogue."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterCrosswalk",
+        "genxGetCrosswalk",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-105"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.crosswalks.record",
+        "brapi-genx.genx.v1.crosswalks.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Crosswalk",
+      "brapiTag": "Crosswalk",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Crosswalk/Crosswalk_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.crosswalks.record",
+      "method": "POST",
+      "path": "/crosswalks",
+      "operationIdInSource": "genxRegisterCrosswalk",
+      "recommendedOperationId": "genxRegisterCrosswalk",
+      "operationName": "Register one crosswalk",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one crosswalk record with provenance.",
+      "sourceDescription": "Unknown crosswalkDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a crosswalk.",
+        "Retry an identical record safely using the same crosswalkDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming a record is a BrAPI data resource.",
+        "Asserting that the record is validated or endorsed."
+      ],
+      "sideEffects": "Creates a crosswalk identity or appends a new immutable version when accepted.",
+      "idempotency": "Same crosswalkDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "CrosswalkNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListCrosswalks",
+        "genxGetCrosswalk",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-105"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.crosswalks.list",
+        "brapi-genx.genx.v1.crosswalks.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Crosswalk",
+      "brapiTag": "Crosswalk",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Crosswalk/Crosswalk_CrosswalkDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.crosswalks.get",
+      "method": "GET",
+      "path": "/crosswalks/{crosswalkDbId}",
+      "operationIdInSource": "genxGetCrosswalk",
+      "recommendedOperationId": "genxGetCrosswalk",
+      "operationName": "Get one crosswalk",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one crosswalk record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect crosswalk identity and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a record is a BrAPI data resource.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "crosswalkDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterCrosswalk",
+        "genxListCrosswalks",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-105"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.crosswalks.list",
+        "brapi-genx.genx.v1.crosswalks.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 312,
+    "genxEntriesAdded": 315,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -47369,7 +47604,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 513,
+    "totalEntries": 516,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -47670,5 +47905,5 @@
       ]
     }
   ],
-  "totalEntries": 513
+  "totalEntries": 516
 }

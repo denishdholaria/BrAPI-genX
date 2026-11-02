@@ -91,6 +91,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `ConservationMembership/` | `ConservationMembership` — conservation membership records (member, program, provenance) | `GET /genx/v1/conservation-memberships` (`genxListConservationMemberships`); `POST /genx/v1/conservation-memberships` (`genxRegisterConservationMembership`); `GET /genx/v1/conservation-memberships/{conservationMembershipDbId}` (`genxGetConservationMembership`) |
 | `McpdAdapter/` | `McpdAdapter` — MCPD adapter records (source, provenance) | `GET /genx/v1/mcpd-adapters` (`genxListMcpdAdapters`); `POST /genx/v1/mcpd-adapters` (`genxRegisterMcpdAdapter`); `GET /genx/v1/mcpd-adapters/{mcpdAdapterDbId}` (`genxGetMcpdAdapter`) |
 | `DuplicateReview/` | `DuplicateReview` — duplicate review records (candidate, decision, provenance) | `GET /genx/v1/duplicate-reviews` (`genxListDuplicateReviews`); `POST /genx/v1/duplicate-reviews` (`genxRegisterDuplicateReview`); `GET /genx/v1/duplicate-reviews/{duplicateReviewDbId}` (`genxGetDuplicateReview`) |
+| `Crosswalk/` | `Crosswalk` — crosswalk records (source, target, provenance) | `GET /genx/v1/crosswalks` (`genxListCrosswalks`); `POST /genx/v1/crosswalks` (`genxRegisterCrosswalk`); `GET /genx/v1/crosswalks/{crosswalkDbId}` (`genxGetCrosswalk`) |
 | `FAIR/` | `FAIRPackage` — licensed, embargo-aware payload envelopes | `GET /genx/v1/fair-packages` (`genxListFairPackageMetadata`); `POST /genx/v1/fair-packages` (`genxRegisterFairPackage`); `GET /genx/v1/fair-packages/{packageDbId}` (`genxGetFairPackageMetadata`) |
 | `Telemetry/` | `TelemetryPoint` — sensor streams, idempotent ingest, aggregates | `GET /genx/v1/telemetry` (`genxQueryTelemetrySamplesOrAggregates`); `POST /genx/v1/telemetry` (`genxAppendTelemetryBatch`) |
 | `Tillage/` | `TillageRecord` — tillage records (method, depth, provenance) | `GET /genx/v1/tillage-records` (`genxListTillageRecords`); `POST /genx/v1/tillage-records` (`genxRecordTillage`); `GET /genx/v1/tillage-records/{tillageRecordDbId}` (`genxGetTillage`) |
@@ -239,7 +240,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-101-Collecting-Mission](./RFC-101-Collecting-Mission.md),
 [RFC-102-Conservation-Membership](./RFC-102-Conservation-Membership.md),
 [RFC-103-Mcpd-Adapter](./RFC-103-Mcpd-Adapter.md),
-[RFC-104-Duplicate-Review](./RFC-104-Duplicate-Review.md).
+[RFC-104-Duplicate-Review](./RFC-104-Duplicate-Review.md),
+[RFC-105-Crosswalk](./RFC-105-Crosswalk.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).
