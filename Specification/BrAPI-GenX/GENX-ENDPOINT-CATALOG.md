@@ -69,6 +69,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | SafetyDuplication | 3 | proposed, non-normative |
 | SelectionDecisions | 3 | proposed, non-normative |
 | ServerInfoV3 | 1 | proposed, non-normative |
+| SoilChemistry | 3 | proposed, non-normative |
 | SoilProfile | 3 | proposed, non-normative |
 | SpeedBreeding | 3 | proposed, non-normative |
 | StabilityAnalysis | 3 | proposed, non-normative |
@@ -6658,6 +6659,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **BijMantra relative-route candidates:** 1. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - [backend/app/api/brapi/v2/core/serverinfo.py](https://github.com/denishdholaria/bijmantraorg/blob/main/backend/app/api/brapi/v2/core/serverinfo.py#L145) — `get_server_info`; brapi-adapter-source-declaration.
   - Interpretation: Same relative method/path appears in BijMantra's static inventory. Do not infer V3 wiring, contract equivalence, or runtime mounting.
+
+### SoilChemistry — 3 operations
+
+### GET `/genx/v1/soil-chemistry`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.soil-chemistry.list`
+- **BrAPI-GenX operation identity:** `genxListSoilChemistry` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListSoilChemistry`
+- **GenX source module:** `SoilChemistry`
+- **Source tag:** SoilChemistry
+- **Proposed BrAPI-GenX classification:** D5 — Environment, Agroecology and Field Context; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List soil texture, chemistry, and moisture records, optionally filtered by site or status.
+**Source contract description:**
+> Get a paged list of soil texture, chemistry, and moisture records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover soil texture, chemistry, and moisture observations for a site.
+- Support soil health and agronomic analysis.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a soil chemistry record (use the POST endpoint).
+- Assuming a record is a BrAPI Observation.
+- Treating the list as a complete soil inventory.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** siteDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterSoilChemistry, genxGetSoilChemistry, genxRegisterSoilProfile
+- **Related catalogue IDs:** brapi-genx.genx.v1.soil-chemistry.record, brapi-genx.genx.v1.soil-chemistry.get
+- **Relevant RFC / decision references:** RFC-077
+- **Contract source:** [`Specification/BrAPI-GenX/SoilChemistry/SoilChemistry_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/SoilChemistry/SoilChemistry_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/soil-chemistry`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.soil-chemistry.record`
+- **BrAPI-GenX operation identity:** `genxRegisterSoilChemistry` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterSoilChemistry`
+- **GenX source module:** `SoilChemistry`
+- **Source tag:** SoilChemistry
+- **Proposed BrAPI-GenX classification:** D5 — Environment, Agroecology and Field Context; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register one soil texture, chemistry, and moisture record with site linkage and provenance.
+**Source contract description:**
+> Unknown soilChemistryDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish soil texture, chemistry, and moisture observations for a site.
+- Retry an identical record safely using the same soilChemistryDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming a record is a BrAPI Observation.
+- Asserting that the soil is validated or certified.
+- **Side effects:** Creates a soil chemistry identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same soilChemistryDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** SoilChemistryNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListSoilChemistry, genxGetSoilChemistry, genxRegisterSoilProfile
+- **Related catalogue IDs:** brapi-genx.genx.v1.soil-chemistry.list, brapi-genx.genx.v1.soil-chemistry.get
+- **Relevant RFC / decision references:** RFC-077
+- **Contract source:** [`Specification/BrAPI-GenX/SoilChemistry/SoilChemistry_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/SoilChemistry/SoilChemistry_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/soil-chemistry/{soilChemistryDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.soil-chemistry.get`
+- **BrAPI-GenX operation identity:** `genxGetSoilChemistry` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetSoilChemistry`
+- **GenX source module:** `SoilChemistry`
+- **Source tag:** SoilChemistry
+- **Proposed BrAPI-GenX classification:** D5 — Environment, Agroecology and Field Context; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one soil texture, chemistry, and moisture record.
+**Source contract description:**
+> Returns the registered record, or 404.
+**Can be used for:**
+- Inspect site linkage, texture, chemistry, moisture depth, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming a record is a BrAPI Observation.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** soilChemistryDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterSoilChemistry, genxListSoilChemistry, genxRegisterSoilProfile
+- **Related catalogue IDs:** brapi-genx.genx.v1.soil-chemistry.list, brapi-genx.genx.v1.soil-chemistry.record
+- **Relevant RFC / decision references:** RFC-077
+- **Contract source:** [`Specification/BrAPI-GenX/SoilChemistry/SoilChemistry_SoilChemistryDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/SoilChemistry/SoilChemistry_SoilChemistryDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
 ### SoilProfile — 3 operations
 

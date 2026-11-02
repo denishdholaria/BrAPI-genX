@@ -1,0 +1,65 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /soil-chemistry/{soilChemistryDbId}:
+    get:
+      operationId: genxGetSoilChemistry
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.soil-chemistry.get"
+        classification:
+          primaryDomain: "D5"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve one soil texture, chemistry, and moisture record."
+        canBeUsedFor:
+          - "Inspect site linkage, texture, chemistry, moisture depth, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming a record is a BrAPI Observation."
+          - "Treating a superseded record as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterSoilChemistry"
+          - "genxListSoilChemistry"
+          - "genxRegisterSoilProfile"
+        decisions: ["RFC-077"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one soil chemistry record
+      description: Returns the registered record, or 404.
+      parameters:
+      - name: soilChemistryDbId
+        description: Namespaced soil-chemistry identity `{authority}:soil-chemistry:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/SoilChemistry'
+                required:
+                - metadata
+                - result
+                title: SoilChemistryResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - SoilChemistry

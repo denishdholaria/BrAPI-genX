@@ -86,14 +86,14 @@ implementation, not a claim of production readiness or of scientific validation.
 | D6 | Sowing / planting | `PlantingOperation/` | RFC-066 |
 | D5 | Carbon stock | `CarbonStock/` | RFC-067 |
 | D5 | Emissions | `Emissions/` | RFC-076 |
+| D5 | Soil texture, chemistry, and moisture | `SoilChemistry/` | RFC-077 |
 | D5 | Water balance | `WaterBalance/` | RFC-068 |
 | I | Genomic dataset release/access | `GenomicDatasets/` | RFC-013 |
 | S | FAIR packages | `FAIR/` | RFC-006 |
 | S | Research asset registry, persistent identifiers / DOI, license/access, embargo | `ResearchAssets/` | RFC-016 |
 
 D3 row 9 named gaps are now covered (genotype call semantics, marker/probe registry, vendor order/result ingestion). D1 row 4 named gaps are now covered. D6 row 11 named gaps are now covered (field scouting/work orders, operational field boundary/history). Still open
-in D5 row 12: soil texture/chemistry/moisture depth, environmental
-treatments/stress.
+in D5 row 12: environmental treatments/stress.
 
 ## Suggested GenX sequencing (scientific gaps first)
 

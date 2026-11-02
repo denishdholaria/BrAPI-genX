@@ -40702,12 +40702,248 @@
         "brapi-genx.genx.v1.emissions.list",
         "brapi-genx.genx.v1.emissions.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "SoilChemistry",
+      "brapiTag": "SoilChemistry",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/SoilChemistry/SoilChemistry_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.soil-chemistry.list",
+      "method": "GET",
+      "path": "/soil-chemistry",
+      "operationIdInSource": "genxListSoilChemistry",
+      "recommendedOperationId": "genxListSoilChemistry",
+      "operationName": "List soil chemistry records",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List soil texture, chemistry, and moisture records, optionally filtered by site or status.",
+      "sourceDescription": "Get a paged list of soil texture, chemistry, and moisture records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover soil texture, chemistry, and moisture observations for a site.",
+        "Support soil health and agronomic analysis."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a soil chemistry record (use the POST endpoint).",
+        "Assuming a record is a BrAPI Observation.",
+        "Treating the list as a complete soil inventory."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "siteDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterSoilChemistry",
+        "genxGetSoilChemistry",
+        "genxRegisterSoilProfile"
+      ],
+      "decisionReferences": [
+        "RFC-077"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.soil-chemistry.record",
+        "brapi-genx.genx.v1.soil-chemistry.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "SoilChemistry",
+      "brapiTag": "SoilChemistry",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/SoilChemistry/SoilChemistry_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.soil-chemistry.record",
+      "method": "POST",
+      "path": "/soil-chemistry",
+      "operationIdInSource": "genxRegisterSoilChemistry",
+      "recommendedOperationId": "genxRegisterSoilChemistry",
+      "operationName": "Register one soil chemistry record",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one soil texture, chemistry, and moisture record with site linkage and provenance.",
+      "sourceDescription": "Unknown soilChemistryDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish soil texture, chemistry, and moisture observations for a site.",
+        "Retry an identical record safely using the same soilChemistryDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming a record is a BrAPI Observation.",
+        "Asserting that the soil is validated or certified."
+      ],
+      "sideEffects": "Creates a soil chemistry identity or appends a new immutable version when accepted.",
+      "idempotency": "Same soilChemistryDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "SoilChemistryNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListSoilChemistry",
+        "genxGetSoilChemistry",
+        "genxRegisterSoilProfile"
+      ],
+      "decisionReferences": [
+        "RFC-077"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.soil-chemistry.list",
+        "brapi-genx.genx.v1.soil-chemistry.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "SoilChemistry",
+      "brapiTag": "SoilChemistry",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/SoilChemistry/SoilChemistry_SoilChemistryDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.soil-chemistry.get",
+      "method": "GET",
+      "path": "/soil-chemistry/{soilChemistryDbId}",
+      "operationIdInSource": "genxGetSoilChemistry",
+      "recommendedOperationId": "genxGetSoilChemistry",
+      "operationName": "Get one soil chemistry record",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one soil texture, chemistry, and moisture record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect site linkage, texture, chemistry, moisture depth, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a record is a BrAPI Observation.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "soilChemistryDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterSoilChemistry",
+        "genxListSoilChemistry",
+        "genxRegisterSoilProfile"
+      ],
+      "decisionReferences": [
+        "RFC-077"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.soil-chemistry.list",
+        "brapi-genx.genx.v1.soil-chemistry.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 228,
+    "genxEntriesAdded": 231,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -40785,7 +41021,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 429,
+    "totalEntries": 432,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -41086,5 +41322,5 @@
       ]
     }
   ],
-  "totalEntries": 429
+  "totalEntries": 432
 }
