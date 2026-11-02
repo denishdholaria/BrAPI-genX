@@ -145,6 +145,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | TaxonName / TaxonName | (none, cross-cutting) | C1, C2, C3, C4, C9 | Taxon name and synonym entries; no BrAPI v2.1 equivalent; terminology governance |
 | CommonCropName / CommonCropName | (none, cross-cutting) | C1, C2, C3, C4, C9 | Common crop name entries; no BrAPI v2.1 equivalent; terminology governance |
 | CropSpecies / CropSpecies | (none, cross-cutting) | C1, C2, C3, C4, C9 | Crop and species registry entries; no BrAPI v2.1 equivalent; terminology governance |
+| InstitutionCode / InstitutionCode | (none, cross-cutting) | C1, C2, C3, C4, C9 | Institution and collection code entries; no BrAPI v2.1 equivalent; terminology governance |
 | Conformance | Cross-cutting C8 | C1, C3 | Probes and fixtures establish contract evidence, not scientific-domain data |
 
 ## 5. Relationship to BrAPI V2.1

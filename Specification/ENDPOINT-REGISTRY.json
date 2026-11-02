@@ -45171,12 +45171,247 @@
         "brapi-genx.genx.v1.crop-species.list",
         "brapi-genx.genx.v1.crop-species.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "InstitutionCode",
+      "brapiTag": "InstitutionCode",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/InstitutionCode/InstitutionCode_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.institution-codes.list",
+      "method": "GET",
+      "path": "/institution-codes",
+      "operationIdInSource": "genxListInstitutionCodes",
+      "recommendedOperationId": "genxListInstitutionCodes",
+      "operationName": "List institution codes",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List institution and collection code entries, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of institution and collection code entries across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover institution and collection codes.",
+        "Support reference data."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing an entry (use the POST endpoint).",
+        "Assuming an entry is a BrAPI Germplasm.",
+        "Treating the list as a complete catalogue."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterInstitutionCode",
+        "genxGetInstitutionCode",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-096"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.institution-codes.record",
+        "brapi-genx.genx.v1.institution-codes.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "InstitutionCode",
+      "brapiTag": "InstitutionCode",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/InstitutionCode/InstitutionCode_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.institution-codes.record",
+      "method": "POST",
+      "path": "/institution-codes",
+      "operationIdInSource": "genxRegisterInstitutionCode",
+      "recommendedOperationId": "genxRegisterInstitutionCode",
+      "operationName": "Register one institution code",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one institution and collection code entry with provenance.",
+      "sourceDescription": "Unknown institutionCodeDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish an institution code.",
+        "Retry an identical entry safely using the same institutionCodeDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing entry; corrections require a new record that supersedes.",
+        "Assuming an entry is a BrAPI Germplasm.",
+        "Asserting that the entry is validated or endorsed."
+      ],
+      "sideEffects": "Creates an institution code identity or appends a new immutable version when accepted.",
+      "idempotency": "Same institutionCodeDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "InstitutionCodeNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListInstitutionCodes",
+        "genxGetInstitutionCode",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-096"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.institution-codes.list",
+        "brapi-genx.genx.v1.institution-codes.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "InstitutionCode",
+      "brapiTag": "InstitutionCode",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/InstitutionCode/InstitutionCode_InstitutionCodeDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.institution-codes.get",
+      "method": "GET",
+      "path": "/institution-codes/{institutionCodeDbId}",
+      "operationIdInSource": "genxGetInstitutionCode",
+      "recommendedOperationId": "genxGetInstitutionCode",
+      "operationName": "Get one institution code",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one institution and collection code entry.",
+      "sourceDescription": "Returns the registered entry, or 404.",
+      "canBeUsedFor": [
+        "Inspect code, name, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming an entry is a BrAPI Germplasm.",
+        "Treating a superseded entry as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "institutionCodeDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterInstitutionCode",
+        "genxListInstitutionCodes",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-096"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.institution-codes.list",
+        "brapi-genx.genx.v1.institution-codes.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 285,
+    "genxEntriesAdded": 288,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -45254,7 +45489,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 486,
+    "totalEntries": 489,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -45555,5 +45790,5 @@
       ]
     }
   ],
-  "totalEntries": 486
+  "totalEntries": 489
 }

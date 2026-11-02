@@ -1,0 +1,44 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    InstitutionCode:
+      type: object
+      description: |-
+        One immutable institution and collection code entry. A published
+        (institutionCodeDbId) record never mutates in place; corrections are
+        recorded as additional entries linked by supersedes.
+      required:
+      - institutionCodeDbId
+      - status
+      properties:
+        institutionCodeDbId:
+          description: Namespaced institution-code identity `{authority}:institution-code:{localId}`
+          type: string
+          example: institute-a:institution-code:ic-2026-001
+        code:
+          description: Institution or collection code
+          type: string
+          example: WHEAT-GB
+        name:
+          description: Institution or collection name
+          type: string
+          example: Wheat Genebank
+        status:
+          description: Lifecycle state of the entry
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: institutionCodeDbId of the entry this one replaces
+          type: string
+          example: institute-a:institution-code:ic-2026-000
+        provenance:
+          description: Evidence and method provenance for the entry
+          $ref: '#/components/schemas/ProvenanceEnvelope'
