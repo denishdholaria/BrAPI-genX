@@ -1,0 +1,65 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /pipeline-provenances/{pipelineProvenanceDbId}:
+    get:
+      operationId: genxGetPipelineProvenance
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.pipeline-provenances.get"
+        classification:
+          primaryDomain: "D3"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve one pipeline provenance record."
+        canBeUsedFor:
+          - "Inspect assembly, accession, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming a record is a BrAPI data resource."
+          - "Treating a superseded record as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterPipelineProvenance"
+          - "genxListPipelineProvenances"
+          - "genxRegisterFarm"
+        decisions: ["RFC-116"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one pipeline provenance
+      description: Returns the registered record, or 404.
+      parameters:
+      - name: pipelineProvenanceDbId
+        description: Namespaced pipeline-provenances identity `{authority}:pipeline-provenances:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/PipelineProvenance'
+                required:
+                - metadata
+                - result
+                title: PipelineProvenanceResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - PipelineProvenance

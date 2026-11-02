@@ -230,6 +230,11 @@ modules:
     primary_class: "D3"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Reference assembly records; BrAPI v2.1 has no equivalent record."
+  - path: "PipelineProvenance/"
+    object: "PipelineProvenance"
+    primary_class: "D3"
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Pipeline provenance records; BrAPI v2.1 has no equivalent record."
   - path: "AssayDesign/"
     object: "AssayDesign"
     primary_class: "D3"

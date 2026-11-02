@@ -1,0 +1,56 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    PipelineProvenance:
+      type: object
+      description: |-
+        One immutable pipeline provenance record. A published (pipelineProvenanceDbId) record
+        never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - pipelineProvenanceDbId
+      - status
+      properties:
+        pipelineProvenanceDbId:
+          description: Namespaced pipeline-provenance identity `{authority}:pipeline-provenance:{localId}`
+          type: string
+          example: institute-a:pipeline-provenance:pp-2026-001
+        pipelineName:
+          description: Name of the bioinformatics pipeline
+          type: string
+          example: variant-calling-gatk
+        pipelineVersion:
+          description: Version of the bioinformatics pipeline
+          type: string
+          example: "4.2.0"
+        parameters:
+          description: Key parameters used by the pipeline
+          type: string
+          example: "--min-qual 30"
+        inputs:
+          description: Input dataset or file references
+          type: string
+          example: institute-a:genomic-dataset:gd-2026-001
+        outputs:
+          description: Output dataset or file references
+          type: string
+          example: institute-a:vcf-export:ve-2026-001
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: pipelineProvenanceDbId of the record this one replaces
+          type: string
+          example: institute-a:pipeline-provenance:pp-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
