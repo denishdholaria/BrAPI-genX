@@ -1,0 +1,56 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    IrrigationAdvice:
+      type: object
+      description: |-
+        One immutable irrigation advice record. A published (irrigationAdviceDbId) record
+        never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - irrigationAdviceDbId
+      - status
+      properties:
+        irrigationAdviceDbId:
+          description: Namespaced irrigation-advice identity `{authority}:irrigation-advice:{localId}`
+          type: string
+          example: institute-a:irrigation-advice:ia-2026-001
+        adviceType:
+          description: Type of irrigation advice
+          type: string
+          example: deficit irrigation
+        recommendedAmount:
+          description: Recommended water amount
+          type: string
+          example: "25mm"
+        recommendedFrequency:
+          description: Recommended irrigation frequency
+          type: string
+          example: weekly
+        regionOrZone:
+          description: Region or zone the advice applies to
+          type: string
+          example: zone-3
+        cropType:
+          description: Crop type the advice applies to
+          type: string
+          example: maize
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: irrigationAdviceDbId of the record this one replaces
+          type: string
+          example: institute-a:irrigation-advice:ia-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

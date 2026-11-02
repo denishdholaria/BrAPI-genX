@@ -53399,12 +53399,247 @@
         "brapi-genx.genx.v1.sowing-windows.list",
         "brapi-genx.genx.v1.sowing-windows.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "IrrigationAdvice",
+      "brapiTag": "IrrigationAdvice",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/IrrigationAdvice/IrrigationAdvice_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.irrigation-advices.list",
+      "method": "GET",
+      "path": "/irrigation-advices",
+      "operationIdInSource": "genxListIrrigationAdvices",
+      "recommendedOperationId": "genxListIrrigationAdvices",
+      "operationName": "List ArtifactCatalogues",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List irrigation advice records, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover artifactcatalogues.",
+        "Support VCF import/export."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a record (use the POST endpoint).",
+        "Assuming a record is a BrAPI data resource.",
+        "Treating the list as a complete history."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterIrrigationAdvice",
+        "genxGetIrrigationAdvice",
+        "genxRegisterGenomicDataset"
+      ],
+      "decisionReferences": [
+        "RFC-131"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.irrigation-advices.record",
+        "brapi-genx.genx.v1.irrigation-advices.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "IrrigationAdvice",
+      "brapiTag": "IrrigationAdvice",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/IrrigationAdvice/IrrigationAdvice_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.irrigation-advices.record",
+      "method": "POST",
+      "path": "/irrigation-advices",
+      "operationIdInSource": "genxRegisterIrrigationAdvice",
+      "recommendedOperationId": "genxRegisterIrrigationAdvice",
+      "operationName": "Register one ArtifactCatalogue",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one irrigation advice record with provenance.",
+      "sourceDescription": "Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a artifactcatalogue.",
+        "Retry an identical record safely using the same vcfExportDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming a record is a BrAPI data resource.",
+        "Asserting that the export is validated or endorsed."
+      ],
+      "sideEffects": "Creates a irrigation advice identity or appends a new immutable version when accepted.",
+      "idempotency": "Same irrigationAdviceDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "IrrigationAdviceNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListIrrigationAdvices",
+        "genxGetIrrigationAdvice",
+        "genxRegisterGenomicDataset"
+      ],
+      "decisionReferences": [
+        "RFC-131"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.irrigation-advices.list",
+        "brapi-genx.genx.v1.irrigation-advices.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "IrrigationAdvice",
+      "brapiTag": "IrrigationAdvice",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/IrrigationAdvice/IrrigationAdvice_IrrigationAdviceDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.irrigation-advices.get",
+      "method": "GET",
+      "path": "/irrigation-advices/{irrigationAdviceDbId}",
+      "operationIdInSource": "genxGetIrrigationAdvice",
+      "recommendedOperationId": "genxGetIrrigationAdvice",
+      "operationName": "Get one ArtifactCatalogue",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one irrigation advice record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect export, status, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a record is a BrAPI data resource.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "irrigationAdviceDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterIrrigationAdvice",
+        "genxListIrrigationAdvices",
+        "genxRegisterGenomicDataset"
+      ],
+      "decisionReferences": [
+        "RFC-131"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.irrigation-advices.list",
+        "brapi-genx.genx.v1.irrigation-advices.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 390,
+    "genxEntriesAdded": 393,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -53482,7 +53717,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 591,
+    "totalEntries": 594,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -53783,5 +54018,5 @@
       ]
     }
   ],
-  "totalEntries": 591
+  "totalEntries": 594
 }

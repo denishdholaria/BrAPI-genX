@@ -102,6 +102,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | CropHealthImage / CropHealthImage | (none, cross-cutting) | C1, C2, C3, C6, C9 | Crop health image records; no BrAPI v2.1 equivalent |
 | CropRecommendation / CropRecommendation | (none, cross-cutting) | C1, C2, C3, C6, C9 | Crop recommendation records; no BrAPI v2.1 equivalent |
 | SowingWindow / SowingWindow | (none, cross-cutting) | C1, C2, C3, C6, C9 | Sowing window records; no BrAPI v2.1 equivalent |
+| IrrigationAdvice / IrrigationAdvice | (none, cross-cutting) | C1, C2, C3, C6, C9 | Irrigation advice records; no BrAPI v2.1 equivalent |
 | AssayDesign / AssayDesign | D3 | C1, C2, C3, C6, C9 | Assay design records; no BrAPI v2.1 equivalent |
 | AssayExecution / AssayExecution | D3 | C1, C2, C3, C6, C9 | Assay execution records; no BrAPI v2.1 equivalent |
 | VariantAnnotation / VariantAnnotation | D3 | C1, C2, C3, C6, C9 | Variant annotation records; no BrAPI v2.1 equivalent |

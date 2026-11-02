@@ -1,0 +1,137 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /irrigation-advices:
+    get:
+      operationId: genxListIrrigationAdvices
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.irrigation-advices.list"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List irrigation advice records, optionally filtered by status."
+        canBeUsedFor:
+          - "Discover irrigation advices."
+          - "Support dataset/model artefact discovery."
+        mustNotBeUsedFor:
+          - "Creating or changing a record (use the POST endpoint)."
+          - "Assuming a record is a BrAPI data resource."
+          - "Treating the list as a complete history."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterIrrigationAdvice"
+          - "genxGetIrrigationAdvice"
+          - "genxRegisterFarm"
+        decisions: ["RFC-131"]
+        proposalStatus: "draft-non-normative"
+      summary: List irrigation advice
+      description: Get a paged list of irrigation advice records across authorities. Filters combine with AND.
+      parameters:
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/IrrigationAdviceListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - IrrigationAdvice
+    post:
+      operationId: genxRegisterIrrigationAdvice
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.irrigation-advices.record"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Register one irrigation advice record with provenance."
+        canBeUsedFor:
+          - "Publish a irrigation advice."
+          - "Retry an identical record safely using the same irrigationAdviceDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing record; corrections require a new record that supersedes."
+          - "Assuming a record is a BrAPI data resource."
+          - "Asserting that the catalogue is validated or endorsed."
+        sideEffects: "Creates a irrigation advice identity or appends a new immutable version when accepted."
+        idempotency: "Same irrigationAdviceDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListIrrigationAdvices"
+          - "genxGetIrrigationAdvice"
+          - "genxRegisterFarm"
+        decisions: ["RFC-131"]
+        proposalStatus: "draft-non-normative"
+      summary: Register one irrigation advice
+      description: Register one irrigation advice record with provenance.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IrrigationAdviceNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/IrrigationAdvice'
+                required:
+                - metadata
+                - result
+                title: IrrigationAdviceResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - IrrigationAdvice
+components:
+  responses:
+    IrrigationAdviceListResponse:
+      content:
+        application/json:
+          schema:
+            title: IrrigationAdviceListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/IrrigationAdvice'
+            required:
+            - metadata
+            - result
+      description: OK

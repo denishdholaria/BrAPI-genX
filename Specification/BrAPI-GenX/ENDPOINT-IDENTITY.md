@@ -246,6 +246,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/sowing-windows` | GET | `genxListSowingWindows` | List sowing windows | Does not create or change a record; not a BrAPI data resource. |
 | `/genx/v1/sowing-windows` | POST | `genxRegisterSowingWindow` | Register one sowing window | Append-only record; replay/conflict semantics. |
 | `/genx/v1/sowing-windows/{sowingWindowDbId}` | GET | `genxGetSowingWindow` | Retrieve one sowing window | Does not treat a superseded record as current. |
+| `/genx/v1/irrigation-advices` | GET | `genxListIrrigationAdvices` | List irrigation advice | Does not create or change a record; not a BrAPI data resource. |
+| `/genx/v1/irrigation-advices` | POST | `genxRegisterIrrigationAdvice` | Register one irrigation advice | Append-only record; replay/conflict semantics. |
+| `/genx/v1/irrigation-advices/{irrigationAdviceDbId}` | GET | `genxGetIrrigationAdvice` | Retrieve one irrigation advice | Does not treat a superseded record as current. |
 | `/genx/v1/analysis-results` | GET | `genxListAnalysisResults` | List analysis result records | Does not create or change a result; not a BrAPI data resource. |
 | `/genx/v1/analysis-results` | POST | `genxRecordAnalysisResult` | Record one analysis result | Append-only record; replay/conflict semantics. |
 | `/genx/v1/analysis-results/{analysisResultDbId}` | GET | `genxGetAnalysisResult` | Retrieve one analysis result record | Does not treat a superseded result as current. |
