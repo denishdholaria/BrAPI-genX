@@ -123,7 +123,8 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `CropHealthImage/` | `CropHealthImage` — crop health image records (type, index, status) | `GET /genx/v1/crop-health-images` (`genxListCropHealthImages`); `POST /genx/v1/crop-health-images` (`genxRegisterCropHealthImage`); `GET /genx/v1/crop-health-images/{cropHealthImageDbId}` (`genxGetCropHealthImage`) |
 | `CropRecommendation/` | `CropRecommendation` — crop recommendation records (type, variety, practice) | `GET /genx/v1/crop-recommendations` (`genxListCropRecommendations`); `POST /genx/v1/crop-recommendations` (`genxRegisterCropRecommendation`); `GET /genx/v1/crop-recommendations/{cropRecommendationDbId}` (`genxGetCropRecommendation`) |
 | `SowingWindow/` | `SowingWindow` — sowing window records (type, dates, zone) | `GET /genx/v1/sowing-windows` (`genxListSowingWindows`); `POST /genx/v1/sowing-windows` (`genxRegisterSowingWindow`); `GET /genx/v1/sowing-windows/{sowingWindowDbId}` (`genxGetSowingWindow`) |
-| `IrrigationAdvice/` | `IrrigationAdvice` — irrigation advice records (type, amount, frequency) | `GET /genx/v1/irrigation-advice` (`genxListIrrigationAdvice`); `POST /genx/v1/irrigation-advice` (`genxRegisterIrrigationAdvice`); `GET /genx/v1/irrigation-advice/{irrigationAdviceDbId}` (`genxGetIrrigationAdvice`) |
+| `IrrigationAdvice/` | `IrrigationAdvice` — irrigation advice records (type, amount, frequency) | `GET /genx/v1/irrigation-advices` (`genxListIrrigationAdvices`); `POST /genx/v1/irrigation-advices` (`genxRegisterIrrigationAdvice`); `GET /genx/v1/irrigation-advices/{irrigationAdviceDbId}` (`genxGetIrrigationAdvice`) |
+| `NutrientAdvice/` | `NutrientAdvice` — nutrient advice records (type, nutrient, rate) | `GET /genx/v1/nutrient-advices` (`genxListNutrientAdvices`); `POST /genx/v1/nutrient-advices` (`genxRegisterNutrientAdvice`); `GET /genx/v1/nutrient-advices/{nutrientAdviceDbId}` (`genxGetNutrientAdvice`) |
 | `AssayDesign/` | `AssayDesign` — assay design records (platform, marker count, provenance) | `GET /genx/v1/assay-designs` (`genxListAssayDesigns`); `POST /genx/v1/assay-designs` (`genxRecordAssayDesign`); `GET /genx/v1/assay-designs/{assayDesignDbId}` (`genxGetAssayDesign`) |
 | `AssayExecution/` | `AssayExecution` — assay execution records (assay reference, provenance) | `GET /genx/v1/assay-executions` (`genxListAssayExecutions`); `POST /genx/v1/assay-executions` (`genxRegisterAssayExecution`); `GET /genx/v1/assay-executions/{assayExecutionDbId}` (`genxGetAssayExecution`) |
 | `VariantAnnotation/` | `VariantAnnotation` — variant annotation records (functional annotations, provenance) | `GET /genx/v1/variant-annotations` (`genxListVariantAnnotations`); `POST /genx/v1/variant-annotations` (`genxRecordVariantAnnotation`); `GET /genx/v1/variant-annotations/{variantAnnotationDbId}` (`genxGetVariantAnnotation`) |
@@ -293,7 +294,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-128-CropHealthImage](./RFC-128-CropHealthImage.md),
 [RFC-129-CropRecommendation](./RFC-129-CropRecommendation.md),
 [RFC-130-SowingWindow](./RFC-130-SowingWindow.md),
-[RFC-131-IrrigationAdvice](./RFC-131-IrrigationAdvice.md).
+[RFC-131-IrrigationAdvice](./RFC-131-IrrigationAdvice.md),
+[RFC-132-NutrientAdvice](./RFC-132-NutrientAdvice.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

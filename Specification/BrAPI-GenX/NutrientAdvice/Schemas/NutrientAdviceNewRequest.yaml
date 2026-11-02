@@ -1,0 +1,56 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    NutrientAdviceNewRequest:
+      type: object
+      description: |-
+        Request to register one nutrient advice record. Unknown nutrientAdviceDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - nutrientAdviceDbId
+      properties:
+        nutrientAdviceDbId:
+          description: Namespaced nutrient-advice identity `{authority}:nutrient-advice:{localId}`
+          type: string
+          example: institute-a:nutrient-advice:na-2026-001
+        adviceType:
+          description: Type of nutrient advice
+          type: string
+          example: nitrogen
+        recommendedNutrient:
+          description: Recommended nutrient
+          type: string
+          example: nitrogen
+        recommendedRate:
+          description: Recommended application rate
+          type: string
+          example: "150kg/ha"
+        regionOrZone:
+          description: Region or zone the advice applies to
+          type: string
+          example: zone-3
+        cropType:
+          description: Crop type the advice applies to
+          type: string
+          example: maize
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: nutrientAdviceDbId of the record this one replaces
+          type: string
+          example: institute-a:nutrient-advice:na-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
