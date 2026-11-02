@@ -35016,12 +35016,249 @@
         "brapi-genx.genx.v1.kinship-matrices.list",
         "brapi-genx.genx.v1.kinship-matrices.register"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "PcaResult",
+      "brapiTag": "PcaResult",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/PcaResult/PcaResult_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.pca-results.list",
+      "method": "GET",
+      "path": "/pca-results",
+      "operationIdInSource": "genxListPcaResults",
+      "recommendedOperationId": "genxListPcaResults",
+      "operationName": "List PCA results",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List PCA result records, optionally filtered by method, study, or status.",
+      "sourceDescription": "Get a paged list of PCA results across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover PCA results for a study or method.",
+        "Support scientific reproducibility and auditing."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a result (use the POST endpoint).",
+        "Assuming a result is a BrAPI data resource.",
+        "Treating the list as a complete analysis repository."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "analysisMethodDbId",
+        "studyDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordPcaResult",
+        "genxGetPcaResult",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-053"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.pca-results.record",
+        "brapi-genx.genx.v1.pca-results.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "PcaResult",
+      "brapiTag": "PcaResult",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/PcaResult/PcaResult_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.pca-results.record",
+      "method": "POST",
+      "path": "/pca-results",
+      "operationIdInSource": "genxRecordPcaResult",
+      "recommendedOperationId": "genxRecordPcaResult",
+      "operationName": "Record one PCA result",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record one PCA result with components and provenance.",
+      "sourceDescription": "Unknown pcaResultDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish PCA result metadata and payload references.",
+        "Retry an identical result safely using the same pcaResultDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing result; corrections require a new record that supersedes.",
+        "Assuming the result is a BrAPI data resource.",
+        "Treating the result as scientific validation or approval."
+      ],
+      "sideEffects": "Creates a PCA result when accepted.",
+      "idempotency": "Same pcaResultDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "PcaResultNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListPcaResults",
+        "genxGetPcaResult",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-053"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.pca-results.list",
+        "brapi-genx.genx.v1.pca-results.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "PcaResult",
+      "brapiTag": "PcaResult",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/PcaResult/PcaResult_PcaResultDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.pca-results.get",
+      "method": "GET",
+      "path": "/pca-results/{pcaResultDbId}",
+      "operationIdInSource": "genxGetPcaResult",
+      "recommendedOperationId": "genxGetPcaResult",
+      "operationName": "Get one PCA result",
+      "classification": {
+        "primaryDomain": "D7",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one PCA result.",
+      "sourceDescription": "Returns the recorded result, or 404.",
+      "canBeUsedFor": [
+        "Inspect components, explained variance, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the result is a BrAPI data resource.",
+        "Treating a superseded result as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "pcaResultDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordPcaResult",
+        "genxListPcaResults",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-053"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.pca-results.list",
+        "brapi-genx.genx.v1.pca-results.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 156,
+    "genxEntriesAdded": 159,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -35099,7 +35336,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 357,
+    "totalEntries": 360,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

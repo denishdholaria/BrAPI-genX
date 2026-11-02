@@ -216,6 +216,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/kinship-matrices` | GET | `genxListKinshipMatrices` | List kinship matrices | Does not create or change a matrix; not a BrAPI data resource. |
 | `/genx/v1/kinship-matrices` | POST | `genxRegisterKinshipMatrix` | Register one kinship matrix | Append-only record; replay/conflict semantics. |
 | `/genx/v1/kinship-matrices/{kinshipMatrixDbId}` | GET | `genxGetKinshipMatrix` | Retrieve one kinship matrix | Does not treat a superseded matrix as current. |
+| `/genx/v1/pca-results` | GET | `genxListPcaResults` | List PCA results | Does not create or change a result; not a BrAPI data resource. |
+| `/genx/v1/pca-results` | POST | `genxRecordPcaResult` | Record one PCA result | Append-only record; replay/conflict semantics. |
+| `/genx/v1/pca-results/{pcaResultDbId}` | GET | `genxGetPcaResult` | Retrieve one PCA result | Does not treat a superseded result as current. |
 | `/genx/v1/bulk-captures` | GET | `genxListBulkCaptures` | List bulk captures | Does not create or change a capture; not a BrAPI Observation. |
 | `/genx/v1/bulk-captures` | POST | `genxRecordBulkCapture` | Record one bulk capture | Append-only record; replay/conflict semantics. |
 | `/genx/v1/bulk-captures/{bulkCaptureDbId}` | GET | `genxGetBulkCapture` | Retrieve one bulk capture | Does not treat a superseded capture as current. |

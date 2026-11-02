@@ -1,0 +1,57 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    PcaResultNewRequest:
+      type: object
+      description: |-
+        Request to record one PCA result. Unknown pcaResultDbId
+        creates; same id with an identical body replays the existing
+        record; same id with a different body is rejected with 409.
+      required:
+      - pcaResultDbId
+      - analysisMethodDbId
+      properties:
+        pcaResultDbId:
+          description: Namespaced PCA-result identity `{authority}:pca-result:{localId}`
+          type: string
+          example: institute-a:pca-result:pcar-2026-001
+        analysisMethodDbId:
+          description: GenX AnalysisMethod used
+          type: string
+          example: institute-a:analysis-method:pca
+        jobDbId:
+          description: GenX Job that produced this result
+          type: string
+          example: institute-a:job:analysis-7
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        components:
+          description: Principal component loadings or scores
+          type: object
+          example: {PC1: 0.42, PC2: 0.18}
+        explainedVariance:
+          description: Explained variance per component
+          type: object
+          example: {PC1: 0.35, PC2: 0.15}
+        status:
+          description: Lifecycle state of the result record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: pcaResultDbId of the result this one replaces
+          type: string
+          example: institute-a:pca-result:pcar-2026-000
+        provenance:
+          description: Evidence and method provenance for the result
+          $ref: '#/components/schemas/ProvenanceEnvelope'

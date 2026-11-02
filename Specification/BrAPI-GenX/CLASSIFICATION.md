@@ -92,6 +92,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | Heritability / HeritabilityEstimate | D7 | C1, C2, C3, C6, C9 | Heritability estimate records; no BrAPI v2.1 equivalent |
 | GxeAnalysis / GxeAnalysisResult | D7 | C1, C2, C3, C6, C9 | GxE analysis result records; no BrAPI v2.1 equivalent |
 | Kinship / KinshipMatrix | D7 | C1, C2, C3, C5, C6, C9 | Kinship matrix records; no BrAPI v2.1 equivalent |
+| PcaResult / PcaResult | D7 | C1, C2, C3, C6, C9 | PCA result records; no BrAPI v2.1 equivalent |
 | BulkCapture / BulkCapture | D4 | C1, C2, C3, C6, C9 | Bulk capture records; no BrAPI v2.1 equivalent |
 | AnalysisMethods / AnalysisMethod | D7 | C1, C2, C3, C6, C9 | Versioned analysis method registry; no BrAPI v2.1 equivalent; execution is via Jobs |
 | WeatherObservations / WeatherObservation | D5 | C1, C2, C3, C6, C7, C9 | Environmental/weather observation records; no BrAPI v2.1 equivalent; complementary to Telemetry |
