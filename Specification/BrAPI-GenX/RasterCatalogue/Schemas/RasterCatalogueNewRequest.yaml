@@ -1,0 +1,56 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    RasterCatalogueNewRequest:
+      type: object
+      description: |-
+        Request to register one raster catalogue record. Unknown rasterCatalogueDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - rasterCatalogueDbId
+      properties:
+        rasterCatalogueDbId:
+          description: Namespaced raster-catalogue identity `{authority}:raster-catalogue:{localId}`
+          type: string
+          example: institute-a:raster-catalogue:rc-2026-001
+        datasetName:
+          description: Name of the raster dataset
+          type: string
+          example: ndvi-2026
+        datasetType:
+          description: Type of raster dataset
+          type: string
+          example: NDVI
+        resolution:
+          description: Spatial resolution
+          type: string
+          example: "30m"
+        crs:
+          description: Coordinate reference system
+          type: string
+          example: EPSG:4326
+        extent:
+          description: Spatial extent
+          type: string
+          example: POLYGON((...))
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: rasterCatalogueDbId of the record this one replaces
+          type: string
+          example: institute-a:raster-catalogue:rc-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

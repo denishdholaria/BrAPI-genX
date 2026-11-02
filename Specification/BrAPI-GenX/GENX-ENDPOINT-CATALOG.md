@@ -111,6 +111,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | PublicationReview | 3 | proposed, non-normative |
 | QualityFlag | 3 | proposed, non-normative |
 | Quarantine | 3 | proposed, non-normative |
+| RasterCatalogue | 3 | proposed, non-normative |
 | ReferenceAssembly | 3 | proposed, non-normative |
 | ReferenceDataVersion | 3 | proposed, non-normative |
 | Regeneration | 3 | proposed, non-normative |
@@ -11197,6 +11198,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
+### RasterCatalogue — 3 operations
+
+### GET `/genx/v1/raster-catalogues`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.raster-catalogues.list`
+- **BrAPI-GenX operation identity:** `genxListRasterCatalogues` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListRasterCatalogues`
+- **GenX source module:** `RasterCatalogue`
+- **Source tag:** RasterCatalogue
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List rastercatalogue records, optionally filtered by status.
+**Source contract description:**
+> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover artifactcatalogues.
+- Support VCF import/export.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a record (use the POST endpoint).
+- Assuming a record is a BrAPI data resource.
+- Treating the list as a complete history.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterRasterCatalogue, genxGetRasterCatalogue, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.raster-catalogues.record, brapi-genx.genx.v1.raster-catalogues.get
+- **Relevant RFC / decision references:** RFC-144
+- **Contract source:** [`Specification/BrAPI-GenX/RasterCatalogue/RasterCatalogue_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/RasterCatalogue/RasterCatalogue_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/raster-catalogues`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.raster-catalogues.record`
+- **BrAPI-GenX operation identity:** `genxRegisterRasterCatalogue` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterRasterCatalogue`
+- **GenX source module:** `RasterCatalogue`
+- **Source tag:** RasterCatalogue
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register one rastercatalogue record with provenance.
+**Source contract description:**
+> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish a artifactcatalogue.
+- Retry an identical record safely using the same vcfExportDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming a record is a BrAPI data resource.
+- Asserting that the export is validated or endorsed.
+- **Side effects:** Creates a rastercatalogue identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same rasterCatalogueDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** RasterCatalogueNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListRasterCatalogues, genxGetRasterCatalogue, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.raster-catalogues.list, brapi-genx.genx.v1.raster-catalogues.get
+- **Relevant RFC / decision references:** RFC-144
+- **Contract source:** [`Specification/BrAPI-GenX/RasterCatalogue/RasterCatalogue_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/RasterCatalogue/RasterCatalogue_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/raster-catalogues/{rasterCatalogueDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.raster-catalogues.get`
+- **BrAPI-GenX operation identity:** `genxGetRasterCatalogue` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetRasterCatalogue`
+- **GenX source module:** `RasterCatalogue`
+- **Source tag:** RasterCatalogue
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one rastercatalogue record.
+**Source contract description:**
+> Returns the registered record, or 404.
+**Can be used for:**
+- Inspect export, status, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming a record is a BrAPI data resource.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** rasterCatalogueDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterRasterCatalogue, genxListRasterCatalogues, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.raster-catalogues.list, brapi-genx.genx.v1.raster-catalogues.record
+- **Relevant RFC / decision references:** RFC-144
+- **Contract source:** [`Specification/BrAPI-GenX/RasterCatalogue/RasterCatalogue_RasterCatalogueDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/RasterCatalogue/RasterCatalogue_RasterCatalogueDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
 ### ReferenceAssembly — 3 operations
 
 ### GET `/genx/v1/reference-assemblies`
@@ -12716,8 +12822,8 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 ### GET `/genx/v1/spatial-queries`
 
 - **Catalogue ID:** `brapi-genx.genx.v1.spatial-queries.list`
-- **BrAPI-GenX operation identity:** `genxListSpatialQuerys` (advisory where absent from source)
-- **Source OpenAPI operationId:** `genxListSpatialQuerys`
+- **BrAPI-GenX operation identity:** `genxListSpatialQueries` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListSpatialQueries`
 - **GenX source module:** `SpatialQuery`
 - **Source tag:** SpatialQuery
 - **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
@@ -12725,7 +12831,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> List spatialquery records, optionally filtered by status.
+> List spatial query records, optionally filtered by status.
 **Source contract description:**
 > Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
 **Can be used for:**
@@ -12760,7 +12866,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> Register one spatialquery record with provenance.
+> Register one spatial query record with provenance.
 **Source contract description:**
 > Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
 **Can be used for:**
@@ -12770,13 +12876,13 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
 - Asserting that the export is validated or endorsed.
-- **Side effects:** Creates a spatialquery identity or appends a new immutable version when accepted.
+- **Side effects:** Creates a spatial query identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same spatialQueryDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
 - **Request schema refs recorded:** SpatialQueryNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListSpatialQuerys, genxGetSpatialQuery, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListSpatialQueries, genxGetSpatialQuery, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.spatial-queries.list, brapi-genx.genx.v1.spatial-queries.get
 - **Relevant RFC / decision references:** RFC-143
 - **Contract source:** [`Specification/BrAPI-GenX/SpatialQuery/SpatialQuery_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/SpatialQuery/SpatialQuery_GET_POST.yaml)
@@ -12795,7 +12901,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> Retrieve one spatialquery record.
+> Retrieve one spatial query record.
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
@@ -12809,7 +12915,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterSpatialQuery, genxListSpatialQuerys, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterSpatialQuery, genxListSpatialQueries, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.spatial-queries.list, brapi-genx.genx.v1.spatial-queries.record
 - **Relevant RFC / decision references:** RFC-143
 - **Contract source:** [`Specification/BrAPI-GenX/SpatialQuery/SpatialQuery_SpatialQueryDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/SpatialQuery/SpatialQuery_SpatialQueryDbId_GET.yaml)

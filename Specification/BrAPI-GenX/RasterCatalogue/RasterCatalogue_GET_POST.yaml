@@ -1,0 +1,137 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /raster-catalogues:
+    get:
+      operationId: genxListRasterCatalogues
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.raster-catalogues.list"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List raster catalogue records, optionally filtered by status."
+        canBeUsedFor:
+          - "Discover raster catalogues."
+          - "Support dataset/model artefact discovery."
+        mustNotBeUsedFor:
+          - "Creating or changing a record (use the POST endpoint)."
+          - "Assuming a record is a BrAPI data resource."
+          - "Treating the list as a complete history."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterRasterCatalogue"
+          - "genxGetRasterCatalogue"
+          - "genxRegisterFarm"
+        decisions: ["RFC-144"]
+        proposalStatus: "draft-non-normative"
+      summary: List raster catalogues
+      description: Get a paged list of raster catalogue records across authorities. Filters combine with AND.
+      parameters:
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/RasterCatalogueListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - RasterCatalogue
+    post:
+      operationId: genxRegisterRasterCatalogue
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.raster-catalogues.record"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Register one raster catalogue record with provenance."
+        canBeUsedFor:
+          - "Publish a raster catalogue."
+          - "Retry an identical record safely using the same rasterCatalogueDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing record; corrections require a new record that supersedes."
+          - "Assuming a record is a BrAPI data resource."
+          - "Asserting that the catalogue is validated or endorsed."
+        sideEffects: "Creates a raster catalogue identity or appends a new immutable version when accepted."
+        idempotency: "Same rasterCatalogueDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListRasterCatalogues"
+          - "genxGetRasterCatalogue"
+          - "genxRegisterFarm"
+        decisions: ["RFC-144"]
+        proposalStatus: "draft-non-normative"
+      summary: Register one raster catalogue
+      description: Register one raster catalogue record with provenance.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RasterCatalogueNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/RasterCatalogue'
+                required:
+                - metadata
+                - result
+                title: RasterCatalogueResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - RasterCatalogue
+components:
+  responses:
+    RasterCatalogueListResponse:
+      content:
+        application/json:
+          schema:
+            title: RasterCatalogueListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RasterCatalogue'
+            required:
+            - metadata
+            - result
+      description: OK

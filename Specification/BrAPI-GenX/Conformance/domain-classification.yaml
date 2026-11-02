@@ -360,6 +360,11 @@ modules:
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Spatial index records; BrAPI v2.1 has no equivalent record."
+  - path: "RasterCatalogue/"
+    object: "RasterCatalogue"
+    primary_class: null
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Raster catalogue records; BrAPI v2.1 has no equivalent record."
   - path: "SpatialQuery/"
     object: "SpatialQuery"
     primary_class: null

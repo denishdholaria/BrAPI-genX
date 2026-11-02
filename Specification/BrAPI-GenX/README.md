@@ -135,6 +135,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `CrsTransform/` | `CrsTransform` — CRS transform records (source, target, method) | `GET /genx/v1/crs-transforms` (`genxListCrsTransforms`); `POST /genx/v1/crs-transforms` (`genxRegisterCrsTransform`); `GET /genx/v1/crs-transforms/{crsTransformDbId}` (`genxGetCrsTransform`) |
 | `SpatialQuery/` | `SpatialQuery` — spatial query records (type, geometry, params) | `GET /genx/v1/spatial-queries` (`genxListSpatialQueries`); `POST /genx/v1/spatial-queries` (`genxRegisterSpatialQuery`); `GET /genx/v1/spatial-queries/{spatialQueryDbId}` (`genxGetSpatialQuery`) |
 | `SpatialIndex/` | `SpatialIndex` — spatial index records (type, coverage, resolution) | `GET /genx/v1/spatial-indexes` (`genxListSpatialIndexes`); `POST /genx/v1/spatial-indexes` (`genxRegisterSpatialIndex`); `GET /genx/v1/spatial-indexes/{spatialIndexDbId}` (`genxGetSpatialIndex`) |
+| `RasterCatalogue/` | `RasterCatalogue` — raster catalogue records (type, resolution, CRS) | `GET /genx/v1/raster-catalogues` (`genxListRasterCatalogues`); `POST /genx/v1/raster-catalogues` (`genxRegisterRasterCatalogue`); `GET /genx/v1/raster-catalogues/{rasterCatalogueDbId}` (`genxGetRasterCatalogue`) |
 | `FieldGeometry/` | `FieldGeometry` — field geometry records (type, geometry, area) | `GET /genx/v1/field-geometries` (`genxListFieldGeometries`); `POST /genx/v1/field-geometries` (`genxRegisterFieldGeometry`); `GET /genx/v1/field-geometries/{fieldGeometryDbId}` (`genxGetFieldGeometry`) |
 | `AssayDesign/` | `AssayDesign` — assay design records (platform, marker count, provenance) | `GET /genx/v1/assay-designs` (`genxListAssayDesigns`); `POST /genx/v1/assay-designs` (`genxRecordAssayDesign`); `GET /genx/v1/assay-designs/{assayDesignDbId}` (`genxGetAssayDesign`) |
 | `AssayExecution/` | `AssayExecution` — assay execution records (assay reference, provenance) | `GET /genx/v1/assay-executions` (`genxListAssayExecutions`); `POST /genx/v1/assay-executions` (`genxRegisterAssayExecution`); `GET /genx/v1/assay-executions/{assayExecutionDbId}` (`genxGetAssayExecution`) |
@@ -317,7 +318,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-140-CrsTransform](./RFC-140-CrsTransform.md),
 [RFC-141-SpatialIndex](./RFC-141-SpatialIndex.md),
 [RFC-142-FieldGeometry](./RFC-142-FieldGeometry.md),
-[RFC-143-SpatialQuery](./RFC-143-SpatialQuery.md).
+[RFC-143-SpatialQuery](./RFC-143-SpatialQuery.md),
+[RFC-144-RasterCatalogue](./RFC-144-RasterCatalogue.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

@@ -82,6 +82,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | O | Local constraint | `LocalConstraint/` | RFC-139 |
 | M | CRS transform | `CrsTransform/` | RFC-140 |
 | M | Spatial index | `SpatialIndex/` | RFC-141 |
+| M | Raster catalogue | `RasterCatalogue/` | RFC-144 |
 | M | Spatial query | `SpatialQuery/` | RFC-143 |
 | M | Field geometry | `FieldGeometry/` | RFC-142 |
 | D3 | Genomic dataset release/access, reference assembly versioning, pipeline provenance | `GenomicDatasets/` | RFC-013 |
