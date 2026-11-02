@@ -1,0 +1,48 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    CapabilityNegotiationNewRequest:
+      type: object
+      description: |-
+        Request to register one capability negotiation record. Unknown capabilityNegotiationDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - capabilityNegotiationDbId
+      properties:
+        capabilityNegotiationDbId:
+          description: Namespaced capability-negotiation identity `{authority}:capability-negotiation:{localId}`
+          type: string
+          example: institute-a:capability-negotiation:cn-2026-001
+        negotiationType:
+          description: Type of capability negotiation
+          type: string
+          example: capability-negotiation
+        counterparty:
+          description: Counterparty identifier
+          type: string
+          example: institute-b:counterparty:cp-2026-001
+        lastSeen:
+          description: Last seen timestamp
+          type: string
+          example: "2026-05-01T12:00:00Z"
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: capabilityNegotiationDbId of the record this one replaces
+          type: string
+          example: institute-a:capability-negotiation:cn-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

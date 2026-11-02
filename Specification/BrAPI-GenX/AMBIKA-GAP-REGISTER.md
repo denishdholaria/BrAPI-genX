@@ -85,6 +85,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | M | Vegetation index | `VegetationIndex/` | RFC-146 |
 | M | Remote sensing metadata | `RemoteSensingMetadata/` | RFC-145 |
 | M | Edge gateway health | `EdgeGatewayHealth/` | RFC-151 |
+| M | Capability negotiation | `CapabilityNegotiation/` | RFC-153 |
 | M | Schema mapping | `SchemaMapping/` | RFC-152 |
 | M | Sensor device | `SensorDevice/` | RFC-149 |
 | M | Spatial index | `SpatialIndex/` | RFC-141 |
