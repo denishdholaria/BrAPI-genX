@@ -13,7 +13,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "Specification" / "ENDPOINT-REGISTRY.json"
 EXPECTED_V21 = 201
-EXPECTED_GENX = 303
+EXPECTED_GENX = 306
 DOMAINS = {f"D{i}" for i in range(1, 8)}
 CAPABILITIES = {f"C{i}" for i in range(1, 10)}
 
@@ -225,7 +225,7 @@ def check() -> list[str]:
     if bi.get("brapiV21EntriesAdded") != EXPECTED_V21:
         errors.append("buildIntegrity.brapiV21EntriesAdded must be 201.")
     if bi.get("genxEntriesAdded") != EXPECTED_GENX:
-        errors.append("buildIntegrity.genxEntriesAdded must be 303.")
+        errors.append("buildIntegrity.genxEntriesAdded must be 306.")
     if bi.get("unmatchedV21InventoryRows") != []:
         errors.append("Some BrAPI v2.1 inventory rows did not resolve to a source specification operation.")
     if bi.get("duplicateCatalogIds") != [] or bi.get("duplicateMethodRouteKeys") != []:
@@ -253,7 +253,7 @@ def main() -> int:
             print("- " + error)
         return 1
     registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
-    print("Endpoint registry passed structural checks: 201 BrAPI v2.1 entries, 303 proposed GenX entries, unique identities/routes, complete source links, and resolved semantic-neighbor IDs.")
+    print("Endpoint registry passed structural checks: 201 BrAPI v2.1 entries, 306 proposed GenX entries, unique identities/routes, complete source links, and resolved semantic-neighbor IDs.")
     return 0
 
 

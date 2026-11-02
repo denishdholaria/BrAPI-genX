@@ -102,6 +102,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | B | Server and profile capability metadata | `CapabilityMetadata/` | RFC-099 |
 | B | Research locations | `ResearchLocation/` | RFC-100 |
 | C | Collecting missions | `CollectingMission/` | RFC-101 |
+| C | Conservation membership | `ConservationMembership/` | RFC-102 |
 | B | Location geometry reference | `LocationGeometry/` | RFC-092 |
 | B | Reference data versioning | `ReferenceDataVersion/` | RFC-093 |
 | G | Developmental stage vocabulary | `DevelopmentalStage/` | RFC-079 |

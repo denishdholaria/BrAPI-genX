@@ -46581,12 +46581,247 @@
         "brapi-genx.genx.v1.collecting-missions.list",
         "brapi-genx.genx.v1.collecting-missions.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ConservationMembership",
+      "brapiTag": "ConservationMembership",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ConservationMembership/ConservationMembership_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.conservation-memberships.list",
+      "method": "GET",
+      "path": "/conservation-memberships",
+      "operationIdInSource": "genxListConservationMemberships",
+      "recommendedOperationId": "genxListConservationMemberships",
+      "operationName": "List conservation memberships",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List conservation membership records, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of conservation membership records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover conservation memberships.",
+        "Support germplasm and genetic resources."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a record (use the POST endpoint).",
+        "Assuming a record is a BrAPI data resource.",
+        "Treating the list as a complete catalogue."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterConservationMembership",
+        "genxGetConservationMembership",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-102"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.conservation-memberships.record",
+        "brapi-genx.genx.v1.conservation-memberships.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ConservationMembership",
+      "brapiTag": "ConservationMembership",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ConservationMembership/ConservationMembership_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.conservation-memberships.record",
+      "method": "POST",
+      "path": "/conservation-memberships",
+      "operationIdInSource": "genxRegisterConservationMembership",
+      "recommendedOperationId": "genxRegisterConservationMembership",
+      "operationName": "Register one conservation membership",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one conservation membership record with provenance.",
+      "sourceDescription": "Unknown conservationMembershipDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a conservation membership.",
+        "Retry an identical record safely using the same conservationMembershipDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming a record is a BrAPI data resource.",
+        "Asserting that the record is validated or endorsed."
+      ],
+      "sideEffects": "Creates a conservation membership identity or appends a new immutable version when accepted.",
+      "idempotency": "Same conservationMembershipDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "ConservationMembershipNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListConservationMemberships",
+        "genxGetConservationMembership",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-102"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.conservation-memberships.list",
+        "brapi-genx.genx.v1.conservation-memberships.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "ConservationMembership",
+      "brapiTag": "ConservationMembership",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/ConservationMembership/ConservationMembership_ConservationMembershipDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.conservation-memberships.get",
+      "method": "GET",
+      "path": "/conservation-memberships/{conservationMembershipDbId}",
+      "operationIdInSource": "genxGetConservationMembership",
+      "recommendedOperationId": "genxGetConservationMembership",
+      "operationName": "Get one conservation membership",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one conservation membership record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect membership identity and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a record is a BrAPI data resource.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "conservationMembershipDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterConservationMembership",
+        "genxListConservationMemberships",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-102"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.conservation-memberships.list",
+        "brapi-genx.genx.v1.conservation-memberships.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 303,
+    "genxEntriesAdded": 306,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -46664,7 +46899,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 504,
+    "totalEntries": 507,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -46965,5 +47200,5 @@
       ]
     }
   ],
-  "totalEntries": 504
+  "totalEntries": 507
 }

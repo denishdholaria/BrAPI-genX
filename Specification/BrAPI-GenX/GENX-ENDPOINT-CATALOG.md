@@ -19,6 +19,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | ClimateNormals | 3 | proposed, non-normative |
 | CollectingMission | 3 | proposed, non-normative |
 | CommonCropName | 3 | proposed, non-normative |
+| ConservationMembership | 3 | proposed, non-normative |
 | CropCycle | 3 | proposed, non-normative |
 | CropSpecies | 3 | proposed, non-normative |
 | CropTraitDictionary | 3 | proposed, non-normative |
@@ -1474,6 +1475,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.common-crop-names.list, brapi-genx.genx.v1.common-crop-names.record
 - **Relevant RFC / decision references:** RFC-094
 - **Contract source:** [`Specification/BrAPI-GenX/CommonCropName/CommonCropName_CommonCropNameDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CommonCropName/CommonCropName_CommonCropNameDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### ConservationMembership — 3 operations
+
+### GET `/genx/v1/conservation-memberships`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.conservation-memberships.list`
+- **BrAPI-GenX operation identity:** `genxListConservationMemberships` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListConservationMemberships`
+- **GenX source module:** `ConservationMembership`
+- **Source tag:** ConservationMembership
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List conservation membership records, optionally filtered by status.
+**Source contract description:**
+> Get a paged list of conservation membership records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover conservation memberships.
+- Support germplasm and genetic resources.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a record (use the POST endpoint).
+- Assuming a record is a BrAPI data resource.
+- Treating the list as a complete catalogue.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterConservationMembership, genxGetConservationMembership, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.conservation-memberships.record, brapi-genx.genx.v1.conservation-memberships.get
+- **Relevant RFC / decision references:** RFC-102
+- **Contract source:** [`Specification/BrAPI-GenX/ConservationMembership/ConservationMembership_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ConservationMembership/ConservationMembership_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/conservation-memberships`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.conservation-memberships.record`
+- **BrAPI-GenX operation identity:** `genxRegisterConservationMembership` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterConservationMembership`
+- **GenX source module:** `ConservationMembership`
+- **Source tag:** ConservationMembership
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register one conservation membership record with provenance.
+**Source contract description:**
+> Unknown conservationMembershipDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish a conservation membership.
+- Retry an identical record safely using the same conservationMembershipDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming a record is a BrAPI data resource.
+- Asserting that the record is validated or endorsed.
+- **Side effects:** Creates a conservation membership identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same conservationMembershipDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** ConservationMembershipNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListConservationMemberships, genxGetConservationMembership, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.conservation-memberships.list, brapi-genx.genx.v1.conservation-memberships.get
+- **Relevant RFC / decision references:** RFC-102
+- **Contract source:** [`Specification/BrAPI-GenX/ConservationMembership/ConservationMembership_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ConservationMembership/ConservationMembership_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/conservation-memberships/{conservationMembershipDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.conservation-memberships.get`
+- **BrAPI-GenX operation identity:** `genxGetConservationMembership` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetConservationMembership`
+- **GenX source module:** `ConservationMembership`
+- **Source tag:** ConservationMembership
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one conservation membership record.
+**Source contract description:**
+> Returns the registered record, or 404.
+**Can be used for:**
+- Inspect membership identity and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming a record is a BrAPI data resource.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** conservationMembershipDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterConservationMembership, genxListConservationMemberships, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.conservation-memberships.list, brapi-genx.genx.v1.conservation-memberships.record
+- **Relevant RFC / decision references:** RFC-102
+- **Contract source:** [`Specification/BrAPI-GenX/ConservationMembership/ConservationMembership_ConservationMembershipDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ConservationMembership/ConservationMembership_ConservationMembershipDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

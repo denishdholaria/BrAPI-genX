@@ -1,0 +1,45 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ConservationMembershipNewRequest:
+      type: object
+      description: |-
+        Request to register one conservation membership record. Unknown
+        conservationMembershipDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      required:
+      - conservationMembershipDbId
+      properties:
+        conservationMembershipDbId:
+          description: Namespaced conservation-membership identity `{authority}:conservation-membership:{localId}`
+          type: string
+          example: institute-a:conservation-membership:cm-2026-001
+        memberDbId:
+          description: Germplasm or accession reference
+          type: string
+          example: acc-001
+        program:
+          description: Conservation program name
+          type: string
+          example: global wheat conservation
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: conservationMembershipDbId of the record this one replaces
+          type: string
+          example: institute-a:conservation-membership:cm-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

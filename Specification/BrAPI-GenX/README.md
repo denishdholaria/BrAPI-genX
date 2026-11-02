@@ -88,6 +88,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `CapabilityMetadata/` | `CapabilityMetadata` — capability metadata records (profile, capabilities, provenance) | `GET /genx/v1/capability-metadata` (`genxListCapabilityMetadata`); `POST /genx/v1/capability-metadata` (`genxRegisterCapabilityMetadata`); `GET /genx/v1/capability-metadata/{capabilityMetadataDbId}` (`genxGetCapabilityMetadata`) |
 | `ResearchLocation/` | `ResearchLocation` — research location records (name, provenance) | `GET /genx/v1/research-locations` (`genxListResearchLocations`); `POST /genx/v1/research-locations` (`genxRegisterResearchLocation`); `GET /genx/v1/research-locations/{researchLocationDbId}` (`genxGetResearchLocation`) |
 | `CollectingMission/` | `CollectingMission` — collecting mission records (title, provenance) | `GET /genx/v1/collecting-missions` (`genxListCollectingMissions`); `POST /genx/v1/collecting-missions` (`genxRegisterCollectingMission`); `GET /genx/v1/collecting-missions/{collectingMissionDbId}` (`genxGetCollectingMission`) |
+| `ConservationMembership/` | `ConservationMembership` — conservation membership records (member, program, provenance) | `GET /genx/v1/conservation-memberships` (`genxListConservationMemberships`); `POST /genx/v1/conservation-memberships` (`genxRegisterConservationMembership`); `GET /genx/v1/conservation-memberships/{conservationMembershipDbId}` (`genxGetConservationMembership`) |
 | `FAIR/` | `FAIRPackage` — licensed, embargo-aware payload envelopes | `GET /genx/v1/fair-packages` (`genxListFairPackageMetadata`); `POST /genx/v1/fair-packages` (`genxRegisterFairPackage`); `GET /genx/v1/fair-packages/{packageDbId}` (`genxGetFairPackageMetadata`) |
 | `Telemetry/` | `TelemetryPoint` — sensor streams, idempotent ingest, aggregates | `GET /genx/v1/telemetry` (`genxQueryTelemetrySamplesOrAggregates`); `POST /genx/v1/telemetry` (`genxAppendTelemetryBatch`) |
 | `Tillage/` | `TillageRecord` — tillage records (method, depth, provenance) | `GET /genx/v1/tillage-records` (`genxListTillageRecords`); `POST /genx/v1/tillage-records` (`genxRecordTillage`); `GET /genx/v1/tillage-records/{tillageRecordDbId}` (`genxGetTillage`) |
@@ -233,7 +234,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-098-Research-Program](./RFC-098-Research-Program.md),
 [RFC-099-Capability-Metadata](./RFC-099-Capability-Metadata.md),
 [RFC-100-Research-Location](./RFC-100-Research-Location.md),
-[RFC-101-Collecting-Mission](./RFC-101-Collecting-Mission.md).
+[RFC-101-Collecting-Mission](./RFC-101-Collecting-Mission.md),
+[RFC-102-Conservation-Membership](./RFC-102-Conservation-Membership.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).
