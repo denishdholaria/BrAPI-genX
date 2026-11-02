@@ -1,0 +1,56 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    CropSuitabilityNewRequest:
+      type: object
+      description: |-
+        Request to register one crop suitability record. Unknown cropSuitabilityDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - cropSuitabilityDbId
+      properties:
+        cropSuitabilityDbId:
+          description: Namespaced crop-suitability identity `{authority}:crop-suitability:{localId}`
+          type: string
+          example: institute-a:crop-suitability:cs-2026-001
+        suitabilityType:
+          description: Type of suitability assessment
+          type: string
+          example: rainfed
+        suitableCrop:
+          description: Suitable crop
+          type: string
+          example: sorghum
+        suitabilityScore:
+          description: Suitability score
+          type: string
+          example: "0.85"
+        regionOrZone:
+          description: Region or zone the suitability applies to
+          type: string
+          example: zone-3
+        season:
+          description: Season the suitability applies to
+          type: string
+          example: 2026 main season
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: cropSuitabilityDbId of the record this one replaces
+          type: string
+          example: institute-a:crop-suitability:cs-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
