@@ -41410,12 +41410,247 @@
         "brapi-genx.genx.v1.developmental-stages.list",
         "brapi-genx.genx.v1.developmental-stages.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "TaxonName",
+      "brapiTag": "TaxonName",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/TaxonName/TaxonName_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.taxon-names.list",
+      "method": "GET",
+      "path": "/taxon-names",
+      "operationIdInSource": "genxListTaxonNames",
+      "recommendedOperationId": "genxListTaxonNames",
+      "operationName": "List taxon names",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List taxon name and synonym entries, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of taxon name and synonym entries across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover taxon names and synonyms.",
+        "Support germplasm and reference data resolution."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a taxon entry (use the POST endpoint).",
+        "Assuming a taxon entry is a BrAPI Germplasm.",
+        "Treating the list as a complete taxonomy."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterTaxonName",
+        "genxGetTaxonName",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-080"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.taxon-names.record",
+        "brapi-genx.genx.v1.taxon-names.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "TaxonName",
+      "brapiTag": "TaxonName",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/TaxonName/TaxonName_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.taxon-names.record",
+      "method": "POST",
+      "path": "/taxon-names",
+      "operationIdInSource": "genxRegisterTaxonName",
+      "recommendedOperationId": "genxRegisterTaxonName",
+      "operationName": "Register one taxon name",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one taxon name or synonym entry with provenance.",
+      "sourceDescription": "Unknown taxonNameDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a taxon name or synonym.",
+        "Retry an identical entry safely using the same taxonNameDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing entry; corrections require a new record that supersedes.",
+        "Assuming an entry is a BrAPI Germplasm.",
+        "Asserting that the entry is validated or endorsed."
+      ],
+      "sideEffects": "Creates a taxon name identity or appends a new immutable version when accepted.",
+      "idempotency": "Same taxonNameDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "TaxonNameNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListTaxonNames",
+        "genxGetTaxonName",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-080"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.taxon-names.list",
+        "brapi-genx.genx.v1.taxon-names.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "TaxonName",
+      "brapiTag": "TaxonName",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/TaxonName/TaxonName_TaxonNameDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.taxon-names.get",
+      "method": "GET",
+      "path": "/taxon-names/{taxonNameDbId}",
+      "operationIdInSource": "genxGetTaxonName",
+      "recommendedOperationId": "genxGetTaxonName",
+      "operationName": "Get one taxon name",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one taxon name or synonym entry.",
+      "sourceDescription": "Returns the registered entry, or 404.",
+      "canBeUsedFor": [
+        "Inspect taxon name, synonyms, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming an entry is a BrAPI Germplasm.",
+        "Treating a superseded entry as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "taxonNameDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterTaxonName",
+        "genxListTaxonNames",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-080"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.taxon-names.list",
+        "brapi-genx.genx.v1.taxon-names.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 237,
+    "genxEntriesAdded": 240,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -41493,7 +41728,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 438,
+    "totalEntries": 441,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -41794,5 +42029,5 @@
       ]
     }
   ],
-  "totalEntries": 438
+  "totalEntries": 441
 }

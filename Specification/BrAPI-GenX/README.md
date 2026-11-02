@@ -67,6 +67,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `ResearchAssets/` | `ResearchAsset` — research asset records (type, title, license, access policy, persistent identifier, provenance) | `GET /genx/v1/research-assets` (`genxListResearchAssets`); `POST /genx/v1/research-assets` (`genxRegisterResearchAsset`); `GET /genx/v1/research-assets/{researchAssetDbId}` (`genxGetResearchAsset`) |
 | `MeasurementMethods/` | `MeasurementMethod` — measurement method definitions (procedure, equipment, precision, provenance) | `GET /genx/v1/measurement-methods` (`genxListMeasurementMethods`); `POST /genx/v1/measurement-methods` (`genxRegisterMeasurementMethod`); `GET /genx/v1/measurement-methods/{measurementMethodDbId}` (`genxGetMeasurementMethod`) |
 | `DevelopmentalStage/` | `DevelopmentalStage` — developmental stage vocabulary entries (code, name, definition, provenance) | `GET /genx/v1/developmental-stages` (`genxListDevelopmentalStages`); `POST /genx/v1/developmental-stages` (`genxRegisterDevelopmentalStage`); `GET /genx/v1/developmental-stages/{developmentalStageDbId}` (`genxGetDevelopmentalStage`) |
+| `TaxonName/` | `TaxonName` — taxon name and synonym entries (scientific name, synonyms, provenance) | `GET /genx/v1/taxon-names` (`genxListTaxonNames`); `POST /genx/v1/taxon-names` (`genxRegisterTaxonName`); `GET /genx/v1/taxon-names/{taxonNameDbId}` (`genxGetTaxonName`) |
 | `FAIR/` | `FAIRPackage` — licensed, embargo-aware payload envelopes | `GET /genx/v1/fair-packages` (`genxListFairPackageMetadata`); `POST /genx/v1/fair-packages` (`genxRegisterFairPackage`); `GET /genx/v1/fair-packages/{packageDbId}` (`genxGetFairPackageMetadata`) |
 | `Telemetry/` | `TelemetryPoint` — sensor streams, idempotent ingest, aggregates | `GET /genx/v1/telemetry` (`genxQueryTelemetrySamplesOrAggregates`); `POST /genx/v1/telemetry` (`genxAppendTelemetryBatch`) |
 | `Tillage/` | `TillageRecord` — tillage records (method, depth, provenance) | `GET /genx/v1/tillage-records` (`genxListTillageRecords`); `POST /genx/v1/tillage-records` (`genxRecordTillage`); `GET /genx/v1/tillage-records/{tillageRecordDbId}` (`genxGetTillage`) |
@@ -189,7 +190,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-076-Emissions](./RFC-076-Emissions.md),
 [RFC-077-Soil-Chemistry](./RFC-077-Soil-Chemistry.md),
 [RFC-078-Environmental-Treatment](./RFC-078-Environmental-Treatment.md),
-[RFC-079-Developmental-Stage](./RFC-079-Developmental-Stage.md).
+[RFC-079-Developmental-Stage](./RFC-079-Developmental-Stage.md),
+[RFC-080-Taxon-Name](./RFC-080-Taxon-Name.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

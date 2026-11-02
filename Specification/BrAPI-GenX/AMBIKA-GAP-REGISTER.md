@@ -89,6 +89,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | D5 | Soil texture, chemistry, and moisture | `SoilChemistry/` | RFC-077 |
 | D5 | Environmental treatments and stress exposures | `EnvironmentalTreatment/` | RFC-078 |
 | D5 | Water balance | `WaterBalance/` | RFC-068 |
+| B | Taxon names and synonyms | `TaxonName/` | RFC-080 |
 | G | Developmental stage vocabulary | `DevelopmentalStage/` | RFC-079 |
 | I | Genomic dataset release/access | `GenomicDatasets/` | RFC-013 |
 | S | FAIR packages | `FAIR/` | RFC-006 |
@@ -108,7 +109,7 @@ D5 row 12 named gaps are now covered (emissions, soil texture/chemistry/moisture
 7. **D1 Genebank storage/conservation** — storage location/capacity, viability/germination, quarantine, safety duplication, regeneration, sample custody/transfer, retention/disposal.
 8. **S Research assets & publication** — builds on GenX `FAIRPackage`; add research asset registry, persistent identifiers/DOI, dataset/model catalogue, protocol/method library, embargo management.
 9. **G Terminology depth** — builds on GenX `VariableTerm`; add units/quantity semantics, measurement method catalogue, external vocab sync, terminology versioning/provenance.
-10. **B/F reference data & experimental design depth** — project/funding, reusable lists/cohorts, calendars/time, location geometry, taxon names, block/replication/randomization, treatment assignment, plot identity, experimental protocol/design, field book definition, trial network/MET design.
+10. **B/F reference data & experimental design depth** — project/funding, reusable lists/cohorts, calendars/time, location geometry, block/replication/randomization, treatment assignment, plot identity, experimental protocol/design, field book definition, trial network/MET design.
 
 ## Rules for adding new GenX specs
 

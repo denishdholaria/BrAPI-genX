@@ -1,0 +1,139 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /taxon-names:
+    get:
+      operationId: genxListTaxonNames
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.taxon-names.list"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C4", "C9"]
+        purpose: "List taxon name and synonym entries, optionally filtered by status."
+        canBeUsedFor:
+          - "Discover taxon names and synonyms."
+          - "Support germplasm and reference data resolution."
+        mustNotBeUsedFor:
+          - "Creating or changing a taxon entry (use the POST endpoint)."
+          - "Assuming a taxon entry is a BrAPI Germplasm."
+          - "Treating the list as a complete taxonomy."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterTaxonName"
+          - "genxGetTaxonName"
+          - "genxPublishVariableTermVersion"
+        decisions: ["RFC-080"]
+        proposalStatus: "draft-non-normative"
+      summary: List taxon names
+      description: Get a paged list of taxon name and synonym entries across authorities. Filters combine with AND.
+      parameters:
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/TaxonNameListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - TaxonName
+    post:
+      operationId: genxRegisterTaxonName
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.taxon-names.record"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C4", "C9"]
+        purpose: "Register one taxon name or synonym entry with provenance."
+        canBeUsedFor:
+          - "Publish a taxon name or synonym."
+          - "Retry an identical entry safely using the same taxonNameDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing entry; corrections require a new record that supersedes."
+          - "Assuming an entry is a BrAPI Germplasm."
+          - "Asserting that the entry is validated or endorsed."
+        sideEffects: "Creates a taxon name identity or appends a new immutable version when accepted."
+        idempotency: "Same taxonNameDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListTaxonNames"
+          - "genxGetTaxonName"
+          - "genxPublishVariableTermVersion"
+        decisions: ["RFC-080"]
+        proposalStatus: "draft-non-normative"
+      summary: Register one taxon name
+      description: |-
+        Unknown taxonNameDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaxonNameNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/TaxonName'
+                required:
+                - metadata
+                - result
+                title: TaxonNameResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - TaxonName
+components:
+  responses:
+    TaxonNameListResponse:
+      content:
+        application/json:
+          schema:
+            title: TaxonNameListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TaxonName'
+            required:
+            - metadata
+            - result
+      description: OK

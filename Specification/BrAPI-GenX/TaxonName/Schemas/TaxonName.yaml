@@ -1,0 +1,46 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    TaxonName:
+      type: object
+      description: |-
+        One immutable taxon name or synonym entry. A published
+        (taxonNameDbId) record never mutates in place; corrections are
+        recorded as additional entries linked by supersedes.
+      required:
+      - taxonNameDbId
+      - status
+      properties:
+        taxonNameDbId:
+          description: Namespaced taxon-name identity `{authority}:taxon-name:{localId}`
+          type: string
+          example: institute-a:taxon-name:tn-2026-001
+        scientificName:
+          description: Scientific name
+          type: string
+          example: Triticum aestivum
+        synonyms:
+          description: Synonyms for the taxon
+          type: array
+          items:
+            type: string
+          example: ["wheat"]
+        status:
+          description: Lifecycle state of the entry
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: taxonNameDbId of the entry this one replaces
+          type: string
+          example: institute-a:taxon-name:tn-2026-000
+        provenance:
+          description: Evidence and method provenance for the entry
+          $ref: '#/components/schemas/ProvenanceEnvelope'
