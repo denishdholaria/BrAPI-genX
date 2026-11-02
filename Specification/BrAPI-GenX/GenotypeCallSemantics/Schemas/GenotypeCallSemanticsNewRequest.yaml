@@ -1,0 +1,53 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    GenotypeCallSemanticsNewRequest:
+      type: object
+      description: |-
+        Request to register one genotype call semantics record. Unknown
+        genotypeCallSemanticsDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      required:
+      - genotypeCallSemanticsDbId
+      properties:
+        genotypeCallSemanticsDbId:
+          description: Namespaced genotype-call-semantics identity `{authority}:genotype-call-semantics:{localId}`
+          type: string
+          example: institute-a:genotype-call-semantics:gcs-2026-001
+        callSetDbId:
+          description: BrAPI CallSet the semantics apply to
+          type: string
+          example: cs-2026-001
+        missingCallPolicy:
+          description: Policy for handling missing calls
+          type: string
+          example: treat-as-missing
+        zygosityEncoding:
+          description: Convention used to encode zygosity
+          type: string
+          example: 0/1/2
+        confidenceThreshold:
+          description: Minimum confidence for a call to be considered valid
+          type: number
+          example: 0.9
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: genotypeCallSemanticsDbId of the record this one replaces
+          type: string
+          example: institute-a:genotype-call-semantics:gcs-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

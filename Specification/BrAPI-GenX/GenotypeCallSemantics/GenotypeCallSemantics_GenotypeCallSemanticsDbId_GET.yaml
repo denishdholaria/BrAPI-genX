@@ -1,0 +1,65 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /genotype-call-semantics/{genotypeCallSemanticsDbId}:
+    get:
+      operationId: genxGetGenotypeCallSemantics
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.genotype-call-semantics.get"
+        classification:
+          primaryDomain: "D3"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve one genotype call semantics record."
+        canBeUsedFor:
+          - "Inspect call-set linkage, missing-call policy, encoding, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming the record changes BrAPI VariantCall values."
+          - "Treating a superseded record as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterGenotypeCallSemantics"
+          - "genxListGenotypeCallSemantics"
+          - "genxRegisterGenomicDataset"
+        decisions: ["RFC-072"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one genotype call semantics record
+      description: Returns the registered record, or 404.
+      parameters:
+      - name: genotypeCallSemanticsDbId
+        description: Namespaced genotype-call-semantics identity `{authority}:genotype-call-semantics:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/GenotypeCallSemantics'
+                required:
+                - metadata
+                - result
+                title: GenotypeCallSemanticsResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - GenotypeCallSemantics

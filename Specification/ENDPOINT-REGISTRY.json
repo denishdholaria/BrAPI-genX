@@ -39522,12 +39522,248 @@
         "brapi-genx.genx.v1.marker-probes.list",
         "brapi-genx.genx.v1.marker-probes.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "GenotypeCallSemantics",
+      "brapiTag": "GenotypeCallSemantics",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/GenotypeCallSemantics/GenotypeCallSemantics_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.genotype-call-semantics.list",
+      "method": "GET",
+      "path": "/genotype-call-semantics",
+      "operationIdInSource": "genxListGenotypeCallSemantics",
+      "recommendedOperationId": "genxListGenotypeCallSemantics",
+      "operationName": "List genotype call semantics",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List genotype call semantics records, optionally filtered by call set or status.",
+      "sourceDescription": "Get a paged list of genotype call semantics records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover call-semantics conventions applied to a call set.",
+        "Support genotype call interpretation and missing-call handling."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a semantics record (use the POST endpoint).",
+        "Assuming the record changes BrAPI VariantCall values.",
+        "Treating the list as a complete call-set catalogue."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "callSetDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterGenotypeCallSemantics",
+        "genxGetGenotypeCallSemantics",
+        "genxRegisterGenomicDataset"
+      ],
+      "decisionReferences": [
+        "RFC-072"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.genotype-call-semantics.record",
+        "brapi-genx.genx.v1.genotype-call-semantics.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "GenotypeCallSemantics",
+      "brapiTag": "GenotypeCallSemantics",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/GenotypeCallSemantics/GenotypeCallSemantics_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.genotype-call-semantics.record",
+      "method": "POST",
+      "path": "/genotype-call-semantics",
+      "operationIdInSource": "genxRegisterGenotypeCallSemantics",
+      "recommendedOperationId": "genxRegisterGenotypeCallSemantics",
+      "operationName": "Register one genotype call semantics record",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one genotype call semantics record with call set linkage and provenance.",
+      "sourceDescription": "Unknown genotypeCallSemanticsDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish the missing-call policy and encoding conventions for a call set.",
+        "Retry an identical record safely using the same genotypeCallSemanticsDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming the record changes BrAPI VariantCall values.",
+        "Asserting that the call set is validated or released."
+      ],
+      "sideEffects": "Creates a genotype call semantics identity or appends a new immutable version when accepted.",
+      "idempotency": "Same genotypeCallSemanticsDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "GenotypeCallSemanticsNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListGenotypeCallSemantics",
+        "genxGetGenotypeCallSemantics",
+        "genxRegisterGenomicDataset"
+      ],
+      "decisionReferences": [
+        "RFC-072"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.genotype-call-semantics.list",
+        "brapi-genx.genx.v1.genotype-call-semantics.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "GenotypeCallSemantics",
+      "brapiTag": "GenotypeCallSemantics",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/GenotypeCallSemantics/GenotypeCallSemantics_GenotypeCallSemanticsDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.genotype-call-semantics.get",
+      "method": "GET",
+      "path": "/genotype-call-semantics/{genotypeCallSemanticsDbId}",
+      "operationIdInSource": "genxGetGenotypeCallSemantics",
+      "recommendedOperationId": "genxGetGenotypeCallSemantics",
+      "operationName": "Get one genotype call semantics record",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one genotype call semantics record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect call-set linkage, missing-call policy, encoding, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the record changes BrAPI VariantCall values.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "genotypeCallSemanticsDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterGenotypeCallSemantics",
+        "genxListGenotypeCallSemantics",
+        "genxRegisterGenomicDataset"
+      ],
+      "decisionReferences": [
+        "RFC-072"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.genotype-call-semantics.list",
+        "brapi-genx.genx.v1.genotype-call-semantics.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 213,
+    "genxEntriesAdded": 216,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -39605,7 +39841,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 414,
+    "totalEntries": 417,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -39906,5 +40142,5 @@
       ]
     }
   ],
-  "totalEntries": 414
+  "totalEntries": 417
 }

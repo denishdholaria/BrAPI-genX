@@ -1,0 +1,145 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /genotype-call-semantics:
+    get:
+      operationId: genxListGenotypeCallSemantics
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.genotype-call-semantics.list"
+        classification:
+          primaryDomain: "D3"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List genotype call semantics records, optionally filtered by call set or status."
+        canBeUsedFor:
+          - "Discover call-semantics conventions applied to a call set."
+          - "Support genotype call interpretation and missing-call handling."
+        mustNotBeUsedFor:
+          - "Creating or changing a semantics record (use the POST endpoint)."
+          - "Assuming the record changes BrAPI VariantCall values."
+          - "Treating the list as a complete call-set catalogue."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterGenotypeCallSemantics"
+          - "genxGetGenotypeCallSemantics"
+          - "genxRegisterGenomicDataset"
+        decisions: ["RFC-072"]
+        proposalStatus: "draft-non-normative"
+      summary: List genotype call semantics
+      description: Get a paged list of genotype call semantics records across authorities. Filters combine with AND.
+      parameters:
+      - name: callSetDbId
+        description: Filter by BrAPI CallSet
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/GenotypeCallSemanticsListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - GenotypeCallSemantics
+    post:
+      operationId: genxRegisterGenotypeCallSemantics
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.genotype-call-semantics.record"
+        classification:
+          primaryDomain: "D3"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Register one genotype call semantics record with call set linkage and provenance."
+        canBeUsedFor:
+          - "Publish the missing-call policy and encoding conventions for a call set."
+          - "Retry an identical record safely using the same genotypeCallSemanticsDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing record; corrections require a new record that supersedes."
+          - "Assuming the record changes BrAPI VariantCall values."
+          - "Asserting that the call set is validated or released."
+        sideEffects: "Creates a genotype call semantics identity or appends a new immutable version when accepted."
+        idempotency: "Same genotypeCallSemanticsDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListGenotypeCallSemantics"
+          - "genxGetGenotypeCallSemantics"
+          - "genxRegisterGenomicDataset"
+        decisions: ["RFC-072"]
+        proposalStatus: "draft-non-normative"
+      summary: Register one genotype call semantics record
+      description: |-
+        Unknown genotypeCallSemanticsDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenotypeCallSemanticsNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/GenotypeCallSemantics'
+                required:
+                - metadata
+                - result
+                title: GenotypeCallSemanticsResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - GenotypeCallSemantics
+components:
+  responses:
+    GenotypeCallSemanticsListResponse:
+      content:
+        application/json:
+          schema:
+            title: GenotypeCallSemanticsListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GenotypeCallSemantics'
+            required:
+            - metadata
+            - result
+      description: OK

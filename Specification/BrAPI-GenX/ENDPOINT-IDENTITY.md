@@ -252,6 +252,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/genotype-qc-reports` | GET | `genxListGenotypeQcReports` | List genotype QC reports | Does not create or change a report; not a BrAPI data resource. |
 | `/genx/v1/genotype-qc-reports` | POST | `genxRecordGenotypeQcReport` | Record one genotype QC report | Append-only record; replay/conflict semantics. |
 | `/genx/v1/genotype-qc-reports/{genotypeQcReportDbId}` | GET | `genxGetGenotypeQcReport` | Retrieve one genotype QC report | Does not treat a superseded report as current. |
+| `/genx/v1/genotype-call-semantics` | GET | `genxListGenotypeCallSemantics` | List genotype call semantics | Does not create or change a record; not a BrAPI data resource. |
+| `/genx/v1/genotype-call-semantics` | POST | `genxRegisterGenotypeCallSemantics` | Register one genotype call semantics record | Append-only record; replay/conflict semantics. |
+| `/genx/v1/genotype-call-semantics/{genotypeCallSemanticsDbId}` | GET | `genxGetGenotypeCallSemantics` | Retrieve one genotype call semantics record | Does not treat a superseded record as current. |
 | `/genx/v1/marker-probes` | GET | `genxListMarkerProbes` | List marker probes | Does not create or change a probe; not a BrAPI Marker. |
 | `/genx/v1/marker-probes` | POST | `genxRegisterMarkerProbe` | Register one marker probe | Append-only record; replay/conflict semantics. |
 | `/genx/v1/marker-probes/{markerProbeDbId}` | GET | `genxGetMarkerProbe` | Retrieve one marker probe | Does not treat a superseded probe as current. |
