@@ -1,0 +1,56 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    CropHealthImageNewRequest:
+      type: object
+      description: |-
+        Request to register one crop health image record. Unknown cropHealthImageDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - cropHealthImageDbId
+      properties:
+        cropHealthImageDbId:
+          description: Namespaced crop-health-image identity `{authority}:crop-health-image:{localId}`
+          type: string
+          example: institute-a:crop-health-image:chi-2026-001
+        imageType:
+          description: Type of crop health image
+          type: string
+          example: multispectral
+        captureDate:
+          description: Date the image was captured
+          type: string
+          example: "2026-05-01"
+        sensorOrPlatform:
+          description: Sensor or platform used for capture
+          type: string
+          example: UAV
+        vegetationIndex:
+          description: Vegetation index derived from the image
+          type: string
+          example: NDVI
+        healthStatus:
+          description: Crop health status
+          type: string
+          example: stressed
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: cropHealthImageDbId of the record this one replaces
+          type: string
+          example: institute-a:crop-health-image:chi-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

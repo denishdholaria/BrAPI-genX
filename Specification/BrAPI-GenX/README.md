@@ -120,6 +120,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `IpmStrategy/` | `IpmStrategy` — IPM strategy records (target, type, tactics) | `GET /genx/v1/ipm-strategies` (`genxListIpmStrategies`); `POST /genx/v1/ipm-strategies` (`genxRegisterIpmStrategy`); `GET /genx/v1/ipm-strategies/{ipmStrategyDbId}` (`genxGetIpmStrategy`) |
 | `ThresholdAlert/` | `ThresholdAlert` — threshold alert records (type, threshold, current value) | `GET /genx/v1/threshold-alerts` (`genxListThresholdAlerts`); `POST /genx/v1/threshold-alerts` (`genxRegisterThresholdAlert`); `GET /genx/v1/threshold-alerts/{thresholdAlertDbId}` (`genxGetThresholdAlert`) |
 | `DiseaseResistance/` | `DiseaseResistance` — disease resistance records (type, target, level) | `GET /genx/v1/disease-resistances` (`genxListDiseaseResistances`); `POST /genx/v1/disease-resistances` (`genxRegisterDiseaseResistance`); `GET /genx/v1/disease-resistances/{diseaseResistanceDbId}` (`genxGetDiseaseResistance`) |
+| `CropHealthImage/` | `CropHealthImage` — crop health image records (type, index, status) | `GET /genx/v1/crop-health-images` (`genxListCropHealthImages`); `POST /genx/v1/crop-health-images` (`genxRegisterCropHealthImage`); `GET /genx/v1/crop-health-images/{cropHealthImageDbId}` (`genxGetCropHealthImage`) |
 | `AssayDesign/` | `AssayDesign` — assay design records (platform, marker count, provenance) | `GET /genx/v1/assay-designs` (`genxListAssayDesigns`); `POST /genx/v1/assay-designs` (`genxRecordAssayDesign`); `GET /genx/v1/assay-designs/{assayDesignDbId}` (`genxGetAssayDesign`) |
 | `AssayExecution/` | `AssayExecution` — assay execution records (assay reference, provenance) | `GET /genx/v1/assay-executions` (`genxListAssayExecutions`); `POST /genx/v1/assay-executions` (`genxRegisterAssayExecution`); `GET /genx/v1/assay-executions/{assayExecutionDbId}` (`genxGetAssayExecution`) |
 | `VariantAnnotation/` | `VariantAnnotation` — variant annotation records (functional annotations, provenance) | `GET /genx/v1/variant-annotations` (`genxListVariantAnnotations`); `POST /genx/v1/variant-annotations` (`genxRecordVariantAnnotation`); `GET /genx/v1/variant-annotations/{variantAnnotationDbId}` (`genxGetVariantAnnotation`) |
@@ -285,7 +286,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-124-DiagnosticEvidence](./RFC-124-DiagnosticEvidence.md),
 [RFC-125-IpmStrategy](./RFC-125-IpmStrategy.md),
 [RFC-126-ThresholdAlert](./RFC-126-ThresholdAlert.md),
-[RFC-127-DiseaseResistance](./RFC-127-DiseaseResistance.md).
+[RFC-127-DiseaseResistance](./RFC-127-DiseaseResistance.md),
+[RFC-128-CropHealthImage](./RFC-128-CropHealthImage.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

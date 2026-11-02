@@ -1,0 +1,137 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /crop-health-images:
+    get:
+      operationId: genxListCropHealthImages
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.crop-health-images.list"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List crop health image records, optionally filtered by status."
+        canBeUsedFor:
+          - "Discover crop health images."
+          - "Support dataset/model artefact discovery."
+        mustNotBeUsedFor:
+          - "Creating or changing a record (use the POST endpoint)."
+          - "Assuming a record is a BrAPI data resource."
+          - "Treating the list as a complete history."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterCropHealthImage"
+          - "genxGetCropHealthImage"
+          - "genxRegisterFarm"
+        decisions: ["RFC-128"]
+        proposalStatus: "draft-non-normative"
+      summary: List crop health images
+      description: Get a paged list of crop health image records across authorities. Filters combine with AND.
+      parameters:
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/CropHealthImageListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - CropHealthImage
+    post:
+      operationId: genxRegisterCropHealthImage
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.crop-health-images.record"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Register one crop health image record with provenance."
+        canBeUsedFor:
+          - "Publish a crop health image."
+          - "Retry an identical record safely using the same cropHealthImageDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing record; corrections require a new record that supersedes."
+          - "Assuming a record is a BrAPI data resource."
+          - "Asserting that the catalogue is validated or endorsed."
+        sideEffects: "Creates a crop health image identity or appends a new immutable version when accepted."
+        idempotency: "Same cropHealthImageDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListCropHealthImages"
+          - "genxGetCropHealthImage"
+          - "genxRegisterFarm"
+        decisions: ["RFC-128"]
+        proposalStatus: "draft-non-normative"
+      summary: Register one crop health image
+      description: Register one crop health image record with provenance.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CropHealthImageNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/CropHealthImage'
+                required:
+                - metadata
+                - result
+                title: CropHealthImageResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - CropHealthImage
+components:
+  responses:
+    CropHealthImageListResponse:
+      content:
+        application/json:
+          schema:
+            title: CropHealthImageListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CropHealthImage'
+            required:
+            - metadata
+            - result
+      description: OK
