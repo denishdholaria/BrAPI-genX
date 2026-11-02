@@ -69,6 +69,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | PlantingOperation | 3 | proposed, non-normative |
 | PopulationAdvancement | 3 | proposed, non-normative |
 | ProgenyRecords | 3 | proposed, non-normative |
+| Project | 3 | proposed, non-normative |
 | Quarantine | 3 | proposed, non-normative |
 | Regeneration | 3 | proposed, non-normative |
 | RepeatedMeasurement | 3 | proposed, non-normative |
@@ -6729,6 +6730,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.progeny-records.list, brapi-genx.genx.v1.progeny-records.record
 - **Relevant RFC / decision references:** RFC-019
 - **Contract source:** [`Specification/BrAPI-GenX/ProgenyRecords/ProgenyRecords_ProgenyRecordDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ProgenyRecords/ProgenyRecords_ProgenyRecordDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### Project — 3 operations
+
+### GET `/genx/v1/projects`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.projects.list`
+- **BrAPI-GenX operation identity:** `genxListProjects` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListProjects`
+- **GenX source module:** `Project`
+- **Source tag:** Project
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List project and funding reference records, optionally filtered by status.
+**Source contract description:**
+> Get a paged list of project and funding reference records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover projects and funding references.
+- Support research organization and reference data.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a project (use the POST endpoint).
+- Assuming a project is a BrAPI Study.
+- Treating the list as a complete project catalogue.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterProject, genxGetProject, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.projects.record, brapi-genx.genx.v1.projects.get
+- **Relevant RFC / decision references:** RFC-089
+- **Contract source:** [`Specification/BrAPI-GenX/Project/Project_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Project/Project_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/projects`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.projects.record`
+- **BrAPI-GenX operation identity:** `genxRegisterProject` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterProject`
+- **GenX source module:** `Project`
+- **Source tag:** Project
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register one project and funding reference record with provenance.
+**Source contract description:**
+> Unknown projectDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish a project or funding reference.
+- Retry an identical record safely using the same projectDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming a project is a BrAPI Study.
+- Asserting that the project is validated or endorsed.
+- **Side effects:** Creates a project identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same projectDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** ProjectNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListProjects, genxGetProject, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.projects.list, brapi-genx.genx.v1.projects.get
+- **Relevant RFC / decision references:** RFC-089
+- **Contract source:** [`Specification/BrAPI-GenX/Project/Project_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Project/Project_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/projects/{projectDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.projects.get`
+- **BrAPI-GenX operation identity:** `genxGetProject` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetProject`
+- **GenX source module:** `Project`
+- **Source tag:** Project
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one project and funding reference record.
+**Source contract description:**
+> Returns the registered record, or 404.
+**Can be used for:**
+- Inspect project identity, funding, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming a project is a BrAPI Study.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** projectDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterProject, genxListProjects, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.projects.list, brapi-genx.genx.v1.projects.record
+- **Relevant RFC / decision references:** RFC-089
+- **Contract source:** [`Specification/BrAPI-GenX/Project/Project_ProjectDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Project/Project_ProjectDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

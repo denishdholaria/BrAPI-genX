@@ -43526,12 +43526,247 @@
         "brapi-genx.genx.v1.crop-trait-dictionaries.list",
         "brapi-genx.genx.v1.crop-trait-dictionaries.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Project",
+      "brapiTag": "Project",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Project/Project_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.projects.list",
+      "method": "GET",
+      "path": "/projects",
+      "operationIdInSource": "genxListProjects",
+      "recommendedOperationId": "genxListProjects",
+      "operationName": "List projects",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List project and funding reference records, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of project and funding reference records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover projects and funding references.",
+        "Support research organization and reference data."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a project (use the POST endpoint).",
+        "Assuming a project is a BrAPI Study.",
+        "Treating the list as a complete project catalogue."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterProject",
+        "genxGetProject",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-089"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.projects.record",
+        "brapi-genx.genx.v1.projects.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Project",
+      "brapiTag": "Project",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Project/Project_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.projects.record",
+      "method": "POST",
+      "path": "/projects",
+      "operationIdInSource": "genxRegisterProject",
+      "recommendedOperationId": "genxRegisterProject",
+      "operationName": "Register one project",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one project and funding reference record with provenance.",
+      "sourceDescription": "Unknown projectDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a project or funding reference.",
+        "Retry an identical record safely using the same projectDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming a project is a BrAPI Study.",
+        "Asserting that the project is validated or endorsed."
+      ],
+      "sideEffects": "Creates a project identity or appends a new immutable version when accepted.",
+      "idempotency": "Same projectDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "ProjectNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListProjects",
+        "genxGetProject",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-089"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.projects.list",
+        "brapi-genx.genx.v1.projects.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Project",
+      "brapiTag": "Project",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Project/Project_ProjectDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.projects.get",
+      "method": "GET",
+      "path": "/projects/{projectDbId}",
+      "operationIdInSource": "genxGetProject",
+      "recommendedOperationId": "genxGetProject",
+      "operationName": "Get one project",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one project and funding reference record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect project identity, funding, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a project is a BrAPI Study.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "projectDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterProject",
+        "genxListProjects",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-089"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.projects.list",
+        "brapi-genx.genx.v1.projects.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 264,
+    "genxEntriesAdded": 267,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -43609,7 +43844,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 465,
+    "totalEntries": 468,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -43910,5 +44145,5 @@
       ]
     }
   ],
-  "totalEntries": 465
+  "totalEntries": 468
 }

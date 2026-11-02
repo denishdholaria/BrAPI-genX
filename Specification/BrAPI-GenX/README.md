@@ -74,6 +74,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `OntologyMapping/` | `OntologyMapping` — ontology mapping and crosswalk entries (source, target, mapping, provenance) | `GET /genx/v1/ontology-mappings` (`genxListOntologyMappings`); `POST /genx/v1/ontology-mappings` (`genxRegisterOntologyMapping`); `GET /genx/v1/ontology-mappings/{ontologyMappingDbId}` (`genxGetOntologyMapping`) |
 | `MeasurementScale/` | `MeasurementScale` — measurement scale and value domain entries (scale name, value domain, provenance) | `GET /genx/v1/measurement-scales` (`genxListMeasurementScales`); `POST /genx/v1/measurement-scales` (`genxRegisterMeasurementScale`); `GET /genx/v1/measurement-scales/{measurementScaleDbId}` (`genxGetMeasurementScale`) |
 | `CropTraitDictionary/` | `CropTraitDictionary` — crop trait dictionary entries (crop, trait, definition, provenance) | `GET /genx/v1/crop-trait-dictionaries` (`genxListCropTraitDictionaries`); `POST /genx/v1/crop-trait-dictionaries` (`genxRegisterCropTraitDictionary`); `GET /genx/v1/crop-trait-dictionaries/{cropTraitDictionaryDbId}` (`genxGetCropTraitDictionary`) |
+| `Project/` | `Project` — project and funding reference records (title, funding, provenance) | `GET /genx/v1/projects` (`genxListProjects`); `POST /genx/v1/projects` (`genxRegisterProject`); `GET /genx/v1/projects/{projectDbId}` (`genxGetProject`) |
 | `TaxonName/` | `TaxonName` — taxon name and synonym entries (scientific name, synonyms, provenance) | `GET /genx/v1/taxon-names` (`genxListTaxonNames`); `POST /genx/v1/taxon-names` (`genxRegisterTaxonName`); `GET /genx/v1/taxon-names/{taxonNameDbId}` (`genxGetTaxonName`) |
 | `FAIR/` | `FAIRPackage` — licensed, embargo-aware payload envelopes | `GET /genx/v1/fair-packages` (`genxListFairPackageMetadata`); `POST /genx/v1/fair-packages` (`genxRegisterFairPackage`); `GET /genx/v1/fair-packages/{packageDbId}` (`genxGetFairPackageMetadata`) |
 | `Telemetry/` | `TelemetryPoint` — sensor streams, idempotent ingest, aggregates | `GET /genx/v1/telemetry` (`genxQueryTelemetrySamplesOrAggregates`); `POST /genx/v1/telemetry` (`genxAppendTelemetryBatch`) |
@@ -207,7 +208,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-085-Ontology-Term](./RFC-085-Ontology-Term.md),
 [RFC-086-Ontology-Mapping](./RFC-086-Ontology-Mapping.md),
 [RFC-087-Measurement-Scale](./RFC-087-Measurement-Scale.md),
-[RFC-088-Crop-Trait-Dictionary](./RFC-088-Crop-Trait-Dictionary.md).
+[RFC-088-Crop-Trait-Dictionary](./RFC-088-Crop-Trait-Dictionary.md),
+[RFC-089-Project](./RFC-089-Project.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

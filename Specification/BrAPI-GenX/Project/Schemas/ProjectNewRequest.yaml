@@ -1,0 +1,44 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ProjectNewRequest:
+      type: object
+      description: |-
+        Request to register one project and funding reference record. Unknown
+        projectDbId creates; same id with an identical body replays the
+        existing record; same id with a different body is rejected with 409.
+      required:
+      - projectDbId
+      properties:
+        projectDbId:
+          description: Namespaced project identity `{authority}:project:{localId}`
+          type: string
+          example: institute-a:project:pr-2026-001
+        title:
+          description: Project title
+          type: string
+          example: Genomics for yield improvement
+        funding:
+          description: Funding reference
+          type: string
+          example: grant-2026-001
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: projectDbId of the record this one replaces
+          type: string
+          example: institute-a:project:pr-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

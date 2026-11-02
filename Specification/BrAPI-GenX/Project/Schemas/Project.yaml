@@ -1,0 +1,44 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    Project:
+      type: object
+      description: |-
+        One immutable project and funding reference record. A published
+        (projectDbId) record never mutates in place; corrections are recorded
+        as additional records linked by supersedes.
+      required:
+      - projectDbId
+      - status
+      properties:
+        projectDbId:
+          description: Namespaced project identity `{authority}:project:{localId}`
+          type: string
+          example: institute-a:project:pr-2026-001
+        title:
+          description: Project title
+          type: string
+          example: Genomics for yield improvement
+        funding:
+          description: Funding reference
+          type: string
+          example: grant-2026-001
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: projectDbId of the record this one replaces
+          type: string
+          example: institute-a:project:pr-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
