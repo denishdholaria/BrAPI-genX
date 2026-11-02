@@ -110,6 +110,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `ReferenceAssembly/` | `ReferenceAssembly` — reference assembly records (accession, version, provenance) | `GET /genx/v1/reference-assemblies` (`genxListReferenceAssemblies`); `POST /genx/v1/reference-assemblies` (`genxRegisterReferenceAssembly`); `GET /genx/v1/reference-assemblies/{referenceAssemblyDbId}` (`genxGetReferenceAssembly`) |
 | `PipelineProvenance/` | `PipelineProvenance` — pipeline provenance records (pipeline, version, provenance) | `GET /genx/v1/pipeline-provenances` (`genxListPipelineProvenances`); `POST /genx/v1/pipeline-provenances` (`genxRegisterPipelineProvenance`); `GET /genx/v1/pipeline-provenances/{pipelineProvenanceDbId}` (`genxGetPipelineProvenance`) |
 | `ExperimentalProtocol/` | `ExperimentalProtocol` — experimental protocol records (design, treatments, provenance) | `GET /genx/v1/experimental-protocols` (`genxListExperimentalProtocols`); `POST /genx/v1/experimental-protocols` (`genxRegisterExperimentalProtocol`); `GET /genx/v1/experimental-protocols/{experimentalProtocolDbId}` (`genxGetExperimentalProtocol`) |
+| `ArtifactCatalogue/` | `ArtifactCatalogue` — artefact catalogue records (type, storage reference, digest) | `GET /genx/v1/artifact-catalogues` (`genxListArtifactCatalogues`); `POST /genx/v1/artifact-catalogues` (`genxRegisterArtifactCatalogue`); `GET /genx/v1/artifact-catalogues/{artifactCatalogueDbId}` (`genxGetArtifactCatalogue`) |
 | `AssayDesign/` | `AssayDesign` — assay design records (platform, marker count, provenance) | `GET /genx/v1/assay-designs` (`genxListAssayDesigns`); `POST /genx/v1/assay-designs` (`genxRecordAssayDesign`); `GET /genx/v1/assay-designs/{assayDesignDbId}` (`genxGetAssayDesign`) |
 | `AssayExecution/` | `AssayExecution` — assay execution records (assay reference, provenance) | `GET /genx/v1/assay-executions` (`genxListAssayExecutions`); `POST /genx/v1/assay-executions` (`genxRegisterAssayExecution`); `GET /genx/v1/assay-executions/{assayExecutionDbId}` (`genxGetAssayExecution`) |
 | `VariantAnnotation/` | `VariantAnnotation` — variant annotation records (functional annotations, provenance) | `GET /genx/v1/variant-annotations` (`genxListVariantAnnotations`); `POST /genx/v1/variant-annotations` (`genxRecordVariantAnnotation`); `GET /genx/v1/variant-annotations/{variantAnnotationDbId}` (`genxGetVariantAnnotation`) |
@@ -265,7 +266,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-114-Vcf-Export](./RFC-114-Vcf-Export.md),
 [RFC-115-Reference-Assembly](./RFC-115-Reference-Assembly.md),
 [RFC-116-Pipeline-Provenance](./RFC-116-Pipeline-Provenance.md),
-[RFC-117-ExperimentalProtocol](./RFC-117-ExperimentalProtocol.md).
+[RFC-117-ExperimentalProtocol](./RFC-117-ExperimentalProtocol.md),
+[RFC-118-ArtifactCatalogue](./RFC-118-ArtifactCatalogue.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

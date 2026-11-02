@@ -240,6 +240,11 @@ modules:
     primary_class: "D2"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Experimental protocol records; BrAPI v2.1 has no equivalent record."
+  - path: "ArtifactCatalogue/"
+    object: "ArtifactCatalogue"
+    primary_class: null
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Artifact catalogue records; BrAPI v2.1 has no equivalent record."
   - path: "AssayDesign/"
     object: "AssayDesign"
     primary_class: "D3"

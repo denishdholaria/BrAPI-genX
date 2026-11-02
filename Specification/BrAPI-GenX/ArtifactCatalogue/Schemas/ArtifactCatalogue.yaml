@@ -1,0 +1,60 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ArtifactCatalogue:
+      type: object
+      description: |-
+        One immutable artifact catalogue record. A published (artifactCatalogueDbId) record
+        never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - artifactCatalogueDbId
+      - status
+      properties:
+        artifactCatalogueDbId:
+          description: Namespaced artifact-catalogue identity `{authority}:artifact-catalogue:{localId}`
+          type: string
+          example: institute-a:artifact-catalogue:ac-2026-001
+        catalogueName:
+          description: Name of the artifact catalogue
+          type: string
+          example: genotyping-artefacts-2026
+        artefactType:
+          description: Type of artefact catalogued
+          type: string
+          example: VCF
+        version:
+          description: Version of the artefact
+          type: string
+          example: "1.0"
+        storageReference:
+          description: Storage location or URI of the artefact
+          type: string
+          example: s3://bucket/artegacts/vcf-2026-001.vcf.gz
+        digest:
+          description: SHA-256 digest of the artefact bytes
+          type: string
+          example: "sha256:3b6e9a3c..."
+        size:
+          description: Size of the artefact in bytes
+          type: string
+          example: "1048576"
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: artifactCatalogueDbId of the record this one replaces
+          type: string
+          example: institute-a:artifact-catalogue:ac-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

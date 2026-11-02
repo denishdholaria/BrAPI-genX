@@ -1,0 +1,137 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /artifact-catalogues:
+    get:
+      operationId: genxListArtifactCatalogues
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.artifact-catalogues.list"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List artifact catalogue records, optionally filtered by status."
+        canBeUsedFor:
+          - "Discover artifact catalogues."
+          - "Support dataset/model artefact discovery."
+        mustNotBeUsedFor:
+          - "Creating or changing a record (use the POST endpoint)."
+          - "Assuming a record is a BrAPI data resource."
+          - "Treating the list as a complete history."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterArtifactCatalogue"
+          - "genxGetArtifactCatalogue"
+          - "genxRegisterFarm"
+        decisions: ["RFC-118"]
+        proposalStatus: "draft-non-normative"
+      summary: List artifact catalogues
+      description: Get a paged list of artifact catalogue records across authorities. Filters combine with AND.
+      parameters:
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/ArtifactCatalogueListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - ArtifactCatalogue
+    post:
+      operationId: genxRegisterArtifactCatalogue
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.artifact-catalogues.record"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Register one artifact catalogue record with provenance."
+        canBeUsedFor:
+          - "Publish an artifact catalogue."
+          - "Retry an identical record safely using the same artifactCatalogueDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing record; corrections require a new record that supersedes."
+          - "Assuming a record is a BrAPI data resource."
+          - "Asserting that the catalogue is validated or endorsed."
+        sideEffects: "Creates an artifact catalogue identity or appends a new immutable version when accepted."
+        idempotency: "Same artifactCatalogueDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListArtifactCatalogues"
+          - "genxGetArtifactCatalogue"
+          - "genxRegisterFarm"
+        decisions: ["RFC-118"]
+        proposalStatus: "draft-non-normative"
+      summary: Register one artifact catalogue
+      description: Register one artifact catalogue record with provenance.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArtifactCatalogueNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/ArtifactCatalogue'
+                required:
+                - metadata
+                - result
+                title: ArtifactCatalogueResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - ArtifactCatalogue
+components:
+  responses:
+    ArtifactCatalogueListResponse:
+      content:
+        application/json:
+          schema:
+            title: ArtifactCatalogueListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ArtifactCatalogue'
+            required:
+            - metadata
+            - result
+      description: OK
