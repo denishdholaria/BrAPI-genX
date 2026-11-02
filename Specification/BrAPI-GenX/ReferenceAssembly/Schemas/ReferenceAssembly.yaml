@@ -1,0 +1,52 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ReferenceAssembly:
+      type: object
+      description: |-
+        One immutable reference assembly record. A published (referenceAssemblyDbId) record
+        never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - referenceAssemblyDbId
+      - status
+      properties:
+        referenceAssemblyDbId:
+          description: Namespaced reference-assembly identity `{authority}:reference-assembly:{localId}`
+          type: string
+          example: institute-a:reference-assembly:ra-2026-001
+        assemblyName:
+          description: Name of the reference assembly
+          type: string
+          example: GRCm39
+        assemblyAccession:
+          description: Accession of the reference assembly
+          type: string
+          example: GCF_000001635.27
+        version:
+          description: Version of the reference assembly
+          type: string
+          example: "2020-06"
+        organism:
+          description: Organism the assembly refers to
+          type: string
+          example: Mus musculus
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: referenceAssemblyDbId of the record this one replaces
+          type: string
+          example: institute-a:reference-assembly:ra-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
