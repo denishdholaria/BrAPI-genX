@@ -285,6 +285,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/remote-sensing-metadata` | GET | `genxListRemoteSensingMetadata` | List remote sensing metadata | Does not create or change a record; not a BrAPI data resource. |
 | `/genx/v1/remote-sensing-metadata` | POST | `genxRegisterRemoteSensingMetadata` | Register one remote sensing metadata | Append-only record; replay/conflict semantics. |
 | `/genx/v1/remote-sensing-metadata/{remoteSensingMetadataDbId}` | GET | `genxGetRemoteSensingMetadata` | Retrieve one remote sensing metadata | Does not treat a superseded record as current. |
+| `/genx/v1/edge-gateway-healths` | GET | `genxListEdgeGatewayHealths` | List edge gateway healths | Does not create or change a record; not a BrAPI data resource. |
+| `/genx/v1/edge-gateway-healths` | POST | `genxRegisterEdgeGatewayHealth` | Register one edge gateway health | Append-only record; replay/conflict semantics. |
+| `/genx/v1/edge-gateway-healths/{edgeGatewayHealthDbId}` | GET | `genxGetEdgeGatewayHealth` | Retrieve one edge gateway health | Does not treat a superseded record as current. |
 | `/genx/v1/sensor-devices` | GET | `genxListSensorDevices` | List sensor devices | Does not create or change a record; not a BrAPI data resource. |
 | `/genx/v1/sensor-devices` | POST | `genxRegisterSensorDevice` | Register one sensor device | Append-only record; replay/conflict semantics. |
 | `/genx/v1/sensor-devices/{sensorDeviceDbId}` | GET | `genxGetSensorDevice` | Retrieve one sensor device | Does not treat a superseded record as current. |

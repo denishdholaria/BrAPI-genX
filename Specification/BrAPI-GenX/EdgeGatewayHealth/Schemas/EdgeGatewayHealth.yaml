@@ -1,0 +1,56 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    EdgeGatewayHealth:
+      type: object
+      description: |-
+        One immutable edge gateway health record. A published (edgeGatewayHealthDbId) record
+        never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - edgeGatewayHealthDbId
+      - status
+      properties:
+        edgeGatewayHealthDbId:
+          description: Namespaced edge-gateway-health identity `{authority}:edge-gateway-health:{localId}`
+          type: string
+          example: institute-a:edge-gateway-health:egh-2026-001
+        gatewayType:
+          description: Type of edge gateway
+          type: string
+          example: field-gateway
+        deviceId:
+          description: Edge gateway device identity
+          type: string
+          example: egw-2026-001
+        lastSeen:
+          description: Last seen timestamp
+          type: string
+          example: "2026-05-01T12:00:00Z"
+        healthStatus:
+          description: Health status of the gateway
+          type: string
+          example: healthy
+        regionOrZone:
+          description: Region or zone the gateway covers
+          type: string
+          example: zone-3
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: edgeGatewayHealthDbId of the record this one replaces
+          type: string
+          example: institute-a:edge-gateway-health:egh-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

@@ -1,0 +1,56 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    EdgeGatewayHealthNewRequest:
+      type: object
+      description: |-
+        Request to register one edge gateway health record. Unknown edgeGatewayHealthDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - edgeGatewayHealthDbId
+      properties:
+        edgeGatewayHealthDbId:
+          description: Namespaced edge-gateway-health identity `{authority}:edge-gateway-health:{localId}`
+          type: string
+          example: institute-a:edge-gateway-health:egh-2026-001
+        gatewayType:
+          description: Type of edge gateway
+          type: string
+          example: field-gateway
+        deviceId:
+          description: Edge gateway device identity
+          type: string
+          example: egw-2026-001
+        lastSeen:
+          description: Last seen timestamp
+          type: string
+          example: "2026-05-01T12:00:00Z"
+        healthStatus:
+          description: Health status of the gateway
+          type: string
+          example: healthy
+        regionOrZone:
+          description: Region or zone the gateway covers
+          type: string
+          example: zone-3
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: edgeGatewayHealthDbId of the record this one replaces
+          type: string
+          example: institute-a:edge-gateway-health:egh-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
