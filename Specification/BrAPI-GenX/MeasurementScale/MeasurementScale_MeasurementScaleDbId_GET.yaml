@@ -1,0 +1,65 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /measurement-scales/{measurementScaleDbId}:
+    get:
+      operationId: genxGetMeasurementScale
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.measurement-scales.get"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C4", "C9"]
+        purpose: "Retrieve one measurement scale and value domain entry."
+        canBeUsedFor:
+          - "Inspect scale, value domain, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming an entry is a BrAPI Observation."
+          - "Treating a superseded entry as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterMeasurementScale"
+          - "genxListMeasurementScales"
+          - "genxPublishVariableTermVersion"
+        decisions: ["RFC-087"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one measurement scale
+      description: Returns the registered entry, or 404.
+      parameters:
+      - name: measurementScaleDbId
+        description: Namespaced measurement-scale identity `{authority}:measurement-scale:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/MeasurementScale'
+                required:
+                - metadata
+                - result
+                title: MeasurementScaleResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - MeasurementScale

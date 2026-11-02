@@ -1,0 +1,44 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    MeasurementScale:
+      type: object
+      description: |-
+        One immutable measurement scale and value domain entry. A published
+        (measurementScaleDbId) record never mutates in place; corrections
+        are recorded as additional entries linked by supersedes.
+      required:
+      - measurementScaleDbId
+      - status
+      properties:
+        measurementScaleDbId:
+          description: Namespaced measurement-scale identity `{authority}:measurement-scale:{localId}`
+          type: string
+          example: institute-a:measurement-scale:ms-2026-001
+        scaleName:
+          description: Name of the measurement scale
+          type: string
+          example: 1-5 rating
+        valueDomain:
+          description: Value domain or allowed values
+          type: string
+          example: integer 1..5
+        status:
+          description: Lifecycle state of the entry
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: measurementScaleDbId of the entry this one replaces
+          type: string
+          example: institute-a:measurement-scale:ms-2026-000
+        provenance:
+          description: Evidence and method provenance for the entry
+          $ref: '#/components/schemas/ProvenanceEnvelope'

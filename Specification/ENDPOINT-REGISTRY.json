@@ -43056,12 +43056,247 @@
         "brapi-genx.genx.v1.ontology-mappings.list",
         "brapi-genx.genx.v1.ontology-mappings.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "MeasurementScale",
+      "brapiTag": "MeasurementScale",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/MeasurementScale/MeasurementScale_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.measurement-scales.list",
+      "method": "GET",
+      "path": "/measurement-scales",
+      "operationIdInSource": "genxListMeasurementScales",
+      "recommendedOperationId": "genxListMeasurementScales",
+      "operationName": "List measurement scales",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List measurement scale and value domain entries, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of measurement scale and value domain entries across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover measurement scales and value domains.",
+        "Support measurement and terminology governance."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing an entry (use the POST endpoint).",
+        "Assuming an entry is a BrAPI Observation.",
+        "Treating the list as a complete scale catalogue."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterMeasurementScale",
+        "genxGetMeasurementScale",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-087"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.measurement-scales.record",
+        "brapi-genx.genx.v1.measurement-scales.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "MeasurementScale",
+      "brapiTag": "MeasurementScale",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/MeasurementScale/MeasurementScale_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.measurement-scales.record",
+      "method": "POST",
+      "path": "/measurement-scales",
+      "operationIdInSource": "genxRegisterMeasurementScale",
+      "recommendedOperationId": "genxRegisterMeasurementScale",
+      "operationName": "Register one measurement scale entry",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one measurement scale and value domain entry with provenance.",
+      "sourceDescription": "Unknown measurementScaleDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a measurement scale and value domain.",
+        "Retry an identical entry safely using the same measurementScaleDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing entry; corrections require a new record that supersedes.",
+        "Assuming an entry is a BrAPI Observation.",
+        "Asserting that the entry is validated or endorsed."
+      ],
+      "sideEffects": "Creates a measurement scale identity or appends a new immutable version when accepted.",
+      "idempotency": "Same measurementScaleDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "MeasurementScaleNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListMeasurementScales",
+        "genxGetMeasurementScale",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-087"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.measurement-scales.list",
+        "brapi-genx.genx.v1.measurement-scales.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "MeasurementScale",
+      "brapiTag": "MeasurementScale",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/MeasurementScale/MeasurementScale_MeasurementScaleDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.measurement-scales.get",
+      "method": "GET",
+      "path": "/measurement-scales/{measurementScaleDbId}",
+      "operationIdInSource": "genxGetMeasurementScale",
+      "recommendedOperationId": "genxGetMeasurementScale",
+      "operationName": "Get one measurement scale entry",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one measurement scale and value domain entry.",
+      "sourceDescription": "Returns the registered entry, or 404.",
+      "canBeUsedFor": [
+        "Inspect scale, value domain, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming an entry is a BrAPI Observation.",
+        "Treating a superseded entry as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "measurementScaleDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterMeasurementScale",
+        "genxListMeasurementScales",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-087"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.measurement-scales.list",
+        "brapi-genx.genx.v1.measurement-scales.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 258,
+    "genxEntriesAdded": 261,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -43139,7 +43374,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 459,
+    "totalEntries": 462,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -43440,5 +43675,5 @@
       ]
     }
   ],
-  "totalEntries": 459
+  "totalEntries": 462
 }

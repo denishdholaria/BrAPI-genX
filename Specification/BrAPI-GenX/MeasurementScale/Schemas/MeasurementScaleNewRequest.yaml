@@ -1,0 +1,45 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    MeasurementScaleNewRequest:
+      type: object
+      description: |-
+        Request to register one measurement scale and value domain entry.
+        Unknown measurementScaleDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      required:
+      - measurementScaleDbId
+      properties:
+        measurementScaleDbId:
+          description: Namespaced measurement-scale identity `{authority}:measurement-scale:{localId}`
+          type: string
+          example: institute-a:measurement-scale:ms-2026-001
+        scaleName:
+          description: Name of the measurement scale
+          type: string
+          example: 1-5 rating
+        valueDomain:
+          description: Value domain or allowed values
+          type: string
+          example: integer 1..5
+        status:
+          description: Lifecycle state of the entry
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: measurementScaleDbId of the entry this one replaces
+          type: string
+          example: institute-a:measurement-scale:ms-2026-000
+        provenance:
+          description: Evidence and method provenance for the entry
+          $ref: '#/components/schemas/ProvenanceEnvelope'
