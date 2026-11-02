@@ -1,0 +1,52 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    OutcomeFeedback:
+      type: object
+      description: |-
+        One immutable outcome feedback record. A published (outcomeFeedbackDbId) record
+        never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - outcomeFeedbackDbId
+      - status
+      properties:
+        outcomeFeedbackDbId:
+          description: Namespaced outcome-feedback identity `{authority}:outcome-feedback:{localId}`
+          type: string
+          example: institute-a:outcome-feedback:of-2026-001
+        feedbackType:
+          description: Type of outcome feedback
+          type: string
+          example: yield outcome
+        feedbackValue:
+          description: Feedback value
+          type: string
+          example: "7.2t/ha"
+        feedbackSource:
+          description: Source of the feedback
+          type: string
+          example: harvest measurement
+        feedbackDate:
+          description: Date of the feedback
+          type: string
+          example: "2026-10-15"
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: outcomeFeedbackDbId of the record this one replaces
+          type: string
+          example: institute-a:outcome-feedback:of-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

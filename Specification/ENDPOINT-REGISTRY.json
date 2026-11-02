@@ -55044,12 +55044,247 @@
         "brapi-genx.genx.v1.explanation-evidences.list",
         "brapi-genx.genx.v1.explanation-evidences.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "OutcomeFeedback",
+      "brapiTag": "OutcomeFeedback",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/OutcomeFeedback/OutcomeFeedback_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.outcome-feedbacks.list",
+      "method": "GET",
+      "path": "/outcome-feedbacks",
+      "operationIdInSource": "genxListOutcomeFeedbacks",
+      "recommendedOperationId": "genxListOutcomeFeedbacks",
+      "operationName": "List ArtifactCatalogues",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List outcome feedback records, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover artifactcatalogues.",
+        "Support VCF import/export."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a record (use the POST endpoint).",
+        "Assuming a record is a BrAPI data resource.",
+        "Treating the list as a complete history."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterOutcomeFeedback",
+        "genxGetOutcomeFeedback",
+        "genxRegisterGenomicDataset"
+      ],
+      "decisionReferences": [
+        "RFC-138"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.outcome-feedbacks.record",
+        "brapi-genx.genx.v1.outcome-feedbacks.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "OutcomeFeedback",
+      "brapiTag": "OutcomeFeedback",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/OutcomeFeedback/OutcomeFeedback_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.outcome-feedbacks.record",
+      "method": "POST",
+      "path": "/outcome-feedbacks",
+      "operationIdInSource": "genxRegisterOutcomeFeedback",
+      "recommendedOperationId": "genxRegisterOutcomeFeedback",
+      "operationName": "Register one ArtifactCatalogue",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one outcome feedback record with provenance.",
+      "sourceDescription": "Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a artifactcatalogue.",
+        "Retry an identical record safely using the same vcfExportDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming a record is a BrAPI data resource.",
+        "Asserting that the export is validated or endorsed."
+      ],
+      "sideEffects": "Creates a outcome feedback identity or appends a new immutable version when accepted.",
+      "idempotency": "Same outcomeFeedbackDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "OutcomeFeedbackNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListOutcomeFeedbacks",
+        "genxGetOutcomeFeedback",
+        "genxRegisterGenomicDataset"
+      ],
+      "decisionReferences": [
+        "RFC-138"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.outcome-feedbacks.list",
+        "brapi-genx.genx.v1.outcome-feedbacks.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "OutcomeFeedback",
+      "brapiTag": "OutcomeFeedback",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/OutcomeFeedback/OutcomeFeedback_OutcomeFeedbackDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.outcome-feedbacks.get",
+      "method": "GET",
+      "path": "/outcome-feedbacks/{outcomeFeedbackDbId}",
+      "operationIdInSource": "genxGetOutcomeFeedback",
+      "recommendedOperationId": "genxGetOutcomeFeedback",
+      "operationName": "Get one ArtifactCatalogue",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one outcome feedback record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect export, status, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a record is a BrAPI data resource.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "outcomeFeedbackDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterOutcomeFeedback",
+        "genxListOutcomeFeedbacks",
+        "genxRegisterGenomicDataset"
+      ],
+      "decisionReferences": [
+        "RFC-138"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.outcome-feedbacks.list",
+        "brapi-genx.genx.v1.outcome-feedbacks.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 411,
+    "genxEntriesAdded": 414,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -55127,7 +55362,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 612,
+    "totalEntries": 615,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -55428,5 +55663,5 @@
       ]
     }
   ],
-  "totalEntries": 612
+  "totalEntries": 615
 }

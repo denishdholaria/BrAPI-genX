@@ -1,0 +1,52 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    OutcomeFeedbackNewRequest:
+      type: object
+      description: |-
+        Request to register one outcome feedback record. Unknown outcomeFeedbackDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - outcomeFeedbackDbId
+      properties:
+        outcomeFeedbackDbId:
+          description: Namespaced outcome-feedback identity `{authority}:outcome-feedback:{localId}`
+          type: string
+          example: institute-a:outcome-feedback:of-2026-001
+        feedbackType:
+          description: Type of outcome feedback
+          type: string
+          example: yield outcome
+        feedbackValue:
+          description: Feedback value
+          type: string
+          example: "7.2t/ha"
+        feedbackSource:
+          description: Source of the feedback
+          type: string
+          example: harvest measurement
+        feedbackDate:
+          description: Date of the feedback
+          type: string
+          example: "2026-10-15"
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: outcomeFeedbackDbId of the record this one replaces
+          type: string
+          example: institute-a:outcome-feedback:of-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

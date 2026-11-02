@@ -267,6 +267,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/explanation-evidences` | GET | `genxListExplanationEvidences` | List explanation evidences | Does not create or change a record; not a BrAPI data resource. |
 | `/genx/v1/explanation-evidences` | POST | `genxRegisterExplanationEvidence` | Register one explanation evidence | Append-only record; replay/conflict semantics. |
 | `/genx/v1/explanation-evidences/{explanationEvidenceDbId}` | GET | `genxGetExplanationEvidence` | Retrieve one explanation evidence | Does not treat a superseded record as current. |
+| `/genx/v1/outcome-feedbacks` | GET | `genxListOutcomeFeedbacks` | List outcome feedbacks | Does not create or change a record; not a BrAPI data resource. |
+| `/genx/v1/outcome-feedbacks` | POST | `genxRegisterOutcomeFeedback` | Register one outcome feedback | Append-only record; replay/conflict semantics. |
+| `/genx/v1/outcome-feedbacks/{outcomeFeedbackDbId}` | GET | `genxGetOutcomeFeedback` | Retrieve one outcome feedback | Does not treat a superseded record as current. |
 | `/genx/v1/analysis-results` | GET | `genxListAnalysisResults` | List analysis result records | Does not create or change a result; not a BrAPI data resource. |
 | `/genx/v1/analysis-results` | POST | `genxRecordAnalysisResult` | Record one analysis result | Append-only record; replay/conflict semantics. |
 | `/genx/v1/analysis-results/{analysisResultDbId}` | GET | `genxGetAnalysisResult` | Retrieve one analysis result record | Does not treat a superseded result as current. |

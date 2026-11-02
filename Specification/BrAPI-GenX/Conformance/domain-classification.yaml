@@ -340,6 +340,11 @@ modules:
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Explanation evidence records; BrAPI v2.1 has no equivalent record."
+  - path: "OutcomeFeedback/"
+    object: "OutcomeFeedback"
+    primary_class: null
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Outcome feedback records; BrAPI v2.1 has no equivalent record."
   - path: "AssayDesign/"
     object: "AssayDesign"
     primary_class: "D3"
