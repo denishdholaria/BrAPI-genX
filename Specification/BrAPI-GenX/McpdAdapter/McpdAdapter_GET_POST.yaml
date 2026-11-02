@@ -1,0 +1,139 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /mcpd-adapters:
+    get:
+      operationId: genxListMcpdAdapters
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.mcpd-adapters.list"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List MCPD adapter records, optionally filtered by status."
+        canBeUsedFor:
+          - "Discover mcpd-adapters and funding references."
+          - "Support germplasm and genetic resources."
+        mustNotBeUsedFor:
+          - "Creating or changing a mcpd-adapter (use the POST endpoint)."
+          - "Assuming a mcpd-adapter is a BrAPI Study."
+          - "Treating the list as a complete mcpd-adapter catalogue."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterMcpdAdapter"
+          - "genxGetMcpdAdapter"
+          - "genxPublishVariableTermVersion"
+        decisions: ["RFC-103"]
+        proposalStatus: "draft-non-normative"
+      summary: List mcpd-adapters
+      description: Get a paged list of mcpd-adapter and funding reference records across authorities. Filters combine with AND.
+      parameters:
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/McpdAdapterListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - McpdAdapter
+    post:
+      operationId: genxRegisterMcpdAdapter
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.mcpd-adapters.record"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Register one MCPD adapter record with provenance."
+        canBeUsedFor:
+          - "Publish a mcpd-adapter or funding reference."
+          - "Retry an identical record safely using the same mcpdAdapterDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing record; corrections require a new record that supersedes."
+          - "Assuming a mcpd-adapter is a BrAPI Study."
+          - "Asserting that the mcpd-adapter is validated or endorsed."
+        sideEffects: "Creates an MCPD adapter identity or appends a new immutable version when accepted."
+        idempotency: "Same mcpdAdapterDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListMcpdAdapters"
+          - "genxGetMcpdAdapter"
+          - "genxPublishVariableTermVersion"
+        decisions: ["RFC-103"]
+        proposalStatus: "draft-non-normative"
+      summary: Register one mcpd-adapter
+      description: |-
+        Unknown mcpdAdapterDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/McpdAdapterNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/McpdAdapter'
+                required:
+                - metadata
+                - result
+                title: McpdAdapterResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - McpdAdapter
+components:
+  responses:
+    McpdAdapterListResponse:
+      content:
+        application/json:
+          schema:
+            title: McpdAdapterListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/McpdAdapter'
+            required:
+            - metadata
+            - result
+      description: OK

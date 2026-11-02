@@ -1,0 +1,40 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    McpdAdapter:
+      type: object
+      description: |-
+        One immutable MCPD adapter record. A published (mcpdAdapterDbId)
+        record never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - mcpdAdapterDbId
+      - status
+      properties:
+        mcpdAdapterDbId:
+          description: Namespaced MCPD-adapter identity `{authority}:mcpd-adapter:{localId}`
+          type: string
+          example: institute-a:mcpd-adapter:ma-2026-001
+        source:
+          description: MCPD source system
+          type: string
+          example: MCPD v2
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: mcpdAdapterDbId of the record this one replaces
+          type: string
+          example: institute-a:mcpd-adapter:ma-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

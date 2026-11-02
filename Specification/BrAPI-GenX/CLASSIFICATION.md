@@ -152,6 +152,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | ResearchLocation / ResearchLocation | (none, cross-cutting) | C1, C2, C3, C6, C9 | Research location records; no BrAPI v2.1 equivalent |
 | CollectingMission / CollectingMission | (none, cross-cutting) | C1, C2, C3, C6, C9 | Collecting mission records; no BrAPI v2.1 equivalent |
 | ConservationMembership / ConservationMembership | (none, cross-cutting) | C1, C2, C3, C6, C9 | Conservation membership records; no BrAPI v2.1 equivalent |
+| McpdAdapter / McpdAdapter | (none, cross-cutting) | C1, C2, C3, C6, C9 | MCPD adapter records; no BrAPI v2.1 equivalent |
 | Conformance | Cross-cutting C8 | C1, C3 | Probes and fixtures establish contract evidence, not scientific-domain data |
 
 ## 5. Relationship to BrAPI V2.1

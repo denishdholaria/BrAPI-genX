@@ -396,6 +396,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/conservation-memberships` | GET | `genxListConservationMemberships` | List conservation memberships | Does not create or change a record; not a BrAPI data resource. |
 | `/genx/v1/conservation-memberships` | POST | `genxRegisterConservationMembership` | Register one conservation membership | Append-only record; replay/conflict semantics. |
 | `/genx/v1/conservation-memberships/{conservationMembershipDbId}` | GET | `genxGetConservationMembership` | Retrieve one conservation membership | Does not treat a superseded record as current. |
+| `/genx/v1/mcpd-adapters` | GET | `genxListMcpdAdapters` | List MCPD adapters | Does not create or change a record; not a BrAPI data resource. |
+| `/genx/v1/mcpd-adapters` | POST | `genxRegisterMcpdAdapter` | Register one MCPD adapter | Append-only record; replay/conflict semantics. |
+| `/genx/v1/mcpd-adapters/{mcpdAdapterDbId}` | GET | `genxGetMcpdAdapter` | Retrieve one MCPD adapter | Does not treat a superseded record as current. |
 
 `ProvenanceEnvelope` is embedded in result/record schemas and has no standalone route in this proposal.
 
