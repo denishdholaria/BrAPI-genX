@@ -1,0 +1,65 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /disease-observations/{diseaseObservationDbId}:
+    get:
+      operationId: genxGetDiseaseObservation
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.disease-observations.get"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve one disease observation record."
+        canBeUsedFor:
+          - "Inspect catalogue entries and provenance."
+        mustNotBeUsedFor:
+          - "Assuming a record is a BrAPI data resource."
+          - "Treating a superseded record as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterDiseaseObservation"
+          - "genxListDiseaseObservations"
+          - "genxRegisterResearchAsset"
+        decisions: ["RFC-123"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one disease observation
+      description: Returns the registered record, or 404.
+      parameters:
+      - name: diseaseObservationDbId
+        description: Namespaced disease-observations identity `{authority}:disease-observations:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/DiseaseObservation'
+                required:
+                - metadata
+                - result
+                title: DiseaseObservationResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - DiseaseObservation

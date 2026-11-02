@@ -1,0 +1,56 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    DiseaseObservation:
+      type: object
+      description: |-
+        One immutable disease observation record. A published (diseaseObservationDbId) record
+        never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - diseaseObservationDbId
+      - status
+      properties:
+        diseaseObservationDbId:
+          description: Namespaced disease-observation identity `{authority}:disease-observation:{localId}`
+          type: string
+          example: institute-a:disease-observation:do-2026-001
+        observationType:
+          description: Type of disease observation
+          type: string
+          example: field scouting
+        pestOrDisease:
+          description: Pest or disease observed
+          type: string
+          example: maize lethal necrosis
+        severity:
+          description: Severity of the observation
+          type: string
+          example: moderate
+        observationDate:
+          description: Date of the observation
+          type: string
+          example: "2026-04-10"
+        fieldOrPlot:
+          description: Field or plot where observed
+          type: string
+          example: field-plot-42
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: diseaseObservationDbId of the record this one replaces
+          type: string
+          example: institute-a:disease-observation:do-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

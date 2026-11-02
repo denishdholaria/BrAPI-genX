@@ -1,0 +1,56 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    DiseaseObservationNewRequest:
+      type: object
+      description: |-
+        Request to register one disease observation record. Unknown diseaseObservationDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - diseaseObservationDbId
+      properties:
+        diseaseObservationDbId:
+          description: Namespaced disease-observation identity `{authority}:disease-observation:{localId}`
+          type: string
+          example: institute-a:disease-observation:do-2026-001
+        observationType:
+          description: Type of disease observation
+          type: string
+          example: field scouting
+        pestOrDisease:
+          description: Pest or disease observed
+          type: string
+          example: maize lethal necrosis
+        severity:
+          description: Severity of the observation
+          type: string
+          example: moderate
+        observationDate:
+          description: Date of the observation
+          type: string
+          example: "2026-04-10"
+        fieldOrPlot:
+          description: Field or plot where observed
+          type: string
+          example: field-plot-42
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: diseaseObservationDbId of the record this one replaces
+          type: string
+          example: institute-a:disease-observation:do-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
