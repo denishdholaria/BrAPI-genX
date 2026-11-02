@@ -260,6 +260,11 @@ modules:
     primary_class: "D6"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Farm and site reference records; BrAPI v2.1 has no equivalent record."
+  - path: "YieldMap/"
+    object: "YieldMap"
+    primary_class: "D6"
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Yield map records; BrAPI v2.1 has no equivalent record."
   - path: "AnalysisResult/"
     object: "AnalysisResult"
     primary_class: "D7"

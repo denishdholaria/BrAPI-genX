@@ -1,0 +1,64 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /yield-maps/{yieldMapDbId}:
+    get:
+      operationId: genxGetYieldMap
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.yield-maps.get"
+        classification:
+          primaryDomain: "D6"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve one yield map."
+        canBeUsedFor:
+          - "Inspect storage reference, resolution, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming the yield map is a BrAPI Observation."
+          - "Treating a superseded yield map as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterYieldMap"
+          - "genxListYieldMaps"
+        decisions: ["RFC-070"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one yield map
+      description: Returns the registered yield map, or 404.
+      parameters:
+      - name: yieldMapDbId
+        description: Namespaced yield-map identity `{authority}:yield-map:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/YieldMap'
+                required:
+                - metadata
+                - result
+                title: YieldMapResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - YieldMap

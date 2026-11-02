@@ -77,6 +77,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | D3 | Genotype QC reports | `GenotypeQc/` | RFC-064 |
 | D1 | Retention / disposal | `DisposalRecord/` | RFC-065 |
 | D6 | Farm / site reference | `Farm/` | RFC-069 |
+| D6 | Yield maps | `YieldMap/` | RFC-070 |
 | D6 | Sowing / planting | `PlantingOperation/` | RFC-066 |
 | D5 | Carbon stock | `CarbonStock/` | RFC-067 |
 | D5 | Water balance | `WaterBalance/` | RFC-068 |

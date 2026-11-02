@@ -76,6 +76,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | WaterBalance | 3 | proposed, non-normative |
 | WeatherForecast | 3 | proposed, non-normative |
 | WeatherObservations | 3 | proposed, non-normative |
+| YieldMap | 3 | proposed, non-normative |
 
 ## Operations
 
@@ -7363,6 +7364,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.weather-observations.list, brapi-genx.genx.v1.weather-observations.record
 - **Relevant RFC / decision references:** RFC-010
 - **Contract source:** [`Specification/BrAPI-GenX/WeatherObservations/WeatherObservations_WeatherObservationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/WeatherObservations/WeatherObservations_WeatherObservationDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### YieldMap — 3 operations
+
+### GET `/genx/v1/yield-maps`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.yield-maps.list`
+- **BrAPI-GenX operation identity:** `genxListYieldMaps` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListYieldMaps`
+- **GenX source module:** `YieldMap`
+- **Source tag:** YieldMap
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List yield maps, optionally filtered by study, crop cycle, or status.
+**Source contract description:**
+> Get a paged list of yield maps across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover yield maps produced for a study or crop cycle.
+- Support yield analysis and field-level reporting.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a yield map (use the POST endpoint).
+- Assuming a yield map is a BrAPI Observation.
+- Treating the list as a complete yield history.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** studyDbId, cropCycleDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterYieldMap, genxGetYieldMap, genxRecordHarvest
+- **Related catalogue IDs:** brapi-genx.genx.v1.yield-maps.register, brapi-genx.genx.v1.yield-maps.get
+- **Relevant RFC / decision references:** RFC-070
+- **Contract source:** [`Specification/BrAPI-GenX/YieldMap/YieldMap_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/YieldMap/YieldMap_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/yield-maps`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.yield-maps.register`
+- **BrAPI-GenX operation identity:** `genxRegisterYieldMap` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterYieldMap`
+- **GenX source module:** `YieldMap`
+- **Source tag:** YieldMap
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register a yield map with storage reference, resolution, and provenance.
+**Source contract description:**
+> Unknown yieldMapDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish a yield map produced from harvest data.
+- Create a new version under an existing yield map identity.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing yield map; corrections require a new record that supersedes.
+- Assuming the yield map is a BrAPI Observation.
+- Treating the yield map as measured yield without the referenced harvest records.
+- **Side effects:** Creates a yield map identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same yield map identity and identical body replays; conflicting content for the same identity is rejected.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** YieldMapNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListYieldMaps, genxGetYieldMap, genxRecordHarvest
+- **Related catalogue IDs:** brapi-genx.genx.v1.yield-maps.list, brapi-genx.genx.v1.yield-maps.get
+- **Relevant RFC / decision references:** RFC-070
+- **Contract source:** [`Specification/BrAPI-GenX/YieldMap/YieldMap_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/YieldMap/YieldMap_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/yield-maps/{yieldMapDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.yield-maps.get`
+- **BrAPI-GenX operation identity:** `genxGetYieldMap` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetYieldMap`
+- **GenX source module:** `YieldMap`
+- **Source tag:** YieldMap
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one yield map.
+**Source contract description:**
+> Returns the registered yield map, or 404.
+**Can be used for:**
+- Inspect storage reference, resolution, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the yield map is a BrAPI Observation.
+- Treating a superseded yield map as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** yieldMapDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterYieldMap, genxListYieldMaps, genxRecordHarvest
+- **Related catalogue IDs:** brapi-genx.genx.v1.yield-maps.list, brapi-genx.genx.v1.yield-maps.register
+- **Relevant RFC / decision references:** RFC-070
+- **Contract source:** [`Specification/BrAPI-GenX/YieldMap/YieldMap_YieldMapDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/YieldMap/YieldMap_YieldMapDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

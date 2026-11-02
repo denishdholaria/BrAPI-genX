@@ -39048,12 +39048,249 @@
         "brapi-genx.genx.v1.farms.list",
         "brapi-genx.genx.v1.farms.register"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "YieldMap",
+      "brapiTag": "YieldMap",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/YieldMap/YieldMap_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.yield-maps.list",
+      "method": "GET",
+      "path": "/yield-maps",
+      "operationIdInSource": "genxListYieldMaps",
+      "recommendedOperationId": "genxListYieldMaps",
+      "operationName": "List yield maps",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List yield maps, optionally filtered by study, crop cycle, or status.",
+      "sourceDescription": "Get a paged list of yield maps across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover yield maps produced for a study or crop cycle.",
+        "Support yield analysis and field-level reporting."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a yield map (use the POST endpoint).",
+        "Assuming a yield map is a BrAPI Observation.",
+        "Treating the list as a complete yield history."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "studyDbId",
+        "cropCycleDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterYieldMap",
+        "genxGetYieldMap",
+        "genxRecordHarvest"
+      ],
+      "decisionReferences": [
+        "RFC-070"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.yield-maps.register",
+        "brapi-genx.genx.v1.yield-maps.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "YieldMap",
+      "brapiTag": "YieldMap",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/YieldMap/YieldMap_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.yield-maps.register",
+      "method": "POST",
+      "path": "/yield-maps",
+      "operationIdInSource": "genxRegisterYieldMap",
+      "recommendedOperationId": "genxRegisterYieldMap",
+      "operationName": "Register one yield map",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register a yield map with storage reference, resolution, and provenance.",
+      "sourceDescription": "Unknown yieldMapDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a yield map produced from harvest data.",
+        "Create a new version under an existing yield map identity."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing yield map; corrections require a new record that supersedes.",
+        "Assuming the yield map is a BrAPI Observation.",
+        "Treating the yield map as measured yield without the referenced harvest records."
+      ],
+      "sideEffects": "Creates a yield map identity or appends a new immutable version when accepted.",
+      "idempotency": "Same yield map identity and identical body replays; conflicting content for the same identity is rejected.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "YieldMapNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListYieldMaps",
+        "genxGetYieldMap",
+        "genxRecordHarvest"
+      ],
+      "decisionReferences": [
+        "RFC-070"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.yield-maps.list",
+        "brapi-genx.genx.v1.yield-maps.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "YieldMap",
+      "brapiTag": "YieldMap",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/YieldMap/YieldMap_YieldMapDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.yield-maps.get",
+      "method": "GET",
+      "path": "/yield-maps/{yieldMapDbId}",
+      "operationIdInSource": "genxGetYieldMap",
+      "recommendedOperationId": "genxGetYieldMap",
+      "operationName": "Get one yield map",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one yield map.",
+      "sourceDescription": "Returns the registered yield map, or 404.",
+      "canBeUsedFor": [
+        "Inspect storage reference, resolution, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the yield map is a BrAPI Observation.",
+        "Treating a superseded yield map as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "yieldMapDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterYieldMap",
+        "genxListYieldMaps",
+        "genxRecordHarvest"
+      ],
+      "decisionReferences": [
+        "RFC-070"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.yield-maps.list",
+        "brapi-genx.genx.v1.yield-maps.register"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 207,
+    "genxEntriesAdded": 210,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -39131,7 +39368,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 408,
+    "totalEntries": 411,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

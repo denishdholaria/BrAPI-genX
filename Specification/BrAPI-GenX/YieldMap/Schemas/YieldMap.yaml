@@ -1,0 +1,73 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    YieldMap:
+      type: object
+      description: |-
+        One immutable yield map record. A published (yieldMapDbId) record
+        never mutates in place; corrections are recorded as additional
+        versions linked by supersedes.
+      required:
+      - yieldMapDbId
+      - status
+      properties:
+        yieldMapDbId:
+          description: Namespaced yield-map identity `{authority}:yield-map:{localId}`
+          type: string
+          example: institute-a:yield-map:ym-2026-001
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        locationDbId:
+          description: BrAPI Location the map covers, when applicable
+          type: string
+          example: institute-a:location:field-12
+        cropCycleDbId:
+          description: GenX CropCycle the map belongs to, when applicable
+          type: string
+          example: institute-a:crop-cycle:cc-2026-001
+        harvestRecordDbId:
+          description: GenX HarvestRecord the map was derived from, when applicable
+          type: string
+          example: institute-a:harvest:hr-2026-001
+        mapType:
+          description: Quantity represented by the map
+          type: string
+          enum:
+          - yield
+          - moisture
+          - protein
+          - other
+          example: yield
+        resolutionM:
+          description: Nominal cell size of the map, in metres
+          type: number
+          example: 10
+        storageUri:
+          description: Location of the map payload (HTTPS, DRS, or object store URI)
+          type: string
+          example: https://data.example.org/yield/ym-2026-001.tif
+        fileDigest:
+          description: Content digest of the map payload, for integrity checking
+          type: string
+          example: sha256:9f2c1c0d0b7a4e5f8a6b3c2d1e0f9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f
+        status:
+          description: Lifecycle state of the map record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: yieldMapDbId of the map record this one replaces
+          type: string
+          example: institute-a:yield-map:ym-2026-000
+        provenance:
+          description: Evidence and method provenance for the map
+          $ref: '#/components/schemas/ProvenanceEnvelope'

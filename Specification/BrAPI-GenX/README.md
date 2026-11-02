@@ -85,6 +85,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `CarbonStock/` | `CarbonStock` — carbon stock observations (pool, stock, depth, provenance) | `GET /genx/v1/carbon-stocks` (`genxListCarbonStocks`); `POST /genx/v1/carbon-stocks` (`genxRecordCarbonStock`); `GET /genx/v1/carbon-stocks/{carbonStockDbId}` (`genxGetCarbonStock`) |
 | `WaterBalance/` | `WaterBalance` — water balance records (period, inputs, outputs, storage change, provenance) | `GET /genx/v1/water-balances` (`genxListWaterBalances`); `POST /genx/v1/water-balances` (`genxRecordWaterBalance`); `GET /genx/v1/water-balances/{waterBalanceDbId}` (`genxGetWaterBalance`) |
 | `Farm/` | `Farm` — farm and site reference records (locations, area, provenance) | `GET /genx/v1/farms` (`genxListFarms`); `POST /genx/v1/farms` (`genxRegisterFarm`); `GET /genx/v1/farms/{farmDbId}` (`genxGetFarm`) |
+| `YieldMap/` | `YieldMap` — yield map records (storage reference, resolution, digest, provenance) | `GET /genx/v1/yield-maps` (`genxListYieldMaps`); `POST /genx/v1/yield-maps` (`genxRegisterYieldMap`); `GET /genx/v1/yield-maps/{yieldMapDbId}` (`genxGetYieldMap`) |
 | `MixedModel/` | `MixedModelResult` — mixed model result records (variance components, BLUPs, provenance) | `GET /genx/v1/mixed-model-results` (`genxListMixedModelResults`); `POST /genx/v1/mixed-model-results` (`genxRecordMixedModelResult`); `GET /genx/v1/mixed-model-results/{mixedModelResultDbId}` (`genxGetMixedModelResult`) |
 | `Heritability/` | `HeritabilityEstimate` — heritability estimate records (value, provenance) | `GET /genx/v1/heritability-estimates` (`genxListHeritabilityEstimates`); `POST /genx/v1/heritability-estimates` (`genxRecordHeritability`); `GET /genx/v1/heritability-estimates/{heritabilityEstimateDbId}` (`genxGetHeritabilityEstimate`) |
 | `GxeAnalysis/` | `GxeAnalysisResult` — GxE analysis result records (interaction effect, provenance) | `GET /genx/v1/gxe-analyses` (`genxListGxeAnalyses`); `POST /genx/v1/gxe-analyses` (`genxRecordGxeAnalysis`); `GET /genx/v1/gxe-analyses/{gxeAnalysisResultDbId}` (`genxGetGxeAnalysis`) |
@@ -169,7 +170,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-066-Planting-Operation](./RFC-066-Planting-Operation.md),
 [RFC-067-Carbon-Stock](./RFC-067-Carbon-Stock.md),
 [RFC-068-Water-Balance](./RFC-068-Water-Balance.md),
-[RFC-069-Farm](./RFC-069-Farm.md).
+[RFC-069-Farm](./RFC-069-Farm.md),
+[RFC-070-Yield-Map](./RFC-070-Yield-Map.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

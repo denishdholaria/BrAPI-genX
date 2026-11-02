@@ -43,8 +43,9 @@ paths:
           type: string
           enum:
           - active
-          - completed
+          - inactive
           - superseded
+          - withdrawn
       - $ref: '#/components/parameters/page'
       - $ref: '#/components/parameters/pageSize'
       - $ref: '#/components/parameters/authorizationHeader'
