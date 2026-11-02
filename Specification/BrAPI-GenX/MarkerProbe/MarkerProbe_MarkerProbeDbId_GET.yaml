@@ -1,0 +1,65 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /marker-probes/{markerProbeDbId}:
+    get:
+      operationId: genxGetMarkerProbe
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.marker-probes.get"
+        classification:
+          primaryDomain: "D3"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve one marker probe record."
+        canBeUsedFor:
+          - "Inspect probe identity, marker linkage, platform, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming the probe is a BrAPI Marker."
+          - "Treating a superseded probe as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterMarkerProbe"
+          - "genxListMarkerProbes"
+          - "genxRecordAssayDesign"
+        decisions: ["RFC-071"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one marker probe
+      description: Returns the registered probe, or 404.
+      parameters:
+      - name: markerProbeDbId
+        description: Namespaced marker-probe identity `{authority}:marker-probe:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/MarkerProbe'
+                required:
+                - metadata
+                - result
+                title: MarkerProbeResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - MarkerProbe

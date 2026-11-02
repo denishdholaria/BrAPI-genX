@@ -252,6 +252,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/genotype-qc-reports` | GET | `genxListGenotypeQcReports` | List genotype QC reports | Does not create or change a report; not a BrAPI data resource. |
 | `/genx/v1/genotype-qc-reports` | POST | `genxRecordGenotypeQcReport` | Record one genotype QC report | Append-only record; replay/conflict semantics. |
 | `/genx/v1/genotype-qc-reports/{genotypeQcReportDbId}` | GET | `genxGetGenotypeQcReport` | Retrieve one genotype QC report | Does not treat a superseded report as current. |
+| `/genx/v1/marker-probes` | GET | `genxListMarkerProbes` | List marker probes | Does not create or change a probe; not a BrAPI Marker. |
+| `/genx/v1/marker-probes` | POST | `genxRegisterMarkerProbe` | Register one marker probe | Append-only record; replay/conflict semantics. |
+| `/genx/v1/marker-probes/{markerProbeDbId}` | GET | `genxGetMarkerProbe` | Retrieve one marker probe | Does not treat a superseded probe as current. |
 | `/genx/v1/disposal-records` | GET | `genxListDisposalRecords` | List disposal records | Does not create or change a disposal; not a BrAPI data resource. |
 | `/genx/v1/disposal-records` | POST | `genxRecordDisposalRecord` | Record one disposal | Append-only record; replay/conflict semantics. |
 | `/genx/v1/disposal-records/{disposalRecordDbId}` | GET | `genxGetDisposalRecord` | Retrieve one disposal record | Does not treat a superseded disposal as current. |

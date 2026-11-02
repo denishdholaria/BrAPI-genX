@@ -39285,12 +39285,249 @@
         "brapi-genx.genx.v1.yield-maps.list",
         "brapi-genx.genx.v1.yield-maps.register"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "MarkerProbe",
+      "brapiTag": "MarkerProbe",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/MarkerProbe/MarkerProbe_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.marker-probes.list",
+      "method": "GET",
+      "path": "/marker-probes",
+      "operationIdInSource": "genxListMarkerProbes",
+      "recommendedOperationId": "genxListMarkerProbes",
+      "operationName": "List marker probes",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List marker probe records, optionally filtered by marker, platform, or status.",
+      "sourceDescription": "Get a paged list of marker probes across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover probes defined for a marker or genotyping platform.",
+        "Support assay design and probe traceability."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a probe (use the POST endpoint).",
+        "Assuming a probe is a BrAPI Marker.",
+        "Treating the list as a complete assay catalogue."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "markerDbId",
+        "platform",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterMarkerProbe",
+        "genxGetMarkerProbe",
+        "genxRecordAssayDesign"
+      ],
+      "decisionReferences": [
+        "RFC-071"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.marker-probes.record",
+        "brapi-genx.genx.v1.marker-probes.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "MarkerProbe",
+      "brapiTag": "MarkerProbe",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/MarkerProbe/MarkerProbe_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.marker-probes.record",
+      "method": "POST",
+      "path": "/marker-probes",
+      "operationIdInSource": "genxRegisterMarkerProbe",
+      "recommendedOperationId": "genxRegisterMarkerProbe",
+      "operationName": "Register one marker probe",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one marker probe with marker linkage, platform, and provenance.",
+      "sourceDescription": "Unknown markerProbeDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a vendor probe definition and its marker linkage.",
+        "Retry an identical probe safely using the same markerProbeDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing probe; corrections require a new record that supersedes.",
+        "Assuming the probe is a BrAPI Marker or replaces the Marker registry.",
+        "Asserting that the probe is validated or commercially available."
+      ],
+      "sideEffects": "Creates a marker probe identity or appends a new immutable version when accepted.",
+      "idempotency": "Same markerProbeDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "MarkerProbeNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListMarkerProbes",
+        "genxGetMarkerProbe",
+        "genxRecordAssayDesign"
+      ],
+      "decisionReferences": [
+        "RFC-071"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.marker-probes.list",
+        "brapi-genx.genx.v1.marker-probes.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "MarkerProbe",
+      "brapiTag": "MarkerProbe",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/MarkerProbe/MarkerProbe_MarkerProbeDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.marker-probes.get",
+      "method": "GET",
+      "path": "/marker-probes/{markerProbeDbId}",
+      "operationIdInSource": "genxGetMarkerProbe",
+      "recommendedOperationId": "genxGetMarkerProbe",
+      "operationName": "Get one marker probe",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one marker probe record.",
+      "sourceDescription": "Returns the registered probe, or 404.",
+      "canBeUsedFor": [
+        "Inspect probe identity, marker linkage, platform, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the probe is a BrAPI Marker.",
+        "Treating a superseded probe as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "markerProbeDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterMarkerProbe",
+        "genxListMarkerProbes",
+        "genxRecordAssayDesign"
+      ],
+      "decisionReferences": [
+        "RFC-071"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.marker-probes.list",
+        "brapi-genx.genx.v1.marker-probes.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 210,
+    "genxEntriesAdded": 213,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -39368,7 +39605,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 411,
+    "totalEntries": 414,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -39668,5 +39905,6 @@
         "Do not invent a synchronous inference route."
       ]
     }
-  ]
+  ],
+  "totalEntries": 414
 }

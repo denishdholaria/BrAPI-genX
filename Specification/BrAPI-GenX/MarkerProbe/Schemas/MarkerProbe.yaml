@@ -1,0 +1,48 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    MarkerProbe:
+      type: object
+      description: |-
+        One immutable marker probe record. A published (markerProbeDbId)
+        record never mutates in place; corrections are recorded as additional
+        probes linked by supersedes.
+      required:
+      - markerProbeDbId
+      - status
+      properties:
+        markerProbeDbId:
+          description: Namespaced marker-probe identity `{authority}:marker-probe:{localId}`
+          type: string
+          example: institute-a:marker-probe:mp-2026-001
+        markerDbId:
+          description: BrAPI Marker the probe targets
+          type: string
+          example: m1
+        platform:
+          description: Genotyping platform or vendor the probe is defined for
+          type: string
+          example: vendor-x-array-v3
+        probeSequence:
+          description: Probe sequence, when disclosed
+          type: string
+          example: ACGTACGTACGT
+        status:
+          description: Lifecycle state of the probe record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: markerProbeDbId of the record this one replaces
+          type: string
+          example: institute-a:marker-probe:mp-2026-000
+        provenance:
+          description: Evidence and method provenance for the probe
+          $ref: '#/components/schemas/ProvenanceEnvelope'

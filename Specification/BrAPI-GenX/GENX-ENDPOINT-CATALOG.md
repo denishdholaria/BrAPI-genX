@@ -44,6 +44,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | Jobs | 4 | proposed, non-normative |
 | Kinship | 3 | proposed, non-normative |
 | LotLedger | 2 | proposed, non-normative |
+| MarkerProbe | 3 | proposed, non-normative |
 | MeasurementMethods | 3 | proposed, non-normative |
 | MethylationAnalysis | 3 | proposed, non-normative |
 | MixedModel | 3 | proposed, non-normative |
@@ -4082,6 +4083,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.brapi-v2-1.germplasm.get.seedlots.by-seedlotdbid.transactions, brapi-genx.brapi-v2-1.germplasm.get.seedlots.transactions, brapi-genx.brapi-v2-1.germplasm.post.seedlots.transactions, brapi-genx.genx.v1.seed-lot-ledger.list
 - **Relevant RFC / decision references:** RFC-003, D-07, D-08, D-20, A-05, A-06
 - **Contract source:** [`Specification/BrAPI-GenX/LotLedger/Ledger_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/LotLedger/Ledger_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### MarkerProbe — 3 operations
+
+### GET `/genx/v1/marker-probes`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.marker-probes.list`
+- **BrAPI-GenX operation identity:** `genxListMarkerProbes` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListMarkerProbes`
+- **GenX source module:** `MarkerProbe`
+- **Source tag:** MarkerProbe
+- **Proposed BrAPI-GenX classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List marker probes, optionally filtered by marker, platform, or status.
+**Source contract description:**
+> Get a paged list of marker probes across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover probes defined for a marker or genotyping platform.
+- Support assay design and probe traceability.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a probe (use the POST endpoint).
+- Assuming a probe is a BrAPI Marker.
+- Treating the list as a complete assay catalogue.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** markerDbId, platform, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterMarkerProbe, genxGetMarkerProbe, genxRecordAssayDesign
+- **Related catalogue IDs:** brapi-genx.genx.v1.marker-probes.record, brapi-genx.genx.v1.marker-probes.get
+- **Relevant RFC / decision references:** RFC-071
+- **Contract source:** [`Specification/BrAPI-GenX/MarkerProbe/MarkerProbe_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/MarkerProbe/MarkerProbe_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/marker-probes`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.marker-probes.record`
+- **BrAPI-GenX operation identity:** `genxRegisterMarkerProbe` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterMarkerProbe`
+- **GenX source module:** `MarkerProbe`
+- **Source tag:** MarkerProbe
+- **Proposed BrAPI-GenX classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register one marker probe with marker linkage, platform, and provenance.
+**Source contract description:**
+> Unknown markerProbeDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish a vendor probe definition and its marker linkage.
+- Retry an identical probe safely using the same markerProbeDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing probe; corrections require a new record that supersedes.
+- Assuming the probe is a BrAPI Marker or replaces the Marker registry.
+- Asserting that the probe is validated or commercially available.
+- **Side effects:** Creates a marker probe identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same markerProbeDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** MarkerProbeNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListMarkerProbes, genxGetMarkerProbe, genxRecordAssayDesign
+- **Related catalogue IDs:** brapi-genx.genx.v1.marker-probes.list, brapi-genx.genx.v1.marker-probes.get
+- **Relevant RFC / decision references:** RFC-071
+- **Contract source:** [`Specification/BrAPI-GenX/MarkerProbe/MarkerProbe_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/MarkerProbe/MarkerProbe_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/marker-probes/{markerProbeDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.marker-probes.get`
+- **BrAPI-GenX operation identity:** `genxGetMarkerProbe` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetMarkerProbe`
+- **GenX source module:** `MarkerProbe`
+- **Source tag:** MarkerProbe
+- **Proposed BrAPI-GenX classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one marker probe record.
+**Source contract description:**
+> Returns the registered probe, or 404.
+**Can be used for:**
+- Inspect probe identity, marker linkage, platform, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the probe is a BrAPI Marker.
+- Treating a superseded probe as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** markerProbeDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterMarkerProbe, genxListMarkerProbes, genxRecordAssayDesign
+- **Related catalogue IDs:** brapi-genx.genx.v1.marker-probes.list, brapi-genx.genx.v1.marker-probes.register
+- **Relevant RFC / decision references:** RFC-071
+- **Contract source:** [`Specification/BrAPI-GenX/MarkerProbe/MarkerProbe_MarkerProbeDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/MarkerProbe/MarkerProbe_MarkerProbeDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

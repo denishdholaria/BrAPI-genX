@@ -80,6 +80,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `AssayDesign/` | `AssayDesign` — assay design records (platform, marker count, provenance) | `GET /genx/v1/assay-designs` (`genxListAssayDesigns`); `POST /genx/v1/assay-designs` (`genxRecordAssayDesign`); `GET /genx/v1/assay-designs/{assayDesignDbId}` (`genxGetAssayDesign`) |
 | `VariantAnnotation/` | `VariantAnnotation` — variant annotation records (functional annotations, provenance) | `GET /genx/v1/variant-annotations` (`genxListVariantAnnotations`); `POST /genx/v1/variant-annotations` (`genxRecordVariantAnnotation`); `GET /genx/v1/variant-annotations/{variantAnnotationDbId}` (`genxGetVariantAnnotation`) |
 | `GenotypeQc/` | `GenotypeQcReport` — genotype QC report records (metrics, thresholds, provenance) | `GET /genx/v1/genotype-qc-reports` (`genxListGenotypeQcReports`); `POST /genx/v1/genotype-qc-reports` (`genxRecordGenotypeQcReport`); `GET /genx/v1/genotype-qc-reports/{genotypeQcReportDbId}` (`genxGetGenotypeQcReport`) |
+| `MarkerProbe/` | `MarkerProbe` — marker probe records (marker linkage, platform, sequence, provenance) | `GET /genx/v1/marker-probes` (`genxListMarkerProbes`); `POST /genx/v1/marker-probes` (`genxRegisterMarkerProbe`); `GET /genx/v1/marker-probes/{markerProbeDbId}` (`genxGetMarkerProbe`) |
 | `DisposalRecord/` | `DisposalRecord` — disposal records (reason, method, quantity, provenance) | `GET /genx/v1/disposal-records` (`genxListDisposalRecords`); `POST /genx/v1/disposal-records` (`genxRecordDisposalRecord`); `GET /genx/v1/disposal-records/{disposalRecordDbId}` (`genxGetDisposalRecord`) |
 | `PlantingOperation/` | `PlantingOperation` — planting operation records (date, method, rate, provenance) | `GET /genx/v1/planting-operations` (`genxListPlantingOperations`); `POST /genx/v1/planting-operations` (`genxRecordPlantingOperation`); `GET /genx/v1/planting-operations/{plantingOperationDbId}` (`genxGetPlantingOperation`) |
 | `CarbonStock/` | `CarbonStock` — carbon stock observations (pool, stock, depth, provenance) | `GET /genx/v1/carbon-stocks` (`genxListCarbonStocks`); `POST /genx/v1/carbon-stocks` (`genxRecordCarbonStock`); `GET /genx/v1/carbon-stocks/{carbonStockDbId}` (`genxGetCarbonStock`) |
@@ -171,7 +172,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-067-Carbon-Stock](./RFC-067-Carbon-Stock.md),
 [RFC-068-Water-Balance](./RFC-068-Water-Balance.md),
 [RFC-069-Farm](./RFC-069-Farm.md),
-[RFC-070-Yield-Map](./RFC-070-Yield-Map.md).
+[RFC-070-Yield-Map](./RFC-070-Yield-Map.md),
+[RFC-071-Marker-Probe](./RFC-071-Marker-Probe.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).
