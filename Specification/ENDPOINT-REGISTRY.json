@@ -44936,12 +44936,247 @@
         "brapi-genx.genx.v1.common-crop-names.list",
         "brapi-genx.genx.v1.common-crop-names.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CropSpecies",
+      "brapiTag": "CropSpecies",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CropSpecies/CropSpecies_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.crop-species.list",
+      "method": "GET",
+      "path": "/crop-species",
+      "operationIdInSource": "genxListCropSpecies",
+      "recommendedOperationId": "genxListCropSpecies",
+      "operationName": "List crop species",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List crop and species registry entries, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of crop and species registry entries across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover crop and species entries.",
+        "Support crop and species reference data."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing an entry (use the POST endpoint).",
+        "Assuming an entry is a BrAPI Germplasm.",
+        "Treating the list as a complete catalogue."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterCropSpecies",
+        "genxGetCropSpecies",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-095"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.crop-species.record",
+        "brapi-genx.genx.v1.crop-species.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CropSpecies",
+      "brapiTag": "CropSpecies",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CropSpecies/CropSpecies_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.crop-species.record",
+      "method": "POST",
+      "path": "/crop-species",
+      "operationIdInSource": "genxRegisterCropSpecies",
+      "recommendedOperationId": "genxRegisterCropSpecies",
+      "operationName": "Register one crop species",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one crop and species registry entry with provenance.",
+      "sourceDescription": "Unknown cropSpeciesDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a crop and species entry.",
+        "Retry an identical entry safely using the same cropSpeciesDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing entry; corrections require a new record that supersedes.",
+        "Assuming an entry is a BrAPI Germplasm.",
+        "Asserting that the entry is validated or endorsed."
+      ],
+      "sideEffects": "Creates a crop species identity or appends a new immutable version when accepted.",
+      "idempotency": "Same cropSpeciesDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "CropSpeciesNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListCropSpecies",
+        "genxGetCropSpecies",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-095"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.crop-species.list",
+        "brapi-genx.genx.v1.crop-species.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CropSpecies",
+      "brapiTag": "CropSpecies",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CropSpecies/CropSpecies_CropSpeciesDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.crop-species.get",
+      "method": "GET",
+      "path": "/crop-species/{cropSpeciesDbId}",
+      "operationIdInSource": "genxGetCropSpecies",
+      "recommendedOperationId": "genxGetCropSpecies",
+      "operationName": "Get one crop species",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one crop and species registry entry.",
+      "sourceDescription": "Returns the registered entry, or 404.",
+      "canBeUsedFor": [
+        "Inspect species, synonyms, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming an entry is a BrAPI Germplasm.",
+        "Treating a superseded entry as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "cropSpeciesDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterCropSpecies",
+        "genxListCropSpecies",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-095"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.crop-species.list",
+        "brapi-genx.genx.v1.crop-species.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 282,
+    "genxEntriesAdded": 285,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -45019,7 +45254,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 483,
+    "totalEntries": 486,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -45320,5 +45555,5 @@
       ]
     }
   ],
-  "totalEntries": 483
+  "totalEntries": 486
 }

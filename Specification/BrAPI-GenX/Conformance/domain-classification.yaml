@@ -515,6 +515,11 @@ modules:
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C4", "C9"]
     rationale: "Common crop name entries; BrAPI v2.1 has no equivalent record."
+  - path: "CropSpecies/"
+    object: "CropSpecies"
+    primary_class: null
+    cross_cutting: ["C1", "C2", "C3", "C4", "C9"]
+    rationale: "Crop and species registry entries; BrAPI v2.1 has no equivalent record."
   - path: "Conformance/"
     object: "Probes, fixtures and overlap register"
     primary_class: null

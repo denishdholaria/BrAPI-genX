@@ -95,6 +95,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | B | Calendars and time conventions | `Calendar/` | RFC-091 |
 | B | Taxon names and synonyms | `TaxonName/` | RFC-080 |
 | B | Common crop names | `CommonCropName/` | RFC-094 |
+| B | Crop and species registry | `CropSpecies/` | RFC-095 |
 | B | Location geometry reference | `LocationGeometry/` | RFC-092 |
 | B | Reference data versioning | `ReferenceDataVersion/` | RFC-093 |
 | G | Developmental stage vocabulary | `DevelopmentalStage/` | RFC-079 |

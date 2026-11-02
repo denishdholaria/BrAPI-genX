@@ -1,0 +1,139 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /crop-species:
+    get:
+      operationId: genxListCropSpecies
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.crop-species.list"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C4", "C9"]
+        purpose: "List crop and species registry entries, optionally filtered by status."
+        canBeUsedFor:
+          - "Discover crop and species entries."
+          - "Support crop and species reference data."
+        mustNotBeUsedFor:
+          - "Creating or changing an entry (use the POST endpoint)."
+          - "Assuming an entry is a BrAPI Germplasm."
+          - "Treating the list as a complete catalogue."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterCropSpecies"
+          - "genxGetCropSpecies"
+          - "genxPublishVariableTermVersion"
+        decisions: ["RFC-095"]
+        proposalStatus: "draft-non-normative"
+      summary: List crop species
+      description: Get a paged list of crop and species registry entries across authorities. Filters combine with AND.
+      parameters:
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/CropSpeciesListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - CropSpecies
+    post:
+      operationId: genxRegisterCropSpecies
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.crop-species.record"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C4", "C9"]
+        purpose: "Register one crop and species registry entry with provenance."
+        canBeUsedFor:
+          - "Publish a crop and species entry."
+          - "Retry an identical entry safely using the same cropSpeciesDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing entry; corrections require a new record that supersedes."
+          - "Assuming an entry is a BrAPI Germplasm."
+          - "Asserting that the entry is validated or endorsed."
+        sideEffects: "Creates a crop species identity or appends a new immutable version when accepted."
+        idempotency: "Same cropSpeciesDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListCropSpecies"
+          - "genxGetCropSpecies"
+          - "genxPublishVariableTermVersion"
+        decisions: ["RFC-095"]
+        proposalStatus: "draft-non-normative"
+      summary: Register one crop species
+      description: |-
+        Unknown cropSpeciesDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CropSpeciesNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/CropSpecies'
+                required:
+                - metadata
+                - result
+                title: CropSpeciesResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - CropSpecies
+components:
+  responses:
+    CropSpeciesListResponse:
+      content:
+        application/json:
+          schema:
+            title: CropSpeciesListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CropSpecies'
+            required:
+            - metadata
+            - result
+      description: OK
