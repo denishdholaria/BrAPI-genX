@@ -1,0 +1,40 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    CollectingMission:
+      type: object
+      description: |-
+        One immutable collecting mission record. A published
+        (collectingMissionDbId) record never mutates in place; corrections
+        are recorded as additional records linked by supersedes.
+      required:
+      - collectingMissionDbId
+      - status
+      properties:
+        collectingMissionDbId:
+          description: Namespaced collecting-mission identity `{authority}:collecting-mission:{localId}`
+          type: string
+          example: institute-a:collecting-mission:cm-2026-001
+        title:
+          description: Mission title
+          type: string
+          example: Wild wheat collection 2026
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: collectingMissionDbId of the record this one replaces
+          type: string
+          example: institute-a:collecting-mission:cm-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

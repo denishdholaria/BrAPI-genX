@@ -1,0 +1,139 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /collecting-missions:
+    get:
+      operationId: genxListCollectingMissions
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.collecting-missions.list"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List collecting mission records, optionally filtered by status."
+        canBeUsedFor:
+          - "Discover collecting-missions and funding references."
+          - "Support germplasm and genetic resources."
+        mustNotBeUsedFor:
+          - "Creating or changing a collecting-mission (use the POST endpoint)."
+          - "Assuming a collecting-mission is a BrAPI Study."
+          - "Treating the list as a complete collecting-mission catalogue."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterCollectingMission"
+          - "genxGetCollectingMission"
+          - "genxPublishVariableTermVersion"
+        decisions: ["RFC-101"]
+        proposalStatus: "draft-non-normative"
+      summary: List collecting-missions
+      description: Get a paged list of collecting-mission and funding reference records across authorities. Filters combine with AND.
+      parameters:
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/CollectingMissionListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - CollectingMission
+    post:
+      operationId: genxRegisterCollectingMission
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.collecting-missions.record"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Register one collecting mission record with provenance."
+        canBeUsedFor:
+          - "Publish a collecting-mission or funding reference."
+          - "Retry an identical record safely using the same collectingMissionDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing record; corrections require a new record that supersedes."
+          - "Assuming a collecting-mission is a BrAPI Study."
+          - "Asserting that the collecting-mission is validated or endorsed."
+        sideEffects: "Creates a collecting mission identity or appends a new immutable version when accepted."
+        idempotency: "Same collectingMissionDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListCollectingMissions"
+          - "genxGetCollectingMission"
+          - "genxPublishVariableTermVersion"
+        decisions: ["RFC-101"]
+        proposalStatus: "draft-non-normative"
+      summary: Register one collecting-mission
+      description: |-
+        Unknown collectingMissionDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectingMissionNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/CollectingMission'
+                required:
+                - metadata
+                - result
+                title: CollectingMissionResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - CollectingMission
+components:
+  responses:
+    CollectingMissionListResponse:
+      content:
+        application/json:
+          schema:
+            title: CollectingMissionListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CollectingMission'
+            required:
+            - metadata
+            - result
+      description: OK

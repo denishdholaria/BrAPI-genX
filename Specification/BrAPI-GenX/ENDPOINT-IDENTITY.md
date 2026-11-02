@@ -390,6 +390,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/research-locations` | GET | `genxListResearchLocations` | List research locations | Does not create or change a record; not a BrAPI data resource. |
 | `/genx/v1/research-locations` | POST | `genxRegisterResearchLocation` | Register one research location | Append-only record; replay/conflict semantics. |
 | `/genx/v1/research-locations/{researchLocationDbId}` | GET | `genxGetResearchLocation` | Retrieve one research location | Does not treat a superseded record as current. |
+| `/genx/v1/collecting-missions` | GET | `genxListCollectingMissions` | List collecting missions | Does not create or change a record; not a BrAPI data resource. |
+| `/genx/v1/collecting-missions` | POST | `genxRegisterCollectingMission` | Register one collecting mission | Append-only record; replay/conflict semantics. |
+| `/genx/v1/collecting-missions/{collectingMissionDbId}` | GET | `genxGetCollectingMission` | Retrieve one collecting mission | Does not treat a superseded record as current. |
 
 `ProvenanceEnvelope` is embedded in result/record schemas and has no standalone route in this proposal.
 
