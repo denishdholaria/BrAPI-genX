@@ -1,0 +1,44 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    Calendar:
+      type: object
+      description: |-
+        One immutable calendar or time convention record. A published
+        (calendarDbId) record never mutates in place; corrections are
+        recorded as additional records linked by supersedes.
+      required:
+      - calendarDbId
+      - status
+      properties:
+        calendarDbId:
+          description: Namespaced calendar identity `{authority}:calendar:{localId}`
+          type: string
+          example: institute-a:calendar:cal-2026-001
+        name:
+          description: Calendar or convention name
+          type: string
+          example: Northern hemisphere growing season
+        convention:
+          description: Time convention details
+          type: string
+          example: ISO-8601
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: calendarDbId of the record this one replaces
+          type: string
+          example: institute-a:calendar:cal-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

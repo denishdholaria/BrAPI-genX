@@ -357,6 +357,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/reusable-lists` | GET | `genxListReusableLists` | List reusable lists | Does not create or change a record; not a BrAPI data resource. |
 | `/genx/v1/reusable-lists` | POST | `genxRegisterReusableList` | Register one reusable list | Append-only record; replay/conflict semantics. |
 | `/genx/v1/reusable-lists/{reusableListDbId}` | GET | `genxGetReusableList` | Retrieve one reusable list | Does not treat a superseded record as current. |
+| `/genx/v1/calendars` | GET | `genxListCalendars` | List calendars | Does not create or change a record; not a BrAPI data resource. |
+| `/genx/v1/calendars` | POST | `genxRegisterCalendar` | Register one calendar | Append-only record; replay/conflict semantics. |
+| `/genx/v1/calendars/{calendarDbId}` | GET | `genxGetCalendar` | Retrieve one calendar | Does not treat a superseded record as current. |
 | `/genx/v1/taxon-names` | GET | `genxListTaxonNames` | List taxon names | Does not create or change an entry; not a BrAPI data resource. |
 | `/genx/v1/taxon-names` | POST | `genxRegisterTaxonName` | Register one taxon name | Append-only record; replay/conflict semantics. |
 | `/genx/v1/taxon-names/{taxonNameDbId}` | GET | `genxGetTaxonName` | Retrieve one taxon name | Does not treat a superseded entry as current. |

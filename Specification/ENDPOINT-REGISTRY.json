@@ -43996,12 +43996,247 @@
         "brapi-genx.genx.v1.reusable-lists.list",
         "brapi-genx.genx.v1.reusable-lists.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Calendar",
+      "brapiTag": "Calendar",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Calendar/Calendar_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.calendars.list",
+      "method": "GET",
+      "path": "/calendars",
+      "operationIdInSource": "genxListCalendars",
+      "recommendedOperationId": "genxListCalendars",
+      "operationName": "List calendars",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List calendar and time convention records, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of calendar and time convention records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover calendars and time conventions.",
+        "Support reference data and time conventions."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a calendar (use the POST endpoint).",
+        "Assuming a calendar is a BrAPI Study.",
+        "Treating the list as a complete catalogue."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterCalendar",
+        "genxGetCalendar",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-091"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.calendars.record",
+        "brapi-genx.genx.v1.calendars.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Calendar",
+      "brapiTag": "Calendar",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Calendar/Calendar_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.calendars.record",
+      "method": "POST",
+      "path": "/calendars",
+      "operationIdInSource": "genxRegisterCalendar",
+      "recommendedOperationId": "genxRegisterCalendar",
+      "operationName": "Register one calendar",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one calendar or time convention record with provenance.",
+      "sourceDescription": "Unknown calendarDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a calendar or time convention.",
+        "Retry an identical record safely using the same calendarDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming a calendar is a BrAPI Study.",
+        "Asserting that the calendar is validated or endorsed."
+      ],
+      "sideEffects": "Creates a calendar identity or appends a new immutable version when accepted.",
+      "idempotency": "Same calendarDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "CalendarNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListCalendars",
+        "genxGetCalendar",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-091"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.calendars.list",
+        "brapi-genx.genx.v1.calendars.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Calendar",
+      "brapiTag": "Calendar",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Calendar/Calendar_CalendarDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.calendars.get",
+      "method": "GET",
+      "path": "/calendars/{calendarDbId}",
+      "operationIdInSource": "genxGetCalendar",
+      "recommendedOperationId": "genxGetCalendar",
+      "operationName": "Get one calendar",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one calendar or time convention record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect calendar identity, convention, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a calendar is a BrAPI Study.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "calendarDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterCalendar",
+        "genxListCalendars",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-091"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.calendars.list",
+        "brapi-genx.genx.v1.calendars.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 270,
+    "genxEntriesAdded": 273,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -44079,7 +44314,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 471,
+    "totalEntries": 474,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -44380,5 +44615,5 @@
       ]
     }
   ],
-  "totalEntries": 471
+  "totalEntries": 474
 }
