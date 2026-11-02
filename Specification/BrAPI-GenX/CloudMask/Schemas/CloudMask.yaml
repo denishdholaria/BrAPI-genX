@@ -1,0 +1,56 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    CloudMask:
+      type: object
+      description: |-
+        One immutable cloud mask record. A published (cloudMaskDbId) record
+        never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - cloudMaskDbId
+      - status
+      properties:
+        cloudMaskDbId:
+          description: Namespaced cloud-mask identity `{authority}:cloud-mask:{localId}`
+          type: string
+          example: institute-a:cloud-mask:cm-2026-001
+        maskType:
+          description: Type of cloud mask
+          type: string
+          example: binary
+        acquisitionDate:
+          description: Acquisition date
+          type: string
+          example: "2026-05-01"
+        crs:
+          description: Coordinate reference system
+          type: string
+          example: EPSG:4326
+        resolution:
+          description: Spatial resolution
+          type: string
+          example: "10m"
+        extent:
+          description: Spatial extent
+          type: string
+          example: POLYGON((...))
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: cloudMaskDbId of the record this one replaces
+          type: string
+          example: institute-a:cloud-mask:cm-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

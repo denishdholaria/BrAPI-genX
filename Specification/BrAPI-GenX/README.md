@@ -137,6 +137,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `RemoteSensingMetadata/` | `RemoteSensingMetadata` — remote sensing metadata records (platform, sensor, CRS) | `GET /genx/v1/remote-sensing-metadata` (`genxListRemoteSensingMetadata`); `POST /genx/v1/remote-sensing-metadata` (`genxRegisterRemoteSensingMetadata`); `GET /genx/v1/remote-sensing-metadata/{remoteSensingMetadataDbId}` (`genxGetRemoteSensingMetadata`) |
 | `SpatialQuery/` | `SpatialQuery` — spatial query records (type, geometry, params) | `GET /genx/v1/spatial-queries` (`genxListSpatialQueries`); `POST /genx/v1/spatial-queries` (`genxRegisterSpatialQuery`); `GET /genx/v1/spatial-queries/{spatialQueryDbId}` (`genxGetSpatialQuery`) |
 | `SpatialIndex/` | `SpatialIndex` — spatial index records (type, coverage, resolution) | `GET /genx/v1/spatial-indexes` (`genxListSpatialIndexes`); `POST /genx/v1/spatial-indexes` (`genxRegisterSpatialIndex`); `GET /genx/v1/spatial-indexes/{spatialIndexDbId}` (`genxGetSpatialIndex`) |
+| `CloudMask/` | `CloudMask` — cloud mask records (type, acquisition date, resolution) | `GET /genx/v1/cloud-masks` (`genxListCloudMasks`); `POST /genx/v1/cloud-masks` (`genxRegisterCloudMask`); `GET /genx/v1/cloud-masks/{cloudMaskDbId}` (`genxGetCloudMask`) |
 | `RasterCatalogue/` | `RasterCatalogue` — raster catalogue records (type, resolution, CRS) | `GET /genx/v1/raster-catalogues` (`genxListRasterCatalogues`); `POST /genx/v1/raster-catalogues` (`genxRegisterRasterCatalogue`); `GET /genx/v1/raster-catalogues/{rasterCatalogueDbId}` (`genxGetRasterCatalogue`) |
 | `FieldGeometry/` | `FieldGeometry` — field geometry records (type, geometry, area) | `GET /genx/v1/field-geometries` (`genxListFieldGeometries`); `POST /genx/v1/field-geometries` (`genxRegisterFieldGeometry`); `GET /genx/v1/field-geometries/{fieldGeometryDbId}` (`genxGetFieldGeometry`) |
 | `AssayDesign/` | `AssayDesign` — assay design records (platform, marker count, provenance) | `GET /genx/v1/assay-designs` (`genxListAssayDesigns`); `POST /genx/v1/assay-designs` (`genxRecordAssayDesign`); `GET /genx/v1/assay-designs/{assayDesignDbId}` (`genxGetAssayDesign`) |
@@ -323,7 +324,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-143-SpatialQuery](./RFC-143-SpatialQuery.md),
 [RFC-144-RasterCatalogue](./RFC-144-RasterCatalogue.md),
 [RFC-145-RemoteSensingMetadata](./RFC-145-RemoteSensingMetadata.md),
-[RFC-146-VegetationIndex](./RFC-146-VegetationIndex.md).
+[RFC-146-VegetationIndex](./RFC-146-VegetationIndex.md),
+[RFC-147-CloudMask](./RFC-147-CloudMask.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

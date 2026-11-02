@@ -84,6 +84,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | M | Vegetation index | `VegetationIndex/` | RFC-146 |
 | M | Remote sensing metadata | `RemoteSensingMetadata/` | RFC-145 |
 | M | Spatial index | `SpatialIndex/` | RFC-141 |
+| M | Cloud mask | `CloudMask/` | RFC-147 |
 | M | Raster catalogue | `RasterCatalogue/` | RFC-144 |
 | M | Spatial query | `SpatialQuery/` | RFC-143 |
 | M | Field geometry | `FieldGeometry/` | RFC-142 |
