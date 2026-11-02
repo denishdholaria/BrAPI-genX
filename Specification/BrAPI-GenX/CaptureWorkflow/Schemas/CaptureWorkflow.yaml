@@ -1,0 +1,40 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    CaptureWorkflow:
+      type: object
+      description: |-
+        One immutable capture workflow record. A published
+        (captureWorkflowDbId) record never mutates in place; corrections are
+        recorded as additional records linked by supersedes.
+      required:
+      - captureWorkflowDbId
+      - status
+      properties:
+        captureWorkflowDbId:
+          description: Namespaced capture-workflow identity `{authority}:capture-workflow:{localId}`
+          type: string
+          example: institute-a:capture-workflow:cw-2026-001
+        workflowType:
+          description: Type of capture workflow
+          type: string
+          example: manual-entry
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: captureWorkflowDbId of the record this one replaces
+          type: string
+          example: institute-a:capture-workflow:cw-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

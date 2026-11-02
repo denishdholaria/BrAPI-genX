@@ -48464,12 +48464,247 @@
         "brapi-genx.genx.v1.trial-networks.list",
         "brapi-genx.genx.v1.trial-networks.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CaptureWorkflow",
+      "brapiTag": "CaptureWorkflow",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CaptureWorkflow/CaptureWorkflow_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.capture-workflows.list",
+      "method": "GET",
+      "path": "/capture-workflows",
+      "operationIdInSource": "genxListCaptureWorkflows",
+      "recommendedOperationId": "genxListCaptureWorkflows",
+      "operationName": "List capture workflows",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List capture workflow records, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of capture workflow records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover capture workflows.",
+        "Support phenotyping capture workflow."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a record (use the POST endpoint).",
+        "Assuming a record is a BrAPI Observation.",
+        "Treating the list as a complete history."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterCaptureWorkflow",
+        "genxGetCaptureWorkflow",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-110"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.capture-workflows.record",
+        "brapi-genx.genx.v1.capture-workflows.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CaptureWorkflow",
+      "brapiTag": "CaptureWorkflow",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CaptureWorkflow/CaptureWorkflow_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.capture-workflows.record",
+      "method": "POST",
+      "path": "/capture-workflows",
+      "operationIdInSource": "genxRegisterCaptureWorkflow",
+      "recommendedOperationId": "genxRegisterCaptureWorkflow",
+      "operationName": "Register one capture workflow",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one capture workflow record with provenance.",
+      "sourceDescription": "Unknown captureWorkflowDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a capture workflow.",
+        "Retry an identical record safely using the same captureWorkflowDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming a record is a BrAPI Observation.",
+        "Asserting that the workflow is validated or endorsed."
+      ],
+      "sideEffects": "Creates a capture workflow identity or appends a new immutable version when accepted.",
+      "idempotency": "Same captureWorkflowDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "CaptureWorkflowNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListCaptureWorkflows",
+        "genxGetCaptureWorkflow",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-110"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.capture-workflows.list",
+        "brapi-genx.genx.v1.capture-workflows.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CaptureWorkflow",
+      "brapiTag": "CaptureWorkflow",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CaptureWorkflow/CaptureWorkflow_CaptureWorkflowDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.capture-workflows.get",
+      "method": "GET",
+      "path": "/capture-workflows/{captureWorkflowDbId}",
+      "operationIdInSource": "genxGetCaptureWorkflow",
+      "recommendedOperationId": "genxGetCaptureWorkflow",
+      "operationName": "Get one capture workflow",
+      "classification": {
+        "primaryDomain": "D4",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one capture workflow record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect workflow, status, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a record is a BrAPI Observation.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "captureWorkflowDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterCaptureWorkflow",
+        "genxListCaptureWorkflows",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-110"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.capture-workflows.list",
+        "brapi-genx.genx.v1.capture-workflows.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 327,
+    "genxEntriesAdded": 330,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -48547,7 +48782,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 528,
+    "totalEntries": 531,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -48848,5 +49083,5 @@
       ]
     }
   ],
-  "totalEntries": 528
+  "totalEntries": 531
 }

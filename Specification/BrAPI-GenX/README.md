@@ -62,6 +62,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `WeatherObservations/` | `WeatherObservation` — environmental/weather observation records (measurements, quality, provenance) | `GET /genx/v1/weather-observations` (`genxListWeatherObservations`); `POST /genx/v1/weather-observations` (`genxRecordWeatherObservation`); `GET /genx/v1/weather-observations/{weatherObservationDbId}` (`genxGetWeatherObservation`) |
 | `HarvestRecords/` | `HarvestRecord` — harvest-event records (quantity, quality, moisture, provenance) | `GET /genx/v1/harvest-records` (`genxListHarvestRecords`); `POST /genx/v1/harvest-records` (`genxRecordHarvest`); `GET /genx/v1/harvest-records/{harvestRecordDbId}` (`genxGetHarvestRecord`) |
 | `PhenotypeCapture/` | `PhenotypeCapture` — phenotype capture events (entries, quality flags, missingness, corrections, image linkage) | `GET /genx/v1/phenotype-captures` (`genxListPhenotypeCaptures`); `POST /genx/v1/phenotype-captures` (`genxRecordPhenotypeCapture`); `GET /genx/v1/phenotype-captures/{phenotypeCaptureDbId}` (`genxGetPhenotypeCapture`) |
+| `CaptureWorkflow/` | `CaptureWorkflow` — capture workflow records (workflow type, provenance) | `GET /genx/v1/capture-workflows` (`genxListCaptureWorkflows`); `POST /genx/v1/capture-workflows` (`genxRegisterCaptureWorkflow`); `GET /genx/v1/capture-workflows/{captureWorkflowDbId}` (`genxGetCaptureWorkflow`) |
 | `GenomicDatasets/` | `GenomicDataset` — prepared genomic dataset records (reference assembly, pipeline provenance, access policy, release status) | `GET /genx/v1/genomic-datasets` (`genxListGenomicDatasets`); `POST /genx/v1/genomic-datasets` (`genxRegisterGenomicDataset`); `GET /genx/v1/genomic-datasets/{genomicDatasetDbId}` (`genxGetGenomicDataset`) |
 | `GenebankStorage/` | `StorageLocation` — genebank storage location records (capacity, environment, provenance) | `GET /genx/v1/genebank-storage` (`genxListStorageLocations`); `POST /genx/v1/genebank-storage` (`genxRegisterStorageLocation`); `GET /genx/v1/genebank-storage/{storageLocationDbId}` (`genxGetStorageLocation`) |
 | `ResearchAssets/` | `ResearchAsset` — research asset records (type, title, license, access policy, persistent identifier, provenance) | `GET /genx/v1/research-assets` (`genxListResearchAssets`); `POST /genx/v1/research-assets` (`genxRegisterResearchAsset`); `GET /genx/v1/research-assets/{researchAssetDbId}` (`genxGetResearchAsset`) |
@@ -249,7 +250,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-106-Treatment-Assignment](./RFC-106-Treatment-Assignment.md),
 [RFC-107-Plot](./RFC-107-Plot.md),
 [RFC-108-Field-Book](./RFC-108-Field-Book.md),
-[RFC-109-Trial-Network](./RFC-109-Trial-Network.md).
+[RFC-109-Trial-Network](./RFC-109-Trial-Network.md),
+[RFC-110-Capture-Workflow](./RFC-110-Capture-Workflow.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

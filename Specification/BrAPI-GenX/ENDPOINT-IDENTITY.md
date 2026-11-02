@@ -324,6 +324,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/phenotype-captures` | GET | `genxListPhenotypeCaptures` | List phenotype capture events | Does not create or change a capture; not a BrAPI Observation. |
 | `/genx/v1/phenotype-captures` | POST | `genxRecordPhenotypeCapture` | Record one phenotype capture event | Append-only record; replay/conflict semantics; does not imply a BrAPI Observation. |
 | `/genx/v1/phenotype-captures/{phenotypeCaptureDbId}` | GET | `genxGetPhenotypeCapture` | Retrieve one phenotype capture event | Does not treat a superseded capture as current. |
+| `/genx/v1/capture-workflows` | GET | `genxListCaptureWorkflows` | List capture workflows | Does not create or change a record; not a BrAPI Observation. |
+| `/genx/v1/capture-workflows` | POST | `genxRegisterCaptureWorkflow` | Register one capture workflow | Append-only record; replay/conflict semantics. |
+| `/genx/v1/capture-workflows/{captureWorkflowDbId}` | GET | `genxGetCaptureWorkflow` | Retrieve one capture workflow | Does not treat a superseded record as current. |
 | `/genx/v1/genomic-datasets` | GET | `genxListGenomicDatasets` | List prepared genomic datasets | Does not create or change a dataset; not a BrAPI VariantSet or VariantMatrix. |
 | `/genx/v1/genomic-datasets` | POST | `genxRegisterGenomicDataset` | Register one prepared genomic dataset | Append-only record; replay/conflict semantics; does not upload dataset bytes. |
 | `/genx/v1/genomic-datasets/{genomicDatasetDbId}` | GET | `genxGetGenomicDataset` | Retrieve one prepared genomic dataset | Does not treat a withdrawn dataset as current. |

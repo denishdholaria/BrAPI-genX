@@ -1,0 +1,40 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    CaptureWorkflowNewRequest:
+      type: object
+      description: |-
+        Request to register one capture workflow record. Unknown
+        captureWorkflowDbId creates; same id with an identical body replays
+        the existing record; same id with a different body is rejected with 409.
+      required:
+      - captureWorkflowDbId
+      properties:
+        captureWorkflowDbId:
+          description: Namespaced capture-workflow identity `{authority}:capture-workflow:{localId}`
+          type: string
+          example: institute-a:capture-workflow:cw-2026-001
+        workflowType:
+          description: Type of capture workflow
+          type: string
+          example: manual-entry
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: captureWorkflowDbId of the record this one replaces
+          type: string
+          example: institute-a:capture-workflow:cw-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
