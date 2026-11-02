@@ -1,0 +1,52 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    TelemetryNormalization:
+      type: object
+      description: |-
+        One immutable telemetry normalization record. A published (telemetryNormalizationDbId) record
+        never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - telemetryNormalizationDbId
+      - status
+      properties:
+        telemetryNormalizationDbId:
+          description: Namespaced telemetry-normalization identity `{authority}:telemetry-normalization:{localId}`
+          type: string
+          example: institute-a:telemetry-normalization:tn-2026-001
+        normalizationType:
+          description: Type of telemetry normalization
+          type: string
+          example: radiometric
+        rawDataReference:
+          description: Reference to raw telemetry data
+          type: string
+          example: institute-a:raw-telemetry:rt-2026-001
+        normalizedDataReference:
+          description: Reference to normalized telemetry data
+          type: string
+          example: institute-a:normalized-telemetry:nt-2026-001
+        method:
+          description: Normalization method
+          type: string
+          example: radiometric-correction
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: telemetryNormalizationDbId of the record this one replaces
+          type: string
+          example: institute-a:telemetry-normalization:tn-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

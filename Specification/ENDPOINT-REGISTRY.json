@@ -57394,12 +57394,247 @@
         "brapi-genx.genx.v1.cloud-masks.list",
         "brapi-genx.genx.v1.cloud-masks.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "TelemetryNormalization",
+      "brapiTag": "TelemetryNormalization",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/TelemetryNormalization/TelemetryNormalization_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.telemetry-normalizations.list",
+      "method": "GET",
+      "path": "/telemetry-normalizations",
+      "operationIdInSource": "genxListTelemetryNormalizations",
+      "recommendedOperationId": "genxListTelemetryNormalizations",
+      "operationName": "List ArtifactCatalogues",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List telemetry normalization records, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover artifactcatalogues.",
+        "Support VCF import/export."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a record (use the POST endpoint).",
+        "Assuming a record is a BrAPI data resource.",
+        "Treating the list as a complete history."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterTelemetryNormalization",
+        "genxGetTelemetryNormalization",
+        "genxRegisterGenomicDataset"
+      ],
+      "decisionReferences": [
+        "RFC-148"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.telemetry-normalizations.record",
+        "brapi-genx.genx.v1.telemetry-normalizations.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "TelemetryNormalization",
+      "brapiTag": "TelemetryNormalization",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/TelemetryNormalization/TelemetryNormalization_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.telemetry-normalizations.record",
+      "method": "POST",
+      "path": "/telemetry-normalizations",
+      "operationIdInSource": "genxRegisterTelemetryNormalization",
+      "recommendedOperationId": "genxRegisterTelemetryNormalization",
+      "operationName": "Register one ArtifactCatalogue",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one telemetry normalization record with provenance.",
+      "sourceDescription": "Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a artifactcatalogue.",
+        "Retry an identical record safely using the same vcfExportDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming a record is a BrAPI data resource.",
+        "Asserting that the export is validated or endorsed."
+      ],
+      "sideEffects": "Creates a telemetry normalization identity or appends a new immutable version when accepted.",
+      "idempotency": "Same telemetryNormalizationDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "TelemetryNormalizationNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListTelemetryNormalizations",
+        "genxGetTelemetryNormalization",
+        "genxRegisterGenomicDataset"
+      ],
+      "decisionReferences": [
+        "RFC-148"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.telemetry-normalizations.list",
+        "brapi-genx.genx.v1.telemetry-normalizations.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "TelemetryNormalization",
+      "brapiTag": "TelemetryNormalization",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/TelemetryNormalization/TelemetryNormalization_TelemetryNormalizationDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.telemetry-normalizations.get",
+      "method": "GET",
+      "path": "/telemetry-normalizations/{telemetryNormalizationDbId}",
+      "operationIdInSource": "genxGetTelemetryNormalization",
+      "recommendedOperationId": "genxGetTelemetryNormalization",
+      "operationName": "Get one ArtifactCatalogue",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one telemetry normalization record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect export, status, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a record is a BrAPI data resource.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "telemetryNormalizationDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterTelemetryNormalization",
+        "genxListTelemetryNormalizations",
+        "genxRegisterGenomicDataset"
+      ],
+      "decisionReferences": [
+        "RFC-148"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.telemetry-normalizations.list",
+        "brapi-genx.genx.v1.telemetry-normalizations.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 441,
+    "genxEntriesAdded": 444,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -57477,7 +57712,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 642,
+    "totalEntries": 645,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -57778,5 +58013,5 @@
       ]
     }
   ],
-  "totalEntries": 642
+  "totalEntries": 645
 }

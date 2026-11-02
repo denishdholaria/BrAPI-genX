@@ -355,6 +355,11 @@ modules:
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "CRS transform records; BrAPI v2.1 has no equivalent record."
+  - path: "TelemetryNormalization/"
+    object: "TelemetryNormalization"
+    primary_class: null
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Telemetry normalization records; BrAPI v2.1 has no equivalent record."
   - path: "VegetationIndex/"
     object: "VegetationIndex"
     primary_class: null

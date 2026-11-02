@@ -276,6 +276,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/crs-transforms` | GET | `genxListCrsTransforms` | List crs transforms | Does not create or change a record; not a BrAPI data resource. |
 | `/genx/v1/crs-transforms` | POST | `genxRegisterCrsTransform` | Register one crs transform | Append-only record; replay/conflict semantics. |
 | `/genx/v1/crs-transforms/{crsTransformDbId}` | GET | `genxGetCrsTransform` | Retrieve one crs transform | Does not treat a superseded record as current. |
+| `/genx/v1/telemetry-normalizations` | GET | `genxListTelemetryNormalizations` | List telemetry normalization | Does not create or change a record; not a BrAPI data resource. |
+| `/genx/v1/telemetry-normalizations` | POST | `genxRegisterTelemetryNormalization` | Register one telemetry normalization | Append-only record; replay/conflict semantics. |
+| `/genx/v1/telemetry-normalizations/{telemetryNormalizationDbId}` | GET | `genxGetTelemetryNormalization` | Retrieve one telemetry normalization | Does not treat a superseded record as current. |
 | `/genx/v1/vegetation-indexes` | GET | `genxListVegetationIndexes` | List vegetation indexes | Does not create or change a record; not a BrAPI data resource. |
 | `/genx/v1/vegetation-indexes` | POST | `genxRegisterVegetationIndex` | Register one vegetation index | Append-only record; replay/conflict semantics. |
 | `/genx/v1/vegetation-indexes/{vegetationIndexDbId}` | GET | `genxGetVegetationIndex` | Retrieve one vegetation index | Does not treat a superseded record as current. |

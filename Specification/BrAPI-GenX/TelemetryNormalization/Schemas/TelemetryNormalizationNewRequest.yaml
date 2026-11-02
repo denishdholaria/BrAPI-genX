@@ -1,0 +1,52 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    TelemetryNormalizationNewRequest:
+      type: object
+      description: |-
+        Request to register one telemetry normalization record. Unknown telemetryNormalizationDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - telemetryNormalizationDbId
+      properties:
+        telemetryNormalizationDbId:
+          description: Namespaced telemetry-normalization identity `{authority}:telemetry-normalization:{localId}`
+          type: string
+          example: institute-a:telemetry-normalization:tn-2026-001
+        normalizationType:
+          description: Type of telemetry normalization
+          type: string
+          example: radiometric
+        rawDataReference:
+          description: Reference to raw telemetry data
+          type: string
+          example: institute-a:raw-telemetry:rt-2026-001
+        normalizedDataReference:
+          description: Reference to normalized telemetry data
+          type: string
+          example: institute-a:normalized-telemetry:nt-2026-001
+        method:
+          description: Normalization method
+          type: string
+          example: radiometric-correction
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: telemetryNormalizationDbId of the record this one replaces
+          type: string
+          example: institute-a:telemetry-normalization:tn-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
