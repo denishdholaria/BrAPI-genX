@@ -1,0 +1,56 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    PestDiseaseRiskNewRequest:
+      type: object
+      description: |-
+        Request to register one pest/disease risk record. Unknown pestDiseaseRiskDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - pestDiseaseRiskDbId
+      properties:
+        pestDiseaseRiskDbId:
+          description: Namespaced pest-disease-risk identity `{authority}:pest-disease-risk:{localId}`
+          type: string
+          example: institute-a:pest-disease-risk:pdr-2026-001
+        riskType:
+          description: Type of pest/disease risk
+          type: string
+          example: foliar disease
+        targetPestOrDisease:
+          description: Target pest or disease
+          type: string
+          example: northern corn leaf blight
+        riskLevel:
+          description: Risk level
+          type: string
+          example: high
+        probability:
+          description: Probability of occurrence
+          type: string
+          example: "0.75"
+        regionOrZone:
+          description: Region or zone the risk applies to
+          type: string
+          example: zone-3
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: pestDiseaseRiskDbId of the record this one replaces
+          type: string
+          example: institute-a:pest-disease-risk:pdr-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
