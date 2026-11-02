@@ -8,15 +8,11 @@ components:
     ResearchAsset:
       type: object
       description: |-
-        One immutable research asset record. A published
-        (researchAssetDbId) record never mutates in place; corrections are
-        recorded as additional assets linked by supersedes.
+        One immutable research asset record. A published (researchAssetDbId)
+        record never mutates in place; corrections are recorded as additional
+        versions linked by supersedes.
       required:
       - researchAssetDbId
-      - assetType
-      - title
-      - license
-      - accessPolicy
       - status
       properties:
         researchAssetDbId:
@@ -24,7 +20,7 @@ components:
           type: string
           example: institute-a:research-asset:ra-2026-001
         assetType:
-          description: Class of research asset
+          description: Kind of research output
           type: string
           enum:
           - dataset
@@ -32,23 +28,18 @@ components:
           - protocol
           - report
           - evidence-pack
+          - other
           example: dataset
         title:
-          description: Human readable asset title
+          description: Human-readable title of the asset
           type: string
-          example: Wheat yield trial dataset 2026
-        creators:
-          description: Creators or authors of the asset
-          type: array
-          items:
-            type: string
-          example: [Dr. Jane Doe, Dr. John Smith]
+          example: Wheat yield trial 2026 dataset
         description:
-          description: What the asset contains and its scope
+          description: Short description of the asset
           type: string
-          example: Phenotype and genotype data from the 2026 yield trial.
+          example: Plot-level yield and covariates for the 2026 multi-site trial.
         license:
-          description: License applied to the asset
+          description: License identifier applied to the asset
           type: string
           example: CC-BY-4.0
         accessPolicy:
@@ -58,33 +49,32 @@ components:
           - open
           - restricted
           - embargoed
+          - closed
           example: open
         embargoUntil:
-          description: Embargo end date (ISO-8601), when applicable
+          description: End of the embargo window (ISO 8601), when accessPolicy is embargoed
           type: string
-          format: date
-          example: '2027-01-01'
+          format: date-time
+          example: '2027-01-01T00:00:00Z'
         persistentIdentifier:
-          description: Persistent identifier (e.g. DOI) when minted
+          description: Persistent identifier already assigned to the asset (DOI, Handle, ARK)
           type: string
-          example: 10.5281/zenodo.1234567
-        payloadReferences:
-          description: References to payload bytes or files
-          type: array
-          items:
-            type: string
-          example: [https://institute.org/data/wheat-2026.zip]
+          example: doi:10.5281/zenodo.1234567
+        fairPackageDbId:
+          description: GenX FAIR package that carries the payload, when applicable
+          type: string
+          example: institute-a:fair-package:fp-2026-001
         status:
           description: Lifecycle state of the asset record
           type: string
           enum:
           - draft
           - published
-          - withdrawn
           - superseded
-          example: draft
+          - withdrawn
+          example: published
         supersedes:
-          description: researchAssetDbId of the asset this one replaces
+          description: researchAssetDbId of the asset record this one replaces
           type: string
           example: institute-a:research-asset:ra-2026-000
         provenance:

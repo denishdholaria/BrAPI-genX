@@ -83,6 +83,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | D5 | Water balance | `WaterBalance/` | RFC-068 |
 | I | Genomic dataset release/access | `GenomicDatasets/` | RFC-013 |
 | S | FAIR packages | `FAIR/` | RFC-006 |
+| S | Research asset registry, persistent identifiers / DOI, license/access, embargo | `ResearchAssets/` | RFC-016 |
 
 Still open in D3 row 9: genotype call semantics, marker/probe registry,
 vendor order/result ingestion. D1 row 4 named gaps are now covered. Still open

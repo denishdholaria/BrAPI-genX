@@ -31,19 +31,13 @@ paths:
       description: Get a paged list of research assets across authorities. Filters combine with AND.
       parameters:
       - name: assetType
-        description: Filter by asset class
+        description: Filter by asset type
         in: query
         required: false
         schema:
           type: string
-          enum:
-          - dataset
-          - model
-          - protocol
-          - report
-          - evidence-pack
       - name: license
-        description: Filter by license
+        description: Filter by license identifier
         in: query
         required: false
         schema:
@@ -54,10 +48,6 @@ paths:
         required: false
         schema:
           type: string
-          enum:
-          - open
-          - restricted
-          - embargoed
       - $ref: '#/components/parameters/page'
       - $ref: '#/components/parameters/pageSize'
       - $ref: '#/components/parameters/authorizationHeader'
@@ -71,7 +61,7 @@ paths:
         '403':
           $ref: '#/components/responses/403Forbidden'
       tags:
-      - ResearchAssets
+      - ResearchAsset
     post:
       operationId: genxRegisterResearchAsset
       x-brapi-genx:
@@ -132,7 +122,7 @@ paths:
         '403':
           $ref: '#/components/responses/403Forbidden'
       tags:
-      - ResearchAssets
+      - ResearchAsset
 components:
   responses:
     ResearchAssetListResponse:
