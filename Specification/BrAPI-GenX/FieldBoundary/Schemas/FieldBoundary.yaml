@@ -1,0 +1,48 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    FieldBoundary:
+      type: object
+      description: |-
+        One immutable operational field boundary and history record. A
+        published (fieldBoundaryDbId) record never mutates in place;
+        corrections are recorded as additional records linked by supersedes.
+      required:
+      - fieldBoundaryDbId
+      - status
+      properties:
+        fieldBoundaryDbId:
+          description: Namespaced field-boundary identity `{authority}:field-boundary:{localId}`
+          type: string
+          example: institute-a:field-boundary:fb-2026-001
+        fieldDbId:
+          description: BrAPI/GenX field or site reference
+          type: string
+          example: field-001
+        boundaryVersion:
+          description: Version label for the boundary
+          type: string
+          example: v3
+        geometryUri:
+          description: URI referencing the boundary geometry
+          type: string
+          example: https://storage.example.org/boundaries/fb-2026-001.geojson
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: fieldBoundaryDbId of the record this one replaces
+          type: string
+          example: institute-a:field-boundary:fb-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

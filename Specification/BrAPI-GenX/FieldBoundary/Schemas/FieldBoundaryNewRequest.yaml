@@ -1,0 +1,49 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    FieldBoundaryNewRequest:
+      type: object
+      description: |-
+        Request to register one operational field boundary and history record.
+        Unknown fieldBoundaryDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      required:
+      - fieldBoundaryDbId
+      properties:
+        fieldBoundaryDbId:
+          description: Namespaced field-boundary identity `{authority}:field-boundary:{localId}`
+          type: string
+          example: institute-a:field-boundary:fb-2026-001
+        fieldDbId:
+          description: BrAPI/GenX field or site reference
+          type: string
+          example: field-001
+        boundaryVersion:
+          description: Version label for the boundary
+          type: string
+          example: v3
+        geometryUri:
+          description: URI referencing the boundary geometry
+          type: string
+          example: https://storage.example.org/boundaries/fb-2026-001.geojson
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: fieldBoundaryDbId of the record this one replaces
+          type: string
+          example: institute-a:field-boundary:fb-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

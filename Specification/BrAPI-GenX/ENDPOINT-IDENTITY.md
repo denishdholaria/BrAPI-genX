@@ -280,6 +280,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/field-scouting` | GET | `genxListFieldScouting` | List field scouting records | Does not create or change a record; not a BrAPI Observation. |
 | `/genx/v1/field-scouting` | POST | `genxRegisterFieldScouting` | Register one field scouting record | Append-only record; replay/conflict semantics. |
 | `/genx/v1/field-scouting/{fieldScoutingDbId}` | GET | `genxGetFieldScouting` | Retrieve one field scouting record | Does not treat a superseded record as current. |
+| `/genx/v1/field-boundaries` | GET | `genxListFieldBoundaries` | List field boundaries | Does not create or change a boundary; not a BrAPI Location. |
+| `/genx/v1/field-boundaries` | POST | `genxRegisterFieldBoundary` | Register one field boundary record | Append-only record; replay/conflict semantics. |
+| `/genx/v1/field-boundaries/{fieldBoundaryDbId}` | GET | `genxGetFieldBoundary` | Retrieve one field boundary record | Does not treat a superseded boundary as current. |
 | `/genx/v1/yield-maps` | POST | `genxRegisterYieldMap` | Register one yield map | Append-only record; replay/conflict semantics. |
 | `/genx/v1/yield-maps/{yieldMapDbId}` | GET | `genxGetYieldMap` | Retrieve one yield map | Does not treat a superseded map as current. |
 | `/genx/v1/bulk-captures` | GET | `genxListBulkCaptures` | List bulk captures | Does not create or change a capture; not a BrAPI Observation. |

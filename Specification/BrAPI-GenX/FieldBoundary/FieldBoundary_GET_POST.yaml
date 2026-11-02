@@ -1,0 +1,145 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /field-boundaries:
+    get:
+      operationId: genxListFieldBoundaries
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.field-boundaries.list"
+        classification:
+          primaryDomain: "D6"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List operational field boundary and history records, optionally filtered by field or status."
+        canBeUsedFor:
+          - "Discover field boundary versions and their history."
+          - "Support spatial and agronomic traceability."
+        mustNotBeUsedFor:
+          - "Creating or changing a boundary (use the POST endpoint)."
+          - "Assuming a boundary is a BrAPI Location."
+          - "Treating the list as a complete field catalogue."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterFieldBoundary"
+          - "genxGetFieldBoundary"
+          - "genxRegisterFarm"
+        decisions: ["RFC-075"]
+        proposalStatus: "draft-non-normative"
+      summary: List field boundaries
+      description: Get a paged list of operational field boundary and history records across authorities. Filters combine with AND.
+      parameters:
+      - name: fieldDbId
+        description: Filter by field or site reference
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/FieldBoundaryListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - FieldBoundary
+    post:
+      operationId: genxRegisterFieldBoundary
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.field-boundaries.record"
+        classification:
+          primaryDomain: "D6"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Register one operational field boundary and history record with field linkage and provenance."
+        canBeUsedFor:
+          - "Publish a field boundary version and its geometry reference."
+          - "Retry an identical record safely using the same fieldBoundaryDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing boundary; corrections require a new record that supersedes."
+          - "Assuming a boundary is a BrAPI Location."
+          - "Asserting that the boundary is validated or current."
+        sideEffects: "Creates a field boundary identity or appends a new immutable version when accepted."
+        idempotency: "Same fieldBoundaryDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListFieldBoundaries"
+          - "genxGetFieldBoundary"
+          - "genxRegisterFarm"
+        decisions: ["RFC-075"]
+        proposalStatus: "draft-non-normative"
+      summary: Register one field boundary record
+      description: |-
+        Unknown fieldBoundaryDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FieldBoundaryNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/FieldBoundary'
+                required:
+                - metadata
+                - result
+                title: FieldBoundaryResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - FieldBoundary
+components:
+  responses:
+    FieldBoundaryListResponse:
+      content:
+        application/json:
+          schema:
+            title: FieldBoundaryListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FieldBoundary'
+            required:
+            - metadata
+            - result
+      description: OK

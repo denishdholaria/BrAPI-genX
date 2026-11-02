@@ -280,6 +280,11 @@ modules:
     primary_class: "D6"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Field scouting and work order records; BrAPI v2.1 has no equivalent record."
+  - path: "FieldBoundary/"
+    object: "FieldBoundary"
+    primary_class: "D6"
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Operational field boundary and history records; BrAPI v2.1 has no equivalent record."
   - path: "YieldMap/"
     object: "YieldMap"
     primary_class: "D6"

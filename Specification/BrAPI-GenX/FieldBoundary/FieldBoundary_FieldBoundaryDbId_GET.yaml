@@ -1,0 +1,65 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /field-boundaries/{fieldBoundaryDbId}:
+    get:
+      operationId: genxGetFieldBoundary
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.field-boundaries.get"
+        classification:
+          primaryDomain: "D6"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve one operational field boundary and history record."
+        canBeUsedFor:
+          - "Inspect field linkage, boundary version, geometry reference, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming a boundary is a BrAPI Location."
+          - "Treating a superseded boundary as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterFieldBoundary"
+          - "genxListFieldBoundaries"
+          - "genxRegisterFarm"
+        decisions: ["RFC-075"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one field boundary record
+      description: Returns the registered record, or 404.
+      parameters:
+      - name: fieldBoundaryDbId
+        description: Namespaced field-boundary identity `{authority}:field-boundary:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/FieldBoundary'
+                required:
+                - metadata
+                - result
+                title: FieldBoundaryResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - FieldBoundary

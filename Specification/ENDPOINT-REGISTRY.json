@@ -40230,12 +40230,248 @@
         "brapi-genx.genx.v1.field-scouting.list",
         "brapi-genx.genx.v1.field-scouting.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "FieldBoundary",
+      "brapiTag": "FieldBoundary",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/FieldBoundary/FieldBoundary_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.field-boundaries.list",
+      "method": "GET",
+      "path": "/field-boundaries",
+      "operationIdInSource": "genxListFieldBoundaries",
+      "recommendedOperationId": "genxListFieldBoundaries",
+      "operationName": "List field boundaries",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List operational field boundary and history records, optionally filtered by field or status.",
+      "sourceDescription": "Get a paged list of operational field boundary and history records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover field boundary versions and their history.",
+        "Support spatial and agronomic traceability."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a boundary (use the POST endpoint).",
+        "Assuming a boundary is a BrAPI Location.",
+        "Treating the list as a complete field catalogue."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "fieldDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterFieldBoundary",
+        "genxGetFieldBoundary",
+        "genxRegisterFarm"
+      ],
+      "decisionReferences": [
+        "RFC-075"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.field-boundaries.record",
+        "brapi-genx.genx.v1.field-boundaries.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "FieldBoundary",
+      "brapiTag": "FieldBoundary",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/FieldBoundary/FieldBoundary_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.field-boundaries.record",
+      "method": "POST",
+      "path": "/field-boundaries",
+      "operationIdInSource": "genxRegisterFieldBoundary",
+      "recommendedOperationId": "genxRegisterFieldBoundary",
+      "operationName": "Register one field boundary record",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one operational field boundary and history record with field linkage and provenance.",
+      "sourceDescription": "Unknown fieldBoundaryDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a field boundary version and its geometry reference.",
+        "Retry an identical record safely using the same fieldBoundaryDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing boundary; corrections require a new record that supersedes.",
+        "Assuming a boundary is a BrAPI Location.",
+        "Asserting that the boundary is validated or current."
+      ],
+      "sideEffects": "Creates a field boundary identity or appends a new immutable version when accepted.",
+      "idempotency": "Same fieldBoundaryDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "FieldBoundaryNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListFieldBoundaries",
+        "genxGetFieldBoundary",
+        "genxRegisterFarm"
+      ],
+      "decisionReferences": [
+        "RFC-075"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.field-boundaries.list",
+        "brapi-genx.genx.v1.field-boundaries.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "FieldBoundary",
+      "brapiTag": "FieldBoundary",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/FieldBoundary/FieldBoundary_FieldBoundaryDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.field-boundaries.get",
+      "method": "GET",
+      "path": "/field-boundaries/{fieldBoundaryDbId}",
+      "operationIdInSource": "genxGetFieldBoundary",
+      "recommendedOperationId": "genxGetFieldBoundary",
+      "operationName": "Get one field boundary record",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one operational field boundary and history record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect field linkage, boundary version, geometry reference, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a boundary is a BrAPI Location.",
+        "Treating a superseded boundary as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "fieldBoundaryDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterFieldBoundary",
+        "genxListFieldBoundaries",
+        "genxRegisterFarm"
+      ],
+      "decisionReferences": [
+        "RFC-075"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.field-boundaries.list",
+        "brapi-genx.genx.v1.field-boundaries.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 222,
+    "genxEntriesAdded": 225,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -40313,7 +40549,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 423,
+    "totalEntries": 426,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -40614,5 +40850,5 @@
       ]
     }
   ],
-  "totalEntries": 423
+  "totalEntries": 426
 }
