@@ -265,6 +265,11 @@ modules:
     primary_class: "D5"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Carbon stock records; BrAPI v2.1 has no equivalent record."
+  - path: "Emissions/"
+    object: "Emissions"
+    primary_class: "D5"
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Emissions records; BrAPI v2.1 has no equivalent record."
   - path: "WaterBalance/"
     object: "WaterBalance"
     primary_class: "D5"

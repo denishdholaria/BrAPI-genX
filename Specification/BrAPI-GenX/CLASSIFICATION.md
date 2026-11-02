@@ -94,6 +94,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | DisposalRecord / DisposalRecord | D1 | C1, C2, C3, C6, C9 | Disposal records; no BrAPI v2.1 equivalent |
 | PlantingOperation / PlantingOperation | D6 | C1, C2, C3, C6, C9 | Planting operation records; no BrAPI v2.1 equivalent |
 | CarbonStock / CarbonStock | D5 | C1, C2, C3, C6, C9 | Carbon stock records; no BrAPI v2.1 equivalent |
+| Emissions / Emissions | D5 | C1, C2, C3, C6, C9 | Emissions records; no BrAPI v2.1 equivalent |
 | WaterBalance / WaterBalance | D5 | C1, C2, C3, C6, C9 | Water balance records; no BrAPI v2.1 equivalent |
 | Farm / Farm | D6 | C1, C2, C3, C6, C9 | Farm and site reference records; no BrAPI v2.1 equivalent |
 | FieldScouting / FieldScouting | D6 | C1, C2, C3, C6, C9 | Field scouting and work order records; no BrAPI v2.1 equivalent |

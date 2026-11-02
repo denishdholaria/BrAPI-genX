@@ -40466,12 +40466,248 @@
         "brapi-genx.genx.v1.field-boundaries.list",
         "brapi-genx.genx.v1.field-boundaries.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Emissions",
+      "brapiTag": "Emissions",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Emissions/Emissions_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.emissions.list",
+      "method": "GET",
+      "path": "/emissions",
+      "operationIdInSource": "genxListEmissions",
+      "recommendedOperationId": "genxListEmissions",
+      "operationName": "List emissions records",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List emissions records, optionally filtered by site or status.",
+      "sourceDescription": "Get a paged list of emissions records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover greenhouse gas emissions for a site or period.",
+        "Support sustainability reporting and carbon accounting."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing an emissions record (use the POST endpoint).",
+        "Assuming an emissions record is a BrAPI Observation.",
+        "Treating the list as a complete emissions inventory."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "siteDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterEmissions",
+        "genxGetEmissions",
+        "genxRegisterCarbonStock"
+      ],
+      "decisionReferences": [
+        "RFC-076"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.emissions.record",
+        "brapi-genx.genx.v1.emissions.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Emissions",
+      "brapiTag": "Emissions",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Emissions/Emissions_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.emissions.record",
+      "method": "POST",
+      "path": "/emissions",
+      "operationIdInSource": "genxRegisterEmissions",
+      "recommendedOperationId": "genxRegisterEmissions",
+      "operationName": "Register one emissions record",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one emissions record with site linkage, period, and provenance.",
+      "sourceDescription": "Unknown emissionsDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish greenhouse gas emissions for a site or period.",
+        "Retry an identical record safely using the same emissionsDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming an emissions record is a BrAPI Observation.",
+        "Asserting that the emissions are validated or certified."
+      ],
+      "sideEffects": "Creates an emissions identity or appends a new immutable version when accepted.",
+      "idempotency": "Same emissionsDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "EmissionsNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListEmissions",
+        "genxGetEmissions",
+        "genxRegisterCarbonStock"
+      ],
+      "decisionReferences": [
+        "RFC-076"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.emissions.list",
+        "brapi-genx.genx.v1.emissions.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Emissions",
+      "brapiTag": "Emissions",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Emissions/Emissions_EmissionsDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.emissions.get",
+      "method": "GET",
+      "path": "/emissions/{emissionsDbId}",
+      "operationIdInSource": "genxGetEmissions",
+      "recommendedOperationId": "genxGetEmissions",
+      "operationName": "Get one emissions record",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one emissions record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect site linkage, period, emissions quantity, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming an emissions record is a BrAPI Observation.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "emissionsDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterEmissions",
+        "genxListEmissions",
+        "genxRegisterCarbonStock"
+      ],
+      "decisionReferences": [
+        "RFC-076"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.emissions.list",
+        "brapi-genx.genx.v1.emissions.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 225,
+    "genxEntriesAdded": 228,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -40549,7 +40785,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 426,
+    "totalEntries": 429,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -40850,5 +41086,5 @@
       ]
     }
   ],
-  "totalEntries": 426
+  "totalEntries": 429
 }

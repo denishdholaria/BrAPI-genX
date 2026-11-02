@@ -1,0 +1,56 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    Emissions:
+      type: object
+      description: |-
+        One immutable emissions record. A published (emissionsDbId) record
+        never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - emissionsDbId
+      - status
+      properties:
+        emissionsDbId:
+          description: Namespaced emissions identity `{authority}:emissions:{localId}`
+          type: string
+          example: institute-a:emissions:em-2026-001
+        siteDbId:
+          description: Site or location reference
+          type: string
+          example: site-001
+        period:
+          description: Reporting period (ISO-8601 interval)
+          type: string
+          example: 2026-01/2026-12
+        greenhouseGas:
+          description: Greenhouse gas or emissions category
+          type: string
+          example: CO2e
+        quantity:
+          description: Emissions quantity
+          type: number
+          example: 12.5
+        unit:
+          description: Unit of the quantity
+          type: string
+          example: tCO2e
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: emissionsDbId of the record this one replaces
+          type: string
+          example: institute-a:emissions:em-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

@@ -86,6 +86,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `DisposalRecord/` | `DisposalRecord` — disposal records (reason, method, quantity, provenance) | `GET /genx/v1/disposal-records` (`genxListDisposalRecords`); `POST /genx/v1/disposal-records` (`genxRecordDisposalRecord`); `GET /genx/v1/disposal-records/{disposalRecordDbId}` (`genxGetDisposalRecord`) |
 | `PlantingOperation/` | `PlantingOperation` — planting operation records (date, method, rate, provenance) | `GET /genx/v1/planting-operations` (`genxListPlantingOperations`); `POST /genx/v1/planting-operations` (`genxRecordPlantingOperation`); `GET /genx/v1/planting-operations/{plantingOperationDbId}` (`genxGetPlantingOperation`) |
 | `CarbonStock/` | `CarbonStock` — carbon stock observations (pool, stock, depth, provenance) | `GET /genx/v1/carbon-stocks` (`genxListCarbonStocks`); `POST /genx/v1/carbon-stocks` (`genxRecordCarbonStock`); `GET /genx/v1/carbon-stocks/{carbonStockDbId}` (`genxGetCarbonStock`) |
+| `Emissions/` | `Emissions` — emissions records (gas, quantity, unit, period, provenance) | `GET /genx/v1/emissions` (`genxListEmissions`); `POST /genx/v1/emissions` (`genxRegisterEmissions`); `GET /genx/v1/emissions/{emissionsDbId}` (`genxGetEmissions`) |
 | `WaterBalance/` | `WaterBalance` — water balance records (period, inputs, outputs, storage change, provenance) | `GET /genx/v1/water-balances` (`genxListWaterBalances`); `POST /genx/v1/water-balances` (`genxRecordWaterBalance`); `GET /genx/v1/water-balances/{waterBalanceDbId}` (`genxGetWaterBalance`) |
 | `Farm/` | `Farm` — farm and site reference records (locations, area, provenance) | `GET /genx/v1/farms` (`genxListFarms`); `POST /genx/v1/farms` (`genxRegisterFarm`); `GET /genx/v1/farms/{farmDbId}` (`genxGetFarm`) |
 | `FieldScouting/` | `FieldScouting` — field scouting and work order records (type, observations, provenance) | `GET /genx/v1/field-scouting` (`genxListFieldScouting`); `POST /genx/v1/field-scouting` (`genxRegisterFieldScouting`); `GET /genx/v1/field-scouting/{fieldScoutingDbId}` (`genxGetFieldScouting`) |
@@ -181,7 +182,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-072-Genotype-Call-Semantics](./RFC-072-Genotype-Call-Semantics.md),
 [RFC-073-Vendor-Order](./RFC-073-Vendor-Order.md),
 [RFC-074-Field-Scouting](./RFC-074-Field-Scouting.md),
-[RFC-075-Field-Boundary](./RFC-075-Field-Boundary.md).
+[RFC-075-Field-Boundary](./RFC-075-Field-Boundary.md),
+[RFC-076-Emissions](./RFC-076-Emissions.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).
