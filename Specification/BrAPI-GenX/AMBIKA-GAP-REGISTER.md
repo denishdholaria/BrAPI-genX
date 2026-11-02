@@ -61,6 +61,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | S | Dataset/model artefact catalogue | `ArtifactCatalogue/` | RFC-118 |
 | S | Protocol / method library | `ProtocolLibrary/` | RFC-119 |
 | S | Publication review and release | `PublicationReview/` | RFC-120 |
+| S | Biodiversity occurrence / specimen export | `BiodiversityExport/` | RFC-121 |
 | D3 | Genomic dataset release/access, reference assembly versioning, pipeline provenance | `GenomicDatasets/` | RFC-013 |
 | D3 | Assay / plate workflow (design side) | `AssayDesign/` | RFC-061 |
 | D3 | Assay / plate workflow (execution side) | `AssayExecution/` | RFC-113 |

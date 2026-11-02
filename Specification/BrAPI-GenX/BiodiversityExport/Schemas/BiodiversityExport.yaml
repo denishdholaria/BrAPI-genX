@@ -1,0 +1,56 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    BiodiversityExport:
+      type: object
+      description: |-
+        One immutable biodiversity export record. A published (biodiversityExportDbId) record
+        never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - biodiversityExportDbId
+      - status
+      properties:
+        biodiversityExportDbId:
+          description: Namespaced biodiversity-export identity `{authority}:biodiversity-export:{localId}`
+          type: string
+          example: institute-a:biodiversity-export:be-2026-001
+        specimenType:
+          description: Type of specimen exported
+          type: string
+          example: leaf tissue
+        occurrenceId:
+          description: Biodiversity occurrence identifier
+          type: string
+          example: institute-a:occurrence:occ-2026-001
+        collectionDate:
+          description: Date the specimen was collected
+          type: string
+          example: "2026-03-15"
+        location:
+          description: Collection location
+          type: string
+          example: field-plot-42
+        taxon:
+          description: Taxon of the specimen
+          type: string
+          example: Zea mays
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: biodiversityExportDbId of the record this one replaces
+          type: string
+          example: institute-a:biodiversity-export:be-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
