@@ -74,10 +74,11 @@ implementation, not a claim of production readiness or of scientific validation.
 | D7 | Reproducible job contracts | `Jobs/` | RFC-001 |
 | D7 | Result provenance | `AnalysisResult/`, `Provenance/` | RFC-045 |
 | D1 | Sample custody / transfer | `CustodyTransfer/` | RFC-063 |
+| D3 | Genotype QC reports | `GenotypeQc/` | RFC-064 |
 | I | Genomic dataset release/access | `GenomicDatasets/` | RFC-013 |
 | S | FAIR packages | `FAIR/` | RFC-006 |
 
-Still open in D3 row 9: genotype QC reports, genotype call semantics, marker/probe registry,
+Still open in D3 row 9: genotype call semantics, marker/probe registry,
 vendor order/result ingestion. Still open in D1 row 4: retention/disposal.
 
 ## Suggested GenX sequencing (scientific gaps first)

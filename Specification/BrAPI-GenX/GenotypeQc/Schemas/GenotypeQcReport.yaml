@@ -1,0 +1,48 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    GenotypeQcReport:
+      type: object
+      description: |-
+        One immutable genotype QC report. A published (genotypeQcReportDbId)
+        record never mutates in place; corrections are recorded as additional
+        reports linked by supersedes.
+      required:
+      - genotypeQcReportDbId
+      - status
+      properties:
+        genotypeQcReportDbId:
+          description: Namespaced genotype-QC identity `{authority}:genotype-qc:{localId}`
+          type: string
+          example: institute-a:genotype-qc:qc-2026-001
+        genomicDatasetDbId:
+          description: GenX GenomicDataset the report applies to
+          type: string
+          example: institute-a:genomic-dataset:gd-2026-001
+        vcfImportDbId:
+          description: GenX VcfImport that produced the calls, when applicable
+          type: string
+          example: institute-a:vcf-import:vi-2026-001
+        metrics:
+          description: QC metrics and thresholds applied
+          type: object
+          example: {callRate: 0.98, missingness: 0.02, heterozygosity: 0.31}
+        status:
+          description: Lifecycle state of the report record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: genotypeQcReportDbId of the record this one replaces
+          type: string
+          example: institute-a:genotype-qc:qc-2026-000
+        provenance:
+          description: Evidence and method provenance for the report
+          $ref: '#/components/schemas/ProvenanceEnvelope'

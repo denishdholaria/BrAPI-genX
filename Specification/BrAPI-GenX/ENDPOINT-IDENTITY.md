@@ -249,6 +249,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/variant-annotations` | GET | `genxListVariantAnnotations` | List variant annotations | Does not create or change an annotation; not a BrAPI data resource. |
 | `/genx/v1/variant-annotations` | POST | `genxRecordVariantAnnotation` | Record one variant annotation | Append-only record; replay/conflict semantics. |
 | `/genx/v1/variant-annotations/{variantAnnotationDbId}` | GET | `genxGetVariantAnnotation` | Retrieve one variant annotation | Does not treat a superseded annotation as current. |
+| `/genx/v1/genotype-qc-reports` | GET | `genxListGenotypeQcReports` | List genotype QC reports | Does not create or change a report; not a BrAPI data resource. |
+| `/genx/v1/genotype-qc-reports` | POST | `genxRecordGenotypeQcReport` | Record one genotype QC report | Append-only record; replay/conflict semantics. |
+| `/genx/v1/genotype-qc-reports/{genotypeQcReportDbId}` | GET | `genxGetGenotypeQcReport` | Retrieve one genotype QC report | Does not treat a superseded report as current. |
 | `/genx/v1/bulk-captures` | GET | `genxListBulkCaptures` | List bulk captures | Does not create or change a capture; not a BrAPI Observation. |
 | `/genx/v1/bulk-captures` | POST | `genxRecordBulkCapture` | Record one bulk capture | Append-only record; replay/conflict semantics. |
 | `/genx/v1/bulk-captures/{bulkCaptureDbId}` | GET | `genxGetBulkCapture` | Retrieve one bulk capture | Does not treat a superseded capture as current. |

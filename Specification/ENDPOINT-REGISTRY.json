@@ -37626,12 +37626,249 @@
         "brapi-genx.genx.v1.custody-transfers.list",
         "brapi-genx.genx.v1.custody-transfers.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "GenotypeQc",
+      "brapiTag": "GenotypeQc",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/GenotypeQc/GenotypeQcReport_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.genotype-qc-reports.list",
+      "method": "GET",
+      "path": "/genotype-qc-reports",
+      "operationIdInSource": "genxListGenotypeQcReports",
+      "recommendedOperationId": "genxListGenotypeQcReports",
+      "operationName": "List genotype QC reports",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List genotype QC report records, optionally filtered by dataset, import, or status.",
+      "sourceDescription": "Get a paged list of genotype QC reports across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover QC reports for a genomic dataset or import.",
+        "Support genotyping quality auditing."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a report (use the POST endpoint).",
+        "Assuming a report is a BrAPI data resource.",
+        "Treating the list as a complete QC history."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "genomicDatasetDbId",
+        "vcfImportDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordGenotypeQcReport",
+        "genxGetGenotypeQcReport",
+        "genxRegisterGenomicDataset"
+      ],
+      "decisionReferences": [
+        "RFC-064"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.genotype-qc-reports.record",
+        "brapi-genx.genx.v1.genotype-qc-reports.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "GenotypeQc",
+      "brapiTag": "GenotypeQc",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/GenotypeQc/GenotypeQcReport_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.genotype-qc-reports.record",
+      "method": "POST",
+      "path": "/genotype-qc-reports",
+      "operationIdInSource": "genxRecordGenotypeQcReport",
+      "recommendedOperationId": "genxRecordGenotypeQcReport",
+      "operationName": "Record one genotype QC report",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record one genotype QC report with metrics and provenance.",
+      "sourceDescription": "Unknown genotypeQcReportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish QC metrics and thresholds for a genotyping run.",
+        "Retry an identical report safely using the same genotypeQcReportDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing report; corrections require a new record that supersedes.",
+        "Assuming the report is a BrAPI data resource.",
+        "Treating the report as scientific validation or approval."
+      ],
+      "sideEffects": "Creates a genotype QC report when accepted.",
+      "idempotency": "Same genotypeQcReportDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "GenotypeQcReportNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListGenotypeQcReports",
+        "genxGetGenotypeQcReport",
+        "genxRegisterGenomicDataset"
+      ],
+      "decisionReferences": [
+        "RFC-064"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.genotype-qc-reports.list",
+        "brapi-genx.genx.v1.genotype-qc-reports.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "GenotypeQc",
+      "brapiTag": "GenotypeQc",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/GenotypeQc/GenotypeQcReport_GenotypeQcReportDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.genotype-qc-reports.get",
+      "method": "GET",
+      "path": "/genotype-qc-reports/{genotypeQcReportDbId}",
+      "operationIdInSource": "genxGetGenotypeQcReport",
+      "recommendedOperationId": "genxGetGenotypeQcReport",
+      "operationName": "Get one genotype QC report",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one genotype QC report.",
+      "sourceDescription": "Returns the recorded report, or 404.",
+      "canBeUsedFor": [
+        "Inspect QC metrics, thresholds, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the report is a BrAPI data resource.",
+        "Treating a superseded report as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "genotypeQcReportDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordGenotypeQcReport",
+        "genxListGenotypeQcReports",
+        "genxRegisterGenomicDataset"
+      ],
+      "decisionReferences": [
+        "RFC-064"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.genotype-qc-reports.list",
+        "brapi-genx.genx.v1.genotype-qc-reports.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 189,
+    "genxEntriesAdded": 192,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -37709,7 +37946,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 390,
+    "totalEntries": 393,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

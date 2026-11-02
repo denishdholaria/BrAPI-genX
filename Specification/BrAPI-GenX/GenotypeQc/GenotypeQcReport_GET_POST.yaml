@@ -1,0 +1,151 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /genotype-qc-reports:
+    get:
+      operationId: genxListGenotypeQcReports
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.genotype-qc-reports.list"
+        classification:
+          primaryDomain: "D3"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List genotype QC report records, optionally filtered by dataset, import, or status."
+        canBeUsedFor:
+          - "Discover QC reports for a genomic dataset or import."
+          - "Support genotyping quality auditing."
+        mustNotBeUsedFor:
+          - "Creating or changing a report (use the POST endpoint)."
+          - "Assuming a report is a BrAPI data resource."
+          - "Treating the list as a complete QC history."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordGenotypeQcReport"
+          - "genxGetGenotypeQcReport"
+          - "genxRegisterGenomicDataset"
+        decisions: ["RFC-064"]
+        proposalStatus: "draft-non-normative"
+      summary: List genotype QC reports
+      description: Get a paged list of genotype QC reports across authorities. Filters combine with AND.
+      parameters:
+      - name: genomicDatasetDbId
+        description: Filter by GenX GenomicDataset
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: vcfImportDbId
+        description: Filter by GenX VcfImport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/GenotypeQcReportListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - GenotypeQcReport
+    post:
+      operationId: genxRecordGenotypeQcReport
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.genotype-qc-reports.record"
+        classification:
+          primaryDomain: "D3"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Record one genotype QC report with metrics and provenance."
+        canBeUsedFor:
+          - "Publish QC metrics and thresholds for a genotyping run."
+          - "Retry an identical report safely using the same genotypeQcReportDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing report; corrections require a new record that supersedes."
+          - "Assuming the report is a BrAPI data resource."
+          - "Treating the report as scientific validation or approval."
+        sideEffects: "Creates a genotype QC report when accepted."
+        idempotency: "Same genotypeQcReportDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListGenotypeQcReports"
+          - "genxGetGenotypeQcReport"
+          - "genxRegisterGenomicDataset"
+        decisions: ["RFC-064"]
+        proposalStatus: "draft-non-normative"
+      summary: Record one genotype QC report
+      description: |-
+        Unknown genotypeQcReportDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenotypeQcReportNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/GenotypeQcReport'
+                required:
+                - metadata
+                - result
+                title: GenotypeQcReportResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - GenotypeQcReport
+components:
+  responses:
+    GenotypeQcReportListResponse:
+      content:
+        application/json:
+          schema:
+            title: GenotypeQcReportListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GenotypeQcReport'
+            required:
+            - metadata
+            - result
+      description: OK

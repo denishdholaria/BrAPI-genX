@@ -87,6 +87,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | VcfImport / VcfImport | D3 | C1, C2, C3, C5, C6, C9 | VCF import records; no BrAPI v2.1 equivalent |
 | AssayDesign / AssayDesign | D3 | C1, C2, C3, C6, C9 | Assay design records; no BrAPI v2.1 equivalent |
 | VariantAnnotation / VariantAnnotation | D3 | C1, C2, C3, C6, C9 | Variant annotation records; no BrAPI v2.1 equivalent |
+| GenotypeQc / GenotypeQcReport | D3 | C1, C2, C3, C6, C9 | Genotype QC report records; no BrAPI v2.1 equivalent |
 | AnalysisResult / AnalysisResult | D7 | C1, C2, C3, C6, C9 | Analysis result records; no BrAPI v2.1 equivalent |
 | GeneticGain / GeneticGainRecord | D7 | C1, C2, C3, C6, C9 | Genetic gain records; no BrAPI v2.1 equivalent |
 | GwasResult / GwasResult | D7 | C1, C2, C3, C6, C9 | GWAS result records; no BrAPI v2.1 equivalent |

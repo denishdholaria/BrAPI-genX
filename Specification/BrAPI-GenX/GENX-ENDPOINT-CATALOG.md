@@ -30,6 +30,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | GenomicRelationship | 3 | proposed, non-normative |
 | GenomicSelection | 3 | proposed, non-normative |
 | Genomics | 3 | proposed, non-normative |
+| GenotypeQc | 3 | proposed, non-normative |
 | GwasResult | 3 | proposed, non-normative |
 | GxeAnalysis | 3 | proposed, non-normative |
 | HaplotypeAnalysis | 3 | proposed, non-normative |
@@ -2597,6 +2598,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.brapi-v2-1.genotyping.get.allelematrix, brapi-genx.brapi-v2-1.genotyping.get.calls, brapi-genx.brapi-v2-1.genotyping.get.callsets, brapi-genx.brapi-v2-1.genotyping.get.callsets.by-callsetdbid, brapi-genx.brapi-v2-1.genotyping.get.callsets.by-callsetdbid.calls, brapi-genx.brapi-v2-1.genotyping.get.variants, brapi-genx.brapi-v2-1.genotyping.get.variants.by-variantdbid, brapi-genx.brapi-v2-1.genotyping.get.variants.by-variantdbid.calls, brapi-genx.brapi-v2-1.genotyping.get.variantsets, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.calls, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.callsets, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.variants, brapi-genx.brapi-v2-1.genotyping.post.variantsets.extract, brapi-genx.brapi-v2-1.genotyping.put.calls, brapi-genx.genx.v1.variant-matrices.list, brapi-genx.genx.v1.variant-matrices.register
 - **Relevant RFC / decision references:** RFC-005, D-11, D-12, D-19
 - **Contract source:** [`Specification/BrAPI-GenX/Genomics/VariantMatrices_MatrixDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-Den/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Genomics/VariantMatrices_MatrixDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GenotypeQc — 3 operations
+
+### GET `/genx/v1/genotype-qc-reports`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.genotype-qc-reports.list`
+- **BrAPI-GenX operation identity:** `genxListGenotypeQcReports` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListGenotypeQcReports`
+- **GenX source module:** `GenotypeQc`
+- **Source tag:** GenotypeQc
+- **Proposed BrAPI-GenX classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List genotype QC report records, optionally filtered by dataset, import, or status.
+**Source contract description:**
+> Get a paged list of genotype QC reports across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover QC reports for a genomic dataset or import.
+- Support genotyping quality auditing.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a report (use the POST endpoint).
+- Assuming a report is a BrAPI data resource.
+- Treating the list as a complete QC history.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** genomicDatasetDbId, vcfImportDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordGenotypeQcReport, genxGetGenotypeQcReport, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.genotype-qc-reports.record, brapi-genx.genx.v1.genotype-qc-reports.get
+- **Relevant RFC / decision references:** RFC-064
+- **Contract source:** [`Specification/BrAPI-GenX/GenotypeQc/GenotypeQcReport_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/GenotypeQc/GenotypeQcReport_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/genotype-qc-reports`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.genotype-qc-reports.record`
+- **BrAPI-GenX operation identity:** `genxRecordGenotypeQcReport` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordGenotypeQcReport`
+- **GenX source module:** `GenotypeQc`
+- **Source tag:** GenotypeQc
+- **Proposed BrAPI-GenX classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one genotype QC report with metrics and provenance.
+**Source contract description:**
+> Unknown genotypeQcReportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish QC metrics and thresholds for a genotyping run.
+- Retry an identical report safely using the same genotypeQcReportDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing report; corrections require a new record that supersedes.
+- Assuming the report is a BrAPI data resource.
+- Treating the report as scientific validation or approval.
+- **Side effects:** Creates a genotype QC report when accepted.
+- **Retry / idempotency:** Same genotypeQcReportDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** GenotypeQcReportNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListGenotypeQcReports, genxGetGenotypeQcReport, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.genotype-qc-reports.list, brapi-genx.genx.v1.genotype-qc-reports.get
+- **Relevant RFC / decision references:** RFC-064
+- **Contract source:** [`Specification/BrAPI-GenX/GenotypeQc/GenotypeQcReport_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/GenotypeQc/GenotypeQcReport_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/genotype-qc-reports/{genotypeQcReportDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.genotype-qc-reports.get`
+- **BrAPI-GenX operation identity:** `genxGetGenotypeQcReport` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetGenotypeQcReport`
+- **GenX source module:** `GenotypeQc`
+- **Source tag:** GenotypeQc
+- **Proposed BrAPI-GenX classification:** D3 — Genotyping and Molecular Genomics; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one genotype QC report.
+**Source contract description:**
+> Returns the recorded report, or 404.
+**Can be used for:**
+- Inspect QC metrics, thresholds, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the report is a BrAPI data resource.
+- Treating a superseded report as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** genotypeQcReportDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordGenotypeQcReport, genxListGenotypeQcReports, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.genotype-qc-reports.list, brapi-genx.genx.v1.genotype-qc-reports.record
+- **Relevant RFC / decision references:** RFC-064
+- **Contract source:** [`Specification/BrAPI-GenX/GenotypeQc/GenotypeQcReport_GenotypeQcReportDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/GenotypeQc/GenotypeQcReport_GenotypeQcReportDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
