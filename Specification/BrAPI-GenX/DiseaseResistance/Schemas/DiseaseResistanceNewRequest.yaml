@@ -1,0 +1,52 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    DiseaseResistanceNewRequest:
+      type: object
+      description: |-
+        Request to register one disease resistance record. Unknown diseaseResistanceDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - diseaseResistanceDbId
+      properties:
+        diseaseResistanceDbId:
+          description: Namespaced disease-resistance identity `{authority}:disease-resistance:{localId}`
+          type: string
+          example: institute-a:disease-resistance:dr-2026-001
+        resistanceType:
+          description: Type of disease resistance
+          type: string
+          example: qualitative
+        targetPestOrDisease:
+          description: Target pest or disease
+          type: string
+          example: northern corn leaf blight
+        resistanceLevel:
+          description: Level of resistance
+          type: string
+          example: high
+        screeningMethod:
+          description: Method used to screen for resistance
+          type: string
+          example: field inoculation
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: diseaseResistanceDbId of the record this one replaces
+          type: string
+          example: institute-a:disease-resistance:dr-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

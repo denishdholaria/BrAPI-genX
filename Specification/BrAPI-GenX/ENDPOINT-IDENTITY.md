@@ -234,6 +234,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/threshold-alerts` | GET | `genxListThresholdAlerts` | List threshold alerts | Does not create or change a record; not a BrAPI data resource. |
 | `/genx/v1/threshold-alerts` | POST | `genxRegisterThresholdAlert` | Register one threshold alert | Append-only record; replay/conflict semantics. |
 | `/genx/v1/threshold-alerts/{thresholdAlertDbId}` | GET | `genxGetThresholdAlert` | Retrieve one threshold alert | Does not treat a superseded record as current. |
+| `/genx/v1/disease-resistances` | GET | `genxListDiseaseResistances` | List disease resistances | Does not create or change a record; not a BrAPI data resource. |
+| `/genx/v1/disease-resistances` | POST | `genxRegisterDiseaseResistance` | Register one disease resistance | Append-only record; replay/conflict semantics. |
+| `/genx/v1/disease-resistances/{diseaseResistanceDbId}` | GET | `genxGetDiseaseResistance` | Retrieve one disease resistance | Does not treat a superseded record as current. |
 | `/genx/v1/analysis-results` | GET | `genxListAnalysisResults` | List analysis result records | Does not create or change a result; not a BrAPI data resource. |
 | `/genx/v1/analysis-results` | POST | `genxRecordAnalysisResult` | Record one analysis result | Append-only record; replay/conflict semantics. |
 | `/genx/v1/analysis-results/{analysisResultDbId}` | GET | `genxGetAnalysisResult` | Retrieve one analysis result record | Does not treat a superseded result as current. |

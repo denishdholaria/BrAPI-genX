@@ -33,6 +33,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | DevelopmentalStage | 3 | proposed, non-normative |
 | DiagnosticEvidence | 3 | proposed, non-normative |
 | DiseaseObservation | 3 | proposed, non-normative |
+| DiseaseResistance | 3 | proposed, non-normative |
 | DisposalRecord | 3 | proposed, non-normative |
 | DoubledHaploid | 3 | proposed, non-normative |
 | DuplicateReview | 3 | proposed, non-normative |
@@ -2969,6 +2970,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.disease-observations.list, brapi-genx.genx.v1.disease-observations.record
 - **Relevant RFC / decision references:** RFC-123
 - **Contract source:** [`Specification/BrAPI-GenX/DiseaseObservation/DiseaseObservation_DiseaseObservationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/DiseaseObservation/DiseaseObservation_DiseaseObservationDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### DiseaseResistance — 3 operations
+
+### GET `/genx/v1/disease-resistances`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.disease-resistances.list`
+- **BrAPI-GenX operation identity:** `genxListDiseaseResistances` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListDiseaseResistances`
+- **GenX source module:** `DiseaseResistance`
+- **Source tag:** DiseaseResistance
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List diseaseresistance records, optionally filtered by status.
+**Source contract description:**
+> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover artifactcatalogues.
+- Support VCF import/export.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a record (use the POST endpoint).
+- Assuming a record is a BrAPI data resource.
+- Treating the list as a complete history.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterDiseaseResistance, genxGetDiseaseResistance, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.disease-resistances.record, brapi-genx.genx.v1.disease-resistances.get
+- **Relevant RFC / decision references:** RFC-127
+- **Contract source:** [`Specification/BrAPI-GenX/DiseaseResistance/DiseaseResistance_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/DiseaseResistance/DiseaseResistance_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/disease-resistances`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.disease-resistances.record`
+- **BrAPI-GenX operation identity:** `genxRegisterDiseaseResistance` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterDiseaseResistance`
+- **GenX source module:** `DiseaseResistance`
+- **Source tag:** DiseaseResistance
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register one diseaseresistance record with provenance.
+**Source contract description:**
+> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish a artifactcatalogue.
+- Retry an identical record safely using the same vcfExportDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming a record is a BrAPI data resource.
+- Asserting that the export is validated or endorsed.
+- **Side effects:** Creates a diseaseresistance identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same diseaseResistanceDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** DiseaseResistanceNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListDiseaseResistances, genxGetDiseaseResistance, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.disease-resistances.list, brapi-genx.genx.v1.disease-resistances.get
+- **Relevant RFC / decision references:** RFC-127
+- **Contract source:** [`Specification/BrAPI-GenX/DiseaseResistance/DiseaseResistance_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/DiseaseResistance/DiseaseResistance_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/disease-resistances/{diseaseResistanceDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.disease-resistances.get`
+- **BrAPI-GenX operation identity:** `genxGetDiseaseResistance` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetDiseaseResistance`
+- **GenX source module:** `DiseaseResistance`
+- **Source tag:** DiseaseResistance
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one diseaseresistance record.
+**Source contract description:**
+> Returns the registered record, or 404.
+**Can be used for:**
+- Inspect export, status, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming a record is a BrAPI data resource.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** diseaseResistanceDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterDiseaseResistance, genxListDiseaseResistances, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.disease-resistances.list, brapi-genx.genx.v1.disease-resistances.record
+- **Relevant RFC / decision references:** RFC-127
+- **Contract source:** [`Specification/BrAPI-GenX/DiseaseResistance/DiseaseResistance_DiseaseResistanceDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/DiseaseResistance/DiseaseResistance_DiseaseResistanceDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11737,7 +11843,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> List thresholdalert records, optionally filtered by status.
+> List threshold alert records, optionally filtered by status.
 **Source contract description:**
 > Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
 **Can be used for:**
@@ -11772,7 +11878,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> Register one thresholdalert record with provenance.
+> Register one threshold alert record with provenance.
 **Source contract description:**
 > Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
 **Can be used for:**
@@ -11782,7 +11888,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
 - Asserting that the export is validated or endorsed.
-- **Side effects:** Creates a thresholdalert identity or appends a new immutable version when accepted.
+- **Side effects:** Creates a threshold alert identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same thresholdAlertDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
 - **Request schema refs recorded:** ThresholdAlertNewRequest
@@ -11807,7 +11913,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> Retrieve one thresholdalert record.
+> Retrieve one threshold alert record.
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**

@@ -67,6 +67,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | N | Diagnostic evidence for IPM decisions | `DiagnosticEvidence/` | RFC-124 |
 | N | IPM strategy | `IpmStrategy/` | RFC-125 |
 | N | Threshold alerts for pests/disease | `ThresholdAlert/` | RFC-126 |
+| N | Disease resistance characterization | `DiseaseResistance/` | RFC-127 |
 | D3 | Genomic dataset release/access, reference assembly versioning, pipeline provenance | `GenomicDatasets/` | RFC-013 |
 | D3 | Assay / plate workflow (design side) | `AssayDesign/` | RFC-061 |
 | D3 | Assay / plate workflow (execution side) | `AssayExecution/` | RFC-113 |
