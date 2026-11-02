@@ -380,6 +380,11 @@ modules:
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Spatial index records; BrAPI v2.1 has no equivalent record."
+  - path: "CalibrationQuality/"
+    object: "CalibrationQuality"
+    primary_class: null
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Calibration quality records; BrAPI v2.1 has no equivalent record."
   - path: "CloudMask/"
     object: "CloudMask"
     primary_class: null

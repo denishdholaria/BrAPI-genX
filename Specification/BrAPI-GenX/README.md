@@ -139,6 +139,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `SensorDevice/` | `SensorDevice` — sensor device records (type, manufacturer, model) | `GET /genx/v1/sensor-devices` (`genxListSensorDevices`); `POST /genx/v1/sensor-devices` (`genxRegisterSensorDevice`); `GET /genx/v1/sensor-devices/{sensorDeviceDbId}` (`genxGetSensorDevice`) |
 | `SpatialQuery/` | `SpatialQuery` — spatial query records (type, geometry, params) | `GET /genx/v1/spatial-queries` (`genxListSpatialQueries`); `POST /genx/v1/spatial-queries` (`genxRegisterSpatialQuery`); `GET /genx/v1/spatial-queries/{spatialQueryDbId}` (`genxGetSpatialQuery`) |
 | `SpatialIndex/` | `SpatialIndex` — spatial index records (type, coverage, resolution) | `GET /genx/v1/spatial-indexes` (`genxListSpatialIndexes`); `POST /genx/v1/spatial-indexes` (`genxRegisterSpatialIndex`); `GET /genx/v1/spatial-indexes/{spatialIndexDbId}` (`genxGetSpatialIndex`) |
+| `CalibrationQuality/` | `CalibrationQuality` — calibration quality records (type, date, factor) | `GET /genx/v1/calibration-qualities` (`genxListCalibrationQualitys`); `POST /genx/v1/calibration-qualities` (`genxRegisterCalibrationQuality`); `GET /genx/v1/calibration-qualities/{calibrationQualityDbId}` (`genxGetCalibrationQuality`) |
 | `CloudMask/` | `CloudMask` — cloud mask records (type, acquisition date, resolution) | `GET /genx/v1/cloud-masks` (`genxListCloudMasks`); `POST /genx/v1/cloud-masks` (`genxRegisterCloudMask`); `GET /genx/v1/cloud-masks/{cloudMaskDbId}` (`genxGetCloudMask`) |
 | `RasterCatalogue/` | `RasterCatalogue` — raster catalogue records (type, resolution, CRS) | `GET /genx/v1/raster-catalogues` (`genxListRasterCatalogues`); `POST /genx/v1/raster-catalogues` (`genxRegisterRasterCatalogue`); `GET /genx/v1/raster-catalogues/{rasterCatalogueDbId}` (`genxGetRasterCatalogue`) |
 | `FieldGeometry/` | `FieldGeometry` — field geometry records (type, geometry, area) | `GET /genx/v1/field-geometries` (`genxListFieldGeometries`); `POST /genx/v1/field-geometries` (`genxRegisterFieldGeometry`); `GET /genx/v1/field-geometries/{fieldGeometryDbId}` (`genxGetFieldGeometry`) |
@@ -329,7 +330,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-146-VegetationIndex](./RFC-146-VegetationIndex.md),
 [RFC-147-CloudMask](./RFC-147-CloudMask.md),
 [RFC-148-TelemetryNormalization](./RFC-148-TelemetryNormalization.md),
-[RFC-149-SensorDevice](./RFC-149-SensorDevice.md).
+[RFC-149-SensorDevice](./RFC-149-SensorDevice.md),
+[RFC-150-CalibrationQuality](./RFC-150-CalibrationQuality.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

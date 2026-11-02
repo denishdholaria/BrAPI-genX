@@ -1,0 +1,137 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /calibration-qualities:
+    get:
+      operationId: genxListCalibrationQualitys
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.calibration-qualities.list"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List calibration quality records, optionally filtered by status."
+        canBeUsedFor:
+          - "Discover calibration qualitys."
+          - "Support dataset/model artefact discovery."
+        mustNotBeUsedFor:
+          - "Creating or changing a record (use the POST endpoint)."
+          - "Assuming a record is a BrAPI data resource."
+          - "Treating the list as a complete history."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterCalibrationQuality"
+          - "genxGetCalibrationQuality"
+          - "genxRegisterFarm"
+        decisions: ["RFC-150"]
+        proposalStatus: "draft-non-normative"
+      summary: List calibration quality
+      description: Get a paged list of calibration quality records across authorities. Filters combine with AND.
+      parameters:
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/CalibrationQualityListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - CalibrationQuality
+    post:
+      operationId: genxRegisterCalibrationQuality
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.calibration-qualities.record"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Register one calibration quality record with provenance."
+        canBeUsedFor:
+          - "Publish a calibration quality."
+          - "Retry an identical record safely using the same calibrationQualityDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing record; corrections require a new record that supersedes."
+          - "Assuming a record is a BrAPI data resource."
+          - "Asserting that the catalogue is validated or endorsed."
+        sideEffects: "Creates a calibration quality identity or appends a new immutable version when accepted."
+        idempotency: "Same calibrationQualityDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListCalibrationQualitys"
+          - "genxGetCalibrationQuality"
+          - "genxRegisterFarm"
+        decisions: ["RFC-150"]
+        proposalStatus: "draft-non-normative"
+      summary: Register one calibration quality
+      description: Register one calibration quality record with provenance.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalibrationQualityNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/CalibrationQuality'
+                required:
+                - metadata
+                - result
+                title: CalibrationQualityResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - CalibrationQuality
+components:
+  responses:
+    CalibrationQualityListResponse:
+      content:
+        application/json:
+          schema:
+            title: CalibrationQualityListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CalibrationQuality'
+            required:
+            - metadata
+            - result
+      description: OK

@@ -117,6 +117,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | RemoteSensingMetadata / RemoteSensingMetadata | (none, cross-cutting) | C1, C2, C3, C6, C9 | Remote sensing metadata records; no BrAPI v2.1 equivalent |
 | SensorDevice / SensorDevice | (none, cross-cutting) | C1, C2, C3, C6, C9 | Sensor device records; no BrAPI v2.1 equivalent |
 | SpatialIndex / SpatialIndex | (none, cross-cutting) | C1, C2, C3, C6, C9 | Spatial index records; no BrAPI v2.1 equivalent |
+| CalibrationQuality / CalibrationQuality | (none, cross-cutting) | C1, C2, C3, C6, C9 | Calibration quality records; no BrAPI v2.1 equivalent |
 | CloudMask / CloudMask | (none, cross-cutting) | C1, C2, C3, C6, C9 | Cloud mask records; no BrAPI v2.1 equivalent |
 | RasterCatalogue / RasterCatalogue | (none, cross-cutting) | C1, C2, C3, C6, C9 | Raster catalogue records; no BrAPI v2.1 equivalent |
 | SpatialQuery / SpatialQuery | (none, cross-cutting) | C1, C2, C3, C6, C9 | Spatial query records; no BrAPI v2.1 equivalent |

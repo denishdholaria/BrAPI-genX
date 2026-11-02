@@ -1,0 +1,52 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    CalibrationQuality:
+      type: object
+      description: |-
+        One immutable calibration quality record. A published (calibrationQualityDbId) record
+        never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - calibrationQualityDbId
+      - status
+      properties:
+        calibrationQualityDbId:
+          description: Namespaced calibration-quality identity `{authority}:calibration-quality:{localId}`
+          type: string
+          example: institute-a:calibration-quality:cq-2026-001
+        sensorDeviceReference:
+          description: Reference to sensor device
+          type: string
+          example: institute-a:sensor-device:sd-2026-001
+        calibrationType:
+          description: Type of calibration
+          type: string
+          example: radiometric
+        calibrationDate:
+          description: Calibration date
+          type: string
+          example: "2026-05-01"
+        calibrationFactor:
+          description: Calibration factor
+          type: string
+          example: "1.05"
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: calibrationQualityDbId of the record this one replaces
+          type: string
+          example: institute-a:calibration-quality:cq-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

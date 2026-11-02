@@ -16,6 +16,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | BreedingPipeline | 3 | proposed, non-normative |
 | BulkCapture | 3 | proposed, non-normative |
 | Calendar | 3 | proposed, non-normative |
+| CalibrationQuality | 3 | proposed, non-normative |
 | CandidateVarietyLifecycle | 3 | proposed, non-normative |
 | CapabilityMetadata | 3 | proposed, non-normative |
 | CaptureWorkflow | 3 | proposed, non-normative |
@@ -1207,6 +1208,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.calendars.list, brapi-genx.genx.v1.calendars.record
 - **Relevant RFC / decision references:** RFC-091
 - **Contract source:** [`Specification/BrAPI-GenX/Calendar/Calendar_CalendarDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Calendar/Calendar_CalendarDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### CalibrationQuality — 3 operations
+
+### GET `/genx/v1/calibration-quality`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.calibration-quality.list`
+- **BrAPI-GenX operation identity:** `genxListCalibrationQualitys` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListCalibrationQualitys`
+- **GenX source module:** `CalibrationQuality`
+- **Source tag:** CalibrationQuality
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List calibrationquality records, optionally filtered by status.
+**Source contract description:**
+> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover artifactcatalogues.
+- Support VCF import/export.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a record (use the POST endpoint).
+- Assuming a record is a BrAPI data resource.
+- Treating the list as a complete history.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterCalibrationQuality, genxGetCalibrationQuality, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.calibration-quality.record, brapi-genx.genx.v1.calibration-quality.get
+- **Relevant RFC / decision references:** RFC-150
+- **Contract source:** [`Specification/BrAPI-GenX/CalibrationQuality/CalibrationQuality_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CalibrationQuality/CalibrationQuality_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/calibration-quality`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.calibration-quality.record`
+- **BrAPI-GenX operation identity:** `genxRegisterCalibrationQuality` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterCalibrationQuality`
+- **GenX source module:** `CalibrationQuality`
+- **Source tag:** CalibrationQuality
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register one calibrationquality record with provenance.
+**Source contract description:**
+> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish a artifactcatalogue.
+- Retry an identical record safely using the same vcfExportDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming a record is a BrAPI data resource.
+- Asserting that the export is validated or endorsed.
+- **Side effects:** Creates a calibrationquality identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same calibrationQualityDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** CalibrationQualityNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListCalibrationQualitys, genxGetCalibrationQuality, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.calibration-quality.list, brapi-genx.genx.v1.calibration-quality.get
+- **Relevant RFC / decision references:** RFC-150
+- **Contract source:** [`Specification/BrAPI-GenX/CalibrationQuality/CalibrationQuality_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CalibrationQuality/CalibrationQuality_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/calibration-quality/{calibrationQualityDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.calibration-quality.get`
+- **BrAPI-GenX operation identity:** `genxGetCalibrationQuality` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetCalibrationQuality`
+- **GenX source module:** `CalibrationQuality`
+- **Source tag:** CalibrationQuality
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one calibrationquality record.
+**Source contract description:**
+> Returns the registered record, or 404.
+**Can be used for:**
+- Inspect export, status, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming a record is a BrAPI data resource.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** calibrationQualityDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterCalibrationQuality, genxListCalibrationQualitys, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.calibration-quality.list, brapi-genx.genx.v1.calibration-quality.record
+- **Relevant RFC / decision references:** RFC-150
+- **Contract source:** [`Specification/BrAPI-GenX/CalibrationQuality/CalibrationQuality_CalibrationQualityDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CalibrationQuality/CalibrationQuality_CalibrationQualityDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12582,7 +12688,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> List sensordevice records, optionally filtered by status.
+> List sensor device records, optionally filtered by status.
 **Source contract description:**
 > Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
 **Can be used for:**
@@ -12617,7 +12723,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> Register one sensordevice record with provenance.
+> Register one sensor device record with provenance.
 **Source contract description:**
 > Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
 **Can be used for:**
@@ -12627,7 +12733,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
 - Asserting that the export is validated or endorsed.
-- **Side effects:** Creates a sensordevice identity or appends a new immutable version when accepted.
+- **Side effects:** Creates a sensor device identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same sensorDeviceDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
 - **Request schema refs recorded:** SensorDeviceNewRequest
@@ -12652,7 +12758,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> Retrieve one sensordevice record.
+> Retrieve one sensor device record.
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**

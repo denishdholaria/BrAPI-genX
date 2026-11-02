@@ -86,6 +86,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | M | Remote sensing metadata | `RemoteSensingMetadata/` | RFC-145 |
 | M | Sensor device | `SensorDevice/` | RFC-149 |
 | M | Spatial index | `SpatialIndex/` | RFC-141 |
+| M | Calibration quality | `CalibrationQuality/` | RFC-150 |
 | M | Cloud mask | `CloudMask/` | RFC-147 |
 | M | Raster catalogue | `RasterCatalogue/` | RFC-144 |
 | M | Spatial query | `SpatialQuery/` | RFC-143 |
