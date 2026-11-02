@@ -95,6 +95,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | B | Calendars and time conventions | `Calendar/` | RFC-091 |
 | B | Taxon names and synonyms | `TaxonName/` | RFC-080 |
 | B | Location geometry reference | `LocationGeometry/` | RFC-092 |
+| B | Reference data versioning | `ReferenceDataVersion/` | RFC-093 |
 | G | Developmental stage vocabulary | `DevelopmentalStage/` | RFC-079 |
 | G | Units and quantity semantics | `UnitsAndQuantity/` | RFC-082 |
 | G | External vocabulary sync | `ExternalVocabulary/` | RFC-083 |

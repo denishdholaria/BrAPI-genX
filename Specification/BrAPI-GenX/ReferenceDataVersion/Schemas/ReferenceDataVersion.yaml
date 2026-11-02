@@ -1,0 +1,44 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ReferenceDataVersion:
+      type: object
+      description: |-
+        One immutable reference data version record. A published
+        (referenceDataVersionDbId) record never mutates in place; corrections
+        are recorded as additional records linked by supersedes.
+      required:
+      - referenceDataVersionDbId
+      - status
+      properties:
+        referenceDataVersionDbId:
+          description: Namespaced reference-data-version identity `{authority}:reference-data-version:{localId}`
+          type: string
+          example: institute-a:reference-data-version:rdv-2026-001
+        source:
+          description: Source reference data system
+          type: string
+          example: MCPD
+        version:
+          description: Version label
+          type: string
+          example: 1.0
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: referenceDataVersionDbId of the record this one replaces
+          type: string
+          example: institute-a:reference-data-version:rdv-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

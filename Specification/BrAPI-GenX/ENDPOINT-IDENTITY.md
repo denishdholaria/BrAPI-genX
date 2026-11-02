@@ -363,6 +363,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/location-geometries` | GET | `genxListLocationGeometries` | List location geometries | Does not create or change a record; not a BrAPI data resource. |
 | `/genx/v1/location-geometries` | POST | `genxRegisterLocationGeometry` | Register one location geometry | Append-only record; replay/conflict semantics. |
 | `/genx/v1/location-geometries/{locationGeometryDbId}` | GET | `genxGetLocationGeometry` | Retrieve one location geometry | Does not treat a superseded record as current. |
+| `/genx/v1/reference-data-versions` | GET | `genxListReferenceDataVersions` | List reference data versions | Does not create or change a record; not a BrAPI data resource. |
+| `/genx/v1/reference-data-versions` | POST | `genxRegisterReferenceDataVersion` | Register one reference data version | Append-only record; replay/conflict semantics. |
+| `/genx/v1/reference-data-versions/{referenceDataVersionDbId}` | GET | `genxGetReferenceDataVersion` | Retrieve one reference data version | Does not treat a superseded record as current. |
 | `/genx/v1/taxon-names` | GET | `genxListTaxonNames` | List taxon names | Does not create or change an entry; not a BrAPI data resource. |
 | `/genx/v1/taxon-names` | POST | `genxRegisterTaxonName` | Register one taxon name | Append-only record; replay/conflict semantics. |
 | `/genx/v1/taxon-names/{taxonNameDbId}` | GET | `genxGetTaxonName` | Retrieve one taxon name | Does not treat a superseded entry as current. |

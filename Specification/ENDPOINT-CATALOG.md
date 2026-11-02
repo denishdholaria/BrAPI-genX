@@ -13,8 +13,8 @@ A catalogue identifier does not replace a source operationId or route. Classific
 | Surface | Operations | Contract status |
 |---|---:|---|
 | BrAPI v2.1 official modules | 201 | Released specification; implementation availability not inferred |
-| BrAPI GenX /genx/v1 | 276 | Proposed, non-normative |
-| **Total** | **477** | Existing contracts plus proposed operations |
+| BrAPI GenX /genx/v1 | 279 | Proposed, non-normative |
+| **Total** | **480** | Existing contracts plus proposed operations |
 
 BijMantra snapshot: 2240 records from the inventory generated 2026-10-17; see [source inventory](https://github.com/denishdholaria/bijmantraorg/blob/main/endpoints-inventory.md) and [crosswalk](./BIJMANTRA-CROSSWALK.md).
 
@@ -14809,6 +14809,111 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
+### ReferenceDataVersion — 3 operations
+
+### GET `/genx/v1/reference-data-versions`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.reference-data-versions.list`
+- **BrAPI-GenX operation identity:** `genxListReferenceDataVersions` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListReferenceDataVersions`
+- **GenX source module:** `ReferenceDataVersion`
+- **Source tag:** ReferenceDataVersion
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List reference data version records, optionally filtered by status.
+**Source contract description:**
+> Get a paged list of reference data version records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover reference data versions.
+- Support reference data versioning.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a record (use the POST endpoint).
+- Assuming a record is a BrAPI data resource.
+- Treating the list as a complete catalogue.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterReferenceDataVersion, genxGetReferenceDataVersion, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.reference-data-versions.record, brapi-genx.genx.v1.reference-data-versions.get
+- **Relevant RFC / decision references:** RFC-093
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceDataVersion/ReferenceDataVersion_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ReferenceDataVersion/ReferenceDataVersion_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/reference-data-versions`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.reference-data-versions.record`
+- **BrAPI-GenX operation identity:** `genxRegisterReferenceDataVersion` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterReferenceDataVersion`
+- **GenX source module:** `ReferenceDataVersion`
+- **Source tag:** ReferenceDataVersion
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register one reference data version record with provenance.
+**Source contract description:**
+> Unknown referenceDataVersionDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish a reference data version record.
+- Retry an identical record safely using the same referenceDataVersionDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming a record is a BrAPI data resource.
+- Asserting that the record is validated or endorsed.
+- **Side effects:** Creates a reference data version identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same referenceDataVersionDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** ReferenceDataVersionNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListReferenceDataVersions, genxGetReferenceDataVersion, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.reference-data-versions.list, brapi-genx.genx.v1.reference-data-versions.get
+- **Relevant RFC / decision references:** RFC-093
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceDataVersion/ReferenceDataVersion_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ReferenceDataVersion/ReferenceDataVersion_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/reference-data-versions/{referenceDataVersionDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.reference-data-versions.get`
+- **BrAPI-GenX operation identity:** `genxGetReferenceDataVersion` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetReferenceDataVersion`
+- **GenX source module:** `ReferenceDataVersion`
+- **Source tag:** ReferenceDataVersion
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one reference data version record.
+**Source contract description:**
+> Returns the registered record, or 404.
+**Can be used for:**
+- Inspect version, source, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming a record is a BrAPI data resource.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** referenceDataVersionDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterReferenceDataVersion, genxListReferenceDataVersions, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.reference-data-versions.list, brapi-genx.genx.v1.reference-data-versions.record
+- **Relevant RFC / decision references:** RFC-093
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceDataVersion/ReferenceDataVersion_ReferenceDataVersionDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ReferenceDataVersion/ReferenceDataVersion_ReferenceDataVersionDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
 ### Regeneration — 3 operations
 
 ### GET `/genx/v1/regeneration-records`
@@ -17464,6 +17569,6 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - Unique full-base-path/method/route keys: `True`.
 - Unique source/advisory operation identifiers where present: `True`.
 - BrAPI v2.1 inventory rows resolved to source YAML operations: 201 / 201.
-- GenX operations documented: 276.
+- GenX operations documented: 279.
 
 See [BIJMANTRA-CROSSWALK.md](./BIJMANTRA-CROSSWALK.md) for inventory evidence and semantic boundaries.

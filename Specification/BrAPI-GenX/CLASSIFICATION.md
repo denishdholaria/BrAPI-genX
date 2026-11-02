@@ -141,6 +141,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | ReusableList / ReusableList | (none, cross-cutting) | C1, C2, C3, C6, C9 | Reusable list and cohort records; no BrAPI v2.1 equivalent |
 | Calendar / Calendar | (none, cross-cutting) | C1, C2, C3, C6, C9 | Calendar and time convention records; no BrAPI v2.1 equivalent |
 | LocationGeometry / LocationGeometry | (none, cross-cutting) | C1, C2, C3, C6, C9 | Location geometry records; no BrAPI v2.1 equivalent |
+| ReferenceDataVersion / ReferenceDataVersion | (none, cross-cutting) | C1, C2, C3, C6, C9 | Reference data version records; no BrAPI v2.1 equivalent |
 | TaxonName / TaxonName | (none, cross-cutting) | C1, C2, C3, C4, C9 | Taxon name and synonym entries; no BrAPI v2.1 equivalent; terminology governance |
 | Conformance | Cross-cutting C8 | C1, C3 | Probes and fixtures establish contract evidence, not scientific-domain data |
 

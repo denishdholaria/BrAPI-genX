@@ -1,0 +1,45 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ReferenceDataVersionNewRequest:
+      type: object
+      description: |-
+        Request to register one reference data version record. Unknown
+        referenceDataVersionDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      required:
+      - referenceDataVersionDbId
+      properties:
+        referenceDataVersionDbId:
+          description: Namespaced reference-data-version identity `{authority}:reference-data-version:{localId}`
+          type: string
+          example: institute-a:reference-data-version:rdv-2026-001
+        source:
+          description: Source reference data system
+          type: string
+          example: MCPD
+        version:
+          description: Version label
+          type: string
+          example: 1.0
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: referenceDataVersionDbId of the record this one replaces
+          type: string
+          example: institute-a:reference-data-version:rdv-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
