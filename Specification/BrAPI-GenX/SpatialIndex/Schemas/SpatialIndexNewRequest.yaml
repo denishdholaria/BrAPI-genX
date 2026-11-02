@@ -1,0 +1,52 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    SpatialIndexNewRequest:
+      type: object
+      description: |-
+        Request to register one spatial index record. Unknown spatialIndexDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - spatialIndexDbId
+      properties:
+        spatialIndexDbId:
+          description: Namespaced spatial-index identity `{authority}:spatial-index:{localId}`
+          type: string
+          example: institute-a:spatial-index:si-2026-001
+        indexType:
+          description: Type of spatial index
+          type: string
+          example: quadtree
+        indexName:
+          description: Name of the spatial index
+          type: string
+          example: field-quadtree-2026
+        coverageArea:
+          description: Coverage area of the index
+          type: string
+          example: POLYGON((...))
+        resolution:
+          description: Spatial resolution
+          type: string
+          example: "30m"
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: spatialIndexDbId of the record this one replaces
+          type: string
+          example: institute-a:spatial-index:si-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

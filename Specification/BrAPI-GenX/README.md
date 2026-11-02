@@ -133,6 +133,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `OutcomeFeedback/` | `OutcomeFeedback` — outcome feedback records (type, value, source) | `GET /genx/v1/outcome-feedbacks` (`genxListOutcomeFeedbacks`); `POST /genx/v1/outcome-feedbacks` (`genxRegisterOutcomeFeedback`); `GET /genx/v1/outcome-feedbacks/{outcomeFeedbackDbId}` (`genxGetOutcomeFeedback`) |
 | `LocalConstraint/` | `LocalConstraint` — local constraint records (type, value, source) | `GET /genx/v1/local-constraints` (`genxListLocalConstraints`); `POST /genx/v1/local-constraints` (`genxRegisterLocalConstraint`); `GET /genx/v1/local-constraints/{localConstraintDbId}` (`genxGetLocalConstraint`) |
 | `CrsTransform/` | `CrsTransform` — CRS transform records (source, target, method) | `GET /genx/v1/crs-transforms` (`genxListCrsTransforms`); `POST /genx/v1/crs-transforms` (`genxRegisterCrsTransform`); `GET /genx/v1/crs-transforms/{crsTransformDbId}` (`genxGetCrsTransform`) |
+| `SpatialIndex/` | `SpatialIndex` — spatial index records (type, coverage, resolution) | `GET /genx/v1/spatial-indexes` (`genxListSpatialIndexes`); `POST /genx/v1/spatial-indexes` (`genxRegisterSpatialIndex`); `GET /genx/v1/spatial-indexes/{spatialIndexDbId}` (`genxGetSpatialIndex`) |
 | `AssayDesign/` | `AssayDesign` — assay design records (platform, marker count, provenance) | `GET /genx/v1/assay-designs` (`genxListAssayDesigns`); `POST /genx/v1/assay-designs` (`genxRecordAssayDesign`); `GET /genx/v1/assay-designs/{assayDesignDbId}` (`genxGetAssayDesign`) |
 | `AssayExecution/` | `AssayExecution` — assay execution records (assay reference, provenance) | `GET /genx/v1/assay-executions` (`genxListAssayExecutions`); `POST /genx/v1/assay-executions` (`genxRegisterAssayExecution`); `GET /genx/v1/assay-executions/{assayExecutionDbId}` (`genxGetAssayExecution`) |
 | `VariantAnnotation/` | `VariantAnnotation` — variant annotation records (functional annotations, provenance) | `GET /genx/v1/variant-annotations` (`genxListVariantAnnotations`); `POST /genx/v1/variant-annotations` (`genxRecordVariantAnnotation`); `GET /genx/v1/variant-annotations/{variantAnnotationDbId}` (`genxGetVariantAnnotation`) |
@@ -311,7 +312,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-137-ExplanationEvidence](./RFC-137-ExplanationEvidence.md),
 [RFC-138-OutcomeFeedback](./RFC-138-OutcomeFeedback.md),
 [RFC-139-LocalConstraint](./RFC-139-LocalConstraint.md),
-[RFC-140-CrsTransform](./RFC-140-CrsTransform.md).
+[RFC-140-CrsTransform](./RFC-140-CrsTransform.md),
+[RFC-141-SpatialIndex](./RFC-141-SpatialIndex.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).
