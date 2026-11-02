@@ -51284,12 +51284,247 @@
         "brapi-genx.genx.v1.biodiversity-exports.list",
         "brapi-genx.genx.v1.biodiversity-exports.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "EvidencePack",
+      "brapiTag": "EvidencePack",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/EvidencePack/EvidencePack_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.evidence-packs.list",
+      "method": "GET",
+      "path": "/evidence-packs",
+      "operationIdInSource": "genxListEvidencePacks",
+      "recommendedOperationId": "genxListEvidencePacks",
+      "operationName": "List ArtifactCatalogues",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List evidence pack records, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover artifactcatalogues.",
+        "Support VCF import/export."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a record (use the POST endpoint).",
+        "Assuming a record is a BrAPI data resource.",
+        "Treating the list as a complete history."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterEvidencePack",
+        "genxGetEvidencePack",
+        "genxRegisterGenomicDataset"
+      ],
+      "decisionReferences": [
+        "RFC-122"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.evidence-packs.record",
+        "brapi-genx.genx.v1.evidence-packs.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "EvidencePack",
+      "brapiTag": "EvidencePack",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/EvidencePack/EvidencePack_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.evidence-packs.record",
+      "method": "POST",
+      "path": "/evidence-packs",
+      "operationIdInSource": "genxRegisterEvidencePack",
+      "recommendedOperationId": "genxRegisterEvidencePack",
+      "operationName": "Register one ArtifactCatalogue",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one evidence pack record with provenance.",
+      "sourceDescription": "Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a artifactcatalogue.",
+        "Retry an identical record safely using the same vcfExportDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming a record is a BrAPI data resource.",
+        "Asserting that the export is validated or endorsed."
+      ],
+      "sideEffects": "Creates a evidence pack identity or appends a new immutable version when accepted.",
+      "idempotency": "Same evidencePackDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "EvidencePackNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListEvidencePacks",
+        "genxGetEvidencePack",
+        "genxRegisterGenomicDataset"
+      ],
+      "decisionReferences": [
+        "RFC-122"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.evidence-packs.list",
+        "brapi-genx.genx.v1.evidence-packs.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "EvidencePack",
+      "brapiTag": "EvidencePack",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/EvidencePack/EvidencePack_EvidencePackDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.evidence-packs.get",
+      "method": "GET",
+      "path": "/evidence-packs/{evidencePackDbId}",
+      "operationIdInSource": "genxGetEvidencePack",
+      "recommendedOperationId": "genxGetEvidencePack",
+      "operationName": "Get one ArtifactCatalogue",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one evidence pack record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect export, status, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a record is a BrAPI data resource.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "evidencePackDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterEvidencePack",
+        "genxListEvidencePacks",
+        "genxRegisterGenomicDataset"
+      ],
+      "decisionReferences": [
+        "RFC-122"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.evidence-packs.list",
+        "brapi-genx.genx.v1.evidence-packs.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 363,
+    "genxEntriesAdded": 366,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -51367,7 +51602,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 564,
+    "totalEntries": 567,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -51668,5 +51903,5 @@
       ]
     }
   ],
-  "totalEntries": 564
+  "totalEntries": 567
 }

@@ -1,0 +1,48 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    EvidencePackNewRequest:
+      type: object
+      description: |-
+        Request to register one evidence pack record. Unknown evidencePackDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - evidencePackDbId
+      properties:
+        evidencePackDbId:
+          description: Namespaced evidence-pack identity `{authority}:evidence-pack:{localId}`
+          type: string
+          example: institute-a:evidence-pack:ep-2026-001
+        packName:
+          description: Name of the evidence pack
+          type: string
+          example: trial-2026-evidence-pack
+        packType:
+          description: Type of evidence pack
+          type: string
+          example: reproducibility pack
+        contents:
+          description: Contents or references included in the pack
+          type: string
+          example: protocol, dataset, model, report
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: evidencePackDbId of the record this one replaces
+          type: string
+          example: institute-a:evidence-pack:ep-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

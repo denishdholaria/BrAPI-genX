@@ -219,6 +219,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/biodiversity-exports` | GET | `genxListBiodiversityExports` | List biodiversity exports | Does not create or change a record; not a BrAPI data resource. |
 | `/genx/v1/biodiversity-exports` | POST | `genxRegisterBiodiversityExport` | Register one biodiversity export | Append-only record; replay/conflict semantics. |
 | `/genx/v1/biodiversity-exports/{biodiversityExportDbId}` | GET | `genxGetBiodiversityExport` | Retrieve one biodiversity export | Does not treat a superseded record as current. |
+| `/genx/v1/evidence-packs` | GET | `genxListEvidencePacks` | List evidence packs | Does not create or change a record; not a BrAPI data resource. |
+| `/genx/v1/evidence-packs` | POST | `genxRegisterEvidencePack` | Register one evidence pack | Append-only record; replay/conflict semantics. |
+| `/genx/v1/evidence-packs/{evidencePackDbId}` | GET | `genxGetEvidencePack` | Retrieve one evidence pack | Does not treat a superseded record as current. |
 | `/genx/v1/analysis-results` | GET | `genxListAnalysisResults` | List analysis result records | Does not create or change a result; not a BrAPI data resource. |
 | `/genx/v1/analysis-results` | POST | `genxRecordAnalysisResult` | Record one analysis result | Append-only record; replay/conflict semantics. |
 | `/genx/v1/analysis-results/{analysisResultDbId}` | GET | `genxGetAnalysisResult` | Retrieve one analysis result record | Does not treat a superseded result as current. |

@@ -13,8 +13,8 @@ A catalogue identifier does not replace a source operationId or route. Classific
 | Surface | Operations | Contract status |
 |---|---:|---|
 | BrAPI v2.1 official modules | 201 | Released specification; implementation availability not inferred |
-| BrAPI GenX /genx/v1 | 363 | Proposed, non-normative |
-| **Total** | **564** | Existing contracts plus proposed operations |
+| BrAPI GenX /genx/v1 | 366 | Proposed, non-normative |
+| **Total** | **567** | Existing contracts plus proposed operations |
 
 BijMantra snapshot: 2240 records from the inventory generated 2026-10-17; see [source inventory](https://github.com/denishdholaria/bijmantraorg/blob/main/endpoints-inventory.md) and [crosswalk](./BIJMANTRA-CROSSWALK.md).
 
@@ -8400,7 +8400,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> List biodiversityexport records, optionally filtered by status.
+> List biodiversity export records, optionally filtered by status.
 **Source contract description:**
 > Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
 **Can be used for:**
@@ -8435,7 +8435,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> Register one biodiversityexport record with provenance.
+> Register one biodiversity export record with provenance.
 **Source contract description:**
 > Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
 **Can be used for:**
@@ -8445,7 +8445,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
 - Asserting that the export is validated or endorsed.
-- **Side effects:** Creates a biodiversityexport identity or appends a new immutable version when accepted.
+- **Side effects:** Creates a biodiversity export identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same biodiversityExportDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
 - **Request schema refs recorded:** BiodiversityExportNewRequest
@@ -8470,7 +8470,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> Retrieve one biodiversityexport record.
+> Retrieve one biodiversity export record.
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
@@ -10903,6 +10903,111 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Related catalogue IDs:** brapi-genx.genx.v1.environmental-treatments.list, brapi-genx.genx.v1.environmental-treatments.record
 - **Relevant RFC / decision references:** RFC-078
 - **Contract source:** [`Specification/BrAPI-GenX/EnvironmentalTreatment/EnvironmentalTreatment_EnvironmentalTreatmentDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/EnvironmentalTreatment/EnvironmentalTreatment_EnvironmentalTreatmentDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### EvidencePack — 3 operations
+
+### GET `/genx/v1/evidence-packs`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.evidence-packs.list`
+- **BrAPI-GenX operation identity:** `genxListEvidencePacks` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListEvidencePacks`
+- **GenX source module:** `EvidencePack`
+- **Source tag:** EvidencePack
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List evidencepack records, optionally filtered by status.
+**Source contract description:**
+> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover artifactcatalogues.
+- Support VCF import/export.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a record (use the POST endpoint).
+- Assuming a record is a BrAPI data resource.
+- Treating the list as a complete history.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterEvidencePack, genxGetEvidencePack, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.evidence-packs.record, brapi-genx.genx.v1.evidence-packs.get
+- **Relevant RFC / decision references:** RFC-122
+- **Contract source:** [`Specification/BrAPI-GenX/EvidencePack/EvidencePack_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/EvidencePack/EvidencePack_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/evidence-packs`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.evidence-packs.record`
+- **BrAPI-GenX operation identity:** `genxRegisterEvidencePack` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterEvidencePack`
+- **GenX source module:** `EvidencePack`
+- **Source tag:** EvidencePack
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register one evidencepack record with provenance.
+**Source contract description:**
+> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish a artifactcatalogue.
+- Retry an identical record safely using the same vcfExportDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming a record is a BrAPI data resource.
+- Asserting that the export is validated or endorsed.
+- **Side effects:** Creates a evidencepack identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same evidencePackDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** EvidencePackNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListEvidencePacks, genxGetEvidencePack, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.evidence-packs.list, brapi-genx.genx.v1.evidence-packs.get
+- **Relevant RFC / decision references:** RFC-122
+- **Contract source:** [`Specification/BrAPI-GenX/EvidencePack/EvidencePack_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/EvidencePack/EvidencePack_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/evidence-packs/{evidencePackDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.evidence-packs.get`
+- **BrAPI-GenX operation identity:** `genxGetEvidencePack` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetEvidencePack`
+- **GenX source module:** `EvidencePack`
+- **Source tag:** EvidencePack
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one evidencepack record.
+**Source contract description:**
+> Returns the registered record, or 404.
+**Can be used for:**
+- Inspect export, status, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming a record is a BrAPI data resource.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** evidencePackDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterEvidencePack, genxListEvidencePacks, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.evidence-packs.list, brapi-genx.genx.v1.evidence-packs.record
+- **Relevant RFC / decision references:** RFC-122
+- **Contract source:** [`Specification/BrAPI-GenX/EvidencePack/EvidencePack_EvidencePackDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/EvidencePack/EvidencePack_EvidencePackDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20509,6 +20614,6 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - Unique full-base-path/method/route keys: `True`.
 - Unique source/advisory operation identifiers where present: `True`.
 - BrAPI v2.1 inventory rows resolved to source YAML operations: 201 / 201.
-- GenX operations documented: 363.
+- GenX operations documented: 366.
 
 See [BIJMANTRA-CROSSWALK.md](./BIJMANTRA-CROSSWALK.md) for inventory evidence and semantic boundaries.
