@@ -1,0 +1,52 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    AssayDesignNewRequest:
+      type: object
+      description: |-
+        Request to register one assay design. Unknown assayDesignDbId creates;
+        same id with an identical body replays the existing record; same id
+        with a different body is rejected with 409.
+      required:
+      - assayDesignDbId
+      properties:
+        assayDesignDbId:
+          description: Namespaced assay-design identity `{authority}:assay-design:{localId}`
+          type: string
+          example: institute-a:assay-design:ad-2026-001
+        analysisMethodDbId:
+          description: GenX AnalysisMethod used, when applicable
+          type: string
+          example: institute-a:analysis-method:assay-design
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        platform:
+          description: Genotyping platform
+          type: string
+          example: illumina
+        markerCount:
+          description: Number of markers in the design
+          type: integer
+          example: 10000
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: assayDesignDbId of the record this one replaces
+          type: string
+          example: institute-a:assay-design:ad-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

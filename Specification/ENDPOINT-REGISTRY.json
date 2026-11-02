@@ -36915,12 +36915,249 @@
         "brapi-genx.genx.v1.pedigree-analyses.list",
         "brapi-genx.genx.v1.pedigree-analyses.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "AssayDesign",
+      "brapiTag": "AssayDesign",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/AssayDesign/AssayDesign_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.assay-designs.list",
+      "method": "GET",
+      "path": "/assay-designs",
+      "operationIdInSource": "genxListAssayDesigns",
+      "recommendedOperationId": "genxListAssayDesigns",
+      "operationName": "List assay designs",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List assay design records, optionally filtered by study or status.",
+      "sourceDescription": "Get a paged list of assay designs across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover assay designs for a study.",
+        "Support genotyping workflow auditing."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a design (use the POST endpoint).",
+        "Assuming a design is a BrAPI data resource.",
+        "Treating the list as a complete design repository."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "analysisMethodDbId",
+        "studyDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordAssayDesign",
+        "genxGetAssayDesign",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-061"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.assay-designs.record",
+        "brapi-genx.genx.v1.assay-designs.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "AssayDesign",
+      "brapiTag": "AssayDesign",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/AssayDesign/AssayDesign_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.assay-designs.record",
+      "method": "POST",
+      "path": "/assay-designs",
+      "operationIdInSource": "genxRecordAssayDesign",
+      "recommendedOperationId": "genxRecordAssayDesign",
+      "operationName": "Record one assay design",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record one assay design with platform and provenance.",
+      "sourceDescription": "Unknown assayDesignDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish assay design metadata and payload references.",
+        "Retry an identical design safely using the same assayDesignDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing design; corrections require a new record that supersedes.",
+        "Assuming the design is a BrAPI data resource.",
+        "Treating the design as scientific validation or approval."
+      ],
+      "sideEffects": "Creates an assay design when accepted.",
+      "idempotency": "Same assayDesignDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "AssayDesignNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListAssayDesigns",
+        "genxGetAssayDesign",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-061"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.assay-designs.list",
+        "brapi-genx.genx.v1.assay-designs.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "AssayDesign",
+      "brapiTag": "AssayDesign",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/AssayDesign/AssayDesign_AssayDesignDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.assay-designs.get",
+      "method": "GET",
+      "path": "/assay-designs/{assayDesignDbId}",
+      "operationIdInSource": "genxGetAssayDesign",
+      "recommendedOperationId": "genxGetAssayDesign",
+      "operationName": "Get one assay design",
+      "classification": {
+        "primaryDomain": "D3",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one assay design.",
+      "sourceDescription": "Returns the recorded design, or 404.",
+      "canBeUsedFor": [
+        "Inspect platform, marker count, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the design is a BrAPI data resource.",
+        "Treating a superseded design as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "assayDesignDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordAssayDesign",
+        "genxListAssayDesigns",
+        "genxRegisterAnalysisMethod"
+      ],
+      "decisionReferences": [
+        "RFC-061"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.assay-designs.list",
+        "brapi-genx.genx.v1.assay-designs.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 180,
+    "genxEntriesAdded": 183,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -36998,7 +37235,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 381,
+    "totalEntries": 384,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

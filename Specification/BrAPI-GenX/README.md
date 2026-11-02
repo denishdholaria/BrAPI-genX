@@ -76,6 +76,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `PhenotypeAnnotation/` | `PhenotypeAnnotation` — phenotype annotation records (score, variable, provenance) | `GET /genx/v1/phenotype-annotations` (`genxListPhenotypeAnnotations`); `POST /genx/v1/phenotype-annotations` (`genxRecordPhenotypeAnnotation`); `GET /genx/v1/phenotype-annotations/{phenotypeAnnotationDbId}` (`genxGetPhenotypeAnnotation`) |
 | `ExtremeWeather/` | `ExtremeWeatherEvent` — extreme weather event records (type, severity, provenance) | `GET /genx/v1/extreme-weather-events` (`genxListExtremeWeatherEvents`); `POST /genx/v1/extreme-weather-events` (`genxRecordExtremeWeather`); `GET /genx/v1/extreme-weather-events/{extremeWeatherEventDbId}` (`genxGetExtremeWeatherEvent`) |
 | `VcfImport/` | `VcfImport` — VCF import records (source format, counts, provenance) | `GET /genx/v1/vcf-imports` (`genxListVcfImports`); `POST /genx/v1/vcf-imports` (`genxRecordVcfImport`); `GET /genx/v1/vcf-imports/{vcfImportDbId}` (`genxGetVcfImport`) |
+| `AssayDesign/` | `AssayDesign` — assay design records (platform, marker count, provenance) | `GET /genx/v1/assay-designs` (`genxListAssayDesigns`); `POST /genx/v1/assay-designs` (`genxRecordAssayDesign`); `GET /genx/v1/assay-designs/{assayDesignDbId}` (`genxGetAssayDesign`) |
 | `MixedModel/` | `MixedModelResult` — mixed model result records (variance components, BLUPs, provenance) | `GET /genx/v1/mixed-model-results` (`genxListMixedModelResults`); `POST /genx/v1/mixed-model-results` (`genxRecordMixedModelResult`); `GET /genx/v1/mixed-model-results/{mixedModelResultDbId}` (`genxGetMixedModelResult`) |
 | `Heritability/` | `HeritabilityEstimate` — heritability estimate records (value, provenance) | `GET /genx/v1/heritability-estimates` (`genxListHeritabilityEstimates`); `POST /genx/v1/heritability-estimates` (`genxRecordHeritability`); `GET /genx/v1/heritability-estimates/{heritabilityEstimateDbId}` (`genxGetHeritabilityEstimate`) |
 | `GxeAnalysis/` | `GxeAnalysisResult` — GxE analysis result records (interaction effect, provenance) | `GET /genx/v1/gxe-analyses` (`genxListGxeAnalyses`); `POST /genx/v1/gxe-analyses` (`genxRecordGxeAnalysis`); `GET /genx/v1/gxe-analyses/{gxeAnalysisResultDbId}` (`genxGetGxeAnalysis`) |
@@ -151,7 +152,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-057-Methylation-Analysis](./RFC-057-Methylation-Analysis.md),
 [RFC-058-Expression-Qtl](./RFC-058-Expression-Qtl.md),
 [RFC-059-Haplotype-Analysis](./RFC-059-Haplotype-Analysis.md),
-[RFC-060-Pedigree-Analysis](./RFC-060-Pedigree-Analysis.md).
+[RFC-060-Pedigree-Analysis](./RFC-060-Pedigree-Analysis.md),
+[RFC-061-Assay-Design](./RFC-061-Assay-Design.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).
