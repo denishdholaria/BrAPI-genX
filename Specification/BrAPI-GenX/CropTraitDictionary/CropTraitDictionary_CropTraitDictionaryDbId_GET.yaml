@@ -1,0 +1,65 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /crop-trait-dictionaries/{cropTraitDictionaryDbId}:
+    get:
+      operationId: genxGetCropTraitDictionary
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.crop-trait-dictionaries.get"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C4", "C9"]
+        purpose: "Retrieve one crop trait dictionary entry."
+        canBeUsedFor:
+          - "Inspect trait, definition, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming an entry is a BrAPI Observation."
+          - "Treating a superseded entry as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterCropTraitDictionary"
+          - "genxListCropTraitDictionaries"
+          - "genxPublishVariableTermVersion"
+        decisions: ["RFC-088"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one crop trait dictionary
+      description: Returns the registered entry, or 404.
+      parameters:
+      - name: cropTraitDictionaryDbId
+        description: Namespaced crop-trait-dictionary identity `{authority}:crop-trait-dictionary:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/CropTraitDictionary'
+                required:
+                - metadata
+                - result
+                title: CropTraitDictionaryResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - CropTraitDictionary

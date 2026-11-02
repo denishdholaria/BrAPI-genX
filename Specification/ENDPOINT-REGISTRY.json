@@ -43291,12 +43291,247 @@
         "brapi-genx.genx.v1.measurement-scales.list",
         "brapi-genx.genx.v1.measurement-scales.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CropTraitDictionary",
+      "brapiTag": "CropTraitDictionary",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CropTraitDictionary/CropTraitDictionary_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.crop-trait-dictionaries.list",
+      "method": "GET",
+      "path": "/crop-trait-dictionaries",
+      "operationIdInSource": "genxListCropTraitDictionaries",
+      "recommendedOperationId": "genxListCropTraitDictionaries",
+      "operationName": "List crop trait dictionaries",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List crop trait dictionary entries, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of crop trait dictionary entries across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover crop trait dictionary entries.",
+        "Support crop trait and terminology governance."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing an entry (use the POST endpoint).",
+        "Assuming an entry is a BrAPI Observation.",
+        "Treating the list as a complete trait catalogue."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterCropTraitDictionary",
+        "genxGetCropTraitDictionary",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-088"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.crop-trait-dictionaries.record",
+        "brapi-genx.genx.v1.crop-trait-dictionaries.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CropTraitDictionary",
+      "brapiTag": "CropTraitDictionary",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CropTraitDictionary/CropTraitDictionary_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.crop-trait-dictionaries.record",
+      "method": "POST",
+      "path": "/crop-trait-dictionaries",
+      "operationIdInSource": "genxRegisterCropTraitDictionary",
+      "recommendedOperationId": "genxRegisterCropTraitDictionary",
+      "operationName": "Register one crop trait dictionary entry",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one crop trait dictionary entry with provenance.",
+      "sourceDescription": "Unknown cropTraitDictionaryDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a crop trait dictionary entry.",
+        "Retry an identical entry safely using the same cropTraitDictionaryDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing entry; corrections require a new record that supersedes.",
+        "Assuming an entry is a BrAPI Observation.",
+        "Asserting that the entry is validated or endorsed."
+      ],
+      "sideEffects": "Creates a crop trait dictionary identity or appends a new immutable version when accepted.",
+      "idempotency": "Same cropTraitDictionaryDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "CropTraitDictionaryNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListCropTraitDictionaries",
+        "genxGetCropTraitDictionary",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-088"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.crop-trait-dictionaries.list",
+        "brapi-genx.genx.v1.crop-trait-dictionaries.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CropTraitDictionary",
+      "brapiTag": "CropTraitDictionary",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CropTraitDictionary/CropTraitDictionary_CropTraitDictionaryDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.crop-trait-dictionaries.get",
+      "method": "GET",
+      "path": "/crop-trait-dictionaries/{cropTraitDictionaryDbId}",
+      "operationIdInSource": "genxGetCropTraitDictionary",
+      "recommendedOperationId": "genxGetCropTraitDictionary",
+      "operationName": "Get one crop trait dictionary entry",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one crop trait dictionary entry.",
+      "sourceDescription": "Returns the registered entry, or 404.",
+      "canBeUsedFor": [
+        "Inspect trait, definition, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming an entry is a BrAPI Observation.",
+        "Treating a superseded entry as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "cropTraitDictionaryDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterCropTraitDictionary",
+        "genxListCropTraitDictionaries",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-088"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.crop-trait-dictionaries.list",
+        "brapi-genx.genx.v1.crop-trait-dictionaries.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 261,
+    "genxEntriesAdded": 264,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -43374,7 +43609,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 462,
+    "totalEntries": 465,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -43675,5 +43910,5 @@
       ]
     }
   ],
-  "totalEntries": 462
+  "totalEntries": 465
 }

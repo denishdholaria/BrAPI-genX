@@ -475,6 +475,11 @@ modules:
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C4", "C9"]
     rationale: "Measurement scale and value domain entries; BrAPI v2.1 has no equivalent record."
+  - path: "CropTraitDictionary/"
+    object: "CropTraitDictionary"
+    primary_class: null
+    cross_cutting: ["C1", "C2", "C3", "C4", "C9"]
+    rationale: "Crop trait dictionary entries; BrAPI v2.1 has no equivalent record."
   - path: "TaxonName/"
     object: "TaxonName"
     primary_class: null

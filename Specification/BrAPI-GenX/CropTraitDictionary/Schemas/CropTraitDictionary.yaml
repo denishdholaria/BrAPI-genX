@@ -1,0 +1,48 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    CropTraitDictionary:
+      type: object
+      description: |-
+        One immutable crop trait dictionary entry. A published
+        (cropTraitDictionaryDbId) record never mutates in place; corrections
+        are recorded as additional entries linked by supersedes.
+      required:
+      - cropTraitDictionaryDbId
+      - status
+      properties:
+        cropTraitDictionaryDbId:
+          description: Namespaced crop-trait-dictionary identity `{authority}:crop-trait-dictionary:{localId}`
+          type: string
+          example: institute-a:crop-trait-dictionary:ctd-2026-001
+        cropDbId:
+          description: Crop or germplasm reference
+          type: string
+          example: crop-001
+        trait:
+          description: Trait name or identifier
+          type: string
+          example: grain yield
+        definition:
+          description: Definition of the trait
+          type: string
+          example: Grain yield per unit area
+        status:
+          description: Lifecycle state of the entry
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: cropTraitDictionaryDbId of the entry this one replaces
+          type: string
+          example: institute-a:crop-trait-dictionary:ctd-2026-000
+        provenance:
+          description: Evidence and method provenance for the entry
+          $ref: '#/components/schemas/ProvenanceEnvelope'
