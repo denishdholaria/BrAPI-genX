@@ -77,11 +77,13 @@ implementation, not a claim of production readiness or of scientific validation.
 | D3 | Genotype QC reports | `GenotypeQc/` | RFC-064 |
 | D1 | Retention / disposal | `DisposalRecord/` | RFC-065 |
 | D6 | Sowing / planting | `PlantingOperation/` | RFC-066 |
+| D5 | Carbon stock | `CarbonStock/` | RFC-067 |
 | I | Genomic dataset release/access | `GenomicDatasets/` | RFC-013 |
 | S | FAIR packages | `FAIR/` | RFC-006 |
 
 Still open in D3 row 9: genotype call semantics, marker/probe registry,
-vendor order/result ingestion. D1 row 4 named gaps are now covered.
+vendor order/result ingestion. D1 row 4 named gaps are now covered. Still open
+in D5 row 12: water balance.
 
 ## Suggested GenX sequencing (scientific gaps first)
 

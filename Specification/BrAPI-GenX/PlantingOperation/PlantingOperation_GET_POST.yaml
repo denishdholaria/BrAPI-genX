@@ -81,7 +81,7 @@ paths:
           - "Updating or deleting an existing operation; corrections require a new record that supersedes."
           - "Assuming the operation is a BrAPI data resource."
           - "Treating an operation as evidence that seed was viable or that planting succeeded."
-        sideEffects: "Creates a planting record when accepted."
+        sideEffects: "Creates a planting operation record when accepted."
         idempotency: "Same plantingOperationDbId and identical body replays the existing record; same id with a different body is rejected with 409."
         semanticNeighbors:
           - "genxListPlantingOperations"

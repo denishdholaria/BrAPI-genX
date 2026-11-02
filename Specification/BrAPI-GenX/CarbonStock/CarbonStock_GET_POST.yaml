@@ -1,0 +1,162 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /carbon-stocks:
+    get:
+      operationId: genxListCarbonStocks
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.carbon-stocks.list"
+        classification:
+          primaryDomain: "D5"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List carbon stock records, optionally filtered by study, location, pool, or status."
+        canBeUsedFor:
+          - "Discover carbon stock observations for a study or location."
+          - "Support soil carbon and climate reporting."
+        mustNotBeUsedFor:
+          - "Creating or changing a record (use the POST endpoint)."
+          - "Assuming a record is a BrAPI data resource."
+          - "Treating the list as a complete carbon inventory."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordCarbonStock"
+          - "genxGetCarbonStock"
+          - "genxRegisterSoilProfile"
+        decisions: ["RFC-067"]
+        proposalStatus: "draft-non-normative"
+      summary: List carbon stocks
+      description: Get a paged list of carbon stock records across authorities. Filters combine with AND.
+      parameters:
+      - name: studyDbId
+        description: Filter by BrAPI Study / trial context
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: locationDbId
+        description: Filter by BrAPI Location
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pool
+        description: Filter by carbon pool
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - soil
+          - biomass
+          - litter
+          - coarse-woody-debris
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/CarbonStockListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - CarbonStock
+    post:
+      operationId: genxRecordCarbonStock
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.carbon-stocks.record"
+        classification:
+          primaryDomain: "D5"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Record one carbon stock observation with pool, stock, and provenance."
+        canBeUsedFor:
+          - "Publish a carbon stock measurement for climate reporting."
+          - "Retry an identical record safely using the same carbonStockDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing record; corrections require a new record that supersedes."
+          - "Assuming the record is a BrAPI data resource."
+          - "Treating a record as a verified emissions factor or carbon credit."
+        sideEffects: "Creates a carbon stock record when accepted."
+        idempotency: "Same carbonStockDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListCarbonStocks"
+          - "genxGetCarbonStock"
+          - "genxRegisterSoilProfile"
+        decisions: ["RFC-067"]
+        proposalStatus: "draft-non-normative"
+      summary: Record one carbon stock observation
+      description: |-
+        Unknown carbonStockDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CarbonStockNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/CarbonStock'
+                required:
+                - metadata
+                - result
+                title: CarbonStockResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - CarbonStock
+components:
+  responses:
+    CarbonStockListResponse:
+      content:
+        application/json:
+          schema:
+            title: CarbonStockListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CarbonStock'
+            required:
+            - metadata
+            - result
+      description: OK

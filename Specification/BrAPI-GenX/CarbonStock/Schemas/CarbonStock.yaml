@@ -1,0 +1,66 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    CarbonStock:
+      type: object
+      description: |-
+        One immutable carbon stock observation. A published (carbonStockDbId)
+        record never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - carbonStockDbId
+      - status
+      properties:
+        carbonStockDbId:
+          description: Namespaced carbon-stock identity `{authority}:carbon-stock:{localId}`
+          type: string
+          example: institute-a:carbon-stock:cs-2026-001
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        locationDbId:
+          description: BrAPI Location sampled, when applicable
+          type: string
+          example: institute-a:location:field-12
+        pool:
+          description: Carbon pool measured
+          type: string
+          enum:
+          - soil
+          - biomass
+          - litter
+          - coarse-woody-debris
+          example: soil
+        stockMgPerHa:
+          description: Carbon stock in megagrams per hectare
+          type: number
+          example: 42.7
+        depthCm:
+          description: Sampling depth for soil pools, in centimetres
+          type: number
+          example: 30
+        measuredAt:
+          description: Measurement timestamp (ISO 8601)
+          type: string
+          format: date-time
+          example: '2026-06-18T08:00:00Z'
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: carbonStockDbId of the record this one replaces
+          type: string
+          example: institute-a:carbon-stock:cs-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

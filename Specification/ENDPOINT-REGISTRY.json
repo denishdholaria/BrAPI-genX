@@ -38337,12 +38337,250 @@
         "brapi-genx.genx.v1.planting-operations.list",
         "brapi-genx.genx.v1.planting-operations.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CarbonStock",
+      "brapiTag": "CarbonStock",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CarbonStock/CarbonStock_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.carbon-stocks.list",
+      "method": "GET",
+      "path": "/carbon-stocks",
+      "operationIdInSource": "genxListCarbonStocks",
+      "recommendedOperationId": "genxListCarbonStocks",
+      "operationName": "List carbon stocks",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List carbon stock records, optionally filtered by study, location, pool, or status.",
+      "sourceDescription": "Get a paged list of carbon stock records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover carbon stock observations for a study or location.",
+        "Support soil carbon and climate reporting."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a record (use the POST endpoint).",
+        "Assuming a record is a BrAPI data resource.",
+        "Treating the list as a complete carbon inventory."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "studyDbId",
+        "locationDbId",
+        "pool",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordCarbonStock",
+        "genxGetCarbonStock",
+        "genxRegisterSoilProfile"
+      ],
+      "decisionReferences": [
+        "RFC-067"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.carbon-stocks.record",
+        "brapi-genx.genx.v1.carbon-stocks.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CarbonStock",
+      "brapiTag": "CarbonStock",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CarbonStock/CarbonStock_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.carbon-stocks.record",
+      "method": "POST",
+      "path": "/carbon-stocks",
+      "operationIdInSource": "genxRecordCarbonStock",
+      "recommendedOperationId": "genxRecordCarbonStock",
+      "operationName": "Record one carbon stock observation",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record one carbon stock observation with pool, stock, and provenance.",
+      "sourceDescription": "Unknown carbonStockDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a carbon stock measurement for climate reporting.",
+        "Retry an identical record safely using the same carbonStockDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming the record is a BrAPI data resource.",
+        "Treating a record as a verified emissions factor or carbon credit."
+      ],
+      "sideEffects": "Creates a carbon stock record when accepted.",
+      "idempotency": "Same carbonStockDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "CarbonStockNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListCarbonStocks",
+        "genxGetCarbonStock",
+        "genxRegisterSoilProfile"
+      ],
+      "decisionReferences": [
+        "RFC-067"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.carbon-stocks.list",
+        "brapi-genx.genx.v1.carbon-stocks.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CarbonStock",
+      "brapiTag": "CarbonStock",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CarbonStock/CarbonStock_CarbonStockDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.carbon-stocks.get",
+      "method": "GET",
+      "path": "/carbon-stocks/{carbonStockDbId}",
+      "operationIdInSource": "genxGetCarbonStock",
+      "recommendedOperationId": "genxGetCarbonStock",
+      "operationName": "Get one carbon stock record",
+      "classification": {
+        "primaryDomain": "D5",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one carbon stock record.",
+      "sourceDescription": "Returns the recorded measurement, or 404.",
+      "canBeUsedFor": [
+        "Inspect pool, stock, depth, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the record is a BrAPI data resource.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "carbonStockDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordCarbonStock",
+        "genxListCarbonStocks",
+        "genxRegisterSoilProfile"
+      ],
+      "decisionReferences": [
+        "RFC-067"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.carbon-stocks.list",
+        "brapi-genx.genx.v1.carbon-stocks.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 198,
+    "genxEntriesAdded": 201,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -38420,7 +38658,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 399,
+    "totalEntries": 402,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

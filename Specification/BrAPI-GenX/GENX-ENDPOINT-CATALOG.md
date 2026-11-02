@@ -13,6 +13,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | BreedingPipeline | 3 | proposed, non-normative |
 | BulkCapture | 3 | proposed, non-normative |
 | CandidateVarietyLifecycle | 3 | proposed, non-normative |
+| CarbonStock | 3 | proposed, non-normative |
 | ClimateNormals | 3 | proposed, non-normative |
 | CropCycle | 3 | proposed, non-normative |
 | CrossingSchedule | 3 | proposed, non-normative |
@@ -809,6 +810,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.candidate-varieties.list, brapi-genx.genx.v1.candidate-varieties.register
 - **Relevant RFC / decision references:** RFC-039
 - **Contract source:** [`Specification/BrAPI-GenX/CandidateVarietyLifecycle/CandidateVarietyLifecycle_CandidateVarietyDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CandidateVarietyLifecycle/CandidateVarietyLifecycle_CandidateVarietyDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### CarbonStock — 3 operations
+
+### GET `/genx/v1/carbon-stocks`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.carbon-stocks.list`
+- **BrAPI-GenX operation identity:** `genxListCarbonStocks` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListCarbonStocks`
+- **GenX source module:** `CarbonStock`
+- **Source tag:** CarbonStock
+- **Proposed BrAPI-GenX classification:** D5 — Environment, Agroecology and Field Context; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List carbon stock records, optionally filtered by study, location, pool, or status.
+**Source contract description:**
+> Get a paged list of carbon stock records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover carbon stock observations for a study or location.
+- Support soil carbon and climate reporting.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a record (use the POST endpoint).
+- Assuming a record is a BrAPI data resource.
+- Treating the list as a complete carbon inventory.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** studyDbId, locationDbId, pool, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordCarbonStock, genxGetCarbonStock, genxRegisterSoilProfile
+- **Related catalogue IDs:** brapi-genx.genx.v1.carbon-stocks.record, brapi-genx.genx.v1.carbon-stocks.get
+- **Relevant RFC / decision references:** RFC-067
+- **Contract source:** [`Specification/BrAPI-GenX/CarbonStock/CarbonStock_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CarbonStock/CarbonStock_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/carbon-stocks`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.carbon-stocks.record`
+- **BrAPI-GenX operation identity:** `genxRecordCarbonStock` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordCarbonStock`
+- **GenX source module:** `CarbonStock`
+- **Source tag:** CarbonStock
+- **Proposed BrAPI-GenX classification:** D5 — Environment, Agroecology and Field Context; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one carbon stock observation with pool, stock, and provenance.
+**Source contract description:**
+> Unknown carbonStockDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish a carbon stock measurement for climate reporting.
+- Retry an identical record safely using the same carbonStockDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming the record is a BrAPI data resource.
+- Treating a record as a verified emissions factor or carbon credit.
+- **Side effects:** Creates a carbon stock record when accepted.
+- **Retry / idempotency:** Same carbonStockDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** CarbonStockNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListCarbonStocks, genxGetCarbonStock, genxRegisterSoilProfile
+- **Related catalogue IDs:** brapi-genx.genx.v1.carbon-stocks.list, brapi-genx.genx.v1.carbon-stocks.get
+- **Relevant RFC / decision references:** RFC-067
+- **Contract source:** [`Specification/BrAPI-GenX/CarbonStock/CarbonStock_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CarbonStock/CarbonStock_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/carbon-stocks/{carbonStockDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.carbon-stocks.get`
+- **BrAPI-GenX operation identity:** `genxGetCarbonStock` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetCarbonStock`
+- **GenX source module:** `CarbonStock`
+- **Source tag:** CarbonStock
+- **Proposed BrAPI-GenX classification:** D5 — Environment, Agroecology and Field Context; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one carbon stock record.
+**Source contract description:**
+> Returns the recorded measurement, or 404.
+**Can be used for:**
+- Inspect pool, stock, depth, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the record is a BrAPI data resource.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** carbonStockDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordCarbonStock, genxListCarbonStocks, genxRegisterSoilProfile
+- **Related catalogue IDs:** brapi-genx.genx.v1.carbon-stocks.list, brapi-genx.genx.v1.carbon-stocks.record
+- **Relevant RFC / decision references:** RFC-067
+- **Contract source:** [`Specification/BrAPI-GenX/CarbonStock/CarbonStock_CarbonStockDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CarbonStock/CarbonStock_CarbonStockDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
