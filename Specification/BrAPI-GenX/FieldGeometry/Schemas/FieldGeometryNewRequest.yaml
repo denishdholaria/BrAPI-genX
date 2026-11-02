@@ -1,0 +1,51 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    FieldGeometryNewRequest:
+      type: object
+      description: |-
+        Request to register one field geometry record. Unknown fieldGeometryDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - fieldGeometryDbId
+      properties:
+        fieldGeometryDbId:
+          description: Namespaced field-geometry identity `{authority}:field-geometry:{localId}`
+          type: string
+          example: institute-a:field-geometry:fg-2026-001
+        geometryType:
+          description: Type of geometry
+          type: string
+          example: Polygon
+        geometry:
+          description: Geometry (GeoJSON geometry object)
+          type: object
+        crs:
+          description: Coordinate reference system
+          type: string
+          example: EPSG:4326
+        area:
+          description: Area in hectares
+          type: string
+          example: "5.2"
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: fieldGeometryDbId of the record this one replaces
+          type: string
+          example: institute-a:field-geometry:fg-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
