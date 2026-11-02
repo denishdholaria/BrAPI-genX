@@ -48,6 +48,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `FertilizerApplication/` | `FertilizerApplication` — fertilizer application records (product, quantity, method, provenance) | `GET /genx/v1/fertilizer-applications` (`genxListFertilizerApplications`); `POST /genx/v1/fertilizer-applications` (`genxRecordFertilizerApplication`); `GET /genx/v1/fertilizer-applications/{fertilizerApplicationDbId}` (`genxGetFertilizerApplication`) |
 | `CropCycle/` | `CropCycle` — crop cycle records (planting/harvest dates, crop, provenance) | `GET /genx/v1/crop-cycles` (`genxListCropCycles`); `POST /genx/v1/crop-cycles` (`genxRegisterCropCycle`); `GET /genx/v1/crop-cycles/{cropCycleDbId}` (`genxGetCropCycle`) |
 | `Quarantine/` | `QuarantineRecord` — quarantine records (reason, status, release, provenance) | `GET /genx/v1/quarantine-records` (`genxListQuarantineRecords`); `POST /genx/v1/quarantine-records` (`genxRecordQuarantine`); `GET /genx/v1/quarantine-records/{quarantineRecordDbId}` (`genxGetQuarantineRecord`) |
+| `CustodyTransfer/` | `CustodyTransfer` — chain-of-custody transfer records (parties, condition, provenance) | `GET /genx/v1/custody-transfers` (`genxListCustodyTransfers`); `POST /genx/v1/custody-transfers` (`genxRecordCustodyTransfer`); `GET /genx/v1/custody-transfers/{custodyTransferDbId}` (`genxGetCustodyTransfer`) |
 | `WeatherForecast/` | `WeatherForecast` — weather forecast records (predicted conditions, validity window, provenance) | `GET /genx/v1/weather-forecasts` (`genxListWeatherForecasts`); `POST /genx/v1/weather-forecasts` (`genxRegisterWeatherForecast`); `GET /genx/v1/weather-forecasts/{weatherForecastDbId}` (`genxGetWeatherForecast`) |
 | `PopulationAdvancement/` | `PopulationAdvancement` — population advancement records (stages, dates, provenance) | `GET /genx/v1/population-advancements` (`genxListPopulationAdvancements`); `POST /genx/v1/population-advancements` (`genxRecordPopulationAdvancement`); `GET /genx/v1/population-advancements/{populationAdvancementDbId}` (`genxGetPopulationAdvancement`) |
 | `CrossingSchedule/` | `CrossingSchedule` — crossing schedule records (parents, date, mating design, provenance) | `GET /genx/v1/crossing-schedules` (`genxListCrossingSchedules`); `POST /genx/v1/crossing-schedules` (`genxRegisterCrossingSchedule`); `GET /genx/v1/crossing-schedules/{crossingScheduleDbId}` (`genxGetCrossingSchedule`) |
@@ -155,7 +156,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-059-Haplotype-Analysis](./RFC-059-Haplotype-Analysis.md),
 [RFC-060-Pedigree-Analysis](./RFC-060-Pedigree-Analysis.md),
 [RFC-061-Assay-Design](./RFC-061-Assay-Design.md),
-[RFC-062-Variant-Annotation](./RFC-062-Variant-Annotation.md).
+[RFC-062-Variant-Annotation](./RFC-062-Variant-Annotation.md),
+[RFC-063-Custody-Transfer](./RFC-063-Custody-Transfer.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

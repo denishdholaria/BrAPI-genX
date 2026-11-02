@@ -1,0 +1,65 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /custody-transfers/{custodyTransferDbId}:
+    get:
+      operationId: genxGetCustodyTransfer
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.custody-transfers.get"
+        classification:
+          primaryDomain: "D1"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve one custody transfer."
+        canBeUsedFor:
+          - "Inspect parties, transfer time, condition, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming the transfer is a BrAPI data resource."
+          - "Treating a superseded transfer as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordCustodyTransfer"
+          - "genxListCustodyTransfers"
+          - "genxAppendSeedLotLedgerEntry"
+        decisions: ["RFC-063"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one custody transfer
+      description: Returns the recorded transfer, or 404.
+      parameters:
+      - name: custodyTransferDbId
+        description: Namespaced custody-transfer identity `{authority}:custody-transfer:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/CustodyTransfer'
+                required:
+                - metadata
+                - result
+                title: CustodyTransferResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - CustodyTransfer

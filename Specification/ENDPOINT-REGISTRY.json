@@ -37389,12 +37389,249 @@
         "brapi-genx.genx.v1.variant-annotations.list",
         "brapi-genx.genx.v1.variant-annotations.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CustodyTransfer",
+      "brapiTag": "CustodyTransfer",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CustodyTransfer/CustodyTransfer_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.custody-transfers.list",
+      "method": "GET",
+      "path": "/custody-transfers",
+      "operationIdInSource": "genxListCustodyTransfers",
+      "recommendedOperationId": "genxListCustodyTransfers",
+      "operationName": "List custody transfers",
+      "classification": {
+        "primaryDomain": "D1",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List custody transfer records, optionally filtered by sample, lot, or status.",
+      "sourceDescription": "Get a paged list of custody transfers across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Trace the chain of custody for a sample or seed lot.",
+        "Support scientific reproducibility and auditing."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a transfer (use the POST endpoint).",
+        "Assuming a transfer is a BrAPI data resource.",
+        "Treating the list as a complete custody history."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "sampleDbId",
+        "lotDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordCustodyTransfer",
+        "genxGetCustodyTransfer",
+        "genxAppendSeedLotLedgerEntry"
+      ],
+      "decisionReferences": [
+        "RFC-063"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.custody-transfers.record",
+        "brapi-genx.genx.v1.custody-transfers.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CustodyTransfer",
+      "brapiTag": "CustodyTransfer",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CustodyTransfer/CustodyTransfer_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.custody-transfers.record",
+      "method": "POST",
+      "path": "/custody-transfers",
+      "operationIdInSource": "genxRecordCustodyTransfer",
+      "recommendedOperationId": "genxRecordCustodyTransfer",
+      "operationName": "Record one custody transfer",
+      "classification": {
+        "primaryDomain": "D1",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record one custody transfer with parties, condition, and provenance.",
+      "sourceDescription": "Unknown custodyTransferDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a custody transfer event for audit.",
+        "Retry an identical transfer safely using the same custodyTransferDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing transfer; corrections require a new record that supersedes.",
+        "Assuming a transfer is a BrAPI data resource.",
+        "Treating a transfer as scientific validation or approval."
+      ],
+      "sideEffects": "Creates a custody transfer record when accepted.",
+      "idempotency": "Same custodyTransferDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "CustodyTransferNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListCustodyTransfers",
+        "genxGetCustodyTransfer",
+        "genxAppendSeedLotLedgerEntry"
+      ],
+      "decisionReferences": [
+        "RFC-063"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.custody-transfers.list",
+        "brapi-genx.genx.v1.custody-transfers.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CustodyTransfer",
+      "brapiTag": "CustodyTransfer",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CustodyTransfer/CustodyTransfer_CustodyTransferDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.custody-transfers.get",
+      "method": "GET",
+      "path": "/custody-transfers/{custodyTransferDbId}",
+      "operationIdInSource": "genxGetCustodyTransfer",
+      "recommendedOperationId": "genxGetCustodyTransfer",
+      "operationName": "Get one custody transfer",
+      "classification": {
+        "primaryDomain": "D1",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one custody transfer.",
+      "sourceDescription": "Returns the recorded transfer, or 404.",
+      "canBeUsedFor": [
+        "Inspect parties, transfer time, condition, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a transfer is a BrAPI data resource.",
+        "Treating a superseded transfer as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "custodyTransferDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordCustodyTransfer",
+        "genxListCustodyTransfers",
+        "genxAppendSeedLotLedgerEntry"
+      ],
+      "decisionReferences": [
+        "RFC-063"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.custody-transfers.list",
+        "brapi-genx.genx.v1.custody-transfers.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 186,
+    "genxEntriesAdded": 189,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -37472,7 +37709,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 387,
+    "totalEntries": 390,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

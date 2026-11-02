@@ -1,0 +1,63 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    CustodyTransferNewRequest:
+      type: object
+      description: |-
+        Request to record one custody transfer. Unknown custodyTransferDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - custodyTransferDbId
+      properties:
+        custodyTransferDbId:
+          description: Namespaced custody-transfer identity `{authority}:custody-transfer:{localId}`
+          type: string
+          example: institute-a:custody-transfer:ct-2026-001
+        sampleDbId:
+          description: BrAPI Sample being transferred
+          type: string
+          example: institute-a:sample:smp-001
+        lotDbId:
+          description: GenX seed lot being transferred, when applicable
+          type: string
+          example: institute-a:lot:lot-2026-001
+        fromParty:
+          description: Party relinquishing custody
+          type: string
+          example: institute-a
+        toParty:
+          description: Party accepting custody
+          type: string
+          example: genebank-b
+        transferredAt:
+          description: Transfer timestamp (ISO 8601)
+          type: string
+          format: date-time
+          example: '2026-03-14T09:30:00Z'
+        receivedCondition:
+          description: Observed condition on receipt
+          type: string
+          example: viable
+        status:
+          description: Lifecycle state of the transfer record
+          type: string
+          enum:
+          - pending
+          - accepted
+          - rejected
+          - superseded
+          - withdrawn
+          default: pending
+          example: accepted
+        supersedes:
+          description: custodyTransferDbId of the record this one replaces
+          type: string
+          example: institute-a:custody-transfer:ct-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

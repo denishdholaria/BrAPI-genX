@@ -150,6 +150,11 @@ modules:
     primary_class: "D1"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Quarantine records; BrAPI v2.1 has no equivalent record."
+  - path: "CustodyTransfer/"
+    object: "CustodyTransfer"
+    primary_class: "D1"
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Chain-of-custody transfer records; BrAPI v2.1 has no equivalent record."
   - path: "WeatherForecast/"
     object: "WeatherForecast"
     primary_class: "D5"

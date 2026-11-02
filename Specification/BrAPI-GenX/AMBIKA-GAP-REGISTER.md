@@ -45,6 +45,41 @@
 | 23 | W-administration_developer_experience_and_operations | 25 | None | Platform | Admin/dev/ops. GenX-relevant: serverinfo, capability negotiation, conformance. |
 | 24 | X-client_experiences | 13 | None | Out-of-scope | UI composition; no API ownership. |
 
+## Coverage status (verified against the filesystem and endpoint registry)
+
+This section records which named gaps above already have a GenX module. It is evidence of
+implementation, not a claim of production readiness or of scientific validation.
+
+| Domain | Gap named above | GenX module | RFC |
+|---|---|---|---|
+| D2 | Selection decisions | `SelectionDecisions/` | RFC-008 |
+| D3 | VCF import / export (import side) | `VcfImport/` | RFC-043 |
+| D3 | Genomic dataset release/access, reference assembly versioning, pipeline provenance | `GenomicDatasets/` | RFC-013 |
+| D3 | Assay / plate workflow (design side) | `AssayDesign/` | RFC-061 |
+| D3 | Variant functional annotation | `VariantAnnotation/` | RFC-062 |
+| D4 | Phenotype capture / entry | `PhenotypeCapture/` | RFC-012 |
+| D4 | Confirmations / corrections | `PhenotypeAnnotation/` | RFC-044 |
+| D4 | Repeated measurement / time series | `RepeatedMeasurement/` | RFC-025 |
+| D4 | Bulk capture | `BulkCapture/` | RFC-040 |
+| D4 | Image metadata linkage | `ImageMetadata/` | RFC-032 |
+| D5 | Weather observations | `WeatherObservations/` | RFC-010 |
+| D5 | Weather forecast | `WeatherForecast/` | RFC-031 |
+| D5 | Climate normals / extremes | `ClimateNormals/`, `ExtremeWeather/` | RFC-033, RFC-042 |
+| D5 | Soil profile | `SoilProfile/` | RFC-023 |
+| D6 | Crop cycle | `CropCycle/` | RFC-029 |
+| D6 | Irrigation operation | `IrrigationOperation/` | RFC-024 |
+| D6 | Fertilizer application | `FertilizerApplication/` | RFC-026 |
+| D6 | Harvest / yield | `HarvestRecords/` | RFC-011 |
+| D7 | AnalysisMethod registry | `AnalysisMethods/` | RFC-009 |
+| D7 | Reproducible job contracts | `Jobs/` | RFC-001 |
+| D7 | Result provenance | `AnalysisResult/`, `Provenance/` | RFC-045 |
+| D1 | Sample custody / transfer | `CustodyTransfer/` | RFC-063 |
+| I | Genomic dataset release/access | `GenomicDatasets/` | RFC-013 |
+| S | FAIR packages | `FAIR/` | RFC-006 |
+
+Still open in D3 row 9: genotype QC reports, genotype call semantics, marker/probe registry,
+vendor order/result ingestion. Still open in D1 row 4: retention/disposal.
+
 ## Suggested GenX sequencing (scientific gaps first)
 
 1. **D2 Breeding pipeline & selection** — started with `SelectionDecisions` (RFC-008). Next: breeding pipeline/stage gates, population/line advancement, progeny/family, doubled haploid, speed breeding, parent candidate selection, crossing schedule/worklist.
