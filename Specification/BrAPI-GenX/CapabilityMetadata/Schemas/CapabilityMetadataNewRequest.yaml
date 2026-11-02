@@ -1,0 +1,44 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    CapabilityMetadataNewRequest:
+      type: object
+      description: |-
+        Request to register one capability metadata record. Unknown
+        capabilityMetadataDbId creates; same id with an identical body replays
+        the existing record; same id with a different body is rejected with 409.
+      required:
+      - capabilityMetadataDbId
+      properties:
+        capabilityMetadataDbId:
+          description: Namespaced capability-metadata identity `{authority}:capability-metadata:{localId}`
+          type: string
+          example: institute-a:capability-metadata:cm-2026-001
+        profile:
+          description: Server or profile identifier
+          type: string
+          example: genx-reference-server
+        capabilities:
+          description: Advertised capabilities
+          type: object
+          example: {genx: true}
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: capabilityMetadataDbId of the record this one replaces
+          type: string
+          example: institute-a:capability-metadata:cm-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

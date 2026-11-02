@@ -14,6 +14,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | BulkCapture | 3 | proposed, non-normative |
 | Calendar | 3 | proposed, non-normative |
 | CandidateVarietyLifecycle | 3 | proposed, non-normative |
+| CapabilityMetadata | 3 | proposed, non-normative |
 | CarbonStock | 3 | proposed, non-normative |
 | ClimateNormals | 3 | proposed, non-normative |
 | CommonCropName | 3 | proposed, non-normative |
@@ -946,6 +947,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.candidate-varieties.list, brapi-genx.genx.v1.candidate-varieties.register
 - **Relevant RFC / decision references:** RFC-039
 - **Contract source:** [`Specification/BrAPI-GenX/CandidateVarietyLifecycle/CandidateVarietyLifecycle_CandidateVarietyDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CandidateVarietyLifecycle/CandidateVarietyLifecycle_CandidateVarietyDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### CapabilityMetadata — 3 operations
+
+### GET `/genx/v1/capability-metadata`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.capability-metadata.list`
+- **BrAPI-GenX operation identity:** `genxListCapabilityMetadata` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListCapabilityMetadata`
+- **GenX source module:** `CapabilityMetadata`
+- **Source tag:** CapabilityMetadata
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List capability metadata records, optionally filtered by status.
+**Source contract description:**
+> Get a paged list of capability metadata records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover capability metadata.
+- Support capability negotiation.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a record (use the POST endpoint).
+- Assuming a record is a BrAPI data resource.
+- Treating the list as a complete catalogue.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterCapabilityMetadata, genxGetCapabilityMetadata, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.capability-metadata.record, brapi-genx.genx.v1.capability-metadata.get
+- **Relevant RFC / decision references:** RFC-099
+- **Contract source:** [`Specification/BrAPI-GenX/CapabilityMetadata/CapabilityMetadata_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CapabilityMetadata/CapabilityMetadata_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/capability-metadata`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.capability-metadata.record`
+- **BrAPI-GenX operation identity:** `genxRegisterCapabilityMetadata` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterCapabilityMetadata`
+- **GenX source module:** `CapabilityMetadata`
+- **Source tag:** CapabilityMetadata
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register one capability metadata record with provenance.
+**Source contract description:**
+> Unknown capabilityMetadataDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish capability metadata.
+- Retry an identical record safely using the same capabilityMetadataDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming a record is a BrAPI data resource.
+- Asserting that the record is validated or endorsed.
+- **Side effects:** Creates a capability metadata identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same capabilityMetadataDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** CapabilityMetadataNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListCapabilityMetadata, genxGetCapabilityMetadata, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.capability-metadata.list, brapi-genx.genx.v1.capability-metadata.get
+- **Relevant RFC / decision references:** RFC-099
+- **Contract source:** [`Specification/BrAPI-GenX/CapabilityMetadata/CapabilityMetadata_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CapabilityMetadata/CapabilityMetadata_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/capability-metadata/{capabilityMetadataDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.capability-metadata.get`
+- **BrAPI-GenX operation identity:** `genxGetCapabilityMetadata` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetCapabilityMetadata`
+- **GenX source module:** `CapabilityMetadata`
+- **Source tag:** CapabilityMetadata
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one capability metadata record.
+**Source contract description:**
+> Returns the registered record, or 404.
+**Can be used for:**
+- Inspect capability metadata and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming a record is a BrAPI data resource.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** capabilityMetadataDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterCapabilityMetadata, genxListCapabilityMetadata, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.capability-metadata.list, brapi-genx.genx.v1.capability-metadata.record
+- **Relevant RFC / decision references:** RFC-099
+- **Contract source:** [`Specification/BrAPI-GenX/CapabilityMetadata/CapabilityMetadata_CapabilityMetadataDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CapabilityMetadata/CapabilityMetadata_CapabilityMetadataDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

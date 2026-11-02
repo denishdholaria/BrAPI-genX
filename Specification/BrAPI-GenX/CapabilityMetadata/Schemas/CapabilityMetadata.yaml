@@ -1,0 +1,44 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    CapabilityMetadata:
+      type: object
+      description: |-
+        One immutable capability metadata record. A published
+        (capabilityMetadataDbId) record never mutates in place; corrections
+        are recorded as additional records linked by supersedes.
+      required:
+      - capabilityMetadataDbId
+      - status
+      properties:
+        capabilityMetadataDbId:
+          description: Namespaced capability-metadata identity `{authority}:capability-metadata:{localId}`
+          type: string
+          example: institute-a:capability-metadata:cm-2026-001
+        profile:
+          description: Server or profile identifier
+          type: string
+          example: genx-reference-server
+        capabilities:
+          description: Advertised capabilities
+          type: object
+          example: {genx: true}
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: capabilityMetadataDbId of the record this one replaces
+          type: string
+          example: institute-a:capability-metadata:cm-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
