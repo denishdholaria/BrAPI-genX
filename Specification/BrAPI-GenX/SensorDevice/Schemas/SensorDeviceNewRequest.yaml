@@ -1,0 +1,56 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    SensorDeviceNewRequest:
+      type: object
+      description: |-
+        Request to register one sensor device record. Unknown sensorDeviceDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - sensorDeviceDbId
+      properties:
+        sensorDeviceDbId:
+          description: Namespaced sensor-device identity `{authority}:sensor-device:{localId}`
+          type: string
+          example: institute-a:sensor-device:sd-2026-001
+        deviceType:
+          description: Type of sensor device
+          type: string
+          example: weather-station
+        sensorType:
+          description: Type of sensor
+          type: string
+          example: temperature
+        manufacturer:
+          description: Device manufacturer
+          type: string
+          example: Acme Sensors
+        model:
+          description: Device model
+          type: string
+          example: TS-2000
+        serialNumber:
+          description: Device serial number
+          type: string
+          example: SN-2026-001
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: sensorDeviceDbId of the record this one replaces
+          type: string
+          example: institute-a:sensor-device:sd-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

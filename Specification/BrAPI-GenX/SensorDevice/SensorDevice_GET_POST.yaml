@@ -1,0 +1,137 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /sensor-devices:
+    get:
+      operationId: genxListSensorDevices
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.sensor-devices.list"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List sensor device records, optionally filtered by status."
+        canBeUsedFor:
+          - "Discover sensor devices."
+          - "Support dataset/model artefact discovery."
+        mustNotBeUsedFor:
+          - "Creating or changing a record (use the POST endpoint)."
+          - "Assuming a record is a BrAPI data resource."
+          - "Treating the list as a complete history."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterSensorDevice"
+          - "genxGetSensorDevice"
+          - "genxRegisterFarm"
+        decisions: ["RFC-149"]
+        proposalStatus: "draft-non-normative"
+      summary: List sensor devices
+      description: Get a paged list of sensor device records across authorities. Filters combine with AND.
+      parameters:
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/SensorDeviceListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - SensorDevice
+    post:
+      operationId: genxRegisterSensorDevice
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.sensor-devices.record"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Register one sensor device record with provenance."
+        canBeUsedFor:
+          - "Publish a sensor device."
+          - "Retry an identical record safely using the same sensorDeviceDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing record; corrections require a new record that supersedes."
+          - "Assuming a record is a BrAPI data resource."
+          - "Asserting that the catalogue is validated or endorsed."
+        sideEffects: "Creates a sensor device identity or appends a new immutable version when accepted."
+        idempotency: "Same sensorDeviceDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListSensorDevices"
+          - "genxGetSensorDevice"
+          - "genxRegisterFarm"
+        decisions: ["RFC-149"]
+        proposalStatus: "draft-non-normative"
+      summary: Register one sensor device
+      description: Register one sensor device record with provenance.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensorDeviceNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/SensorDevice'
+                required:
+                - metadata
+                - result
+                title: SensorDeviceResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - SensorDevice
+components:
+  responses:
+    SensorDeviceListResponse:
+      content:
+        application/json:
+          schema:
+            title: SensorDeviceListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SensorDevice'
+            required:
+            - metadata
+            - result
+      description: OK

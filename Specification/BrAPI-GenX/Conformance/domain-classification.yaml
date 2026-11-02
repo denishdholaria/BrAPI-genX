@@ -370,6 +370,11 @@ modules:
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Remote sensing metadata records; BrAPI v2.1 has no equivalent record."
+  - path: "SensorDevice/"
+    object: "SensorDevice"
+    primary_class: null
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Sensor device records; BrAPI v2.1 has no equivalent record."
   - path: "SpatialIndex/"
     object: "SpatialIndex"
     primary_class: null

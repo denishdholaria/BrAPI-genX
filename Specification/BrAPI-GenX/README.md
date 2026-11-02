@@ -136,6 +136,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `TelemetryNormalization/` | `TelemetryNormalization` — telemetry normalization records (type, data refs) | `GET /genx/v1/telemetry-normalization` (`genxListTelemetryNormalization`); `POST /genx/v1/telemetry-normalization` (`genxRegisterTelemetryNormalization`); `GET /genx/v1/telemetry-normalization/{telemetryNormalizationDbId}` (`genxGetTelemetryNormalization`) |
 | `VegetationIndex/` | `VegetationIndex` — vegetation index records (type, name, resolution) | `GET /genx/v1/vegetation-indexes` (`genxListVegetationIndexes`); `POST /genx/v1/vegetation-indexes` (`genxRegisterVegetationIndex`); `GET /genx/v1/vegetation-indexes/{vegetationIndexDbId}` (`genxGetVegetationIndex`) |
 | `RemoteSensingMetadata/` | `RemoteSensingMetadata` — remote sensing metadata records (platform, sensor, CRS) | `GET /genx/v1/remote-sensing-metadata` (`genxListRemoteSensingMetadata`); `POST /genx/v1/remote-sensing-metadata` (`genxRegisterRemoteSensingMetadata`); `GET /genx/v1/remote-sensing-metadata/{remoteSensingMetadataDbId}` (`genxGetRemoteSensingMetadata`) |
+| `SensorDevice/` | `SensorDevice` — sensor device records (type, manufacturer, model) | `GET /genx/v1/sensor-devices` (`genxListSensorDevices`); `POST /genx/v1/sensor-devices` (`genxRegisterSensorDevice`); `GET /genx/v1/sensor-devices/{sensorDeviceDbId}` (`genxGetSensorDevice`) |
 | `SpatialQuery/` | `SpatialQuery` — spatial query records (type, geometry, params) | `GET /genx/v1/spatial-queries` (`genxListSpatialQueries`); `POST /genx/v1/spatial-queries` (`genxRegisterSpatialQuery`); `GET /genx/v1/spatial-queries/{spatialQueryDbId}` (`genxGetSpatialQuery`) |
 | `SpatialIndex/` | `SpatialIndex` — spatial index records (type, coverage, resolution) | `GET /genx/v1/spatial-indexes` (`genxListSpatialIndexes`); `POST /genx/v1/spatial-indexes` (`genxRegisterSpatialIndex`); `GET /genx/v1/spatial-indexes/{spatialIndexDbId}` (`genxGetSpatialIndex`) |
 | `CloudMask/` | `CloudMask` — cloud mask records (type, acquisition date, resolution) | `GET /genx/v1/cloud-masks` (`genxListCloudMasks`); `POST /genx/v1/cloud-masks` (`genxRegisterCloudMask`); `GET /genx/v1/cloud-masks/{cloudMaskDbId}` (`genxGetCloudMask`) |
@@ -327,7 +328,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-145-RemoteSensingMetadata](./RFC-145-RemoteSensingMetadata.md),
 [RFC-146-VegetationIndex](./RFC-146-VegetationIndex.md),
 [RFC-147-CloudMask](./RFC-147-CloudMask.md),
-[RFC-148-TelemetryNormalization](./RFC-148-TelemetryNormalization.md).
+[RFC-148-TelemetryNormalization](./RFC-148-TelemetryNormalization.md),
+[RFC-149-SensorDevice](./RFC-149-SensorDevice.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

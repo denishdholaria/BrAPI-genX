@@ -285,6 +285,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/remote-sensing-metadata` | GET | `genxListRemoteSensingMetadata` | List remote sensing metadata | Does not create or change a record; not a BrAPI data resource. |
 | `/genx/v1/remote-sensing-metadata` | POST | `genxRegisterRemoteSensingMetadata` | Register one remote sensing metadata | Append-only record; replay/conflict semantics. |
 | `/genx/v1/remote-sensing-metadata/{remoteSensingMetadataDbId}` | GET | `genxGetRemoteSensingMetadata` | Retrieve one remote sensing metadata | Does not treat a superseded record as current. |
+| `/genx/v1/sensor-devices` | GET | `genxListSensorDevices` | List sensor devices | Does not create or change a record; not a BrAPI data resource. |
+| `/genx/v1/sensor-devices` | POST | `genxRegisterSensorDevice` | Register one sensor device | Append-only record; replay/conflict semantics. |
+| `/genx/v1/sensor-devices/{sensorDeviceDbId}` | GET | `genxGetSensorDevice` | Retrieve one sensor device | Does not treat a superseded record as current. |
 | `/genx/v1/spatial-indexes` | GET | `genxListSpatialIndexes` | List spatial indexes | Does not create or change a record; not a BrAPI data resource. |
 | `/genx/v1/spatial-indexes` | POST | `genxRegisterSpatialIndex` | Register one spatial index | Append-only record; replay/conflict semantics. |
 | `/genx/v1/spatial-indexes/{spatialIndexDbId}` | GET | `genxGetSpatialIndex` | Retrieve one spatial index | Does not treat a superseded record as current. |
