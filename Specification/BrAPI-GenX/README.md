@@ -77,6 +77,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `Project/` | `Project` — project and funding reference records (title, funding, provenance) | `GET /genx/v1/projects` (`genxListProjects`); `POST /genx/v1/projects` (`genxRegisterProject`); `GET /genx/v1/projects/{projectDbId}` (`genxGetProject`) |
 | `ReusableList/` | `ReusableList` — reusable list and cohort records (name, members, provenance) | `GET /genx/v1/reusable-lists` (`genxListReusableLists`); `POST /genx/v1/reusable-lists` (`genxRegisterReusableList`); `GET /genx/v1/reusable-lists/{reusableListDbId}` (`genxGetReusableList`) |
 | `Calendar/` | `Calendar` — calendar and time convention records (name, convention, provenance) | `GET /genx/v1/calendars` (`genxListCalendars`); `POST /genx/v1/calendars` (`genxRegisterCalendar`); `GET /genx/v1/calendars/{calendarDbId}` (`genxGetCalendar`) |
+| `LocationGeometry/` | `LocationGeometry` — location geometry records (location reference, geometry URI, provenance) | `GET /genx/v1/location-geometries` (`genxListLocationGeometries`); `POST /genx/v1/location-geometries` (`genxRegisterLocationGeometry`); `GET /genx/v1/location-geometries/{locationGeometryDbId}` (`genxGetLocationGeometry`) |
 | `TaxonName/` | `TaxonName` — taxon name and synonym entries (scientific name, synonyms, provenance) | `GET /genx/v1/taxon-names` (`genxListTaxonNames`); `POST /genx/v1/taxon-names` (`genxRegisterTaxonName`); `GET /genx/v1/taxon-names/{taxonNameDbId}` (`genxGetTaxonName`) |
 | `FAIR/` | `FAIRPackage` — licensed, embargo-aware payload envelopes | `GET /genx/v1/fair-packages` (`genxListFairPackageMetadata`); `POST /genx/v1/fair-packages` (`genxRegisterFairPackage`); `GET /genx/v1/fair-packages/{packageDbId}` (`genxGetFairPackageMetadata`) |
 | `Telemetry/` | `TelemetryPoint` — sensor streams, idempotent ingest, aggregates | `GET /genx/v1/telemetry` (`genxQueryTelemetrySamplesOrAggregates`); `POST /genx/v1/telemetry` (`genxAppendTelemetryBatch`) |
@@ -213,7 +214,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-088-Crop-Trait-Dictionary](./RFC-088-Crop-Trait-Dictionary.md),
 [RFC-089-Project](./RFC-089-Project.md),
 [RFC-090-Reusable-List](./RFC-090-Reusable-List.md),
-[RFC-091-Calendar](./RFC-091-Calendar.md).
+[RFC-091-Calendar](./RFC-091-Calendar.md),
+[RFC-092-Location-Geometry](./RFC-092-Location-Geometry.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

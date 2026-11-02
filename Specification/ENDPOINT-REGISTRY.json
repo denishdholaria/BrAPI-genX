@@ -44231,12 +44231,247 @@
         "brapi-genx.genx.v1.calendars.list",
         "brapi-genx.genx.v1.calendars.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "LocationGeometry",
+      "brapiTag": "LocationGeometry",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/LocationGeometry/LocationGeometry_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.location-geometries.list",
+      "method": "GET",
+      "path": "/location-geometries",
+      "operationIdInSource": "genxListLocationGeometries",
+      "recommendedOperationId": "genxListLocationGeometries",
+      "operationName": "List location geometries",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List location geometry records, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of location geometry records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover location geometry records.",
+        "Support geospatial reference data."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a geometry record (use the POST endpoint).",
+        "Assuming a record is a BrAPI Location.",
+        "Treating the list as a complete catalogue."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterLocationGeometry",
+        "genxGetLocationGeometry",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-092"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.location-geometries.record",
+        "brapi-genx.genx.v1.location-geometries.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "LocationGeometry",
+      "brapiTag": "LocationGeometry",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/LocationGeometry/LocationGeometry_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.location-geometries.record",
+      "method": "POST",
+      "path": "/location-geometries",
+      "operationIdInSource": "genxRegisterLocationGeometry",
+      "recommendedOperationId": "genxRegisterLocationGeometry",
+      "operationName": "Register one location geometry",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one location geometry record with provenance.",
+      "sourceDescription": "Unknown locationGeometryDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a location geometry record.",
+        "Retry an identical record safely using the same locationGeometryDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming a record is a BrAPI Location.",
+        "Asserting that the geometry is validated or endorsed."
+      ],
+      "sideEffects": "Creates a location geometry identity or appends a new immutable version when accepted.",
+      "idempotency": "Same locationGeometryDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "LocationGeometryNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListLocationGeometries",
+        "genxGetLocationGeometry",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-092"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.location-geometries.list",
+        "brapi-genx.genx.v1.location-geometries.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "LocationGeometry",
+      "brapiTag": "LocationGeometry",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/LocationGeometry/LocationGeometry_LocationGeometryDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.location-geometries.get",
+      "method": "GET",
+      "path": "/location-geometries/{locationGeometryDbId}",
+      "operationIdInSource": "genxGetLocationGeometry",
+      "recommendedOperationId": "genxGetLocationGeometry",
+      "operationName": "Get one location geometry",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one location geometry record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect geometry, reference, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a record is a BrAPI Location.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "locationGeometryDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterLocationGeometry",
+        "genxListLocationGeometries",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-092"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.location-geometries.list",
+        "brapi-genx.genx.v1.location-geometries.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 273,
+    "genxEntriesAdded": 276,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -44314,7 +44549,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 474,
+    "totalEntries": 477,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -44615,5 +44850,5 @@
       ]
     }
   ],
-  "totalEntries": 474
+  "totalEntries": 477
 }

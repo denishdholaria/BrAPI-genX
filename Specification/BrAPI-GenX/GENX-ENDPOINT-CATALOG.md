@@ -52,6 +52,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | IrrigationOperation | 3 | proposed, non-normative |
 | Jobs | 4 | proposed, non-normative |
 | Kinship | 3 | proposed, non-normative |
+| LocationGeometry | 3 | proposed, non-normative |
 | LotLedger | 2 | proposed, non-normative |
 | MarkerProbe | 3 | proposed, non-normative |
 | MeasurementMethods | 3 | proposed, non-normative |
@@ -4974,6 +4975,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.kinship-matrices.list, brapi-genx.genx.v1.kinship-matrices.register
 - **Relevant RFC / decision references:** RFC-052
 - **Contract source:** [`Specification/BrAPI-GenX/Kinship/Kinship_KinshipMatrixDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Kinship/Kinship_KinshipMatrixDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### LocationGeometry — 3 operations
+
+### GET `/genx/v1/location-geometries`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.location-geometries.list`
+- **BrAPI-GenX operation identity:** `genxListLocationGeometries` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListLocationGeometries`
+- **GenX source module:** `LocationGeometry`
+- **Source tag:** LocationGeometry
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List location geometry records, optionally filtered by status.
+**Source contract description:**
+> Get a paged list of location geometry records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover location geometry records.
+- Support geospatial reference data.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a geometry record (use the POST endpoint).
+- Assuming a record is a BrAPI Location.
+- Treating the list as a complete catalogue.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterLocationGeometry, genxGetLocationGeometry, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.location-geometries.record, brapi-genx.genx.v1.location-geometries.get
+- **Relevant RFC / decision references:** RFC-092
+- **Contract source:** [`Specification/BrAPI-GenX/LocationGeometry/LocationGeometry_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/LocationGeometry/LocationGeometry_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/location-geometries`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.location-geometries.record`
+- **BrAPI-GenX operation identity:** `genxRegisterLocationGeometry` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterLocationGeometry`
+- **GenX source module:** `LocationGeometry`
+- **Source tag:** LocationGeometry
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register one location geometry record with provenance.
+**Source contract description:**
+> Unknown locationGeometryDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish a location geometry record.
+- Retry an identical record safely using the same locationGeometryDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming a record is a BrAPI Location.
+- Asserting that the geometry is validated or endorsed.
+- **Side effects:** Creates a location geometry identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same locationGeometryDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** LocationGeometryNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListLocationGeometries, genxGetLocationGeometry, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.location-geometries.list, brapi-genx.genx.v1.location-geometries.get
+- **Relevant RFC / decision references:** RFC-092
+- **Contract source:** [`Specification/BrAPI-GenX/LocationGeometry/LocationGeometry_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/LocationGeometry/LocationGeometry_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/location-geometries/{locationGeometryDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.location-geometries.get`
+- **BrAPI-GenX operation identity:** `genxGetLocationGeometry` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetLocationGeometry`
+- **GenX source module:** `LocationGeometry`
+- **Source tag:** LocationGeometry
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one location geometry record.
+**Source contract description:**
+> Returns the registered record, or 404.
+**Can be used for:**
+- Inspect geometry, reference, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming a record is a BrAPI Location.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** locationGeometryDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterLocationGeometry, genxListLocationGeometries, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.location-geometries.list, brapi-genx.genx.v1.location-geometries.record
+- **Relevant RFC / decision references:** RFC-092
+- **Contract source:** [`Specification/BrAPI-GenX/LocationGeometry/LocationGeometry_LocationGeometryDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/LocationGeometry/LocationGeometry_LocationGeometryDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

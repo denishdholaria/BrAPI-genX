@@ -1,0 +1,44 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    LocationGeometry:
+      type: object
+      description: |-
+        One immutable location geometry record. A published
+        (locationGeometryDbId) record never mutates in place; corrections
+        are recorded as additional records linked by supersedes.
+      required:
+      - locationGeometryDbId
+      - status
+      properties:
+        locationGeometryDbId:
+          description: Namespaced location-geometry identity `{authority}:location-geometry:{localId}`
+          type: string
+          example: institute-a:location-geometry:lg-2026-001
+        locationDbId:
+          description: BrAPI Location reference
+          type: string
+          example: loc-001
+        geometryUri:
+          description: URI referencing the geometry
+          type: string
+          example: https://storage.example.org/geom/lg-2026-001.geojson
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: locationGeometryDbId of the record this one replaces
+          type: string
+          example: institute-a:location-geometry:lg-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

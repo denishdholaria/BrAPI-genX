@@ -495,6 +495,11 @@ modules:
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Calendar and time convention records; BrAPI v2.1 has no equivalent record."
+  - path: "LocationGeometry/"
+    object: "LocationGeometry"
+    primary_class: null
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Location geometry records; BrAPI v2.1 has no equivalent record."
   - path: "TaxonName/"
     object: "TaxonName"
     primary_class: null
