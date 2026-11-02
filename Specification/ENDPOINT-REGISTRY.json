@@ -38812,12 +38812,248 @@
         "brapi-genx.genx.v1.water-balances.list",
         "brapi-genx.genx.v1.water-balances.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Farm",
+      "brapiTag": "Farm",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Farm/Farm_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.farms.list",
+      "method": "GET",
+      "path": "/farms",
+      "operationIdInSource": "genxListFarms",
+      "recommendedOperationId": "genxListFarms",
+      "operationName": "List farms",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List farms, optionally filtered by location or status.",
+      "sourceDescription": "Get a paged list of farms across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover farms associated with a location.",
+        "Support agronomic planning and site reference."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a farm (use the POST endpoint).",
+        "Assuming a farm is a BrAPI Location.",
+        "Treating the list as a complete land inventory."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "locationDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterFarm",
+        "genxGetFarm",
+        "genxRegisterCropCycle"
+      ],
+      "decisionReferences": [
+        "RFC-069"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.farms.register",
+        "brapi-genx.genx.v1.farms.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Farm",
+      "brapiTag": "Farm",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Farm/Farm_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.farms.register",
+      "method": "POST",
+      "path": "/farms",
+      "operationIdInSource": "genxRegisterFarm",
+      "recommendedOperationId": "genxRegisterFarm",
+      "operationName": "Register one farm",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register a farm with site reference, area, and provenance.",
+      "sourceDescription": "Unknown farmDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish farm identity and site reference metadata.",
+        "Create a new version under an existing farm identity."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing farm; corrections require a new record that supersedes.",
+        "Assuming the farm is a BrAPI Location.",
+        "Treating the farm as a cadastral survey or legal land title."
+      ],
+      "sideEffects": "Creates a farm identity or appends a new immutable version when accepted.",
+      "idempotency": "Same farm identity and identical body replays; conflicting content for the same identity is rejected.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "FarmNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListFarms",
+        "genxGetFarm",
+        "genxRegisterCropCycle"
+      ],
+      "decisionReferences": [
+        "RFC-069"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.farms.list",
+        "brapi-genx.genx.v1.farms.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Farm",
+      "brapiTag": "Farm",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Farm/Farm_FarmDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.farms.get",
+      "method": "GET",
+      "path": "/farms/{farmDbId}",
+      "operationIdInSource": "genxGetFarm",
+      "recommendedOperationId": "genxGetFarm",
+      "operationName": "Get one farm",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one farm.",
+      "sourceDescription": "Returns the registered farm, or 404.",
+      "canBeUsedFor": [
+        "Inspect site reference, area, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the farm is a BrAPI Location.",
+        "Treating a superseded farm as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "farmDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterFarm",
+        "genxListFarms",
+        "genxRegisterCropCycle"
+      ],
+      "decisionReferences": [
+        "RFC-069"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.farms.list",
+        "brapi-genx.genx.v1.farms.register"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 204,
+    "genxEntriesAdded": 207,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -38895,7 +39131,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 405,
+    "totalEntries": 408,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

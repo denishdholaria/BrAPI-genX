@@ -1,0 +1,57 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    Farm:
+      type: object
+      description: |-
+        One immutable farm record. A published (farmDbId) record never
+        mutates in place; corrections are recorded as additional versions
+        linked by supersedes.
+      required:
+      - farmDbId
+      - status
+      properties:
+        farmDbId:
+          description: Namespaced farm identity `{authority}:farm:{localId}`
+          type: string
+          example: institute-a:farm:highfield
+        name:
+          description: Human-readable farm or site name
+          type: string
+          example: Highfield Research Farm
+        organization:
+          description: Managing organization or holding
+          type: string
+          example: institute-a
+        locationDbIds:
+          description: BrAPI Locations that make up the farm or site
+          type: array
+          items:
+            type: string
+          example:
+          - institute-a:location:field-12
+          - institute-a:location:field-13
+        totalAreaHa:
+          description: Total farm area in hectares
+          type: number
+          example: 128.5
+        status:
+          description: Lifecycle state of the farm record
+          type: string
+          enum:
+          - active
+          - inactive
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: farmDbId of the farm record this one replaces
+          type: string
+          example: institute-a:farm:highfield
+        provenance:
+          description: Evidence and method provenance for the farm
+          $ref: '#/components/schemas/ProvenanceEnvelope'

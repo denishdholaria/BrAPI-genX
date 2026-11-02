@@ -92,6 +92,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | PlantingOperation / PlantingOperation | D6 | C1, C2, C3, C6, C9 | Planting operation records; no BrAPI v2.1 equivalent |
 | CarbonStock / CarbonStock | D5 | C1, C2, C3, C6, C9 | Carbon stock records; no BrAPI v2.1 equivalent |
 | WaterBalance / WaterBalance | D5 | C1, C2, C3, C6, C9 | Water balance records; no BrAPI v2.1 equivalent |
+| Farm / Farm | D6 | C1, C2, C3, C6, C9 | Farm and site reference records; no BrAPI v2.1 equivalent |
 | AnalysisResult / AnalysisResult | D7 | C1, C2, C3, C6, C9 | Analysis result records; no BrAPI v2.1 equivalent |
 | GeneticGain / GeneticGainRecord | D7 | C1, C2, C3, C6, C9 | Genetic gain records; no BrAPI v2.1 equivalent |
 | GwasResult / GwasResult | D7 | C1, C2, C3, C6, C9 | GWAS result records; no BrAPI v2.1 equivalent |

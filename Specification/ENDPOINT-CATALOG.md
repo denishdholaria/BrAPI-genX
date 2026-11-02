@@ -13,8 +13,8 @@ A catalogue identifier does not replace a source operationId or route. Classific
 | Surface | Operations | Contract status |
 |---|---:|---|
 | BrAPI v2.1 official modules | 201 | Released specification; implementation availability not inferred |
-| BrAPI GenX /genx/v1 | 204 | Proposed, non-normative |
-| **Total** | **405** | Existing contracts plus proposed operations |
+| BrAPI GenX /genx/v1 | 207 | Proposed, non-normative |
+| **Total** | **408** | Existing contracts plus proposed operations |
 
 BijMantra snapshot: 2240 records from the inventory generated 2026-10-17; see [source inventory](https://github.com/denishdholaria/bijmantraorg/blob/main/endpoints-inventory.md) and [crosswalk](./BIJMANTRA-CROSSWALK.md).
 
@@ -9649,6 +9649,111 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
+### Farm — 3 operations
+
+### GET `/genx/v1/farms`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.farms.list`
+- **BrAPI-GenX operation identity:** `genxListFarms` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListFarms`
+- **GenX source module:** `Farm`
+- **Source tag:** Farm
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List farms, optionally filtered by location or status.
+**Source contract description:**
+> Get a paged list of farms across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover farms associated with a location.
+- Support agronomic planning and site reference.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a farm (use the POST endpoint).
+- Assuming a farm is a BrAPI Location.
+- Treating the list as a complete land inventory.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** locationDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterFarm, genxGetFarm, genxRegisterCropCycle
+- **Related catalogue IDs:** brapi-genx.genx.v1.farms.register, brapi-genx.genx.v1.farms.get
+- **Relevant RFC / decision references:** RFC-069
+- **Contract source:** [`Specification/BrAPI-GenX/Farm/Farm_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Farm/Farm_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/farms`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.farms.register`
+- **BrAPI-GenX operation identity:** `genxRegisterFarm` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterFarm`
+- **GenX source module:** `Farm`
+- **Source tag:** Farm
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register a farm with site reference, area, and provenance.
+**Source contract description:**
+> Unknown farmDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish farm identity and site reference metadata.
+- Create a new version under an existing farm identity.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing farm; corrections require a new record that supersedes.
+- Assuming the farm is a BrAPI Location.
+- Treating the farm as a cadastral survey or legal land title.
+- **Side effects:** Creates a farm identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same farm identity and identical body replays; conflicting content for the same identity is rejected.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** FarmNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListFarms, genxGetFarm, genxRegisterCropCycle
+- **Related catalogue IDs:** brapi-genx.genx.v1.farms.list, brapi-genx.genx.v1.farms.get
+- **Relevant RFC / decision references:** RFC-069
+- **Contract source:** [`Specification/BrAPI-GenX/Farm/Farm_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Farm/Farm_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/farms/{farmDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.farms.get`
+- **BrAPI-GenX operation identity:** `genxGetFarm` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetFarm`
+- **GenX source module:** `Farm`
+- **Source tag:** Farm
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one farm.
+**Source contract description:**
+> Returns the registered farm, or 404.
+**Can be used for:**
+- Inspect site reference, area, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the farm is a BrAPI Location.
+- Treating a superseded farm as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** farmDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterFarm, genxListFarms, genxRegisterCropCycle
+- **Related catalogue IDs:** brapi-genx.genx.v1.farms.list, brapi-genx.genx.v1.farms.register
+- **Relevant RFC / decision references:** RFC-069
+- **Contract source:** [`Specification/BrAPI-GenX/Farm/Farm_FarmDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Farm/Farm_FarmDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
 ### FertilizerApplication — 3 operations
 
 ### GET `/genx/v1/fertilizer-applications`
@@ -14944,6 +15049,6 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - Unique full-base-path/method/route keys: `True`.
 - Unique source/advisory operation identifiers where present: `True`.
 - BrAPI v2.1 inventory rows resolved to source YAML operations: 201 / 201.
-- GenX operations documented: 204.
+- GenX operations documented: 207.
 
 See [BIJMANTRA-CROSSWALK.md](./BIJMANTRA-CROSSWALK.md) for inventory evidence and semantic boundaries.
