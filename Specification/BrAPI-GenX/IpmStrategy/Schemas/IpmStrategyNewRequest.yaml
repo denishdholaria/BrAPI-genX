@@ -1,0 +1,52 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    IpmStrategyNewRequest:
+      type: object
+      description: |-
+        Request to register one IPM strategy record. Unknown ipmStrategyDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - ipmStrategyDbId
+      properties:
+        ipmStrategyDbId:
+          description: Namespaced IPM-strategy identity `{authority}:ipm-strategy:{localId}`
+          type: string
+          example: institute-a:ipm-strategy:ips-2026-001
+        strategyName:
+          description: Name of the IPM strategy
+          type: string
+          example: maize-ipm-2026
+        targetPestOrDisease:
+          description: Target pest or disease for the strategy
+          type: string
+          example: fall armyworm
+        strategyType:
+          description: Type of IPM strategy
+          type: string
+          example: cultural control
+        tactics:
+          description: Tactics included in the strategy
+          type: string
+          example: crop rotation, biological control, scouting
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: ipmStrategyDbId of the record this one replaces
+          type: string
+          example: institute-a:ipm-strategy:ips-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

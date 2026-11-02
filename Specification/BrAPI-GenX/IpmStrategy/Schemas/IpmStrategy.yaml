@@ -1,0 +1,52 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    IpmStrategy:
+      type: object
+      description: |-
+        One immutable IPM strategy record. A published (ipmStrategyDbId) record
+        never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - ipmStrategyDbId
+      - status
+      properties:
+        ipmStrategyDbId:
+          description: Namespaced IPM-strategy identity `{authority}:ipm-strategy:{localId}`
+          type: string
+          example: institute-a:ipm-strategy:ips-2026-001
+        strategyName:
+          description: Name of the IPM strategy
+          type: string
+          example: maize-ipm-2026
+        targetPestOrDisease:
+          description: Target pest or disease for the strategy
+          type: string
+          example: fall armyworm
+        strategyType:
+          description: Type of IPM strategy
+          type: string
+          example: cultural control
+        tactics:
+          description: Tactics included in the strategy
+          type: string
+          example: crop rotation, biological control, scouting
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: ipmStrategyDbId of the record this one replaces
+          type: string
+          example: institute-a:ipm-strategy:ips-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

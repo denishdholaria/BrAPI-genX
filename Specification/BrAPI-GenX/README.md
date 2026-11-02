@@ -117,6 +117,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `EvidencePack/` | `EvidencePack` — evidence pack records (type, contents, provenance) | `GET /genx/v1/evidence-packs` (`genxListEvidencePacks`); `POST /genx/v1/evidence-packs` (`genxRegisterEvidencePack`); `GET /genx/v1/evidence-packs/{evidencePackDbId}` (`genxGetEvidencePack`) |
 | `DiseaseObservation/` | `DiseaseObservation` — disease observation records (type, pest/disease, severity) | `GET /genx/v1/disease-observations` (`genxListDiseaseObservations`); `POST /genx/v1/disease-observations` (`genxRegisterDiseaseObservation`); `GET /genx/v1/disease-observations/{diseaseObservationDbId}` (`genxGetDiseaseObservation`) |
 | `DiagnosticEvidence/` | `DiagnosticEvidence` — diagnostic evidence records (type, method, result) | `GET /genx/v1/diagnostic-evidences` (`genxListDiagnosticEvidences`); `POST /genx/v1/diagnostic-evidences` (`genxRegisterDiagnosticEvidence`); `GET /genx/v1/diagnostic-evidences/{diagnosticEvidenceDbId}` (`genxGetDiagnosticEvidence`) |
+| `IpmStrategy/` | `IpmStrategy` — IPM strategy records (target, type, tactics) | `GET /genx/v1/ipm-strategies` (`genxListIpmStrategies`); `POST /genx/v1/ipm-strategies` (`genxRegisterIpmStrategy`); `GET /genx/v1/ipm-strategies/{ipmStrategyDbId}` (`genxGetIpmStrategy`) |
 | `AssayDesign/` | `AssayDesign` — assay design records (platform, marker count, provenance) | `GET /genx/v1/assay-designs` (`genxListAssayDesigns`); `POST /genx/v1/assay-designs` (`genxRecordAssayDesign`); `GET /genx/v1/assay-designs/{assayDesignDbId}` (`genxGetAssayDesign`) |
 | `AssayExecution/` | `AssayExecution` — assay execution records (assay reference, provenance) | `GET /genx/v1/assay-executions` (`genxListAssayExecutions`); `POST /genx/v1/assay-executions` (`genxRegisterAssayExecution`); `GET /genx/v1/assay-executions/{assayExecutionDbId}` (`genxGetAssayExecution`) |
 | `VariantAnnotation/` | `VariantAnnotation` — variant annotation records (functional annotations, provenance) | `GET /genx/v1/variant-annotations` (`genxListVariantAnnotations`); `POST /genx/v1/variant-annotations` (`genxRecordVariantAnnotation`); `GET /genx/v1/variant-annotations/{variantAnnotationDbId}` (`genxGetVariantAnnotation`) |
@@ -279,7 +280,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-121-BiodiversityExport](./RFC-121-BiodiversityExport.md),
 [RFC-122-EvidencePack](./RFC-122-EvidencePack.md),
 [RFC-123-DiseaseObservation](./RFC-123-DiseaseObservation.md),
-[RFC-124-DiagnosticEvidence](./RFC-124-DiagnosticEvidence.md).
+[RFC-124-DiagnosticEvidence](./RFC-124-DiagnosticEvidence.md),
+[RFC-125-IpmStrategy](./RFC-125-IpmStrategy.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).
