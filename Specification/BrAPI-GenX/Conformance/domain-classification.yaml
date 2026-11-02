@@ -560,6 +560,11 @@ modules:
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "MCPD adapter records; BrAPI v2.1 has no equivalent record."
+  - path: "DuplicateReview/"
+    object: "DuplicateReview"
+    primary_class: null
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Duplicate review records; BrAPI v2.1 has no equivalent record."
   - path: "Conformance/"
     object: "Probes, fixtures and overlap register"
     primary_class: null

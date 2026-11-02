@@ -1,0 +1,139 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /duplicate-reviews:
+    get:
+      operationId: genxListDuplicateReviews
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.duplicate-reviews.list"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List duplicate review records, optionally filtered by status."
+        canBeUsedFor:
+          - "Discover duplicate-reviews and funding references."
+          - "Support germplasm and genetic resources."
+        mustNotBeUsedFor:
+          - "Creating or changing a duplicate-review (use the POST endpoint)."
+          - "Assuming a duplicate-review is a BrAPI Study."
+          - "Treating the list as a complete duplicate-review catalogue."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterDuplicateReview"
+          - "genxGetDuplicateReview"
+          - "genxPublishVariableTermVersion"
+        decisions: ["RFC-104"]
+        proposalStatus: "draft-non-normative"
+      summary: List duplicate-reviews
+      description: Get a paged list of duplicate-review and funding reference records across authorities. Filters combine with AND.
+      parameters:
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/DuplicateReviewListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - DuplicateReview
+    post:
+      operationId: genxRegisterDuplicateReview
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.duplicate-reviews.record"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Register one duplicate review record with provenance."
+        canBeUsedFor:
+          - "Publish a duplicate-review or funding reference."
+          - "Retry an identical record safely using the same duplicateReviewDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing record; corrections require a new record that supersedes."
+          - "Assuming a duplicate-review is a BrAPI Study."
+          - "Asserting that the duplicate-review is validated or endorsed."
+        sideEffects: "Creates a duplicate review identity or appends a new immutable version when accepted."
+        idempotency: "Same duplicateReviewDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListDuplicateReviews"
+          - "genxGetDuplicateReview"
+          - "genxPublishVariableTermVersion"
+        decisions: ["RFC-104"]
+        proposalStatus: "draft-non-normative"
+      summary: Register one duplicate-review
+      description: |-
+        Unknown duplicateReviewDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DuplicateReviewNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/DuplicateReview'
+                required:
+                - metadata
+                - result
+                title: DuplicateReviewResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - DuplicateReview
+components:
+  responses:
+    DuplicateReviewListResponse:
+      content:
+        application/json:
+          schema:
+            title: DuplicateReviewListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DuplicateReview'
+            required:
+            - metadata
+            - result
+      description: OK

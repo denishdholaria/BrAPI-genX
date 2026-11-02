@@ -47051,12 +47051,247 @@
         "brapi-genx.genx.v1.mcpd-adapters.list",
         "brapi-genx.genx.v1.mcpd-adapters.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "DuplicateReview",
+      "brapiTag": "DuplicateReview",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/DuplicateReview/DuplicateReview_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.duplicate-reviews.list",
+      "method": "GET",
+      "path": "/duplicate-reviews",
+      "operationIdInSource": "genxListDuplicateReviews",
+      "recommendedOperationId": "genxListDuplicateReviews",
+      "operationName": "List duplicate reviews",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List duplicate review records, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of duplicate review records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover duplicate reviews.",
+        "Support germplasm and genetic resources."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a record (use the POST endpoint).",
+        "Assuming a record is a BrAPI data resource.",
+        "Treating the list as a complete catalogue."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterDuplicateReview",
+        "genxGetDuplicateReview",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-104"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.duplicate-reviews.record",
+        "brapi-genx.genx.v1.duplicate-reviews.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "DuplicateReview",
+      "brapiTag": "DuplicateReview",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/DuplicateReview/DuplicateReview_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.duplicate-reviews.record",
+      "method": "POST",
+      "path": "/duplicate-reviews",
+      "operationIdInSource": "genxRegisterDuplicateReview",
+      "recommendedOperationId": "genxRegisterDuplicateReview",
+      "operationName": "Register one duplicate review",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one duplicate review record with provenance.",
+      "sourceDescription": "Unknown duplicateReviewDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a duplicate review.",
+        "Retry an identical record safely using the same duplicateReviewDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming a record is a BrAPI data resource.",
+        "Asserting that the record is validated or endorsed."
+      ],
+      "sideEffects": "Creates a duplicate review identity or appends a new immutable version when accepted.",
+      "idempotency": "Same duplicateReviewDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "DuplicateReviewNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListDuplicateReviews",
+        "genxGetDuplicateReview",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-104"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.duplicate-reviews.list",
+        "brapi-genx.genx.v1.duplicate-reviews.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "DuplicateReview",
+      "brapiTag": "DuplicateReview",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/DuplicateReview/DuplicateReview_DuplicateReviewDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.duplicate-reviews.get",
+      "method": "GET",
+      "path": "/duplicate-reviews/{duplicateReviewDbId}",
+      "operationIdInSource": "genxGetDuplicateReview",
+      "recommendedOperationId": "genxGetDuplicateReview",
+      "operationName": "Get one duplicate review",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one duplicate review record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect review identity and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a record is a BrAPI data resource.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "duplicateReviewDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterDuplicateReview",
+        "genxListDuplicateReviews",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-104"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.duplicate-reviews.list",
+        "brapi-genx.genx.v1.duplicate-reviews.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 309,
+    "genxEntriesAdded": 312,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -47134,7 +47369,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 510,
+    "totalEntries": 513,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -47435,5 +47670,5 @@
       ]
     }
   ],
-  "totalEntries": 510
+  "totalEntries": 513
 }

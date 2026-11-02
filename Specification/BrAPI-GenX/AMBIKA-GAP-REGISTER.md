@@ -104,6 +104,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | C | Collecting missions | `CollectingMission/` | RFC-101 |
 | C | Conservation membership | `ConservationMembership/` | RFC-102 |
 | C | MCPD adapter | `McpdAdapter/` | RFC-103 |
+| C | Duplicate review | `DuplicateReview/` | RFC-104 |
 | B | Location geometry reference | `LocationGeometry/` | RFC-092 |
 | B | Reference data versioning | `ReferenceDataVersion/` | RFC-093 |
 | G | Developmental stage vocabulary | `DevelopmentalStage/` | RFC-079 |

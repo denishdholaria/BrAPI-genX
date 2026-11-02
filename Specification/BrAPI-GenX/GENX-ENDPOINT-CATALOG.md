@@ -28,6 +28,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | DevelopmentalStage | 3 | proposed, non-normative |
 | DisposalRecord | 3 | proposed, non-normative |
 | DoubledHaploid | 3 | proposed, non-normative |
+| DuplicateReview | 3 | proposed, non-normative |
 | Emissions | 3 | proposed, non-normative |
 | EnvironmentalTreatment | 3 | proposed, non-normative |
 | ExperimentalDesign | 3 | proposed, non-normative |
@@ -2421,6 +2422,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.doubled-haploid-programs.list, brapi-genx.genx.v1.doubled-haploid-programs.register
 - **Relevant RFC / decision references:** RFC-020
 - **Contract source:** [`Specification/BrAPI-GenX/DoubledHaploid/DoubledHaploid_DoubledHaploidProgramDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/DoubledHaploid/DoubledHaploid_DoubledHaploidProgramDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### DuplicateReview — 3 operations
+
+### GET `/genx/v1/duplicate-reviews`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.duplicate-reviews.list`
+- **BrAPI-GenX operation identity:** `genxListDuplicateReviews` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListDuplicateReviews`
+- **GenX source module:** `DuplicateReview`
+- **Source tag:** DuplicateReview
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List duplicate review records, optionally filtered by status.
+**Source contract description:**
+> Get a paged list of duplicate review records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover duplicate reviews.
+- Support germplasm and genetic resources.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a record (use the POST endpoint).
+- Assuming a record is a BrAPI data resource.
+- Treating the list as a complete catalogue.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterDuplicateReview, genxGetDuplicateReview, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.duplicate-reviews.record, brapi-genx.genx.v1.duplicate-reviews.get
+- **Relevant RFC / decision references:** RFC-104
+- **Contract source:** [`Specification/BrAPI-GenX/DuplicateReview/DuplicateReview_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/DuplicateReview/DuplicateReview_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/duplicate-reviews`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.duplicate-reviews.record`
+- **BrAPI-GenX operation identity:** `genxRegisterDuplicateReview` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterDuplicateReview`
+- **GenX source module:** `DuplicateReview`
+- **Source tag:** DuplicateReview
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register one duplicate review record with provenance.
+**Source contract description:**
+> Unknown duplicateReviewDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish a duplicate review.
+- Retry an identical record safely using the same duplicateReviewDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming a record is a BrAPI data resource.
+- Asserting that the record is validated or endorsed.
+- **Side effects:** Creates a duplicate review identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same duplicateReviewDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** DuplicateReviewNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListDuplicateReviews, genxGetDuplicateReview, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.duplicate-reviews.list, brapi-genx.genx.v1.duplicate-reviews.get
+- **Relevant RFC / decision references:** RFC-104
+- **Contract source:** [`Specification/BrAPI-GenX/DuplicateReview/DuplicateReview_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/DuplicateReview/DuplicateReview_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/duplicate-reviews/{duplicateReviewDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.duplicate-reviews.get`
+- **BrAPI-GenX operation identity:** `genxGetDuplicateReview` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetDuplicateReview`
+- **GenX source module:** `DuplicateReview`
+- **Source tag:** DuplicateReview
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one duplicate review record.
+**Source contract description:**
+> Returns the registered record, or 404.
+**Can be used for:**
+- Inspect review identity and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming a record is a BrAPI data resource.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** duplicateReviewDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterDuplicateReview, genxListDuplicateReviews, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.duplicate-reviews.list, brapi-genx.genx.v1.duplicate-reviews.record
+- **Relevant RFC / decision references:** RFC-104
+- **Contract source:** [`Specification/BrAPI-GenX/DuplicateReview/DuplicateReview_DuplicateReviewDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/DuplicateReview/DuplicateReview_DuplicateReviewDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
