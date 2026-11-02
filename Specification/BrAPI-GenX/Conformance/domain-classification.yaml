@@ -380,6 +380,11 @@ modules:
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Capability negotiation records; BrAPI v2.1 has no equivalent record."
+  - path: "BreedingPipeline/"
+    object: "BreedingPipeline"
+    primary_class: null
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Breeding pipeline records; BrAPI v2.1 has no equivalent record."
   - path: "SchemaMapping/"
     object: "SchemaMapping"
     primary_class: null

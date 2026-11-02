@@ -1002,6 +1002,8 @@ def check_endpoint_identity(root, probe, ctx, results):
                 continue
             triple = (method, normalize_operation_path(full_route[len("/genx/v1"):]), op_id)
             if triple in catalogue_rows_seen:
+                print(f'DEBUG: DUPLICATE: {method} {full_route} ({op_id})', file=sys.stderr)
+                print(f'DEBUG: Already seen from one of {len(catalogue_rows_seen)} entries', file=sys.stderr)
                 problems.append(f"duplicate endpoint catalogue row: {method} {full_route} ({op_id})")
             catalogue_rows_seen.add(triple)
             documented_operations.add(triple)

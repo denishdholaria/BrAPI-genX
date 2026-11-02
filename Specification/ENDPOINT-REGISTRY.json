@@ -25934,85 +25934,7 @@
         "RFC-014"
       ],
       "semanticNeighborCatalogIds": [
-        "brapi-genx.genx.v1.breeding-pipelines.register",
-        "brapi-genx.genx.v1.breeding-pipelines.get"
-      ]
-    },
-    {
-      "apiGeneration": "genx-v1",
-      "basePath": "/genx/v1",
-      "brapiModule": null,
-      "genxModule": "BreedingPipeline",
-      "brapiTag": "BreedingPipeline",
-      "standardStatus": "proposal-non-normative",
-      "implementationStatus": "reference-test-server-evidence-only",
-      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
-      "source": {
-        "repository": "denishdholaria/BrAPI-GenX",
-        "ref": "proposal/scientific-domain-classification",
-        "path": "Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml"
-      },
-      "bijmantraCrosswalk": {
-        "relativePathCandidates": [],
-        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
-      },
-      "catalogId": "brapi-genx.genx.v1.breeding-pipelines.register",
-      "method": "POST",
-      "path": "/breeding-pipelines",
-      "operationIdInSource": "genxRegisterBreedingPipeline",
-      "recommendedOperationId": "genxRegisterBreedingPipeline",
-      "operationName": "Register one breeding pipeline",
-      "classification": {
-        "primaryDomain": "D2",
-        "crossCuttingCapabilities": [
-          "C1",
-          "C2",
-          "C3",
-          "C6",
-          "C9"
-        ],
-        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
-        "confidence": "medium"
-      },
-      "purpose": "Register a breeding pipeline with stages, entry/exit criteria, and provenance.",
-      "sourceDescription": "Unknown breedingPipelineDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
-      "canBeUsedFor": [
-        "Publish pipeline stage-gate definitions.",
-        "Create a new version under an existing pipeline identity."
-      ],
-      "mustNotBeUsedFor": [
-        "Updating or deleting an existing pipeline; corrections require a new record that supersedes.",
-        "Assuming the pipeline is a BrAPI Program or Study.",
-        "Treating the pipeline as an approved breeding plan."
-      ],
-      "sideEffects": "Creates a pipeline identity or appends a new immutable version when accepted.",
-      "idempotency": "Same pipeline identity and identical body replays; conflicting content for the same identity is rejected.",
-      "parameters": [
-        "authorizationHeader"
-      ],
-      "requestSchemaRefs": [
-        "BreedingPipelineNewRequest"
-      ],
-      "responseCodes": [
-        "200",
-        "400",
-        "401",
-        "403"
-      ],
-      "responseRefs": [
-        "400BadRequest",
-        "401Unauthorized",
-        "403Forbidden"
-      ],
-      "semanticNeighborIds": [
-        "genxListBreedingPipelines",
-        "genxGetBreedingPipeline"
-      ],
-      "decisionReferences": [
-        "RFC-014"
-      ],
-      "semanticNeighborCatalogIds": [
-        "brapi-genx.genx.v1.breeding-pipelines.list",
+        "brapi-genx.genx.v1.breeding-pipelines.record",
         "brapi-genx.genx.v1.breeding-pipelines.get"
       ]
     },
@@ -26089,7 +26011,7 @@
       ],
       "semanticNeighborCatalogIds": [
         "brapi-genx.genx.v1.breeding-pipelines.list",
-        "brapi-genx.genx.v1.breeding-pipelines.register"
+        "brapi-genx.genx.v1.breeding-pipelines.record"
       ]
     },
     {
@@ -58803,6 +58725,85 @@
       "semanticNeighborCatalogIds": [
         "brapi-genx.genx.v1.capability-negotiations.list",
         "brapi-genx.genx.v1.capability-negotiations.record"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "BreedingPipeline",
+      "brapiTag": "BreedingPipeline",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.breeding-pipelines.record",
+      "method": "POST",
+      "path": "/breeding-pipelines",
+      "operationIdInSource": "genxRegisterBreedingPipeline",
+      "recommendedOperationId": "genxRegisterBreedingPipeline",
+      "operationName": "Register one ArtifactCatalogue",
+      "classification": {
+        "primaryDomain": "D2",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one breeding pipeline record with provenance.",
+      "sourceDescription": "Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a artifactcatalogue.",
+        "Retry an identical record safely using the same vcfExportDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming a record is a BrAPI data resource.",
+        "Asserting that the export is validated or endorsed."
+      ],
+      "sideEffects": "Creates a breeding pipeline identity or appends a new immutable version when accepted.",
+      "idempotency": "Same breedingPipelineDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "BreedingPipelineNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListBreedingPipelines",
+        "genxGetBreedingPipeline",
+        "genxRegisterGenomicDataset"
+      ],
+      "decisionReferences": [
+        "RFC-154"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.breeding-pipelines.list",
+        "brapi-genx.genx.v1.breeding-pipelines.get"
       ]
     }
   ],

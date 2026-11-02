@@ -8,73 +8,49 @@ components:
     BreedingPipelineNewRequest:
       type: object
       description: |-
-        Request to register one breeding pipeline. Unknown
-        breedingPipelineDbId creates; same id with an identical body replays
-        the existing record; same id with a different body is rejected with 409.
+        Request to register one breeding pipeline record. Unknown breedingPipelineDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
       required:
       - breedingPipelineDbId
-      - programDbId
-      - pipelineName
-      - stages
       properties:
         breedingPipelineDbId:
           description: Namespaced breeding-pipeline identity `{authority}:breeding-pipeline:{localId}`
           type: string
-          example: institute-a:breeding-pipeline:bp-wheat-2026
-        programDbId:
-          description: BrAPI Program (breeding program) this pipeline belongs to
-          type: string
-          example: institute-a:program:wheat-breeding
+          example: institute-a:breeding-pipeline:bp-2026-001
         pipelineName:
-          description: Human readable pipeline name
+          description: Name of the breeding pipeline
           type: string
-          example: Wheat yield improvement pipeline 2026
-        description:
-          description: What the pipeline produces and its scope
+          example: maize-recurrent-selection-2026
+        pipelineType:
+          description: Type of breeding pipeline
           type: string
-          example: From F1 to released variety.
-        stages:
-          description: Ordered stage gates of the pipeline
-          type: array
-          items:
-            type: object
-            required:
-            - stageName
-            - stageOrder
-            properties:
-              stageName:
-                description: Name of the stage
-                type: string
-                example: F2 advancement
-              stageOrder:
-                description: Position of the stage in the pipeline
-                type: integer
-                example: 2
-              entryCriteria:
-                description: Conditions to enter the stage
-                type: string
-                example: Minimum 100 F1 plants available.
-              exitCriteria:
-                description: Conditions to exit the stage
-                type: string
-                example: Selected lines meet yield threshold.
-              selectionMethod:
-                description: Selection method applied at this stage
-                type: string
-                example: phenotypic
+          example: recurrent-selection
+        breedingProgram:
+          description: Reference to breeding program
+          type: string
+          example: institute-a:breeding-program:bp-2026-001
+        pipelineStage:
+          description: Current pipeline stage
+          type: string
+          example: advancement
+        targetTrait:
+          description: Target trait for selection
+          type: string
+          example: drought-tolerance
         status:
-          description: Lifecycle state of the pipeline record
+          description: Lifecycle state of the record
           type: string
           enum:
           - active
-          - deprecated
           - superseded
+          - withdrawn
           default: active
           example: active
         supersedes:
-          description: breedingPipelineDbId of the pipeline this one replaces
+          description: breedingPipelineDbId of the record this one replaces
           type: string
-          example: institute-a:breeding-pipeline:bp-wheat-2025
+          example: institute-a:breeding-pipeline:bp-2026-000
         provenance:
-          description: Evidence and method provenance for the pipeline
+          description: Evidence and method provenance for the record
           $ref: '#/components/schemas/ProvenanceEnvelope'

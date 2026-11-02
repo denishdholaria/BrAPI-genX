@@ -13,28 +13,23 @@ paths:
           crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
         purpose: "List breeding pipeline definitions, optionally filtered by program or status."
         canBeUsedFor:
-          - "Discover breeding pipelines and their stage gates."
-          - "Support breeding program planning and auditing."
+          - "Discover breeding pipelines."
+          - "Support dataset/model artefact discovery."
         mustNotBeUsedFor:
-          - "Creating or changing a pipeline (use the POST endpoint)."
-          - "Assuming a pipeline is a BrAPI Program or Study."
-          - "Treating the list as a complete breeding program record."
+          - "Creating or changing a record (use the POST endpoint)."
+          - "Assuming a record is a BrAPI data resource."
+          - "Treating the list as a complete history."
         sideEffects: "Read-only."
         idempotency: "Read-only."
         semanticNeighbors:
           - "genxRegisterBreedingPipeline"
           - "genxGetBreedingPipeline"
-        decisions: ["RFC-014"]
+          - "genxRegisterFarm"
+        decisions: ["RFC-154"]
         proposalStatus: "draft-non-normative"
-      summary: List breeding pipelines
-      description: Get a paged list of breeding pipelines across authorities. Filters combine with AND.
+      summary: List breeding pipeline
+      description: Get a paged list of breeding pipeline records across authorities. Filters combine with AND.
       parameters:
-      - name: programDbId
-        description: Filter by BrAPI Program (breeding program)
-        in: query
-        required: false
-        schema:
-          type: string
       - name: status
         description: Filter by lifecycle state
         in: query
@@ -43,8 +38,8 @@ paths:
           type: string
           enum:
           - active
-          - deprecated
           - superseded
+          - withdrawn
       - $ref: '#/components/parameters/page'
       - $ref: '#/components/parameters/pageSize'
       - $ref: '#/components/parameters/authorizationHeader'
@@ -62,33 +57,32 @@ paths:
     post:
       operationId: genxRegisterBreedingPipeline
       x-brapi-genx:
-        catalogId: "brapi-genx.genx.v1.breeding-pipelines.register"
+        catalogId: "brapi-genx.genx.v1.breeding-pipelines.record"
         classification:
           primaryDomain: "D2"
           crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
-        purpose: "Register a breeding pipeline with stages, entry/exit criteria, and provenance."
+        purpose: "Register one breeding pipeline record with provenance."
         canBeUsedFor:
-          - "Publish pipeline stage-gate definitions."
-          - "Create a new version under an existing pipeline identity."
+          - "Publish a breeding pipeline."
+          - "Retry an identical record safely using the same breedingPipelineDbId."
         mustNotBeUsedFor:
-          - "Updating or deleting an existing pipeline; corrections require a new record that supersedes."
-          - "Assuming the pipeline is a BrAPI Program or Study."
-          - "Treating the pipeline as an approved breeding plan."
-        sideEffects: "Creates a pipeline identity or appends a new immutable version when accepted."
-        idempotency: "Same pipeline identity and identical body replays; conflicting content for the same identity is rejected."
+          - "Updating or deleting an existing record; corrections require a new record that supersedes."
+          - "Assuming a record is a BrAPI data resource."
+          - "Asserting that the catalogue is validated or endorsed."
+        sideEffects: "Creates a breeding pipeline identity or appends a new immutable version when accepted."
+        idempotency: "Same breedingPipelineDbId and identical body replays the existing record; same id with a different body is rejected with 409."
         semanticNeighbors:
           - "genxListBreedingPipelines"
           - "genxGetBreedingPipeline"
-        decisions: ["RFC-014"]
+          - "genxRegisterFarm"
+        decisions: ["RFC-154"]
         proposalStatus: "draft-non-normative"
       summary: Register one breeding pipeline
-      description: |-
-        Unknown breedingPipelineDbId creates; same id with an identical body
-        replays the existing record; same id with a different body is
-        rejected with 409.
+      description: Register one breeding pipeline record with provenance.
       parameters:
       - $ref: '#/components/parameters/authorizationHeader'
       requestBody:
+        required: true
         content:
           application/json:
             schema:

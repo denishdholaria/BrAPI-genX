@@ -8522,7 +8522,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
 - **Semantic relationship IDs / labels:** genxRegisterBreedingPipeline, genxGetBreedingPipeline
-- **Related catalogue IDs:** brapi-genx.genx.v1.breeding-pipelines.register, brapi-genx.genx.v1.breeding-pipelines.get
+- **Related catalogue IDs:** brapi-genx.genx.v1.breeding-pipelines.record, brapi-genx.genx.v1.breeding-pipelines.get
 - **Relevant RFC / decision references:** RFC-014
 - **Contract source:** [`Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
@@ -8530,7 +8530,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 
 ### POST `/genx/v1/breeding-pipelines`
 
-- **Catalogue ID:** `brapi-genx.genx.v1.breeding-pipelines.register`
+- **Catalogue ID:** `brapi-genx.genx.v1.breeding-pipelines.record`
 - **BrAPI-GenX operation identity:** `genxRegisterBreedingPipeline` (advisory where absent from source)
 - **Source OpenAPI operationId:** `genxRegisterBreedingPipeline`
 - **GenX source module:** `BreedingPipeline`
@@ -8540,25 +8540,25 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> Register a breeding pipeline with stages, entry/exit criteria, and provenance.
+> Register one breeding pipeline record with provenance.
 **Source contract description:**
-> Unknown breedingPipelineDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
 **Can be used for:**
-- Publish pipeline stage-gate definitions.
-- Create a new version under an existing pipeline identity.
+- Publish a artifactcatalogue.
+- Retry an identical record safely using the same vcfExportDbId.
 **Must not be used for / explicit non-goals:**
-- Updating or deleting an existing pipeline; corrections require a new record that supersedes.
-- Assuming the pipeline is a BrAPI Program or Study.
-- Treating the pipeline as an approved breeding plan.
-- **Side effects:** Creates a pipeline identity or appends a new immutable version when accepted.
-- **Retry / idempotency:** Same pipeline identity and identical body replays; conflicting content for the same identity is rejected.
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming a record is a BrAPI data resource.
+- Asserting that the export is validated or endorsed.
+- **Side effects:** Creates a breeding pipeline identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same breedingPipelineDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
 - **Request schema refs recorded:** BreedingPipelineNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListBreedingPipelines, genxGetBreedingPipeline
+- **Semantic relationship IDs / labels:** genxListBreedingPipelines, genxGetBreedingPipeline, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.breeding-pipelines.list, brapi-genx.genx.v1.breeding-pipelines.get
-- **Relevant RFC / decision references:** RFC-014
+- **Relevant RFC / decision references:** RFC-154
 - **Contract source:** [`Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
@@ -8590,7 +8590,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
 - **Semantic relationship IDs / labels:** genxRegisterBreedingPipeline, genxListBreedingPipelines
-- **Related catalogue IDs:** brapi-genx.genx.v1.breeding-pipelines.list, brapi-genx.genx.v1.breeding-pipelines.register
+- **Related catalogue IDs:** brapi-genx.genx.v1.breeding-pipelines.list, brapi-genx.genx.v1.breeding-pipelines.record
 - **Relevant RFC / decision references:** RFC-014
 - **Contract source:** [`Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_BreedingPipelineDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_BreedingPipelineDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
@@ -9135,7 +9135,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> List capabilitynegotiation records, optionally filtered by status.
+> List capability negotiation records, optionally filtered by status.
 **Source contract description:**
 > Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
 **Can be used for:**
@@ -9170,7 +9170,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> Register one capabilitynegotiation record with provenance.
+> Register one capability negotiation record with provenance.
 **Source contract description:**
 > Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
 **Can be used for:**
@@ -9180,7 +9180,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
 - Asserting that the export is validated or endorsed.
-- **Side effects:** Creates a capabilitynegotiation identity or appends a new immutable version when accepted.
+- **Side effects:** Creates a capability negotiation identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same capabilityNegotiationDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
 - **Request schema refs recorded:** CapabilityNegotiationNewRequest
@@ -9205,7 +9205,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> Retrieve one capabilitynegotiation record.
+> Retrieve one capability negotiation record.
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**

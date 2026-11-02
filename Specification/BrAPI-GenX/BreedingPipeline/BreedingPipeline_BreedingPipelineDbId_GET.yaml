@@ -13,19 +13,20 @@ paths:
           crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
         purpose: "Retrieve one registered breeding pipeline."
         canBeUsedFor:
-          - "Inspect pipeline stages, criteria, and provenance."
+          - "Inspect catalogue entries and provenance."
         mustNotBeUsedFor:
-          - "Assuming the pipeline is a BrAPI Program or Study."
-          - "Treating a superseded pipeline as current."
+          - "Assuming a record is a BrAPI data resource."
+          - "Treating a superseded record as current."
         sideEffects: "Read-only."
         idempotency: "Read-only."
         semanticNeighbors:
           - "genxRegisterBreedingPipeline"
           - "genxListBreedingPipelines"
-        decisions: ["RFC-014"]
+          - "genxRegisterResearchAsset"
+        decisions: ["RFC-154"]
         proposalStatus: "draft-non-normative"
       summary: Get one breeding pipeline
-      description: Returns the registered pipeline, or 404.
+      description: Returns the registered record, or 404.
       parameters:
       - name: breedingPipelineDbId
         description: Namespaced breeding-pipeline identity `{authority}:breeding-pipeline:{localId}`
