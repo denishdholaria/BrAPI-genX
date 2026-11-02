@@ -88,6 +88,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | VcfExport / VcfExport | D3 | C1, C2, C3, C6, C9 | VCF export records; no BrAPI v2.1 equivalent |
 | ReferenceAssembly / ReferenceAssembly | D3 | C1, C2, C3, C6, C9 | Reference assembly records; no BrAPI v2.1 equivalent |
 | PipelineProvenance / PipelineProvenance | D3 | C1, C2, C3, C6, C9 | Pipeline provenance records; no BrAPI v2.1 equivalent |
+| ExperimentalProtocol / ExperimentalProtocol | D2 | C1, C2, C3, C6, C9 | Experimental protocol records; no BrAPI v2.1 equivalent |
 | AssayDesign / AssayDesign | D3 | C1, C2, C3, C6, C9 | Assay design records; no BrAPI v2.1 equivalent |
 | AssayExecution / AssayExecution | D3 | C1, C2, C3, C6, C9 | Assay execution records; no BrAPI v2.1 equivalent |
 | VariantAnnotation / VariantAnnotation | D3 | C1, C2, C3, C6, C9 | Variant annotation records; no BrAPI v2.1 equivalent |

@@ -1,0 +1,68 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ExperimentalProtocolNewRequest:
+      type: object
+      description: |-
+        Request to register one experimental protocol record. Unknown experimentalProtocolDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - experimentalProtocolDbId
+      properties:
+        experimentalProtocolDbId:
+          description: Namespaced experimental-protocol identity `{authority}:experimental-protocol:{localId}`
+          type: string
+          example: institute-a:experimental-protocol:ep-2026-001
+        protocolName:
+          description: Name of the experimental protocol
+          type: string
+          example: randomized-complete-block-design
+        protocolType:
+          description: Type of experimental protocol
+          type: string
+          example: RCBD
+        version:
+          description: Version of the experimental protocol
+          type: string
+          example: "1.0"
+        designType:
+          description: Experimental design type
+          type: string
+          example: randomized complete block
+        treatments:
+          description: Number or list of treatments
+          type: string
+          example: "4"
+        replicates:
+          description: Number of replicates
+          type: string
+          example: "3"
+        randomization:
+          description: Randomization method used
+          type: string
+          example: simple randomization
+        blocks:
+          description: Number of blocks
+          type: string
+          example: "3"
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: experimentalProtocolDbId of the record this one replaces
+          type: string
+          example: institute-a:experimental-protocol:ep-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

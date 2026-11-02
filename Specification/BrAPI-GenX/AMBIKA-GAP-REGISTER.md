@@ -57,6 +57,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | D3 | VCF import / export (export side) | `VcfExport/` | RFC-114 |
 | D3 | Reference assembly versioning | `ReferenceAssembly/` | RFC-115 |
 | D3 | Bioinformatics pipeline provenance | `PipelineProvenance/` | RFC-116 |
+| D2 | Experimental design and protocol | `ExperimentalProtocol/` | RFC-117 |
 | D3 | Genomic dataset release/access, reference assembly versioning, pipeline provenance | `GenomicDatasets/` | RFC-013 |
 | D3 | Assay / plate workflow (design side) | `AssayDesign/` | RFC-061 |
 | D3 | Assay / plate workflow (execution side) | `AssayExecution/` | RFC-113 |
