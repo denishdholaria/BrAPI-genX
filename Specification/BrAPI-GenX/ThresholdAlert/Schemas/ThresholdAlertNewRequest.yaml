@@ -1,0 +1,56 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ThresholdAlertNewRequest:
+      type: object
+      description: |-
+        Request to register one threshold alert record. Unknown thresholdAlertDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - thresholdAlertDbId
+      properties:
+        thresholdAlertDbId:
+          description: Namespaced threshold-alert identity `{authority}:threshold-alert:{localId}`
+          type: string
+          example: institute-a:threshold-alert:ta-2026-001
+        alertType:
+          description: Type of threshold alert
+          type: string
+          example: pest threshold
+        thresholdValue:
+          description: Threshold value that triggers the alert
+          type: string
+          example: "5"
+        currentValue:
+          description: Current observed value
+          type: string
+          example: "7"
+        status:
+          description: Alert state
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        triggerDate:
+          description: Date the alert was triggered
+          type: string
+          example: "2026-04-15"
+        fieldOrPlot:
+          description: Field or plot the alert applies to
+          type: string
+          example: field-plot-42
+        supersedes:
+          description: thresholdAlertDbId of the record this one replaces
+          type: string
+          example: institute-a:threshold-alert:ta-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

@@ -117,6 +117,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | TaxonName | 3 | proposed, non-normative |
 | Telemetry | 2 | proposed, non-normative |
 | TerminologyVersion | 3 | proposed, non-normative |
+| ThresholdAlert | 3 | proposed, non-normative |
 | Tillage | 3 | proposed, non-normative |
 | TreatmentAssignment | 3 | proposed, non-normative |
 | TrialNetwork | 3 | proposed, non-normative |
@@ -6447,8 +6448,8 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 ### GET `/genx/v1/ipm-strategies`
 
 - **Catalogue ID:** `brapi-genx.genx.v1.ipm-strategies.list`
-- **BrAPI-GenX operation identity:** `genxListIpmStrategys` (advisory where absent from source)
-- **Source OpenAPI operationId:** `genxListIpmStrategys`
+- **BrAPI-GenX operation identity:** `genxListIpmStrategies` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListIpmStrategies`
 - **GenX source module:** `IpmStrategy`
 - **Source tag:** IpmStrategy
 - **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
@@ -6456,7 +6457,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> List ipmstrategy records, optionally filtered by status.
+> List ipm strategy records, optionally filtered by status.
 **Source contract description:**
 > Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
 **Can be used for:**
@@ -6491,7 +6492,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> Register one ipmstrategy record with provenance.
+> Register one ipm strategy record with provenance.
 **Source contract description:**
 > Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
 **Can be used for:**
@@ -6501,13 +6502,13 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
 - Asserting that the export is validated or endorsed.
-- **Side effects:** Creates a ipmstrategy identity or appends a new immutable version when accepted.
+- **Side effects:** Creates a ipm strategy identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same ipmStrategyDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
 - **Request schema refs recorded:** IpmStrategyNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListIpmStrategys, genxGetIpmStrategy, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListIpmStrategies, genxGetIpmStrategy, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.ipm-strategies.list, brapi-genx.genx.v1.ipm-strategies.get
 - **Relevant RFC / decision references:** RFC-125
 - **Contract source:** [`Specification/BrAPI-GenX/IpmStrategy/IpmStrategy_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/IpmStrategy/IpmStrategy_GET_POST.yaml)
@@ -6526,7 +6527,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> Retrieve one ipmstrategy record.
+> Retrieve one ipm strategy record.
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
@@ -6540,7 +6541,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterIpmStrategy, genxListIpmStrategys, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterIpmStrategy, genxListIpmStrategies, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.ipm-strategies.list, brapi-genx.genx.v1.ipm-strategies.record
 - **Relevant RFC / decision references:** RFC-125
 - **Contract source:** [`Specification/BrAPI-GenX/IpmStrategy/IpmStrategy_IpmStrategyDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/IpmStrategy/IpmStrategy_IpmStrategyDbId_GET.yaml)
@@ -11719,6 +11720,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.terminology-versions.list, brapi-genx.genx.v1.terminology-versions.record
 - **Relevant RFC / decision references:** RFC-084
 - **Contract source:** [`Specification/BrAPI-GenX/TerminologyVersion/TerminologyVersion_TerminologyVersionDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/TerminologyVersion/TerminologyVersion_TerminologyVersionDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### ThresholdAlert — 3 operations
+
+### GET `/genx/v1/threshold-alerts`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.threshold-alerts.list`
+- **BrAPI-GenX operation identity:** `genxListThresholdAlerts` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListThresholdAlerts`
+- **GenX source module:** `ThresholdAlert`
+- **Source tag:** ThresholdAlert
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List thresholdalert records, optionally filtered by status.
+**Source contract description:**
+> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover artifactcatalogues.
+- Support VCF import/export.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a record (use the POST endpoint).
+- Assuming a record is a BrAPI data resource.
+- Treating the list as a complete history.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterThresholdAlert, genxGetThresholdAlert, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.threshold-alerts.record, brapi-genx.genx.v1.threshold-alerts.get
+- **Relevant RFC / decision references:** RFC-126
+- **Contract source:** [`Specification/BrAPI-GenX/ThresholdAlert/ThresholdAlert_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ThresholdAlert/ThresholdAlert_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/threshold-alerts`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.threshold-alerts.record`
+- **BrAPI-GenX operation identity:** `genxRegisterThresholdAlert` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterThresholdAlert`
+- **GenX source module:** `ThresholdAlert`
+- **Source tag:** ThresholdAlert
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register one thresholdalert record with provenance.
+**Source contract description:**
+> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish a artifactcatalogue.
+- Retry an identical record safely using the same vcfExportDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming a record is a BrAPI data resource.
+- Asserting that the export is validated or endorsed.
+- **Side effects:** Creates a thresholdalert identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same thresholdAlertDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** ThresholdAlertNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListThresholdAlerts, genxGetThresholdAlert, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.threshold-alerts.list, brapi-genx.genx.v1.threshold-alerts.get
+- **Relevant RFC / decision references:** RFC-126
+- **Contract source:** [`Specification/BrAPI-GenX/ThresholdAlert/ThresholdAlert_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ThresholdAlert/ThresholdAlert_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/threshold-alerts/{thresholdAlertDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.threshold-alerts.get`
+- **BrAPI-GenX operation identity:** `genxGetThresholdAlert` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetThresholdAlert`
+- **GenX source module:** `ThresholdAlert`
+- **Source tag:** ThresholdAlert
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one thresholdalert record.
+**Source contract description:**
+> Returns the registered record, or 404.
+**Can be used for:**
+- Inspect export, status, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming a record is a BrAPI data resource.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** thresholdAlertDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterThresholdAlert, genxListThresholdAlerts, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.threshold-alerts.list, brapi-genx.genx.v1.threshold-alerts.record
+- **Relevant RFC / decision references:** RFC-126
+- **Contract source:** [`Specification/BrAPI-GenX/ThresholdAlert/ThresholdAlert_ThresholdAlertDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/ThresholdAlert/ThresholdAlert_ThresholdAlertDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
