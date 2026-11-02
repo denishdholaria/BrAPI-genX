@@ -79,6 +79,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | PhenotypeAnnotation | 3 | proposed, non-normative |
 | PhenotypeCapture | 3 | proposed, non-normative |
 | PlantingOperation | 3 | proposed, non-normative |
+| Plot | 3 | proposed, non-normative |
 | PopulationAdvancement | 3 | proposed, non-normative |
 | ProgenyRecords | 3 | proposed, non-normative |
 | Project | 3 | proposed, non-normative |
@@ -7797,6 +7798,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.planting-operations.list, brapi-genx.genx.v1.planting-operations.record
 - **Relevant RFC / decision references:** RFC-066
 - **Contract source:** [`Specification/BrAPI-GenX/PlantingOperation/PlantingOperation_PlantingOperationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PlantingOperation/PlantingOperation_PlantingOperationDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### Plot — 3 operations
+
+### GET `/genx/v1/plots`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.plots.list`
+- **BrAPI-GenX operation identity:** `genxListPlots` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListPlots`
+- **GenX source module:** `Plot`
+- **Source tag:** Plot
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List plot identity records, optionally filtered by field or status.
+**Source contract description:**
+> Get a paged list of plot identity records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover plots for a field.
+- Support experimental design.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a record (use the POST endpoint).
+- Assuming a record is a BrAPI Observation.
+- Treating the list as a complete history.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** fieldDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterPlot, genxGetPlot, genxRegisterFieldScouting
+- **Related catalogue IDs:** brapi-genx.genx.v1.plots.record, brapi-genx.genx.v1.plots.get
+- **Relevant RFC / decision references:** RFC-107
+- **Contract source:** [`Specification/BrAPI-GenX/Plot/Plot_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Plot/Plot_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/plots`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.plots.record`
+- **BrAPI-GenX operation identity:** `genxRegisterPlot` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterPlot`
+- **GenX source module:** `Plot`
+- **Source tag:** Plot
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register one plot identity record with field linkage and provenance.
+**Source contract description:**
+> Unknown plotDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish a plot identity for a field.
+- Retry an identical record safely using the same plotDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming a record is a BrAPI Observation.
+- Asserting that the plot is validated or endorsed.
+- **Side effects:** Creates a plot identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same plotDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** PlotNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListPlots, genxGetPlot, genxRegisterFieldScouting
+- **Related catalogue IDs:** brapi-genx.genx.v1.plots.list, brapi-genx.genx.v1.plots.get
+- **Relevant RFC / decision references:** RFC-107
+- **Contract source:** [`Specification/BrAPI-GenX/Plot/Plot_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Plot/Plot_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/plots/{plotDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.plots.get`
+- **BrAPI-GenX operation identity:** `genxGetPlot` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetPlot`
+- **GenX source module:** `Plot`
+- **Source tag:** Plot
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one plot identity record.
+**Source contract description:**
+> Returns the registered record, or 404.
+**Can be used for:**
+- Inspect field linkage, plot identity, status, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming a record is a BrAPI Observation.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** plotDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterPlot, genxListPlots, genxRegisterFieldScouting
+- **Related catalogue IDs:** brapi-genx.genx.v1.plots.list, brapi-genx.genx.v1.plots.record
+- **Relevant RFC / decision references:** RFC-107
+- **Contract source:** [`Specification/BrAPI-GenX/Plot/Plot_PlotDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Plot/Plot_PlotDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

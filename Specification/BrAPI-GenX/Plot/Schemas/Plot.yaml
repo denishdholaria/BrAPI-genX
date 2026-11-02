@@ -1,0 +1,44 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    Plot:
+      type: object
+      description: |-
+        One immutable plot identity record. A published (plotDbId) record
+        never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - plotDbId
+      - status
+      properties:
+        plotDbId:
+          description: Namespaced plot identity `{authority}:plot:{localId}`
+          type: string
+          example: institute-a:plot:pl-2026-001
+        fieldDbId:
+          description: Field or site reference
+          type: string
+          example: field-001
+        plotName:
+          description: Plot name or label
+          type: string
+          example: plot-001
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: plotDbId of the record this one replaces
+          type: string
+          example: institute-a:plot:pl-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

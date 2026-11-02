@@ -292,6 +292,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/treatment-assignments` | GET | `genxListTreatmentAssignments` | List treatment assignments | Does not create or change a record; not a BrAPI Observation. |
 | `/genx/v1/treatment-assignments` | POST | `genxRegisterTreatmentAssignment` | Register one treatment assignment | Append-only record; replay/conflict semantics. |
 | `/genx/v1/treatment-assignments/{treatmentAssignmentDbId}` | GET | `genxGetTreatmentAssignment` | Retrieve one treatment assignment | Does not treat a superseded record as current. |
+| `/genx/v1/plots` | GET | `genxListPlots` | List plots | Does not create or change a record; not a BrAPI Observation. |
+| `/genx/v1/plots` | POST | `genxRegisterPlot` | Register one plot | Append-only record; replay/conflict semantics. |
+| `/genx/v1/plots/{plotDbId}` | GET | `genxGetPlot` | Retrieve one plot | Does not treat a superseded record as current. |
 | `/genx/v1/field-boundaries` | GET | `genxListFieldBoundaries` | List field boundaries | Does not create or change a boundary; not a BrAPI Location. |
 | `/genx/v1/field-boundaries` | POST | `genxRegisterFieldBoundary` | Register one field boundary record | Append-only record; replay/conflict semantics. |
 | `/genx/v1/field-boundaries/{fieldBoundaryDbId}` | GET | `genxGetFieldBoundary` | Retrieve one field boundary record | Does not treat a superseded boundary as current. |

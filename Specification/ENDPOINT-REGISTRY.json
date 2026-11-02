@@ -47757,12 +47757,248 @@
         "brapi-genx.genx.v1.treatment-assignments.list",
         "brapi-genx.genx.v1.treatment-assignments.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Plot",
+      "brapiTag": "Plot",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Plot/Plot_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.plots.list",
+      "method": "GET",
+      "path": "/plots",
+      "operationIdInSource": "genxListPlots",
+      "recommendedOperationId": "genxListPlots",
+      "operationName": "List plots",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List plot identity records, optionally filtered by field or status.",
+      "sourceDescription": "Get a paged list of plot identity records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover plots for a field.",
+        "Support experimental design."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a record (use the POST endpoint).",
+        "Assuming a record is a BrAPI Observation.",
+        "Treating the list as a complete history."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "fieldDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterPlot",
+        "genxGetPlot",
+        "genxRegisterFieldScouting"
+      ],
+      "decisionReferences": [
+        "RFC-107"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.plots.record",
+        "brapi-genx.genx.v1.plots.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Plot",
+      "brapiTag": "Plot",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Plot/Plot_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.plots.record",
+      "method": "POST",
+      "path": "/plots",
+      "operationIdInSource": "genxRegisterPlot",
+      "recommendedOperationId": "genxRegisterPlot",
+      "operationName": "Register one plot",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one plot identity record with field linkage and provenance.",
+      "sourceDescription": "Unknown plotDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a plot identity for a field.",
+        "Retry an identical record safely using the same plotDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Assuming a record is a BrAPI Observation.",
+        "Asserting that the plot is validated or endorsed."
+      ],
+      "sideEffects": "Creates a plot identity or appends a new immutable version when accepted.",
+      "idempotency": "Same plotDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "PlotNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListPlots",
+        "genxGetPlot",
+        "genxRegisterFieldScouting"
+      ],
+      "decisionReferences": [
+        "RFC-107"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.plots.list",
+        "brapi-genx.genx.v1.plots.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "Plot",
+      "brapiTag": "Plot",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/Plot/Plot_PlotDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.plots.get",
+      "method": "GET",
+      "path": "/plots/{plotDbId}",
+      "operationIdInSource": "genxGetPlot",
+      "recommendedOperationId": "genxGetPlot",
+      "operationName": "Get one plot",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one plot identity record.",
+      "sourceDescription": "Returns the registered record, or 404.",
+      "canBeUsedFor": [
+        "Inspect field linkage, plot identity, status, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a record is a BrAPI Observation.",
+        "Treating a superseded record as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "plotDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterPlot",
+        "genxListPlots",
+        "genxRegisterFieldScouting"
+      ],
+      "decisionReferences": [
+        "RFC-107"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.plots.list",
+        "brapi-genx.genx.v1.plots.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 318,
+    "genxEntriesAdded": 321,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -47840,7 +48076,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 519,
+    "totalEntries": 522,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -48141,5 +48377,5 @@
       ]
     }
   ],
-  "totalEntries": 519
+  "totalEntries": 522
 }

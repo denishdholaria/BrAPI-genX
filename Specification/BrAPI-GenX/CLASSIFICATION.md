@@ -101,6 +101,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | Farm / Farm | D6 | C1, C2, C3, C6, C9 | Farm and site reference records; no BrAPI v2.1 equivalent |
 | FieldScouting / FieldScouting | D6 | C1, C2, C3, C6, C9 | Field scouting and work order records; no BrAPI v2.1 equivalent |
 | TreatmentAssignment / TreatmentAssignment | D6 | C1, C2, C3, C6, C9 | Treatment assignment records; no BrAPI v2.1 equivalent |
+| Plot / Plot | D6 | C1, C2, C3, C6, C9 | Plot identity records; no BrAPI v2.1 equivalent |
 | FieldBoundary / FieldBoundary | D6 | C1, C2, C3, C6, C9 | Operational field boundary and history records; no BrAPI v2.1 equivalent |
 | SprayApplication / SprayApplication | D6 | C1, C2, C3, C6, C9 | Spray application records; no BrAPI v2.1 equivalent |
 | YieldMap / YieldMap | D6 | C1, C2, C3, C6, C9 | Yield map records; no BrAPI v2.1 equivalent |

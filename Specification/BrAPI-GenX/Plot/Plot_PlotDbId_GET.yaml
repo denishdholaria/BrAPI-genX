@@ -1,0 +1,65 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /plots/{plotDbId}:
+    get:
+      operationId: genxGetPlot
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.plots.get"
+        classification:
+          primaryDomain: "D6"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve one plot identity record."
+        canBeUsedFor:
+          - "Inspect field linkage, plot identity, status, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming a record is a BrAPI Observation."
+          - "Treating a superseded record as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterPlot"
+          - "genxListPlots"
+          - "genxRegisterFarm"
+        decisions: ["RFC-107"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one plot
+      description: Returns the registered record, or 404.
+      parameters:
+      - name: plotDbId
+        description: Namespaced plots identity `{authority}:plots:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/Plot'
+                required:
+                - metadata
+                - result
+                title: PlotResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - Plot
