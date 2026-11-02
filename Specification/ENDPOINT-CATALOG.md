@@ -13,8 +13,8 @@ A catalogue identifier does not replace a source operationId or route. Classific
 | Surface | Operations | Contract status |
 |---|---:|---|
 | BrAPI v2.1 official modules | 201 | Released specification; implementation availability not inferred |
-| BrAPI GenX /genx/v1 | 405 | Proposed, non-normative |
-| **Total** | **606** | Existing contracts plus proposed operations |
+| BrAPI GenX /genx/v1 | 408 | Proposed, non-normative |
+| **Total** | **609** | Existing contracts plus proposed operations |
 
 BijMantra snapshot: 2240 records from the inventory generated 2026-10-17; see [source inventory](https://github.com/denishdholaria/bijmantraorg/blob/main/endpoints-inventory.md) and [crosswalk](./BIJMANTRA-CROSSWALK.md).
 
@@ -10071,8 +10071,8 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 ### GET `/genx/v1/crop-suitabilities`
 
 - **Catalogue ID:** `brapi-genx.genx.v1.crop-suitabilities.list`
-- **BrAPI-GenX operation identity:** `genxListCropSuitabilitys` (advisory where absent from source)
-- **Source OpenAPI operationId:** `genxListCropSuitabilitys`
+- **BrAPI-GenX operation identity:** `genxListCropSuitabilities` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListCropSuitabilities`
 - **GenX source module:** `CropSuitability`
 - **Source tag:** CropSuitability
 - **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
@@ -10080,7 +10080,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> List cropsuitability records, optionally filtered by status.
+> List crop suitability records, optionally filtered by status.
 **Source contract description:**
 > Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
 **Can be used for:**
@@ -10115,7 +10115,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> Register one cropsuitability record with provenance.
+> Register one crop suitability record with provenance.
 **Source contract description:**
 > Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
 **Can be used for:**
@@ -10125,13 +10125,13 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
 - Asserting that the export is validated or endorsed.
-- **Side effects:** Creates a cropsuitability identity or appends a new immutable version when accepted.
+- **Side effects:** Creates a crop suitability identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same cropSuitabilityDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
 - **Request schema refs recorded:** CropSuitabilityNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListCropSuitabilitys, genxGetCropSuitability, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListCropSuitabilities, genxGetCropSuitability, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-suitabilities.list, brapi-genx.genx.v1.crop-suitabilities.get
 - **Relevant RFC / decision references:** RFC-135
 - **Contract source:** [`Specification/BrAPI-GenX/CropSuitability/CropSuitability_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CropSuitability/CropSuitability_GET_POST.yaml)
@@ -10150,7 +10150,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> Retrieve one cropsuitability record.
+> Retrieve one crop suitability record.
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
@@ -10164,7 +10164,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterCropSuitability, genxListCropSuitabilitys, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterCropSuitability, genxListCropSuitabilities, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-suitabilities.list, brapi-genx.genx.v1.crop-suitabilities.record
 - **Relevant RFC / decision references:** RFC-135
 - **Contract source:** [`Specification/BrAPI-GenX/CropSuitability/CropSuitability_CropSuitabilityDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CropSuitability/CropSuitability_CropSuitabilityDbId_GET.yaml)
@@ -14269,6 +14269,111 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Related catalogue IDs:** brapi-genx.genx.v1.heritability-estimates.list, brapi-genx.genx.v1.heritability-estimates.record
 - **Relevant RFC / decision references:** RFC-050
 - **Contract source:** [`Specification/BrAPI-GenX/Heritability/Heritability_HeritabilityEstimateDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/Heritability/Heritability_HeritabilityEstimateDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### HumanReview — 3 operations
+
+### GET `/genx/v1/human-reviews`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.human-reviews.list`
+- **BrAPI-GenX operation identity:** `genxListHumanReviews` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListHumanReviews`
+- **GenX source module:** `HumanReview`
+- **Source tag:** HumanReview
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List humanreview records, optionally filtered by status.
+**Source contract description:**
+> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover artifactcatalogues.
+- Support VCF import/export.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a record (use the POST endpoint).
+- Assuming a record is a BrAPI data resource.
+- Treating the list as a complete history.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterHumanReview, genxGetHumanReview, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.human-reviews.record, brapi-genx.genx.v1.human-reviews.get
+- **Relevant RFC / decision references:** RFC-136
+- **Contract source:** [`Specification/BrAPI-GenX/HumanReview/HumanReview_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/HumanReview/HumanReview_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/human-reviews`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.human-reviews.record`
+- **BrAPI-GenX operation identity:** `genxRegisterHumanReview` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterHumanReview`
+- **GenX source module:** `HumanReview`
+- **Source tag:** HumanReview
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register one humanreview record with provenance.
+**Source contract description:**
+> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish a artifactcatalogue.
+- Retry an identical record safely using the same vcfExportDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Assuming a record is a BrAPI data resource.
+- Asserting that the export is validated or endorsed.
+- **Side effects:** Creates a humanreview identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same humanReviewDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** HumanReviewNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListHumanReviews, genxGetHumanReview, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.human-reviews.list, brapi-genx.genx.v1.human-reviews.get
+- **Relevant RFC / decision references:** RFC-136
+- **Contract source:** [`Specification/BrAPI-GenX/HumanReview/HumanReview_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/HumanReview/HumanReview_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/human-reviews/{humanReviewDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.human-reviews.get`
+- **BrAPI-GenX operation identity:** `genxGetHumanReview` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetHumanReview`
+- **GenX source module:** `HumanReview`
+- **Source tag:** HumanReview
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one humanreview record.
+**Source contract description:**
+> Returns the registered record, or 404.
+**Can be used for:**
+- Inspect export, status, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming a record is a BrAPI data resource.
+- Treating a superseded record as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** humanReviewDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterHumanReview, genxListHumanReviews, genxRegisterGenomicDataset
+- **Related catalogue IDs:** brapi-genx.genx.v1.human-reviews.list, brapi-genx.genx.v1.human-reviews.record
+- **Relevant RFC / decision references:** RFC-136
+- **Contract source:** [`Specification/BrAPI-GenX/HumanReview/HumanReview_HumanReviewDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/HumanReview/HumanReview_HumanReviewDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21979,6 +22084,6 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - Unique full-base-path/method/route keys: `True`.
 - Unique source/advisory operation identifiers where present: `True`.
 - BrAPI v2.1 inventory rows resolved to source YAML operations: 201 / 201.
-- GenX operations documented: 405.
+- GenX operations documented: 408.
 
 See [BIJMANTRA-CROSSWALK.md](./BIJMANTRA-CROSSWALK.md) for inventory evidence and semantic boundaries.

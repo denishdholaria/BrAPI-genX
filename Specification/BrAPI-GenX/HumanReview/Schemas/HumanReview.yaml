@@ -1,0 +1,56 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    HumanReview:
+      type: object
+      description: |-
+        One immutable human review record. A published (humanReviewDbId) record
+        never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - humanReviewDbId
+      - status
+      properties:
+        humanReviewDbId:
+          description: Namespaced human-review identity `{authority}:human-review:{localId}`
+          type: string
+          example: institute-a:human-review:hr-2026-001
+        reviewType:
+          description: Type of human review
+          type: string
+          example: advisory acceptance
+        reviewer:
+          description: Reviewer identity
+          type: string
+          example: reviewer-a
+        reviewDecision:
+          description: Review decision
+          type: string
+          example: accepted
+        reviewDate:
+          description: Date of the review
+          type: string
+          example: "2026-06-15"
+        comments:
+          description: Reviewer comments
+          type: string
+          example: Looks sound, proceed.
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: humanReviewDbId of the record this one replaces
+          type: string
+          example: institute-a:human-review:hr-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

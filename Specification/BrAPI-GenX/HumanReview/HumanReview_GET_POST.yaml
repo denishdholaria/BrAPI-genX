@@ -1,0 +1,137 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /human-reviews:
+    get:
+      operationId: genxListHumanReviews
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.human-reviews.list"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List human review records, optionally filtered by status."
+        canBeUsedFor:
+          - "Discover human reviews."
+          - "Support dataset/model artefact discovery."
+        mustNotBeUsedFor:
+          - "Creating or changing a record (use the POST endpoint)."
+          - "Assuming a record is a BrAPI data resource."
+          - "Treating the list as a complete history."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterHumanReview"
+          - "genxGetHumanReview"
+          - "genxRegisterFarm"
+        decisions: ["RFC-136"]
+        proposalStatus: "draft-non-normative"
+      summary: List human reviews
+      description: Get a paged list of human review records across authorities. Filters combine with AND.
+      parameters:
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/HumanReviewListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - HumanReview
+    post:
+      operationId: genxRegisterHumanReview
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.human-reviews.record"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Register one human review record with provenance."
+        canBeUsedFor:
+          - "Publish a human review."
+          - "Retry an identical record safely using the same humanReviewDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing record; corrections require a new record that supersedes."
+          - "Assuming a record is a BrAPI data resource."
+          - "Asserting that the catalogue is validated or endorsed."
+        sideEffects: "Creates a human review identity or appends a new immutable version when accepted."
+        idempotency: "Same humanReviewDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListHumanReviews"
+          - "genxGetHumanReview"
+          - "genxRegisterFarm"
+        decisions: ["RFC-136"]
+        proposalStatus: "draft-non-normative"
+      summary: Register one human review
+      description: Register one human review record with provenance.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HumanReviewNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/HumanReview'
+                required:
+                - metadata
+                - result
+                title: HumanReviewResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - HumanReview
+components:
+  responses:
+    HumanReviewListResponse:
+      content:
+        application/json:
+          schema:
+            title: HumanReviewListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/HumanReview'
+            required:
+            - metadata
+            - result
+      description: OK
