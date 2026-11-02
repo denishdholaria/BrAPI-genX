@@ -255,6 +255,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/disposal-records` | GET | `genxListDisposalRecords` | List disposal records | Does not create or change a disposal; not a BrAPI data resource. |
 | `/genx/v1/disposal-records` | POST | `genxRecordDisposalRecord` | Record one disposal | Append-only record; replay/conflict semantics. |
 | `/genx/v1/disposal-records/{disposalRecordDbId}` | GET | `genxGetDisposalRecord` | Retrieve one disposal record | Does not treat a superseded disposal as current. |
+| `/genx/v1/planting-operations` | GET | `genxListPlantingOperations` | List planting operations | Does not create or change an operation; not a BrAPI Observation. |
+| `/genx/v1/planting-operations` | POST | `genxRecordPlantingOperation` | Record one planting operation | Append-only record; replay/conflict semantics. |
+| `/genx/v1/planting-operations/{plantingOperationDbId}` | GET | `genxGetPlantingOperation` | Retrieve one planting operation | Does not treat a superseded operation as current. |
 | `/genx/v1/bulk-captures` | GET | `genxListBulkCaptures` | List bulk captures | Does not create or change a capture; not a BrAPI Observation. |
 | `/genx/v1/bulk-captures` | POST | `genxRecordBulkCapture` | Record one bulk capture | Append-only record; replay/conflict semantics. |
 | `/genx/v1/bulk-captures/{bulkCaptureDbId}` | GET | `genxGetBulkCapture` | Retrieve one bulk capture | Does not treat a superseded capture as current. |

@@ -52,6 +52,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | PhenologyObservation | 3 | proposed, non-normative |
 | PhenotypeAnnotation | 3 | proposed, non-normative |
 | PhenotypeCapture | 3 | proposed, non-normative |
+| PlantingOperation | 3 | proposed, non-normative |
 | PopulationAdvancement | 3 | proposed, non-normative |
 | ProgenyRecords | 3 | proposed, non-normative |
 | Quarantine | 3 | proposed, non-normative |
@@ -4921,6 +4922,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.phenotype-captures.list, brapi-genx.genx.v1.phenotype-captures.record
 - **Relevant RFC / decision references:** RFC-012
 - **Contract source:** [`Specification/BrAPI-GenX/PhenotypeCapture/PhenotypeCapture_PhenotypeCaptureDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PhenotypeCapture/PhenotypeCapture_PhenotypeCaptureDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### PlantingOperation — 3 operations
+
+### GET `/genx/v1/planting-operations`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.planting-operations.list`
+- **BrAPI-GenX operation identity:** `genxListPlantingOperations` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListPlantingOperations`
+- **GenX source module:** `PlantingOperation`
+- **Source tag:** PlantingOperation
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List planting operation records, optionally filtered by study, crop cycle, or status.
+**Source contract description:**
+> Get a paged list of planting operations across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover planting operations for a study or crop cycle.
+- Support agronomic traceability for a season.
+**Must not be used for / explicit non-goals:**
+- Creating or changing an operation (use the POST endpoint).
+- Assuming an operation is a BrAPI data resource.
+- Treating the list as a complete field operation history.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** studyDbId, cropCycleDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordPlantingOperation, genxGetPlantingOperation, genxRegisterCropCycle
+- **Related catalogue IDs:** brapi-genx.genx.v1.planting-operations.record, brapi-genx.genx.v1.planting-operations.get
+- **Relevant RFC / decision references:** RFC-066
+- **Contract source:** [`Specification/BrAPI-GenX/PlantingOperation/PlantingOperation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PlantingOperation/PlantingOperation_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/planting-operations`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.planting-operations.record`
+- **BrAPI-GenX operation identity:** `genxRecordPlantingOperation` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordPlantingOperation`
+- **GenX source module:** `PlantingOperation`
+- **Source tag:** PlantingOperation
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one planting operation with date, method, rate, and provenance.
+**Source contract description:**
+> Unknown plantingOperationDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish a planting event for agronomic traceability.
+- Retry an identical operation safely using the same plantingOperationDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing operation; corrections require a new record that supersedes.
+- Assuming the operation is a BrAPI data resource.
+- Treating an operation as evidence that seed was viable or that planting succeeded.
+- **Side effects:** Creates a planting operation record when accepted.
+- **Retry / idempotency:** Same plantingOperationDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** PlantingOperationNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListPlantingOperations, genxGetPlantingOperation, genxRegisterCropCycle
+- **Related catalogue IDs:** brapi-genx.genx.v1.planting-operations.list, brapi-genx.genx.v1.planting-operations.get
+- **Relevant RFC / decision references:** RFC-066
+- **Contract source:** [`Specification/BrAPI-GenX/PlantingOperation/PlantingOperation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PlantingOperation/PlantingOperation_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/planting-operations/{plantingOperationDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.planting-operations.get`
+- **BrAPI-GenX operation identity:** `genxGetPlantingOperation` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetPlantingOperation`
+- **GenX source module:** `PlantingOperation`
+- **Source tag:** PlantingOperation
+- **Proposed BrAPI-GenX classification:** D6 — Crop Production and Material Operations; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one planting operation.
+**Source contract description:**
+> Returns the recorded operation, or 404.
+**Can be used for:**
+- Inspect planting date, method, seeding rate, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming the operation is a BrAPI data resource.
+- Treating a superseded operation as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** plantingOperationDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordPlantingOperation, genxListPlantingOperations, genxRegisterCropCycle
+- **Related catalogue IDs:** brapi-genx.genx.v1.planting-operations.list, brapi-genx.genx.v1.planting-operations.record
+- **Relevant RFC / decision references:** RFC-066
+- **Contract source:** [`Specification/BrAPI-GenX/PlantingOperation/PlantingOperation_PlantingOperationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/PlantingOperation/PlantingOperation_PlantingOperationDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

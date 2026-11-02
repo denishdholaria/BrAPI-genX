@@ -38100,12 +38100,249 @@
         "brapi-genx.genx.v1.disposal-records.list",
         "brapi-genx.genx.v1.disposal-records.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "PlantingOperation",
+      "brapiTag": "PlantingOperation",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/PlantingOperation/PlantingOperation_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.planting-operations.list",
+      "method": "GET",
+      "path": "/planting-operations",
+      "operationIdInSource": "genxListPlantingOperations",
+      "recommendedOperationId": "genxListPlantingOperations",
+      "operationName": "List planting operations",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List planting operation records, optionally filtered by study, crop cycle, or status.",
+      "sourceDescription": "Get a paged list of planting operations across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover planting operations for a study or crop cycle.",
+        "Support agronomic traceability for a season."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing an operation (use the POST endpoint).",
+        "Assuming an operation is a BrAPI data resource.",
+        "Treating the list as a complete field operation history."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "studyDbId",
+        "cropCycleDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordPlantingOperation",
+        "genxGetPlantingOperation",
+        "genxRegisterCropCycle"
+      ],
+      "decisionReferences": [
+        "RFC-066"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.planting-operations.record",
+        "brapi-genx.genx.v1.planting-operations.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "PlantingOperation",
+      "brapiTag": "PlantingOperation",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/PlantingOperation/PlantingOperation_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.planting-operations.record",
+      "method": "POST",
+      "path": "/planting-operations",
+      "operationIdInSource": "genxRecordPlantingOperation",
+      "recommendedOperationId": "genxRecordPlantingOperation",
+      "operationName": "Record one planting operation",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record one planting operation with date, method, rate, and provenance.",
+      "sourceDescription": "Unknown plantingOperationDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a planting event for agronomic traceability.",
+        "Retry an identical operation safely using the same plantingOperationDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing operation; corrections require a new record that supersedes.",
+        "Assuming the operation is a BrAPI data resource.",
+        "Treating an operation as evidence that seed was viable or that planting succeeded."
+      ],
+      "sideEffects": "Creates a planting operation record when accepted.",
+      "idempotency": "Same plantingOperationDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "PlantingOperationNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListPlantingOperations",
+        "genxGetPlantingOperation",
+        "genxRegisterCropCycle"
+      ],
+      "decisionReferences": [
+        "RFC-066"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.planting-operations.list",
+        "brapi-genx.genx.v1.planting-operations.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "PlantingOperation",
+      "brapiTag": "PlantingOperation",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/PlantingOperation/PlantingOperation_PlantingOperationDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.planting-operations.get",
+      "method": "GET",
+      "path": "/planting-operations/{plantingOperationDbId}",
+      "operationIdInSource": "genxGetPlantingOperation",
+      "recommendedOperationId": "genxGetPlantingOperation",
+      "operationName": "Get one planting operation",
+      "classification": {
+        "primaryDomain": "D6",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one planting operation.",
+      "sourceDescription": "Returns the recorded operation, or 404.",
+      "canBeUsedFor": [
+        "Inspect planting date, method, seeding rate, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming the operation is a BrAPI data resource.",
+        "Treating a superseded operation as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "plantingOperationDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordPlantingOperation",
+        "genxListPlantingOperations",
+        "genxRegisterCropCycle"
+      ],
+      "decisionReferences": [
+        "RFC-066"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.planting-operations.list",
+        "brapi-genx.genx.v1.planting-operations.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 195,
+    "genxEntriesAdded": 198,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -38183,7 +38420,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 396,
+    "totalEntries": 399,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

@@ -1,0 +1,65 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /planting-operations/{plantingOperationDbId}:
+    get:
+      operationId: genxGetPlantingOperation
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.planting-operations.get"
+        classification:
+          primaryDomain: "D6"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve one planting operation."
+        canBeUsedFor:
+          - "Inspect planting date, method, seeding rate, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming the operation is a BrAPI data resource."
+          - "Treating a superseded operation as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordPlantingOperation"
+          - "genxListPlantingOperations"
+          - "genxRegisterCropCycle"
+        decisions: ["RFC-066"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one planting operation
+      description: Returns the recorded operation, or 404.
+      parameters:
+      - name: plantingOperationDbId
+        description: Namespaced planting identity `{authority}:planting:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/PlantingOperation'
+                required:
+                - metadata
+                - result
+                title: PlantingOperationResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - PlantingOperation

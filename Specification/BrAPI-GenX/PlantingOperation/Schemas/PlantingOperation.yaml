@@ -1,0 +1,66 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    PlantingOperation:
+      type: object
+      description: |-
+        One immutable planting operation record. A published
+        (plantingOperationDbId) record never mutates in place; corrections are
+        recorded as additional operations linked by supersedes.
+      required:
+      - plantingOperationDbId
+      - status
+      properties:
+        plantingOperationDbId:
+          description: Namespaced planting-operation identity `{authority}:planting:{localId}`
+          type: string
+          example: institute-a:planting:pl-2026-001
+        studyDbId:
+          description: BrAPI Study / trial context, when applicable
+          type: string
+          example: institute-a:study:yield-trial-2026
+        observationUnitDbId:
+          description: BrAPI ObservationUnit planted, when applicable
+          type: string
+          example: institute-a:observationunit:plot-101
+        cropCycleDbId:
+          description: GenX CropCycle this operation belongs to, when applicable
+          type: string
+          example: institute-a:crop-cycle:cc-2026-001
+        plantedAt:
+          description: Planting timestamp (ISO 8601)
+          type: string
+          format: date-time
+          example: '2026-05-02T06:30:00Z'
+        method:
+          description: Planting method
+          type: string
+          example: direct-seeding
+        seedingRate:
+          description: Seeding or transplanting rate, with unit captured in provenance
+          type: number
+          example: 120
+        depthCm:
+          description: Sowing depth in centimetres
+          type: number
+          example: 3.5
+        status:
+          description: Lifecycle state of the operation record
+          type: string
+          enum:
+          - planned
+          - completed
+          - cancelled
+          - superseded
+          example: completed
+        supersedes:
+          description: plantingOperationDbId of the record this one replaces
+          type: string
+          example: institute-a:planting:pl-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

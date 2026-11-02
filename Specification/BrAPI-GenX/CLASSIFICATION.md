@@ -89,6 +89,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | VariantAnnotation / VariantAnnotation | D3 | C1, C2, C3, C6, C9 | Variant annotation records; no BrAPI v2.1 equivalent |
 | GenotypeQc / GenotypeQcReport | D3 | C1, C2, C3, C6, C9 | Genotype QC report records; no BrAPI v2.1 equivalent |
 | DisposalRecord / DisposalRecord | D1 | C1, C2, C3, C6, C9 | Disposal records; no BrAPI v2.1 equivalent |
+| PlantingOperation / PlantingOperation | D6 | C1, C2, C3, C6, C9 | Planting operation records; no BrAPI v2.1 equivalent |
 | AnalysisResult / AnalysisResult | D7 | C1, C2, C3, C6, C9 | Analysis result records; no BrAPI v2.1 equivalent |
 | GeneticGain / GeneticGainRecord | D7 | C1, C2, C3, C6, C9 | Genetic gain records; no BrAPI v2.1 equivalent |
 | GwasResult / GwasResult | D7 | C1, C2, C3, C6, C9 | GWAS result records; no BrAPI v2.1 equivalent |

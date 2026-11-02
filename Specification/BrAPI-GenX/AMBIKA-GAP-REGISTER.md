@@ -76,6 +76,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | D1 | Sample custody / transfer | `CustodyTransfer/` | RFC-063 |
 | D3 | Genotype QC reports | `GenotypeQc/` | RFC-064 |
 | D1 | Retention / disposal | `DisposalRecord/` | RFC-065 |
+| D6 | Sowing / planting | `PlantingOperation/` | RFC-066 |
 | I | Genomic dataset release/access | `GenomicDatasets/` | RFC-013 |
 | S | FAIR packages | `FAIR/` | RFC-006 |
 
