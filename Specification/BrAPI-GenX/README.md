@@ -80,6 +80,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `LocationGeometry/` | `LocationGeometry` — location geometry records (location reference, geometry URI, provenance) | `GET /genx/v1/location-geometries` (`genxListLocationGeometries`); `POST /genx/v1/location-geometries` (`genxRegisterLocationGeometry`); `GET /genx/v1/location-geometries/{locationGeometryDbId}` (`genxGetLocationGeometry`) |
 | `ReferenceDataVersion/` | `ReferenceDataVersion` — reference data version records (source, version, provenance) | `GET /genx/v1/reference-data-versions` (`genxListReferenceDataVersions`); `POST /genx/v1/reference-data-versions` (`genxRegisterReferenceDataVersion`); `GET /genx/v1/reference-data-versions/{referenceDataVersionDbId}` (`genxGetReferenceDataVersion`) |
 | `TaxonName/` | `TaxonName` — taxon name and synonym entries (scientific name, synonyms, provenance) | `GET /genx/v1/taxon-names` (`genxListTaxonNames`); `POST /genx/v1/taxon-names` (`genxRegisterTaxonName`); `GET /genx/v1/taxon-names/{taxonNameDbId}` (`genxGetTaxonName`) |
+| `CommonCropName/` | `CommonCropName` — common crop name entries (scientific name, common name, provenance) | `GET /genx/v1/common-crop-names` (`genxListCommonCropNames`); `POST /genx/v1/common-crop-names` (`genxRegisterCommonCropName`); `GET /genx/v1/common-crop-names/{commonCropNameDbId}` (`genxGetCommonCropName`) |
 | `FAIR/` | `FAIRPackage` — licensed, embargo-aware payload envelopes | `GET /genx/v1/fair-packages` (`genxListFairPackageMetadata`); `POST /genx/v1/fair-packages` (`genxRegisterFairPackage`); `GET /genx/v1/fair-packages/{packageDbId}` (`genxGetFairPackageMetadata`) |
 | `Telemetry/` | `TelemetryPoint` — sensor streams, idempotent ingest, aggregates | `GET /genx/v1/telemetry` (`genxQueryTelemetrySamplesOrAggregates`); `POST /genx/v1/telemetry` (`genxAppendTelemetryBatch`) |
 | `Tillage/` | `TillageRecord` — tillage records (method, depth, provenance) | `GET /genx/v1/tillage-records` (`genxListTillageRecords`); `POST /genx/v1/tillage-records` (`genxRecordTillage`); `GET /genx/v1/tillage-records/{tillageRecordDbId}` (`genxGetTillage`) |
@@ -217,7 +218,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-090-Reusable-List](./RFC-090-Reusable-List.md),
 [RFC-091-Calendar](./RFC-091-Calendar.md),
 [RFC-092-Location-Geometry](./RFC-092-Location-Geometry.md),
-[RFC-093-Reference-Data-Version](./RFC-093-Reference-Data-Version.md).
+[RFC-093-Reference-Data-Version](./RFC-093-Reference-Data-Version.md),
+[RFC-094-Common-Crop-Name](./RFC-094-Common-Crop-Name.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

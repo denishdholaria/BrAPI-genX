@@ -369,6 +369,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/taxon-names` | GET | `genxListTaxonNames` | List taxon names | Does not create or change an entry; not a BrAPI data resource. |
 | `/genx/v1/taxon-names` | POST | `genxRegisterTaxonName` | Register one taxon name | Append-only record; replay/conflict semantics. |
 | `/genx/v1/taxon-names/{taxonNameDbId}` | GET | `genxGetTaxonName` | Retrieve one taxon name | Does not treat a superseded entry as current. |
+| `/genx/v1/common-crop-names` | GET | `genxListCommonCropNames` | List common crop names | Does not create or change an entry; not a BrAPI data resource. |
+| `/genx/v1/common-crop-names` | POST | `genxRegisterCommonCropName` | Register one common crop name | Append-only record; replay/conflict semantics. |
+| `/genx/v1/common-crop-names/{commonCropNameDbId}` | GET | `genxGetCommonCropName` | Retrieve one common crop name | Does not treat a superseded entry as current. |
 
 `ProvenanceEnvelope` is embedded in result/record schemas and has no standalone route in this proposal.
 

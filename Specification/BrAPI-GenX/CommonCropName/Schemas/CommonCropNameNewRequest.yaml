@@ -1,0 +1,44 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    CommonCropNameNewRequest:
+      type: object
+      description: |-
+        Request to register one common crop name entry. Unknown
+        commonCropNameDbId creates; same id with an identical body replays
+        the existing record; same id with a different body is rejected with 409.
+      required:
+      - commonCropNameDbId
+      properties:
+        commonCropNameDbId:
+          description: Namespaced common-crop-name identity `{authority}:common-crop-name:{localId}`
+          type: string
+          example: institute-a:common-crop-name:ccn-2026-001
+        scientificName:
+          description: Scientific name
+          type: string
+          example: Triticum aestivum
+        commonName:
+          description: Common crop name
+          type: string
+          example: wheat
+        status:
+          description: Lifecycle state of the entry
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: commonCropNameDbId of the entry this one replaces
+          type: string
+          example: institute-a:common-crop-name:ccn-2026-000
+        provenance:
+          description: Evidence and method provenance for the entry
+          $ref: '#/components/schemas/ProvenanceEnvelope'

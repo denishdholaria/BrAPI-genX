@@ -44701,12 +44701,247 @@
         "brapi-genx.genx.v1.reference-data-versions.list",
         "brapi-genx.genx.v1.reference-data-versions.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CommonCropName",
+      "brapiTag": "CommonCropName",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CommonCropName/CommonCropName_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.common-crop-names.list",
+      "method": "GET",
+      "path": "/common-crop-names",
+      "operationIdInSource": "genxListCommonCropNames",
+      "recommendedOperationId": "genxListCommonCropNames",
+      "operationName": "List common crop names",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List common crop name entries, optionally filtered by status.",
+      "sourceDescription": "Get a paged list of common crop name entries across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover common crop names.",
+        "Support crop reference data."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing an entry (use the POST endpoint).",
+        "Assuming an entry is a BrAPI Germplasm.",
+        "Treating the list as a complete catalogue."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterCommonCropName",
+        "genxGetCommonCropName",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-094"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.common-crop-names.record",
+        "brapi-genx.genx.v1.common-crop-names.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CommonCropName",
+      "brapiTag": "CommonCropName",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CommonCropName/CommonCropName_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.common-crop-names.record",
+      "method": "POST",
+      "path": "/common-crop-names",
+      "operationIdInSource": "genxRegisterCommonCropName",
+      "recommendedOperationId": "genxRegisterCommonCropName",
+      "operationName": "Register one common crop name",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one common crop name entry with provenance.",
+      "sourceDescription": "Unknown commonCropNameDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a common crop name.",
+        "Retry an identical entry safely using the same commonCropNameDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing entry; corrections require a new record that supersedes.",
+        "Assuming an entry is a BrAPI Germplasm.",
+        "Asserting that the entry is validated or endorsed."
+      ],
+      "sideEffects": "Creates a common crop name identity or appends a new immutable version when accepted.",
+      "idempotency": "Same commonCropNameDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "CommonCropNameNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListCommonCropNames",
+        "genxGetCommonCropName",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-094"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.common-crop-names.list",
+        "brapi-genx.genx.v1.common-crop-names.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "CommonCropName",
+      "brapiTag": "CommonCropName",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/CommonCropName/CommonCropName_CommonCropNameDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.common-crop-names.get",
+      "method": "GET",
+      "path": "/common-crop-names/{commonCropNameDbId}",
+      "operationIdInSource": "genxGetCommonCropName",
+      "recommendedOperationId": "genxGetCommonCropName",
+      "operationName": "Get one common crop name",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one common crop name entry.",
+      "sourceDescription": "Returns the registered entry, or 404.",
+      "canBeUsedFor": [
+        "Inspect crop name, synonyms, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming an entry is a BrAPI Germplasm.",
+        "Treating a superseded entry as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "commonCropNameDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterCommonCropName",
+        "genxListCommonCropNames",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-094"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.common-crop-names.list",
+        "brapi-genx.genx.v1.common-crop-names.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 279,
+    "genxEntriesAdded": 282,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -44784,7 +45019,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 480,
+    "totalEntries": 483,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -45085,5 +45320,5 @@
       ]
     }
   ],
-  "totalEntries": 480
+  "totalEntries": 483
 }
