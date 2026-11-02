@@ -1,0 +1,56 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    RemoteSensingMetadata:
+      type: object
+      description: |-
+        One immutable remote sensing metadata record. A published (remoteSensingMetadataDbId) record
+        never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - remoteSensingMetadataDbId
+      - status
+      properties:
+        remoteSensingMetadataDbId:
+          description: Namespaced remote-sensing-metadata identity `{authority}:remote-sensing-metadata:{localId}`
+          type: string
+          example: institute-a:remote-sensing-metadata:rsm-2026-001
+        platform:
+          description: Remote sensing platform
+          type: string
+          example: Sentinel-2
+        sensor:
+          description: Sensor
+          type: string
+          example: MSI
+        acquisitionDate:
+          description: Acquisition date
+          type: string
+          example: "2026-05-01"
+        crs:
+          description: Coordinate reference system
+          type: string
+          example: EPSG:4326
+        resolution:
+          description: Spatial resolution
+          type: string
+          example: "10m"
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: remoteSensingMetadataDbId of the record this one replaces
+          type: string
+          example: institute-a:remote-sensing-metadata:rsm-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

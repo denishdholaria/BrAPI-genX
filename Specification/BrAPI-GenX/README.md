@@ -133,6 +133,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `OutcomeFeedback/` | `OutcomeFeedback` — outcome feedback records (type, value, source) | `GET /genx/v1/outcome-feedbacks` (`genxListOutcomeFeedbacks`); `POST /genx/v1/outcome-feedbacks` (`genxRegisterOutcomeFeedback`); `GET /genx/v1/outcome-feedbacks/{outcomeFeedbackDbId}` (`genxGetOutcomeFeedback`) |
 | `LocalConstraint/` | `LocalConstraint` — local constraint records (type, value, source) | `GET /genx/v1/local-constraints` (`genxListLocalConstraints`); `POST /genx/v1/local-constraints` (`genxRegisterLocalConstraint`); `GET /genx/v1/local-constraints/{localConstraintDbId}` (`genxGetLocalConstraint`) |
 | `CrsTransform/` | `CrsTransform` — CRS transform records (source, target, method) | `GET /genx/v1/crs-transforms` (`genxListCrsTransforms`); `POST /genx/v1/crs-transforms` (`genxRegisterCrsTransform`); `GET /genx/v1/crs-transforms/{crsTransformDbId}` (`genxGetCrsTransform`) |
+| `RemoteSensingMetadata/` | `RemoteSensingMetadata` — remote sensing metadata records (platform, sensor, CRS) | `GET /genx/v1/remote-sensing-metadata` (`genxListRemoteSensingMetadata`); `POST /genx/v1/remote-sensing-metadata` (`genxRegisterRemoteSensingMetadata`); `GET /genx/v1/remote-sensing-metadata/{remoteSensingMetadataDbId}` (`genxGetRemoteSensingMetadata`) |
 | `SpatialQuery/` | `SpatialQuery` — spatial query records (type, geometry, params) | `GET /genx/v1/spatial-queries` (`genxListSpatialQueries`); `POST /genx/v1/spatial-queries` (`genxRegisterSpatialQuery`); `GET /genx/v1/spatial-queries/{spatialQueryDbId}` (`genxGetSpatialQuery`) |
 | `SpatialIndex/` | `SpatialIndex` — spatial index records (type, coverage, resolution) | `GET /genx/v1/spatial-indexes` (`genxListSpatialIndexes`); `POST /genx/v1/spatial-indexes` (`genxRegisterSpatialIndex`); `GET /genx/v1/spatial-indexes/{spatialIndexDbId}` (`genxGetSpatialIndex`) |
 | `RasterCatalogue/` | `RasterCatalogue` — raster catalogue records (type, resolution, CRS) | `GET /genx/v1/raster-catalogues` (`genxListRasterCatalogues`); `POST /genx/v1/raster-catalogues` (`genxRegisterRasterCatalogue`); `GET /genx/v1/raster-catalogues/{rasterCatalogueDbId}` (`genxGetRasterCatalogue`) |
@@ -319,7 +320,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-141-SpatialIndex](./RFC-141-SpatialIndex.md),
 [RFC-142-FieldGeometry](./RFC-142-FieldGeometry.md),
 [RFC-143-SpatialQuery](./RFC-143-SpatialQuery.md),
-[RFC-144-RasterCatalogue](./RFC-144-RasterCatalogue.md).
+[RFC-144-RasterCatalogue](./RFC-144-RasterCatalogue.md),
+[RFC-145-RemoteSensingMetadata](./RFC-145-RemoteSensingMetadata.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).

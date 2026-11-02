@@ -112,6 +112,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | OutcomeFeedback / OutcomeFeedback | (none, cross-cutting) | C1, C2, C3, C6, C9 | Outcome feedback records; no BrAPI v2.1 equivalent |
 | LocalConstraint / LocalConstraint | (none, cross-cutting) | C1, C2, C3, C6, C9 | Local constraint records; no BrAPI v2.1 equivalent |
 | CrsTransform / CrsTransform | (none, cross-cutting) | C1, C2, C3, C6, C9 | CRS transform records; no BrAPI v2.1 equivalent |
+| RemoteSensingMetadata / RemoteSensingMetadata | (none, cross-cutting) | C1, C2, C3, C6, C9 | Remote sensing metadata records; no BrAPI v2.1 equivalent |
 | SpatialIndex / SpatialIndex | (none, cross-cutting) | C1, C2, C3, C6, C9 | Spatial index records; no BrAPI v2.1 equivalent |
 | RasterCatalogue / RasterCatalogue | (none, cross-cutting) | C1, C2, C3, C6, C9 | Raster catalogue records; no BrAPI v2.1 equivalent |
 | SpatialQuery / SpatialQuery | (none, cross-cutting) | C1, C2, C3, C6, C9 | Spatial query records; no BrAPI v2.1 equivalent |
