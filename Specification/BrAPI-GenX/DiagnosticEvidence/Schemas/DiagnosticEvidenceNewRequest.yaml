@@ -1,0 +1,60 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    DiagnosticEvidenceNewRequest:
+      type: object
+      description: |-
+        Request to register one diagnostic evidence record. Unknown diagnosticEvidenceDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - diagnosticEvidenceDbId
+      properties:
+        diagnosticEvidenceDbId:
+          description: Namespaced diagnostic-evidence identity `{authority}:diagnostic-evidence:{localId}`
+          type: string
+          example: institute-a:diagnostic-evidence:de-2026-001
+        evidenceType:
+          description: Type of diagnostic evidence
+          type: string
+          example: laboratory test
+        diagnosticMethod:
+          description: Diagnostic method used
+          type: string
+          example: PCR
+        result:
+          description: Diagnostic result
+          type: string
+          example: positive
+        confidence:
+          description: Confidence level of the result
+          type: string
+          example: high
+        observationDate:
+          description: Date of the diagnostic observation
+          type: string
+          example: "2026-04-12"
+        fieldOrPlot:
+          description: Field or plot where sampled
+          type: string
+          example: field-plot-42
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: diagnosticEvidenceDbId of the record this one replaces
+          type: string
+          example: institute-a:diagnostic-evidence:de-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

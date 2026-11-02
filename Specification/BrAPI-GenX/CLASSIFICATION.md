@@ -95,6 +95,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | BiodiversityExport / BiodiversityExport | (none, cross-cutting) | C1, C2, C3, C6, C9 | Biodiversity export records; no BrAPI v2.1 equivalent |
 | EvidencePack / EvidencePack | (none, cross-cutting) | C1, C2, C3, C6, C9 | Evidence pack records; no BrAPI v2.1 equivalent |
 | DiseaseObservation / DiseaseObservation | (none, cross-cutting) | C1, C2, C3, C6, C9 | Disease observation records; no BrAPI v2.1 equivalent |
+| DiagnosticEvidence / DiagnosticEvidence | (none, cross-cutting) | C1, C2, C3, C6, C9 | Diagnostic evidence records; no BrAPI v2.1 equivalent |
 | AssayDesign / AssayDesign | D3 | C1, C2, C3, C6, C9 | Assay design records; no BrAPI v2.1 equivalent |
 | AssayExecution / AssayExecution | D3 | C1, C2, C3, C6, C9 | Assay execution records; no BrAPI v2.1 equivalent |
 | VariantAnnotation / VariantAnnotation | D3 | C1, C2, C3, C6, C9 | Variant annotation records; no BrAPI v2.1 equivalent |

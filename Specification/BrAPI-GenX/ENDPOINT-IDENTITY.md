@@ -225,6 +225,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/disease-observations` | GET | `genxListDiseaseObservations` | List disease observations | Does not create or change a record; not a BrAPI data resource. |
 | `/genx/v1/disease-observations` | POST | `genxRegisterDiseaseObservation` | Register one disease observation | Append-only record; replay/conflict semantics. |
 | `/genx/v1/disease-observations/{diseaseObservationDbId}` | GET | `genxGetDiseaseObservation` | Retrieve one disease observation | Does not treat a superseded record as current. |
+| `/genx/v1/diagnostic-evidences` | GET | `genxListDiagnosticEvidences` | List diagnostic evidence | Does not create or change a record; not a BrAPI data resource. |
+| `/genx/v1/diagnostic-evidences` | POST | `genxRegisterDiagnosticEvidence` | Register one diagnostic evidence | Append-only record; replay/conflict semantics. |
+| `/genx/v1/diagnostic-evidences/{diagnosticEvidenceDbId}` | GET | `genxGetDiagnosticEvidence` | Retrieve one diagnostic evidence | Does not treat a superseded record as current. |
 | `/genx/v1/analysis-results` | GET | `genxListAnalysisResults` | List analysis result records | Does not create or change a result; not a BrAPI data resource. |
 | `/genx/v1/analysis-results` | POST | `genxRecordAnalysisResult` | Record one analysis result | Append-only record; replay/conflict semantics. |
 | `/genx/v1/analysis-results/{analysisResultDbId}` | GET | `genxGetAnalysisResult` | Retrieve one analysis result record | Does not treat a superseded result as current. |
