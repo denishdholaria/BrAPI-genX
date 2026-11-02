@@ -1,0 +1,56 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ProtocolLibrary:
+      type: object
+      description: |-
+        One immutable protocol library record. A published (protocolLibraryDbId) record
+        never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - protocolLibraryDbId
+      - status
+      properties:
+        protocolLibraryDbId:
+          description: Namespaced protocol-library identity `{authority}:protocol-library:{localId}`
+          type: string
+          example: institute-a:protocol-library:pl-2026-001
+        libraryName:
+          description: Name of the protocol library
+          type: string
+          example: breeding-protocols-2026
+        protocolType:
+          description: Type of protocol
+          type: string
+          example: crossing
+        version:
+          description: Version of the protocol
+          type: string
+          example: "1.0"
+        description:
+          description: Human-readable description of the protocol
+          type: string
+          example: Standard operating procedure for recurrent selection
+        methods:
+          description: Methods included in the library
+          type: string
+          example: "mass selection, progeny selection"
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: protocolLibraryDbId of the record this one replaces
+          type: string
+          example: institute-a:protocol-library:pl-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

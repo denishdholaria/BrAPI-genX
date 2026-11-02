@@ -210,6 +210,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/artifact-catalogues` | GET | `genxListArtifactCatalogues` | List artifact catalogues | Does not create or change a record; not a BrAPI data resource. |
 | `/genx/v1/artifact-catalogues` | POST | `genxRegisterArtifactCatalogue` | Register one artifact catalogue | Append-only record; replay/conflict semantics. |
 | `/genx/v1/artifact-catalogues/{artifactCatalogueDbId}` | GET | `genxGetArtifactCatalogue` | Retrieve one artifact catalogue | Does not treat a superseded record as current. |
+| `/genx/v1/protocol-libraries` | GET | `genxListProtocolLibraries` | List protocol libraries | Does not create or change a record; not a BrAPI data resource. |
+| `/genx/v1/protocol-libraries` | POST | `genxRegisterProtocolLibrary` | Register one protocol library | Append-only record; replay/conflict semantics. |
+| `/genx/v1/protocol-libraries/{protocolLibraryDbId}` | GET | `genxGetProtocolLibrary` | Retrieve one protocol library | Does not treat a superseded record as current. |
 | `/genx/v1/analysis-results` | GET | `genxListAnalysisResults` | List analysis result records | Does not create or change a result; not a BrAPI data resource. |
 | `/genx/v1/analysis-results` | POST | `genxRecordAnalysisResult` | Record one analysis result | Append-only record; replay/conflict semantics. |
 | `/genx/v1/analysis-results/{analysisResultDbId}` | GET | `genxGetAnalysisResult` | Retrieve one analysis result record | Does not treat a superseded result as current. |

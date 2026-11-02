@@ -59,6 +59,7 @@ implementation, not a claim of production readiness or of scientific validation.
 | D3 | Bioinformatics pipeline provenance | `PipelineProvenance/` | RFC-116 |
 | D2 | Experimental design and protocol | `ExperimentalProtocol/` | RFC-117 |
 | S | Dataset/model artefact catalogue | `ArtifactCatalogue/` | RFC-118 |
+| S | Protocol / method library | `ProtocolLibrary/` | RFC-119 |
 | D3 | Genomic dataset release/access, reference assembly versioning, pipeline provenance | `GenomicDatasets/` | RFC-013 |
 | D3 | Assay / plate workflow (design side) | `AssayDesign/` | RFC-061 |
 | D3 | Assay / plate workflow (execution side) | `AssayExecution/` | RFC-113 |
