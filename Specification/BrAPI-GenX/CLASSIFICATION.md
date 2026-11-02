@@ -128,6 +128,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | ViabilityTesting / ViabilityTest | D1 | C1, C2, C3, C6, C9 | Viability/germination test records; no BrAPI v2.1 equivalent |
 | ResearchAssets / ResearchAsset | (none, cross-cutting) | C1, C2, C3, C5, C6, C9 | Research asset records; no BrAPI v2.1 equivalent; builds on FAIRPackage |
 | MeasurementMethods / MeasurementMethod | (none, cross-cutting) | C1, C2, C3, C4, C9 | Measurement method definitions; no BrAPI v2.1 equivalent; terminology governance |
+| DevelopmentalStage / DevelopmentalStage | (none, cross-cutting) | C1, C2, C3, C4, C9 | Developmental stage vocabulary entries; no BrAPI v2.1 equivalent; terminology governance |
 | Conformance | Cross-cutting C8 | C1, C3 | Probes and fixtures establish contract evidence, not scientific-domain data |
 
 ## 5. Relationship to BrAPI V2.1

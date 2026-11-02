@@ -324,6 +324,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/measurement-methods` | GET | `genxListMeasurementMethods` | List measurement method definitions | Does not create or change a method; not a BrAPI Method. |
 | `/genx/v1/measurement-methods` | POST | `genxRegisterMeasurementMethod` | Register one measurement method definition | Append-only record; replay/conflict semantics. |
 | `/genx/v1/measurement-methods/{measurementMethodDbId}` | GET | `genxGetMeasurementMethod` | Retrieve one measurement method definition | Does not treat a superseded method as current. |
+| `/genx/v1/developmental-stages` | GET | `genxListDevelopmentalStages` | List developmental stages | Does not create or change an entry; not a BrAPI data resource. |
+| `/genx/v1/developmental-stages` | POST | `genxRegisterDevelopmentalStage` | Register one developmental stage | Append-only record; replay/conflict semantics. |
+| `/genx/v1/developmental-stages/{developmentalStageDbId}` | GET | `genxGetDevelopmentalStage` | Retrieve one developmental stage | Does not treat a superseded entry as current. |
 
 `ProvenanceEnvelope` is embedded in result/record schemas and has no standalone route in this proposal.
 

@@ -41174,12 +41174,248 @@
         "brapi-genx.genx.v1.environmental-treatments.list",
         "brapi-genx.genx.v1.environmental-treatments.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "DevelopmentalStage",
+      "brapiTag": "DevelopmentalStage",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/DevelopmentalStage/DevelopmentalStage_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.developmental-stages.list",
+      "method": "GET",
+      "path": "/developmental-stages",
+      "operationIdInSource": "genxListDevelopmentalStages",
+      "recommendedOperationId": "genxListDevelopmentalStages",
+      "operationName": "List developmental stages",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List developmental stage vocabulary entries, optionally filtered by crop or status.",
+      "sourceDescription": "Get a paged list of developmental stage vocabulary entries across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover developmental stage terms for a crop.",
+        "Support phenology and growth-stage annotation."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a stage entry (use the POST endpoint).",
+        "Assuming a stage entry is a BrAPI Observation.",
+        "Treating the list as a complete ontology."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "cropDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterDevelopmentalStage",
+        "genxGetDevelopmentalStage",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-079"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.developmental-stages.record",
+        "brapi-genx.genx.v1.developmental-stages.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "DevelopmentalStage",
+      "brapiTag": "DevelopmentalStage",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/DevelopmentalStage/DevelopmentalStage_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.developmental-stages.record",
+      "method": "POST",
+      "path": "/developmental-stages",
+      "operationIdInSource": "genxRegisterDevelopmentalStage",
+      "recommendedOperationId": "genxRegisterDevelopmentalStage",
+      "operationName": "Register one developmental stage",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Register one developmental stage vocabulary entry with crop linkage and provenance.",
+      "sourceDescription": "Unknown developmentalStageDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a developmental stage term and its definition.",
+        "Retry an identical entry safely using the same developmentalStageDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing entry; corrections require a new record that supersedes.",
+        "Assuming an entry is a BrAPI Observation.",
+        "Asserting that the entry is validated or endorsed."
+      ],
+      "sideEffects": "Creates a developmental stage identity or appends a new immutable version when accepted.",
+      "idempotency": "Same developmentalStageDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "DevelopmentalStageNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListDevelopmentalStages",
+        "genxGetDevelopmentalStage",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-079"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.developmental-stages.list",
+        "brapi-genx.genx.v1.developmental-stages.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "DevelopmentalStage",
+      "brapiTag": "DevelopmentalStage",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/DevelopmentalStage/DevelopmentalStage_DevelopmentalStageDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.developmental-stages.get",
+      "method": "GET",
+      "path": "/developmental-stages/{developmentalStageDbId}",
+      "operationIdInSource": "genxGetDevelopmentalStage",
+      "recommendedOperationId": "genxGetDevelopmentalStage",
+      "operationName": "Get one developmental stage",
+      "classification": {
+        "primaryDomain": null,
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C4",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one developmental stage vocabulary entry.",
+      "sourceDescription": "Returns the registered entry, or 404.",
+      "canBeUsedFor": [
+        "Inspect crop linkage, stage code, definition, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming an entry is a BrAPI Observation.",
+        "Treating a superseded entry as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "developmentalStageDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRegisterDevelopmentalStage",
+        "genxListDevelopmentalStages",
+        "genxPublishVariableTermVersion"
+      ],
+      "decisionReferences": [
+        "RFC-079"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.developmental-stages.list",
+        "brapi-genx.genx.v1.developmental-stages.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 234,
+    "genxEntriesAdded": 237,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -41257,7 +41493,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 435,
+    "totalEntries": 438,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",
@@ -41558,5 +41794,5 @@
       ]
     }
   ],
-  "totalEntries": 435
+  "totalEntries": 438
 }

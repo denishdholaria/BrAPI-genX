@@ -1,0 +1,52 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    DevelopmentalStageNewRequest:
+      type: object
+      description: |-
+        Request to register one developmental stage vocabulary entry. Unknown
+        developmentalStageDbId creates; same id with an identical body replays
+        the existing record; same id with a different body is rejected with 409.
+      required:
+      - developmentalStageDbId
+      properties:
+        developmentalStageDbId:
+          description: Namespaced developmental-stage identity `{authority}:developmental-stage:{localId}`
+          type: string
+          example: institute-a:developmental-stage:ds-2026-001
+        cropDbId:
+          description: Crop or germplasm reference
+          type: string
+          example: crop-001
+        stageCode:
+          description: Developmental stage code
+          type: string
+          example: BBCH-31
+        stageName:
+          description: Human-readable stage name
+          type: string
+          example: Stem elongation
+        definition:
+          description: Definition of the stage
+          type: string
+          example: First node visible
+        status:
+          description: Lifecycle state of the entry
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: developmentalStageDbId of the entry this one replaces
+          type: string
+          example: institute-a:developmental-stage:ds-2026-000
+        provenance:
+          description: Evidence and method provenance for the entry
+          $ref: '#/components/schemas/ProvenanceEnvelope'

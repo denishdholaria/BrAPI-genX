@@ -18,6 +18,7 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 | CropCycle | 3 | proposed, non-normative |
 | CrossingSchedule | 3 | proposed, non-normative |
 | CustodyTransfer | 3 | proposed, non-normative |
+| DevelopmentalStage | 3 | proposed, non-normative |
 | DisposalRecord | 3 | proposed, non-normative |
 | DoubledHaploid | 3 | proposed, non-normative |
 | Emissions | 3 | proposed, non-normative |
@@ -1346,6 +1347,111 @@ This is a focused view of the 21 proposed GenX operations, not a separate source
 - **Related catalogue IDs:** brapi-genx.genx.v1.custody-transfers.list, brapi-genx.genx.v1.custody-transfers.record
 - **Relevant RFC / decision references:** RFC-063
 - **Contract source:** [`Specification/BrAPI-GenX/CustodyTransfer/CustodyTransfer_CustodyTransferDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/CustodyTransfer/CustodyTransfer_CustodyTransferDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### DevelopmentalStage — 3 operations
+
+### GET `/genx/v1/developmental-stages`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.developmental-stages.list`
+- **BrAPI-GenX operation identity:** `genxListDevelopmentalStages` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListDevelopmentalStages`
+- **GenX source module:** `DevelopmentalStage`
+- **Source tag:** DevelopmentalStage
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C4 — Scientific terminology governance, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List developmental stage vocabulary entries, optionally filtered by crop or status.
+**Source contract description:**
+> Get a paged list of developmental stage vocabulary entries across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover developmental stage terms for a crop.
+- Support phenology and growth-stage annotation.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a stage entry (use the POST endpoint).
+- Assuming a stage entry is a BrAPI Observation.
+- Treating the list as a complete ontology.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** cropDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRegisterDevelopmentalStage, genxGetDevelopmentalStage, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.developmental-stages.record, brapi-genx.genx.v1.developmental-stages.get
+- **Relevant RFC / decision references:** RFC-079
+- **Contract source:** [`Specification/BrAPI-GenX/DevelopmentalStage/DevelopmentalStage_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/DevelopmentalStage/DevelopmentalStage_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/developmental-stages`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.developmental-stages.record`
+- **BrAPI-GenX operation identity:** `genxRegisterDevelopmentalStage` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRegisterDevelopmentalStage`
+- **GenX source module:** `DevelopmentalStage`
+- **Source tag:** DevelopmentalStage
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C4 — Scientific terminology governance, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Register one developmental stage vocabulary entry with crop linkage and provenance.
+**Source contract description:**
+> Unknown developmentalStageDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish a developmental stage term and its definition.
+- Retry an identical entry safely using the same developmentalStageDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing entry; corrections require a new record that supersedes.
+- Assuming an entry is a BrAPI Observation.
+- Asserting that the entry is validated or endorsed.
+- **Side effects:** Creates a developmental stage identity or appends a new immutable version when accepted.
+- **Retry / idempotency:** Same developmentalStageDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** DevelopmentalStageNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListDevelopmentalStages, genxGetDevelopmentalStage, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.developmental-stages.list, brapi-genx.genx.v1.developmental-stages.get
+- **Relevant RFC / decision references:** RFC-079
+- **Contract source:** [`Specification/BrAPI-GenX/DevelopmentalStage/DevelopmentalStage_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/DevelopmentalStage/DevelopmentalStage_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/developmental-stages/{developmentalStageDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.developmental-stages.get`
+- **BrAPI-GenX operation identity:** `genxGetDevelopmentalStage` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetDevelopmentalStage`
+- **GenX source module:** `DevelopmentalStage`
+- **Source tag:** DevelopmentalStage
+- **Proposed BrAPI-GenX classification:** No primary domain assigned; cross-cutting or review required; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C4 — Scientific terminology governance, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one developmental stage vocabulary entry.
+**Source contract description:**
+> Returns the registered entry, or 404.
+**Can be used for:**
+- Inspect crop linkage, stage code, definition, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming an entry is a BrAPI Observation.
+- Treating a superseded entry as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** developmentalStageDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRegisterDevelopmentalStage, genxListDevelopmentalStages, genxPublishVariableTermVersion
+- **Related catalogue IDs:** brapi-genx.genx.v1.developmental-stages.list, brapi-genx.genx.v1.developmental-stages.record
+- **Relevant RFC / decision references:** RFC-079
+- **Contract source:** [`Specification/BrAPI-GenX/DevelopmentalStage/DevelopmentalStage_DevelopmentalStageDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/DevelopmentalStage/DevelopmentalStage_DevelopmentalStageDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
