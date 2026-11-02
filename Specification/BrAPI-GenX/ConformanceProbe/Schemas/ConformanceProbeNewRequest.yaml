@@ -1,0 +1,48 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ConformanceProbeNewRequest:
+      type: object
+      description: |-
+        Request to register one conformance probe record. Unknown conformanceProbeDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - conformanceProbeDbId
+      properties:
+        conformanceProbeDbId:
+          description: Namespaced conformance-probe identity `{authority}:conformance-probe:{localId}`
+          type: string
+          example: institute-a:conformance-probe:cp-2026-001
+        probeType:
+          description: Type of conformance probe
+          type: string
+          example: schema-validation
+        targetEndpoint:
+          description: Endpoint being probed
+          type: string
+          example: /genx/v1/reference-assemblies
+        expectedResponse:
+          description: Expected response shape or status
+          type: string
+          example: 200 with metadata and result
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: conformanceProbeDbId of the record this one replaces
+          type: string
+          example: institute-a:conformance-probe:cp-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

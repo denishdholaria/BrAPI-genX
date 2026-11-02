@@ -288,6 +288,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/edge-gateway-healths` | GET | `genxListEdgeGatewayHealths` | List edge gateway healths | Does not create or change a record; not a BrAPI data resource. |
 | `/genx/v1/edge-gateway-healths` | POST | `genxRegisterEdgeGatewayHealth` | Register one edge gateway health | Append-only record; replay/conflict semantics. |
 | `/genx/v1/edge-gateway-healths/{edgeGatewayHealthDbId}` | GET | `genxGetEdgeGatewayHealth` | Retrieve one edge gateway health | Does not treat a superseded record as current. |
+| `/genx/v1/conformance-probes` | GET | `genxListConformanceProbes` | List conformance probes | Does not create or change a record; not a BrAPI data resource. |
+| `/genx/v1/conformance-probes` | POST | `genxRegisterConformanceProbe` | Register one conformance probe | Append-only record; replay/conflict semantics. |
+| `/genx/v1/conformance-probes/{conformanceProbeDbId}` | GET | `genxGetConformanceProbe` | Retrieve one conformance probe | Does not treat a superseded record as current. |
 | `/genx/v1/capability-negotiations` | GET | `genxListCapabilityNegotiations` | List capability negotiations | Does not create or change a record; not a BrAPI data resource. |
 | `/genx/v1/capability-negotiations` | POST | `genxRegisterCapabilityNegotiation` | Register one capability negotiation | Append-only record; replay/conflict semantics. |
 | `/genx/v1/capability-negotiations/{capabilityNegotiationDbId}` | GET | `genxGetCapabilityNegotiation` | Retrieve one capability negotiation | Does not treat a superseded record as current. |

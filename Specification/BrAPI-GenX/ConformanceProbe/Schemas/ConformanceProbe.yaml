@@ -1,0 +1,52 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    ConformanceProbe:
+      type: object
+      description: |-
+        One immutable conformance probe record. A published (conformanceProbeDbId) record
+        never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - conformanceProbeDbId
+      - status
+      properties:
+        conformanceProbeDbId:
+          description: Namespaced conformance-probe identity `{authority}:conformance-probe:{localId}`
+          type: string
+          example: institute-a:conformance-probe:cp-2026-001
+        probeType:
+          description: Type of conformance probe
+          type: string
+          example: schema-validation
+        targetEndpoint:
+          description: Endpoint being probed
+          type: string
+          example: /genx/v1/reference-assemblies
+        expectedResponse:
+          description: Expected response shape or status
+          type: string
+          example: 200 with metadata and result
+        actualResponse:
+          description: Actual response observed
+          type: string
+          example: 404 Not Found
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: conformanceProbeDbId of the record this one replaces
+          type: string
+          example: institute-a:conformance-probe:cp-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
