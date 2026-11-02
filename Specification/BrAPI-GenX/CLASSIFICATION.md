@@ -134,6 +134,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | ExternalVocabulary / ExternalVocabulary | (none, cross-cutting) | C1, C2, C3, C4, C9 | External vocabulary sync entries; no BrAPI v2.1 equivalent; terminology governance |
 | TerminologyVersion / TerminologyVersion | (none, cross-cutting) | C1, C2, C3, C4, C9 | Terminology version entries; no BrAPI v2.1 equivalent; terminology governance |
 | OntologyTerm / OntologyTermRecord | (none, cross-cutting) | C1, C2, C3, C4, C9 | Ontology term and synonym entries; no BrAPI v2.1 equivalent; terminology governance |
+| OntologyMapping / OntologyMapping | (none, cross-cutting) | C1, C2, C3, C4, C9 | Ontology mapping and crosswalk entries; no BrAPI v2.1 equivalent; terminology governance |
 | TaxonName / TaxonName | (none, cross-cutting) | C1, C2, C3, C4, C9 | Taxon name and synonym entries; no BrAPI v2.1 equivalent; terminology governance |
 | Conformance | Cross-cutting C8 | C1, C3 | Probes and fixtures establish contract evidence, not scientific-domain data |
 

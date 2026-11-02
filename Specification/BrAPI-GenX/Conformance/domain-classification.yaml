@@ -465,6 +465,11 @@ modules:
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C4", "C9"]
     rationale: "Ontology term and synonym entries; BrAPI v2.1 has no equivalent record."
+  - path: "OntologyMapping/"
+    object: "OntologyMapping"
+    primary_class: null
+    cross_cutting: ["C1", "C2", "C3", "C4", "C9"]
+    rationale: "Ontology mapping and crosswalk entries; BrAPI v2.1 has no equivalent record."
   - path: "TaxonName/"
     object: "TaxonName"
     primary_class: null

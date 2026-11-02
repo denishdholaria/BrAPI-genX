@@ -342,6 +342,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/ontology-terms` | GET | `genxListOntologyTerms` | List ontology terms | Does not create or change an entry; not a BrAPI data resource. |
 | `/genx/v1/ontology-terms` | POST | `genxRegisterOntologyTerm` | Register one ontology term entry | Append-only record; replay/conflict semantics. |
 | `/genx/v1/ontology-terms/{ontologyTermDbId}` | GET | `genxGetOntologyTerm` | Retrieve one ontology term entry | Does not treat a superseded entry as current. |
+| `/genx/v1/ontology-mappings` | GET | `genxListOntologyMappings` | List ontology mappings | Does not create or change an entry; not a BrAPI data resource. |
+| `/genx/v1/ontology-mappings` | POST | `genxRegisterOntologyMapping` | Register one ontology mapping entry | Append-only record; replay/conflict semantics. |
+| `/genx/v1/ontology-mappings/{ontologyMappingDbId}` | GET | `genxGetOntologyMapping` | Retrieve one ontology mapping entry | Does not treat a superseded entry as current. |
 | `/genx/v1/taxon-names` | GET | `genxListTaxonNames` | List taxon names | Does not create or change an entry; not a BrAPI data resource. |
 | `/genx/v1/taxon-names` | POST | `genxRegisterTaxonName` | Register one taxon name | Append-only record; replay/conflict semantics. |
 | `/genx/v1/taxon-names/{taxonNameDbId}` | GET | `genxGetTaxonName` | Retrieve one taxon name | Does not treat a superseded entry as current. |

@@ -1,0 +1,48 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    OntologyMapping:
+      type: object
+      description: |-
+        One immutable external vocabulary sync entry. A published
+        (ontologyMappingDbId) record never mutates in place; corrections
+        are recorded as additional entries linked by supersedes.
+      required:
+      - ontologyMappingDbId
+      - status
+      properties:
+        ontologyMappingDbId:
+          description: Namespaced ontology-mapping identity `{authority}:ontology-mapping:{localId}`
+          type: string
+          example: institute-a:ontology-mapping:om-2026-001
+        source:
+          description: Source vocabulary system
+          type: string
+          example: AGROVOC
+        target:
+          description: Target vocabulary system
+          type: string
+          example: GenX
+        mapping:
+          description: Mapping or sync details
+          type: object
+          example: {sourceTerm: "wheat", targetTerm: "Triticum aestivum"}
+        status:
+          description: Lifecycle state of the entry
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: ontologyMappingDbId of the entry this one replaces
+          type: string
+          example: institute-a:ontology-mapping:om-2026-000
+        provenance:
+          description: Evidence and method provenance for the entry
+          $ref: '#/components/schemas/ProvenanceEnvelope'
