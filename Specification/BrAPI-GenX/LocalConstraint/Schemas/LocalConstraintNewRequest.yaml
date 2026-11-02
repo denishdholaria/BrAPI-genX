@@ -1,0 +1,52 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    LocalConstraintNewRequest:
+      type: object
+      description: |-
+        Request to register one local constraint record. Unknown localConstraintDbId
+        creates; same id with an identical body replays the existing record;
+        same id with a different body is rejected with 409.
+      required:
+      - localConstraintDbId
+      properties:
+        localConstraintDbId:
+          description: Namespaced local-constraint identity `{authority}:local-constraint:{localId}`
+          type: string
+          example: institute-a:local-constraint:lc-2026-001
+        constraintType:
+          description: Type of local constraint
+          type: string
+          example: water restriction
+        constraintValue:
+          description: Constraint value
+          type: string
+          example: "50%"
+        regionOrZone:
+          description: Region or zone the constraint applies to
+          type: string
+          example: zone-3
+        constraintSource:
+          description: Source of the constraint
+          type: string
+          example: local regulation
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          default: active
+          example: active
+        supersedes:
+          description: localConstraintDbId of the record this one replaces
+          type: string
+          example: institute-a:local-constraint:lc-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

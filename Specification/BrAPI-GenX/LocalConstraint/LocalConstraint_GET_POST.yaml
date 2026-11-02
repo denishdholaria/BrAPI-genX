@@ -1,0 +1,137 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /local-constraints:
+    get:
+      operationId: genxListLocalConstraints
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.local-constraints.list"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List local constraint records, optionally filtered by status."
+        canBeUsedFor:
+          - "Discover local constraints."
+          - "Support dataset/model artefact discovery."
+        mustNotBeUsedFor:
+          - "Creating or changing a record (use the POST endpoint)."
+          - "Assuming a record is a BrAPI data resource."
+          - "Treating the list as a complete history."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRegisterLocalConstraint"
+          - "genxGetLocalConstraint"
+          - "genxRegisterFarm"
+        decisions: ["RFC-139"]
+        proposalStatus: "draft-non-normative"
+      summary: List local constraints
+      description: Get a paged list of local constraint records across authorities. Filters combine with AND.
+      parameters:
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/LocalConstraintListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - LocalConstraint
+    post:
+      operationId: genxRegisterLocalConstraint
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.local-constraints.record"
+        classification:
+          primaryDomain: null
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Register one local constraint record with provenance."
+        canBeUsedFor:
+          - "Publish a local constraint."
+          - "Retry an identical record safely using the same localConstraintDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing record; corrections require a new record that supersedes."
+          - "Assuming a record is a BrAPI data resource."
+          - "Asserting that the catalogue is validated or endorsed."
+        sideEffects: "Creates a local constraint identity or appends a new immutable version when accepted."
+        idempotency: "Same localConstraintDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListLocalConstraints"
+          - "genxGetLocalConstraint"
+          - "genxRegisterFarm"
+        decisions: ["RFC-139"]
+        proposalStatus: "draft-non-normative"
+      summary: Register one local constraint
+      description: Register one local constraint record with provenance.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocalConstraintNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/LocalConstraint'
+                required:
+                - metadata
+                - result
+                title: LocalConstraintResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - LocalConstraint
+components:
+  responses:
+    LocalConstraintListResponse:
+      content:
+        application/json:
+          schema:
+            title: LocalConstraintListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LocalConstraint'
+            required:
+            - metadata
+            - result
+      description: OK

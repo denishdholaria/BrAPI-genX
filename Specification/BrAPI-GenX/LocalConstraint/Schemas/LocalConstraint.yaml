@@ -1,0 +1,52 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    LocalConstraint:
+      type: object
+      description: |-
+        One immutable local constraint record. A published (localConstraintDbId) record
+        never mutates in place; corrections are recorded as additional
+        records linked by supersedes.
+      required:
+      - localConstraintDbId
+      - status
+      properties:
+        localConstraintDbId:
+          description: Namespaced local-constraint identity `{authority}:local-constraint:{localId}`
+          type: string
+          example: institute-a:local-constraint:lc-2026-001
+        constraintType:
+          description: Type of local constraint
+          type: string
+          example: water restriction
+        constraintValue:
+          description: Constraint value
+          type: string
+          example: "50%"
+        regionOrZone:
+          description: Region or zone the constraint applies to
+          type: string
+          example: zone-3
+        constraintSource:
+          description: Source of the constraint
+          type: string
+          example: local regulation
+        status:
+          description: Lifecycle state of the record
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+          example: active
+        supersedes:
+          description: localConstraintDbId of the record this one replaces
+          type: string
+          example: institute-a:local-constraint:lc-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'
