@@ -13,8 +13,8 @@ A catalogue identifier does not replace a source operationId or route. Classific
 | Surface | Operations | Contract status |
 |---|---:|---|
 | BrAPI v2.1 official modules | 201 | Released specification; implementation availability not inferred |
-| BrAPI GenX /genx/v1 | 192 | Proposed, non-normative |
-| **Total** | **393** | Existing contracts plus proposed operations |
+| BrAPI GenX /genx/v1 | 195 | Proposed, non-normative |
+| **Total** | **396** | Existing contracts plus proposed operations |
 
 BijMantra snapshot: 2240 records from the inventory generated 2026-10-17; see [source inventory](https://github.com/denishdholaria/bijmantraorg/blob/main/endpoints-inventory.md) and [crosswalk](./BIJMANTRA-CROSSWALK.md).
 
@@ -8911,6 +8911,111 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
+### DisposalRecord — 3 operations
+
+### GET `/genx/v1/disposal-records`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.disposal-records.list`
+- **BrAPI-GenX operation identity:** `genxListDisposalRecords` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxListDisposalRecords`
+- **GenX source module:** `DisposalRecord`
+- **Source tag:** DisposalRecord
+- **Proposed BrAPI-GenX classification:** D1 — Germplasm and Biological Resources; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> List disposal records, optionally filtered by sample, lot, or status.
+**Source contract description:**
+> Get a paged list of disposal records across authorities. Filters combine with AND.
+**Can be used for:**
+- Discover disposals for a sample or seed lot.
+- Support conservation and retention auditing.
+**Must not be used for / explicit non-goals:**
+- Creating or changing a disposal (use the POST endpoint).
+- Assuming a disposal is a BrAPI data resource.
+- Treating the list as a complete disposal history.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** sampleDbId, lotDbId, status, page, pageSize, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxRecordDisposalRecord, genxGetDisposalRecord, genxRecordCustodyTransfer
+- **Related catalogue IDs:** brapi-genx.genx.v1.disposal-records.record, brapi-genx.genx.v1.disposal-records.get
+- **Relevant RFC / decision references:** RFC-065
+- **Contract source:** [`Specification/BrAPI-GenX/DisposalRecord/DisposalRecord_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/DisposalRecord/DisposalRecord_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### POST `/genx/v1/disposal-records`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.disposal-records.record`
+- **BrAPI-GenX operation identity:** `genxRecordDisposalRecord` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxRecordDisposalRecord`
+- **GenX source module:** `DisposalRecord`
+- **Source tag:** DisposalRecord
+- **Proposed BrAPI-GenX classification:** D1 — Germplasm and Biological Resources; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C3 — Asynchronous execution and idempotency, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Record one disposal with reason, method, and provenance.
+**Source contract description:**
+> Unknown disposalRecordDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+**Can be used for:**
+- Publish a disposal event for retention and audit evidence.
+- Retry an identical disposal safely using the same disposalRecordDbId.
+**Must not be used for / explicit non-goals:**
+- Updating or deleting an existing disposal; corrections require a new record that supersedes.
+- Assuming a disposal is a BrAPI data resource.
+- Treating a disposal as proof of destruction without the referenced evidence.
+- **Side effects:** Creates a disposal record when accepted.
+- **Retry / idempotency:** Same disposalRecordDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- **Parameters recorded in registry:** authorizationHeader
+- **Request schema refs recorded:** DisposalRecordNewRequest
+- **Response status codes recorded:** 200, 400, 401, 403
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Semantic relationship IDs / labels:** genxListDisposalRecords, genxGetDisposalRecord, genxRecordCustodyTransfer
+- **Related catalogue IDs:** brapi-genx.genx.v1.disposal-records.list, brapi-genx.genx.v1.disposal-records.get
+- **Relevant RFC / decision references:** RFC-065
+- **Contract source:** [`Specification/BrAPI-GenX/DisposalRecord/DisposalRecord_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/DisposalRecord/DisposalRecord_GET_POST.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
+### GET `/genx/v1/disposal-records/{disposalRecordDbId}`
+
+- **Catalogue ID:** `brapi-genx.genx.v1.disposal-records.get`
+- **BrAPI-GenX operation identity:** `genxGetDisposalRecord` (advisory where absent from source)
+- **Source OpenAPI operationId:** `genxGetDisposalRecord`
+- **GenX source module:** `DisposalRecord`
+- **Source tag:** DisposalRecord
+- **Proposed BrAPI-GenX classification:** D1 — Germplasm and Biological Resources; Facets: C1 — Identity, versioning and capability discovery, C2 — Provenance, evidence and uncertainty, C6 — Artifact integrity and external references, C9 — Security, authority and tenancy
+- **Classification review / confidence:** `defined-in-genx-proposal-community-review-pending` / `medium`
+- **Standard / proposal status:** `proposal-non-normative`
+- **Implementation status:** `reference-test-server-evidence-only`
+**Purpose:**
+> Retrieve one disposal record.
+**Source contract description:**
+> Returns the recorded disposal, or 404.
+**Can be used for:**
+- Inspect disposal reason, method, timestamp, and provenance.
+**Must not be used for / explicit non-goals:**
+- Assuming a disposal is a BrAPI data resource.
+- Treating a superseded disposal as current.
+- **Side effects:** Read-only.
+- **Retry / idempotency:** Read-only.
+- **Parameters recorded in registry:** disposalRecordDbId, authorizationHeader
+- **Request schema refs recorded:** —
+- **Response status codes recorded:** 200, 400, 401, 403, 404
+- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Semantic relationship IDs / labels:** genxRecordDisposalRecord, genxListDisposalRecords, genxRecordCustodyTransfer
+- **Related catalogue IDs:** brapi-genx.genx.v1.disposal-records.list, brapi-genx.genx.v1.disposal-records.record
+- **Relevant RFC / decision references:** RFC-065
+- **Contract source:** [`Specification/BrAPI-GenX/DisposalRecord/DisposalRecord_DisposalRecordDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-GenX/blob/proposal/scientific-domain-classification/Specification/BrAPI-GenX/DisposalRecord/DisposalRecord_DisposalRecordDbId_GET.yaml)
+- **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
+  - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
 ### DoubledHaploid — 3 operations
 
 ### GET `/genx/v1/doubled-haploid-programs`
@@ -14524,6 +14629,6 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - Unique full-base-path/method/route keys: `True`.
 - Unique source/advisory operation identifiers where present: `True`.
 - BrAPI v2.1 inventory rows resolved to source YAML operations: 201 / 201.
-- GenX operations documented: 192.
+- GenX operations documented: 195.
 
 See [BIJMANTRA-CROSSWALK.md](./BIJMANTRA-CROSSWALK.md) for inventory evidence and semantic boundaries.

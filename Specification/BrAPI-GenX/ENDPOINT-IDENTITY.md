@@ -252,6 +252,9 @@ The OpenAPI endpoint files remain the machine-readable source of request/respons
 | `/genx/v1/genotype-qc-reports` | GET | `genxListGenotypeQcReports` | List genotype QC reports | Does not create or change a report; not a BrAPI data resource. |
 | `/genx/v1/genotype-qc-reports` | POST | `genxRecordGenotypeQcReport` | Record one genotype QC report | Append-only record; replay/conflict semantics. |
 | `/genx/v1/genotype-qc-reports/{genotypeQcReportDbId}` | GET | `genxGetGenotypeQcReport` | Retrieve one genotype QC report | Does not treat a superseded report as current. |
+| `/genx/v1/disposal-records` | GET | `genxListDisposalRecords` | List disposal records | Does not create or change a disposal; not a BrAPI data resource. |
+| `/genx/v1/disposal-records` | POST | `genxRecordDisposalRecord` | Record one disposal | Append-only record; replay/conflict semantics. |
+| `/genx/v1/disposal-records/{disposalRecordDbId}` | GET | `genxGetDisposalRecord` | Retrieve one disposal record | Does not treat a superseded disposal as current. |
 | `/genx/v1/bulk-captures` | GET | `genxListBulkCaptures` | List bulk captures | Does not create or change a capture; not a BrAPI Observation. |
 | `/genx/v1/bulk-captures` | POST | `genxRecordBulkCapture` | Record one bulk capture | Append-only record; replay/conflict semantics. |
 | `/genx/v1/bulk-captures/{bulkCaptureDbId}` | GET | `genxGetBulkCapture` | Retrieve one bulk capture | Does not treat a superseded capture as current. |

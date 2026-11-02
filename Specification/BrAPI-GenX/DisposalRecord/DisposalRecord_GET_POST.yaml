@@ -1,0 +1,151 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /disposal-records:
+    get:
+      operationId: genxListDisposalRecords
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.disposal-records.list"
+        classification:
+          primaryDomain: "D1"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "List disposal records, optionally filtered by sample, lot, or status."
+        canBeUsedFor:
+          - "Discover disposals for a sample or seed lot."
+          - "Support conservation and retention auditing."
+        mustNotBeUsedFor:
+          - "Creating or changing a disposal (use the POST endpoint)."
+          - "Assuming a disposal is a BrAPI data resource."
+          - "Treating the list as a complete disposal history."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordDisposalRecord"
+          - "genxGetDisposalRecord"
+          - "genxRecordCustodyTransfer"
+        decisions: ["RFC-065"]
+        proposalStatus: "draft-non-normative"
+      summary: List disposal records
+      description: Get a paged list of disposal records across authorities. Filters combine with AND.
+      parameters:
+      - name: sampleDbId
+        description: Filter by BrAPI Sample
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: lotDbId
+        description: Filter by GenX seed lot
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        description: Filter by lifecycle state
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - superseded
+          - withdrawn
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/DisposalRecordListResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - DisposalRecord
+    post:
+      operationId: genxRecordDisposalRecord
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.disposal-records.record"
+        classification:
+          primaryDomain: "D1"
+          crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
+        purpose: "Record one disposal with reason, method, and provenance."
+        canBeUsedFor:
+          - "Publish a disposal event for retention and audit evidence."
+          - "Retry an identical disposal safely using the same disposalRecordDbId."
+        mustNotBeUsedFor:
+          - "Updating or deleting an existing disposal; corrections require a new record that supersedes."
+          - "Assuming the disposal is a BrAPI data resource."
+          - "Treating a disposal as proof of destruction without the referenced evidence."
+        sideEffects: "Creates a disposal record when accepted."
+        idempotency: "Same disposalRecordDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        semanticNeighbors:
+          - "genxListDisposalRecords"
+          - "genxGetDisposalRecord"
+          - "genxRecordCustodyTransfer"
+        decisions: ["RFC-065"]
+        proposalStatus: "draft-non-normative"
+      summary: Record one disposal
+      description: |-
+        Unknown disposalRecordDbId creates; same id with an identical body
+        replays the existing record; same id with a different body is
+        rejected with 409.
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisposalRecordNewRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/DisposalRecord'
+                required:
+                - metadata
+                - result
+                title: DisposalRecordResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+      tags:
+      - DisposalRecord
+components:
+  responses:
+    DisposalRecordListResponse:
+      content:
+        application/json:
+          schema:
+            title: DisposalRecordListResponse
+            type: object
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DisposalRecord'
+            required:
+            - metadata
+            - result
+      description: OK

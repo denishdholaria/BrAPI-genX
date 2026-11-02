@@ -37863,12 +37863,249 @@
         "brapi-genx.genx.v1.genotype-qc-reports.list",
         "brapi-genx.genx.v1.genotype-qc-reports.record"
       ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "DisposalRecord",
+      "brapiTag": "DisposalRecord",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/DisposalRecord/DisposalRecord_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.disposal-records.list",
+      "method": "GET",
+      "path": "/disposal-records",
+      "operationIdInSource": "genxListDisposalRecords",
+      "recommendedOperationId": "genxListDisposalRecords",
+      "operationName": "List disposal records",
+      "classification": {
+        "primaryDomain": "D1",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "List disposal records, optionally filtered by sample, lot, or status.",
+      "sourceDescription": "Get a paged list of disposal records across authorities. Filters combine with AND.",
+      "canBeUsedFor": [
+        "Discover disposals for a sample or seed lot.",
+        "Support conservation and retention auditing."
+      ],
+      "mustNotBeUsedFor": [
+        "Creating or changing a disposal (use the POST endpoint).",
+        "Assuming a disposal is a BrAPI data resource.",
+        "Treating the list as a complete disposal history."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "sampleDbId",
+        "lotDbId",
+        "status",
+        "page",
+        "pageSize",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordDisposalRecord",
+        "genxGetDisposalRecord",
+        "genxRecordCustodyTransfer"
+      ],
+      "decisionReferences": [
+        "RFC-065"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.disposal-records.record",
+        "brapi-genx.genx.v1.disposal-records.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "DisposalRecord",
+      "brapiTag": "DisposalRecord",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/DisposalRecord/DisposalRecord_GET_POST.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.disposal-records.record",
+      "method": "POST",
+      "path": "/disposal-records",
+      "operationIdInSource": "genxRecordDisposalRecord",
+      "recommendedOperationId": "genxRecordDisposalRecord",
+      "operationName": "Record one disposal",
+      "classification": {
+        "primaryDomain": "D1",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C3",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Record one disposal with reason, method, and provenance.",
+      "sourceDescription": "Unknown disposalRecordDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.",
+      "canBeUsedFor": [
+        "Publish a disposal event for retention and audit evidence.",
+        "Retry an identical disposal safely using the same disposalRecordDbId."
+      ],
+      "mustNotBeUsedFor": [
+        "Updating or deleting an existing disposal; corrections require a new record that supersedes.",
+        "Assuming a disposal is a BrAPI data resource.",
+        "Treating a disposal as proof of destruction without the referenced evidence."
+      ],
+      "sideEffects": "Creates a disposal record when accepted.",
+      "idempotency": "Same disposalRecordDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "parameters": [
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [
+        "DisposalRecordNewRequest"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden"
+      ],
+      "semanticNeighborIds": [
+        "genxListDisposalRecords",
+        "genxGetDisposalRecord",
+        "genxRecordCustodyTransfer"
+      ],
+      "decisionReferences": [
+        "RFC-065"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.disposal-records.list",
+        "brapi-genx.genx.v1.disposal-records.get"
+      ]
+    },
+    {
+      "apiGeneration": "genx-v1",
+      "basePath": "/genx/v1",
+      "brapiModule": null,
+      "genxModule": "DisposalRecord",
+      "brapiTag": "DisposalRecord",
+      "standardStatus": "proposal-non-normative",
+      "implementationStatus": "reference-test-server-evidence-only",
+      "semanticReviewStatus": "defined-in-proposal; community-review-pending",
+      "source": {
+        "repository": "denishdholaria/BrAPI-GenX",
+        "ref": "proposal/scientific-domain-classification",
+        "path": "Specification/BrAPI-GenX/DisposalRecord/DisposalRecord_DisposalRecordDbId_GET.yaml"
+      },
+      "bijmantraCrosswalk": {
+        "relativePathCandidates": [],
+        "interpretation": "No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence."
+      },
+      "catalogId": "brapi-genx.genx.v1.disposal-records.get",
+      "method": "GET",
+      "path": "/disposal-records/{disposalRecordDbId}",
+      "operationIdInSource": "genxGetDisposalRecord",
+      "recommendedOperationId": "genxGetDisposalRecord",
+      "operationName": "Get one disposal record",
+      "classification": {
+        "primaryDomain": "D1",
+        "crossCuttingCapabilities": [
+          "C1",
+          "C2",
+          "C6",
+          "C9"
+        ],
+        "reviewStatus": "defined-in-genx-proposal-community-review-pending",
+        "confidence": "medium"
+      },
+      "purpose": "Retrieve one disposal record.",
+      "sourceDescription": "Returns the recorded disposal, or 404.",
+      "canBeUsedFor": [
+        "Inspect disposal reason, method, timestamp, and provenance."
+      ],
+      "mustNotBeUsedFor": [
+        "Assuming a disposal is a BrAPI data resource.",
+        "Treating a superseded disposal as current."
+      ],
+      "sideEffects": "Read-only.",
+      "idempotency": "Read-only.",
+      "parameters": [
+        "disposalRecordDbId",
+        "authorizationHeader"
+      ],
+      "requestSchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404"
+      ],
+      "responseRefs": [
+        "400BadRequest",
+        "401Unauthorized",
+        "403Forbidden",
+        "404NotFound"
+      ],
+      "semanticNeighborIds": [
+        "genxRecordDisposalRecord",
+        "genxListDisposalRecords",
+        "genxRecordCustodyTransfer"
+      ],
+      "decisionReferences": [
+        "RFC-065"
+      ],
+      "semanticNeighborCatalogIds": [
+        "brapi-genx.genx.v1.disposal-records.list",
+        "brapi-genx.genx.v1.disposal-records.record"
+      ]
     }
   ],
   "buildIntegrity": {
     "brapiV21InventoryRows": 201,
     "brapiV21EntriesAdded": 201,
-    "genxEntriesAdded": 192,
+    "genxEntriesAdded": 195,
     "unmatchedV21InventoryRows": [],
     "duplicateCatalogIds": [],
     "duplicateMethodRouteKeys": [],
@@ -37946,7 +38183,7 @@
     "fullBasePathMethodRouteKeysUnique": true,
     "recommendedOperationIdsUnique": true,
     "duplicateRecommendedOperationIds": [],
-    "totalEntries": 393,
+    "totalEntries": 396,
     "classificationGovernance": {
       "proposedDomainClasses": [
         "D1",

@@ -1,0 +1,65 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths:
+  /disposal-records/{disposalRecordDbId}:
+    get:
+      operationId: genxGetDisposalRecord
+      x-brapi-genx:
+        catalogId: "brapi-genx.genx.v1.disposal-records.get"
+        classification:
+          primaryDomain: "D1"
+          crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
+        purpose: "Retrieve one disposal record."
+        canBeUsedFor:
+          - "Inspect disposal reason, method, timestamp, and provenance."
+        mustNotBeUsedFor:
+          - "Assuming the disposal is a BrAPI data resource."
+          - "Treating a superseded disposal as current."
+        sideEffects: "Read-only."
+        idempotency: "Read-only."
+        semanticNeighbors:
+          - "genxRecordDisposalRecord"
+          - "genxListDisposalRecords"
+          - "genxRecordCustodyTransfer"
+        decisions: ["RFC-065"]
+        proposalStatus: "draft-non-normative"
+      summary: Get one disposal record
+      description: Returns the recorded disposal, or 404.
+      parameters:
+      - name: disposalRecordDbId
+        description: Namespaced disposal identity `{authority}:disposal:{localId}`
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorizationHeader'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  '@context':
+                    $ref: '#/components/schemas/Context'
+                  metadata:
+                    $ref: '#/components/schemas/metadata'
+                  result:
+                    $ref: '#/components/schemas/DisposalRecord'
+                required:
+                - metadata
+                - result
+                title: DisposalRecordResponse
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+      tags:
+      - DisposalRecord

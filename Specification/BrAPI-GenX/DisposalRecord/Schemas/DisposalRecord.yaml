@@ -1,0 +1,62 @@
+info:
+  title: BrAPI-GenX API
+  version: ''
+openapi: 3.0.0
+paths: {}
+components:
+  schemas:
+    DisposalRecord:
+      type: object
+      description: |-
+        One immutable disposal record. A published (disposalRecordDbId) record
+        never mutates in place; corrections are recorded as additional records
+        linked by supersedes.
+      required:
+      - disposalRecordDbId
+      - status
+      properties:
+        disposalRecordDbId:
+          description: Namespaced disposal identity `{authority}:disposal:{localId}`
+          type: string
+          example: institute-a:disposal:ds-2026-001
+        sampleDbId:
+          description: BrAPI Sample being disposed of, when applicable
+          type: string
+          example: institute-a:sample:smp-001
+        lotDbId:
+          description: GenX seed lot being disposed of, when applicable
+          type: string
+          example: institute-a:lot:lot-2019-014
+        reason:
+          description: Reason for disposal
+          type: string
+          example: lost viability
+        method:
+          description: Disposal method applied
+          type: string
+          example: incineration
+        disposedAt:
+          description: Disposal timestamp (ISO 8601)
+          type: string
+          format: date-time
+          example: '2026-04-02T11:00:00Z'
+        quantity:
+          description: Quantity disposed of, with unit captured in provenance
+          type: number
+          example: 25
+        status:
+          description: Lifecycle state of the disposal record
+          type: string
+          enum:
+          - pending
+          - completed
+          - cancelled
+          - superseded
+          example: completed
+        supersedes:
+          description: disposalRecordDbId of the record this one replaces
+          type: string
+          example: institute-a:disposal:ds-2026-000
+        provenance:
+          description: Evidence and method provenance for the record
+          $ref: '#/components/schemas/ProvenanceEnvelope'

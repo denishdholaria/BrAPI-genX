@@ -235,6 +235,11 @@ modules:
     primary_class: "D3"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Genotype QC report records; BrAPI v2.1 has no equivalent record."
+  - path: "DisposalRecord/"
+    object: "DisposalRecord"
+    primary_class: "D1"
+    cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
+    rationale: "Disposal records; BrAPI v2.1 has no equivalent record."
   - path: "AnalysisResult/"
     object: "AnalysisResult"
     primary_class: "D7"

@@ -80,6 +80,7 @@ Next-generation BrAPI design surface. **Proposal status: not accepted, not norma
 | `AssayDesign/` | `AssayDesign` — assay design records (platform, marker count, provenance) | `GET /genx/v1/assay-designs` (`genxListAssayDesigns`); `POST /genx/v1/assay-designs` (`genxRecordAssayDesign`); `GET /genx/v1/assay-designs/{assayDesignDbId}` (`genxGetAssayDesign`) |
 | `VariantAnnotation/` | `VariantAnnotation` — variant annotation records (functional annotations, provenance) | `GET /genx/v1/variant-annotations` (`genxListVariantAnnotations`); `POST /genx/v1/variant-annotations` (`genxRecordVariantAnnotation`); `GET /genx/v1/variant-annotations/{variantAnnotationDbId}` (`genxGetVariantAnnotation`) |
 | `GenotypeQc/` | `GenotypeQcReport` — genotype QC report records (metrics, thresholds, provenance) | `GET /genx/v1/genotype-qc-reports` (`genxListGenotypeQcReports`); `POST /genx/v1/genotype-qc-reports` (`genxRecordGenotypeQcReport`); `GET /genx/v1/genotype-qc-reports/{genotypeQcReportDbId}` (`genxGetGenotypeQcReport`) |
+| `DisposalRecord/` | `DisposalRecord` — disposal records (reason, method, quantity, provenance) | `GET /genx/v1/disposal-records` (`genxListDisposalRecords`); `POST /genx/v1/disposal-records` (`genxRecordDisposalRecord`); `GET /genx/v1/disposal-records/{disposalRecordDbId}` (`genxGetDisposalRecord`) |
 | `MixedModel/` | `MixedModelResult` — mixed model result records (variance components, BLUPs, provenance) | `GET /genx/v1/mixed-model-results` (`genxListMixedModelResults`); `POST /genx/v1/mixed-model-results` (`genxRecordMixedModelResult`); `GET /genx/v1/mixed-model-results/{mixedModelResultDbId}` (`genxGetMixedModelResult`) |
 | `Heritability/` | `HeritabilityEstimate` — heritability estimate records (value, provenance) | `GET /genx/v1/heritability-estimates` (`genxListHeritabilityEstimates`); `POST /genx/v1/heritability-estimates` (`genxRecordHeritability`); `GET /genx/v1/heritability-estimates/{heritabilityEstimateDbId}` (`genxGetHeritabilityEstimate`) |
 | `GxeAnalysis/` | `GxeAnalysisResult` — GxE analysis result records (interaction effect, provenance) | `GET /genx/v1/gxe-analyses` (`genxListGxeAnalyses`); `POST /genx/v1/gxe-analyses` (`genxRecordGxeAnalysis`); `GET /genx/v1/gxe-analyses/{gxeAnalysisResultDbId}` (`genxGetGxeAnalysis`) |
@@ -159,7 +160,8 @@ three objects), [RFC-002-Variable-Term-Governance](./RFC-002-Variable-Term-Gover
 [RFC-061-Assay-Design](./RFC-061-Assay-Design.md),
 [RFC-062-Variant-Annotation](./RFC-062-Variant-Annotation.md),
 [RFC-063-Custody-Transfer](./RFC-063-Custody-Transfer.md),
-[RFC-064-Genotype-Qc](./RFC-064-Genotype-Qc.md).
+[RFC-064-Genotype-Qc](./RFC-064-Genotype-Qc.md),
+[RFC-065-Disposal-Record](./RFC-065-Disposal-Record.md).
 
 [DECISIONS.md](./DECISIONS.md) logs deferred questions (D-01…D-20, need
 authorization) and autonomous drafting decisions (A-01…A-12, reviewable).
