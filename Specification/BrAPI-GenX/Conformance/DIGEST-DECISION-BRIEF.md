@@ -1,6 +1,8 @@
 # Digest interoperability — decision brief for review
 
-**Status:** engineering recommendation for authorized review, not a BrAPI decision. RFC-001 decision D-02 remains open.
+**Historical status:** engineering recommendation for authorized review, not a BrAPI decision.
+
+> **Ratification update (2026-11-03):** The BrAPI-GenX project maintainer accepted D-02 internally: generic canonical JSON uses unmodified JCS/RFC 8785 (`JCS-RFC8785`), while raw-byte and optional scientific semantic fingerprints remain distinct. This historical brief still accurately records evidence limitations; it does not prove implementation, field-level preimage definition, production conformance, or official BrAPI endorsement.
 
 ## Recommendation in one sentence
 
@@ -23,7 +25,7 @@ See the [digest-scope inventory](./DIGEST-SCOPE-INVENTORY.md) for the currently 
 | Option | Strength | Material limitation | Engineering judgement |
 |---|---|---|---|
 | Keep the current Python/Bun canonicalizers | Small change; already works for the tested ASCII subset | They demonstrably diverge for non-ASCII escaping and Unicode key ordering. No complete shared contract. | Not acceptable as a cross-runtime contract. Retain only as legacy diagnostics, not as the long-term rule. |
-| Select RFC 8785 JSON Canonicalization Scheme (JCS) for structured JSON | Published byte-level algorithm; candidate passes a shared cross-runtime corpus; avoids a bespoke serializer | Its input model is constrained by Internet JSON and IEEE 754 binary64 behavior; no Unicode normalization; does not define GenX field scope. Existing digests may change. | Best current candidate for structured JSON, subject to implementer and scientific-data review. Not automatically applicable to exact-byte fields or query-binding semantics. |
+| Select RFC 8785 JSON Canonicalization Scheme (JCS) for structured JSON | Published byte-level algorithm; shared corpus evidence; avoids a bespoke serializer | Its input model is constrained by Internet JSON and IEEE 754 binary64 behavior; no Unicode normalization; does not define GenX field scope. Existing digests may change. | Accepted internally for generic canonical JSON as `JCS-RFC8785`; not automatically applicable to exact-byte fields or query-binding semantics. |
 | Invent a GenX-specific canonicalizer | Could be tailored to domain-specific number requirements | Creates a permanent custom conformance and maintenance burden; likely reproduces edge-case disagreement between languages. | Avoid unless evidence demonstrates that mature candidates cannot satisfy a real requirement. Any custom profile would require a complete specification and multi-runtime vectors. |
 | Hash original JSON request/response bytes | Excellent for exact byte-integrity or transport evidence | Whitespace, property order and equivalent spellings change the digest; does not identify a logical JSON value independent of serialization. | Use where exact byte identity is the goal, but name the byte domain clearly. Do not present it as a canonical structured-value digest. |
 
@@ -46,7 +48,7 @@ Use only where the logical object boundary is precisely specified. Define:
 - UTF-8 as the encoding of the resulting canonical bytes before SHA-256.
 - Version/migration rules so existing digests do not silently change meaning.
 
-RFC 8785/JCS is currently the preferred candidate to evaluate, not an adopted rule. Scientific quantities requiring exact decimal fidelity should be represented using the appropriate schema semantics—often decimal strings—not silently rounded through JSON binary64 number handling.
+RFC 8785/JCS is the approved generic canonical JSON rule within BrAPI-GenX. Scientific quantities requiring exact decimal fidelity should be represented using the appropriate schema semantics—often decimal strings—not silently rounded through JSON binary64 number handling.
 
 ### C. Query/evidence binding
 
@@ -77,8 +79,8 @@ Not established: digest scope agreement with third parties; deployment interoper
 - How should multiple files, archives, generated indices, and HTTP content coding affect exact payload hashes?
 - Which source/context identifiers belong in provenance bindings, and what privacy safeguards are required?
 - How should previously generated digest values be migrated or marked without corrupting immutable artifact identities?
-- Which independent language/runtime implementations and real scientific payloads must pass before D-02 can be resolved?
+- Which independent language/runtime implementations and real scientific payloads must pass before an implementation can claim conformance?
 
 ## Decision boundary
 
-Engineering can recommend a candidate, expose the mismatches, publish test vectors, and show migration consequences. Engineering alone cannot ratify the rule for BrAPI. Keep D-02 open until the relevant maintainers and implementers explicitly accept the profile and its field-level semantics.
+Engineering can expose mismatches, publish test vectors, and show migration consequences. The BrAPI-GenX maintainer accepted the architectural rule; engineering alone still cannot claim official BrAPI ratification or implementation/conformance completion. Field-level semantics remain work to specify and verify.

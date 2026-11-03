@@ -1,15 +1,17 @@
 # BrAPI-GenX — Cluster 1 Approval Packet (D-02 / D-24 / D-25)
 
-**Status:** DRAFT — NOT APPROVED. For maintainer review only.
+**Historical status:** DRAFT — NOT APPROVED. Prepared for maintainer review.
+
+> **Ratification update (2026-11-03):** The BrAPI-GenX project maintainer approved the D-02, D-24, and D-25 architectural direction. This packet preserves the assessment that informed that decision; it is not the status authority. See `Specification/BrAPI-GenX/DECISIONS.md` and `docs/governance/BRAPI-GENX-CLUSTER-1-APPROVED-DECISIONS.md`. Implementation, conformance, security review, and external endorsement remain pending.
 
 ## 1. Executive summary
 
-This packet presents the evidence, options, and recommendations for the first
+This packet presents the historical evidence, options, and recommendations for the first
 critical decision cluster: digest canonicalization (D-02), idempotency
 equivalence (D-24), and idempotency scope/retention/durability (D-25).
 
-**No decision is accepted by this document.** All proposed decision text is
-draft and requires explicit maintainer authorization.
+**No decision is accepted by this document.** The required maintainer
+authorization was subsequently recorded in the authoritative decision register.
 
 ## 2. Exact questions requiring decisions
 
@@ -43,14 +45,15 @@ D-02 → D-24 → D-25, with feedback: D-25 scope/retention constrains D-24's
 identity model. Partially parallel: D-02 and D-25-scope analysis can run
 concurrently; D-24's equivalence depends on D-02.
 
-## 4. Recommended options (draft)
+## 4. Historical recommended options (draft at time of assessment)
 
 - D-02: Versioned GenX canonicalization profile referencing JCS for generic
   JSON, with domain-specific rules for decimals/quantities; separate digest
   purposes.
-- D-24: Composite idempotency identity (tenant + principal + operation +
-  endpoint + canonical payload); header precedence with documented conflict
-  handling; 409 on payload mismatch.
+- D-24: The historical recommendation was a composite identity. The accepted
+  direction now uses tenant + authenticated client + effective principal +
+  stable GenX operation ID as the namespace, a separate request fingerprint,
+  and HTTP 400 for conflicting header/body keys.
 - D-25: Composite key namespace; durable DB-backed state for production claims;
   configurable retention with documented minimum; tombstone retention; at-least-once
   delivery, not exactly-once execution.
@@ -63,20 +66,22 @@ concurrently; D-24's equivalence depends on D-02.
 - Idempotency: L-01…L-05, L-24 (8-thread concurrency) on in-memory reference.
 - No durability, multi-instance, or tenant-isolation evidence exists.
 
-## 6. Outstanding uncertainty
+## 6. Outstanding implementation and policy work
 
-- Scientific decimal handling in JCS (IEEE 754 vs decimal strings).
-- Unicode normalization policy.
-- In-flight and post-failure replay behaviour.
-- Retention duration justification.
-- Multi-instance coordination mechanism.
-- Authorization on replay.
+- Operation/domain contracts for scientific decimal strings and fingerprint
+  preimages.
+- In-flight and post-failure replay representation.
+- Retention-duration justification and documented minimum.
+- Multi-instance coordination mechanism and recovery evidence.
+- Implementation and verification of the approved replay-authorization rule.
 
-## 7. Accountable authority
+## 7. Approval authority and remaining review
 
-- D-02: technical architecture + interoperability review; community if normative.
-- D-24: maintainer + implementers + community (normative API contract).
-- D-25: maintainer + security + operational.
+- D-02/D-24/D-25: approved by the BrAPI-GenX project maintainer on 2026-11-03.
+- Implementers remain accountable for implementation and cross-language evidence.
+- Security and operational reviewers remain responsible for D-22, replay
+  enforcement evidence, durability, recovery, and retention validation.
+- External BrAPI/community consultation remains separate and is not implied.
 
 ## 8. Required reviewers
 
@@ -85,13 +90,14 @@ concurrently; D-24's equivalence depends on D-02.
 - Operational reviewers (durability/retention).
 - BrAPI community (if normative compatibility claimed).
 
-## 9. Approval criteria
+## 9. Post-approval implementation and evidence criteria
 
 - Cross-language digest agreement on a normative vector set.
 - Documented equivalence rules with edge cases.
 - Tenant-isolation and authorization-on-replay specified.
 - Durability guarantees honestly scoped (at-least-once, not exactly-once).
-- Maintainer explicit approval recorded in `DECISIONS.md`.
+- Maintainer approval is recorded in `DECISIONS.md`; retain evidence showing
+  the approved architecture is implemented correctly.
 
 ## 10. Implementation consequences after approval
 
@@ -101,46 +107,48 @@ concurrently; D-24's equivalence depends on D-02.
 - Migrate reference server from prototype canonical form if changed.
 - Update test vectors to normative status.
 
-## 11. Decisions that must remain open
+## 11. Decisions and matters that remain open
 
-- D-02, D-24, D-25 themselves (this packet does not resolve them).
 - D-22 (security) — separate cluster.
 - D-20 (BrAPI overlap) — separate cluster.
 - D-01, D-03…D-19 — per ownership matrix.
+- Cryptographic hash-algorithm selection, numeric retention minimum, exact
+  operation fingerprint fields, and domain semantic fingerprints.
 
 ## 11.5 Maintainer Review — Critical Architectural Questions
 
-### Question 1 — Digest purpose
+### Question 1 — Digest purpose (approved)
 Should GenX distinguish raw-byte digests, canonical JSON digests, and
-domain-specific semantic fingerprints? Recommendation (draft): yes. Trade-off:
-clarity vs. complexity. Consequence: each purpose gets its own contract.
+domain-specific semantic fingerprints? **Approved:** yes. Each purpose has its
+own contract; scientific semantic fingerprints remain optional and domain-specific.
 
-### Question 2 — JCS
-Should JCS (RFC 8785) be the candidate for generic JSON canonicalization, with
-scientific decimals/units handled separately? Recommendation (draft): yes, as a
-candidate, with explicit limitations documented (IEEE 754 numbers, no Unicode
-normalization). Consequence: JCS compliance tests required.
+### Question 2 — JCS (approved)
+Should JCS (RFC 8785) be used for generic JSON canonicalization, with scientific
+decimals/units handled separately? **Approved:** yes, as unmodified
+`JCS-RFC8785`, with its IEEE 754 constraints and no Unicode normalization. JCS
+implementation and conformance tests remain required.
 
-### Question 3 — Idempotency identity
+### Question 3 — Idempotency identity (approved)
 Should the system separate idempotency record lookup identity from request
-fingerprint? Recommendation (draft): yes. Proposed: namespace+key for lookup;
-operation identity + canonical payload for fingerprint.
+fingerprint? **Approved:** yes: namespace+key for lookup; stable operation ID +
+relevant context + canonical payload for the fingerprint.
 
-### Question 4 — Operation identity and scope
+### Question 4 — Operation identity and scope (approved)
 What should define the idempotency namespace? Evaluate tenant, authenticated
-client, principal, stable operation identity. Recommendation (draft): composite
-(tenant + principal + operation + endpoint), not global.
+client, principal, stable operation identity. **Approved:** tenant +
+authenticated client + effective principal + stable GenX operation ID; no
+route-derived endpoint component.
 
-### Question 5 — Header/body conflict and replay authorization
+### Question 5 — Header/body conflict and replay authorization (approved)
 Should header/body conflict be rejected (400) rather than silently ignored?
-Should authorization be re-checked on replay? Recommendation (draft): reject on
-conflict; re-verify authorization on replay.
+Should authorization be re-checked on replay? **Approved:** reject differing
+key values with HTTP 400 and freshly authenticate/authorize before disclosure.
 
-### Question 6 — Durability and side effects
+### Question 6 — Durability and side effects (approved)
 What guarantees should the contract require for production-conforming
-idempotency? Recommendation (draft): at-least-once delivery + idempotent retry;
-not exactly-once execution; durable DB-backed state; separate external
-side-effect strategy.
+idempotency? **Approved:** durable shared state, coordinated mutation/recovery,
+at-least-once delivery with idempotent effects, no universal exactly-once claim,
+and separate response/tombstone retention. Technology and durations remain open.
 
 ## 12. Cross-references
 

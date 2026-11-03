@@ -1,6 +1,8 @@
 # Digest interoperability corpus (experimental)
 
-**Status:** exploratory engineering evidence only. This file does not settle RFC-001 decision D-02 and is not a normative BrAPI rule.
+**Status:** exploratory engineering evidence only. This file does not prove implementation or conformance and is not a normative BrAPI rule.
+
+> **Ratification update (2026-11-03):** The BrAPI-GenX maintainer accepted JCS/RFC 8785 as the `JCS-RFC8785` method for generic canonical JSON under D-02. The results below remain historical candidate-evaluation evidence; they do not show the reference servers have been migrated or imply official BrAPI endorsement.
 
 ## Why the corpus exists
 
@@ -13,9 +15,9 @@ The shared machine-readable vectors are in [digest-vectors.json](./digest-vector
 
 These two digest types are not interchangeable. Any future field or specification must state which input and bytes it binds to.
 
-## Candidate under evaluation: RFC 8785 JCS
+## Historical candidate evaluation: RFC 8785 JCS
 
-[RFC 8785](https://www.rfc-editor.org/rfc/rfc8785.html) defines the JSON Canonicalization Scheme (JCS). It is a credible candidate because it specifies deterministic primitive serialization and property ordering, but this branch does not adopt it on behalf of BrAPI maintainers.
+[RFC 8785](https://www.rfc-editor.org/rfc/rfc8785.html) defines the JSON Canonicalization Scheme (JCS). It is the accepted BrAPI-GenX generic canonical JSON method (`JCS-RFC8785`); this historical evidence does not itself implement it or adopt it on behalf of the BrAPI community.
 
 Important constraints and review questions:
 
@@ -29,12 +31,12 @@ The vector runners reject duplicate names (including names equal only after JSON
 
 ## Current result boundary
 
-The legacyDiagnostics section records known disagreement in the existing reference-server algorithms. The tests intentionally keep those diagnostics visible while separately verifying the JCS candidate against a golden corpus. They do **not** claim the current reference-server behavior has been migrated.
+The legacyDiagnostics section records known disagreement in the existing reference-server algorithms. The tests intentionally keep those diagnostics visible while separately verifying the historical JCS candidate corpus. They do **not** claim the current reference-server behavior has been migrated.
 
-Before D-02 can be resolved, review the scientific-data implications, parser behavior in supported languages, query and source digests' scope, canonicalization identifier/version, schema version, and behavior when sources are missing, changed, redacted, or no longer resolvable. Any proposal must preserve BrAPI V2.1 unchanged and remain non-normative until the proper standards process accepts it.
+The approved architecture still requires implementation evidence for scientific-data implications, parser behavior in supported languages, query/source digest scope, schema version, and missing/changed/redacted-source behavior. BrAPI V2.1 remains unchanged, and no official BrAPI standards acceptance is claimed.
 
 ## Field-level scope inventory
 
-The [digest-scope inventory](./DIGEST-SCOPE-INVENTORY.md) catalogs each digest field currently found in the draft contracts and distinguishes structured-JSON digests, exact-byte payload digests, and the underspecified query/evidence binding digest. The canonicalization algorithm alone cannot define any of these fields' exact preimage. D-02 remains open until both candidate selection and field-by-field scope receive authorized review.
+The [digest-scope inventory](./DIGEST-SCOPE-INVENTORY.md) catalogs each digest field currently found in the draft contracts and distinguishes structured-JSON digests, exact-byte payload digests, and the underspecified query/evidence binding digest. The canonicalization algorithm alone cannot define any of these fields' exact preimage. D-02 is approved architecturally; field-by-field scope remains implementation/specification work.
 
 The design recommendation is captured separately in [DIGEST-DECISION-BRIEF.md](./DIGEST-DECISION-BRIEF.md). The [digest-scope inventory](./DIGEST-SCOPE-INVENTORY.md) should be reviewed alongside it: selecting JCS alone cannot resolve which values or bytes the field names actually bind.

@@ -1,6 +1,8 @@
 # BrAPI-GenX — Cluster 1 Implementation Baseline (D-02 / D-24 / D-25)
 
-**Status:** Phase 1A.1 decision engineering. No normative decision is made.
+**Historical status:** Phase 1A.1 decision engineering. No normative decision was made by this baseline.
+
+> **Ratification update (2026-11-03):** D-02, D-24, and D-25 are now approved BrAPI-GenX architectural directions. This baseline intentionally preserves the pre-implementation facts and limitations it observed; no production behavior or conformance is implied.
 **Baseline branch:** `planning/cluster-1-decision-package` (from `e0146c98`).
 
 ## 1. Current implementation inventory
@@ -17,8 +19,9 @@
    Verified implementation fact.
 3. **Digest test vectors** — `Scripts/test_digest_vectors.py` and
    `Scripts/digest-conformance/test-digest-vectors.ts` exercise RFC 8785 (JCS)
-   canonicalization as an *unselected candidate* (script docstring states this).
-   Exploratory evidence only.
+   canonicalization as an *unselected candidate at the time of this baseline*
+   (script docstring states this). Exploratory evidence only; the approved
+   architecture now selects JCS-RFC8785 but the helpers remain unmigrated.
 
 These are different purposes (request equivalence vs. provenance binding vs.
 candidate standard evaluation) and are not currently unified. Verified fact.
@@ -63,14 +66,16 @@ candidate standard evaluation) and are not currently unified. Verified fact.
 - Python: `json.dumps(doc, sort_keys=True, separators=(",", ":"))`.
 - TypeScript/Bun: sorted-keys + compact separators + UTF-8 (per conformance
   README). Digest agreement with Python holds for ASCII payloads.
-- Note: JCS (RFC 8785) is the candidate in digest test vectors; the reference
-  server uses Python's canonical form, not JCS. Verified fact.
+- Note: at this baseline, JCS (RFC 8785) was the candidate in digest test
+  vectors; the reference server uses Python's canonical form, not JCS. The
+  approved architecture now selects JCS-RFC8785, but implementation remains
+  pending. Verified baseline fact.
 
 ## 4. Existing test coverage
 
 - `test_job_idempotency.py`: idempotency replay/conflict/tenant tests.
-- `test_digest_vectors.py` + `test_digest_vector_mutations.py`: JCS candidate
-  corpus (12 structured + 2 exact-byte + 5 rejection + 2 legacy + 10 mutations).
+- `test_digest_vectors.py` + `test_digest_vector_mutations.py`: historical JCS
+  candidate corpus (12 structured + 2 exact-byte + 5 rejection + 2 legacy + 10 mutations).
 - Conformance L-01…L-05, L-24: live replay/conflict/cancel/expired/concurrency.
 - Evidence: prototype behaviour only, not normative.
 
@@ -104,9 +109,10 @@ Python `json.dumps(sort_keys=True, separators=(",",":"))` differs from JCS
 (RFC 8785) in at least: ASCII escaping (Python escapes non-ASCII by default
 unless `ensure_ascii=False`), handling of non-finite numbers (Python emits
 `NaN`/`Infinity` by default), and numeric serialization. The prototype is
-**not** JCS-compliant. The digest test vectors exercise JCS as an unselected
-candidate. Verified fact: `test_digest_vectors.py` docstring states
-"RFC 8785 remains an unselected candidate."
+**not** JCS-compliant. The digest test vectors exercised JCS as an unselected
+candidate when this baseline was recorded. JCS-RFC8785 is now the approved
+architecture, but the prototype remains unmigrated. Verified baseline fact:
+`test_digest_vectors.py` docstring states "RFC 8785 remains an unselected candidate."
 
 ## 8. Refinement — Transaction boundary and replay authorization
 

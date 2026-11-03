@@ -1,27 +1,29 @@
 # BrAPI-GenX — Cluster 1 Interoperability Matrix
 
-**Status:** Phase 1A.1 decision engineering.
+**Historical status:** Phase 1A.1 decision engineering.
+
+> **Ratification update (2026-11-03):** D-02, D-24, and D-25 are accepted BrAPI-GenX architectural directions. This matrix preserves pre-approval evidence and test gaps. The authoritative status is in `Specification/BrAPI-GenX/DECISIONS.md`; implementation and verification remain pending.
 
 ## 1. Canonicalization test matrix (D-02)
 
-| Case | JCS candidate | Python prototype | Required rule |
+| Case | Approved JCS rule | Python prototype | Current requirement / follow-up |
 |---|---|---|---|
-| Object property ordering | Normalized (sorted) | Normalized (sorted) | Define |
-| Array ordering | Preserved | Preserved | Define (likely preserved) |
-| Whitespace | Ignored | Ignored | Define |
-| Duplicate property names | Reject | Reject (hook) | Define |
-| `null` vs missing | Differ | Differ | Define |
-| Negative zero | Normalized to 0 | Python keeps -0.0 | Define |
-| Large integers | JCS uses shortest repr | Python arbitrary precision | Define safe range |
-| Exponential notation | Normalized | Python preserves | Define |
-| Unicode normalization | None (preserved) | None (preserved) | Define (no normalization) |
-| Lone surrogates | Reject | Reject (custom) | Define |
-| Non-JSON constants (NaN/Infinity) | Reject | Reject (parse_constant) | Define |
-| Decimal as string | Treated as string | Treated as string | Define (string) |
+| Object property ordering | Normalized (sorted) | Normalized (sorted) | JCS-RFC8785 |
+| Array ordering | Preserved | Preserved | JCS-RFC8785 |
+| Whitespace | Ignored | Ignored | JCS-RFC8785 |
+| Duplicate property names | Reject | Reject (hook) | Reject |
+| `null` vs missing | Differ | Differ | JCS semantics; operation contracts define fingerprint fields |
+| Negative zero | Normalized to 0 | Python keeps -0.0 | JCS-RFC8785 |
+| Large integers | JCS uses shortest repr | Python arbitrary precision | JCS constraints; use domain strings where required |
+| Exponential notation | Normalized | Python preserves | JCS-RFC8785 |
+| Unicode normalization | None (preserved) | None (preserved) | No automatic normalization |
+| Lone surrogates | Reject | Reject (custom) | JCS-RFC8785 |
+| Non-JSON constants (NaN/Infinity) | Reject | Reject (parse_constant) | Reject |
+| Decimal as string | Treated as string | Treated as string | Use strings where domain contract requires |
 
 ## 2. Request-equivalence matrix (D-24)
 
-| # | Variation | Equivalent? (candidate composite model) |
+| # | Variation | Equivalent? (approved model / implementation follow-up) |
 |---|---|---|
 | 1 | Same key, identical request | Yes (replay) |
 | 2 | Same key, different property order | Yes |
@@ -34,8 +36,8 @@
 | 9 | Same key, different route | No |
 | 10 | Same key, different API version | No |
 | 11 | Same key, different content type | No |
-| 12 | Same key, different tenant | No (conflict/unauthorized) |
-| 13 | Same key, different client | Depends on scope (D-25) |
+| 12 | Same key, different tenant | Separate namespace; do not disclose another record |
+| 13 | Same key, different client | Separate namespace |
 | 14 | Same body, different keys | No (different identity) |
 | 15 | Same key after success | Replay |
 | 16 | Same key while pending | TBD (define in-flight behaviour) |
@@ -48,7 +50,7 @@
 
 - Two identical requests simultaneously → one accepted (202), one replay (200)
   requires atomic check-and-create under lock.
-- Same key, different payload, simultaneous → one accepted, one conflict (409).
+- Same key, different payload, simultaneous → one accepted, one conflict; D-01 still governs any general conflict status while header/body key disagreement is HTTP 400 under D-24.
 - Cross-instance same key → requires distributed coordination (not in prototype).
 - Crash after accept before store → no idempotency record; retry creates duplicate
   unless durable pre-write.
@@ -118,9 +120,9 @@
 
 | Requirement | Existing evidence | Gap |
 |---|---|---|
-| Serialization determinism | Python/TS prototype | No normative spec |
-| Cross-language digest | 12 structured + 2 exact-byte + 5 rejection vectors | Scientific decimals, units, Unicode normalization |
-| Request equivalence | Prototype canonical comparison | No spec; header/body precedence undecided |
+| Serialization determinism | Python/TS prototype | Implement approved JCS-RFC8785 |
+| Cross-language digest | 12 structured + 2 exact-byte + 5 rejection vectors | Scientific decimal/domain contracts and normative implementation evidence |
+| Request equivalence | Prototype canonical comparison | Implement approved identity/fingerprint and HTTP 400 header/body rule |
 | Concurrency | L-24 (8-thread) | Multi-instance not tested |
 | Durability | None (in-memory) | No durable implementation |
 | Failure recovery | None | No fault-injection tests |

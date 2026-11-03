@@ -4,6 +4,8 @@
 - Reference server: `Scripts/genx_test_server.py` (stdlib only, in-memory)
 - Runner: `Scripts/checkGenXConformance.py`
 
+> **Ratification update (2026-11-03):** These historical results predate the maintainer's internal approval of D-02, D-24, and D-25. D-02 now selects JCS-RFC8785 for generic canonical JSON, but these runs do not show implementation migration, security enforcement, durable idempotency, or production conformance.
+
 ## Historical-run scope
 
 Runs 1–12 are recorded results for earlier proposal revisions. They include the former GenX term route `/genx/v1/variables`. During the endpoint-identity review, the proposed GenX term resource was renamed to `/genx/v1/variable-terms`, and its specification folder was renamed from `Ontology/` to `VariableTerms/`. Runs 1–12 do **not** validate the renamed route; Run 13 below records the first successful live check of `/genx/v1/variable-terms`. V2.1 contracts remain unchanged.
@@ -328,7 +330,7 @@ Tested commit: `86fec6494ee95773d8993d7d69cbcc060793cfa1`
 - Legacy divergence diagnostics: **2 passed** in both runtimes, confirming different current serializer behavior for non-ASCII text and Unicode property ordering.
 - Endpoint-identity mutation suite: **12 passed**; static GenX conformance: **21 passed, 0 failed**; live reference-server conformance: **28 passed, 0 failed, 0 skipped**.
 
-This verifies two independent implementations against an experimental candidate corpus. It does not migrate either reference server to JCS, resolve D-02, or adopt RFC 8785 for BrAPI. Scientific quantities requiring exact decimal or integer precision must not be silently converted to binary64 JSON numbers. No BrAPI V2.1 contract files changed; the in-memory reference server still has no effective authentication, and no production-readiness claim is made.
+This verifies two independent implementations against the historical experimental corpus. It does not migrate either reference server to JCS or adopt RFC 8785 for BrAPI. Scientific quantities requiring exact decimal or integer precision must not be silently converted to binary64 JSON numbers. No BrAPI V2.1 contract files changed; the in-memory reference server still has no effective authentication, and no production-readiness claim is made.
 
 
 ## Run 19 — digest numeric-boundary hardening (2026-10-15)
@@ -343,7 +345,7 @@ Tested commit: `3f4518e97eefebf9c8045ef83c789f2142e753ec`
 - Known legacy serializer divergence diagnostics: **2 passed** in both runtimes.
 - Endpoint-identity mutation tests: **12 passed**; static GenX conformance: **21 passed, 0 failed**; live reference-server conformance: **28 passed, 0 failed, 0 skipped**.
 
-The strict parser is a conformance-test guard, not a production parser or a normative BrAPI rule. RFC 8785/JCS remains an experimental candidate. The currently deployed-in-repository reference-server canonicalization helpers have not been migrated; D-02 remains unresolved pending field-scope, scientific numeric semantics, migration/versioning, and implementer/community review. V2.1 contracts remain unchanged.
+The strict parser is a conformance-test guard, not a production parser or a normative BrAPI rule. At this run date RFC 8785/JCS was an experimental candidate. The currently deployed-in-repository reference-server canonicalization helpers have not been migrated; D-02 is now approved architecturally, while field scope, scientific numeric semantics, migration/versioning, and conformance work remain pending. V2.1 contracts remain unchanged.
 
 
 ## Run 20 — digest corpus completeness and mutation resistance (2026-10-15)
@@ -356,7 +358,7 @@ Tested commit: `7542db0248f21182c5ce95d6146aee2a89880580`
 - Digest corpus mutation tests: **5 deliberate corruptions rejected by both runtimes (10 checks)** — wrong canonical bytes, wrong structured digest, wrong exact-byte digest, removed required edge vector, and duplicate vector identity.
 - Endpoint-identity mutation tests: **12 passed**; static GenX conformance: **21 passed, 0 failed**; live reference-server conformance: **28 passed, 0 failed, 0 skipped**.
 
-This adds evidence that the tests themselves detect deliberate corruption and missing edge-case coverage. The shared corpus still evaluates RFC 8785/JCS as a candidate only; D-02 remains open. Neither current reference-server canonicalization helper has been migrated, and V2.1 contracts remain unchanged. Reference-server constraints continue to apply: no durable persistence or effective authentication.
+This adds evidence that the tests themselves detect deliberate corruption and missing edge-case coverage. At this run date the shared corpus evaluated RFC 8785/JCS as a candidate; D-02 is now approved architecturally. Neither current reference-server canonicalization helper has been migrated, and V2.1 contracts remain unchanged. Reference-server constraints continue to apply: no durable persistence or effective authentication.
 
 
 ## Run 21 — make strict-profile rejection semantics explicit (2026-10-15)
@@ -369,4 +371,4 @@ Tested commit: `1fcf062c65faf2ec797899070f9da386011aead5`
 - The rejection vectors now name their rationale and distinguish four JSON/JCS input constraints from the stricter unsafe-integer guard. That guard is an explicit exploratory candidate-profile policy, not a blanket claim that large integers are invalid JSON or a requirement imposed by RFC 8785.
 - Five intentional mutations were rejected by each implementation (10 checks). The run also passed 12 endpoint-identity mutation tests, 21 static GenX probes, and 28 live reference-server probes; no skips or failures.
 
-D-02 remains open. The current Python and TypeScript/Bun reference-server canonicalizers remain unchanged. This run supports the test harness and candidate comparison only; it does not establish third-party agreement or standards acceptance.
+At this run date D-02 remained open. The current Python and TypeScript/Bun reference-server canonicalizers remain unchanged. This run supports the test harness and historical candidate comparison only; it does not establish third-party agreement, implementation conformance, or standards acceptance.

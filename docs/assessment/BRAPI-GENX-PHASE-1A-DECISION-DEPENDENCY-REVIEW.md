@@ -5,6 +5,8 @@ authorized by this document.
 **Baseline:** `planning/phase-1a-decision-review` from `548d00ba` (Phase 0 + assessment commit).
 **Phase 0 baseline commit:** `e65b1d89825c137eec0ddefedad117c3108f1586`.
 
+> **Ratification update (2026-11-03):** This is a historical Phase 1A planning record. D-02, D-24, and D-25 have since been accepted by the BrAPI-GenX project maintainer; D-22 remains open, except that D-24 now requires fresh authentication and authorization before replay disclosure. Implementation and conformance remain pending.
+
 ## 1. Executive summary
 
 Phase 0 established governance, quality, and maturity foundations. Phase 1A
@@ -40,8 +42,8 @@ Key findings:
 ### 3.1 Centrally registered decisions (D-01…D-25)
 
 Source: `Specification/BrAPI-GenX/DECISIONS.md` Part A (deferred) and the
-"Additional deferred decisions" section (D-21…D-25). All 25 are unresolved
-(status DEFERRED) and require authorization. Titles and evidence are as recorded
+"Additional deferred decisions" section (D-21…D-25). At the time of this
+review all 25 were unresolved (status DEFERRED). The current status is recorded
 in `DECISIONS.md` and summarized in
 `docs/governance/BRAPI-GENX-DECISION-GOVERNANCE.md`.
 

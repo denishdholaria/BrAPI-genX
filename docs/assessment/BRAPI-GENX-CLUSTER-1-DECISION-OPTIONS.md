@@ -1,6 +1,8 @@
 # BrAPI-GenX — Cluster 1 Decision Options (D-02 / D-24 / D-25)
 
-**Status:** DRAFT — NOT APPROVED. Decision-engineering analysis only.
+**Historical status:** DRAFT — NOT APPROVED. Decision-engineering analysis.
+
+> **Ratification update (2026-11-03):** This historical options analysis informed a subsequent BrAPI-GenX maintainer approval of D-02, D-24, and D-25. The approved resolution is in `Specification/BrAPI-GenX/DECISIONS.md`; its detailed explanation is `docs/governance/BRAPI-GENX-CLUSTER-1-APPROVED-DECISIONS.md`. Do not treat the alternatives below as currently undecided.
 
 ## 1. D-02 — Digest canonicalization
 
@@ -17,12 +19,8 @@ provenance binding and (potentially) request equivalence?
 | C. Versioned canonicalization profile | GenX-defined profile with version id | Evolvable; can tailor to scientific types | Requires governance; risk of fragmentation |
 | D. Separate digests per purpose | Different digest for request equivalence vs provenance | Clear semantics; avoids overloading | More complexity; more to specify |
 
-### Recommendation (draft, not approved)
-Evaluate JCS as the *candidate* for general JSON canonicalization, but do not
-assume it covers scientific decimals, units, or domain semantics. Consider a
-versioned GenX canonicalization profile that references JCS for generic JSON
-and defines domain-specific rules (decimal strings, quantities) separately.
-Separate digest purposes (request fingerprint vs. provenance binding) explicitly.
+### Historical recommendation and approved outcome
+The approved outcome adopts unmodified JCS/RFC 8785 for generic canonical JSON under `JCS-RFC8785`, separates raw-byte/canonical-JSON/scientific-semantic purposes, and leaves semantic fingerprints domain-specific and optional.
 
 ### Rejected/deferred
 - Treating the Python prototype's `sort_keys` form as the standard (not
@@ -43,13 +41,10 @@ What makes two requests equivalent for idempotency replay/conflict purposes?
 | C. Operation identity + payload fingerprint | Separate operation identity from payload digest |
 | D. Composite model | Key + method + route + canonical payload + tenant |
 
-### Recommendation (draft)
-A composite model: idempotency identity = (key namespace) + (method) + (route)
-+ (canonical payload) + (tenant/principal). This separates request identity,
-operation identity, and payload identity. Header/body key precedence must be
-decided explicitly (current prototype: header wins). Conflicting payload → 409.
+### Historical recommendation and approved outcome
+The accepted model separates lookup identity (`namespace + key`) from the request fingerprint (stable operation ID + relevant context + canonical payload). The namespace is tenant + authenticated client + effective principal + stable GenX operation ID. Different header/body values are rejected with HTTP 400, and every replay needs fresh authentication and authorization.
 
-### Unresolved
+### Operation-specific follow-up
 - Whether optional-vs-null differences count as conflicts.
 - Numeric representation equivalence.
 - Query parameter inclusion.
@@ -69,16 +64,8 @@ Key namespace, retention, expiry, and durability guarantees.
 | Retention | Fixed TTL / configurable / operation-dependent |
 | Expiry reuse | Reject / allow with new operation |
 
-### Recommendation (draft)
-- Scope: composite namespace (tenant + principal + operation + endpoint), not
-  global. Global scope risks cross-tenant collision and unauthorized replay.
-- Storage: durable, database-backed idempotency state required for any claim
-  beyond in-process deduplication. In-memory is a reference implementation
-  only.
-- Retention: configurable with a documented minimum; separate response-retention
-  from identity-retention (tombstone may suffice).
-- Durability: at-least-once delivery + idempotent retry, not exactly-once
-  execution (external side effects require separate analysis).
+### Historical recommendation and approved outcome
+The approved model requires durable shared production state, atomic claim/create, namespace-scoped uniqueness, recovery, and documented retention. In-memory state remains reference-only. Response and tombstone retention are separate; the delivery model is at-least-once with appropriate effect coordination, not a universal exactly-once promise. Database technology and numeric durations remain implementation/operational decisions.
 
 ### Rejected
 - Global key scope (cross-tenant risk).
@@ -96,7 +83,7 @@ definition depends on D-02; D-25's durability requirements feed back into D-24.
 ## 4.5 Refinement — Three digest purposes (D-02)
 
 See implementation baseline §6. Raw-byte identity, canonical JSON identity, and
-scientific semantic identity are distinct. JCS (RFC 8785) is a candidate for
+scientific semantic identity are distinct. JCS (RFC 8785) is the approved
 generic JSON canonicalization only; it uses IEEE 754 binary64 numbers and does
 not perform Unicode normalization or scientific decimal normalization. Scientific
 semantic fingerprints, if needed, must be defined per domain contract, not
@@ -115,10 +102,7 @@ These must be modelled separately. The current prototype conflates them in a
 single `canonical(body)` comparison. Stable operation identity should be the
 GenX operation identifier, not the literal HTTP route.
 
-Header/body conflict: current behaviour gives header precedence silently.
-Recommendation (draft): reject on conflict (400) rather than silently ignore.
-Replay authorization: current implementation does not re-check authorization;
-recommend re-verifying the current caller before returning a stored result.
+Header/body conflict: current behaviour gives header precedence silently. The approved rule rejects conflicting values with HTTP 400. The approved replay rule requires fresh authentication and authorization before disclosure.
 
 ## 4.7 Refinement — Transaction boundaries and side effects (D-25)
 
@@ -129,14 +113,12 @@ duplicate-request detection alone. Retention: separate full-response retention
 from minimal tombstone retention to extend conflict detection without storing
 responses indefinitely.
 
-## 5. Required approval authority
+## 5. Approval and remaining-review authority
 
-- D-02: technical architecture + interoperability review (+ community if
-  normative canonicalization profile adopted).
-- D-24: maintainer + implementers + community (normative API contract).
-- D-25: maintainer + security + operational (retention/durability obligations).
+- D-02/D-24/D-25: approved by the BrAPI-GenX project maintainer on 2026-11-03.
+- Implementers, security specialists, and operators remain responsible for implementation and evidence; external BrAPI/community endorsement is not implied.
 
-## 6. DRAFT — NOT APPROVED decision text (for maintainer consideration)
+## 6. Historical draft decision text (superseded by approval)
 
 > "BrAPI-GenX will define a versioned canonicalization profile for digest inputs,
 > referencing JCS (RFC 8785) for generic JSON while specifying domain-specific

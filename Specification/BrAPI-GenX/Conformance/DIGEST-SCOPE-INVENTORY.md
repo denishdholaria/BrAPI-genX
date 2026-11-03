@@ -1,6 +1,8 @@
 # Digest scope inventory (engineering review; non-normative)
 
-**Status:** observed draft contracts and unresolved questions, not a decision on RFC-001 D-02. This inventory is intentionally descriptive where current wording is ambiguous.
+**Status:** observed draft contracts and field-level follow-up questions. This inventory is intentionally descriptive where current wording is ambiguous.
+
+> **Ratification update (2026-11-03):** D-02 accepts JCS-RFC8785 for generic canonical JSON and keeps raw-byte and scientific semantic purposes separate. The field-level preimages catalogued here remain implementation/specification work; this inventory is not conformance evidence or a hash-algorithm selection.
 
 ## Existing digest-bearing fields
 
@@ -21,7 +23,7 @@ The search was limited to the current GenX draft schemas and RFC text on the fea
 ## Cross-cutting observations
 
 1. The draft uses one wire shape — lowercase SHA-256 hexadecimal — for distinct concepts: canonicalized JSON values, exact file bytes, and query/evidence bindings. The algorithm encoding alone does not identify the hashed input.
-2. RFC-001 D-02 currently leaves the canonical form unresolved. The schema wording for inputsDigest, responseDigest, and trainingDataDigest therefore must not be treated as a fully interoperable byte-level rule yet.
+2. D-02 now selects JCS-RFC8785 for generic canonical JSON, but the schema wording for inputsDigest, responseDigest, and trainingDataDigest still does not define every field-level preimage and must not yet be treated as a fully interoperable byte-level rule.
 3. Exact-byte digests do not need JSON canonicalization. Their contract should name the exact byte domain, including any transformations or packaging layer.
 4. Structured-JSON digests need an explicit canonicalization profile and version, parser acceptance rules, and a defined object boundary before implementations can promise interoperability.
 5. A query/evidence binding digest needs a separately specified, versioned input envelope or construction algorithm. Calling it “a digest of the query” is not enough to reconstruct the same preimage.
@@ -30,13 +32,13 @@ The search was limited to the current GenX draft schemas and RFC text on the fea
 
 ## Candidate implications
 
-[RFC 8785 — JSON Canonicalization Scheme (JCS)](https://www.rfc-editor.org/rfc/rfc8785.html) is being evaluated for the structured-JSON cases only. It does not define the content scope of these BrAPI fields or the preimage of queryDigest. It also uses the I-JSON / IEEE 754 binary64 model, requires unique object names and valid Unicode, and does not normalize Unicode strings. Exact scientific decimal quantities and large identifiers may need string representations if exactness matters.
+[RFC 8785 — JSON Canonicalization Scheme (JCS)](https://www.rfc-editor.org/rfc/rfc8785.html) is the accepted BrAPI-GenX method for generic structured-JSON canonicalization. It does not define the content scope of these BrAPI fields or the preimage of queryDigest. It also uses the I-JSON / IEEE 754 binary64 model, requires unique object names and valid Unicode, and does not normalize Unicode strings. Exact scientific decimal quantities and large identifiers may need string representations if exactness matters.
 
 The experimental [golden corpus](./digest-vectors.json) is tested independently by Python and TypeScript/Bun: 12 structured-JSON vectors, 2 exact-byte cases, 5 rejection-policy cases (four JCS/JSON input constraints and one conservative numeric policy), and 2 known legacy serializer divergence diagnostics passed in [CI run 38687419662](https://github.com/denishdholaria/BrAPI_genX/actions/runs/38687419662). Five deliberate corpus mutations are rejected by both runtimes (10 mutation checks). Passing the corpus is evidence for that candidate profile only; it does not settle field scope or ratify D-02.
 
 ## Decisions still required
 
-- Select a structured-JSON digest profile (or document why no candidate fits), assign an explicit profile/version identifier, and define its accepted input subset.
+- Apply the selected `JCS-RFC8785` profile and define each field's accepted input subset and exact preimage.
 - Define the exact preimage for inputsDigest, responseDigest, trainingDataDigest, and queryDigest independently rather than assuming their scopes are equivalent.
 - Confirm exact byte boundaries for artifactDigest, fileDigest, and indexDigest, including content encodings and multi-file artifacts.
 - Specify how canonicalization/profile migrations work without silently changing existing digest meaning.

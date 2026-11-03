@@ -5,9 +5,9 @@
 > [`docs/governance/BRAPI-GENX-DECISION-GOVERNANCE.md`](../../docs/governance/BRAPI-GENX-DECISION-GOVERNANCE.md).
 > RFC-local questions use `RFC-NNN-QN` and do not reuse global `D-` identifiers.
 
-Companion to RFC-001…RFC-007. Two lists: decisions the proposal **defers**
-(need community or operator authorization — not taken here), and decisions
-taken autonomously while drafting (visible here for review and reversal).
+Companion to RFC-001…RFC-007. This register records deferred decisions,
+reviewable drafting decisions, and decisions accepted by the BrAPI-GenX project
+maintainer. It is the authoritative record of decision status.
 
 Status of the proposal as a whole: **draft, not accepted, not normative**.
 Nothing here changes V2.1.
@@ -17,7 +17,6 @@ Nothing here changes V2.1.
 | ID | Question | Source | Evidence available | What resolves it |
 |---|---|---|---|---|
 | D-01 | HTTP status for same-key/different-body conflicts (`409` proposed) | RFC-001 §8 | Reference server uses `409` + plain text (L-02 etc. green) | Community agreement + `Error_Handling.md` amendment |
-| D-02 | JSON canonical form feeding digests | RFC-001 §8 | Experimental Python and TypeScript/Bun candidate corpus covers 12 structured JSON vectors, 2 exact-byte cases, 5 rejection-policy cases, 2 legacy-divergence diagnostics, and 10 mutation failures; no existing helper migrated | Community/implementer review of canonicalization, field-level preimage scope, numeric precision, rejection policy and migration/versioning; explicit ratification |
 | D-03 | OIDC tenant-claim name and scope vocabulary | RFC-001 §8 | None implemented (reference server: auth `none`) | Operator identity decision + second implementation |
 | D-04 | Wiring GenX into `generator/`, `BrAPI-Schema/`, `Generated/` | RFC-001 §8 | GenX dir proven inert to the V2.1 build (Slice H) | Operator build decision |
 | D-05 | Term/model version ordering and comparison | RFC-002 §5 | Omitted-version reads use creation recency | Community versioning rule |
@@ -71,19 +70,52 @@ is reversible without breaking the rest; objections belong against the ID.
   zero changes to V2.1 modules, `BrAPI-Schema/`, `generator/`, `Generated/`.
 
 
-## Additional deferred decisions identified during branch review (2026-10-16)
+## Additional decision inventory identified during branch review (2026-10-16)
 
 | ID | Question | Source | Evidence available | What resolves it |
 |---|---|---|---|---|
 | D-21 | ServerInfoV3 capability-to-operation mapping and version-token semantics | RFC-001 §6; ServerInfoV3 schema; CAPABILITY-NEGOTIATION.md | `methods` alone cannot identify routes; `provenanceEnvelope` is an embedded contract. An optional `operations[]` route map is proposed and tested on a branch. | Community/implementer review of mapping shape, requiredness, public operation-ID stability, exact-token negotiation, and unknown/duplicate capability handling |
-| D-22 | Security meaning of capability scopes and authentication profiles | RFC-001 §6; ServerInfoV3 schema; CAPABILITY-NEGOTIATION.md | Capability `scopes` and auth-profile `scopes` are semantically ambiguous. The prototype accepts and ignores bearer tokens and has no effective authorization. | Security/operator review of required versus issued scopes, missing/empty scopes, `none` profile semantics, per-operation enforcement, denial behavior, and independent verification |
+| D-22 | Security meaning of capability scopes and authentication profiles | RFC-001 §6; ServerInfoV3 schema; CAPABILITY-NEGOTIATION.md | Capability `scopes` and auth-profile `scopes` are semantically ambiguous. The prototype accepts and ignores bearer tokens and has no effective authorization. D-24 now separately requires fresh authentication and authorization before any idempotency replay result is disclosed. | Security/operator review of required versus issued scopes, missing/empty scopes, `none` profile semantics, per-operation enforcement, denial behavior, and independent verification. D-22 remains deferred except for the D-24 replay-security dependency. |
 | D-23 | How supported asynchronous `jobType` tokens are advertised and versioned | Jobs schemas; ServerInfoV3 schema; CAPABILITY-NEGOTIATION.md | Optional experimental `jobs.jobTypes[]` lists prototype-supported tokens and is checked against runtime validation. | Implementer/community review of requiredness, older-server compatibility, exact token namespace/case, versioning/deprecation, and a second implementation |
-| D-24 | Idempotency request equivalence and key-source precedence | RFC-001 §8; `Jobs/Schemas/JobNewRequest.yaml`; reference submit handler | RFC prose says byte-identical bodies, while the Python prototype parses JSON and compares a canonicalized object, making whitespace/property order irrelevant. A non-empty `Idempotency-Key` header takes precedence over body `idempotencyKey`, but the body field still participates in the comparison. | Select exact-byte, named structured-JSON, or normalized-command equivalence; specify header/body precedence and whether the body key participates in equivalence. Preserve D-02/profile-version implications |
-| D-25 | Idempotency namespace, retention, expiry, and deployment guarantee | RFC-001 §8; Jobs schemas; prototype store | The key map is process-local and not durable across restart or replicas; retention/reuse rules, tenant/actor scope, and behavior after job expiry are unspecified. | Define key namespace, minimum retention, reuse rules, relationship to job time-to-live (TTL), expiry/conflict behavior, and whether guarantees survive restart or multiple replicas |
+| D-24 | Idempotency request equivalence and key-source precedence | RFC-001 §8; `Jobs/Schemas/JobNewRequest.yaml`; reference submit handler | **Accepted 2026-11-03.** Historical issue: RFC prose says byte-identical bodies, while the Python prototype parses JSON and compares a canonicalized object. The accepted resolution separates lookup identity from request fingerprint; see Part C. | Implementation, security review, operation-specific fingerprint definitions, conformance evidence, and legacy compatibility work remain pending. |
+| D-25 | Idempotency namespace, retention, expiry, and deployment guarantee | RFC-001 §8; Jobs schemas; prototype store | **Accepted 2026-11-03.** Historical issue: the key map is process-local and not durable across restart or replicas. The accepted resolution requires durable shared production state and separate response/tombstone retention; see Part C. | Implementation, retention policy selection, recovery evidence, and production conformance verification remain pending. |
 
-The above additions record open questions found during implementation review;
-they do not settle these contract decisions. The reference server and its tests
-are evidence for one prototype only, not a normative or production guarantee.
+The above additions record open questions found during implementation review.
+Except for the accepted D-24 and D-25 resolutions recorded below, they do not
+settle contract decisions. The reference server and its tests are evidence for
+one prototype only, not a normative or production guarantee.
+
+## Part C — Accepted BrAPI-GenX architectural decisions
+
+**Approval authority:** BrAPI-GenX project maintainer.
+**Approval date:** 2026-11-03.
+**Authority boundary:** These are internal BrAPI-GenX architectural decisions. They do not claim implementation completion, production conformance, external standards adoption, or official BrAPI community endorsement.
+
+### D-02 — Digest canonicalization and purposes (`ACCEPTED`)
+
+**Original question and context.** What JSON canonical form feeds digests? The historical evidence was an exploratory Python and TypeScript/Bun candidate corpus; the historical alternatives included exact-byte hashing, JCS, and a custom profile. No existing helper was migrated as part of that evidence.
+
+**Resolution and requirements.** BrAPI-GenX distinguishes a raw-byte digest for exact bytes, a canonical JSON digest for generic JSON, and an optional, domain-specific scientific semantic fingerprint. Generic canonical JSON uses unmodified JCS from RFC 8785, identified as `JCS-RFC8785`. JCS inputs reject duplicate object properties and non-finite numbers; Unicode is not normalized automatically; and JCS numeric constraints apply. High-precision scientific decimals use strings where their domain contract requires it. Unit conversion, decimal rounding, Unicode normalization, and other scientific transformations are outside generic JCS and require an explicit domain contract. Digest purpose and canonicalization method must be identifiable.
+
+**Deferred and pending.** This decision does not choose a universal cryptographic digest algorithm (existing SHA-256 evidence is not such a selection), create a universal semantic fingerprint, or define every field-level preimage. JCS implementation, operation/domain preimages, and cross-language conformance evidence remain pending. D-24 may use the approved canonical JSON approach for its canonical request payload where appropriate.
+
+### D-24 — Idempotency identity, equivalence, and replay (`ACCEPTED`)
+
+**Original question and context.** What makes requests equivalent and how are header/body keys reconciled? Historically, RFC prose said byte-identical bodies while the Python prototype compared a parsed, Python-canonicalized object and silently preferred a non-empty header key.
+
+**Resolution and requirements.** Lookup identity is `idempotency_namespace + idempotency_key`, distinct from the request fingerprint `stable_genx_operation_id + relevant_request_context + canonical_request_payload`. The namespace is `tenant_id + authenticated_client_id + effective_principal_id + stable_genx_operation_id`; operation identifiers are logical GenX identifiers, not route strings. Same namespace/key plus same fingerprint is a retry/replay candidate; same namespace/key plus a different fingerprint is conflicting reuse; different namespaces, including different tenants, remain distinct. Equal header/body keys are permitted; different values are rejected with HTTP 400; the header remains the authoritative transport mechanism. Every replay requires fresh authentication and authorization before result disclosure; a key grants no access right and unauthorized handling must not disclose another record.
+
+**Deferred and pending.** The exact fingerprint fields are operation-specific; only materially relevant context belongs in them. D-24 does not complete D-22, select every replay response status, or settle every legacy body-key outcome. Implementation, security review, deterministic concurrency, operation-specific contracts, and conformance evidence remain pending. D-25 provides its durable lifecycle requirements.
+
+### D-25 — Idempotency scope, retention, and durability (`ACCEPTED`)
+
+**Original question and context.** What namespace, retention, expiry, and deployment guarantee apply? Historically, the prototype used a process-local map with no restart/replica guarantee and unspecified retention.
+
+**Resolution and requirements.** Production-conforming implementations require durable shared idempotency state, atomic claim/create, namespace-scoped uniqueness, restart recovery, and duplicate recognition within documented retention. Process-local maps and locks are development/reference-only. Where record and business mutation share a transactional store, they must be coordinated atomically; other boundaries require documented coordination and recovery. External effects require appropriate mechanisms, but BrAPI-GenX does not promise universal exactly-once execution. Full-response and tombstone retention are distinct; discarding a response must not re-enable execution while the tombstone remains. Implementations must document retry window, both retention periods, expiry/key-reuse behaviour, recovery implications, and extensions.
+
+**Deferred and pending.** No database technology or numeric minimum retention duration is selected, and no universal external-effect mechanism is mandated. Implementation, durable multi-instance/failure testing, recovery design, and retention-policy documentation remain pending. D-22 remains open for the broader security architecture.
+
+For diagrams, acceptance criteria, evidence requirements, and complete cross-dependencies, see [`BRAPI-GENX-CLUSTER-1-APPROVED-DECISIONS.md`](../../docs/governance/BRAPI-GENX-CLUSTER-1-APPROVED-DECISIONS.md).
 
 ## Branch reconciliation record (2026-10-16)
 

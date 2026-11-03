@@ -1,6 +1,8 @@
 # BrAPI-GenX — Cluster 1 Maintainer Review Guide
 
-**Status:** DRAFT — NOT APPROVED. Reading guide for the repository maintainer.
+**Status:** REVIEW COMPLETE — six maintainer approval components recorded on 2026-11-03.
+
+The BrAPI-GenX project maintainer approved the D-02, D-24, and D-25 architectural direction. `Specification/BrAPI-GenX/DECISIONS.md` remains the decision-status authority. This guide preserves the review framing and now directs follow-up implementation and verification; it does not claim implementation, production conformance, or official BrAPI endorsement.
 
 ## 1. What the three decisions are about
 
@@ -25,29 +27,35 @@ from D-25 to D-24.
 3. Database transactions are not distributed transactions; exactly-once
    execution cannot be claimed from duplicate-request detection.
 
-## 4. Six questions requiring review
+## 4. Six questions resolved by maintainer approval
 
 See approval packet §11.5 (Questions 1–6).
 
-## 5. Recommended answers and trade-offs
+## 5. Approved answers and remaining trade-offs
 
-Summarized in the approval packet. All recommendations are draft.
+The approved digest purposes, JCS adoption, identity/fingerprint separation,
+composite namespace, header/body HTTP 400 rule, fresh replay authorization, and
+durability/recovery requirements are summarized in the approved decision record.
+Operation-specific fingerprints, retention duration, security architecture, and
+implementation mechanisms remain follow-up work.
 
-## 6. Decisions delegable to technical implementers
+## 6. Implementation choices delegable to technical implementers
 
-- Choice of hash algorithm (within approved profile).
+- Choice of hash algorithm/profile (not selected by this approval).
 - Storage engine selection.
 - Concurrency control mechanism.
 
-## 7. Decisions requiring security/operational authority
+## 7. Work requiring security/operational review
 
-- Tenant isolation and authorization on replay (D-22 adjacent).
+- Broader tenant isolation and authorization policy (D-22 remains open); fresh
+  authentication and authorization on replay is already required by D-24.
 - Retention periods and expiry policy.
 - Durability guarantees and production claims.
 
-## 8. Decisions possibly requiring external standards consultation
+## 8. Matters possibly requiring external standards consultation
 
-- JCS adoption as normative canonicalization (community).
+- Independent interoperability evidence for JCS implementation; no official
+  BrAPI/community endorsement is implied by internal approval.
 - BrAPI overlap for LotLedger (D-20, community).
 
 ## 9. Evidence still missing
@@ -57,19 +65,20 @@ Summarized in the approval packet. All recommendations are draft.
 - Authorization-on-replay tests.
 - Fault-injection recovery tests.
 
-## 10. What approval would authorize
+## 10. What the recorded approval authorizes
 
-Approval of D-02/D-24/D-25 would authorize updating RFC-001, the digest scope
-inventory, conformance probes, and migrating the reference server from prototype
-canonical form — not Phase 1B implementation.
+The approval authorizes future implementation planning for the approved
+architecture, including RFC-001 updates, digest scope work, conformance probes,
+and replacement of prototype-only behavior through separately authorized work.
+It does not itself implement or validate those changes.
 
 ## Compact decision table
 
 | Decision | Proposed direction | Authority | Status |
 |---|---|---|---|
-| D-02 | Versioned GenX canonicalization profile (JCS candidate, domain rules separate) | Technical architecture + interoperability | Open |
-| D-24 | Composite idempotency identity + separate request fingerprint | Maintainer + implementers + community | Open |
-| D-25 | Composite namespace; durable DB-backed; at-least-once; tombstone retention | Maintainer + security + operational | Open |
+| D-02 | Three digest purposes; JCS-RFC8785 for generic JSON; domain rules separate | BrAPI-GenX maintainer | Approved — implementation pending |
+| D-24 | Separate lookup/fingerprint; approved namespace; HTTP 400 key conflict; fresh replay authorization | BrAPI-GenX maintainer | Approved — implementation pending |
+| D-25 | Durable shared state; atomic/recovery discipline; at-least-once; separate tombstones | BrAPI-GenX maintainer | Approved — implementation pending |
 
 ## Links
 

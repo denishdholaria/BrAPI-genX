@@ -1,6 +1,6 @@
 # BrAPI-GenX — Phase 1A Roadmap
 
-**Status:** Phase 1A planning. No implementation authorized.
+**Status:** Phase 1A planning. Cluster 1 direction is approved; no implementation is authorized by this roadmap.
 **Companions:** decision dependency review, ownership matrix, pilot selection.
 
 ## 1. Dependency-aware work sequence
@@ -10,8 +10,8 @@
 2. Adopt decision governance policy (already documented).
 3. Update Phase 1 backlog decision cluster dependency note (done).
 
-### Workstream 1 — Prerequisite decision clusters (requires authority)
-1. Cluster 1: D-02 → D-24 → D-25 (digest + idempotency).
+### Workstream 1 — Prerequisite decision clusters
+1. Cluster 1: D-02 → D-24 → D-25 (digest + idempotency) — approved by the BrAPI-GenX project maintainer on 2026-11-03; implementation and evidence remain pending.
 2. Cluster 2: D-22 (security).
 3. Cluster 3: D-20 (BrAPI overlap).
 4. Cluster 4: D-21, D-23 (capability advertisement).
@@ -30,7 +30,8 @@
 ## 2. Prerequisite decisions
 
 Minimum set before Phase 1B implementation:
-- D-02 (digest canonicalization) — if pilot touches provenance/mutation.
+- D-02 (digest canonicalization) — approved architecture; implementation and
+  conformance evidence are required if a pilot touches provenance/mutation.
 - D-22 (security meaning) — if pilot declares authorization.
 - D-20 (BrAPI overlap) — if pilot overlaps BrAPI resources.
 
@@ -39,8 +40,8 @@ research on stage-gate semantics. No digest/BrAPI-overlap dependency.
 
 ## 3. Parallel workstreams
 
-- Governance hygiene (Workstream 0) can run in parallel with Cluster 1.
-- D-22 and D-20 can run in parallel with Cluster 1 (different authorities).
+- Governance hygiene (Workstream 0) can run in parallel with Cluster 1 implementation planning.
+- D-22 and D-20 can run in parallel with Cluster 1 implementation (different authorities).
 - Pilot domain investigation can begin in parallel with decision clusters,
   provided no normative claims are made.
 
@@ -56,8 +57,8 @@ research on stage-gate semantics. No digest/BrAPI-overlap dependency.
 
 ## 5. Evidence milestones
 
-- M1: Digest canonicalization decision record (D-02) with cross-language evidence.
-- M2: Idempotency equivalence + scope/retention decision records (D-24, D-25).
+- M1: D-02 approved decision record (complete); cross-language implementation evidence remains required.
+- M2: D-24/D-25 approved decision records (complete); implementation, durability, and security evidence remains required.
 - M3: Security contract definition (D-22).
 - M4: BrAPI overlap analysis for LotLedger (D-20).
 - M5: Capability advertisement model (D-21, D-23).

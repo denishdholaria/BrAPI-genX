@@ -1,6 +1,6 @@
 # BrAPI-GenX — Decision Ownership Matrix
 
-**Status:** Phase 1A planning. No decision is accepted by this document.
+**Status:** Phase 1A planning; updated for the 2026-11-03 Cluster 1 maintainer approvals. This matrix does not itself grant acceptance.
 **Companion:** `docs/assessment/BRAPI-GENX-PHASE-1A-DECISION-DEPENDENCY-REVIEW.md`
 
 Authority categories: M = Repository maintainer; T = Technical architecture;
@@ -10,7 +10,7 @@ J = Joint.
 | ID | Title (short) | Status | Category | Accountable | Required reviewers | Required evidence | Dependencies |
 |---|---|---|---|---|---|---|---|
 | D-01 | HTTP status for same-key/different-body conflicts | Deferred | T (with C for normative status code) | Maintainer | Implementers, community | Reference behaviour + Error_Handling amendment | None |
-| D-02 | JSON canonical form feeding digests | Deferred | T + C (normative) | Maintainer + community | Implementers (Python/TS), security | Cross-language corpus, JCS evaluation, migration plan | None (root) |
+| D-02 | JSON canonical form feeding digests | Accepted (implementation pending) | T + interoperability | BrAPI-GenX project maintainer | Implementers (Python/TS), security | JCS implementation, cross-language vectors, preimage/profile and migration evidence | None (root) |
 | D-03 | OIDC tenant-claim name and scope vocabulary | Deferred | Sec + M | Maintainer + security | Identity provider operators | Identity-provider evidence, second implementation | D-25 (tenant scope) |
 | D-04 | Wiring GenX into generator/BrAPI-Schema/Generated | Deferred | M (operator build decision) | Maintainer | Build/infra | Build evidence (Slice H) | None |
 | D-05 | Term/model version ordering and comparison | Deferred | S + T | Maintainer | Domain experts | Versioning rule proposal | None |
@@ -30,10 +30,10 @@ J = Joint.
 | D-19 | Pangenome graph encodings | Deferred | S + C | Maintainer + community | Format spec maturity | Format specification maturity | None |
 | D-20 | SeedLotTransaction vs LotLedgerEntry relationship | Deferred | S + C (BrAPI overlap) | Maintainer + community | Implementers, BrAPI community | Authority, event correlation, mapping, dual-read/write | None (root for overlap) |
 | D-21 | Capability-to-operation mapping and version tokens | Deferred | T + C | Maintainer + community | Implementers | Mapping shape, operation-ID stability, token negotiation | None |
-| D-22 | Security meaning of capability scopes and auth profiles | Deferred | Sec (with T) | Maintainer + security | Security specialists | Scope/auth-profile semantics, enforcement, denial behaviour | None (root for security) |
+| D-22 | Security meaning of capability scopes and auth profiles | Deferred; D-24 replay-auth dependency accepted | Sec (with T) | Maintainer + security | Security specialists | Scope/auth-profile semantics, enforcement, denial behaviour; replay non-disclosure evidence | None (root for security) |
 | D-23 | Advertised asynchronous job types | Deferred | T + C | Maintainer + community | Implementers | Requiredness, compatibility, token namespace/versioning | D-21 |
-| D-24 | Idempotency request equivalence and header/body precedence | Deferred | T + Sec + C (API contract) | Maintainer + community | Implementers | Equivalence selection, header/body precedence | D-02 |
-| D-25 | Idempotency namespace, retention, expiry, durability | Deferred | T + Sec + operational policy | Maintainer + security + operators | Retention, durability, multi-replica behaviour | D-24, D-03 (tenant) |
+| D-24 | Idempotency request equivalence and header/body precedence | Accepted (implementation pending) | T + Sec (API architecture) | BrAPI-GenX project maintainer | Implementers, security | Operation-specific fingerprints, HTTP 400 conflict tests, replay authorization/non-disclosure and concurrency evidence | D-02, D-25; informs D-22 |
+| D-25 | Idempotency namespace, retention, expiry, durability | Accepted (implementation pending) | T + Sec + operational policy | BrAPI-GenX project maintainer | Implementers, security, operators | Durable multi-instance, transaction/recovery, retention and fault-injection evidence | D-24; D-22 remains open; tenant integration with D-03 |
 
 ### Additional: RFC-local questions (RFC-NNN-Q1..Q3)
 
@@ -45,11 +45,11 @@ authority for the substantive question. Required evidence: per-RFC domain review
 ### Approval route summary
 
 - Repository-maintainer decisions: D-04, D-16 (identity registration), naming.
-- Technical architecture: D-02, D-10, D-11, D-21, D-23, D-24 (implementation).
+- Technical architecture: D-02 and D-24 are accepted internally; D-10, D-11, D-21, and D-23 remain deferred.
 - Scientific/domain: D-05, D-06, D-07, D-08, D-09, D-17, D-18, D-19, D-20.
-- Standards/community: D-06, D-13, D-19, D-20, D-21, D-23, D-24 (normative).
-- Security/operational: D-03, D-12, D-14, D-15, D-22, D-25.
-- Joint: D-07, D-09, D-20, D-24, D-25 (multiple authorities).
+- Standards/community: D-06, D-13, D-19, D-20, D-21, and D-23 remain external/community matters. Cluster 1 acceptance does not claim external endorsement.
+- Security/operational: D-25 is accepted architecturally with implementation and operational validation pending; D-03, D-12, D-14, D-15, and D-22 remain deferred.
+- Joint: D-07, D-09, and D-20 remain joint unresolved matters. D-24/D-25 implementation needs security and operational review but their direction is accepted.
 
 Where the accountable owner is not yet assigned, this is recorded as
 "Maintainer (unassigned)" — no person or committee has been invented.
