@@ -13,7 +13,12 @@ establish production readiness.
 | `live` (L-01…L-28) | a GenX test server | `python Scripts/checkGenXConformance.py --server https://host/genx/v1` |
 
 Static probes run by default. Live probes `SKIP` without `--server` and fail
-closed with it. Run the endpoint-identity negative tests separately with
+closed with it.
+
+Note: `probes.yaml` currently registers S-01…S-21 only. References to an
+"S-22" guardrail in this document and in `RESULTS.md` describe a proposed
+capability-to-operation guardrail that is not yet a registered probe; this
+discrepancy is tracked in the Phase 0 consistency register. Run the endpoint-identity negative tests separately with
 `python Scripts/test_endpoint_identity.py`; these exercise deliberately broken
 synthetic contracts to ensure identity errors fail closed. Both tiers are declared in [`probes.yaml`](./probes.yaml);
 fixtures live in [`fixtures/`](./fixtures). The probe list is the authority —

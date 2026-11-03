@@ -9,13 +9,14 @@ info:
   description: |-
     BrAPI-GenX is a proposal for the next generation of the Breeding API. Status: draft, not accepted, not normative. V2.1 remains the stable release. See Specification/BrAPI-GenX/RFC-001-GenX-Skeleton.md.
   title: BrAPI-GenX (proposal)
-  version: '3.0-draft'
+  version: '0.1-draft'
 openapi: 3.0.0
 paths: {}
 security:
 - GenXAuthorizationToken: []
 servers:
-- url: https://test-server.brapi.org/genx/v1
+- url: http://localhost:8080/genx/v1
+  description: Local/reference GenX server only. Not an official BrAPI deployment.
 tags:
 - name: Provenance
   description: Provenance envelope for observations, analyses, and predictions

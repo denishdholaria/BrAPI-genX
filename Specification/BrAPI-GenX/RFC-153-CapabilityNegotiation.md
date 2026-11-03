@@ -36,9 +36,9 @@ negotiation type, counterparty, last seen timestamp, and provenance.
 
 ## 6. Deferred questions
 
-- D-460: Should `lastSeen` be required? (Current: optional.)
-- D-461: Should `negotiationType` be a controlled vocabulary? (Current: free-form string.)
-- D-462: Should records link to GenX `ResearchAsset`? (Current: no link.)
+- RFC-153-Q1: Should `lastSeen` be required? (Current: optional.)
+- RFC-153-Q2: Should `negotiationType` be a controlled vocabulary? (Current: free-form string.)
+- RFC-153-Q3: Should records link to GenX `ResearchAsset`? (Current: no link.)
 
 ## 7. Classification
 
