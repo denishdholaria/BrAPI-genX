@@ -1,5 +1,10 @@
 # BrAPI GenX — Decision Log
 
+> **Governance:** decision-identifier policy, authority rules, and the unresolved
+> decision inventory are maintained in
+> [`docs/governance/BRAPI-GENX-DECISION-GOVERNANCE.md`](../../docs/governance/BRAPI-GENX-DECISION-GOVERNANCE.md).
+> RFC-local questions use `RFC-NNN-QN` and do not reuse global `D-` identifiers.
+
 Companion to RFC-001…RFC-007. Two lists: decisions the proposal **defers**
 (need community or operator authorization — not taken here), and decisions
 taken autonomously while drafting (visible here for review and reversal).

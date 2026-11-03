@@ -36,9 +36,9 @@ target endpoint, expected response, actual response, and provenance.
 
 ## 6. Deferred questions
 
-- D-460: Should `expectedResponse` be required? (Current: optional.)
-- D-461: Should `probeType` be a controlled vocabulary? (Current: free-form string.)
-- D-462: Should records link to GenX `ResearchAsset`? (Current: no link.)
+- RFC-155-Q1: Should `expectedResponse` be required? (Current: optional.)
+- RFC-155-Q2: Should `probeType` be a controlled vocabulary? (Current: free-form string.)
+- RFC-155-Q3: Should records link to GenX `ResearchAsset`? (Current: no link.)
 
 ## 7. Classification
 

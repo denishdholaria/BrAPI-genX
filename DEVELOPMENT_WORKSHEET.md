@@ -1,11 +1,12 @@
 # BrAPI_genX — Development Command Worksheet
 
 **Purpose:** Master work ledger for independent, slice-based development of the BrAPI GenX proposal.  
-**Maintainer / technical lead:** OpenAI assistant (independent development lead, as delegated by repository owner).  
-**Last reviewed:** 2026-10-15  
+**Maintainer / technical lead:** Repository maintainer (human). AI agents are development tools, not governance authorities.  
+**Last reviewed:** 2026-11-03 (Phase 0 consolidation)  
 **Planning branch:** `work/development-command-worksheet`  
-**Baseline branch:** `brapi-V2.1`  
-**Repository:** [denishdholaria/BrAPI_genX](https://github.com/denishdholaria/BrAPI_genX)
+**Baseline branch (Phase 0):** `assessment/phase-0-consolidation` (from `main`)  
+**Repository:** [denishdholaria/BrAPI-GenX](https://github.com/denishdholaria/BrAPI-GenX)
+**Baseline commit (Phase 0):** `6c09dff4c8f68fc89df541fc1fdcb09abc95e30c` (2026-11-03)
 
 > **Standards-status guardrail:** The existing GenX documentation explicitly labels GenX as a proposal that is *not accepted and not normative*. This worksheet is a development plan, not community ratification. No entry here changes the status or authority of BrAPI or GenX.
 
@@ -44,7 +45,7 @@ I will:
 |---|---|---|
 | Default branch | `brapi-V2.1` | Do not use the release-named branch for independent work. |
 | BrAPI V2.1 modules | Core, Phenotyping, Genotyping, Germplasm | Preserve these contracts; do not rewrite V2.1 to accommodate GenX. |
-| GenX proposal | `Specification/BrAPI-GenX/`, RFC-001 through RFC-007 | Additive, optional proposal under `/genx/v1/`; status remains non-normative. |
+| GenX proposal | `Specification/BrAPI-GenX/`, RFC-001 through RFC-155 | Additive, optional proposal under `/genx/v1/`; status remains non-normative. Maturity tracked in `docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md`. |
 | Decision register | `Specification/BrAPI-GenX/DECISIONS.md` | D-01…D-23 are deferred decisions; A-01…A-12 are reviewable drafting decisions. |
 | Conformance authority | `Specification/BrAPI-GenX/Conformance/probes.yaml` | The probe file declares intended conformance; the runner must remain aligned with it. |
 | Recorded test evidence | `Conformance/RESULTS.md`, dated 2026-09-07 | Historical recorded evidence is strong, but must be rerun before asserting the current baseline. |

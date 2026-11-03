@@ -29,8 +29,10 @@ references may be preserved for attribution, migration, or compatibility.
 
 - **BrAPI** — the established community-driven Breeding Application Programming
   Interface specification and ecosystem.
-- **Official BrAPI v3** — the community's official third major version,
-  governed by the BrAPI community.
+- **Official BrAPI** — latest stable release is **v2.1** (brapi.org, released
+  2022-07-01). "BrAPI v3" is not an officially released major version; the
+  community's "New Concept Preview" documentation is explicitly subject to
+  change. BrAPI-GenX must not claim or imply official v3 status.
 - **BrAPI-GenX** — this independently governed project.
 
 GenX-native endpoints use `/genx/v1/`. Official BrAPI-versioned routes are used

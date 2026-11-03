@@ -82,11 +82,13 @@ Existing GenX modules and their primary class:
 | FAIR / FAIRPackage | C5 | 3 (fair-metadata) | Spec exists |
 | Provenance / ProvenanceEnvelope | C2 (embedded) | — | Embedded only, no endpoints |
 
-Classes with **no GenX spec yet** but significant legacy surface:
-- **D1** Germplasm & Biological Resources — 76 endpoints (seed-bank, passport, grin, germplasm search/comparison)
-- **D2** Breeding Programs & Experimental Design — 240 endpoints (trials, crosses, nursery, selection, breeding pipeline, doubled haploids, gxe, stability)
-- **D4** Phenotyping & Plant Observations — 124 endpoints (phenotype, observations, image/vision, DUS, crop-health)
-- **D5** Environment, Agroecology & Field Context — 160 endpoints (weather, sensors, IoT, field layout, crop calendar, carbon/emissions)
+Classes where GenX specs now exist but maturity is uneven (see RFC maturity register):
+- **D1** Germplasm & Biological Resources — 76 legacy endpoints; RFCs exist but semantic depth varies.
+- **D2** Breeding Programs & Experimental Design — 240 legacy endpoints; RFCs exist but semantic depth varies.
+- **D4** Phenotyping & Plant Observations — 124 legacy endpoints; RFCs exist but semantic depth varies.
+- **D5** Environment, Agroecology & Field Context — 160 legacy endpoints; RFCs exist but semantic depth varies.
+
+Note: this inventory is generated from the legacy backend and counts implementation routes, not specification requirements. Legacy endpoint counts are evidence only, not delivery targets.
 
 ## Clashes / duplicates detected
 
