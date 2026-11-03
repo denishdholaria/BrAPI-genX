@@ -84,6 +84,36 @@
 - Two independent implementations must agree on all vectors.
 - Current evidence: Python/TS agreement on ASCII payloads only (not sufficient).
 
+## 7.5 Refinement — Raw-byte vs canonical vs semantic identity cases
+
+- Raw-byte: two byte sequences differing in whitespace → different digest.
+- Canonical JSON: two JSON docs differing only in key order/whitespace → same
+  digest (under canonical rule).
+- Scientific semantic: `100 cm` vs `1 m` may be equivalent only under an
+  explicit domain rule; must not be normalized silently in JSON canonicalization.
+
+## 7.6 Refinement — Crash windows and external side effects
+
+- Failure A (before record): no durable state; retry creates new operation.
+- Failure B (after record, before mutation): claimed but unexecuted; retry
+  replays or conflicts.
+- Failure C (during mutation): transaction rollback must roll back idempotency
+  record too.
+- Failure D (after mutation, before result persist): uncertain outcome;
+  reconciliation required.
+- Failure E (after commit, before response): operation succeeded; client retry
+  must be deduplicated via durable record.
+- Failure F (async worker): durable workflow state required.
+- Failure G (external side effect before local record): downstream idempotency
+  propagation required.
+
+## 7.7 Refinement — Retention and expiry cases
+
+- Full response retained vs discarded with tombstone.
+- Key reuse after expiry (new operation vs conflict).
+- Clock skew across instances.
+- Multi-instance concurrency (unique constraint, atomic claim).
+
 ## 8. Evidence status
 
 | Requirement | Existing evidence | Gap |

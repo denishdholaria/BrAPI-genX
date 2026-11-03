@@ -83,3 +83,36 @@ candidate standard evaluation) and are not currently unified. Verified fact.
 - No response storage (only job reference).
 - No authorization on replay (replayed response not re-checked).
 - Canonical form is Python-specific, not a documented standard.
+
+## 6. Refinement — Digest-purpose inventory
+
+Three distinct digest purposes are present and must not be conflated:
+
+1. **Raw-byte digest** — identifies an exact byte sequence (file/artifact
+   integrity). Not currently implemented as a separate mechanism; the
+   `inputsDigest` hashes canonicalized inputs, not raw bytes.
+2. **Canonical JSON digest** — identifies a JSON representation under a
+   defined serialization rule. Implemented as `canonical()` + SHA-256 for
+   provenance binding in model registration.
+3. **Scientific semantic fingerprint** — not implemented. Would require
+   domain-specific normalization (units, decimals, identifiers) that must not
+   be performed silently during JSON canonicalization.
+
+## 7. Refinement — JCS compatibility findings
+
+Python `json.dumps(sort_keys=True, separators=(",",":"))` differs from JCS
+(RFC 8785) in at least: ASCII escaping (Python escapes non-ASCII by default
+unless `ensure_ascii=False`), handling of non-finite numbers (Python emits
+`NaN`/`Infinity` by default), and numeric serialization. The prototype is
+**not** JCS-compliant. The digest test vectors exercise JCS as an unselected
+candidate. Verified fact: `test_digest_vectors.py` docstring states
+"RFC 8785 remains an unselected candidate."
+
+## 8. Refinement — Transaction boundary and replay authorization
+
+- The idempotency record and business mutation are both in-memory; no
+  transactional boundary exists. No crash-recovery guarantee.
+- Replay returns the stored job object without re-checking the current caller's
+  authorization. This is a verified security limitation (D-22 adjacent).
+- No external side-effect coordination exists (no outbox, no downstream
+  idempotency propagation).

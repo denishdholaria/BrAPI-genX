@@ -108,6 +108,40 @@ concurrently; D-24's equivalence depends on D-02.
 - D-20 (BrAPI overlap) — separate cluster.
 - D-01, D-03…D-19 — per ownership matrix.
 
+## 11.5 Maintainer Review — Critical Architectural Questions
+
+### Question 1 — Digest purpose
+Should GenX distinguish raw-byte digests, canonical JSON digests, and
+domain-specific semantic fingerprints? Recommendation (draft): yes. Trade-off:
+clarity vs. complexity. Consequence: each purpose gets its own contract.
+
+### Question 2 — JCS
+Should JCS (RFC 8785) be the candidate for generic JSON canonicalization, with
+scientific decimals/units handled separately? Recommendation (draft): yes, as a
+candidate, with explicit limitations documented (IEEE 754 numbers, no Unicode
+normalization). Consequence: JCS compliance tests required.
+
+### Question 3 — Idempotency identity
+Should the system separate idempotency record lookup identity from request
+fingerprint? Recommendation (draft): yes. Proposed: namespace+key for lookup;
+operation identity + canonical payload for fingerprint.
+
+### Question 4 — Operation identity and scope
+What should define the idempotency namespace? Evaluate tenant, authenticated
+client, principal, stable operation identity. Recommendation (draft): composite
+(tenant + principal + operation + endpoint), not global.
+
+### Question 5 — Header/body conflict and replay authorization
+Should header/body conflict be rejected (400) rather than silently ignored?
+Should authorization be re-checked on replay? Recommendation (draft): reject on
+conflict; re-verify authorization on replay.
+
+### Question 6 — Durability and side effects
+What guarantees should the contract require for production-conforming
+idempotency? Recommendation (draft): at-least-once delivery + idempotent retry;
+not exactly-once execution; durable DB-backed state; separate external
+side-effect strategy.
+
 ## 12. Cross-references
 
 - Baseline: `docs/assessment/BRAPI-GENX-CLUSTER-1-IMPLEMENTATION-BASELINE.md`

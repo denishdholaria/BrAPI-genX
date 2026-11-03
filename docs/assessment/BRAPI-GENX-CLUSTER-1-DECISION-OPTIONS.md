@@ -93,6 +93,42 @@ constrain D-24's identity model. Recommend representing as a partially parallel
 model: D-02 and D-25-scope can be analysed in parallel; D-24's equivalence
 definition depends on D-02; D-25's durability requirements feed back into D-24.
 
+## 4.5 Refinement — Three digest purposes (D-02)
+
+See implementation baseline §6. Raw-byte identity, canonical JSON identity, and
+scientific semantic identity are distinct. JCS (RFC 8785) is a candidate for
+generic JSON canonicalization only; it uses IEEE 754 binary64 numbers and does
+not perform Unicode normalization or scientific decimal normalization. Scientific
+semantic fingerprints, if needed, must be defined per domain contract, not
+silently folded into JSON canonicalization.
+
+## 4.6 Refinement — Idempotency lookup identity vs request fingerprint (D-24)
+
+Idempotency record lookup identity (which previous submission is referenced):
+`namespace + key`, where namespace may include tenant, principal, and stable
+operation identity.
+
+Request fingerprint (whether a new submission is equivalent): `operation
+identity + canonical request content (+ relevant query/headers)`.
+
+These must be modelled separately. The current prototype conflates them in a
+single `canonical(body)` comparison. Stable operation identity should be the
+GenX operation identifier, not the literal HTTP route.
+
+Header/body conflict: current behaviour gives header precedence silently.
+Recommendation (draft): reject on conflict (400) rather than silently ignore.
+Replay authorization: current implementation does not re-check authorization;
+recommend re-verifying the current caller before returning a stored result.
+
+## 4.7 Refinement — Transaction boundaries and side effects (D-25)
+
+Database transactional atomicity covers only the primary store. External side
+effects require separate coordination (outbox, downstream idempotency
+propagation, reconciliation). Exactly-once execution cannot be claimed from
+duplicate-request detection alone. Retention: separate full-response retention
+from minimal tombstone retention to extend conflict detection without storing
+responses indefinitely.
+
 ## 5. Required approval authority
 
 - D-02: technical architecture + interoperability review (+ community if
