@@ -17,6 +17,8 @@ on:
       - 'Scripts/test_digest_vectors.py'
       - 'Scripts/test_digest_vector_mutations.py'
       - 'Scripts/digest-conformance/**'
+      - 'Scripts/jcs-canonicalization/**'
+      - 'Scripts/test_cross_language_jcs.py'
       - 'Scripts/genx_test_server.py'
       - '.github/workflows/genx-static-conformance.yml'
   push:
@@ -35,6 +37,8 @@ on:
       - 'Scripts/test_digest_vectors.py'
       - 'Scripts/test_digest_vector_mutations.py'
       - 'Scripts/digest-conformance/**'
+      - 'Scripts/jcs-canonicalization/**'
+      - 'Scripts/test_cross_language_jcs.py'
       - 'Scripts/genx_test_server.py'
       - '.github/workflows/genx-static-conformance.yml'
   workflow_dispatch:
@@ -78,6 +82,16 @@ jobs:
         run: |
           cd Scripts/digest-conformance
           bun run test
+      - name: Install TypeScript JCS test dependency
+        run: |
+          cd Scripts/jcs-canonicalization
+          bun install
+      - name: Run TypeScript JCS vectors
+        run: |
+          cd Scripts/jcs-canonicalization
+          bun run test
+      - name: Run cross-language JCS interoperability
+        run: python Scripts/test_cross_language_jcs.py
       - name: Run static GenX conformance probes
         run: python Scripts/checkGenXConformance.py
       - name: Validate semantic endpoint catalogue

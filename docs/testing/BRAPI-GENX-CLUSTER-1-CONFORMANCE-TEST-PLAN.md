@@ -15,7 +15,7 @@
 | Duplicate-property rejection | Exploratory | Normative (Slice 1) |
 | Unicode & numeric edge cases | Exploratory | Normative (Slice 1) |
 | Scientific decimal representation | Exploratory | Normative (Slice 1) |
-| Cross-language digest agreement | Exploratory (ASCII only) | Full agreement (Slice 3) |
+| Cross-language digest agreement | Verified (Phase 1B.2) | Full agreement (Phase 1B.2) |
 | Idempotency identity (namespace) | Prototype (in-memory) | Normative (Slice 4, 7) |
 | Request fingerprint equivalence | Prototype (Python canonical) | Normative (Slice 5, 7) |
 | Tenant/principal isolation | Not implemented | Normative (Slice 8) |
