@@ -148,8 +148,8 @@ Quantitative:
 - The `canonicalize` (TS) and `rfc8785` (Python) libraries are independent
   implementations; agreement is verified on the corpus, not by construction.
 - External digest encoding remains unresolved (intentionally).
-- Request fingerprint construction in `digest.py` still uses a legacy
-  sort_keys path; migration deferred.
+- Request fingerprint construction in `digest.py` migrated to JCS in
+  Phase 1C; legacy diagnostic helper retained in `test_digest_vectors.py`.
 - Reference servers still use legacy canonicalizers (see migration inventory).
 
 ## 14. Reproduction instructions
@@ -191,7 +191,7 @@ should be added to the workflow paths and steps. Minimal additions:
 
 ## 16. Reference-server migration status
 
-Migration has NOT occurred. See migration inventory (Stage G) for legacy
-consumers. Reference servers continue to use legacy canonicalizers; migration
-is a separate bounded task.
+Phase 1C migration completed: digest API, both reference servers, and the
+conformance checker now use the verified JCS implementation. See
+`BRAPI-GENX-LEGACY-CANONICALIZATION-MIGRATION-INVENTORY.md`.
 EOF

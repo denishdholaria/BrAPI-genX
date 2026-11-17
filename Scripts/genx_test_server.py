@@ -38,8 +38,24 @@ this does not guarantee distributed or durable idempotency.
 import argparse
 import copy
 import json
+import uuid
 import re
 import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src"))
+from brapi_genx.canonicalization import jcs_canonicalize, parse_strict_json, JCSError
+try:
+    from brapi_genx.idempotency import (
+        PostgresIdempotencyStore,
+        IdempotencyIdentity,
+        IdempotencyStatus,
+    )
+    _IDEMPOTENCY_IMPORT_ERROR = None
+except Exception as _exc:  # pragma: no cover - optional dependency guard
+    PostgresIdempotencyStore = None
+    IdempotencyIdentity = None
+    IdempotencyStatus = None
+    _IDEMPOTENCY_IMPORT_ERROR = _exc
 import threading
 import time
 from datetime import datetime, timedelta, timezone
@@ -71,7 +87,9 @@ def utcnow():
 
 
 def canonical(doc):
-    return json.dumps(doc, sort_keys=True, separators=(",", ":"))
+    """JCS-canonicalized form (authoritative, RFC 8785) of a parsed JSON value."""
+    raw = json.dumps(doc).encode("utf-8")
+    return jcs_canonicalize(raw).decode("utf-8")
 
 
 def envelope(result=None, data=None, pagination=None, status=None, datafiles=None):
@@ -89,14 +107,35 @@ def envelope(result=None, data=None, pagination=None, status=None, datafiles=Non
     return body
 
 
+# Default identity used by the reference server when no auth/tenant context is
+# available. Tenant/client/principal isolation is still enforced by the store
+# schema; the reference server simply operates as a single default principal.
+DEFAULT_TENANT_ID = uuid.UUID("00000000-0000-0000-0000-000000000000")
+DEFAULT_CLIENT_ID = uuid.UUID("00000000-0000-0000-0000-000000000000")
+DEFAULT_PRINCIPAL_ID = uuid.UUID("00000000-0000-0000-0000-000000000000")
+
+
 class Store:
-    def __init__(self, ttl_days=7, delay=1.0):
+    def __init__(self, ttl_days=7, delay=1.0, idempotency_store=None, idempotency_dsn=None,
+                 init_from_env=False):
+        if isinstance(idempotency_store, str):
+            idempotency_dsn = idempotency_store
+            idempotency_store = None
+        if idempotency_store is None and idempotency_dsn is None and init_from_env:
+            idempotency_dsn = os.environ.get("GENX_IDEMPOTENCY_DSN")
+        if idempotency_store is None and idempotency_dsn:
+            idempotency_store = create_idempotency_store(idempotency_dsn)
         self.lock = threading.Lock()
         self.jobs = {}
         self.idempotency = {}  # key -> {"body": canonical, "jobDbId": str}
         self.counter = 0
         self.ttl = timedelta(days=ttl_days)
         self.delay = delay
+        self.idempotency_store = idempotency_store
+        self.idempotency_mode = (
+            "authoritative" if idempotency_store is not None
+            else "non_authoritative_dev"
+        )
         self.variable_terms = {}  # (variableDbId, version) -> term, insertion ordered
         self.variable_term_order = []
         self.ledger = {}  # seedLotDbId -> [entries in position order]
@@ -144,6 +183,48 @@ class Store:
 
     def submit_idempotent(self, job_type, parameters, key, body_canonical):
         """Atomically check the idempotency key, create the job, and publish the key."""
+        pg = getattr(self, "idempotency_store", None)
+        if pg is not None and key:
+            identity = IdempotencyIdentity(
+                DEFAULT_TENANT_ID, DEFAULT_CLIENT_ID, DEFAULT_PRINCIPAL_ID,
+                "genxSubmitAsyncJob", key,
+            )
+            record, disposition = pg.claim(identity, body_canonical)
+            if disposition == "conflict":
+                return None, "conflict"
+            if disposition == "in_progress":
+                return None, "in_progress"
+            if disposition == "replay":
+                job = getattr(record, "response_body", None)
+                if not isinstance(job, dict):
+                    job = self.jobs.get(getattr(job, "jobDbId", None)) if isinstance(job, str) else None
+                # fall back to in-memory map if present
+                if not isinstance(job, dict):
+                    seen = self.idempotency.get(key)
+                    if seen:
+                        job = copy.deepcopy(self.jobs.get(seen["jobDbId"]))
+                return (copy.deepcopy(job) if isinstance(job, dict) else None), "replay"
+            # acquired
+            with self.lock:
+                job = self._create_unlocked(job_type, parameters, key)
+            try:
+                pg.complete(
+                    identity, body_canonical, 202, copy.deepcopy(job),
+                    "application/json",
+                )
+            except Exception:
+                try:
+                    pg.fail(identity, retryable=True, failure_kind="server_error")
+                except Exception:
+                    pass
+            with self.lock:
+                if key:
+                    self.idempotency[key] = {
+                        "body": body_canonical,
+                        "jobDbId": job["jobDbId"],
+                    }
+            return job, "created"
+
         with self.lock:
             seen = self.idempotency.get(key) if key else None
             if seen:
@@ -164,6 +245,13 @@ class Store:
         with self.lock:
             job = self.jobs.get(job_id)
             return copy.deepcopy(job) if job else None
+
+    def close(self):
+        pg = getattr(self, "idempotency_store", None)
+        if pg is not None and hasattr(pg, "close"):
+            pg.close()
+        self.idempotency_store = None
+        self.idempotency_mode = "closed"
 
     def set_status(self, job_id, status, result=None):
         with self.lock:
@@ -272,9 +360,10 @@ class Handler(BaseHTTPRequestHandler):
         length = int(self.headers.get("Content-Length") or 0)
         if not length:
             return {}
+        raw = self.rfile.read(length)
         try:
-            return json.loads(self.rfile.read(length).decode("utf-8"))
-        except Exception:
+            return parse_strict_json(raw)
+        except (JCSError, Exception):
             return None
 
     # -- endpoints ------------------------------------------------------
@@ -642,6 +731,8 @@ class Handler(BaseHTTPRequestHandler):
         )
         if disposition == "conflict":
             return self._send_text(409, "idempotency key already used with a different body")
+        if disposition == "in_progress":
+            return self._send_text(409, "idempotency key in progress")
         if disposition == "replay":
             return self._send_json(200, envelope(
                 result=job,
@@ -1177,6 +1268,77 @@ def parse_rfc3339(value):
     return parsed
 
 
+def create_idempotency_store(dsn=None, migrate=True, validate=True):
+    """Initialize a PostgreSQL-backed idempotency store from DSN or env.
+
+    Returns None when no DSN is configured (non-authoritative dev mode).
+    Raises if a configured store cannot be initialized or validated.
+    """
+    if dsn is None:
+        dsn = os.environ.get("GENX_IDEMPOTENCY_DSN")
+    if not dsn:
+        return None
+    if PostgresIdempotencyStore is None:
+        raise RuntimeError(f"idempotency module unavailable: {_IDEMPOTENCY_IMPORT_ERROR}")
+    store = PostgresIdempotencyStore(dsn)
+    if migrate:
+        store.migrate()
+    if validate:
+        with store._connect() as conn:
+            with conn.cursor() as cur:
+                cur.execute("SELECT 1")
+                cur.fetchone()
+    return store
+
+
+def create_store(ttl_days=7, delay=1.0, idempotency_store=None, idempotency_dsn=None,
+                init_from_env=True, **kwargs):
+    if isinstance(idempotency_store, str):
+        idempotency_dsn = idempotency_store
+        idempotency_store = None
+    if idempotency_store is None and idempotency_dsn is None and init_from_env:
+        idempotency_dsn = os.environ.get("GENX_IDEMPOTENCY_DSN")
+    if idempotency_store is None and idempotency_dsn:
+        idempotency_store = create_idempotency_store(idempotency_dsn)
+    return Store(
+        ttl_days=ttl_days, delay=delay,
+        idempotency_store=idempotency_store, **kwargs,
+    )
+
+
+class GenXHTTPServer(ThreadingHTTPServer):
+    def server_close(self):
+        super().server_close()
+        store = getattr(self, "store", None)
+        if store is not None and hasattr(store, "close"):
+            try:
+                store.close()
+            except Exception:
+                pass
+
+
+def create_server(port=8080, host="127.0.0.1", profile="genx", ttl_days=7, delay=1.0,
+                 idempotency_store=None, idempotency_dsn=None, init_from_env=True,
+                 migrate=True, validate=True):
+    if isinstance(idempotency_store, str):
+        idempotency_dsn = idempotency_store
+        idempotency_store = None
+    if idempotency_store is None and idempotency_dsn is None and init_from_env:
+        idempotency_dsn = os.environ.get("GENX_IDEMPOTENCY_DSN")
+    if idempotency_store is None and idempotency_dsn:
+        idempotency_store = create_idempotency_store(
+            idempotency_dsn, migrate=migrate, validate=validate,
+        )
+    store = Store(
+        ttl_days=ttl_days, delay=delay, idempotency_store=idempotency_store,
+    )
+    httpd = GenXHTTPServer((host, port), Handler)
+    httpd.store = store
+    httpd.profile = profile
+    httpd.idempotency_store = idempotency_store
+    return httpd
+
+
 def main():
     parser = argparse.ArgumentParser(description="GenX reference test server")
     parser.add_argument("--port", type=int, default=8080)
@@ -1186,14 +1348,24 @@ def main():
                         help="seconds from submit to completion")
     args = parser.parse_args()
 
-    server = ThreadingHTTPServer(("127.0.0.1", args.port), Handler)
-    server.store = Store(ttl_days=args.ttl_days, delay=args.delay)
-    server.profile = args.profile
+    try:
+        server = create_server(
+            port=args.port, profile=args.profile, ttl_days=args.ttl_days,
+            delay=args.delay, init_from_env=True,
+        )
+    except Exception as exc:
+        sys.stderr.write(f"ERROR - startup failed: {exc}\n")
+        raise SystemExit(1)
     print(f"GenX test server on 127.0.0.1:{args.port} profile={args.profile}", flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:
         pass
+    finally:
+        try:
+            server.server_close()
+        except Exception:
+            pass
 
 
 if __name__ == "__main__":

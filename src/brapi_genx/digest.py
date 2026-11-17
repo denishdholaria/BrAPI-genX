@@ -155,6 +155,11 @@ def request_fingerprint_digest(
     """
     import json
 
+    # Validate raw payload bytes through JCS when available, so duplicate
+    # properties and other JCS input constraints are rejected.
+    if canonical_payload:
+        canonical_payload = jcs_canonicalize(canonical_payload)
+
     envelope = {
         "v": 1,
         "op": operation_id,
@@ -166,16 +171,15 @@ def request_fingerprint_digest(
         "cv": contract_version,
     }
 
-    # JCS-canonicalize the envelope
-    envelope_bytes = json.dumps(envelope, sort_keys=True, separators=(",", ":")).encode("utf-8")
-    # Note: For production, use jcs_canonicalize(envelope_bytes) once
-    # the envelope structure is finalized. For now, sort_keys provides
-    # deterministic ordering.
+    # Authoritative JCS canonicalization of the envelope (RFC 8785).
+    raw_envelope = json.dumps(envelope).encode("utf-8")
+    envelope_bytes = jcs_canonicalize(raw_envelope)
 
     return DigestResult(
         algorithm=SHA256_ALGORITHM,
         purpose=DigestPurpose.REQUEST_FINGERPRINT,
         value=_sha256(envelope_bytes),
+        canonicalization_profile=JCS_RFC8785_V1,
     )
 
 

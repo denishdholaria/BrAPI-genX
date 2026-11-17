@@ -26,6 +26,9 @@ import json
 import os
 import re
 import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src"))
+from brapi_genx.canonicalization import jcs_canonicalize
 import uuid
 
 try:
@@ -258,7 +261,8 @@ def check_datetime_format(root, probe, ctx, results):
 
 
 def canonical(doc):
-    return json.dumps(doc, sort_keys=True, separators=(",", ":"))
+    raw = json.dumps(doc).encode("utf-8")
+    return jcs_canonicalize(raw).decode("utf-8")
 
 
 def check_idempotency_relations(root, probe, ctx, results):
