@@ -1,7 +1,8 @@
 # RFC-037 — Crossing Schedule (Breeding)
 
-- Status: proposal, non-normative.
+- Status: deferred; retained as historical proposal.
 - Supersedes: none.
+- Decision: D-BP-11 — the broad CrossingSchedule surface is deferred; reopen only for scheduling/booking semantics beyond BrAPI PlannedCross and CrossingProject.
 - Related: RFC-001 (GenX skeleton), `CLASSIFICATION.md` (D2).
 
 ## 1. Problem
