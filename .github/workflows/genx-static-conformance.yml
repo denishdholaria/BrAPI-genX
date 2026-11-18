@@ -21,6 +21,10 @@ on:
       - 'Scripts/jcs-canonicalization/**'
       - 'Scripts/test_cross_language_jcs.py'
       - 'Scripts/genx_test_server.py'
+      - 'Scripts/validate_breeding_pipeline_candidate_fixtures.py'
+      - 'Scripts/validate_breeding_pipeline_contract_fixtures.py'
+      - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
+      - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json'
       - '.github/workflows/genx-static-conformance.yml'
   push:
     paths:
@@ -64,6 +68,10 @@ jobs:
           python-version: '3.12'
       - name: Install conformance dependencies
         run: python -m pip install 'PyYAML==6.0.2' 'rfc8785==0.1.4'
+      - name: Validate advisory breeding design fixtures
+        run: python3 Scripts/validate_breeding_pipeline_candidate_fixtures.py
+      - name: Validate approved-candidate breeding contract fixtures
+        run: python3 Scripts/validate_breeding_pipeline_contract_fixtures.py
       - name: Run endpoint-identity mutation tests
         run: python Scripts/test_endpoint_identity.py
       - name: Run capability-negotiation mutation tests
