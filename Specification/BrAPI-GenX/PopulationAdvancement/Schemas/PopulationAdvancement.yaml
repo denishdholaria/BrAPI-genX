@@ -60,10 +60,6 @@ components:
         toStageId:
           type: string
           description: Scheme-version-local destination stage identifier.
-        populationDbId:
-          description: BrAPI population or family reference
-          type: string
-          example: institute-a:population:f2-2026
         advancedAt:
           description: Date of advancement (ISO-8601)
           type: string
