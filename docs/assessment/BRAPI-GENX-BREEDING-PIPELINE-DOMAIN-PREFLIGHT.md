@@ -149,7 +149,13 @@ The master endpoint registry contains three BreedingPipeline entries. Its initia
 - `sources.genx.repository` and `sources.genx.ref` now point to that repository and branch, and `expectedOperationCount` is 462;
 - `generatedAt` is 2026-11-18. The inventory still contains 201 official BrAPI v2.1 entries and 462 proposed GenX entries (663 total). No official BrAPI entries or contracts were changed.
 
-The authoritative operation YAML and master registry were updated together. The next CI (Continuous Integration) run must verify source/registry consistency and the existing registry integrity invariants.
+The authoritative operation YAML and master registry were updated together. Verification on commit [`e1b60dc`](https://github.com/denishdholaria/BrAPI-genX/commit/e1b60dc1507a5c352ceea2796685ed5219dde554):
+- GenX conformance run [44286897932](https://github.com/denishdholaria/BrAPI-genX/actions/runs/44286897932): static and live jobs both succeeded, including endpoint identity tests, capability negotiation, idempotency, digest/JCS (JSON Canonicalization Scheme) vectors, GenX catalogue validation, registry validation, and generated-artifact comparison.
+- Specification build [44286897632](https://github.com/denishdholaria/BrAPI-genX/actions/runs/44286897632): check and generation jobs both succeeded.
+- The three generated catalogue/crosswalk documents are now synchronized with the master registry. The focused GenX catalogue reports 462 proposals, and `Scripts/generateEndpointArtifacts.py` derives that count dynamically rather than hard-coding 21.
+- The registry continues to contain 201 official BrAPI v2.1 entries and 462 non-normative GenX entries; no official BrAPI entry was modified.
+
+A separate, broader metadata-quality audit was identified but deliberately not folded into this pilot: the registry still has repeated generic ArtifactCatalogue/VCF metadata on unrelated modules, and at least one sampled source YAML (ProtocolLibrary) itself has overly generic discovery examples and an unrelated `genxRegisterFarm` semantic neighbour. The current registry checker verifies the required purpose/side-effect/idempotency/classification fields but does not cross-check operation summaries, source descriptions, allowed-use lists, or semantic neighbours against their source YAML. This is a separate source-contract and registry-consistency workstream; no blind bulk replacement was made.
 
 ### 5.3 Classification and maturity records
 
