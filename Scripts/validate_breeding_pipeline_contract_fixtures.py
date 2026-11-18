@@ -542,6 +542,105 @@ def validate_registration(registration: Any) -> list[str]:
     return errors
 
 
+def validate_authority_filter_request(value: Any) -> list[str]:
+    """Validate fail-closed authority-paired filters used by execution list operations."""
+    errors: list[str] = []
+    filters = as_object(value)
+
+    pairs = (
+        ("programDbId", "programServer"),
+        ("studyDbId", "studyServer"),
+        ("candidateGermplasmDbId", "candidateGermplasmServer"),
+    )
+    for identifier_name, server_name in pairs:
+        identifier_present = identifier_name in filters and filters.get(identifier_name) is not None
+        server_present = server_name in filters and filters.get(server_name) is not None
+        if identifier_present != server_present:
+            add(
+                errors,
+                "BM-FILTER-01",
+                f"{identifier_name} and {server_name} must be supplied together; an unqualified BrAPI identifier must not be resolved by guessing its server.",
+            )
+        if identifier_present and not nonempty_string(filters.get(identifier_name)):
+            add(errors, "BM-FILTER-01", f"{identifier_name} must be a non-empty string when supplied.")
+        if server_present:
+            server = filters.get(server_name)
+            if not nonempty_string(server):
+                add(errors, "BM-FILTER-01", f"{server_name} must be a non-empty absolute HTTP(S) URI.")
+            else:
+                try:
+                    parsed = urlsplit(server)
+                    if (
+                        parsed.scheme not in {"https", "http"}
+                        or not parsed.netloc
+                        or not parsed.hostname
+                        or parsed.username is not None
+                        or parsed.password is not None
+                        or parsed.query
+                        or parsed.fragment
+                    ):
+                        raise ValueError("not an absolute authority URI")
+                except ValueError:
+                    add(errors, "BM-FILTER-01", f"{server_name} must be an absolute HTTP(S) URI without credentials, query, or fragment.")
+
+    population_id = "populationDbId"
+    population_server = "populationServer"
+    population_type = "populationResourceType"
+    population_presence = [
+        name in filters and filters.get(name) is not None
+        for name in (population_id, population_server, population_type)
+    ]
+    if any(population_presence) and not all(population_presence):
+        add(
+            errors,
+            "BM-FILTER-02",
+            "populationDbId, populationServer, and populationResourceType must be supplied together; the server must not infer a resource type.",
+        )
+    if population_presence[0] and not nonempty_string(filters.get(population_id)):
+        add(errors, "BM-FILTER-02", "populationDbId must be a non-empty string when supplied.")
+    if population_presence[2] and not nonempty_string(filters.get(population_type)):
+        add(errors, "BM-FILTER-02", "populationResourceType must be the exact non-empty BrAPI resource type when supplied.")
+    if population_presence[1]:
+        server = filters.get(population_server)
+        if not nonempty_string(server):
+            add(errors, "BM-FILTER-02", "populationServer must be a non-empty absolute HTTP(S) URI.")
+        else:
+            try:
+                parsed = urlsplit(server)
+                if (
+                    parsed.scheme not in {"https", "http"}
+                    or not parsed.netloc
+                    or not parsed.hostname
+                    or parsed.username is not None
+                    or parsed.password is not None
+                    or parsed.query
+                    or parsed.fragment
+                ):
+                    raise ValueError("not an absolute authority URI")
+            except ValueError:
+                add(errors, "BM-FILTER-02", "populationServer must be an absolute HTTP(S) URI without credentials, query, or fragment.")
+
+    # The authority tuple is (resourceType, server, dbId), not dbId alone.
+    seen_references: set[tuple[str, str, str]] = set()
+    for index, raw_reference in enumerate(as_list(filters.get("authorityReferences"))):
+        reference = as_object(raw_reference)
+        validate_brapi_reference(
+            reference,
+            f"authorityReferences[{index}]",
+            errors,
+        )
+        resource_type = reference.get("resourceType")
+        server = reference.get("server")
+        db_id = reference.get("dbId")
+        if all(nonempty_string(item) for item in (resource_type, server, db_id)):
+            key = (resource_type, server, db_id)
+            if key in seen_references:
+                add(errors, "BM-FILTER-03", "Duplicate authority-qualified reference tuple.")
+            seen_references.add(key)
+
+    return errors
+
+
 def validate_fixture(fixture: dict[str, Any]) -> list[str]:
     """Validate one positive or negative candidate scenario."""
     errors: list[str] = []
@@ -557,6 +656,9 @@ def validate_fixture(fixture: dict[str, Any]) -> list[str]:
 
     if fixture.get("registration") is not None:
         errors.extend(validate_registration(fixture.get("registration")))
+
+    if fixture.get("authorityFilterRequest") is not None:
+        errors.extend(validate_authority_filter_request(fixture.get("authorityFilterRequest")))
 
     for index, event in enumerate(as_list(fixture.get("executionEvents"))):
         event_errors = validate_execution_event(event, revision, definitions)
@@ -663,6 +765,10 @@ def validate_corpus(corpus: Any) -> list[str]:
         "invalid-quantitative-target-references-trait-only",
         "invalid-incomplete-exact-decimal-range",
         "invalid-scalar-threshold-combined-with-range",
+        "valid-authority-qualified-filters-distinct-authorities",
+        "invalid-authority-filter-without-server",
+        "invalid-population-filter-without-resource-type",
+        "invalid-duplicate-authority-reference-tuple",
         "valid-identical-registration-replay",
         "valid-new-revision-appends-same-workstream",
         "invalid-same-version-different-payload-registration",
