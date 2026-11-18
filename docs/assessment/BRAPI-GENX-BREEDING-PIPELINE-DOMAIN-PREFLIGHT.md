@@ -138,22 +138,24 @@ This is not a harmless documentation duplicate: the resource’s intended meanin
 
 ### 5.2 Endpoint registry metadata defect
 
-The master endpoint registry has three BreedingPipeline entries. GET and list operations reference RFC-014; POST references RFC-154.
+The master endpoint registry contains three BreedingPipeline entries. Its initial state had stale source references and contaminated metadata: the list record advertised an unsupported program filter and cited RFC-014; the retrieval record cited RFC-014; and the POST record was labelled “Register one ArtifactCatalogue”, carried vcfExportDbId examples, and named a Genotyping operation as a semantic neighbour.
 
-The POST entry contains unrelated ArtifactCatalogue / VCF-export description content, including an ArtifactCatalogue operation name and vcfExportDbId examples. This indicates semantic metadata contamination, even though structural registry validation currently passes.
+**Reconciled on 18 November 2026** in commit [`005a470`](https://github.com/denishdholaria/BrAPI-genX/commit/005a4702a0bf7e9cd2fedd78a315e07a064c784f):
+- all three BreedingPipeline registry records now align with the corresponding OpenAPI operation metadata and reference RFC-154 consistently;
+- the list record exposes only its actual server-side `status` filter (plus pagination and authorization parameters), and its purpose states the status-only filter;
+- the retrieval record's description and allowed-use metadata match its source operation;
+- the POST record has the correct operation name, request description, identity field, allowed-use boundaries, and pipeline-only semantic neighbours;
+- all 462 GenX entries now reference repository `denishdholaria/BrAPI-genX` at `main`;
+- `sources.genx.repository` and `sources.genx.ref` now point to that repository and branch, and `expectedOperationCount` is 462;
+- `generatedAt` is 2026-11-18. The inventory still contains 201 official BrAPI v2.1 entries and 462 proposed GenX entries (663 total). No official BrAPI entries or contracts were changed.
 
-The registry root metadata is also stale relative to the current repository:
-- generatedAt is 2026-10-22;
-- the GenX source metadata names denishdholaria/BrAPI-Den and a historical proposal ref;
-- expectedOperationCount remains 21 while buildIntegrity.genxEntriesAdded is 462.
-
-This requires a separate source-of-truth and generation audit. Do not hand-edit the generated registry or its derived catalogues as an isolated patch. Correct the authoritative source records, regenerate, and validate the results in a bounded control-plane workstream.
+The authoritative operation YAML and master registry were updated together. The next CI (Continuous Integration) run must verify source/registry consistency and the existing registry integrity invariants.
 
 ### 5.3 Classification and maturity records
 
-The machine-readable domain classification has duplicate BreedingPipeline module-path entries: one classified as D2 and another with a null primary domain. The maturity register independently lists RFC-014 and RFC-154 as structural drafts.
+The duplicate unclassified BreedingPipeline entry was removed in commit [`9a99cd0`](https://github.com/denishdholaria/BrAPI-genX/commit/9a99cd08f3b4e09f38a7fa6515cfb684bc4d067b); exactly one D2 classification remains. The maturity register still lists RFC-014 and RFC-154 as separate structural drafts. The domain/RFC ownership decision remains open and must not be inferred from this metadata cleanup.
 
-Reconciliation must update all references consistently:
+The remaining reconciliation scope is to keep all references consistent:
 - RFC index and module README;
 - maturity register;
 - machine-readable domain classification;
