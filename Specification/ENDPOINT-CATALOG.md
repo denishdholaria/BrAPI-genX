@@ -8528,6 +8528,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Contract source:** [`Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/implementation/bgx-p1-06-approved-breeding-contract/Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
 ### POST `/genx/v1/breeding-pipelines`
 
 - **Catalogue ID:** `brapi-genx.genx.v1.breeding-pipelines.record`
@@ -8562,6 +8563,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Contract source:** [`Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/implementation/bgx-p1-06-approved-breeding-contract/Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
 ### GET `/genx/v1/breeding-pipelines/{breedingPipelineDbId}`
 
 - **Catalogue ID:** `brapi-genx.genx.v1.breeding-pipelines.get`
@@ -8595,6 +8597,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Contract source:** [`Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_BreedingPipelineDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/implementation/bgx-p1-06-approved-breeding-contract/Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_BreedingPipelineDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
+
 ### BulkCapture — 3 operations
 
 ### GET `/genx/v1/bulk-captures`
