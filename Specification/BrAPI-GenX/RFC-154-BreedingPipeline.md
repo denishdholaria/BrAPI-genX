@@ -80,14 +80,28 @@ This RFC fixes the semantic shape, not a final URI serialization syntax. The con
 
 ## 5. Target contexts
 
-A PipelineRevision supports zero or more typed target contexts. A target context may describe:
+A PipelineRevision supports zero or more purpose-specific target contexts. A target context may describe:
 - product concept/profile reference or immutable descriptive snapshot;
 - market segment reference or description;
 - target population of environments (TPE) reference or description;
-- zero or more trait requirements, each with a resolvable trait/variable reference, desired direction, and typed threshold or range when defined;
-- units, precision, source authority/version, and provenance where relevant.
+- zero or more trait requirements, each with a BrAPI Trait or ObservationVariable reference and a desired direction; quantitative requirements are scale-bound as described below;
+- target provenance and the source authority/version for any external profile snapshot.
 
 Target contexts are purpose-specific. Do not require product/market fields for every pipeline purpose. Trait targets are breeding objectives, not observations or measurements.
+
+### 5.1 Trait-only and quantitative objectives
+
+A directional-only objective may reference an authority-qualified BrAPI `Trait`. A numeric threshold or range must reference an authority-qualified BrAPI `ObservationVariable`. Under BrAPI v2.1, an ObservationVariable is the combination of one Trait, one Method, and one Scale. The embedded Scale is therefore the authoritative source for the measurement unit, decimal-place precision, data type, and valid-value constraints.
+
+The target requirement does not repeat a free-text unit field. Its numeric values are expressed in the Scale of the referenced ObservationVariable. Implementations must not infer or silently convert between units or scales. A different measurement scale requires a different ObservationVariable reference. The exact official BrAPI v2.1 schemas remain authoritative for Trait, Method, ObservationVariable and Scale; this RFC does not redefine them.
+
+Numeric target representation is one of:
+- `threshold`: scalar JSON number;
+- `exactDecimal`: scalar base-10 decimal string, without exponent notation, when JSON number semantics are insufficient;
+- `minimum` and `maximum`: inclusive numeric range bounds, both required together;
+- `minimumExactDecimal` and `maximumExactDecimal`: inclusive exact-decimal range bounds, both required together.
+
+A scalar target cannot be combined with range bounds. Numeric and exact-decimal representations cannot be mixed in one target. The `target-range` direction requires one complete lower/upper bound pair; lower must not exceed upper. Other directions do not carry range bounds. The Scale's `decimalPlaces`, `validValues`, `minimumValue`, and `maximumValue` govern admissible values; candidate schema validation can check representation and range pairing, but validation against a live ObservationVariable Scale is an interoperability/runtime acceptance gate.
 
 This initial contract does not create independent public APIs for MarketSegment, ProductConcept, or TPE. Their independent identity, authority, reuse, and lifecycle have not been demonstrated.
 
@@ -211,7 +225,7 @@ The following remain gates rather than guessed defaults:
 - whether exact version selection remains a query parameter or becomes a nested version route;
 - how multiple published revisions are designated current, including concurrency and authorization rules;
 - canonical BrAPI server URI normalization and authority dereferencing;
-- typed target quantity units, range closure, precision, and exact-decimal validation;
+- runtime dereference of ObservationVariable to its Trait/Method/Scale, and validation of target values against the referenced Scale's units, decimalPlaces, and validValues;
 - whether lifecycle transitions need a separate governance event/audit resource.
 
 The current query-selector and list flag are candidate semantics to test in the implementation-independent OpenAPI build, not a promise that the final public path is immutable.
