@@ -25894,21 +25894,22 @@
         "reviewStatus": "defined-in-genx-proposal-community-review-pending",
         "confidence": "medium"
       },
-      "purpose": "List registered breeding pipeline records, optionally filtered by lifecycle status.",
-      "sourceDescription": "Get a paged list of registered breeding pipeline records. The optional status filter selects records by lifecycle state.",
+      "purpose": "List stable BreedingPipeline workstream identities and their available revision summaries.",
+      "sourceDescription": "Get a paged list of stable pipeline workstream identities. By default, each logical pipeline is represented by its current published revision summary; includeRevisions=true includes all available revision summaries.",
       "canBeUsedFor": [
-        "Discover registered breeding pipeline records.",
-        "Compare pipeline type, lifecycle status, and provenance across returned records."
+        "Discover stable breeding-pipeline workstream identities.",
+        "Compare workstream purpose, current revision, and provenance across returned records.",
+        "Request revision summaries for a complete workstream history."
       ],
       "mustNotBeUsedFor": [
         "Creating or changing a record (use the POST endpoint).",
         "Assuming a record is a BrAPI data resource.",
-        "Treating the list as a complete history."
+        "Treating the default current-revision view as a complete history."
       ],
       "sideEffects": "Read-only.",
       "idempotency": "Read-only.",
       "parameters": [
-        "status",
+        "includeRevisions",
         "page",
         "pageSize",
         "authorizationHeader"
@@ -25921,6 +25922,7 @@
         "403"
       ],
       "responseRefs": [
+        "BreedingPipelineListResponse",
         "400BadRequest",
         "401Unauthorized",
         "403Forbidden"
@@ -25930,11 +25932,17 @@
         "genxGetBreedingPipeline"
       ],
       "decisionReferences": [
-        "RFC-154"
+        "RFC-154",
+        "D-BP-01",
+        "D-BP-03",
+        "D-BP-13"
       ],
       "semanticNeighborCatalogIds": [
         "brapi-genx.genx.v1.breeding-pipelines.record",
         "brapi-genx.genx.v1.breeding-pipelines.get"
+      ],
+      "notes": [
+        "Published BreedingPipeline revisions are immutable. A new revision requires a new breedingPipelineVersionDbId; the stable breedingPipelineDbId continues to identify the workstream. Pipeline stage occupancy belongs to cohort/material execution under an exact scheme version, not to the pipeline."
       ]
     },
     {
@@ -25972,19 +25980,21 @@
         "reviewStatus": "defined-in-genx-proposal-community-review-pending",
         "confidence": "medium"
       },
-      "purpose": "Retrieve one registered breeding pipeline.",
-      "sourceDescription": "Returns the registered record, or 404.",
+      "purpose": "Retrieve the stable logical pipeline view or one exact immutable revision.",
+      "sourceDescription": "Returns the logical pipeline with current published revision by default, or the exact requested breedingPipelineVersionDbId revision, or 404.",
       "canBeUsedFor": [
-        "Inspect a registered breeding pipeline record and its provenance."
+        "Inspect the stable workstream identity and its current published revision.",
+        "Retrieve a historically referenced exact pipeline revision."
       ],
       "mustNotBeUsedFor": [
         "Assuming a record is a BrAPI data resource.",
-        "Treating a superseded record as current."
+        "Treating the current revision as a substitute for an explicitly requested historical revision."
       ],
       "sideEffects": "Read-only.",
       "idempotency": "Read-only.",
       "parameters": [
         "breedingPipelineDbId",
+        "breedingPipelineVersionDbId",
         "authorizationHeader"
       ],
       "requestSchemaRefs": [],
@@ -25996,6 +26006,7 @@
         "404"
       ],
       "responseRefs": [
+        "BreedingPipelineResponse",
         "400BadRequest",
         "401Unauthorized",
         "403Forbidden",
@@ -26006,11 +26017,16 @@
         "genxListBreedingPipelines"
       ],
       "decisionReferences": [
-        "RFC-154"
+        "RFC-154",
+        "D-BP-03",
+        "D-BP-13"
       ],
       "semanticNeighborCatalogIds": [
         "brapi-genx.genx.v1.breeding-pipelines.list",
         "brapi-genx.genx.v1.breeding-pipelines.record"
+      ],
+      "notes": [
+        "Published BreedingPipeline revisions are immutable. A new revision requires a new breedingPipelineVersionDbId; the stable breedingPipelineDbId continues to identify the workstream. Pipeline stage occupancy belongs to cohort/material execution under an exact scheme version, not to the pipeline."
       ]
     },
     {
@@ -58749,7 +58765,7 @@
       "path": "/breeding-pipelines",
       "operationIdInSource": "genxRegisterBreedingPipeline",
       "recommendedOperationId": "genxRegisterBreedingPipeline",
-      "operationName": "Register one breeding pipeline",
+      "operationName": "Register a breeding pipeline revision",
       "classification": {
         "primaryDomain": "D2",
         "crossCuttingCapabilities": [
@@ -58762,19 +58778,19 @@
         "reviewStatus": "defined-in-genx-proposal-community-review-pending",
         "confidence": "medium"
       },
-      "purpose": "Register one breeding pipeline record with provenance.",
-      "sourceDescription": "Register one breeding pipeline record with provenance.",
+      "purpose": "Create a stable BreedingPipeline workstream and append its first immutable revision, or append a new immutable revision to an existing workstream.",
+      "sourceDescription": "Creates or references one stable workstream identity and registers one immutable pipeline revision. A new breedingPipelineVersionDbId is required for every additional revision.",
       "canBeUsedFor": [
-        "Register a breeding pipeline record with its namespaced identity and provenance.",
-        "Retry an identical record safely using the same breedingPipelineDbId."
+        "Register a stable workstream identity with a new immutable breedingPipelineVersionDbId.",
+        "Retry an identical revision safely using the same breedingPipelineVersionDbId."
       ],
       "mustNotBeUsedFor": [
-        "Updating or deleting an existing record; corrections require a new record that supersedes.",
+        "Mutating a published revision; substantive corrections require a new version identity.",
         "Assuming a record is a BrAPI data resource.",
         "Asserting that the catalogue is validated or endorsed."
       ],
-      "sideEffects": "Creates a breeding pipeline identity or appends a new immutable version when accepted.",
-      "idempotency": "Same breedingPipelineDbId and identical body replays the existing record; same id with a different body is rejected with 409.",
+      "sideEffects": "Creates a stable workstream identity when unknown and creates one immutable revision.",
+      "idempotency": "Replay is keyed by breedingPipelineVersionDbId. The same version ID and identical canonical payload replays; the same version ID with a different payload is rejected with 409. A new revision under an existing pipeline uses a new version ID.",
       "parameters": [
         "authorizationHeader"
       ],
@@ -58788,6 +58804,7 @@
         "403"
       ],
       "responseRefs": [
+        "BreedingPipelineResponse",
         "400BadRequest",
         "401Unauthorized",
         "403Forbidden"
@@ -58797,11 +58814,18 @@
         "genxGetBreedingPipeline"
       ],
       "decisionReferences": [
-        "RFC-154"
+        "RFC-154",
+        "D-BP-01",
+        "D-BP-02",
+        "D-BP-03",
+        "D-BP-13"
       ],
       "semanticNeighborCatalogIds": [
         "brapi-genx.genx.v1.breeding-pipelines.list",
         "brapi-genx.genx.v1.breeding-pipelines.get"
+      ],
+      "notes": [
+        "Published BreedingPipeline revisions are immutable. A new revision requires a new breedingPipelineVersionDbId; the stable breedingPipelineDbId continues to identify the workstream. Pipeline stage occupancy belongs to cohort/material execution under an exact scheme version, not to the pipeline."
       ]
     },
     {
