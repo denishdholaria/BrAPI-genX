@@ -453,17 +453,15 @@ These questions do not block further domain research. They do block schema promo
 
 ### Slice 3B — Cross-RFC overlap review
 
-Review RFC-008, RFC-019, RFC-029, RFC-035, RFC-037, and RFC-098 against corresponding official BrAPI resources and each other. Produce a focused overlap matrix identifying duplicated concepts, true GenX-only semantics, fields that should become typed references, lifecycle/identity ownership, and which draft RFCs should be retained, narrowed, deferred, or split.
-
-Do not delete, renumber, or merge RFCs in this review.
+**Completed as assessment** in [the Cross-RFC Overlap Review](./BRAPI-GENX-BREEDING-CROSS-RFC-OVERLAP-REVIEW.md). The review verified official BrAPI v2.1 coverage and GenX draft boundaries for RFC-008, RFC-019, RFC-029, RFC-035, RFC-037, and RFC-098. It identifies SelectionDecision and PopulationAdvancement as the strongest GenX-only candidates, flags ProgenyRecord and CrossingSchedule for narrowing, and finds the current ResearchProgram premise contradicted by BrAPI Program. No RFC or API contract changed.
 
 ### Slice 3C — Candidate logical model and fixtures
 
-Prepare a non-normative entity-relationship model and positive/negative examples for section 11. Use fixtures to test identity, immutable versions, scheme transitions, and separation of definitions from actual events. Do not edit endpoint YAML until the maintainer chooses the public resource boundary.
+**Completed as non-normative design evidence** in [the Candidate Logical Model](./BRAPI-GENX-BREEDING-PIPELINE-LOGICAL-MODEL.md) and [the Candidate Fixture Corpus](./BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json). The model defines candidate cardinalities, identity/versioning rules, execution-reference constraints, and 20 invariants. The nine machine-readable scenarios include three positive and six negative cases. A lightweight structural/semantic check confirmed unique scenario IDs and the declared positive/negative conditions. These are not production conformance fixtures and are not wired into CI.
 
-### Slice 4 — Contract review package
+### Slice 4 — Maintainer contract decision package
 
-Present the refined logical model, OpenAPI alternatives, BrAPI v2.1 crosswalk, migration impact on the current BreedingPipeline record, and explicit decisions required for acceptance. Keep all RFCs at \`STRUCTURAL_DRAFT\` until the specification-quality gates are satisfied and the maintainer directs otherwise.
+Prepare a consolidated decision package comparing the nested-scheme and first-class-scheme alternatives, candidate identity/reference/versioning fields, BrAPI mappings, migration impact on the current scalar pipelineStage record, and RFC disposition consequences. Keep all RFCs at \`STRUCTURAL_DRAFT\`; do not change endpoint YAML, schemas, or maturity states before the maintainer selects the public resource boundary.
 
 ## 14. References
 
