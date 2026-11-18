@@ -207,7 +207,7 @@ The request body must not allow a client to mutate an already published revision
 
 `GET /breeding-pipelines` returns logical workstream summaries. By default, each workstream is represented by its current published revision summary. `includeRevisions=true` includes the known revision summaries for each logical workstream. This flag does not inline the full historical revision payloads and does not replace exact revision retrieval.
 
-The list response's `BreedingPipeline` item represents the stable logical identity and may include the convenience `currentBreedingPipelineVersionDbId`. It must not imply that the workstream itself is an immutable revision.
+The list response's `BreedingPipeline` item represents the stable logical identity and may include the convenience `currentBreedingPipelineVersionDbId` and a `currentRevisionSummary`. When `includeRevisions=true`, the `revisionSummaries` array contains lightweight metadata for all known revisions. These summaries include the immutable version identifier and publication state but not full scheme definitions, target contexts, or other historical payload content. Exact historical revision retrieval remains a separate operation. It must not imply that the workstream itself is an immutable revision.
 
 ### 12.3 Single-resource retrieval
 
