@@ -133,7 +133,7 @@ components:
           enum:
             - version-content-conflict
             - current-version-precondition-failed
-            - withdrawal-target-mismatch
+            - revision-relationship-mismatch
         message:
           type: string
         currentBreedingPipelineVersionDbId:
