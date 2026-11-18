@@ -3,7 +3,7 @@
 
 This validator checks implementation-independent invariants for the candidate
 OpenAPI model. It is not production conformance and cannot promote RFC maturity.
-It uses only the Python standard library.
+Registration replay checks use the repository's JCS (RFC 8785) canonicalizer.
 """
 from __future__ import annotations
 
@@ -15,6 +15,9 @@ import sys
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlsplit
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+from brapi_genx.canonicalization import JCSError, jcs_canonicalize
 
 
 DEFAULT_FIXTURE_PATH = (
@@ -388,6 +391,72 @@ def validate_execution_event(
     return errors
 
 
+
+def validate_registration(registration: Any) -> list[str]:
+    """Validate replay, append, and conflict semantics for revision registration."""
+    errors: list[str] = []
+    request = as_object(registration)
+    existing = as_object(request.get("existingRevision"))
+    incoming = as_object(request.get("incomingRevision"))
+
+    existing_pipeline_id = existing.get("breedingPipelineDbId")
+    incoming_pipeline_id = incoming.get("breedingPipelineDbId")
+    existing_version_id = existing.get("breedingPipelineVersionDbId")
+    incoming_version_id = incoming.get("breedingPipelineVersionDbId")
+
+    if not all(
+        nonempty_string(value)
+        for value in (
+            existing_pipeline_id,
+            incoming_pipeline_id,
+            existing_version_id,
+            incoming_version_id,
+        )
+    ):
+        add(
+            errors,
+            "BM-REG-01",
+            "Registration fixtures require stable pipeline IDs and immutable version IDs on both revisions.",
+        )
+        return errors
+
+    try:
+        existing_canonical = jcs_canonicalize(
+            json.dumps(existing, ensure_ascii=False, allow_nan=False).encode("utf-8")
+        )
+        incoming_canonical = jcs_canonicalize(
+            json.dumps(incoming, ensure_ascii=False, allow_nan=False).encode("utf-8")
+        )
+    except (JCSError, TypeError, ValueError, UnicodeError) as exc:
+        add(errors, "BM-REG-01", f"Registration payload is not valid JCS JSON: {exc}.")
+        return errors
+
+    if existing_version_id == incoming_version_id:
+        if existing_pipeline_id != incoming_pipeline_id or existing_canonical != incoming_canonical:
+            actual_outcome = "conflict"
+            add(
+                errors,
+                "BM-REG-01",
+                "Reusing a breedingPipelineVersionDbId with a different canonical payload must conflict; published content must never be overwritten.",
+            )
+        else:
+            actual_outcome = "replay"
+    elif existing_pipeline_id == incoming_pipeline_id:
+        actual_outcome = "append"
+    else:
+        actual_outcome = "create"
+
+    expected_outcome = request.get("expectedOutcome")
+    if nonempty_string(expected_outcome) and expected_outcome != actual_outcome:
+        add(
+            errors,
+            "BM-REG-01",
+            f"Registration fixture declares outcome {expected_outcome!r}, but the identifiers and canonical payload imply {actual_outcome!r}.",
+        )
+
+    return errors
+
+
 def validate_fixture(fixture: dict[str, Any]) -> list[str]:
     """Validate one positive or negative candidate scenario."""
     errors: list[str] = []
@@ -400,6 +469,9 @@ def validate_fixture(fixture: dict[str, Any]) -> list[str]:
 
     if fixture.get("event") is not None:
         errors.extend(validate_execution_event(fixture.get("event"), revision, definitions))
+
+    if fixture.get("registration") is not None:
+        errors.extend(validate_registration(fixture.get("registration")))
 
     for index, event in enumerate(as_list(fixture.get("executionEvents"))):
         event_errors = validate_execution_event(event, revision, definitions)
@@ -505,6 +577,9 @@ def validate_corpus(corpus: Any) -> list[str]:
         "valid-exact-decimal-observation-variable-range",
         "invalid-quantitative-target-references-trait-only",
         "invalid-incomplete-exact-decimal-range",
+        "valid-identical-registration-replay",
+        "valid-new-revision-appends-same-workstream",
+        "invalid-same-version-different-payload-registration",
     }
     missing = sorted(required - set(by_id))
     if missing:
