@@ -213,7 +213,7 @@ The companion JSON fixture file contains nine design scenarios:
 - three positive scenarios: recurrent overlapping cohorts, immutable scheme-version history, and BrAPI execution crosswalk;
 - six negative scenarios: dangling stage transition, stage without scheme version, pipeline/scheme mismatch, published scheme mutation, duplicate parentage authority, and pipeline-wide current stage.
 
-The corpus is not production conformance. Its current job is to make the logical model falsifiable and to provide stable examples when the accepted schema is later designed.
+The corpus is not production conformance. Its current job is to make the logical model falsifiable and to provide stable examples when the accepted schema is later designed. A standalone validator is available at `Scripts/validate_breeding_pipeline_candidate_fixtures.py`; run it with `python3 Scripts/validate_breeding_pipeline_candidate_fixtures.py`. The specification-build workflow runs this validator as a separate preliminary check. It validates only the advisory corpus and does not promote the examples into normative API conformance.
 
 Minimum checks before promotion:
 1. The JSON file parses.
