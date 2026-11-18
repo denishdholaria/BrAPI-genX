@@ -74,6 +74,11 @@ def audit(strict: bool) -> int:
     documents, errors = load_source_documents(entries)
     mismatches: list[dict[str, Any]] = []
     examined = 0
+    relationship_ids = {
+        relation.get("id")
+        for relation in registry.get("semanticRelationships", [])
+        if isinstance(relation, dict) and isinstance(relation.get("id"), str)
+    }
 
     for entry in entries:
         source = entry.get("source") or {}
@@ -95,6 +100,21 @@ def audit(strict: bool) -> int:
         for field in FIELD_MAP:
             expected = source_value(operation, entry, field)
             actual = entry.get(field)
+
+            if field == "sourceDescription":
+                # Registry descriptions may flatten YAML block-scalar newlines.
+                # Compare semantic text, not formatting-only whitespace.
+                if isinstance(expected, str):
+                    expected = " ".join(expected.split())
+                if isinstance(actual, str):
+                    actual = " ".join(actual.split())
+
+            if field == "semanticNeighborIds":
+                # The registry may add explicitly governed relationship IDs
+                # (for example SEM-*), beyond operation-level neighbors in YAML.
+                actual = [value for value in (actual or []) if value not in relationship_ids]
+                expected = expected or []
+
             if expected != actual:
                 mismatches.append({
                     "catalogId": entry.get("catalogId"),
