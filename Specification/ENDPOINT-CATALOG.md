@@ -8543,7 +8543,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 **Purpose:**
 > Create a stable BreedingPipeline workstream and append its first immutable revision, or append a new immutable revision to an existing workstream.
 **Source contract description:**
-> Creates or references one stable workstream identity and registers one immutable pipeline revision. A new breedingPipelineVersionDbId is required for every additional revision.
+> Creates or references a stable workstream identity and registers one immutable pipeline revision. A new breedingPipelineVersionDbId is required for every additional revision. An append to an existing workstream also supplies expectedCurrentBreedingPipelineVersionDbId as an atomic compare-and-set precondition; explicit null means no currently published revision.
 **Can be used for:**
 - Register a stable workstream identity with a new immutable breedingPipelineVersionDbId.
 - Retry an identical revision safely using the same breedingPipelineVersionDbId.
@@ -8551,12 +8551,12 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - Mutating a published revision; substantive corrections require a new version identity.
 - Assuming a record is a BrAPI data resource.
 - Asserting that the catalogue is validated or endorsed.
-- **Side effects:** Creates a stable workstream identity when unknown and creates one immutable revision.
-- **Retry / idempotency:** Replay is keyed by breedingPipelineVersionDbId. The same version ID and identical canonical payload replays; the same version ID with a different payload is rejected with 409. A new revision under an existing pipeline uses a new version ID.
+- **Side effects:** Creates a stable workstream identity when unknown and appends one immutable revision. A published or withdrawn revision conditionally advances or clears the current published-version pointer using an atomic expected-current comparison.
+- **Retry / idempotency:** Replay is keyed by breedingPipelineVersionDbId and the immutable revision payload is compared using JCS (RFC 8785). An identical same-version replay is evaluated before the expected-current precondition and replays even when that precondition is now stale. The same version ID with a different payload is rejected with 409. A new version under an existing pipeline requires expectedCurrentBreedingPipelineVersionDbId (explicit null when no published version exists); the server atomically compares it with the current pointer before append. A stale or omitted precondition is rejected with 409 and no state change.
 - **Parameters recorded in registry:** authorizationHeader
 - **Request schema refs recorded:** BreedingPipelineNewRequest
-- **Response status codes recorded:** 200, 400, 401, 403
-- **Response component refs recorded:** BreedingPipelineResponse, 400BadRequest, 401Unauthorized, 403Forbidden
+- **Response status codes recorded:** 200, 400, 401, 403, 409
+- **Response component refs recorded:** BreedingPipelineResponse, 400BadRequest, 401Unauthorized, 403Forbidden, BreedingPipelineConflictResponse
 - **Semantic relationship IDs / labels:** genxListBreedingPipelines, genxGetBreedingPipeline
 - **Related catalogue IDs:** brapi-genx.genx.v1.breeding-pipelines.list, brapi-genx.genx.v1.breeding-pipelines.get
 - **Relevant RFC / decision references:** RFC-154, D-BP-01, D-BP-02, D-BP-03, D-BP-13
