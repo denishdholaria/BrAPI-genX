@@ -3189,7 +3189,7 @@
                   },
                   "desiredDirection": "target-range",
                   "minimum": 6.5,
-                  "maximum": 8.0
+                  "maximum": 8
                 },
                 {
                   "traitReference": {
@@ -4082,6 +4082,220 @@
         "expectedOutcome": "conflict"
       },
       "expectedFailure": "The same breedingPipelineVersionDbId cannot be registered with a different canonical payload."
+    },
+    {
+      "scenarioId": "valid-first-registration-with-no-current-pointer",
+      "expectation": "valid",
+      "invariantIds": [
+        "BM-REG-01"
+      ],
+      "description": "Creating the first published revision of a new workstream does not require an expected-current-version precondition.",
+      "registration": {
+        "existingRevision": null,
+        "incomingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:1",
+          "publicationState": "published"
+        },
+        "expectedOutcome": "create"
+      }
+    },
+    {
+      "scenarioId": "valid-published-revision-advances-current-with-matching-precondition",
+      "expectation": "valid",
+      "invariantIds": [
+        "BM-REG-01",
+        "BM-REG-02",
+        "BM-REG-03"
+      ],
+      "description": "A new published revision is appended only when its expected current pointer matches, and it explicitly supersedes that current revision.",
+      "registration": {
+        "existingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+          "publicationState": "published"
+        },
+        "currentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "expectedCurrentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "incomingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3",
+          "publicationState": "published",
+          "revisionRelationship": {
+            "relationshipType": "supersedes",
+            "priorBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
+          }
+        },
+        "expectedOutcome": "publish"
+      }
+    },
+    {
+      "scenarioId": "valid-draft-revision-preserves-current-pointer",
+      "expectation": "valid",
+      "invariantIds": [
+        "BM-REG-01",
+        "BM-REG-02"
+      ],
+      "description": "A draft revision may be appended against the current published baseline but does not advance the published-current pointer.",
+      "registration": {
+        "existingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+          "publicationState": "published"
+        },
+        "currentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "expectedCurrentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "incomingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3",
+          "publicationState": "draft",
+          "revisionRelationship": {
+            "relationshipType": "supersedes",
+            "priorBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
+          }
+        },
+        "expectedOutcome": "append"
+      }
+    },
+    {
+      "scenarioId": "invalid-append-missing-current-pointer-precondition",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-REG-02"
+      ],
+      "description": "Appending a new revision to an existing workstream without stating its expected current published revision must fail closed.",
+      "registration": {
+        "existingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+          "publicationState": "published"
+        },
+        "currentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "incomingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3",
+          "publicationState": "published",
+          "revisionRelationship": {
+            "relationshipType": "supersedes",
+            "priorBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
+          }
+        },
+        "expectedOutcome": "publish"
+      },
+      "expectedFailure": "The append omits expectedCurrentBreedingPipelineVersionDbId."
+    },
+    {
+      "scenarioId": "invalid-append-stale-current-pointer-precondition",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-REG-02"
+      ],
+      "description": "A concurrent publish that has already advanced the current pointer must cause a stale append precondition to fail.",
+      "registration": {
+        "existingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3",
+          "publicationState": "published"
+        },
+        "currentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3",
+        "expectedCurrentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "incomingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:4",
+          "publicationState": "published",
+          "revisionRelationship": {
+            "relationshipType": "supersedes",
+            "priorBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3"
+          }
+        },
+        "expectedOutcome": "publish"
+      },
+      "expectedFailure": "The expected current version no longer matches the server's current published revision."
+    },
+    {
+      "scenarioId": "invalid-published-revision-does-not-reference-current-version",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-REG-03"
+      ],
+      "description": "A published successor must explicitly identify the current published version it supersedes or corrects.",
+      "registration": {
+        "existingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+          "publicationState": "published"
+        },
+        "currentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "expectedCurrentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "incomingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3",
+          "publicationState": "published",
+          "revisionRelationship": {
+            "relationshipType": "supersedes",
+            "priorBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:1"
+          }
+        },
+        "expectedOutcome": "publish"
+      },
+      "expectedFailure": "The successor relationship does not identify the current published revision."
+    },
+    {
+      "scenarioId": "valid-withdrawal-references-current-version",
+      "expectation": "valid",
+      "invariantIds": [
+        "BM-REG-01",
+        "BM-REG-02",
+        "BM-REG-03"
+      ],
+      "description": "Withdrawing the current published revision is a new immutable revision tied to the exact current version and guarded by the matching precondition.",
+      "registration": {
+        "existingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+          "publicationState": "published"
+        },
+        "currentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "expectedCurrentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "incomingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3",
+          "publicationState": "withdrawn",
+          "revisionRelationship": {
+            "relationshipType": "supersedes",
+            "priorBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
+          }
+        },
+        "expectedOutcome": "withdraw"
+      }
+    },
+    {
+      "scenarioId": "invalid-withdrawal-does-not-reference-current-version",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-REG-03"
+      ],
+      "description": "A withdrawal revision cannot clear the current pointer unless it identifies the exact current published version being withdrawn.",
+      "registration": {
+        "existingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+          "publicationState": "published"
+        },
+        "currentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "expectedCurrentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "incomingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3",
+          "publicationState": "withdrawn",
+          "revisionRelationship": {
+            "relationshipType": "supersedes",
+            "priorBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:1"
+          }
+        },
+        "expectedOutcome": "withdraw"
+      },
+      "expectedFailure": "The withdrawal revision points to a version other than the current published revision."
     }
   ]
 }
