@@ -57,8 +57,7 @@
                 },
                 "desiredDirection": "increase",
                 "minimum": 6.5,
-                "maximum": 8,
-                "unit": "t/ha"
+                "maximum": 8
               },
               {
                 "traitReference": {
@@ -68,8 +67,7 @@
                   "dbId": "lodging"
                 },
                 "desiredDirection": "decrease",
-                "exactDecimal": "0.15",
-                "unit": "proportion"
+                "exactDecimal": "0.15"
               }
             ]
           },
@@ -312,8 +310,7 @@
                 },
                 "desiredDirection": "increase",
                 "minimum": 6.5,
-                "maximum": 8,
-                "unit": "t/ha"
+                "maximum": 8
               },
               {
                 "traitReference": {
@@ -323,8 +320,7 @@
                   "dbId": "lodging"
                 },
                 "desiredDirection": "decrease",
-                "exactDecimal": "0.15",
-                "unit": "proportion"
+                "exactDecimal": "0.15"
               }
             ]
           },
@@ -484,8 +480,7 @@
                 },
                 "desiredDirection": "increase",
                 "minimum": 6.5,
-                "maximum": 8,
-                "unit": "t/ha"
+                "maximum": 8
               },
               {
                 "traitReference": {
@@ -495,8 +490,7 @@
                   "dbId": "lodging"
                 },
                 "desiredDirection": "decrease",
-                "exactDecimal": "0.15",
-                "unit": "proportion"
+                "exactDecimal": "0.15"
               }
             ]
           },
@@ -660,8 +654,7 @@
                 },
                 "desiredDirection": "increase",
                 "minimum": 6.5,
-                "maximum": 8,
-                "unit": "t/ha"
+                "maximum": 8
               },
               {
                 "traitReference": {
@@ -671,8 +664,7 @@
                   "dbId": "lodging"
                 },
                 "desiredDirection": "decrease",
-                "exactDecimal": "0.15",
-                "unit": "proportion"
+                "exactDecimal": "0.15"
               }
             ]
           },
@@ -813,8 +805,7 @@
                 },
                 "desiredDirection": "increase",
                 "minimum": 6.5,
-                "maximum": 8,
-                "unit": "t/ha"
+                "maximum": 8
               },
               {
                 "traitReference": {
@@ -824,8 +815,7 @@
                   "dbId": "lodging"
                 },
                 "desiredDirection": "decrease",
-                "exactDecimal": "0.15",
-                "unit": "proportion"
+                "exactDecimal": "0.15"
               }
             ]
           },
@@ -991,8 +981,7 @@
                 },
                 "desiredDirection": "increase",
                 "minimum": 6.5,
-                "maximum": 8,
-                "unit": "t/ha"
+                "maximum": 8
               },
               {
                 "traitReference": {
@@ -1002,8 +991,7 @@
                   "dbId": "lodging"
                 },
                 "desiredDirection": "decrease",
-                "exactDecimal": "0.15",
-                "unit": "proportion"
+                "exactDecimal": "0.15"
               }
             ]
           },
@@ -1178,8 +1166,7 @@
                 },
                 "desiredDirection": "increase",
                 "minimum": 6.5,
-                "maximum": 8,
-                "unit": "t/ha"
+                "maximum": 8
               },
               {
                 "traitReference": {
@@ -1189,8 +1176,7 @@
                   "dbId": "lodging"
                 },
                 "desiredDirection": "decrease",
-                "exactDecimal": "0.15",
-                "unit": "proportion"
+                "exactDecimal": "0.15"
               }
             ]
           },
@@ -1393,8 +1379,7 @@
                 },
                 "desiredDirection": "increase",
                 "minimum": 6.5,
-                "maximum": 8,
-                "unit": "t/ha"
+                "maximum": 8
               },
               {
                 "traitReference": {
@@ -1404,8 +1389,7 @@
                   "dbId": "lodging"
                 },
                 "desiredDirection": "decrease",
-                "exactDecimal": "0.15",
-                "unit": "proportion"
+                "exactDecimal": "0.15"
               }
             ]
           },
@@ -1608,8 +1592,7 @@
                 },
                 "desiredDirection": "increase",
                 "minimum": 6.5,
-                "maximum": 8,
-                "unit": "t/ha"
+                "maximum": 8
               },
               {
                 "traitReference": {
@@ -1619,8 +1602,7 @@
                   "dbId": "lodging"
                 },
                 "desiredDirection": "decrease",
-                "exactDecimal": "0.15",
-                "unit": "proportion"
+                "exactDecimal": "0.15"
               }
             ]
           },
@@ -1824,7 +1806,6 @@
                 "desiredDirection": "increase",
                 "minimum": 6.5,
                 "maximum": 8,
-                "unit": "t/ha",
                 "exactDecimal": "6.75"
               }
             ]
@@ -2008,8 +1989,7 @@
                 },
                 "desiredDirection": "increase",
                 "minimum": 6.5,
-                "maximum": 8,
-                "unit": "t/ha"
+                "maximum": 8
               },
               {
                 "traitReference": {
@@ -2019,8 +1999,7 @@
                   "dbId": "lodging"
                 },
                 "desiredDirection": "decrease",
-                "exactDecimal": "0.15",
-                "unit": "proportion"
+                "exactDecimal": "0.15"
               }
             ]
           },
@@ -2341,6 +2320,505 @@
         ]
       },
       "expectedFailure": "Published scheme content changed without a new breedingSchemeVersionDbId."
+    },
+    {
+      "scenarioId": "valid-exact-decimal-observation-variable-range",
+      "expectation": "valid",
+      "invariantIds": [
+        "BM-TARGET-02",
+        "BM-TARGET-04"
+      ],
+      "description": "A quantitative exact-decimal target range uses an authority-qualified BrAPI ObservationVariable reference; its referenced Scale supplies units and precision.",
+      "pipelineRevision": {
+        "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+        "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "pipelineName": "rice-lowland-product-development",
+        "purpose": "product-development",
+        "programReference": {
+          "apiGeneration": "brapi-v2.1",
+          "resourceType": "Program",
+          "server": "https://brapi.example.org/brapi/v2",
+          "dbId": "rice-program-2026"
+        },
+        "publicationState": "published",
+        "targetContexts": [
+          {
+            "targetContextId": "precise-yield-range",
+            "traitRequirements": [
+              {
+                "traitReference": {
+                  "apiGeneration": "brapi-v2.1",
+                  "resourceType": "ObservationVariable",
+                  "server": "https://brapi.example.org/brapi/v2",
+                  "dbId": "grain-yield"
+                },
+                "desiredDirection": "target-range",
+                "minimumExactDecimal": "6.250",
+                "maximumExactDecimal": "8.750"
+              }
+            ]
+          }
+        ],
+        "schemeBindings": [
+          {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+            "role": "principal",
+            "schemeVersion": {
+              "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+              "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+              "versionLabel": "4",
+              "publicationState": "published",
+              "stages": [
+                {
+                  "stageId": "crossing",
+                  "label": "Crossing block",
+                  "displayOrder": 1,
+                  "tasks": [
+                    {
+                      "taskId": "make-crosses",
+                      "activityCategory": "crossing",
+                      "expectedEvidence": [
+                        "CrossingProject",
+                        "PlannedCross",
+                        "Cross"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "stageId": "F2",
+                  "label": "F2",
+                  "displayOrder": 2,
+                  "tasks": [
+                    {
+                      "taskId": "advance-generation",
+                      "activityCategory": "generation-advancement"
+                    }
+                  ]
+                },
+                {
+                  "stageId": "F3",
+                  "label": "F3",
+                  "displayOrder": 3,
+                  "tasks": [
+                    {
+                      "taskId": "evaluate-F3",
+                      "activityCategory": "evaluation",
+                      "expectedEvidence": [
+                        "Study",
+                        "Observation"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "transitions": [
+                {
+                  "transitionId": "t1",
+                  "fromStageId": "crossing",
+                  "toStageId": "F2",
+                  "transitionType": "advance"
+                },
+                {
+                  "transitionId": "t2",
+                  "fromStageId": "F2",
+                  "toStageId": "F3",
+                  "transitionType": "advance",
+                  "tasks": [
+                    {
+                      "taskId": "select-F2",
+                      "activityCategory": "selection",
+                      "description": "Select F2 material for F3 advancement"
+                    }
+                  ]
+                },
+                {
+                  "transitionId": "t3",
+                  "fromStageId": "F3",
+                  "toStageId": "crossing",
+                  "transitionType": "recurrent"
+                }
+              ]
+            }
+          },
+          {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+            "role": "experimental",
+            "schemeVersion": {
+              "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+              "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+              "versionLabel": "2",
+              "publicationState": "published",
+              "stages": [
+                {
+                  "stageId": "rapid-advance",
+                  "label": "Rapid generation advance",
+                  "displayOrder": 1,
+                  "tasks": [
+                    {
+                      "taskId": "advance-rapid",
+                      "activityCategory": "generation-advancement"
+                    }
+                  ]
+                },
+                {
+                  "stageId": "seed-increase",
+                  "label": "Seed increase",
+                  "displayOrder": 2,
+                  "tasks": [
+                    {
+                      "taskId": "multiply-seed",
+                      "activityCategory": "multiplication"
+                    }
+                  ]
+                }
+              ],
+              "transitions": [
+                {
+                  "transitionId": "rapid-to-seed",
+                  "fromStageId": "rapid-advance",
+                  "toStageId": "seed-increase",
+                  "transitionType": "advance"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "scenarioId": "invalid-quantitative-target-references-trait-only",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-TARGET-04"
+      ],
+      "description": "A numeric target cannot use a BrAPI Trait-only reference because Trait does not define the measurement Scale.",
+      "pipelineRevision": {
+        "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+        "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "pipelineName": "rice-lowland-product-development",
+        "purpose": "product-development",
+        "programReference": {
+          "apiGeneration": "brapi-v2.1",
+          "resourceType": "Program",
+          "server": "https://brapi.example.org/brapi/v2",
+          "dbId": "rice-program-2026"
+        },
+        "publicationState": "published",
+        "targetContexts": [
+          {
+            "targetContextId": "trait-only-numeric",
+            "traitRequirements": [
+              {
+                "traitReference": {
+                  "apiGeneration": "brapi-v2.1",
+                  "resourceType": "Trait",
+                  "server": "https://brapi.example.org/brapi/v2",
+                  "dbId": "grain-yield-trait"
+                },
+                "desiredDirection": "increase",
+                "exactDecimal": "6.75"
+              }
+            ]
+          }
+        ],
+        "schemeBindings": [
+          {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+            "role": "principal",
+            "schemeVersion": {
+              "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+              "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+              "versionLabel": "4",
+              "publicationState": "published",
+              "stages": [
+                {
+                  "stageId": "crossing",
+                  "label": "Crossing block",
+                  "displayOrder": 1,
+                  "tasks": [
+                    {
+                      "taskId": "make-crosses",
+                      "activityCategory": "crossing",
+                      "expectedEvidence": [
+                        "CrossingProject",
+                        "PlannedCross",
+                        "Cross"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "stageId": "F2",
+                  "label": "F2",
+                  "displayOrder": 2,
+                  "tasks": [
+                    {
+                      "taskId": "advance-generation",
+                      "activityCategory": "generation-advancement"
+                    }
+                  ]
+                },
+                {
+                  "stageId": "F3",
+                  "label": "F3",
+                  "displayOrder": 3,
+                  "tasks": [
+                    {
+                      "taskId": "evaluate-F3",
+                      "activityCategory": "evaluation",
+                      "expectedEvidence": [
+                        "Study",
+                        "Observation"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "transitions": [
+                {
+                  "transitionId": "t1",
+                  "fromStageId": "crossing",
+                  "toStageId": "F2",
+                  "transitionType": "advance"
+                },
+                {
+                  "transitionId": "t2",
+                  "fromStageId": "F2",
+                  "toStageId": "F3",
+                  "transitionType": "advance",
+                  "tasks": [
+                    {
+                      "taskId": "select-F2",
+                      "activityCategory": "selection",
+                      "description": "Select F2 material for F3 advancement"
+                    }
+                  ]
+                },
+                {
+                  "transitionId": "t3",
+                  "fromStageId": "F3",
+                  "toStageId": "crossing",
+                  "transitionType": "recurrent"
+                }
+              ]
+            }
+          },
+          {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+            "role": "experimental",
+            "schemeVersion": {
+              "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+              "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+              "versionLabel": "2",
+              "publicationState": "published",
+              "stages": [
+                {
+                  "stageId": "rapid-advance",
+                  "label": "Rapid generation advance",
+                  "displayOrder": 1,
+                  "tasks": [
+                    {
+                      "taskId": "advance-rapid",
+                      "activityCategory": "generation-advancement"
+                    }
+                  ]
+                },
+                {
+                  "stageId": "seed-increase",
+                  "label": "Seed increase",
+                  "displayOrder": 2,
+                  "tasks": [
+                    {
+                      "taskId": "multiply-seed",
+                      "activityCategory": "multiplication"
+                    }
+                  ]
+                }
+              ],
+              "transitions": [
+                {
+                  "transitionId": "rapid-to-seed",
+                  "fromStageId": "rapid-advance",
+                  "toStageId": "seed-increase",
+                  "transitionType": "advance"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "expectedFailure": "Quantitative target references must use resourceType ObservationVariable so the BrAPI Scale is explicit."
+    },
+    {
+      "scenarioId": "invalid-incomplete-exact-decimal-range",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-TARGET-02"
+      ],
+      "description": "An exact-decimal target range must include both minimumExactDecimal and maximumExactDecimal.",
+      "pipelineRevision": {
+        "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+        "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "pipelineName": "rice-lowland-product-development",
+        "purpose": "product-development",
+        "programReference": {
+          "apiGeneration": "brapi-v2.1",
+          "resourceType": "Program",
+          "server": "https://brapi.example.org/brapi/v2",
+          "dbId": "rice-program-2026"
+        },
+        "publicationState": "published",
+        "targetContexts": [
+          {
+            "targetContextId": "incomplete-exact-range",
+            "traitRequirements": [
+              {
+                "traitReference": {
+                  "apiGeneration": "brapi-v2.1",
+                  "resourceType": "ObservationVariable",
+                  "server": "https://brapi.example.org/brapi/v2",
+                  "dbId": "grain-yield"
+                },
+                "desiredDirection": "target-range",
+                "minimumExactDecimal": "6.0"
+              }
+            ]
+          }
+        ],
+        "schemeBindings": [
+          {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+            "role": "principal",
+            "schemeVersion": {
+              "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+              "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+              "versionLabel": "4",
+              "publicationState": "published",
+              "stages": [
+                {
+                  "stageId": "crossing",
+                  "label": "Crossing block",
+                  "displayOrder": 1,
+                  "tasks": [
+                    {
+                      "taskId": "make-crosses",
+                      "activityCategory": "crossing",
+                      "expectedEvidence": [
+                        "CrossingProject",
+                        "PlannedCross",
+                        "Cross"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "stageId": "F2",
+                  "label": "F2",
+                  "displayOrder": 2,
+                  "tasks": [
+                    {
+                      "taskId": "advance-generation",
+                      "activityCategory": "generation-advancement"
+                    }
+                  ]
+                },
+                {
+                  "stageId": "F3",
+                  "label": "F3",
+                  "displayOrder": 3,
+                  "tasks": [
+                    {
+                      "taskId": "evaluate-F3",
+                      "activityCategory": "evaluation",
+                      "expectedEvidence": [
+                        "Study",
+                        "Observation"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "transitions": [
+                {
+                  "transitionId": "t1",
+                  "fromStageId": "crossing",
+                  "toStageId": "F2",
+                  "transitionType": "advance"
+                },
+                {
+                  "transitionId": "t2",
+                  "fromStageId": "F2",
+                  "toStageId": "F3",
+                  "transitionType": "advance",
+                  "tasks": [
+                    {
+                      "taskId": "select-F2",
+                      "activityCategory": "selection",
+                      "description": "Select F2 material for F3 advancement"
+                    }
+                  ]
+                },
+                {
+                  "transitionId": "t3",
+                  "fromStageId": "F3",
+                  "toStageId": "crossing",
+                  "transitionType": "recurrent"
+                }
+              ]
+            }
+          },
+          {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+            "role": "experimental",
+            "schemeVersion": {
+              "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+              "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+              "versionLabel": "2",
+              "publicationState": "published",
+              "stages": [
+                {
+                  "stageId": "rapid-advance",
+                  "label": "Rapid generation advance",
+                  "displayOrder": 1,
+                  "tasks": [
+                    {
+                      "taskId": "advance-rapid",
+                      "activityCategory": "generation-advancement"
+                    }
+                  ]
+                },
+                {
+                  "stageId": "seed-increase",
+                  "label": "Seed increase",
+                  "displayOrder": 2,
+                  "tasks": [
+                    {
+                      "taskId": "multiply-seed",
+                      "activityCategory": "multiplication"
+                    }
+                  ]
+                }
+              ],
+              "transitions": [
+                {
+                  "transitionId": "rapid-to-seed",
+                  "fromStageId": "rapid-advance",
+                  "toStageId": "seed-increase",
+                  "transitionType": "advance"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "expectedFailure": "target-range requires a complete numeric or exact-decimal minimum/maximum pair."
     }
   ]
 }
