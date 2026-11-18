@@ -263,3 +263,44 @@ The registration envelope carries `expectedCurrentBreedingPipelineVersionDbId` a
 The current pointer is a convenience for discovery, not the identity or history of the workstream. It must never be advanced independently of the immutable revision append. The pointer comparison and version append/update/clear must be atomic under the repository's persistence model.
 
 **Decision needed before normative promotion:** ratify this compare-and-set profile or choose a different concurrency model, and define which actor scopes may publish and withdraw. Until ratified and behaviorally implemented, the profile is candidate contract guidance only. The 28 fixtures exercise these proposed semantics at the design-validation layer; they do not prove production transaction isolation or runtime enforcement.
+
+
+### 12.8 BrAPI v2.1 authority and target-scale profile (candidate)
+
+The reference and target-value model is based on the official BrAPI v2.1 source contracts, not on GenX-defined copies of BrAPI measurement metadata:
+
+- [ObservationVariable schema](https://github.com/plantbreeding/BrAPI/blob/brapi-V2.1/Specification/BrAPI-Phenotyping/ObservationVariables/Schemas/ObservationVariable.yaml) defines an ObservationVariable as a unique combination of Trait, Method, and Scale.
+- [VariableBaseClass schema](https://github.com/plantbreeding/BrAPI/blob/brapi-V2.1/Specification/Components/Schemas/VariableBaseClass.yaml) requires Trait, Method, and Scale and embeds the Scale definition in an ObservationVariable.
+- [ScaleBaseClass schema](https://github.com/plantbreeding/BrAPI/blob/brapi-V2.1/Specification/Components/Schemas/ScaleBaseClass.yaml) defines the scale's data type, decimalPlaces, units, and validValues. The v2.1 profile uses minimumValue and maximumValue; the older min and max properties are explicitly deprecated.
+- [TraitDataType schema](https://github.com/plantbreeding/BrAPI/blob/brapi-V2.1/Specification/BrAPI-Schema/BrAPI-Common/TraitDataType.json) defines Code, Date, Duration, Nominal, Numerical, Ordinal, and Text.
+
+Candidate semantic constraints:
+
+1. A direction-only breeding objective may refer to a BrAPI Trait or ObservationVariable.
+2. A quantitative target must refer to an authority-qualified ObservationVariable, not a Trait-only reference. The referenced ObservationVariable's Scale is the measurement contract.
+3. The resolved Scale must have `dataType: Numerical` before a numeric threshold or range is considered semantically valid. A non-numerical Scale must not be coerced into a numeric target.
+4. The Scale's `units` is authoritative. GenX must not add a second free-text unit that could conflict with the referenced Scale.
+5. Where supplied, `validValues.minimumValue` and `validValues.maximumValue` bound the admissible numeric range. The v2.1 values are strings and should be parsed as decimal quantities, not binary floating-point text.
+6. Where supplied, `decimalPlaces` describes the number of decimal places to be reported. Candidate validation should reject a target whose requested precision exceeds an explicitly defined scale precision rather than silently rounding or truncating it. A null or absent decimalPlaces value means that precision is not specified by the Scale; it must not be guessed.
+7. If `validValues.categories` is the governing representation, values must be checked against the allowed categories rather than treated as unrestricted numerical values.
+
+These are target-profile constraints, not a new GenX measurement-scale resource. The immutable pipeline revision preserves the authority-qualified ObservationVariable reference; it does not snapshot a conflicting copy of Trait, Method, Scale, or units.
+
+**Open implementation gate:** decide whether registration must synchronously dereference the authority-qualified ObservationVariable and validate against its Scale, or whether unresolved references may be accepted with an explicit unverified state and later validation. Silent fallback, local-server guessing, unit substitution, and implicit rounding are prohibited under either profile. Behavior-level tests must cover stale or unavailable authority servers, wrong resource types, non-numerical scales, configured minimum/maximum values, and configured decimalPlaces.
+
+### 12.9 BrAPI server URI canonicalization profile (candidate)
+
+The `server` component identifies a BrAPI server base URI, including its configured BrAPI base path (for example `/brapi/v2`). It is not a per-resource URL and must not be reconstructed from a host name or an unqualified dbId.
+
+The candidate canonicalization profile follows the syntax-based normalization rules in [RFC 3986 §§6.2.2–6.2.3](https://www.rfc-editor.org/rfc/rfc3986.html):
+
+- Require an absolute hierarchical HTTP or HTTPS URI with an authority and no user information, query, or fragment.
+- Lowercase the scheme and DNS host; normalize percent-encoding hex digits to uppercase and decode percent-encoded unreserved characters only.
+- Remove dot segments and the default port for the selected scheme. Normalize an empty HTTP(S) path to `/`.
+- Preserve path case, reserved percent-encoded octets, and a non-empty trailing slash because these can be part of a deployment's base-path identity. Do not treat `/brapi/v2` and `/brapi/v2/` as equivalent without an explicit deployment rule.
+- Do not resolve redirects during identity canonicalization. A redirect target is not silently substituted for the declared authority.
+
+A canonical server identifier is used consistently in reference equality, filter pairing, and cache keys. URI canonicalization is distinct from permission to make a network request to that server. Dereferencing must use an explicit server/authority policy with outbound-request protections; a user-supplied URI must not become an unrestricted server-side fetch target.
+
+The allowed deployment scheme policy (HTTPS-only versus explicitly configured HTTP for private/test servers), internationalized DNS name profile, proxy/redirect policy, DNS rebinding defenses, and authority onboarding/trust model remain gates. RFC 3986 defines generic normalization, but it does not decide which external authorities an implementation trusts or is permitted to contact.
+
