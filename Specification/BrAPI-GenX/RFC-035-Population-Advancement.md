@@ -1,7 +1,8 @@
 # RFC-035 — Population Advancement (Breeding)
 
-- Status: proposal, non-normative.
+- Status: proposal, non-normative; retain and refine as an actual execution event.
 - Supersedes: none.
+- Decision: D-BP-10 — actual population progression remains a distinct GenX event; whenever scheme-local stage identifiers are supplied, they must resolve through the exact scheme version.
 - Related: RFC-001 (GenX skeleton), `CLASSIFICATION.md` (D2).
 
 ## 1. Problem
