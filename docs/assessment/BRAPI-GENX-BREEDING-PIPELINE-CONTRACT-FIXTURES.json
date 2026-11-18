@@ -55,7 +55,7 @@
                   "server": "https://brapi.example.org/brapi/v2",
                   "dbId": "grain-yield"
                 },
-                "desiredDirection": "increase",
+                "desiredDirection": "target-range",
                 "minimum": 6.5,
                 "maximum": 8
               },
