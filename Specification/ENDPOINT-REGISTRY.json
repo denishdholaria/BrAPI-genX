@@ -30772,6 +30772,7 @@
         "programServer",
         "populationDbId",
         "populationServer",
+        "populationResourceType",
         "status",
         "page",
         "pageSize",
