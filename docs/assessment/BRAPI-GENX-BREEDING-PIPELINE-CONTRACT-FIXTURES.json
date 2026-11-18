@@ -4338,6 +4338,91 @@
         ],
         "schemeBindings": []
       }
+    },
+    {
+      "scenarioId": "valid-authority-qualified-filters-distinct-authorities",
+      "expectation": "valid",
+      "invariantIds": [
+        "BM-FILTER-01",
+        "BM-FILTER-02",
+        "BM-FILTER-03"
+      ],
+      "description": "All BrAPI list identifier filters are paired with the issuing server; population filters also include the exact resource type. Equal dbIds from distinct servers remain distinct authority tuples.",
+      "authorityFilterRequest": {
+        "programDbId": "program-1",
+        "programServer": "https://server-a.example.org/brapi/v2",
+        "studyDbId": "study-1",
+        "studyServer": "https://server-a.example.org/brapi/v2",
+        "candidateGermplasmDbId": "line-42",
+        "candidateGermplasmServer": "https://server-b.example.org/brapi/v2",
+        "populationDbId": "line-42",
+        "populationServer": "https://server-b.example.org/brapi/v2",
+        "populationResourceType": "Germplasm",
+        "authorityReferences": [
+          {
+            "apiGeneration": "brapi-v2.1",
+            "resourceType": "Germplasm",
+            "server": "https://server-a.example.org/brapi/v2",
+            "dbId": "line-42"
+          },
+          {
+            "apiGeneration": "brapi-v2.1",
+            "resourceType": "Germplasm",
+            "server": "https://server-b.example.org/brapi/v2",
+            "dbId": "line-42"
+          }
+        ]
+      }
+    },
+    {
+      "scenarioId": "invalid-authority-filter-without-server",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-FILTER-01"
+      ],
+      "expectedFailure": "programDbId and programServer must be supplied together.",
+      "description": "A BrAPI identifier list filter without its issuing server must fail closed.",
+      "authorityFilterRequest": {
+        "programDbId": "program-1"
+      }
+    },
+    {
+      "scenarioId": "invalid-population-filter-without-resource-type",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-FILTER-02"
+      ],
+      "expectedFailure": "populationDbId, populationServer, and populationResourceType must be supplied together.",
+      "description": "A population/family identifier and server are insufficient without the exact owning BrAPI resource type.",
+      "authorityFilterRequest": {
+        "populationDbId": "line-42",
+        "populationServer": "https://server-b.example.org/brapi/v2"
+      }
+    },
+    {
+      "scenarioId": "invalid-duplicate-authority-reference-tuple",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-FILTER-03"
+      ],
+      "expectedFailure": "Duplicate authority-qualified reference tuple.",
+      "description": "The same BrAPI resource tuple must not be duplicated, while a same-valued dbId from another server remains a distinct tuple.",
+      "authorityFilterRequest": {
+        "authorityReferences": [
+          {
+            "apiGeneration": "brapi-v2.1",
+            "resourceType": "Program",
+            "server": "https://server-a.example.org/brapi/v2",
+            "dbId": "same-id"
+          },
+          {
+            "apiGeneration": "brapi-v2.1",
+            "resourceType": "Program",
+            "server": "https://server-a.example.org/brapi/v2",
+            "dbId": "same-id"
+          }
+        ]
+      }
     }
   ]
 }
