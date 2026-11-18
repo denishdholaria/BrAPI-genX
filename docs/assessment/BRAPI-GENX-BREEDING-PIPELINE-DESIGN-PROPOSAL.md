@@ -4,7 +4,8 @@
 **Prepared:** 18 November 2026  
 **Workstream:** BGX-P1-01 — BreedingPipeline / BreedingScheme domain boundary  
 **Parent assessment:** [Breeding Pipeline Domain Preflight](./BRAPI-GENX-BREEDING-PIPELINE-DOMAIN-PREFLIGHT.md)  
-**Repository baseline:** `main` at `569a75e194df2ee540ecd60615bad2790523c022`
+**Candidate contract design:** [Breeding Pipeline and Scheme Candidate Contract Design](./BRAPI-GENX-BREEDING-PIPELINE-SCHEME-CONTRACT-DESIGN.md)  
+**Repository baseline:** `main` at `315ba3c524bb09fde0c3580fdb4512b070cc0300` (inspection baseline after the candidate contract-design slice).
 
 ## 1. Purpose and decision boundary
 
@@ -227,7 +228,7 @@ Current repository state:
 - RFC-154 and the current module schemas describe a pipeline record with a scalar `pipelineStage`, pipeline type, breeding program, and target trait.
 - The module README, operation metadata, and schemas currently direct readers to RFC-154.
 - Both RFCs currently declare the same three endpoint paths and operation identifiers.
-- The domain-classification YAML contains two entries for the same `BreedingPipeline/` path, one D2-classified and one unclassified.
+- The domain-classification YAML contains exactly one `BreedingPipeline/` entry, classified D2. The duplicate unclassified entry was removed as an engineering-only consistency correction.
 
 Recommended editorial handling:
 
@@ -238,7 +239,7 @@ Recommended editorial handling:
 5. Mark any retained predecessor explicitly as superseded or withdrawn only when the maintainer has approved that disposition.
 6. Keep endpoint identifiers and routes provisional until the domain model is settled. Do not preserve a three-operation template merely for continuity if a different resource boundary is justified.
 
-The duplicated domain-classification entry is a repository consistency defect and should be removed in a separate engineering-only change, retaining the D2-classified entry. It does not decide the scientific model or RFC ownership.
+The domain-classification duplication is resolved. This engineering-only correction does not decide the scientific model or RFC ownership.
 
 ## 11. Validation scenarios for the next design slice
 
@@ -301,13 +302,15 @@ Before revising the schemas or operation definitions, require:
 
 **Slice 1 — Model review (this proposal):** complete. Record the pipeline/scheme distinction, alternatives, target-context boundaries, and test scenarios.
 
-**Slice 2 — Repository reconciliation:** remove the duplicate domain-classification entry, identify and correct contaminated endpoint metadata at its authoritative source, and align registry/catalogue outputs. Keep RFC maturity at `STRUCTURAL_DRAFT` until semantic gates are met.
+**Slice 2 — Repository reconciliation:** completed for the classification and operation-metadata baseline. The duplicate unclassified domain entry has been removed; BreedingPipeline operation descriptions and allowed-use metadata were reconciled against authoritative operation YAML; endpoint catalogue and crosswalk outputs were regenerated and checked. The registry contains 462 proposed GenX operations and 201 official BrAPI v2.1 operations. The source/registry audit examines all 462 GenX source operations with zero loading errors and no remaining drift in operation names, descriptions, allowed-use metadata, or decision references. Semantic-neighbour differences remain review-only: 147 source/registry mismatches across 49 modules and 153 registry-only operation-neighbour references across 153 operations. Do not automatically rewrite these relationships without domain review. RFC maturity remains `STRUCTURAL_DRAFT`.
 
-**Slice 3 — Contract design:** prepare separate candidate schemas for the pipeline and scheme version, if the maintainer accepts the boundary. Define identity, versioning, target context, stage/transition structure, and execution references. Do not add endpoint operations until lifecycle and use cases justify them.
+**Slice 3A — Candidate contract design:** completed as advisory design in [the Pipeline and Scheme Candidate Contract Design](./BRAPI-GENX-BREEDING-PIPELINE-SCHEME-CONTRACT-DESIGN.md). It defines the candidate pipeline/scheme boundary, explicit stage transitions, design-time task definitions, target context, immutable versioning, and an execution-record crosswalk. No endpoint YAML, schema, or operation was changed.
 
-**Slice 4 — Conformance design:** create valid and invalid fixtures, relationship/versioning probes, and independent reference examples. Run catalogue, registry, specification-generation, and static/live conformance checks.
+**Slice 3B — Cross-RFC overlap review:** next. Review RFC-008, RFC-019, RFC-029, RFC-035, RFC-037, and RFC-098 against official BrAPI resources and one another. Record genuine GenX-only semantics and avoid duplicating BrAPI concepts.
 
-**Slice 5 — Maintainer decision:** present the complete contract and consequences for explicit acceptance before promoting either RFC beyond a non-normative proposal.
+**Slice 3C — Candidate logical model and fixtures:** prepare non-normative relationship/cardinality definitions and valid/invalid examples for recurrent population improvement, product development, multiple schemes, and crop-specific stage terminology. Do not edit endpoint YAML until the maintainer chooses the public resource boundary.
+
+**Slice 4 — Contract review package:** compare the nested-scheme and first-class-scheme alternatives, define candidate identity/reference/versioning fields, document BrAPI mappings and migration consequences, and present explicit maintainer decisions. Keep RFCs at `STRUCTURAL_DRAFT` until the quality gates and maintainer direction support promotion.
 
 ## 14. References
 
