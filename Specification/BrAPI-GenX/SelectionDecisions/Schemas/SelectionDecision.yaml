@@ -5,6 +5,20 @@ openapi: 3.0.0
 paths: {}
 components:
   schemas:
+    BrapiResourceReference:
+      type: object
+      required: [apiGeneration, resourceType, server, dbId]
+      properties:
+        apiGeneration:
+          type: string
+          enum: ["2.1"]
+        resourceType:
+          type: string
+        server:
+          type: string
+          format: uri
+        dbId:
+          type: string
     SelectionDecision:
       type: object
       description: |-
@@ -13,7 +27,7 @@ components:
         recorded as additional decisions linked by supersedes.
       required:
       - selectionDecisionDbId
-      - programDbId
+      - programReference
       - decision
       - decisionDate
       properties:
@@ -21,10 +35,24 @@ components:
           description: Namespaced selection-decision identity `{authority}:selection-decision:{localId}`
           type: string
           example: institute-a:selection-decision:sd-2026-001
-        programDbId:
-          description: BrAPI Program (breeding program) this decision belongs to
+        programReference:
+          description: Authority-qualified BrAPI Program reference.
+          $ref: '#/components/schemas/BrapiResourceReference'
+        breedingPipelineDbId:
           type: string
-          example: institute-a:program:wheat-breeding
+          description: Optional stable pipeline workstream identity.
+        breedingPipelineVersionDbId:
+          type: string
+          description: Exact immutable pipeline revision when governed by a registered pipeline.
+        breedingSchemeDbId:
+          type: string
+          description: Optional stable scheme identity.
+        breedingSchemeVersionDbId:
+          type: string
+          description: Required whenever stageId is supplied.
+        stageId:
+          type: string
+          description: Scheme-version-local stage identifier.
         studyDbId:
           description: BrAPI Study / trial context, when applicable
           type: string
