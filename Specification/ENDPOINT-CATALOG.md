@@ -8547,10 +8547,12 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 **Can be used for:**
 - Register a stable workstream identity with a new immutable breedingPipelineVersionDbId.
 - Retry an identical revision safely using the same breedingPipelineVersionDbId.
+- Append a new version only when expectedCurrentBreedingPipelineVersionDbId matches the current published pointer.
 **Must not be used for / explicit non-goals:**
 - Mutating a published revision; substantive corrections require a new version identity.
 - Assuming a record is a BrAPI data resource.
 - Asserting that the catalogue is validated or endorsed.
+- Bypassing a stale or omitted expected-current precondition when appending to an existing workstream.
 - **Side effects:** Creates a stable workstream identity when unknown and appends one immutable revision. A published or withdrawn revision conditionally advances or clears the current published-version pointer using an atomic expected-current comparison.
 - **Retry / idempotency:** Replay is keyed by breedingPipelineVersionDbId and the immutable revision payload is compared using JCS (RFC 8785). An identical same-version replay is evaluated before the expected-current precondition and replays even when that precondition is now stale. The same version ID with a different payload is rejected with 409. A new version under an existing pipeline requires expectedCurrentBreedingPipelineVersionDbId (explicit null when no published version exists); the server atomically compares it with the current pointer before append. A stale or omitted precondition is rejected with 409 and no state change.
 - **Parameters recorded in registry:** authorizationHeader
