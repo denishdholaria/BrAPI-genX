@@ -35,4 +35,6 @@ The approval authorizes the next specification-development phase. It does not au
 
 RFC-154 is the canonical editorial surface for the approved candidate model. RFC-014 remains preserved as historical evidence. Related RFC dispositions are recorded in RFC-154 and must be reflected consistently in future catalogue and governance materials.
 
+The separate [Breeding Pipeline Open Maintainer Decisions](./BRAPI-GENX-BREEDING-PIPELINE-OPEN-DECISIONS.md) note records later technical recommendations and unresolved choices. It is advisory and must not be read as an extension of D-BP-01 through D-BP-13 approval.
+
 All reversible contract-design work should proceed autonomously within these boundaries. Escalate only a genuinely new consequential decision not covered by D-BP-01 through D-BP-13.
