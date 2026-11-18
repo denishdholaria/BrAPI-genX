@@ -14,7 +14,8 @@ paths:
         purpose: "List stable BreedingPipeline workstream identities and their available revision summaries."
         canBeUsedFor:
           - "Discover stable breeding-pipeline workstream identities."
-          - "Compare workstream purpose and revision metadata across returned records."
+          - "Compare workstream purpose, current revision, and provenance across returned records."
+          - "Request revision summaries for a complete workstream history."
         mustNotBeUsedFor:
           - "Creating or changing a record (use the POST endpoint)."
           - "Assuming a record is a BrAPI data resource."
@@ -24,10 +25,10 @@ paths:
         semanticNeighbors:
           - "genxRegisterBreedingPipeline"
           - "genxGetBreedingPipeline"
-        decisions: ["RFC-154", "D-BP-01", "D-BP-03", "D-BP-13"]
+        decisions: ["RFC-154"]
         proposalStatus: "draft-non-normative"
       summary: List breeding pipelines
-      description: Get a paged list of stable pipeline workstream identities. By default, each logical pipeline is represented by its current published revision summary; includeRevisions=true includes all available revision summaries.
+      description: Get a paged list of stable pipeline workstream identities. The default view returns the current published revision summary for each logical pipeline. An explicit includeRevisions option returns revision summaries; it does not replace exact historical revision retrieval.
       parameters:
       - name: includeRevisions
         description: When true, include all known revision summaries for each logical pipeline. When false or omitted, return the current published revision summary only.
