@@ -110,8 +110,8 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: '3.12'
-      - name: Install conformance dependency
-        run: python -m pip install 'PyYAML==6.0.2'
+      - name: Install conformance dependencies for the reference server
+        run: python -m pip install 'PyYAML==6.0.2' 'rfc8785==0.1.4'
       - name: Start in-memory GenX reference server
         run: |
           python Scripts/genx_test_server.py --port 18080 --delay 0.4 --profile genx > /tmp/genx-reference-server.log 2>&1 &
@@ -127,6 +127,12 @@ jobs:
               except Exception:
                   time.sleep(0.5)
           else:
+              print("GenX reference server failed to become ready. Server log follows:")
+              try:
+                  with open("/tmp/genx-reference-server.log", encoding="utf-8") as log:
+                      print(log.read())
+              except OSError as exc:
+                  print(f"Unable to read server log: {exc}")
               raise SystemExit("GenX reference server failed to become ready")
           PY
       - name: Run live GenX conformance probes
