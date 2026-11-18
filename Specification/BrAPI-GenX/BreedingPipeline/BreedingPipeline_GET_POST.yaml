@@ -62,10 +62,12 @@ paths:
         canBeUsedFor:
           - "Register a stable workstream identity with a new immutable breedingPipelineVersionDbId."
           - "Retry an identical revision safely using the same breedingPipelineVersionDbId."
+          - "Append a new version only when expectedCurrentBreedingPipelineVersionDbId matches the current published pointer."
         mustNotBeUsedFor:
           - "Mutating a published revision; substantive corrections require a new version identity."
           - "Assuming a record is a BrAPI data resource."
           - "Asserting that the catalogue is validated or endorsed."
+          - "Bypassing a stale or omitted expected-current precondition when appending to an existing workstream."
         sideEffects: "Creates a stable workstream identity when unknown and appends one immutable revision. A published or withdrawn revision conditionally advances or clears the current published-version pointer using an atomic expected-current comparison."
         idempotency: "Replay is keyed by breedingPipelineVersionDbId and the immutable revision payload is compared using JCS (RFC 8785). An identical same-version replay is evaluated before the expected-current precondition and replays even when that precondition is now stale. The same version ID with a different payload is rejected with 409. A new version under an existing pipeline requires expectedCurrentBreedingPipelineVersionDbId (explicit null when no published version exists); the server atomically compares it with the current pointer before append. A stale or omitted precondition is rejected with 409 and no state change."
         semanticNeighbors:
@@ -74,7 +76,7 @@ paths:
         decisions: ["RFC-154", "D-BP-01", "D-BP-02", "D-BP-03", "D-BP-13"]
         proposalStatus: "draft-non-normative"
       summary: Register a breeding pipeline revision
-      description: Creates or references one stable workstream identity and registers one immutable pipeline revision. A new breedingPipelineVersionDbId is required for every additional revision.
+      description: Creates or references a stable workstream identity and registers one immutable pipeline revision. A new breedingPipelineVersionDbId is required for every additional revision. An append to an existing workstream also supplies expectedCurrentBreedingPipelineVersionDbId as an atomic compare-and-set precondition; explicit null means no currently published revision.
       parameters:
       - $ref: '#/components/parameters/authorizationHeader'
       requestBody:
