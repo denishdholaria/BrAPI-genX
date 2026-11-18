@@ -53,18 +53,15 @@ components:
         stageId:
           type: string
           description: Scheme-version-local stage identifier.
-        studyDbId:
-          description: BrAPI Study / trial context, when applicable
-          type: string
-          example: institute-a:study:yield-trial-2026
-        candidateGermplasmDbId:
-          description: BrAPI Germplasm candidate under evaluation
-          type: string
-          example: institute-a:germplasm:line-42
-        populationDbId:
-          description: Optional BrAPI population / family reference
-          type: string
-          example: institute-a:population:f2-2026
+        studyReference:
+          description: Optional authority-qualified BrAPI Study reference.
+          $ref: '#/components/schemas/BrapiResourceReference'
+        candidateGermplasmReference:
+          description: Optional authority-qualified BrAPI Germplasm reference.
+          $ref: '#/components/schemas/BrapiResourceReference'
+        populationReference:
+          description: Optional authority-qualified population or family reference.
+          $ref: '#/components/schemas/BrapiResourceReference'
         selectionCriterion:
           description: Criterion or index used to reach the verdict
           type: string
@@ -91,12 +88,11 @@ components:
           description: Human-readable justification
           type: string
           example: Selected for high yield and acceptable disease score.
-        linkedObservationDbIds:
-          description: BrAPI Observation identifiers that informed the verdict
+        linkedObservationReferences:
+          description: Authority-qualified BrAPI Observation references that informed the verdict.
           type: array
           items:
-            type: string
-          example: [institute-a:observation:obs-1, institute-a:observation:obs-2]
+            $ref: '#/components/schemas/BrapiResourceReference'
         linkedJobDbId:
           description: GenX Job that produced supporting analysis, when applicable
           type: string
