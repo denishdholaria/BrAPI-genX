@@ -93,7 +93,7 @@ paths:
                   metadata:
                     $ref: '#/components/schemas/metadata'
                   result:
-                    $ref: '#/components/schemas/BreedingPipeline'
+                    $ref: '#/components/schemas/BreedingPipelineRevision'
                 required:
                 - metadata
                 - result
@@ -117,9 +117,7 @@ components:
         metadata:
           $ref: '#/components/schemas/metadata'
         result:
-          oneOf:
-            - $ref: '#/components/schemas/BreedingPipeline'
-            - $ref: '#/components/schemas/BreedingPipelineRevision'
+          $ref: '#/components/schemas/BreedingPipelineRevision'
   responses:
     BreedingPipelineListResponse:
       content:
