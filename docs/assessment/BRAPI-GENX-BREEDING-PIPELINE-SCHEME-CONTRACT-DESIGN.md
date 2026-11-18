@@ -458,7 +458,7 @@ These questions do not block further domain research. They do block schema promo
 
 ### Slice 3C — Candidate logical model and fixtures
 
-**Completed as non-normative design evidence** in [the Candidate Logical Model](./BRAPI-GENX-BREEDING-PIPELINE-LOGICAL-MODEL.md) and [the Candidate Fixture Corpus](./BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json). The model defines candidate cardinalities, identity/versioning rules, execution-reference constraints, and 20 invariants. The nine machine-readable scenarios include three positive and six negative cases. A lightweight structural/semantic check confirmed unique scenario IDs and the declared positive/negative conditions. These are not production conformance fixtures and are not wired into CI.
+**Completed as non-normative design evidence** in [the Candidate Logical Model](./BRAPI-GENX-BREEDING-PIPELINE-LOGICAL-MODEL.md) and [the Candidate Fixture Corpus](./BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json). The model defines candidate cardinalities, identity/versioning rules, execution-reference constraints, and 20 invariants. The nine machine-readable scenarios include three positive and six negative cases. A lightweight structural/semantic check confirmed unique scenario IDs and the declared positive/negative conditions. These are not production conformance fixtures. Their structural and declared design-invariant checks run in a separate preliminary step of the specification-build workflow; they do not become normative API conformance tests.
 
 ### Slice 4 — Maintainer contract decision package
 
