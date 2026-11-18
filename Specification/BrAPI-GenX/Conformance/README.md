@@ -115,8 +115,8 @@ python Scripts/test_digest_vectors.py
 cd Scripts/digest-conformance && bun install && bun run test
 ```
 
-The corpus includes Unicode, UTF-16 property ordering, number formatting, duplicate-key rejection, exact-byte hashes, and known disagreement between the two existing reference-server legacy serializers. RFC 8785 (JSON Canonicalization Scheme) is a candidate under test, not an accepted BrAPI standard; RFC-001 decision D-02 remains open. See [DIGEST-INTEROPERABILITY.md](./DIGEST-INTEROPERABILITY.md). The current reference servers have **not** been migrated by this change.
+The corpus includes Unicode, UTF-16 property ordering, number formatting, duplicate-key rejection, exact-byte hashes, and known disagreement between the two existing reference-server legacy serializers. D-02 now accepts RFC 8785 (JCS) as BrAPI-GenX's `JCS-RFC8785` method for generic canonical JSON; this is not an accepted BrAPI community standard. See [DIGEST-INTEROPERABILITY.md](./DIGEST-INTEROPERABILITY.md). The current reference servers have **not** been migrated by this documentation change.
 
 The [digest-scope inventory](./DIGEST-SCOPE-INVENTORY.md) records the current per-field preimage ambiguity. Passing the candidate vectors is not sufficient to resolve D-02: field meaning, exact input scope, and migration/versioning must also be specified.
 
-The [digest decision brief](./DIGEST-DECISION-BRIEF.md) compares the legacy serializer, JCS candidate, a custom canonicalizer, and exact-byte hashing, and identifies the field-level decisions still requiring implementer/community review.
+The [digest decision brief](./DIGEST-DECISION-BRIEF.md) preserves the historical comparison of the legacy serializer, JCS, a custom canonicalizer, and exact-byte hashing, and identifies field-level implementation work still requiring review.

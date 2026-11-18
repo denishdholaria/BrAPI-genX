@@ -19,6 +19,7 @@
  */
 
 import { createHash } from "node:crypto";
+import { jcsCanonicalize, parseStrictJson } from "./jcs-canonicalization/jcs.ts";
 
 const args: Record<string, string> = {};
 for (let i = 2; i < Bun.argv.length; i += 2) {
@@ -44,10 +45,9 @@ function utcnow(): string {
 }
 
 function canonical(value: unknown): string {
-  if (value === null || typeof value !== "object") return JSON.stringify(value);
-  if (Array.isArray(value)) return `[${value.map(canonical).join(",")}]`;
-  const keys = Object.keys(value as Record<string, unknown>).sort();
-  return `{${keys.map((k) => `${JSON.stringify(k)}:${canonical((value as Record<string, unknown>)[k])}`).join(",")}}`;
+  if (value === undefined) value = null;
+  const bytes = new TextEncoder().encode(JSON.stringify(value));
+  return new TextDecoder().decode(jcsCanonicalize(bytes));
 }
 
 function sha256hex(text: string): string {
@@ -169,7 +169,8 @@ async function readBody(req: Request): Promise<{ ok: boolean; value: unknown }> 
   const textBody = await req.text();
   if (!textBody) return { ok: true, value: {} };
   try {
-    return { ok: true, value: JSON.parse(textBody) };
+    const value = parseStrictJson(new TextEncoder().encode(textBody));
+    return { ok: true, value };
   } catch {
     return { ok: false, value: null };
   }

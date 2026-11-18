@@ -121,9 +121,11 @@ prototype existence.
 
 - Generic/placeholder RFCs lack scientific depth (P1).
 - No independent implementation evidence beyond the prototype.
-- D-01…D-25 remain unresolved; require maintainer/community/security authority.
-- Digest (D-02), idempotency (D-24/D-25) are interdependent and must be resolved
-  as a cluster.
+- Historical Phase 0 finding: D-01…D-25 were unresolved. As of 2026-11-03,
+  D-02, D-24, and D-25 are accepted internally; the remaining decisions retain
+  their stated authority requirements.
+- Digest (D-02), idempotency (D-24/D-25) are interdependent and have been
+  accepted as a cluster; implementation and verification remain pending.
 - Security: prototype accepts/ignores bearer tokens; not production-ready.
 - S-22 remains a documented guardrail, not a registered probe.
 

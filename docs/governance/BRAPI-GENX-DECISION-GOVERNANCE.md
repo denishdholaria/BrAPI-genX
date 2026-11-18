@@ -1,6 +1,6 @@
 # BrAPI-GenX — Decision Governance Register
 
-**Status:** Phase 0 governance foundation.
+**Status:** Phase 0 governance foundation, updated for the 2026-11-03 Cluster 1 maintainer approvals.
 **Companion:** `Specification/BrAPI-GenX/DECISIONS.md` (historical decision log).
 
 ## 1. Identifier policy
@@ -32,7 +32,23 @@ acceptance, assume maintainer authority, or convert an experimental proposal
 into a normative specification. The repository maintainer retains final decision
 authority.
 
-## 4. Unresolved decision inventory (verified)
+## 4. Accepted decision inventory
+
+The BrAPI-GenX project maintainer accepted the following internal architectural
+directions on 2026-11-03. Acceptance does not represent implementation,
+independent conformance verification, production deployment, or official BrAPI
+community endorsement.
+
+| ID | Subject | Status | Approval authority | Remaining work |
+|---|---|---|---|---|
+| D-02 | Digest purposes and generic canonical JSON | ACCEPTED | BrAPI-GenX project maintainer | JCS implementation, profile/preimage use, cross-language conformance; hash algorithm remains separate |
+| D-24 | Idempotency lookup identity, equivalence, key conflict, replay | ACCEPTED | BrAPI-GenX project maintainer | Operation-specific fingerprint contracts, implementation, authorization and concurrency evidence |
+| D-25 | Idempotency durability, recovery, and retention architecture | ACCEPTED | BrAPI-GenX project maintainer | Durable implementation, recovery/retention policy, multi-instance and fault evidence |
+
+The detailed explanatory record is
+[`BRAPI-GENX-CLUSTER-1-APPROVED-DECISIONS.md`](BRAPI-GENX-CLUSTER-1-APPROVED-DECISIONS.md).
+
+## 5. Unresolved decision inventory (verified)
 
 The following deferred decisions remain unresolved and must not be silently
 standardised from prototype behaviour:
@@ -40,7 +56,6 @@ standardised from prototype behaviour:
 | ID | Subject | Source | Required authority |
 |---|---|---|---|
 | D-01 | HTTP status for same-key/different-body conflicts | RFC-001 §8 | Community |
-| D-02 | JSON canonical form feeding digests (JCS) | RFC-001 §8 | Community/implementer |
 | D-03 | OIDC tenant-claim name and scope vocabulary | RFC-001 §8 | Operator |
 | D-04 | Wiring GenX into generator/BrAPI-Schema/Generated | RFC-001 §8 | Operator |
 | D-05 | Term/model version ordering and comparison | RFC-002 §5 | Community |
@@ -62,26 +77,27 @@ standardised from prototype behaviour:
 | D-21 | Capability-to-operation mapping and version tokens | ServerInfoV3 | Community/implementer |
 | D-22 | Security meaning of capability scopes and auth profiles | ServerInfoV3 | Security/operator |
 | D-23 | Advertised asynchronous job types | Jobs/ServerInfoV3 | Implementer/community |
-| D-24 | Idempotency request equivalence and header/body precedence | Jobs | Community |
-| D-25 | Idempotency namespace, retention, expiry, durability | Jobs | Community |
 | RFC-153-Q1..Q3 | CapabilityNegotiation local questions | RFC-153 | Maintainer |
 | RFC-155-Q1..Q3 | ConformanceProbe local questions | RFC-155 | Maintainer |
 
-## 5. Digest interoperability note
+## 6. Digest interoperability note
 
-Passing a candidate digest corpus does not automatically resolve the normative
-digest contract. D-02 remains deferred pending community/implementer review of
-canonicalization, field-level preimage scope, numeric precision, rejection
-policy, and migration/versioning.
+Passing a candidate digest corpus is not implementation or conformance proof.
+D-02 is accepted internally: generic canonical JSON is JCS-RFC8785 and
+scientific semantics remain separate. Field-level preimages, hash-algorithm
+selection, implementation migration, and cross-language conformance remain
+pending.
 
-## 6. Authentication note
+## 7. Authentication note
 
 The reference implementation has historically lacked effective authentication and
 authorization. Token acceptance must be distinguished from token validation,
 authorization, and tenant enforcement. The prototype must not be described as
-secure.
+secure. D-24 nevertheless requires fresh authentication and authorization
+before a stored idempotency result is disclosed; D-22's broader security
+architecture remains unresolved.
 
-## 7. Collision repair record
+## 8. Collision repair record
 
 D-460/D-461/D-462 were reused between RFC-153 and RFC-155 for different
 questions. They have been renamed to `RFC-153-Q1..Q3` and `RFC-155-Q1..Q3`

@@ -1,0 +1,11 @@
+{
+  "name": "brapi-genx-jcs-canonicalization",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "bun test-jcs.ts"
+  },
+  "dependencies": {
+    "canonicalize": "5.1.0"
+  }
+}
