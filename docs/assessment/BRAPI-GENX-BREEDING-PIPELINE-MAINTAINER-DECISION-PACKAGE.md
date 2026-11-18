@@ -35,7 +35,7 @@ The package is intended to turn the existing research into a small set of explic
 | Repository reconciliation | Complete for descriptive metadata and classification | One BreedingPipeline D2 classification entry; 462 GenX and 201 BrAPI v2.1 operations in the registry; no remaining operation-name, description, allowed-use, or decision-reference drift |
 | Breeding contract design | Complete as advisory model | Pipeline, scheme, stage-transition, task, target-context, and immutable-version boundaries |
 | Cross-RFC review | Complete | Six related RFCs checked against official BrAPI v2.1 source contracts |
-| Logical model and fixtures | Complete as non-normative evidence | Cardinalities, 20 invariants, and nine candidate machine-readable scenarios; structural/semantic checks passed |
+| Logical model and fixtures | Complete as non-normative evidence | Cardinalities, 20 invariants, and nine candidate machine-readable scenarios; standalone validator passes in a separate specification-build check, outside production conformance |
 
 ### 2.1 Known registry semantic-neighbour caveat
 
