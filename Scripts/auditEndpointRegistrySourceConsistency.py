@@ -79,6 +79,8 @@ def audit(strict: bool) -> int:
         for relation in registry.get("semanticRelationships", [])
         if isinstance(relation, dict) and isinstance(relation.get("id"), str)
     }
+    sync_plan: dict[str, dict[str, Any]] = {}
+    registry_only_neighbors: list[dict[str, Any]] = []
 
     for entry in entries:
         source = entry.get("source") or {}
@@ -97,32 +99,72 @@ def audit(strict: bool) -> int:
             continue
 
         examined += 1
+        catalog_id = entry.get("catalogId")
+        sync_fields = sync_plan.setdefault(catalog_id, {})
+
         for field in FIELD_MAP:
             expected = source_value(operation, entry, field)
             actual = entry.get(field)
 
             if field == "sourceDescription":
                 # Registry descriptions may flatten YAML block-scalar newlines.
-                # Compare semantic text, not formatting-only whitespace.
+                # Compare and store semantic text, not formatting-only whitespace.
                 if isinstance(expected, str):
                     expected = " ".join(expected.split())
                 if isinstance(actual, str):
                     actual = " ".join(actual.split())
 
             if field == "semanticNeighborIds":
-                # The registry may add explicitly governed relationship IDs
-                # (for example SEM-*), beyond operation-level neighbors in YAML.
-                actual = [value for value in (actual or []) if value not in relationship_ids]
-                expected = expected or []
+                # Source-declared operation neighbours must be present. Keep
+                # additional registry links (including governed SEM-* links)
+                # until they receive their own explicit semantic review.
+                source_neighbors = list(expected or [])
+                registry_neighbors = list(actual or [])
+                source_operation_neighbors = [
+                    value for value in source_neighbors if value not in relationship_ids
+                ]
+                registry_operation_neighbors = [
+                    value for value in registry_neighbors if value not in relationship_ids
+                ]
+                missing = [
+                    value for value in source_neighbors if value not in registry_neighbors
+                ]
+                extra = [
+                    value for value in registry_operation_neighbors
+                    if value not in source_operation_neighbors
+                ]
+                if missing:
+                    mismatches.append({
+                        "catalogId": catalog_id,
+                        "module": entry.get("genxModule") or "Unclassified",
+                        "field": field,
+                        "registry": registry_neighbors,
+                        "source": source_operation_neighbors,
+                        "missing": missing,
+                    })
+                    merged = registry_neighbors + [value for value in missing if value not in registry_neighbors]
+                    sync_fields[field] = merged
+                if extra:
+                    registry_only_neighbors.append({
+                        "catalogId": catalog_id,
+                        "module": entry.get("genxModule") or "Unclassified",
+                        "neighbors": extra,
+                    })
+                continue
 
             if expected != actual:
                 mismatches.append({
-                    "catalogId": entry.get("catalogId"),
+                    "catalogId": catalog_id,
                     "module": entry.get("genxModule") or "Unclassified",
                     "field": field,
                     "registry": actual,
                     "source": expected,
                 })
+                if expected is not None:
+                    sync_fields[field] = expected
+
+        if not sync_fields:
+            sync_plan.pop(catalog_id, None)
 
     counts = Counter(item["field"] for item in mismatches)
     modules: dict[str, set[str]] = defaultdict(set)
@@ -146,26 +188,46 @@ def audit(strict: bool) -> int:
     else:
         print("All audited descriptive fields match their source OpenAPI operations.")
 
+    if registry_only_neighbors:
+        by_module = defaultdict(int)
+        for item in registry_only_neighbors:
+            by_module[item["module"]] += len(item["neighbors"])
+        print(
+            f"Registry-only operation-neighbor references: "
+            f"{sum(len(item['neighbors']) for item in registry_only_neighbors)} "
+            f"across {len(registry_only_neighbors)} operations and {len(by_module)} modules"
+        )
+
     if errors:
         print("Source errors (first 20):")
         for error in errors[:20]:
             print(f"  - {error}")
 
     if mismatches:
-        print("Mismatch samples (first 20; source YAML is shown as the expected value):")
-        for item in mismatches[:20]:
-            registry_value = repr(item["registry"])
-            source_value_text = repr(item["source"])
-            if len(registry_value) > 180:
-                registry_value = registry_value[:177] + "..."
-            if len(source_value_text) > 180:
-                source_value_text = source_value_text[:177] + "..."
-            print(
-                f"  - {item['catalogId']} [{item['field']}] "
-                f"registry={registry_value}; source={source_value_text}"
-            )
+        print("Mismatch samples (up to 4 per field; source YAML is the expected value):")
+        for field in FIELD_MAP:
+            samples = [item for item in mismatches if item["field"] == field][:4]
+            for item in samples:
+                registry_value = repr(item.get("registry"))
+                source_value_text = repr(item.get("source"))
+                if len(registry_value) > 180:
+                    registry_value = registry_value[:177] + "..."
+                if len(source_value_text) > 180:
+                    source_value_text = source_value_text[:177] + "..."
+                detail = f"; missing={item['missing']!r}" if item.get("missing") else ""
+                print(
+                    f"  - {item['catalogId']} [{field}] "
+                    f"registry={registry_value}; source={source_value_text}{detail}"
+                )
 
-    if strict and (errors or mismatches):
+    if getattr(args, "plan_json", False):
+        plan = [
+            {"catalogId": catalog_id, "fields": fields}
+            for catalog_id, fields in sorted(sync_plan.items())
+        ]
+        print("REGISTRY_SOURCE_SYNC_PLAN=" + json.dumps(plan, separators=(",", ":")))
+
+    if strict and (errors or mismatches or registry_only_neighbors):
         return 1
     return 0
 
@@ -176,6 +238,11 @@ def main() -> int:
         "--strict",
         action="store_true",
         help="return a failure status when source/registry drift is found",
+    )
+    parser.add_argument(
+        "--plan-json",
+        action="store_true",
+        help="emit a machine-readable metadata reconciliation plan",
     )
     args = parser.parse_args()
     try:
