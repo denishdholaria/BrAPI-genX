@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+from decimal import Decimal
 import sys
 from pathlib import Path
 from typing import Any
@@ -223,37 +224,71 @@ def validate_target_contexts(revision: dict[str, Any], errors: list[str]) -> Non
         traits = as_list(context.get("traitRequirements"))
         for trait_index, raw_trait in enumerate(traits):
             trait = as_object(raw_trait)
+            label = f"targetContexts[{context_index}].traitRequirements[{trait_index}]"
+            reference = as_object(trait.get("traitReference"))
             validate_brapi_reference(
                 trait.get("traitReference"),
-                f"targetContexts[{context_index}].traitRequirements[{trait_index}].traitReference",
+                f"{label}.traitReference",
                 errors,
             )
-            if trait.get("desiredDirection") not in ALLOWED_DIRECTIONS:
-                add(errors, "BM-TARGET-03", f"targetContexts[{context_index}].traitRequirements[{trait_index}] has an unsupported desiredDirection.")
+            resource_type = reference.get("resourceType")
+            if resource_type not in {"Trait", "ObservationVariable"}:
+                add(errors, "BM-TARGET-03", f"{label}.traitReference resourceType must be Trait or ObservationVariable.")
 
-            exact_decimal = trait.get("exactDecimal")
-            numeric_keys = [key for key in ("threshold", "minimum", "maximum") if key in trait]
-            has_exact_decimal = exact_decimal is not None
-            if has_exact_decimal and numeric_keys:
-                add(errors, "BM-TARGET-02", "exactDecimal must be used instead of threshold/minimum/maximum.")
-            if has_exact_decimal and (
-                not isinstance(exact_decimal, str)
-                or not DECIMAL_RE.fullmatch(exact_decimal)
-            ):
-                add(errors, "BM-TARGET-02", "exactDecimal must be a base-10 decimal string without exponent notation.")
-            if "minimum" in trait and "maximum" in trait:
-                minimum, maximum = trait.get("minimum"), trait.get("maximum")
-                if (
-                    not isinstance(minimum, (int, float))
-                    or isinstance(minimum, bool)
-                    or not isinstance(maximum, (int, float))
-                    or isinstance(maximum, bool)
-                    or minimum > maximum
+            direction = trait.get("desiredDirection")
+            if direction not in ALLOWED_DIRECTIONS:
+                add(errors, "BM-TARGET-03", f"{label} has an unsupported desiredDirection.")
+
+            numeric_keys = ("threshold", "minimum", "maximum")
+            exact_keys = ("exactDecimal", "minimumExactDecimal", "maximumExactDecimal")
+            present_numeric = {key for key in numeric_keys if key in trait}
+            present_exact = {key for key in exact_keys if key in trait}
+            quantitative = bool(present_numeric or present_exact)
+
+            for key in present_numeric:
+                value = trait.get(key)
+                if not isinstance(value, (int, float)) or isinstance(value, bool):
+                    add(errors, "BM-TARGET-02", f"{label}.{key} must be a JSON number.")
+
+            for key in present_exact:
+                value = trait.get(key)
+                if not isinstance(value, str) or not DECIMAL_RE.fullmatch(value):
+                    add(errors, "BM-TARGET-02", f"{label}.{key} must be a base-10 decimal string without exponent notation.")
+
+            if "exactDecimal" in present_exact and (present_numeric or {"minimumExactDecimal", "maximumExactDecimal"} & present_exact):
+                add(errors, "BM-TARGET-02", "exactDecimal is a scalar target and cannot be combined with numeric or range bounds.")
+            if {"minimum", "maximum"} & present_numeric:
+                if not {"minimum", "maximum"} <= present_numeric:
+                    add(errors, "BM-TARGET-02", f"{label} numeric ranges require both minimum and maximum.")
+                elif (
+                    isinstance(trait.get("minimum"), (int, float))
+                    and not isinstance(trait.get("minimum"), bool)
+                    and isinstance(trait.get("maximum"), (int, float))
+                    and not isinstance(trait.get("maximum"), bool)
+                    and trait["minimum"] > trait["maximum"]
                 ):
-                    add(errors, "BM-TARGET-02", "minimum and maximum must be numeric and minimum must not exceed maximum.")
-            if (has_exact_decimal or numeric_keys) and not nonempty_string(trait.get("unit")):
-                add(errors, "BM-TARGET-03", "A numeric target requires a non-empty unit token.")
+                    add(errors, "BM-TARGET-02", f"{label} minimum must not exceed maximum.")
+            if {"minimumExactDecimal", "maximumExactDecimal"} & present_exact:
+                if not {"minimumExactDecimal", "maximumExactDecimal"} <= present_exact:
+                    add(errors, "BM-TARGET-02", f"{label} exact-decimal ranges require both minimumExactDecimal and maximumExactDecimal.")
+                elif all(
+                    isinstance(trait.get(key), str) and DECIMAL_RE.fullmatch(trait[key])
+                    for key in ("minimumExactDecimal", "maximumExactDecimal")
+                ) and Decimal(trait["minimumExactDecimal"]) > Decimal(trait["maximumExactDecimal"]):
+                    add(errors, "BM-TARGET-02", f"{label} minimumExactDecimal must not exceed maximumExactDecimal.")
 
+            has_numeric_range = {"minimum", "maximum"} <= present_numeric
+            has_exact_range = {"minimumExactDecimal", "maximumExactDecimal"} <= present_exact
+            has_any_range = bool({"minimum", "maximum", "minimumExactDecimal", "maximumExactDecimal"} & (present_numeric | present_exact))
+            if present_numeric & {"minimum", "maximum"} and present_exact & {"minimumExactDecimal", "maximumExactDecimal"}:
+                add(errors, "BM-TARGET-02", "A target range must use either JSON numeric bounds or exact-decimal bounds, not both.")
+            if direction == "target-range" and not (has_numeric_range or has_exact_range):
+                add(errors, "BM-TARGET-02", f"{label} target-range requires a complete minimum/maximum pair.")
+            if direction != "target-range" and has_any_range:
+                add(errors, "BM-TARGET-02", f"{label} range bounds require desiredDirection target-range.")
+
+            if quantitative and resource_type != "ObservationVariable":
+                add(errors, "BM-TARGET-04", "Quantitative target references must use resourceType ObservationVariable so the BrAPI Scale is explicit.")
 
 def validate_pipeline_revision(revision: Any) -> tuple[list[str], dict[tuple[str, str], dict[str, Any]]]:
     """Validate pipeline revision identity, authority, targets, and embedded schemes."""
@@ -467,6 +502,9 @@ def validate_corpus(corpus: Any) -> list[str]:
         "invalid-exact-decimal-mixed-with-binary-numeric",
         "invalid-authority-qualified-program-reference",
         "invalid-mutated-published-scheme-version",
+        "valid-exact-decimal-observation-variable-range",
+        "invalid-quantitative-target-references-trait-only",
+        "invalid-incomplete-exact-decimal-range",
     }
     missing = sorted(required - set(by_id))
     if missing:
