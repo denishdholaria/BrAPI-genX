@@ -1,6 +1,6 @@
 # BrAPI-GenX ↔ BijMantra Endpoint Crosswalk
 
-> Generated from [ENDPOINT-REGISTRY.json](./ENDPOINT-REGISTRY.json) by Scripts/generateEndpointArtifacts.py on 2026-10-22. Do not edit by hand.
+> Generated from [ENDPOINT-REGISTRY.json](./ENDPOINT-REGISTRY.json) by Scripts/generateEndpointArtifacts.py on 2026-11-18. Do not edit by hand.
 
 ## Scope and evidence boundaries
 
