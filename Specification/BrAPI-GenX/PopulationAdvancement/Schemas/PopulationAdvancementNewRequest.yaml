@@ -5,6 +5,20 @@ openapi: 3.0.0
 paths: {}
 components:
   schemas:
+    BrapiResourceReference:
+      type: object
+      required: [apiGeneration, resourceType, server, dbId]
+      properties:
+        apiGeneration:
+          type: string
+          enum: ["2.1"]
+        resourceType:
+          type: string
+        server:
+          type: string
+          format: uri
+        dbId:
+          type: string
     PopulationAdvancementNewRequest:
       type: object
       description: |-
@@ -14,32 +28,42 @@ components:
         rejected with 409.
       required:
       - populationAdvancementDbId
-      - programDbId
-      - populationDbId
-      - fromStage
-      - toStage
+      - programReference
+      - populationReference
       - advancedAt
       properties:
         populationAdvancementDbId:
           description: Namespaced population-advancement identity `{authority}:population-advancement:{localId}`
           type: string
           example: institute-a:population-advancement:pa-2026-001
-        programDbId:
-          description: BrAPI Program (breeding program)
+        programReference:
+          description: Authority-qualified BrAPI Program reference.
+          $ref: '#/components/schemas/BrapiResourceReference'
+        populationReference:
+          description: Authority-qualified population or family reference. Resource type/authority must be explicit.
+          $ref: '#/components/schemas/BrapiResourceReference'
+        breedingPipelineDbId:
           type: string
-          example: institute-a:program:wheat-breeding
+          description: Optional stable pipeline workstream identity.
+        breedingPipelineVersionDbId:
+          type: string
+          description: Exact immutable pipeline revision when governed by a registered pipeline.
+        breedingSchemeDbId:
+          type: string
+          description: Optional stable scheme identity.
+        breedingSchemeVersionDbId:
+          type: string
+          description: Required whenever fromStageId or toStageId is supplied.
+        fromStageId:
+          type: string
+          description: Scheme-version-local source stage identifier.
+        toStageId:
+          type: string
+          description: Scheme-version-local destination stage identifier.
         populationDbId:
           description: BrAPI population or family reference
           type: string
           example: institute-a:population:f2-2026
-        fromStage:
-          description: Stage the population advanced from
-          type: string
-          example: F2
-        toStage:
-          description: Stage the population advanced to
-          type: string
-          example: F3
         advancedAt:
           description: Date of advancement (ISO-8601)
           type: string
