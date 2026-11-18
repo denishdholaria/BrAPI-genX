@@ -13,8 +13,8 @@ paths:
           crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
         purpose: "Retrieve the stable logical pipeline view or one exact immutable revision."
         canBeUsedFor:
-          - "Inspect the stable workstream identity and current published revision summary."
-          - "Retrieve the exact immutable revision identified by breedingPipelineVersionDbId."
+          - "Inspect the stable workstream identity and its current published revision."
+          - "Retrieve a historically referenced exact pipeline revision."
         mustNotBeUsedFor:
           - "Assuming a record is a BrAPI data resource."
           - "Treating the current revision as a substitute for an explicitly requested historical revision."
@@ -23,10 +23,10 @@ paths:
         semanticNeighbors:
           - "genxRegisterBreedingPipeline"
           - "genxListBreedingPipelines"
-        decisions: ["RFC-154"]
+        decisions: ["RFC-154", "D-BP-03", "D-BP-13"]
         proposalStatus: "draft-non-normative"
-      summary: Get a breeding pipeline
-      description: Returns the stable pipeline workstream and its current published revision summary by default. When breedingPipelineVersionDbId is supplied, returns that exact immutable revision or 404.
+      summary: Get one breeding pipeline
+      description: Returns the logical pipeline with current published revision by default, or the exact requested breedingPipelineVersionDbId revision, or 404.
       parameters:
       - name: breedingPipelineDbId
         description: Namespaced breeding-pipeline identity `{authority}:breeding-pipeline:{localId}`
