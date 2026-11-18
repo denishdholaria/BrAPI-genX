@@ -51,7 +51,7 @@ paths:
                   metadata:
                     $ref: '#/components/schemas/metadata'
                   result:
-                    $ref: '#/components/schemas/BreedingPipeline'
+                    $ref: '#/components/schemas/BreedingPipelineRevision'
                 required:
                 - metadata
                 - result
