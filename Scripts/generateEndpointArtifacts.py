@@ -263,6 +263,10 @@ def main():
                 print(f"Length: checked={len(actual)} generated={len(expected)}")
                 print(f"Checked tail: {actual[-48:]!r}")
                 print(f"Generated tail: {expected[-48:]!r}")
+                mismatch = next((i for i, pair in enumerate(zip(actual, expected)) if pair[0] != pair[1]), min(len(actual), len(expected)))
+                print(f"First character mismatch at offset {mismatch}: checked={actual[mismatch:mismatch+24]!r}; generated={expected[mismatch:mismatch+24]!r}")
+                print(f"Newline counts: checked LF={actual.count(chr(10))}, CR={actual.count(chr(13))}; generated LF={expected.count(chr(10))}, CR={expected.count(chr(13))}")
+                print(f"Line arrays identical: {actual.splitlines() == expected.splitlines()}")
                 diff = list(difflib.unified_diff(
                     actual.splitlines(),
                     expected.splitlines(),
