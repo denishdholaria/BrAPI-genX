@@ -75,11 +75,40 @@ components:
           type: string
           description: Optional convenience reference to the current published revision; historical retrieval uses an exact version ID.
           example: institute-a:breeding-pipeline-version:bp-2026-001-v2
+        currentRevisionSummary:
+          description: Summary of the current published revision. Omitted when the workstream has no current published revision.
+          $ref: '#/components/schemas/BreedingPipelineRevisionSummary'
+        revisionSummaries:
+          type: array
+          description: All known revision summaries. Returned only when includeRevisions=true; these summaries do not contain full historical revision payloads.
+          items:
+            $ref: '#/components/schemas/BreedingPipelineRevisionSummary'
         createdAt:
           type: string
           format: date-time
         provenance:
           $ref: '#/components/schemas/ProvenanceEnvelope'
+
+    BreedingPipelineRevisionSummary:
+      type: object
+      description: Lightweight metadata for one immutable pipeline revision. It is not a substitute for exact revision retrieval.
+      required: [breedingPipelineVersionDbId, publicationState]
+      properties:
+        breedingPipelineVersionDbId:
+          type: string
+          description: Exact immutable revision identifier.
+        pipelineName:
+          type: string
+        purpose:
+          type: string
+        publicationState:
+          type: string
+          enum: [draft, published, withdrawn]
+        createdAt:
+          type: string
+          format: date-time
+        revisionRelationship:
+          $ref: '#/components/schemas/RevisionRelationship'
 
     BreedingPipelineRevision:
       type: object
