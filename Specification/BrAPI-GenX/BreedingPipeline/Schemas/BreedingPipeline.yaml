@@ -231,30 +231,41 @@ components:
 
     TargetTraitRequirement:
       type: object
-      description: A breeding objective for a trait or observation variable, not an observed value.
+      description: |-
+        A directional breeding objective, not an observed value. A direction-only
+        objective may reference a BrAPI Trait. Any quantitative threshold or
+        range must reference a BrAPI ObservationVariable, because ObservationVariable
+        embeds its Trait, Method, and Scale. The referenced Scale is the source
+        of units, decimal precision, and valid-value constraints.
       required: [traitReference, desiredDirection]
       properties:
         traitReference:
+          description: Authority-qualified BrAPI Trait or ObservationVariable reference. Numeric targets require resourceType ObservationVariable.
           $ref: '#/components/schemas/BrapiResourceReference'
         desiredDirection:
           type: string
           enum: [increase, decrease, maintain, target-range]
         threshold:
           type: number
-          description: Approximate numeric target using JSON number semantics. Do not combine with exactDecimal.
+          description: Scalar numeric target using JSON number semantics. Do not combine with exactDecimal or range bounds.
         minimum:
           type: number
-          description: Inclusive lower target bound using JSON number semantics. Do not combine with exactDecimal.
+          description: Inclusive lower numeric bound using JSON number semantics. Pair with maximum; do not combine with exact-decimal bounds.
         maximum:
           type: number
-          description: Inclusive upper target bound using JSON number semantics. Do not combine with exactDecimal.
-        unit:
-          type: string
-          description: Unit token or identifier. A shared governed quantity profile remains a separate RFC-154 acceptance gate.
+          description: Inclusive upper numeric bound using JSON number semantics. Pair with minimum; do not combine with exact-decimal bounds.
         exactDecimal:
           type: string
-          pattern: '^-?[0-9]+(\.[0-9]+)?$'
-          description: Exact base-10 decimal lexical value when binary64 JSON number semantics are insufficient. Use instead of threshold/minimum/maximum.
+          pattern: '^-?[0-9]+(\\.[0-9]+)?$'
+          description: Exact base-10 scalar target when JSON number semantics are insufficient. Use instead of threshold or range bounds.
+        minimumExactDecimal:
+          type: string
+          pattern: '^-?[0-9]+(\\.[0-9]+)?$'
+          description: Exact base-10 inclusive lower range bound. Pair with maximumExactDecimal.
+        maximumExactDecimal:
+          type: string
+          pattern: '^-?[0-9]+(\\.[0-9]+)?$'
+          description: Exact base-10 inclusive upper range bound. Pair with minimumExactDecimal.
 
     StageDefinition:
       type: object
