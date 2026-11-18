@@ -3033,81 +3033,6 @@
           ]
         },
         "incomingRevision": {
-          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
-          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
-          "pipelineName": "rice-lowland-product-development",
-          "purpose": "product-development",
-          "programReference": {
-            "apiGeneration": "brapi-v2.1",
-            "resourceType": "Program",
-            "server": "https://brapi.example.org/brapi/v2",
-            "dbId": "rice-program-2026"
-          },
-          "publicationState": "published",
-          "targetContexts": [
-            {
-              "targetContextId": "south-asia-irrigated-lowland",
-              "productConcept": {
-                "reference": "https://profiles.example.org/products/rice-lowland-01",
-                "snapshot": {
-                  "name": "Irrigated lowland rice",
-                  "version": "2026.1",
-                  "sourceAuthority": "https://profiles.example.org"
-                }
-              },
-              "marketSegment": {
-                "reference": "https://profiles.example.org/market-segments/south-asia",
-                "description": "South Asian irrigated lowland systems"
-              },
-              "targetPopulationOfEnvironments": {
-                "reference": "https://environments.example.org/tpe/south-asia-lowland",
-                "description": "Warm irrigated lowland production environments"
-              },
-              "traitRequirements": [
-                {
-                  "traitReference": {
-                    "apiGeneration": "brapi-v2.1",
-                    "resourceType": "ObservationVariable",
-                    "server": "https://brapi.example.org/brapi/v2",
-                    "dbId": "grain-yield"
-                  },
-                  "desiredDirection": "target-range",
-                  "minimum": 6.5,
-                  "maximum": 8
-                },
-                {
-                  "traitReference": {
-                    "apiGeneration": "brapi-v2.1",
-                    "resourceType": "ObservationVariable",
-                    "server": "https://brapi.example.org/brapi/v2",
-                    "dbId": "lodging"
-                  },
-                  "desiredDirection": "decrease",
-                  "exactDecimal": "0.15"
-                }
-              ]
-            },
-            {
-              "targetContextId": "south-asia-drought-prone",
-              "marketSegment": {
-                "description": "Drought-prone rainfed rice systems"
-              },
-              "targetPopulationOfEnvironments": {
-                "description": "Rainfed drought-prone production environments"
-              },
-              "traitRequirements": [
-                {
-                  "traitReference": {
-                    "apiGeneration": "brapi-v2.1",
-                    "resourceType": "Trait",
-                    "server": "https://brapi.example.org/brapi/v2",
-                    "dbId": "drought-tolerance"
-                  },
-                  "desiredDirection": "increase"
-                }
-              ]
-            }
-          ],
           "schemeBindings": [
             {
               "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
@@ -3234,7 +3159,82 @@
                 ]
               }
             }
-          ]
+          ],
+          "targetContexts": [
+            {
+              "targetContextId": "south-asia-irrigated-lowland",
+              "productConcept": {
+                "reference": "https://profiles.example.org/products/rice-lowland-01",
+                "snapshot": {
+                  "name": "Irrigated lowland rice",
+                  "version": "2026.1",
+                  "sourceAuthority": "https://profiles.example.org"
+                }
+              },
+              "marketSegment": {
+                "reference": "https://profiles.example.org/market-segments/south-asia",
+                "description": "South Asian irrigated lowland systems"
+              },
+              "targetPopulationOfEnvironments": {
+                "reference": "https://environments.example.org/tpe/south-asia-lowland",
+                "description": "Warm irrigated lowland production environments"
+              },
+              "traitRequirements": [
+                {
+                  "traitReference": {
+                    "apiGeneration": "brapi-v2.1",
+                    "resourceType": "ObservationVariable",
+                    "server": "https://brapi.example.org/brapi/v2",
+                    "dbId": "grain-yield"
+                  },
+                  "desiredDirection": "target-range",
+                  "minimum": 6.5,
+                  "maximum": 8.0
+                },
+                {
+                  "traitReference": {
+                    "apiGeneration": "brapi-v2.1",
+                    "resourceType": "ObservationVariable",
+                    "server": "https://brapi.example.org/brapi/v2",
+                    "dbId": "lodging"
+                  },
+                  "desiredDirection": "decrease",
+                  "exactDecimal": "0.15"
+                }
+              ]
+            },
+            {
+              "targetContextId": "south-asia-drought-prone",
+              "marketSegment": {
+                "description": "Drought-prone rainfed rice systems"
+              },
+              "targetPopulationOfEnvironments": {
+                "description": "Rainfed drought-prone production environments"
+              },
+              "traitRequirements": [
+                {
+                  "traitReference": {
+                    "apiGeneration": "brapi-v2.1",
+                    "resourceType": "Trait",
+                    "server": "https://brapi.example.org/brapi/v2",
+                    "dbId": "drought-tolerance"
+                  },
+                  "desiredDirection": "increase"
+                }
+              ]
+            }
+          ],
+          "publicationState": "published",
+          "programReference": {
+            "apiGeneration": "brapi-v2.1",
+            "resourceType": "Program",
+            "server": "https://brapi.example.org/brapi/v2",
+            "dbId": "rice-program-2026"
+          },
+          "purpose": "product-development",
+          "pipelineName": "rice-lowland-product-development",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland"
         },
         "expectedOutcome": "replay"
       }
