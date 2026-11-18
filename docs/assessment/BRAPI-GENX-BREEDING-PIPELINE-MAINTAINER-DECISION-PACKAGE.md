@@ -4,6 +4,7 @@
 **Prepared:** 18 November 2026  
 **Workstream:** BGX-P1-05 — Public contract boundary and RFC disposition  
 **Repository baseline:** main at 52fd8cb1f4e7e88020f15cdf00577c0b0930dc40  
+**Terminology:** BrAPI (Breeding Application Programming Interface); RFC (Request for Comments); API (Application Programming Interface); MIAPPE (Minimum Information About a Plant Phenotyping Experiment); TPE (target population of environments); URL (Uniform Resource Locator); URI (Uniform Resource Identifier); CRUD (Create, Read, Update, Delete); DOI (Digital Object Identifier); PUI (Permanent Unique Identifier); YAML (YAML Ain't Markup Language).
 **Companion evidence:**
 - [Breeding Pipeline Domain Preflight](./BRAPI-GENX-BREEDING-PIPELINE-DOMAIN-PREFLIGHT.md)
 - [Breeding Pipeline and Scheme Design Proposal](./BRAPI-GENX-BREEDING-PIPELINE-DESIGN-PROPOSAL.md)
