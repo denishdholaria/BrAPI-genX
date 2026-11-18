@@ -24445,7 +24445,7 @@
       "semanticReviewStatus": "defined-in-proposal; community-review-pending",
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
-        "ref": "main",
+        "ref": "implementation/bgx-p1-06-approved-breeding-contract",
         "path": "Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
@@ -24528,7 +24528,7 @@
       "semanticReviewStatus": "defined-in-proposal; community-review-pending",
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
-        "ref": "main",
+        "ref": "implementation/bgx-p1-06-approved-breeding-contract",
         "path": "Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
@@ -24605,7 +24605,7 @@
       "semanticReviewStatus": "defined-in-proposal; community-review-pending",
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
-        "ref": "main",
+        "ref": "implementation/bgx-p1-06-approved-breeding-contract",
         "path": "Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_SelectionDecisionDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
@@ -30730,7 +30730,7 @@
       "semanticReviewStatus": "defined-in-proposal; community-review-pending",
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
-        "ref": "main",
+        "ref": "implementation/bgx-p1-06-approved-breeding-contract",
         "path": "Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
@@ -30813,7 +30813,7 @@
       "semanticReviewStatus": "defined-in-proposal; community-review-pending",
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
-        "ref": "main",
+        "ref": "implementation/bgx-p1-06-approved-breeding-contract",
         "path": "Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
@@ -30891,7 +30891,7 @@
       "semanticReviewStatus": "defined-in-proposal; community-review-pending",
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
-        "ref": "main",
+        "ref": "implementation/bgx-p1-06-approved-breeding-contract",
         "path": "Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_PopulationAdvancementDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
