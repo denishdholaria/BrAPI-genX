@@ -1,15 +1,9 @@
-# BrAPI-GenX — Crossing Schedule (Breeding)
+# BrAPI-GenX — Crossing Schedule (Deferred)
 
-Crossing schedules record planned crosses with parents and scheduled dates.
-BrAPI v2.1 has crosses and crossing projects but no schedule record.
+**Status:** Deferred by maintainer decision D-BP-11.
 
-- `POST /genx/v1/crossing-schedules` (`genxRegisterCrossingSchedule`) registers one
-  `CrossingSchedule` (`Schemas/CrossingScheduleNewRequest.yaml`). Same
-  `crossingScheduleDbId` + identical body replays; different body is
-  rejected with `409`.
-- `GET /genx/v1/crossing-schedules` (`genxListCrossingSchedules`) lists schedules,
-  optionally filtered by program or status.
-- `GET /genx/v1/crossing-schedules/{crossingScheduleDbId}`
-  (`genxGetCrossingSchedule`) retrieves one schedule.
+BrAPI PlannedCross and CrossingProject remain authoritative for mating intent, parent associations, cross type, project context, and planned-cross status. The current broad CrossingSchedule record must not duplicate that intent.
 
-Details and falsifiers: `../RFC-037-Crossing-Schedule.md`.
+Do not implement or promote the current CrossingSchedule endpoint surface. Reopen only for a distinct operational scheduling/booking requirement, such as resource/time-slot reservation and conflict semantics, with an explicit link to the BrAPI PlannedCross/CrossingProject identity. Calendar booking is not implied by a breeding scheme task.
+
+Historical RFC: `../RFC-037-Crossing-Schedule.md`.
