@@ -68,7 +68,7 @@ def source_value(operation: dict[str, Any], entry: dict[str, Any], field: str) -
     return extension.get(extension_key)
 
 
-def audit(strict: bool) -> int:
+def audit(strict: bool, plan_json: bool) -> int:
     registry = load_registry()
     entries = [e for e in registry.get("entries", []) if e.get("apiGeneration") == "genx-v1"]
     documents, errors = load_source_documents(entries)
@@ -220,7 +220,7 @@ def audit(strict: bool) -> int:
                     f"registry={registry_value}; source={source_value_text}{detail}"
                 )
 
-    if getattr(args, "plan_json", False):
+    if plan_json:
         plan = [
             {"catalogId": catalog_id, "fields": fields}
             for catalog_id, fields in sorted(sync_plan.items())
@@ -246,7 +246,7 @@ def main() -> int:
     )
     args = parser.parse_args()
     try:
-        return audit(strict=args.strict)
+        return audit(strict=args.strict, plan_json=args.plan_json)
     except (OSError, json.JSONDecodeError) as exc:
         print(f"Cannot audit the endpoint registry: {exc}")
         return 1
