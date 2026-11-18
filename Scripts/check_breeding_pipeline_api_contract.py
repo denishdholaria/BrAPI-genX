@@ -275,7 +275,7 @@ def run(root: Path) -> list[str]:
     )
     conflict_properties = conflict_schema.get("properties", {})
     require(
-        {"version-content-conflict", "current-version-precondition-failed", "withdrawal-target-mismatch"}
+        {"version-content-conflict", "current-version-precondition-failed", "revision-relationship-mismatch"}
         <= set(conflict_properties.get("errorCode", {}).get("enum", [])),
         "BreedingPipelineConflict.errorCode must distinguish version content, current pointer, and withdrawal conflicts.",
         errors,
