@@ -263,7 +263,8 @@ def run(root: Path) -> list[str]:
         post_operation = {}
         pipeline_operations = {}
     require(
-        ref_name(post_operation.get("responses", {}).get("409")) == "BreedingPipelineConflictResponse",
+        post_operation.get("responses", {}).get("409", {}).get("$ref")
+        == "#/components/responses/BreedingPipelineConflictResponse",
         "BreedingPipeline registration POST must document its structured 409 Conflict response.",
         errors,
     )
