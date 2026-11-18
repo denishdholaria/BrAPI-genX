@@ -181,7 +181,7 @@ Before this RFC is promoted:
 1. settle the exact version-retrieval route and current/all list semantics;
 2. settle BrAPI server canonicalization and typed reference schema;
 3. validate target-context profile variants and typed units/precision;
-4. validate lifecycle and actor authorization;
+4. ratify the candidate current-revision compare-and-set profile in §12.7 and validate lifecycle/actor authorization;
 5. validate embedded scheme-version identity equality and nested execution-context envelopes;
 6. synchronize OpenAPI, registry, generated catalogue, crosswalk, and conformance probes;
 7. test positive and negative revision/replay/version-binding cases;
@@ -223,7 +223,7 @@ A missing logical identity returns 404. An unknown version under an existing log
 
 The following remain gates rather than guessed defaults:
 - whether exact version selection remains a query parameter or becomes a nested version route;
-- how multiple published revisions are designated current, including concurrency and authorization rules;
+- final authorization policy for publishing, withdrawing, and resolving a current-revision precondition;
 - canonical BrAPI server URI normalization and authority dereferencing;
 - runtime dereference of ObservationVariable to its Trait/Method/Scale, and validation of target values against the referenced Scale's units, decimalPlaces, and validValues;
 - whether lifecycle transitions need a separate governance event/audit resource.
@@ -244,3 +244,22 @@ List filters that accept BrAPI identifiers must preserve the owning server autho
 The source server is the authoritative BrAPI v2.1 base URI. The exact `populationResourceType` is supplied because the candidate model has not approved one universal mapping from a population/family concept to a single BrAPI resource type. A server must not guess that resource type from an identifier or silently substitute Germplasm. API generation is fixed to BrAPI v2.1 for this initial filter profile; resource types use exact official resource names.
 
 These paired parameters are candidate wire semantics. Before normative promotion, conformance cases must prove that omitted authority/type pairs fail closed when an identifier filter is supplied, valid pairs resolve only against the identified server/resource type, and same-valued dbIds from different authorities remain distinct.
+
+
+### 12.7 Candidate current-revision compare-and-set profile — pending maintainer ratification
+
+The following is the recommended candidate rule for a single current published revision per stable BreedingPipeline identity. It is introduced to make concurrent publication behavior deterministic; it is not one of D-BP-01 through D-BP-13 and is **not yet maintainer-ratified**.
+
+The registration envelope carries `expectedCurrentBreedingPipelineVersionDbId` alongside `breedingPipelineVersion`. This precondition is outside the immutable revision payload and is excluded from that revision's canonical replay fingerprint.
+
+1. **First registration:** omit the precondition because no logical pipeline exists yet. The first revision may be draft or published. A first published revision initializes the current pointer; a first draft leaves it unset.
+2. **Existing workstream:** every new immutable version must include the expected current pointer observed by the client. Supply the exact current `breedingPipelineVersionDbId`, or explicit JSON `null` when the workstream has no published revision. Omission is not equivalent to null.
+3. **Replay precedence:** first evaluate whether the incoming `breedingPipelineVersionDbId` already exists. If the revision payload is canonically identical under JCS (RFC 8785), return the prior result without re-evaluating the now possibly stale pointer precondition. If the same version ID has different canonical revision content, return a version-content conflict. The expected-current field is not part of this equality comparison.
+4. **New draft:** compare the supplied expected pointer atomically with the current pointer. On a match, append the immutable draft but do not change the current pointer. Multiple drafts may therefore coexist against the same published baseline.
+5. **New published revision:** compare the supplied expected pointer atomically with the current pointer. On a match, append the immutable published revision and advance the pointer in the same transaction. If a current pointer exists, `revisionRelationship.priorBreedingPipelineVersionDbId` must identify that exact version using `supersedes` or `corrects`. If the current pointer is null, this is the first published revision.
+6. **Withdrawal:** compare the supplied expected pointer atomically with the current pointer. A new immutable withdrawn revision must identify the exact current version it withdraws; append it and clear the pointer in the same transaction. A workstream with no current published version cannot withdraw a current version.
+7. **Lost race:** if the expected pointer does not equal the current pointer at commit time, return HTTP 409 Conflict and make no append or pointer mutation. The client must retrieve the latest state and submit a new revision with a new version ID if its intent still applies; never reuse an existing version ID with changed content.
+
+The current pointer is a convenience for discovery, not the identity or history of the workstream. It must never be advanced independently of the immutable revision append. The pointer comparison and version append/update/clear must be atomic under the repository's persistence model.
+
+**Decision needed before normative promotion:** ratify this compare-and-set profile or choose a different concurrency model, and define which actor scopes may publish and withdraw. Until ratified and behaviorally implemented, the profile is candidate contract guidance only. The 28 fixtures exercise these proposed semantics at the design-validation layer; they do not prove production transaction isolation or runtime enforcement.
