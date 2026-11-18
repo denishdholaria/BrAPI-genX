@@ -24483,8 +24483,11 @@
       "idempotency": "Read-only.",
       "parameters": [
         "programDbId",
+        "programServer",
         "studyDbId",
+        "studyServer",
         "candidateGermplasmDbId",
+        "candidateGermplasmServer",
         "decision",
         "page",
         "pageSize",
@@ -30766,7 +30769,9 @@
       "idempotency": "Read-only.",
       "parameters": [
         "programDbId",
+        "programServer",
         "populationDbId",
+        "populationServer",
         "status",
         "page",
         "pageSize",
