@@ -461,7 +461,9 @@ These questions do not block further domain research. They do block schema promo
 
 ### Slice 4 — Maintainer contract decision package
 
-Prepare a consolidated decision package comparing the nested-scheme and first-class-scheme alternatives, candidate identity/reference/versioning fields, BrAPI mappings, migration impact on the current scalar pipelineStage record, and RFC disposition consequences. Keep all RFCs at \`STRUCTURAL_DRAFT\`; do not change endpoint YAML, schemas, or maturity states before the maintainer selects the public resource boundary.
+**Prepared** in [the Maintainer Decision Package](./BRAPI-GENX-BREEDING-PIPELINE-MAINTAINER-DECISION-PACKAGE.md). It consolidates the preferred Pipeline/Scheme boundary, nested-versus-first-class scheme alternatives, logical/revision identity migration, typed BrAPI references, stage/transition rules, target-context boundaries, and proposed RFC dispositions. It identifies 13 maintainer decisions. No endpoint YAML, schema, or RFC maturity state was changed.
+
+The next action is maintainer direction on the public resource boundary and dependent identity/reference choices.
 
 ## 14. References
 
