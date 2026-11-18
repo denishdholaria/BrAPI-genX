@@ -234,7 +234,7 @@ The candidate Pipeline/Scheme model should account for these findings:
 
 ### Slice 4 — Maintainer contract decision package
 
-Consolidate the candidate resource boundary, nested-versus-first-class scheme alternatives, identity and reference rules, migration impacts, and recommended RFC dispositions. Preserve all current RFCs and draft schemas until the maintainer chooses the public contract boundary.
+**Prepared** in [the Maintainer Decision Package](./BRAPI-GENX-BREEDING-PIPELINE-MAINTAINER-DECISION-PACKAGE.md). It sets out the recommended resource boundary, scheme representation alternatives, identity/version model, BrAPI reference rules, migration consequences, and dispositions for the six related RFCs. The package identifies 13 maintainer decisions. No RFC, endpoint YAML, schema, or maturity state was changed.
 
 ## 8. References
 
