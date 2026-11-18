@@ -11026,7 +11026,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - Treating the list as a complete breeding program record.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
-- **Parameters recorded in registry:** programDbId, populationDbId, status, page, pageSize, authorizationHeader
+- **Parameters recorded in registry:** programDbId, programServer, populationDbId, populationServer, status, page, pageSize, authorizationHeader
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
@@ -13021,7 +13021,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - Treating the list as a complete breeding program record.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
-- **Parameters recorded in registry:** programDbId, studyDbId, candidateGermplasmDbId, decision, page, pageSize, authorizationHeader
+- **Parameters recorded in registry:** programDbId, programServer, studyDbId, studyServer, candidateGermplasmDbId, candidateGermplasmServer, decision, page, pageSize, authorizationHeader
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
