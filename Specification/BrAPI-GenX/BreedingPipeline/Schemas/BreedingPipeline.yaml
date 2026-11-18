@@ -256,15 +256,15 @@ components:
           description: Inclusive upper numeric bound using JSON number semantics. Pair with minimum; do not combine with exact-decimal bounds.
         exactDecimal:
           type: string
-          pattern: '^-?[0-9]+(\\.[0-9]+)?$'
+          pattern: '^-?[0-9]+(\.[0-9]+)?$'
           description: Exact base-10 scalar target when JSON number semantics are insufficient. Use instead of threshold or range bounds.
         minimumExactDecimal:
           type: string
-          pattern: '^-?[0-9]+(\\.[0-9]+)?$'
+          pattern: '^-?[0-9]+(\.[0-9]+)?$'
           description: Exact base-10 inclusive lower range bound. Pair with maximumExactDecimal.
         maximumExactDecimal:
           type: string
-          pattern: '^-?[0-9]+(\\.[0-9]+)?$'
+          pattern: '^-?[0-9]+(\.[0-9]+)?$'
           description: Exact base-10 inclusive upper range bound. Pair with minimumExactDecimal.
 
     StageDefinition:
