@@ -2,10 +2,11 @@
 
 SelectionDecision records an actual, immutable selection verdict and its rationale/evidence. It is not a planned selection rule or a scheme TaskDefinition.
 
-- The decision may reference the exact BreedingPipeline logical ID and revision and the exact BreedingScheme logical ID and version that governed it.
-- A stage identifier is scheme-version-local. If `stageId` is supplied, `breedingSchemeVersionDbId` is required.
-- Where both a pipeline revision and scheme version are supplied, the revision must bind that exact scheme version.
-- BrAPI Program, Study, Germplasm and Observation resources remain authoritative; references must preserve their owning BrAPI server context.
+- The decision may reference an exact BreedingPipeline revision and exact BreedingScheme version when those definitions governed the decision.
+- `schemeContext` is optional and contains both `breedingSchemeDbId` and `breedingSchemeVersionDbId`. Any `stageId` must be nested inside this context and resolve within that exact scheme version.
+- `pipelineContext` is optional and contains both the stable pipeline ID and exact immutable pipeline revision. When both contexts are supplied, that pipeline revision must embed the referenced scheme version.
+- A decision made outside a registered pipeline or scheme may omit both contexts.
+- BrAPI Program, Study, Germplasm and Observation resources remain authoritative; references preserve their owning BrAPI server context.
 
 The existing list, record, and retrieve operations remain non-normative until the referenced schema and conformance gates pass.
 
