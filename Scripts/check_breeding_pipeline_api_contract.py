@@ -234,6 +234,69 @@ def run(root: Path) -> list[str]:
         errors,
     )
 
+    expected_current = request.get("properties", {}).get("expectedCurrentBreedingPipelineVersionDbId", {})
+    require(
+        expected_current.get("type") == "string" and expected_current.get("nullable") is True,
+        "BreedingPipelineNewRequest.expectedCurrentBreedingPipelineVersionDbId must be a nullable string to distinguish no current revision from an omitted precondition.",
+        errors,
+    )
+    require(
+        "expectedCurrentBreedingPipelineVersionDbId" not in required_fields(request),
+        "expectedCurrentBreedingPipelineVersionDbId must remain conditionally required, not unconditional, so first creation and identical replay can omit it.",
+        errors,
+    )
+    expected_current_description = str(expected_current.get("description", "")).lower()
+    require(
+        "explicit null" in expected_current_description
+        and "existing" in expected_current_description
+        and "replay" in expected_current_description,
+        "Expected-current-version description must define explicit-null, existing-pipeline, and replay behavior.",
+        errors,
+    )
+
+    pipeline_operations_path = bp_dir / "BreedingPipeline_GET_POST.yaml"
+    try:
+        pipeline_operations = load_yaml(pipeline_operations_path)
+        post_operation = pipeline_operations.get("paths", {}).get("/breeding-pipelines", {}).get("post", {})
+    except (OSError, yaml.YAMLError, ValueError) as exc:
+        errors.append(f"Cannot load BreedingPipeline registration operation: {exc}")
+        post_operation = {}
+        pipeline_operations = {}
+    require(
+        ref_name(post_operation.get("responses", {}).get("409")) == "BreedingPipelineConflictResponse",
+        "BreedingPipeline registration POST must document its structured 409 Conflict response.",
+        errors,
+    )
+    conflict_schema = schema(pipeline_operations, "BreedingPipelineConflict", pipeline_operations_path, errors)
+    require(
+        {"errorCode", "message"} <= required_fields(conflict_schema),
+        "BreedingPipelineConflict must require errorCode and message.",
+        errors,
+    )
+    conflict_properties = conflict_schema.get("properties", {})
+    require(
+        {"version-content-conflict", "current-version-precondition-failed", "withdrawal-target-mismatch"}
+        <= set(conflict_properties.get("errorCode", {}).get("enum", [])),
+        "BreedingPipelineConflict.errorCode must distinguish version content, current pointer, and withdrawal conflicts.",
+        errors,
+    )
+    current_on_conflict = conflict_properties.get("currentBreedingPipelineVersionDbId", {})
+    require(
+        current_on_conflict.get("type") == "string" and current_on_conflict.get("nullable") is True,
+        "BreedingPipelineConflict.currentBreedingPipelineVersionDbId must be a nullable string.",
+        errors,
+    )
+    post_extension = post_operation.get("x-brapi-genx", {})
+    idempotency_text = str(post_extension.get("idempotency", "")).lower()
+    require(
+        "jcs" in idempotency_text
+        and "before" in idempotency_text
+        and "atomically" in idempotency_text
+        and "409" in idempotency_text,
+        "BreedingPipeline POST idempotency contract must document canonical replay-before-precondition and atomic 409 conflict behavior.",
+        errors,
+    )
+
     # Execution contexts are nested; no event schema may accept unqualified top-level stage IDs.
     pipeline_context = schema(bp_doc, "BreedingPipelineExecutionContext", bp_schema_path, errors)
     scheme_context = schema(bp_doc, "BreedingSchemeExecutionContext", bp_schema_path, errors)
@@ -341,7 +404,7 @@ def main() -> int:
         for error in errors:
             print("- " + error)
         return 1
-    print("PASS: embedded scheme versions, immutable identities, nested execution contexts, and authority-qualified list filters.")
+    print("PASS: embedded scheme versions, immutable identities, nested execution contexts, authority-qualified list filters, and atomic revision registration preconditions.")
     print("NOTE: static contract consistency only; no production runtime conformance or normative status is implied.")
     return 0
 
