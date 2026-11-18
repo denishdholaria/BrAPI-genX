@@ -13,7 +13,7 @@ paths:
           crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
         purpose: "Retrieve one registered breeding pipeline."
         canBeUsedFor:
-          - "Inspect catalogue entries and provenance."
+          - "Inspect a registered breeding pipeline record and its provenance."
         mustNotBeUsedFor:
           - "Assuming a record is a BrAPI data resource."
           - "Treating a superseded record as current."
@@ -22,7 +22,6 @@ paths:
         semanticNeighbors:
           - "genxRegisterBreedingPipeline"
           - "genxListBreedingPipelines"
-          - "genxRegisterResearchAsset"
         decisions: ["RFC-154"]
         proposalStatus: "draft-non-normative"
       summary: Get one breeding pipeline
