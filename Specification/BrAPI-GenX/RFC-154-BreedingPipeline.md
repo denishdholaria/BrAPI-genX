@@ -1,46 +1,156 @@
 # RFC-154 — Breeding Pipeline (D2)
 
-- Status: proposal, non-normative.
-- Supersedes: none.
-- Related: RFC-001 (GenX skeleton), `CLASSIFICATION.md` (D2).
+- Status: approved candidate contract design; non-normative until the RFC acceptance gates are met.
+- Supersedes: RFC-014 for the canonical pipeline design; RFC-014 is retained as historical evidence and is not deleted or renumbered.
+- Related: RFC-001 (GenX skeleton), RFC-008 (Selection Decisions), RFC-029 (Crop Cycle), RFC-035 (Population Advancement), RFC-037 (Crossing Schedule), RFC-098 (Research Program), and the BreedingPipeline/Scheme decision package.
+- Maintainer authorization: D-BP-01 through D-BP-13 approved on 18 November 2026.
+- Terminology: BrAPI (Breeding Application Programming Interface); API (Application Programming Interface); RFC (Request for Comments); URI (Uniform Resource Identifier); TPE (target population of environments).
 
-## 1. Problem
+## 1. Purpose
 
-BrAPI v2.1 has no place to record breeding pipeline records. Breeding pipelines
-circulate without a stated type, breeding program reference, pipeline stage, or
-provenance, so breeding program advancement cannot be tracked or audited.
+A BreedingPipeline is a durable, goal- and target-oriented breeding workstream associated with one owning BrAPI Program. It describes why the workstream exists, its target context, and the exact breeding-scheme versions adopted or evaluated by the workstream.
 
-## 2. Object
+A BreedingPipeline is not:
+- a BrAPI Program, Trial, Study, Germplasm, Cross, or Pedigree;
+- a single stage occupied by every material in the workstream;
+- an execution workflow or task scheduler;
+- a governmental variety approval, registration, or release record.
 
-`BreedingPipeline` — one immutable breeding pipeline record, with its pipeline
-type, breeding program reference, pipeline stage, target trait, and provenance.
+A pipeline may use multiple schemes and may have multiple immutable revisions over its lifetime.
 
-## 3. Endpoints
+## 2. BreedingPipeline and BreedingScheme boundaries
 
-- `GET /genx/v1/breeding-pipelines` (`genxListBreedingPipelines`)
-- `POST /genx/v1/breeding-pipelines` (`genxRegisterBreedingPipeline`)
-- `GET /genx/v1/breeding-pipelines/{breedingPipelineDbId}` (`genxGetBreedingPipeline`)
+- **BreedingPipeline**: persistent breeding workstream and target context.
+- **BreedingPipelineRevision**: immutable snapshot of pipeline purpose, target contexts, and exact scheme-version bindings.
+- **BreedingScheme**: stable identity for a process blueprint.
+- **BreedingSchemeVersion**: immutable published process definition.
+- **StageDefinition**: scheme-version-local description of a breeding stage.
+- **Transition**: permitted directed relationship between two stages in one scheme version. It may be forward, branching, or recurrent.
+- **TaskDefinition**: design-time activity definition, not evidence that an activity occurred.
+- **Execution record**: actual event or evidence, owned by its relevant BrAPI or GenX resource.
 
-## 4. Compatibility law
+The initial public contract gives BreedingScheme a first-class logical identity and immutable version identity, but embeds the version definition in the adopting PipelineRevision. No separate BreedingScheme CRUD endpoints are introduced in this initial surface. The logical model must not preclude a later dedicated endpoint that exposes the same identity and version semantics.
 
-- Additive and optional. A V2.1 client keeps working against a GenX server.
-- A GenX client tolerates a server that does not implement this object.
-- No change to BrAPI v2.1 paths, schemas, or operationIds.
-- A record is not a BrAPI data resource and must not be treated as one.
+## 3. Identity and immutable revisions
 
-## 5. Invariants
+| Identifier | Meaning |
+|---|---|
+| breedingPipelineDbId | Stable logical identity of the continuing workstream |
+| breedingPipelineVersionDbId | Immutable identity of one pipeline revision |
+| breedingSchemeDbId | Stable logical identity of a process blueprint |
+| breedingSchemeVersionDbId | Immutable identity of one scheme definition version |
 
-- A published `breedingPipelineDbId` record never mutates in place.
-- Replay: same id + identical body replays; same id + different body → 409.
-- Corrections are recorded as additional records linked by `supersedes`.
+A PipelineRevision:
+- belongs to exactly one BreedingPipeline logical identity;
+- has one immutable breedingPipelineVersionDbId;
+- contains the exact BrAPI Program reference;
+- contains zero or more target contexts;
+- contains zero or more scheme bindings, each resolving to an exact scheme version;
+- carries provenance for the revision.
 
-## 6. Deferred questions
+A scheme binding identifies the exact breedingSchemeDbId and breedingSchemeVersionDbId, and may include a locally governed role such as principal or experimental. The role does not change the referenced scheme's identity.
 
-- D-454: Should `targetTrait` be required? (Current: optional.)
-- D-455: Should `pipelineType` be a controlled vocabulary? (Current: free-form string.)
-- D-456: Should records link to GenX `ResearchAsset`? (Current: no link.)
+A new revision is registered under the existing breedingPipelineDbId by supplying a new breedingPipelineVersionDbId. Replaying the same version ID with an identical body returns the existing version. Reusing the same version ID with a different body is rejected with 409. A new version ID is required for every substantive published revision.
 
-## 7. Classification
+A published revision is immutable. Corrections preserve the original revision and are represented by a new revision with an explicit correction/supersession relationship. A mutable current-version pointer may be exposed as a convenience only; it must never be the only way to retrieve historical versions.
 
-Primary domain: D2.
-Cross-cutting: C1, C2, C3 (POST), C6, C9.
+## 4. BrAPI authority-qualified references
+
+BrAPI identifiers are owned by a BrAPI server. A dbId alone is not sufficient to resolve a resource across independent servers.
+
+The candidate reference object contains:
+- apiGeneration, identifying the BrAPI contract generation (initially 2.1);
+- resourceType, using the exact official resource name (for example Program, Germplasm, Study, Trial, PlannedCross, Cross, Observation, or ObservationVariable);
+- server, identifying the authoritative BrAPI server or authority URI;
+- dbId, the identifier issued by that server.
+
+The server/authority value must be canonical and resolvable under an explicit policy. Implementations must not infer an authority from an unqualified identifier, and must not silently resolve a reference against their own default server.
+
+This RFC fixes the semantic shape, not a final URI serialization syntax. The contract-definition slice must settle server canonicalization, normalization, and dereference policy before schema promotion.
+
+## 5. Target contexts
+
+A PipelineRevision supports zero or more typed target contexts. A target context may describe:
+- product concept/profile reference or immutable descriptive snapshot;
+- market segment reference or description;
+- target population of environments (TPE) reference or description;
+- zero or more trait requirements, each with a resolvable trait/variable reference, desired direction, and typed threshold or range when defined;
+- units, precision, source authority/version, and provenance where relevant.
+
+Target contexts are purpose-specific. Do not require product/market fields for every pipeline purpose. Trait targets are breeding objectives, not observations or measurements.
+
+This initial contract does not create independent public APIs for MarketSegment, ProductConcept, or TPE. Their independent identity, authority, reuse, and lifecycle have not been demonstrated.
+
+## 6. Scheme version contents
+
+A SchemeVersion contains:
+- one or more StageDefinitions;
+- zero or more directed Transitions;
+- zero or more TaskDefinitions assigned to stages or transition/gate contexts;
+- provenance and version/lifecycle metadata.
+
+Stage IDs are unique only within their exact scheme version. Labels and codes may be crop- and organization-specific. Display order is presentation metadata only and does not define process semantics.
+
+Initial task categories are crossing, generation advancement, multiplication, evaluation, and selection.
+
+The initial model does not include executable gate scripts, generic workflow gateways, orchestration, scheduling, dispatch, retries, event routing, or live cohort state. Category-specific detail must be typed and introduced only for validated interoperability needs; opaque parameter bags are not a substitute for domain modelling.
+
+## 7. Execution and evidence ownership
+
+Actual execution remains with the authoritative resource:
+- BrAPI Program owns program context.
+- BrAPI BreedingMethod owns breeding-method identity.
+- BrAPI CrossingProject, PlannedCross, and Cross own crossing project, mating intent, and actual cross facts.
+- BrAPI Germplasm and Pedigree own biological material and parentage.
+- BrAPI Trial, Study, ObservationUnit, Observation, and ObservationVariable own experiment and observation evidence.
+- GenX SelectionDecision may own an actual selection verdict.
+- GenX PopulationAdvancement may own an actual material-progression event.
+
+A scheme TaskDefinition is not proof of execution. A Transition is not an actual advancement event. An execution event may cite pipeline and scheme version context when it was governed by a registered strategy. If it includes a stage ID, it must include the exact scheme version that defines that stage. If it includes both a pipeline revision and scheme version, the revision must bind that exact scheme version.
+
+## 8. Lifecycle dimensions
+
+Do not overload a single status field to express draft versus published, adopted/active versus no longer used, current versus superseded, governance approval, and governmental variety registration or release.
+
+Published pipeline and scheme versions are immutable. Substantive changes create new version identities. The final public contract must define permitted lifecycle transitions and actor authority. No GenX lifecycle status implies regulatory approval.
+
+## 9. Initial endpoint surface
+
+The initial BreedingPipeline endpoint surface remains:
+- GET /genx/v1/breeding-pipelines — list logical pipelines, with explicitly defined current/all revision semantics;
+- POST /genx/v1/breeding-pipelines — register a logical pipeline and immutable revision, or append a revision using a new version ID;
+- GET /genx/v1/breeding-pipelines/{breedingPipelineDbId} — retrieve the logical pipeline view with a defined current-revision selector;
+- exact historical revision retrieval must be supported by a version-aware lookup contract before normative promotion.
+
+The route shape for exact revision retrieval, whether nested or a query parameter, remains to be finalized in the contract-definition slice. The initial design does not add separate BreedingScheme endpoints.
+
+The list and retrieval operations must not imply that a logical pipeline is a single immutable version. Mutation of published content is prohibited; corrections create new versions.
+
+## 10. Related RFC disposition
+
+| RFC | Disposition |
+|---|---|
+| RFC-014 | Historical predecessor. Preserve file and number; canonical design is consolidated here. |
+| RFC-008 SelectionDecision | Retain and refine as an actual verdict; add exact pipeline/scheme version context where applicable. |
+| RFC-019 ProgenyRecords | Defer the current broad resource. BrAPI Pedigree remains authoritative for parentage. Reopen only for a distinct immutable formation/family event with a proven gap. |
+| RFC-029 CropCycle | Retain as crop planting-to-harvest cycle; never reuse as a breeding cycle. |
+| RFC-035 PopulationAdvancement | Retain and refine as an actual population progression event; qualify stage IDs with an exact scheme version. |
+| RFC-037 CrossingSchedule | Defer the broad current resource. Reopen only for scheduling/booking semantics that add value beyond PlannedCross and CrossingProject. |
+| RFC-098 ResearchProgram | Defer the duplicate resource. BrAPI Program remains authoritative. Reopen only if a distinct portfolio/network/governance concept is demonstrated. |
+
+No historical RFC is deleted or renumbered.
+
+## 11. Compatibility and conformance
+
+The GenX surface is additive and optional. It must not alter official BrAPI v2.1 paths, schemas, or operation identifiers.
+
+Before this RFC is promoted:
+1. settle the exact version-retrieval route and current/all list semantics;
+2. settle BrAPI server canonicalization and typed reference schema;
+3. validate target-context profile variants and typed units/precision;
+4. validate lifecycle and actor authorization;
+5. synchronize OpenAPI, registry, generated catalogue, crosswalk, and conformance probes;
+6. test positive and negative revision/replay/version-binding cases;
+7. retain all official BrAPI source contracts unchanged.
+
+Until these gates pass, this document is an approved candidate design, not a normative released specification.
