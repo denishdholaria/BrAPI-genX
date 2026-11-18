@@ -25870,7 +25870,7 @@
       "semanticReviewStatus": "defined-in-proposal; community-review-pending",
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
-        "ref": "main",
+        "ref": "implementation/bgx-p1-06-approved-breeding-contract",
         "path": "Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
@@ -25956,7 +25956,7 @@
       "semanticReviewStatus": "defined-in-proposal; community-review-pending",
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
-        "ref": "main",
+        "ref": "implementation/bgx-p1-06-approved-breeding-contract",
         "path": "Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_BreedingPipelineDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
@@ -58753,7 +58753,7 @@
       "semanticReviewStatus": "defined-in-proposal; community-review-pending",
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
-        "ref": "main",
+        "ref": "implementation/bgx-p1-06-approved-breeding-contract",
         "path": "Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
