@@ -8,6 +8,8 @@ SelectionDecision records an actual, immutable selection verdict and its rationa
 - A decision made outside a registered pipeline or scheme may omit both contexts.
 - BrAPI Program, Study, Germplasm and Observation resources remain authoritative; references preserve their owning BrAPI server context.
 
+The list filters require authority pairs: `programDbId` with `programServer`, `studyDbId` with `studyServer`, and `candidateGermplasmDbId` with `candidateGermplasmServer`. These are the authoritative BrAPI v2.1 server base URIs that issued the identifiers.
+
 The existing list, record, and retrieve operations remain non-normative until the referenced schema and conformance gates pass.
 
 Details: `../RFC-008-Selection-Decisions.md`.
