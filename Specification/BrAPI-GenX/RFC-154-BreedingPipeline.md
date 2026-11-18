@@ -187,6 +187,8 @@ Before this RFC is promoted:
 7. test positive and negative revision/replay/version-binding cases;
 8. retain all official BrAPI source contracts unchanged.
 
+The current maintainer choices, recommendations, alternatives, and implementation consequences are consolidated in [Breeding Pipeline Open Maintainer Decisions](../../docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-OPEN-DECISIONS.md). That note is advisory and does not change the approval record.
+
 Until these gates pass, this document is an approved candidate design, not a normative released specification.
 
 ## 12. Candidate request and response semantics
