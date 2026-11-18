@@ -288,8 +288,10 @@ def validate_corpus(corpus: Any) -> list[str]:
     # Negative scenario: scheme-local stage IDs require an exact scheme version.
     fixture = by_id.get("invalid-execution-stage-without-scheme-version", {})
     event = as_object(fixture.get("executionEvent"))
-    has_stage = bool(event.get("fromStageId") or event.get("toStageId") or event.get("stageId"))
-    if event.get("schemeVersionId") or not has_stage:
+    has_stage_reference = bool(
+        event.get("fromStageId") or event.get("toStageId") or event.get("stageId")
+    )
+    if event.get("schemeVersionId") or not has_stage_reference:
         errors.append(
             "invalid-execution-stage-without-scheme-version: scenario must have stage "
             "reference(s) and no schemeVersionId"
