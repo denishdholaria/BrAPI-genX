@@ -28,7 +28,7 @@ paths:
         decisions: ["RFC-154", "D-BP-01", "D-BP-03", "D-BP-13"]
         proposalStatus: "draft-non-normative"
       summary: List breeding pipelines
-      description: Get a paged list of stable pipeline workstream identities. By default, each logical pipeline is represented by its current published revision summary; includeRevisions=true includes all available revision summaries.
+      description: Get a paged list of stable pipeline workstream identities. By default, each item includes its currentRevisionSummary when a current published revision exists. includeRevisions=true additionally returns revisionSummaries for all known immutable revisions; the summaries do not include full historical revision payloads.
       parameters:
       - name: includeRevisions
         description: When true, include all known revision summaries for each logical pipeline. When false or omitted, return the current published revision summary only.
