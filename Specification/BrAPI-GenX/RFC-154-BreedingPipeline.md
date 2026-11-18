@@ -154,3 +154,44 @@ Before this RFC is promoted:
 7. retain all official BrAPI source contracts unchanged.
 
 Until these gates pass, this document is an approved candidate design, not a normative released specification.
+
+## 12. Candidate request and response semantics
+
+This section makes the provisional operation behavior explicit enough for schema and registry reconciliation. It does not waive the acceptance gates in §11.
+
+### 12.1 Registration request
+
+The registration request contains:
+- `breedingPipelineDbId`: stable logical workstream identity;
+- `breedingPipelineVersion`: the immutable revision payload, including `breedingPipelineVersionDbId`.
+
+The first successful registration creates the logical identity and its first revision. A subsequent registration under the same `breedingPipelineDbId` appends a revision only when `breedingPipelineVersionDbId` is new. The idempotency key is the immutable version identity, not the logical workstream identity.
+
+The request body must not allow a client to mutate an already published revision by sending changed content under the same version identifier. Servers must compare the canonical request representation under the GenX idempotency rules and reject a same-version/different-payload conflict with HTTP 409.
+
+### 12.2 List behavior
+
+`GET /breeding-pipelines` returns logical workstream summaries. By default, each workstream is represented by its current published revision summary. `includeRevisions=true` includes the known revision summaries for each logical workstream. This flag does not inline the full historical revision payloads and does not replace exact revision retrieval.
+
+The list response's `BreedingPipeline` item represents the stable logical identity and may include the convenience `currentBreedingPipelineVersionDbId`. It must not imply that the workstream itself is an immutable revision.
+
+### 12.3 Single-resource retrieval
+
+`GET /breeding-pipelines/{breedingPipelineDbId}` without a version selector returns the logical identity and current published revision view. Supplying `breedingPipelineVersionDbId` selects that exact immutable revision. The response result is the `BreedingPipelineRevision` for both default and exact-version lookups; the stable logical identifier is retained within the revision object.
+
+A missing logical identity returns 404. An unknown version under an existing logical identity also returns 404 and must not fall back silently to the current revision.
+
+### 12.4 Lifecycle and revision relationships
+
+`publicationState` distinguishes draft, published, and withdrawn definitions. It does not describe adoption, currentness, governance approval, or regulatory variety release. `revisionRelationship.relationshipType` may identify `supersedes` or `corrects`; `priorBreedingPipelineVersionDbId` identifies the exact prior revision. A revision with no prior relationship leaves this object absent.
+
+### 12.5 Explicitly unresolved wire-level details
+
+The following remain gates rather than guessed defaults:
+- whether exact version selection remains a query parameter or becomes a nested version route;
+- how multiple published revisions are designated current, including concurrency and authorization rules;
+- canonical BrAPI server URI normalization and authority dereferencing;
+- typed target quantity units, range closure, precision, and exact-decimal validation;
+- whether lifecycle transitions need a separate governance event/audit resource.
+
+The current query-selector and list flag are candidate semantics to test in the implementation-independent OpenAPI build, not a promise that the final public path is immutable.
