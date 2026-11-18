@@ -120,3 +120,13 @@ The corpus includes Unicode, UTF-16 property ordering, number formatting, duplic
 The [digest-scope inventory](./DIGEST-SCOPE-INVENTORY.md) records the current per-field preimage ambiguity. Passing the candidate vectors is not sufficient to resolve D-02: field meaning, exact input scope, and migration/versioning must also be specified.
 
 The [digest decision brief](./DIGEST-DECISION-BRIEF.md) preserves the historical comparison of the legacy serializer, JCS, a custom canonicalizer, and exact-byte hashing, and identifies field-level implementation work still requiring review.
+
+## BreedingPipeline and BreedingScheme candidate gates
+
+The approved-candidate breeding contract has two additional static gates:
+
+- `python Scripts/validate_breeding_pipeline_candidate_fixtures.py` validates the historical design-evidence corpus.
+- `python Scripts/validate_breeding_pipeline_contract_fixtures.py` validates the approved-candidate fixtures for immutable identity, embedded scheme-version equality, stage/transition/task integrity, target-context rules, authority-qualified references, and exact execution contexts.
+- `python Scripts/check_breeding_pipeline_api_contract.py` checks the actual OpenAPI schema composition and source-server filter pairs against the endpoint registry.
+
+The corresponding fixtures are in `docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json` and `docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json`. These gates are implementation-independent static checks; they do not prove production runtime behavior or promote RFC-154 from candidate status.
