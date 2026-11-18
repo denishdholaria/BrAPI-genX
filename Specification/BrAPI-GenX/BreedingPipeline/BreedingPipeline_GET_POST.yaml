@@ -109,6 +109,17 @@ paths:
       tags:
       - BreedingPipeline
 components:
+  schemas:
+    BreedingPipelineResponse:
+      type: object
+      required: [metadata, result]
+      properties:
+        metadata:
+          $ref: '#/components/schemas/metadata'
+        result:
+          oneOf:
+            - $ref: '#/components/schemas/BreedingPipeline'
+            - $ref: '#/components/schemas/BreedingPipelineRevision'
   responses:
     BreedingPipelineListResponse:
       content:
