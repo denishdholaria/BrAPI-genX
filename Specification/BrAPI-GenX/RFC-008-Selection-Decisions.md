@@ -1,7 +1,8 @@
 # RFC-008 — Selection Decisions (Breeding Verdicts)
 
-- Status: proposal, non-normative.
+- Status: proposal, non-normative; retain and refine as an actual selection verdict.
 - Supersedes: none.
+- Decision: preserve the separation between actual selection verdicts and pipeline/scheme design-time task definitions; exact pipeline and scheme versions may be referenced where applicable.
 - Related: RFC-001 (GenX skeleton), `CLASSIFICATION.md` (D2).
 
 ## 1. Problem
