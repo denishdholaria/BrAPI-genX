@@ -8,6 +8,8 @@ PopulationAdvancement records an actual, immutable movement/progression event fo
 - Either context may be omitted when no registered pipeline or scheme governed the event; a stage identifier must never be invented without its scheme context.
 - BrAPI Program and material identities remain authoritative and are represented as authority-qualified references.
 
+The list filters require authority pairs: `programDbId` with `programServer`, and `populationDbId` with both `populationServer` and `populationResourceType`. The population resource type is explicit because no universal population/family-to-BrAPI-resource mapping has been approved.
+
 The existing list, register, and retrieve operations remain non-normative until the referenced schema and conformance gates pass.
 
 Details: `../RFC-035-Population-Advancement.md`.
