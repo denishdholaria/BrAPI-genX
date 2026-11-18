@@ -29,8 +29,8 @@ their evidence.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Selection decisions reference BrAPI Program, Study, and Germplasm by their
-  existing identifiers; they do not duplicate those resources.
+- Selection decisions reference BrAPI Program, Study, Germplasm and Observation
+  by authority-qualified references; they do not duplicate those resources.
 
 ## 5. Invariants
 
@@ -63,3 +63,7 @@ The current candidate schema uses nested optional context envelopes:
 If both contexts are supplied, the referenced pipeline revision must contain the exact scheme version in its embedded scheme bindings. A scheme context without pipeline context is valid; a decision made outside a registered strategy may omit both contexts. An event must not put scheme-local stage identifiers at the top level.
 
 The selection verdict, rationale, actor and evidence remain owned by SelectionDecision. A scheme TaskDefinition describes the intended selection process and is not a verdict.
+
+## 9. Authority-qualified list filters
+
+The list operation accepts `programDbId` only with `programServer`, `studyDbId` only with `studyServer`, and `candidateGermplasmDbId` only with `candidateGermplasmServer`. Server parameters identify the authoritative BrAPI v2.1 base URI that issued the identifier. Implementations must reject incomplete pairs and must not resolve identifiers by guessing the server.
