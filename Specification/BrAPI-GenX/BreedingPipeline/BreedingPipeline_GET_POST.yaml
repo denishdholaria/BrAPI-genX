@@ -65,8 +65,8 @@ paths:
           - "Mutating an existing published revision; substantive corrections require a new version identity."
           - "Assuming a record is a BrAPI data resource."
           - "Asserting that the catalogue is validated or endorsed."
-        sideEffects: "Creates a stable workstream identity when unknown, and creates one immutable revision."
-        idempotency: "Replay is keyed by breedingPipelineVersionDbId. Same version ID and identical canonical payload replays; same version ID with a different payload is rejected with 409. A new revision under an existing pipeline uses a new version ID."
+        sideEffects: "Creates a stable workstream identity when unknown and creates one immutable revision."
+        idempotency: "Replay is keyed by breedingPipelineVersionDbId. The same version ID and identical canonical payload replays; the same version ID with a different payload is rejected with 409. A new revision under an existing pipeline uses a new version ID."
         semanticNeighbors:
           - "genxListBreedingPipelines"
           - "genxGetBreedingPipeline"
