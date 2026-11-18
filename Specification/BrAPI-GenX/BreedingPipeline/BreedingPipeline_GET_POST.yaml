@@ -16,7 +16,6 @@ paths:
           - "Discover stable breeding-pipeline workstream identities."
           - "Compare workstream purpose, current revision, and provenance across returned records."
           - "Request revision summaries for a complete workstream history."
-          - "Request revision summaries for a complete workstream history."
         mustNotBeUsedFor:
           - "Creating or changing a record (use the POST endpoint)."
           - "Assuming a record is a BrAPI data resource."
@@ -67,8 +66,8 @@ paths:
           - "Mutating a published revision; substantive corrections require a new version identity."
           - "Assuming a record is a BrAPI data resource."
           - "Asserting that the catalogue is validated or endorsed."
-        sideEffects: "Creates a stable workstream identity when unknown and creates one immutable revision."
-        idempotency: "Replay is keyed by breedingPipelineVersionDbId. The same version ID and identical canonical payload replays; the same version ID with a different payload is rejected with 409. A new revision under an existing pipeline uses a new version ID."
+        sideEffects: "Creates a stable workstream identity when unknown and appends one immutable revision. A published or withdrawn revision conditionally advances or clears the current published-version pointer using an atomic expected-current comparison."
+        idempotency: "Replay is keyed by breedingPipelineVersionDbId and the immutable revision payload is compared using JCS (RFC 8785). An identical same-version replay is evaluated before the expected-current precondition and replays even when that precondition is now stale. The same version ID with a different payload is rejected with 409. A new version under an existing pipeline requires expectedCurrentBreedingPipelineVersionDbId (explicit null when no published version exists); the server atomically compares it with the current pointer before append. A stale or omitted precondition is rejected with 409 and no state change."
         semanticNeighbors:
           - "genxListBreedingPipelines"
           - "genxGetBreedingPipeline"
@@ -108,6 +107,8 @@ paths:
           $ref: '#/components/responses/401Unauthorized'
         '403':
           $ref: '#/components/responses/403Forbidden'
+        '409':
+          $ref: '#/components/responses/BreedingPipelineConflictResponse'
       tags:
       - BreedingPipeline
 components:
@@ -120,7 +121,41 @@ components:
           $ref: '#/components/schemas/metadata'
         result:
           $ref: '#/components/schemas/BreedingPipelineRevision'
+  schemas:
+    BreedingPipelineConflict:
+      type: object
+      required: [errorCode, message]
+      properties:
+        errorCode:
+          type: string
+          enum:
+            - version-content-conflict
+            - current-version-precondition-failed
+            - withdrawal-target-mismatch
+        message:
+          type: string
+        currentBreedingPipelineVersionDbId:
+          type: string
+          nullable: true
+          description: Current published revision at the time the conflict was detected, or null when none is published.
   responses:
+    BreedingPipelineConflictResponse:
+      description: |-
+        Registration conflict. A version-content conflict means the same immutable
+        revision identifier was submitted with different canonical content. A
+        current-version precondition failure means the workstream's current
+        published pointer changed or the expected pointer was omitted. No append
+        or pointer mutation is performed for this request.
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [metadata, result]
+            properties:
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                $ref: '#/components/schemas/BreedingPipelineConflict'
     BreedingPipelineListResponse:
       content:
         application/json:
