@@ -1,15 +1,13 @@
 # BrAPI-GenX — Population Advancement (Breeding)
 
-Population advancement records the movement of a population between breeding
-stages. BrAPI v2.1 has no population advancement record.
+PopulationAdvancement records an actual, immutable movement/progression event for a population or family. It is an execution record, not a definition of a permitted scheme transition.
 
-- `POST /genx/v1/population-advancements` (`genxRecordPopulationAdvancement`) registers one
-  `PopulationAdvancement` (`Schemas/PopulationAdvancementNewRequest.yaml`). Same
-  `populationAdvancementDbId` + identical body replays; different body is
-  rejected with `409`.
-- `GET /genx/v1/population-advancements` (`genxListPopulationAdvancements`) lists records,
-  optionally filtered by program, population, or status.
-- `GET /genx/v1/population-advancements/{populationAdvancementDbId}`
-  (`genxGetPopulationAdvancement`) retrieves one record.
+- The event may reference the exact BreedingPipeline logical ID and revision and the exact BreedingScheme logical ID and version that governed it.
+- A stage identifier is scheme-version-local. If `fromStageId` or `toStageId` is supplied, `breedingSchemeVersionDbId` is required and the stage ID must resolve within that version.
+- Where both a pipeline revision and scheme version are supplied, the revision must bind that exact scheme version.
+- If no registered scheme governed the activity, pipeline/scheme references may be absent; do not invent stage IDs.
+- BrAPI Program and material identities remain authoritative and must be authority-qualified.
 
-Details and falsifiers: `../RFC-035-Population-Advancement.md`.
+The existing list, register, and retrieve operations remain non-normative until the referenced schema and conformance gates pass.
+
+Details: `../RFC-035-Population-Advancement.md`.
