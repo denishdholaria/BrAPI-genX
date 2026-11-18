@@ -64,6 +64,23 @@ def stage_ids(stage_rows: Any) -> list[str]:
     return result
 
 
+def has_stage(stage_id: Any, known_stage_ids: set[str]) -> bool:
+    """Return whether a value is a known string stage identifier."""
+    return isinstance(stage_id, str) and stage_id in known_stage_ids
+
+
+def scheme_binding_ids(binding_rows: Any) -> set[str]:
+    """Extract valid scheme-version identifiers from binding rows."""
+    return {
+        scheme_version_id
+        for row in as_list(binding_rows)
+        if isinstance(
+            (scheme_version_id := as_object(row).get("schemeVersionId")), str
+        )
+        and scheme_version_id
+    }
+
+
 def validate_corpus(corpus: Any) -> list[str]:
     """Return all corpus validation errors; an empty list means success."""
     errors: list[str] = []
@@ -95,7 +112,7 @@ def validate_corpus(corpus: Any) -> list[str]:
         by_id[scenario_id] = fixture
 
         expectation = fixture.get("expectation")
-        if expectation not in {"valid", "invalid"}:
+        if expectation not in ("valid", "invalid"):
             errors.append(f"{scenario_id}: expectation must be valid or invalid")
         if expectation == "invalid" and not fixture.get("expectedFailure"):
             errors.append(f"{scenario_id}: invalid scenario needs expectedFailure")
@@ -118,11 +135,12 @@ def validate_corpus(corpus: Any) -> list[str]:
     pipeline = as_object(fixture.get("pipeline"))
     scheme = as_object(fixture.get("schemeVersion"))
     scheme_version_id = scheme.get("schemeVersionId")
-    bindings = [
-        as_object(item).get("schemeVersionId")
-        for item in as_list(pipeline.get("schemeBindings"))
-    ]
-    if not scheme_version_id or scheme_version_id not in bindings:
+    bindings = scheme_binding_ids(pipeline.get("schemeBindings"))
+    if (
+        not isinstance(scheme_version_id, str)
+        or not scheme_version_id
+        or scheme_version_id not in bindings
+    ):
         errors.append(
             "valid-recurrent-overlapping-cohorts: pipeline must bind the exact scheme version"
         )
@@ -152,8 +170,8 @@ def validate_corpus(corpus: Any) -> list[str]:
     for transition_index, raw_transition in enumerate(transitions):
         transition = as_object(raw_transition)
         if (
-            transition.get("fromStageId") not in defined_stage_set
-            or transition.get("toStageId") not in defined_stage_set
+            not has_stage(transition.get("fromStageId"), defined_stage_set)
+            or not has_stage(transition.get("toStageId"), defined_stage_set)
         ):
             errors.append(
                 "valid-recurrent-overlapping-cohorts: "
@@ -203,11 +221,15 @@ def validate_corpus(corpus: Any) -> list[str]:
         ),
         None,
     )
-    revision_bindings = {
-        as_object(item).get("schemeVersionId")
-        for item in as_list(as_object(matching_revision).get("schemeBindings"))
-    }
-    if not matching_revision or event.get("schemeVersionId") not in revision_bindings:
+    revision_bindings = scheme_binding_ids(
+        as_object(matching_revision).get("schemeBindings")
+    )
+    event_scheme_version_id = event.get("schemeVersionId")
+    if (
+        not matching_revision
+        or not isinstance(event_scheme_version_id, str)
+        or event_scheme_version_id not in revision_bindings
+    ):
         errors.append(
             "valid-scheme-revision-history: event must resolve to the exact scheme "
             "version bound by its pipeline revision"
@@ -223,7 +245,7 @@ def validate_corpus(corpus: Any) -> list[str]:
         owner = reference.get("owner")
         resource_type = reference.get("resourceType")
         if owner == "BrAPI":
-            if resource_type not in BRAPI_RESOURCE_TYPES:
+            if not isinstance(resource_type, str) or resource_type not in BRAPI_RESOURCE_TYPES:
                 errors.append(
                     f"valid-brapi-execution-crosswalk: reference[{index}] has an "
                     "unrecognized BrAPI resourceType"
@@ -235,7 +257,7 @@ def validate_corpus(corpus: Any) -> list[str]:
                         f"requires {field}"
                     )
         elif owner == "GenX":
-            if resource_type not in GENX_RESOURCE_TYPES:
+            if not isinstance(resource_type, str) or resource_type not in GENX_RESOURCE_TYPES:
                 errors.append(
                     f"valid-brapi-execution-crosswalk: reference[{index}] has an "
                     "unrecognized GenX resourceType"
@@ -254,8 +276,8 @@ def validate_corpus(corpus: Any) -> list[str]:
     scheme = as_object(fixture.get("schemeVersion"))
     stages = set(stage_ids(scheme.get("stages")))
     dangling = any(
-        as_object(item).get("fromStageId") not in stages
-        or as_object(item).get("toStageId") not in stages
+        not has_stage(as_object(item).get("fromStageId"), stages)
+        or not has_stage(as_object(item).get("toStageId"), stages)
         for item in as_list(scheme.get("transitions"))
     )
     if not dangling:
@@ -277,14 +299,13 @@ def validate_corpus(corpus: Any) -> list[str]:
     fixture = by_id.get("invalid-pipeline-scheme-version-mismatch", {})
     revision = as_object(fixture.get("pipelineRevision"))
     event = as_object(fixture.get("executionEvent"))
-    bindings = {
-        as_object(item).get("schemeVersionId")
-        for item in as_list(revision.get("schemeBindings"))
-    }
+    bindings = scheme_binding_ids(revision.get("schemeBindings"))
+    event_scheme_version_id = event.get("schemeVersionId")
     if (
         event.get("pipelineRevisionId") != revision.get("pipelineRevisionId")
-        or not event.get("schemeVersionId")
-        or event.get("schemeVersionId") in bindings
+        or not isinstance(event_scheme_version_id, str)
+        or not event_scheme_version_id
+        or event_scheme_version_id in bindings
     ):
         errors.append(
             "invalid-pipeline-scheme-version-mismatch: event must cite a scheme version "
@@ -327,7 +348,9 @@ def validate_corpus(corpus: Any) -> list[str]:
     pipeline = as_object(fixture.get("pipeline"))
     concurrent_states = as_list(fixture.get("concurrentCohortStates"))
     concurrent_stages = {
-        as_object(item).get("stageId") for item in concurrent_states
+        stage_id
+        for item in concurrent_states
+        if isinstance((stage_id := as_object(item).get("stageId")), str)
     }
     if (
         not pipeline.get("currentStage")
