@@ -11,7 +11,7 @@ paths:
         classification:
           primaryDomain: "D2"
           crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
-        purpose: "List breeding pipeline definitions, optionally filtered by program or status."
+        purpose: "List registered breeding pipeline records, optionally filtered by lifecycle status."
         canBeUsedFor:
           - "Discover registered breeding pipeline records."
           - "Compare pipeline type, lifecycle status, and provenance across returned records."
@@ -27,7 +27,7 @@ paths:
         decisions: ["RFC-154"]
         proposalStatus: "draft-non-normative"
       summary: List breeding pipeline
-      description: Get a paged list of breeding pipeline records across authorities. Filters combine with AND.
+      description: Get a paged list of registered breeding pipeline records. The optional status filter selects records by lifecycle state.
       parameters:
       - name: status
         description: Filter by lifecycle state
