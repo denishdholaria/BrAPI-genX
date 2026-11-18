@@ -14,6 +14,7 @@ paths:
         purpose: "Retrieve the stable logical pipeline view, with optional exact immutable revision selection."
         canBeUsedFor:
           - "Inspect the stable workstream identity and current published revision summary."
+          - "Retrieve the exact immutable revision identified by breedingPipelineVersionDbId."
         mustNotBeUsedFor:
           - "Assuming a record is a BrAPI data resource."
           - "Treating the current revision as a substitute for an explicitly requested historical revision."
