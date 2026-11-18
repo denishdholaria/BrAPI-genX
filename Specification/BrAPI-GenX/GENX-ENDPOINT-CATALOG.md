@@ -496,10 +496,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List artifact catalogue records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of artifact catalogue records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover artifact catalogues.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -531,14 +531,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one artifact catalogue record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one artifact catalogue record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish an artifact catalogue.
+- Retry an identical record safely using the same artifactCatalogueDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates an artifact catalogue identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same artifactCatalogueDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -568,7 +568,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -603,12 +603,12 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Get a paged list of assay designs across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover assay designs for a study.
-- Support genotyping workflow auditing.
+- Discover assay designs for a study or method.
+- Support scientific reproducibility and auditing.
 **Must not be used for / explicit non-goals:**
-- Creating or changing a design (use the POST endpoint).
-- Assuming a design is a BrAPI data resource.
-- Treating the list as a complete design repository.
+- Creating or changing a result (use the POST endpoint).
+- Assuming a result is a BrAPI data resource.
+- Treating the list as a complete analysis repository.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
 - **Parameters recorded in registry:** analysisMethodDbId, studyDbId, status, page, pageSize, authorizationHeader
@@ -639,11 +639,11 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 > Unknown assayDesignDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
 **Can be used for:**
 - Publish assay design metadata and payload references.
-- Retry an identical design safely using the same assayDesignDbId.
+- Retry an identical result safely using the same assayDesignDbId.
 **Must not be used for / explicit non-goals:**
-- Updating or deleting an existing design; corrections require a new record that supersedes.
-- Assuming the design is a BrAPI data resource.
-- Treating the design as scientific validation or approval.
+- Updating or deleting an existing result; corrections require a new record that supersedes.
+- Assuming the result is a BrAPI data resource.
+- Treating the result as scientific validation or approval.
 - **Side effects:** Creates an assay design when accepted.
 - **Retry / idempotency:** Same assayDesignDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -671,12 +671,12 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Retrieve one assay design.
 **Source contract description:**
-> Returns the recorded design, or 404.
+> Returns the recorded result, or 404.
 **Can be used for:**
 - Inspect platform, marker count, and provenance.
 **Must not be used for / explicit non-goals:**
-- Assuming the design is a BrAPI data resource.
-- Treating a superseded design as current.
+- Assuming the result is a BrAPI data resource.
+- Treating a superseded result as current.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
 - **Parameters recorded in registry:** assayDesignDbId, authorizationHeader
@@ -712,7 +712,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - Support genotyping assay workflow.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
-- Assuming a record is a BrAPI data resource.
+- Assuming a record is a BrAPI Observation.
 - Treating the list as a complete history.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
@@ -747,8 +747,8 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - Retry an identical record safely using the same assayExecutionDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
-- Assuming a record is a BrAPI data resource.
-- Asserting that the execution is validated or endorsed.
+- Assuming a record is a BrAPI Observation.
+- Asserting that the work order is completed or validated.
 - **Side effects:** Creates an assay execution identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same assayExecutionDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -780,7 +780,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Can be used for:**
 - Inspect assay, status, and provenance.
 **Must not be used for / explicit non-goals:**
-- Assuming a record is a BrAPI data resource.
+- Assuming a record is a BrAPI Observation.
 - Treating a superseded record as current.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
@@ -811,10 +811,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List biodiversity export records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of biodiversity export records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover biodiversity exports.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -846,14 +846,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one biodiversity export record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one biodiversity export record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a biodiversity export.
+- Retry an identical record safely using the same biodiversityExportDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a biodiversity export identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same biodiversityExportDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -883,7 +883,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -1131,8 +1131,8 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - Discover calendars and time conventions.
 - Support reference data and time conventions.
 **Must not be used for / explicit non-goals:**
-- Creating or changing a calendar (use the POST endpoint).
-- Assuming a calendar is a BrAPI Study.
+- Creating or changing a list (use the POST endpoint).
+- Assuming a list is a BrAPI Study.
 - Treating the list as a complete catalogue.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
@@ -1167,8 +1167,8 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - Retry an identical record safely using the same calendarDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
-- Assuming a calendar is a BrAPI Study.
-- Asserting that the calendar is validated or endorsed.
+- Assuming a list is a BrAPI Study.
+- Asserting that the list is validated or endorsed.
 - **Side effects:** Creates a calendar identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same calendarDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -1200,7 +1200,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Can be used for:**
 - Inspect calendar identity, convention, and provenance.
 **Must not be used for / explicit non-goals:**
-- Assuming a calendar is a BrAPI Study.
+- Assuming a list is a BrAPI Study.
 - Treating a superseded record as current.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
@@ -1231,10 +1231,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List calibration quality records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of calibration quality records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover calibration qualitys.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -1266,14 +1266,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one calibration quality record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one calibration quality record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a calibration quality.
+- Retry an identical record safely using the same calibrationQualityDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a calibration quality identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same calibrationQualityDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -1303,7 +1303,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -1446,8 +1446,8 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - Discover capability metadata.
 - Support capability negotiation.
 **Must not be used for / explicit non-goals:**
-- Creating or changing a record (use the POST endpoint).
-- Assuming a record is a BrAPI data resource.
+- Creating or changing a capability-metadata (use the POST endpoint).
+- Assuming metadata is a BrAPI Study.
 - Treating the list as a complete catalogue.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
@@ -1482,7 +1482,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - Retry an identical record safely using the same capabilityMetadataDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
-- Assuming a record is a BrAPI data resource.
+- Assuming metadata is a BrAPI Study.
 - Asserting that the record is validated or endorsed.
 - **Side effects:** Creates a capability metadata identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same capabilityMetadataDbId and identical body replays the existing record; same id with a different body is rejected with 409.
@@ -1515,7 +1515,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Can be used for:**
 - Inspect capability metadata and provenance.
 **Must not be used for / explicit non-goals:**
-- Assuming a record is a BrAPI data resource.
+- Assuming metadata is a BrAPI Study.
 - Treating a superseded record as current.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
@@ -1546,10 +1546,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List capability negotiation records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of capability negotiation records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover capability negotiations.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -1581,14 +1581,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one capability negotiation record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one capability negotiation record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a capability negotiation.
+- Retry an identical record safely using the same capabilityNegotiationDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a capability negotiation identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same capabilityNegotiationDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -1618,7 +1618,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -1693,7 +1693,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI Observation.
-- Asserting that the workflow is validated or endorsed.
+- Asserting that the work order is completed or validated.
 - **Side effects:** Creates a capture workflow identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same captureWorkflowDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -1966,10 +1966,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List cloud mask records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of cloud mask records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover cloud masks.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -2001,14 +2001,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one cloud mask record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one cloud mask record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a cloud mask.
+- Retry an identical record safely using the same cloudMaskDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a cloud mask identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same cloudMaskDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -2038,7 +2038,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -2071,14 +2071,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List collecting mission records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of collecting mission records across authorities. Filters combine with AND.
+> Get a paged list of collecting-mission and funding reference records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover collecting missions.
+- Discover collecting-missions and funding references.
 - Support germplasm and genetic resources.
 **Must not be used for / explicit non-goals:**
-- Creating or changing a record (use the POST endpoint).
-- Assuming a record is a BrAPI data resource.
-- Treating the list as a complete catalogue.
+- Creating or changing a collecting-mission (use the POST endpoint).
+- Assuming a collecting-mission is a BrAPI Study.
+- Treating the list as a complete collecting-mission catalogue.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
 - **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
@@ -2108,12 +2108,12 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Unknown collectingMissionDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
 **Can be used for:**
-- Publish a collecting mission.
+- Publish a collecting-mission or funding reference.
 - Retry an identical record safely using the same collectingMissionDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
-- Assuming a record is a BrAPI data resource.
-- Asserting that the record is validated or endorsed.
+- Assuming a collecting-mission is a BrAPI Study.
+- Asserting that the collecting-mission is validated or endorsed.
 - **Side effects:** Creates a collecting mission identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same collectingMissionDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -2143,9 +2143,9 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect mission identity and provenance.
+- Inspect collecting-mission identity, funding, and provenance.
 **Must not be used for / explicit non-goals:**
-- Assuming a record is a BrAPI data resource.
+- Assuming a collecting-mission is a BrAPI Study.
 - Treating a superseded record as current.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
@@ -2281,10 +2281,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List conformance probe records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of conformance probe records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover conformance probes.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -2316,14 +2316,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one conformance probe record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one conformance probe record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a conformance probe.
+- Retry an identical record safely using the same conformanceProbeDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a conformance probe identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same conformanceProbeDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -2353,7 +2353,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -2386,14 +2386,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List conservation membership records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of conservation membership records across authorities. Filters combine with AND.
+> Get a paged list of conservation-membership and funding reference records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover conservation memberships.
+- Discover conservation-memberships and funding references.
 - Support germplasm and genetic resources.
 **Must not be used for / explicit non-goals:**
-- Creating or changing a record (use the POST endpoint).
-- Assuming a record is a BrAPI data resource.
-- Treating the list as a complete catalogue.
+- Creating or changing a conservation-membership (use the POST endpoint).
+- Assuming a conservation-membership is a BrAPI Study.
+- Treating the list as a complete conservation-membership catalogue.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
 - **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
@@ -2423,12 +2423,12 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Unknown conservationMembershipDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
 **Can be used for:**
-- Publish a conservation membership.
+- Publish a conservation-membership or funding reference.
 - Retry an identical record safely using the same conservationMembershipDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
-- Assuming a record is a BrAPI data resource.
-- Asserting that the record is validated or endorsed.
+- Assuming a conservation-membership is a BrAPI Study.
+- Asserting that the conservation-membership is validated or endorsed.
 - **Side effects:** Creates a conservation membership identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same conservationMembershipDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -2458,9 +2458,9 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect membership identity and provenance.
+- Inspect conservation-membership identity, funding, and provenance.
 **Must not be used for / explicit non-goals:**
-- Assuming a record is a BrAPI data resource.
+- Assuming a conservation-membership is a BrAPI Study.
 - Treating a superseded record as current.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
@@ -2596,10 +2596,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List crop health image records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of crop health image records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover crop health images.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -2631,14 +2631,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one crop health image record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one crop health image record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a crop health image.
+- Retry an identical record safely using the same cropHealthImageDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a crop health image identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same cropHealthImageDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -2668,7 +2668,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -2701,10 +2701,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List crop recommendation records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of crop recommendation records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover crop recommendations.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -2736,14 +2736,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one crop recommendation record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one crop recommendation record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a crop recommendation.
+- Retry an identical record safely using the same cropRecommendationDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a crop recommendation identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same cropRecommendationDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -2773,7 +2773,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -2911,10 +2911,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List crop suitability records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of crop suitability records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover crop suitabilitys.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -2946,14 +2946,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one crop suitability record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one crop suitability record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a crop suitability.
+- Retry an identical record safely using the same cropSuitabilityDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a crop suitability identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same cropSuitabilityDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -2983,7 +2983,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -3021,9 +3021,9 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - Discover crop trait dictionary entries.
 - Support crop trait and terminology governance.
 **Must not be used for / explicit non-goals:**
-- Creating or changing an entry (use the POST endpoint).
-- Assuming an entry is a BrAPI Observation.
-- Treating the list as a complete trait catalogue.
+- Creating or changing a stage entry (use the POST endpoint).
+- Assuming a stage entry is a BrAPI Observation.
+- Treating the list as a complete ontology.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
 - **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
@@ -3226,14 +3226,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List crosswalk records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of crosswalk records across authorities. Filters combine with AND.
+> Get a paged list of crosswalk and funding reference records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover crosswalks.
+- Discover crosswalks and funding references.
 - Support crosswalks and reference data.
 **Must not be used for / explicit non-goals:**
-- Creating or changing a record (use the POST endpoint).
-- Assuming a record is a BrAPI data resource.
-- Treating the list as a complete catalogue.
+- Creating or changing a crosswalk (use the POST endpoint).
+- Assuming a crosswalk is a BrAPI Study.
+- Treating the list as a complete crosswalk catalogue.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
 - **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
@@ -3263,12 +3263,12 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Unknown crosswalkDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
 **Can be used for:**
-- Publish a crosswalk.
+- Publish a crosswalk or funding reference.
 - Retry an identical record safely using the same crosswalkDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
-- Assuming a record is a BrAPI data resource.
-- Asserting that the record is validated or endorsed.
+- Assuming a crosswalk is a BrAPI Study.
+- Asserting that the crosswalk is validated or endorsed.
 - **Side effects:** Creates a crosswalk identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same crosswalkDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -3298,9 +3298,9 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect crosswalk identity and provenance.
+- Inspect crosswalk identity, funding, and provenance.
 **Must not be used for / explicit non-goals:**
-- Assuming a record is a BrAPI data resource.
+- Assuming a crosswalk is a BrAPI Study.
 - Treating a superseded record as current.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
@@ -3331,10 +3331,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List crs transform records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of crs transform records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover crs transforms.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -3366,14 +3366,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one crs transform record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one crs transform record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a crs transform.
+- Retry an identical record safely using the same crsTransformDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a crs transform identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same crsTransformDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -3403,7 +3403,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -3477,7 +3477,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - Retry an identical transfer safely using the same custodyTransferDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing transfer; corrections require a new record that supersedes.
-- Assuming a transfer is a BrAPI data resource.
+- Assuming the transfer is a BrAPI data resource.
 - Treating a transfer as scientific validation or approval.
 - **Side effects:** Creates a custody transfer record when accepted.
 - **Retry / idempotency:** Same custodyTransferDbId and identical body replays the existing record; same id with a different body is rejected with 409.
@@ -3510,7 +3510,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Can be used for:**
 - Inspect parties, transfer time, condition, and provenance.
 **Must not be used for / explicit non-goals:**
-- Assuming a transfer is a BrAPI data resource.
+- Assuming the transfer is a BrAPI data resource.
 - Treating a superseded transfer as current.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
@@ -3646,10 +3646,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List diagnostic evidence records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of diagnostic evidence records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover diagnostic evidences.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -3681,14 +3681,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one diagnostic evidence record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one diagnostic evidence record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a diagnostic evidence.
+- Retry an identical record safely using the same diagnosticEvidenceDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a diagnostic evidence identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same diagnosticEvidenceDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -3718,7 +3718,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -3751,10 +3751,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List disease observation records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of disease observation records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover disease observations.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -3786,14 +3786,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one disease observation record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one disease observation record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a disease observation.
+- Retry an identical record safely using the same diseaseObservationDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a disease observation identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same diseaseObservationDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -3823,7 +3823,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -3856,10 +3856,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List disease resistance records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of disease resistance records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover disease resistances.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -3891,14 +3891,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one disease resistance record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one disease resistance record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a disease resistance.
+- Retry an identical record safely using the same diseaseResistanceDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a disease resistance identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same diseaseResistanceDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -3928,7 +3928,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -4002,7 +4002,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - Retry an identical disposal safely using the same disposalRecordDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing disposal; corrections require a new record that supersedes.
-- Assuming a disposal is a BrAPI data resource.
+- Assuming the disposal is a BrAPI data resource.
 - Treating a disposal as proof of destruction without the referenced evidence.
 - **Side effects:** Creates a disposal record when accepted.
 - **Retry / idempotency:** Same disposalRecordDbId and identical body replays the existing record; same id with a different body is rejected with 409.
@@ -4035,7 +4035,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Can be used for:**
 - Inspect disposal reason, method, timestamp, and provenance.
 **Must not be used for / explicit non-goals:**
-- Assuming a disposal is a BrAPI data resource.
+- Assuming the disposal is a BrAPI data resource.
 - Treating a superseded disposal as current.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
@@ -4171,14 +4171,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List duplicate review records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of duplicate review records across authorities. Filters combine with AND.
+> Get a paged list of duplicate-review and funding reference records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover duplicate reviews.
+- Discover duplicate-reviews and funding references.
 - Support germplasm and genetic resources.
 **Must not be used for / explicit non-goals:**
-- Creating or changing a record (use the POST endpoint).
-- Assuming a record is a BrAPI data resource.
-- Treating the list as a complete catalogue.
+- Creating or changing a duplicate-review (use the POST endpoint).
+- Assuming a duplicate-review is a BrAPI Study.
+- Treating the list as a complete duplicate-review catalogue.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
 - **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
@@ -4208,12 +4208,12 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Unknown duplicateReviewDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
 **Can be used for:**
-- Publish a duplicate review.
+- Publish a duplicate-review or funding reference.
 - Retry an identical record safely using the same duplicateReviewDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
-- Assuming a record is a BrAPI data resource.
-- Asserting that the record is validated or endorsed.
+- Assuming a duplicate-review is a BrAPI Study.
+- Asserting that the duplicate-review is validated or endorsed.
 - **Side effects:** Creates a duplicate review identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same duplicateReviewDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -4243,9 +4243,9 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect review identity and provenance.
+- Inspect duplicate-review identity, funding, and provenance.
 **Must not be used for / explicit non-goals:**
-- Assuming a record is a BrAPI data resource.
+- Assuming a duplicate-review is a BrAPI Study.
 - Treating a superseded record as current.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
@@ -4276,10 +4276,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List edge gateway health records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of edge gateway health records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover edge gateway healths.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -4311,14 +4311,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one edge gateway health record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one edge gateway health record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a edge gateway health.
+- Retry an identical record safely using the same edgeGatewayHealthDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a edge gateway health identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same edgeGatewayHealthDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -4348,7 +4348,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -4591,10 +4591,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List evidence pack records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of evidence pack records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover evidence packs.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -4626,14 +4626,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one evidence pack record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one evidence pack record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a evidence pack.
+- Retry an identical record safely using the same evidencePackDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a evidence pack identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same evidencePackDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -4663,7 +4663,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -4804,7 +4804,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 > Get a paged list of experimental protocol records across authorities. Filters combine with AND.
 **Can be used for:**
 - Discover experimental protocols.
-- Support VCF import/export.
+- Support trial design and treatment layout.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -4836,14 +4836,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one experimental protocol record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one experimental protocol record with provenance.
 **Can be used for:**
-- Publish a experimental protocol.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish an experimental protocol.
+- Retry an identical record safely using the same experimentalProtocolDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the protocol is validated or endorsed.
 - **Side effects:** Creates an experimental protocol identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same experimentalProtocolDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -4873,7 +4873,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect protocol, design, and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -4906,10 +4906,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List explanation evidence records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of explanation evidence records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover explanation evidences.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -4941,14 +4941,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one explanation evidence record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one explanation evidence record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a explanation evidence.
+- Retry an identical record safely using the same explanationEvidenceDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a explanation evidence identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same explanationEvidenceDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -4978,7 +4978,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -5011,9 +5011,9 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List expression QTL result records, optionally filtered by method, study, or status.
 **Source contract description:**
-> Get a paged list of expression QTLs across authorities. Filters combine with AND.
+> Get a paged list of expression QTL results across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover expression QTLs for a study or method.
+- Discover expression QTL results for a study or method.
 - Support scientific reproducibility and auditing.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a result (use the POST endpoint).
@@ -5083,7 +5083,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the recorded result, or 404.
 **Can be used for:**
-- Inspect QTLs and provenance.
+- Inspect components, explained variance, and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming the result is a BrAPI data resource.
 - Treating a superseded result as current.
@@ -5121,9 +5121,9 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - Discover external vocabulary sync entries.
 - Support external vocabulary synchronization.
 **Must not be used for / explicit non-goals:**
-- Creating or changing an entry (use the POST endpoint).
-- Assuming an entry is a BrAPI Observation.
-- Treating the list as a complete vocabulary.
+- Creating or changing a stage entry (use the POST endpoint).
+- Assuming a stage entry is a BrAPI Observation.
+- Treating the list as a complete ontology.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
 - **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
@@ -5644,9 +5644,9 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List field book definition records, optionally filtered by field or status.
 **Source contract description:**
-> Get a paged list of field book definition records across authorities. Filters combine with AND.
+> Get a paged list of field-book identity records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover field books for a field.
+- Discover field-books for a field.
 - Support experimental design.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
@@ -5681,12 +5681,12 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Unknown fieldBookDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
 **Can be used for:**
-- Publish a field book definition for a field.
+- Publish a field-book identity for a field.
 - Retry an identical record safely using the same fieldBookDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI Observation.
-- Asserting that the field book is validated or endorsed.
+- Asserting that the work order is completed or validated.
 - **Side effects:** Creates a field book identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same fieldBookDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -5716,7 +5716,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect field linkage, field book, status, and provenance.
+- Inspect field linkage, field-book identity, status, and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI Observation.
 - Treating a superseded record as current.
@@ -5854,10 +5854,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List field geometry records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of field geometry records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover field geometrys.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -5889,14 +5889,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one field geometry record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one field geometry record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a field geometry.
+- Retry an identical record safely using the same fieldGeometryDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a field geometry identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same fieldGeometryDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -5926,7 +5926,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -6522,7 +6522,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Unknown genomicRelationshipDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
 **Can be used for:**
-- Publish genomic relationship matrix metadata.
+- Publish genomic relationship metadata.
 - Create a new version under an existing matrix identity.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing matrix; corrections require a new record that supersedes.
@@ -6662,7 +6662,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the recorded result, or 404.
 **Can be used for:**
-- Inspect selections, threshold, and provenance.
+- Inspect components, explained variance, and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming the result is a BrAPI data resource.
 - Treating a superseded result as current.
@@ -7222,9 +7222,9 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List haplotype analysis result records, optionally filtered by method, study, or status.
 **Source contract description:**
-> Get a paged list of haplotype analyses across authorities. Filters combine with AND.
+> Get a paged list of haplotype analysis results across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover haplotype analyses for a study or method.
+- Discover haplotype analysis results for a study or method.
 - Support scientific reproducibility and auditing.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a result (use the POST endpoint).
@@ -7537,10 +7537,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List human review records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of human review records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover human reviews.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -7572,14 +7572,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one human review record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one human review record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a human review.
+- Retry an identical record safely using the same humanReviewDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a human review identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same humanReviewDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -7609,7 +7609,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -7852,10 +7852,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List ipm strategy records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of ipm strategy records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover ipm strategys.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -7887,14 +7887,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one ipm strategy record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one ipm strategy record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a ipm strategy.
+- Retry an identical record safely using the same ipmStrategyDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a ipm strategy identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same ipmStrategyDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -7924,7 +7924,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -7957,10 +7957,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List irrigation advice records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of irrigation advice records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover irrigation advices.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -7992,14 +7992,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one irrigation advice record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one irrigation advice record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a irrigation advice.
+- Retry an identical record safely using the same irrigationAdviceDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a irrigation advice identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same irrigationAdviceDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -8029,7 +8029,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -8416,10 +8416,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List local constraint records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of local constraint records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover local constraints.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -8451,14 +8451,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one local constraint record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one local constraint record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a local constraint.
+- Retry an identical record safely using the same localConstraintDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a local constraint identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same localConstraintDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -8488,7 +8488,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -8521,13 +8521,13 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List location geometry records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of location geometry records across authorities. Filters combine with AND.
+> Get a paged list of location-geometry and time convention records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover location geometry records.
+- Discover location-geometries and time conventions.
 - Support geospatial reference data.
 **Must not be used for / explicit non-goals:**
-- Creating or changing a geometry record (use the POST endpoint).
-- Assuming a record is a BrAPI Location.
+- Creating or changing a list (use the POST endpoint).
+- Assuming a list is a BrAPI Study.
 - Treating the list as a complete catalogue.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
@@ -8558,12 +8558,12 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Unknown locationGeometryDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
 **Can be used for:**
-- Publish a location geometry record.
+- Publish a location-geometry or time convention.
 - Retry an identical record safely using the same locationGeometryDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
-- Assuming a record is a BrAPI Location.
-- Asserting that the geometry is validated or endorsed.
+- Assuming a list is a BrAPI Study.
+- Asserting that the list is validated or endorsed.
 - **Side effects:** Creates a location geometry identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same locationGeometryDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -8593,9 +8593,9 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect geometry, reference, and provenance.
+- Inspect location-geometry identity, convention, and provenance.
 **Must not be used for / explicit non-goals:**
-- Assuming a record is a BrAPI Location.
+- Assuming a list is a BrAPI Study.
 - Treating a superseded record as current.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
@@ -8805,14 +8805,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List MCPD adapter records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of MCPD adapter records across authorities. Filters combine with AND.
+> Get a paged list of mcpd-adapter and funding reference records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover MCPD adapters.
+- Discover mcpd-adapters and funding references.
 - Support germplasm and genetic resources.
 **Must not be used for / explicit non-goals:**
-- Creating or changing a record (use the POST endpoint).
-- Assuming a record is a BrAPI data resource.
-- Treating the list as a complete catalogue.
+- Creating or changing a mcpd-adapter (use the POST endpoint).
+- Assuming a mcpd-adapter is a BrAPI Study.
+- Treating the list as a complete mcpd-adapter catalogue.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
 - **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
@@ -8842,12 +8842,12 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Unknown mcpdAdapterDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
 **Can be used for:**
-- Publish an MCPD adapter.
+- Publish a mcpd-adapter or funding reference.
 - Retry an identical record safely using the same mcpdAdapterDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
-- Assuming a record is a BrAPI data resource.
-- Asserting that the record is validated or endorsed.
+- Assuming a mcpd-adapter is a BrAPI Study.
+- Asserting that the mcpd-adapter is validated or endorsed.
 - **Side effects:** Creates an MCPD adapter identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same mcpdAdapterDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -8877,9 +8877,9 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect adapter identity and provenance.
+- Inspect mcpd-adapter identity, funding, and provenance.
 **Must not be used for / explicit non-goals:**
-- Assuming a record is a BrAPI data resource.
+- Assuming a mcpd-adapter is a BrAPI Study.
 - Treating a superseded record as current.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
@@ -9020,9 +9020,9 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - Discover measurement scales and value domains.
 - Support measurement and terminology governance.
 **Must not be used for / explicit non-goals:**
-- Creating or changing an entry (use the POST endpoint).
-- Assuming an entry is a BrAPI Observation.
-- Treating the list as a complete scale catalogue.
+- Creating or changing a stage entry (use the POST endpoint).
+- Assuming a stage entry is a BrAPI Observation.
+- Treating the list as a complete ontology.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
 - **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
@@ -9120,9 +9120,9 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List methylation analysis result records, optionally filtered by method, study, or status.
 **Source contract description:**
-> Get a paged list of methylation analyses across authorities. Filters combine with AND.
+> Get a paged list of methylation analysis results across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover methylation analyses for a study or method.
+- Discover methylation analysis results for a study or method.
 - Support scientific reproducibility and auditing.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a result (use the POST endpoint).
@@ -9192,7 +9192,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the recorded result, or 404.
 **Can be used for:**
-- Inspect regions and provenance.
+- Inspect components, explained variance, and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming the result is a BrAPI data resource.
 - Treating a superseded result as current.
@@ -9439,10 +9439,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List nutrient advice records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of nutrient advice records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover nutrient advices.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -9474,14 +9474,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one nutrient advice record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one nutrient advice record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a nutrient advice.
+- Retry an identical record safely using the same nutrientAdviceDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a nutrient advice identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same nutrientAdviceDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -9511,7 +9511,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -9549,8 +9549,8 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - Discover ontology mappings and crosswalks.
 - Support ontology mapping and terminology governance.
 **Must not be used for / explicit non-goals:**
-- Creating or changing an entry (use the POST endpoint).
-- Assuming an entry is a BrAPI Observation.
+- Creating or changing a stage entry (use the POST endpoint).
+- Assuming a stage entry is a BrAPI Observation.
 - Treating the list as a complete ontology.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
@@ -9654,8 +9654,8 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - Discover ontology terms and synonyms.
 - Support ontology mapping and terminology governance.
 **Must not be used for / explicit non-goals:**
-- Creating or changing an entry (use the POST endpoint).
-- Assuming an entry is a BrAPI Observation.
+- Creating or changing a stage entry (use the POST endpoint).
+- Assuming a stage entry is a BrAPI Observation.
 - Treating the list as a complete ontology.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
@@ -9754,10 +9754,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List outcome feedback records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of outcome feedback records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover outcome feedbacks.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -9789,14 +9789,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one outcome feedback record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one outcome feedback record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a outcome feedback.
+- Retry an identical record safely using the same outcomeFeedbackDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a outcome feedback identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same outcomeFeedbackDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -9826,7 +9826,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -10069,9 +10069,9 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List pedigree analysis result records, optionally filtered by method, study, or status.
 **Source contract description:**
-> Get a paged list of pedigree analyses across authorities. Filters combine with AND.
+> Get a paged list of pedigree analysis results across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover pedigree analyses for a study or method.
+- Discover pedigree analysis results for a study or method.
 - Support scientific reproducibility and auditing.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a result (use the POST endpoint).
@@ -10248,7 +10248,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Can be used for:**
 - Inspect person identity, name, and provenance.
 **Must not be used for / explicit non-goals:**
-- Assuming an entry is a BrAPI Person.
+- Assuming an entry is a BrAPI Germplasm.
 - Treating a superseded entry as current.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
@@ -10279,10 +10279,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List pest disease risk records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of pest disease risk records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover pest disease risks.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -10314,14 +10314,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one pest disease risk record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one pest disease risk record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a pest disease risk.
+- Retry an identical record safely using the same pestDiseaseRiskDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a pest disease risk identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same pestDiseaseRiskDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -10351,7 +10351,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -10702,7 +10702,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 > Get a paged list of pipeline provenance records across authorities. Filters combine with AND.
 **Can be used for:**
 - Discover pipeline provenances.
-- Support VCF import/export.
+- Support genotyping pipeline provenance.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -10734,14 +10734,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one pipeline provenance record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one pipeline provenance record with provenance.
 **Can be used for:**
 - Publish a pipeline provenance.
-- Retry an identical record safely using the same vcfExportDbId.
+- Retry an identical record safely using the same pipelineProvenanceDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the pipeline is validated or endorsed.
 - **Side effects:** Creates a pipeline provenance identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same pipelineProvenanceDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -10771,7 +10771,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect assembly, accession, and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -10951,7 +10951,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI Observation.
-- Asserting that the plot is validated or endorsed.
+- Asserting that the work order is completed or validated.
 - **Side effects:** Creates a plot identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same plotDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -11329,10 +11329,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List protocol library records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of protocol library records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover protocol libraries.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -11364,14 +11364,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one protocol library record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one protocol library record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish an protocol library.
+- Retry an identical record safely using the same protocolLibraryDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates an protocol library identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same protocolLibraryDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -11401,7 +11401,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -11434,10 +11434,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List publication review records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of publication review records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover publication reviews.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -11469,14 +11469,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one publication review record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one publication review record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a publication review.
+- Retry an identical record safely using the same publicationReviewDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a publication review identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same publicationReviewDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -11506,7 +11506,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -11581,7 +11581,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI Observation.
-- Asserting that the flag is validated or endorsed.
+- Asserting that the work order is completed or validated.
 - **Side effects:** Creates a quality flag identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same qualityFlagDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -11749,10 +11749,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List raster catalogue records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of raster catalogue records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover raster catalogues.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -11784,14 +11784,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one raster catalogue record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one raster catalogue record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a raster catalogue.
+- Retry an identical record safely using the same rasterCatalogueDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a raster catalogue identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same rasterCatalogueDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -11821,7 +11821,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -11856,8 +11856,8 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Get a paged list of reference assembly records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover reference assemblys.
-- Support VCF import/export.
+- Discover reference assemblies.
+- Support genotyping reference selection.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -11889,14 +11889,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one reference assembly record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one reference assembly record with provenance.
 **Can be used for:**
 - Publish a reference assembly.
-- Retry an identical record safely using the same vcfExportDbId.
+- Retry an identical record safely using the same referenceAssemblyDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the assembly is validated or endorsed.
 - **Side effects:** Creates a reference assembly identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same referenceAssemblyDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -11926,7 +11926,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect assembly, accession, and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -11959,13 +11959,13 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List reference data version records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of reference data version records across authorities. Filters combine with AND.
+> Get a paged list of reference-data-version and time convention records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover reference data versions.
+- Discover reference-data-versions and time conventions.
 - Support reference data versioning.
 **Must not be used for / explicit non-goals:**
-- Creating or changing a record (use the POST endpoint).
-- Assuming a record is a BrAPI data resource.
+- Creating or changing a list (use the POST endpoint).
+- Assuming a list is a BrAPI Study.
 - Treating the list as a complete catalogue.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
@@ -11996,12 +11996,12 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Unknown referenceDataVersionDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
 **Can be used for:**
-- Publish a reference data version record.
+- Publish a reference-data-version or time convention.
 - Retry an identical record safely using the same referenceDataVersionDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
-- Assuming a record is a BrAPI data resource.
-- Asserting that the record is validated or endorsed.
+- Assuming a list is a BrAPI Study.
+- Asserting that the list is validated or endorsed.
 - **Side effects:** Creates a reference data version identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same referenceDataVersionDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -12031,9 +12031,9 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect version, source, and provenance.
+- Inspect reference-data-version identity, convention, and provenance.
 **Must not be used for / explicit non-goals:**
-- Assuming a record is a BrAPI data resource.
+- Assuming a list is a BrAPI Study.
 - Treating a superseded record as current.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
@@ -12169,10 +12169,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List remote sensing metadata records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of remote sensing metadata records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover remote sensing metadatas.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -12204,14 +12204,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one remote sensing metadata record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one remote sensing metadata record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a remote sensing metadata.
+- Retry an identical record safely using the same remoteSensingMetadataDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a remote sensing metadata identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same remoteSensingMetadataDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -12241,7 +12241,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -12484,14 +12484,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List research location records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of research location records across authorities. Filters combine with AND.
+> Get a paged list of research-location and funding reference records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover research locations.
+- Discover research-locations and funding references.
 - Support research organization.
 **Must not be used for / explicit non-goals:**
-- Creating or changing a record (use the POST endpoint).
-- Assuming a record is a BrAPI Location.
-- Treating the list as a complete catalogue.
+- Creating or changing a research-location (use the POST endpoint).
+- Assuming a research-location is a BrAPI Study.
+- Treating the list as a complete research-location catalogue.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
 - **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
@@ -12521,12 +12521,12 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Unknown researchLocationDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
 **Can be used for:**
-- Publish a research location.
+- Publish a research-location or funding reference.
 - Retry an identical record safely using the same researchLocationDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
-- Assuming a record is a BrAPI Location.
-- Asserting that the record is validated or endorsed.
+- Assuming a research-location is a BrAPI Study.
+- Asserting that the research-location is validated or endorsed.
 - **Side effects:** Creates a research location identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same researchLocationDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -12556,9 +12556,9 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect location identity and provenance.
+- Inspect research-location identity, funding, and provenance.
 **Must not be used for / explicit non-goals:**
-- Assuming a record is a BrAPI Location.
+- Assuming a research-location is a BrAPI Study.
 - Treating a superseded record as current.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
@@ -12589,14 +12589,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List research program records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of research program records across authorities. Filters combine with AND.
+> Get a paged list of research-program and funding reference records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover research programs.
+- Discover research-programs and funding references.
 - Support research organization.
 **Must not be used for / explicit non-goals:**
-- Creating or changing a record (use the POST endpoint).
-- Assuming a record is a BrAPI Study.
-- Treating the list as a complete catalogue.
+- Creating or changing a research-program (use the POST endpoint).
+- Assuming a research-program is a BrAPI Study.
+- Treating the list as a complete research-program catalogue.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
 - **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
@@ -12626,12 +12626,12 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Unknown researchProgramDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
 **Can be used for:**
-- Publish a research program.
+- Publish a research-program or funding reference.
 - Retry an identical record safely using the same researchProgramDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
-- Assuming a record is a BrAPI Study.
-- Asserting that the record is validated or endorsed.
+- Assuming a research-program is a BrAPI Study.
+- Asserting that the research-program is validated or endorsed.
 - **Side effects:** Creates a research program identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same researchProgramDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -12661,9 +12661,9 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect program identity, title, and provenance.
+- Inspect research-program identity, funding, and provenance.
 **Must not be used for / explicit non-goals:**
-- Assuming a record is a BrAPI Study.
+- Assuming a research-program is a BrAPI Study.
 - Treating a superseded record as current.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
@@ -12904,10 +12904,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List schema mapping records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of schema mapping records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover schema mappings.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -12939,14 +12939,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one schema mapping record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one schema mapping record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a schema mapping.
+- Retry an identical record safely using the same schemaMappingDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a schema mapping identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same schemaMappingDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -12976,7 +12976,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -13114,10 +13114,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List sensor device records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of sensor device records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover sensor devices.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -13149,14 +13149,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one sensor device record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one sensor device record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a sensor device.
+- Retry an identical record safely using the same sensorDeviceDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a sensor device identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same sensorDeviceDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -13186,7 +13186,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -13473,10 +13473,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List sowing window records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of sowing window records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover sowing windows.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -13508,14 +13508,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one sowing window record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one sowing window record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a sowing window.
+- Retry an identical record safely using the same sowingWindowDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a sowing window identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same sowingWindowDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -13545,7 +13545,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -13578,10 +13578,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List spatial index records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of spatial index records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover spatial indexs.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -13613,14 +13613,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one spatial index record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one spatial index record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a spatial index.
+- Retry an identical record safely using the same spatialIndexDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a spatial index identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same spatialIndexDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -13650,7 +13650,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -13683,10 +13683,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List spatial query records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of spatial query records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover spatial querys.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -13718,14 +13718,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one spatial query record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one spatial query record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a spatial query.
+- Retry an identical record safely using the same spatialQueryDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a spatial query identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same spatialQueryDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -13755,7 +13755,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -14287,10 +14287,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List telemetry normalization records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of telemetry normalization records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover telemetry normalizations.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -14322,14 +14322,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one telemetry normalization record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one telemetry normalization record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a telemetry normalization.
+- Retry an identical record safely using the same telemetryNormalizationDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a telemetry normalization identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same telemetryNormalizationDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -14359,7 +14359,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -14397,9 +14397,9 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - Discover terminology version entries.
 - Support terminology versioning and provenance.
 **Must not be used for / explicit non-goals:**
-- Creating or changing an entry (use the POST endpoint).
-- Assuming an entry is a BrAPI Observation.
-- Treating the list as a complete version catalogue.
+- Creating or changing a stage entry (use the POST endpoint).
+- Assuming a stage entry is a BrAPI Observation.
+- Treating the list as a complete ontology.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
 - **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
@@ -14497,10 +14497,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List threshold alert records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of threshold alert records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover threshold alerts.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -14532,14 +14532,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one threshold alert record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one threshold alert record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a threshold alert.
+- Retry an identical record safely using the same thresholdAlertDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a threshold alert identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same thresholdAlertDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -14569,7 +14569,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -14749,7 +14749,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI Observation.
-- Asserting that the assignment is validated or endorsed.
+- Asserting that the work order is completed or validated.
 - **Side effects:** Creates a treatment assignment identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same treatmentAssignmentDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -14854,7 +14854,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI Observation.
-- Asserting that the network is validated or endorsed.
+- Asserting that the work order is completed or validated.
 - **Side effects:** Creates a trial network identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same trialNetworkDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -14884,7 +14884,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect network, design, status, and provenance.
+- Inspect field linkage, trial-network identity, status, and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI Observation.
 - Treating a superseded record as current.
@@ -15064,7 +15064,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI Observation.
-- Asserting that the record is validated or endorsed.
+- Asserting that the work order is completed or validated.
 - **Side effects:** Creates a value and missingness identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same valueMissingnessDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -15240,11 +15240,11 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 > Get a paged list of variant annotations across authorities. Filters combine with AND.
 **Can be used for:**
 - Discover variant annotations for a study or method.
-- Support genotyping interpretation auditing.
+- Support scientific reproducibility and auditing.
 **Must not be used for / explicit non-goals:**
-- Creating or changing an annotation (use the POST endpoint).
-- Assuming an annotation is a BrAPI data resource.
-- Treating the list as a complete annotation repository.
+- Creating or changing a result (use the POST endpoint).
+- Assuming a result is a BrAPI data resource.
+- Treating the list as a complete analysis repository.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
 - **Parameters recorded in registry:** analysisMethodDbId, studyDbId, status, page, pageSize, authorizationHeader
@@ -15275,11 +15275,11 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 > Unknown variantAnnotationDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
 **Can be used for:**
 - Publish variant annotation metadata and payload references.
-- Retry an identical annotation safely using the same variantAnnotationDbId.
+- Retry an identical result safely using the same variantAnnotationDbId.
 **Must not be used for / explicit non-goals:**
-- Updating or deleting an existing annotation; corrections require a new record that supersedes.
-- Assuming the annotation is a BrAPI data resource.
-- Treating the annotation as scientific validation or approval.
+- Updating or deleting an existing result; corrections require a new record that supersedes.
+- Assuming the result is a BrAPI data resource.
+- Treating the result as scientific validation or approval.
 - **Side effects:** Creates a variant annotation when accepted.
 - **Retry / idempotency:** Same variantAnnotationDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -15311,8 +15311,8 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Can be used for:**
 - Inspect functional annotations and provenance.
 **Must not be used for / explicit non-goals:**
-- Assuming the annotation is a BrAPI data resource.
-- Treating a superseded annotation as current.
+- Assuming the result is a BrAPI data resource.
+- Treating a superseded result as current.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
 - **Parameters recorded in registry:** variantAnnotationDbId, authorizationHeader
@@ -15348,7 +15348,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - Support VCF import/export.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
-- Assuming a record is a BrAPI data resource.
+- Assuming a record is a BrAPI Observation.
 - Treating the list as a complete history.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
@@ -15383,8 +15383,8 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - Retry an identical record safely using the same vcfExportDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
-- Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Assuming a record is a BrAPI Observation.
+- Asserting that the work order is completed or validated.
 - **Side effects:** Creates a VCF export identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same vcfExportDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -15416,7 +15416,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Can be used for:**
 - Inspect export, status, and provenance.
 **Must not be used for / explicit non-goals:**
-- Assuming a record is a BrAPI data resource.
+- Assuming a record is a BrAPI Observation.
 - Treating a superseded record as current.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
@@ -15552,10 +15552,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List vegetation index records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of vegetation index records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover vegetation indexs.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -15587,14 +15587,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one vegetation index record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one vegetation index record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a vegetation index.
+- Retry an identical record safely using the same vegetationIndexDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a vegetation index identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same vegetationIndexDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -15624,7 +15624,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
@@ -16182,10 +16182,10 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List yield forecast records, optionally filtered by status.
 **Source contract description:**
-> Get a paged list of artifactcatalogue records across authorities. Filters combine with AND.
+> Get a paged list of yield forecast records across authorities. Filters combine with AND.
 **Can be used for:**
-- Discover artifactcatalogues.
-- Support VCF import/export.
+- Discover yield forecasts.
+- Support dataset/model artefact discovery.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
@@ -16217,14 +16217,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Register one yield forecast record with provenance.
 **Source contract description:**
-> Unknown vcfExportDbId creates; same id with an identical body replays the existing record; same id with a different body is rejected with 409.
+> Register one yield forecast record with provenance.
 **Can be used for:**
-- Publish a artifactcatalogue.
-- Retry an identical record safely using the same vcfExportDbId.
+- Publish a yield forecast.
+- Retry an identical record safely using the same yieldForecastDbId.
 **Must not be used for / explicit non-goals:**
 - Updating or deleting an existing record; corrections require a new record that supersedes.
 - Assuming a record is a BrAPI data resource.
-- Asserting that the export is validated or endorsed.
+- Asserting that the catalogue is validated or endorsed.
 - **Side effects:** Creates a yield forecast identity or appends a new immutable version when accepted.
 - **Retry / idempotency:** Same yieldForecastDbId and identical body replays the existing record; same id with a different body is rejected with 409.
 - **Parameters recorded in registry:** authorizationHeader
@@ -16254,7 +16254,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Source contract description:**
 > Returns the registered record, or 404.
 **Can be used for:**
-- Inspect export, status, and provenance.
+- Inspect catalogue entries and provenance.
 **Must not be used for / explicit non-goals:**
 - Assuming a record is a BrAPI data resource.
 - Treating a superseded record as current.
