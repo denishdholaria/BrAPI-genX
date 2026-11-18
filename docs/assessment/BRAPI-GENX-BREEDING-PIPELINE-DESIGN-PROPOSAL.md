@@ -306,11 +306,11 @@ Before revising the schemas or operation definitions, require:
 
 **Slice 3A — Candidate contract design:** completed as advisory design in [the Pipeline and Scheme Candidate Contract Design](./BRAPI-GENX-BREEDING-PIPELINE-SCHEME-CONTRACT-DESIGN.md). It defines the candidate pipeline/scheme boundary, explicit stage transitions, design-time task definitions, target context, immutable versioning, and an execution-record crosswalk. No endpoint YAML, schema, or operation was changed.
 
-**Slice 3B — Cross-RFC overlap review:** next. Review RFC-008, RFC-019, RFC-029, RFC-035, RFC-037, and RFC-098 against official BrAPI resources and one another. Record genuine GenX-only semantics and avoid duplicating BrAPI concepts.
+**Slice 3B — Cross-RFC overlap review:** completed in [the Cross-RFC Overlap Review](./BRAPI-GENX-BREEDING-CROSS-RFC-OVERLAP-REVIEW.md). It confirms the strongest GenX-only candidates (SelectionDecision and PopulationAdvancement), identifies high overlap in ProgenyRecord and CrossingSchedule, and finds the current ResearchProgram premise contradicted by BrAPI Program. No RFC or API contract changed.
 
-**Slice 3C — Candidate logical model and fixtures:** prepare non-normative relationship/cardinality definitions and valid/invalid examples for recurrent population improvement, product development, multiple schemes, and crop-specific stage terminology. Do not edit endpoint YAML until the maintainer chooses the public resource boundary.
+**Slice 3C — Candidate logical model and fixtures:** completed in [the Candidate Logical Model](./BRAPI-GENX-BREEDING-PIPELINE-LOGICAL-MODEL.md) and [Candidate Fixture Corpus](./BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json). The non-normative model defines relationships, cardinalities, versioning, execution-reference rules, and 20 invariants. Nine machine-readable scenarios cover three positive and six negative cases; structural and semantic checks passed. These are not production conformance fixtures and are not wired into CI.
 
-**Slice 4 — Contract review package:** compare the nested-scheme and first-class-scheme alternatives, define candidate identity/reference/versioning fields, document BrAPI mappings and migration consequences, and present explicit maintainer decisions. Keep RFCs at `STRUCTURAL_DRAFT` until the quality gates and maintainer direction support promotion.
+**Slice 4 — Maintainer contract decision package:** prepare the consolidated public resource boundary, nested-versus-first-class scheme alternatives, identity/reference/versioning choices, migration impact on the scalar pipelineStage contract, and RFC disposition recommendations. Keep RFCs at `STRUCTURAL_DRAFT`; do not promote or change endpoint YAML/schemas until the maintainer selects the public contract boundary.
 
 ## 14. References
 
