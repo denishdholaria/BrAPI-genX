@@ -96,6 +96,12 @@ def require_filter_pair(
         description = parameter.get("description", "")
         if not isinstance(description, str) or not description.strip():
             errors.append(f"List filter parameter '{name}' needs an explicit authority-pair description.")
+    identifier_description = str(parameters.get(dbid_name, {}).get("description", "")).lower()
+    server_description = str(parameters.get(server_name, {}).get("description", "")).lower()
+    if server_name.lower() not in identifier_description or "paired" not in identifier_description:
+        errors.append(f"List identifier parameter '{dbid_name}' must explicitly require pairing with '{server_name}'.")
+    if dbid_name.lower() not in server_description:
+        errors.append(f"Authority parameter '{server_name}' must explicitly identify the dbId it qualifies.")
     server = parameters.get(server_name)
     if server:
         fmt = server.get("schema", {}).get("format")
