@@ -11,7 +11,7 @@ paths:
         classification:
           primaryDomain: "D2"
           crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
-        purpose: "Retrieve the stable logical pipeline view, with optional exact immutable revision selection."
+        purpose: "Retrieve the stable logical pipeline view or one exact immutable revision."
         canBeUsedFor:
           - "Inspect the stable workstream identity and current published revision summary."
           - "Retrieve the exact immutable revision identified by breedingPipelineVersionDbId."
