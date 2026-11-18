@@ -44,8 +44,8 @@ their evidence.
 
 - D-21: Should selection decisions be scoped per breeding program only, or
   also per trial/study? (Current: program required, study optional.)
-- D-22: Should `linkedObservationDbIds` be required when `decision` is
-  `selected`? (Current: optional.)
+- D-22: Should linked BrAPI Observation evidence be required when `decision`
+  is `selected`? (Current: optional authority-qualified `linkedObservationReferences`.)
 - D-23: Should a decision be cancellable/superseded only by the original
   decision maker or by any authorized breeder? (Current: requires decision.)
 
@@ -53,3 +53,13 @@ their evidence.
 
 Primary domain: D2 — Breeding Programs and Experimental Design.
 Cross-cutting: C1, C2, C3 (POST), C9.
+
+## 8. Pipeline and scheme context
+
+The current candidate schema uses nested optional context envelopes:
+- `pipelineContext` contains the stable `breedingPipelineDbId` and exact `breedingPipelineVersionDbId`;
+- `schemeContext` contains `breedingSchemeDbId` and exact `breedingSchemeVersionDbId`, with optional `stageId` nested inside it.
+
+If both contexts are supplied, the referenced pipeline revision must contain the exact scheme version in its embedded scheme bindings. A scheme context without pipeline context is valid; a decision made outside a registered strategy may omit both contexts. An event must not put scheme-local stage identifiers at the top level.
+
+The selection verdict, rationale, actor and evidence remain owned by SelectionDecision. A scheme TaskDefinition describes the intended selection process and is not a verdict.
