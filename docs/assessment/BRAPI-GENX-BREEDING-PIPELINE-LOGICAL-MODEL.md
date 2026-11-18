@@ -6,6 +6,7 @@
 **Related design:** [Pipeline and Scheme Candidate Contract Design](./BRAPI-GENX-BREEDING-PIPELINE-SCHEME-CONTRACT-DESIGN.md)  
 **Overlap review:** [Breeding and Related RFC Overlap Review](./BRAPI-GENX-BREEDING-CROSS-RFC-OVERLAP-REVIEW.md)  
 **Candidate fixtures:** [Breeding Pipeline Candidate Fixtures](./BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json)  
+**Terminology:** BrAPI (Breeding Application Programming Interface); RFC (Request for Comments); JSON (JavaScript Object Notation); API (Application Programming Interface); ID (identifier); URL (Uniform Resource Locator); URI (Uniform Resource Identifier); YAML (YAML Ain't Markup Language).
 **Repository baseline:** main at fc42722dbdbf4a613314ca3850f8db3924553e09.
 
 ## 1. Purpose and boundary
