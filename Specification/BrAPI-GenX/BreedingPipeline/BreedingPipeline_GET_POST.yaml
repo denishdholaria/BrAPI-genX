@@ -11,14 +11,14 @@ paths:
         classification:
           primaryDomain: "D2"
           crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
-        purpose: "List registered breeding pipeline records, optionally filtered by lifecycle status."
+        purpose: "List stable BreedingPipeline workstream identities and their available revision summaries."
         canBeUsedFor:
-          - "Discover registered breeding pipeline records."
-          - "Compare pipeline type, lifecycle status, and provenance across returned records."
+          - "Discover stable breeding-pipeline workstream identities."
+          - "Compare workstream purpose and revision metadata across returned records."
         mustNotBeUsedFor:
           - "Creating or changing a record (use the POST endpoint)."
           - "Assuming a record is a BrAPI data resource."
-          - "Treating the list as a complete history."
+          - "Assuming the default result includes every historical revision; clients must request all revisions explicitly."
         sideEffects: "Read-only."
         idempotency: "Read-only."
         semanticNeighbors:
@@ -27,18 +27,15 @@ paths:
         decisions: ["RFC-154"]
         proposalStatus: "draft-non-normative"
       summary: List breeding pipelines
-      description: Get a paged list of registered breeding pipeline records. The optional status filter selects records by lifecycle state.
+      description: Get a paged list of stable pipeline workstream identities. The default view returns the current published revision summary for each logical pipeline. An explicit includeRevisions option returns revision summaries; it does not replace exact historical revision retrieval.
       parameters:
-      - name: status
-        description: Filter by lifecycle state
+      - name: includeRevisions
+        description: When true, include all known revision summaries for each logical pipeline. When false or omitted, return the current published revision summary only.
         in: query
         required: false
         schema:
-          type: string
-          enum:
-          - active
-          - superseded
-          - withdrawn
+          type: boolean
+          default: false
       - $ref: '#/components/parameters/page'
       - $ref: '#/components/parameters/pageSize'
       - $ref: '#/components/parameters/authorizationHeader'
@@ -60,23 +57,23 @@ paths:
         classification:
           primaryDomain: "D2"
           crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
-        purpose: "Register one breeding pipeline record with provenance."
+        purpose: "Create a stable BreedingPipeline workstream and append its first immutable revision, or append a new immutable revision to an existing workstream."
         canBeUsedFor:
-          - "Register a breeding pipeline record with its namespaced identity and provenance."
-          - "Retry an identical record safely using the same breedingPipelineDbId."
+          - "Register a stable workstream identity with a new immutable breedingPipelineVersionDbId."
+          - "Retry an identical revision safely using the same breedingPipelineVersionDbId."
         mustNotBeUsedFor:
-          - "Updating or deleting an existing record; corrections require a new record that supersedes."
+          - "Mutating an existing published revision; substantive corrections require a new version identity."
           - "Assuming a record is a BrAPI data resource."
           - "Asserting that the catalogue is validated or endorsed."
-        sideEffects: "Creates a breeding pipeline identity or appends a new immutable version when accepted."
-        idempotency: "Same breedingPipelineDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+        sideEffects: "Creates a stable workstream identity when unknown, and creates one immutable revision."
+        idempotency: "Replay is keyed by breedingPipelineVersionDbId. Same version ID and identical canonical payload replays; same version ID with a different payload is rejected with 409. A new revision under an existing pipeline uses a new version ID."
         semanticNeighbors:
           - "genxListBreedingPipelines"
           - "genxGetBreedingPipeline"
         decisions: ["RFC-154"]
         proposalStatus: "draft-non-normative"
-      summary: Register one breeding pipeline
-      description: Register one breeding pipeline record with provenance.
+      summary: Register a breeding pipeline revision
+      description: Create or reference the stable workstream identity and append one immutable revision. A new breedingPipelineVersionDbId is required for every new revision.
       parameters:
       - $ref: '#/components/parameters/authorizationHeader'
       requestBody:
