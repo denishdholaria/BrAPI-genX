@@ -1,0 +1,359 @@
+{
+  "designStatus": "candidate-only",
+  "normative": false,
+  "schemaStatus": "not-an-openapi-contract",
+  "purpose": "Machine-readable design scenarios for the non-normative BreedingPipeline/BreedingScheme logical model. These are not production API fixtures and must not be added to conformance runs until the contract is accepted.",
+  "fixtures": [
+    {
+      "scenarioId": "valid-recurrent-overlapping-cohorts",
+      "expectation": "valid",
+      "invariantIds": [
+        "BM-01",
+        "BM-02",
+        "BM-05",
+        "BM-08"
+      ],
+      "description": "Two cohorts progress concurrently through different stages of the same recurrent scheme version. Pipeline has no single current stage.",
+      "pipeline": {
+        "pipelineId": "institute-a:breeding-pipeline:rice-lowland",
+        "pipelineRevisionId": "institute-a:breeding-pipeline-revision:rice-lowland:2",
+        "programReference": {
+          "apiGeneration": "brapi-v2.1",
+          "resourceType": "Program",
+          "server": "https://brapi.example.org/brapi/v2.1",
+          "dbId": "rice-program"
+        },
+        "schemeBindings": [
+          {
+            "schemeVersionId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+            "role": "principal"
+          }
+        ]
+      },
+      "schemeVersion": {
+        "schemeId": "institute-a:breeding-scheme:rice-recurrent",
+        "schemeVersionId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+        "publicationState": "published",
+        "stages": [
+          {
+            "stageId": "crossing",
+            "label": "Crossing block"
+          },
+          {
+            "stageId": "F2",
+            "label": "F2"
+          },
+          {
+            "stageId": "F3",
+            "label": "F3"
+          }
+        ],
+        "transitions": [
+          {
+            "transitionId": "t1",
+            "fromStageId": "crossing",
+            "toStageId": "F2",
+            "transitionType": "advance"
+          },
+          {
+            "transitionId": "t2",
+            "fromStageId": "F2",
+            "toStageId": "F3",
+            "transitionType": "advance"
+          },
+          {
+            "transitionId": "t3",
+            "fromStageId": "F3",
+            "toStageId": "crossing",
+            "transitionType": "recurrent"
+          }
+        ]
+      },
+      "cohortExecutions": [
+        {
+          "cohortId": "cohort-2025-A",
+          "schemeVersionId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+          "generation": "F3",
+          "stageId": "F3"
+        },
+        {
+          "cohortId": "cohort-2026-B",
+          "schemeVersionId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+          "generation": "F2",
+          "stageId": "F2"
+        }
+      ]
+    },
+    {
+      "scenarioId": "valid-scheme-revision-history",
+      "expectation": "valid",
+      "invariantIds": [
+        "BM-03",
+        "BM-04",
+        "BM-07"
+      ],
+      "description": "Pipeline revision 2 adopts scheme version 4; an earlier execution event still resolves to pipeline revision 1 and scheme version 3.",
+      "pipeline": {
+        "pipelineId": "institute-a:breeding-pipeline:wheat-product-dev",
+        "revisions": [
+          {
+            "pipelineRevisionId": "institute-a:breeding-pipeline-revision:wheat-product-dev:1",
+            "schemeBindings": [
+              {
+                "schemeVersionId": "institute-a:breeding-scheme-version:wheat-evaluation:3",
+                "role": "principal"
+              }
+            ]
+          },
+          {
+            "pipelineRevisionId": "institute-a:breeding-pipeline-revision:wheat-product-dev:2",
+            "schemeBindings": [
+              {
+                "schemeVersionId": "institute-a:breeding-scheme-version:wheat-evaluation:4",
+                "role": "principal"
+              }
+            ]
+          }
+        ]
+      },
+      "executionEvent": {
+        "eventType": "populationAdvancement",
+        "eventId": "institute-a:population-advancement:pa-001",
+        "pipelineRevisionId": "institute-a:breeding-pipeline-revision:wheat-product-dev:1",
+        "schemeVersionId": "institute-a:breeding-scheme-version:wheat-evaluation:3",
+        "fromStageId": "early-testing",
+        "toStageId": "advanced-testing"
+      }
+    },
+    {
+      "scenarioId": "valid-brapi-execution-crosswalk",
+      "expectation": "valid",
+      "invariantIds": [
+        "BM-06",
+        "BM-07",
+        "BM-09"
+      ],
+      "description": "Design-time tasks reference existing BrAPI resources; actual verdict and advancement remain distinct GenX event types.",
+      "pipeline": {
+        "pipelineId": "institute-a:breeding-pipeline:wheat-yield",
+        "pipelineRevisionId": "institute-a:breeding-pipeline-revision:wheat-yield:1",
+        "programReference": {
+          "apiGeneration": "brapi-v2.1",
+          "resourceType": "Program",
+          "server": "https://brapi.example.org/brapi/v2.1",
+          "dbId": "wheat-program"
+        },
+        "schemeBindings": [
+          {
+            "schemeVersionId": "institute-a:breeding-scheme-version:wheat-line-development:1",
+            "role": "principal"
+          }
+        ]
+      },
+      "schemeVersion": {
+        "schemeVersionId": "institute-a:breeding-scheme-version:wheat-line-development:1",
+        "stageDefinitions": [
+          {
+            "stageId": "crossing",
+            "taskDefinitions": [
+              {
+                "taskId": "make-crosses",
+                "activityType": "crossing"
+              }
+            ]
+          },
+          {
+            "stageId": "yield-evaluation",
+            "taskDefinitions": [
+              {
+                "taskId": "evaluate-yield",
+                "activityType": "evaluation"
+              },
+              {
+                "taskId": "select-lines",
+                "activityType": "selection"
+              }
+            ]
+          }
+        ]
+      },
+      "executionReferences": [
+        {
+          "owner": "BrAPI",
+          "resourceType": "CrossingProject",
+          "server": "https://brapi.example.org/brapi/v2.1",
+          "dbId": "cross-project-2026"
+        },
+        {
+          "owner": "BrAPI",
+          "resourceType": "PlannedCross",
+          "server": "https://brapi.example.org/brapi/v2.1",
+          "dbId": "planned-cross-2026-01"
+        },
+        {
+          "owner": "BrAPI",
+          "resourceType": "Cross",
+          "server": "https://brapi.example.org/brapi/v2.1",
+          "dbId": "cross-2026-01"
+        },
+        {
+          "owner": "BrAPI",
+          "resourceType": "Study",
+          "server": "https://brapi.example.org/brapi/v2.1",
+          "dbId": "yield-study-2026"
+        },
+        {
+          "owner": "GenX",
+          "resourceType": "SelectionDecision",
+          "dbId": "institute-a:selection-decision:sd-2026-01"
+        },
+        {
+          "owner": "GenX",
+          "resourceType": "PopulationAdvancement",
+          "dbId": "institute-a:population-advancement:pa-2026-01"
+        }
+      ]
+    },
+    {
+      "scenarioId": "invalid-dangling-stage-transition",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-10"
+      ],
+      "description": "Transition target must resolve to a stage within the same immutable scheme version.",
+      "schemeVersion": {
+        "schemeVersionId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+        "stages": [
+          {
+            "stageId": "crossing"
+          },
+          {
+            "stageId": "F2"
+          }
+        ],
+        "transitions": [
+          {
+            "transitionId": "bad-transition",
+            "fromStageId": "F2",
+            "toStageId": "F5"
+          }
+        ]
+      },
+      "expectedFailure": "Transition toStageId F5 is not defined in the referenced scheme version."
+    },
+    {
+      "scenarioId": "invalid-execution-stage-without-scheme-version",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-11"
+      ],
+      "description": "A scheme-local stage identifier is meaningless without the exact scheme version that owns it.",
+      "executionEvent": {
+        "eventType": "populationAdvancement",
+        "fromStageId": "F2",
+        "toStageId": "F3"
+      },
+      "expectedFailure": "Scheme stage references are present but schemeVersionId is absent."
+    },
+    {
+      "scenarioId": "invalid-pipeline-scheme-version-mismatch",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-12"
+      ],
+      "description": "When both a pipeline revision and scheme version are referenced, that exact scheme version must be bound by that pipeline revision.",
+      "pipelineRevision": {
+        "pipelineRevisionId": "institute-a:breeding-pipeline-revision:wheat-yield:2",
+        "schemeBindings": [
+          {
+            "schemeVersionId": "institute-a:breeding-scheme-version:wheat-line-development:4"
+          }
+        ]
+      },
+      "executionEvent": {
+        "eventType": "selectionDecision",
+        "pipelineRevisionId": "institute-a:breeding-pipeline-revision:wheat-yield:2",
+        "schemeVersionId": "institute-a:breeding-scheme-version:wheat-line-development:3",
+        "stageId": "early-testing"
+      },
+      "expectedFailure": "The event references scheme version 3, which is not bound by pipeline revision 2."
+    },
+    {
+      "scenarioId": "invalid-published-scheme-mutated-in-place",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-03",
+        "BM-13"
+      ],
+      "description": "Published scheme version 4 changes its stage structure without issuing a new scheme version identity.",
+      "before": {
+        "schemeVersionId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+        "publicationState": "published",
+        "stages": [
+          "crossing",
+          "F2",
+          "F3"
+        ]
+      },
+      "after": {
+        "schemeVersionId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+        "publicationState": "published",
+        "stages": [
+          "crossing",
+          "F2",
+          "F3",
+          "F4"
+        ]
+      },
+      "expectedFailure": "Published content changed while the immutable schemeVersionId remained the same."
+    },
+    {
+      "scenarioId": "invalid-duplicate-parentage-authority",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-14"
+      ],
+      "description": "A GenX ProgenyRecord must not assert a conflicting parentage graph for Germplasm already represented by BrAPI Pedigree.",
+      "brapiPedigree": {
+        "germplasmDbId": "line-42",
+        "parentDbIds": [
+          "parent-1",
+          "parent-2"
+        ]
+      },
+      "genxProgenyRecord": {
+        "progenyDbId": "line-42",
+        "parentDbIds": [
+          "parent-3",
+          "parent-4"
+        ],
+        "claimsParentageAuthority": true
+      },
+      "expectedFailure": "Two conflicting sources claim authority for the same progeny parentage."
+    },
+    {
+      "scenarioId": "invalid-pipeline-wide-current-stage",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-01",
+        "BM-08"
+      ],
+      "description": "Pipeline must not carry one scalar current stage when its cohorts may be at different stages.",
+      "pipeline": {
+        "pipelineId": "institute-a:breeding-pipeline:rice-lowland",
+        "currentStage": "F3"
+      },
+      "concurrentCohortStates": [
+        {
+          "cohortId": "A",
+          "stageId": "F3"
+        },
+        {
+          "cohortId": "B",
+          "stageId": "F2"
+        }
+      ],
+      "expectedFailure": "currentStage is ambiguous at pipeline scope because concurrent cohorts occupy different stages."
+    }
+  ]
+}
