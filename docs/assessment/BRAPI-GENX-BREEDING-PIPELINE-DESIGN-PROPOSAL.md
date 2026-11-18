@@ -310,7 +310,7 @@ Before revising the schemas or operation definitions, require:
 
 **Slice 3C — Candidate logical model and fixtures:** completed in [the Candidate Logical Model](./BRAPI-GENX-BREEDING-PIPELINE-LOGICAL-MODEL.md) and [Candidate Fixture Corpus](./BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json). The non-normative model defines relationships, cardinalities, versioning, execution-reference rules, and 20 invariants. Nine machine-readable scenarios cover three positive and six negative cases; structural and semantic checks passed. These are not production conformance fixtures and are not wired into CI.
 
-**Slice 4 — Maintainer contract decision package:** prepare the consolidated public resource boundary, nested-versus-first-class scheme alternatives, identity/reference/versioning choices, migration impact on the scalar pipelineStage contract, and RFC disposition recommendations. Keep RFCs at `STRUCTURAL_DRAFT`; do not promote or change endpoint YAML/schemas until the maintainer selects the public contract boundary.
+**Slice 4 — Maintainer contract decision package:** completed in [the Maintainer Decision Package](./BRAPI-GENX-BREEDING-PIPELINE-MAINTAINER-DECISION-PACKAGE.md). It consolidates the preferred public resource boundary, scheme representation alternatives, identity/reference/versioning choices, migration impact on the scalar pipelineStage contract, and proposed RFC dispositions. It identifies 13 maintainer decisions. No endpoint YAML, schema, RFC maturity state, or accepted-decision register was changed.
 
 ## 14. References
 
