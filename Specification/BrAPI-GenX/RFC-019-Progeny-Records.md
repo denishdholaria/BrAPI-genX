@@ -1,7 +1,8 @@
 # RFC-019 — Progeny Records (Breeding)
 
-- Status: proposal, non-normative.
+- Status: deferred; retained as historical proposal.
 - Supersedes: none.
+- Decision: D-BP-08 — the broad ProgenyRecords surface is deferred; BrAPI Pedigree remains authoritative. Reopen only for a distinct immutable formation/family event or typed generation/cohort association that does not duplicate parentage.
 - Related: RFC-001 (GenX skeleton), `CLASSIFICATION.md` (D2).
 
 ## 1. Problem
