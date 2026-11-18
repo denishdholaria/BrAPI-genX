@@ -49,12 +49,18 @@ paths:
         schema:
           type: string
       - name: populationServer
-        description: Authoritative BrAPI v2.1 server base URI that issued populationDbId.
+        description: Authoritative BrAPI v2.1 server base URI that issued populationDbId. Must be supplied with populationDbId and populationResourceType.
         in: query
         required: false
         schema:
           type: string
           format: uri
+      - name: populationResourceType
+        description: Exact official BrAPI resource type that owns populationDbId (for example Germplasm). Must be supplied with populationDbId and populationServer; do not infer it from the identifier.
+        in: query
+        required: false
+        schema:
+          type: string
       - name: status
         description: Filter by lifecycle state
         in: query
