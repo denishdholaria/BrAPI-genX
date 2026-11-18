@@ -198,6 +198,29 @@ def run(root: Path) -> list[str]:
         errors,
     )
 
+    # Quantitative target objectives must be interpretable through the official BrAPI measurement scale.
+    target_requirement = schema(bp_doc, "TargetTraitRequirement", bp_schema_path, errors)
+    target_properties = target_requirement.get("properties", {})
+    require(
+        "unit" not in target_properties,
+        "TargetTraitRequirement must not duplicate a free-text unit field; units come from the referenced BrAPI ObservationVariable Scale.",
+        errors,
+    )
+    for field in ("traitReference", "desiredDirection", "threshold", "minimum", "maximum", "exactDecimal", "minimumExactDecimal", "maximumExactDecimal"):
+        require(field in target_properties, f"TargetTraitRequirement is missing {field}.", errors)
+    trait_description = str(target_properties.get("traitReference", {}).get("description", "")).lower()
+    require(
+        "observationvariable" in trait_description and "numeric" in trait_description,
+        "TargetTraitRequirement must state that quantitative targets require ObservationVariable resourceType.",
+        errors,
+    )
+    target_description = str(target_requirement.get("description", "")).lower()
+    require(
+        "scale" in target_description and "decimal precision" in target_description,
+        "TargetTraitRequirement must explain that BrAPI ObservationVariable Scale supplies units and precision.",
+        errors,
+    )
+
     # Registration request must wrap the shared immutable revision schema.
     request = schema(request_doc, "BreedingPipelineNewRequest", request_path, errors)
     require(
