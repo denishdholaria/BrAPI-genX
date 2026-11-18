@@ -6,6 +6,7 @@
 **Parent assessment:** [Breeding Pipeline Domain Preflight](./BRAPI-GENX-BREEDING-PIPELINE-DOMAIN-PREFLIGHT.md)  
 **Parent proposal:** [Breeding Pipeline and Breeding Scheme Design Proposal](./BRAPI-GENX-BREEDING-PIPELINE-DESIGN-PROPOSAL.md)  
 **Repository baseline:** \`main\` at \`32e43fdf49a6bb6fd2d642ecf1220e7d4b8f8ade\`  
+**Terminology:** BrAPI (Breeding Application Programming Interface); API (Application Programming Interface); RFC (Request for Comments); CES (crossing, evaluation, and selection); MIAPPE (Minimum Information About a Plant Phenotyping Experiment); JSON (JavaScript Object Notation); TPE (target population of environments); URL (Uniform Resource Locator); CI (Continuous Integration); YAML (YAML Ain't Markup Language).
 **Scope:** Candidate domain model, resource boundaries, identity/versioning, stage topology, and cross-resource mappings. No schema or endpoint change is made by this document.
 
 ## 1. Executive recommendation
