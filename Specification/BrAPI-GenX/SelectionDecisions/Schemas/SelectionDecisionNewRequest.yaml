@@ -5,31 +5,13 @@ openapi: 3.0.0
 paths: {}
 components:
   schemas:
-    BrapiResourceReference:
-      type: object
-      required: [apiGeneration, resourceType, server, dbId]
-      properties:
-        apiGeneration:
-          type: string
-          enum: ["2.1"]
-        resourceType:
-          type: string
-        server:
-          type: string
-          format: uri
-        dbId:
-          type: string
     SelectionDecisionNewRequest:
       type: object
       description: |-
-        Request to record one selection decision. Unknown
-        selectionDecisionDbId creates; same id with an identical body replays
-        the existing record; same id with a different body is rejected with 409.
-      required:
-      - selectionDecisionDbId
-      - programReference
-      - decision
-      - decisionDate
+        Request to record one actual selection verdict. The
+        selectionDecisionDbId is immutable: identical replay is safe;
+        a different payload under the same identifier is rejected with 409.
+      required: [selectionDecisionDbId, programReference, decision, decisionDate]
       properties:
         selectionDecisionDbId:
           description: Namespaced selection-decision identity `{authority}:selection-decision:{localId}`
@@ -38,54 +20,41 @@ components:
         programReference:
           description: Authority-qualified BrAPI Program reference.
           $ref: '#/components/schemas/BrapiResourceReference'
-        breedingPipelineDbId:
-          type: string
-          description: Optional stable pipeline workstream identity.
-        breedingPipelineVersionDbId:
-          type: string
-          description: Exact immutable pipeline revision when governed by a registered pipeline.
-        breedingSchemeDbId:
-          type: string
-          description: Optional stable scheme identity.
-        breedingSchemeVersionDbId:
-          type: string
-          description: Required whenever stageId is supplied.
-        stageId:
-          type: string
-          description: Scheme-version-local stage identifier.
+        pipelineContext:
+          description: Optional exact pipeline revision context when this decision was governed by a registered pipeline.
+          $ref: '#/components/schemas/BreedingPipelineExecutionContext'
+        schemeContext:
+          description: Optional exact scheme-version context. Any supplied stage identifier must resolve in this exact version.
+          $ref: '#/components/schemas/BreedingSchemeExecutionContext'
         studyReference:
           description: Optional authority-qualified BrAPI Study reference.
           $ref: '#/components/schemas/BrapiResourceReference'
         candidateGermplasmReference:
-          description: Optional authority-qualified BrAPI Germplasm reference.
+          description: Optional authority-qualified BrAPI Germplasm candidate reference.
           $ref: '#/components/schemas/BrapiResourceReference'
         populationReference:
-          description: Optional authority-qualified population or family reference.
+          description: Optional authority-qualified population or family material reference.
           $ref: '#/components/schemas/BrapiResourceReference'
         selectionCriterion:
-          description: Criterion or index used to reach the verdict
+          description: Criterion or index used to reach the verdict; this is not the verdict itself.
           type: string
           example: grain-yield-index-2026
         decision:
-          description: Verdict reached for the candidate
+          description: Actual verdict reached for the candidate.
           type: string
-          enum:
-          - selected
-          - rejected
-          - deferred
-          - advanced
+          enum: [selected, rejected, deferred, advanced]
           example: selected
         decisionDate:
-          description: Date the verdict was recorded (ISO-8601)
+          description: Date the verdict was recorded (ISO-8601).
           type: string
           format: date
           example: '2026-10-24'
         decisionMaker:
-          description: Actor recording the verdict (person id or system identity)
+          description: Actor recording the verdict (person identifier or system identity).
           type: string
           example: breeder-42
         rationale:
-          description: Human-readable justification
+          description: Human-readable justification.
           type: string
           example: Selected for high yield and acceptable disease score.
         linkedObservationReferences:
@@ -94,21 +63,18 @@ components:
           items:
             $ref: '#/components/schemas/BrapiResourceReference'
         linkedJobDbId:
-          description: GenX Job that produced supporting analysis, when applicable
+          description: GenX Job that produced supporting analysis, when applicable.
           type: string
           example: institute-a:job:analysis-7
         supersedes:
-          description: selectionDecisionDbId of the decision this one replaces
+          description: selectionDecisionDbId of the decision this one corrects or supersedes.
           type: string
           example: institute-a:selection-decision:sd-2026-000
         status:
-          description: Lifecycle state of the decision record
+          description: Lifecycle state of this immutable verdict record.
           type: string
-          enum:
-          - active
-          - superseded
+          enum: [active, superseded]
           default: active
-          example: active
         provenance:
-          description: Evidence and method provenance for the verdict
+          description: Evidence and method provenance for the verdict.
           $ref: '#/components/schemas/ProvenanceEnvelope'
