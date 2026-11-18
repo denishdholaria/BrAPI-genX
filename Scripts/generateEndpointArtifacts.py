@@ -224,7 +224,7 @@ def render_genx_catalog(reg):
     lines = [
         "# BrAPI-GenX Endpoint Catalogue (Focused View)", "",
         "> Generated from the master registry by Scripts/generateEndpointArtifacts.py on " + str(reg.get("generatedAt", "unknown date")) + ". Do not edit by hand.", "",
-        "This is a focused view of the 21 proposed GenX operations, not a separate source of truth. The complete catalogue covering BrAPI v2.1 and GenX is the [master endpoint catalogue](../ENDPOINT-CATALOG.md); authoritative structured records live in the [master registry](../ENDPOINT-REGISTRY.json). The [BijMantra crosswalk](../BIJMANTRA-CROSSWALK.md) records source-level implementation candidates without implying runtime availability or contract equivalence.", "",
+        "This is a focused view of " + str(len(genx)) + " proposed GenX operations, not a separate source of truth. The complete catalogue covering BrAPI v2.1 and GenX is the [master endpoint catalogue](../ENDPOINT-CATALOG.md); authoritative structured records live in the [master registry](../ENDPOINT-REGISTRY.json). The [BijMantra crosswalk](../BIJMANTRA-CROSSWALK.md) records source-level implementation candidates without implying runtime availability or contract equivalence.", "",
         "| Source module | Operation count | Status |", "|---|---:|---|"
     ]
     modules = sorted({e.get("genxModule") or "Unclassified" for e in genx})
