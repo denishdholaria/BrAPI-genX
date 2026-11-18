@@ -7,7 +7,13 @@ components:
   schemas:
     BreedingPipelineNewRequest:
       type: object
-      description: Register a stable BreedingPipeline identity together with one immutable revision. Replay identity is breedingPipelineVersionDbId, not breedingPipelineDbId.
+      description: |-
+        Create a stable BreedingPipeline and its first immutable revision, or append
+        a new immutable revision to an existing workstream. Registration replay
+        is keyed by breedingPipelineVersionDbId and compares the revision payload
+        using the JSON Canonicalization Scheme (RFC 8785). The expected-current
+        version is a separate compare-and-set precondition; it is not part of the
+        immutable revision payload or its replay fingerprint.
       required: [breedingPipelineDbId, breedingPipelineVersion]
       properties:
         breedingPipelineDbId:
@@ -17,3 +23,15 @@ components:
         breedingPipelineVersion:
           description: Immutable revision payload. Scheme definitions are embedded in each scheme binding.
           $ref: '#/components/schemas/BreedingPipelineRevision'
+        expectedCurrentBreedingPipelineVersionDbId:
+          type: string
+          nullable: true
+          description: |-
+            Candidate compare-and-set precondition for appending to an existing
+            pipeline. Required when registering a new version under an existing
+            breedingPipelineDbId. It must equal the current published version
+            observed by the client; explicit null means the workstream currently
+            has no published revision. Omit only when creating a new logical
+            pipeline or retrying an identical breedingPipelineVersionDbId for
+            idempotent replay. The server compares this value atomically before
+            appending a new version and rejects a mismatch with 409 Conflict.
