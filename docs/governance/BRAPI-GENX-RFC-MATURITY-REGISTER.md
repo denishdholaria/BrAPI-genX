@@ -17,7 +17,7 @@
 | RFC-011 | RFC-011 — Harvest Records (Crop Production) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
 | RFC-012 | RFC-012 — Phenotype Capture (Observation Workflow) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
 | RFC-013 | RFC-013 — Genomic Datasets (Molecular Data Preparation) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
-| RFC-014 | RFC-014 — Breeding Pipeline (Stage Gates) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
+| RFC-014 | RFC-014 — Breeding Pipeline (Stage Gates) | STRUCTURAL_DRAFT | Historical predecessor retained for evidence; canonical editorial design is RFC-154. Do not use as an independent schema or endpoint source. |
 | RFC-015 | RFC-015 — Genebank Storage (Conservation) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
 | RFC-016 | RFC-016 — Research Assets (Publication & Knowledge) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
 | RFC-017 | RFC-017 — Measurement Methods (Terminology) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
@@ -157,5 +157,5 @@
 | RFC-151 | RFC-151 — Edge Gateway Health (M) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
 | RFC-152 | RFC-152 — Schema Mapping (T/W/A) | DEFERRED | Unresolved scientific/governance decision; see decision register. Do not treat as complete. |
 | RFC-153 | RFC-153 — Capability Negotiation (T/W/A) | DEFERRED | Unresolved scientific/governance decision; see decision register. Do not treat as complete. |
-| RFC-154 | RFC-154 — Breeding Pipeline (D2) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
+| RFC-154 | RFC-154 — Breeding Pipeline (D2) | STRUCTURAL_DRAFT | Maintainer-approved candidate architecture (D-BP-01..13); remains non-normative pending exact route semantics, authority canonicalization, lifecycle/authorization, target quantity profile, synchronized schemas/registry, and positive/negative conformance gates. |
 | RFC-155 | RFC-155 — Conformance Probe (T/W/A) | DEFERRED | Unresolved scientific/governance decision; see decision register. Do not treat as complete. |
