@@ -247,6 +247,16 @@ def validate_target_contexts(revision: dict[str, Any], errors: list[str]) -> Non
             present_numeric = {key for key in numeric_keys if key in trait}
             present_exact = {key for key in exact_keys if key in trait}
             quantitative = bool(present_numeric or present_exact)
+            has_range_bounds = bool(
+                ({"minimum", "maximum"} & present_numeric)
+                or ({"minimumExactDecimal", "maximumExactDecimal"} & present_exact)
+            )
+            if "threshold" in present_numeric and has_range_bounds:
+                add(
+                    errors,
+                    "BM-TARGET-02",
+                    "threshold is a scalar target and cannot be combined with numeric or exact-decimal range bounds.",
+                )
 
             for key in present_numeric:
                 value = trait.get(key)
@@ -652,6 +662,7 @@ def validate_corpus(corpus: Any) -> list[str]:
         "valid-exact-decimal-observation-variable-range",
         "invalid-quantitative-target-references-trait-only",
         "invalid-incomplete-exact-decimal-range",
+        "invalid-scalar-threshold-combined-with-range",
         "valid-identical-registration-replay",
         "valid-new-revision-appends-same-workstream",
         "invalid-same-version-different-payload-registration",
