@@ -169,9 +169,9 @@ Before this RFC is promoted:
 3. validate target-context profile variants and typed units/precision;
 4. validate lifecycle and actor authorization;
 5. validate embedded scheme-version identity equality and nested execution-context envelopes;
-5. synchronize OpenAPI, registry, generated catalogue, crosswalk, and conformance probes;
-6. test positive and negative revision/replay/version-binding cases;
-7. retain all official BrAPI source contracts unchanged.
+6. synchronize OpenAPI, registry, generated catalogue, crosswalk, and conformance probes;
+7. test positive and negative revision/replay/version-binding cases;
+8. retain all official BrAPI source contracts unchanged.
 
 Until these gates pass, this document is an approved candidate design, not a normative released specification.
 
@@ -215,3 +215,18 @@ The following remain gates rather than guessed defaults:
 - whether lifecycle transitions need a separate governance event/audit resource.
 
 The current query-selector and list flag are candidate semantics to test in the implementation-independent OpenAPI build, not a promise that the final public path is immutable.
+
+### 12.6 Authority-qualified execution filters
+
+List filters that accept BrAPI identifiers must preserve the owning server authority rather than resolve a bare `dbId` against an inferred local/default server. The current candidate filter pairs are:
+
+| Resource filter | Required authority context when the identifier filter is used |
+|---|---|
+| Program | `programDbId` + `programServer` |
+| Study | `studyDbId` + `studyServer` |
+| Germplasm candidate | `candidateGermplasmDbId` + `candidateGermplasmServer` |
+| Population/family | `populationDbId` + `populationServer` + `populationResourceType` |
+
+The source server is the authoritative BrAPI v2.1 base URI. The exact `populationResourceType` is supplied because the candidate model has not approved one universal mapping from a population/family concept to a single BrAPI resource type. A server must not guess that resource type from an identifier or silently substitute Germplasm. API generation is fixed to BrAPI v2.1 for this initial filter profile; resource types use exact official resource names.
+
+These paired parameters are candidate wire semantics. Before normative promotion, conformance cases must prove that omitted authority/type pairs fail closed when an identifier filter is supplied, valid pairs resolve only against the identified server/resource type, and same-valued dbIds from different authorities remain distinct.
