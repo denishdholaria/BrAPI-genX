@@ -27,8 +27,8 @@ provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Population advancements reference BrAPI Program by identifier; they do not
-  duplicate that resource.
+- Population advancement records reference BrAPI Program and material using
+  authority-qualified resource references; they do not duplicate those resources.
 - A record is not a BrAPI Program and must not be treated as one.
 
 ## 5. Invariants
@@ -59,3 +59,7 @@ The current candidate schema uses nested optional context envelopes:
 If both contexts are supplied, the referenced pipeline revision must contain the exact scheme version in one of its embedded scheme bindings. A scheme context without pipeline context is valid; an event with neither context is valid when no registered strategy governed it. An event must not put stage identifiers at the top level.
 
 `PopulationAdvancement` remains an actual material-progression event. It does not own, define, or mutate the scheme's permitted transition graph. The transition graph resides in the immutable `BreedingSchemeVersion` embedded in the pipeline revision.
+
+## 9. Authority-qualified list filters
+
+The list operation accepts `programDbId` only with `programServer`. Population/family filtering accepts `populationDbId` only with both `populationServer` and `populationResourceType`. The server parameter is the authoritative BrAPI v2.1 base URI; the resource type is the exact official type that owns the identifier. Implementations must reject incomplete pairs and must not guess an authority or assume every population/family identifier is a Germplasm identifier.
