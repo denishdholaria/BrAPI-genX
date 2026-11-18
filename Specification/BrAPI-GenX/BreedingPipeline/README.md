@@ -44,6 +44,21 @@ The existing list, register, and retrieve operations remain provisional. Before 
 
 No published revision may be changed in place. A substantive change requires a new version identity.
 
+
+## Candidate current-revision concurrency rule
+
+The draft registration envelope now carries `expectedCurrentBreedingPipelineVersionDbId` separately from the immutable `breedingPipelineVersion` payload. For an existing workstream, a new version must compare the expected pointer with the current published pointer atomically. Explicit null means no published version; omission is reserved for first creation or an identical same-version replay.
+
+The candidate profile is:
+- identical version ID plus identical JSON Canonicalization Scheme (JCS, RFC 8785) revision content replays before the current-pointer check;
+- the same version ID with different revision content conflicts;
+- a new draft is appended without moving the current published pointer;
+- a new published revision advances the pointer only when its expected pointer matches and its revision relationship identifies the prior current version;
+- a withdrawal appends a new immutable withdrawn revision and clears the pointer only when it identifies the exact current published version;
+- a stale or omitted expected pointer on an append returns HTTP 409 Conflict without changing revision history or current state.
+
+**Status:** candidate design and fixture coverage only. The compare-and-set behavior and publish/withdraw authorization policy require maintainer ratification and server transaction-level implementation before normative promotion. The fixture checker is not production conformance.
+
 ## Deliberate exclusions
 
 This module does not introduce a pipeline-wide current stage, a generic workflow engine, standalone MarketSegment/ProductConcept/TPE APIs, or duplicate BrAPI Program, Cross, Germplasm, Pedigree, Trial, or Study resources.
