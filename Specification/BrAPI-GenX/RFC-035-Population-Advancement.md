@@ -36,17 +36,26 @@ provenance.
 - A published `populationAdvancementDbId` record never mutates in place.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional records linked by `supersedes`.
-- `fromStage`, `toStage`, and `advancedAt` are required.
+- `advancedAt` is required. Scheme stage IDs are not required when the event is outside a registered scheme.
 - A record does not imply an approved breeding plan or release.
 
 ## 6. Deferred questions
 
-- D-102: Should `populationDbId` be required? (Current: required.)
-- D-103: Should advancement require a GenX `BreedingPipeline` reference?
-  (Current: optional, not required.)
-- D-104: Should stages be a governed vocabulary? (Current: free string.)
+- D-102: Which BrAPI resource types are valid targets for `populationReference`? (Current: authority-qualified reference; Germplasm is the default when the population/family is represented as biological material.)
+- D-103: Should advancement require a registered pipeline or scheme context? (Current: both are optional; events outside a registered strategy remain valid.)
+- D-104: Should scheme stages use a global vocabulary? (Current: no; stage IDs are local to an exact immutable scheme version and are resolved through `schemeContext`.)
 
 ## 7. Classification
 
 Primary domain: D2 — Breeding Programs and Experimental Design.
 Cross-cutting: C1, C2, C3 (POST), C6, C9.
+
+## 8. Pipeline and scheme context
+
+The current candidate schema uses nested optional context envelopes:
+- `pipelineContext` contains the stable `breedingPipelineDbId` and exact `breedingPipelineVersionDbId`;
+- `schemeContext` contains `breedingSchemeDbId` and exact `breedingSchemeVersionDbId`, with optional `fromStageId` and `toStageId` nested inside it.
+
+If both contexts are supplied, the referenced pipeline revision must contain the exact scheme version in one of its embedded scheme bindings. A scheme context without pipeline context is valid; an event with neither context is valid when no registered strategy governed it. An event must not put stage identifiers at the top level.
+
+`PopulationAdvancement` remains an actual material-progression event. It does not own, define, or mutate the scheme's permitted transition graph. The transition graph resides in the immutable `BreedingSchemeVersion` embedded in the pipeline revision.
