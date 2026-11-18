@@ -31,6 +31,16 @@ A pipeline may use multiple schemes and may have multiple immutable revisions ov
 
 The initial public contract gives BreedingScheme a first-class logical identity and immutable version identity, but embeds the version definition in the adopting PipelineRevision. No separate BreedingScheme CRUD endpoints are introduced in this initial surface. The logical model must not preclude a later dedicated endpoint that exposes the same identity and version semantics.
 
+
+
+#### 2.1 Embedded scheme-version definition
+
+Each PipelineRevision `schemeBindings[]` item contains the stable `breedingSchemeDbId`, exact `breedingSchemeVersionDbId`, an optional local adoption `role`, and a required `schemeVersion` object. The embedded `schemeVersion` contains the same `breedingSchemeDbId` and `breedingSchemeVersionDbId` values plus its publication state, stages, transitions, task definitions, and provenance. The two identity pairs must match exactly. This makes a pipeline revision historically interpretable without introducing standalone BreedingScheme endpoints.
+
+A binding is not merely a pointer to a remote mutable “current” scheme. Reuse of a scheme version across pipeline revisions is represented by embedding the same immutable definition and version identity in each adopting revision. The contract does not yet assert that a scheme may or may not be reused by different pipeline logical identities; that relationship remains constrained by the approved design boundary and future evidence.
+
+Stage and transition task definitions are both permitted. Every stage and transition ID is unique only within its scheme version; every task ID is unique across all task definitions in that version. Transition IDs are required, transition endpoints must resolve to stages in the same version, and each transition declares an explicit type. 
+
 ## 3. Identity and immutable revisions
 
 | Identifier | Meaning |
@@ -59,7 +69,7 @@ A published revision is immutable. Corrections preserve the original revision an
 BrAPI identifiers are owned by a BrAPI server. A dbId alone is not sufficient to resolve a resource across independent servers.
 
 The candidate reference object contains:
-- apiGeneration, identifying the BrAPI contract generation (initially 2.1);
+- apiGeneration, identifying the BrAPI contract generation (wire token: `brapi-v2.1`);
 - resourceType, using the exact official resource name (for example Program, Germplasm, Study, Trial, PlannedCross, Cross, Observation, or ObservationVariable);
 - server, identifying the authoritative BrAPI server or authority URI;
 - dbId, the identifier issued by that server.
@@ -108,6 +118,15 @@ Actual execution remains with the authoritative resource:
 
 A scheme TaskDefinition is not proof of execution. A Transition is not an actual advancement event. An execution event may cite pipeline and scheme version context when it was governed by a registered strategy. If it includes a stage ID, it must include the exact scheme version that defines that stage. If it includes both a pipeline revision and scheme version, the revision must bind that exact scheme version.
 
+
+### 7.1 Execution-context envelopes
+
+Execution resources use two optional nested context objects rather than independent scalar identifiers:
+- `pipelineContext` contains both `breedingPipelineDbId` and exact `breedingPipelineVersionDbId`;
+- `schemeContext` contains both `breedingSchemeDbId` and exact `breedingSchemeVersionDbId`, with optional `stageId`, `fromStageId`, or `toStageId` inside that object.
+
+Because stage identifiers are nested inside `schemeContext`, an event cannot express a scheme-local stage without also expressing the scheme logical and version identities. Either context may be omitted when the activity was not governed by a registered GenX pipeline or scheme. If both are present, the exact scheme version must be included in the referenced pipeline revision's embedded scheme bindings. A scheme context without pipeline context remains valid.
+
 ## 8. Lifecycle dimensions
 
 Do not overload a single status field to express draft versus published, adopted/active versus no longer used, current versus superseded, governance approval, and governmental variety registration or release.
@@ -149,6 +168,7 @@ Before this RFC is promoted:
 2. settle BrAPI server canonicalization and typed reference schema;
 3. validate target-context profile variants and typed units/precision;
 4. validate lifecycle and actor authorization;
+5. validate embedded scheme-version identity equality and nested execution-context envelopes;
 5. synchronize OpenAPI, registry, generated catalogue, crosswalk, and conformance probes;
 6. test positive and negative revision/replay/version-binding cases;
 7. retain all official BrAPI source contracts unchanged.
