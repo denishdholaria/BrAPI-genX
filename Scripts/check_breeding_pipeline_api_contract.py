@@ -160,6 +160,30 @@ def run(root: Path) -> list[str]:
         "BreedingPipelineRevision.programReference must use BrapiResourceReference.",
         errors,
     )
+    revision_summary = schema(bp_doc, "BreedingPipelineRevisionSummary", bp_schema_path, errors)
+    require(
+        {"breedingPipelineVersionDbId", "publicationState"} <= required_fields(revision_summary),
+        "BreedingPipelineRevisionSummary must identify an immutable revision and its publication state.",
+        errors,
+    )
+    logical_properties = pipeline.get("properties", {})
+    require(
+        ref_name(logical_properties.get("currentRevisionSummary")) == "BreedingPipelineRevisionSummary",
+        "BreedingPipeline.currentRevisionSummary must use BreedingPipelineRevisionSummary.",
+        errors,
+    )
+    revision_summaries = logical_properties.get("revisionSummaries", {})
+    require(
+        revision_summaries.get("type") == "array"
+        and ref_name(revision_summaries.get("items")) == "BreedingPipelineRevisionSummary",
+        "BreedingPipeline.revisionSummaries must be an array of BreedingPipelineRevisionSummary.",
+        errors,
+    )
+    require(
+        "includeRevisions=true" in str(revision_summaries.get("description", "")),
+        "BreedingPipeline.revisionSummaries must be explicitly conditional on includeRevisions=true.",
+        errors,
+    )
 
     # Scheme definition is embedded in the binding, not referenced as a mutable pointer.
     scheme_binding = schema(bp_doc, "BreedingSchemeBinding", bp_schema_path, errors)
