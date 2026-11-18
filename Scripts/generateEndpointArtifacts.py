@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate BrAPI-GenX endpoint documentation from the canonical JSON registry."""
 from __future__ import annotations
-import argparse, json, sys
+import argparse, difflib, json, sys
 from pathlib import Path
 from urllib.parse import quote
 
@@ -259,7 +259,20 @@ def main():
             try: actual=path.read_text(encoding="utf-8")
             except OSError: actual=""
             if actual!=expected:
-                print("Generated output is stale: "+str(path.relative_to(ROOT))); failed=True
+                print("Generated output is stale: "+str(path.relative_to(ROOT)))
+                diff = list(difflib.unified_diff(
+                    actual.splitlines(),
+                    expected.splitlines(),
+                    fromfile="checked-in",
+                    tofile="generated",
+                    lineterm="",
+                    n=2,
+                ))
+                for line in diff[:40]:
+                    print(line)
+                if len(diff) > 40:
+                    print(f"... {len(diff) - 40} additional diff lines omitted")
+                failed=True
         else:
             path.parent.mkdir(parents=True,exist_ok=True)
             path.write_text(expected,encoding="utf-8")
