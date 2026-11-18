@@ -5,6 +5,7 @@
 **Workstream:** BGX-P1-03 — Cross-RFC and BrAPI boundary review  
 **Related design:** [Pipeline and Scheme Candidate Contract Design](./BRAPI-GENX-BREEDING-PIPELINE-SCHEME-CONTRACT-DESIGN.md)  
 **Repository baseline:** main at 3b2075c3feac59e4391fb4923baea4a43f40cf27  
+**Terminology:** BrAPI (Breeding Application Programming Interface); RFC (Request for Comments); API (Application Programming Interface); URL (Uniform Resource Locator); ID (identifier).
 **Official baseline inspected:** BrAPI v2.1 branch brapi-V2.1, commit 0a562640f44bce7217b982ec22980b8a47561dda.
 
 ## 1. Executive findings
