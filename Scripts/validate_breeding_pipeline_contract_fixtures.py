@@ -393,30 +393,45 @@ def validate_execution_event(
 
 
 def validate_registration(registration: Any) -> list[str]:
-    """Validate replay, append, and conflict semantics for revision registration."""
+    """Validate replay, append, publish, withdrawal, and current-pointer CAS semantics."""
     errors: list[str] = []
     request = as_object(registration)
-    existing = as_object(request.get("existingRevision"))
+    existing_raw = request.get("existingRevision")
     incoming = as_object(request.get("incomingRevision"))
 
-    existing_pipeline_id = existing.get("breedingPipelineDbId")
     incoming_pipeline_id = incoming.get("breedingPipelineDbId")
-    existing_version_id = existing.get("breedingPipelineVersionDbId")
     incoming_version_id = incoming.get("breedingPipelineVersionDbId")
-
-    if not all(
-        nonempty_string(value)
-        for value in (
-            existing_pipeline_id,
-            incoming_pipeline_id,
-            existing_version_id,
-            incoming_version_id,
-        )
-    ):
+    if not nonempty_string(incoming_pipeline_id) or not nonempty_string(incoming_version_id):
         add(
             errors,
             "BM-REG-01",
-            "Registration fixtures require stable pipeline IDs and immutable version IDs on both revisions.",
+            "Registration fixtures require a stable pipeline ID and immutable incoming version ID.",
+        )
+        return errors
+
+    # First registration creates the logical workstream; there is no current
+    # published version against which a precondition can be evaluated.
+    if existing_raw is None:
+        if "expectedCurrentBreedingPipelineVersionDbId" in request:
+            add(
+                errors,
+                "BM-REG-02",
+                "A first registration must omit the expected-current-version precondition.",
+            )
+        actual_outcome = "create"
+        expected_outcome = request.get("expectedOutcome")
+        if nonempty_string(expected_outcome) and expected_outcome != actual_outcome:
+            add(errors, "BM-REG-01", f"Registration fixture declares {expected_outcome!r}, expected {actual_outcome!r}.")
+        return errors
+
+    existing = as_object(existing_raw)
+    existing_pipeline_id = existing.get("breedingPipelineDbId")
+    existing_version_id = existing.get("breedingPipelineVersionDbId")
+    if not nonempty_string(existing_pipeline_id) or not nonempty_string(existing_version_id):
+        add(
+            errors,
+            "BM-REG-01",
+            "An existing revision must contain stable pipeline and immutable version identifiers.",
         )
         return errors
 
@@ -431,18 +446,78 @@ def validate_registration(registration: Any) -> list[str]:
         add(errors, "BM-REG-01", f"Registration payload is not valid JCS JSON: {exc}.")
         return errors
 
+    # Idempotent replay/conflict detection precedes the current-pointer
+    # precondition. A retry after a successful publish must replay even though
+    # the supplied expected pointer is now stale.
     if existing_version_id == incoming_version_id:
         if existing_pipeline_id != incoming_pipeline_id or existing_canonical != incoming_canonical:
             actual_outcome = "conflict"
             add(
                 errors,
                 "BM-REG-01",
-                "Reusing a breedingPipelineVersionDbId with a different canonical payload must conflict; published content must never be overwritten.",
+                "Reusing a breedingPipelineVersionDbId with a different canonical payload must conflict; immutable content must never be overwritten.",
             )
         else:
             actual_outcome = "replay"
-    elif existing_pipeline_id == incoming_pipeline_id:
-        actual_outcome = "append"
+        expected_outcome = request.get("expectedOutcome")
+        if nonempty_string(expected_outcome) and expected_outcome != actual_outcome:
+            add(errors, "BM-REG-01", f"Registration fixture declares {expected_outcome!r}, expected {actual_outcome!r}.")
+        return errors
+
+    # A different version under the same logical workstream is an append.
+    # The caller must state the current published pointer (including explicit
+    # null when the workstream has no published revision) and the server must
+    # compare it atomically before any state-changing publication operation.
+    if existing_pipeline_id == incoming_pipeline_id:
+        if "currentBreedingPipelineVersionDbId" not in request:
+            add(
+                errors,
+                "BM-REG-02",
+                "Append fixture must expose the server's current published revision snapshot.",
+            )
+            return errors
+        if "expectedCurrentBreedingPipelineVersionDbId" not in request:
+            add(
+                errors,
+                "BM-REG-02",
+                "Appending a new version to an existing pipeline requires expectedCurrentBreedingPipelineVersionDbId.",
+            )
+            return errors
+
+        current_pointer = request.get("currentBreedingPipelineVersionDbId")
+        expected_pointer = request.get("expectedCurrentBreedingPipelineVersionDbId")
+        if expected_pointer != current_pointer:
+            add(
+                errors,
+                "BM-REG-02",
+                "The expected current published version is stale; the server must reject the append without changing the pipeline.",
+            )
+            return errors
+
+        state = incoming.get("publicationState")
+        prior = as_object(incoming.get("revisionRelationship")).get(
+            "priorBreedingPipelineVersionDbId"
+        )
+        if state == "published":
+            if current_pointer is not None and prior != current_pointer:
+                add(
+                    errors,
+                    "BM-REG-03",
+                    "A new published revision must explicitly supersede or correct the current published revision it replaces.",
+                )
+            actual_outcome = "publish"
+        elif state == "withdrawn":
+            if current_pointer is None or prior != current_pointer:
+                add(
+                    errors,
+                    "BM-REG-03",
+                    "A withdrawal revision must identify the current published version it withdraws.",
+                )
+            actual_outcome = "withdraw"
+        else:
+            # Drafts are immutable history records but do not move the current
+            # published pointer. Multiple drafts may branch from one baseline.
+            actual_outcome = "append"
     else:
         actual_outcome = "create"
 
@@ -451,7 +526,7 @@ def validate_registration(registration: Any) -> list[str]:
         add(
             errors,
             "BM-REG-01",
-            f"Registration fixture declares outcome {expected_outcome!r}, but the identifiers and canonical payload imply {actual_outcome!r}.",
+            f"Registration fixture declares outcome {expected_outcome!r}, but identifiers and publication state imply {actual_outcome!r}.",
         )
 
     return errors
@@ -580,6 +655,14 @@ def validate_corpus(corpus: Any) -> list[str]:
         "valid-identical-registration-replay",
         "valid-new-revision-appends-same-workstream",
         "invalid-same-version-different-payload-registration",
+        "valid-first-registration-with-no-current-pointer",
+        "valid-published-revision-advances-current-with-matching-precondition",
+        "valid-draft-revision-preserves-current-pointer",
+        "invalid-append-missing-current-pointer-precondition",
+        "invalid-append-stale-current-pointer-precondition",
+        "invalid-published-revision-does-not-reference-current-version",
+        "valid-withdrawal-references-current-version",
+        "invalid-withdrawal-does-not-reference-current-version",
     }
     missing = sorted(required - set(by_id))
     if missing:
