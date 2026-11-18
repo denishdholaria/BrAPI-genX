@@ -6,6 +6,7 @@
 **Parent assessment:** [Breeding Pipeline Domain Preflight](./BRAPI-GENX-BREEDING-PIPELINE-DOMAIN-PREFLIGHT.md)  
 **Candidate contract design:** [Breeding Pipeline and Scheme Candidate Contract Design](./BRAPI-GENX-BREEDING-PIPELINE-SCHEME-CONTRACT-DESIGN.md)  
 **Repository baseline:** `main` at `315ba3c524bb09fde0c3580fdb4512b070cc0300` (inspection baseline after the candidate contract-design slice).
+**Terminology:** BrAPI (Breeding Application Programming Interface); API (Application Programming Interface); RFC (Request for Comments); CES (crossing, evaluation, and selection); MIAPPE (Minimum Information About a Plant Phenotyping Experiment); CI (Continuous Integration); YAML (YAML Ain't Markup Language).
 
 ## 1. Purpose and decision boundary
 
