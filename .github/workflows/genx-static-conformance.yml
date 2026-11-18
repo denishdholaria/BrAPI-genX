@@ -23,6 +23,7 @@ on:
       - 'Scripts/genx_test_server.py'
       - 'Scripts/validate_breeding_pipeline_candidate_fixtures.py'
       - 'Scripts/validate_breeding_pipeline_contract_fixtures.py'
+      - 'Scripts/check_breeding_pipeline_api_contract.py'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json'
       - '.github/workflows/genx-static-conformance.yml'
@@ -46,6 +47,11 @@ on:
       - 'Scripts/jcs-canonicalization/**'
       - 'Scripts/test_cross_language_jcs.py'
       - 'Scripts/genx_test_server.py'
+      - 'Scripts/validate_breeding_pipeline_candidate_fixtures.py'
+      - 'Scripts/validate_breeding_pipeline_contract_fixtures.py'
+      - 'Scripts/check_breeding_pipeline_api_contract.py'
+      - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
+      - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json'
       - '.github/workflows/genx-static-conformance.yml'
   workflow_dispatch:
 
@@ -72,6 +78,8 @@ jobs:
         run: python3 Scripts/validate_breeding_pipeline_candidate_fixtures.py
       - name: Validate approved-candidate breeding contract fixtures
         run: python3 Scripts/validate_breeding_pipeline_contract_fixtures.py
+      - name: Check breeding pipeline OpenAPI and authority-filter contract
+        run: python Scripts/check_breeding_pipeline_api_contract.py
       - name: Run endpoint-identity mutation tests
         run: python Scripts/test_endpoint_identity.py
       - name: Run capability-negotiation mutation tests
