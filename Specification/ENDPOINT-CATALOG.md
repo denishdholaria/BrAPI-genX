@@ -23970,9 +23970,9 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 
 ## Registry quality summary
 
-- Unique catalogue identifiers: `true`.
-- Unique full-base-path/method/route keys: `true`.
-- Unique source/advisory operation identifiers where present: `true`.
+- Unique catalogue identifiers: `True`.
+- Unique full-base-path/method/route keys: `True`.
+- Unique source/advisory operation identifiers where present: `True`.
 - BrAPI v2.1 inventory rows resolved to source YAML operations: 201 / 201.
 - GenX operations documented: 462.
 
