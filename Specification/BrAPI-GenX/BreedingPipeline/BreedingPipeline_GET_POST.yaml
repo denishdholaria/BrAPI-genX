@@ -11,7 +11,7 @@ paths:
         classification:
           primaryDomain: "D2"
           crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
-        purpose: "List registered breeding pipeline records, optionally filtered by lifecycle status."
+        purpose: "List breeding pipeline definitions, optionally filtered by program or status."
         canBeUsedFor:
           - "Discover registered breeding pipeline records."
           - "Compare pipeline type, lifecycle status, and provenance across returned records."
