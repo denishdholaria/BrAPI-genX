@@ -20,6 +20,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
+      - name: Validate advisory breeding design fixtures
+        run: python3 Scripts/validate_breeding_pipeline_candidate_fixtures.py
       - name: Check last commit message
         id: commit-message
         run: |
