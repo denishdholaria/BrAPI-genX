@@ -30,23 +30,44 @@ paths:
       description: Get a paged list of selection decisions across authorities. Filters combine with AND.
       parameters:
       - name: programDbId
-        description: Filter by BrAPI Program (breeding program)
+        description: BrAPI Program identifier filter. This filter is valid only when paired with programServer.
         in: query
         required: false
         schema:
           type: string
+      - name: programServer
+        description: Authoritative BrAPI v2.1 server base URI that issued programDbId. Do not resolve an unqualified identifier by guessing the server.
+        in: query
+        required: false
+        schema:
+          type: string
+          format: uri
       - name: studyDbId
-        description: Filter by BrAPI Study / trial context
+        description: BrAPI Study identifier filter. This filter is valid only when paired with studyServer.
         in: query
         required: false
         schema:
           type: string
+      - name: studyServer
+        description: Authoritative BrAPI v2.1 server base URI that issued studyDbId.
+        in: query
+        required: false
+        schema:
+          type: string
+          format: uri
       - name: candidateGermplasmDbId
-        description: Filter by candidate BrAPI Germplasm
+        description: Candidate BrAPI Germplasm identifier filter. This filter is valid only when paired with candidateGermplasmServer.
         in: query
         required: false
         schema:
           type: string
+      - name: candidateGermplasmServer
+        description: Authoritative BrAPI v2.1 server base URI that issued candidateGermplasmDbId.
+        in: query
+        required: false
+        schema:
+          type: string
+          format: uri
       - name: decision
         description: Filter by verdict
         in: query
