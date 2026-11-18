@@ -1,16 +1,9 @@
-# BrAPI-GenX — Progeny Records (Breeding)
+# BrAPI-GenX — Progeny Records (Deferred)
 
-Progeny records link parents to offspring within a breeding program, including
-generation and family identity. BrAPI v2.1 has pedigree and crosses but no
-progeny/family record.
+**Status:** Deferred by maintainer decision D-BP-08.
 
-- `POST /genx/v1/progeny-records` (`genxRecordProgeny`) records one
-  `ProgenyRecord` (`Schemas/ProgenyRecordNewRequest.yaml`). Same
-  `progenyRecordDbId` + identical body replays; different body is rejected
-  with `409`.
-- `GET /genx/v1/progeny-records` (`genxListProgenyRecords`) lists records,
-  optionally filtered by program, parent, or generation.
-- `GET /genx/v1/progeny-records/{progenyRecordDbId}`
-  (`genxGetProgenyRecord`) retrieves one record.
+BrAPI v2.1 Pedigree and Cross remain authoritative for parentage, progeny links, family codes, and crossing context. The current broad ProgenyRecord proposal must not be treated as an additional authoritative parentage graph.
 
-Details and falsifiers: `../RFC-019-Progeny-Records.md`.
+Do not implement or promote the current ProgenyRecords endpoint surface. Reopen this proposal only if a distinct immutable family/progeny formation event or typed generation/cohort association is demonstrated that cannot be represented by existing BrAPI resources. Any future design must not assert conflicting parentage authority.
+
+Historical RFC: `../RFC-019-Progeny-Records.md`.
