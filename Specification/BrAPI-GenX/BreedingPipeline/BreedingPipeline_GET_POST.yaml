@@ -26,7 +26,7 @@ paths:
           - "genxGetBreedingPipeline"
         decisions: ["RFC-154"]
         proposalStatus: "draft-non-normative"
-      summary: List breeding pipeline
+      summary: List breeding pipelines
       description: Get a paged list of registered breeding pipeline records. The optional status filter selects records by lifecycle state.
       parameters:
       - name: status
