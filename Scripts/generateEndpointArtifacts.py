@@ -260,6 +260,9 @@ def main():
             except OSError: actual=""
             if actual!=expected:
                 print("Generated output is stale: "+str(path.relative_to(ROOT)))
+                print(f"Length: checked={len(actual)} generated={len(expected)}")
+                print(f"Checked tail: {actual[-48:]!r}")
+                print(f"Generated tail: {expected[-48:]!r}")
                 diff = list(difflib.unified_diff(
                     actual.splitlines(),
                     expected.splitlines(),
