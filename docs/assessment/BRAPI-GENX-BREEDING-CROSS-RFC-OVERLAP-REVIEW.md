@@ -222,22 +222,19 @@ The candidate Pipeline/Scheme model should account for these findings:
 - A ProgenyRecord cannot be used as a second authority for parent/offspring edges without a documented immutable-event reason.
 - A CrossingSchedule cannot duplicate the same parent pair and mating intent already recorded as PlannedCross; any residual schedule record must add independent scheduling semantics.
 
-## 7. Next implementation-independent work
+## 7. Review outcome and next work
 
 ### Slice 3B — Cross-RFC overlap review
 
-**Completed as assessment.** Official BrAPI v2.1 coverage and GenX draft boundaries have been checked for the six RFCs in scope. No RFC or API contract changed.
+**Completed as assessment.** Official BrAPI v2.1 coverage and GenX draft boundaries were checked for all six RFCs in scope. RFC-008 and RFC-035 remain strong extension candidates; RFC-019 and RFC-037 need narrower semantics; RFC-098 presently duplicates BrAPI Program. No RFC or API contract changed.
 
 ### Slice 3C — Candidate logical model and fixtures
 
-Next:
-1. Build the Pipeline–Scheme–Stage–Transition–Task–Execution relationship/cardinality model.
-2. Add positive/negative examples for two overlapping cohorts, a recurrent stage transition, a scheme revision, an actual advancement event, and a selection verdict.
-3. Add cross-boundary examples for BrAPI Program, PlannedCross/Cross, Pedigree, Trial, and Study references.
-4. Add invalid fixtures demonstrating duplicate authority, dangling scheme-stage references, execution event without its scheme revision, and attempted mutation of a published scheme version.
-5. Record open decisions separately; do not make endpoint YAML or RFC maturity changes.
+**Completed as non-normative design evidence.** The [Candidate Logical Model](./BRAPI-GENX-BREEDING-PIPELINE-LOGICAL-MODEL.md) defines relationship cardinalities and 20 design invariants. The [Candidate Fixture Corpus](./BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json) contains three positive and six negative cases for recurrent cohorts, exact version history, BrAPI execution crosswalks, dangling stages, missing scheme versions, mismatched bindings, mutation of published versions, duplicate parentage authority, and ambiguous pipeline-wide stage state. Structural and semantic checks passed. These cases remain assessment-only; they are not production conformance fixtures and are not wired into CI.
 
-After Slice 3C, prepare a maintainer review packet for the public resource boundary, stable/revision identity, cross-server BrAPI references, and RFC disposition. No external community approval is a prerequisite for this internal design work.
+### Slice 4 — Maintainer contract decision package
+
+Consolidate the candidate resource boundary, nested-versus-first-class scheme alternatives, identity and reference rules, migration impacts, and recommended RFC dispositions. Preserve all current RFCs and draft schemas until the maintainer chooses the public contract boundary.
 
 ## 8. References
 
