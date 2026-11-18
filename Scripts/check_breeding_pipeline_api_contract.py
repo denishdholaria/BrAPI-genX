@@ -208,6 +208,14 @@ def run(root: Path) -> list[str]:
     )
     for field in ("traitReference", "desiredDirection", "threshold", "minimum", "maximum", "exactDecimal", "minimumExactDecimal", "maximumExactDecimal"):
         require(field in target_properties, f"TargetTraitRequirement is missing {field}.", errors)
+    decimal_pattern = r"^-?[0-9]+(\.[0-9]+)?$"
+    for field in ("exactDecimal", "minimumExactDecimal", "maximumExactDecimal"):
+        definition = target_properties.get(field, {})
+        require(
+            definition.get("type") == "string" and definition.get("pattern") == decimal_pattern,
+            f"TargetTraitRequirement.{field} must use the base-10 decimal string pattern without exponent notation.",
+            errors,
+        )
     trait_description = str(target_properties.get("traitReference", {}).get("description", "")).lower()
     require(
         "observationvariable" in trait_description and "numeric" in trait_description,
