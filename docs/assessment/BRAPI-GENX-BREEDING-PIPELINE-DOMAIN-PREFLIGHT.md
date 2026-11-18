@@ -2,7 +2,9 @@
 
 **Status:** Research assessment; non-normative; no specification acceptance or implementation authorization.  
 **Assessment date:** 18 November 2026  
-**Repository baseline:** \`main\` at \`2d696fb677c0efa8f956981032160b0a1a49cd58\`  
+**Initial repository baseline:** \`main\` at \`2d696fb677c0efa8f956981032160b0a1a49cd58\`  
+**Current inspected code baseline:** \`main\` at \`569a75e194df2ee540ecd60615bad2790523c022\` (subsequent commits before this update change only \`LICENSE\`).  
+**Companion design proposal:** [Breeding Pipeline and Breeding Scheme Design Proposal](./BRAPI-GENX-BREEDING-PIPELINE-DESIGN-PROPOSAL.md)  
 **Related project:** \`denishdholaria/bijmantra-project\` — Ambika ideal-module catalog  
 **Workstream:** BGX-P1-00 — BreedingPipeline specification identity and domain preflight
 
@@ -132,7 +134,7 @@ The historical RFC-014 schema (from the commit that introduced the module on 1 N
 
 This is not a harmless documentation duplicate: the resource’s intended meaning and field structure changed while the endpoint identity remained the same.
 
-**Recommendation for governance:** retain both RFC documents as historical evidence. Treat RFC-014 as the initial canonical candidate because it contains the original stage-gate framing, but do not automatically restore its historical schema. The maintainer should ratify a single canonical RFC owner after the pipeline/scheme domain boundary is agreed. RFC-154 should then be explicitly marked as superseded, consolidated, or otherwise reconciled; do not delete or renumber it silently.
+**Current repository linkage:** the module README, current schemas, and endpoint-operation metadata use RFC-154 as the working document. RFC-014 is the earlier stage-gate proposal. This makes RFC-154 the current editorial surface, but does not make its scalar-stage schema semantically adequate or ratified. Neither RFC should be treated as the accepted canonical contract at this point. Retain both as evidence; select one canonical RFC or split the pipeline and scheme into separate RFCs only after the domain boundary is settled. Any supersession or withdrawal must be recorded explicitly; do not delete or renumber either RFC.
 
 ### 5.2 Endpoint registry metadata defect
 
@@ -232,21 +234,20 @@ Before any resource is advanced beyond structural draft, require evidence for ea
 
 ## 9. Recommended bounded next sequence
 
-### Step A — Governance reconciliation package
+### Step A — Model and repository reconciliation
 
-- Ratify one canonical RFC owner for BreedingPipeline.
-- Decide whether BreedingScheme warrants a separate RFC and candidate resource.
-- Reconcile the duplicate classification entry and stale maturity references.
-- Correct the contaminated endpoint-registry POST metadata at its authoritative source.
-- Regenerate catalogues and run all registry checks.
-- Keep all historical RFCs and decisions traceable.
+- Use the companion design proposal as the working model recommendation, not as a ratified contract.
+- Keep RFC-014 and RFC-154 at \`STRUCTURAL_DRAFT\` while the maintainer decides the pipeline/scheme boundary and RFC disposition.
+- Remove the duplicate \`BreedingPipeline/\` domain-classification entry, retaining the D2-classified entry.
+- Correct contaminated endpoint metadata at its authoritative source, then regenerate derived catalogues and validate the registry. Do not hand-edit a generated registry as an isolated repair.
+- Keep historical RFCs, operation identifiers, and decision references traceable.
 
 ### Step B — Scientific model review
 
-- Validate the pipeline/scheme definitions with breeding-domain practitioners.
+- Test the definitions against published breeding examples from at least two materially different crop and breeding contexts; external participation is not a prerequisite for this internal design work.
 - Include at least one recurrent-selection or population-improvement example and one product-development example.
 - Include crop-specific variation rather than assuming a universal stage list.
-- Validate whether market segment and product concept are shared reference entities or pipeline-scoped descriptions.
+- Determine whether market segment and product concept should remain external references, embedded target-context descriptions, or independent resources; do not create public endpoints before that boundary is justified.
 
 ### Step C — Contract design
 
@@ -266,25 +267,22 @@ Only after Steps A and B:
 - No assumption that every Ambika module needs a GenX resource.
 - No claim of community acceptance or production conformance.
 
-## 10. Related engineering finding: live conformance startup regression
+## 10. Related engineering finding: live conformance startup regression — resolved
 
-The current main commit’s GenX conformance workflow failed because the live-reference job installed PyYAML but did not install the newly required pinned rfc8785 dependency imported by the JCS canonicalization module. The reference server therefore exited before live probes ran.
+The live-reference conformance workflow initially failed because the job installed PyYAML but omitted the pinned \`rfc8785==0.1.4\` dependency imported by the JSON Canonicalization Scheme (JCS) module. The reference server exited before live probes could run.
 
-A separate one-file fix was prepared on branch \`fix/live-conformance-jcs-dependency\` and opened as draft PR #3:
-https://github.com/denishdholaria/BrAPI-genX/pull/3
+The dependency and startup-failure diagnostics were corrected directly on \`main\` in commit [`cbba636`](https://github.com/denishdholaria/BrAPI-genX/commit/cbba6361ec00758fe8b27531719e7beb48b785b0).
 
-On that branch:
-- the reference server started successfully;
-- static probes S-01 through S-21 passed;
-- live probes L-01 through L-28 passed (zero failures and zero skipped);
-- the specification build completed successfully;
-- the PR-triggered conformance workflow completed successfully.
+Verification on the resulting code baseline:
+- Conformance workflow run [44281104026](https://github.com/denishdholaria/BrAPI-genX/actions/runs/44281104026): \`live-reference-conformance\` and \`static-conformance\` both completed successfully.
+- Specification-build workflow run [44281111071](https://github.com/denishdholaria/BrAPI-genX/actions/runs/44281111071): both \`check\` and \`generate\` completed successfully, including specification validation and generated-artifact comparison.
+- The later commits [`3f5f0fb`](https://github.com/denishdholaria/BrAPI-genX/commit/3f5f0fb0da1fbd1d1a77c0ad5ef3bebb4ea8c1d5) and [`569a75e`](https://github.com/denishdholaria/BrAPI-genX/commit/569a75e194df2ee540ecd60615bad2790523c022) changed only the \`LICENSE\` file; they did not alter the tested specification or conformance code.
 
-This fix does not change any specification or generated artifact and remains a separate draft for review.
+The temporary draft pull requests used to stage these changes were closed after the changes were committed directly to \`main\`. There is no remaining pull-request dependency for this engineering fix.
 
 ## 11. Preflight recommendation
 
-The best first scientific pilot remains breeding pipeline development, but it should be treated as a **pipeline + scheme domain-boundary exercise**, not as a task to fill out the current BreedingPipeline schema.
+The next design artifact is the companion [Breeding Pipeline and Breeding Scheme Design Proposal](./BRAPI-GENX-BREEDING-PIPELINE-DESIGN-PROPOSAL.md). It recommends a pipeline + scheme domain boundary but remains advisory and non-normative. The best first scientific pilot remains breeding pipeline development, but it should be treated as a **pipeline + scheme domain-boundary exercise**, not as a task to fill out the current BreedingPipeline schema.
 
 Keep RFC-014 and RFC-154 as history, reconcile the owner, and define the intended separation between:
 - program-level/product-oriented pipeline;
