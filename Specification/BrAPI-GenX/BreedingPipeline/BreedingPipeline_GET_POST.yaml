@@ -25,7 +25,7 @@ paths:
         semanticNeighbors:
           - "genxRegisterBreedingPipeline"
           - "genxGetBreedingPipeline"
-        decisions: ["RFC-154"]
+        decisions: ["RFC-154", "D-BP-01", "D-BP-02", "D-BP-03", "D-BP-13"]
         proposalStatus: "draft-non-normative"
       summary: List breeding pipelines
       description: Get a paged list of stable pipeline workstream identities. The default view returns the current published revision summary for each logical pipeline. An explicit includeRevisions option returns revision summaries; it does not replace exact historical revision retrieval.
@@ -63,7 +63,7 @@ paths:
           - "Register a stable workstream identity with a new immutable breedingPipelineVersionDbId."
           - "Retry an identical revision safely using the same breedingPipelineVersionDbId."
         mustNotBeUsedFor:
-          - "Mutating an existing published revision; substantive corrections require a new version identity."
+          - "Mutating a published revision; substantive corrections require a new version identity."
           - "Assuming a record is a BrAPI data resource."
           - "Asserting that the catalogue is validated or endorsed."
         sideEffects: "Creates a stable workstream identity when unknown and creates one immutable revision."
@@ -74,7 +74,7 @@ paths:
         decisions: ["RFC-154"]
         proposalStatus: "draft-non-normative"
       summary: Register a breeding pipeline revision
-      description: Create or reference the stable workstream identity and append one immutable revision. A new breedingPipelineVersionDbId is required for every new revision.
+      description: Creates or references one stable workstream identity and registers one immutable pipeline revision. A new breedingPipelineVersionDbId is required for every additional revision.
       parameters:
       - $ref: '#/components/parameters/authorizationHeader'
       requestBody:
