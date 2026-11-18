@@ -127,7 +127,8 @@ def audit(strict: bool, plan_json: bool) -> int:
                     value for value in registry_neighbors if value not in relationship_ids
                 ]
                 missing = [
-                    value for value in source_neighbors if value not in registry_neighbors
+                    value for value in source_operation_neighbors
+                    if value not in registry_operation_neighbors
                 ]
                 extra = [
                     value for value in registry_operation_neighbors
@@ -142,8 +143,6 @@ def audit(strict: bool, plan_json: bool) -> int:
                         "source": source_operation_neighbors,
                         "missing": missing,
                     })
-                    merged = registry_neighbors + [value for value in missing if value not in registry_neighbors]
-                    sync_fields[field] = merged
                 if extra:
                     registry_only_neighbors.append({
                         "catalogId": catalog_id,
