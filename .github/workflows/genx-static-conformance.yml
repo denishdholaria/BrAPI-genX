@@ -101,7 +101,7 @@ jobs:
       - name: Validate master endpoint registry and semantic links
         run: python Scripts/checkEndpointRegistry.py
       - name: Audit descriptive registry metadata against source OpenAPI (report only)
-        run: python Scripts/auditEndpointRegistrySourceConsistency.py
+        run: python Scripts/auditEndpointRegistrySourceConsistency.py --plan-json
       - name: Verify generated endpoint catalogue and crosswalk
         run: python Scripts/generateEndpointArtifacts.py --check
 
