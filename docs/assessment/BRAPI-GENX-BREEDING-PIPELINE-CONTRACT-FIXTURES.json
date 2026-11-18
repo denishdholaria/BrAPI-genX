@@ -4298,6 +4298,46 @@
         "expectedOutcome": "withdraw"
       },
       "expectedFailure": "The withdrawal revision points to a version other than the current published revision."
+    },
+    {
+      "scenarioId": "invalid-scalar-threshold-combined-with-range",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-TARGET-02"
+      ],
+      "description": "A scalar threshold must not be combined with either numeric range bounds or exact-decimal range bounds.",
+      "expectedFailure": "threshold is a scalar target and cannot be combined with numeric or exact-decimal range bounds.",
+      "pipelineRevision": {
+        "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+        "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3",
+        "programReference": {
+          "apiGeneration": "brapi-v2.1",
+          "resourceType": "Program",
+          "server": "https://brapi.example.org/brapi/v2",
+          "dbId": "rice-program-2026"
+        },
+        "publicationState": "published",
+        "targetContexts": [
+          {
+            "targetContextId": "yield-target-range",
+            "traitRequirements": [
+              {
+                "traitReference": {
+                  "apiGeneration": "brapi-v2.1",
+                  "resourceType": "ObservationVariable",
+                  "server": "https://brapi.example.org/brapi/v2",
+                  "dbId": "grain-yield"
+                },
+                "desiredDirection": "target-range",
+                "threshold": 7.25,
+                "minimum": 6.5,
+                "maximum": 8
+              }
+            ]
+          }
+        ],
+        "schemeBindings": []
+      }
     }
   ]
 }
