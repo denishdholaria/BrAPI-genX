@@ -69,7 +69,7 @@ The [Target-Scale Validation Evidence Candidate Design](../../../docs/assessment
 
 ## Local fixture verification
 
-From the repository root, run the candidate fixture validator and its 19 independent standard-library mutation tests:
+From the repository root, run the candidate fixture validator and its 23 independent standard-library mutation tests:
 
 ```sh
 python Scripts/validate_breeding_pipeline_contract_fixtures.py
