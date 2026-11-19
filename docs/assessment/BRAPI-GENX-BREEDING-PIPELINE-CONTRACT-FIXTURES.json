@@ -4138,7 +4138,7 @@
         "BM-REG-01",
         "BM-REG-02"
       ],
-      "description": "A draft revision may be appended against the current published baseline but does not advance the published-current pointer.",
+      "description": "A draft revision records the published baseline it was prepared from, but it is not a published supersession and does not move the current pointer.",
       "registration": {
         "existingRevision": {
           "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
@@ -4151,10 +4151,7 @@
           "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
           "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3",
           "publicationState": "draft",
-          "revisionRelationship": {
-            "relationshipType": "supersedes",
-            "priorBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
-          }
+          "basedOnBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
         },
         "expectedOutcome": "append"
       }
@@ -4220,7 +4217,7 @@
       "invariantIds": [
         "BM-REG-03"
       ],
-      "description": "A published successor must explicitly identify the current published version it supersedes or corrects.",
+      "description": "A published successor must explicitly identify the current published version it supersedes or corrects, not a different historical version.",
       "registration": {
         "existingRevision": {
           "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
@@ -4423,6 +4420,77 @@
           }
         ]
       }
+    },
+    {
+      "scenarioId": "invalid-draft-claims-published-supersession",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-REG-03"
+      ],
+      "description": "A draft cannot use a published supersession relationship to claim that it replaces the current published revision.",
+      "registration": {
+        "existingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+          "publicationState": "published"
+        },
+        "currentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "expectedCurrentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "incomingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3",
+          "publicationState": "draft",
+          "revisionRelationship": {
+            "relationshipType": "supersedes",
+            "priorBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
+          }
+        },
+        "expectedOutcome": "append"
+      },
+      "expectedFailure": "Draft revisions must use a non-superseding baseline relationship."
+    },
+    {
+      "scenarioId": "invalid-cross-pipeline-revision-id-replay",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-REG-01"
+      ],
+      "description": "The same version identifier scoped to a different pipeline identity must not replay or disclose the existing pipeline revision.",
+      "registration": {
+        "existingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+          "publicationState": "published"
+        },
+        "currentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "expectedCurrentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "incomingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:maize-upland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+          "publicationState": "published"
+        },
+        "expectedOutcome": "conflict"
+      },
+      "expectedFailure": "Replay identity is scoped to the owning logical pipeline; cross-pipeline version-ID collisions must conflict without disclosure."
+    },
+    {
+      "scenarioId": "invalid-first-create-over-existing-logical-identity",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-REG-02"
+      ],
+      "description": "A first-registration request cannot overwrite an already-created logical pipeline when its prior existence was not observed.",
+      "registration": {
+        "existingRevision": null,
+        "logicalPipelineAlreadyExists": true,
+        "incomingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:1",
+          "publicationState": "published"
+        },
+        "expectedOutcome": "conflict"
+      },
+      "expectedFailure": "Concurrent first-creation collision must be resolved atomically; the losing request must re-read and append with an explicit expected-current precondition."
     }
   ]
 }
