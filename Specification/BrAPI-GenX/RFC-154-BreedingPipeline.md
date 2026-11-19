@@ -219,7 +219,13 @@ A missing logical identity returns 404. An unknown version under an existing log
 
 ### 12.4 Lifecycle and revision relationships
 
-`publicationState` distinguishes draft, published, and withdrawn definitions. It does not describe adoption, currentness, governance approval, or regulatory variety release. `revisionRelationship.relationshipType` may identify `supersedes` or `corrects`; `priorBreedingPipelineVersionDbId` identifies the exact prior revision. A revision with no prior relationship leaves this object absent.
+`publicationState` distinguishes draft, published, and withdrawn definitions. It does not describe adoption, currentness, governance approval, or regulatory variety release.
+
+A draft revision may record the published revision on which its preparation was based using `basedOnBreedingPipelineVersionDbId`. This is a historical baseline reference only: it does not supersede or correct the published revision, and it does not change the current published pointer. A draft must not use a `revisionRelationship` of `supersedes` or `corrects`.
+
+A published successor that replaces an existing current published revision must use `revisionRelationship.relationshipType` of `supersedes` or `corrects` and identify that exact current revision in `priorBreedingPipelineVersionDbId`. A withdrawal revision must likewise identify the exact current published revision it withdraws; withdrawal does not delete or mutate that historical revision.
+
+Published pipeline and scheme versions are immutable. Substantive changes create new version identities. The final public contract must define permitted lifecycle transitions and actor authority. No GenX lifecycle status implies regulatory approval.
 
 ### 12.5 Explicitly unresolved wire-level details
 
