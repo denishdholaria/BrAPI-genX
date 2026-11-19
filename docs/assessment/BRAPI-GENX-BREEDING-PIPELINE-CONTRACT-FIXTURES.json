@@ -5100,6 +5100,35 @@
         "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland"
       },
       "expectedFailure": "A published revision must not carry the draft-only basedOnBreedingPipelineVersionDbId property."
+    },
+    {
+      "scenarioId": "invalid-unknown-publication-state",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-REG-03"
+      ],
+      "description": "A revision publicationState must be one of draft, published, or withdrawn; unrecognized lifecycle states are rejected.",
+      "registration": {
+        "existingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+          "publicationState": "published"
+        },
+        "currentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "expectedCurrentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "incomingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3",
+          "publicationState": "archived",
+          "revisionRelationship": {
+            "relationshipType": "supersedes",
+            "priorBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
+          }
+        },
+        "expectedOutcome": "publish",
+        "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland"
+      },
+      "expectedFailure": "A revision publicationState must be one of draft, published, or withdrawn; unrecognized lifecycle states are rejected."
     }
   ]
 }
