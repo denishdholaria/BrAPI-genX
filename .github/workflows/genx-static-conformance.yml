@@ -26,6 +26,8 @@ on:
       - 'Scripts/check_breeding_pipeline_api_contract.py'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json'
+      - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-DECISIONS-APPROVED.md'
+      - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-OPEN-DECISIONS.md'
       - '.github/workflows/genx-static-conformance.yml'
   push:
     paths:
@@ -52,6 +54,8 @@ on:
       - 'Scripts/check_breeding_pipeline_api_contract.py'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json'
+      - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-DECISIONS-APPROVED.md'
+      - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-OPEN-DECISIONS.md'
       - '.github/workflows/genx-static-conformance.yml'
   workflow_dispatch:
 
