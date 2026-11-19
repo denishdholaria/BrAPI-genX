@@ -4488,6 +4488,90 @@
         "expectedOutcome": "conflict"
       },
       "expectedFailure": "Concurrent first-creation collision must be resolved atomically; the losing request must re-read and append with an explicit expected-current precondition."
+    },
+    {
+      "scenarioId": "valid-stale-publication-conflict-preserves-state",
+      "expectation": "valid",
+      "invariantIds": [
+        "BM-REG-04"
+      ],
+      "description": "A stale concurrent publication receives HTTP 409 and leaves the current pointer and immutable revision history unchanged.",
+      "registration": {
+        "existingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3",
+          "publicationState": "published"
+        },
+        "currentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3",
+        "expectedCurrentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "incomingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:4",
+          "publicationState": "published",
+          "revisionRelationship": {
+            "relationshipType": "supersedes",
+            "priorBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3"
+          }
+        },
+        "stateBefore": {
+          "currentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3",
+          "revisionVersionDbIds": [
+            "institute-a:breeding-pipeline-version:rice-lowland:2",
+            "institute-a:breeding-pipeline-version:rice-lowland:3"
+          ]
+        },
+        "stateAfter": {
+          "currentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3",
+          "revisionVersionDbIds": [
+            "institute-a:breeding-pipeline-version:rice-lowland:2",
+            "institute-a:breeding-pipeline-version:rice-lowland:3"
+          ]
+        },
+        "expectedOutcome": "conflict"
+      }
+    },
+    {
+      "scenarioId": "invalid-stale-publication-conflict-mutates-state",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-REG-04"
+      ],
+      "description": "A stale concurrent publication must be rejected without append or pointer movement; this simulated result incorrectly mutates state.",
+      "registration": {
+        "existingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3",
+          "publicationState": "published"
+        },
+        "currentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3",
+        "expectedCurrentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "incomingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:4",
+          "publicationState": "published",
+          "revisionRelationship": {
+            "relationshipType": "supersedes",
+            "priorBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3"
+          }
+        },
+        "stateBefore": {
+          "currentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3",
+          "revisionVersionDbIds": [
+            "institute-a:breeding-pipeline-version:rice-lowland:2",
+            "institute-a:breeding-pipeline-version:rice-lowland:3"
+          ]
+        },
+        "stateAfter": {
+          "currentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:4",
+          "revisionVersionDbIds": [
+            "institute-a:breeding-pipeline-version:rice-lowland:2",
+            "institute-a:breeding-pipeline-version:rice-lowland:3",
+            "institute-a:breeding-pipeline-version:rice-lowland:4"
+          ]
+        },
+        "expectedOutcome": "conflict"
+      },
+      "expectedFailure": "A failed compare-and-set must leave the current pointer and revision history unchanged."
     }
   ]
 }
