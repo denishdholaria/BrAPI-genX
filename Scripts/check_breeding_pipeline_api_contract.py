@@ -166,6 +166,31 @@ def run(root: Path) -> list[str]:
         "BreedingPipelineRevision.programReference must use BrapiResourceReference.",
         errors,
     )
+    revision_relationship = schema(bp_doc, "RevisionRelationship", bp_schema_path, errors)
+    relationship_types = set(
+        revision_relationship.get("properties", {}).get("relationshipType", {}).get("enum", [])
+    )
+    require(
+        {"supersedes", "corrects", "withdraws"} <= relationship_types,
+        "RevisionRelationship must distinguish published supersession/correction from withdrawal.",
+        errors,
+    )
+    relationship_description = str(revision_relationship.get("description", "")).lower()
+    require(
+        "draft" in relationship_description and "baseline" in relationship_description,
+        "RevisionRelationship must explicitly exclude draft preparation baselines.",
+        errors,
+    )
+    based_on = revision.get("properties", {}).get("basedOnBreedingPipelineVersionDbId", {})
+    based_on_description = str(based_on.get("description", "")).lower()
+    require(
+        based_on.get("type") == "string"
+        and based_on.get("nullable") is not True
+        and "draft" in based_on_description
+        and "does not imply supersession" in based_on_description,
+        "basedOnBreedingPipelineVersionDbId must be a non-nullable draft-only baseline reference.",
+        errors,
+    )
     revision_summary = schema(bp_doc, "BreedingPipelineRevisionSummary", bp_schema_path, errors)
     require(
         {"breedingPipelineVersionDbId", "publicationState"} <= required_fields(revision_summary),
