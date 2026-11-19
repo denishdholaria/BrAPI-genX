@@ -1,9 +1,9 @@
 # BrAPI-GenX — Breeding Pipeline Open Maintainer Decisions
 
-**Status:** Advisory decision note; no new decision in this document is ratified.  
+**Status:** Advisory record of remaining open choices; the CAS ratification is D-BP-14 in the approved decision record.  
 **Workstream:** BGX-P1-06  
 **Canonical specification:** [RFC-154 — Breeding Pipeline](../../Specification/BrAPI-GenX/RFC-154-BreedingPipeline.md)  
-**Approved baseline:** [D-BP-01 through D-BP-13](./BRAPI-GENX-BREEDING-PIPELINE-DECISIONS-APPROVED.md)
+**Ratified decisions:** [D-BP-01 through D-BP-14](./BRAPI-GENX-BREEDING-PIPELINE-DECISIONS-APPROVED.md)
 
 This note separates the approved conceptual model from additional wire-level, authorization, authority-resolution, and measurement semantics that must be settled before RFC-154 can become normative.
 
@@ -25,7 +25,7 @@ The normative intent of the ratified candidate profile is:
 
 The current fixtures validate selected logical branches only. Before normative promotion, add deterministic two-writer race tests, first-creation collision tests, cross-pipeline version-ID collision tests, and assertions that a conflict leaves both revision history and the current pointer unchanged. These tests must distinguish contract fixture validation from actual concurrent service behavior.
 
-RFC-154 §12.7 records the ratification and the strengthened candidate semantics. The approved D-BP-01 through D-BP-13 baseline remains unchanged; this decision is a separate, later technical ratification.
+RFC-154 §12.7 records the ratification and the strengthened candidate semantics. D-BP-01 through D-BP-13 remain the original conceptual design baseline; D-BP-14 separately ratifies CAS as the candidate current-pointer concurrency model.
 ## 2. Draft/withdrawal relationship semantics — schema refinement applied
 
 A draft revision records its preparation baseline with `basedOnBreedingPipelineVersionDbId`; this is not a `revisionRelationship` and does not mean that the draft supersedes or corrects the current published revision. RFC-154 §12.4 and the candidate BreedingPipeline schema now express this separation. Candidate fixtures also reject a draft that claims a published supersession and require the baseline when a draft is appended over a published revision.
@@ -101,7 +101,7 @@ Source contracts:
 
 ## 7. Status boundary
 
-- D-BP-01 through D-BP-13 remain the only ratified breeding design decisions recorded in the approval file.
+- D-BP-01 through D-BP-13 remain the original approved conceptual design decisions; D-BP-14 separately ratifies the candidate CAS concurrency profile.
 - This note does not ratify the CAS profile or any other open technical choice.
 - RFC-014 remains historical; RFC-154 remains an approved candidate design.
 - The candidate fixtures and static checkers prove only the invariants they test. They do not prove production database atomicity, remote authority availability, authorization enforcement, or interoperability with an independently implemented server.
