@@ -529,6 +529,12 @@ def validate_registration(registration: Any) -> list[str]:
                     "BM-REG-03",
                     "A draft baseline reference must identify the current published pointer observed by the request.",
                 )
+            if based_on is None and current_pointer is not None:
+                add(
+                    errors,
+                    "BM-REG-03",
+                    "A draft appended over a published baseline must identify it with basedOnBreedingPipelineVersionDbId.",
+                )
         prior = as_object(incoming.get("revisionRelationship")).get(
             "priorBreedingPipelineVersionDbId"
         )
