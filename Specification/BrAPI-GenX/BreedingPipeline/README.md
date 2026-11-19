@@ -53,8 +53,8 @@ The candidate profile is:
 - identical version ID plus identical JSON Canonicalization Scheme (JCS, RFC 8785) revision content replays before the current-pointer check;
 - the same version ID with different revision content conflicts;
 - a new draft is appended without moving the current published pointer;
-- a new published revision advances the pointer only when its expected pointer matches and its revision relationship identifies the prior current version;
-- a withdrawal appends a new immutable withdrawn revision and clears the pointer only when it identifies the exact current published version;
+- a new published revision advances the pointer only when its expected pointer matches and its revision relationship uses supersedes/corrects to identify the prior current version;
+- a withdrawal appends a new immutable withdrawn revision using the withdraws relationship and clears the pointer only when it identifies the exact current published version;
 - a stale or omitted expected pointer on an append returns HTTP (Hypertext Transfer Protocol) 409 Conflict without changing revision history or current state.
 
 **Behavioral acceptance plan:** [BreedingPipeline CAS Behavioral Conformance Plan](../../../docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CAS-BEHAVIORAL-TEST-PLAN.md) defines the independent-service tests required for normative promotion. The same plan includes candidate authorization/non-disclosure scenarios that remain pending D-22 and maintainer approval.
