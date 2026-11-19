@@ -26,12 +26,13 @@ The normative intent of the ratified candidate profile is:
 The current fixtures validate selected logical branches only. Before normative promotion, add deterministic two-writer race tests, first-creation collision tests, cross-pipeline version-ID collision tests, and assertions that a conflict leaves both revision history and the current pointer unchanged. These tests must distinguish contract fixture validation from actual concurrent service behavior.
 
 RFC-154 §12.7 records the ratification and the strengthened candidate semantics. The approved D-BP-01 through D-BP-13 baseline remains unchanged; this decision is a separate, later technical ratification.
-## 2. Draft/withdrawal relationship semantics — clarification required
+## 2. Draft/withdrawal relationship semantics — schema refinement applied
 
-The candidate CAS profile allows a draft revision to append against a current published baseline without moving the current pointer. It also says the draft may carry a `revisionRelationship` naming that baseline. The schema currently names the relationship type `supersedes` or `corrects`, which can incorrectly imply that an unpublished draft already supersedes or corrects the published revision.
+A draft revision records its preparation baseline with `basedOnBreedingPipelineVersionDbId`; this is not a `revisionRelationship` and does not mean that the draft supersedes or corrects the current published revision. RFC-154 §12.4 and the candidate BreedingPipeline schema now express this separation. The contract fixtures and endpoint registry must preserve the same invariant.
 
-**Recommendation:** keep the historical baseline reference, but distinguish its meaning from a published successor relationship. Either introduce a clearly named `basedOnBreedingPipelineVersionDbId` for draft revisions and reserve `revisionRelationship` for published correction/supersession and withdrawal, or define a relationship type such as `basedOn` with explicit lifecycle constraints. Do not let a draft move the current pointer or claim to supersede the current published revision. This is a schema and semantics refinement to complete before normative promotion; it does not change the ratified CAS choice.
+Withdrawal remains a new immutable revision that identifies the exact current published version it withdraws. It does not mutate or delete that historical published revision.
 
+This refinement does not change the ratified CAS model.
 ## 3. Publication and withdrawal authorization
 
 The contract must distinguish permission to create a draft from permission to publish or withdraw a strategy used by breeding operations.
