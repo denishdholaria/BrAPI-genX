@@ -35,3 +35,8 @@ components:
             pipeline or retrying an identical breedingPipelineVersionDbId for
             idempotent replay. The server compares this value atomically before
             appending a new version and rejects a mismatch with 409 Conflict.
+            If two clients concurrently create the same logical pipeline, only
+            one creation may succeed; the other client must re-read and retry
+            as an append using this precondition. Replay lookup is scoped to
+            breedingPipelineDbId; a version-ID collision across pipelines must
+            conflict and must not disclose another pipeline's revision.
