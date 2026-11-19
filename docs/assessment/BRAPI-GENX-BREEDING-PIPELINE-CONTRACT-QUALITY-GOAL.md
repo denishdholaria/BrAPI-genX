@@ -12,7 +12,8 @@ Refine the BreedingPipeline target-scale and authority-reference contract withou
 3. Clarify the candidate lifecycle boundary: drafts may carry unresolved scale references only under an explicit unverified state/representation; publication requires successful resolution and validation against ObservationVariable's numerical Scale. Keep this proposal unratified.
 4. Keep network trust/dereferencing, DNS rebinding, redirect policy, HTTPS-only production profile, provider and onboarding decisions open.
 5. Define immutable evidence binding to pipeline revision + target context + target requirement index; define the JCS preimage while leaving the cryptographic hash algorithm open under D-02.
-6. Keep the evidence record identity, wire link, endpoint/storage representation and retention as maintainer decisions; do not reuse Genotyping PipelineProvenance.
+6. Check category-governed Numerical Scale values against permitted decimal category values as an explicitly unratified candidate rule.
+7. Keep the evidence record identity, wire link, endpoint/storage representation and retention as maintainer decisions; do not reuse Genotyping PipelineProvenance.
 7. Synchronize RFC-154, open-decision record, module readme, digest implementation documentation, and independent-service behavioral acceptance plan. Do not change official BrAPI v2.1 sources or unrelated operation catalogues.
 
 ## Guardrails
