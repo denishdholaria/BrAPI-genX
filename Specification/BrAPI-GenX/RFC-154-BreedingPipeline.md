@@ -3,7 +3,7 @@
 - Status: approved candidate contract design; non-normative until the RFC acceptance gates are met.
 - Supersedes: RFC-014 for the canonical pipeline design; RFC-014 is retained as historical evidence and is not deleted or renumbered.
 - Related: RFC-001 (GenX skeleton), RFC-008 (Selection Decisions), RFC-029 (Crop Cycle), RFC-035 (Population Advancement), RFC-037 (Crossing Schedule), RFC-098 (Research Program), and the BreedingPipeline/Scheme decision package.
-- Maintainer authorization: D-BP-01 through D-BP-13 approved on 18 November 2026.
+- Maintainer authorization: D-BP-01 through D-BP-13 approved on 18 November 2026; D-BP-14 (CAS concurrency profile) ratified on 19 November 2026.
 - Terminology: BrAPI (Breeding Application Programming Interface); API (Application Programming Interface); RFC (Request for Comments); URI (Uniform Resource Identifier); TPE (target population of environments).
 
 ## 1. Purpose
