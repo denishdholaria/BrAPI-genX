@@ -427,8 +427,23 @@ def validate_registration(registration: Any) -> list[str]:
     existing_raw = request.get("existingRevision")
     incoming = as_object(request.get("incomingRevision"))
 
+    request_pipeline_id = request.get("breedingPipelineDbId")
     incoming_pipeline_id = incoming.get("breedingPipelineDbId")
     incoming_version_id = incoming.get("breedingPipelineVersionDbId")
+    if not nonempty_string(request_pipeline_id):
+        add(
+            errors,
+            "BM-REG-01",
+            "Registration request must include its outer breedingPipelineDbId.",
+        )
+        return errors
+    if request_pipeline_id != incoming_pipeline_id:
+        add(
+            errors,
+            "BM-REG-01",
+            "Outer breedingPipelineDbId must exactly match breedingPipelineVersion.breedingPipelineDbId.",
+        )
+        return errors
     if not nonempty_string(incoming_pipeline_id) or not nonempty_string(incoming_version_id):
         add(
             errors,
@@ -844,6 +859,7 @@ def validate_corpus(corpus: Any) -> list[str]:
         "invalid-draft-claims-published-supersession",
         "invalid-cross-pipeline-revision-id-replay",
         "invalid-first-create-over-existing-logical-identity",
+        "invalid-request-and-revision-pipeline-identities-disagree",
         "valid-stale-publication-conflict-preserves-state",
         "invalid-stale-publication-conflict-mutates-state",
     }
