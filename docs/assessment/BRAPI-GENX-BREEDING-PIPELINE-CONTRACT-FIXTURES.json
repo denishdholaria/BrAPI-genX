@@ -2,7 +2,7 @@
   "contractStatus": "approved-candidate-only",
   "normative": false,
   "schemaStatus": "candidate-openapi-contract-fixtures",
-  "purpose": "Implementation-independent contract fixtures for the maintainer-approved BreedingPipeline/BreedingScheme model. These validate candidate design invariants only and do not prove production conformance or normative status.",
+  "purpose": "Implementation-independent contract fixtures for the maintainer-approved BreedingPipeline/BreedingScheme model. These validate candidate design invariants only and do not prove production conformance or normative status. Additional candidate fixtures cover explicit Scale evidence and absolute authority URI exclusions. They do not perform network dereferencing or establish trust policy.",
   "fixtures": [
     {
       "scenarioId": "valid-embedded-schemes-multiple-targets",
@@ -5159,6 +5159,2038 @@
         "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland"
       },
       "expectedFailure": "basedOnBreedingPipelineVersionDbId is draft-only and non-nullable; an explicit JSON null on a published revision is invalid rather than equivalent to omission."
+    },
+    {
+      "scenarioId": "valid-target-scale-evidence-within-bounds",
+      "expectation": "valid",
+      "invariantIds": [
+        "BM-SCALE-01"
+      ],
+      "description": "Published numerical target fits supplied immutable Scale evidence.",
+      "pipelineRevision": {
+        "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+        "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "pipelineName": "rice-lowland-product-development",
+        "purpose": "product-development",
+        "programReference": {
+          "apiGeneration": "brapi-v2.1",
+          "resourceType": "Program",
+          "server": "https://brapi.example.org/brapi/v2",
+          "dbId": "rice-program-2026"
+        },
+        "publicationState": "published",
+        "targetContexts": [
+          {
+            "targetContextId": "scale-profile",
+            "traitRequirements": [
+              {
+                "traitReference": {
+                  "apiGeneration": "brapi-v2.1",
+                  "resourceType": "ObservationVariable",
+                  "server": "https://brapi.example.org/brapi/v2",
+                  "dbId": "grain-yield"
+                },
+                "desiredDirection": "target-range",
+                "minimumExactDecimal": "6.25",
+                "maximumExactDecimal": "8.75"
+              }
+            ]
+          }
+        ],
+        "schemeBindings": [
+          {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+            "role": "principal",
+            "schemeVersion": {
+              "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+              "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+              "versionLabel": "4",
+              "publicationState": "published",
+              "stages": [
+                {
+                  "stageId": "crossing",
+                  "label": "Crossing block",
+                  "displayOrder": 1,
+                  "tasks": [
+                    {
+                      "taskId": "make-crosses",
+                      "activityCategory": "crossing",
+                      "expectedEvidence": [
+                        "CrossingProject",
+                        "PlannedCross",
+                        "Cross"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "stageId": "F2",
+                  "label": "F2",
+                  "displayOrder": 2,
+                  "tasks": [
+                    {
+                      "taskId": "advance-generation",
+                      "activityCategory": "generation-advancement"
+                    }
+                  ]
+                },
+                {
+                  "stageId": "F3",
+                  "label": "F3",
+                  "displayOrder": 3,
+                  "tasks": [
+                    {
+                      "taskId": "evaluate-F3",
+                      "activityCategory": "evaluation",
+                      "expectedEvidence": [
+                        "Study",
+                        "Observation"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "transitions": [
+                {
+                  "transitionId": "t1",
+                  "fromStageId": "crossing",
+                  "toStageId": "F2",
+                  "transitionType": "advance"
+                },
+                {
+                  "transitionId": "t2",
+                  "fromStageId": "F2",
+                  "toStageId": "F3",
+                  "transitionType": "advance",
+                  "tasks": [
+                    {
+                      "taskId": "select-F2",
+                      "activityCategory": "selection",
+                      "description": "Select F2 material for F3 advancement"
+                    }
+                  ]
+                },
+                {
+                  "transitionId": "t3",
+                  "fromStageId": "F3",
+                  "toStageId": "crossing",
+                  "transitionType": "recurrent"
+                }
+              ]
+            }
+          },
+          {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+            "role": "experimental",
+            "schemeVersion": {
+              "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+              "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+              "versionLabel": "2",
+              "publicationState": "published",
+              "stages": [
+                {
+                  "stageId": "rapid-advance",
+                  "label": "Rapid generation advance",
+                  "displayOrder": 1,
+                  "tasks": [
+                    {
+                      "taskId": "advance-rapid",
+                      "activityCategory": "generation-advancement"
+                    }
+                  ]
+                },
+                {
+                  "stageId": "seed-increase",
+                  "label": "Seed increase",
+                  "displayOrder": 2,
+                  "tasks": [
+                    {
+                      "taskId": "multiply-seed",
+                      "activityCategory": "multiplication"
+                    }
+                  ]
+                }
+              ],
+              "transitions": [
+                {
+                  "transitionId": "rapid-to-seed",
+                  "fromStageId": "rapid-advance",
+                  "toStageId": "seed-increase",
+                  "transitionType": "advance"
+                }
+              ]
+            }
+          }
+        ],
+        "targetValidationState": "verified"
+      },
+      "scaleEvidence": {
+        "resourceReference": {
+          "apiGeneration": "brapi-v2.1",
+          "resourceType": "ObservationVariable",
+          "server": "https://brapi.example.org/brapi/v2",
+          "dbId": "grain-yield"
+        },
+        "dataType": "Numerical",
+        "decimalPlaces": 2,
+        "units": "t/ha",
+        "validValues": {
+          "minimumValue": "0",
+          "maximumValue": "20"
+        }
+      }
+    },
+    {
+      "scenarioId": "invalid-target-exceeds-scale-maximum",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-SCALE-01"
+      ],
+      "description": "Published target exceeds evidenced Scale maximum.",
+      "pipelineRevision": {
+        "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+        "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "pipelineName": "rice-lowland-product-development",
+        "purpose": "product-development",
+        "programReference": {
+          "apiGeneration": "brapi-v2.1",
+          "resourceType": "Program",
+          "server": "https://brapi.example.org/brapi/v2",
+          "dbId": "rice-program-2026"
+        },
+        "publicationState": "published",
+        "targetContexts": [
+          {
+            "targetContextId": "scale-profile",
+            "traitRequirements": [
+              {
+                "traitReference": {
+                  "apiGeneration": "brapi-v2.1",
+                  "resourceType": "ObservationVariable",
+                  "server": "https://brapi.example.org/brapi/v2",
+                  "dbId": "grain-yield"
+                },
+                "desiredDirection": "target-range",
+                "minimumExactDecimal": "19.5",
+                "maximumExactDecimal": "20.5"
+              }
+            ]
+          }
+        ],
+        "schemeBindings": [
+          {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+            "role": "principal",
+            "schemeVersion": {
+              "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+              "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+              "versionLabel": "4",
+              "publicationState": "published",
+              "stages": [
+                {
+                  "stageId": "crossing",
+                  "label": "Crossing block",
+                  "displayOrder": 1,
+                  "tasks": [
+                    {
+                      "taskId": "make-crosses",
+                      "activityCategory": "crossing",
+                      "expectedEvidence": [
+                        "CrossingProject",
+                        "PlannedCross",
+                        "Cross"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "stageId": "F2",
+                  "label": "F2",
+                  "displayOrder": 2,
+                  "tasks": [
+                    {
+                      "taskId": "advance-generation",
+                      "activityCategory": "generation-advancement"
+                    }
+                  ]
+                },
+                {
+                  "stageId": "F3",
+                  "label": "F3",
+                  "displayOrder": 3,
+                  "tasks": [
+                    {
+                      "taskId": "evaluate-F3",
+                      "activityCategory": "evaluation",
+                      "expectedEvidence": [
+                        "Study",
+                        "Observation"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "transitions": [
+                {
+                  "transitionId": "t1",
+                  "fromStageId": "crossing",
+                  "toStageId": "F2",
+                  "transitionType": "advance"
+                },
+                {
+                  "transitionId": "t2",
+                  "fromStageId": "F2",
+                  "toStageId": "F3",
+                  "transitionType": "advance",
+                  "tasks": [
+                    {
+                      "taskId": "select-F2",
+                      "activityCategory": "selection",
+                      "description": "Select F2 material for F3 advancement"
+                    }
+                  ]
+                },
+                {
+                  "transitionId": "t3",
+                  "fromStageId": "F3",
+                  "toStageId": "crossing",
+                  "transitionType": "recurrent"
+                }
+              ]
+            }
+          },
+          {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+            "role": "experimental",
+            "schemeVersion": {
+              "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+              "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+              "versionLabel": "2",
+              "publicationState": "published",
+              "stages": [
+                {
+                  "stageId": "rapid-advance",
+                  "label": "Rapid generation advance",
+                  "displayOrder": 1,
+                  "tasks": [
+                    {
+                      "taskId": "advance-rapid",
+                      "activityCategory": "generation-advancement"
+                    }
+                  ]
+                },
+                {
+                  "stageId": "seed-increase",
+                  "label": "Seed increase",
+                  "displayOrder": 2,
+                  "tasks": [
+                    {
+                      "taskId": "multiply-seed",
+                      "activityCategory": "multiplication"
+                    }
+                  ]
+                }
+              ],
+              "transitions": [
+                {
+                  "transitionId": "rapid-to-seed",
+                  "fromStageId": "rapid-advance",
+                  "toStageId": "seed-increase",
+                  "transitionType": "advance"
+                }
+              ]
+            }
+          }
+        ],
+        "targetValidationState": "verified"
+      },
+      "scaleEvidence": {
+        "resourceReference": {
+          "apiGeneration": "brapi-v2.1",
+          "resourceType": "ObservationVariable",
+          "server": "https://brapi.example.org/brapi/v2",
+          "dbId": "grain-yield"
+        },
+        "dataType": "Numerical",
+        "decimalPlaces": 2,
+        "units": "t/ha",
+        "validValues": {
+          "minimumValue": "0",
+          "maximumValue": "20"
+        }
+      },
+      "expectedFailure": "Target range must remain within the referenced Scale validValues minimumValue and maximumValue."
+    },
+    {
+      "scenarioId": "invalid-target-precision-exceeds-scale",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-SCALE-02"
+      ],
+      "description": "Published target exceeds evidenced Scale decimal precision.",
+      "pipelineRevision": {
+        "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+        "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "pipelineName": "rice-lowland-product-development",
+        "purpose": "product-development",
+        "programReference": {
+          "apiGeneration": "brapi-v2.1",
+          "resourceType": "Program",
+          "server": "https://brapi.example.org/brapi/v2",
+          "dbId": "rice-program-2026"
+        },
+        "publicationState": "published",
+        "targetContexts": [
+          {
+            "targetContextId": "scale-profile",
+            "traitRequirements": [
+              {
+                "traitReference": {
+                  "apiGeneration": "brapi-v2.1",
+                  "resourceType": "ObservationVariable",
+                  "server": "https://brapi.example.org/brapi/v2",
+                  "dbId": "grain-yield"
+                },
+                "desiredDirection": "target-range",
+                "minimumExactDecimal": "6.251",
+                "maximumExactDecimal": "8.750"
+              }
+            ]
+          }
+        ],
+        "schemeBindings": [
+          {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+            "role": "principal",
+            "schemeVersion": {
+              "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+              "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+              "versionLabel": "4",
+              "publicationState": "published",
+              "stages": [
+                {
+                  "stageId": "crossing",
+                  "label": "Crossing block",
+                  "displayOrder": 1,
+                  "tasks": [
+                    {
+                      "taskId": "make-crosses",
+                      "activityCategory": "crossing",
+                      "expectedEvidence": [
+                        "CrossingProject",
+                        "PlannedCross",
+                        "Cross"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "stageId": "F2",
+                  "label": "F2",
+                  "displayOrder": 2,
+                  "tasks": [
+                    {
+                      "taskId": "advance-generation",
+                      "activityCategory": "generation-advancement"
+                    }
+                  ]
+                },
+                {
+                  "stageId": "F3",
+                  "label": "F3",
+                  "displayOrder": 3,
+                  "tasks": [
+                    {
+                      "taskId": "evaluate-F3",
+                      "activityCategory": "evaluation",
+                      "expectedEvidence": [
+                        "Study",
+                        "Observation"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "transitions": [
+                {
+                  "transitionId": "t1",
+                  "fromStageId": "crossing",
+                  "toStageId": "F2",
+                  "transitionType": "advance"
+                },
+                {
+                  "transitionId": "t2",
+                  "fromStageId": "F2",
+                  "toStageId": "F3",
+                  "transitionType": "advance",
+                  "tasks": [
+                    {
+                      "taskId": "select-F2",
+                      "activityCategory": "selection",
+                      "description": "Select F2 material for F3 advancement"
+                    }
+                  ]
+                },
+                {
+                  "transitionId": "t3",
+                  "fromStageId": "F3",
+                  "toStageId": "crossing",
+                  "transitionType": "recurrent"
+                }
+              ]
+            }
+          },
+          {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+            "role": "experimental",
+            "schemeVersion": {
+              "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+              "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+              "versionLabel": "2",
+              "publicationState": "published",
+              "stages": [
+                {
+                  "stageId": "rapid-advance",
+                  "label": "Rapid generation advance",
+                  "displayOrder": 1,
+                  "tasks": [
+                    {
+                      "taskId": "advance-rapid",
+                      "activityCategory": "generation-advancement"
+                    }
+                  ]
+                },
+                {
+                  "stageId": "seed-increase",
+                  "label": "Seed increase",
+                  "displayOrder": 2,
+                  "tasks": [
+                    {
+                      "taskId": "multiply-seed",
+                      "activityCategory": "multiplication"
+                    }
+                  ]
+                }
+              ],
+              "transitions": [
+                {
+                  "transitionId": "rapid-to-seed",
+                  "fromStageId": "rapid-advance",
+                  "toStageId": "seed-increase",
+                  "transitionType": "advance"
+                }
+              ]
+            }
+          }
+        ],
+        "targetValidationState": "verified"
+      },
+      "scaleEvidence": {
+        "resourceReference": {
+          "apiGeneration": "brapi-v2.1",
+          "resourceType": "ObservationVariable",
+          "server": "https://brapi.example.org/brapi/v2",
+          "dbId": "grain-yield"
+        },
+        "dataType": "Numerical",
+        "decimalPlaces": 2,
+        "units": "t/ha",
+        "validValues": {
+          "minimumValue": "0",
+          "maximumValue": "20"
+        }
+      },
+      "expectedFailure": "Target precision must not exceed the referenced Scale decimalPlaces."
+    },
+    {
+      "scenarioId": "invalid-quantitative-target-nonnumerical-scale",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-SCALE-03"
+      ],
+      "description": "Quantitative target cannot use a non-numerical Scale.",
+      "pipelineRevision": {
+        "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+        "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "pipelineName": "rice-lowland-product-development",
+        "purpose": "product-development",
+        "programReference": {
+          "apiGeneration": "brapi-v2.1",
+          "resourceType": "Program",
+          "server": "https://brapi.example.org/brapi/v2",
+          "dbId": "rice-program-2026"
+        },
+        "publicationState": "published",
+        "targetContexts": [
+          {
+            "targetContextId": "scale-profile",
+            "traitRequirements": [
+              {
+                "traitReference": {
+                  "apiGeneration": "brapi-v2.1",
+                  "resourceType": "ObservationVariable",
+                  "server": "https://brapi.example.org/brapi/v2",
+                  "dbId": "grain-yield"
+                },
+                "desiredDirection": "target-range",
+                "minimumExactDecimal": "6.25",
+                "maximumExactDecimal": "8.75"
+              }
+            ]
+          }
+        ],
+        "schemeBindings": [
+          {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+            "role": "principal",
+            "schemeVersion": {
+              "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+              "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+              "versionLabel": "4",
+              "publicationState": "published",
+              "stages": [
+                {
+                  "stageId": "crossing",
+                  "label": "Crossing block",
+                  "displayOrder": 1,
+                  "tasks": [
+                    {
+                      "taskId": "make-crosses",
+                      "activityCategory": "crossing",
+                      "expectedEvidence": [
+                        "CrossingProject",
+                        "PlannedCross",
+                        "Cross"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "stageId": "F2",
+                  "label": "F2",
+                  "displayOrder": 2,
+                  "tasks": [
+                    {
+                      "taskId": "advance-generation",
+                      "activityCategory": "generation-advancement"
+                    }
+                  ]
+                },
+                {
+                  "stageId": "F3",
+                  "label": "F3",
+                  "displayOrder": 3,
+                  "tasks": [
+                    {
+                      "taskId": "evaluate-F3",
+                      "activityCategory": "evaluation",
+                      "expectedEvidence": [
+                        "Study",
+                        "Observation"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "transitions": [
+                {
+                  "transitionId": "t1",
+                  "fromStageId": "crossing",
+                  "toStageId": "F2",
+                  "transitionType": "advance"
+                },
+                {
+                  "transitionId": "t2",
+                  "fromStageId": "F2",
+                  "toStageId": "F3",
+                  "transitionType": "advance",
+                  "tasks": [
+                    {
+                      "taskId": "select-F2",
+                      "activityCategory": "selection",
+                      "description": "Select F2 material for F3 advancement"
+                    }
+                  ]
+                },
+                {
+                  "transitionId": "t3",
+                  "fromStageId": "F3",
+                  "toStageId": "crossing",
+                  "transitionType": "recurrent"
+                }
+              ]
+            }
+          },
+          {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+            "role": "experimental",
+            "schemeVersion": {
+              "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+              "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+              "versionLabel": "2",
+              "publicationState": "published",
+              "stages": [
+                {
+                  "stageId": "rapid-advance",
+                  "label": "Rapid generation advance",
+                  "displayOrder": 1,
+                  "tasks": [
+                    {
+                      "taskId": "advance-rapid",
+                      "activityCategory": "generation-advancement"
+                    }
+                  ]
+                },
+                {
+                  "stageId": "seed-increase",
+                  "label": "Seed increase",
+                  "displayOrder": 2,
+                  "tasks": [
+                    {
+                      "taskId": "multiply-seed",
+                      "activityCategory": "multiplication"
+                    }
+                  ]
+                }
+              ],
+              "transitions": [
+                {
+                  "transitionId": "rapid-to-seed",
+                  "fromStageId": "rapid-advance",
+                  "toStageId": "seed-increase",
+                  "transitionType": "advance"
+                }
+              ]
+            }
+          }
+        ],
+        "targetValidationState": "verified"
+      },
+      "scaleEvidence": {
+        "resourceReference": {
+          "apiGeneration": "brapi-v2.1",
+          "resourceType": "ObservationVariable",
+          "server": "https://brapi.example.org/brapi/v2",
+          "dbId": "grain-yield"
+        },
+        "dataType": "Nominal",
+        "decimalPlaces": 2,
+        "units": "t/ha",
+        "validValues": {
+          "categories": [
+            {
+              "value": "low"
+            },
+            {
+              "value": "high"
+            }
+          ]
+        }
+      },
+      "expectedFailure": "Quantitative target requires dataType Numerical."
+    },
+    {
+      "scenarioId": "valid-draft-unresolved-scale-reference",
+      "expectation": "valid",
+      "invariantIds": [
+        "BM-SCALE-04"
+      ],
+      "description": "Draft may remain explicitly unverified while remote reference resolution is pending.",
+      "pipelineRevision": {
+        "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+        "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "pipelineName": "rice-lowland-product-development",
+        "purpose": "product-development",
+        "programReference": {
+          "apiGeneration": "brapi-v2.1",
+          "resourceType": "Program",
+          "server": "https://brapi.example.org/brapi/v2",
+          "dbId": "rice-program-2026"
+        },
+        "publicationState": "draft",
+        "targetContexts": [
+          {
+            "targetContextId": "scale-profile",
+            "traitRequirements": [
+              {
+                "traitReference": {
+                  "apiGeneration": "brapi-v2.1",
+                  "resourceType": "ObservationVariable",
+                  "server": "https://brapi.example.org/brapi/v2",
+                  "dbId": "grain-yield"
+                },
+                "desiredDirection": "target-range",
+                "minimumExactDecimal": "6.25",
+                "maximumExactDecimal": "8.75"
+              }
+            ]
+          }
+        ],
+        "schemeBindings": [
+          {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+            "role": "principal",
+            "schemeVersion": {
+              "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+              "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+              "versionLabel": "4",
+              "publicationState": "published",
+              "stages": [
+                {
+                  "stageId": "crossing",
+                  "label": "Crossing block",
+                  "displayOrder": 1,
+                  "tasks": [
+                    {
+                      "taskId": "make-crosses",
+                      "activityCategory": "crossing",
+                      "expectedEvidence": [
+                        "CrossingProject",
+                        "PlannedCross",
+                        "Cross"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "stageId": "F2",
+                  "label": "F2",
+                  "displayOrder": 2,
+                  "tasks": [
+                    {
+                      "taskId": "advance-generation",
+                      "activityCategory": "generation-advancement"
+                    }
+                  ]
+                },
+                {
+                  "stageId": "F3",
+                  "label": "F3",
+                  "displayOrder": 3,
+                  "tasks": [
+                    {
+                      "taskId": "evaluate-F3",
+                      "activityCategory": "evaluation",
+                      "expectedEvidence": [
+                        "Study",
+                        "Observation"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "transitions": [
+                {
+                  "transitionId": "t1",
+                  "fromStageId": "crossing",
+                  "toStageId": "F2",
+                  "transitionType": "advance"
+                },
+                {
+                  "transitionId": "t2",
+                  "fromStageId": "F2",
+                  "toStageId": "F3",
+                  "transitionType": "advance",
+                  "tasks": [
+                    {
+                      "taskId": "select-F2",
+                      "activityCategory": "selection",
+                      "description": "Select F2 material for F3 advancement"
+                    }
+                  ]
+                },
+                {
+                  "transitionId": "t3",
+                  "fromStageId": "F3",
+                  "toStageId": "crossing",
+                  "transitionType": "recurrent"
+                }
+              ]
+            }
+          },
+          {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+            "role": "experimental",
+            "schemeVersion": {
+              "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+              "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+              "versionLabel": "2",
+              "publicationState": "published",
+              "stages": [
+                {
+                  "stageId": "rapid-advance",
+                  "label": "Rapid generation advance",
+                  "displayOrder": 1,
+                  "tasks": [
+                    {
+                      "taskId": "advance-rapid",
+                      "activityCategory": "generation-advancement"
+                    }
+                  ]
+                },
+                {
+                  "stageId": "seed-increase",
+                  "label": "Seed increase",
+                  "displayOrder": 2,
+                  "tasks": [
+                    {
+                      "taskId": "multiply-seed",
+                      "activityCategory": "multiplication"
+                    }
+                  ]
+                }
+              ],
+              "transitions": [
+                {
+                  "transitionId": "rapid-to-seed",
+                  "fromStageId": "rapid-advance",
+                  "toStageId": "seed-increase",
+                  "transitionType": "advance"
+                }
+              ]
+            }
+          }
+        ],
+        "targetValidationState": "unverified"
+      }
+    },
+    {
+      "scenarioId": "invalid-published-unverified-scale-reference",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-SCALE-04"
+      ],
+      "description": "Published revision cannot retain an unresolved quantitative target.",
+      "pipelineRevision": {
+        "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+        "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "pipelineName": "rice-lowland-product-development",
+        "purpose": "product-development",
+        "programReference": {
+          "apiGeneration": "brapi-v2.1",
+          "resourceType": "Program",
+          "server": "https://brapi.example.org/brapi/v2",
+          "dbId": "rice-program-2026"
+        },
+        "publicationState": "published",
+        "targetContexts": [
+          {
+            "targetContextId": "scale-profile",
+            "traitRequirements": [
+              {
+                "traitReference": {
+                  "apiGeneration": "brapi-v2.1",
+                  "resourceType": "ObservationVariable",
+                  "server": "https://brapi.example.org/brapi/v2",
+                  "dbId": "grain-yield"
+                },
+                "desiredDirection": "target-range",
+                "minimumExactDecimal": "6.25",
+                "maximumExactDecimal": "8.75"
+              }
+            ]
+          }
+        ],
+        "schemeBindings": [
+          {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+            "role": "principal",
+            "schemeVersion": {
+              "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+              "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+              "versionLabel": "4",
+              "publicationState": "published",
+              "stages": [
+                {
+                  "stageId": "crossing",
+                  "label": "Crossing block",
+                  "displayOrder": 1,
+                  "tasks": [
+                    {
+                      "taskId": "make-crosses",
+                      "activityCategory": "crossing",
+                      "expectedEvidence": [
+                        "CrossingProject",
+                        "PlannedCross",
+                        "Cross"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "stageId": "F2",
+                  "label": "F2",
+                  "displayOrder": 2,
+                  "tasks": [
+                    {
+                      "taskId": "advance-generation",
+                      "activityCategory": "generation-advancement"
+                    }
+                  ]
+                },
+                {
+                  "stageId": "F3",
+                  "label": "F3",
+                  "displayOrder": 3,
+                  "tasks": [
+                    {
+                      "taskId": "evaluate-F3",
+                      "activityCategory": "evaluation",
+                      "expectedEvidence": [
+                        "Study",
+                        "Observation"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "transitions": [
+                {
+                  "transitionId": "t1",
+                  "fromStageId": "crossing",
+                  "toStageId": "F2",
+                  "transitionType": "advance"
+                },
+                {
+                  "transitionId": "t2",
+                  "fromStageId": "F2",
+                  "toStageId": "F3",
+                  "transitionType": "advance",
+                  "tasks": [
+                    {
+                      "taskId": "select-F2",
+                      "activityCategory": "selection",
+                      "description": "Select F2 material for F3 advancement"
+                    }
+                  ]
+                },
+                {
+                  "transitionId": "t3",
+                  "fromStageId": "F3",
+                  "toStageId": "crossing",
+                  "transitionType": "recurrent"
+                }
+              ]
+            }
+          },
+          {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+            "role": "experimental",
+            "schemeVersion": {
+              "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+              "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+              "versionLabel": "2",
+              "publicationState": "published",
+              "stages": [
+                {
+                  "stageId": "rapid-advance",
+                  "label": "Rapid generation advance",
+                  "displayOrder": 1,
+                  "tasks": [
+                    {
+                      "taskId": "advance-rapid",
+                      "activityCategory": "generation-advancement"
+                    }
+                  ]
+                },
+                {
+                  "stageId": "seed-increase",
+                  "label": "Seed increase",
+                  "displayOrder": 2,
+                  "tasks": [
+                    {
+                      "taskId": "multiply-seed",
+                      "activityCategory": "multiplication"
+                    }
+                  ]
+                }
+              ],
+              "transitions": [
+                {
+                  "transitionId": "rapid-to-seed",
+                  "fromStageId": "rapid-advance",
+                  "toStageId": "seed-increase",
+                  "transitionType": "advance"
+                }
+              ]
+            }
+          }
+        ],
+        "targetValidationState": "unverified"
+      },
+      "expectedFailure": "Published quantitative targets require verified ObservationVariable Scale evidence."
+    },
+    {
+      "scenarioId": "invalid-authority-server-uri-with-userinfo",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-AUTHORITY-01"
+      ],
+      "description": "Authority server URI must be absolute HTTP(S) without user information, query, or fragment.",
+      "pipelineRevision": {
+        "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+        "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "pipelineName": "rice-lowland-product-development",
+        "purpose": "product-development",
+        "programReference": {
+          "apiGeneration": "brapi-v2.1",
+          "resourceType": "Program",
+          "server": "https://user:pass@brapi.example.org/brapi/v2",
+          "dbId": "rice-program-2026"
+        },
+        "publicationState": "published",
+        "targetContexts": [
+          {
+            "targetContextId": "south-asia-irrigated-lowland",
+            "productConcept": {
+              "reference": "https://profiles.example.org/products/rice-lowland-01",
+              "snapshot": {
+                "name": "Irrigated lowland rice",
+                "version": "2026.1",
+                "sourceAuthority": "https://profiles.example.org"
+              }
+            },
+            "marketSegment": {
+              "reference": "https://profiles.example.org/market-segments/south-asia",
+              "description": "South Asian irrigated lowland systems"
+            },
+            "targetPopulationOfEnvironments": {
+              "reference": "https://environments.example.org/tpe/south-asia-lowland",
+              "description": "Warm irrigated lowland production environments"
+            },
+            "traitRequirements": [
+              {
+                "traitReference": {
+                  "apiGeneration": "brapi-v2.1",
+                  "resourceType": "ObservationVariable",
+                  "server": "https://brapi.example.org/brapi/v2",
+                  "dbId": "grain-yield"
+                },
+                "desiredDirection": "target-range",
+                "minimum": 6.5,
+                "maximum": 8
+              },
+              {
+                "traitReference": {
+                  "apiGeneration": "brapi-v2.1",
+                  "resourceType": "ObservationVariable",
+                  "server": "https://brapi.example.org/brapi/v2",
+                  "dbId": "lodging"
+                },
+                "desiredDirection": "decrease",
+                "exactDecimal": "0.15"
+              }
+            ]
+          },
+          {
+            "targetContextId": "south-asia-drought-prone",
+            "marketSegment": {
+              "description": "Drought-prone rainfed rice systems"
+            },
+            "targetPopulationOfEnvironments": {
+              "description": "Rainfed drought-prone production environments"
+            },
+            "traitRequirements": [
+              {
+                "traitReference": {
+                  "apiGeneration": "brapi-v2.1",
+                  "resourceType": "Trait",
+                  "server": "https://brapi.example.org/brapi/v2",
+                  "dbId": "drought-tolerance"
+                },
+                "desiredDirection": "increase"
+              }
+            ]
+          }
+        ],
+        "schemeBindings": [
+          {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+            "role": "principal",
+            "schemeVersion": {
+              "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+              "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+              "versionLabel": "4",
+              "publicationState": "published",
+              "stages": [
+                {
+                  "stageId": "crossing",
+                  "label": "Crossing block",
+                  "displayOrder": 1,
+                  "tasks": [
+                    {
+                      "taskId": "make-crosses",
+                      "activityCategory": "crossing",
+                      "expectedEvidence": [
+                        "CrossingProject",
+                        "PlannedCross",
+                        "Cross"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "stageId": "F2",
+                  "label": "F2",
+                  "displayOrder": 2,
+                  "tasks": [
+                    {
+                      "taskId": "advance-generation",
+                      "activityCategory": "generation-advancement"
+                    }
+                  ]
+                },
+                {
+                  "stageId": "F3",
+                  "label": "F3",
+                  "displayOrder": 3,
+                  "tasks": [
+                    {
+                      "taskId": "evaluate-F3",
+                      "activityCategory": "evaluation",
+                      "expectedEvidence": [
+                        "Study",
+                        "Observation"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "transitions": [
+                {
+                  "transitionId": "t1",
+                  "fromStageId": "crossing",
+                  "toStageId": "F2",
+                  "transitionType": "advance"
+                },
+                {
+                  "transitionId": "t2",
+                  "fromStageId": "F2",
+                  "toStageId": "F3",
+                  "transitionType": "advance",
+                  "tasks": [
+                    {
+                      "taskId": "select-F2",
+                      "activityCategory": "selection",
+                      "description": "Select F2 material for F3 advancement"
+                    }
+                  ]
+                },
+                {
+                  "transitionId": "t3",
+                  "fromStageId": "F3",
+                  "toStageId": "crossing",
+                  "transitionType": "recurrent"
+                }
+              ]
+            }
+          },
+          {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+            "role": "experimental",
+            "schemeVersion": {
+              "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+              "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+              "versionLabel": "2",
+              "publicationState": "published",
+              "stages": [
+                {
+                  "stageId": "rapid-advance",
+                  "label": "Rapid generation advance",
+                  "displayOrder": 1,
+                  "tasks": [
+                    {
+                      "taskId": "advance-rapid",
+                      "activityCategory": "generation-advancement"
+                    }
+                  ]
+                },
+                {
+                  "stageId": "seed-increase",
+                  "label": "Seed increase",
+                  "displayOrder": 2,
+                  "tasks": [
+                    {
+                      "taskId": "multiply-seed",
+                      "activityCategory": "multiplication"
+                    }
+                  ]
+                }
+              ],
+              "transitions": [
+                {
+                  "transitionId": "rapid-to-seed",
+                  "fromStageId": "rapid-advance",
+                  "toStageId": "seed-increase",
+                  "transitionType": "advance"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "executionEvents": [
+        {
+          "eventType": "populationAdvancement",
+          "pipelineContext": {
+            "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+            "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
+          },
+          "schemeContext": {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+            "fromStageId": "F2",
+            "toStageId": "F3"
+          }
+        },
+        {
+          "eventType": "selectionDecision",
+          "pipelineContext": {
+            "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+            "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
+          },
+          "schemeContext": {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+            "stageId": "rapid-advance"
+          }
+        }
+      ],
+      "expectedFailure": "Server base URI must be absolute HTTP(S) without user information, query, or fragment."
+    },
+    {
+      "scenarioId": "invalid-authority-server-uri-with-query",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-AUTHORITY-01"
+      ],
+      "description": "Authority server URI must be absolute HTTP(S) without user information, query, or fragment.",
+      "pipelineRevision": {
+        "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+        "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "pipelineName": "rice-lowland-product-development",
+        "purpose": "product-development",
+        "programReference": {
+          "apiGeneration": "brapi-v2.1",
+          "resourceType": "Program",
+          "server": "https://brapi.example.org/brapi/v2?tenant=secret",
+          "dbId": "rice-program-2026"
+        },
+        "publicationState": "published",
+        "targetContexts": [
+          {
+            "targetContextId": "south-asia-irrigated-lowland",
+            "productConcept": {
+              "reference": "https://profiles.example.org/products/rice-lowland-01",
+              "snapshot": {
+                "name": "Irrigated lowland rice",
+                "version": "2026.1",
+                "sourceAuthority": "https://profiles.example.org"
+              }
+            },
+            "marketSegment": {
+              "reference": "https://profiles.example.org/market-segments/south-asia",
+              "description": "South Asian irrigated lowland systems"
+            },
+            "targetPopulationOfEnvironments": {
+              "reference": "https://environments.example.org/tpe/south-asia-lowland",
+              "description": "Warm irrigated lowland production environments"
+            },
+            "traitRequirements": [
+              {
+                "traitReference": {
+                  "apiGeneration": "brapi-v2.1",
+                  "resourceType": "ObservationVariable",
+                  "server": "https://brapi.example.org/brapi/v2",
+                  "dbId": "grain-yield"
+                },
+                "desiredDirection": "target-range",
+                "minimum": 6.5,
+                "maximum": 8
+              },
+              {
+                "traitReference": {
+                  "apiGeneration": "brapi-v2.1",
+                  "resourceType": "ObservationVariable",
+                  "server": "https://brapi.example.org/brapi/v2",
+                  "dbId": "lodging"
+                },
+                "desiredDirection": "decrease",
+                "exactDecimal": "0.15"
+              }
+            ]
+          },
+          {
+            "targetContextId": "south-asia-drought-prone",
+            "marketSegment": {
+              "description": "Drought-prone rainfed rice systems"
+            },
+            "targetPopulationOfEnvironments": {
+              "description": "Rainfed drought-prone production environments"
+            },
+            "traitRequirements": [
+              {
+                "traitReference": {
+                  "apiGeneration": "brapi-v2.1",
+                  "resourceType": "Trait",
+                  "server": "https://brapi.example.org/brapi/v2",
+                  "dbId": "drought-tolerance"
+                },
+                "desiredDirection": "increase"
+              }
+            ]
+          }
+        ],
+        "schemeBindings": [
+          {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+            "role": "principal",
+            "schemeVersion": {
+              "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+              "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+              "versionLabel": "4",
+              "publicationState": "published",
+              "stages": [
+                {
+                  "stageId": "crossing",
+                  "label": "Crossing block",
+                  "displayOrder": 1,
+                  "tasks": [
+                    {
+                      "taskId": "make-crosses",
+                      "activityCategory": "crossing",
+                      "expectedEvidence": [
+                        "CrossingProject",
+                        "PlannedCross",
+                        "Cross"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "stageId": "F2",
+                  "label": "F2",
+                  "displayOrder": 2,
+                  "tasks": [
+                    {
+                      "taskId": "advance-generation",
+                      "activityCategory": "generation-advancement"
+                    }
+                  ]
+                },
+                {
+                  "stageId": "F3",
+                  "label": "F3",
+                  "displayOrder": 3,
+                  "tasks": [
+                    {
+                      "taskId": "evaluate-F3",
+                      "activityCategory": "evaluation",
+                      "expectedEvidence": [
+                        "Study",
+                        "Observation"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "transitions": [
+                {
+                  "transitionId": "t1",
+                  "fromStageId": "crossing",
+                  "toStageId": "F2",
+                  "transitionType": "advance"
+                },
+                {
+                  "transitionId": "t2",
+                  "fromStageId": "F2",
+                  "toStageId": "F3",
+                  "transitionType": "advance",
+                  "tasks": [
+                    {
+                      "taskId": "select-F2",
+                      "activityCategory": "selection",
+                      "description": "Select F2 material for F3 advancement"
+                    }
+                  ]
+                },
+                {
+                  "transitionId": "t3",
+                  "fromStageId": "F3",
+                  "toStageId": "crossing",
+                  "transitionType": "recurrent"
+                }
+              ]
+            }
+          },
+          {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+            "role": "experimental",
+            "schemeVersion": {
+              "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+              "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+              "versionLabel": "2",
+              "publicationState": "published",
+              "stages": [
+                {
+                  "stageId": "rapid-advance",
+                  "label": "Rapid generation advance",
+                  "displayOrder": 1,
+                  "tasks": [
+                    {
+                      "taskId": "advance-rapid",
+                      "activityCategory": "generation-advancement"
+                    }
+                  ]
+                },
+                {
+                  "stageId": "seed-increase",
+                  "label": "Seed increase",
+                  "displayOrder": 2,
+                  "tasks": [
+                    {
+                      "taskId": "multiply-seed",
+                      "activityCategory": "multiplication"
+                    }
+                  ]
+                }
+              ],
+              "transitions": [
+                {
+                  "transitionId": "rapid-to-seed",
+                  "fromStageId": "rapid-advance",
+                  "toStageId": "seed-increase",
+                  "transitionType": "advance"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "executionEvents": [
+        {
+          "eventType": "populationAdvancement",
+          "pipelineContext": {
+            "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+            "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
+          },
+          "schemeContext": {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+            "fromStageId": "F2",
+            "toStageId": "F3"
+          }
+        },
+        {
+          "eventType": "selectionDecision",
+          "pipelineContext": {
+            "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+            "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
+          },
+          "schemeContext": {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+            "stageId": "rapid-advance"
+          }
+        }
+      ],
+      "expectedFailure": "Server base URI must be absolute HTTP(S) without user information, query, or fragment."
+    },
+    {
+      "scenarioId": "invalid-authority-server-uri-with-fragment",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-AUTHORITY-01"
+      ],
+      "description": "Authority server URI must be absolute HTTP(S) without user information, query, or fragment.",
+      "pipelineRevision": {
+        "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+        "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "pipelineName": "rice-lowland-product-development",
+        "purpose": "product-development",
+        "programReference": {
+          "apiGeneration": "brapi-v2.1",
+          "resourceType": "Program",
+          "server": "https://brapi.example.org/brapi/v2#fragment",
+          "dbId": "rice-program-2026"
+        },
+        "publicationState": "published",
+        "targetContexts": [
+          {
+            "targetContextId": "south-asia-irrigated-lowland",
+            "productConcept": {
+              "reference": "https://profiles.example.org/products/rice-lowland-01",
+              "snapshot": {
+                "name": "Irrigated lowland rice",
+                "version": "2026.1",
+                "sourceAuthority": "https://profiles.example.org"
+              }
+            },
+            "marketSegment": {
+              "reference": "https://profiles.example.org/market-segments/south-asia",
+              "description": "South Asian irrigated lowland systems"
+            },
+            "targetPopulationOfEnvironments": {
+              "reference": "https://environments.example.org/tpe/south-asia-lowland",
+              "description": "Warm irrigated lowland production environments"
+            },
+            "traitRequirements": [
+              {
+                "traitReference": {
+                  "apiGeneration": "brapi-v2.1",
+                  "resourceType": "ObservationVariable",
+                  "server": "https://brapi.example.org/brapi/v2",
+                  "dbId": "grain-yield"
+                },
+                "desiredDirection": "target-range",
+                "minimum": 6.5,
+                "maximum": 8
+              },
+              {
+                "traitReference": {
+                  "apiGeneration": "brapi-v2.1",
+                  "resourceType": "ObservationVariable",
+                  "server": "https://brapi.example.org/brapi/v2",
+                  "dbId": "lodging"
+                },
+                "desiredDirection": "decrease",
+                "exactDecimal": "0.15"
+              }
+            ]
+          },
+          {
+            "targetContextId": "south-asia-drought-prone",
+            "marketSegment": {
+              "description": "Drought-prone rainfed rice systems"
+            },
+            "targetPopulationOfEnvironments": {
+              "description": "Rainfed drought-prone production environments"
+            },
+            "traitRequirements": [
+              {
+                "traitReference": {
+                  "apiGeneration": "brapi-v2.1",
+                  "resourceType": "Trait",
+                  "server": "https://brapi.example.org/brapi/v2",
+                  "dbId": "drought-tolerance"
+                },
+                "desiredDirection": "increase"
+              }
+            ]
+          }
+        ],
+        "schemeBindings": [
+          {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+            "role": "principal",
+            "schemeVersion": {
+              "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+              "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+              "versionLabel": "4",
+              "publicationState": "published",
+              "stages": [
+                {
+                  "stageId": "crossing",
+                  "label": "Crossing block",
+                  "displayOrder": 1,
+                  "tasks": [
+                    {
+                      "taskId": "make-crosses",
+                      "activityCategory": "crossing",
+                      "expectedEvidence": [
+                        "CrossingProject",
+                        "PlannedCross",
+                        "Cross"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "stageId": "F2",
+                  "label": "F2",
+                  "displayOrder": 2,
+                  "tasks": [
+                    {
+                      "taskId": "advance-generation",
+                      "activityCategory": "generation-advancement"
+                    }
+                  ]
+                },
+                {
+                  "stageId": "F3",
+                  "label": "F3",
+                  "displayOrder": 3,
+                  "tasks": [
+                    {
+                      "taskId": "evaluate-F3",
+                      "activityCategory": "evaluation",
+                      "expectedEvidence": [
+                        "Study",
+                        "Observation"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "transitions": [
+                {
+                  "transitionId": "t1",
+                  "fromStageId": "crossing",
+                  "toStageId": "F2",
+                  "transitionType": "advance"
+                },
+                {
+                  "transitionId": "t2",
+                  "fromStageId": "F2",
+                  "toStageId": "F3",
+                  "transitionType": "advance",
+                  "tasks": [
+                    {
+                      "taskId": "select-F2",
+                      "activityCategory": "selection",
+                      "description": "Select F2 material for F3 advancement"
+                    }
+                  ]
+                },
+                {
+                  "transitionId": "t3",
+                  "fromStageId": "F3",
+                  "toStageId": "crossing",
+                  "transitionType": "recurrent"
+                }
+              ]
+            }
+          },
+          {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+            "role": "experimental",
+            "schemeVersion": {
+              "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+              "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+              "versionLabel": "2",
+              "publicationState": "published",
+              "stages": [
+                {
+                  "stageId": "rapid-advance",
+                  "label": "Rapid generation advance",
+                  "displayOrder": 1,
+                  "tasks": [
+                    {
+                      "taskId": "advance-rapid",
+                      "activityCategory": "generation-advancement"
+                    }
+                  ]
+                },
+                {
+                  "stageId": "seed-increase",
+                  "label": "Seed increase",
+                  "displayOrder": 2,
+                  "tasks": [
+                    {
+                      "taskId": "multiply-seed",
+                      "activityCategory": "multiplication"
+                    }
+                  ]
+                }
+              ],
+              "transitions": [
+                {
+                  "transitionId": "rapid-to-seed",
+                  "fromStageId": "rapid-advance",
+                  "toStageId": "seed-increase",
+                  "transitionType": "advance"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "executionEvents": [
+        {
+          "eventType": "populationAdvancement",
+          "pipelineContext": {
+            "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+            "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
+          },
+          "schemeContext": {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+            "fromStageId": "F2",
+            "toStageId": "F3"
+          }
+        },
+        {
+          "eventType": "selectionDecision",
+          "pipelineContext": {
+            "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+            "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
+          },
+          "schemeContext": {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+            "stageId": "rapid-advance"
+          }
+        }
+      ],
+      "expectedFailure": "Server base URI must be absolute HTTP(S) without user information, query, or fragment."
+    },
+    {
+      "scenarioId": "invalid-authority-server-uri-relative",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-AUTHORITY-01"
+      ],
+      "description": "Authority server URI must be absolute HTTP(S) without user information, query, or fragment.",
+      "pipelineRevision": {
+        "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+        "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "pipelineName": "rice-lowland-product-development",
+        "purpose": "product-development",
+        "programReference": {
+          "apiGeneration": "brapi-v2.1",
+          "resourceType": "Program",
+          "server": "/brapi/v2",
+          "dbId": "rice-program-2026"
+        },
+        "publicationState": "published",
+        "targetContexts": [
+          {
+            "targetContextId": "south-asia-irrigated-lowland",
+            "productConcept": {
+              "reference": "https://profiles.example.org/products/rice-lowland-01",
+              "snapshot": {
+                "name": "Irrigated lowland rice",
+                "version": "2026.1",
+                "sourceAuthority": "https://profiles.example.org"
+              }
+            },
+            "marketSegment": {
+              "reference": "https://profiles.example.org/market-segments/south-asia",
+              "description": "South Asian irrigated lowland systems"
+            },
+            "targetPopulationOfEnvironments": {
+              "reference": "https://environments.example.org/tpe/south-asia-lowland",
+              "description": "Warm irrigated lowland production environments"
+            },
+            "traitRequirements": [
+              {
+                "traitReference": {
+                  "apiGeneration": "brapi-v2.1",
+                  "resourceType": "ObservationVariable",
+                  "server": "https://brapi.example.org/brapi/v2",
+                  "dbId": "grain-yield"
+                },
+                "desiredDirection": "target-range",
+                "minimum": 6.5,
+                "maximum": 8
+              },
+              {
+                "traitReference": {
+                  "apiGeneration": "brapi-v2.1",
+                  "resourceType": "ObservationVariable",
+                  "server": "https://brapi.example.org/brapi/v2",
+                  "dbId": "lodging"
+                },
+                "desiredDirection": "decrease",
+                "exactDecimal": "0.15"
+              }
+            ]
+          },
+          {
+            "targetContextId": "south-asia-drought-prone",
+            "marketSegment": {
+              "description": "Drought-prone rainfed rice systems"
+            },
+            "targetPopulationOfEnvironments": {
+              "description": "Rainfed drought-prone production environments"
+            },
+            "traitRequirements": [
+              {
+                "traitReference": {
+                  "apiGeneration": "brapi-v2.1",
+                  "resourceType": "Trait",
+                  "server": "https://brapi.example.org/brapi/v2",
+                  "dbId": "drought-tolerance"
+                },
+                "desiredDirection": "increase"
+              }
+            ]
+          }
+        ],
+        "schemeBindings": [
+          {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+            "role": "principal",
+            "schemeVersion": {
+              "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+              "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+              "versionLabel": "4",
+              "publicationState": "published",
+              "stages": [
+                {
+                  "stageId": "crossing",
+                  "label": "Crossing block",
+                  "displayOrder": 1,
+                  "tasks": [
+                    {
+                      "taskId": "make-crosses",
+                      "activityCategory": "crossing",
+                      "expectedEvidence": [
+                        "CrossingProject",
+                        "PlannedCross",
+                        "Cross"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "stageId": "F2",
+                  "label": "F2",
+                  "displayOrder": 2,
+                  "tasks": [
+                    {
+                      "taskId": "advance-generation",
+                      "activityCategory": "generation-advancement"
+                    }
+                  ]
+                },
+                {
+                  "stageId": "F3",
+                  "label": "F3",
+                  "displayOrder": 3,
+                  "tasks": [
+                    {
+                      "taskId": "evaluate-F3",
+                      "activityCategory": "evaluation",
+                      "expectedEvidence": [
+                        "Study",
+                        "Observation"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "transitions": [
+                {
+                  "transitionId": "t1",
+                  "fromStageId": "crossing",
+                  "toStageId": "F2",
+                  "transitionType": "advance"
+                },
+                {
+                  "transitionId": "t2",
+                  "fromStageId": "F2",
+                  "toStageId": "F3",
+                  "transitionType": "advance",
+                  "tasks": [
+                    {
+                      "taskId": "select-F2",
+                      "activityCategory": "selection",
+                      "description": "Select F2 material for F3 advancement"
+                    }
+                  ]
+                },
+                {
+                  "transitionId": "t3",
+                  "fromStageId": "F3",
+                  "toStageId": "crossing",
+                  "transitionType": "recurrent"
+                }
+              ]
+            }
+          },
+          {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+            "role": "experimental",
+            "schemeVersion": {
+              "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+              "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+              "versionLabel": "2",
+              "publicationState": "published",
+              "stages": [
+                {
+                  "stageId": "rapid-advance",
+                  "label": "Rapid generation advance",
+                  "displayOrder": 1,
+                  "tasks": [
+                    {
+                      "taskId": "advance-rapid",
+                      "activityCategory": "generation-advancement"
+                    }
+                  ]
+                },
+                {
+                  "stageId": "seed-increase",
+                  "label": "Seed increase",
+                  "displayOrder": 2,
+                  "tasks": [
+                    {
+                      "taskId": "multiply-seed",
+                      "activityCategory": "multiplication"
+                    }
+                  ]
+                }
+              ],
+              "transitions": [
+                {
+                  "transitionId": "rapid-to-seed",
+                  "fromStageId": "rapid-advance",
+                  "toStageId": "seed-increase",
+                  "transitionType": "advance"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "executionEvents": [
+        {
+          "eventType": "populationAdvancement",
+          "pipelineContext": {
+            "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+            "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
+          },
+          "schemeContext": {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-recurrent",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-recurrent:4",
+            "fromStageId": "F2",
+            "toStageId": "F3"
+          }
+        },
+        {
+          "eventType": "selectionDecision",
+          "pipelineContext": {
+            "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+            "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
+          },
+          "schemeContext": {
+            "breedingSchemeDbId": "institute-a:breeding-scheme:rice-rapid-generation",
+            "breedingSchemeVersionDbId": "institute-a:breeding-scheme-version:rice-rapid-generation:2",
+            "stageId": "rapid-advance"
+          }
+        }
+      ],
+      "expectedFailure": "Server base URI must be absolute HTTP(S) without user information, query, or fragment."
     }
   ]
 }
