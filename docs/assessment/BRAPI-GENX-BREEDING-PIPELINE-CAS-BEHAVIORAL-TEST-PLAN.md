@@ -309,4 +309,4 @@ Passing this plan demonstrates the tested CAS behavior for the tested implementa
 - target-scale validation against remote BrAPI ObservationVariable resources;
 - conformance of every endpoint or resource in BrAPI-GenX.
 
-The 64 candidate contract fixtures (16 valid, 48 invalid) in `BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json` cover model-level invariants and selected fixture-supplied Scale evidence checks. They do not dereference live authorities or replace service-level tests. They are complementary to, not substitutes for, these behavioral service tests.
+The 70 candidate contract fixtures (16 valid, 54 invalid) in `BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json` cover model-level invariants and selected fixture-supplied Scale evidence checks. They do not dereference live authorities or replace service-level tests. They are complementary to, not substitutes for, these behavioral service tests.
