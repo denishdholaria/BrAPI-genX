@@ -135,7 +135,7 @@ The required reference field/link from a pipeline revision to its evidence recor
 
 - minimumValue and maximumValue are candidate inclusive bounds and must be parsed as decimal strings, not binary floating-point numbers.
 - A non-numerical dataType cannot satisfy a quantitative threshold/range.
-- When validValues.categories governs the Scale, accepted values must match the permitted category values; the field must not be treated as an unrestricted interval.
+- When validValues.categories is present on a Numerical Scale, the candidate profile parses each category value as a base-10 decimal string and matches target values by exact decimal numeric equality. Category labels are display metadata only; the field must not be treated as an unrestricted interval. This equality rule is a candidate interpretation, not a ratified BrAPI/GenX policy.
 - If decimalPlaces is null or absent, the Scale has not specified a precision limit; the validator must not invent one.
 - For exact-decimal strings, the candidate profile counts all fractional digits, including trailing zeroes, against an explicit decimalPlaces value. This is a proposed lexical rule, not a ratified scientific policy.
 - A JSON number does not reliably preserve the source lexical number of decimal places after parsing/canonicalization. Whether a target must use exactDecimal whenever the Scale declares decimalPlaces, or whether canonical numeric value precision is sufficient, remains an explicit decision.
