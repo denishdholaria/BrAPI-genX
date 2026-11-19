@@ -1141,14 +1141,38 @@ def validate_corpus(corpus: Any) -> list[str]:
     return errors
 
 
+def _unique_json_object_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    """Reject ambiguous duplicate object members in the fixture JSON."""
+    result: dict[str, Any] = {}
+    for name, value in pairs:
+        if name in result:
+            raise ValueError(f"duplicate JSON object key: {name!r}")
+        result[name] = value
+    return result
+
+
+def _reject_nonfinite_json_constant(value: str) -> None:
+    """Reject NaN/Infinity, which Python's decoder otherwise permits."""
+    raise ValueError(f"non-standard JSON numeric constant: {value}")
+
+
+def load_fixture_corpus(path: Path) -> Any:
+    """Read only standards-compliant, unambiguous JSON fixture documents."""
+    with path.open("r", encoding="utf-8") as handle:
+        return json.load(
+            handle,
+            object_pairs_hook=_unique_json_object_pairs,
+            parse_constant=_reject_nonfinite_json_constant,
+        )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--file", type=Path, default=DEFAULT_FIXTURE_PATH)
     args = parser.parse_args()
 
     try:
-        with args.file.open("r", encoding="utf-8") as handle:
-            corpus = json.load(handle)
+        corpus = load_fixture_corpus(args.file)
     except OSError as exc:
         print(f"ERROR: cannot read {args.file}: {exc}", file=sys.stderr)
         return 2
@@ -1158,6 +1182,9 @@ def main() -> int:
             f"column {exc.colno}: {exc.msg}",
             file=sys.stderr,
         )
+        return 2
+    except ValueError as exc:
+        print(f"ERROR: invalid fixture JSON in {args.file}: {exc}", file=sys.stderr)
         return 2
 
     failures = validate_corpus(corpus)
