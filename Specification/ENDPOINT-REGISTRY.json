@@ -58785,7 +58785,7 @@
         "confidence": "medium"
       },
       "purpose": "Create a stable BreedingPipeline workstream and append its first immutable revision, or append a new immutable revision to an existing workstream.",
-      "sourceDescription": "Creates or references a stable workstream identity and registers one immutable pipeline revision. A new breedingPipelineVersionDbId is required for every additional revision. An append to an existing workstream also supplies expectedCurrentBreedingPipelineVersionDbId as an atomic compare-and-set precondition; explicit null means no currently published revision.",
+      "sourceDescription": "Creates or references a stable workstream identity and registers one immutable pipeline revision. A new breedingPipelineVersionDbId is required for every additional revision. An append to an existing workstream supplies expectedCurrentBreedingPipelineVersionDbId as an atomic compare-and-set precondition; explicit null means no currently published revision. Drafts record their preparation baseline using basedOnBreedingPipelineVersionDbId; published successors and withdrawals identify the exact current published revision.",
       "canBeUsedFor": [
         "Register a stable workstream identity with a new immutable breedingPipelineVersionDbId.",
         "Retry an identical revision safely using the same breedingPipelineVersionDbId.",
@@ -58828,7 +58828,8 @@
         "D-BP-01",
         "D-BP-02",
         "D-BP-03",
-        "D-BP-13"
+        "D-BP-13",
+        "D-BP-14"
       ],
       "semanticNeighborCatalogIds": [
         "brapi-genx.genx.v1.breeding-pipelines.list",
@@ -58836,7 +58837,7 @@
       ],
       "notes": [
         "Published BreedingPipeline revisions are immutable. A new revision requires a new breedingPipelineVersionDbId; the stable breedingPipelineDbId continues to identify the workstream. Pipeline stage occupancy belongs to cohort/material execution under an exact scheme version, not to the pipeline.",
-        "The current-version compare-and-set profile is proposed in RFC-154 §12.7 and is pending maintainer ratification; it is not included in approved decisions D-BP-01 through D-BP-13."
+        "D-BP-14 ratifies Option A (optimistic compare-and-set) as the candidate current-pointer concurrency model. It does not promote RFC-154 to normative status; concurrent service behavior and remaining authorization, authority, and measurement gates are outstanding."
       ]
     },
     {
