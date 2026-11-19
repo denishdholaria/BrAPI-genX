@@ -612,10 +612,12 @@ def validate_registration(registration: Any) -> list[str]:
                     "A withdrawal revision must use relationshipType=withdraws and identify the exact current published version it withdraws.",
                 )
             actual_outcome = "withdraw"
-        else:
+        elif state == "draft":
             # Drafts are immutable history records but do not move the current
             # published pointer. Multiple drafts may branch from one baseline.
             actual_outcome = "append"
+        else:
+            actual_outcome = "reject"
     else:
         # Version identifiers are unique only within their owning logical
         # pipeline; do not replay or disclose a different pipeline's revision.
