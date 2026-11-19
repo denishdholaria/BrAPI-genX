@@ -98,12 +98,16 @@ A published revision needs durable evidence of the Scale definition used at vali
 
 **Open choice — exact precision and bounds:** confirm whether decimalPlaces is a maximum number of fractional digits (including whether trailing zeroes count), whether minimumValue and maximumValue are inclusive, and how missing/null precision is treated. The candidate check currently interprets configured bounds inclusively and rejects lexical decimal precision above an explicit decimalPlaces; those interpretations remain pending maintainer approval. No silent unit conversion or implicit rounding is proposed.
 
+**Candidate evidence-record model:** one immutable evidence record per quantitative target, bound to the exact pipeline/revision, target-context identifier, zero-based trait-requirement index, and full authority-qualified ObservationVariable reference. It captures the relevant Scale projection and retrieval/validation timestamps. The evidence preimage is the exact ObservationVariable reference plus the captured Scale projection. JCS-RFC8785 is the accepted canonical JSON method, but D-02 does not select the cryptographic hash algorithm; SHA-256 must not be presented as a universal approved algorithm. The exact evidence resource identity, revision link, endpoint/storage location, correction relation, and retention are still open. The detailed candidate is in [Target-Scale Validation Evidence Design](./BRAPI-GENX-BREEDING-PIPELINE-TARGET-SCALE-EVIDENCE-DESIGN.md).
+
+The candidate publication transaction must persist the evidence record, immutable revision, current pointer, and any required audit/outbox record atomically. A remote Scale change after publication does not mutate historical evidence; a new published revision must obtain new evidence under this profile. Independent service tests are listed in [Scale Evidence Behavioral Acceptance Plan](./BRAPI-GENX-BREEDING-PIPELINE-SCALE-EVIDENCE-BEHAVIORAL-TEST-PLAN.md).
+
 ## 6. Required evidence before normative promotion
 
 1. Implement and behaviorally validate the ratified current-pointer concurrency model using the [CAS Behavioral Conformance Plan](./BRAPI-GENX-BREEDING-PIPELINE-CAS-BEHAVIORAL-TEST-PLAN.md), including simultaneous publication, first-creation collisions, idempotent retries, withdrawal races, and failure atomicity.
 2. Approved publish/withdraw actor permissions and lifecycle audit behavior.
 3. Approved authority URI normalization, trusted-server onboarding, and dereferencing policy.
-4. Approved target-scale resolution timing and immutable scale-evidence profile.
+4. Approved target-scale resolution timing, evidence identity/link/storage, snapshot fingerprint algorithm, precision semantics, and immutable scale-evidence profile.
 5. Positive and negative contract fixtures for the approved choices.
 6. Behavior-level tests against a real implementation, including simultaneous publication attempts, replay after pointer movement, authority collisions, unavailable authority servers, wrong resource types, scale bounds, and precision.
 

@@ -63,6 +63,10 @@ The candidate profile is:
 
 **Status:** Option A (optimistic compare-and-set) is ratified as the candidate concurrency model under D-BP-14. The profile remains non-normative pending deterministic concurrent-service and transaction-level conformance. Publish/withdraw authorization and audit requirements remain separate maintainer gates. The 54 candidate contract fixtures (13 valid, 41 invalid) include local checks for fixture-supplied Scale bounds, precision, data type, and basic BrAPI authority URI exclusions. The Scale evidence is fixture input only, not a wire-level target validation state or duplicate BrAPI Scale object. These checks do not dereference remote authorities or establish trust, and the fixture checker is not production conformance.
 
+## Target-scale validation evidence — candidate
+
+The [Target-Scale Validation Evidence Candidate Design](../../../docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-TARGET-SCALE-EVIDENCE-DESIGN.md) defines a per-target immutable evidence model without adding a new endpoint or public schema field. The [Scale Evidence Behavioral Acceptance Plan](../../../docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-SCALE-EVIDENCE-BEHAVIORAL-TEST-PLAN.md) defines independent-service scenarios for remote resolution, snapshot immutability, transaction atomicity, and replay. Both remain non-normative and pending maintainer decisions.
+
 ## Deliberate exclusions
 
 This module does not introduce a pipeline-wide current stage, a generic workflow engine, standalone MarketSegment/ProductConcept/TPE APIs, or duplicate BrAPI Program, Cross, Germplasm, Pedigree, Trial, or Study resources.

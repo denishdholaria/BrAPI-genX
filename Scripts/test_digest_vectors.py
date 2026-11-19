@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Cross-language digest-vector checks; RFC 8785 remains an unselected candidate."""
+"""Cross-language digest-vector checks for the accepted JCS method and candidate digest implementation."""
 import argparse
 import hashlib
 import json
@@ -173,7 +173,7 @@ def main():
     print("PASS digest interoperability vectors: " + str(structured_count) + " structured JCS candidates, " +
           str(exact_count) + " exact-byte cases, " + str(rejection_count) + " rejection-policy cases, " +
           str(legacy_count) + " known legacy divergences")
-    print("NOTE: RFC 8785 is evaluated as a candidate only; BrAPI decision D-02 remains open.")
+    print("NOTE: D-02 accepts JCS-RFC8785 for generic canonical JSON; this corpus does not select a universal hash algorithm, define every field preimage, or prove production conformance.")
     return 0
 
 if __name__ == "__main__":

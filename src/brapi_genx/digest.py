@@ -1,16 +1,18 @@
 """Digest primitives for BrAPI-GenX.
 
-Provides SHA-256 based digest functions for the three approved digest purposes:
+Provides current internal digest implementations for three distinct purposes:
 1. Raw-byte digest — exact byte sequence identification.
 2. Canonical JSON digest — JCS-canonicalized JSON content identification.
 3. Request fingerprint — composite request identity hashing.
 
-This module uses SHA-256 as the approved algorithm (maintainer decision 2026-11-04).
-The algorithm identifier is "sha256".
+The implementation currently uses SHA-256 internally. This is an implementation
+default for these helpers, not a universal BrAPI-GenX digest-algorithm decision.
+D-02 accepts JCS-RFC8785 for generic canonical JSON but explicitly leaves the
+cryptographic hash algorithm as a separate selection. The external digest
+representation (envelope format and encoding) is also not finalized here.
 
-The external digest representation (envelope format, encoding) is NOT finalized
-by this module. This module produces raw digest bytes and canonicalization
-metadata for internal use.
+This module produces internal digest bytes and canonicalization metadata. Do not
+infer an approved external/wire digest profile from the current implementation.
 """
 
 from __future__ import annotations
