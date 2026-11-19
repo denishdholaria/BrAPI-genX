@@ -181,7 +181,7 @@ Before this RFC is promoted:
 1. settle the exact version-retrieval route and current/all list semantics;
 2. settle BrAPI server canonicalization and typed reference schema;
 3. validate target-context profile variants and typed units/precision;
-4. ratify the candidate current-revision compare-and-set profile in §12.7 and validate lifecycle/actor authorization;
+4. implement and behaviorally validate the maintainer-ratified candidate current-revision compare-and-set profile in §12.7, including concurrent publication and failure-atomicity tests; validate lifecycle/actor authorization separately;
 5. validate embedded scheme-version identity equality and nested execution-context envelopes;
 6. synchronize OpenAPI, registry, generated catalogue, crosswalk, and conformance probes;
 7. test positive and negative revision/replay/version-binding cases;
