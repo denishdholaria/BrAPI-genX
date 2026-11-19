@@ -201,6 +201,8 @@ The registration request contains:
 - `breedingPipelineDbId`: stable logical workstream identity;
 - `breedingPipelineVersion`: the immutable revision payload, including `breedingPipelineVersionDbId`.
 
+The outer `breedingPipelineDbId` must exactly equal `breedingPipelineVersion.breedingPipelineDbId`. A mismatch is an invalid request and returns HTTP 400 Bad Request; implementations must not infer which identifier was intended or create a record under either value.
+
 The first successful registration creates the logical identity and its first revision. A subsequent registration under the same `breedingPipelineDbId` appends a revision only when `breedingPipelineVersionDbId` is new. The idempotency key is the immutable version identity, not the logical workstream identity.
 
 The request body must not allow a client to mutate an already published revision by sending changed content under the same version identifier. Servers must compare the canonical request representation under the GenX idempotency rules and reject a same-version/different-payload conflict with HTTP 409 and errorCode `version-content-conflict`.
