@@ -47,7 +47,11 @@ The contract must distinguish permission to create a draft from permission to pu
 
 Do not hard-code scope token names until the repository's authorization model and deployment profile are selected. The decision is whether publish/withdraw are separate governed actions, not the spelling of a token.
 
-**Open choice:** separate publish/withdraw permissions and an auditable event are recommended; final actor roles, delegation rules, and audit-resource shape remain to be approved.
+**Candidate profile:** RFC-154 §12.10 now records a more complete implementation-independent security profile. It distinguishes authenticated client from effective principal, binds authorization to the owning Program and pipeline authority, requires fresh authorization before replay disclosure, prevents stale-pointer disclosure to callers without read access, and requires successful lifecycle audit evidence to commit atomically with publication/withdrawal.
+
+**Recommendation:** separate draft/write, publish, and withdraw actions; retain distinct authenticated-client, effective-principal, and tenant context; record immutable publish/withdraw audit events; and revalidate authorization at the mutation commit boundary or document a versioned authorization decision with explicit revocation semantics.
+
+**Open choice:** approve or revise this action separation, revocation timing, delegation model, required reason/justification, and audit evidence shape. Exact scope-token names and provider/claim mapping remain governed by D-22 and are intentionally not invented here. This proposal is not ratified.
 
 ## 4. BrAPI server authority canonicalization and dereferencing
 
