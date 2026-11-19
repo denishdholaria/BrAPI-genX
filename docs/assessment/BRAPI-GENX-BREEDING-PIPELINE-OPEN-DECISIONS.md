@@ -102,7 +102,7 @@ Source contracts:
 ## 7. Status boundary
 
 - D-BP-01 through D-BP-13 remain the original approved conceptual design decisions; D-BP-14 separately ratifies the candidate CAS concurrency profile.
-- This note does not ratify the CAS profile or any other open technical choice.
+- This note does not ratify the remaining open authorization, authority-trust/dereferencing, and target-scale measurement choices. CAS is separately ratified as D-BP-14.
 - RFC-014 remains historical; RFC-154 remains an approved candidate design.
 - The candidate fixtures and static checkers prove only the invariants they test. They do not prove production database atomicity, remote authority availability, authorization enforcement, or interoperability with an independently implemented server.
 - No official BrAPI v2.1 source contract is modified by this workstream.
