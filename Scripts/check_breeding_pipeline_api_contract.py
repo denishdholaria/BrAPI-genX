@@ -271,6 +271,16 @@ def run(root: Path) -> list[str]:
         "BreedingPipelineNewRequest.breedingPipelineVersion must reference the canonical BreedingPipelineRevision schema.",
         errors,
     )
+    outer_identity_description = str(
+        request.get("properties", {}).get("breedingPipelineDbId", {}).get("description", "")
+    ).lower()
+    require(
+        "must exactly match" in outer_identity_description
+        and "breedingpipelineversion.breedingpipelinedbid" in outer_identity_description
+        and "400 bad request" in outer_identity_description,
+        "BreedingPipelineNewRequest must require the outer and immutable revision pipeline identities to match exactly.",
+        errors,
+    )
 
     expected_current = request.get("properties", {}).get("expectedCurrentBreedingPipelineVersionDbId", {})
     require(
