@@ -10,7 +10,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
 import sys
 from pathlib import Path
 from typing import Any
@@ -742,7 +742,125 @@ def validate_authority_filter_request(value: Any) -> list[str]:
                 add(errors, "BM-FILTER-03", "Duplicate authority-qualified reference tuple.")
             seen_references.add(key)
 
-    return errors
+  def _target_decimals(trait: dict[str, Any]) -> list[tuple[str, Decimal, int]]:
+    """Return validated target values as (field, decimal, fractional_digits)."""
+    values: list[tuple[str, Decimal, int]] = []
+    for key in ("threshold", "minimum", "maximum"):
+        if key in trait and isinstance(trait[key], (int, float)) and not isinstance(trait[key], bool):
+            rendered = str(trait[key])
+            try:
+                number = Decimal(rendered)
+            except InvalidOperation:
+                continue
+            if number.is_finite():
+                fractional_digits = max(0, -number.as_tuple().exponent)
+                values.append((key, number, fractional_digits))
+    for key in ("exactDecimal", "minimumExactDecimal", "maximumExactDecimal"):
+        value = trait.get(key)
+        if isinstance(value, str) and DECIMAL_RE.fullmatch(value):
+            number = Decimal(value)
+            fractional_digits = len(value.partition(".")[2]) if "." in value else 0
+            values.append((key, number, fractional_digits))
+    return values
+
+
+def validate_scale_evidence(fixture: dict[str, Any], errors: list[str]) -> None:
+    """Validate fixture-supplied Scale evidence without performing network dereferencing.
+
+    Scale evidence is a test-evidence envelope, not an extension of the BrAPI
+    ObservationVariable or the BreedingPipeline target wire schema.
+    """
+    revision = as_object(fixture.get("pipelineRevision"))
+    state = revision.get("publicationState")
+    validation_state = revision.get("targetValidationState")
+    evidence = as_object(fixture.get("scaleEvidence"))
+    has_evidence = bool(evidence)
+
+    if validation_state not in {None, "verified", "unverified"}:
+        add(errors, "BM-SCALE-04", "targetValidationState must be verified or unverified in this candidate fixture profile.")
+        return
+
+    if validation_state == "verified" and not has_evidence:
+        add(errors, "BM-SCALE-04", "Verified target validation requires separate Scale evidence.")
+        return
+
+    if validation_state == "unverified":
+        if state == "published":
+            add(errors, "BM-SCALE-04", "Published quantitative targets require verified ObservationVariable Scale evidence.")
+        elif state != "draft":
+            add(errors, "BM-SCALE-04", "Only a draft may remain unverified in this candidate profile.")
+        if has_evidence:
+            add(errors, "BM-SCALE-04", "An unverified fixture must not present Scale evidence as verified.")
+        return
+
+    if not has_evidence:
+        return
+
+    evidence_reference = as_object(evidence.get("resourceReference"))
+    data_type = evidence.get("dataType")
+    decimal_places = evidence.get("decimalPlaces")
+    valid_values = as_object(evidence.get("validValues"))
+
+    if (
+        evidence_reference.get("apiGeneration") != "brapi-v2.1"
+        or evidence_reference.get("resourceType") != "ObservationVariable"
+        or not all(nonempty_string(evidence_reference.get(key)) for key in ("server", "dbId"))
+    ):
+        add(errors, "BM-SCALE-01", "Scale evidence must identify one authority-qualified BrAPI v2.1 ObservationVariable.")
+        return
+
+    if decimal_places is not None and (
+        not isinstance(decimal_places, int)
+        or isinstance(decimal_places, bool)
+        or decimal_places < 0
+    ):
+        add(errors, "BM-SCALE-02", "Scale evidence decimalPlaces must be a non-negative integer or null.")
+
+    bound_values: dict[str, Decimal] = {}
+    for bound_name in ("minimumValue", "maximumValue"):
+        if bound_name in valid_values:
+            raw_bound = valid_values[bound_name]
+            if not isinstance(raw_bound, str) or not DECIMAL_RE.fullmatch(raw_bound):
+                add(errors, "BM-SCALE-01", f"Scale validValues.{bound_name} must be a decimal string.")
+            else:
+                bound_values[bound_name] = Decimal(raw_bound)
+
+    if (
+        "minimumValue" in bound_values
+        and "maximumValue" in bound_values
+        and bound_values["minimumValue"] > bound_values["maximumValue"]
+    ):
+        add(errors, "BM-SCALE-01", "Scale minimumValue must not exceed maximumValue.")
+
+    target_rows: list[tuple[dict[str, Any], dict[str, Any], list[tuple[str, Decimal, int]]]] = []
+    for context in as_list(revision.get("targetContexts")):
+        for raw_target in as_list(as_object(context).get("traitRequirements")):
+            target = as_object(raw_target)
+            values = _target_decimals(target)
+            if values:
+                target_reference = as_object(target.get("traitReference"))
+                identity_keys = ("apiGeneration", "resourceType", "server", "dbId")
+                if any(target_reference.get(k) != evidence_reference.get(k) for k in identity_keys):
+                    add(errors, "BM-SCALE-01", "Scale evidence authority/resource identity must exactly match its quantitative target reference.")
+                target_rows.append((target, target_reference, values))
+
+    if not target_rows:
+        add(errors, "BM-SCALE-01", "Scale evidence was supplied without a quantitative ObservationVariable target.")
+        return
+
+    for target, target_reference, values in target_rows:
+        if target_reference.get("resourceType") != "ObservationVariable":
+            add(errors, "BM-SCALE-03", "Quantitative target Scale evidence requires an ObservationVariable reference.")
+        if data_type != "Numerical":
+            add(errors, "BM-SCALE-03", "Quantitative target requires dataType Numerical.")
+
+        for field, number, fractional_digits in values:
+            if "minimumValue" in bound_values and number < bound_values["minimumValue"]:
+                add(errors, "BM-SCALE-01", f"Target {field} is below Scale validValues.minimumValue.")
+            if "maximumValue" in bound_values and number > bound_values["maximumValue"]:
+                add(errors, "BM-SCALE-01", f"Target {field} is above Scale validValues.maximumValue.")
+            if decimal_places is not None and fractional_digits > decimal_places:
+                add(errors, "BM-SCALE-02", f"Target {field} requires more fractional precision than Scale decimalPlaces.")
 
 
 def validate_fixture(fixture: dict[str, Any]) -> list[str]:
@@ -754,6 +872,7 @@ def validate_fixture(fixture: dict[str, Any]) -> list[str]:
     if revision is not None:
         revision_errors, definitions = validate_pipeline_revision(revision)
         errors.extend(revision_errors)
+        validate_scale_evidence(fixture, errors)
 
     if fixture.get("event") is not None:
         errors.extend(validate_execution_event(fixture.get("event"), revision, definitions))
@@ -782,6 +901,7 @@ def validate_fixture(fixture: dict[str, Any]) -> list[str]:
         ):
             add(errors, "BM-03", "Published scheme content changed without a new breedingSchemeVersionDbId.")
 
+    return errors
     return errors
 
 
