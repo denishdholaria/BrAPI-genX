@@ -952,7 +952,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Create a stable BreedingPipeline workstream and append its first immutable revision, or append a new immutable revision to an existing workstream.
 **Source contract description:**
-> Creates or references a stable workstream identity and registers one immutable pipeline revision. A new breedingPipelineVersionDbId is required for every additional revision. An append to an existing workstream also supplies expectedCurrentBreedingPipelineVersionDbId as an atomic compare-and-set precondition; explicit null means no currently published revision.
+> Creates or references a stable workstream identity and registers one immutable pipeline revision. A new breedingPipelineVersionDbId is required for every additional revision. An append to an existing workstream supplies expectedCurrentBreedingPipelineVersionDbId as an atomic compare-and-set precondition; explicit null means no currently published revision. Drafts record their preparation baseline using basedOnBreedingPipelineVersionDbId; published successors and withdrawals identify the exact current published revision.
 **Can be used for:**
 - Register a stable workstream identity with a new immutable breedingPipelineVersionDbId.
 - Retry an identical revision safely using the same breedingPipelineVersionDbId.
@@ -970,7 +970,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Response component refs recorded:** BreedingPipelineResponse, 400BadRequest, 401Unauthorized, 403Forbidden, BreedingPipelineConflictResponse
 - **Semantic relationship IDs / labels:** genxListBreedingPipelines, genxGetBreedingPipeline
 - **Related catalogue IDs:** brapi-genx.genx.v1.breeding-pipelines.list, brapi-genx.genx.v1.breeding-pipelines.get
-- **Relevant RFC / decision references:** RFC-154, D-BP-01, D-BP-02, D-BP-03, D-BP-13
+- **Relevant RFC / decision references:** RFC-154, D-BP-01, D-BP-02, D-BP-03, D-BP-13, D-BP-14
 - **Contract source:** [`Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/implementation/bgx-p1-06-approved-breeding-contract/Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
