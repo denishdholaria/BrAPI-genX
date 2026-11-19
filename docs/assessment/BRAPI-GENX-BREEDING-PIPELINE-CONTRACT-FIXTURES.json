@@ -6236,7 +6236,7 @@
       "scenarioId": "invalid-authority-server-uri-with-userinfo",
       "expectation": "invalid",
       "invariantIds": [
-        "BM-AUTHORITY-01"
+        "BM-20"
       ],
       "description": "Authority server URI must be absolute HTTP(S) without user information, query, or fragment.",
       "pipelineRevision": {
@@ -6476,7 +6476,7 @@
       "scenarioId": "invalid-authority-server-uri-with-query",
       "expectation": "invalid",
       "invariantIds": [
-        "BM-AUTHORITY-01"
+        "BM-20"
       ],
       "description": "Authority server URI must be absolute HTTP(S) without user information, query, or fragment.",
       "pipelineRevision": {
@@ -6716,7 +6716,7 @@
       "scenarioId": "invalid-authority-server-uri-with-fragment",
       "expectation": "invalid",
       "invariantIds": [
-        "BM-AUTHORITY-01"
+        "BM-20"
       ],
       "description": "Authority server URI must be absolute HTTP(S) without user information, query, or fragment.",
       "pipelineRevision": {
@@ -6956,7 +6956,7 @@
       "scenarioId": "invalid-authority-server-uri-relative",
       "expectation": "invalid",
       "invariantIds": [
-        "BM-AUTHORITY-01"
+        "BM-20"
       ],
       "description": "Authority server URI must be absolute HTTP(S) without user information, query, or fragment.",
       "pipelineRevision": {
