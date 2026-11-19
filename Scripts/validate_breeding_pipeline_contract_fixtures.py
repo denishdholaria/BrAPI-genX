@@ -553,14 +553,17 @@ def validate_registration(registration: Any) -> list[str]:
             return errors
 
         state = incoming.get("publicationState")
-        relationship = as_object(incoming.get("revisionRelationship"))
+        relationship_raw = incoming.get("revisionRelationship")
+        relationship = as_object(relationship_raw)
+        relationship_type = relationship.get("relationshipType")
+        prior = relationship.get("priorBreedingPipelineVersionDbId")
         based_on = incoming.get("basedOnBreedingPipelineVersionDbId")
         if state == "draft":
-            if relationship.get("relationshipType") in {"supersedes", "corrects"}:
+            if relationship_raw is not None:
                 add(
                     errors,
                     "BM-REG-03",
-                    "A draft revision must not claim a published supersession/correction; use basedOnBreedingPipelineVersionDbId for its baseline.",
+                    "A draft revision must omit revisionRelationship and use basedOnBreedingPipelineVersionDbId for its preparation baseline.",
                 )
             if based_on is not None and based_on != current_pointer:
                 add(
@@ -574,23 +577,33 @@ def validate_registration(registration: Any) -> list[str]:
                     "BM-REG-03",
                     "A draft appended over a published baseline must identify it with basedOnBreedingPipelineVersionDbId.",
                 )
-        prior = as_object(incoming.get("revisionRelationship")).get(
-            "priorBreedingPipelineVersionDbId"
-        )
+        elif based_on is not None:
+            add(
+                errors,
+                "BM-REG-03",
+                "basedOnBreedingPipelineVersionDbId is reserved for drafts and must be absent from published or withdrawn revisions.",
+            )
         if state == "published":
-            if current_pointer is not None and prior != current_pointer:
+            if current_pointer is None:
+                if relationship_raw is not None:
+                    add(
+                        errors,
+                        "BM-REG-03",
+                        "A first publication with no current published pointer must not claim a prior-revision relationship.",
+                    )
+            elif relationship_type not in {"supersedes", "corrects"} or prior != current_pointer:
                 add(
                     errors,
                     "BM-REG-03",
-                    "A new published revision must explicitly supersede or correct the current published revision it replaces.",
+                    "A published successor must use supersedes/corrects and identify the exact current published revision.",
                 )
             actual_outcome = "publish"
         elif state == "withdrawn":
-            if current_pointer is None or prior != current_pointer:
+            if current_pointer is None or relationship_type != "withdraws" or prior != current_pointer:
                 add(
                     errors,
                     "BM-REG-03",
-                    "A withdrawal revision must identify the current published version it withdraws.",
+                    "A withdrawal revision must use relationshipType=withdraws and identify the exact current published version it withdraws.",
                 )
             actual_outcome = "withdraw"
         else:
@@ -860,6 +873,9 @@ def validate_corpus(corpus: Any) -> list[str]:
         "invalid-cross-pipeline-revision-id-replay",
         "invalid-first-create-over-existing-logical-identity",
         "invalid-request-and-revision-pipeline-identities-disagree",
+        "invalid-withdrawal-uses-supersedes-relationship",
+        "invalid-published-revision-uses-withdraws-relationship",
+        "invalid-published-revision-contains-draft-baseline",
         "valid-stale-publication-conflict-preserves-state",
         "invalid-stale-publication-conflict-mutates-state",
     }
