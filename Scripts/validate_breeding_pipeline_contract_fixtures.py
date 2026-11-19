@@ -563,8 +563,15 @@ def validate_registration(registration: Any) -> list[str]:
         relationship = as_object(relationship_raw)
         relationship_type = relationship.get("relationshipType")
         prior = relationship.get("priorBreedingPipelineVersionDbId")
+        based_on_present = "basedOnBreedingPipelineVersionDbId" in incoming
         based_on = incoming.get("basedOnBreedingPipelineVersionDbId")
         if state == "draft":
+            if based_on_present and not nonempty_string(based_on):
+                add(
+                    errors,
+                    "BM-REG-03",
+                    "A supplied basedOnBreedingPipelineVersionDbId must be a non-empty string; JSON null is not equivalent to omission.",
+                )
             if relationship_raw is not None:
                 add(
                     errors,
@@ -583,11 +590,11 @@ def validate_registration(registration: Any) -> list[str]:
                     "BM-REG-03",
                     "A draft appended over a published baseline must identify it with basedOnBreedingPipelineVersionDbId.",
                 )
-        elif based_on is not None:
+        elif based_on_present:
             add(
                 errors,
                 "BM-REG-03",
-                "basedOnBreedingPipelineVersionDbId is reserved for drafts and must be absent from published or withdrawn revisions.",
+                "basedOnBreedingPipelineVersionDbId is reserved for drafts and must be absent from published or withdrawn revisions, including as JSON null.",
             )
         if state == "published":
             if current_pointer is None:
