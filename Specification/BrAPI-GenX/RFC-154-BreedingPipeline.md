@@ -315,3 +315,58 @@ A canonical server identifier is used consistently in reference equality, filter
 
 The allowed deployment scheme policy (HTTPS-only versus explicitly configured HTTP for private/test servers), internationalized DNS name profile, proxy/redirect policy, DNS rebinding defenses, and authority onboarding/trust model remain gates. RFC 3986 defines generic normalization, but it does not decide which external authorities an implementation trusts or is permitted to contact.
 
+### 12.10 Candidate publication/withdrawal authorization and lifecycle audit profile — maintainer decision pending
+
+This section is a candidate security profile, not a ratified authorization policy. It is constrained by the repository's existing security decisions: RFC-001 §2 and §6 require runtime enforcement using trusted tenant, role, and scope context; D-22 remains open for the broader authorization provider and scope vocabulary; D-24 requires fresh authentication and authorization before disclosing an idempotent replay result.
+
+#### Trusted request context
+
+An implementation must establish the caller context from a validated authentication credential and server-side policy. The conceptual context distinguishes:
+
+- **tenant** — the authenticated tenant/data-isolation boundary;
+- **authenticated client** — the application or service presenting the credential;
+- **effective principal** — the user or service whose authority is exercised, including delegated-user context where applicable;
+- **operation** — the stable operation identity being authorized;
+- **resource scope** — the owning pipeline authority and its associated BrAPI Program.
+
+A request-supplied tenant, actor, principal, or authority header must not override authenticated claims or server-side ownership. The pipeline's `programReference` is an authority-qualified relationship, not proof that the caller is authorized for that Program. Authorization must be checked against the server's trusted ownership and delegation policy.
+
+#### Candidate action matrix
+
+| Operation | Candidate authorization action | Required resource scope |
+|---|---|---|
+| Read logical pipeline, revision, or history | Read | Pipeline authority and owning Program |
+| Create or append a draft | Draft/write | Pipeline authority and owning Program |
+| Publish a revision | Publish | Same resource scope, with explicit publish authority |
+| Withdraw a revision | Withdraw | Same resource scope, with explicit withdrawal authority |
+
+Draft creation, publication, and withdrawal are separate actions. A generic write permission must not automatically imply permission to publish or withdraw. Exact scope token names, roles, issuer/claim mapping, delegation semantics, and policy syntax remain subject to D-22 and maintainer selection; this candidate profile intentionally does not invent their wire-level spelling.
+
+#### Ordering and non-disclosure
+
+1. Authenticate and establish tenant, authenticated-client, and effective-principal context before reading or changing pipeline state.
+2. Authorize the requested action against the owning pipeline and Program before disclosing whether a version exists, whether a replay is available, or what the current pointer is.
+3. For an identical same-version retry, perform fresh authentication and current authorization before returning the prior revision. A previously successful request or possession of a revision ID does not preserve access after permission revocation.
+4. A stale compare-and-set conflict must not disclose the current version ID to a caller who is not authorized to read the pipeline. The server may return a non-disclosing conflict response, or include the current pointer only after a separate read authorization check.
+5. Authorization must be evaluated at a documented point relative to the atomic commit. The candidate recommendation is to ensure the decision remains valid at the mutation commit boundary, or to use an explicitly versioned authorization decision whose revocation semantics are documented. An implementation must not silently rely on a stale request-start permission check where immediate revocation is promised.
+
+#### Candidate lifecycle audit record
+
+For every successful publication or withdrawal, record an immutable lifecycle event or equivalent append-only audit evidence containing at least:
+
+- event identifier and event type (`published` or `withdrawn`);
+- stable `breedingPipelineDbId` and exact new `breedingPipelineVersionDbId`;
+- exact prior current version, or explicit null for first publication;
+- authenticated client, effective principal, and tenant identity from trusted context;
+- server-generated event timestamp;
+- reason or justification supplied under the deployment policy;
+- stable operation/correlation identifier and authorization decision reference or policy version, where available.
+
+Do not persist bearer tokens, private credentials, or unfiltered authentication claims in the audit record. Draft appends may use ordinary immutable revision provenance; whether they require the same lifecycle-event resource is an open design choice.
+
+The revision append, current-pointer transition, and required lifecycle audit/outbox record must commit or roll back together. Failed compare-and-set, authorization denial, and failed transaction attempts must not leave a successful publication/withdrawal event.
+
+#### Explicit non-claims and unresolved decisions
+
+This profile does not define an identity provider, claim names, scope tokens, organization hierarchy, delegation format, policy language, break-glass mechanism, retention schedule, or audit API. It does not make `publicationState=published` a claim of regulatory approval or scientific endorsement. These choices require maintainer review and must be reconciled with D-22 before the authorization profile becomes normative.
+
