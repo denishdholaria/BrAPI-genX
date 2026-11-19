@@ -157,5 +157,5 @@
 | RFC-151 | RFC-151 — Edge Gateway Health (M) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
 | RFC-152 | RFC-152 — Schema Mapping (T/W/A) | DEFERRED | Unresolved scientific/governance decision; see decision register. Do not treat as complete. |
 | RFC-153 | RFC-153 — Capability Negotiation (T/W/A) | DEFERRED | Unresolved scientific/governance decision; see decision register. Do not treat as complete. |
-| RFC-154 | RFC-154 — Breeding Pipeline (D2) | STRUCTURAL_DRAFT | Maintainer-approved candidate architecture (D-BP-01..13); remains non-normative pending exact route semantics, authority canonicalization, lifecycle/authorization, target quantity profile, synchronized schemas/registry, and positive/negative conformance gates. |
+| RFC-154 | RFC-154 — Breeding Pipeline (D2) | STRUCTURAL_DRAFT | Maintainer-approved candidate architecture (D-BP-01..14, including ratified CAS concurrency profile); remains non-normative pending exact route semantics, authority canonicalization/trust, lifecycle authorization/audit, target-scale semantics, synchronized artifacts, and independent behavioral conformance. |
 | RFC-155 | RFC-155 — Conformance Probe (T/W/A) | DEFERRED | Unresolved scientific/governance decision; see decision register. Do not treat as complete. |
