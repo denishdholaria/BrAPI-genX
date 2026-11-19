@@ -28,7 +28,7 @@ The current fixtures validate selected logical branches only. Before normative p
 RFC-154 §12.7 records the ratification and the strengthened candidate semantics. The approved D-BP-01 through D-BP-13 baseline remains unchanged; this decision is a separate, later technical ratification.
 ## 2. Draft/withdrawal relationship semantics — schema refinement applied
 
-A draft revision records its preparation baseline with `basedOnBreedingPipelineVersionDbId`; this is not a `revisionRelationship` and does not mean that the draft supersedes or corrects the current published revision. RFC-154 §12.4 and the candidate BreedingPipeline schema now express this separation. The contract fixtures and endpoint registry must preserve the same invariant.
+A draft revision records its preparation baseline with `basedOnBreedingPipelineVersionDbId`; this is not a `revisionRelationship` and does not mean that the draft supersedes or corrects the current published revision. RFC-154 §12.4 and the candidate BreedingPipeline schema now express this separation. Candidate fixtures also reject a draft that claims a published supersession and require the baseline when a draft is appended over a published revision.
 
 Withdrawal remains a new immutable revision that identifies the exact current published version it withdraws. It does not mutate or delete that historical published revision.
 
