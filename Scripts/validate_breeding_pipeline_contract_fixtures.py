@@ -776,7 +776,7 @@ def validate_scale_evidence(fixture: dict[str, Any], errors: list[str]) -> None:
     evidence = as_object(fixture.get("scaleEvidence"))
     has_evidence = bool(evidence)
 
-    if validation_state not in {None, "verified", "unverified"}:
+    if validation_state is not None and validation_state not in ("verified", "unverified"):
         add(errors, "BM-SCALE-04", "scaleValidationState must be verified or unverified in this candidate fixture profile.")
         return
 
@@ -809,12 +809,16 @@ def validate_scale_evidence(fixture: dict[str, Any], errors: list[str]) -> None:
         add(errors, "BM-SCALE-01", "Scale evidence must identify one authority-qualified BrAPI v2.1 ObservationVariable.")
         return
 
-    if decimal_places is not None and (
-        not isinstance(decimal_places, int)
-        or isinstance(decimal_places, bool)
-        or decimal_places < 0
-    ):
-        add(errors, "BM-SCALE-02", "Scale evidence decimalPlaces must be a non-negative integer or null.")
+    usable_decimal_places: int | None = None
+    if decimal_places is not None:
+        if (
+            isinstance(decimal_places, int)
+            and not isinstance(decimal_places, bool)
+            and decimal_places >= 0
+        ):
+            usable_decimal_places = decimal_places
+        else:
+            add(errors, "BM-SCALE-02", "Scale evidence decimalPlaces must be a non-negative integer or null.")
 
     bound_values: dict[str, Decimal] = {}
     for bound_name in ("minimumValue", "maximumValue"):
@@ -859,7 +863,7 @@ def validate_scale_evidence(fixture: dict[str, Any], errors: list[str]) -> None:
                 add(errors, "BM-SCALE-01", f"Target {field} is below Scale validValues.minimumValue.")
             if "maximumValue" in bound_values and number > bound_values["maximumValue"]:
                 add(errors, "BM-SCALE-01", f"Target {field} is above Scale validValues.maximumValue.")
-            if decimal_places is not None and fractional_digits > decimal_places:
+            if usable_decimal_places is not None and fractional_digits > usable_decimal_places:
                 add(errors, "BM-SCALE-02", f"Target {field} requires more fractional precision than Scale decimalPlaces.")
 
 
