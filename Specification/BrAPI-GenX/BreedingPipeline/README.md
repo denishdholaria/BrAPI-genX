@@ -57,7 +57,9 @@ The candidate profile is:
 - a withdrawal appends a new immutable withdrawn revision and clears the pointer only when it identifies the exact current published version;
 - a stale or omitted expected pointer on an append returns HTTP (Hypertext Transfer Protocol) 409 Conflict without changing revision history or current state.
 
-**Behavioral acceptance plan:** [BreedingPipeline CAS Behavioral Conformance Plan](../../../docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CAS-BEHAVIORAL-TEST-PLAN.md) defines the independent-service tests required for normative promotion.
+**Behavioral acceptance plan:** [BreedingPipeline CAS Behavioral Conformance Plan](../../../docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CAS-BEHAVIORAL-TEST-PLAN.md) defines the independent-service tests required for normative promotion. The same plan includes candidate authorization/non-disclosure scenarios that remain pending D-22 and maintainer approval.
+
+**Security profile:** RFC-154 §12.10 documents candidate publication/withdrawal authorization, non-disclosure, and lifecycle audit behavior. It is not ratified; D-22 and the maintainer decision remain open for provider, scope, delegation, and policy semantics.
 
 **Status:** Option A (optimistic compare-and-set) is ratified as the candidate concurrency model under D-BP-14. The profile remains non-normative pending deterministic concurrent-service and transaction-level conformance. Publish/withdraw authorization and audit requirements remain separate maintainer gates. The fixture checker is not production conformance.
 
