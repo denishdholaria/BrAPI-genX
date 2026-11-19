@@ -23,7 +23,7 @@ The normative intent of the ratified candidate profile is:
 - A publication/withdrawal becomes effective at the successful atomic commit. Competing requests against the same baseline have at most one successful pointer transition; a stale loser receives HTTP 409 Conflict with no partial append or pointer mutation.
 - Persistence mechanisms may differ, but must prevent time-of-check/time-of-use races and provide equivalent externally observable semantics. Defined audit/outbox side effects must commit or roll back with the operation.
 
-The current fixtures validate selected logical branches only. Before normative promotion, add deterministic two-writer race tests, first-creation collision tests, cross-pipeline version-ID collision tests, and assertions that a conflict leaves both revision history and the current pointer unchanged. These tests must distinguish contract fixture validation from actual concurrent service behavior.
+The current fixtures validate selected logical branches only. Before normative promotion, run the implementation-independent [BreedingPipeline CAS Behavioral Conformance Plan](./BRAPI-GENX-BREEDING-PIPELINE-CAS-BEHAVIORAL-TEST-PLAN.md) against an independently implemented service. It includes deterministic two-writer race tests, first-creation collision tests, cross-pipeline version-ID collision tests, retries after a lost response, withdrawal races, and transaction-failure injection. These tests distinguish contract fixture validation from actual concurrent service behavior.
 
 RFC-154 §12.7 records the ratification and the strengthened candidate semantics. D-BP-01 through D-BP-13 remain the original conceptual design baseline; D-BP-14 separately ratifies CAS as the candidate current-pointer concurrency model.
 ## 2. Draft/withdrawal relationship semantics — schema refinement applied
@@ -92,7 +92,7 @@ Source contracts:
 
 ## 6. Required evidence before normative promotion
 
-1. Implement and behaviorally validate the ratified current-pointer concurrency model, including deterministic simultaneous publication, first-creation collisions, idempotent retries, and failure-atomicity tests.
+1. Implement and behaviorally validate the ratified current-pointer concurrency model using the [CAS Behavioral Conformance Plan](./BRAPI-GENX-BREEDING-PIPELINE-CAS-BEHAVIORAL-TEST-PLAN.md), including simultaneous publication, first-creation collisions, idempotent retries, withdrawal races, and failure atomicity.
 2. Approved publish/withdraw actor permissions and lifecycle audit behavior.
 3. Approved authority URI normalization, trusted-server onboarding, and dereferencing policy.
 4. Approved target-scale resolution timing and immutable scale-evidence profile.
