@@ -11,10 +11,12 @@ paths:
         classification:
           primaryDomain: "D2"
           crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
-        purpose: "Retrieve the stable logical pipeline view or one exact immutable revision."
+        purpose: "Retrieve the current published revision or one exact immutable revision of a stable pipeline workstream."
         canBeUsedFor:
-          - "Inspect the stable workstream identity and its current published revision."
-          - "Retrieve a historically referenced exact pipeline revision."
+          - "Retrieve the current published revision for a known stable workstream identity."
+          - "Retrieve a specifically identified historical, draft, or withdrawn revision."
+        mustNotBeUsedFor:
+          - "Retrieve the logical workstream projection or revision-summary collection; use the list endpoint for those views."
         mustNotBeUsedFor:
           - "Assuming a record is a BrAPI data resource."
           - "Treating the current revision as a substitute for an explicitly requested historical revision."
@@ -26,7 +28,7 @@ paths:
         decisions: ["RFC-154", "D-BP-03", "D-BP-13"]
         proposalStatus: "draft-non-normative"
       summary: Get one breeding pipeline
-      description: Returns the logical pipeline with current published revision by default, or the exact requested breedingPipelineVersionDbId revision, or 404.
+      description: Returns the current published BreedingPipelineRevision by default, or the exact requested immutable revision. The response result is a revision payload in both cases; the stable breedingPipelineDbId remains within it. A default request returns 404 when no current published revision exists. The list endpoint returns the logical workstream projection and revision summaries.
       parameters:
       - name: breedingPipelineDbId
         description: Namespaced breeding-pipeline identity `{authority}:breeding-pipeline:{localId}`
@@ -35,7 +37,7 @@ paths:
         schema:
           type: string
       - name: breedingPipelineVersionDbId
-        description: Optional exact immutable revision identifier. When omitted, the current published revision is returned.
+        description: Optional exact immutable revision identifier, including draft or withdrawn history when authorized. When omitted, the current published revision is returned; if none exists, the server returns 404.
         in: query
         required: false
         schema:
