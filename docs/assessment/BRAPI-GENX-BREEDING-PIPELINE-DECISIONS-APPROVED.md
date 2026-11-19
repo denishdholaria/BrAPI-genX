@@ -24,7 +24,7 @@ The maintainer explicitly approved the recommendations in the Breeding Pipeline 
 | D-BP-11 | Defer broad CrossingSchedule; reopen only for scheduling/booking semantics beyond BrAPI PlannedCross and CrossingProject. |
 | D-BP-12 | Defer duplicate ResearchProgram; BrAPI Program remains authoritative. |
 | D-BP-13 | Retain the initial list/register/retrieve pipeline surface provisionally, make registration version-aware, and specify exact historical revision retrieval before normative promotion. |
-| D-BP-14 | Ratify Option A: optimistic compare-and-set for the single current published BreedingPipeline revision pointer, including atomic append/pointer transition, replay precedence, and stale-write conflict semantics. This remains a candidate contract decision pending behavioral implementation and conformance evidence. |
+| D-BP-14 | Ratified Option A: optimistic compare-and-set for the single current published BreedingPipeline revision pointer, including atomic append/pointer transition, replay precedence, and stale-write conflict semantics. It remains a candidate contract decision pending behavioral implementation and conformance evidence. |
 
 ## Authority and implementation boundary
 
