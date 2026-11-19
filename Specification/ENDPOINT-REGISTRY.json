@@ -26030,7 +26030,8 @@
         "brapi-genx.genx.v1.breeding-pipelines.record"
       ],
       "notes": [
-        "Published BreedingPipeline revisions are immutable. A new revision requires a new breedingPipelineVersionDbId; the stable breedingPipelineDbId continues to identify the workstream. Pipeline stage occupancy belongs to cohort/material execution under an exact scheme version, not to the pipeline."
+        "Published BreedingPipeline revisions are immutable. A new revision requires a new breedingPipelineVersionDbId; the stable breedingPipelineDbId continues to identify the workstream. Pipeline stage occupancy belongs to cohort/material execution under an exact scheme version, not to the pipeline.",
+        "The single-resource GET returns a revision payload, not the logical workstream projection; use the list endpoint for current and all-revision summaries. A default GET returns 404 when no current published revision exists; an exact version selector never falls back."
       ]
     },
     {
