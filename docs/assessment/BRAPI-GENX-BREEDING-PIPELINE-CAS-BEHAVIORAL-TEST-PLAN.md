@@ -3,7 +3,9 @@
 **Status:** Candidate acceptance plan; implementation-independent.  
 **Decision:** D-BP-14 — optimistic compare-and-set for the current published revision pointer.  
 **Canonical contract:** [RFC-154 §12.7](../../Specification/BrAPI-GenX/RFC-154-BreedingPipeline.md).  
-**Scope:** Behavioral evidence required before the CAS profile can be used as a normative interoperability guarantee.
+**Scope:** Behavioral evidence required before the CAS (Compare-and-Set) profile can be used as a normative interoperability guarantee.
+
+BrAPI (Breeding Application Programming Interface)-GenX is a specification project: this plan validates the contract against an independently implemented service, not a production application shipped by this repository.
 
 This plan defines externally observable behavior. It does not prescribe a database, transaction isolation level, locking strategy, programming language, or server architecture. A conforming implementation may use row locks, serializable transactions, conditional updates, or another mechanism, provided the externally observable results are equivalent.
 
@@ -20,7 +22,7 @@ The harness must be able to:
 - record response status, structured conflict code, request correlation ID, and resulting resource state;
 - repeat tests across separate service processes or replicas where the deployment supports them.
 
-The harness may use a test-only failpoint to verify transaction rollback. Such a failpoint is test infrastructure, not a production API requirement.
+The harness may use a test-only failpoint to verify transaction rollback. Such a failpoint is test infrastructure, not a production application programming interface (API) requirement.
 
 For every rejected mutation, capture a before/after state snapshot containing at least:
 
@@ -38,7 +40,7 @@ For every rejected mutation, capture a before/after state snapshot containing at
 
 **Expected result:**
 
-- HTTP 409 Conflict;
+- HTTP (Hypertext Transfer Protocol) 409 Conflict;
 - `errorCode=current-version-precondition-failed`;
 - no V4 revision is appended;
 - current pointer remains V3;
