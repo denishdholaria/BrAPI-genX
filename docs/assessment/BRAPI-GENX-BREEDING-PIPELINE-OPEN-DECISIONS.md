@@ -92,7 +92,7 @@ Source contracts:
 
 ## 6. Required evidence before normative promotion
 
-1. Maintainer ratification of the current-pointer concurrency model.
+1. Implement and behaviorally validate the ratified current-pointer concurrency model, including deterministic simultaneous publication, first-creation collisions, idempotent retries, and failure-atomicity tests.
 2. Approved publish/withdraw actor permissions and lifecycle audit behavior.
 3. Approved authority URI normalization, trusted-server onboarding, and dereferencing policy.
 4. Approved target-scale resolution timing and immutable scale-evidence profile.
