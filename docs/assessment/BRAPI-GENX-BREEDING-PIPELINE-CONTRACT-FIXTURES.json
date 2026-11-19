@@ -9532,7 +9532,7 @@
         ]
       },
       "scaleEvidence": {
-        "evidenceRecordId": "institute-a:target-scale-evidence:valid-target-scale-evidence-matches-numerical-category",
+        "evidenceRecordId": "institute-a:target-scale-evidence:invalid-target-scale-evidence-empty-numerical-categories",
         "pipelineContext": {
           "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
           "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
@@ -9733,7 +9733,7 @@
         ]
       },
       "scaleEvidence": {
-        "evidenceRecordId": "institute-a:target-scale-evidence:valid-target-scale-evidence-matches-numerical-category",
+        "evidenceRecordId": "institute-a:target-scale-evidence:invalid-target-scale-evidence-malformed-numerical-category",
         "pipelineContext": {
           "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
           "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
@@ -9940,7 +9940,7 @@
         ]
       },
       "scaleEvidence": {
-        "evidenceRecordId": "institute-a:target-scale-evidence:valid-target-scale-evidence-within-bounds",
+        "evidenceRecordId": "institute-a:target-scale-evidence:invalid-target-scale-evidence-reversed-scale-bounds",
         "pipelineContext": {
           "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
           "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
@@ -10141,7 +10141,7 @@
         ]
       },
       "scaleEvidence": {
-        "evidenceRecordId": "institute-a:target-scale-evidence:valid-target-scale-evidence-within-bounds",
+        "evidenceRecordId": "institute-a:target-scale-evidence:invalid-target-scale-evidence-timestamp-without-timezone",
         "pipelineContext": {
           "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
           "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
@@ -10342,7 +10342,7 @@
         ]
       },
       "scaleEvidence": {
-        "evidenceRecordId": "institute-a:target-scale-evidence:valid-target-scale-evidence-within-bounds",
+        "evidenceRecordId": "institute-a:target-scale-evidence:invalid-target-scale-evidence-retrieval-after-validation",
         "pipelineContext": {
           "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
           "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
