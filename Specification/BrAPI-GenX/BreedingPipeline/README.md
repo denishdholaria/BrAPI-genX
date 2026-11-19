@@ -2,7 +2,7 @@
 
 **Canonical design:** [RFC-154 — Breeding Pipeline](../RFC-154-BreedingPipeline.md)  
 **Historical predecessor:** [RFC-014 — Breeding Pipeline (Stage Gates)](../RFC-014-Breeding-Pipeline.md)  
-**Maintainer approval:** [D-BP-01 through D-BP-13](../../../docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-DECISIONS-APPROVED.md)
+**Maintainer decisions:** [D-BP-01 through D-BP-14](../../../docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-DECISIONS-APPROVED.md)
 
 ## Resource boundary
 
@@ -45,7 +45,7 @@ The existing list, register, and retrieve operations remain provisional. Before 
 No published revision may be changed in place. A substantive change requires a new version identity.
 
 
-## Candidate current-revision concurrency rule
+## Ratified candidate current-revision concurrency profile (D-BP-14)
 
 The draft registration envelope now carries `expectedCurrentBreedingPipelineVersionDbId` separately from the immutable `breedingPipelineVersion` payload. For an existing workstream, a new version must compare the expected pointer with the current published pointer atomically. Explicit null means no published version; omission is reserved for first creation or an identical same-version replay.
 
@@ -57,7 +57,7 @@ The candidate profile is:
 - a withdrawal appends a new immutable withdrawn revision and clears the pointer only when it identifies the exact current published version;
 - a stale or omitted expected pointer on an append returns HTTP 409 Conflict without changing revision history or current state.
 
-**Status:** candidate design and fixture coverage only. The compare-and-set behavior and publish/withdraw authorization policy require maintainer ratification and server transaction-level implementation before normative promotion. The fixture checker is not production conformance.
+**Status:** Option A (optimistic compare-and-set) is ratified as the candidate concurrency model under D-BP-14. The profile remains non-normative pending deterministic concurrent-service and transaction-level conformance. Publish/withdraw authorization and audit requirements remain separate maintainer gates. The fixture checker is not production conformance.
 
 ## Deliberate exclusions
 
