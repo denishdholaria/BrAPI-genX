@@ -10,6 +10,8 @@ from pathlib import Path
 
 import yaml
 
+from domain_classification import check_classification
+
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "Specification" / "ENDPOINT-REGISTRY.json"
 EXPECTED_V21 = 201
@@ -242,6 +244,7 @@ def check() -> list[str]:
     if cross.get("endpointsWithBrapiSpecificStaticSource", 0) > cross.get("endpointsWithAnyExactRouteDeclaration", 0):
         errors.append("BrAPI-specific static source count cannot exceed all exact route matches.")
 
+    errors.extend(check_classification(genx))
     return errors
 
 
