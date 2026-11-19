@@ -369,6 +369,14 @@ def run(root: Path) -> list[str]:
         "BreedingPipelineConflict.currentBreedingPipelineVersionDbId must be a nullable string.",
         errors,
     )
+    current_on_conflict_description = str(current_on_conflict.get("description", "")).lower()
+    require(
+        "authorized to read" in current_on_conflict_description
+        and "omitted" in current_on_conflict_description
+        and "null" in current_on_conflict_description,
+        "Conflict response must disclose the current pointer only to an authorized reader and distinguish omission from authorized null.",
+        errors,
+    )
     post_extension = post_operation.get("x-brapi-genx", {})
     idempotency_text = str(post_extension.get("idempotency", "")).lower()
     require(
