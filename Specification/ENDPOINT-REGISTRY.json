@@ -58785,7 +58785,7 @@
         "confidence": "medium"
       },
       "purpose": "Create a stable BreedingPipeline workstream and append its first immutable revision, or append a new immutable revision to an existing workstream.",
-      "sourceDescription": "Creates or references a stable workstream identity and registers one immutable pipeline revision. The outer breedingPipelineDbId must exactly match breedingPipelineVersion.breedingPipelineDbId; mismatch is rejected with 400 Bad Request. A new breedingPipelineVersionDbId is required for every additional revision. An append to an existing workstream supplies expectedCurrentBreedingPipelineVersionDbId as an atomic compare-and-set precondition; explicit null means no currently published revision. Drafts record their preparation baseline using basedOnBreedingPipelineVersionDbId; published successors and withdrawal revisions identify the exact current published revision through revisionRelationship.",
+      "sourceDescription": "Creates or references a stable workstream identity and registers one immutable pipeline revision. The outer breedingPipelineDbId must exactly match breedingPipelineVersion.breedingPipelineDbId; mismatch is rejected with 400 Bad Request. A new breedingPipelineVersionDbId is required for every additional revision. An append to an existing workstream supplies expectedCurrentBreedingPipelineVersionDbId as an atomic compare-and-set precondition; explicit null means no currently published revision. Drafts record their preparation baseline using basedOnBreedingPipelineVersionDbId and omit revisionRelationship; published successors use supersedes/corrects and withdrawal revisions use withdraws, each identifying the exact current published revision.",
       "canBeUsedFor": [
         "Register a stable workstream identity with a new immutable breedingPipelineVersionDbId.",
         "Retry an identical revision safely using the same breedingPipelineVersionDbId.",
@@ -58837,7 +58837,8 @@
       ],
       "notes": [
         "Published BreedingPipeline revisions are immutable. A new revision requires a new breedingPipelineVersionDbId; the stable breedingPipelineDbId continues to identify the workstream. Pipeline stage occupancy belongs to cohort/material execution under an exact scheme version, not to the pipeline.",
-        "D-BP-14 ratifies Option A (optimistic compare-and-set) as the candidate current-pointer concurrency model. It does not promote RFC-154 to normative status; concurrent service behavior and remaining authorization, authority, and measurement gates are outstanding."
+        "D-BP-14 ratifies Option A (optimistic compare-and-set) as the candidate current-pointer concurrency model. It does not promote RFC-154 to normative status; concurrent service behavior and remaining authorization, authority, and measurement gates are outstanding.",
+        "Lifecycle relationships are state-specific: drafts use basedOnBreedingPipelineVersionDbId and omit revisionRelationship; published successors use supersedes/corrects; withdrawal revisions use withdraws."
       ]
     },
     {
