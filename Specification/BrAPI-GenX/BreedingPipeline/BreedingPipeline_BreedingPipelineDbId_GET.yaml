@@ -43,22 +43,7 @@ paths:
       - $ref: '#/components/parameters/authorizationHeader'
       responses:
         '200':
-          content:
-            application/json:
-              schema:
-                properties:
-                  '@context':
-                    $ref: '#/components/schemas/Context'
-                  metadata:
-                    $ref: '#/components/schemas/metadata'
-                  result:
-                    $ref: '#/components/schemas/BreedingPipelineRevision'
-                required:
-                - metadata
-                - result
-                title: BreedingPipelineResponse
-                type: object
-          description: OK
+          $ref: '#/components/responses/BreedingPipelineResponse'
         '400':
           $ref: '#/components/responses/400BadRequest'
         '401':
