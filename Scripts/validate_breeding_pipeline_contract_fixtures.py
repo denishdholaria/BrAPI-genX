@@ -1006,17 +1006,18 @@ def validate_corpus(corpus: Any) -> list[str]:
     corpus_evidence_errors: dict[str, list[str]] = {}
     evidence_by_id: dict[str, dict[str, Any]] = {}
     for scenario_id, fixture in by_id.items():
-        evidence = as_object(fixture.get("scaleEvidence"))
-        evidence_id = evidence.get("evidenceRecordId")
-        if not nonempty_string(evidence_id):
-            continue
-        previous = evidence_by_id.get(evidence_id)
-        if previous is None:
-            evidence_by_id[evidence_id] = evidence
-        elif previous != evidence:
-            corpus_evidence_errors.setdefault(scenario_id, []).append(
-                "BM-SCALE-06: An evidenceRecordId must not identify different evidence content across fixtures."
-            )
+        for evidence_field in ("scaleEvidence", "evidenceBefore", "evidenceAfter"):
+            evidence = as_object(fixture.get(evidence_field))
+            evidence_id = evidence.get("evidenceRecordId")
+            if not nonempty_string(evidence_id):
+                continue
+            previous = evidence_by_id.get(evidence_id)
+            if previous is None:
+                evidence_by_id[evidence_id] = evidence
+            elif previous != evidence:
+                corpus_evidence_errors.setdefault(scenario_id, []).append(
+                    "BM-SCALE-06: An evidenceRecordId must not identify different evidence content across fixtures."
+                )
 
     valid_count = 0
     invalid_count = 0
@@ -1026,7 +1027,12 @@ def validate_corpus(corpus: Any) -> list[str]:
             errors.append(f"{scenario_id}: expectation must be valid or invalid")
             continue
         scenario_errors = validate_fixture(fixture)
-        scenario_errors.extend(corpus_evidence_errors.get(scenario_id, []))
+        detected_invariants = {error.split(":", 1)[0] for error in scenario_errors}
+        for corpus_error in corpus_evidence_errors.get(scenario_id, []):
+            invariant = corpus_error.split(":", 1)[0]
+            if invariant not in detected_invariants:
+                scenario_errors.append(corpus_error)
+                detected_invariants.add(invariant)
         expected_invariants = set(as_list(fixture.get("invariantIds")))
         error_invariants = {error.split(":", 1)[0] for error in scenario_errors}
 
