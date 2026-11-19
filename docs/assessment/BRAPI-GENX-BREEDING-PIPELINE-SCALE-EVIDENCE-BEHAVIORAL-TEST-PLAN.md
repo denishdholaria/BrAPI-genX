@@ -58,7 +58,7 @@ The selected authority, client authentication, tenant context, and persistence c
 
 **Action:** publish a target using an allowed value and another target using a value absent from the category set.
 
-**Expected result:** values are checked against the allowed category values, not treated as unrestricted continuous numeric values. The service documents its exact string/decimal matching semantics.
+**Expected result:** values are checked against the allowed category values, not treated as unrestricted continuous numeric values. For a Numerical Scale, the candidate profile parses category value strings as base-10 decimals and compares numeric decimal equality; labels are not values. This matching rule remains subject to maintainer approval.
 
 ### SCALE-EV-07 — decimal precision and exact representation
 
