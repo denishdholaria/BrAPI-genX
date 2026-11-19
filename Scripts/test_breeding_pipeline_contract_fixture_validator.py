@@ -38,6 +38,31 @@ class BreedingPipelineFixtureValidatorTests(unittest.TestCase):
     def test_current_corpus_is_consistent(self) -> None:
         self.assertEqual(validator.validate_corpus(copy.deepcopy(self.corpus)), [])
 
+    def test_valid_authority_filters_return_empty_errors(self) -> None:
+        fixture = self.scenario("valid-authority-qualified-filters-distinct-authorities")
+        result = validator.validate_authority_filter_request(fixture["authorityFilterRequest"])
+        self.assertIsInstance(result, list)
+        self.assertEqual(result, [])
+        self.assertEqual(validator.validate_fixture(fixture), [])
+
+    def test_authority_filter_requires_matching_server(self) -> None:
+        fixture = self.scenario("invalid-authority-filter-without-server")
+        errors = validator.validate_authority_filter_request(fixture["authorityFilterRequest"])
+        self.assertIn("BM-FILTER-01", self.codes(errors))
+        self.assertIn("BM-FILTER-01", self.codes(validator.validate_fixture(fixture)))
+
+    def test_population_filter_requires_resource_type(self) -> None:
+        fixture = self.scenario("invalid-population-filter-without-resource-type")
+        errors = validator.validate_authority_filter_request(fixture["authorityFilterRequest"])
+        self.assertIn("BM-FILTER-02", self.codes(errors))
+
+    def test_duplicate_authority_reference_tuple_is_rejected(self) -> None:
+        fixture = self.scenario("valid-authority-qualified-filters-distinct-authorities")
+        references = fixture["authorityFilterRequest"]["authorityReferences"]
+        references.append(copy.deepcopy(references[0]))
+        errors = validator.validate_authority_filter_request(fixture["authorityFilterRequest"])
+        self.assertIn("BM-FILTER-03", self.codes(errors))
+
     def test_known_good_scale_evidence(self) -> None:
         fixture = self.scenario("valid-target-scale-evidence-within-bounds")
         self.assertEqual(validator.validate_fixture(fixture), [])
