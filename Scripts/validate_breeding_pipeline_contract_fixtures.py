@@ -448,15 +448,12 @@ def validate_registration(registration: Any) -> list[str]:
                 "A first registration must omit the expected-current-version precondition.",
             )
         if request.get("logicalPipelineAlreadyExists") is True:
+            add(
+                errors,
+                "BM-REG-02",
+                "A concurrent first-create collision must not overwrite an existing logical pipeline; re-read and append under the expected-current precondition.",
+            )
             actual_outcome = "conflict"
-            if request.get("expectedOutcome") == "conflict":
-                validate_conflict_atomicity(request, errors)
-            else:
-                add(
-                    errors,
-                    "BM-REG-02",
-                    "A concurrent first-create collision must not overwrite an existing logical pipeline; re-read and append under the expected-current precondition.",
-                )
         else:
             actual_outcome = "create"
         expected_outcome = request.get("expectedOutcome")
