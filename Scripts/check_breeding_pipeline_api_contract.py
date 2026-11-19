@@ -375,6 +375,15 @@ def run(root: Path) -> list[str]:
         "BreedingPipeline single-resource GET must reuse the canonical success Response component.",
         errors,
     )
+    get_description = str(get_operation.get("description", "")).lower()
+    require(
+        "current published breedingpipelinerevision" in get_description
+        and "exact requested immutable revision" in get_description
+        and "404 when no current published revision exists" in get_description
+        and "list endpoint returns the logical workstream projection" in get_description,
+        "BreedingPipeline GET must distinguish revision retrieval from the logical workstream/list projection and define the no-current-revision outcome.",
+        errors,
+    )
     require(
         post_operation.get("responses", {}).get("409", {}).get("$ref")
         == "#/components/responses/BreedingPipelineConflictResponse",
