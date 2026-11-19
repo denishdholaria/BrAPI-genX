@@ -87,7 +87,7 @@ paths:
               $ref: '#/components/schemas/BreedingPipelineNewRequest'
       responses:
         '200':
-          $ref: '#/components/schemas/BreedingPipelineResponse'
+          $ref: '#/components/responses/BreedingPipelineResponse'
         '400':
           $ref: '#/components/responses/400BadRequest'
         '401':
@@ -100,7 +100,7 @@ paths:
       - BreedingPipeline
 components:
   schemas:
-    BreedingPipelineResponse:
+    BreedingPipelineRevisionEnvelope:
       type: object
       required: [metadata, result]
       properties:
@@ -125,6 +125,12 @@ components:
           nullable: true
           description: Current published revision at the time the conflict was detected, or null when none is published.
   responses:
+    BreedingPipelineResponse:
+      description: Successful registration; result is the immutable revision that was created or replayed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BreedingPipelineRevisionEnvelope'
     BreedingPipelineConflictResponse:
       description: |-
         Registration conflict. A version-content conflict means the same immutable
