@@ -8578,13 +8578,14 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> Retrieve the stable logical pipeline view or one exact immutable revision.
+> Retrieve the current published revision or one exact immutable revision of a stable pipeline workstream.
 **Source contract description:**
-> Returns the logical pipeline with current published revision by default, or the exact requested breedingPipelineVersionDbId revision, or 404.
+> Returns the current published BreedingPipelineRevision by default, or the exact requested immutable revision. The response result is a revision payload in both cases; the stable breedingPipelineDbId remains within it. A default request returns 404 when no current published revision exists. The list endpoint returns the logical workstream projection and revision summaries.
 **Can be used for:**
-- Inspect the stable workstream identity and its current published revision.
-- Retrieve a historically referenced exact pipeline revision.
+- Retrieve the current published revision for a known stable workstream identity.
+- Retrieve a specifically identified historical, draft, or withdrawn revision.
 **Must not be used for / explicit non-goals:**
+- Retrieve the logical workstream projection or revision-summary collection; use the list endpoint for those views.
 - Assuming a record is a BrAPI data resource.
 - Treating the current revision as a substitute for an explicitly requested historical revision.
 - **Side effects:** Read-only.
