@@ -235,7 +235,71 @@ A service implementation passes this profile only when:
 
 Record implementation name, version, test harness version, storage configuration, concurrency configuration, scenario results, and any deployment limitations with the conformance evidence.
 
-## 4. Explicit non-claims
+## 4. Candidate authorization and audit scenarios — pending D-22 and maintainer approval
+
+These scenarios are additional to CAS-01 through CAS-14. They express the candidate profile in RFC-154 §12.10; they are not ratified scope names or a substitute for the repository-wide authorization decision D-22. Execute them after the maintainer selects the identity/authorization deployment profile.
+
+### AUTH-01 — draft writer cannot publish
+
+**Initial state:** a principal is authorized to create drafts for pipeline P but is not authorized to publish.
+
+**Request:** submit a new revision with `publicationState=published`.
+
+**Expected result:**
+
+- authorization is denied;
+- no revision is appended and the current pointer is unchanged;
+- no successful publish audit event is emitted;
+- the response does not reveal the existence or current version of a resource outside the caller's read scope.
+
+### AUTH-02 — write-only caller does not receive current-pointer details
+
+**Initial state:** a caller is allowed to attempt a versioned write against pipeline P but is not authorized to read the pipeline's current state.
+
+**Request:** submit an append whose expected-current precondition is stale.
+
+**Expected result:**
+
+- the mutation is rejected;
+- the response may identify the conflict class needed to explain rejection, but omits `currentBreedingPipelineVersionDbId`;
+- no revision, pointer, or audit state is changed;
+- a caller with separate read permission may receive the current pointer in the conflict response.
+
+### AUTH-03 — authorization is rechecked before identical replay disclosure
+
+**Initial state:** a caller successfully publishes V4. Before retry, its read access to P or the exact revision is revoked.
+
+**Request:** resend the identical V4 registration request.
+
+**Expected result:**
+
+- the server performs fresh authentication and authorization;
+- it denies disclosure of the stored V4 result;
+- it does not create another revision or lifecycle event;
+- it does not disclose whether a protected revision exists beyond the minimum non-disclosing response required by the selected error profile.
+
+### AUTH-04 — delegated client and effective principal remain distinct
+
+**Initial state:** a service client acts under a delegated user's authority to publish V4.
+
+**Request:** publish V4 with a valid expected-current precondition.
+
+**Expected result:**
+
+- authorization evaluates the delegated effective principal and the authenticated client under the selected delegation policy;
+- the audit record preserves both identities rather than replacing one with the other;
+- no client-supplied actor/tenant header overrides the validated context;
+- the revision and audit evidence commit atomically.
+
+### AUTH-05 — permission revocation at the commit boundary
+
+**Initial state:** a caller has publish permission when a request begins. The test harness revokes that permission before the mutation's commit decision.
+
+**Expected result:** behavior follows the documented authorization decision point. Under the recommended immediate-revocation profile, the publication is denied and no revision, pointer, or successful audit event is committed. If the deployment uses versioned authorization decisions, evidence must identify the policy version and its documented revocation semantics.
+
+These scenarios must use the deployment's selected provider and policy profile. Do not invent universal permission token strings as part of the test harness.
+
+## 5. Explicit non-claims
 
 Passing this plan demonstrates the tested CAS behavior for the tested implementation and configuration. It does not prove:
 
