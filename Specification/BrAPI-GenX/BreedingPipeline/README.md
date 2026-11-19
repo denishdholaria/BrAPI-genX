@@ -67,6 +67,17 @@ The candidate profile is:
 
 The [Target-Scale Validation Evidence Candidate Design](../../../docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-TARGET-SCALE-EVIDENCE-DESIGN.md) defines a per-target immutable evidence model without adding a new endpoint or public schema field. The [Scale Evidence Behavioral Acceptance Plan](../../../docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-SCALE-EVIDENCE-BEHAVIORAL-TEST-PLAN.md) defines independent-service scenarios for remote resolution, snapshot immutability, transaction atomicity, and replay. Both remain non-normative and pending maintainer decisions.
 
+## Local fixture verification
+
+From the repository root, run the candidate fixture validator and its 19 independent standard-library mutation tests:
+
+```sh
+python Scripts/validate_breeding_pipeline_contract_fixtures.py
+python -m unittest discover -s Scripts -p 'test_breeding_pipeline_contract_fixture_validator.py' -v
+```
+
+The fixture loader rejects duplicate JSON object keys and non-standard numeric constants. These checks verify local contract-fixture behavior only; they do not establish production conformance, authority trust, or live-service transactional correctness. The regression suite has not yet been executed in this GitHub-only development session because the workflow jobs did not begin running steps.
+
 ## Deliberate exclusions
 
 This module does not introduce a pipeline-wide current stage, a generic workflow engine, standalone MarketSegment/ProductConcept/TPE APIs, or duplicate BrAPI Program, Cross, Germplasm, Pedigree, Trial, or Study resources.
