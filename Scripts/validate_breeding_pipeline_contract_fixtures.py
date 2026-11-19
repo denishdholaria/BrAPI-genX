@@ -402,6 +402,24 @@ def validate_execution_event(
 
 
 
+def validate_conflict_atomicity(request: dict[str, Any], errors: list[str]) -> None:
+    """Require rejected-registration fixtures to preserve history and pointer."""
+    before = request.get("stateBefore")
+    after = request.get("stateAfter")
+    if not isinstance(before, dict) or not isinstance(after, dict):
+        add(
+            errors,
+            "BM-REG-04",
+            "A conflict-behavior fixture must include stateBefore and stateAfter snapshots.",
+        )
+    elif before != after:
+        add(
+            errors,
+            "BM-REG-04",
+            "A rejected registration must not append revision history or mutate the current published pointer.",
+        )
+
+
 def validate_registration(registration: Any) -> list[str]:
     """Validate replay, append, publish, withdrawal, and current-pointer CAS semantics."""
     errors: list[str] = []
@@ -430,12 +448,15 @@ def validate_registration(registration: Any) -> list[str]:
                 "A first registration must omit the expected-current-version precondition.",
             )
         if request.get("logicalPipelineAlreadyExists") is True:
-            add(
-                errors,
-                "BM-REG-02",
-                "A concurrent first-create collision must not overwrite an existing logical pipeline; re-read and append under the expected-current precondition.",
-            )
             actual_outcome = "conflict"
+            if request.get("expectedOutcome") == "conflict":
+                validate_conflict_atomicity(request, errors)
+            else:
+                add(
+                    errors,
+                    "BM-REG-02",
+                    "A concurrent first-create collision must not overwrite an existing logical pipeline; re-read and append under the expected-current precondition.",
+                )
         else:
             actual_outcome = "create"
         expected_outcome = request.get("expectedOutcome")
@@ -496,6 +517,9 @@ def validate_registration(registration: Any) -> list[str]:
             )
             return errors
         if "expectedCurrentBreedingPipelineVersionDbId" not in request:
+            if request.get("expectedOutcome") == "conflict":
+                validate_conflict_atomicity(request, errors)
+                return errors
             add(
                 errors,
                 "BM-REG-02",
@@ -506,6 +530,9 @@ def validate_registration(registration: Any) -> list[str]:
         current_pointer = request.get("currentBreedingPipelineVersionDbId")
         expected_pointer = request.get("expectedCurrentBreedingPipelineVersionDbId")
         if expected_pointer != current_pointer:
+            if request.get("expectedOutcome") == "conflict":
+                validate_conflict_atomicity(request, errors)
+                return errors
             add(
                 errors,
                 "BM-REG-02",
@@ -820,6 +847,8 @@ def validate_corpus(corpus: Any) -> list[str]:
         "invalid-draft-claims-published-supersession",
         "invalid-cross-pipeline-revision-id-replay",
         "invalid-first-create-over-existing-logical-identity",
+        "valid-stale-publication-conflict-preserves-state",
+        "invalid-stale-publication-conflict-mutates-state",
     }
     missing = sorted(required - set(by_id))
     if missing:
