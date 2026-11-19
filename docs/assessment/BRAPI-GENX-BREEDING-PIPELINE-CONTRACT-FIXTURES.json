@@ -5125,7 +5125,7 @@
             "priorBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
           }
         },
-        "expectedOutcome": "publish",
+        "expectedOutcome": "reject",
         "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland"
       },
       "expectedFailure": "A revision publicationState must be one of draft, published, or withdrawn; unrecognized lifecycle states are rejected."
