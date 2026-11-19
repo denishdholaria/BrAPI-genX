@@ -1015,6 +1015,16 @@ def validate_corpus(corpus: Any) -> list[str]:
         "invalid-unknown-publication-state",
         "valid-stale-publication-conflict-preserves-state",
         "invalid-stale-publication-conflict-mutates-state",
+        "valid-target-scale-evidence-within-bounds",
+        "invalid-target-exceeds-scale-maximum",
+        "invalid-target-precision-exceeds-scale",
+        "invalid-quantitative-target-nonnumerical-scale",
+        "valid-draft-unresolved-scale-reference",
+        "invalid-published-unverified-scale-reference",
+        "invalid-authority-server-uri-with-userinfo",
+        "invalid-authority-server-uri-with-query",
+        "invalid-authority-server-uri-with-fragment",
+        "invalid-authority-server-uri-relative",
     }
     missing = sorted(required - set(by_id))
     if missing:
