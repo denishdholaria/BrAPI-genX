@@ -314,9 +314,9 @@ def run(root: Path) -> list[str]:
     )
     conflict_properties = conflict_schema.get("properties", {})
     require(
-        {"version-content-conflict", "current-version-precondition-failed", "revision-relationship-mismatch"}
+        {"version-content-conflict", "current-version-precondition-failed", "revision-relationship-mismatch", "pipeline-identity-conflict"}
         <= set(conflict_properties.get("errorCode", {}).get("enum", [])),
-        "BreedingPipelineConflict.errorCode must distinguish version content, current pointer, and withdrawal conflicts.",
+        "BreedingPipelineConflict.errorCode must distinguish revision content, current pointer, relationship, and logical-pipeline identity conflicts.",
         errors,
     )
     current_on_conflict = conflict_properties.get("currentBreedingPipelineVersionDbId", {})
