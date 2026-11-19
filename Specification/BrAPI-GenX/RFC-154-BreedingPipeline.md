@@ -254,7 +254,7 @@ The source server is the authoritative BrAPI v2.1 base URI. The exact `populatio
 These paired parameters are candidate wire semantics. Before normative promotion, conformance cases must prove that omitted authority/type pairs fail closed when an identifier filter is supplied, valid pairs resolve only against the identified server/resource type, and same-valued dbIds from different authorities remain distinct.
 
 
-### 12.7 Candidate current-revision compare-and-set profile — pending maintainer ratification
+### 12.7 Ratified candidate current-revision compare-and-set profile
 
 The following is the maintainer-ratified candidate concurrency profile for a single current published revision per stable BreedingPipeline identity. The maintainer selected Option A (optimistic compare-and-set) on 19 November 2026. This ratification adds a technical decision beyond D-BP-01 through D-BP-13; it does not promote RFC-154 to normative status.
 
