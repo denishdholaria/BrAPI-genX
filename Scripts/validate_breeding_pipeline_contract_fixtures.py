@@ -553,6 +553,12 @@ def validate_registration(registration: Any) -> list[str]:
             return errors
 
         state = incoming.get("publicationState")
+        if state not in {"draft", "published", "withdrawn"}:
+            add(
+                errors,
+                "BM-REG-03",
+                "Incoming revision publicationState must be draft, published, or withdrawn.",
+            )
         relationship_raw = incoming.get("revisionRelationship")
         relationship = as_object(relationship_raw)
         relationship_type = relationship.get("relationshipType")
@@ -876,6 +882,7 @@ def validate_corpus(corpus: Any) -> list[str]:
         "invalid-withdrawal-uses-supersedes-relationship",
         "invalid-published-revision-uses-withdraws-relationship",
         "invalid-published-revision-contains-draft-baseline",
+        "invalid-unknown-publication-state",
         "valid-stale-publication-conflict-preserves-state",
         "invalid-stale-publication-conflict-mutates-state",
     }
