@@ -878,6 +878,21 @@ def validate_scale_evidence(fixture: dict[str, Any], errors: list[str]) -> None:
         add(errors, "BM-SCALE-02", "Scale evidence decimalPlaces must be a non-negative integer or null.")
         decimal_places = None
 
+    category_values: set[Decimal] | None = None
+    raw_categories = valid_values.get("categories")
+    if raw_categories is not None:
+        if not isinstance(raw_categories, list) or not raw_categories:
+            add(errors, "BM-SCALE-03", "A category-governed Numerical Scale must provide a non-empty categories array.")
+            category_values = set()
+        else:
+            category_values = set()
+            for category_index, raw_category in enumerate(raw_categories):
+                category_value = as_object(raw_category).get("value")
+                if not isinstance(category_value, str) or not DECIMAL_RE.fullmatch(category_value):
+                    add(errors, "BM-SCALE-03", f"Numerical Scale category[{category_index}].value must be an exact decimal string.")
+                else:
+                    category_values.add(Decimal(category_value))
+
     bound_values: dict[str, Decimal] = {}
     for bound_name in ("minimumValue", "maximumValue"):
         if bound_name in valid_values:
@@ -904,6 +919,8 @@ def validate_scale_evidence(fixture: dict[str, Any], errors: list[str]) -> None:
             add(errors, "BM-SCALE-01", f"Target {field} is below Scale validValues.minimumValue.")
         if "maximumValue" in bound_values and number > bound_values["maximumValue"]:
             add(errors, "BM-SCALE-01", f"Target {field} is above Scale validValues.maximumValue.")
+        if category_values is not None and number not in category_values:
+            add(errors, "BM-SCALE-03", f"Target {field} does not match a permitted Numerical Scale category value.")
         if decimal_places is not None and fractional_digits > decimal_places:
             add(errors, "BM-SCALE-02", f"Target {field} requires more fractional precision than Scale decimalPlaces.")
 def validate_fixture(fixture: dict[str, Any]) -> list[str]:
@@ -1083,6 +1100,8 @@ def validate_corpus(corpus: Any) -> list[str]:
         "invalid-target-scale-evidence-mutates-same-id",
         "valid-target-scale-evidence-null-precision-and-unit",
         "valid-target-scale-evidence-nonzero-trait-index",
+        "valid-target-scale-evidence-matches-numerical-category",
+        "invalid-target-scale-evidence-not-in-numerical-categories",
     }
     missing = sorted(required - set(by_id))
     if missing:
