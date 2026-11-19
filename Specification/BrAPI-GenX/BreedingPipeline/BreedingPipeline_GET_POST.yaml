@@ -73,7 +73,7 @@ paths:
         semanticNeighbors:
           - "genxListBreedingPipelines"
           - "genxGetBreedingPipeline"
-        decisions: ["RFC-154", "D-BP-01", "D-BP-02", "D-BP-03", "D-BP-13"]
+        decisions: ["RFC-154", "D-BP-01", "D-BP-02", "D-BP-03", "D-BP-13", "D-BP-14"]
         proposalStatus: "draft-non-normative"
       summary: Register a breeding pipeline revision
       description: Creates or references a stable workstream identity and registers one immutable pipeline revision. A new breedingPipelineVersionDbId is required for every additional revision. An append to an existing workstream also supplies expectedCurrentBreedingPipelineVersionDbId as an atomic compare-and-set precondition; explicit null means no currently published revision. Draft revisions record their preparation baseline using basedOnBreedingPipelineVersionDbId and must not claim supersedes/corrects. Published successors and withdrawal revisions identify the exact current published revision through revisionRelationship.
@@ -87,22 +87,7 @@ paths:
               $ref: '#/components/schemas/BreedingPipelineNewRequest'
       responses:
         '200':
-          content:
-            application/json:
-              schema:
-                properties:
-                  '@context':
-                    $ref: '#/components/schemas/Context'
-                  metadata:
-                    $ref: '#/components/schemas/metadata'
-                  result:
-                    $ref: '#/components/schemas/BreedingPipelineRevision'
-                required:
-                - metadata
-                - result
-                title: BreedingPipelineResponse
-                type: object
-          description: OK
+          $ref: '#/components/schemas/BreedingPipelineResponse'
         '400':
           $ref: '#/components/responses/400BadRequest'
         '401':
