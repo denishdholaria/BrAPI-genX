@@ -126,7 +126,7 @@ components:
         currentBreedingPipelineVersionDbId:
           type: string
           nullable: true
-          description: Current published revision at the time the conflict was detected, or null when none is published.
+          description: Current published revision at conflict time, returned only when the caller is authorized to read the pipeline; omitted when pointer disclosure is not authorized, or null when authorized and no revision is currently published.
   responses:
     BreedingPipelineResponse:
       description: Successful registration; result is the immutable revision that was created or replayed.
@@ -140,7 +140,9 @@ components:
         revision identifier within one pipeline was submitted with different
         canonical content. current-version-precondition-failed means the
         workstream's current published pointer changed or the expected pointer
-        was omitted. revision-relationship-mismatch means the new published or
+        was omitted. The current pointer is included only when the caller
+        is authorized to read the pipeline; otherwise it is omitted.
+        revision-relationship-mismatch means the new published or
         withdrawn revision does not identify the exact current published version.
         pipeline-identity-conflict means another request created the logical
         pipeline first, or the version identifier is already bound to another
