@@ -743,6 +743,9 @@ def validate_authority_filter_request(value: Any) -> list[str]:
                 add(errors, "BM-FILTER-03", "Duplicate authority-qualified reference tuple.")
             seen_references.add(key)
 
+    return errors
+
+
 def _target_decimals(trait: dict[str, Any]) -> list[tuple[str, Decimal, int]]:
     """Return validated target values as (field, decimal, fractional_digits)."""
     values: list[tuple[str, Decimal, int]] = []
