@@ -30,7 +30,7 @@ RFC-154 §12.7 records the ratification and the strengthened candidate semantics
 
 A draft revision records its preparation baseline with `basedOnBreedingPipelineVersionDbId`; this is not a `revisionRelationship` and does not mean that the draft supersedes or corrects the current published revision. RFC-154 §12.4 and the candidate BreedingPipeline schema now express this separation. Candidate fixtures also reject a draft that claims a published supersession and require the baseline when a draft is appended over a published revision.
 
-Withdrawal remains a new immutable revision that identifies the exact current published version it withdraws. It does not mutate or delete that historical published revision.
+Withdrawal remains a new immutable revision that uses `revisionRelationship.relationshipType=withdraws` and identifies the exact current published version it withdraws. It does not mutate or delete that historical published revision. Drafts use `basedOnBreedingPipelineVersionDbId` and omit `revisionRelationship`; published successors use `supersedes` or `corrects`.
 
 This refinement does not change the ratified CAS model.
 ## 3. Publication and withdrawal authorization
