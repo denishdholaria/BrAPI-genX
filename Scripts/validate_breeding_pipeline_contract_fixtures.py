@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+from datetime import datetime
 from decimal import Decimal, InvalidOperation
 import sys
 from pathlib import Path
@@ -764,12 +765,21 @@ def validate_authority_filter_request(value: Any) -> list[str]:
     return values
 
 
-def validate_scale_evidence(fixture: dict[str, Any], errors: list[str]) -> None:
-    """Validate fixture-supplied Scale evidence without performing network dereferencing.
+def _parse_aware_timestamp(value: Any) -> datetime | None:
+    """Parse an ISO-8601 timestamp only when it includes an explicit UTC offset."""
+    if not isinstance(value, str) or not value.strip():
+        return None
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if parsed.tzinfo is None or parsed.utcoffset() is None:
+        return None
+    return parsed
 
-    Scale evidence is a test-evidence envelope, not an extension of the BrAPI
-    ObservationVariable or the BreedingPipeline target wire schema.
-    """
+
+def validate_scale_evidence(fixture: dict[str, Any], errors: list[str]) -> None:
+    """Validate fixture-supplied per-target evidence without network dereferencing."""
     revision = as_object(fixture.get("pipelineRevision"))
     state = revision.get("publicationState")
     validation_state = fixture.get("scaleValidationState")
@@ -779,11 +789,9 @@ def validate_scale_evidence(fixture: dict[str, Any], errors: list[str]) -> None:
     if validation_state is not None and validation_state not in ("verified", "unverified"):
         add(errors, "BM-SCALE-04", "scaleValidationState must be verified or unverified in this candidate fixture profile.")
         return
-
     if validation_state == "verified" and not has_evidence:
         add(errors, "BM-SCALE-04", "Verified target validation requires separate Scale evidence.")
         return
-
     if validation_state == "unverified":
         if state == "published":
             add(errors, "BM-SCALE-04", "Published quantitative targets require verified ObservationVariable Scale evidence.")
@@ -792,33 +800,83 @@ def validate_scale_evidence(fixture: dict[str, Any], errors: list[str]) -> None:
         if has_evidence:
             add(errors, "BM-SCALE-04", "An unverified fixture must not present Scale evidence as verified.")
         return
-
     if not has_evidence:
         return
 
-    evidence_reference = as_object(evidence.get("resourceReference"))
-    data_type = evidence.get("dataType")
-    decimal_places = evidence.get("decimalPlaces")
-    valid_values = as_object(evidence.get("validValues"))
+    evidence_id = evidence.get("evidenceRecordId")
+    pipeline_context = as_object(evidence.get("pipelineContext"))
+    target_binding = as_object(evidence.get("targetBinding"))
+    expected_pipeline = (revision.get("breedingPipelineDbId"), revision.get("breedingPipelineVersionDbId"))
+    supplied_pipeline = (pipeline_context.get("breedingPipelineDbId"), pipeline_context.get("breedingPipelineVersionDbId"))
+    target_context_id = target_binding.get("targetContextId")
+    target_index = target_binding.get("traitRequirementIndex")
+    if not nonempty_string(evidence_id) or supplied_pipeline != expected_pipeline:
+        add(errors, "BM-SCALE-05", "Evidence identity and pipelineContext must identify the exact immutable pipeline revision.")
+        return
+    if (
+        not nonempty_string(target_context_id)
+        or not isinstance(target_index, int)
+        or isinstance(target_index, bool)
+        or target_index < 0
+    ):
+        add(errors, "BM-SCALE-05", "Evidence targetBinding requires a targetContextId and non-negative integer traitRequirementIndex.")
+        return
 
+    matching_contexts = [
+        as_object(context)
+        for context in as_list(revision.get("targetContexts"))
+        if as_object(context).get("targetContextId") == target_context_id
+    ]
+    if len(matching_contexts) != 1:
+        add(errors, "BM-SCALE-05", "Evidence targetBinding must identify exactly one target context in the immutable revision.")
+        return
+    requirements = as_list(matching_contexts[0].get("traitRequirements"))
+    if target_index >= len(requirements):
+        add(errors, "BM-SCALE-05", "Evidence traitRequirementIndex is outside the selected target context.")
+        return
+    target = as_object(requirements[target_index])
+    target_reference = as_object(target.get("traitReference"))
+    evidence_reference = as_object(evidence.get("observationVariableReference"))
+    identity_keys = ("apiGeneration", "resourceType", "server", "dbId")
+    if any(target_reference.get(key) != evidence_reference.get(key) for key in identity_keys):
+        add(errors, "BM-SCALE-05", "Evidence ObservationVariable reference must exactly match the selected target authority-qualified traitReference.")
+        return
     if (
         evidence_reference.get("apiGeneration") != "brapi-v2.1"
         or evidence_reference.get("resourceType") != "ObservationVariable"
-        or not all(nonempty_string(evidence_reference.get(key)) for key in ("server", "dbId"))
+        or not nonempty_string(evidence_reference.get("server"))
+        or not nonempty_string(evidence_reference.get("dbId"))
     ):
-        add(errors, "BM-SCALE-01", "Scale evidence must identify one authority-qualified BrAPI v2.1 ObservationVariable.")
+        add(errors, "BM-SCALE-05", "Evidence must reference an authority-qualified BrAPI v2.1 ObservationVariable.")
         return
 
-    usable_decimal_places: int | None = None
-    if decimal_places is not None:
-        if (
-            isinstance(decimal_places, int)
-            and not isinstance(decimal_places, bool)
-            and decimal_places >= 0
-        ):
-            usable_decimal_places = decimal_places
-        else:
-            add(errors, "BM-SCALE-02", "Scale evidence decimalPlaces must be a non-negative integer or null.")
+    retrieved = _parse_aware_timestamp(evidence.get("sourceRetrievedAt"))
+    validated = _parse_aware_timestamp(evidence.get("validatedAt"))
+    profile = as_object(evidence.get("validationProfile"))
+    if (
+        retrieved is None
+        or validated is None
+        or retrieved > validated
+        or not nonempty_string(profile.get("profileId"))
+        or not nonempty_string(profile.get("profileVersion"))
+        or evidence.get("validationResult") != "passed"
+    ):
+        add(errors, "BM-SCALE-07", "A passed evidence record requires ordered timezone-aware timestamps and a versioned validation profile.")
+
+    projection = as_object(evidence.get("scaleProjection"))
+    data_type = projection.get("dataType")
+    decimal_places = projection.get("decimalPlaces")
+    valid_values = as_object(projection.get("validValues"))
+    if not projection:
+        add(errors, "BM-SCALE-01", "Evidence requires a non-empty Scale projection.")
+        return
+    if decimal_places is not None and (
+        not isinstance(decimal_places, int)
+        or isinstance(decimal_places, bool)
+        or decimal_places < 0
+    ):
+        add(errors, "BM-SCALE-02", "Scale evidence decimalPlaces must be a non-negative integer or null.")
+        decimal_places = None
 
     bound_values: dict[str, Decimal] = {}
     for bound_name in ("minimumValue", "maximumValue"):
@@ -828,7 +886,6 @@ def validate_scale_evidence(fixture: dict[str, Any], errors: list[str]) -> None:
                 add(errors, "BM-SCALE-01", f"Scale validValues.{bound_name} must be a decimal string.")
             else:
                 bound_values[bound_name] = Decimal(raw_bound)
-
     if (
         "minimumValue" in bound_values
         and "maximumValue" in bound_values
@@ -836,37 +893,19 @@ def validate_scale_evidence(fixture: dict[str, Any], errors: list[str]) -> None:
     ):
         add(errors, "BM-SCALE-01", "Scale minimumValue must not exceed maximumValue.")
 
-    target_rows: list[tuple[dict[str, Any], dict[str, Any], list[tuple[str, Decimal, int]]]] = []
-    for context in as_list(revision.get("targetContexts")):
-        for raw_target in as_list(as_object(context).get("traitRequirements")):
-            target = as_object(raw_target)
-            values = _target_decimals(target)
-            if values:
-                target_reference = as_object(target.get("traitReference"))
-                identity_keys = ("apiGeneration", "resourceType", "server", "dbId")
-                if any(target_reference.get(k) != evidence_reference.get(k) for k in identity_keys):
-                    add(errors, "BM-SCALE-01", "Scale evidence authority/resource identity must exactly match its quantitative target reference.")
-                target_rows.append((target, target_reference, values))
-
-    if not target_rows:
-        add(errors, "BM-SCALE-01", "Scale evidence was supplied without a quantitative ObservationVariable target.")
+    values = _target_decimals(target)
+    if not values:
+        add(errors, "BM-SCALE-01", "Evidence target binding must select a quantitative target requirement.")
         return
-
-    for target, target_reference, values in target_rows:
-        if target_reference.get("resourceType") != "ObservationVariable":
-            add(errors, "BM-SCALE-03", "Quantitative target Scale evidence requires an ObservationVariable reference.")
-        if data_type != "Numerical":
-            add(errors, "BM-SCALE-03", "Quantitative target requires dataType Numerical.")
-
-        for field, number, fractional_digits in values:
-            if "minimumValue" in bound_values and number < bound_values["minimumValue"]:
-                add(errors, "BM-SCALE-01", f"Target {field} is below Scale validValues.minimumValue.")
-            if "maximumValue" in bound_values and number > bound_values["maximumValue"]:
-                add(errors, "BM-SCALE-01", f"Target {field} is above Scale validValues.maximumValue.")
-            if usable_decimal_places is not None and fractional_digits > usable_decimal_places:
-                add(errors, "BM-SCALE-02", f"Target {field} requires more fractional precision than Scale decimalPlaces.")
-
-
+    if data_type != "Numerical":
+        add(errors, "BM-SCALE-03", "Quantitative target requires dataType Numerical.")
+    for field, number, fractional_digits in values:
+        if "minimumValue" in bound_values and number < bound_values["minimumValue"]:
+            add(errors, "BM-SCALE-01", f"Target {field} is below Scale validValues.minimumValue.")
+        if "maximumValue" in bound_values and number > bound_values["maximumValue"]:
+            add(errors, "BM-SCALE-01", f"Target {field} is above Scale validValues.maximumValue.")
+        if decimal_places is not None and fractional_digits > decimal_places:
+            add(errors, "BM-SCALE-02", f"Target {field} requires more fractional precision than Scale decimalPlaces.")
 def validate_fixture(fixture: dict[str, Any]) -> list[str]:
     """Validate one positive or negative candidate scenario."""
     errors: list[str] = []
@@ -905,8 +944,15 @@ def validate_fixture(fixture: dict[str, Any]) -> list[str]:
         ):
             add(errors, "BM-03", "Published scheme content changed without a new breedingSchemeVersionDbId.")
 
-    return errors
-    return errors
+    evidence_before = as_object(fixture.get("evidenceBefore"))
+    evidence_after = as_object(fixture.get("evidenceAfter"))
+    if evidence_before and evidence_after:
+        before_evidence_id = evidence_before.get("evidenceRecordId")
+        after_evidence_id = evidence_after.get("evidenceRecordId")
+        if before_evidence_id and before_evidence_id == after_evidence_id and evidence_before != evidence_after:
+            add(errors, "BM-SCALE-06", "An immutable evidenceRecordId must not identify different evidence content.")
+
+    return errors    return errors
 
 
 def validate_corpus(corpus: Any) -> list[str]:
@@ -1029,6 +1075,14 @@ def validate_corpus(corpus: Any) -> list[str]:
         "invalid-authority-server-uri-with-query",
         "invalid-authority-server-uri-with-fragment",
         "invalid-authority-server-uri-relative",
+        "invalid-target-scale-evidence-wrong-pipeline-revision",
+        "invalid-target-scale-evidence-wrong-target-context",
+        "invalid-target-scale-evidence-wrong-target-index",
+        "invalid-target-scale-evidence-wrong-observation-variable",
+        "invalid-target-scale-evidence-missing-provenance-metadata",
+        "invalid-target-scale-evidence-mutates-same-id",
+        "valid-target-scale-evidence-null-precision-and-unit",
+        "valid-target-scale-evidence-nonzero-trait-index",
     }
     missing = sorted(required - set(by_id))
     if missing:
