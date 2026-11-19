@@ -17,7 +17,6 @@ paths:
           - "Retrieve a specifically identified historical, draft, or withdrawn revision."
         mustNotBeUsedFor:
           - "Retrieve the logical workstream projection or revision-summary collection; use the list endpoint for those views."
-        mustNotBeUsedFor:
           - "Assuming a record is a BrAPI data resource."
           - "Treating the current revision as a substitute for an explicitly requested historical revision."
         sideEffects: "Read-only."
