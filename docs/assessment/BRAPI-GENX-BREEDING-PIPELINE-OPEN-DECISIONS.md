@@ -7,39 +7,25 @@
 
 This note separates the approved conceptual model from additional wire-level, authorization, authority-resolution, and measurement semantics that must be settled before RFC-154 can become normative.
 
-## 1. Immediate maintainer decision — current published revision concurrency
+## 1. Ratified candidate decision — current published revision concurrency
 
-### Problem
+**Maintainer decision: Option A — optimistic compare-and-set (CAS) approved on 19 November 2026.**
 
-The logical BreedingPipeline exposes one convenience pointer, `currentBreedingPipelineVersionDbId`, to identify the current published revision. Two clients can read revision v3 concurrently and then submit different published revisions. Without a concurrency rule, both may append successfully and the last pointer write can silently replace the other client's current revision. The immutable history remains, but the current pointer no longer expresses a deterministic update outcome.
+The maintainer approved retaining the candidate profile in RFC-154 §12.7. The ratification is limited to the concurrency model for a single current published revision per stable BreedingPipeline identity. It does not approve publication/withdrawal permissions, actor roles, audit-resource shape, authority onboarding/dereferencing, target-scale resolution, or normative RFC promotion.
 
-### Recommended choice: optimistic compare-and-set
+The normative intent of the ratified candidate profile is:
 
-Retain the candidate profile in RFC-154 §12.7:
+- First registration omits the expected-current precondition; creation of the workstream and first revision is atomic. Competing first creators cannot overwrite or silently append to the winner's workstream.
+- A new immutable revision under an existing workstream supplies the exact current published version, or explicit JSON `null` when none exists. Omission is not equivalent to null.
+- Replay lookup is scoped to the owning pipeline. An identical same-version retry is resolved before checking a now-stale expected pointer; the same version identity with different canonical content conflicts.
+- A new draft is appended only after a successful expected-pointer comparison and does not move the current published pointer. Its relationship records the declared baseline without implying that it supersedes the published revision.
+- Publication appends the immutable revision and advances the current pointer in one atomic commit. Withdrawal appends an immutable withdrawal revision and clears the pointer in one atomic commit.
+- A publication/withdrawal becomes effective at the successful atomic commit. Competing requests against the same baseline have at most one successful pointer transition; a stale loser receives HTTP 409 Conflict with no partial append or pointer mutation.
+- Persistence mechanisms may differ, but must prevent time-of-check/time-of-use races and provide equivalent externally observable semantics. Defined audit/outbox side effects must commit or roll back with the operation.
 
-- First registration creates the workstream and its first revision without an expected-current value.
-- A new revision under an existing workstream supplies the exact current revision observed by the client; explicit JSON `null` means no current published revision. Omission is not equivalent to null.
-- The expected-current precondition is outside the immutable revision payload and its replay fingerprint.
-- An identical retry using the same `breedingPipelineVersionDbId` and canonical revision body is replayed before checking a now-stale precondition.
-- A new draft appends without moving the current published pointer.
-- A new published revision atomically compares the expected pointer, appends the immutable revision, and advances the pointer.
-- A withdrawal revision identifies the exact current version being withdrawn, appends an immutable withdrawal revision, and clears the pointer atomically.
-- A stale or missing precondition for an existing workstream returns HTTP 409 Conflict and performs no append or pointer mutation.
+The current fixtures validate selected logical branches only. Before normative promotion, add deterministic two-writer race tests, first-creation collision tests, cross-pipeline version-ID collision tests, and assertions that a conflict leaves both revision history and the current pointer unchanged. These tests must distinguish contract fixture validation from actual concurrent service behavior.
 
-The revision body uses the repository's JSON Canonicalization Scheme (JCS), RFC 8785, for same-version replay comparison. This profile is a candidate recommendation only; it is not included in D-BP-01 through D-BP-13 and is not maintainer-ratified.
-
-### Alternatives
-
-| Option | Behavior | Assessment |
-|---|---|---|
-| A — Compare-and-set (recommended) | Client supplies the exact current pointer; append and pointer transition are atomic | Detects lost updates, preserves immutable history, makes concurrent publication outcomes explicit |
-| B — Server serialization / last write wins | Server serializes writes but accepts a stale client intent and lets the last publication replace the pointer | Simple client contract, but can silently lose an earlier publication intent |
-| C — Multiple current published revisions | Concurrent publications can remain current together | Requires changing the single current pointer into a collection or introducing a separate selection rule; retrieval and downstream consumers become more complex |
-
-**Recommendation:** choose A. If one current published revision is the logical model, the server must detect a stale client baseline rather than silently overwrite it.
-
-**Maintainer action:** ratify A, or reject it and select B or C. Until then, §12.7 remains explicitly candidate-only.
-
+RFC-154 §12.7 records the ratification and the strengthened candidate semantics. The approved D-BP-01 through D-BP-13 baseline remains unchanged; this decision is a separate, later technical ratification.
 ## 2. Publication and withdrawal authorization
 
 The contract must distinguish permission to create a draft from permission to publish or withdraw a strategy used by breeding operations.
