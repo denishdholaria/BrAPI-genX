@@ -166,6 +166,12 @@ def run(root: Path) -> list[str]:
         "BreedingPipelineRevision.programReference must use BrapiResourceReference.",
         errors,
     )
+    publication_state = revision.get("properties", {}).get("publicationState", {})
+    require(
+        set(publication_state.get("enum", [])) == {"draft", "published", "withdrawn"},
+        "BreedingPipelineRevision.publicationState must define exactly draft, published, and withdrawn.",
+        errors,
+    )
     revision_relationship = schema(bp_doc, "RevisionRelationship", bp_schema_path, errors)
     relationship_types = set(
         revision_relationship.get("properties", {}).get("relationshipType", {}).get("enum", [])
