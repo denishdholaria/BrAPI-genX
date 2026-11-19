@@ -14,7 +14,8 @@ Refine the BreedingPipeline target-scale and authority-reference contract withou
 5. Define immutable evidence binding to pipeline revision + target context + target requirement index; define the JCS preimage while leaving the cryptographic hash algorithm open under D-02.
 6. Check category-governed Numerical Scale values against permitted decimal category values as an explicitly unratified candidate rule.
 7. Keep the evidence record identity, wire link, endpoint/storage representation and retention as maintainer decisions; do not reuse Genotyping PipelineProvenance.
-7. Synchronize RFC-154, open-decision record, module readme, digest implementation documentation, and independent-service behavioral acceptance plan. Do not change official BrAPI v2.1 sources or unrelated operation catalogues.
+8. Synchronize RFC-154, open-decision record, module readme, digest implementation documentation, and independent-service behavioral acceptance plan. Do not change official BrAPI v2.1 sources or unrelated operation catalogues.
+9. Keep the fixture validator itself tested with mutation-based unit tests; reject ambiguous duplicate JSON keys and non-standard JSON numeric constants without extending the public API contract.
 
 ## Guardrails
 - No change to D-22 or D-24.
@@ -25,4 +26,15 @@ Refine the BreedingPipeline target-scale and authority-reference contract withou
 - Maintain the existing non-normative markers.
 
 ## Validation
-Run the fixture validator and static API contract checker locally if the environment is available. Also run JSON parsing, Python compilation, digest vector tests, Python fixture validation, and relevant specification checks. Report exact commands and outputs. If execution is unavailable, state that clearly.
+
+From the repository root, run:
+
+```sh
+python -m py_compile Scripts/validate_breeding_pipeline_contract_fixtures.py Scripts/test_breeding_pipeline_contract_fixture_validator.py
+python Scripts/validate_breeding_pipeline_contract_fixtures.py
+python -m unittest discover -s Scripts -p 'test_breeding_pipeline_contract_fixture_validator.py' -v
+```
+
+The third command runs the 19-test standard-library mutation regression suite. Execute the existing static API contract checker, digest-vector tests, and relevant specification checks separately. Report exact commands and outputs. The test suite has not been run in the remote GitHub-only editing environment; read-back or JavaScript mirrors are not equivalent to Python execution.
+
+The candidate fixture corpus contains 70 scenarios (16 valid, 54 invalid). Static evidence fixture checks cannot substitute for the independent-service Scale evidence and compare-and-set acceptance plans.
