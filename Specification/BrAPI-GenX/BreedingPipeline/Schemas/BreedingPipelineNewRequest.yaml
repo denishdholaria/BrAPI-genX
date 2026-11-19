@@ -18,7 +18,7 @@ components:
       properties:
         breedingPipelineDbId:
           type: string
-          description: Stable namespaced identity of the continuing pipeline workstream.
+          description: Stable namespaced identity of the continuing pipeline workstream. Must exactly match breedingPipelineVersion.breedingPipelineDbId; a mismatch is an invalid request and must be rejected with 400 Bad Request.
           example: institute-a:breeding-pipeline:bp-2026-001
         breedingPipelineVersion:
           description: Immutable revision payload. Scheme definitions are embedded in each scheme binding.
