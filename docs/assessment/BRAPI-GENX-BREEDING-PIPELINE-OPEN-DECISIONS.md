@@ -26,7 +26,13 @@ The normative intent of the ratified candidate profile is:
 The current fixtures validate selected logical branches only. Before normative promotion, add deterministic two-writer race tests, first-creation collision tests, cross-pipeline version-ID collision tests, and assertions that a conflict leaves both revision history and the current pointer unchanged. These tests must distinguish contract fixture validation from actual concurrent service behavior.
 
 RFC-154 §12.7 records the ratification and the strengthened candidate semantics. The approved D-BP-01 through D-BP-13 baseline remains unchanged; this decision is a separate, later technical ratification.
-## 2. Publication and withdrawal authorization
+## 2. Draft/withdrawal relationship semantics — clarification required
+
+The candidate CAS profile allows a draft revision to append against a current published baseline without moving the current pointer. It also says the draft may carry a `revisionRelationship` naming that baseline. The schema currently names the relationship type `supersedes` or `corrects`, which can incorrectly imply that an unpublished draft already supersedes or corrects the published revision.
+
+**Recommendation:** keep the historical baseline reference, but distinguish its meaning from a published successor relationship. Either introduce a clearly named `basedOnBreedingPipelineVersionDbId` for draft revisions and reserve `revisionRelationship` for published correction/supersession and withdrawal, or define a relationship type such as `basedOn` with explicit lifecycle constraints. Do not let a draft move the current pointer or claim to supersede the current published revision. This is a schema and semantics refinement to complete before normative promotion; it does not change the ratified CAS choice.
+
+## 3. Publication and withdrawal authorization
 
 The contract must distinguish permission to create a draft from permission to publish or withdraw a strategy used by breeding operations.
 
@@ -42,7 +48,7 @@ Do not hard-code scope token names until the repository's authorization model an
 
 **Open choice:** separate publish/withdraw permissions and an auditable event are recommended; final actor roles, delegation rules, and audit-resource shape remain to be approved.
 
-## 3. BrAPI server authority canonicalization and dereferencing
+## 4. BrAPI server authority canonicalization and dereferencing
 
 The reference envelope is approved in shape: BrAPI (Breeding Application Programming Interface) generation, exact resource type, authoritative server URI (Uniform Resource Identifier), and server-issued dbId. The canonical server identity and network dereferencing policy remain open.
 
@@ -60,7 +66,7 @@ The reference envelope is approved in shape: BrAPI (Breeding Application Program
 
 **Open choices:** whether production authorities must be HTTPS-only; how private/test HTTP authorities are registered; the internationalized DNS name profile; DNS rebinding and proxy rules; redirect policy; and whether authority onboarding is an administrator-managed trust registry or a tenant-controlled registry.
 
-## 4. Quantitative target validation against BrAPI Scale
+## 5. Quantitative target validation against BrAPI Scale
 
 The official BrAPI v2.1 schema defines an ObservationVariable as a unique combination of Trait, Method, and Scale. Its Scale defines `dataType`, `decimalPlaces`, `units`, and `validValues`; the v2.1 `minimumValue` and `maximumValue` fields are strings, while older `min` and `max` fields are deprecated.
 
@@ -83,7 +89,7 @@ Source contracts:
 
 **Open choice — exact precision and bounds:** confirm the meaning of decimalPlaces as a maximum reported precision for targets, whether min/max bounds are inclusive, and how scale changes are handled. No silent unit conversion or implicit rounding should occur.
 
-## 5. Required evidence before normative promotion
+## 6. Required evidence before normative promotion
 
 1. Maintainer ratification of the current-pointer concurrency model.
 2. Approved publish/withdraw actor permissions and lifecycle audit behavior.
@@ -92,7 +98,7 @@ Source contracts:
 5. Positive and negative contract fixtures for the approved choices.
 6. Behavior-level tests against a real implementation, including simultaneous publication attempts, replay after pointer movement, authority collisions, unavailable authority servers, wrong resource types, scale bounds, and precision.
 
-## 6. Status boundary
+## 7. Status boundary
 
 - D-BP-01 through D-BP-13 remain the only ratified breeding design decisions recorded in the approval file.
 - This note does not ratify the CAS profile or any other open technical choice.
