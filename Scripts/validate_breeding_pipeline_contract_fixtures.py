@@ -743,7 +743,7 @@ def validate_authority_filter_request(value: Any) -> list[str]:
                 add(errors, "BM-FILTER-03", "Duplicate authority-qualified reference tuple.")
             seen_references.add(key)
 
-  def _target_decimals(trait: dict[str, Any]) -> list[tuple[str, Decimal, int]]:
+def _target_decimals(trait: dict[str, Any]) -> list[tuple[str, Decimal, int]]:
     """Return validated target values as (field, decimal, fractional_digits)."""
     values: list[tuple[str, Decimal, int]] = []
     for key in ("threshold", "minimum", "maximum"):
@@ -969,7 +969,7 @@ def validate_fixture(fixture: dict[str, Any]) -> list[str]:
         if before_evidence_id and before_evidence_id == after_evidence_id and evidence_before != evidence_after:
             add(errors, "BM-SCALE-06", "An immutable evidenceRecordId must not identify different evidence content.")
 
-    return errors    return errors
+    return errors
 
 
 def validate_corpus(corpus: Any) -> list[str]:
@@ -1000,6 +1000,24 @@ def validate_corpus(corpus: Any) -> list[str]:
             continue
         by_id[scenario_id] = fixture
 
+    # Evidence record identifiers are immutable across the corpus, not just
+    # within one fixture's before/after pair. Identical repeated snapshots are
+    # allowed; reusing an identifier for different content is rejected.
+    corpus_evidence_errors: dict[str, list[str]] = {}
+    evidence_by_id: dict[str, dict[str, Any]] = {}
+    for scenario_id, fixture in by_id.items():
+        evidence = as_object(fixture.get("scaleEvidence"))
+        evidence_id = evidence.get("evidenceRecordId")
+        if not nonempty_string(evidence_id):
+            continue
+        previous = evidence_by_id.get(evidence_id)
+        if previous is None:
+            evidence_by_id[evidence_id] = evidence
+        elif previous != evidence:
+            corpus_evidence_errors.setdefault(scenario_id, []).append(
+                "BM-SCALE-06: An evidenceRecordId must not identify different evidence content across fixtures."
+            )
+
     valid_count = 0
     invalid_count = 0
     for scenario_id, fixture in by_id.items():
@@ -1008,6 +1026,7 @@ def validate_corpus(corpus: Any) -> list[str]:
             errors.append(f"{scenario_id}: expectation must be valid or invalid")
             continue
         scenario_errors = validate_fixture(fixture)
+        scenario_errors.extend(corpus_evidence_errors.get(scenario_id, []))
         expected_invariants = set(as_list(fixture.get("invariantIds")))
         error_invariants = {error.split(":", 1)[0] for error in scenario_errors}
 
@@ -1102,6 +1121,12 @@ def validate_corpus(corpus: Any) -> list[str]:
         "valid-target-scale-evidence-nonzero-trait-index",
         "valid-target-scale-evidence-matches-numerical-category",
         "invalid-target-scale-evidence-not-in-numerical-categories",
+        "invalid-target-scale-evidence-empty-numerical-categories",
+        "invalid-target-scale-evidence-malformed-numerical-category",
+        "invalid-target-scale-evidence-reversed-scale-bounds",
+        "invalid-target-scale-evidence-timestamp-without-timezone",
+        "invalid-target-scale-evidence-retrieval-after-validation",
+        "invalid-evidence-identity-reused-with-different-content",
     }
     missing = sorted(required - set(by_id))
     if missing:
