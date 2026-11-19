@@ -60,7 +60,7 @@ A PipelineRevision:
 
 A scheme binding identifies the exact breedingSchemeDbId and breedingSchemeVersionDbId, and may include a locally governed role such as principal or experimental. The role does not change the referenced scheme's identity.
 
-A new revision is registered under the existing breedingPipelineDbId by supplying a new breedingPipelineVersionDbId. Replaying the same version ID with an identical body returns the existing version. Reusing the same version ID with a different body is rejected with 409. A new version ID is required for every substantive published revision.
+A new revision is registered under the existing breedingPipelineDbId by supplying a new breedingPipelineVersionDbId. Replaying the same version ID with an identical body returns the existing version. Reusing the same version ID with a different body is rejected with 409. A new version ID is required for every substantive published revision. A draft revision may record the published baseline on which its work was prepared, but that relationship must not assert that the draft supersedes or corrects the published revision; the pointer remains unchanged. Use a distinct `basedOnBreedingPipelineVersionDbId` for that draft baseline, or an explicitly non-superseding `basedOn` relationship. Reserve `supersedes` and `corrects` for published revisions, and constrain withdrawal to identify the exact current published revision it withdraws.
 
 A published revision is immutable. Corrections preserve the original revision and are represented by a new revision with an explicit correction/supersession relationship. A mutable current-version pointer may be exposed as a convenience only; it must never be the only way to retrieve historical versions.
 
