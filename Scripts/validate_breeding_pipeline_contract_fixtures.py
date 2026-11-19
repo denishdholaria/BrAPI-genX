@@ -772,12 +772,12 @@ def validate_scale_evidence(fixture: dict[str, Any], errors: list[str]) -> None:
     """
     revision = as_object(fixture.get("pipelineRevision"))
     state = revision.get("publicationState")
-    validation_state = revision.get("targetValidationState")
+    validation_state = fixture.get("scaleValidationState")
     evidence = as_object(fixture.get("scaleEvidence"))
     has_evidence = bool(evidence)
 
     if validation_state not in {None, "verified", "unverified"}:
-        add(errors, "BM-SCALE-04", "targetValidationState must be verified or unverified in this candidate fixture profile.")
+        add(errors, "BM-SCALE-04", "scaleValidationState must be verified or unverified in this candidate fixture profile.")
         return
 
     if validation_state == "verified" and not has_evidence:
