@@ -118,6 +118,7 @@ components:
             - version-content-conflict
             - current-version-precondition-failed
             - revision-relationship-mismatch
+            - pipeline-identity-conflict
         message:
           type: string
         currentBreedingPipelineVersionDbId:
@@ -133,11 +134,16 @@ components:
             $ref: '#/components/schemas/BreedingPipelineRevisionEnvelope'
     BreedingPipelineConflictResponse:
       description: |-
-        Registration conflict. A version-content conflict means the same immutable
-        revision identifier was submitted with different canonical content. A
-        current-version precondition failure means the workstream's current
-        published pointer changed or the expected pointer was omitted. No append
-        or pointer mutation is performed for this request.
+        Registration conflict. version-content-conflict means the same immutable
+        revision identifier within one pipeline was submitted with different
+        canonical content. current-version-precondition-failed means the
+        workstream's current published pointer changed or the expected pointer
+        was omitted. revision-relationship-mismatch means the new published or
+        withdrawn revision does not identify the exact current published version.
+        pipeline-identity-conflict means another request created the logical
+        pipeline first, or the version identifier is already bound to another
+        logical pipeline. No revision append or current-pointer mutation is
+        performed for a rejected request.
       content:
         application/json:
           schema:
