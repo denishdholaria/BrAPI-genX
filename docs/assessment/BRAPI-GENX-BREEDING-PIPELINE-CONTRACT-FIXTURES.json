@@ -3246,7 +3246,7 @@
         "BM-REG-01",
         "BM-04"
       ],
-      "description": "A new immutable version ID appends a revision to an existing stable pipeline logical identity.",
+      "description": "A new draft revision appends under the same logical workstream, records the current published preparation baseline, and leaves the published pointer unchanged.",
       "registration": {
         "existingRevision": {
           "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
@@ -3655,10 +3655,7 @@
               }
             }
           ],
-          "revisionRelationship": {
-            "relationshipType": "supersedes",
-            "priorBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
-          }
+          "basedOnBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
         },
         "expectedOutcome": "append",
         "currentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
