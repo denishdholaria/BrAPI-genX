@@ -1,6 +1,6 @@
 # BrAPI-GenX — Breeding Pipeline and Scheme Decision Ratification
 
-**Status:** Maintainer-approved design decisions; recorded 18 November 2026.  
+**Status:** Maintainer-approved design decisions; D-BP-01 through D-BP-13 recorded 18 November 2026, with D-BP-14 ratified 19 November 2026.  
 **Workstream:** BGX-P1-06 — Approved candidate contract baseline.  
 **Scope:** D-BP-01 through D-BP-13.  
 **Normative status:** These decisions authorize preparation of normative specifications; they do not themselves promote an RFC to a released normative contract.
@@ -24,6 +24,7 @@ The maintainer explicitly approved the recommendations in the Breeding Pipeline 
 | D-BP-11 | Defer broad CrossingSchedule; reopen only for scheduling/booking semantics beyond BrAPI PlannedCross and CrossingProject. |
 | D-BP-12 | Defer duplicate ResearchProgram; BrAPI Program remains authoritative. |
 | D-BP-13 | Retain the initial list/register/retrieve pipeline surface provisionally, make registration version-aware, and specify exact historical revision retrieval before normative promotion. |
+| D-BP-14 | Ratify Option A: optimistic compare-and-set for the single current published BreedingPipeline revision pointer, including atomic append/pointer transition, replay precedence, and stale-write conflict semantics. This remains a candidate contract decision pending behavioral implementation and conformance evidence. |
 
 ## Authority and implementation boundary
 
@@ -35,6 +36,6 @@ The approval authorizes the next specification-development phase. It does not au
 
 RFC-154 is the canonical editorial surface for the approved candidate model. RFC-014 remains preserved as historical evidence. Related RFC dispositions are recorded in RFC-154 and must be reflected consistently in future catalogue and governance materials.
 
-The separate [Breeding Pipeline Open Maintainer Decisions](./BRAPI-GENX-BREEDING-PIPELINE-OPEN-DECISIONS.md) note records later technical recommendations and unresolved choices. It is advisory and must not be read as an extension of D-BP-01 through D-BP-13 approval.
+D-BP-14 is a separate technical ratification and does not change the scope or meaning of D-BP-01 through D-BP-13. The [Breeding Pipeline Open Maintainer Decisions](./BRAPI-GENX-BREEDING-PIPELINE-OPEN-DECISIONS.md) note records the remaining unratified authorization, authority, and measurement choices.
 
 All reversible contract-design work should proceed autonomously within these boundaries. Escalate only a genuinely new consequential decision not covered by D-BP-01 through D-BP-13.
