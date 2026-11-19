@@ -58785,7 +58785,7 @@
         "confidence": "medium"
       },
       "purpose": "Create a stable BreedingPipeline workstream and append its first immutable revision, or append a new immutable revision to an existing workstream.",
-      "sourceDescription": "Creates or references a stable workstream identity and registers one immutable pipeline revision. A new breedingPipelineVersionDbId is required for every additional revision. An append to an existing workstream supplies expectedCurrentBreedingPipelineVersionDbId as an atomic compare-and-set precondition; explicit null means no currently published revision. Drafts record their preparation baseline using basedOnBreedingPipelineVersionDbId; published successors and withdrawals identify the exact current published revision.",
+      "sourceDescription": "Creates or references a stable workstream identity and registers one immutable pipeline revision. A new breedingPipelineVersionDbId is required for every additional revision. An append to an existing workstream supplies expectedCurrentBreedingPipelineVersionDbId as an atomic compare-and-set precondition; explicit null means no currently published revision. Drafts record their preparation baseline using basedOnBreedingPipelineVersionDbId; published successors and withdrawal revisions identify the exact current published revision through revisionRelationship.",
       "canBeUsedFor": [
         "Register a stable workstream identity with a new immutable breedingPipelineVersionDbId.",
         "Retry an identical revision safely using the same breedingPipelineVersionDbId.",
