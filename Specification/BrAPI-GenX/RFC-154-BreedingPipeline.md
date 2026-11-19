@@ -215,9 +215,11 @@ The list response's `BreedingPipeline` item represents the stable logical identi
 
 ### 12.3 Single-resource retrieval
 
-`GET /breeding-pipelines/{breedingPipelineDbId}` without a version selector returns the logical identity and current published revision view. Supplying `breedingPipelineVersionDbId` selects that exact immutable revision. The response result is the `BreedingPipelineRevision` for both default and exact-version lookups; the stable logical identifier is retained within the revision object.
+`GET /breeding-pipelines/{breedingPipelineDbId}` without a version selector returns the current published `BreedingPipelineRevision` for that stable logical workstream. Supplying `breedingPipelineVersionDbId` selects that exact immutable revision, including a draft or withdrawn revision when the caller is authorized to retrieve it. The response result is `BreedingPipelineRevision` in both modes; the stable logical identifier is retained within the revision object.
 
-A missing logical identity returns 404. An unknown version under an existing logical identity also returns 404 and must not fall back silently to the current revision.
+This single-resource GET does not return the logical `BreedingPipeline` projection or its revision-summary collection. The list endpoint returns that stable workstream projection, including `currentRevisionSummary` and, when requested, `revisionSummaries`.
+
+A missing logical identity returns 404. When the logical workstream exists but has no current published revision, a default GET also returns 404; clients can discover the logical workstream through the list endpoint and retrieve a known draft or withdrawn version by its exact version selector. An unknown version, or a version not owned by the requested logical pipeline, returns 404 and must not fall back silently to the current revision.
 
 ### 12.4 Lifecycle and revision relationships
 
