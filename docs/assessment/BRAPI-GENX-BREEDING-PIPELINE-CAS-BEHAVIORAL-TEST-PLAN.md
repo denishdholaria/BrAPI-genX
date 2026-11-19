@@ -171,7 +171,7 @@ The test must be repeated with reversed client ordering and under realistic conc
 
 **Initial state:** pipeline P has current published revision V3.
 
-**Request:** append a new immutable withdrawn revision V4-W with expected-current V3 and a relationship identifying exactly V3.
+**Request:** append a new immutable withdrawn revision V4-W with expected-current V3 and `revisionRelationship.relationshipType=withdraws`, identifying exactly V3.
 
 **Expected result:**
 
