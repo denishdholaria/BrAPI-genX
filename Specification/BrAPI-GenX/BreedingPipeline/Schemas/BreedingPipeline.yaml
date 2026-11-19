@@ -147,7 +147,7 @@ components:
           enum: [draft, published, withdrawn]
         revisionRelationship:
           $ref: '#/components/schemas/RevisionRelationship'
-          description: Published successors and withdrawal revisions identify the exact prior current published version. Draft revisions must not use supersedes/corrects here.
+          description: Published successors use supersedes/corrects; withdrawn revisions use withdraws. Each identifies the exact prior current published version. Drafts must omit this property and use basedOnBreedingPipelineVersionDbId.
         basedOnBreedingPipelineVersionDbId:
           type: string
           description: For a draft revision only, the current published revision observed as its preparation baseline. This does not imply supersession and never advances the current published pointer.
@@ -366,10 +366,12 @@ components:
 
     RevisionRelationship:
       type: object
+      description: Lifecycle-specific relationship from a new immutable revision to the exact prior published revision. Draft preparation baselines use basedOnBreedingPipelineVersionDbId instead and do not use this object.
       required: [relationshipType, priorBreedingPipelineVersionDbId]
       properties:
         relationshipType:
           type: string
-          enum: [supersedes, corrects]
+          enum: [supersedes, corrects, withdraws]
+          description: Use supersedes or corrects for a published successor; use withdraws only for a withdrawn revision.
         priorBreedingPipelineVersionDbId:
           type: string
