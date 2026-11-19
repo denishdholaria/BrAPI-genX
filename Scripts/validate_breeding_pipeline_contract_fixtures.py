@@ -420,7 +420,8 @@ def validate_registration(registration: Any) -> list[str]:
         return errors
 
     # First registration creates the logical workstream; there is no current
-    # published version against which a precondition can be evaluated.
+    # published version against which a precondition can be evaluated. The
+    # logical-identity uniqueness race is represented separately by fixtures.
     if existing_raw is None:
         if "expectedCurrentBreedingPipelineVersionDbId" in request:
             add(
@@ -428,7 +429,15 @@ def validate_registration(registration: Any) -> list[str]:
                 "BM-REG-02",
                 "A first registration must omit the expected-current-version precondition.",
             )
-        actual_outcome = "create"
+        if request.get("logicalPipelineAlreadyExists") is True:
+            add(
+                errors,
+                "BM-REG-02",
+                "A concurrent first-create collision must not overwrite an existing logical pipeline; re-read and append under the expected-current precondition.",
+            )
+            actual_outcome = "conflict"
+        else:
+            actual_outcome = "create"
         expected_outcome = request.get("expectedOutcome")
         if nonempty_string(expected_outcome) and expected_outcome != actual_outcome:
             add(errors, "BM-REG-01", f"Registration fixture declares {expected_outcome!r}, expected {actual_outcome!r}.")
@@ -505,6 +514,21 @@ def validate_registration(registration: Any) -> list[str]:
             return errors
 
         state = incoming.get("publicationState")
+        relationship = as_object(incoming.get("revisionRelationship"))
+        based_on = incoming.get("basedOnBreedingPipelineVersionDbId")
+        if state == "draft":
+            if relationship.get("relationshipType") in {"supersedes", "corrects"}:
+                add(
+                    errors,
+                    "BM-REG-03",
+                    "A draft revision must not claim a published supersession/correction; use basedOnBreedingPipelineVersionDbId for its baseline.",
+                )
+            if based_on is not None and based_on != current_pointer:
+                add(
+                    errors,
+                    "BM-REG-03",
+                    "A draft baseline reference must identify the current published pointer observed by the request.",
+                )
         prior = as_object(incoming.get("revisionRelationship")).get(
             "priorBreedingPipelineVersionDbId"
         )
@@ -529,7 +553,14 @@ def validate_registration(registration: Any) -> list[str]:
             # published pointer. Multiple drafts may branch from one baseline.
             actual_outcome = "append"
     else:
-        actual_outcome = "create"
+        # Version identifiers are unique only within their owning logical
+        # pipeline; do not replay or disclose a different pipeline's revision.
+        actual_outcome = "conflict"
+        add(
+            errors,
+            "BM-REG-01",
+            "A version identifier collision across different pipeline identities must conflict and must not replay another pipeline's revision.",
+        )
 
     expected_outcome = request.get("expectedOutcome")
     if nonempty_string(expected_outcome) and expected_outcome != actual_outcome:
@@ -780,6 +811,9 @@ def validate_corpus(corpus: Any) -> list[str]:
         "invalid-published-revision-does-not-reference-current-version",
         "valid-withdrawal-references-current-version",
         "invalid-withdrawal-does-not-reference-current-version",
+        "invalid-draft-claims-published-supersession",
+        "invalid-cross-pipeline-revision-id-replay",
+        "invalid-first-create-over-existing-logical-identity",
     }
     missing = sorted(required - set(by_id))
     if missing:
