@@ -891,6 +891,7 @@ def validate_corpus(corpus: Any) -> list[str]:
         "invalid-withdrawal-uses-supersedes-relationship",
         "invalid-published-revision-uses-withdraws-relationship",
         "invalid-published-revision-contains-draft-baseline",
+        "invalid-published-revision-has-null-draft-baseline",
         "invalid-unknown-publication-state",
         "valid-stale-publication-conflict-preserves-state",
         "invalid-stale-publication-conflict-mutates-state",
