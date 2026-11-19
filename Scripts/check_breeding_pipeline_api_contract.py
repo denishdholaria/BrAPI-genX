@@ -301,6 +301,40 @@ def run(root: Path) -> list[str]:
         post_operation = {}
         pipeline_operations = {}
     require(
+        post_operation.get("responses", {}).get("200", {}).get("$ref")
+        == "#/components/responses/BreedingPipelineResponse",
+        "BreedingPipeline registration POST must reference the canonical success Response component.",
+        errors,
+    )
+    success_response = pipeline_operations.get("components", {}).get("responses", {}).get("BreedingPipelineResponse", {})
+    success_schema_ref = (
+        success_response.get("content", {}).get("application/json", {}).get("schema", {}).get("$ref")
+    )
+    require(
+        success_schema_ref == "#/components/schemas/BreedingPipelineRevisionEnvelope",
+        "BreedingPipelineResponse must wrap the canonical immutable revision envelope schema.",
+        errors,
+    )
+    success_envelope = schema(pipeline_operations, "BreedingPipelineRevisionEnvelope", pipeline_operations_path, errors)
+    require(
+        {"metadata", "result"} <= required_fields(success_envelope)
+        and ref_name(success_envelope.get("properties", {}).get("result")) == "BreedingPipelineRevision",
+        "BreedingPipelineRevisionEnvelope must require metadata and the exact immutable revision result.",
+        errors,
+    )
+    try:
+        get_operation_doc = load_yaml(bp_dir / "BreedingPipeline_BreedingPipelineDbId_GET.yaml")
+        get_operation = get_operation_doc.get("paths", {}).get("/breeding-pipelines/{breedingPipelineDbId}", {}).get("get", {})
+    except (OSError, yaml.YAMLError, ValueError) as exc:
+        errors.append(f"Cannot load BreedingPipeline exact-revision retrieval operation: {exc}")
+        get_operation = {}
+    require(
+        get_operation.get("responses", {}).get("200", {}).get("$ref")
+        == "#/components/responses/BreedingPipelineResponse",
+        "BreedingPipeline single-resource GET must reuse the canonical success Response component.",
+        errors,
+    )
+    require(
         post_operation.get("responses", {}).get("409", {}).get("$ref")
         == "#/components/responses/BreedingPipelineConflictResponse",
         "BreedingPipeline registration POST must document its structured 409 Conflict response.",
