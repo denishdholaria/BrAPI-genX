@@ -4253,7 +4253,7 @@
         "BM-REG-02",
         "BM-REG-03"
       ],
-      "description": "Withdrawing the current published revision is a new immutable revision tied to the exact current version and guarded by the matching precondition.",
+      "description": "A withdrawn revision uses the explicit withdraws relationship to identify the exact current published revision and clears the current pointer.",
       "registration": {
         "existingRevision": {
           "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
@@ -4267,7 +4267,7 @@
           "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3",
           "publicationState": "withdrawn",
           "revisionRelationship": {
-            "relationshipType": "supersedes",
+            "relationshipType": "withdraws",
             "priorBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
           }
         },
@@ -4281,7 +4281,7 @@
       "invariantIds": [
         "BM-REG-03"
       ],
-      "description": "A withdrawal revision cannot clear the current pointer unless it identifies the exact current published version being withdrawn.",
+      "description": "A withdrawal revision uses the correct withdraws relationship type but identifies a historical version other than the current published version.",
       "registration": {
         "existingRevision": {
           "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
@@ -4295,7 +4295,7 @@
           "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3",
           "publicationState": "withdrawn",
           "revisionRelationship": {
-            "relationshipType": "supersedes",
+            "relationshipType": "withdraws",
             "priorBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:1"
           }
         },
@@ -5012,6 +5012,94 @@
         "breedingPipelineDbId": "institute-a:breeding-pipeline:another-workstream"
       },
       "expectedFailure": "The outer breedingPipelineDbId does not match breedingPipelineVersion.breedingPipelineDbId."
+    },
+    {
+      "scenarioId": "invalid-withdrawal-uses-supersedes-relationship",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-REG-03"
+      ],
+      "description": "A withdrawal revision must use relationshipType withdraws rather than supersedes.",
+      "registration": {
+        "existingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+          "publicationState": "published"
+        },
+        "currentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "expectedCurrentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "incomingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3",
+          "publicationState": "withdrawn",
+          "revisionRelationship": {
+            "relationshipType": "supersedes",
+            "priorBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
+          }
+        },
+        "expectedOutcome": "withdraw",
+        "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland"
+      },
+      "expectedFailure": "A withdrawal revision must use relationshipType withdraws rather than supersedes."
+    },
+    {
+      "scenarioId": "invalid-published-revision-uses-withdraws-relationship",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-REG-03"
+      ],
+      "description": "A published successor must use supersedes or corrects, not the withdrawal-specific relationship type.",
+      "registration": {
+        "existingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+          "publicationState": "published"
+        },
+        "currentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "expectedCurrentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "incomingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3",
+          "publicationState": "published",
+          "revisionRelationship": {
+            "relationshipType": "withdraws",
+            "priorBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
+          }
+        },
+        "expectedOutcome": "publish",
+        "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland"
+      },
+      "expectedFailure": "A published successor must use supersedes or corrects, not the withdrawal-specific relationship type."
+    },
+    {
+      "scenarioId": "invalid-published-revision-contains-draft-baseline",
+      "expectation": "invalid",
+      "invariantIds": [
+        "BM-REG-03"
+      ],
+      "description": "A published revision must not carry the draft-only basedOnBreedingPipelineVersionDbId property.",
+      "registration": {
+        "existingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+          "publicationState": "published"
+        },
+        "currentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "expectedCurrentBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2",
+        "incomingRevision": {
+          "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland",
+          "breedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:3",
+          "publicationState": "published",
+          "revisionRelationship": {
+            "relationshipType": "supersedes",
+            "priorBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
+          },
+          "basedOnBreedingPipelineVersionDbId": "institute-a:breeding-pipeline-version:rice-lowland:2"
+        },
+        "expectedOutcome": "publish",
+        "breedingPipelineDbId": "institute-a:breeding-pipeline:rice-lowland"
+      },
+      "expectedFailure": "A published revision must not carry the draft-only basedOnBreedingPipelineVersionDbId property."
     }
   ]
 }
