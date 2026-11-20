@@ -8,49 +8,35 @@ components:
     BreedingPipelineNewRequest:
       type: object
       description: |-
-        Request to register one breeding pipeline record. Unknown breedingPipelineDbId
-        creates; same id with an identical body replays the existing record;
-        same id with a different body is rejected with 409.
-      required:
-      - breedingPipelineDbId
+        Create a stable BreedingPipeline and its first immutable revision, or append
+        a new immutable revision to an existing workstream. Registration replay
+        is keyed by breedingPipelineVersionDbId and compares the revision payload
+        using the JSON Canonicalization Scheme (RFC 8785). The expected-current
+        version is a separate compare-and-set precondition; it is not part of the
+        immutable revision payload or its replay fingerprint.
+      required: [breedingPipelineDbId, breedingPipelineVersion]
       properties:
         breedingPipelineDbId:
-          description: Namespaced breeding-pipeline identity `{authority}:breeding-pipeline:{localId}`
           type: string
+          description: Stable namespaced identity of the continuing pipeline workstream. Must exactly match breedingPipelineVersion.breedingPipelineDbId; a mismatch is an invalid request and must be rejected with 400 Bad Request.
           example: institute-a:breeding-pipeline:bp-2026-001
-        pipelineName:
-          description: Name of the breeding pipeline
+        breedingPipelineVersion:
+          description: Immutable revision payload. Scheme definitions are embedded in each scheme binding.
+          $ref: '#/components/schemas/BreedingPipelineRevision'
+        expectedCurrentBreedingPipelineVersionDbId:
           type: string
-          example: maize-recurrent-selection-2026
-        pipelineType:
-          description: Type of breeding pipeline
-          type: string
-          example: recurrent-selection
-        breedingProgram:
-          description: Reference to breeding program
-          type: string
-          example: institute-a:breeding-program:bp-2026-001
-        pipelineStage:
-          description: Current pipeline stage
-          type: string
-          example: advancement
-        targetTrait:
-          description: Target trait for selection
-          type: string
-          example: drought-tolerance
-        status:
-          description: Lifecycle state of the record
-          type: string
-          enum:
-          - active
-          - superseded
-          - withdrawn
-          default: active
-          example: active
-        supersedes:
-          description: breedingPipelineDbId of the record this one replaces
-          type: string
-          example: institute-a:breeding-pipeline:bp-2026-000
-        provenance:
-          description: Evidence and method provenance for the record
-          $ref: '#/components/schemas/ProvenanceEnvelope'
+          nullable: true
+          description: |-
+            Candidate compare-and-set precondition for appending to an existing
+            pipeline. Required when registering a new version under an existing
+            breedingPipelineDbId. It must equal the current published version
+            observed by the client; explicit null means the workstream currently
+            has no published revision. Omit only when creating a new logical
+            pipeline or retrying an identical breedingPipelineVersionDbId for
+            idempotent replay. The server compares this value atomically before
+            appending a new version and rejects a mismatch with 409 Conflict.
+            If two clients concurrently create the same logical pipeline, only
+            one creation may succeed; the other client must re-read and retry
+            as an append using this precondition. Replay lookup is scoped to
+            breedingPipelineDbId; a version-ID collision across pipelines must
+            conflict and must not disclose another pipeline's revision.

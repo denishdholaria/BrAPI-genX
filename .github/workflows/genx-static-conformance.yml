@@ -21,6 +21,13 @@ on:
       - 'Scripts/jcs-canonicalization/**'
       - 'Scripts/test_cross_language_jcs.py'
       - 'Scripts/genx_test_server.py'
+      - 'Scripts/validate_breeding_pipeline_candidate_fixtures.py'
+      - 'Scripts/validate_breeding_pipeline_contract_fixtures.py'
+      - 'Scripts/check_breeding_pipeline_api_contract.py'
+      - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
+      - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json'
+      - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-DECISIONS-APPROVED.md'
+      - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-OPEN-DECISIONS.md'
       - '.github/workflows/genx-static-conformance.yml'
   push:
     paths:
@@ -42,6 +49,13 @@ on:
       - 'Scripts/jcs-canonicalization/**'
       - 'Scripts/test_cross_language_jcs.py'
       - 'Scripts/genx_test_server.py'
+      - 'Scripts/validate_breeding_pipeline_candidate_fixtures.py'
+      - 'Scripts/validate_breeding_pipeline_contract_fixtures.py'
+      - 'Scripts/check_breeding_pipeline_api_contract.py'
+      - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
+      - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json'
+      - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-DECISIONS-APPROVED.md'
+      - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-OPEN-DECISIONS.md'
       - '.github/workflows/genx-static-conformance.yml'
   workflow_dispatch:
 
@@ -64,6 +78,12 @@ jobs:
           python-version: '3.12'
       - name: Install conformance dependencies
         run: python -m pip install 'PyYAML==6.0.2' 'rfc8785==0.1.4'
+      - name: Validate advisory breeding design fixtures
+        run: python3 Scripts/validate_breeding_pipeline_candidate_fixtures.py
+      - name: Validate approved-candidate breeding contract fixtures
+        run: python3 Scripts/validate_breeding_pipeline_contract_fixtures.py
+      - name: Check breeding pipeline OpenAPI and authority-filter contract
+        run: python Scripts/check_breeding_pipeline_api_contract.py
       - name: Run endpoint-identity mutation tests
         run: python Scripts/test_endpoint_identity.py
       - name: Run capability-negotiation mutation tests
@@ -104,6 +124,37 @@ jobs:
         run: python Scripts/auditEndpointRegistrySourceConsistency.py --plan-json
       - name: Verify generated endpoint catalogue and crosswalk
         run: python Scripts/generateEndpointArtifacts.py --check
+      - name: Collect static conformance failure diagnostics
+        if: failure()
+        run: |
+          set +e
+          run_check() {
+            echo ""
+            echo ">>> $*"
+            "$@" 2>&1
+            result=$?
+            echo "EXIT_STATUS=$result"
+          }
+          {
+            run_check python3 Scripts/validate_breeding_pipeline_candidate_fixtures.py
+            run_check python3 Scripts/validate_breeding_pipeline_contract_fixtures.py
+            run_check python Scripts/check_breeding_pipeline_api_contract.py
+            run_check python Scripts/test_endpoint_identity.py
+            run_check python Scripts/test_capability_negotiation.py
+            run_check python Scripts/test_job_idempotency.py
+            run_check python Scripts/checkGenXConformance.py
+            run_check python Scripts/checkGenXEndpointCatalog.py
+            run_check python Scripts/checkEndpointRegistry.py
+            run_check python Scripts/auditEndpointRegistrySourceConsistency.py --plan-json
+            run_check python Scripts/generateEndpointArtifacts.py --check
+          } | tee "$RUNNER_TEMP/genx-static-diagnostics.log"
+      - name: Upload static conformance diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: genx-static-conformance-diagnostics
+          path: ${{ runner.temp }}/genx-static-diagnostics.log
+          if-no-files-found: warn
 
   live-reference-conformance:
     runs-on: ubuntu-24.04
@@ -141,6 +192,19 @@ jobs:
           PY
       - name: Run live GenX conformance probes
         run: python Scripts/checkGenXConformance.py --server http://127.0.0.1:18080/genx/v1 --expired-job JOB_EXPIRED
+      - name: Collect live conformance failure diagnostics
+        if: failure()
+        run: |
+          set +e
+          python Scripts/checkGenXConformance.py --server http://127.0.0.1:18080/genx/v1 --expired-job JOB_EXPIRED 2>&1 | tee "$RUNNER_TEMP/genx-live-diagnostics.log"
+          echo "EXIT_STATUS=${PIPESTATUS[0]}"
+      - name: Upload live conformance diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: genx-live-conformance-diagnostics
+          path: ${{ runner.temp }}/genx-live-diagnostics.log
+          if-no-files-found: warn
       - name: Stop in-memory GenX reference server
         if: always()
         run: |

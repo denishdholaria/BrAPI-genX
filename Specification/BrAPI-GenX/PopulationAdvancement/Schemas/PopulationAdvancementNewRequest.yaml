@@ -8,59 +8,45 @@ components:
     PopulationAdvancementNewRequest:
       type: object
       description: |-
-        Request to record one population advancement. Unknown
-        populationAdvancementDbId creates; same id with an identical body
-        replays the existing record; same id with a different body is
-        rejected with 409.
-      required:
-      - populationAdvancementDbId
-      - programDbId
-      - populationDbId
-      - fromStage
-      - toStage
-      - advancedAt
+        Request to record one actual population advancement event. The
+        populationAdvancementDbId is immutable: identical replay is safe;
+        a different payload under the same identifier is rejected with 409.
+      required: [populationAdvancementDbId, programReference, populationReference, advancedAt]
       properties:
         populationAdvancementDbId:
           description: Namespaced population-advancement identity `{authority}:population-advancement:{localId}`
           type: string
           example: institute-a:population-advancement:pa-2026-001
-        programDbId:
-          description: BrAPI Program (breeding program)
-          type: string
-          example: institute-a:program:wheat-breeding
-        populationDbId:
-          description: BrAPI population or family reference
-          type: string
-          example: institute-a:population:f2-2026
-        fromStage:
-          description: Stage the population advanced from
-          type: string
-          example: F2
-        toStage:
-          description: Stage the population advanced to
-          type: string
-          example: F3
+        programReference:
+          description: Authority-qualified BrAPI Program reference.
+          $ref: '#/components/schemas/BrapiResourceReference'
+        populationReference:
+          description: Authority-qualified material reference; use BrAPI Germplasm when the population or family is represented as Germplasm.
+          $ref: '#/components/schemas/BrapiResourceReference'
+        pipelineContext:
+          description: Optional exact pipeline revision context when this event was governed by a registered pipeline.
+          $ref: '#/components/schemas/BreedingPipelineExecutionContext'
+        schemeContext:
+          description: Optional exact scheme-version context. Any supplied stage identifier must resolve in this exact version.
+          $ref: '#/components/schemas/BreedingSchemeExecutionContext'
         advancedAt:
-          description: Date of advancement (ISO-8601)
+          description: Date of actual advancement (ISO-8601).
           type: string
           format: date
           example: '2026-10-24'
         notes:
-          description: Human-readable notes
+          description: Human-readable notes about the actual progression event.
           type: string
           example: Selected lines advanced to F3.
         status:
-          description: Lifecycle state of the record
+          description: Lifecycle state of this immutable event record.
           type: string
-          enum:
-          - active
-          - superseded
+          enum: [active, superseded]
           default: active
-          example: active
         supersedes:
-          description: populationAdvancementDbId of the record this one replaces
+          description: populationAdvancementDbId of the event record this one corrects or supersedes.
           type: string
           example: institute-a:population-advancement:pa-2026-000
         provenance:
-          description: Evidence and method provenance for the advancement
+          description: Evidence and method provenance for the advancement.
           $ref: '#/components/schemas/ProvenanceEnvelope'

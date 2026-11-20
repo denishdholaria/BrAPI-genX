@@ -30,13 +30,33 @@ paths:
       description: Get a paged list of population advancements across authorities. Filters combine with AND.
       parameters:
       - name: programDbId
-        description: Filter by BrAPI Program (breeding program)
+        description: BrAPI Program identifier filter. This filter is valid only when paired with programServer.
         in: query
         required: false
         schema:
           type: string
+      - name: programServer
+        description: Authoritative BrAPI v2.1 server base URI that issued programDbId. Do not resolve an unqualified identifier by guessing the server.
+        in: query
+        required: false
+        schema:
+          type: string
+          format: uri
       - name: populationDbId
-        description: Filter by BrAPI population or family reference
+        description: Population or family identifier filter. This filter is valid only when paired with populationServer.
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: populationServer
+        description: Authoritative BrAPI v2.1 server base URI that issued populationDbId. Must be supplied with populationDbId and populationResourceType.
+        in: query
+        required: false
+        schema:
+          type: string
+          format: uri
+      - name: populationResourceType
+        description: Exact official BrAPI resource type that owns populationDbId (for example Germplasm). Must be supplied with populationDbId and populationServer; do not infer it from the identifier.
         in: query
         required: false
         schema:

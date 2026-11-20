@@ -86,10 +86,10 @@ modules:
     cross_cutting: ["C1", "C2", "C3", "C9"]
     rationale: "Breeding selection verdicts; BrAPI v2.1 has no equivalent record."
   - path: "BreedingPipeline/"
-    object: "BreedingPipeline"
+    object: "BreedingPipeline and embedded BreedingSchemeVersion"
     primary_class: "D2"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
-    rationale: "Breeding pipeline definitions with stage gates; BrAPI v2.1 has no equivalent record."
+    rationale: "BreedingPipeline owns the durable workstream; immutable revisions bind exact versioned scheme blueprints with scheme-local stages, directed transitions, and task definitions. Actual crossing, material, trial, study, and observation records remain owned by their authoritative BrAPI resources."
   - path: "ExperimentalDesign/"
     object: "ExperimentalDesign"
     primary_class: "D2"

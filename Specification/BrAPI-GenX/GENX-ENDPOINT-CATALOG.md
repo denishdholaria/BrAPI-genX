@@ -914,26 +914,27 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> List registered breeding pipeline records, optionally filtered by lifecycle status.
+> List stable BreedingPipeline workstream identities and their available revision summaries.
 **Source contract description:**
-> Get a paged list of registered breeding pipeline records. The optional status filter selects records by lifecycle state.
+> Get a paged list of stable pipeline workstream identities. By default, each logical pipeline is represented by its current published revision summary; includeRevisions=true includes all available revision summaries.
 **Can be used for:**
-- Discover registered breeding pipeline records.
-- Compare pipeline type, lifecycle status, and provenance across returned records.
+- Discover stable breeding-pipeline workstream identities.
+- Compare workstream purpose, current revision, and provenance across returned records.
+- Request revision summaries for a complete workstream history.
 **Must not be used for / explicit non-goals:**
 - Creating or changing a record (use the POST endpoint).
 - Assuming a record is a BrAPI data resource.
-- Treating the list as a complete history.
+- Treating the default current-revision view as a complete history.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
-- **Parameters recorded in registry:** status, page, pageSize, authorizationHeader
+- **Parameters recorded in registry:** includeRevisions, page, pageSize, authorizationHeader
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
-- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Response component refs recorded:** BreedingPipelineListResponse, 400BadRequest, 401Unauthorized, 403Forbidden
 - **Semantic relationship IDs / labels:** genxRegisterBreedingPipeline, genxGetBreedingPipeline
 - **Related catalogue IDs:** brapi-genx.genx.v1.breeding-pipelines.record, brapi-genx.genx.v1.breeding-pipelines.get
-- **Relevant RFC / decision references:** RFC-154
-- **Contract source:** [`Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml)
+- **Relevant RFC / decision references:** RFC-154, D-BP-01, D-BP-03, D-BP-13
+- **Contract source:** [`Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/implementation/bgx-p1-06-approved-breeding-contract/Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -949,26 +950,28 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> Register one breeding pipeline record with provenance.
+> Create a stable BreedingPipeline workstream and append its first immutable revision, or append a new immutable revision to an existing workstream.
 **Source contract description:**
-> Register one breeding pipeline record with provenance.
+> Creates or references a stable workstream identity and registers one immutable pipeline revision. The outer breedingPipelineDbId must exactly match breedingPipelineVersion.breedingPipelineDbId; mismatch is rejected with 400 Bad Request. A new breedingPipelineVersionDbId is required for every additional revision. An append to an existing workstream supplies expectedCurrentBreedingPipelineVersionDbId as an atomic compare-and-set precondition; explicit null means no currently published revision. Drafts record their preparation baseline using basedOnBreedingPipelineVersionDbId and omit revisionRelationship; published successors use supersedes/corrects and withdrawal revisions use withdraws, each identifying the exact current published revision.
 **Can be used for:**
-- Register a breeding pipeline record with its namespaced identity and provenance.
-- Retry an identical record safely using the same breedingPipelineDbId.
+- Register a stable workstream identity with a new immutable breedingPipelineVersionDbId.
+- Retry an identical revision safely using the same breedingPipelineVersionDbId.
+- Append a new version only when expectedCurrentBreedingPipelineVersionDbId matches the current published pointer.
 **Must not be used for / explicit non-goals:**
-- Updating or deleting an existing record; corrections require a new record that supersedes.
+- Mutating a published revision; substantive corrections require a new version identity.
 - Assuming a record is a BrAPI data resource.
 - Asserting that the catalogue is validated or endorsed.
-- **Side effects:** Creates a breeding pipeline identity or appends a new immutable version when accepted.
-- **Retry / idempotency:** Same breedingPipelineDbId and identical body replays the existing record; same id with a different body is rejected with 409.
+- Bypassing a stale or omitted expected-current precondition when appending to an existing workstream.
+- **Side effects:** Creates a stable workstream identity when unknown and appends one immutable revision. A published or withdrawn revision conditionally advances or clears the current published-version pointer using an atomic expected-current comparison.
+- **Retry / idempotency:** Replay is keyed by breedingPipelineVersionDbId and the immutable revision payload is compared using JCS (RFC 8785). An identical same-version replay is evaluated before the expected-current precondition and replays even when that precondition is now stale. The same version ID with a different payload is rejected with 409. A new version under an existing pipeline requires expectedCurrentBreedingPipelineVersionDbId (explicit null when no published version exists); the server atomically compares it with the current pointer before append. A stale or omitted precondition is rejected with 409 and no state change.
 - **Parameters recorded in registry:** authorizationHeader
 - **Request schema refs recorded:** BreedingPipelineNewRequest
-- **Response status codes recorded:** 200, 400, 401, 403
-- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
+- **Response status codes recorded:** 200, 400, 401, 403, 409
+- **Response component refs recorded:** BreedingPipelineResponse, 400BadRequest, 401Unauthorized, 403Forbidden, BreedingPipelineConflictResponse
 - **Semantic relationship IDs / labels:** genxListBreedingPipelines, genxGetBreedingPipeline
 - **Related catalogue IDs:** brapi-genx.genx.v1.breeding-pipelines.list, brapi-genx.genx.v1.breeding-pipelines.get
-- **Relevant RFC / decision references:** RFC-154
-- **Contract source:** [`Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml)
+- **Relevant RFC / decision references:** RFC-154, D-BP-01, D-BP-02, D-BP-03, D-BP-13, D-BP-14
+- **Contract source:** [`Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/implementation/bgx-p1-06-approved-breeding-contract/Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -984,24 +987,26 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Standard / proposal status:** `proposal-non-normative`
 - **Implementation status:** `reference-test-server-evidence-only`
 **Purpose:**
-> Retrieve one registered breeding pipeline.
+> Retrieve the current published revision or one exact immutable revision of a stable pipeline workstream.
 **Source contract description:**
-> Returns the registered record, or 404.
+> Returns the current published BreedingPipelineRevision by default, or the exact requested immutable revision. The response result is a revision payload in both cases; the stable breedingPipelineDbId remains within it. A default request returns 404 when no current published revision exists. The list endpoint returns the logical workstream projection and revision summaries.
 **Can be used for:**
-- Inspect a registered breeding pipeline record and its provenance.
+- Retrieve the current published revision for a known stable workstream identity.
+- Retrieve a specifically identified historical, draft, or withdrawn revision.
 **Must not be used for / explicit non-goals:**
+- Retrieve the logical workstream projection or revision-summary collection; use the list endpoint for those views.
 - Assuming a record is a BrAPI data resource.
-- Treating a superseded record as current.
+- Treating the current revision as a substitute for an explicitly requested historical revision.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
-- **Parameters recorded in registry:** breedingPipelineDbId, authorizationHeader
+- **Parameters recorded in registry:** breedingPipelineDbId, breedingPipelineVersionDbId, authorizationHeader
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
-- **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
+- **Response component refs recorded:** BreedingPipelineResponse, 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
 - **Semantic relationship IDs / labels:** genxRegisterBreedingPipeline, genxListBreedingPipelines
 - **Related catalogue IDs:** brapi-genx.genx.v1.breeding-pipelines.list, brapi-genx.genx.v1.breeding-pipelines.record
-- **Relevant RFC / decision references:** RFC-154
-- **Contract source:** [`Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_BreedingPipelineDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_BreedingPipelineDbId_GET.yaml)
+- **Relevant RFC / decision references:** RFC-154, D-BP-03, D-BP-13
+- **Contract source:** [`Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_BreedingPipelineDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/implementation/bgx-p1-06-approved-breeding-contract/Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_BreedingPipelineDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11024,14 +11029,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - Treating the list as a complete breeding program record.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
-- **Parameters recorded in registry:** programDbId, populationDbId, status, page, pageSize, authorizationHeader
+- **Parameters recorded in registry:** programDbId, programServer, populationDbId, populationServer, populationResourceType, status, page, pageSize, authorizationHeader
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
 - **Semantic relationship IDs / labels:** genxRecordPopulationAdvancement, genxGetPopulationAdvancement
 - **Related catalogue IDs:** brapi-genx.genx.v1.population-advancements.record, brapi-genx.genx.v1.population-advancements.get
 - **Relevant RFC / decision references:** RFC-035
-- **Contract source:** [`Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/implementation/bgx-p1-06-approved-breeding-contract/Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11066,7 +11071,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Semantic relationship IDs / labels:** genxListPopulationAdvancements, genxGetPopulationAdvancement
 - **Related catalogue IDs:** brapi-genx.genx.v1.population-advancements.list, brapi-genx.genx.v1.population-advancements.get
 - **Relevant RFC / decision references:** RFC-035
-- **Contract source:** [`Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/implementation/bgx-p1-06-approved-breeding-contract/Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11099,7 +11104,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Semantic relationship IDs / labels:** genxRecordPopulationAdvancement, genxListPopulationAdvancements
 - **Related catalogue IDs:** brapi-genx.genx.v1.population-advancements.list, brapi-genx.genx.v1.population-advancements.record
 - **Relevant RFC / decision references:** RFC-035
-- **Contract source:** [`Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_PopulationAdvancementDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_PopulationAdvancementDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_PopulationAdvancementDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/implementation/bgx-p1-06-approved-breeding-contract/Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_PopulationAdvancementDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13019,14 +13024,14 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - Treating the list as a complete breeding program record.
 - **Side effects:** Read-only.
 - **Retry / idempotency:** Read-only.
-- **Parameters recorded in registry:** programDbId, studyDbId, candidateGermplasmDbId, decision, page, pageSize, authorizationHeader
+- **Parameters recorded in registry:** programDbId, programServer, studyDbId, studyServer, candidateGermplasmDbId, candidateGermplasmServer, decision, page, pageSize, authorizationHeader
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
 - **Semantic relationship IDs / labels:** genxRecordSelectionDecision, genxGetSelectionDecision
 - **Related catalogue IDs:** brapi-genx.genx.v1.selection-decisions.record, brapi-genx.genx.v1.selection-decisions.get
 - **Relevant RFC / decision references:** RFC-008
-- **Contract source:** [`Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/implementation/bgx-p1-06-approved-breeding-contract/Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13061,7 +13066,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Semantic relationship IDs / labels:** genxListSelectionDecisions, genxGetSelectionDecision
 - **Related catalogue IDs:** brapi-genx.genx.v1.selection-decisions.list, brapi-genx.genx.v1.selection-decisions.get
 - **Relevant RFC / decision references:** RFC-008
-- **Contract source:** [`Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/implementation/bgx-p1-06-approved-breeding-contract/Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13094,7 +13099,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Semantic relationship IDs / labels:** genxRecordSelectionDecision, genxListSelectionDecisions
 - **Related catalogue IDs:** brapi-genx.genx.v1.selection-decisions.list, brapi-genx.genx.v1.selection-decisions.record
 - **Relevant RFC / decision references:** RFC-008
-- **Contract source:** [`Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_SelectionDecisionDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_SelectionDecisionDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_SelectionDecisionDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/implementation/bgx-p1-06-approved-breeding-contract/Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_SelectionDecisionDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 

@@ -1,19 +1,15 @@
-# BrAPI GenX — Selection Decisions (Breeding Verdicts)
+# BrAPI-GenX — Selection Decisions (Breeding Verdicts)
 
-Selection decisions record the verdict reached for a candidate in a breeding
-program or trial: selected, rejected, deferred, or advanced. They bind the
-candidate, the criterion, the decision maker, the evidence inputs, and the
-provenance of the decision, so that breeding history is auditable and
-reproducible. BrAPI v2.1 has no equivalent record; programs, trials, and
-observations exist, but the verdict and its rationale do not.
+SelectionDecision records an actual, immutable selection verdict and its rationale/evidence. It is not a planned selection rule or a scheme TaskDefinition.
 
-- `POST /genx/v1/selection-decisions` (`genxRecordSelectionDecision`) records
-  one `SelectionDecision` (`Schemas/SelectionDecisionNewRequest.yaml`). Same
-  `selectionDecisionDbId` + identical body replays; different body is
-  rejected with `409`.
-- `GET /genx/v1/selection-decisions` (`genxListSelectionDecisions`) lists
-  decisions, optionally filtered by program, study, candidate, or decision.
-- `GET /genx/v1/selection-decisions/{selectionDecisionDbId}`
-  (`genxGetSelectionDecision`) retrieves one decision.
+- The decision may reference an exact BreedingPipeline revision and exact BreedingScheme version when those definitions governed the decision.
+- `schemeContext` is optional and contains both `breedingSchemeDbId` and `breedingSchemeVersionDbId`. Any `stageId` must be nested inside this context and resolve within that exact scheme version.
+- `pipelineContext` is optional and contains both the stable pipeline ID and exact immutable pipeline revision. When both contexts are supplied, that pipeline revision must embed the referenced scheme version.
+- A decision made outside a registered pipeline or scheme may omit both contexts.
+- BrAPI Program, Study, Germplasm and Observation resources remain authoritative; references preserve their owning BrAPI server context.
 
-Details and falsifiers: `../RFC-008-Selection-Decisions.md`.
+The list filters require authority pairs: `programDbId` with `programServer`, `studyDbId` with `studyServer`, and `candidateGermplasmDbId` with `candidateGermplasmServer`. These are the authoritative BrAPI v2.1 server base URIs that issued the identifiers.
+
+The existing list, record, and retrieve operations remain non-normative until the referenced schema and conformance gates pass.
+
+Details: `../RFC-008-Selection-Decisions.md`.

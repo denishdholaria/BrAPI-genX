@@ -1,7 +1,8 @@
 # RFC-098 — Research Program (Reference Data)
 
-- Status: proposal, non-normative.
+- Status: deferred; retained as historical proposal.
 - Supersedes: none.
+- Decision: D-BP-12 — the duplicate ResearchProgram surface is deferred; BrAPI Program remains authoritative.
 - Related: RFC-001 (GenX skeleton), `CLASSIFICATION.md` (cross-cutting).
 
 ## 1. Problem

@@ -1,15 +1,9 @@
-# BrAPI-GenX — Research Program (Reference Data)
+# BrAPI-GenX — Research Program (Deferred)
 
-Research program records describe research programs.
-BrAPI v2.1 has no research program record.
+**Status:** Deferred by maintainer decision D-BP-12.
 
-- `POST /genx/v1/research-programs` (`genxRegisterResearchProgram`) registers one
-  `ResearchProgram` (`Schemas/ResearchProgramNewRequest.yaml`). Same
-  `researchProgramDbId` + identical body replays; different body is rejected
-  with `409`.
-- `GET /genx/v1/research-programs` (`genxListResearchPrograms`) lists records,
-  optionally filtered by status.
-- `GET /genx/v1/research-programs/{researchProgramDbId}`
-  (`genxGetResearchProgram`) retrieves one record.
+BrAPI Program already represents the relevant organizational/research/breeding-program context. The current ResearchProgram proposal duplicates that responsibility and must not be implemented or promoted as an independent GenX resource.
 
-Details and falsifiers: `../RFC-098-Research-Program.md`.
+Reopen only if a distinct portfolio, research-network, or governance concept is demonstrated with separate identity, authority, lifecycle, and relationships.
+
+Historical RFC: `../RFC-098-Research-Program.md`.

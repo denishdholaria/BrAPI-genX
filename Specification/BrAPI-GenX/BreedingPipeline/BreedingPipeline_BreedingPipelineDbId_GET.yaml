@@ -11,21 +11,23 @@ paths:
         classification:
           primaryDomain: "D2"
           crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
-        purpose: "Retrieve one registered breeding pipeline."
+        purpose: "Retrieve the current published revision or one exact immutable revision of a stable pipeline workstream."
         canBeUsedFor:
-          - "Inspect a registered breeding pipeline record and its provenance."
+          - "Retrieve the current published revision for a known stable workstream identity."
+          - "Retrieve a specifically identified historical, draft, or withdrawn revision."
         mustNotBeUsedFor:
+          - "Retrieve the logical workstream projection or revision-summary collection; use the list endpoint for those views."
           - "Assuming a record is a BrAPI data resource."
-          - "Treating a superseded record as current."
+          - "Treating the current revision as a substitute for an explicitly requested historical revision."
         sideEffects: "Read-only."
         idempotency: "Read-only."
         semanticNeighbors:
           - "genxRegisterBreedingPipeline"
           - "genxListBreedingPipelines"
-        decisions: ["RFC-154"]
+        decisions: ["RFC-154", "D-BP-03", "D-BP-13"]
         proposalStatus: "draft-non-normative"
       summary: Get one breeding pipeline
-      description: Returns the registered record, or 404.
+      description: Returns the current published BreedingPipelineRevision by default, or the exact requested immutable revision. The response result is a revision payload in both cases; the stable breedingPipelineDbId remains within it. A default request returns 404 when no current published revision exists. The list endpoint returns the logical workstream projection and revision summaries.
       parameters:
       - name: breedingPipelineDbId
         description: Namespaced breeding-pipeline identity `{authority}:breeding-pipeline:{localId}`
@@ -33,25 +35,16 @@ paths:
         required: true
         schema:
           type: string
+      - name: breedingPipelineVersionDbId
+        description: Optional exact immutable revision identifier, including draft or withdrawn history when authorized. When omitted, the current published revision is returned; if none exists, the server returns 404.
+        in: query
+        required: false
+        schema:
+          type: string
       - $ref: '#/components/parameters/authorizationHeader'
       responses:
         '200':
-          content:
-            application/json:
-              schema:
-                properties:
-                  '@context':
-                    $ref: '#/components/schemas/Context'
-                  metadata:
-                    $ref: '#/components/schemas/metadata'
-                  result:
-                    $ref: '#/components/schemas/BreedingPipeline'
-                required:
-                - metadata
-                - result
-                title: BreedingPipelineResponse
-                type: object
-          description: OK
+          $ref: '#/components/responses/BreedingPipelineResponse'
         '400':
           $ref: '#/components/responses/400BadRequest'
         '401':

@@ -5,52 +5,373 @@ openapi: 3.0.0
 paths: {}
 components:
   schemas:
-    BreedingPipeline:
+    BrapiResourceReference:
       type: object
-      description: |-
-        One immutable breeding pipeline record. A published (breedingPipelineDbId) record
-        never mutates in place; corrections are recorded as additional
-        records linked by supersedes.
-      required:
-      - breedingPipelineDbId
-      - status
+      description: Authority-qualified reference to an official BrAPI v2.1 resource.
+      required: [apiGeneration, resourceType, server, dbId]
+      properties:
+        apiGeneration:
+          type: string
+          enum: [brapi-v2.1]
+          description: BrAPI API generation that defines the referenced resource.
+          example: brapi-v2.1
+        resourceType:
+          type: string
+          description: Exact official BrAPI resource type name.
+          example: Program
+        server:
+          type: string
+          format: uri
+          description: Canonical base URI of the authoritative BrAPI server. Canonicalization and dereference rules are governed by RFC-154.
+          example: https://brapi.example.org/brapi/v2
+        dbId:
+          type: string
+          description: Identifier assigned by the referenced BrAPI server.
+          example: maize-program-2026
+
+    BreedingPipelineExecutionContext:
+      type: object
+      description: Exact immutable pipeline context for an execution event. Optional when the event was not governed by a registered pipeline.
+      required: [breedingPipelineDbId, breedingPipelineVersionDbId]
       properties:
         breedingPipelineDbId:
-          description: Namespaced breeding-pipeline identity `{authority}:breeding-pipeline:{localId}`
           type: string
+          description: Stable logical workstream identity.
+        breedingPipelineVersionDbId:
+          type: string
+          description: Exact immutable pipeline revision that governed the event.
+
+    BreedingSchemeExecutionContext:
+      type: object
+      description: Exact immutable scheme context for an execution event. Stage identifiers are local to this exact scheme version.
+      required: [breedingSchemeDbId, breedingSchemeVersionDbId]
+      properties:
+        breedingSchemeDbId:
+          type: string
+          description: Stable logical process-blueprint identity.
+        breedingSchemeVersionDbId:
+          type: string
+          description: Exact immutable scheme version that defines any supplied stage identifiers.
+        stageId:
+          type: string
+          description: Optional scheme-local stage identifier, used for an event associated with one stage.
+        fromStageId:
+          type: string
+          description: Optional scheme-local source stage identifier for a progression event.
+        toStageId:
+          type: string
+          description: Optional scheme-local destination stage identifier for a progression event.
+
+    BreedingPipeline:
+      type: object
+      description: Stable logical identity of a goal- and target-oriented breeding workstream. Version-specific content is represented by BreedingPipelineRevision.
+      required: [breedingPipelineDbId]
+      properties:
+        breedingPipelineDbId:
+          type: string
+          description: Stable namespaced identity of the continuing pipeline workstream.
           example: institute-a:breeding-pipeline:bp-2026-001
+        currentBreedingPipelineVersionDbId:
+          type: string
+          description: Optional convenience reference to the current published revision; historical retrieval uses an exact version ID.
+          example: institute-a:breeding-pipeline-version:bp-2026-001-v2
+        currentRevisionSummary:
+          description: Summary of the current published revision. Omitted when the workstream has no current published revision.
+          $ref: '#/components/schemas/BreedingPipelineRevisionSummary'
+        revisionSummaries:
+          type: array
+          description: All known revision summaries. Returned only when includeRevisions=true; these summaries do not contain full historical revision payloads.
+          items:
+            $ref: '#/components/schemas/BreedingPipelineRevisionSummary'
+        createdAt:
+          type: string
+          format: date-time
+        provenance:
+          $ref: '#/components/schemas/ProvenanceEnvelope'
+
+    BreedingPipelineRevisionSummary:
+      type: object
+      description: Lightweight metadata for one immutable pipeline revision. It is not a substitute for exact revision retrieval.
+      required: [breedingPipelineVersionDbId, publicationState]
+      properties:
+        breedingPipelineVersionDbId:
+          type: string
+          description: Exact immutable revision identifier.
         pipelineName:
-          description: Name of the breeding pipeline
+          type: string
+        purpose:
+          type: string
+        publicationState:
+          type: string
+          enum: [draft, published, withdrawn]
+        createdAt:
+          type: string
+          format: date-time
+        revisionRelationship:
+          $ref: '#/components/schemas/RevisionRelationship'
+
+    BreedingPipelineRevision:
+      type: object
+      description: Immutable snapshot of pipeline purpose, target contexts, and exact embedded scheme-version definitions.
+      required: [breedingPipelineDbId, breedingPipelineVersionDbId, programReference, publicationState]
+      properties:
+        breedingPipelineDbId:
+          type: string
+          description: Stable logical identity of the parent BreedingPipeline.
+          example: institute-a:breeding-pipeline:bp-2026-001
+        breedingPipelineVersionDbId:
+          type: string
+          description: Immutable revision identity; registration replay is keyed by this identifier.
+          example: institute-a:breeding-pipeline-version:bp-2026-001-v2
+        pipelineName:
           type: string
           example: maize-recurrent-selection-2026
-        pipelineType:
-          description: Type of breeding pipeline
+        purpose:
           type: string
-          example: recurrent-selection
-        breedingProgram:
-          description: Reference to breeding program
+          description: Breeding workstream purpose; vocabulary governance is defined by RFC-154.
+          example: population-improvement
+        programReference:
+          $ref: '#/components/schemas/BrapiResourceReference'
+        targetContexts:
+          type: array
+          description: Zero or more purpose-specific product, market, environment, and trait objectives.
+          items:
+            $ref: '#/components/schemas/BreedingTargetContext'
+        schemeBindings:
+          type: array
+          description: Zero or more exact scheme-version definitions adopted or evaluated by this pipeline revision. Each definition is embedded so this revision remains historically interpretable.
+          items:
+            $ref: '#/components/schemas/BreedingSchemeBinding'
+        publicationState:
           type: string
-          example: institute-a:breeding-program:bp-2026-001
-        pipelineStage:
-          description: Current pipeline stage
+          enum: [draft, published, withdrawn]
+        revisionRelationship:
+          $ref: '#/components/schemas/RevisionRelationship'
+          description: Published successors use supersedes/corrects; withdrawn revisions use withdraws. Each identifies the exact prior current published version. Drafts must omit this property and use basedOnBreedingPipelineVersionDbId.
+        basedOnBreedingPipelineVersionDbId:
           type: string
-          example: advancement
-        targetTrait:
-          description: Target trait for selection
-          type: string
-          example: drought-tolerance
-        status:
-          description: Lifecycle state of the record
-          type: string
-          enum:
-          - active
-          - superseded
-          - withdrawn
-          example: active
-        supersedes:
-          description: breedingPipelineDbId of the record this one replaces
-          type: string
-          example: institute-a:breeding-pipeline:bp-2026-000
+          description: For a draft revision only, the current published revision observed as its preparation baseline. This does not imply supersession and never advances the current published pointer.
         provenance:
-          description: Evidence and method provenance for the record
           $ref: '#/components/schemas/ProvenanceEnvelope'
+
+    BreedingScheme:
+      type: object
+      description: Stable logical identity of a process blueprint. The initial API does not expose separate Scheme endpoints.
+      required: [breedingSchemeDbId]
+      properties:
+        breedingSchemeDbId:
+          type: string
+          example: institute-a:breeding-scheme:maize-recurrent
+        schemeName:
+          type: string
+
+    BreedingSchemeBinding:
+      type: object
+      description: A relationship from one pipeline revision to one exact, embedded scheme version.
+      required: [breedingSchemeDbId, breedingSchemeVersionDbId, schemeVersion]
+      properties:
+        breedingSchemeDbId:
+          type: string
+          example: institute-a:breeding-scheme:maize-recurrent
+        breedingSchemeVersionDbId:
+          type: string
+          description: Must equal schemeVersion.breedingSchemeVersionDbId.
+          example: institute-a:breeding-scheme-version:maize-recurrent-v3
+        role:
+          type: string
+          description: Locally governed adoption role, such as principal or experimental.
+          example: principal
+        schemeVersion:
+          $ref: '#/components/schemas/BreedingSchemeVersion'
+
+    BreedingSchemeVersion:
+      type: object
+      description: Immutable process blueprint nested in the adopting PipelineRevision. Its logical and version identifiers must equal those on the containing BreedingSchemeBinding.
+      required: [breedingSchemeDbId, breedingSchemeVersionDbId, stages]
+      properties:
+        breedingSchemeDbId:
+          type: string
+        breedingSchemeVersionDbId:
+          type: string
+        versionLabel:
+          type: string
+        publicationState:
+          type: string
+          enum: [draft, published, withdrawn]
+        stages:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/StageDefinition'
+        transitions:
+          type: array
+          description: Zero or more directed permitted stage transitions; transition endpoints resolve only within this exact version.
+          items:
+            $ref: '#/components/schemas/StageTransition'
+        provenance:
+          $ref: '#/components/schemas/ProvenanceEnvelope'
+
+    BreedingTargetContext:
+      type: object
+      description: Bounded, purpose-specific target context; not an independent public resource in the initial design.
+      required: [targetContextId]
+      properties:
+        targetContextId:
+          type: string
+          description: Identifier unique within this pipeline revision.
+        productConcept:
+          type: object
+          properties:
+            reference:
+              type: string
+              format: uri
+              description: Optional authority-qualified external product-concept URI.
+            snapshot:
+              type: object
+              description: Bounded immutable descriptive snapshot used to interpret the historical target.
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                version:
+                  type: string
+                sourceAuthority:
+                  type: string
+                  format: uri
+        marketSegment:
+          type: object
+          properties:
+            reference:
+              type: string
+              format: uri
+            description:
+              type: string
+        targetPopulationOfEnvironments:
+          type: object
+          properties:
+            reference:
+              type: string
+              format: uri
+            description:
+              type: string
+        traitRequirements:
+          type: array
+          items:
+            $ref: '#/components/schemas/TargetTraitRequirement'
+        provenance:
+          $ref: '#/components/schemas/ProvenanceEnvelope'
+
+    TargetTraitRequirement:
+      type: object
+      description: |-
+        A directional breeding objective, not an observed value. A direction-only
+        objective may reference a BrAPI Trait. Any quantitative threshold or
+        range must reference a BrAPI ObservationVariable, because ObservationVariable
+        embeds its Trait, Method, and Scale. The referenced Scale is the source
+        of units, decimal precision, and valid-value constraints.
+      required: [traitReference, desiredDirection]
+      properties:
+        traitReference:
+          description: Authority-qualified BrAPI Trait or ObservationVariable reference. Numeric targets require resourceType ObservationVariable.
+          $ref: '#/components/schemas/BrapiResourceReference'
+        desiredDirection:
+          type: string
+          enum: [increase, decrease, maintain, target-range]
+        threshold:
+          type: number
+          description: Scalar numeric target using JSON number semantics. Do not combine with exactDecimal or range bounds.
+        minimum:
+          type: number
+          description: Inclusive lower numeric bound using JSON number semantics. Pair with maximum; do not combine with exact-decimal bounds.
+        maximum:
+          type: number
+          description: Inclusive upper numeric bound using JSON number semantics. Pair with minimum; do not combine with exact-decimal bounds.
+        exactDecimal:
+          type: string
+          pattern: '^-?[0-9]+(\.[0-9]+)?$'
+          description: Exact base-10 scalar target when JSON number semantics are insufficient. Use instead of threshold or range bounds.
+        minimumExactDecimal:
+          type: string
+          pattern: '^-?[0-9]+(\.[0-9]+)?$'
+          description: Exact base-10 inclusive lower range bound. Pair with maximumExactDecimal.
+        maximumExactDecimal:
+          type: string
+          pattern: '^-?[0-9]+(\.[0-9]+)?$'
+          description: Exact base-10 inclusive upper range bound. Pair with minimumExactDecimal.
+
+    StageDefinition:
+      type: object
+      required: [stageId, label]
+      properties:
+        stageId:
+          type: string
+          description: Unique only within this exact BreedingSchemeVersion.
+        label:
+          type: string
+        description:
+          type: string
+        localCode:
+          type: string
+        displayOrder:
+          type: integer
+          description: Presentation hint only; not process semantics.
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskDefinition'
+
+    StageTransition:
+      type: object
+      required: [transitionId, fromStageId, toStageId, transitionType]
+      properties:
+        transitionId:
+          type: string
+          description: Unique only within this exact BreedingSchemeVersion.
+        fromStageId:
+          type: string
+        toStageId:
+          type: string
+        transitionType:
+          type: string
+          enum: [advance, branch, recurrent, other]
+        description:
+          type: string
+        criteriaReference:
+          type: string
+        tasks:
+          type: array
+          description: Optional task definitions associated with this transition or gate.
+          items:
+            $ref: '#/components/schemas/TaskDefinition'
+
+    TaskDefinition:
+      type: object
+      required: [taskId, activityCategory]
+      properties:
+        taskId:
+          type: string
+          description: Unique only within this exact BreedingSchemeVersion, including tasks nested on stages and transitions.
+        activityCategory:
+          type: string
+          enum: [crossing, generation-advancement, multiplication, evaluation, selection]
+        description:
+          type: string
+        methodReference:
+          $ref: '#/components/schemas/BrapiResourceReference'
+        expectedEvidence:
+          type: array
+          items:
+            type: string
+
+    RevisionRelationship:
+      type: object
+      description: Lifecycle-specific relationship from a new immutable revision to the exact prior published revision. Draft preparation baselines use basedOnBreedingPipelineVersionDbId instead and do not use this object.
+      required: [relationshipType, priorBreedingPipelineVersionDbId]
+      properties:
+        relationshipType:
+          type: string
+          enum: [supersedes, corrects, withdraws]
+          description: Use supersedes or corrects for a published successor; use withdraws only for a withdrawn revision.
+        priorBreedingPipelineVersionDbId:
+          type: string

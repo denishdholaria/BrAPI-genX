@@ -11,34 +11,32 @@ paths:
         classification:
           primaryDomain: "D2"
           crossCuttingCapabilities: ["C1", "C2", "C6", "C9"]
-        purpose: "List registered breeding pipeline records, optionally filtered by lifecycle status."
+        purpose: "List stable BreedingPipeline workstream identities and their available revision summaries."
         canBeUsedFor:
-          - "Discover registered breeding pipeline records."
-          - "Compare pipeline type, lifecycle status, and provenance across returned records."
+          - "Discover stable breeding-pipeline workstream identities."
+          - "Compare workstream purpose, current revision, and provenance across returned records."
+          - "Request revision summaries for a complete workstream history."
         mustNotBeUsedFor:
           - "Creating or changing a record (use the POST endpoint)."
           - "Assuming a record is a BrAPI data resource."
-          - "Treating the list as a complete history."
+          - "Treating the default current-revision view as a complete history."
         sideEffects: "Read-only."
         idempotency: "Read-only."
         semanticNeighbors:
           - "genxRegisterBreedingPipeline"
           - "genxGetBreedingPipeline"
-        decisions: ["RFC-154"]
+        decisions: ["RFC-154", "D-BP-01", "D-BP-03", "D-BP-13"]
         proposalStatus: "draft-non-normative"
       summary: List breeding pipelines
-      description: Get a paged list of registered breeding pipeline records. The optional status filter selects records by lifecycle state.
+      description: Get a paged list of stable pipeline workstream identities. By default, each item includes its currentRevisionSummary when a current published revision exists. includeRevisions=true additionally returns revisionSummaries for all known immutable revisions; the summaries do not include full historical revision payloads.
       parameters:
-      - name: status
-        description: Filter by lifecycle state
+      - name: includeRevisions
+        description: When true, include all known revision summaries for each logical pipeline. When false or omitted, return the current published revision summary only.
         in: query
         required: false
         schema:
-          type: string
-          enum:
-          - active
-          - superseded
-          - withdrawn
+          type: boolean
+          default: false
       - $ref: '#/components/parameters/page'
       - $ref: '#/components/parameters/pageSize'
       - $ref: '#/components/parameters/authorizationHeader'
@@ -60,23 +58,25 @@ paths:
         classification:
           primaryDomain: "D2"
           crossCuttingCapabilities: ["C1", "C2", "C3", "C6", "C9"]
-        purpose: "Register one breeding pipeline record with provenance."
+        purpose: "Create a stable BreedingPipeline workstream and append its first immutable revision, or append a new immutable revision to an existing workstream."
         canBeUsedFor:
-          - "Register a breeding pipeline record with its namespaced identity and provenance."
-          - "Retry an identical record safely using the same breedingPipelineDbId."
+          - "Register a stable workstream identity with a new immutable breedingPipelineVersionDbId."
+          - "Retry an identical revision safely using the same breedingPipelineVersionDbId."
+          - "Append a new version only when expectedCurrentBreedingPipelineVersionDbId matches the current published pointer."
         mustNotBeUsedFor:
-          - "Updating or deleting an existing record; corrections require a new record that supersedes."
+          - "Mutating a published revision; substantive corrections require a new version identity."
           - "Assuming a record is a BrAPI data resource."
           - "Asserting that the catalogue is validated or endorsed."
-        sideEffects: "Creates a breeding pipeline identity or appends a new immutable version when accepted."
-        idempotency: "Same breedingPipelineDbId and identical body replays the existing record; same id with a different body is rejected with 409."
+          - "Bypassing a stale or omitted expected-current precondition when appending to an existing workstream."
+        sideEffects: "Creates a stable workstream identity when unknown and appends one immutable revision. A published or withdrawn revision conditionally advances or clears the current published-version pointer using an atomic expected-current comparison."
+        idempotency: "Replay is keyed by breedingPipelineVersionDbId and the immutable revision payload is compared using JCS (RFC 8785). An identical same-version replay is evaluated before the expected-current precondition and replays even when that precondition is now stale. The same version ID with a different payload is rejected with 409. A new version under an existing pipeline requires expectedCurrentBreedingPipelineVersionDbId (explicit null when no published version exists); the server atomically compares it with the current pointer before append. A stale or omitted precondition is rejected with 409 and no state change."
         semanticNeighbors:
           - "genxListBreedingPipelines"
           - "genxGetBreedingPipeline"
-        decisions: ["RFC-154"]
+        decisions: ["RFC-154", "D-BP-01", "D-BP-02", "D-BP-03", "D-BP-13", "D-BP-14"]
         proposalStatus: "draft-non-normative"
-      summary: Register one breeding pipeline
-      description: Register one breeding pipeline record with provenance.
+      summary: Register a breeding pipeline revision
+      description: Creates or references a stable workstream identity and registers one immutable pipeline revision. The outer breedingPipelineDbId must exactly match breedingPipelineVersion.breedingPipelineDbId; mismatch is rejected with 400 Bad Request. A new breedingPipelineVersionDbId is required for every additional revision. An append to an existing workstream also supplies expectedCurrentBreedingPipelineVersionDbId as an atomic compare-and-set precondition; explicit null means no currently published revision. Draft revisions record their preparation baseline using basedOnBreedingPipelineVersionDbId and must not claim supersedes/corrects. Published successors use supersedes/corrects; withdrawal revisions use withdraws. Both identify the exact current published revision through revisionRelationship.
       parameters:
       - $ref: '#/components/parameters/authorizationHeader'
       requestBody:
@@ -87,32 +87,79 @@ paths:
               $ref: '#/components/schemas/BreedingPipelineNewRequest'
       responses:
         '200':
-          content:
-            application/json:
-              schema:
-                properties:
-                  '@context':
-                    $ref: '#/components/schemas/Context'
-                  metadata:
-                    $ref: '#/components/schemas/metadata'
-                  result:
-                    $ref: '#/components/schemas/BreedingPipeline'
-                required:
-                - metadata
-                - result
-                title: BreedingPipelineResponse
-                type: object
-          description: OK
+          $ref: '#/components/responses/BreedingPipelineResponse'
         '400':
           $ref: '#/components/responses/400BadRequest'
         '401':
           $ref: '#/components/responses/401Unauthorized'
         '403':
           $ref: '#/components/responses/403Forbidden'
+        '409':
+          $ref: '#/components/responses/BreedingPipelineConflictResponse'
       tags:
       - BreedingPipeline
 components:
+  schemas:
+    BreedingPipelineRevisionEnvelope:
+      type: object
+      required: [metadata, result]
+      properties:
+        '@context':
+          $ref: '#/components/schemas/Context'
+        metadata:
+          $ref: '#/components/schemas/metadata'
+        result:
+          $ref: '#/components/schemas/BreedingPipelineRevision'
+    BreedingPipelineConflict:
+      type: object
+      required: [errorCode, message]
+      properties:
+        errorCode:
+          type: string
+          enum:
+            - version-content-conflict
+            - current-version-precondition-failed
+            - revision-relationship-mismatch
+            - pipeline-identity-conflict
+        message:
+          type: string
+        currentBreedingPipelineVersionDbId:
+          type: string
+          nullable: true
+          description: Current published revision at conflict time, returned only when the caller is authorized to read the pipeline; omitted when pointer disclosure is not authorized, or null when authorized and no revision is currently published.
   responses:
+    BreedingPipelineResponse:
+      description: Successful registration; result is the immutable revision that was created or replayed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BreedingPipelineRevisionEnvelope'
+    BreedingPipelineConflictResponse:
+      description: |-
+        Registration conflict. version-content-conflict means the same immutable
+        revision identifier within one pipeline was submitted with different
+        canonical content. current-version-precondition-failed means the
+        workstream's current published pointer changed or the expected pointer
+        was omitted. The current pointer is included only when the caller
+        is authorized to read the pipeline; otherwise it is omitted.
+        revision-relationship-mismatch means the new published or
+        withdrawn revision does not identify the exact current published version.
+        pipeline-identity-conflict means another request created the logical
+        pipeline first, or the version identifier is already bound to another
+        logical pipeline. No revision append or current-pointer mutation is
+        performed for a rejected request.
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [metadata, result]
+            properties:
+              '@context':
+                $ref: '#/components/schemas/Context'
+              metadata:
+                $ref: '#/components/schemas/metadata'
+              result:
+                $ref: '#/components/schemas/BreedingPipelineConflict'
     BreedingPipelineListResponse:
       content:
         application/json:
