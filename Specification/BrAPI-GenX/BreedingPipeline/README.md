@@ -61,7 +61,22 @@ The candidate profile is:
 
 **Security profile:** RFC-154 §12.10 documents candidate publication/withdrawal authorization, non-disclosure, and lifecycle audit behavior. It is not ratified; D-22 and the maintainer decision remain open for provider, scope, delegation, and policy semantics.
 
-**Status:** Option A (optimistic compare-and-set) is ratified as the candidate concurrency model under D-BP-14. The profile remains non-normative pending deterministic concurrent-service and transaction-level conformance. Publish/withdraw authorization and audit requirements remain separate maintainer gates. The fixture checker is not production conformance.
+**Status:** Option A (optimistic compare-and-set) is ratified as the candidate concurrency model under D-BP-14. The profile remains non-normative pending deterministic concurrent-service and transaction-level conformance. Publish/withdraw authorization and audit requirements remain separate maintainer gates. The 70 candidate contract fixtures (16 valid, 54 invalid) include local checks for fixture-supplied Scale bounds, precision, data type, numerical category membership, and basic BrAPI authority URI exclusions. The Scale evidence is fixture input only, not a wire-level target validation state or duplicate BrAPI Scale object. These checks do not dereference remote authorities or establish trust, and the fixture checker is not production conformance.
+
+## Target-scale validation evidence — candidate
+
+The [Target-Scale Validation Evidence Candidate Design](../../../docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-TARGET-SCALE-EVIDENCE-DESIGN.md) defines a per-target immutable evidence model without adding a new endpoint or public schema field. The [Scale Evidence Behavioral Acceptance Plan](../../../docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-SCALE-EVIDENCE-BEHAVIORAL-TEST-PLAN.md) defines independent-service scenarios for remote resolution, snapshot immutability, transaction atomicity, and replay. Both remain non-normative and pending maintainer decisions.
+
+## Local fixture verification
+
+From the repository root, run the candidate fixture validator and its 23 independent standard-library mutation tests:
+
+```sh
+python Scripts/validate_breeding_pipeline_contract_fixtures.py
+python -m unittest discover -s Scripts -p 'test_breeding_pipeline_contract_fixture_validator.py' -v
+```
+
+The fixture loader rejects duplicate JSON object keys and non-standard numeric constants. These checks verify local contract-fixture behavior only; they do not establish production conformance, authority trust, or live-service transactional correctness. The regression suite has not yet been executed in this GitHub-only development session because the workflow jobs did not begin running steps.
 
 ## Deliberate exclusions
 

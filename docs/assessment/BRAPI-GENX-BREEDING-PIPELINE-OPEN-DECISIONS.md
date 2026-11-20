@@ -23,7 +23,7 @@ The normative intent of the ratified candidate profile is:
 - A publication/withdrawal becomes effective at the successful atomic commit. Competing requests against the same baseline have at most one successful pointer transition; a stale loser receives HTTP 409 Conflict with no partial append or pointer mutation.
 - Persistence mechanisms may differ, but must prevent time-of-check/time-of-use races and provide equivalent externally observable semantics. Defined audit/outbox side effects must commit or roll back with the operation.
 
-The current fixtures validate selected logical branches only. Before normative promotion, run the implementation-independent [BreedingPipeline CAS Behavioral Conformance Plan](./BRAPI-GENX-BREEDING-PIPELINE-CAS-BEHAVIORAL-TEST-PLAN.md) against an independently implemented service. It includes deterministic two-writer race tests, first-creation collision tests, cross-pipeline version-ID collision tests, retries after a lost response, withdrawal races, and transaction-failure injection. These tests distinguish contract fixture validation from actual concurrent service behavior.
+The current 70-scenario fixture corpus (16 valid, 54 invalid) validates selected logical branches and includes a fixture-only Scale evidence profile. It does not execute remote dereferencing or service behavior. Before normative promotion, run the implementation-independent [BreedingPipeline CAS Behavioral Conformance Plan](./BRAPI-GENX-BREEDING-PIPELINE-CAS-BEHAVIORAL-TEST-PLAN.md) against an independently implemented service. It includes deterministic two-writer race tests, first-creation collision tests, cross-pipeline version-ID collision tests, retries after a lost response, withdrawal races, and transaction-failure injection. These tests distinguish contract fixture validation from actual concurrent service behavior.
 
 RFC-154 §12.7 records the ratification and the strengthened candidate semantics. D-BP-01 through D-BP-13 remain the original conceptual design baseline; D-BP-14 separately ratifies CAS as the candidate current-pointer concurrency model.
 ## 2. Draft/withdrawal relationship semantics — schema refinement applied
@@ -57,7 +57,7 @@ Do not hard-code scope token names until the repository's authorization model an
 
 The reference envelope is approved in shape: BrAPI (Breeding Application Programming Interface) generation, exact resource type, authoritative server URI (Uniform Resource Identifier), and server-issued dbId. The canonical server identity and network dereferencing policy remain open.
 
-**Candidate normalization baseline:** RFC 3986 §§6.2.2–6.2.3.
+**Candidate normalization baseline:** RFC 3986 §§6.2.2–6.2.3. Current fixture checks only reject non-absolute HTTP(S) references and user information, query, or fragment components; they do not implement the full normalization rules below.
 
 - Require an absolute HTTP or HTTPS base URI with an authority.
 - Reject user information, query, and fragment components.
@@ -90,16 +90,24 @@ Source contracts:
 - Do not guess precision when decimalPlaces is null or absent.
 - A categorical Scale must not be coerced into a numeric measurement.
 
-**Open choice — dereferencing point:** either synchronously resolve the ObservationVariable at registration, or permit unresolved draft references but require successful resolution and validation before publication. The recommended lifecycle is draft may remain unverified, but publication must resolve and validate the reference. A published pipeline revision should preserve enough Scale evidence (authoritative reference plus an immutable snapshot of the relevant dataType, decimalPlaces, units, and validValues) to explain the target semantics even if the remote BrAPI record later changes.
+**Candidate lifecycle recommendation — not ratified:** draft authoring may retain an unresolved quantitative ObservationVariable reference, but it must be treated as unverified. Publication requires successful resolution to the exact authority-qualified ObservationVariable and validation against a Numerical Scale, including configured bounds and explicitly defined precision. This profile blocks publication on unresolved or non-numerical references.
 
-**Open choice — exact precision and bounds:** confirm the meaning of decimalPlaces as a maximum reported precision for targets, whether min/max bounds are inclusive, and how scale changes are handled. No silent unit conversion or implicit rounding should occur.
+A published revision needs durable evidence of the Scale definition used at validation time. Prefer a separate immutable provenance/audit artifact containing the authoritative reference, a content digest, and the relevant Scale fields; do not copy the Scale into the ObservationVariable reference or add a free-text unit to the target. The exact evidence schema, digest algorithm, storage location, retention/freshness rules, revalidation policy, and response to remote Scale changes remain open. The fixture corpus scaleEvidence object is test-harness input only, not a proposed API payload.
+
+**Open choice — dereferencing point and trust:** choose synchronous resolution at registration versus deferral until publication; determine the trusted authority registry, outbound-request restrictions, redirect and DNS rebinding policy, and HTTPS/HTTP deployment profile. Static fixtures do not establish remote-server trust or accessibility.
+
+**Open choice — exact precision and bounds:** confirm whether decimalPlaces is a maximum number of fractional digits (including whether trailing zeroes count), whether minimumValue and maximumValue are inclusive, and how missing/null precision is treated. The candidate check currently interprets configured bounds inclusively and rejects lexical decimal precision above an explicit decimalPlaces; those interpretations remain pending maintainer approval. No silent unit conversion or implicit rounding is proposed. For a Numerical Scale with `validValues.categories`, the candidate checker compares target values to category `value` strings as exact base-10 decimals; labels are display-only. This category matching interpretation is also pending approval.
+
+**Candidate evidence-record model:** one immutable evidence record per quantitative target, bound to the exact pipeline/revision, target-context identifier, zero-based trait-requirement index, and full authority-qualified ObservationVariable reference. It captures the relevant Scale projection and retrieval/validation timestamps. The evidence preimage is the exact ObservationVariable reference plus the captured Scale projection. JCS-RFC8785 is the accepted canonical JSON method, but D-02 does not select the cryptographic hash algorithm; SHA-256 must not be presented as a universal approved algorithm. The exact evidence resource identity, revision link, endpoint/storage location, correction relation, and retention are still open. The detailed candidate is in [Target-Scale Validation Evidence Design](./BRAPI-GENX-BREEDING-PIPELINE-TARGET-SCALE-EVIDENCE-DESIGN.md).
+
+The candidate publication transaction must persist the evidence record, immutable revision, current pointer, and any required audit/outbox record atomically. A remote Scale change after publication does not mutate historical evidence; a new published revision must obtain new evidence under this profile. Independent service tests are listed in [Scale Evidence Behavioral Acceptance Plan](./BRAPI-GENX-BREEDING-PIPELINE-SCALE-EVIDENCE-BEHAVIORAL-TEST-PLAN.md).
 
 ## 6. Required evidence before normative promotion
 
 1. Implement and behaviorally validate the ratified current-pointer concurrency model using the [CAS Behavioral Conformance Plan](./BRAPI-GENX-BREEDING-PIPELINE-CAS-BEHAVIORAL-TEST-PLAN.md), including simultaneous publication, first-creation collisions, idempotent retries, withdrawal races, and failure atomicity.
 2. Approved publish/withdraw actor permissions and lifecycle audit behavior.
 3. Approved authority URI normalization, trusted-server onboarding, and dereferencing policy.
-4. Approved target-scale resolution timing and immutable scale-evidence profile.
+4. Approved target-scale resolution timing, evidence identity/link/storage, snapshot fingerprint algorithm, precision semantics, and immutable scale-evidence profile.
 5. Positive and negative contract fixtures for the approved choices.
 6. Behavior-level tests against a real implementation, including simultaneous publication attempts, replay after pointer movement, authority collisions, unavailable authority servers, wrong resource types, scale bounds, and precision.
 

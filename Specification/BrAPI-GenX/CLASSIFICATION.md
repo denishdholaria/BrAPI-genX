@@ -118,7 +118,6 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | EdgeGatewayHealth / EdgeGatewayHealth | (none, cross-cutting) | C1, C2, C3, C6, C9 | Edge gateway health records; no BrAPI v2.1 equivalent |
 | CapabilityNegotiation / CapabilityNegotiation | (none, cross-cutting) | C1, C2, C3, C6, C9 | Capability negotiation records; no BrAPI v2.1 equivalent |
 | ConformanceProbe / ConformanceProbe | (none, cross-cutting) | C1, C2, C3, C6, C9 | Conformance probe records; no BrAPI v2.1 equivalent |
-| BreedingPipeline / BreedingPipeline | (none, cross-cutting) | C1, C2, C3, C6, C9 | Breeding pipeline records; no BrAPI v2.1 equivalent |
 | SchemaMapping / SchemaMapping | (none, cross-cutting) | C1, C2, C3, C6, C9 | Schema mapping records; no BrAPI v2.1 equivalent |
 | SensorDevice / SensorDevice | (none, cross-cutting) | C1, C2, C3, C6, C9 | Sensor device records; no BrAPI v2.1 equivalent |
 | SpatialIndex / SpatialIndex | (none, cross-cutting) | C1, C2, C3, C6, C9 | Spatial index records; no BrAPI v2.1 equivalent |

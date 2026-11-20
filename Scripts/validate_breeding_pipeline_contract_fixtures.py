@@ -10,7 +10,8 @@ from __future__ import annotations
 import argparse
 import json
 import re
-from decimal import Decimal
+from datetime import datetime
+from decimal import Decimal, InvalidOperation
 import sys
 from pathlib import Path
 from typing import Any
@@ -745,6 +746,186 @@ def validate_authority_filter_request(value: Any) -> list[str]:
     return errors
 
 
+def _target_decimals(trait: dict[str, Any]) -> list[tuple[str, Decimal, int]]:
+    """Return validated target values as (field, decimal, fractional_digits)."""
+    values: list[tuple[str, Decimal, int]] = []
+    for key in ("threshold", "minimum", "maximum"):
+        if key in trait and isinstance(trait[key], (int, float)) and not isinstance(trait[key], bool):
+            rendered = str(trait[key])
+            try:
+                number = Decimal(rendered)
+            except InvalidOperation:
+                continue
+            if number.is_finite():
+                fractional_digits = max(0, -number.as_tuple().exponent)
+                values.append((key, number, fractional_digits))
+    for key in ("exactDecimal", "minimumExactDecimal", "maximumExactDecimal"):
+        value = trait.get(key)
+        if isinstance(value, str) and DECIMAL_RE.fullmatch(value):
+            number = Decimal(value)
+            fractional_digits = len(value.partition(".")[2]) if "." in value else 0
+            values.append((key, number, fractional_digits))
+    return values
+
+
+def _parse_aware_timestamp(value: Any) -> datetime | None:
+    """Parse an ISO-8601 timestamp only when it includes an explicit UTC offset."""
+    if not isinstance(value, str) or not value.strip():
+        return None
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if parsed.tzinfo is None or parsed.utcoffset() is None:
+        return None
+    return parsed
+
+
+def validate_scale_evidence(fixture: dict[str, Any], errors: list[str]) -> None:
+    """Validate fixture-supplied per-target evidence without network dereferencing."""
+    revision = as_object(fixture.get("pipelineRevision"))
+    state = revision.get("publicationState")
+    validation_state = fixture.get("scaleValidationState")
+    evidence = as_object(fixture.get("scaleEvidence"))
+    has_evidence = bool(evidence)
+
+    if validation_state is not None and validation_state not in ("verified", "unverified"):
+        add(errors, "BM-SCALE-04", "scaleValidationState must be verified or unverified in this candidate fixture profile.")
+        return
+    if validation_state == "verified" and not has_evidence:
+        add(errors, "BM-SCALE-04", "Verified target validation requires separate Scale evidence.")
+        return
+    if validation_state == "unverified":
+        if state == "published":
+            add(errors, "BM-SCALE-04", "Published quantitative targets require verified ObservationVariable Scale evidence.")
+        elif state != "draft":
+            add(errors, "BM-SCALE-04", "Only a draft may remain unverified in this candidate profile.")
+        if has_evidence:
+            add(errors, "BM-SCALE-04", "An unverified fixture must not present Scale evidence as verified.")
+        return
+    if not has_evidence:
+        return
+
+    evidence_id = evidence.get("evidenceRecordId")
+    pipeline_context = as_object(evidence.get("pipelineContext"))
+    target_binding = as_object(evidence.get("targetBinding"))
+    expected_pipeline = (revision.get("breedingPipelineDbId"), revision.get("breedingPipelineVersionDbId"))
+    supplied_pipeline = (pipeline_context.get("breedingPipelineDbId"), pipeline_context.get("breedingPipelineVersionDbId"))
+    target_context_id = target_binding.get("targetContextId")
+    target_index = target_binding.get("traitRequirementIndex")
+    if not nonempty_string(evidence_id) or supplied_pipeline != expected_pipeline:
+        add(errors, "BM-SCALE-05", "Evidence identity and pipelineContext must identify the exact immutable pipeline revision.")
+        return
+    if (
+        not nonempty_string(target_context_id)
+        or not isinstance(target_index, int)
+        or isinstance(target_index, bool)
+        or target_index < 0
+    ):
+        add(errors, "BM-SCALE-05", "Evidence targetBinding requires a targetContextId and non-negative integer traitRequirementIndex.")
+        return
+
+    matching_contexts = [
+        as_object(context)
+        for context in as_list(revision.get("targetContexts"))
+        if as_object(context).get("targetContextId") == target_context_id
+    ]
+    if len(matching_contexts) != 1:
+        add(errors, "BM-SCALE-05", "Evidence targetBinding must identify exactly one target context in the immutable revision.")
+        return
+    requirements = as_list(matching_contexts[0].get("traitRequirements"))
+    if target_index >= len(requirements):
+        add(errors, "BM-SCALE-05", "Evidence traitRequirementIndex is outside the selected target context.")
+        return
+    target = as_object(requirements[target_index])
+    target_reference = as_object(target.get("traitReference"))
+    evidence_reference = as_object(evidence.get("observationVariableReference"))
+    identity_keys = ("apiGeneration", "resourceType", "server", "dbId")
+    if any(target_reference.get(key) != evidence_reference.get(key) for key in identity_keys):
+        add(errors, "BM-SCALE-05", "Evidence ObservationVariable reference must exactly match the selected target authority-qualified traitReference.")
+        return
+    if (
+        evidence_reference.get("apiGeneration") != "brapi-v2.1"
+        or evidence_reference.get("resourceType") != "ObservationVariable"
+        or not nonempty_string(evidence_reference.get("server"))
+        or not nonempty_string(evidence_reference.get("dbId"))
+    ):
+        add(errors, "BM-SCALE-05", "Evidence must reference an authority-qualified BrAPI v2.1 ObservationVariable.")
+        return
+
+    retrieved = _parse_aware_timestamp(evidence.get("sourceRetrievedAt"))
+    validated = _parse_aware_timestamp(evidence.get("validatedAt"))
+    profile = as_object(evidence.get("validationProfile"))
+    if (
+        retrieved is None
+        or validated is None
+        or retrieved > validated
+        or not nonempty_string(profile.get("profileId"))
+        or not nonempty_string(profile.get("profileVersion"))
+        or evidence.get("validationResult") != "passed"
+    ):
+        add(errors, "BM-SCALE-07", "A passed evidence record requires ordered timezone-aware timestamps and a versioned validation profile.")
+
+    projection = as_object(evidence.get("scaleProjection"))
+    data_type = projection.get("dataType")
+    decimal_places = projection.get("decimalPlaces")
+    valid_values = as_object(projection.get("validValues"))
+    if not projection:
+        add(errors, "BM-SCALE-01", "Evidence requires a non-empty Scale projection.")
+        return
+    if decimal_places is not None and (
+        not isinstance(decimal_places, int)
+        or isinstance(decimal_places, bool)
+        or decimal_places < 0
+    ):
+        add(errors, "BM-SCALE-02", "Scale evidence decimalPlaces must be a non-negative integer or null.")
+        decimal_places = None
+
+    category_values: set[Decimal] | None = None
+    raw_categories = valid_values.get("categories")
+    if raw_categories is not None:
+        if not isinstance(raw_categories, list) or not raw_categories:
+            add(errors, "BM-SCALE-03", "A category-governed Numerical Scale must provide a non-empty categories array.")
+            category_values = set()
+        else:
+            category_values = set()
+            for category_index, raw_category in enumerate(raw_categories):
+                category_value = as_object(raw_category).get("value")
+                if not isinstance(category_value, str) or not DECIMAL_RE.fullmatch(category_value):
+                    add(errors, "BM-SCALE-03", f"Numerical Scale category[{category_index}].value must be an exact decimal string.")
+                else:
+                    category_values.add(Decimal(category_value))
+
+    bound_values: dict[str, Decimal] = {}
+    for bound_name in ("minimumValue", "maximumValue"):
+        if bound_name in valid_values:
+            raw_bound = valid_values[bound_name]
+            if not isinstance(raw_bound, str) or not DECIMAL_RE.fullmatch(raw_bound):
+                add(errors, "BM-SCALE-01", f"Scale validValues.{bound_name} must be a decimal string.")
+            else:
+                bound_values[bound_name] = Decimal(raw_bound)
+    if (
+        "minimumValue" in bound_values
+        and "maximumValue" in bound_values
+        and bound_values["minimumValue"] > bound_values["maximumValue"]
+    ):
+        add(errors, "BM-SCALE-01", "Scale minimumValue must not exceed maximumValue.")
+
+    values = _target_decimals(target)
+    if not values:
+        add(errors, "BM-SCALE-01", "Evidence target binding must select a quantitative target requirement.")
+        return
+    if data_type != "Numerical":
+        add(errors, "BM-SCALE-03", "Quantitative target requires dataType Numerical.")
+    for field, number, fractional_digits in values:
+        if "minimumValue" in bound_values and number < bound_values["minimumValue"]:
+            add(errors, "BM-SCALE-01", f"Target {field} is below Scale validValues.minimumValue.")
+        if "maximumValue" in bound_values and number > bound_values["maximumValue"]:
+            add(errors, "BM-SCALE-01", f"Target {field} is above Scale validValues.maximumValue.")
+        if category_values is not None and number not in category_values:
+            add(errors, "BM-SCALE-03", f"Target {field} does not match a permitted Numerical Scale category value.")
+        if decimal_places is not None and fractional_digits > decimal_places:
+            add(errors, "BM-SCALE-02", f"Target {field} requires more fractional precision than Scale decimalPlaces.")
 def validate_fixture(fixture: dict[str, Any]) -> list[str]:
     """Validate one positive or negative candidate scenario."""
     errors: list[str] = []
@@ -754,6 +935,7 @@ def validate_fixture(fixture: dict[str, Any]) -> list[str]:
     if revision is not None:
         revision_errors, definitions = validate_pipeline_revision(revision)
         errors.extend(revision_errors)
+        validate_scale_evidence(fixture, errors)
 
     if fixture.get("event") is not None:
         errors.extend(validate_execution_event(fixture.get("event"), revision, definitions))
@@ -781,6 +963,14 @@ def validate_fixture(fixture: dict[str, Any]) -> list[str]:
             and before != after
         ):
             add(errors, "BM-03", "Published scheme content changed without a new breedingSchemeVersionDbId.")
+
+    evidence_before = as_object(fixture.get("evidenceBefore"))
+    evidence_after = as_object(fixture.get("evidenceAfter"))
+    if evidence_before and evidence_after:
+        before_evidence_id = evidence_before.get("evidenceRecordId")
+        after_evidence_id = evidence_after.get("evidenceRecordId")
+        if before_evidence_id and before_evidence_id == after_evidence_id and evidence_before != evidence_after:
+            add(errors, "BM-SCALE-06", "An immutable evidenceRecordId must not identify different evidence content.")
 
     return errors
 
@@ -813,6 +1003,25 @@ def validate_corpus(corpus: Any) -> list[str]:
             continue
         by_id[scenario_id] = fixture
 
+    # Evidence record identifiers are immutable across the corpus, not just
+    # within one fixture's before/after pair. Identical repeated snapshots are
+    # allowed; reusing an identifier for different content is rejected.
+    corpus_evidence_errors: dict[str, list[str]] = {}
+    evidence_by_id: dict[str, dict[str, Any]] = {}
+    for scenario_id, fixture in by_id.items():
+        for evidence_field in ("scaleEvidence", "evidenceBefore", "evidenceAfter"):
+            evidence = as_object(fixture.get(evidence_field))
+            evidence_id = evidence.get("evidenceRecordId")
+            if not nonempty_string(evidence_id):
+                continue
+            previous = evidence_by_id.get(evidence_id)
+            if previous is None:
+                evidence_by_id[evidence_id] = evidence
+            elif previous != evidence:
+                corpus_evidence_errors.setdefault(scenario_id, []).append(
+                    "BM-SCALE-06: An evidenceRecordId must not identify different evidence content across fixtures."
+                )
+
     valid_count = 0
     invalid_count = 0
     for scenario_id, fixture in by_id.items():
@@ -821,6 +1030,12 @@ def validate_corpus(corpus: Any) -> list[str]:
             errors.append(f"{scenario_id}: expectation must be valid or invalid")
             continue
         scenario_errors = validate_fixture(fixture)
+        detected_invariants = {error.split(":", 1)[0] for error in scenario_errors}
+        for corpus_error in corpus_evidence_errors.get(scenario_id, []):
+            invariant = corpus_error.split(":", 1)[0]
+            if invariant not in detected_invariants:
+                scenario_errors.append(corpus_error)
+                detected_invariants.add(invariant)
         expected_invariants = set(as_list(fixture.get("invariantIds")))
         error_invariants = {error.split(":", 1)[0] for error in scenario_errors}
 
@@ -895,6 +1110,32 @@ def validate_corpus(corpus: Any) -> list[str]:
         "invalid-unknown-publication-state",
         "valid-stale-publication-conflict-preserves-state",
         "invalid-stale-publication-conflict-mutates-state",
+        "valid-target-scale-evidence-within-bounds",
+        "invalid-target-exceeds-scale-maximum",
+        "invalid-target-precision-exceeds-scale",
+        "invalid-quantitative-target-nonnumerical-scale",
+        "valid-draft-unresolved-scale-reference",
+        "invalid-published-unverified-scale-reference",
+        "invalid-authority-server-uri-with-userinfo",
+        "invalid-authority-server-uri-with-query",
+        "invalid-authority-server-uri-with-fragment",
+        "invalid-authority-server-uri-relative",
+        "invalid-target-scale-evidence-wrong-pipeline-revision",
+        "invalid-target-scale-evidence-wrong-target-context",
+        "invalid-target-scale-evidence-wrong-target-index",
+        "invalid-target-scale-evidence-wrong-observation-variable",
+        "invalid-target-scale-evidence-missing-provenance-metadata",
+        "invalid-target-scale-evidence-mutates-same-id",
+        "valid-target-scale-evidence-null-precision-and-unit",
+        "valid-target-scale-evidence-nonzero-trait-index",
+        "valid-target-scale-evidence-matches-numerical-category",
+        "invalid-target-scale-evidence-not-in-numerical-categories",
+        "invalid-target-scale-evidence-empty-numerical-categories",
+        "invalid-target-scale-evidence-malformed-numerical-category",
+        "invalid-target-scale-evidence-reversed-scale-bounds",
+        "invalid-target-scale-evidence-timestamp-without-timezone",
+        "invalid-target-scale-evidence-retrieval-after-validation",
+        "invalid-evidence-identity-reused-with-different-content",
     }
     missing = sorted(required - set(by_id))
     if missing:
@@ -903,14 +1144,38 @@ def validate_corpus(corpus: Any) -> list[str]:
     return errors
 
 
+def _unique_json_object_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    """Reject ambiguous duplicate object members in the fixture JSON."""
+    result: dict[str, Any] = {}
+    for name, value in pairs:
+        if name in result:
+            raise ValueError(f"duplicate JSON object key: {name!r}")
+        result[name] = value
+    return result
+
+
+def _reject_nonfinite_json_constant(value: str) -> None:
+    """Reject NaN/Infinity, which Python's decoder otherwise permits."""
+    raise ValueError(f"non-standard JSON numeric constant: {value}")
+
+
+def load_fixture_corpus(path: Path) -> Any:
+    """Read only standards-compliant, unambiguous JSON fixture documents."""
+    with path.open("r", encoding="utf-8") as handle:
+        return json.load(
+            handle,
+            object_pairs_hook=_unique_json_object_pairs,
+            parse_constant=_reject_nonfinite_json_constant,
+        )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--file", type=Path, default=DEFAULT_FIXTURE_PATH)
     args = parser.parse_args()
 
     try:
-        with args.file.open("r", encoding="utf-8") as handle:
-            corpus = json.load(handle)
+        corpus = load_fixture_corpus(args.file)
     except OSError as exc:
         print(f"ERROR: cannot read {args.file}: {exc}", file=sys.stderr)
         return 2
@@ -920,6 +1185,9 @@ def main() -> int:
             f"column {exc.colno}: {exc.msg}",
             file=sys.stderr,
         )
+        return 2
+    except ValueError as exc:
+        print(f"ERROR: invalid fixture JSON in {args.file}: {exc}", file=sys.stderr)
         return 2
 
     failures = validate_corpus(corpus)
