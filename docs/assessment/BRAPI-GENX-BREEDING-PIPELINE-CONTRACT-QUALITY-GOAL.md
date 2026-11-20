@@ -35,6 +35,6 @@ python Scripts/validate_breeding_pipeline_contract_fixtures.py
 python -m unittest discover -s Scripts -p 'test_breeding_pipeline_contract_fixture_validator.py' -v
 ```
 
-The third command runs the 23-test standard-library mutation regression suite, including authority-filter return-value and invariant regression checks. Execute the existing static API contract checker, digest-vector tests, and relevant specification checks separately. Report exact commands and outputs. The test suite has not been run in the remote GitHub-only editing environment; read-back or JavaScript mirrors are not equivalent to Python execution.
+The third command runs the standard-library regression suite, including checks for required scenario payloads, per-target Scale evidence, and authority-filter invariants. The static conformance workflow also runs this suite. Execute the existing static API contract checker, digest-vector tests, and relevant specification checks separately. Report exact commands and outputs.
 
 The candidate fixture corpus contains 70 scenarios (16 valid, 54 invalid). Static evidence fixture checks cannot substitute for the independent-service Scale evidence and compare-and-set acceptance plans.
