@@ -9,6 +9,9 @@ BrAPI-GenX is **not** the official BrAPI specification, an officially endorsed
 BrAPI release, or a replacement for the community's specification. Official
 BrAPI terminology, version identifiers, and routes remain intact.
 
+The [project vision](docs/project/VISION.md) describes how BrAPI-GenX contributes
+to scientific interoperability across agriculture.
+
 ## Identity and naming
 
 The canonical identity and naming standard is
