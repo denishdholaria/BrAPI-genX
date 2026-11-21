@@ -69,14 +69,14 @@ The [Target-Scale Validation Evidence Candidate Design](../../../docs/assessment
 
 ## Local fixture verification
 
-From the repository root, run the candidate fixture validator and its 23 independent standard-library mutation tests:
+From the repository root, run the candidate fixture validator and its standard-library regression suite.
 
 ```sh
 python Scripts/validate_breeding_pipeline_contract_fixtures.py
 python -m unittest discover -s Scripts -p 'test_breeding_pipeline_contract_fixture_validator.py' -v
 ```
 
-The fixture loader rejects duplicate JSON object keys and non-standard numeric constants. These checks verify local contract-fixture behavior only; they do not establish production conformance, authority trust, or live-service transactional correctness. The regression suite has not yet been executed in this GitHub-only development session because the workflow jobs did not begin running steps.
+The corpus checker requires each named scenario to supply its test payload. In publication scenarios exercising the candidate Scale profile, every quantitative target requires its own evidence record. The fixture's `scaleEvidence` accepts a single record or an array of records for multiple targets. The loader rejects duplicate JSON object keys and non-standard numeric constants. The static conformance workflow runs the regression suite alongside the corpus checker. Production conformance, authority trust, and live-service transactional correctness require independent-service testing.
 
 ## Deliberate exclusions
 

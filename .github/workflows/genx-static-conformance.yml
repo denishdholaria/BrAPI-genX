@@ -25,6 +25,7 @@ on:
       - 'Scripts/genx_test_server.py'
       - 'Scripts/validate_breeding_pipeline_candidate_fixtures.py'
       - 'Scripts/validate_breeding_pipeline_contract_fixtures.py'
+      - 'Scripts/test_breeding_pipeline_contract_fixture_validator.py'
       - 'Scripts/check_breeding_pipeline_api_contract.py'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json'
@@ -55,6 +56,7 @@ on:
       - 'Scripts/genx_test_server.py'
       - 'Scripts/validate_breeding_pipeline_candidate_fixtures.py'
       - 'Scripts/validate_breeding_pipeline_contract_fixtures.py'
+      - 'Scripts/test_breeding_pipeline_contract_fixture_validator.py'
       - 'Scripts/check_breeding_pipeline_api_contract.py'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json'
@@ -86,6 +88,8 @@ jobs:
         run: python3 Scripts/validate_breeding_pipeline_candidate_fixtures.py
       - name: Validate approved-candidate breeding contract fixtures
         run: python3 Scripts/validate_breeding_pipeline_contract_fixtures.py
+      - name: Run breeding contract fixture validator regressions
+        run: python Scripts/test_breeding_pipeline_contract_fixture_validator.py
       - name: Check breeding pipeline OpenAPI and authority-filter contract
         run: python Scripts/check_breeding_pipeline_api_contract.py
       - name: Run endpoint-identity mutation tests
@@ -144,6 +148,7 @@ jobs:
           {
             run_check python3 Scripts/validate_breeding_pipeline_candidate_fixtures.py
             run_check python3 Scripts/validate_breeding_pipeline_contract_fixtures.py
+            run_check python Scripts/test_breeding_pipeline_contract_fixture_validator.py
             run_check python Scripts/check_breeding_pipeline_api_contract.py
             run_check python Scripts/test_endpoint_identity.py
             run_check python Scripts/test_capability_negotiation.py

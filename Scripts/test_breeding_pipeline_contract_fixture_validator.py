@@ -67,6 +67,59 @@ class BreedingPipelineFixtureValidatorTests(unittest.TestCase):
         fixture = self.scenario("valid-target-scale-evidence-within-bounds")
         self.assertEqual(validator.validate_fixture(fixture), [])
 
+    def test_required_scenarios_cannot_lose_their_test_payload(self) -> None:
+        mutations = {
+            "valid-event-without-registered-strategy": ("event",),
+            "valid-target-scale-evidence-null-precision-and-unit": (
+                "scaleEvidence",
+                "scaleValidationState",
+            ),
+        }
+        for scenario_id, fields in mutations.items():
+            with self.subTest(scenario=scenario_id):
+                corpus = copy.deepcopy(self.corpus)
+                fixture = next(row for row in corpus["fixtures"] if row["scenarioId"] == scenario_id)
+                for field in fields:
+                    del fixture[field]
+                errors = validator.validate_corpus(corpus)
+                self.assertTrue(any(scenario_id in error for error in errors), errors)
+
+    def test_published_fixture_requires_one_record_per_quantitative_target(self) -> None:
+        fixture = self.scenario("valid-target-scale-evidence-null-precision-and-unit")
+        context = fixture["pipelineRevision"]["targetContexts"][0]
+        context["traitRequirements"].append(copy.deepcopy(context["traitRequirements"][0]))
+        self.assertIn("BM-SCALE-05", self.codes(validator.validate_fixture(fixture)))
+
+        first = fixture["scaleEvidence"]
+        second = copy.deepcopy(first)
+        second["targetBinding"]["traitRequirementIndex"] = 1
+        second["evidenceRecordId"] += "-second-target"
+        fixture["scaleEvidence"] = [first, second]
+        self.assertEqual(validator.validate_fixture(fixture), [])
+        corpus = copy.deepcopy(self.corpus)
+        corpus["fixtures"].append(dict(fixture, scenarioId="valid-two-scale-evidence-records"))
+        self.assertEqual(validator.validate_corpus(corpus), [])
+
+        second_id = second["evidenceRecordId"]
+        second["evidenceRecordId"] = first["evidenceRecordId"]
+        failures = validator.validate_corpus(corpus)
+        self.assertTrue(any("BM-SCALE-06" in error for error in failures), failures)
+        second["evidenceRecordId"] = second_id
+
+        second["targetBinding"]["traitRequirementIndex"] = 0
+        failures = validator.validate_fixture(fixture)
+        self.assertTrue(any("multiple evidence records" in error for error in failures), failures)
+
+    def test_scale_valid_values_preserves_null_but_rejects_non_object(self) -> None:
+        fixture = self.scenario("valid-target-scale-evidence-within-bounds")
+        projection = fixture["scaleEvidence"]["scaleProjection"]
+        projection["validValues"] = None
+        self.assertEqual(validator.validate_fixture(fixture), [])
+        for value in ([], "unbounded", 3, False):
+            with self.subTest(value=value):
+                projection["validValues"] = value
+                self.assertIn("BM-SCALE-01", self.codes(validator.validate_fixture(fixture)))
+
     def test_exact_target_binding_mismatch(self) -> None:
         fixture = self.scenario("valid-target-scale-evidence-within-bounds")
         fixture["scaleEvidence"]["targetBinding"]["traitRequirementIndex"] = 99

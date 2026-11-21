@@ -781,18 +781,25 @@ def _parse_aware_timestamp(value: Any) -> datetime | None:
     return parsed
 
 
+def scale_evidence_records(fixture: dict[str, Any]) -> list[Any]:
+    """Read both the original single record and the multi-target fixture form."""
+    raw = fixture.get("scaleEvidence")
+    if raw is None:
+        return []
+    return raw if isinstance(raw, list) else [raw]
+
+
 def validate_scale_evidence(fixture: dict[str, Any], errors: list[str]) -> None:
     """Validate fixture-supplied per-target evidence without network dereferencing."""
     revision = as_object(fixture.get("pipelineRevision"))
     state = revision.get("publicationState")
     validation_state = fixture.get("scaleValidationState")
-    evidence = as_object(fixture.get("scaleEvidence"))
-    has_evidence = bool(evidence)
+    records = scale_evidence_records(fixture)
 
     if validation_state is not None and validation_state not in ("verified", "unverified"):
         add(errors, "BM-SCALE-04", "scaleValidationState must be verified or unverified in this candidate fixture profile.")
         return
-    if validation_state == "verified" and not has_evidence:
+    if validation_state == "verified" and not records:
         add(errors, "BM-SCALE-04", "Verified target validation requires separate Scale evidence.")
         return
     if validation_state == "unverified":
@@ -800,12 +807,40 @@ def validate_scale_evidence(fixture: dict[str, Any], errors: list[str]) -> None:
             add(errors, "BM-SCALE-04", "Published quantitative targets require verified ObservationVariable Scale evidence.")
         elif state != "draft":
             add(errors, "BM-SCALE-04", "Only a draft may remain unverified in this candidate profile.")
-        if has_evidence:
+        if records:
             add(errors, "BM-SCALE-04", "An unverified fixture must not present Scale evidence as verified.")
         return
-    if not has_evidence:
+    if not records:
         return
 
+    covered_targets: set[tuple[str, int]] = set()
+    for record in records:
+        binding = validate_scale_evidence_record(revision, as_object(record), errors)
+        if binding is None:
+            continue
+        if binding in covered_targets:
+            add(errors, "BM-SCALE-05", f"Target {binding!r} has multiple evidence records.")
+        covered_targets.add(binding)
+
+    if state == "published":
+        for raw_context in as_list(revision.get("targetContexts")):
+            context = as_object(raw_context)
+            context_id = context.get("targetContextId")
+            if not nonempty_string(context_id):
+                continue
+            for index, trait in enumerate(as_list(context.get("traitRequirements"))):
+                binding = (context_id, index)
+                if _target_decimals(as_object(trait)) and binding not in covered_targets:
+                    add(
+                        errors, "BM-SCALE-05",
+                        f"Published quantitative target {binding!r} requires its own bound Scale evidence record.",
+                    )
+
+
+def validate_scale_evidence_record(
+    revision: dict[str, Any], evidence: dict[str, Any], errors: list[str],
+) -> tuple[str, int] | None:
+    """Validate an evidence record and return its exact target binding."""
     evidence_id = evidence.get("evidenceRecordId")
     pipeline_context = as_object(evidence.get("pipelineContext"))
     target_binding = as_object(evidence.get("targetBinding"))
@@ -815,7 +850,7 @@ def validate_scale_evidence(fixture: dict[str, Any], errors: list[str]) -> None:
     target_index = target_binding.get("traitRequirementIndex")
     if not nonempty_string(evidence_id) or supplied_pipeline != expected_pipeline:
         add(errors, "BM-SCALE-05", "Evidence identity and pipelineContext must identify the exact immutable pipeline revision.")
-        return
+        return None
     if (
         not nonempty_string(target_context_id)
         or not isinstance(target_index, int)
@@ -823,7 +858,7 @@ def validate_scale_evidence(fixture: dict[str, Any], errors: list[str]) -> None:
         or target_index < 0
     ):
         add(errors, "BM-SCALE-05", "Evidence targetBinding requires a targetContextId and non-negative integer traitRequirementIndex.")
-        return
+        return None
 
     matching_contexts = [
         as_object(context)
@@ -832,18 +867,18 @@ def validate_scale_evidence(fixture: dict[str, Any], errors: list[str]) -> None:
     ]
     if len(matching_contexts) != 1:
         add(errors, "BM-SCALE-05", "Evidence targetBinding must identify exactly one target context in the immutable revision.")
-        return
+        return None
     requirements = as_list(matching_contexts[0].get("traitRequirements"))
     if target_index >= len(requirements):
         add(errors, "BM-SCALE-05", "Evidence traitRequirementIndex is outside the selected target context.")
-        return
+        return None
     target = as_object(requirements[target_index])
     target_reference = as_object(target.get("traitReference"))
     evidence_reference = as_object(evidence.get("observationVariableReference"))
     identity_keys = ("apiGeneration", "resourceType", "server", "dbId")
     if any(target_reference.get(key) != evidence_reference.get(key) for key in identity_keys):
         add(errors, "BM-SCALE-05", "Evidence ObservationVariable reference must exactly match the selected target authority-qualified traitReference.")
-        return
+        return None
     if (
         evidence_reference.get("apiGeneration") != "brapi-v2.1"
         or evidence_reference.get("resourceType") != "ObservationVariable"
@@ -851,7 +886,7 @@ def validate_scale_evidence(fixture: dict[str, Any], errors: list[str]) -> None:
         or not nonempty_string(evidence_reference.get("dbId"))
     ):
         add(errors, "BM-SCALE-05", "Evidence must reference an authority-qualified BrAPI v2.1 ObservationVariable.")
-        return
+        return None
 
     retrieved = _parse_aware_timestamp(evidence.get("sourceRetrievedAt"))
     validated = _parse_aware_timestamp(evidence.get("validatedAt"))
@@ -866,13 +901,26 @@ def validate_scale_evidence(fixture: dict[str, Any], errors: list[str]) -> None:
     ):
         add(errors, "BM-SCALE-07", "A passed evidence record requires ordered timezone-aware timestamps and a versioned validation profile.")
 
-    projection = as_object(evidence.get("scaleProjection"))
+    values = _target_decimals(target)
+    if not values:
+        add(errors, "BM-SCALE-01", "Evidence target binding must select a quantitative target requirement.")
+        return None
+    validate_scale_projection(as_object(evidence.get("scaleProjection")), values, errors)
+    return target_context_id, target_index
+
+
+def validate_scale_projection(
+    projection: dict[str, Any], values: list[tuple[str, Decimal, int]], errors: list[str],
+) -> None:
     data_type = projection.get("dataType")
     decimal_places = projection.get("decimalPlaces")
-    valid_values = as_object(projection.get("validValues"))
     if not projection:
         add(errors, "BM-SCALE-01", "Evidence requires a non-empty Scale projection.")
         return
+    raw_valid_values = projection.get("validValues")
+    if raw_valid_values is not None and not isinstance(raw_valid_values, dict):
+        add(errors, "BM-SCALE-01", "Scale validValues must be an object or null.")
+    valid_values = as_object(raw_valid_values)
     if decimal_places is not None and (
         not isinstance(decimal_places, int)
         or isinstance(decimal_places, bool)
@@ -911,10 +959,6 @@ def validate_scale_evidence(fixture: dict[str, Any], errors: list[str]) -> None:
     ):
         add(errors, "BM-SCALE-01", "Scale minimumValue must not exceed maximumValue.")
 
-    values = _target_decimals(target)
-    if not values:
-        add(errors, "BM-SCALE-01", "Evidence target binding must select a quantitative target requirement.")
-        return
     if data_type != "Numerical":
         add(errors, "BM-SCALE-03", "Quantitative target requires dataType Numerical.")
     for field, number, fractional_digits in values:
@@ -926,6 +970,8 @@ def validate_scale_evidence(fixture: dict[str, Any], errors: list[str]) -> None:
             add(errors, "BM-SCALE-03", f"Target {field} does not match a permitted Numerical Scale category value.")
         if decimal_places is not None and fractional_digits > decimal_places:
             add(errors, "BM-SCALE-02", f"Target {field} requires more fractional precision than Scale decimalPlaces.")
+
+
 def validate_fixture(fixture: dict[str, Any]) -> list[str]:
     """Validate one positive or negative candidate scenario."""
     errors: list[str] = []
@@ -1009,8 +1055,13 @@ def validate_corpus(corpus: Any) -> list[str]:
     corpus_evidence_errors: dict[str, list[str]] = {}
     evidence_by_id: dict[str, dict[str, Any]] = {}
     for scenario_id, fixture in by_id.items():
-        for evidence_field in ("scaleEvidence", "evidenceBefore", "evidenceAfter"):
-            evidence = as_object(fixture.get(evidence_field))
+        snapshots = [
+            *scale_evidence_records(fixture),
+            fixture.get("evidenceBefore"),
+            fixture.get("evidenceAfter"),
+        ]
+        for snapshot in snapshots:
+            evidence = as_object(snapshot)
             evidence_id = evidence.get("evidenceRecordId")
             if not nonempty_string(evidence_id):
                 continue
@@ -1065,81 +1116,118 @@ def validate_corpus(corpus: Any) -> list[str]:
     if not valid_count or not invalid_count:
         errors.append("corpus must include at least one valid and one invalid scenario")
 
-    required = {
-        "valid-embedded-schemes-multiple-targets",
-        "valid-event-without-registered-strategy",
-        "invalid-embedded-scheme-version-identity-mismatch",
-        "invalid-duplicate-stage-identifiers",
-        "invalid-dangling-transition-endpoint",
-        "invalid-duplicate-transition-identifier",
-        "invalid-duplicate-task-identifier",
-        "invalid-stage-without-scheme-version-context",
-        "invalid-event-scheme-version-not-bound-by-pipeline-revision",
-        "invalid-pipeline-version-does-not-match-logical-identity",
-        "invalid-target-context-duplicate-identifiers",
-        "invalid-exact-decimal-mixed-with-binary-numeric",
-        "invalid-authority-qualified-program-reference",
-        "invalid-mutated-published-scheme-version",
-        "valid-exact-decimal-observation-variable-range",
-        "invalid-quantitative-target-references-trait-only",
-        "invalid-incomplete-exact-decimal-range",
-        "invalid-scalar-threshold-combined-with-range",
-        "valid-authority-qualified-filters-distinct-authorities",
-        "invalid-authority-filter-without-server",
-        "invalid-population-filter-without-resource-type",
-        "invalid-duplicate-authority-reference-tuple",
-        "valid-identical-registration-replay",
-        "valid-new-revision-appends-same-workstream",
-        "invalid-same-version-different-payload-registration",
-        "valid-first-registration-with-no-current-pointer",
-        "valid-published-revision-advances-current-with-matching-precondition",
-        "valid-draft-revision-preserves-current-pointer",
-        "invalid-append-missing-current-pointer-precondition",
-        "invalid-append-stale-current-pointer-precondition",
-        "invalid-published-revision-does-not-reference-current-version",
-        "valid-withdrawal-references-current-version",
-        "invalid-withdrawal-does-not-reference-current-version",
-        "invalid-draft-claims-published-supersession",
-        "invalid-cross-pipeline-revision-id-replay",
-        "invalid-first-create-over-existing-logical-identity",
-        "invalid-request-and-revision-pipeline-identities-disagree",
-        "invalid-withdrawal-uses-supersedes-relationship",
-        "invalid-published-revision-uses-withdraws-relationship",
-        "invalid-published-revision-contains-draft-baseline",
-        "invalid-published-revision-has-null-draft-baseline",
-        "invalid-unknown-publication-state",
-        "valid-stale-publication-conflict-preserves-state",
-        "invalid-stale-publication-conflict-mutates-state",
-        "valid-target-scale-evidence-within-bounds",
-        "invalid-target-exceeds-scale-maximum",
-        "invalid-target-precision-exceeds-scale",
-        "invalid-quantitative-target-nonnumerical-scale",
-        "valid-draft-unresolved-scale-reference",
-        "invalid-published-unverified-scale-reference",
-        "invalid-authority-server-uri-with-userinfo",
-        "invalid-authority-server-uri-with-query",
-        "invalid-authority-server-uri-with-fragment",
-        "invalid-authority-server-uri-relative",
-        "invalid-target-scale-evidence-wrong-pipeline-revision",
-        "invalid-target-scale-evidence-wrong-target-context",
-        "invalid-target-scale-evidence-wrong-target-index",
-        "invalid-target-scale-evidence-wrong-observation-variable",
-        "invalid-target-scale-evidence-missing-provenance-metadata",
-        "invalid-target-scale-evidence-mutates-same-id",
-        "valid-target-scale-evidence-null-precision-and-unit",
-        "valid-target-scale-evidence-nonzero-trait-index",
-        "valid-target-scale-evidence-matches-numerical-category",
-        "invalid-target-scale-evidence-not-in-numerical-categories",
-        "invalid-target-scale-evidence-empty-numerical-categories",
-        "invalid-target-scale-evidence-malformed-numerical-category",
-        "invalid-target-scale-evidence-reversed-scale-bounds",
-        "invalid-target-scale-evidence-timestamp-without-timezone",
-        "invalid-target-scale-evidence-retrieval-after-validation",
-        "invalid-evidence-identity-reused-with-different-content",
+    # Requiring each scenario ID alone allowed a row to keep its name while
+    # silently dropping the input needed to exercise its invariant.
+    required_payloads = {
+        ("executionEvents", "pipelineRevision"): (
+            "valid-embedded-schemes-multiple-targets",
+            "invalid-authority-server-uri-with-userinfo",
+            "invalid-authority-server-uri-with-query",
+            "invalid-authority-server-uri-with-fragment",
+            "invalid-authority-server-uri-relative",
+        ),
+        ("event",): (
+            "valid-event-without-registered-strategy",
+            "invalid-stage-without-scheme-version-context",
+        ),
+        ("pipelineRevision",): (
+            "invalid-embedded-scheme-version-identity-mismatch",
+            "invalid-duplicate-stage-identifiers",
+            "invalid-dangling-transition-endpoint",
+            "invalid-duplicate-transition-identifier",
+            "invalid-duplicate-task-identifier",
+            "invalid-pipeline-version-does-not-match-logical-identity",
+            "invalid-target-context-duplicate-identifiers",
+            "invalid-exact-decimal-mixed-with-binary-numeric",
+            "invalid-authority-qualified-program-reference",
+            "valid-exact-decimal-observation-variable-range",
+            "invalid-quantitative-target-references-trait-only",
+            "invalid-incomplete-exact-decimal-range",
+            "invalid-scalar-threshold-combined-with-range",
+        ),
+        ("event", "pipelineRevision"): (
+            "invalid-event-scheme-version-not-bound-by-pipeline-revision",
+        ),
+        ("after", "before"): (
+            "invalid-mutated-published-scheme-version",
+        ),
+        ("authorityFilterRequest",): (
+            "valid-authority-qualified-filters-distinct-authorities",
+            "invalid-authority-filter-without-server",
+            "invalid-population-filter-without-resource-type",
+            "invalid-duplicate-authority-reference-tuple",
+        ),
+        ("registration",): (
+            "valid-identical-registration-replay",
+            "valid-new-revision-appends-same-workstream",
+            "invalid-same-version-different-payload-registration",
+            "valid-first-registration-with-no-current-pointer",
+            "valid-published-revision-advances-current-with-matching-precondition",
+            "valid-draft-revision-preserves-current-pointer",
+            "invalid-append-missing-current-pointer-precondition",
+            "invalid-append-stale-current-pointer-precondition",
+            "invalid-published-revision-does-not-reference-current-version",
+            "valid-withdrawal-references-current-version",
+            "invalid-withdrawal-does-not-reference-current-version",
+            "invalid-draft-claims-published-supersession",
+            "invalid-cross-pipeline-revision-id-replay",
+            "invalid-first-create-over-existing-logical-identity",
+            "invalid-request-and-revision-pipeline-identities-disagree",
+            "invalid-withdrawal-uses-supersedes-relationship",
+            "invalid-published-revision-uses-withdraws-relationship",
+            "invalid-published-revision-contains-draft-baseline",
+            "invalid-published-revision-has-null-draft-baseline",
+            "invalid-unknown-publication-state",
+            "valid-stale-publication-conflict-preserves-state",
+            "invalid-stale-publication-conflict-mutates-state",
+        ),
+        ("pipelineRevision", "scaleEvidence", "scaleValidationState"): (
+            "valid-target-scale-evidence-within-bounds",
+            "invalid-target-exceeds-scale-maximum",
+            "invalid-target-precision-exceeds-scale",
+            "invalid-quantitative-target-nonnumerical-scale",
+            "invalid-target-scale-evidence-wrong-pipeline-revision",
+            "invalid-target-scale-evidence-wrong-target-context",
+            "invalid-target-scale-evidence-wrong-target-index",
+            "invalid-target-scale-evidence-wrong-observation-variable",
+            "invalid-target-scale-evidence-missing-provenance-metadata",
+            "valid-target-scale-evidence-null-precision-and-unit",
+            "valid-target-scale-evidence-nonzero-trait-index",
+            "valid-target-scale-evidence-matches-numerical-category",
+            "invalid-target-scale-evidence-not-in-numerical-categories",
+            "invalid-target-scale-evidence-empty-numerical-categories",
+            "invalid-target-scale-evidence-malformed-numerical-category",
+            "invalid-target-scale-evidence-reversed-scale-bounds",
+            "invalid-target-scale-evidence-timestamp-without-timezone",
+            "invalid-target-scale-evidence-retrieval-after-validation",
+            "invalid-evidence-identity-reused-with-different-content",
+        ),
+        ("pipelineRevision", "scaleValidationState"): (
+            "valid-draft-unresolved-scale-reference",
+            "invalid-published-unverified-scale-reference",
+        ),
+        ("evidenceAfter", "evidenceBefore", "pipelineRevision", "scaleEvidence", "scaleValidationState"): (
+            "invalid-target-scale-evidence-mutates-same-id",
+        ),
     }
-    missing = sorted(required - set(by_id))
+    payload_types = {
+        "executionEvents": list,
+        "scaleEvidence": (dict, list),
+        "scaleValidationState": str,
+    }
+    missing = []
+    for fields, scenario_ids in required_payloads.items():
+        for scenario_id in scenario_ids:
+            if scenario_id not in by_id:
+                missing.append(scenario_id)
+                continue
+            fixture = by_id[scenario_id]
+            for field in fields:
+                payload = fixture.get(field)
+                if not isinstance(payload, payload_types.get(field, dict)) or not payload:
+                    errors.append(f"{scenario_id}: missing or malformed required fixture payload {field}.")
     if missing:
-        errors.append("missing required contract scenarios: " + ", ".join(missing))
+        errors.append("missing required contract scenarios: " + ", ".join(sorted(missing)))
 
     return errors
 
