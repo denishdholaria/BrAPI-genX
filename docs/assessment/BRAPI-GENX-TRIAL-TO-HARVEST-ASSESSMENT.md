@@ -2,7 +2,7 @@
 
 **Status:** documentation and evidence slice. No source schemas, routes, or generated artifacts changed.
 **Tracking issue:** https://github.com/denishdholaria/BrAPI-genX/issues/7
-**Inspected base SHA:** `c780f656689a46553d747a081a03073c893fd792`
+**Inspected base SHA:** `23c9e09b76f338b8785d208e3872a6660b1425d0` (Mission 003A re-verification)
 **Branch:** local `main` (working tree; no commit created)
 **Companion machine-readable file:** `docs/assessment/BRAPI-GENX-TRIAL-TO-HARVEST-MAPPING.json`
 
@@ -62,7 +62,7 @@ BrAPI v2.1 schema descriptions cite MIAPPE V1.1. MIAPPE v1.2 (October 2024) exis
 ## 5. How irrigation, soil, and weather attach
 
 - **Planned irrigation level** is a design fact. It is carried by BrAPI `ObservationTreatment` (`factor`, `modality`) on each plot's `ObservationUnit` (reuse, TH-011). It is not an applied event.
-- **Applied irrigation** is an operation fact. It is carried by GenX `IrrigationEvent` at `locationDbId` + `studyDbId` + `irrigatedAt` + `volume`/`volumeUnit` + `duration` (TH-013). The current schema has no plot or observation-unit reference, so plot attribution is a gap.
+- **Applied irrigation** is an operation fact. BrAPI v2.1 `Event` supports `eventType='irrigation'`, affected `observationUnitDbIds`, `eventDateRange` (discrete dates), and `eventParameters` (e.g. applied water depth), so plot-level applied irrigation is recoverable on read via `GET /events` (TH-013, corrected). The GenX `IrrigationEvent` schema still has no plot or observation-unit reference and remains field/study-level; plot attribution through BrAPI `Event` requires a shared usage convention and a released write path.
 - **Soil context** is carried by GenX `SoilProfile` at `locationDbId` + `sampledAt` with texture, pH, organic matter, moisture, and nutrients (TH-007, TH-008). It is site-level in the current schema, has no sampling depth, and has no plot link.
 - **Weather context** is carried by GenX `WeatherObservation` at `stationDbId`/`locationDbId` + `observedAt` with measurements, quality flag, and source (TH-009, TH-010). It is site/station-level and instantaneous; aggregation window and representativeness are undefined.
 - **Measured yield** is carried either by BrAPI `Observation` (value + timestamp + yield variable) or by GenX `HarvestRecord` (quantity + unit + moisture + area) (TH-015, TH-016). The HarvestRecord has no plot/observation-unit link and no moisture-basis rule.
@@ -86,7 +86,7 @@ Eighteen findings are recorded in the companion JSON with stable IDs `TH-001` th
 | TH-010 | Document an interoperability gap | Weather context to plot attribution |
 | TH-011 | Reuse existing contract | BrAPI ObservationTreatment for planned treatment |
 | TH-012 | Clarify existing GenX proposal | GenX TreatmentAssignment underspecified |
-| TH-013 | Document an interoperability gap | IrrigationEvent lacks plot attribution |
+| TH-013 | Reuse existing contract (BrAPI Event) + convention | BrAPI Event covers irrigation; parameter/write gaps remain |
 | TH-014 | Document an interoperability gap | Planned vs applied irrigation distinction |
 | TH-015 | Reuse existing contract | BrAPI Observation for measured yield |
 | TH-016 | Clarify existing GenX proposal | HarvestRecord yield/moisture/area/plot link |
@@ -95,11 +95,22 @@ Eighteen findings are recorded in the companion JSON with stable IDs `TH-001` th
 
 Every GenX finding cites the current maturity status `STRUCTURAL_DRAFT` from `docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md`.
 
+### Corrections recorded in Mission 003A
+
+- **TH-003** (Location): `location.coordinates` uses the shared GeoJSON schema (RFC 7946), which supports Point or Polygon geometry; Location is not point-only.
+- **TH-004** (ObservationUnit): BrAPI ObservationUnit supports a persistent identifier (`observationUnitPUI`, MIAPPE DM-72) and `externalReferences`, in addition to `observationUnitDbId`.
+- **TH-013** (irrigation): BrAPI v2.1 `Event` supports `eventType='irrigation'`, affected `observationUnitDbIds`, dates, and `eventParameters`; read via `GET /events`. The earlier claim that BrAPI v2.1 has no irrigation resource is corrected. BrAPI Event read support and write support (absent in released source) are recorded separately.
+- **TH-014** (planned vs applied): both planned (`ObservationUnit.treatments`) and applied (BrAPI `Event`) irrigation can be represented in BrAPI v2.1; the remaining gap is an explicit planned-to-applied link, not plot attribution.
+- **TH-015/TH-016** (harvest): BrAPI `Event` supports `eventType='harvest'` with affected units, dates, and parameters; harvest quantity, moisture basis, harvested area, and plot-level yield comparison still need evidence.
+- **TH-007/TH-008/TH-009/TH-010** (soil/weather): gap claims are provisional pending assessment of companion standards.
+- **TH-011** (treatments): the released schema describes `ObservationUnit.treatments` as "List of treatments applied to an observation unit" (MIAPPE DM-74); planned-vs-applied semantics are by convention, not by contract. Write support exists: `PUT /observationunits` and `PUT /observationunits/{observationUnitDbId}` use `ObservationUnitNewRequest`, which includes `treatments` and `observationUnitPosition`.
+- **ICASA pinned dictionary:** commit `7b0d81745b2ab93c54263f0b4a80fd8d8f95ac76`, file `CSV/Management_info.csv`, lines 205-206: `irrig_amount_depth` / `IRVAL` = "Irrigation amount, depth of water", unit `mm`. The fixture therefore uses `name='irrig_amount_depth'`, `code='IRVAL'`, `units='mm'`, `value='20'`. The 2013 Table 1 (White et al.) listed `IRADP` as applied depth in mm, but the pinned dictionary distinguishes `IRVAL` (applied amount depth, mm) from `IRADP` (application depth, cm); `IRADP` is retained as a negative case for the applied-amount reader even when supplied with mm. The earlier fixture ontology identifier `ICASA:irrigation` (for `eventTypeDbId`) lacked a verified authority and has been removed from the payload. The convention recognizes finite numeric IRVAL values in mm (e.g., 20 and 17.5); cm is outside this pilot convention.
+
 ### Three highest-priority findings
 
-1. **TH-013 — applied irrigation cannot be attributed to a plot.**  
-   Evidence: `Specification/BrAPI-GenX/CropProduction/IrrigationOperation/Schemas/IrrigationEvent.yaml` (properties `locationDbId`, `studyDbId`, `irrigatedAt`, `method`, `volume`, `volumeUnit`, `duration`; no plot or observation-unit property); RFC-024 D-69/D-70/D-71; `Specification/BrAPI-Schema/BrAPI-Phenotyping/ObservationUnit.json`.  
-   Why it matters: BrAPI v2.1 has no irrigation resource and the GenX event stops at Location/Study, so a wrong-plot irrigation event cannot be detected and the scientific question's "irrigation actually applied" cannot be answered per plot.
+1. **TH-013 — applied irrigation is recoverable per plot through BrAPI Event, but convention and write gaps remain.**  
+   Evidence: `Specification/BrAPI-Phenotyping/Events/Schemas/Event.yaml` (`eventType` includes `irrigation`; `observationUnitDbIds`; `eventDateRange.discreteDates`; `eventParameters`); `Specification/BrAPI-Phenotyping/Events/Events_GET.yaml` (filters by `studyDbId`, `observationUnitDbId`, `eventType`, date range); `Specification/BrAPI-GenX/CropProduction/IrrigationOperation/Schemas/IrrigationEvent.yaml` (no plot/observation-unit property).  
+   Why it matters: BrAPI v2.1 does have an irrigation-capable Event resource with affected observation units, so plot-level applied irrigation can be read. The remaining risk is an unstated parameter convention (e.g. applied water depth) and the absence of a released write endpoint/schema.
 
 2. **TH-005 — GenX Plot identity does not resolve to a BrAPI experimental unit.**  
    Evidence: `Specification/BrAPI-GenX/Breeding/Plot/Schemas/Plot.yaml` (`plotDbId`, `fieldDbId`, `plotName`, `status`, `supersedes`, `provenance`; no study/location/observation-unit link); RFC-107 D-319/D-320/D-321; `Specification/BrAPI-Schema/BrAPI-Phenotyping/ObservationUnit.json`.  
@@ -117,7 +128,7 @@ Soil context comes from a GenX SoilProfile at Location `field-12` with `sampledA
 
 ## 8. Negative cases for a later executable fixture
 
-1. **NC-001 — wrong-plot irrigation event.** An IrrigationEvent is recorded with `locationDbId` matching the trial field but is attributed to plot B, although the water was applied to plot A. Expected: reject or flag the attribution because the current IrrigationEvent schema has no `plotDbId`/`observationUnitDbId` or documented distribution rule (TH-013, TH-014).
+1. **NC-001 — wrong-plot irrigation event.** A BrAPI Event is recorded with `eventType='irrigation'` and `observationUnitDbIds=['plot-b']`, although an independent field log shows water was applied to plot A. Expected: structural checks pass (plot-b is a valid plot in the study), but cross-checking the Event against the independent irrigation log exposes the discrepancy; detection is not provided by the Event schema alone (TH-013, TH-014).
 2. **NC-002 — soil data with no sampling depth.** A SoilProfile is recorded with `locationDbId` and `sampledAt` but no sampling depth, and its nutrient values are used to interpret plot performance. Expected: reject or mark incomplete because the depth interval to which the values apply is unstated (TH-007, TH-008).
 3. **NC-003 — yield with an ambiguous measurement basis.** A HarvestRecord states quantity and unit but omits moisture, moistureUnit, areaHarvested, and moisture basis, or an Observation variable scale does not state moisture basis. Expected: reject or flag because grain yield cannot be compared across plots without a stated moisture basis and harvested area (TH-015, TH-016).
 
@@ -145,10 +156,121 @@ Soil context comes from a GenX SoilProfile at Location `field-12` with `sampledA
 |---|---|---:|---|
 | `python3 Scripts/checkEndpointRegistry.py` | `brapi-genx` | 0 | Passed: 201 BrAPI v2.1 entries, 462 proposed GenX entries, unique identities/routes, complete source links, and resolved semantic-neighbor IDs. |
 | `python3 -m json.tool docs/assessment/BRAPI-GENX-TRIAL-TO-HARVEST-MAPPING.json` | `brapi-genx` | 0 | Passed: JSON parses. |
+| `python3 /tmp/scratchpad/validate_fixture.py` (inline snippet reproduced in section 12) | `brapi-genx` | 0 | Passed: BrAPI Event fixture validates against released Event schema; 4/4 relationship checks pass (explicit plot-a resolves; unknown/foreign plot flagged; omitted IDs -> all units; plot substitution passes structural checks but independent log exposes discrepancy). |
 | Local file existence check for all cited paths | `brapi-genx` | 0 | All cited local files exist (verified by inspection). |
 
 No other checks were run. Runtime implementation, conformance tests beyond the registry check, and generated-artifact rebuilds were deliberately not performed because this is a documentation and evidence slice.
 
+## 11.1 Executable fixture (Mission 003A)
+
+Fixture `FX-001` is embedded in `docs/assessment/BRAPI-GENX-TRIAL-TO-HARVEST-MAPPING.json` under the `fixture` key: one study (`institute-a:study:wheat-yield-trial-2026`), two plot-level ObservationUnits (`plot-a`, `plot-b`), and one BrAPI `Event` with `eventType='irrigation'`, `observationUnitDbIds=['plot-a']`, `eventDateRange.discreteDates=['2026-06-15T06:00:00Z']`, and `eventParameters` carrying an applied water depth of `20` (unit `mm`). The parameter name `applied_water_depth` is illustrative fixture terminology; a standard term, if recommended, should cite its authority (ICASA management-event variables / Crop Ontology). The independent field log (`field-log-irrigation-plot-a-001`) is kept separate from the official Event payload.
+
+Reproducible local validation snippet:
+
+```python
+import json, yaml, datetime, sys, math
+from jsonschema import validate, ValidationError
+
+d = json.load(open('docs/assessment/BRAPI-GENX-TRIAL-TO-HARVEST-MAPPING.json'))
+fx = d['fixture']; event = fx['brapiEvent']
+study_units = {u['observationUnitDbId'] for u in fx['observationUnits']}
+foreign_units = {u['observationUnitDbId'] for u in fx.get('foreignStudyObservationUnits', [])}
+
+spec = yaml.safe_load(open('Specification/BrAPI-Phenotyping/Events/Schemas/Event.yaml'))
+schema = spec['components']['schemas']['Event']
+
+def is_dt(s):
+    try:
+        datetime.datetime.fromisoformat(s.replace('Z', '+00:00')); return True
+    except Exception:
+        return False
+
+def schema_errors(payload):
+    try:
+        validate(instance=payload, schema=schema)
+    except ValidationError as e:
+        return [str(e.message)]
+    errs = []
+    for dd in (payload.get('eventDateRange', {}).get('discreteDates') or []):
+        if not is_dt(dd): errs.append(f'bad datetime {dd}')
+    return errs
+
+def resolve(refs):
+    if refs is None:
+        return sorted(study_units), []
+    resolved = [r for r in refs if r in study_units]
+    unknown = [r for r in refs if r not in study_units]
+    return resolved, unknown
+
+base_errors = schema_errors(event)
+case1_resolved, case1_unknown = resolve(event['observationUnitDbIds'])
+case1 = (case1_resolved == ['plot-a']) and (case1_unknown == [])
+
+case2_resolved, case2_unknown = resolve(['plot-z'])
+case2 = (case2_resolved == []) and (case2_unknown == ['plot-z'])
+
+case3_resolved, case3_unknown = resolve(['plot-c'])
+case3 = (case3_resolved == []) and (case3_unknown == ['plot-c']) and ('plot-c' in foreign_units)
+
+case4_resolved, case4_unknown = resolve(None)
+case4 = (case4_resolved == sorted(study_units)) and (case4_unknown == [])
+
+alt = json.loads(json.dumps(event)); alt['observationUnitDbIds'] = ['plot-b']
+case5_resolved, case5_unknown = resolve(alt['observationUnitDbIds'])
+case5 = (case5_resolved == ['plot-b']) and (case5_unknown == []) and (schema_errors(alt) == [])
+
+wrong = json.loads(json.dumps(event))
+wrong['observationUnitDbIds'] = [123]
+case6 = (schema_errors(wrong) != [])
+
+def is_finite_number(v):
+    try:
+        f = float(v); return math.isfinite(f)
+    except (TypeError, ValueError):
+        return False
+
+def recognizes_applied_depth(ep):
+    return (ep.get('code') == 'IRVAL' and ep.get('units') == 'mm'
+            and is_finite_number(ep.get('value')))
+
+param = event['eventParameters'][0]
+case7 = recognizes_applied_depth(param)
+case8 = recognizes_applied_depth({'code': 'IRVAL', 'units': 'mm', 'value': '17.5'})
+case9 = not recognizes_applied_depth({'code': 'IRVAL', 'units': 'cm', 'value': '20'})
+case10 = not recognizes_applied_depth({'code': 'IRADP', 'units': 'mm', 'value': '20'})
+case11 = not recognizes_applied_depth({'code': 'XXXX', 'units': 'mm', 'value': '20'})
+
+field_log_plot = fx['independentFieldLog']['plotDbId']
+case12 = (event['observationUnitDbIds'] == ['plot-a'] and field_log_plot == 'plot-a')
+case13 = (alt['observationUnitDbIds'] == ['plot-b'] and field_log_plot == 'plot-a')
+
+print('schema errors:', base_errors or 'NONE')
+print('case1 explicit plot-a resolves:', case1)
+print('case2 unknown plot flagged:', case2)
+print('case3 foreign-study plot flagged:', case3)
+print('case4 omitted -> all units:', case4, case4_resolved)
+print('case5 substituted plot passes structural checks:', case5)
+print('case6 wrong-type mutation fails:', case6)
+print('case7 IRVAL 20 mm recognized:', case7)
+print('case8 IRVAL 17.5 mm recognized:', case8)
+print('case9 cm outside convention:', case9)
+print('case10 IRADP with mm rejected:', case10)
+print('case11 unrecognized code rejected:', case11)
+print('case12 base field-log agrees:', case12)
+print('case13 substituted field-log disagrees:', case13)
+
+if not (base_errors == [] and case1 and case2 and case3 and case4 and case5 and case6 and case7 and case8 and case9 and case10 and case11 and case12 and case13):
+    sys.exit(1)
+```
+
+## 11.2 Planned-to-applied test (Mission 003B)
+
+Fixture `FX-002` (in the companion JSON) uses two plausible planned applications for the same plot (`plot-a`: `low-water` and `high-water` via `ObservationUnit.treatments`) and one actual BrAPI `Event` (`irrigation`, 20 mm IRVAL, 2026-06-15).
+
+What a reader can establish: the plot's planned modalities and the applied event's occurrence, affected plot, timestamp, and applied depth. What it cannot establish: which planned modality the event fulfilled, because no shared identifier or state links `ObservationTreatment` to `Event`.
+
+Recommendation: document an explicit planned-treatment reference convention (e.g., `Event.additionalInfo` or a documented `plannedApplicationId`) before considering a schema change. Only propose a new field if the pilot must distinguish planned from applied irrigation and the convention cannot carry it.
+
 ## 12. Recommended next interoperability behavior to test
 
-Test **NC-001: a wrong-plot irrigation event** first. The finding that justifies it is **TH-013**: the GenX `IrrigationEvent` schema carries `locationDbId` and `studyDbId` but no `plotDbId` or `observationUnitDbId`, and BrAPI v2.1 has no irrigation resource at all, so an independent system cannot detect when an irrigation event is attributed to the wrong plot. Testing this case will force the missing plot-attribution contract (or an explicit field-level distribution rule) to be defined before any yield conclusion depends on applied irrigation.
+**Recommendation for this use case (Mission 003A): reuse BrAPI `Event` as written and document a shared usage convention; do not add a GenX irrigation field yet.** The fixture shows that BrAPI `Event` can represent an applied water depth of 20 mm for `plot-a` with plot-level attribution, and all structural checks pass. The precise meaning an independent reader would still lose before any new GenX field, schema, or operation is proposed is (a) the planned-to-applied irrigation link (which planned modality an applied event realizes) and (b) the standardized meaning of the `eventParameters` entry (name/code/units). Demonstrate that remaining gap with a reproducible case (NC-001 with an independent irrigation log) before proposing any GenX extension.

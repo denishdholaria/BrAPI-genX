@@ -3,8 +3,8 @@
   "title": "Trial to harvest mapping for one synthetic wheat trial",
   "repository": "denishdholaria/BrAPI-genX",
   "trackingIssue": "https://github.com/denishdholaria/BrAPI-genX/issues/7",
-  "baseCommit": "c780f656689a46553d747a081a03073c893fd792",
-  "branch": "codex/trial-to-harvest-assessment",
+  "baseCommit": "23c9e09b76f338b8785d208e3872a6660b1425d0",
+  "branch": "local main (working tree; no commit created)",
   "scientificQuestion": "Can an independent system recover, for each plot in a wheat trial, the cultivar planted, the irrigation actually applied, the relevant soil and weather context, and the measured grain yield?",
   "permittedWriteScope": [
     "docs/assessment/BRAPI-GENX-TRIAL-TO-HARVEST-ASSESSMENT.md",
@@ -148,16 +148,36 @@
       "targetConcept": "cultivar planted for a plot",
       "relationship": "The cultivar is the Germplasm referenced by the plot's ObservationUnit and/or HarvestRecord; BrAPI Germplasm is the canonical cultivar identity.",
       "identifiers": [
-        { "name": "germplasmDbId", "authority": "BrAPI v2.1 germplasm server", "role": "cultivar identity" },
-        { "name": "observationUnitDbId", "authority": "BrAPI v2.1 phenotyping server", "role": "experimental unit carrying germplasm" }
+        {
+          "name": "germplasmDbId",
+          "authority": "BrAPI v2.1 germplasm server",
+          "role": "cultivar identity"
+        },
+        {
+          "name": "observationUnitDbId",
+          "authority": "BrAPI v2.1 phenotyping server",
+          "role": "experimental unit carrying germplasm"
+        }
       ],
       "spatialContext": "Cultivar identity is not spatial; site/plot linkage is carried by ObservationUnit and Location.",
       "temporalContext": "Germplasm identity is stable across seasons; season is carried by Study/BrAPI Season.",
       "unitsOrMeasurementBasis": "Not applicable (identity, not measurement).",
       "evidence": [
-        { "type": "local-schema", "path": "Specification/BrAPI-Schema/BrAPI-Germplasm/Germplasm.json", "detail": "germplasmDbId property; germplasmName; observationUnits relationship" },
-        { "type": "local-schema", "path": "Specification/BrAPI-Schema/BrAPI-Phenotyping/ObservationUnit.json", "detail": "ObservationUnit.germplasm many-to-one relationship" },
-        { "type": "local-schema", "path": "Specification/BrAPI-Schema/BrAPI-Phenotyping/Observation.json", "detail": "Observation.germplasm many-to-one relationship" }
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-Schema/BrAPI-Germplasm/Germplasm.json",
+          "detail": "germplasmDbId property; germplasmName; observationUnits relationship"
+        },
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-Schema/BrAPI-Phenotyping/ObservationUnit.json",
+          "detail": "ObservationUnit.germplasm many-to-one relationship"
+        },
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-Schema/BrAPI-Phenotyping/Observation.json",
+          "detail": "Observation.germplasm many-to-one relationship"
+        }
       ],
       "reason": "BrAPI v2.1 already defines Germplasm with a server-unique germplasmDbId and links it to observation units and observations; no GenX cultivar identity is needed for this slice.",
       "acceptanceCondition": "Given a plot's observationUnitDbId, an independent client resolves germplasmDbId and retrieves a Germplasm record naming the cultivar; a fixture with an unresolvable germplasmDbId fails."
@@ -169,16 +189,36 @@
       "targetConcept": "study and season context of the trial",
       "relationship": "The trial is a BrAPI Trial containing Studies; each Study carries startDate/endDate, location, experimental design, and season context.",
       "identifiers": [
-        { "name": "trialDbId", "authority": "BrAPI v2.1 core server", "role": "investigation identity (MIAPPE DM-2)" },
-        { "name": "studyDbId", "authority": "BrAPI v2.1 core server", "role": "study identity (MIAPPE DM-11)" }
+        {
+          "name": "trialDbId",
+          "authority": "BrAPI v2.1 core server",
+          "role": "investigation identity (MIAPPE DM-2)"
+        },
+        {
+          "name": "studyDbId",
+          "authority": "BrAPI v2.1 core server",
+          "role": "study identity (MIAPPE DM-11)"
+        }
       ],
       "spatialContext": "Study references its experimental site via Location (study.locationName / locationDbId).",
       "temporalContext": "study.startDate and study.endDate (MIAPPE DM-14/DM-15); BrAPI Season where used.",
       "unitsOrMeasurementBasis": "Not applicable (context, not measurement).",
       "evidence": [
-        { "type": "local-schema", "path": "Specification/BrAPI-Schema/BrAPI-Core/Trial.json", "detail": "trialDbId, studies relationship, startDate/endDate" },
-        { "type": "local-schema", "path": "Specification/BrAPI-Schema/BrAPI-Core/Study.json", "detail": "studyDbId, startDate, endDate, locationName, experimentalDesign" },
-        { "type": "local-doc", "path": "docs/docs/best_practices/MIAPPE.rst", "detail": "MIAPPE DM-1/DM-2/DM-10/DM-11/DM-14/DM-15 mapping to Trial/Study" }
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-Schema/BrAPI-Core/Trial.json",
+          "detail": "trialDbId, studies relationship, startDate/endDate"
+        },
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-Schema/BrAPI-Core/Study.json",
+          "detail": "studyDbId, startDate, endDate, locationName, experimentalDesign"
+        },
+        {
+          "type": "local-doc",
+          "path": "docs/docs/best_practices/MIAPPE.rst",
+          "detail": "MIAPPE DM-1/DM-2/DM-10/DM-11/DM-14/DM-15 mapping to Trial/Study"
+        }
       ],
       "reason": "BrAPI v2.1 Study and Trial already provide the investigation, site, and date context required by MIAPPE; GenX does not need to duplicate them.",
       "acceptanceCondition": "An independent client can traverse trialDbId -> studyDbId and read start/end dates and site for the synthetic wheat trial."
@@ -190,17 +230,29 @@
       "targetConcept": "site spatial context",
       "relationship": "The trial site is a BrAPI Location with coordinates, country, institute, and environment type.",
       "identifiers": [
-        { "name": "locationDbId", "authority": "BrAPI v2.1 core server", "role": "site identity" }
+        {
+          "name": "locationDbId",
+          "authority": "BrAPI v2.1 core server",
+          "role": "site identity"
+        }
       ],
-      "spatialContext": "location.coordinates (GeoJSON, WGS84), coordinateUncertainty, country code/name, environmentType.",
+      "spatialContext": "location.coordinates is a shared GeoJSON object (RFC 7946) supporting Point or Polygon geometry, plus coordinateUncertainty, country code/name, environmentType.",
       "temporalContext": "Not time-specific; site context is static unless a new Location is created.",
       "unitsOrMeasurementBasis": "Coordinates in decimal degrees (WGS84); uncertainty in meters.",
       "evidence": [
-        { "type": "local-schema", "path": "Specification/BrAPI-Schema/BrAPI-Core/Location.json", "detail": "locationDbId, coordinates, coordinateUncertainty, countryCode, countryName, environmentType" },
-        { "type": "local-doc", "path": "docs/docs/best_practices/MIAPPE.rst", "detail": "MIAPPE DM-16/DM-17/DM-18/DM-19/DM-20/DM-21 mapping to Location" }
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-Schema/BrAPI-Core/Location.json",
+          "detail": "locationDbId, coordinates (GeoJSON Feature, Point or Polygon per GeoJSONGeometry), coordinateUncertainty, countryCode, countryName, environmentType"
+        },
+        {
+          "type": "local-doc",
+          "path": "docs/docs/best_practices/MIAPPE.rst",
+          "detail": "MIAPPE DM-16/DM-17/DM-18/DM-19/DM-20/DM-21 mapping to Location"
+        }
       ],
-      "reason": "BrAPI v2.1 Location already provides the site-level spatial and institutional context; FieldGeometry adds plot/field boundary detail rather than replacing Location.",
-      "acceptanceCondition": "An independent client resolves locationDbId and reads WGS84 coordinates and country for the trial site."
+      "reason": "BrAPI v2.1 Location already provides the site-level spatial and institutional context; its coordinates use the shared GeoJSON schema, which supports polygons as well as points, so Location can carry a site boundary, not only a centroid. FieldGeometry adds plot/field boundary detail rather than replacing Location.",
+      "acceptanceCondition": "An independent client resolves locationDbId and reads WGS84 coordinates (Point or Polygon) and country for the trial site."
     },
     {
       "findingId": "TH-004",
@@ -209,16 +261,24 @@
       "targetConcept": "experimental unit / plot-level unit",
       "relationship": "A plot is represented as a BrAPI ObservationUnit with germplasm, observation level, hierarchy, position, and optional GeoJSON geometry.",
       "identifiers": [
-        { "name": "observationUnitDbId", "authority": "BrAPI v2.1 phenotyping server", "role": "experimental unit identity" }
+        {
+          "name": "observationUnitDbId",
+          "authority": "BrAPI v2.1 phenotyping server",
+          "role": "experimental unit identity"
+        }
       ],
       "spatialContext": "observationUnitPosition.geoCoordinates (GeoJSON) and positionCoordinateX/Y; observation level hierarchy.",
       "temporalContext": "ObservationUnit is structural; observation timestamps are on Observation records.",
       "unitsOrMeasurementBasis": "Coordinates in decimal degrees where GeoJSON is used; grid/row units are system-specific and declared by positionCoordinateXType/YType.",
       "evidence": [
-        { "type": "local-schema", "path": "Specification/BrAPI-Schema/BrAPI-Phenotyping/ObservationUnit.json", "detail": "ObservationUnit description: physical entity being observed, typically a Plot or Plant; germplasm; observationLevel; observationLevelRelationships; position; geoCoordinates" }
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-Schema/BrAPI-Phenotyping/ObservationUnit.json",
+          "detail": "ObservationUnit description: physical entity being observed, typically a Plot or Plant; germplasm; observationLevel; observationLevelRelationships; position; geoCoordinates; observationUnitPUI (MIAPPE DM-72); externalReferences"
+        }
       ],
-      "reason": "BrAPI v2.1 ObservationUnit is explicitly defined as the physical entity being observed and commonly a plot, with germplasm and position; this is the interoperable experimental-unit contract.",
-      "acceptanceCondition": "An independent client lists ObservationUnits for the study and identifies plot-level units by observationLevel and germplasmDbId."
+      "reason": "BrAPI v2.1 ObservationUnit is explicitly defined as the physical entity being observed and commonly a plot, with germplasm and position. It also supports a persistent identifier (observationUnitPUI, MIAPPE DM-72) and externalReferences, so an observation unit can be identified persistently and cross-referenced to external repositories; no separate GenX plot identity is required for identification.",
+      "acceptanceCondition": "An independent client lists ObservationUnits for the study, identifies plot-level units by observationLevel and germplasmDbId, and reads observationUnitPUI/externalReferences for persistent cross-referencing."
     },
     {
       "findingId": "TH-005",
@@ -227,17 +287,37 @@
       "targetConcept": "GenX plot identity linked to a BrAPI experimental unit",
       "relationship": "GenX Plot adds an immutable, namespaced plot identity but the current schema has no studyDbId, locationDbId, or observationUnitDbId, so it cannot be resolved to the BrAPI experimental unit it represents.",
       "identifiers": [
-        { "name": "plotDbId", "authority": "GenX proposal (Breeding/Plot)", "role": "GenX plot identity" },
-        { "name": "observationUnitDbId", "authority": "BrAPI v2.1 phenotyping server", "role": "experimental unit that the plot represents" }
+        {
+          "name": "plotDbId",
+          "authority": "GenX proposal (Breeding/Plot)",
+          "role": "GenX plot identity"
+        },
+        {
+          "name": "observationUnitDbId",
+          "authority": "BrAPI v2.1 phenotyping server",
+          "role": "experimental unit that the plot represents"
+        }
       ],
       "spatialContext": "Plot carries fieldDbId only; no geometry or coordinates in the current schema.",
       "temporalContext": "Not stated in the current schema.",
       "unitsOrMeasurementBasis": "Not applicable (identity).",
       "genxMaturityStatus": "STRUCTURAL_DRAFT",
       "evidence": [
-        { "type": "local-schema", "path": "Specification/BrAPI-GenX/Breeding/Plot/Schemas/Plot.yaml", "detail": "Plot properties: plotDbId, fieldDbId, plotName, status, supersedes, provenance; no study/location/observationUnit link" },
-        { "type": "local-rfc", "path": "Specification/BrAPI-GenX/RFCs/RFC-107-Plot.md", "detail": "D-319 fieldDbId required?, D-320 plotName required?, D-321 link to ExperimentalDesign?" },
-        { "type": "local-schema", "path": "Specification/BrAPI-Schema/BrAPI-Phenotyping/ObservationUnit.json", "detail": "BrAPI experimental unit with germplasm and position" }
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-GenX/Breeding/Plot/Schemas/Plot.yaml",
+          "detail": "Plot properties: plotDbId, fieldDbId, plotName, status, supersedes, provenance; no study/location/observationUnit link"
+        },
+        {
+          "type": "local-rfc",
+          "path": "Specification/BrAPI-GenX/RFCs/RFC-107-Plot.md",
+          "detail": "D-319 fieldDbId required?, D-320 plotName required?, D-321 link to ExperimentalDesign?"
+        },
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-Schema/BrAPI-Phenotyping/ObservationUnit.json",
+          "detail": "BrAPI experimental unit with germplasm and position"
+        }
       ],
       "reason": "The inspected GenX Plot schema is an identity record only; it does not define how plotDbId maps to BrAPI observationUnitDbId, so an independent reader cannot recover plot identity across systems without an undocumented convention.",
       "acceptanceCondition": "A GenX Plot record either contains observationUnitDbId or an externalReferences entry resolving to the BrAPI ObservationUnit, and a fixture with a plotDbId that cannot be resolved to an observation unit is rejected."
@@ -249,17 +329,37 @@
       "targetConcept": "field boundary geometry versus experimental unit",
       "relationship": "FieldGeometry is an immutable spatial boundary record; it is not by itself an experimental unit and the current schema has no locationDbId or plotDbId to attach it to a site or plot.",
       "identifiers": [
-        { "name": "fieldGeometryDbId", "authority": "GenX proposal (Geospatial/FieldGeometry)", "role": "geometry record identity" },
-        { "name": "locationDbId", "authority": "BrAPI v2.1 core server", "role": "site to which geometry should attach" }
+        {
+          "name": "fieldGeometryDbId",
+          "authority": "GenX proposal (Geospatial/FieldGeometry)",
+          "role": "geometry record identity"
+        },
+        {
+          "name": "locationDbId",
+          "authority": "BrAPI v2.1 core server",
+          "role": "site to which geometry should attach"
+        }
       ],
       "spatialContext": "geometryType, geometry (GeoJSON), crs, area (hectares as string).",
       "temporalContext": "Not stated; geometry is treated as immutable with supersedes for corrections.",
       "unitsOrMeasurementBasis": "Area in hectares (string); CRS declared per record (example EPSG:4326).",
       "genxMaturityStatus": "STRUCTURAL_DRAFT",
       "evidence": [
-        { "type": "local-schema", "path": "Specification/BrAPI-GenX/Geospatial/FieldGeometry/Schemas/FieldGeometry.yaml", "detail": "FieldGeometry properties: fieldGeometryDbId, geometryType, geometry, crs, area, status, supersedes, provenance; no location/plot link" },
-        { "type": "local-rfc", "path": "Specification/BrAPI-GenX/RFCs/RFC-142-FieldGeometry.md", "detail": "D-424 area required?, D-425 geometryType vocab?, D-426 link to ResearchAsset?" },
-        { "type": "local-schema", "path": "Specification/BrAPI-Schema/BrAPI-Core/Location.json", "detail": "BrAPI Location carries coordinates and coordinateUncertainty" }
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-GenX/Geospatial/FieldGeometry/Schemas/FieldGeometry.yaml",
+          "detail": "FieldGeometry properties: fieldGeometryDbId, geometryType, geometry, crs, area, status, supersedes, provenance; no location/plot link"
+        },
+        {
+          "type": "local-rfc",
+          "path": "Specification/BrAPI-GenX/RFCs/RFC-142-FieldGeometry.md",
+          "detail": "D-424 area required?, D-425 geometryType vocab?, D-426 link to ResearchAsset?"
+        },
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-Schema/BrAPI-Core/Location.json",
+          "detail": "BrAPI Location carries coordinates and coordinateUncertainty"
+        }
       ],
       "reason": "A familiar geometry field is not equivalent to an experimental unit: the inspected FieldGeometry schema has no site or plot link, and BrAPI Location already owns site coordinates, so geometry and experimental unit must be joined by an explicit reference.",
       "acceptanceCondition": "A FieldGeometry record includes locationDbId or plotDbId (or an external reference) plus crs and area, and a fixture that treats geometry alone as a plot is rejected."
@@ -271,20 +371,41 @@
       "targetConcept": "soil sampling depth",
       "relationship": "SoilProfile records soil properties at a Location and sampledAt time, but the current schema has no sampling depth or horizon, so texture/pH/organic matter/moisture/nutrients cannot be interpreted.",
       "identifiers": [
-        { "name": "soilProfileDbId", "authority": "GenX proposal (Environment/SoilProfile)", "role": "soil profile identity" },
-        { "name": "locationDbId", "authority": "BrAPI v2.1 core server", "role": "sampling site" }
+        {
+          "name": "soilProfileDbId",
+          "authority": "GenX proposal (Environment/SoilProfile)",
+          "role": "soil profile identity"
+        },
+        {
+          "name": "locationDbId",
+          "authority": "BrAPI v2.1 core server",
+          "role": "sampling site"
+        }
       ],
       "spatialContext": "locationDbId only; no plot or sampling-point geometry in the current schema.",
       "temporalContext": "sampledAt (ISO-8601 date-time).",
       "unitsOrMeasurementBasis": "ph (number), organicMatter (percent), moisture (percent), nutrients[].value + nutrients[].unit (e.g. ppm); no depth unit.",
       "genxMaturityStatus": "STRUCTURAL_DRAFT",
       "evidence": [
-        { "type": "local-schema", "path": "Specification/BrAPI-GenX/Environment/SoilProfile/Schemas/SoilProfile.yaml", "detail": "SoilProfile properties: soilProfileDbId, locationDbId, sampledAt, texture, ph, organicMatter, moisture, nutrients, status, supersedes, provenance; no depth" },
-        { "type": "local-rfc", "path": "Specification/BrAPI-GenX/RFCs/RFC-023-Soil-Profile.md", "detail": "D-68: Should sampling depth be recorded? (Current: not in this slice.)" },
-        { "type": "local-schema", "path": "Specification/BrAPI-Schema/BrAPI-Core/Location.json", "detail": "BrAPI Location coordinates and uncertainty" }
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-GenX/Environment/SoilProfile/Schemas/SoilProfile.yaml",
+          "detail": "SoilProfile properties: soilProfileDbId, locationDbId, sampledAt, texture, ph, organicMatter, moisture, nutrients, status, supersedes, provenance; no depth"
+        },
+        {
+          "type": "local-rfc",
+          "path": "Specification/BrAPI-GenX/RFCs/RFC-023-Soil-Profile.md",
+          "detail": "D-68: Should sampling depth be recorded? (Current: not in this slice.)"
+        },
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-Schema/BrAPI-Core/Location.json",
+          "detail": "BrAPI Location coordinates and uncertainty"
+        }
       ],
-      "reason": "RFC-023 explicitly defers sampling depth (D-68), so a SoilProfile record cannot currently state the depth interval to which its values apply.",
-      "acceptanceCondition": "A SoilProfile record includes samplingDepth with value and unit (or a horizon identifier), and a fixture with no sampling depth is rejected or marked incomplete."
+      "reason": "Provisional (companion soil/weather standards not yet assessed): Provisional (companion soil/weather standards not yet assessed): RFC-023 explicitly defers sampling depth (D-68), so a SoilProfile record cannot currently state the depth interval to which its values apply.",
+      "acceptanceCondition": "A SoilProfile record includes samplingDepth with value and unit (or a horizon identifier), and a fixture with no sampling depth is rejected or marked incomplete.",
+      "provisional": true
     },
     {
       "findingId": "TH-008",
@@ -293,20 +414,41 @@
       "targetConcept": "soil context attached to a plot or experimental unit",
       "relationship": "SoilProfile attaches to a Location, not to a plot or ObservationUnit, so site-level soil data cannot be attributed to an individual plot without an undocumented convention.",
       "identifiers": [
-        { "name": "soilProfileDbId", "authority": "GenX proposal (Environment/SoilProfile)", "role": "soil profile identity" },
-        { "name": "plotDbId / observationUnitDbId", "authority": "GenX/BrAPI", "role": "intended plot-level consumer (not present in SoilProfile)" }
+        {
+          "name": "soilProfileDbId",
+          "authority": "GenX proposal (Environment/SoilProfile)",
+          "role": "soil profile identity"
+        },
+        {
+          "name": "plotDbId / observationUnitDbId",
+          "authority": "GenX/BrAPI",
+          "role": "intended plot-level consumer (not present in SoilProfile)"
+        }
       ],
       "spatialContext": "locationDbId site-level; no plotDbId or observationUnitDbId property.",
       "temporalContext": "sampledAt.",
       "unitsOrMeasurementBasis": "Soil properties as in TH-007; attribution unit is the plot/experimental unit.",
       "genxMaturityStatus": "STRUCTURAL_DRAFT",
       "evidence": [
-        { "type": "local-schema", "path": "Specification/BrAPI-GenX/Environment/SoilProfile/Schemas/SoilProfile.yaml", "detail": "required: soilProfileDbId, locationDbId, sampledAt, status; no plot/experimental-unit link" },
-        { "type": "local-schema", "path": "Specification/BrAPI-Schema/BrAPI-Phenotyping/ObservationUnit.json", "detail": "BrAPI experimental unit identity" },
-        { "type": "governance", "path": "docs/governance/BRAPI-GENX-SPECIFICATION-QUALITY-STANDARD.md", "detail": "E2 identity boundaries and explicit non-ownership boundaries" }
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-GenX/Environment/SoilProfile/Schemas/SoilProfile.yaml",
+          "detail": "required: soilProfileDbId, locationDbId, sampledAt, status; no plot/experimental-unit link"
+        },
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-Schema/BrAPI-Phenotyping/ObservationUnit.json",
+          "detail": "BrAPI experimental unit identity"
+        },
+        {
+          "type": "governance",
+          "path": "docs/governance/BRAPI-GENX-SPECIFICATION-QUALITY-STANDARD.md",
+          "detail": "E2 identity boundaries and explicit non-ownership boundaries"
+        }
       ],
-      "reason": "Neither BrAPI v2.1 nor the inspected GenX SoilProfile proposal defines a soil-sample-to-plot relationship, so plot-level soil context is lost when only location-level profiles exist.",
-      "acceptanceCondition": "Either SoilProfile gains plotDbId/observationUnitDbId or a documented sampling-unit convention is recorded, and a fixture attributing a location-level profile to one plot without that link is rejected."
+      "reason": "Provisional (companion soil/weather standards not yet assessed): Provisional (companion soil/weather standards not yet assessed): Neither BrAPI v2.1 nor the inspected GenX SoilProfile proposal defines a soil-sample-to-plot relationship, so plot-level soil context is lost when only location-level profiles exist.",
+      "acceptanceCondition": "Either SoilProfile gains plotDbId/observationUnitDbId or a documented sampling-unit convention is recorded, and a fixture attributing a location-level profile to one plot without that link is rejected.",
+      "provisional": true
     },
     {
       "findingId": "TH-009",
@@ -315,21 +457,46 @@
       "targetConcept": "weather measurement time window and representativeness",
       "relationship": "WeatherObservation records measurements at a single observedAt timestamp for a station/location, but does not define the aggregation window, sensor height, or representativeness radius needed to use it as trial context.",
       "identifiers": [
-        { "name": "weatherObservationDbId", "authority": "GenX proposal (Environment/WeatherObservations)", "role": "weather record identity" },
-        { "name": "stationDbId", "authority": "GenX proposal / BrAPI", "role": "weather station or sensor device identity" },
-        { "name": "locationDbId", "authority": "BrAPI v2.1 core server", "role": "observation site" }
+        {
+          "name": "weatherObservationDbId",
+          "authority": "GenX proposal (Environment/WeatherObservations)",
+          "role": "weather record identity"
+        },
+        {
+          "name": "stationDbId",
+          "authority": "GenX proposal / BrAPI",
+          "role": "weather station or sensor device identity"
+        },
+        {
+          "name": "locationDbId",
+          "authority": "BrAPI v2.1 core server",
+          "role": "observation site"
+        }
       ],
       "spatialContext": "locationDbId and stationDbId; no representativeness radius or station-to-plot distance.",
       "temporalContext": "observedAt (single ISO-8601 timestamp); no start/end window or aggregation period.",
       "unitsOrMeasurementBasis": "Per measurement: value (number), unit (string), variableDbId; qualityFlag and source.",
       "genxMaturityStatus": "STRUCTURAL_DRAFT",
       "evidence": [
-        { "type": "local-schema", "path": "Specification/BrAPI-GenX/Environment/WeatherObservations/Schemas/WeatherObservation.yaml", "detail": "WeatherObservation properties: weatherObservationDbId, stationDbId, locationDbId, observedAt, measurements, qualityFlag, source, status, supersedes, provenance" },
-        { "type": "local-rfc", "path": "Specification/BrAPI-GenX/RFCs/RFC-010-Weather-Observations.md", "detail": "D-27 variable reference, D-28 forecast/climate products, D-29 qualityFlag vocab" },
-        { "type": "local-schema", "path": "Specification/BrAPI-Schema/BrAPI-Core/Location.json", "detail": "BrAPI Location coordinates" }
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-GenX/Environment/WeatherObservations/Schemas/WeatherObservation.yaml",
+          "detail": "WeatherObservation properties: weatherObservationDbId, stationDbId, locationDbId, observedAt, measurements, qualityFlag, source, status, supersedes, provenance"
+        },
+        {
+          "type": "local-rfc",
+          "path": "Specification/BrAPI-GenX/RFCs/RFC-010-Weather-Observations.md",
+          "detail": "D-27 variable reference, D-28 forecast/climate products, D-29 qualityFlag vocab"
+        },
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-Schema/BrAPI-Core/Location.json",
+          "detail": "BrAPI Location coordinates"
+        }
       ],
-      "reason": "The inspected schema records an instantaneous observation only; it does not state how that reading represents a plot over a season or what spatial/temporal window it covers.",
-      "acceptanceCondition": "A WeatherObservation record includes an observation window or aggregation period and station metadata reference, and a fixture that uses one instantaneous reading as season context without that window is flagged."
+      "reason": "Provisional (companion soil/weather standards not yet assessed): Provisional (companion soil/weather standards not yet assessed): The inspected schema records an instantaneous observation only; it does not state how that reading represents a plot over a season or what spatial/temporal window it covers.",
+      "acceptanceCondition": "A WeatherObservation record includes an observation window or aggregation period and station metadata reference, and a fixture that uses one instantaneous reading as season context without that window is flagged.",
+      "provisional": true
     },
     {
       "findingId": "TH-010",
@@ -338,38 +505,67 @@
       "targetConcept": "weather context attached to a plot or experimental unit",
       "relationship": "Weather observations are site/station-level; neither BrAPI v2.1 nor the GenX proposal defines how a plot inherits weather context.",
       "identifiers": [
-        { "name": "weatherObservationDbId", "authority": "GenX proposal (Environment/WeatherObservations)", "role": "weather record identity" },
-        { "name": "observationUnitDbId / plotDbId", "authority": "BrAPI / GenX", "role": "intended plot-level consumer (not present in WeatherObservation)" }
+        {
+          "name": "weatherObservationDbId",
+          "authority": "GenX proposal (Environment/WeatherObservations)",
+          "role": "weather record identity"
+        },
+        {
+          "name": "observationUnitDbId / plotDbId",
+          "authority": "BrAPI / GenX",
+          "role": "intended plot-level consumer (not present in WeatherObservation)"
+        }
       ],
       "spatialContext": "stationDbId/locationDbId site-level; no plot link or distance-to-plot.",
       "temporalContext": "observedAt.",
       "unitsOrMeasurementBasis": "Weather measurements in declared units; plot-level representativeness is undefined.",
       "genxMaturityStatus": "STRUCTURAL_DRAFT",
       "evidence": [
-        { "type": "local-schema", "path": "Specification/BrAPI-GenX/Environment/WeatherObservations/Schemas/WeatherObservation.yaml", "detail": "required: weatherObservationDbId, observedAt, measurements; stationDbId/locationDbId optional" },
-        { "type": "local-schema", "path": "Specification/BrAPI-Schema/BrAPI-Phenotyping/ObservationUnit.json", "detail": "BrAPI experimental unit position and geoCoordinates" },
-        { "type": "governance", "path": "docs/governance/BRAPI-GENX-SPECIFICATION-QUALITY-STANDARD.md", "detail": "E2 identity boundaries and non-ownership boundaries" }
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-GenX/Environment/WeatherObservations/Schemas/WeatherObservation.yaml",
+          "detail": "required: weatherObservationDbId, observedAt, measurements; stationDbId/locationDbId optional"
+        },
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-Schema/BrAPI-Phenotyping/ObservationUnit.json",
+          "detail": "BrAPI experimental unit position and geoCoordinates"
+        },
+        {
+          "type": "governance",
+          "path": "docs/governance/BRAPI-GENX-SPECIFICATION-QUALITY-STANDARD.md",
+          "detail": "E2 identity boundaries and non-ownership boundaries"
+        }
       ],
-      "reason": "Neither inspected standard defines a weather-observation-to-experimental-unit relationship, so plot-level weather context is lost unless an external mapping is agreed.",
-      "acceptanceCondition": "A documented convention maps weather observations to plots by location and time and records station distance/time lag, and a fixture using a station reading outside the agreed distance or trial window is rejected."
+      "reason": "Provisional (companion soil/weather standards not yet assessed): Provisional (companion soil/weather standards not yet assessed): Neither inspected standard defines a weather-observation-to-experimental-unit relationship, so plot-level weather context is lost unless an external mapping is agreed.",
+      "acceptanceCondition": "A documented convention maps weather observations to plots by location and time and records station distance/time lag, and a fixture using a station reading outside the agreed distance or trial window is rejected.",
+      "provisional": true
     },
     {
       "findingId": "TH-011",
       "disposition": "reuse existing contract",
       "sourceConcept": "BrAPI v2.1 ObservationTreatment",
       "targetConcept": "planned treatment assignment (e.g. irrigation level)",
-      "relationship": "BrAPI ObservationUnit carries ObservationTreatment with factor and modality, representing planned treatments such as low/high water.",
+      "relationship": "BrAPI ObservationUnit carries ObservationTreatment with factor and modality. The released schema describes treatments as \"List of treatments applied to an observation unit\" (MIAPPE DM-74); the contract does not state whether these are planned design assignments or applied executions, so the assessment treats them as planned treatment assignment by convention.",
       "identifiers": [
-        { "name": "observationUnitDbId", "authority": "BrAPI v2.1 phenotyping server", "role": "treated experimental unit" }
+        {
+          "name": "observationUnitDbId",
+          "authority": "BrAPI v2.1 phenotyping server",
+          "role": "treated experimental unit"
+        }
       ],
       "spatialContext": "Treatment is attached to the ObservationUnit, which carries position/geoCoordinates.",
       "temporalContext": "Treatment is part of trial design; application timing is not in this contract.",
       "unitsOrMeasurementBasis": "Not applicable (planned factor/modality as text).",
       "evidence": [
-        { "type": "local-schema", "path": "Specification/BrAPI-Schema/BrAPI-Phenotyping/ObservationUnit.json", "detail": "ObservationTreatment: factor, modality, observationUnit; MIAPPE DM-61/DM-62 references" }
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-Schema/BrAPI-Phenotyping/ObservationUnit.json",
+          "detail": "ObservationTreatment: factor, modality, observationUnit; MIAPPE DM-61/DM-62 references"
+        }
       ],
-      "reason": "BrAPI v2.1 already represents planned treatment assignments at the observation-unit level, including irrigation as a factor/modality.",
-      "acceptanceCondition": "An independent client reads ObservationTreatment.factor='irrigation' and modality='low-water'/'high-water' for each plot's ObservationUnit."
+      "reason": "BrAPI v2.1 already represents treatment assignments at the observation-unit level, including irrigation as a factor/modality, but the contract wording describes them as treatments applied to the unit; planned-vs-applied semantics are not defined by the schema.",
+      "acceptanceCondition": "An independent client reads ObservationTreatment.factor='irrigation' and modality='low-water'/'high-water' for each plot's ObservationUnit and records that planned-vs-applied semantics are by convention, not by contract."
     },
     {
       "findingId": "TH-012",
@@ -378,65 +574,133 @@
       "targetConcept": "treatment assignment record at field/plot level",
       "relationship": "GenX TreatmentAssignment records a treatment string and fieldDbId, but has no studyDbId, plotDbId, or observationUnitDbId, and treatment is a free-form string.",
       "identifiers": [
-        { "name": "treatmentAssignmentDbId", "authority": "GenX proposal (Breeding/TreatmentAssignment)", "role": "assignment identity" },
-        { "name": "fieldDbId", "authority": "GenX/BrAPI", "role": "field or site reference" }
+        {
+          "name": "treatmentAssignmentDbId",
+          "authority": "GenX proposal (Breeding/TreatmentAssignment)",
+          "role": "assignment identity"
+        },
+        {
+          "name": "fieldDbId",
+          "authority": "GenX/BrAPI",
+          "role": "field or site reference"
+        }
       ],
       "spatialContext": "fieldDbId only; no plot or observation-unit geometry.",
       "temporalContext": "Not stated in the current schema.",
       "unitsOrMeasurementBasis": "treatment is an unrestricted string (RFC-106 D-317).",
       "genxMaturityStatus": "STRUCTURAL_DRAFT",
       "evidence": [
-        { "type": "local-schema", "path": "Specification/BrAPI-GenX/Breeding/TreatmentAssignment/Schemas/TreatmentAssignment.yaml", "detail": "TreatmentAssignment properties: treatmentAssignmentDbId, fieldDbId, treatment, status, supersedes, provenance" },
-        { "type": "local-rfc", "path": "Specification/BrAPI-GenX/RFCs/RFC-106-Treatment-Assignment.md", "detail": "D-316 fieldDbId required?, D-317 treatment controlled vocab?, D-318 link to ExperimentalDesign?" },
-        { "type": "local-schema", "path": "Specification/BrAPI-Schema/BrAPI-Phenotyping/ObservationUnit.json", "detail": "BrAPI ObservationTreatment planned treatment" }
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-GenX/Breeding/TreatmentAssignment/Schemas/TreatmentAssignment.yaml",
+          "detail": "TreatmentAssignment properties: treatmentAssignmentDbId, fieldDbId, treatment, status, supersedes, provenance"
+        },
+        {
+          "type": "local-rfc",
+          "path": "Specification/BrAPI-GenX/RFCs/RFC-106-Treatment-Assignment.md",
+          "detail": "D-316 fieldDbId required?, D-317 treatment controlled vocab?, D-318 link to ExperimentalDesign?"
+        },
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-Schema/BrAPI-Phenotyping/ObservationUnit.json",
+          "detail": "BrAPI ObservationTreatment planned treatment"
+        }
       ],
       "reason": "RFC-106 leaves fieldDbId and treatment semantics unresolved, and the schema has no link to Study, Plot, or ObservationUnit, so a GenX assignment cannot be resolved to the plots it governs.",
       "acceptanceCondition": "A TreatmentAssignment record includes studyDbId and either plotDbId or observationUnitDbId plus a treatment term reference, and a fixture with a field-only assignment cannot be attributed to a plot."
     },
     {
       "findingId": "TH-013",
-      "disposition": "demonstrate an interoperability gap",
-      "sourceConcept": "GenX IrrigationEvent (RFC-024, STRUCTURAL_DRAFT)",
+      "disposition": "reuse existing contract",
+      "sourceConcept": "BrAPI v2.1 Event (irrigation) + GenX IrrigationEvent (RFC-024, STRUCTURAL_DRAFT)",
       "targetConcept": "applied irrigation attributed to a plot",
-      "relationship": "IrrigationEvent records an applied irrigation at a Location/Study, but has no plotDbId or observationUnitDbId, so it cannot be attributed to an individual plot.",
+      "relationship": "BrAPI v2.1 Event supports irrigation events: eventType='irrigation' (ICASA management events), affected observationUnitDbIds, eventDateRange (discreteDates/startDate/endDate), and eventParameters (e.g. applied water depth). The GenX IrrigationEvent remains a proposal without plot/observation-unit attribution.",
       "identifiers": [
-        { "name": "irrigationEventDbId", "authority": "GenX proposal (CropProduction/IrrigationOperation)", "role": "applied irrigation identity" },
-        { "name": "locationDbId", "authority": "BrAPI v2.1 core server", "role": "irrigation site" },
-        { "name": "studyDbId", "authority": "BrAPI v2.1 core server", "role": "trial context" }
+        {
+          "name": "irrigationEventDbId",
+          "authority": "GenX proposal (CropProduction/IrrigationOperation)",
+          "role": "applied irrigation identity"
+        },
+        {
+          "name": "locationDbId",
+          "authority": "BrAPI v2.1 core server",
+          "role": "irrigation site"
+        },
+        {
+          "name": "studyDbId",
+          "authority": "BrAPI v2.1 core server",
+          "role": "trial context"
+        }
       ],
       "spatialContext": "locationDbId site-level; no plot or observation-unit reference.",
       "temporalContext": "irrigatedAt (ISO-8601 date-time).",
       "unitsOrMeasurementBasis": "volume (number) + volumeUnit (string, e.g. liters); duration (integer minutes); method (string).",
       "genxMaturityStatus": "STRUCTURAL_DRAFT",
       "evidence": [
-        { "type": "local-schema", "path": "Specification/BrAPI-GenX/CropProduction/IrrigationOperation/Schemas/IrrigationEvent.yaml", "detail": "IrrigationEvent properties: irrigationEventDbId, locationDbId, studyDbId, irrigatedAt, method, volume, volumeUnit, duration, notes, status, supersedes, provenance; no plot link" },
-        { "type": "local-rfc", "path": "Specification/BrAPI-GenX/RFCs/RFC-024-Irrigation-Operation.md", "detail": "D-69 volume/duration required?, D-70 link to WeatherObservation?, D-71 method vocab?" },
-        { "type": "local-schema", "path": "Specification/BrAPI-Schema/BrAPI-Phenotyping/ObservationUnit.json", "detail": "BrAPI experimental unit identity" }
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-Phenotyping/Events/Schemas/Event.yaml",
+          "detail": "Event: required eventDbId, eventType; eventType includes irrigation (ICASA); observationUnitDbIds affected units; eventDateRange.discreteDates; eventParameters name/code/units/value"
+        },
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-Phenotyping/Events/Events_GET.yaml",
+          "detail": "GET /events filters: observationUnitDbId, studyDbId, eventType, eventDbId, dateRangeStart/dateRangeEnd"
+        },
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-GenX/CropProduction/IrrigationOperation/Schemas/IrrigationEvent.yaml",
+          "detail": "GenX IrrigationEvent has no plot/observation-unit property (context only)"
+        }
       ],
-      "reason": "BrAPI v2.1 has no irrigation resource and the GenX IrrigationEvent schema stops at Location/Study, so plot-level applied irrigation is lost and a wrong-plot attribution cannot be detected.",
-      "acceptanceCondition": "An IrrigationEvent includes plotDbId or observationUnitDbId (or a documented field-level distribution rule), and a fixture that attributes a field-level event to a single plot without that link is rejected."
+      "reason": "BrAPI v2.1 does have an irrigation-capable Event resource with plot-level affected units, so plot-level applied irrigation can be recovered via BrAPI Event (read). The earlier claim that BrAPI v2.1 has no irrigation resource is incorrect. Remaining gaps: (a) no standardized eventParameter name/units for applied water depth, (b) no released write endpoint/schema, (c) GenX IrrigationEvent still lacks plot/observation-unit attribution.",
+      "acceptanceCondition": "A BrAPI Event with eventType='irrigation', observationUnitDbIds=['plot-a'], eventDateRange.discreteDates=[timestamp], and eventParameters containing applied water depth 20 mm validates against the released Event schema and resolves plot-a; a fixture that substitutes another valid plot in the same study still passes structural checks and is only exposed by an independent irrigation log.",
+      "readSupport": "BrAPI GET /events (released v2.1) filters by studyDbId, observationUnitDbId, eventType, eventDbId, dateRangeStart/dateRangeEnd; Event schema includes irrigation and affected observation units.",
+      "writeSupport": "No Events_POST or EventNewRequest in the released BrAPI v2.1 source inspected; write path is not defined in released contracts."
     },
     {
       "findingId": "TH-014",
       "disposition": "demonstrate an interoperability gap",
       "sourceConcept": "BrAPI ObservationTreatment (planned) + GenX IrrigationEvent (applied)",
       "targetConcept": "planned versus applied irrigation",
-      "relationship": "Planned irrigation level (BrAPI ObservationTreatment) and applied irrigation event (GenX IrrigationEvent) are separate records with no shared identifier, state, or explicit link.",
+      "relationship": "Planned irrigation level is carried by BrAPI ObservationUnit.treatments (factor='irrigation', modality); applied irrigation is carried by BrAPI Event (eventType='irrigation', observationUnitDbIds, eventParameters). The two are separate records with no shared identifier or explicit planned-to-applied link in the inspected contracts.",
       "identifiers": [
-        { "name": "observationUnitDbId", "authority": "BrAPI v2.1 phenotyping server", "role": "planned treatment carrier" },
-        { "name": "irrigationEventDbId", "authority": "GenX proposal (CropProduction/IrrigationOperation)", "role": "applied event identity" }
+        {
+          "name": "observationUnitDbId",
+          "authority": "BrAPI v2.1 phenotyping server",
+          "role": "planned treatment carrier"
+        },
+        {
+          "name": "irrigationEventDbId",
+          "authority": "GenX proposal (CropProduction/IrrigationOperation)",
+          "role": "applied event identity"
+        }
       ],
       "spatialContext": "Planned treatment is plot-level; applied event is site/study-level.",
       "temporalContext": "Planned treatment has no application time; applied event has irrigatedAt.",
       "unitsOrMeasurementBasis": "Planned modality is text; applied volume/duration as in TH-013.",
       "genxMaturityStatus": "STRUCTURAL_DRAFT",
       "evidence": [
-        { "type": "local-schema", "path": "Specification/BrAPI-Schema/BrAPI-Phenotyping/ObservationUnit.json", "detail": "ObservationTreatment factor/modality planned treatment" },
-        { "type": "local-schema", "path": "Specification/BrAPI-GenX/CropProduction/IrrigationOperation/Schemas/IrrigationEvent.yaml", "detail": "IrrigationEvent has no planned-treatment reference" },
-        { "type": "quality-standard", "path": "docs/governance/BRAPI-GENX-SPECIFICATION-QUALITY-STANDARD.md", "detail": "E7 lifecycle/state transitions; E2 relationships and cardinality" }
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-Schema/BrAPI-Phenotyping/ObservationUnit.json",
+          "detail": "ObservationTreatment factor/modality planned treatment"
+        },
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-GenX/CropProduction/IrrigationOperation/Schemas/IrrigationEvent.yaml",
+          "detail": "IrrigationEvent has no planned-treatment reference"
+        },
+        {
+          "type": "quality-standard",
+          "path": "docs/governance/BRAPI-GENX-SPECIFICATION-QUALITY-STANDARD.md",
+          "detail": "E7 lifecycle/state transitions; E2 relationships and cardinality"
+        }
       ],
-      "reason": "Neither inspected contract defines a planned-to-applied irrigation link or a state that distinguishes assignment from execution, so an independent system cannot tell whether the planned level was actually applied.",
-      "acceptanceCondition": "A documented link (planned treatment reference on IrrigationEvent or vice versa) exists, and a fixture with a planned high/low water level but no applied event cannot claim applied irrigation."
+      "reason": "Both planned and applied irrigation can now be represented in BrAPI v2.1 (ObservationTreatment and Event), but neither contract defines a planned-to-applied link or state distinguishing assignment from execution, so an independent system cannot tell whether the planned level was actually applied. This is a convention/gap, not plot attribution.",
+      "acceptanceCondition": "A documented link (planned treatment reference on Event or vice versa) or state convention exists, and a fixture with a planned high/low water level but no applied event cannot claim applied irrigation.",
+      "readSupport": "BrAPI GET /events reads applied events; ObservationUnit (GET observationunits) reads planned treatments.",
+      "writeSupport": "No released write endpoint for Event or ObservationUnit treatment update in inspected BrAPI v2.1 source."
     },
     {
       "findingId": "TH-015",
@@ -445,17 +709,33 @@
       "targetConcept": "measured grain yield value",
       "relationship": "Measured grain yield can be recorded as a BrAPI Observation for an ObservationUnit, with the variable defining trait, method, and scale/unit.",
       "identifiers": [
-        { "name": "observationDbId", "authority": "BrAPI v2.1 phenotyping server", "role": "measured value identity" },
-        { "name": "observationVariableDbId", "authority": "BrAPI v2.1 phenotyping server", "role": "trait/method/scale identity" }
+        {
+          "name": "observationDbId",
+          "authority": "BrAPI v2.1 phenotyping server",
+          "role": "measured value identity"
+        },
+        {
+          "name": "observationVariableDbId",
+          "authority": "BrAPI v2.1 phenotyping server",
+          "role": "trait/method/scale identity"
+        }
       ],
       "spatialContext": "Observation may carry geoCoordinates; the unit is carried by observationUnit.",
       "temporalContext": "observationTimeStamp (date-time).",
       "unitsOrMeasurementBasis": "Observation.value is a string; unit and moisture basis must be encoded in the ObservationVariable scale (trait/method/scale) and/or scale unit.",
       "evidence": [
-        { "type": "local-schema", "path": "Specification/BrAPI-Schema/BrAPI-Phenotyping/Observation.json", "detail": "Observation: observationDbId, observationUnit, observationVariable, value, observationTimeStamp, study, season, germplasm" },
-        { "type": "local-schema", "path": "Specification/BrAPI-Schema/BrAPI-Phenotyping/ObservationVariable.json", "detail": "ObservationVariable is a unique combination of Trait, Method, and Scale; MIAPPE DM-83 variable ID" }
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-Schema/BrAPI-Phenotyping/Observation.json",
+          "detail": "Observation: observationDbId, observationUnit, observationVariable, value, observationTimeStamp, study, season, germplasm"
+        },
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-Schema/BrAPI-Phenotyping/ObservationVariable.json",
+          "detail": "ObservationVariable is a unique combination of Trait, Method, and Scale; MIAPPE DM-83 variable ID"
+        }
       ],
-      "reason": "BrAPI v2.1 already provides the measurement contract for a yield value tied to an experimental unit, variable, time, and study.",
+      "reason": "BrAPI v2.1 already provides the measurement contract for a yield value tied to an experimental unit, variable, time, and study. BrAPI v2.1 Event also supports eventType='harvest' (ICASA management events) with affected observation units, dates, and parameters, so harvest occurrence can be recorded as an Event; however, harvest quantity, moisture basis, harvested area, and plot-level yield comparison still depend on Observation/HarvestRecord semantics.",
       "acceptanceCondition": "An independent client can retrieve an Observation for the plot's observationUnitDbId whose variable is grain yield and read value, timestamp, and study."
     },
     {
@@ -465,22 +745,50 @@
       "targetConcept": "grain yield quantity, moisture basis, area, and plot link",
       "relationship": "HarvestRecord requires quantity and unit and optionally records moisture, moistureUnit, qualityGrade, and areaHarvested/areaUnit, but has no plot/observationUnit link and no explicit moisture-basis rule.",
       "identifiers": [
-        { "name": "harvestRecordDbId", "authority": "GenX proposal (CropProduction/HarvestRecords)", "role": "harvest event identity" },
-        { "name": "studyDbId", "authority": "BrAPI v2.1 core server", "role": "trial context" },
-        { "name": "locationDbId", "authority": "BrAPI v2.1 core server", "role": "harvest site" },
-        { "name": "germplasmDbId", "authority": "BrAPI v2.1 germplasm server", "role": "harvested cultivar" }
+        {
+          "name": "harvestRecordDbId",
+          "authority": "GenX proposal (CropProduction/HarvestRecords)",
+          "role": "harvest event identity"
+        },
+        {
+          "name": "studyDbId",
+          "authority": "BrAPI v2.1 core server",
+          "role": "trial context"
+        },
+        {
+          "name": "locationDbId",
+          "authority": "BrAPI v2.1 core server",
+          "role": "harvest site"
+        },
+        {
+          "name": "germplasmDbId",
+          "authority": "BrAPI v2.1 germplasm server",
+          "role": "harvested cultivar"
+        }
       ],
       "spatialContext": "locationDbId site-level; areaHarvested + areaUnit; no plot/observation-unit link.",
       "temporalContext": "harvestedAt (ISO-8601 date-time).",
       "unitsOrMeasurementBasis": "quantity (number) + unit (string, e.g. kg); moisture (number) + moistureUnit (string, e.g. percent); areaHarvested (number) + areaUnit (string, e.g. hectare). Moisture basis (as-harvested vs standard moisture) is not stated.",
       "genxMaturityStatus": "STRUCTURAL_DRAFT",
       "evidence": [
-        { "type": "local-schema", "path": "Specification/BrAPI-GenX/CropProduction/HarvestRecords/Schemas/HarvestRecord.yaml", "detail": "HarvestRecord properties: harvestRecordDbId, studyDbId, locationDbId, germplasmDbId, seedLotDbId, harvestedAt, quantity, unit, moisture, moistureUnit, qualityGrade, areaHarvested, areaUnit, notes, status, supersedes, provenance" },
-        { "type": "local-rfc", "path": "Specification/BrAPI-GenX/RFCs/RFC-011-Harvest-Records.md", "detail": "D-30 seedLot required?, D-31 multi-lot splits?, D-32 area harvested required?" },
-        { "type": "local-schema", "path": "Specification/BrAPI-Schema/BrAPI-Phenotyping/Observation.json", "detail": "BrAPI yield observation alternative" }
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-GenX/CropProduction/HarvestRecords/Schemas/HarvestRecord.yaml",
+          "detail": "HarvestRecord properties: harvestRecordDbId, studyDbId, locationDbId, germplasmDbId, seedLotDbId, harvestedAt, quantity, unit, moisture, moistureUnit, qualityGrade, areaHarvested, areaUnit, notes, status, supersedes, provenance"
+        },
+        {
+          "type": "local-rfc",
+          "path": "Specification/BrAPI-GenX/RFCs/RFC-011-Harvest-Records.md",
+          "detail": "D-30 seedLot required?, D-31 multi-lot splits?, D-32 area harvested required?"
+        },
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-Schema/BrAPI-Phenotyping/Observation.json",
+          "detail": "BrAPI yield observation alternative"
+        }
       ],
-      "reason": "The inspected HarvestRecord schema requires quantity and unit but leaves moisture and area optional and defines no moisture basis or plot link, so grain yield cannot be unambiguously compared across plots.",
-      "acceptanceCondition": "A HarvestRecord states moisture basis (moisture + moistureUnit plus a basis flag or reference to an ObservationVariable scale) and a plot/observationUnit link, and a fixture with an ambiguous measurement basis is rejected."
+      "reason": "The inspected HarvestRecord schema requires quantity and unit but leaves moisture and area optional and defines no moisture basis or plot link, so grain yield cannot be unambiguously compared across plots. BrAPI Event can record a harvest occurrence (eventType='harvest') with affected units, dates, and parameters, but it does not define harvested quantity, moisture basis, harvested area, or a plot link; those semantics still need evidence before any new field is proposed.",
+      "acceptanceCondition": "A HarvestRecord states moisture basis (moisture + moistureUnit plus a basis flag or reference to an ObservationVariable scale) and a plot/observationUnit link, or an Event-based harvest record defines equivalent quantity/moisture/area semantics, and a fixture with an ambiguous measurement basis is rejected."
     },
     {
       "findingId": "TH-017",
@@ -489,15 +797,31 @@
       "targetConcept": "seed lot produced by a harvest",
       "relationship": "HarvestRecord may reference a BrAPI SeedLot produced by the harvest, preserving seed-lot provenance.",
       "identifiers": [
-        { "name": "seedLotDbId", "authority": "BrAPI v2.1 germplasm/server", "role": "produced lot identity" },
-        { "name": "harvestRecordDbId", "authority": "GenX proposal (CropProduction/HarvestRecords)", "role": "harvest event identity" }
+        {
+          "name": "seedLotDbId",
+          "authority": "BrAPI v2.1 germplasm/server",
+          "role": "produced lot identity"
+        },
+        {
+          "name": "harvestRecordDbId",
+          "authority": "GenX proposal (CropProduction/HarvestRecords)",
+          "role": "harvest event identity"
+        }
       ],
       "spatialContext": "Not spatial; lot identity.",
       "temporalContext": "Harvest event time via harvestedAt.",
       "unitsOrMeasurementBasis": "Not applicable (identity link).",
       "evidence": [
-        { "type": "local-schema", "path": "Specification/BrAPI-GenX/CropProduction/HarvestRecords/Schemas/HarvestRecord.yaml", "detail": "seedLotDbId property description" },
-        { "type": "local-rfc", "path": "Specification/BrAPI-GenX/RFCs/RFC-011-Harvest-Records.md", "detail": "Harvest records reference BrAPI Study, Location, Germplasm, and SeedLot by identifier" }
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-GenX/CropProduction/HarvestRecords/Schemas/HarvestRecord.yaml",
+          "detail": "seedLotDbId property description"
+        },
+        {
+          "type": "local-rfc",
+          "path": "Specification/BrAPI-GenX/RFCs/RFC-011-Harvest-Records.md",
+          "detail": "Harvest records reference BrAPI Study, Location, Germplasm, and SeedLot by identifier"
+        }
       ],
       "reason": "The GenX HarvestRecord explicitly references BrAPI SeedLot by identifier rather than duplicating it, so seed-lot provenance can be reused.",
       "acceptanceCondition": "An independent client can traverse harvestRecord.seedLotDbId to a BrAPI SeedLot for harvests that produce a lot."
@@ -509,17 +833,37 @@
       "targetConcept": "reconciliation of harvested area with plot/field geometry",
       "relationship": "There is no defined relationship between FieldGeometry.area and HarvestRecord.areaHarvested, and no evidence for how harvested area should be derived from geometry.",
       "identifiers": [
-        { "name": "fieldGeometryDbId", "authority": "GenX proposal (Geospatial/FieldGeometry)", "role": "geometry identity" },
-        { "name": "areaHarvested / areaUnit", "authority": "GenX proposal (CropProduction/HarvestRecords)", "role": "harvested area" }
+        {
+          "name": "fieldGeometryDbId",
+          "authority": "GenX proposal (Geospatial/FieldGeometry)",
+          "role": "geometry identity"
+        },
+        {
+          "name": "areaHarvested / areaUnit",
+          "authority": "GenX proposal (CropProduction/HarvestRecords)",
+          "role": "harvested area"
+        }
       ],
       "spatialContext": "Geometry area in hectares (string) versus harvested area in declared areaUnit.",
       "temporalContext": "Harvest time via harvestedAt; geometry time not stated.",
       "unitsOrMeasurementBasis": "FieldGeometry.area is a decimal string in hectares; HarvestRecord.areaHarvested is a number with a separate areaUnit.",
       "genxMaturityStatus": "STRUCTURAL_DRAFT",
       "evidence": [
-        { "type": "local-schema", "path": "Specification/BrAPI-GenX/Geospatial/FieldGeometry/Schemas/FieldGeometry.yaml", "detail": "area description: Area in hectares (string)" },
-        { "type": "local-schema", "path": "Specification/BrAPI-GenX/CropProduction/HarvestRecords/Schemas/HarvestRecord.yaml", "detail": "areaHarvested + areaUnit" },
-        { "type": "quality-standard", "path": "docs/governance/BRAPI-GENX-SPECIFICATION-QUALITY-STANDARD.md", "detail": "E5 units and quantities; E10 external standard reuse" }
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-GenX/Geospatial/FieldGeometry/Schemas/FieldGeometry.yaml",
+          "detail": "area description: Area in hectares (string)"
+        },
+        {
+          "type": "local-schema",
+          "path": "Specification/BrAPI-GenX/CropProduction/HarvestRecords/Schemas/HarvestRecord.yaml",
+          "detail": "areaHarvested + areaUnit"
+        },
+        {
+          "type": "quality-standard",
+          "path": "docs/governance/BRAPI-GENX-SPECIFICATION-QUALITY-STANDARD.md",
+          "detail": "E5 units and quantities; E10 external standard reuse"
+        }
       ],
       "reason": "No inspected contract or evidence defines conversion or reconciliation between geometry area and harvested area, including partial harvests and unit conversion.",
       "acceptanceCondition": "A documented rule (harvested area <= relevant geometry area after unit conversion, or an explicit exception) is recorded before this relationship is tested."
@@ -527,29 +871,38 @@
   ],
   "workedTrace": {
     "title": "One worked record trace (synthetic wheat trial)",
-    "prose": "Trial 'wheat-trial-network-2026' (BrAPI Trial) contains Study 'wheat-yield-trial-2026' (BrAPI Study) at Location 'field-12' (BrAPI Location, WGS84 coordinates). The study has two cultivars, 'cv-alpha' and 'cv-beta' (BrAPI Germplasm), and two planned irrigation levels, 'low-water' and 'high-water'. Each of the four plots is a BrAPI ObservationUnit carrying germplasmDbId, observationLevel='plot', position, and ObservationTreatment with factor='irrigation' and the assigned modality; this is the planned treatment. GenX Plot records (plotDbId) exist for the same four plots but, because the current schema has no observationUnitDbId or studyDbId, an external mapping table is required to join plotDbId to observationUnitDbId. Soil context comes from a GenX SoilProfile at location 'field-12' with sampledAt and soil properties; however, the current schema has no sampling depth and no plot link, so the profile is site-level and its depth interval is unstated. Weather context comes from GenX WeatherObservation records for station 'ws-07' at location 'field-12' with observedAt timestamps and measurements; they are site/station-level and their aggregation window and representativeness are unstated. Applied irrigation is recorded as GenX IrrigationEvent records with locationDbId='field-12', studyDbId='wheat-yield-trial-2026', irrigatedAt, method, volume, and volumeUnit; because there is no plotDbId or observationUnitDbId, these events are field/study-level and cannot be attributed to an individual plot without an external rule. Measured grain yield is recorded either as a BrAPI Observation for each plot's ObservationUnit (value, timestamp, grain-yield variable) or as a GenX HarvestRecord with quantity, unit, moisture, moistureUnit, and areaHarvested; the HarvestRecord has no plot/observationUnit link and no moisture-basis rule, so yield comparison across plots requires an external convention. FieldGeometry may describe the field boundary and area, but it has no location or plot link in the current schema, so it cannot by itself identify the harvested experimental unit."
+    "prose": "Trial 'wheat-trial-network-2026' (BrAPI Trial) contains Study 'wheat-yield-trial-2026' (BrAPI Study) at Location 'field-12' (BrAPI Location, WGS84 coordinates). The study has two cultivars, 'cv-alpha' and 'cv-beta' (BrAPI Germplasm), and two planned irrigation levels, 'low-water' and 'high-water'. Each of the four plots is a BrAPI ObservationUnit carrying germplasmDbId, observationLevel='plot', position, and ObservationTreatment with factor='irrigation' and the assigned modality; this is the planned treatment. GenX Plot records (plotDbId) exist for the same four plots but, because the current schema has no observationUnitDbId or studyDbId, an external mapping table is required to join plotDbId to observationUnitDbId. Soil context comes from a GenX SoilProfile at location 'field-12' with sampledAt and soil properties; however, the current schema has no sampling depth and no plot link, so the profile is site-level and its depth interval is unstated. Weather context comes from GenX WeatherObservation records for station 'ws-07' at location 'field-12' with observedAt timestamps and measurements; they are site/station-level and their aggregation window and representativeness are unstated. Applied irrigation can be recorded as a BrAPI Event with eventType='irrigation', observationUnitDbIds (e.g. plot-a), eventDateRange.discreteDates, and eventParameters (e.g. applied water depth 20 mm); this supports plot-level attribution on read. The GenX IrrigationEvent remains field/study-level (no plot/observation-unit link). Planned vs applied irrigation are separate records with no explicit link. Measured grain yield is recorded either as a BrAPI Observation for each plot's ObservationUnit (value, timestamp, grain-yield variable) or as a GenX HarvestRecord with quantity, unit, moisture, moistureUnit, and areaHarvested; the HarvestRecord has no plot/observationUnit link and no moisture-basis rule, so yield comparison across plots requires an external convention. FieldGeometry may describe the field boundary and area, but it has no location or plot link in the current schema, so it cannot by itself identify the harvested experimental unit."
   },
   "negativeCases": [
     {
       "caseId": "NC-001",
       "title": "Wrong-plot irrigation event",
-      "description": "An IrrigationEvent is recorded with locationDbId matching the trial field but is attributed to plot B, although the water was applied to plot A.",
-      "expected": "Reject or flag the attribution because the current IrrigationEvent schema has no plotDbId/observationUnitDbId or documented distribution rule.",
-      "relatedFindingIds": ["TH-013", "TH-014"]
+      "description": "An Event is recorded with eventType='irrigation' and observationUnitDbIds=['plot-b'], although the independent field log shows water was applied to plot-a.",
+      "expected": "Structural checks pass (plot-b is a valid plot in the study), but the independent irrigation log recording plot-a exposes the discrepancy; detection depends on cross-checking the Event against the independent log, not on the Event schema.",
+      "relatedFindingIds": [
+        "TH-013",
+        "TH-014"
+      ]
     },
     {
       "caseId": "NC-002",
       "title": "Soil data with no sampling depth",
       "description": "A SoilProfile is recorded with locationDbId and sampledAt but no sampling depth, and its nutrient values are used to interpret plot performance.",
       "expected": "Reject or mark incomplete because the depth interval to which the values apply is unstated.",
-      "relatedFindingIds": ["TH-007", "TH-008"]
+      "relatedFindingIds": [
+        "TH-007",
+        "TH-008"
+      ]
     },
     {
       "caseId": "NC-003",
       "title": "Yield with an ambiguous measurement basis",
       "description": "A HarvestRecord states quantity and unit but omits moisture, moistureUnit, areaHarvested, and moisture basis, or an Observation variable scale does not state moisture basis.",
       "expected": "Reject or flag because grain yield cannot be compared across plots without a stated moisture basis and harvested area.",
-      "relatedFindingIds": ["TH-015", "TH-016"]
+      "relatedFindingIds": [
+        "TH-015",
+        "TH-016"
+      ]
     }
   ],
   "unknowns": [
@@ -573,6 +926,176 @@
       "workingDirectory": "brapi-genx",
       "exitCode": 0,
       "result": "Passed: JSON parses."
+    },
+    {
+      "command": "python3 (exact snippet copied from assessment section 11.1)",
+      "workingDirectory": "brapi-genx",
+      "exitCode": 0,
+      "result": "Passed: OpenAPI-extracted Event schema validates; explicit/unknown/foreign/omitted/substituted handled by one resolver; wrong-type mutation fails; IRVAL finite numeric mm recognized (20 and 17.5); IRADP with mm rejected; field-log checks affect exit code."
     }
-  ]
+  ],
+  "fixture": {
+    "fixtureId": "FX-001",
+    "description": "Executable BrAPI v2.1 fixture: one study, two plot-level ObservationUnits, one irrigation Event. Applied water depth 20 mm in eventParameters; timestamp in eventDateRange.discreteDates; plot-a in observationUnitDbIds. Parameter name is illustrative fixture terminology.",
+    "studyDbId": "institute-a:study:wheat-yield-trial-2026",
+    "observationUnits": [
+      {
+        "observationUnitDbId": "plot-a",
+        "observationUnitName": "Plot A",
+        "observationLevel": "plot",
+        "studyDbId": "institute-a:study:wheat-yield-trial-2026",
+        "germplasmDbId": "institute-a:germplasm:cv-alpha",
+        "observationUnitPosition": {
+          "observationLevel": {
+            "levelName": "plot",
+            "levelCode": "plot-a",
+            "levelOrder": 2
+          }
+        }
+      },
+      {
+        "observationUnitDbId": "plot-b",
+        "observationUnitName": "Plot B",
+        "observationLevel": "plot",
+        "studyDbId": "institute-a:study:wheat-yield-trial-2026",
+        "germplasmDbId": "institute-a:germplasm:cv-beta",
+        "observationUnitPosition": {
+          "observationLevel": {
+            "levelName": "plot",
+            "levelCode": "plot-b",
+            "levelOrder": 2
+          }
+        }
+      }
+    ],
+    "brapiEvent": {
+      "eventDbId": "irr-2026-plot-a-001",
+      "eventType": "irrigation",
+      "studyDbId": "institute-a:study:wheat-yield-trial-2026",
+      "observationUnitDbIds": [
+        "plot-a"
+      ],
+      "eventDateRange": {
+        "discreteDates": [
+          "2026-06-15T06:00:00Z"
+        ]
+      },
+      "eventParameters": [
+        {
+          "name": "irrig_amount_depth",
+          "code": "IRVAL",
+          "units": "mm",
+          "value": "20",
+          "description": "Pinned ICASA dictionary (commit 7b0d817..., CSV/Management_info.csv lines 205-206): IRVAL = irrig_amount_depth, Irrigation amount, depth of water, mm."
+        }
+      ],
+      "eventDescription": "Irrigation applied to plot-a on 2026-06-15."
+    },
+    "independentFieldLog": {
+      "logId": "field-log-irrigation-plot-a-001",
+      "plotDbId": "plot-a",
+      "appliedWaterDepthMm": 20,
+      "appliedAt": "2026-06-15T06:00:00Z",
+      "source": "independent field notebook (illustrative)"
+    },
+    "relationshipChecks": [
+      {
+        "case": "case1_explicit_plot_a_resolves",
+        "result": "pass",
+        "detail": "observationUnitDbIds=['plot-a'] resolves to plot-a in the study."
+      },
+      {
+        "case": "case2_unknown_plot_flagged",
+        "result": "pass",
+        "detail": "plot-z is unknown and flagged."
+      },
+      {
+        "case": "case3_foreign_study_plot_flagged",
+        "result": "pass",
+        "detail": "plot-c belongs to another study and is flagged."
+      },
+      {
+        "case": "case4_omitted_observationUnitDbIds_all_units",
+        "result": "pass",
+        "detail": "Omitted observationUnitDbIds resolves to all units in the study per released Event contract."
+      },
+      {
+        "case": "case5_substituted_plot_passes_structural_checks",
+        "result": "pass",
+        "detail": "Replacing plot-a with plot-b passes structural checks; independent field log exposes discrepancy."
+      },
+      {
+        "case": "case6_wrong_type_mutation_fails",
+        "result": "pass",
+        "detail": "Mutating observationUnitDbIds to an integer (or eventParameters units to a number) fails the released Event schema/type checks."
+      }
+    ],
+    "notes": "eventParameters.name is illustrative fixture terminology. If a standard term is recommended, cite its authority (ICASA management-event variables / Crop Ontology). Keep fixture envelope and field-log evidence distinguishable from the official Event payload.",
+    "foreignStudyObservationUnits": [
+      {
+        "observationUnitDbId": "plot-c",
+        "studyDbId": "institute-a:study:other-study-2026"
+      }
+    ],
+    "vocabulary": {
+      "source": "ICASA Master Variable List (CSV/Management_info.csv)",
+      "repository": "DSSAT/ICASA-Dictionary",
+      "commit": "7b0d81745b2ab93c54263f0b4a80fd8d8f95ac76",
+      "lines": "205-206",
+      "entry": {
+        "variableName": "irrig_amount_depth",
+        "codeDisplay": "IRVAL",
+        "codeQuery": "IRVAL",
+        "description": "Irrigation amount, depth of water",
+        "unit": "mm",
+        "dataType": "single"
+      },
+      "note": "ICASA v2.0 Table 1 (White et al. 2013) listed IRADP as 'Irrigation amount as depth of water applied' in mm; the pinned dictionary distinguishes IRVAL (applied amount depth, mm) from IRADP (application depth, cm)."
+    }
+  },
+  "plannedToAppliedTest": {
+    "fixtureId": "FX-002",
+    "description": "Planned-to-applied irrigation question: two plausible planned applications for the same plot (plot-a) and one actual BrAPI Event.",
+    "plannedApplications": [
+      {
+        "source": "BrAPI ObservationUnit.treatments",
+        "observationUnitDbId": "plot-a",
+        "factor": "irrigation",
+        "modality": "low-water"
+      },
+      {
+        "source": "BrAPI ObservationUnit.treatments",
+        "observationUnitDbId": "plot-a",
+        "factor": "irrigation",
+        "modality": "high-water"
+      }
+    ],
+    "actualEvent": {
+      "eventDbId": "irr-2026-plot-a-001",
+      "eventType": "irrigation",
+      "observationUnitDbIds": [
+        "plot-a"
+      ],
+      "eventDateRange": {
+        "discreteDates": [
+          "2026-06-15T06:00:00Z"
+        ]
+      },
+      "eventParameters": [
+        {
+          "name": "irrig_amount_depth",
+          "code": "IRVAL",
+          "units": "mm",
+          "value": "20",
+          "description": "Pinned ICASA dictionary (commit 7b0d817..., lines 205-206): IRVAL = irrig_amount_depth, mm."
+        }
+      ]
+    },
+    "readerCanEstablish": [
+      "The plot's planned irrigation modalities (low-water and high-water) from ObservationUnit.treatments.",
+      "The applied event occurrence, affected plot, timestamp, and applied depth (20 mm) from BrAPI Event."
+    ],
+    "readerCannotEstablish": "Which planned modality the event fulfilled; no shared identifier or state links ObservationTreatment to Event.",
+    "recommendation": "Document an explicit planned-treatment reference convention (e.g., Event.additionalInfo or a documented plannedApplicationId) before considering a schema change; only propose a new field if the pilot must distinguish planned vs applied irrigation and the convention cannot carry it."
+  }
 }
