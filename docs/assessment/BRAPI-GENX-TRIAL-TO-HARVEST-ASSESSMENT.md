@@ -156,7 +156,8 @@ Soil context comes from a GenX SoilProfile at Location `field-12` with `sampledA
 |---|---|---:|---|
 | `python3 Scripts/checkEndpointRegistry.py` | `brapi-genx` | 0 | Passed: 201 BrAPI v2.1 entries, 462 proposed GenX entries, unique identities/routes, complete source links, and resolved semantic-neighbor IDs. |
 | `python3 -m json.tool docs/assessment/BRAPI-GENX-TRIAL-TO-HARVEST-MAPPING.json` | `brapi-genx` | 0 | Passed: JSON parses. |
-| `python3 /tmp/scratchpad/validate_fixture.py` (inline snippet reproduced in section 12) | `brapi-genx` | 0 | Passed: BrAPI Event fixture validates against released Event schema; 4/4 relationship checks pass (explicit plot-a resolves; unknown/foreign plot flagged; omitted IDs -> all units; plot substitution passes structural checks but independent log exposes discrepancy). |
+| `python3 /tmp/scratchpad/validate_fixture.py` (inline snippet reproduced in section 11.1) | `brapi-genx` | 0 | Passed: BrAPI Event fixture validates against released Event schema; 4/4 relationship checks pass (explicit plot-a resolves; unknown/foreign plot flagged; omitted IDs -> all units; plot substitution passes structural checks but independent log exposes discrepancy). |
+| `python3 Scripts/validate_trial_to_harvest_fixture.py` | `brapi-genx` | 0 | Passed: irrigation and yield checks (FX-001 + FX-003). |
 | Local file existence check for all cited paths | `brapi-genx` | 0 | All cited local files exist (verified by inspection). |
 
 No other checks were run. Runtime implementation, conformance tests beyond the registry check, and generated-artifact rebuilds were deliberately not performed because this is a documentation and evidence slice.
@@ -274,3 +275,24 @@ Recommendation: document an explicit planned-treatment reference convention (e.g
 ## 12. Recommended next interoperability behavior to test
 
 **Recommendation for this use case (Mission 003A): reuse BrAPI `Event` as written and document a shared usage convention; do not add a GenX irrigation field yet.** The fixture shows that BrAPI `Event` can represent an applied water depth of 20 mm for `plot-a` with plot-level attribution, and all structural checks pass. The precise meaning an independent reader would still lose before any new GenX field, schema, or operation is proposed is (a) the planned-to-applied irrigation link (which planned modality an applied event realizes) and (b) the standardized meaning of the `eventParameters` entry (name/code/units). Demonstrate that remaining gap with a reproducible case (NC-001 with an independent irrigation log) before proposing any GenX extension.
+## 11.3 Yield measurement fixture (Mission 004)
+
+Fixture `FX-003` (in the companion JSON under `yieldFixture`) connects measured wheat yield to the trial plots using released BrAPI v2.1 `Observation` and `ObservationVariable` records:
+
+- Study `institute-a:study:wheat-yield-trial-2026`, plot `plot-a`, cultivar `institute-a:germplasm:cv-alpha`.
+- `ObservationVariable` `var-grain-yield-dry-harvest` resolves trait (`Grain yield`, entity grain, attribute yield), method (`Harvested grain dry weight per harvested area`), and scale (`kg/ha`, dry matter), citing ICASA `HWAH` = "Harvested yield at harvest (dry wt)", unit `kg/ha` (pinned commit `7b0d81745b2ab93c54263f0b4a80fd8d8f95ac76`, `CSV/Measured_data.csv`). `HWAH` is distinct from `HWAM` ("Harvest yield at harvest maturity (dry wt)"), preserving the harvest vs. maturity distinction. Fresh-weight counterparts (`HWAHF`/`HFAH`) are separate variables.
+- `Observation` `yld-2026-plot-a-001`: `value="6000"`, `observationTimeStamp="2026-07-20T10:00:00Z"`, `observationUnitDbId=plot-a`, `germplasmDbId=cv-alpha`.
+- Source measurement: 6 kg dry grain from 10 m² harvested area within a 20 m² plot; calculation 6 kg / 10 m² × 10000 = 6000 kg/ha. Harvested area (10 m²) is less than the full plot area (20 m²); the distinction is preserved.
+- Moisture basis is explicit: dry matter (kg [dm]); `moisturePercent=0`. A yield reported in kg/ha with a fresh or unspecified moisture basis is rejected.
+- Harvest occurrence is recorded separately as a BrAPI `Event` with `eventType='harvest'`, affected `plot-a`, date, and `eventParameters` carrying `HWAH=6000 kg/ha`. The yield value itself is the `Observation`; the `Event` records occurrence only.
+- Seed-lot or operational traceability (GenX `HarvestRecord.seedLotDbId`) is a separate concern; the GenX `HarvestRecord` remains `STRUCTURAL_DRAFT` and lacks a plot/observation-unit link and a moisture-basis rule.
+
+Negative cases (FX-003): unresolved observation variable; plot from the wrong study (`plot-c`); yield in kg/ha with fresh/unspecified moisture basis; and absence of irrigation evidence on `plot-b` (unknown, not zero). NC-004..NC-007 are recorded in the companion JSON.
+
+### IRVAL convention (accepted)
+
+The accepted convention from Mission 003A remains: `eventParameters` entry with `name='irrig_amount_depth'`, `code='IRVAL'`, `units='mm'`, finite numeric `value` (e.g. 20 or 17.5). `IRADP` with mm is rejected (application depth, cm in the pinned dictionary); cm is outside the pilot convention. Absence of an irrigation Event affecting a plot remains unknown and is distinguished from a recorded application of zero (`IRVAL` value `0`).
+
+## 12.1 Recommended next interoperability behavior to test (Mission 004)
+
+**Recommendation for this slice: reuse BrAPI `Observation` + `ObservationVariable` for measured yield and BrAPI `Event` (eventType='harvest') for harvest occurrence; document a shared usage convention; do not add a GenX yield field yet.** The smallest GenX extension still worth considering is an explicit plot/observation-unit link plus a moisture-basis rule on `HarvestRecord` (or a documented convention) only if a concrete exchange—seed-lot/operational traceability or cross-plot yield comparison—still loses meaning after the BrAPI path is adopted. Public schemas, routes, maturity decisions, soil, and weather remain outside this slice.

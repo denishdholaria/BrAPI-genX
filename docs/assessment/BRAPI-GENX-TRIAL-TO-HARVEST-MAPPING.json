@@ -735,8 +735,8 @@
           "detail": "ObservationVariable is a unique combination of Trait, Method, and Scale; MIAPPE DM-83 variable ID"
         }
       ],
-      "reason": "BrAPI v2.1 already provides the measurement contract for a yield value tied to an experimental unit, variable, time, and study. BrAPI v2.1 Event also supports eventType='harvest' (ICASA management events) with affected observation units, dates, and parameters, so harvest occurrence can be recorded as an Event; however, harvest quantity, moisture basis, harvested area, and plot-level yield comparison still depend on Observation/HarvestRecord semantics.",
-      "acceptanceCondition": "An independent client can retrieve an Observation for the plot's observationUnitDbId whose variable is grain yield and read value, timestamp, and study."
+      "reason": "BrAPI v2.1 Observation + ObservationVariable can record a plot's grain yield value, timestamp, and study, with trait/method/scale defining the measurement basis. FX-003 demonstrates 6 kg dry grain from 10 m^2 reported as 6000 kg/ha (ICASA HWAH, dry matter) for plot-a (cv-alpha). A harvest occurrence is recorded separately as a BrAPI Event (eventType='harvest') with affected units, dates, and parameters; it does not carry harvested quantity/moisture/area. BrAPI v2.1 Event supports eventType='harvest' (ICASA management events) with affected observation units, dates, and parameters.",
+      "acceptanceCondition": "An independent client can retrieve an Observation for the plot's observationUnitDbId whose variable is grain yield (HWAH, dry matter, kg/ha) and read value, timestamp, study, and cultivar; and distinguish it from a harvest Event and from seed-lot/operational traceability."
     },
     {
       "findingId": "TH-016",
@@ -787,8 +787,8 @@
           "detail": "BrAPI yield observation alternative"
         }
       ],
-      "reason": "The inspected HarvestRecord schema requires quantity and unit but leaves moisture and area optional and defines no moisture basis or plot link, so grain yield cannot be unambiguously compared across plots. BrAPI Event can record a harvest occurrence (eventType='harvest') with affected units, dates, and parameters, but it does not define harvested quantity, moisture basis, harvested area, or a plot link; those semantics still need evidence before any new field is proposed.",
-      "acceptanceCondition": "A HarvestRecord states moisture basis (moisture + moistureUnit plus a basis flag or reference to an ObservationVariable scale) and a plot/observationUnit link, or an Event-based harvest record defines equivalent quantity/moisture/area semantics, and a fixture with an ambiguous measurement basis is rejected."
+      "reason": "HarvestRecord requires quantity and unit but leaves moisture and area optional and defines no moisture basis or plot link, so grain yield cannot be unambiguously compared across plots. FX-003 shows the BrAPI Observation path resolves plot, cultivar, harvest timing, dry-weight basis, and reported value without a HarvestRecord; GenX HarvestRecord remains useful for operational/seed-lot traceability (seedLotDbId) but needs a plot/observationUnit link and an explicit moisture-basis rule before it can carry comparable yield. Harvest occurrence can be recorded as a BrAPI Event (eventType='harvest'); yield quantity/moisture/area remain Observation/HarvestRecord semantics.",
+      "acceptanceCondition": "A HarvestRecord states moisture basis (moisture + moistureUnit plus a basis flag or reference to an ObservationVariable scale) and a plot/observationUnit link, or an Event-based harvest record defines equivalent quantity/moisture/area semantics, and a fixture with an ambiguous measurement basis is rejected. GenX extension recommended only if a concrete exchange (seed-lot/operational traceability) still loses meaning."
     },
     {
       "findingId": "TH-017",
@@ -903,6 +903,44 @@
         "TH-015",
         "TH-016"
       ]
+    },
+    {
+      "caseId": "NC-004",
+      "title": "Unresolved observation variable",
+      "description": "An Observation references an observationVariableDbId that does not resolve to an ObservationVariable with trait, method, and scale.",
+      "expected": "Reject or flag; yield cannot be interpreted without a resolved variable defining trait, method, scale, and moisture basis.",
+      "relatedFindingIds": [
+        "TH-015"
+      ]
+    },
+    {
+      "caseId": "NC-005",
+      "title": "Plot from wrong study",
+      "description": "An Observation for plot-c (foreign study) is joined to study institute-a:study:wheat-yield-trial-2026.",
+      "expected": "Flag; plot-c belongs to institute-a:study:other-study-2026.",
+      "relatedFindingIds": [
+        "TH-015"
+      ]
+    },
+    {
+      "caseId": "NC-006",
+      "title": "Yield in kg/ha with fresh or unspecified moisture basis",
+      "description": "A yield reported in kg/ha whose moisture basis is fresh or unspecified.",
+      "expected": "Reject or flag; only dry-matter basis (ICASA HWAH) is accepted in this fixture.",
+      "relatedFindingIds": [
+        "TH-015",
+        "TH-016"
+      ]
+    },
+    {
+      "caseId": "NC-007",
+      "title": "Absence of irrigation evidence vs recorded zero",
+      "description": "No irrigation Event affects plot-b, versus an Event with IRVAL value 0.",
+      "expected": "Absence remains unknown; a recorded zero is a measured application of zero and must be distinguished.",
+      "relatedFindingIds": [
+        "TH-013",
+        "TH-014"
+      ]
     }
   ],
   "unknowns": [
@@ -932,6 +970,12 @@
       "workingDirectory": "brapi-genx",
       "exitCode": 0,
       "result": "Passed: OpenAPI-extracted Event schema validates; explicit/unknown/foreign/omitted/substituted handled by one resolver; wrong-type mutation fails; IRVAL finite numeric mm recognized (20 and 17.5); IRADP with mm rejected; field-log checks affect exit code."
+    },
+    {
+      "command": "python3 Scripts/validate_trial_to_harvest_fixture.py",
+      "workingDirectory": "brapi-genx",
+      "exitCode": 0,
+      "result": "Passed: irrigation and yield checks."
     }
   ],
   "fixture": {
@@ -1097,5 +1141,206 @@
     ],
     "readerCannotEstablish": "Which planned modality the event fulfilled; no shared identifier or state links ObservationTreatment to Event.",
     "recommendation": "Document an explicit planned-treatment reference convention (e.g., Event.additionalInfo or a documented plannedApplicationId) before considering a schema change; only propose a new field if the pilot must distinguish planned vs applied irrigation and the convention cannot carry it."
+  },
+  "yieldFixture": {
+    "fixtureId": "FX-003",
+    "description": "Executable BrAPI v2.1 yield fixture: plot-a (cv-alpha) grain yield as a released Observation + ObservationVariable, with a dry-matter moisture basis (ICASA HWAH) and a traceable source measurement (6 kg dry grain from 10 m^2 -> 6000 kg/ha). Harvest occurrence recorded separately as a BrAPI Event (eventType='harvest').",
+    "studyDbId": "institute-a:study:wheat-yield-trial-2026",
+    "observationUnit": {
+      "observationUnitDbId": "plot-a",
+      "observationUnitName": "Plot A",
+      "observationLevel": "plot",
+      "studyDbId": "institute-a:study:wheat-yield-trial-2026",
+      "germplasmDbId": "institute-a:germplasm:cv-alpha"
+    },
+    "germplasmDbId": "institute-a:germplasm:cv-alpha",
+    "observationVariable": {
+      "observationVariableDbId": "var-grain-yield-dry-harvest",
+      "observationVariableName": "Grain yield, harvested, dry weight",
+      "commonCropName": "Wheat",
+      "trait": {
+        "traitName": "Grain yield",
+        "entity": "grain",
+        "attribute": "yield",
+        "traitClass": "agronomical",
+        "traitDescription": "Mass of grain harvested per unit area, dry matter basis."
+      },
+      "method": {
+        "methodDbId": "meth-harvest-dry-weight",
+        "methodName": "Harvested grain dry weight per harvested area",
+        "methodClass": "Measurement",
+        "description": "Harvested grain dried to dry matter, weighed, divided by harvested area."
+      },
+      "scale": {
+        "scaleDbId": "scale-kg-ha-dm",
+        "scaleName": "kilogram per hectare, dry matter",
+        "dataType": "Numeric",
+        "decimalPlaces": 0,
+        "units": "kg/ha",
+        "ontologyReference": null
+      },
+      "ontologyReference": {
+        "ontologyName": "ICASA",
+        "ontologyVersion": "commit 7b0d81745b2ab93c54263f0b4a80fd8d8f95ac76",
+        "termURI": null
+      },
+      "observationVariablePUI": null
+    },
+    "observation": {
+      "observationDbId": "yld-2026-plot-a-001",
+      "studyDbId": "institute-a:study:wheat-yield-trial-2026",
+      "observationUnitDbId": "plot-a",
+      "observationUnitName": "Plot A",
+      "germplasmDbId": "institute-a:germplasm:cv-alpha",
+      "germplasmName": "cv-alpha",
+      "observationVariableDbId": "var-grain-yield-dry-harvest",
+      "observationVariableName": "Grain yield, harvested, dry weight",
+      "value": "6000",
+      "observationTimeStamp": "2026-07-20T10:00:00Z",
+      "collector": "field-team-a",
+      "season": {
+        "season": "2026",
+        "seasonDbId": "season-2026"
+      },
+      "additionalInfo": {
+        "moistureBasis": "dry matter (kg [dm])",
+        "harvestedAreaM2": "10",
+        "fullPlotAreaM2": "20"
+      }
+    },
+    "sourceMeasurement": {
+      "dryGrainMassKg": 6,
+      "dryGrainMassUnit": "kg",
+      "moistureBasis": "dry matter (kg [dm])",
+      "moisturePercent": 0,
+      "harvestedAreaM2": 10,
+      "harvestedAreaUnit": "m2",
+      "fullPlotAreaM2": 20,
+      "fullPlotAreaUnit": "m2",
+      "harvestedAt": "2026-07-20T10:00:00Z",
+      "note": "6 kg of dry grain harvested from 10 m^2 of harvested area within a 20 m^2 plot; harvested area is less than full plot area."
+    },
+    "calculation": {
+      "formula": "dryGrainMassKg / harvestedAreaM2 * 10000",
+      "inputs": {
+        "dryGrainMassKg": 6,
+        "harvestedAreaM2": 10
+      },
+      "result": 6000,
+      "resultUnit": "kg/ha",
+      "reportedValue": "6000"
+    },
+    "harvestEvent": {
+      "eventDbId": "harvest-2026-plot-a-001",
+      "eventType": "harvest",
+      "studyDbId": "institute-a:study:wheat-yield-trial-2026",
+      "observationUnitDbIds": [
+        "plot-a"
+      ],
+      "eventDateRange": {
+        "discreteDates": [
+          "2026-07-20T10:00:00Z"
+        ]
+      },
+      "eventParameters": [
+        {
+          "name": "harvest_yield_harvest_dw",
+          "code": "HWAH",
+          "units": "kg/ha",
+          "value": "6000",
+          "description": "ICASA Measured_data.csv: HWAH = Harvested yield at harvest (dry wt), kg/ha."
+        }
+      ],
+      "eventDescription": "Harvest of plot-a on 2026-07-20."
+    },
+    "vocabulary": {
+      "source": "ICASA Master Variable List (CSV/Measured_data.csv)",
+      "repository": "DSSAT/ICASA-Dictionary",
+      "commit": "7b0d81745b2ab93c54263f0b4a80fd8d8f95ac76",
+      "entry": {
+        "variableName": "harvest_yield_harvest_dw",
+        "codeDisplay": "HWAH",
+        "codeQuery": "HWAH",
+        "description": "Harvested yield at harvest (dry wt)",
+        "unit": "kg/ha",
+        "dataType": "single"
+      },
+      "relatedEntries": [
+        {
+          "variableName": "harvest_yld_matur_dry_wt",
+          "codeDisplay": "HWAM",
+          "description": "Harvest yield at harvest maturity (dry wt)",
+          "unit": "kg/ha"
+        },
+        {
+          "variableName": "harvest_moisture",
+          "codeDisplay": "HMAH",
+          "description": "Moisture content of fresh yield at harvest",
+          "unit": "kg[water]/kg[harvest]"
+        },
+        {
+          "variableName": "grain_moisture_harvest",
+          "codeDisplay": "GW%H",
+          "description": "Grain moisture at harvest",
+          "unit": "%"
+        }
+      ],
+      "note": "HWAH records harvested yield at harvest on a dry-weight basis (kg/ha), distinct from HWAM yield at harvest maturity (dry wt). Fresh-weight counterparts (HWAHF/HFAH) are separate variables; moisture basis must be stated explicitly."
+    },
+    "relationshipChecks": [
+      {
+        "case": "yield_plot_resolves",
+        "result": "pass",
+        "detail": "Observation.observationUnitDbId=plot-a resolves to a plot in study institute-a:study:wheat-yield-trial-2026."
+      },
+      {
+        "case": "yield_cultivar_recovers",
+        "result": "pass",
+        "detail": "Observation.germplasmDbId=institute-a:germplasm:cv-alpha matches plot-a's ObservationUnit.germplasmDbId."
+      },
+      {
+        "case": "yield_variable_resolves",
+        "result": "pass",
+        "detail": "Observation.observationVariableDbId resolves to an ObservationVariable with trait/method/scale and dry-matter units kg/ha."
+      },
+      {
+        "case": "yield_source_traceable",
+        "result": "pass",
+        "detail": "6 kg dry grain / 10 m^2 = 6000 kg/ha; source measurement and calculation recorded."
+      },
+      {
+        "case": "harvested_vs_plot_area",
+        "result": "pass",
+        "detail": "harvestedArea (10 m^2) is less than fullPlotArea (20 m^2); distinction preserved."
+      },
+      {
+        "case": "harvest_event_distinct",
+        "result": "pass",
+        "detail": "Harvest occurrence recorded as a separate BrAPI Event (eventType='harvest'); yield value recorded as Observation."
+      }
+    ],
+    "negativeCases": [
+      {
+        "case": "unresolved_observation_variable",
+        "description": "An Observation references an observationVariableDbId that does not resolve to an ObservationVariable with trait/method/scale.",
+        "expected": "Reject or flag; yield cannot be interpreted without a resolved variable defining trait, method, scale, and moisture basis."
+      },
+      {
+        "case": "plot_from_wrong_study",
+        "description": "An Observation for plot-c (foreign study) is joined to study institute-a:study:wheat-yield-trial-2026.",
+        "expected": "Flag; plot-c belongs to institute-a:study:other-study-2026."
+      },
+      {
+        "case": "yield_kg_ha_fresh_basis",
+        "description": "A yield reported in kg/ha whose moisture basis is fresh or unspecified.",
+        "expected": "Reject or flag; only dry-matter (HWAH) basis is accepted in this fixture; fresh (HWAHF/HFAH) must be stated explicitly."
+      },
+      {
+        "case": "plot_b_irrigation_absence_unknown",
+        "description": "No irrigation Event affects plot-b.",
+        "expected": "Remain unknown; distinguish from a recorded application of zero (IRVAL value 0)."
+      }
+    ],
+    "notes": "Observation.value is a string per released BrAPI schema; unit and moisture basis are encoded in the ObservationVariable scale (kg/ha, dry matter) and cited ICASA HWAH entry. Harvested area (10 m^2) differs from full plot area (20 m^2). Absence of irrigation evidence on plot-b is unknown, not zero."
   }
 }
