@@ -117,13 +117,16 @@ def require_filter_pair(
 
 def run(root: Path) -> list[str]:
     errors: list[str] = []
-    bp_dir = root / "Specification" / "BrAPI-GenX" / "BreedingPipeline"
+    breeding = root / "Specification" / "BrAPI-GenX" / "Breeding"
+    bp_dir = breeding / "BreedingPipeline"
+    population_dir = breeding / "PopulationAdvancement"
+    selection_dir = breeding / "SelectionDecisions"
     bp_schema_path = bp_dir / "Schemas" / "BreedingPipeline.yaml"
     request_path = bp_dir / "Schemas" / "BreedingPipelineNewRequest.yaml"
-    pop_schema_path = root / "Specification" / "BrAPI-GenX" / "PopulationAdvancement" / "Schemas" / "PopulationAdvancement.yaml"
-    pop_request_path = root / "Specification" / "BrAPI-GenX" / "PopulationAdvancement" / "Schemas" / "PopulationAdvancementNewRequest.yaml"
-    sel_schema_path = root / "Specification" / "BrAPI-GenX" / "SelectionDecisions" / "Schemas" / "SelectionDecision.yaml"
-    sel_request_path = root / "Specification" / "BrAPI-GenX" / "SelectionDecisions" / "Schemas" / "SelectionDecisionNewRequest.yaml"
+    pop_schema_path = population_dir / "Schemas" / "PopulationAdvancement.yaml"
+    pop_request_path = population_dir / "Schemas" / "PopulationAdvancementNewRequest.yaml"
+    sel_schema_path = selection_dir / "Schemas" / "SelectionDecision.yaml"
+    sel_request_path = selection_dir / "Schemas" / "SelectionDecisionNewRequest.yaml"
 
     try:
         bp_doc = load_yaml(bp_schema_path)
@@ -472,8 +475,8 @@ def run(root: Path) -> list[str]:
         )
 
     # Authority scope for list filters.
-    pop_ops_path = root / "Specification" / "BrAPI-GenX" / "PopulationAdvancement" / "PopulationAdvancement_GET_POST.yaml"
-    sel_ops_path = root / "Specification" / "BrAPI-GenX" / "SelectionDecisions" / "SelectionDecisions_GET_POST.yaml"
+    pop_ops_path = population_dir / "PopulationAdvancement_GET_POST.yaml"
+    sel_ops_path = selection_dir / "SelectionDecisions_GET_POST.yaml"
     try:
         _, pop_params = list_operation(pop_ops_path, "/population-advancements", errors)
         _, sel_params = list_operation(sel_ops_path, "/selection-decisions", errors)

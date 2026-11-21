@@ -7,39 +7,57 @@ unratified taxonomy. The YAML registry is authoritative for module assignments.
 from __future__ import annotations
 
 import re
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any
 
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
-CLASSIFICATION = ROOT / "Specification/BrAPI-GenX/Conformance/domain-classification.yaml"
-DOCUMENT = ROOT / "Specification/BrAPI-GenX/CLASSIFICATION.md"
+GENX_PATH = PurePosixPath("Specification/BrAPI-GenX")
+GENX_ROOT = ROOT / GENX_PATH
+CLASSIFICATION = GENX_ROOT / "Conformance/domain-classification.yaml"
+DOCUMENT = GENX_ROOT / "CLASSIFICATION.md"
+SUPPORT_DIRECTORIES = {"Conformance", "Inventory", "RFCs"}
 
 
 def classification_errors(
     registry: dict[str, Any],
     document: str,
     endpoint_entries: list[dict[str, Any]],
+    *,
+    genx_root: Path | None = None,
 ) -> list[str]:
     """Return actionable errors; never auto-assign an unclassified module."""
     errors: list[str] = []
     domains = registry.get("domain_classes")
     capabilities = registry.get("cross_cutting_capabilities")
     modules = registry.get("modules")
+    sections = registry.get("sections")
     if not isinstance(domains, dict) or not isinstance(capabilities, dict) or not isinstance(modules, list):
         return ["Classification registry requires domain_classes, cross_cutting_capabilities, and modules."]
+    if not isinstance(sections, dict) or not sections or any(
+        not isinstance(name, str) or not re.fullmatch(r"[A-Za-z][A-Za-z0-9]*", name)
+        or name in SUPPORT_DIRECTORIES
+        for name in sections
+    ):
+        return ["Classification registry requires valid, named specification sections."]
 
     by_module: dict[str, dict[str, Any]] = {}
+    registered_paths: set[str] = set()
     for index, module in enumerate(modules, start=1):
         if not isinstance(module, dict):
             errors.append(f"Registry module #{index} is not an object.")
             continue
         path = module.get("path")
-        if not isinstance(path, str) or not path.endswith("/") or not path[:-1]:
+        if not isinstance(path, str) or not re.fullmatch(r"(?:[A-Za-z][A-Za-z0-9]*/){1,2}", path):
             errors.append(f"Registry module #{index} has an invalid path: {path!r}.")
             continue
-        name = path[:-1]
+        parts = PurePosixPath(path).parts
+        if path != "Conformance/" and (len(parts) != 2 or parts[0] not in sections):
+            errors.append(f"Registry module {path} must be under a declared specification section.")
+            continue
+        registered_paths.add(path)
+        name = parts[-1]
         if name in by_module:
             errors.append(f"Duplicate registry classification for {path}.")
         by_module[name] = module
@@ -55,6 +73,9 @@ def classification_errors(
             for facet in facets:
                 if facet not in capabilities:
                     errors.append(f"Registry {path} has unknown facet {facet!r}.")
+
+    if genx_root is not None:
+        errors.extend(layout_errors(genx_root, sections, registered_paths))
 
     section = document.split("## 4. Mapping current GenX modules", 1)
     if len(section) != 2 or "## 5." not in section[1]:
@@ -117,8 +138,42 @@ def classification_errors(
         module = by_module.get(name)
         if module is None:
             errors.append(f"Endpoint {entry.get('catalogId')} references unknown classification module {name!r}.")
-        elif (entry.get("classification") or {}).get("primaryDomain") != module.get("primary_class"):
+            continue
+        if (entry.get("classification") or {}).get("primaryDomain") != module.get("primary_class"):
             errors.append(f"Endpoint {entry.get('catalogId')} primaryDomain differs from module {name} classification.")
+        source = entry.get("source")
+        source_path = source.get("path") if isinstance(source, dict) else None
+        module_path = GENX_PATH / module["path"]
+        if (
+            not isinstance(source_path, str)
+            or ".." in PurePosixPath(source_path).parts
+            or not PurePosixPath(source_path).is_relative_to(module_path)
+        ):
+            errors.append(f"Endpoint {entry.get('catalogId')} source must be under {module_path}/.")
+    return errors
+
+
+def layout_errors(
+    root: Path, sections: dict[str, Any], registered_paths: set[str],
+) -> list[str]:
+    errors = []
+    expected_top_level = set(sections) | SUPPORT_DIRECTORIES
+    for child in sorted(root.iterdir()):
+        if child.is_dir() and child.name not in expected_top_level:
+            errors.append(f"Unexpected top-level GenX directory {child.name}/.")
+        elif child.is_file() and child.name.startswith("RFC-") and child.suffix == ".md":
+            errors.append(f"Place numbered RFC {child.name} in RFCs/.")
+    for section in sections:
+        section_path = root / section
+        if not (section_path / "README.md").is_file():
+            errors.append(f"Specification section {section}/ requires a README.md.")
+            continue
+        for child in sorted(section_path.iterdir()):
+            if child.is_dir() and f"{section}/{child.name}/" not in registered_paths:
+                errors.append(f"Unregistered specification module {section}/{child.name}/.")
+    for path in sorted(registered_paths):
+        if not (root / path / "README.md").is_file():
+            errors.append(f"Registered module {path} is missing its README.md.")
     return errors
 
 
@@ -130,4 +185,4 @@ def check_classification(endpoint_entries: list[dict[str, Any]]) -> list[str]:
         return [f"Cannot load classification documents: {exc}"]
     if not isinstance(registry, dict):
         return ["Classification registry must be a YAML mapping."]
-    return classification_errors(registry, document, endpoint_entries)
+    return classification_errors(registry, document, endpoint_entries, genx_root=GENX_ROOT)

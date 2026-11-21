@@ -95,7 +95,7 @@ effects; live probes that create server state use fresh idempotency keys.
 
 ## ServerInfoV3 capability audit
 
-The experimental [capability registry](./capability-registry.json) maps every example capability to full GenX route templates, HTTP methods, and operation IDs. See [CAPABILITY-NEGOTIATION.md](../ServerInfoV3/CAPABILITY-NEGOTIATION.md) for the findings and review questions. Run the dedicated mutation suite with:
+The experimental [capability registry](./capability-registry.json) maps every example capability to full GenX route templates, HTTP methods, and operation IDs. See [CAPABILITY-NEGOTIATION.md](../Core/ServerInfoV3/CAPABILITY-NEGOTIATION.md) for the findings and review questions. Run the dedicated mutation suite with:
 
 ```shell
 python Scripts/test_capability_negotiation.py

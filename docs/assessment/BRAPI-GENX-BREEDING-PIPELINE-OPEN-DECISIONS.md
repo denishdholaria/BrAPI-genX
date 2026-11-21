@@ -2,7 +2,7 @@
 
 **Status:** Advisory record of remaining open choices; the CAS ratification is D-BP-14 in the approved decision record.  
 **Workstream:** BGX-P1-06  
-**Canonical specification:** [RFC-154 — Breeding Pipeline](../../Specification/BrAPI-GenX/RFC-154-BreedingPipeline.md)  
+**Canonical specification:** [RFC-154 — Breeding Pipeline](../../Specification/BrAPI-GenX/RFCs/RFC-154-BreedingPipeline.md)\
 **Ratified decisions:** [D-BP-01 through D-BP-14](./BRAPI-GENX-BREEDING-PIPELINE-DECISIONS-APPROVED.md)
 
 This note separates the approved conceptual model from additional wire-level, authorization, authority-resolution, and measurement semantics that must be settled before RFC-154 can become normative.

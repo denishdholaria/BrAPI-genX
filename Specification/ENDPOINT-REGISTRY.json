@@ -22457,7 +22457,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ServerInfoV3/ServerInfoV3_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Core/ServerInfoV3/ServerInfoV3_GET.yaml"
       },
       "standardStatus": "proposal-non-normative",
       "implementationStatus": "reference-test-server-evidence-only",
@@ -22541,7 +22541,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Jobs/Jobs_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Core/Jobs/Jobs_GET_POST.yaml"
       },
       "standardStatus": "proposal-non-normative",
       "implementationStatus": "reference-test-server-evidence-only",
@@ -22669,7 +22669,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Jobs/Jobs_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Core/Jobs/Jobs_GET_POST.yaml"
       },
       "standardStatus": "proposal-non-normative",
       "implementationStatus": "reference-test-server-evidence-only",
@@ -22799,7 +22799,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Jobs/Jobs_JobDbId_GET_DELETE.yaml"
+        "path": "Specification/BrAPI-GenX/Core/Jobs/Jobs_JobDbId_GET_DELETE.yaml"
       },
       "standardStatus": "proposal-non-normative",
       "implementationStatus": "reference-test-server-evidence-only",
@@ -22925,7 +22925,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Jobs/Jobs_JobDbId_GET_DELETE.yaml"
+        "path": "Specification/BrAPI-GenX/Core/Jobs/Jobs_JobDbId_GET_DELETE.yaml"
       },
       "standardStatus": "proposal-non-normative",
       "implementationStatus": "reference-test-server-evidence-only",
@@ -23053,7 +23053,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/VariableTerms/VariableTerms_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/VariableTerms/VariableTerms_GET_POST.yaml"
       },
       "standardStatus": "proposal-non-normative",
       "implementationStatus": "reference-test-server-evidence-only",
@@ -23151,7 +23151,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/VariableTerms/VariableTerms_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/VariableTerms/VariableTerms_GET_POST.yaml"
       },
       "standardStatus": "proposal-non-normative",
       "implementationStatus": "reference-test-server-evidence-only",
@@ -23252,7 +23252,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/VariableTerms/VariableTerms_VariableDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/VariableTerms/VariableTerms_VariableDbId_GET.yaml"
       },
       "standardStatus": "proposal-non-normative",
       "implementationStatus": "reference-test-server-evidence-only",
@@ -23353,7 +23353,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/LotLedger/Ledger_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/LotLedger/Ledger_GET_POST.yaml"
       },
       "standardStatus": "proposal-non-normative",
       "implementationStatus": "reference-test-server-evidence-only",
@@ -23440,7 +23440,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/LotLedger/Ledger_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/LotLedger/Ledger_GET_POST.yaml"
       },
       "standardStatus": "proposal-non-normative",
       "implementationStatus": "reference-test-server-evidence-only",
@@ -23522,7 +23522,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Models/Models_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/Models/Models_GET_POST.yaml"
       },
       "standardStatus": "proposal-non-normative",
       "implementationStatus": "reference-test-server-evidence-only",
@@ -23605,7 +23605,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Models/Models_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/Models/Models_GET_POST.yaml"
       },
       "standardStatus": "proposal-non-normative",
       "implementationStatus": "reference-test-server-evidence-only",
@@ -23687,7 +23687,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Models/Models_ModelDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Research/Models/Models_ModelDbId_GET.yaml"
       },
       "standardStatus": "proposal-non-normative",
       "implementationStatus": "reference-test-server-evidence-only",
@@ -23769,7 +23769,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Genomics/VariantMatrices_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/Genomics/VariantMatrices_GET_POST.yaml"
       },
       "standardStatus": "proposal-non-normative",
       "implementationStatus": "reference-test-server-evidence-only",
@@ -23862,7 +23862,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Genomics/VariantMatrices_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/Genomics/VariantMatrices_GET_POST.yaml"
       },
       "standardStatus": "proposal-non-normative",
       "implementationStatus": "reference-test-server-evidence-only",
@@ -23955,7 +23955,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Genomics/VariantMatrices_MatrixDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/Genomics/VariantMatrices_MatrixDbId_GET.yaml"
       },
       "standardStatus": "proposal-non-normative",
       "implementationStatus": "reference-test-server-evidence-only",
@@ -24050,7 +24050,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/FAIR/FairPackages_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Interoperability/FAIR/FairPackages_GET_POST.yaml"
       },
       "standardStatus": "proposal-non-normative",
       "implementationStatus": "reference-test-server-evidence-only",
@@ -24128,7 +24128,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/FAIR/FairPackages_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Interoperability/FAIR/FairPackages_GET_POST.yaml"
       },
       "standardStatus": "proposal-non-normative",
       "implementationStatus": "reference-test-server-evidence-only",
@@ -24205,7 +24205,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/FAIR/FairPackages_PackageDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Interoperability/FAIR/FairPackages_PackageDbId_GET.yaml"
       },
       "standardStatus": "proposal-non-normative",
       "implementationStatus": "reference-test-server-evidence-only",
@@ -24293,7 +24293,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Telemetry/Telemetry_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Instrumentation/Telemetry/Telemetry_GET_POST.yaml"
       },
       "standardStatus": "proposal-non-normative",
       "implementationStatus": "reference-test-server-evidence-only",
@@ -24398,7 +24398,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Telemetry/Telemetry_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Instrumentation/Telemetry/Telemetry_GET_POST.yaml"
       },
       "standardStatus": "proposal-non-normative",
       "implementationStatus": "reference-test-server-evidence-only",
@@ -24445,8 +24445,8 @@
       "semanticReviewStatus": "defined-in-proposal; community-review-pending",
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
-        "ref": "implementation/bgx-p1-06-approved-breeding-contract",
-        "path": "Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_GET_POST.yaml"
+        "ref": "main",
+        "path": "Specification/BrAPI-GenX/Breeding/SelectionDecisions/SelectionDecisions_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -24528,8 +24528,8 @@
       "semanticReviewStatus": "defined-in-proposal; community-review-pending",
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
-        "ref": "implementation/bgx-p1-06-approved-breeding-contract",
-        "path": "Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_GET_POST.yaml"
+        "ref": "main",
+        "path": "Specification/BrAPI-GenX/Breeding/SelectionDecisions/SelectionDecisions_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -24605,8 +24605,8 @@
       "semanticReviewStatus": "defined-in-proposal; community-review-pending",
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
-        "ref": "implementation/bgx-p1-06-approved-breeding-contract",
-        "path": "Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_SelectionDecisionDbId_GET.yaml"
+        "ref": "main",
+        "path": "Specification/BrAPI-GenX/Breeding/SelectionDecisions/SelectionDecisions_SelectionDecisionDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -24681,7 +24681,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/AnalysisMethods/AnalysisMethods_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/AnalysisMethods/AnalysisMethods_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -24762,7 +24762,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/AnalysisMethods/AnalysisMethods_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/AnalysisMethods/AnalysisMethods_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -24842,7 +24842,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/AnalysisMethods/AnalysisMethods_AnalysisMethodDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Research/AnalysisMethods/AnalysisMethods_AnalysisMethodDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -24920,7 +24920,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/WeatherObservations/WeatherObservations_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/WeatherObservations/WeatherObservations_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -25004,7 +25004,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/WeatherObservations/WeatherObservations_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/WeatherObservations/WeatherObservations_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -25084,7 +25084,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/WeatherObservations/WeatherObservations_WeatherObservationDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/WeatherObservations/WeatherObservations_WeatherObservationDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -25162,7 +25162,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/HarvestRecords/HarvestRecords_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/HarvestRecords/HarvestRecords_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -25244,7 +25244,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/HarvestRecords/HarvestRecords_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/HarvestRecords/HarvestRecords_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -25322,7 +25322,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/HarvestRecords/HarvestRecords_HarvestRecordDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/HarvestRecords/HarvestRecords_HarvestRecordDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -25398,7 +25398,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PhenotypeCapture/PhenotypeCapture_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/PhenotypeCapture/PhenotypeCapture_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -25478,7 +25478,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PhenotypeCapture/PhenotypeCapture_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/PhenotypeCapture/PhenotypeCapture_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -25556,7 +25556,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PhenotypeCapture/PhenotypeCapture_PhenotypeCaptureDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/PhenotypeCapture/PhenotypeCapture_PhenotypeCaptureDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -25632,7 +25632,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GenomicDatasets/GenomicDatasets_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/GenomicDatasets/GenomicDatasets_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -25715,7 +25715,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GenomicDatasets/GenomicDatasets_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/GenomicDatasets/GenomicDatasets_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -25796,7 +25796,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GenomicDatasets/GenomicDatasets_GenomicDatasetDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/GenomicDatasets/GenomicDatasets_GenomicDatasetDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -25873,8 +25873,8 @@
       "semanticReviewStatus": "defined-in-proposal; community-review-pending",
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
-        "ref": "implementation/bgx-p1-06-approved-breeding-contract",
-        "path": "Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml"
+        "ref": "main",
+        "path": "Specification/BrAPI-GenX/Breeding/BreedingPipeline/BreedingPipeline_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -25959,8 +25959,8 @@
       "semanticReviewStatus": "defined-in-proposal; community-review-pending",
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
-        "ref": "implementation/bgx-p1-06-approved-breeding-contract",
-        "path": "Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_BreedingPipelineDbId_GET.yaml"
+        "ref": "main",
+        "path": "Specification/BrAPI-GenX/Breeding/BreedingPipeline/BreedingPipeline_BreedingPipelineDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -26046,7 +26046,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GenebankStorage/GenebankStorage_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/GenebankStorage/GenebankStorage_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -26126,7 +26126,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GenebankStorage/GenebankStorage_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/GenebankStorage/GenebankStorage_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -26204,7 +26204,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GenebankStorage/GenebankStorage_StorageLocationDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/GenebankStorage/GenebankStorage_StorageLocationDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -26280,7 +26280,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ResearchAssets/ResearchAssets_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/ResearchAssets/ResearchAssets_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -26362,7 +26362,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ResearchAssets/ResearchAssets_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/ResearchAssets/ResearchAssets_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -26442,7 +26442,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ResearchAssets/ResearchAssets_ResearchAssetDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Research/ResearchAssets/ResearchAssets_ResearchAssetDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -26520,7 +26520,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/MeasurementMethods/MeasurementMethods_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/MeasurementMethods/MeasurementMethods_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -26599,7 +26599,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/MeasurementMethods/MeasurementMethods_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/MeasurementMethods/MeasurementMethods_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -26677,7 +26677,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/MeasurementMethods/MeasurementMethods_MeasurementMethodDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/MeasurementMethods/MeasurementMethods_MeasurementMethodDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -26753,7 +26753,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ExperimentalDesign/ExperimentalDesign_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/ExperimentalDesign/ExperimentalDesign_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -26832,7 +26832,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ExperimentalDesign/ExperimentalDesign_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/ExperimentalDesign/ExperimentalDesign_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -26910,7 +26910,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ExperimentalDesign/ExperimentalDesign_ExperimentalDesignDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/ExperimentalDesign/ExperimentalDesign_ExperimentalDesignDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -26986,7 +26986,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ProgenyRecords/ProgenyRecords_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/ProgenyRecords/ProgenyRecords_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -27066,7 +27066,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ProgenyRecords/ProgenyRecords_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/ProgenyRecords/ProgenyRecords_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -27144,7 +27144,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ProgenyRecords/ProgenyRecords_ProgenyRecordDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/ProgenyRecords/ProgenyRecords_ProgenyRecordDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -27220,7 +27220,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/DoubledHaploid/DoubledHaploid_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/DoubledHaploid/DoubledHaploid_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -27299,7 +27299,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/DoubledHaploid/DoubledHaploid_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/DoubledHaploid/DoubledHaploid_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -27377,7 +27377,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/DoubledHaploid/DoubledHaploid_DoubledHaploidProgramDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/DoubledHaploid/DoubledHaploid_DoubledHaploidProgramDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -27453,7 +27453,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ViabilityTesting/ViabilityTesting_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/ViabilityTesting/ViabilityTesting_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -27532,7 +27532,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ViabilityTesting/ViabilityTesting_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/ViabilityTesting/ViabilityTesting_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -27610,7 +27610,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ViabilityTesting/ViabilityTesting_ViabilityTestDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/ViabilityTesting/ViabilityTesting_ViabilityTestDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -27686,7 +27686,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SpeedBreeding/SpeedBreeding_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/SpeedBreeding/SpeedBreeding_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -27765,7 +27765,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SpeedBreeding/SpeedBreeding_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/SpeedBreeding/SpeedBreeding_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -27843,7 +27843,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SpeedBreeding/SpeedBreeding_SpeedBreedingProtocolDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/SpeedBreeding/SpeedBreeding_SpeedBreedingProtocolDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -27919,7 +27919,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SoilProfile/SoilProfile_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/SoilProfile/SoilProfile_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -27998,7 +27998,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SoilProfile/SoilProfile_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/SoilProfile/SoilProfile_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -28076,7 +28076,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SoilProfile/SoilProfile_SoilProfileDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/SoilProfile/SoilProfile_SoilProfileDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -28152,7 +28152,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/IrrigationOperation/IrrigationOperation_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/IrrigationOperation/IrrigationOperation_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -28233,7 +28233,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/IrrigationOperation/IrrigationOperation_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/IrrigationOperation/IrrigationOperation_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -28311,7 +28311,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/IrrigationOperation/IrrigationOperation_IrrigationEventDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/IrrigationOperation/IrrigationOperation_IrrigationEventDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -28387,7 +28387,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/RepeatedMeasurement/RepeatedMeasurement_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/RepeatedMeasurement/RepeatedMeasurement_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -28468,7 +28468,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/RepeatedMeasurement/RepeatedMeasurement_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/RepeatedMeasurement/RepeatedMeasurement_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -28547,7 +28547,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/RepeatedMeasurement/RepeatedMeasurement_MeasurementSeriesDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/RepeatedMeasurement/RepeatedMeasurement_MeasurementSeriesDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -28624,7 +28624,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/FertilizerApplication/FertilizerApplication_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/FertilizerApplication/FertilizerApplication_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -28705,7 +28705,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/FertilizerApplication/FertilizerApplication_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/FertilizerApplication/FertilizerApplication_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -28783,7 +28783,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/FertilizerApplication/FertilizerApplication_FertilizerApplicationDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/FertilizerApplication/FertilizerApplication_FertilizerApplicationDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -28859,7 +28859,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PhenologyObservation/PhenologyObservation_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/PhenologyObservation/PhenologyObservation_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -28939,7 +28939,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PhenologyObservation/PhenologyObservation_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/PhenologyObservation/PhenologyObservation_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -29017,7 +29017,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PhenologyObservation/PhenologyObservation_PhenologyObservationDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/PhenologyObservation/PhenologyObservation_PhenologyObservationDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -29093,7 +29093,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ParentCandidateSelection/ParentCandidateSelection_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/ParentCandidateSelection/ParentCandidateSelection_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -29173,7 +29173,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ParentCandidateSelection/ParentCandidateSelection_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/ParentCandidateSelection/ParentCandidateSelection_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -29251,7 +29251,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ParentCandidateSelection/ParentCandidateSelection_ParentCandidateSelectionDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/ParentCandidateSelection/ParentCandidateSelection_ParentCandidateSelectionDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -29327,7 +29327,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CropCycle/CropCycle_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/CropCycle/CropCycle_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -29407,7 +29407,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CropCycle/CropCycle_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/CropCycle/CropCycle_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -29485,7 +29485,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CropCycle/CropCycle_CropCycleDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/CropCycle/CropCycle_CropCycleDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -29561,7 +29561,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Quarantine/Quarantine_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/Quarantine/Quarantine_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -29640,7 +29640,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Quarantine/Quarantine_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/Quarantine/Quarantine_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -29718,7 +29718,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Quarantine/Quarantine_QuarantineRecordDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/Quarantine/Quarantine_QuarantineRecordDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -29794,7 +29794,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/WeatherForecast/WeatherForecast_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/WeatherForecast/WeatherForecast_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -29876,7 +29876,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/WeatherForecast/WeatherForecast_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/WeatherForecast/WeatherForecast_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -29955,7 +29955,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/WeatherForecast/WeatherForecast_WeatherForecastDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/WeatherForecast/WeatherForecast_WeatherForecastDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -30032,7 +30032,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ImageMetadata/ImageMetadata_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/ImageMetadata/ImageMetadata_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -30112,7 +30112,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ImageMetadata/ImageMetadata_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/ImageMetadata/ImageMetadata_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -30190,7 +30190,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ImageMetadata/ImageMetadata_ImageMetadataDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/ImageMetadata/ImageMetadata_ImageMetadataDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -30266,7 +30266,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ClimateNormals/ClimateNormals_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/ClimateNormals/ClimateNormals_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -30346,7 +30346,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ClimateNormals/ClimateNormals_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/ClimateNormals/ClimateNormals_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -30424,7 +30424,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ClimateNormals/ClimateNormals_ClimateNormalDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/ClimateNormals/ClimateNormals_ClimateNormalDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -30500,7 +30500,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SafetyDuplication/SafetyDuplication_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/SafetyDuplication/SafetyDuplication_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -30579,7 +30579,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SafetyDuplication/SafetyDuplication_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/SafetyDuplication/SafetyDuplication_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -30657,7 +30657,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SafetyDuplication/SafetyDuplication_SafetyDuplicationDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/SafetyDuplication/SafetyDuplication_SafetyDuplicationDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -30732,8 +30732,8 @@
       "semanticReviewStatus": "defined-in-proposal; community-review-pending",
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
-        "ref": "implementation/bgx-p1-06-approved-breeding-contract",
-        "path": "Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml"
+        "ref": "main",
+        "path": "Specification/BrAPI-GenX/Breeding/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -30815,8 +30815,8 @@
       "semanticReviewStatus": "defined-in-proposal; community-review-pending",
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
-        "ref": "implementation/bgx-p1-06-approved-breeding-contract",
-        "path": "Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml"
+        "ref": "main",
+        "path": "Specification/BrAPI-GenX/Breeding/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -30893,8 +30893,8 @@
       "semanticReviewStatus": "defined-in-proposal; community-review-pending",
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
-        "ref": "implementation/bgx-p1-06-approved-breeding-contract",
-        "path": "Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_PopulationAdvancementDbId_GET.yaml"
+        "ref": "main",
+        "path": "Specification/BrAPI-GenX/Breeding/PopulationAdvancement/PopulationAdvancement_PopulationAdvancementDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -30970,7 +30970,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Regeneration/Regeneration_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/Regeneration/Regeneration_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -31049,7 +31049,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Regeneration/Regeneration_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/Regeneration/Regeneration_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -31127,7 +31127,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Regeneration/Regeneration_RegenerationRecordDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/Regeneration/Regeneration_RegenerationRecordDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -31203,7 +31203,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CrossingSchedule/CrossingSchedule_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/CrossingSchedule/CrossingSchedule_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -31282,7 +31282,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CrossingSchedule/CrossingSchedule_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/CrossingSchedule/CrossingSchedule_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -31360,7 +31360,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CrossingSchedule/CrossingSchedule_CrossingScheduleDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/CrossingSchedule/CrossingSchedule_CrossingScheduleDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -31436,7 +31436,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Tillage/Tillage_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/Tillage/Tillage_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -31517,7 +31517,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Tillage/Tillage_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/Tillage/Tillage_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -31595,7 +31595,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Tillage/Tillage_TillageRecordDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/Tillage/Tillage_TillageRecordDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -31671,7 +31671,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CandidateVarietyLifecycle/CandidateVarietyLifecycle_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/CandidateVarietyLifecycle/CandidateVarietyLifecycle_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -31750,7 +31750,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CandidateVarietyLifecycle/CandidateVarietyLifecycle_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/CandidateVarietyLifecycle/CandidateVarietyLifecycle_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -31828,7 +31828,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CandidateVarietyLifecycle/CandidateVarietyLifecycle_CandidateVarietyDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/CandidateVarietyLifecycle/CandidateVarietyLifecycle_CandidateVarietyDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -31904,7 +31904,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/BulkCapture/BulkCapture_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/BulkCapture/BulkCapture_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -31983,7 +31983,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/BulkCapture/BulkCapture_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/BulkCapture/BulkCapture_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -32061,7 +32061,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/BulkCapture/BulkCapture_BulkCaptureDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/BulkCapture/BulkCapture_BulkCaptureDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -32137,7 +32137,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Acquisition/Acquisition_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/Acquisition/Acquisition_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -32216,7 +32216,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Acquisition/Acquisition_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/Acquisition/Acquisition_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -32294,7 +32294,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Acquisition/Acquisition_AcquisitionRecordDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/Acquisition/Acquisition_AcquisitionRecordDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -32370,7 +32370,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ExtremeWeather/ExtremeWeather_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/ExtremeWeather/ExtremeWeather_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -32450,7 +32450,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ExtremeWeather/ExtremeWeather_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/ExtremeWeather/ExtremeWeather_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -32528,7 +32528,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ExtremeWeather/ExtremeWeather_ExtremeWeatherEventDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/ExtremeWeather/ExtremeWeather_ExtremeWeatherEventDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -32604,7 +32604,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/VcfImport/VcfImport_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/VcfImport/VcfImport_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -32685,7 +32685,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/VcfImport/VcfImport_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/VcfImport/VcfImport_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -32765,7 +32765,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/VcfImport/VcfImport_VcfImportDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/VcfImport/VcfImport_VcfImportDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -32843,7 +32843,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PhenotypeAnnotation/PhenotypeAnnotation_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/PhenotypeAnnotation/PhenotypeAnnotation_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -32923,7 +32923,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PhenotypeAnnotation/PhenotypeAnnotation_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/PhenotypeAnnotation/PhenotypeAnnotation_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -33001,7 +33001,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PhenotypeAnnotation/PhenotypeAnnotation_PhenotypeAnnotationDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/PhenotypeAnnotation/PhenotypeAnnotation_PhenotypeAnnotationDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -33077,7 +33077,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/AnalysisResult/AnalysisResult_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/AnalysisResult/AnalysisResult_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -33158,7 +33158,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/AnalysisResult/AnalysisResult_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/AnalysisResult/AnalysisResult_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -33238,7 +33238,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/AnalysisResult/AnalysisResult_AnalysisResultDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Research/AnalysisResult/AnalysisResult_AnalysisResultDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -33315,7 +33315,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GeneticGain/GeneticGain_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/GeneticGain/GeneticGain_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -33395,7 +33395,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GeneticGain/GeneticGain_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/GeneticGain/GeneticGain_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -33473,7 +33473,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GeneticGain/GeneticGain_GeneticGainRecordDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/GeneticGain/GeneticGain_GeneticGainRecordDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -33549,7 +33549,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GwasResult/GwasResult_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/GwasResult/GwasResult_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -33630,7 +33630,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GwasResult/GwasResult_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/GwasResult/GwasResult_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -33709,7 +33709,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GwasResult/GwasResult_GwasResultDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/GwasResult/GwasResult_GwasResultDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -33786,7 +33786,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/MixedModel/MixedModel_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/MixedModel/MixedModel_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -33867,7 +33867,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/MixedModel/MixedModel_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/MixedModel/MixedModel_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -33946,7 +33946,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/MixedModel/MixedModel_MixedModelResultDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Research/MixedModel/MixedModel_MixedModelResultDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -34023,7 +34023,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/StabilityAnalysis/StabilityAnalysis_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/StabilityAnalysis/StabilityAnalysis_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -34104,7 +34104,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/StabilityAnalysis/StabilityAnalysis_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/StabilityAnalysis/StabilityAnalysis_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -34183,7 +34183,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/StabilityAnalysis/StabilityAnalysis_StabilityAnalysisResultDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/StabilityAnalysis/StabilityAnalysis_StabilityAnalysisResultDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -34260,7 +34260,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Heritability/Heritability_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/Heritability/Heritability_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -34341,7 +34341,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Heritability/Heritability_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/Heritability/Heritability_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -34420,7 +34420,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Heritability/Heritability_HeritabilityEstimateDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/Heritability/Heritability_HeritabilityEstimateDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -34497,7 +34497,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GxeAnalysis/GxeAnalysis_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/GxeAnalysis/GxeAnalysis_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -34578,7 +34578,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GxeAnalysis/GxeAnalysis_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/GxeAnalysis/GxeAnalysis_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -34657,7 +34657,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GxeAnalysis/GxeAnalysis_GxeAnalysisResultDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/GxeAnalysis/GxeAnalysis_GxeAnalysisResultDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -34734,7 +34734,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Kinship/Kinship_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/Kinship/Kinship_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -34816,7 +34816,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Kinship/Kinship_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/Kinship/Kinship_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -34896,7 +34896,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Kinship/Kinship_KinshipMatrixDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/Kinship/Kinship_KinshipMatrixDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -34974,7 +34974,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PcaResult/PcaResult_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/PcaResult/PcaResult_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -35055,7 +35055,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PcaResult/PcaResult_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/PcaResult/PcaResult_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -35134,7 +35134,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PcaResult/PcaResult_PcaResultDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Research/PcaResult/PcaResult_PcaResultDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -35211,7 +35211,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GenomicPrediction/GenomicPrediction_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/GenomicPrediction/GenomicPrediction_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -35292,7 +35292,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GenomicPrediction/GenomicPrediction_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/GenomicPrediction/GenomicPrediction_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -35371,7 +35371,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GenomicPrediction/GenomicPrediction_GenomicPredictionDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/GenomicPrediction/GenomicPrediction_GenomicPredictionDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -35448,7 +35448,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GenomicSelection/GenomicSelection_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/GenomicSelection/GenomicSelection_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -35529,7 +35529,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GenomicSelection/GenomicSelection_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/GenomicSelection/GenomicSelection_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -35608,7 +35608,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GenomicSelection/GenomicSelection_GenomicSelectionDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/GenomicSelection/GenomicSelection_GenomicSelectionDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -35685,7 +35685,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GenomicRelationship/GenomicRelationship_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/GenomicRelationship/GenomicRelationship_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -35767,7 +35767,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GenomicRelationship/GenomicRelationship_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/GenomicRelationship/GenomicRelationship_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -35847,7 +35847,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GenomicRelationship/GenomicRelationship_GenomicRelationshipDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/GenomicRelationship/GenomicRelationship_GenomicRelationshipDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -35925,7 +35925,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/MethylationAnalysis/MethylationAnalysis_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/MethylationAnalysis/MethylationAnalysis_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -36006,7 +36006,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/MethylationAnalysis/MethylationAnalysis_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/MethylationAnalysis/MethylationAnalysis_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -36085,7 +36085,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/MethylationAnalysis/MethylationAnalysis_MethylationAnalysisDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/MethylationAnalysis/MethylationAnalysis_MethylationAnalysisDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -36162,7 +36162,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ExpressionQtl/ExpressionQtl_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/ExpressionQtl/ExpressionQtl_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -36243,7 +36243,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ExpressionQtl/ExpressionQtl_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/ExpressionQtl/ExpressionQtl_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -36322,7 +36322,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ExpressionQtl/ExpressionQtl_ExpressionQtlDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/ExpressionQtl/ExpressionQtl_ExpressionQtlDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -36399,7 +36399,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/HaplotypeAnalysis/HaplotypeAnalysis_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/HaplotypeAnalysis/HaplotypeAnalysis_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -36480,7 +36480,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/HaplotypeAnalysis/HaplotypeAnalysis_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/HaplotypeAnalysis/HaplotypeAnalysis_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -36559,7 +36559,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/HaplotypeAnalysis/HaplotypeAnalysis_HaplotypeAnalysisDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/HaplotypeAnalysis/HaplotypeAnalysis_HaplotypeAnalysisDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -36636,7 +36636,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PedigreeAnalysis/PedigreeAnalysis_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/PedigreeAnalysis/PedigreeAnalysis_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -36717,7 +36717,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PedigreeAnalysis/PedigreeAnalysis_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/PedigreeAnalysis/PedigreeAnalysis_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -36796,7 +36796,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PedigreeAnalysis/PedigreeAnalysis_PedigreeAnalysisDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/PedigreeAnalysis/PedigreeAnalysis_PedigreeAnalysisDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -36873,7 +36873,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/AssayDesign/AssayDesign_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/AssayDesign/AssayDesign_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -36954,7 +36954,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/AssayDesign/AssayDesign_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/AssayDesign/AssayDesign_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -37033,7 +37033,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/AssayDesign/AssayDesign_AssayDesignDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/AssayDesign/AssayDesign_AssayDesignDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -37110,7 +37110,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/VariantAnnotation/VariantAnnotation_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/VariantAnnotation/VariantAnnotation_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -37191,7 +37191,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/VariantAnnotation/VariantAnnotation_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/VariantAnnotation/VariantAnnotation_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -37270,7 +37270,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/VariantAnnotation/VariantAnnotation_VariantAnnotationDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/VariantAnnotation/VariantAnnotation_VariantAnnotationDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -37347,7 +37347,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CustodyTransfer/CustodyTransfer_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/CustodyTransfer/CustodyTransfer_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -37428,7 +37428,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CustodyTransfer/CustodyTransfer_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/CustodyTransfer/CustodyTransfer_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -37507,7 +37507,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CustodyTransfer/CustodyTransfer_CustodyTransferDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/CustodyTransfer/CustodyTransfer_CustodyTransferDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -37584,7 +37584,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GenotypeQc/GenotypeQcReport_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/GenotypeQc/GenotypeQcReport_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -37665,7 +37665,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GenotypeQc/GenotypeQcReport_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/GenotypeQc/GenotypeQcReport_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -37744,7 +37744,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GenotypeQc/GenotypeQcReport_GenotypeQcReportDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/GenotypeQc/GenotypeQcReport_GenotypeQcReportDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -37821,7 +37821,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/DisposalRecord/DisposalRecord_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/DisposalRecord/DisposalRecord_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -37902,7 +37902,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/DisposalRecord/DisposalRecord_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/DisposalRecord/DisposalRecord_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -37981,7 +37981,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/DisposalRecord/DisposalRecord_DisposalRecordDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/DisposalRecord/DisposalRecord_DisposalRecordDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -38058,7 +38058,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PlantingOperation/PlantingOperation_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/PlantingOperation/PlantingOperation_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -38139,7 +38139,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PlantingOperation/PlantingOperation_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/PlantingOperation/PlantingOperation_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -38218,7 +38218,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PlantingOperation/PlantingOperation_PlantingOperationDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/PlantingOperation/PlantingOperation_PlantingOperationDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -38295,7 +38295,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CarbonStock/CarbonStock_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/CarbonStock/CarbonStock_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -38377,7 +38377,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CarbonStock/CarbonStock_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/CarbonStock/CarbonStock_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -38456,7 +38456,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CarbonStock/CarbonStock_CarbonStockDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/CarbonStock/CarbonStock_CarbonStockDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -38533,7 +38533,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/WaterBalance/WaterBalance_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/WaterBalance/WaterBalance_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -38614,7 +38614,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/WaterBalance/WaterBalance_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/WaterBalance/WaterBalance_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -38693,7 +38693,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/WaterBalance/WaterBalance_WaterBalanceDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/WaterBalance/WaterBalance_WaterBalanceDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -38770,7 +38770,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Farm/Farm_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/Farm/Farm_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -38850,7 +38850,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Farm/Farm_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/Farm/Farm_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -38929,7 +38929,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Farm/Farm_FarmDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/Farm/Farm_FarmDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -39006,7 +39006,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/YieldMap/YieldMap_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/YieldMap/YieldMap_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -39087,7 +39087,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/YieldMap/YieldMap_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/YieldMap/YieldMap_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -39166,7 +39166,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/YieldMap/YieldMap_YieldMapDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/YieldMap/YieldMap_YieldMapDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -39243,7 +39243,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/MarkerProbe/MarkerProbe_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/MarkerProbe/MarkerProbe_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -39324,7 +39324,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/MarkerProbe/MarkerProbe_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/MarkerProbe/MarkerProbe_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -39403,7 +39403,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/MarkerProbe/MarkerProbe_MarkerProbeDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/MarkerProbe/MarkerProbe_MarkerProbeDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -39480,7 +39480,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GenotypeCallSemantics/GenotypeCallSemantics_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/GenotypeCallSemantics/GenotypeCallSemantics_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -39560,7 +39560,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GenotypeCallSemantics/GenotypeCallSemantics_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/GenotypeCallSemantics/GenotypeCallSemantics_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -39639,7 +39639,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/GenotypeCallSemantics/GenotypeCallSemantics_GenotypeCallSemanticsDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/GenotypeCallSemantics/GenotypeCallSemantics_GenotypeCallSemanticsDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -39716,7 +39716,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/VendorOrder/VendorOrder_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/VendorOrder/VendorOrder_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -39796,7 +39796,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/VendorOrder/VendorOrder_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/VendorOrder/VendorOrder_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -39875,7 +39875,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/VendorOrder/VendorOrder_VendorOrderDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/VendorOrder/VendorOrder_VendorOrderDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -39952,7 +39952,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/FieldScouting/FieldScouting_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/PlantHealth/FieldScouting/FieldScouting_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -40032,7 +40032,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/FieldScouting/FieldScouting_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/PlantHealth/FieldScouting/FieldScouting_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -40111,7 +40111,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/FieldScouting/FieldScouting_FieldScoutingDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/PlantHealth/FieldScouting/FieldScouting_FieldScoutingDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -40188,7 +40188,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/FieldBoundary/FieldBoundary_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/FieldBoundary/FieldBoundary_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -40268,7 +40268,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/FieldBoundary/FieldBoundary_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/FieldBoundary/FieldBoundary_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -40347,7 +40347,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/FieldBoundary/FieldBoundary_FieldBoundaryDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/FieldBoundary/FieldBoundary_FieldBoundaryDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -40424,7 +40424,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Emissions/Emissions_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/Emissions/Emissions_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -40504,7 +40504,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Emissions/Emissions_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/Emissions/Emissions_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -40583,7 +40583,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Emissions/Emissions_EmissionsDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/Emissions/Emissions_EmissionsDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -40660,7 +40660,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SoilChemistry/SoilChemistry_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/SoilChemistry/SoilChemistry_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -40740,7 +40740,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SoilChemistry/SoilChemistry_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/SoilChemistry/SoilChemistry_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -40819,7 +40819,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SoilChemistry/SoilChemistry_SoilChemistryDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/SoilChemistry/SoilChemistry_SoilChemistryDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -40896,7 +40896,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/EnvironmentalTreatment/EnvironmentalTreatment_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/EnvironmentalTreatment/EnvironmentalTreatment_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -40976,7 +40976,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/EnvironmentalTreatment/EnvironmentalTreatment_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/EnvironmentalTreatment/EnvironmentalTreatment_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -41055,7 +41055,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/EnvironmentalTreatment/EnvironmentalTreatment_EnvironmentalTreatmentDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Environment/EnvironmentalTreatment/EnvironmentalTreatment_EnvironmentalTreatmentDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -41132,7 +41132,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/DevelopmentalStage/DevelopmentalStage_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/DevelopmentalStage/DevelopmentalStage_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -41212,7 +41212,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/DevelopmentalStage/DevelopmentalStage_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/DevelopmentalStage/DevelopmentalStage_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -41291,7 +41291,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/DevelopmentalStage/DevelopmentalStage_DevelopmentalStageDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/DevelopmentalStage/DevelopmentalStage_DevelopmentalStageDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -41368,7 +41368,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/TaxonName/TaxonName_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/TaxonName/TaxonName_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -41447,7 +41447,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/TaxonName/TaxonName_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/TaxonName/TaxonName_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -41526,7 +41526,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/TaxonName/TaxonName_TaxonNameDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/TaxonName/TaxonName_TaxonNameDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -41603,7 +41603,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SprayApplication/SprayApplication_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/SprayApplication/SprayApplication_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -41683,7 +41683,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SprayApplication/SprayApplication_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/SprayApplication/SprayApplication_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -41762,7 +41762,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SprayApplication/SprayApplication_SprayApplicationDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/SprayApplication/SprayApplication_SprayApplicationDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -41839,7 +41839,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/UnitsAndQuantity/UnitsAndQuantity_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/UnitsAndQuantity/UnitsAndQuantity_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -41918,7 +41918,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/UnitsAndQuantity/UnitsAndQuantity_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/UnitsAndQuantity/UnitsAndQuantity_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -41997,7 +41997,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/UnitsAndQuantity/UnitsAndQuantity_UnitsAndQuantityDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/UnitsAndQuantity/UnitsAndQuantity_UnitsAndQuantityDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -42074,7 +42074,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ExternalVocabulary/ExternalVocabulary_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/ExternalVocabulary/ExternalVocabulary_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -42153,7 +42153,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ExternalVocabulary/ExternalVocabulary_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/ExternalVocabulary/ExternalVocabulary_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -42232,7 +42232,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ExternalVocabulary/ExternalVocabulary_ExternalVocabularyDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/ExternalVocabulary/ExternalVocabulary_ExternalVocabularyDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -42309,7 +42309,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/TerminologyVersion/TerminologyVersion_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/TerminologyVersion/TerminologyVersion_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -42388,7 +42388,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/TerminologyVersion/TerminologyVersion_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/TerminologyVersion/TerminologyVersion_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -42467,7 +42467,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/TerminologyVersion/TerminologyVersion_TerminologyVersionDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/TerminologyVersion/TerminologyVersion_TerminologyVersionDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -42544,7 +42544,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/OntologyTerm/OntologyTerm_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/OntologyTerm/OntologyTerm_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -42623,7 +42623,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/OntologyTerm/OntologyTerm_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/OntologyTerm/OntologyTerm_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -42702,7 +42702,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/OntologyTerm/OntologyTerm_OntologyTermDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/OntologyTerm/OntologyTerm_OntologyTermDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -42779,7 +42779,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/OntologyMapping/OntologyMapping_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/OntologyMapping/OntologyMapping_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -42858,7 +42858,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/OntologyMapping/OntologyMapping_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/OntologyMapping/OntologyMapping_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -42937,7 +42937,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/OntologyMapping/OntologyMapping_OntologyMappingDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/OntologyMapping/OntologyMapping_OntologyMappingDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -43014,7 +43014,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/MeasurementScale/MeasurementScale_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/MeasurementScale/MeasurementScale_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -43093,7 +43093,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/MeasurementScale/MeasurementScale_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/MeasurementScale/MeasurementScale_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -43172,7 +43172,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/MeasurementScale/MeasurementScale_MeasurementScaleDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/MeasurementScale/MeasurementScale_MeasurementScaleDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -43249,7 +43249,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CropTraitDictionary/CropTraitDictionary_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/CropTraitDictionary/CropTraitDictionary_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -43328,7 +43328,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CropTraitDictionary/CropTraitDictionary_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/CropTraitDictionary/CropTraitDictionary_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -43407,7 +43407,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CropTraitDictionary/CropTraitDictionary_CropTraitDictionaryDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/CropTraitDictionary/CropTraitDictionary_CropTraitDictionaryDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -43484,7 +43484,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Project/Project_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/Project/Project_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -43563,7 +43563,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Project/Project_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/Project/Project_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -43642,7 +43642,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Project/Project_ProjectDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Research/Project/Project_ProjectDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -43719,7 +43719,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ReusableList/ReusableList_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/ReusableList/ReusableList_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -43798,7 +43798,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ReusableList/ReusableList_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/ReusableList/ReusableList_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -43877,7 +43877,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ReusableList/ReusableList_ReusableListDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/ReusableList/ReusableList_ReusableListDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -43954,7 +43954,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Calendar/Calendar_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/Calendar/Calendar_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -44033,7 +44033,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Calendar/Calendar_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/Calendar/Calendar_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -44112,7 +44112,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Calendar/Calendar_CalendarDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/Calendar/Calendar_CalendarDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -44189,7 +44189,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/LocationGeometry/LocationGeometry_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/LocationGeometry/LocationGeometry_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -44268,7 +44268,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/LocationGeometry/LocationGeometry_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/LocationGeometry/LocationGeometry_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -44347,7 +44347,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/LocationGeometry/LocationGeometry_LocationGeometryDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/LocationGeometry/LocationGeometry_LocationGeometryDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -44424,7 +44424,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ReferenceDataVersion/ReferenceDataVersion_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/ReferenceDataVersion/ReferenceDataVersion_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -44503,7 +44503,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ReferenceDataVersion/ReferenceDataVersion_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/ReferenceDataVersion/ReferenceDataVersion_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -44582,7 +44582,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ReferenceDataVersion/ReferenceDataVersion_ReferenceDataVersionDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/ReferenceDataVersion/ReferenceDataVersion_ReferenceDataVersionDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -44659,7 +44659,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CommonCropName/CommonCropName_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/CommonCropName/CommonCropName_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -44738,7 +44738,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CommonCropName/CommonCropName_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/CommonCropName/CommonCropName_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -44817,7 +44817,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CommonCropName/CommonCropName_CommonCropNameDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/CommonCropName/CommonCropName_CommonCropNameDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -44894,7 +44894,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CropSpecies/CropSpecies_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/CropSpecies/CropSpecies_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -44973,7 +44973,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CropSpecies/CropSpecies_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/CropSpecies/CropSpecies_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -45052,7 +45052,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CropSpecies/CropSpecies_CropSpeciesDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/CropSpecies/CropSpecies_CropSpeciesDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -45129,7 +45129,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/InstitutionCode/InstitutionCode_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/InstitutionCode/InstitutionCode_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -45208,7 +45208,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/InstitutionCode/InstitutionCode_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/InstitutionCode/InstitutionCode_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -45287,7 +45287,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/InstitutionCode/InstitutionCode_InstitutionCodeDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/InstitutionCode/InstitutionCode_InstitutionCodeDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -45364,7 +45364,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PersonReference/PersonReference_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/PersonReference/PersonReference_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -45443,7 +45443,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PersonReference/PersonReference_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/PersonReference/PersonReference_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -45522,7 +45522,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PersonReference/PersonReference_PersonReferenceDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/ReferenceData/PersonReference/PersonReference_PersonReferenceDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -45599,7 +45599,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ResearchProgram/ResearchProgram_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/ResearchProgram/ResearchProgram_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -45678,7 +45678,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ResearchProgram/ResearchProgram_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/ResearchProgram/ResearchProgram_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -45757,7 +45757,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ResearchProgram/ResearchProgram_ResearchProgramDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Research/ResearchProgram/ResearchProgram_ResearchProgramDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -45834,7 +45834,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CapabilityMetadata/CapabilityMetadata_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Core/CapabilityMetadata/CapabilityMetadata_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -45913,7 +45913,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CapabilityMetadata/CapabilityMetadata_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Core/CapabilityMetadata/CapabilityMetadata_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -45992,7 +45992,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CapabilityMetadata/CapabilityMetadata_CapabilityMetadataDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Core/CapabilityMetadata/CapabilityMetadata_CapabilityMetadataDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -46069,7 +46069,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ResearchLocation/ResearchLocation_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/ResearchLocation/ResearchLocation_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -46148,7 +46148,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ResearchLocation/ResearchLocation_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/ResearchLocation/ResearchLocation_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -46227,7 +46227,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ResearchLocation/ResearchLocation_ResearchLocationDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Research/ResearchLocation/ResearchLocation_ResearchLocationDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -46304,7 +46304,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CollectingMission/CollectingMission_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/CollectingMission/CollectingMission_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -46383,7 +46383,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CollectingMission/CollectingMission_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/CollectingMission/CollectingMission_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -46462,7 +46462,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CollectingMission/CollectingMission_CollectingMissionDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/CollectingMission/CollectingMission_CollectingMissionDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -46539,7 +46539,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ConservationMembership/ConservationMembership_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/ConservationMembership/ConservationMembership_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -46618,7 +46618,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ConservationMembership/ConservationMembership_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/ConservationMembership/ConservationMembership_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -46697,7 +46697,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ConservationMembership/ConservationMembership_ConservationMembershipDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/ConservationMembership/ConservationMembership_ConservationMembershipDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -46774,7 +46774,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/McpdAdapter/McpdAdapter_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/McpdAdapter/McpdAdapter_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -46853,7 +46853,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/McpdAdapter/McpdAdapter_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/McpdAdapter/McpdAdapter_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -46932,7 +46932,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/McpdAdapter/McpdAdapter_McpdAdapterDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/McpdAdapter/McpdAdapter_McpdAdapterDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -47009,7 +47009,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/DuplicateReview/DuplicateReview_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/DuplicateReview/DuplicateReview_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -47088,7 +47088,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/DuplicateReview/DuplicateReview_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/DuplicateReview/DuplicateReview_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -47167,7 +47167,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/DuplicateReview/DuplicateReview_DuplicateReviewDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Germplasm/DuplicateReview/DuplicateReview_DuplicateReviewDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -47244,7 +47244,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Crosswalk/Crosswalk_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Interoperability/Crosswalk/Crosswalk_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -47323,7 +47323,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Crosswalk/Crosswalk_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Interoperability/Crosswalk/Crosswalk_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -47402,7 +47402,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Crosswalk/Crosswalk_CrosswalkDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Interoperability/Crosswalk/Crosswalk_CrosswalkDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -47479,7 +47479,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/TreatmentAssignment/TreatmentAssignment_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/TreatmentAssignment/TreatmentAssignment_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -47559,7 +47559,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/TreatmentAssignment/TreatmentAssignment_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/TreatmentAssignment/TreatmentAssignment_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -47638,7 +47638,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/TreatmentAssignment/TreatmentAssignment_TreatmentAssignmentDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/TreatmentAssignment/TreatmentAssignment_TreatmentAssignmentDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -47715,7 +47715,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Plot/Plot_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/Plot/Plot_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -47795,7 +47795,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Plot/Plot_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/Plot/Plot_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -47874,7 +47874,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/Plot/Plot_PlotDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/Plot/Plot_PlotDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -47951,7 +47951,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/FieldBook/FieldBook_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/FieldBook/FieldBook_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -48031,7 +48031,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/FieldBook/FieldBook_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/FieldBook/FieldBook_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -48110,7 +48110,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/FieldBook/FieldBook_FieldBookDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/FieldBook/FieldBook_FieldBookDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -48187,7 +48187,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/TrialNetwork/TrialNetwork_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/TrialNetwork/TrialNetwork_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -48266,7 +48266,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/TrialNetwork/TrialNetwork_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/TrialNetwork/TrialNetwork_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -48345,7 +48345,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/TrialNetwork/TrialNetwork_TrialNetworkDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/TrialNetwork/TrialNetwork_TrialNetworkDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -48422,7 +48422,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CaptureWorkflow/CaptureWorkflow_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/CaptureWorkflow/CaptureWorkflow_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -48501,7 +48501,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CaptureWorkflow/CaptureWorkflow_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/CaptureWorkflow/CaptureWorkflow_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -48580,7 +48580,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CaptureWorkflow/CaptureWorkflow_CaptureWorkflowDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/CaptureWorkflow/CaptureWorkflow_CaptureWorkflowDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -48657,7 +48657,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/QualityFlag/QualityFlag_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/QualityFlag/QualityFlag_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -48736,7 +48736,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/QualityFlag/QualityFlag_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/QualityFlag/QualityFlag_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -48815,7 +48815,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/QualityFlag/QualityFlag_QualityFlagDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/QualityFlag/QualityFlag_QualityFlagDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -48892,7 +48892,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ValueMissingness/ValueMissingness_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/ValueMissingness/ValueMissingness_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -48971,7 +48971,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ValueMissingness/ValueMissingness_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/ValueMissingness/ValueMissingness_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -49050,7 +49050,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ValueMissingness/ValueMissingness_ValueMissingnessDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Phenotyping/ValueMissingness/ValueMissingness_ValueMissingnessDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -49127,7 +49127,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/AssayExecution/AssayExecution_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/AssayExecution/AssayExecution_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -49206,7 +49206,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/AssayExecution/AssayExecution_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/AssayExecution/AssayExecution_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -49285,7 +49285,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/AssayExecution/AssayExecution_AssayExecutionDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/AssayExecution/AssayExecution_AssayExecutionDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -49362,7 +49362,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/VcfExport/VcfExport_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/VcfExport/VcfExport_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -49441,7 +49441,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/VcfExport/VcfExport_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/VcfExport/VcfExport_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -49520,7 +49520,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/VcfExport/VcfExport_VcfExportDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/VcfExport/VcfExport_VcfExportDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -49597,7 +49597,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ReferenceAssembly/ReferenceAssembly_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/ReferenceAssembly/ReferenceAssembly_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -49676,7 +49676,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ReferenceAssembly/ReferenceAssembly_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/ReferenceAssembly/ReferenceAssembly_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -49755,7 +49755,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ReferenceAssembly/ReferenceAssembly_ReferenceAssemblyDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/ReferenceAssembly/ReferenceAssembly_ReferenceAssemblyDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -49832,7 +49832,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PipelineProvenance/PipelineProvenance_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/PipelineProvenance/PipelineProvenance_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -49911,7 +49911,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PipelineProvenance/PipelineProvenance_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/PipelineProvenance/PipelineProvenance_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -49990,7 +49990,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PipelineProvenance/PipelineProvenance_PipelineProvenanceDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Genotyping/PipelineProvenance/PipelineProvenance_PipelineProvenanceDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -50067,7 +50067,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ExperimentalProtocol/ExperimentalProtocol_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/ExperimentalProtocol/ExperimentalProtocol_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -50146,7 +50146,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ExperimentalProtocol/ExperimentalProtocol_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/ExperimentalProtocol/ExperimentalProtocol_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -50225,7 +50225,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ExperimentalProtocol/ExperimentalProtocol_ExperimentalProtocolDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Breeding/ExperimentalProtocol/ExperimentalProtocol_ExperimentalProtocolDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -50302,7 +50302,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ArtifactCatalogue/ArtifactCatalogue_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/ArtifactCatalogue/ArtifactCatalogue_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -50381,7 +50381,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ArtifactCatalogue/ArtifactCatalogue_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/ArtifactCatalogue/ArtifactCatalogue_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -50460,7 +50460,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ArtifactCatalogue/ArtifactCatalogue_ArtifactCatalogueDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Research/ArtifactCatalogue/ArtifactCatalogue_ArtifactCatalogueDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -50537,7 +50537,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ProtocolLibrary/ProtocolLibrary_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/ProtocolLibrary/ProtocolLibrary_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -50616,7 +50616,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ProtocolLibrary/ProtocolLibrary_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/ProtocolLibrary/ProtocolLibrary_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -50695,7 +50695,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ProtocolLibrary/ProtocolLibrary_ProtocolLibraryDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Research/ProtocolLibrary/ProtocolLibrary_ProtocolLibraryDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -50772,7 +50772,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PublicationReview/PublicationReview_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/PublicationReview/PublicationReview_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -50851,7 +50851,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PublicationReview/PublicationReview_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/PublicationReview/PublicationReview_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -50930,7 +50930,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PublicationReview/PublicationReview_PublicationReviewDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Research/PublicationReview/PublicationReview_PublicationReviewDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -51007,7 +51007,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/BiodiversityExport/BiodiversityExport_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Interoperability/BiodiversityExport/BiodiversityExport_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -51086,7 +51086,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/BiodiversityExport/BiodiversityExport_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Interoperability/BiodiversityExport/BiodiversityExport_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -51165,7 +51165,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/BiodiversityExport/BiodiversityExport_BiodiversityExportDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Interoperability/BiodiversityExport/BiodiversityExport_BiodiversityExportDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -51242,7 +51242,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/EvidencePack/EvidencePack_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/EvidencePack/EvidencePack_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -51321,7 +51321,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/EvidencePack/EvidencePack_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/EvidencePack/EvidencePack_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -51400,7 +51400,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/EvidencePack/EvidencePack_EvidencePackDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Research/EvidencePack/EvidencePack_EvidencePackDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -51477,7 +51477,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/DiseaseObservation/DiseaseObservation_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/PlantHealth/DiseaseObservation/DiseaseObservation_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -51556,7 +51556,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/DiseaseObservation/DiseaseObservation_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/PlantHealth/DiseaseObservation/DiseaseObservation_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -51635,7 +51635,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/DiseaseObservation/DiseaseObservation_DiseaseObservationDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/PlantHealth/DiseaseObservation/DiseaseObservation_DiseaseObservationDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -51712,7 +51712,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/DiagnosticEvidence/DiagnosticEvidence_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/PlantHealth/DiagnosticEvidence/DiagnosticEvidence_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -51791,7 +51791,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/DiagnosticEvidence/DiagnosticEvidence_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/PlantHealth/DiagnosticEvidence/DiagnosticEvidence_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -51870,7 +51870,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/DiagnosticEvidence/DiagnosticEvidence_DiagnosticEvidenceDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/PlantHealth/DiagnosticEvidence/DiagnosticEvidence_DiagnosticEvidenceDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -51947,7 +51947,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/IpmStrategy/IpmStrategy_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/PlantHealth/IpmStrategy/IpmStrategy_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -52026,7 +52026,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/IpmStrategy/IpmStrategy_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/PlantHealth/IpmStrategy/IpmStrategy_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -52105,7 +52105,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/IpmStrategy/IpmStrategy_IpmStrategyDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/PlantHealth/IpmStrategy/IpmStrategy_IpmStrategyDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -52182,7 +52182,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ThresholdAlert/ThresholdAlert_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/PlantHealth/ThresholdAlert/ThresholdAlert_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -52261,7 +52261,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ThresholdAlert/ThresholdAlert_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/PlantHealth/ThresholdAlert/ThresholdAlert_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -52340,7 +52340,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ThresholdAlert/ThresholdAlert_ThresholdAlertDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/PlantHealth/ThresholdAlert/ThresholdAlert_ThresholdAlertDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -52417,7 +52417,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/DiseaseResistance/DiseaseResistance_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/PlantHealth/DiseaseResistance/DiseaseResistance_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -52496,7 +52496,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/DiseaseResistance/DiseaseResistance_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/PlantHealth/DiseaseResistance/DiseaseResistance_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -52575,7 +52575,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/DiseaseResistance/DiseaseResistance_DiseaseResistanceDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/PlantHealth/DiseaseResistance/DiseaseResistance_DiseaseResistanceDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -52652,7 +52652,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CropHealthImage/CropHealthImage_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/PlantHealth/CropHealthImage/CropHealthImage_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -52731,7 +52731,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CropHealthImage/CropHealthImage_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/PlantHealth/CropHealthImage/CropHealthImage_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -52810,7 +52810,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CropHealthImage/CropHealthImage_CropHealthImageDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/PlantHealth/CropHealthImage/CropHealthImage_CropHealthImageDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -52887,7 +52887,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CropRecommendation/CropRecommendation_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/CropRecommendation/CropRecommendation_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -52966,7 +52966,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CropRecommendation/CropRecommendation_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/CropRecommendation/CropRecommendation_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -53045,7 +53045,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CropRecommendation/CropRecommendation_CropRecommendationDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/CropRecommendation/CropRecommendation_CropRecommendationDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -53122,7 +53122,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SowingWindow/SowingWindow_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/SowingWindow/SowingWindow_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -53201,7 +53201,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SowingWindow/SowingWindow_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/SowingWindow/SowingWindow_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -53280,7 +53280,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SowingWindow/SowingWindow_SowingWindowDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/SowingWindow/SowingWindow_SowingWindowDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -53357,7 +53357,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/IrrigationAdvice/IrrigationAdvice_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/IrrigationAdvice/IrrigationAdvice_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -53436,7 +53436,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/IrrigationAdvice/IrrigationAdvice_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/IrrigationAdvice/IrrigationAdvice_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -53515,7 +53515,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/IrrigationAdvice/IrrigationAdvice_IrrigationAdviceDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/IrrigationAdvice/IrrigationAdvice_IrrigationAdviceDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -53592,7 +53592,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/NutrientAdvice/NutrientAdvice_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/NutrientAdvice/NutrientAdvice_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -53671,7 +53671,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/NutrientAdvice/NutrientAdvice_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/NutrientAdvice/NutrientAdvice_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -53750,7 +53750,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/NutrientAdvice/NutrientAdvice_NutrientAdviceDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/NutrientAdvice/NutrientAdvice_NutrientAdviceDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -53827,7 +53827,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PestDiseaseRisk/PestDiseaseRisk_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/PlantHealth/PestDiseaseRisk/PestDiseaseRisk_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -53906,7 +53906,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PestDiseaseRisk/PestDiseaseRisk_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/PlantHealth/PestDiseaseRisk/PestDiseaseRisk_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -53985,7 +53985,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/PestDiseaseRisk/PestDiseaseRisk_PestDiseaseRiskDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/PlantHealth/PestDiseaseRisk/PestDiseaseRisk_PestDiseaseRiskDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -54062,7 +54062,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/YieldForecast/YieldForecast_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/YieldForecast/YieldForecast_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -54141,7 +54141,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/YieldForecast/YieldForecast_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/YieldForecast/YieldForecast_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -54220,7 +54220,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/YieldForecast/YieldForecast_YieldForecastDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/YieldForecast/YieldForecast_YieldForecastDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -54297,7 +54297,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CropSuitability/CropSuitability_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/CropSuitability/CropSuitability_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -54376,7 +54376,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CropSuitability/CropSuitability_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/CropSuitability/CropSuitability_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -54455,7 +54455,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CropSuitability/CropSuitability_CropSuitabilityDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/CropSuitability/CropSuitability_CropSuitabilityDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -54532,7 +54532,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/HumanReview/HumanReview_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/HumanReview/HumanReview_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -54611,7 +54611,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/HumanReview/HumanReview_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/HumanReview/HumanReview_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -54690,7 +54690,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/HumanReview/HumanReview_HumanReviewDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Research/HumanReview/HumanReview_HumanReviewDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -54767,7 +54767,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ExplanationEvidence/ExplanationEvidence_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/ExplanationEvidence/ExplanationEvidence_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -54846,7 +54846,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ExplanationEvidence/ExplanationEvidence_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/ExplanationEvidence/ExplanationEvidence_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -54925,7 +54925,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ExplanationEvidence/ExplanationEvidence_ExplanationEvidenceDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Research/ExplanationEvidence/ExplanationEvidence_ExplanationEvidenceDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -55002,7 +55002,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/OutcomeFeedback/OutcomeFeedback_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/OutcomeFeedback/OutcomeFeedback_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -55081,7 +55081,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/OutcomeFeedback/OutcomeFeedback_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Research/OutcomeFeedback/OutcomeFeedback_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -55160,7 +55160,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/OutcomeFeedback/OutcomeFeedback_OutcomeFeedbackDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Research/OutcomeFeedback/OutcomeFeedback_OutcomeFeedbackDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -55237,7 +55237,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/LocalConstraint/LocalConstraint_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/LocalConstraint/LocalConstraint_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -55316,7 +55316,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/LocalConstraint/LocalConstraint_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/LocalConstraint/LocalConstraint_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -55395,7 +55395,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/LocalConstraint/LocalConstraint_LocalConstraintDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/CropProduction/LocalConstraint/LocalConstraint_LocalConstraintDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -55472,7 +55472,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CrsTransform/CrsTransform_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/CrsTransform/CrsTransform_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -55551,7 +55551,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CrsTransform/CrsTransform_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/CrsTransform/CrsTransform_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -55630,7 +55630,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CrsTransform/CrsTransform_CrsTransformDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/CrsTransform/CrsTransform_CrsTransformDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -55707,7 +55707,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SpatialIndex/SpatialIndex_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/SpatialIndex/SpatialIndex_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -55786,7 +55786,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SpatialIndex/SpatialIndex_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/SpatialIndex/SpatialIndex_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -55865,7 +55865,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SpatialIndex/SpatialIndex_SpatialIndexDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/SpatialIndex/SpatialIndex_SpatialIndexDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -55942,7 +55942,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/FieldGeometry/FieldGeometry_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/FieldGeometry/FieldGeometry_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -56021,7 +56021,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/FieldGeometry/FieldGeometry_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/FieldGeometry/FieldGeometry_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -56100,7 +56100,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/FieldGeometry/FieldGeometry_FieldGeometryDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/FieldGeometry/FieldGeometry_FieldGeometryDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -56177,7 +56177,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SpatialQuery/SpatialQuery_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/SpatialQuery/SpatialQuery_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -56256,7 +56256,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SpatialQuery/SpatialQuery_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/SpatialQuery/SpatialQuery_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -56335,7 +56335,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SpatialQuery/SpatialQuery_SpatialQueryDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/SpatialQuery/SpatialQuery_SpatialQueryDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -56412,7 +56412,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/RasterCatalogue/RasterCatalogue_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/RasterCatalogue/RasterCatalogue_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -56491,7 +56491,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/RasterCatalogue/RasterCatalogue_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/RasterCatalogue/RasterCatalogue_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -56570,7 +56570,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/RasterCatalogue/RasterCatalogue_RasterCatalogueDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/RasterCatalogue/RasterCatalogue_RasterCatalogueDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -56647,7 +56647,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/RemoteSensingMetadata/RemoteSensingMetadata_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/RemoteSensingMetadata/RemoteSensingMetadata_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -56726,7 +56726,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/RemoteSensingMetadata/RemoteSensingMetadata_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/RemoteSensingMetadata/RemoteSensingMetadata_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -56805,7 +56805,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/RemoteSensingMetadata/RemoteSensingMetadata_RemoteSensingMetadataDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/RemoteSensingMetadata/RemoteSensingMetadata_RemoteSensingMetadataDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -56882,7 +56882,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/VegetationIndex/VegetationIndex_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/VegetationIndex/VegetationIndex_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -56961,7 +56961,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/VegetationIndex/VegetationIndex_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/VegetationIndex/VegetationIndex_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -57040,7 +57040,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/VegetationIndex/VegetationIndex_VegetationIndexDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/VegetationIndex/VegetationIndex_VegetationIndexDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -57117,7 +57117,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CloudMask/CloudMask_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/CloudMask/CloudMask_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -57196,7 +57196,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CloudMask/CloudMask_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/CloudMask/CloudMask_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -57275,7 +57275,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CloudMask/CloudMask_CloudMaskDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Geospatial/CloudMask/CloudMask_CloudMaskDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -57352,7 +57352,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/TelemetryNormalization/TelemetryNormalization_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Instrumentation/TelemetryNormalization/TelemetryNormalization_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -57431,7 +57431,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/TelemetryNormalization/TelemetryNormalization_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Instrumentation/TelemetryNormalization/TelemetryNormalization_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -57510,7 +57510,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/TelemetryNormalization/TelemetryNormalization_TelemetryNormalizationDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Instrumentation/TelemetryNormalization/TelemetryNormalization_TelemetryNormalizationDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -57587,7 +57587,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SensorDevice/SensorDevice_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Instrumentation/SensorDevice/SensorDevice_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -57666,7 +57666,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SensorDevice/SensorDevice_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Instrumentation/SensorDevice/SensorDevice_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -57745,7 +57745,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SensorDevice/SensorDevice_SensorDeviceDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Instrumentation/SensorDevice/SensorDevice_SensorDeviceDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -57822,7 +57822,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CalibrationQuality/CalibrationQuality_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Instrumentation/CalibrationQuality/CalibrationQuality_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -57901,7 +57901,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CalibrationQuality/CalibrationQuality_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Instrumentation/CalibrationQuality/CalibrationQuality_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -57980,7 +57980,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CalibrationQuality/CalibrationQuality_CalibrationQualityDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Instrumentation/CalibrationQuality/CalibrationQuality_CalibrationQualityDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -58057,7 +58057,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/EdgeGatewayHealth/EdgeGatewayHealth_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Instrumentation/EdgeGatewayHealth/EdgeGatewayHealth_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -58136,7 +58136,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/EdgeGatewayHealth/EdgeGatewayHealth_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Instrumentation/EdgeGatewayHealth/EdgeGatewayHealth_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -58215,7 +58215,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/EdgeGatewayHealth/EdgeGatewayHealth_EdgeGatewayHealthDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Instrumentation/EdgeGatewayHealth/EdgeGatewayHealth_EdgeGatewayHealthDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -58292,7 +58292,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SchemaMapping/SchemaMapping_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Interoperability/SchemaMapping/SchemaMapping_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -58371,7 +58371,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SchemaMapping/SchemaMapping_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Interoperability/SchemaMapping/SchemaMapping_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -58450,7 +58450,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/SchemaMapping/SchemaMapping_SchemaMappingDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Interoperability/SchemaMapping/SchemaMapping_SchemaMappingDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -58527,7 +58527,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CapabilityNegotiation/CapabilityNegotiation_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Core/CapabilityNegotiation/CapabilityNegotiation_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -58606,7 +58606,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CapabilityNegotiation/CapabilityNegotiation_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Core/CapabilityNegotiation/CapabilityNegotiation_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -58685,7 +58685,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/CapabilityNegotiation/CapabilityNegotiation_CapabilityNegotiationDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Core/CapabilityNegotiation/CapabilityNegotiation_CapabilityNegotiationDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -58761,8 +58761,8 @@
       "semanticReviewStatus": "defined-in-proposal; community-review-pending",
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
-        "ref": "implementation/bgx-p1-06-approved-breeding-contract",
-        "path": "Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml"
+        "ref": "main",
+        "path": "Specification/BrAPI-GenX/Breeding/BreedingPipeline/BreedingPipeline_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -58855,7 +58855,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ConformanceProbe/ConformanceProbe_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Interoperability/ConformanceProbe/ConformanceProbe_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -58934,7 +58934,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ConformanceProbe/ConformanceProbe_GET_POST.yaml"
+        "path": "Specification/BrAPI-GenX/Interoperability/ConformanceProbe/ConformanceProbe_GET_POST.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],
@@ -59013,7 +59013,7 @@
       "source": {
         "repository": "denishdholaria/BrAPI-genX",
         "ref": "main",
-        "path": "Specification/BrAPI-GenX/ConformanceProbe/ConformanceProbe_ConformanceProbeDbId_GET.yaml"
+        "path": "Specification/BrAPI-GenX/Interoperability/ConformanceProbe/ConformanceProbe_ConformanceProbeDbId_GET.yaml"
       },
       "bijmantraCrosswalk": {
         "relativePathCandidates": [],

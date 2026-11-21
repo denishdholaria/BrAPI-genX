@@ -44,8 +44,11 @@ official BrAPI route or version identifier to represent a proprietary extension.
 
 - `Specification/` — endpoint registry, OpenAPI specifications, generated
   catalogues, and crosswalks.
-  - `Specification/BrAPI-GenX/` — GenX proposal specifications (non-normative
-    until explicitly accepted).
+  - [GenX specification index](Specification/BrAPI-GenX/README.md) — proposal
+    contracts grouped by topic, with operations, schemas, and documentation in
+    each module directory.
+  - [GenX design proposals](Specification/BrAPI-GenX/RFCs/README.md) — numbered
+    RFC series with a separate maturity register.
   - `Specification/BrAPI-GenX/Conformance/` — probes, fixtures, and the
     machine-readable domain classification registry.
   - `Specification/BrAPI-GenX/Inventory/` — generated endpoint-to-class inventory.
@@ -87,6 +90,7 @@ policy. See `docs/project/PROJECT_IDENTITY.md`.
 
 - Preserve official BrAPI terminology and identifiers.
 - Do not introduce competing aliases or provisional names.
-- Classify every new GenX module, schema, and operation in
+- Place new modules in a [specification section](Specification/BrAPI-GenX/README.md).
+  Register the module path and its scientific classification in
   `Specification/BrAPI-GenX/Conformance/domain-classification.yaml`.
 - Follow the GenX module pattern and run the checks above before submitting.

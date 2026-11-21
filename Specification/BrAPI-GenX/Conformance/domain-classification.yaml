@@ -1,10 +1,27 @@
 # BrAPI-GenX Domain Classification Registry
 # Status: proposed, non-normative. BrAPI V2.1 contracts remain unchanged.
-# Every entry has exactly one primary class or is explicitly cross-cutting.
+# A null primary class records a shared capability or unresolved ownership.
 # Facets are secondary descriptive tags, not assertions of schema equivalence.
 
 version: "0.1.0-proposal"
 classification_document: "CLASSIFICATION.md"
+
+# Folder sections organize the files by topic. Primary classes and facets record the domain proposal.
+# Conformance/ is registered as shared specification support.
+sections:
+  Core: "Core"
+  ReferenceData: "Reference data"
+  Germplasm: "Germplasm"
+  Breeding: "Breeding and trials"
+  Genotyping: "Genotyping and genomics"
+  Phenotyping: "Phenotyping"
+  Environment: "Environment"
+  CropProduction: "Crop production"
+  PlantHealth: "Plant health"
+  Geospatial: "Geospatial and remote sensing"
+  Instrumentation: "Instrumentation and telemetry"
+  Research: "Research"
+  Interoperability: "Interoperability and exchange"
 
 domain_classes:
   D1:
@@ -34,783 +51,783 @@ cross_cutting_capabilities:
   C9: "Security, authority and tenancy"
 
 modules:
-  - path: "Provenance/"
+  - path: "Core/Provenance/"
     object: "ProvenanceEnvelope"
     primary_class: null
     cross_cutting: ["C2", "C1", "C6"]
     rationale: "Reusable embedded evidence contract; not a domain entity or standalone endpoint."
-  - path: "Jobs/"
+  - path: "Core/Jobs/"
     object: "Job"
     primary_class: null
     cross_cutting: ["C3", "C1", "C2", "C9"]
     rationale: "Execution lifecycle; jobType determines the domain of the underlying work."
-  - path: "ServerInfoV3/"
+  - path: "Core/ServerInfoV3/"
     object: "ServerInfoV3"
     primary_class: null
     cross_cutting: ["C1", "C8", "C9"]
     rationale: "Capability negotiation and server-surface discovery."
-  - path: "VariableTerms/"
+  - path: "ReferenceData/VariableTerms/"
     object: "VariableTerm"
     primary_class: null
     cross_cutting: ["C4", "C1", "C2"]
     rationale: "Shared terminology governance; not the observation or analysis itself."
-  - path: "LotLedger/"
+  - path: "CropProduction/LotLedger/"
     object: "LotLedgerEntry"
     primary_class: "D6"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Append-only traceability of material movement. Not assumed wire-equivalent to V2.1 SeedLotTransaction; see D-20."
-  - path: "Models/"
+  - path: "Research/Models/"
     object: "ModelArtifact"
     primary_class: "D7"
     cross_cutting: ["C1", "C2", "C3", "C5", "C6", "C9"]
     rationale: "Identity and lifecycle of analytical model artifacts; executing inference is a Job."
-  - path: "Genomics/"
+  - path: "Genotyping/Genomics/"
     object: "VariantMatrix"
     primary_class: "D3"
     cross_cutting: ["C1", "C2", "C5", "C6", "C9"]
     rationale: "External genomic matrix reference and integrity metadata; not VariantSet alias or byte transport."
-  - path: "FAIR/"
+  - path: "Interoperability/FAIR/"
     object: "FAIRPackage"
     primary_class: null
     cross_cutting: ["C5", "C1", "C2", "C6", "C9"]
     rationale: "Exchange, publication, license and access envelope around domain payloads."
-  - path: "Telemetry/"
+  - path: "Instrumentation/Telemetry/"
     object: "TelemetryPoint"
     primary_class: null
     context_classes: ["D4", "D5"]
     cross_cutting: ["C7", "C1", "C2", "C3", "C6", "C9"]
     rationale: "The existing schema is context-neutral. Classify individual readings by observed phenomenon: environmental readings as D5; plant phenotype readings as D4."
-  - path: "SelectionDecisions/"
+  - path: "Breeding/SelectionDecisions/"
     object: "SelectionDecision"
     primary_class: "D2"
     cross_cutting: ["C1", "C2", "C3", "C9"]
     rationale: "Breeding selection verdicts; BrAPI v2.1 has no equivalent record."
-  - path: "BreedingPipeline/"
+  - path: "Breeding/BreedingPipeline/"
     object: "BreedingPipeline and embedded BreedingSchemeVersion"
     primary_class: "D2"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "BreedingPipeline owns the durable workstream; immutable revisions bind exact versioned scheme blueprints with scheme-local stages, directed transitions, and task definitions. Actual crossing, material, trial, study, and observation records remain owned by their authoritative BrAPI resources."
-  - path: "ExperimentalDesign/"
+  - path: "Breeding/ExperimentalDesign/"
     object: "ExperimentalDesign"
     primary_class: "D2"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Trial layout, replication, randomization, treatment assignment; BrAPI v2.1 has no equivalent record."
-  - path: "ProgenyRecords/"
+  - path: "Breeding/ProgenyRecords/"
     object: "ProgenyRecord"
     primary_class: "D2"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Progeny/family links with parents, generation, and provenance; BrAPI v2.1 has no equivalent record."
-  - path: "DoubledHaploid/"
+  - path: "Breeding/DoubledHaploid/"
     object: "DoubledHaploidProgram"
     primary_class: "D2"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Doubled haploid program records; BrAPI v2.1 has no equivalent record."
-  - path: "SpeedBreeding/"
+  - path: "Breeding/SpeedBreeding/"
     object: "SpeedBreedingProtocol"
     primary_class: "D2"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Speed breeding protocol records; BrAPI v2.1 has no equivalent record."
-  - path: "SoilProfile/"
+  - path: "Environment/SoilProfile/"
     object: "SoilProfile"
     primary_class: "D5"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Soil profile records; BrAPI v2.1 has no equivalent record."
-  - path: "IrrigationOperation/"
+  - path: "CropProduction/IrrigationOperation/"
     object: "IrrigationEvent"
     primary_class: "D6"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Irrigation event records; BrAPI v2.1 has no equivalent record."
-  - path: "RepeatedMeasurement/"
+  - path: "Phenotyping/RepeatedMeasurement/"
     object: "MeasurementSeries"
     primary_class: "D4"
     cross_cutting: ["C1", "C2", "C3", "C6", "C7", "C9"]
     rationale: "Repeated measurement series; BrAPI v2.1 has no equivalent record."
-  - path: "FertilizerApplication/"
+  - path: "CropProduction/FertilizerApplication/"
     object: "FertilizerApplication"
     primary_class: "D6"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Fertilizer application records; BrAPI v2.1 has no equivalent record."
-  - path: "PhenologyObservation/"
+  - path: "Phenotyping/PhenologyObservation/"
     object: "PhenologyObservation"
     primary_class: "D4"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Phenology observation records; BrAPI v2.1 has no equivalent record."
-  - path: "ParentCandidateSelection/"
+  - path: "Breeding/ParentCandidateSelection/"
     object: "ParentCandidateSelection"
     primary_class: "D2"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Parent candidate selection records; BrAPI v2.1 has no equivalent record."
-  - path: "CropCycle/"
+  - path: "CropProduction/CropCycle/"
     object: "CropCycle"
     primary_class: "D6"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Crop cycle records; BrAPI v2.1 has no equivalent record."
-  - path: "Quarantine/"
+  - path: "Germplasm/Quarantine/"
     object: "QuarantineRecord"
     primary_class: "D1"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Quarantine records; BrAPI v2.1 has no equivalent record."
-  - path: "CustodyTransfer/"
+  - path: "Germplasm/CustodyTransfer/"
     object: "CustodyTransfer"
     primary_class: "D1"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Chain-of-custody transfer records; BrAPI v2.1 has no equivalent record."
-  - path: "WeatherForecast/"
+  - path: "Environment/WeatherForecast/"
     object: "WeatherForecast"
     primary_class: "D5"
     cross_cutting: ["C1", "C2", "C3", "C6", "C7", "C9"]
     rationale: "Weather forecast records; BrAPI v2.1 has no equivalent record."
-  - path: "ImageMetadata/"
+  - path: "Phenotyping/ImageMetadata/"
     object: "ImageMetadata"
     primary_class: "D4"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Image metadata records; BrAPI v2.1 has no equivalent record."
-  - path: "ClimateNormals/"
+  - path: "Environment/ClimateNormals/"
     object: "ClimateNormal"
     primary_class: "D5"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Climate normal records; BrAPI v2.1 has no equivalent record."
-  - path: "SafetyDuplication/"
+  - path: "Germplasm/SafetyDuplication/"
     object: "SafetyDuplication"
     primary_class: "D1"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Safety duplication records; BrAPI v2.1 has no equivalent record."
-  - path: "Regeneration/"
+  - path: "Germplasm/Regeneration/"
     object: "RegenerationRecord"
     primary_class: "D1"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Regeneration records; BrAPI v2.1 has no equivalent record."
-  - path: "PopulationAdvancement/"
+  - path: "Breeding/PopulationAdvancement/"
     object: "PopulationAdvancement"
     primary_class: "D2"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Population advancement records; BrAPI v2.1 has no equivalent record."
-  - path: "CrossingSchedule/"
+  - path: "Breeding/CrossingSchedule/"
     object: "CrossingSchedule"
     primary_class: "D2"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Crossing schedule records; BrAPI v2.1 has no equivalent record."
-  - path: "Tillage/"
+  - path: "CropProduction/Tillage/"
     object: "TillageRecord"
     primary_class: "D6"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Tillage records; BrAPI v2.1 has no equivalent record."
-  - path: "CandidateVarietyLifecycle/"
+  - path: "Breeding/CandidateVarietyLifecycle/"
     object: "CandidateVariety"
     primary_class: "D2"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Candidate variety lifecycle records; BrAPI v2.1 has no equivalent record."
-  - path: "Acquisition/"
+  - path: "Germplasm/Acquisition/"
     object: "AcquisitionRecord"
     primary_class: "D1"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Acquisition records; BrAPI v2.1 has no equivalent record."
-  - path: "PhenotypeAnnotation/"
+  - path: "Phenotyping/PhenotypeAnnotation/"
     object: "PhenotypeAnnotation"
     primary_class: "D4"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Phenotype annotation records; BrAPI v2.1 has no equivalent record."
-  - path: "ExtremeWeather/"
+  - path: "Environment/ExtremeWeather/"
     object: "ExtremeWeatherEvent"
     primary_class: "D5"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Extreme weather event records; BrAPI v2.1 has no equivalent record."
-  - path: "VcfImport/"
+  - path: "Genotyping/VcfImport/"
     object: "VcfImport"
     primary_class: "D3"
     cross_cutting: ["C1", "C2", "C3", "C5", "C6", "C9"]
     rationale: "VCF import records; BrAPI v2.1 has no equivalent record."
-  - path: "VcfExport/"
+  - path: "Genotyping/VcfExport/"
     object: "VcfExport"
     primary_class: "D3"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "VCF export records; BrAPI v2.1 has no equivalent record."
-  - path: "ReferenceAssembly/"
+  - path: "Genotyping/ReferenceAssembly/"
     object: "ReferenceAssembly"
     primary_class: "D3"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Reference assembly records; BrAPI v2.1 has no equivalent record."
-  - path: "PipelineProvenance/"
+  - path: "Genotyping/PipelineProvenance/"
     object: "PipelineProvenance"
     primary_class: "D3"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Pipeline provenance records; BrAPI v2.1 has no equivalent record."
-  - path: "ExperimentalProtocol/"
+  - path: "Breeding/ExperimentalProtocol/"
     object: "ExperimentalProtocol"
     primary_class: "D2"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Experimental protocol records; BrAPI v2.1 has no equivalent record."
-  - path: "ArtifactCatalogue/"
+  - path: "Research/ArtifactCatalogue/"
     object: "ArtifactCatalogue"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Artifact catalogue records; BrAPI v2.1 has no equivalent record."
-  - path: "ProtocolLibrary/"
+  - path: "Research/ProtocolLibrary/"
     object: "ProtocolLibrary"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Protocol library records; BrAPI v2.1 has no equivalent record."
-  - path: "PublicationReview/"
+  - path: "Research/PublicationReview/"
     object: "PublicationReview"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Publication review records; BrAPI v2.1 has no equivalent record."
-  - path: "BiodiversityExport/"
+  - path: "Interoperability/BiodiversityExport/"
     object: "BiodiversityExport"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Biodiversity export records; BrAPI v2.1 has no equivalent record."
-  - path: "EvidencePack/"
+  - path: "Research/EvidencePack/"
     object: "EvidencePack"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Evidence pack records; BrAPI v2.1 has no equivalent record."
-  - path: "DiseaseObservation/"
+  - path: "PlantHealth/DiseaseObservation/"
     object: "DiseaseObservation"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Disease observation records; BrAPI v2.1 has no equivalent record."
-  - path: "DiagnosticEvidence/"
+  - path: "PlantHealth/DiagnosticEvidence/"
     object: "DiagnosticEvidence"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Diagnostic evidence records; BrAPI v2.1 has no equivalent record."
-  - path: "IpmStrategy/"
+  - path: "PlantHealth/IpmStrategy/"
     object: "IpmStrategy"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "IPM strategy records; BrAPI v2.1 has no equivalent record."
-  - path: "ThresholdAlert/"
+  - path: "PlantHealth/ThresholdAlert/"
     object: "ThresholdAlert"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Threshold alert records; BrAPI v2.1 has no equivalent record."
-  - path: "DiseaseResistance/"
+  - path: "PlantHealth/DiseaseResistance/"
     object: "DiseaseResistance"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Disease resistance records; BrAPI v2.1 has no equivalent record."
-  - path: "CropHealthImage/"
+  - path: "PlantHealth/CropHealthImage/"
     object: "CropHealthImage"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Crop health image records; BrAPI v2.1 has no equivalent record."
-  - path: "CropRecommendation/"
+  - path: "CropProduction/CropRecommendation/"
     object: "CropRecommendation"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Crop recommendation records; BrAPI v2.1 has no equivalent record."
-  - path: "SowingWindow/"
+  - path: "CropProduction/SowingWindow/"
     object: "SowingWindow"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Sowing window records; BrAPI v2.1 has no equivalent record."
-  - path: "IrrigationAdvice/"
+  - path: "CropProduction/IrrigationAdvice/"
     object: "IrrigationAdvice"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Irrigation advice records; BrAPI v2.1 has no equivalent record."
-  - path: "NutrientAdvice/"
+  - path: "CropProduction/NutrientAdvice/"
     object: "NutrientAdvice"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Nutrient advice records; BrAPI v2.1 has no equivalent record."
-  - path: "PestDiseaseRisk/"
+  - path: "PlantHealth/PestDiseaseRisk/"
     object: "PestDiseaseRisk"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Pest/disease risk records; BrAPI v2.1 has no equivalent record."
-  - path: "YieldForecast/"
+  - path: "CropProduction/YieldForecast/"
     object: "YieldForecast"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Yield forecast records; BrAPI v2.1 has no equivalent record."
-  - path: "CropSuitability/"
+  - path: "CropProduction/CropSuitability/"
     object: "CropSuitability"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Crop suitability records; BrAPI v2.1 has no equivalent record."
-  - path: "HumanReview/"
+  - path: "Research/HumanReview/"
     object: "HumanReview"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Human review records; BrAPI v2.1 has no equivalent record."
-  - path: "ExplanationEvidence/"
+  - path: "Research/ExplanationEvidence/"
     object: "ExplanationEvidence"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Explanation evidence records; BrAPI v2.1 has no equivalent record."
-  - path: "OutcomeFeedback/"
+  - path: "Research/OutcomeFeedback/"
     object: "OutcomeFeedback"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Outcome feedback records; BrAPI v2.1 has no equivalent record."
-  - path: "LocalConstraint/"
+  - path: "CropProduction/LocalConstraint/"
     object: "LocalConstraint"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Local constraint records; BrAPI v2.1 has no equivalent record."
-  - path: "CrsTransform/"
+  - path: "Geospatial/CrsTransform/"
     object: "CrsTransform"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "CRS transform records; BrAPI v2.1 has no equivalent record."
-  - path: "TelemetryNormalization/"
+  - path: "Instrumentation/TelemetryNormalization/"
     object: "TelemetryNormalization"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Telemetry normalization records; BrAPI v2.1 has no equivalent record."
-  - path: "VegetationIndex/"
+  - path: "Geospatial/VegetationIndex/"
     object: "VegetationIndex"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Vegetation index records; BrAPI v2.1 has no equivalent record."
-  - path: "RemoteSensingMetadata/"
+  - path: "Geospatial/RemoteSensingMetadata/"
     object: "RemoteSensingMetadata"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Remote sensing metadata records; BrAPI v2.1 has no equivalent record."
-  - path: "EdgeGatewayHealth/"
+  - path: "Instrumentation/EdgeGatewayHealth/"
     object: "EdgeGatewayHealth"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Edge gateway health records; BrAPI v2.1 has no equivalent record."
-  - path: "ConformanceProbe/"
+  - path: "Interoperability/ConformanceProbe/"
     object: "ConformanceProbe"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Conformance probe records; BrAPI v2.1 has no equivalent record."
-  - path: "CapabilityNegotiation/"
+  - path: "Core/CapabilityNegotiation/"
     object: "CapabilityNegotiation"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Capability negotiation records; BrAPI v2.1 has no equivalent record."
-  - path: "SchemaMapping/"
+  - path: "Interoperability/SchemaMapping/"
     object: "SchemaMapping"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Schema mapping records; BrAPI v2.1 has no equivalent record."
-  - path: "SensorDevice/"
+  - path: "Instrumentation/SensorDevice/"
     object: "SensorDevice"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Sensor device records; BrAPI v2.1 has no equivalent record."
-  - path: "SpatialIndex/"
+  - path: "Geospatial/SpatialIndex/"
     object: "SpatialIndex"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Spatial index records; BrAPI v2.1 has no equivalent record."
-  - path: "CalibrationQuality/"
+  - path: "Instrumentation/CalibrationQuality/"
     object: "CalibrationQuality"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Calibration quality records; BrAPI v2.1 has no equivalent record."
-  - path: "CloudMask/"
+  - path: "Geospatial/CloudMask/"
     object: "CloudMask"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Cloud mask records; BrAPI v2.1 has no equivalent record."
-  - path: "RasterCatalogue/"
+  - path: "Geospatial/RasterCatalogue/"
     object: "RasterCatalogue"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Raster catalogue records; BrAPI v2.1 has no equivalent record."
-  - path: "SpatialQuery/"
+  - path: "Geospatial/SpatialQuery/"
     object: "SpatialQuery"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Spatial query records; BrAPI v2.1 has no equivalent record."
-  - path: "FieldGeometry/"
+  - path: "Geospatial/FieldGeometry/"
     object: "FieldGeometry"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Field geometry records; BrAPI v2.1 has no equivalent record."
-  - path: "AssayDesign/"
+  - path: "Genotyping/AssayDesign/"
     object: "AssayDesign"
     primary_class: "D3"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Assay design records; BrAPI v2.1 has no equivalent record."
-  - path: "AssayExecution/"
+  - path: "Genotyping/AssayExecution/"
     object: "AssayExecution"
     primary_class: "D3"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Assay execution records; BrAPI v2.1 has no equivalent record."
-  - path: "VariantAnnotation/"
+  - path: "Genotyping/VariantAnnotation/"
     object: "VariantAnnotation"
     primary_class: "D3"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Variant annotation records; BrAPI v2.1 has no equivalent record."
-  - path: "GenotypeQc/"
+  - path: "Genotyping/GenotypeQc/"
     object: "GenotypeQcReport"
     primary_class: "D3"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Genotype QC report records; BrAPI v2.1 has no equivalent record."
-  - path: "GenotypeCallSemantics/"
+  - path: "Genotyping/GenotypeCallSemantics/"
     object: "GenotypeCallSemantics"
     primary_class: "D3"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Genotype call semantics records; BrAPI v2.1 has no equivalent record."
-  - path: "VendorOrder/"
+  - path: "Genotyping/VendorOrder/"
     object: "VendorOrderRecord"
     primary_class: "D3"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Vendor genotyping order records; BrAPI v2.1 has no equivalent record."
-  - path: "MarkerProbe/"
+  - path: "Genotyping/MarkerProbe/"
     object: "MarkerProbe"
     primary_class: "D3"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Marker probe records; BrAPI v2.1 has no equivalent record."
-  - path: "DisposalRecord/"
+  - path: "Germplasm/DisposalRecord/"
     object: "DisposalRecord"
     primary_class: "D1"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Disposal records; BrAPI v2.1 has no equivalent record."
-  - path: "PlantingOperation/"
+  - path: "CropProduction/PlantingOperation/"
     object: "PlantingOperation"
     primary_class: "D6"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Planting operation records; BrAPI v2.1 has no equivalent record."
-  - path: "CarbonStock/"
+  - path: "Environment/CarbonStock/"
     object: "CarbonStock"
     primary_class: "D5"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Carbon stock records; BrAPI v2.1 has no equivalent record."
-  - path: "Emissions/"
+  - path: "Environment/Emissions/"
     object: "Emissions"
     primary_class: "D5"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Emissions records; BrAPI v2.1 has no equivalent record."
-  - path: "SoilChemistry/"
+  - path: "Environment/SoilChemistry/"
     object: "SoilChemistry"
     primary_class: "D5"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Soil texture, chemistry, and moisture records; BrAPI v2.1 has no equivalent record."
-  - path: "EnvironmentalTreatment/"
+  - path: "Environment/EnvironmentalTreatment/"
     object: "EnvironmentalTreatment"
     primary_class: "D5"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Environmental treatment and stress exposure records; BrAPI v2.1 has no equivalent record."
-  - path: "WaterBalance/"
+  - path: "Environment/WaterBalance/"
     object: "WaterBalance"
     primary_class: "D5"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Water balance records; BrAPI v2.1 has no equivalent record."
-  - path: "Farm/"
+  - path: "CropProduction/Farm/"
     object: "Farm"
     primary_class: "D6"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Farm and site reference records; BrAPI v2.1 has no equivalent record."
-  - path: "FieldScouting/"
+  - path: "PlantHealth/FieldScouting/"
     object: "FieldScouting"
     primary_class: "D6"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Field scouting and work order records; BrAPI v2.1 has no equivalent record."
-  - path: "TreatmentAssignment/"
+  - path: "Breeding/TreatmentAssignment/"
     object: "TreatmentAssignment"
     primary_class: "D6"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Treatment assignment records; BrAPI v2.1 has no equivalent record."
-  - path: "Plot/"
+  - path: "Breeding/Plot/"
     object: "Plot"
     primary_class: "D6"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Plot identity records; BrAPI v2.1 has no equivalent record."
-  - path: "FieldBook/"
+  - path: "Breeding/FieldBook/"
     object: "FieldBook"
     primary_class: "D6"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Field book definition records; BrAPI v2.1 has no equivalent record."
-  - path: "TrialNetwork/"
+  - path: "Breeding/TrialNetwork/"
     object: "TrialNetwork"
     primary_class: "D6"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Trial network and MET design records; BrAPI v2.1 has no equivalent record."
-  - path: "FieldBoundary/"
+  - path: "Geospatial/FieldBoundary/"
     object: "FieldBoundary"
     primary_class: "D6"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Operational field boundary and history records; BrAPI v2.1 has no equivalent record."
-  - path: "SprayApplication/"
+  - path: "CropProduction/SprayApplication/"
     object: "SprayApplication"
     primary_class: "D6"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Spray application records; BrAPI v2.1 has no equivalent record."
-  - path: "YieldMap/"
+  - path: "Geospatial/YieldMap/"
     object: "YieldMap"
     primary_class: "D6"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Yield map records; BrAPI v2.1 has no equivalent record."
-  - path: "AnalysisResult/"
+  - path: "Research/AnalysisResult/"
     object: "AnalysisResult"
     primary_class: "D7"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Analysis result records; BrAPI v2.1 has no equivalent record."
-  - path: "GeneticGain/"
+  - path: "Breeding/GeneticGain/"
     object: "GeneticGainRecord"
     primary_class: "D7"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Genetic gain records; BrAPI v2.1 has no equivalent record."
-  - path: "GwasResult/"
+  - path: "Genotyping/GwasResult/"
     object: "GwasResult"
     primary_class: "D7"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "GWAS result records; BrAPI v2.1 has no equivalent record."
-  - path: "MixedModel/"
+  - path: "Research/MixedModel/"
     object: "MixedModelResult"
     primary_class: "D7"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Mixed model result records; BrAPI v2.1 has no equivalent record."
-  - path: "StabilityAnalysis/"
+  - path: "Breeding/StabilityAnalysis/"
     object: "StabilityAnalysisResult"
     primary_class: "D7"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Stability analysis result records; BrAPI v2.1 has no equivalent record."
-  - path: "Heritability/"
+  - path: "Breeding/Heritability/"
     object: "HeritabilityEstimate"
     primary_class: "D7"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Heritability estimate records; BrAPI v2.1 has no equivalent record."
-  - path: "GxeAnalysis/"
+  - path: "Breeding/GxeAnalysis/"
     object: "GxeAnalysisResult"
     primary_class: "D7"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "GxE analysis result records; BrAPI v2.1 has no equivalent record."
-  - path: "Kinship/"
+  - path: "Breeding/Kinship/"
     object: "KinshipMatrix"
     primary_class: "D7"
     cross_cutting: ["C1", "C2", "C3", "C5", "C6", "C9"]
     rationale: "Kinship matrix records; BrAPI v2.1 has no equivalent record."
-  - path: "PcaResult/"
+  - path: "Research/PcaResult/"
     object: "PcaResult"
     primary_class: "D7"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "PCA result records; BrAPI v2.1 has no equivalent record."
-  - path: "GenomicPrediction/"
+  - path: "Breeding/GenomicPrediction/"
     object: "GenomicPrediction"
     primary_class: "D7"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Genomic prediction result records; BrAPI v2.1 has no equivalent record."
-  - path: "GenomicSelection/"
+  - path: "Breeding/GenomicSelection/"
     object: "GenomicSelection"
     primary_class: "D7"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Genomic selection result records; BrAPI v2.1 has no equivalent record."
-  - path: "GenomicRelationship/"
+  - path: "Genotyping/GenomicRelationship/"
     object: "GenomicRelationship"
     primary_class: "D7"
     cross_cutting: ["C1", "C2", "C3", "C5", "C6", "C9"]
     rationale: "Genomic relationship matrix records; BrAPI v2.1 has no equivalent record."
-  - path: "MethylationAnalysis/"
+  - path: "Genotyping/MethylationAnalysis/"
     object: "MethylationAnalysis"
     primary_class: "D7"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Methylation analysis result records; BrAPI v2.1 has no equivalent record."
-  - path: "ExpressionQtl/"
+  - path: "Genotyping/ExpressionQtl/"
     object: "ExpressionQtl"
     primary_class: "D7"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Expression QTL result records; BrAPI v2.1 has no equivalent record."
-  - path: "HaplotypeAnalysis/"
+  - path: "Genotyping/HaplotypeAnalysis/"
     object: "HaplotypeAnalysis"
     primary_class: "D7"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Haplotype analysis result records; BrAPI v2.1 has no equivalent record."
-  - path: "PedigreeAnalysis/"
+  - path: "Breeding/PedigreeAnalysis/"
     object: "PedigreeAnalysis"
     primary_class: "D7"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Pedigree analysis result records; BrAPI v2.1 has no equivalent record."
-  - path: "BulkCapture/"
+  - path: "Phenotyping/BulkCapture/"
     object: "BulkCapture"
     primary_class: "D4"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Bulk capture records; BrAPI v2.1 has no equivalent record."
-  - path: "AnalysisMethods/"
+  - path: "Research/AnalysisMethods/"
     object: "AnalysisMethod"
     primary_class: "D7"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Versioned analysis method registry; BrAPI v2.1 has no equivalent record."
-  - path: "WeatherObservations/"
+  - path: "Environment/WeatherObservations/"
     object: "WeatherObservation"
     primary_class: "D5"
     cross_cutting: ["C1", "C2", "C3", "C6", "C7", "C9"]
     rationale: "Environmental/weather observation records; BrAPI v2.1 has no equivalent record."
-  - path: "HarvestRecords/"
+  - path: "CropProduction/HarvestRecords/"
     object: "HarvestRecord"
     primary_class: "D6"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Harvest-event records; BrAPI v2.1 has no equivalent record."
-  - path: "PhenotypeCapture/"
+  - path: "Phenotyping/PhenotypeCapture/"
     object: "PhenotypeCapture"
     primary_class: "D4"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Phenotype capture events; BrAPI v2.1 has no equivalent record."
-  - path: "CaptureWorkflow/"
+  - path: "Phenotyping/CaptureWorkflow/"
     object: "CaptureWorkflow"
     primary_class: "D4"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Capture workflow records; BrAPI v2.1 has no equivalent record."
-  - path: "QualityFlag/"
+  - path: "Phenotyping/QualityFlag/"
     object: "QualityFlag"
     primary_class: "D4"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Quality flag records; BrAPI v2.1 has no equivalent record."
-  - path: "ValueMissingness/"
+  - path: "Phenotyping/ValueMissingness/"
     object: "ValueMissingness"
     primary_class: "D4"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Value and missingness records; BrAPI v2.1 has no equivalent record."
-  - path: "GenomicDatasets/"
+  - path: "Genotyping/GenomicDatasets/"
     object: "GenomicDataset"
     primary_class: "D3"
     cross_cutting: ["C1", "C2", "C3", "C5", "C6", "C9"]
     rationale: "Prepared genomic dataset records; BrAPI v2.1 has no equivalent record."
-  - path: "GenebankStorage/"
+  - path: "Germplasm/GenebankStorage/"
     object: "StorageLocation"
     primary_class: "D1"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Genebank storage location records; BrAPI v2.1 has no equivalent record."
-  - path: "ViabilityTesting/"
+  - path: "Germplasm/ViabilityTesting/"
     object: "ViabilityTest"
     primary_class: "D1"
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Viability/germination test records; BrAPI v2.1 has no equivalent record."
-  - path: "ResearchAssets/"
+  - path: "Research/ResearchAssets/"
     object: "ResearchAsset"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C5", "C6", "C9"]
     rationale: "Research asset records; BrAPI v2.1 has no equivalent record."
-  - path: "MeasurementMethods/"
+  - path: "ReferenceData/MeasurementMethods/"
     object: "MeasurementMethod"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C4", "C9"]
     rationale: "Measurement method definitions; BrAPI v2.1 has no equivalent record."
-  - path: "DevelopmentalStage/"
+  - path: "ReferenceData/DevelopmentalStage/"
     object: "DevelopmentalStage"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C4", "C9"]
     rationale: "Developmental stage vocabulary entries; BrAPI v2.1 has no equivalent record."
-  - path: "UnitsAndQuantity/"
+  - path: "ReferenceData/UnitsAndQuantity/"
     object: "UnitsAndQuantity"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C4", "C9"]
     rationale: "Units and quantity semantics entries; BrAPI v2.1 has no equivalent record."
-  - path: "ExternalVocabulary/"
+  - path: "ReferenceData/ExternalVocabulary/"
     object: "ExternalVocabulary"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C4", "C9"]
     rationale: "External vocabulary sync entries; BrAPI v2.1 has no equivalent record."
-  - path: "TerminologyVersion/"
+  - path: "ReferenceData/TerminologyVersion/"
     object: "TerminologyVersion"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C4", "C9"]
     rationale: "Terminology version entries; BrAPI v2.1 has no equivalent record."
-  - path: "OntologyTerm/"
+  - path: "ReferenceData/OntologyTerm/"
     object: "OntologyTermRecord"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C4", "C9"]
     rationale: "Ontology term and synonym entries; BrAPI v2.1 has no equivalent record."
-  - path: "OntologyMapping/"
+  - path: "ReferenceData/OntologyMapping/"
     object: "OntologyMapping"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C4", "C9"]
     rationale: "Ontology mapping and crosswalk entries; BrAPI v2.1 has no equivalent record."
-  - path: "MeasurementScale/"
+  - path: "ReferenceData/MeasurementScale/"
     object: "MeasurementScale"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C4", "C9"]
     rationale: "Measurement scale and value domain entries; BrAPI v2.1 has no equivalent record."
-  - path: "CropTraitDictionary/"
+  - path: "ReferenceData/CropTraitDictionary/"
     object: "CropTraitDictionary"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C4", "C9"]
     rationale: "Crop trait dictionary entries; BrAPI v2.1 has no equivalent record."
-  - path: "Project/"
+  - path: "Research/Project/"
     object: "Project"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Project and funding reference records; BrAPI v2.1 has no equivalent record."
-  - path: "ReusableList/"
+  - path: "ReferenceData/ReusableList/"
     object: "ReusableList"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Reusable list and cohort records; BrAPI v2.1 has no equivalent record."
-  - path: "Calendar/"
+  - path: "ReferenceData/Calendar/"
     object: "Calendar"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Calendar and time convention records; BrAPI v2.1 has no equivalent record."
-  - path: "LocationGeometry/"
+  - path: "Geospatial/LocationGeometry/"
     object: "LocationGeometry"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Location geometry records; BrAPI v2.1 has no equivalent record."
-  - path: "ReferenceDataVersion/"
+  - path: "ReferenceData/ReferenceDataVersion/"
     object: "ReferenceDataVersion"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Reference data version records; BrAPI v2.1 has no equivalent record."
-  - path: "TaxonName/"
+  - path: "ReferenceData/TaxonName/"
     object: "TaxonName"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C4", "C9"]
     rationale: "Taxon name and synonym entries; BrAPI v2.1 has no equivalent record."
-  - path: "CommonCropName/"
+  - path: "ReferenceData/CommonCropName/"
     object: "CommonCropName"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C4", "C9"]
     rationale: "Common crop name entries; BrAPI v2.1 has no equivalent record."
-  - path: "CropSpecies/"
+  - path: "ReferenceData/CropSpecies/"
     object: "CropSpecies"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C4", "C9"]
     rationale: "Crop and species registry entries; BrAPI v2.1 has no equivalent record."
-  - path: "InstitutionCode/"
+  - path: "ReferenceData/InstitutionCode/"
     object: "InstitutionCode"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C4", "C9"]
     rationale: "Institution and collection code entries; BrAPI v2.1 has no equivalent record."
-  - path: "PersonReference/"
+  - path: "ReferenceData/PersonReference/"
     object: "PersonReference"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Person reference entries; BrAPI v2.1 has no equivalent record."
-  - path: "ResearchProgram/"
+  - path: "Research/ResearchProgram/"
     object: "ResearchProgram"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Research program records; BrAPI v2.1 has no equivalent record."
-  - path: "CapabilityMetadata/"
+  - path: "Core/CapabilityMetadata/"
     object: "CapabilityMetadata"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Capability metadata records; BrAPI v2.1 has no equivalent record."
-  - path: "ResearchLocation/"
+  - path: "Research/ResearchLocation/"
     object: "ResearchLocation"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Research location records; BrAPI v2.1 has no equivalent record."
-  - path: "CollectingMission/"
+  - path: "Germplasm/CollectingMission/"
     object: "CollectingMission"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Collecting mission records; BrAPI v2.1 has no equivalent record."
-  - path: "ConservationMembership/"
+  - path: "Germplasm/ConservationMembership/"
     object: "ConservationMembership"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Conservation membership records; BrAPI v2.1 has no equivalent record."
-  - path: "McpdAdapter/"
+  - path: "Germplasm/McpdAdapter/"
     object: "McpdAdapter"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "MCPD adapter records; BrAPI v2.1 has no equivalent record."
-  - path: "DuplicateReview/"
+  - path: "Germplasm/DuplicateReview/"
     object: "DuplicateReview"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]
     rationale: "Duplicate review records; BrAPI v2.1 has no equivalent record."
-  - path: "Crosswalk/"
+  - path: "Interoperability/Crosswalk/"
     object: "Crosswalk"
     primary_class: null
     cross_cutting: ["C1", "C2", "C3", "C6", "C9"]

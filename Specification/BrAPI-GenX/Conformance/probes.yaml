@@ -538,4 +538,4 @@ required_map:
   package_submit: {schema: FAIRPackageNewRequest, required: [packageDbId, title, license, accessRights]}
   package_accepted: {schema: FAIRPackage, required: [packageDbId, title, license, accessRights]}
 genx_object_names: [jobs, provenanceEnvelope, variableTerms, lotLedger, modelRegistry, variantMatrices, fairPackages, telemetry]
-capability_dirs: {jobs: Jobs, provenanceEnvelope: Provenance, variableTerms: VariableTerms, lotLedger: LotLedger, modelRegistry: Models, variantMatrices: Genomics, fairPackages: FAIR, telemetry: Telemetry}
+capability_dirs: {jobs: Core/Jobs, provenanceEnvelope: Core/Provenance, variableTerms: ReferenceData/VariableTerms, lotLedger: CropProduction/LotLedger, modelRegistry: Research/Models, variantMatrices: Genotyping/Genomics, fairPackages: Interoperability/FAIR, telemetry: Instrumentation/Telemetry}

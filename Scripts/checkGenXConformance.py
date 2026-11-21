@@ -203,7 +203,7 @@ def check_required_fields(root, probe, ctx, results):
 def check_job_enums(root, probe, ctx, results):
     conf = os.path.join(root, "Specification", "BrAPI-GenX", "Conformance")
     job_schema = load_yaml(
-        os.path.join(root, "Specification", "BrAPI-GenX", "Jobs", "Schemas", "Job.yaml")
+        os.path.join(root, "Specification", "BrAPI-GenX", "Core", "Jobs", "Schemas", "Job.yaml")
     )
     allowed_status = set(
         job_schema["components"]["schemas"]["Job"]["properties"]["status"]["enum"]
@@ -672,7 +672,7 @@ def check_decimal_format(root, probe, ctx, results):
 def check_model_shape(root, probe, ctx, results):
     conf = os.path.join(root, "Specification", "BrAPI-GenX", "Conformance", "fixtures")
     schema = load_yaml(
-        os.path.join(root, "Specification", "BrAPI-GenX", "Models",
+        os.path.join(root, "Specification", "BrAPI-GenX", "Research", "Models",
                      "Schemas", "ModelArtifact.yaml")
     )
     allowed_status = set(
@@ -705,7 +705,7 @@ def check_model_shape(root, probe, ctx, results):
 def check_matrix_shape(root, probe, ctx, results):
     conf = os.path.join(root, "Specification", "BrAPI-GenX", "Conformance", "fixtures")
     schema = load_yaml(
-        os.path.join(root, "Specification", "BrAPI-GenX", "Genomics",
+        os.path.join(root, "Specification", "BrAPI-GenX", "Genotyping", "Genomics",
                      "Schemas", "VariantMatrix.yaml")
     )
     allowed_format = set(
@@ -742,7 +742,7 @@ def check_matrix_shape(root, probe, ctx, results):
 def check_package_shape(root, probe, ctx, results):
     conf = os.path.join(root, "Specification", "BrAPI-GenX", "Conformance", "fixtures")
     schema = load_yaml(
-        os.path.join(root, "Specification", "BrAPI-GenX", "FAIR",
+        os.path.join(root, "Specification", "BrAPI-GenX", "Interoperability", "FAIR",
                      "Schemas", "FAIRPackage.yaml")
     )
     allowed_rights = set(
@@ -810,7 +810,7 @@ def check_telemetry_required(root, probe, ctx, results):
 def check_telemetry_shape(root, probe, ctx, results):
     conf = os.path.join(root, "Specification", "BrAPI-GenX", "Conformance", "fixtures")
     schema = load_yaml(
-        os.path.join(root, "Specification", "BrAPI-GenX", "Telemetry",
+        os.path.join(root, "Specification", "BrAPI-GenX", "Instrumentation", "Telemetry",
                      "Schemas", "TelemetryPoint.yaml")
     )
     allowed_quality = set(

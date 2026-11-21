@@ -1,6 +1,9 @@
 
 # BrAPI V2.1
 
+The independently governed [BrAPI-GenX specification index](BrAPI-GenX/README.md)
+contains candidate contracts under `/genx/v1/`.
+
 The Breeding API (BrAPI) is a Standardized REST ful Web Service API Specification for communicating Plant Breeding Data. BrAPI allows for easy data sharing between databases and tools involved in plant breeding.
 
 ### General Reference Documentation

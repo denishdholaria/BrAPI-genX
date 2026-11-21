@@ -52,123 +52,123 @@ implementation, not a claim of production readiness or of scientific validation.
 
 | Domain | Gap named above | GenX module | RFC |
 |---|---|---|---|
-| D2 | Selection decisions | `SelectionDecisions/` | RFC-008 |
-| D3 | VCF import / export (import side) | `VcfImport/` | RFC-043 |
-| D3 | VCF import / export (export side) | `VcfExport/` | RFC-114 |
-| D3 | Reference assembly versioning | `ReferenceAssembly/` | RFC-115 |
-| D3 | Bioinformatics pipeline provenance | `PipelineProvenance/` | RFC-116 |
-| D2 | Experimental design and protocol | `ExperimentalProtocol/` | RFC-117 |
-| S | Dataset/model artefact catalogue | `ArtifactCatalogue/` | RFC-118 |
-| S | Protocol / method library | `ProtocolLibrary/` | RFC-119 |
-| S | Publication review and release | `PublicationReview/` | RFC-120 |
-| S | Biodiversity occurrence / specimen export | `BiodiversityExport/` | RFC-121 |
-| S | Evidence pack for reproducibility/audit | `EvidencePack/` | RFC-122 |
-| N | Disease/pest observation and scouting | `DiseaseObservation/` | RFC-123 |
-| N | Diagnostic evidence for IPM decisions | `DiagnosticEvidence/` | RFC-124 |
-| N | IPM strategy | `IpmStrategy/` | RFC-125 |
-| N | Threshold alerts for pests/disease | `ThresholdAlert/` | RFC-126 |
-| N | Disease resistance characterization | `DiseaseResistance/` | RFC-127 |
-| N | Crop health image results | `CropHealthImage/` | RFC-128 |
-| O | Crop/variety recommendation | `CropRecommendation/` | RFC-129 |
-| O | Sowing window | `SowingWindow/` | RFC-130 |
-| O | Irrigation advice | `IrrigationAdvice/` | RFC-131 |
-| O | Nutrient advice | `NutrientAdvice/` | RFC-132 |
-| O | Pest/disease risk | `PestDiseaseRisk/` | RFC-133 |
-| O | Yield forecast | `YieldForecast/` | RFC-134 |
-| O | Crop suitability | `CropSuitability/` | RFC-135 |
-| O | Human review | `HumanReview/` | RFC-136 |
-| O | Explanation evidence | `ExplanationEvidence/` | RFC-137 |
-| O | Outcome feedback | `OutcomeFeedback/` | RFC-138 |
-| O | Local constraint | `LocalConstraint/` | RFC-139 |
-| M | CRS transform | `CrsTransform/` | RFC-140 |
-| M | Telemetry normalization | `TelemetryNormalization/` | RFC-148 |
-| M | Vegetation index | `VegetationIndex/` | RFC-146 |
-| M | Remote sensing metadata | `RemoteSensingMetadata/` | RFC-145 |
-| M | Edge gateway health | `EdgeGatewayHealth/` | RFC-151 |
-| M | Conformance probe | `ConformanceProbe/` | RFC-155 |
-| M | Breeding pipeline | `BreedingPipeline/` | RFC-154 |
-| M | Capability negotiation | `CapabilityNegotiation/` | RFC-153 |
-| M | Schema mapping | `SchemaMapping/` | RFC-152 |
-| M | Sensor device | `SensorDevice/` | RFC-149 |
-| M | Spatial index | `SpatialIndex/` | RFC-141 |
-| M | Calibration quality | `CalibrationQuality/` | RFC-150 |
-| M | Cloud mask | `CloudMask/` | RFC-147 |
-| M | Raster catalogue | `RasterCatalogue/` | RFC-144 |
-| M | Spatial query | `SpatialQuery/` | RFC-143 |
-| M | Field geometry | `FieldGeometry/` | RFC-142 |
-| D3 | Genomic dataset release/access, reference assembly versioning, pipeline provenance | `GenomicDatasets/` | RFC-013 |
-| D3 | Assay / plate workflow (design side) | `AssayDesign/` | RFC-061 |
-| D3 | Assay / plate workflow (execution side) | `AssayExecution/` | RFC-113 |
-| D3 | Variant functional annotation | `VariantAnnotation/` | RFC-062 |
-| D4 | Phenotype capture / entry | `PhenotypeCapture/` | RFC-012 |
-| D4 | Capture workflow | `CaptureWorkflow/` | RFC-110 |
-| D4 | Quality flags / corrections | `QualityFlag/` | RFC-111 |
-| D4 | Value / missingness | `ValueMissingness/` | RFC-112 |
-| D4 | Confirmations / corrections | `PhenotypeAnnotation/` | RFC-044 |
-| D4 | Repeated measurement / time series | `RepeatedMeasurement/` | RFC-025 |
-| D4 | Bulk capture | `BulkCapture/` | RFC-040 |
-| D4 | Image metadata linkage | `ImageMetadata/` | RFC-032 |
-| D5 | Weather observations | `WeatherObservations/` | RFC-010 |
-| D5 | Weather forecast | `WeatherForecast/` | RFC-031 |
-| D5 | Climate normals / extremes | `ClimateNormals/`, `ExtremeWeather/` | RFC-033, RFC-042 |
-| D5 | Soil profile | `SoilProfile/` | RFC-023 |
-| D6 | Crop cycle | `CropCycle/` | RFC-029 |
-| D6 | Irrigation operation | `IrrigationOperation/` | RFC-024 |
-| D6 | Fertilizer application | `FertilizerApplication/` | RFC-026 |
-| D6 | Harvest / yield | `HarvestRecords/` | RFC-011 |
-| D7 | AnalysisMethod registry | `AnalysisMethods/` | RFC-009 |
-| D7 | Reproducible job contracts | `Jobs/` | RFC-001 |
-| D7 | Result provenance | `AnalysisResult/`, `Provenance/` | RFC-045 |
-| D1 | Sample custody / transfer | `CustodyTransfer/` | RFC-063 |
-| D3 | Genotype QC reports | `GenotypeQc/` | RFC-064 |
-| D3 | Genotype call and missing call semantics | `GenotypeCallSemantics/` | RFC-072 |
-| D3 | Vendor order submission and result ingestion | `VendorOrder/` | RFC-073 |
-| D3 | Marker/probe registry | `MarkerProbe/` | RFC-071 |
-| D1 | Retention / disposal | `DisposalRecord/` | RFC-065 |
-| D6 | Farm / site reference | `Farm/` | RFC-069 |
-| D6 | Operational field boundary and history | `FieldBoundary/` | RFC-075 |
-| N | Spray application records | `SprayApplication/` | RFC-081 |
-| D6 | Field scouting / work orders | `FieldScouting/` | RFC-074 |
-| F | Treatment assignment | `TreatmentAssignment/` | RFC-106 |
-| F | Plot identity | `Plot/` | RFC-107 |
-| F | Field book definition | `FieldBook/` | RFC-108 |
-| F | Trial network / MET design | `TrialNetwork/` | RFC-109 |
-| D6 | Yield maps | `YieldMap/` | RFC-070 |
-| D6 | Sowing / planting | `PlantingOperation/` | RFC-066 |
-| D5 | Carbon stock | `CarbonStock/` | RFC-067 |
-| D5 | Emissions | `Emissions/` | RFC-076 |
-| D5 | Soil texture, chemistry, and moisture | `SoilChemistry/` | RFC-077 |
-| D5 | Environmental treatments and stress exposures | `EnvironmentalTreatment/` | RFC-078 |
-| D5 | Water balance | `WaterBalance/` | RFC-068 |
-| B | Project and funding reference | `Project/` | RFC-089 |
-| B | Reusable lists and cohorts | `ReusableList/` | RFC-090 |
-| B | Calendars and time conventions | `Calendar/` | RFC-091 |
-| B | Taxon names and synonyms | `TaxonName/` | RFC-080 |
-| B | Common crop names | `CommonCropName/` | RFC-094 |
-| B | Crop and species registry | `CropSpecies/` | RFC-095 |
-| B | Institution and collection codes | `InstitutionCode/` | RFC-096 |
-| B | People references | `PersonReference/` | RFC-097 |
-| B | Research programs | `ResearchProgram/` | RFC-098 |
-| B | Server and profile capability metadata | `CapabilityMetadata/` | RFC-099 |
-| B | Research locations | `ResearchLocation/` | RFC-100 |
-| C | Collecting missions | `CollectingMission/` | RFC-101 |
-| C | Conservation membership | `ConservationMembership/` | RFC-102 |
-| C | MCPD adapter | `McpdAdapter/` | RFC-103 |
-| C | Duplicate review | `DuplicateReview/` | RFC-104 |
-| C | Crosswalks | `Crosswalk/` | RFC-105 |
-| B | Location geometry reference | `LocationGeometry/` | RFC-092 |
-| B | Reference data versioning | `ReferenceDataVersion/` | RFC-093 |
-| G | Developmental stage vocabulary | `DevelopmentalStage/` | RFC-079 |
-| G | Units and quantity semantics | `UnitsAndQuantity/` | RFC-082 |
-| G | External vocabulary sync | `ExternalVocabulary/` | RFC-083 |
-| G | Terminology versioning and provenance | `TerminologyVersion/` | RFC-084 |
-| G | Ontology term and synonym registry | `OntologyTerm/` | RFC-085 |
-| G | Ontology mapping and crosswalks | `OntologyMapping/` | RFC-086 |
-| G | Measurement scale and value domain | `MeasurementScale/` | RFC-087 |
-| G | Crop-specific trait dictionary | `CropTraitDictionary/` | RFC-088 |
-| I | Genomic dataset release/access | `GenomicDatasets/` | RFC-013 |
-| S | FAIR packages | `FAIR/` | RFC-006 |
-| S | Research asset registry, persistent identifiers / DOI, license/access, embargo | `ResearchAssets/` | RFC-016 |
+| D2 | Selection decisions | `Breeding/SelectionDecisions/` | RFC-008 |
+| D3 | VCF import / export (import side) | `Genotyping/VcfImport/` | RFC-043 |
+| D3 | VCF import / export (export side) | `Genotyping/VcfExport/` | RFC-114 |
+| D3 | Reference assembly versioning | `Genotyping/ReferenceAssembly/` | RFC-115 |
+| D3 | Bioinformatics pipeline provenance | `Genotyping/PipelineProvenance/` | RFC-116 |
+| D2 | Experimental design and protocol | `Breeding/ExperimentalProtocol/` | RFC-117 |
+| S | Dataset/model artefact catalogue | `Research/ArtifactCatalogue/` | RFC-118 |
+| S | Protocol / method library | `Research/ProtocolLibrary/` | RFC-119 |
+| S | Publication review and release | `Research/PublicationReview/` | RFC-120 |
+| S | Biodiversity occurrence / specimen export | `Interoperability/BiodiversityExport/` | RFC-121 |
+| S | Evidence pack for reproducibility/audit | `Research/EvidencePack/` | RFC-122 |
+| N | Disease/pest observation and scouting | `PlantHealth/DiseaseObservation/` | RFC-123 |
+| N | Diagnostic evidence for IPM decisions | `PlantHealth/DiagnosticEvidence/` | RFC-124 |
+| N | IPM strategy | `PlantHealth/IpmStrategy/` | RFC-125 |
+| N | Threshold alerts for pests/disease | `PlantHealth/ThresholdAlert/` | RFC-126 |
+| N | Disease resistance characterization | `PlantHealth/DiseaseResistance/` | RFC-127 |
+| N | Crop health image results | `PlantHealth/CropHealthImage/` | RFC-128 |
+| O | Crop/variety recommendation | `CropProduction/CropRecommendation/` | RFC-129 |
+| O | Sowing window | `CropProduction/SowingWindow/` | RFC-130 |
+| O | Irrigation advice | `CropProduction/IrrigationAdvice/` | RFC-131 |
+| O | Nutrient advice | `CropProduction/NutrientAdvice/` | RFC-132 |
+| O | Pest/disease risk | `PlantHealth/PestDiseaseRisk/` | RFC-133 |
+| O | Yield forecast | `CropProduction/YieldForecast/` | RFC-134 |
+| O | Crop suitability | `CropProduction/CropSuitability/` | RFC-135 |
+| O | Human review | `Research/HumanReview/` | RFC-136 |
+| O | Explanation evidence | `Research/ExplanationEvidence/` | RFC-137 |
+| O | Outcome feedback | `Research/OutcomeFeedback/` | RFC-138 |
+| O | Local constraint | `CropProduction/LocalConstraint/` | RFC-139 |
+| M | CRS transform | `Geospatial/CrsTransform/` | RFC-140 |
+| M | Telemetry normalization | `Instrumentation/TelemetryNormalization/` | RFC-148 |
+| M | Vegetation index | `Geospatial/VegetationIndex/` | RFC-146 |
+| M | Remote sensing metadata | `Geospatial/RemoteSensingMetadata/` | RFC-145 |
+| M | Edge gateway health | `Instrumentation/EdgeGatewayHealth/` | RFC-151 |
+| M | Conformance probe | `Interoperability/ConformanceProbe/` | RFC-155 |
+| M | Breeding pipeline | `Breeding/BreedingPipeline/` | RFC-154 |
+| M | Capability negotiation | `Core/CapabilityNegotiation/` | RFC-153 |
+| M | Schema mapping | `Interoperability/SchemaMapping/` | RFC-152 |
+| M | Sensor device | `Instrumentation/SensorDevice/` | RFC-149 |
+| M | Spatial index | `Geospatial/SpatialIndex/` | RFC-141 |
+| M | Calibration quality | `Instrumentation/CalibrationQuality/` | RFC-150 |
+| M | Cloud mask | `Geospatial/CloudMask/` | RFC-147 |
+| M | Raster catalogue | `Geospatial/RasterCatalogue/` | RFC-144 |
+| M | Spatial query | `Geospatial/SpatialQuery/` | RFC-143 |
+| M | Field geometry | `Geospatial/FieldGeometry/` | RFC-142 |
+| D3 | Genomic dataset release/access, reference assembly versioning, pipeline provenance | `Genotyping/GenomicDatasets/` | RFC-013 |
+| D3 | Assay / plate workflow (design side) | `Genotyping/AssayDesign/` | RFC-061 |
+| D3 | Assay / plate workflow (execution side) | `Genotyping/AssayExecution/` | RFC-113 |
+| D3 | Variant functional annotation | `Genotyping/VariantAnnotation/` | RFC-062 |
+| D4 | Phenotype capture / entry | `Phenotyping/PhenotypeCapture/` | RFC-012 |
+| D4 | Capture workflow | `Phenotyping/CaptureWorkflow/` | RFC-110 |
+| D4 | Quality flags / corrections | `Phenotyping/QualityFlag/` | RFC-111 |
+| D4 | Value / missingness | `Phenotyping/ValueMissingness/` | RFC-112 |
+| D4 | Confirmations / corrections | `Phenotyping/PhenotypeAnnotation/` | RFC-044 |
+| D4 | Repeated measurement / time series | `Phenotyping/RepeatedMeasurement/` | RFC-025 |
+| D4 | Bulk capture | `Phenotyping/BulkCapture/` | RFC-040 |
+| D4 | Image metadata linkage | `Phenotyping/ImageMetadata/` | RFC-032 |
+| D5 | Weather observations | `Environment/WeatherObservations/` | RFC-010 |
+| D5 | Weather forecast | `Environment/WeatherForecast/` | RFC-031 |
+| D5 | Climate normals / extremes | `Environment/ClimateNormals/`, `Environment/ExtremeWeather/` | RFC-033, RFC-042 |
+| D5 | Soil profile | `Environment/SoilProfile/` | RFC-023 |
+| D6 | Crop cycle | `CropProduction/CropCycle/` | RFC-029 |
+| D6 | Irrigation operation | `CropProduction/IrrigationOperation/` | RFC-024 |
+| D6 | Fertilizer application | `CropProduction/FertilizerApplication/` | RFC-026 |
+| D6 | Harvest / yield | `CropProduction/HarvestRecords/` | RFC-011 |
+| D7 | AnalysisMethod registry | `Research/AnalysisMethods/` | RFC-009 |
+| D7 | Reproducible job contracts | `Core/Jobs/` | RFC-001 |
+| D7 | Result provenance | `Research/AnalysisResult/`, `Core/Provenance/` | RFC-045 |
+| D1 | Sample custody / transfer | `Germplasm/CustodyTransfer/` | RFC-063 |
+| D3 | Genotype QC reports | `Genotyping/GenotypeQc/` | RFC-064 |
+| D3 | Genotype call and missing call semantics | `Genotyping/GenotypeCallSemantics/` | RFC-072 |
+| D3 | Vendor order submission and result ingestion | `Genotyping/VendorOrder/` | RFC-073 |
+| D3 | Marker/probe registry | `Genotyping/MarkerProbe/` | RFC-071 |
+| D1 | Retention / disposal | `Germplasm/DisposalRecord/` | RFC-065 |
+| D6 | Farm / site reference | `CropProduction/Farm/` | RFC-069 |
+| D6 | Operational field boundary and history | `Geospatial/FieldBoundary/` | RFC-075 |
+| N | Spray application records | `CropProduction/SprayApplication/` | RFC-081 |
+| D6 | Field scouting / work orders | `PlantHealth/FieldScouting/` | RFC-074 |
+| F | Treatment assignment | `Breeding/TreatmentAssignment/` | RFC-106 |
+| F | Plot identity | `Breeding/Plot/` | RFC-107 |
+| F | Field book definition | `Breeding/FieldBook/` | RFC-108 |
+| F | Trial network / MET design | `Breeding/TrialNetwork/` | RFC-109 |
+| D6 | Yield maps | `Geospatial/YieldMap/` | RFC-070 |
+| D6 | Sowing / planting | `CropProduction/PlantingOperation/` | RFC-066 |
+| D5 | Carbon stock | `Environment/CarbonStock/` | RFC-067 |
+| D5 | Emissions | `Environment/Emissions/` | RFC-076 |
+| D5 | Soil texture, chemistry, and moisture | `Environment/SoilChemistry/` | RFC-077 |
+| D5 | Environmental treatments and stress exposures | `Environment/EnvironmentalTreatment/` | RFC-078 |
+| D5 | Water balance | `Environment/WaterBalance/` | RFC-068 |
+| B | Project and funding reference | `Research/Project/` | RFC-089 |
+| B | Reusable lists and cohorts | `ReferenceData/ReusableList/` | RFC-090 |
+| B | Calendars and time conventions | `ReferenceData/Calendar/` | RFC-091 |
+| B | Taxon names and synonyms | `ReferenceData/TaxonName/` | RFC-080 |
+| B | Common crop names | `ReferenceData/CommonCropName/` | RFC-094 |
+| B | Crop and species registry | `ReferenceData/CropSpecies/` | RFC-095 |
+| B | Institution and collection codes | `ReferenceData/InstitutionCode/` | RFC-096 |
+| B | People references | `ReferenceData/PersonReference/` | RFC-097 |
+| B | Research programs | `Research/ResearchProgram/` | RFC-098 |
+| B | Server and profile capability metadata | `Core/CapabilityMetadata/` | RFC-099 |
+| B | Research locations | `Research/ResearchLocation/` | RFC-100 |
+| C | Collecting missions | `Germplasm/CollectingMission/` | RFC-101 |
+| C | Conservation membership | `Germplasm/ConservationMembership/` | RFC-102 |
+| C | MCPD adapter | `Germplasm/McpdAdapter/` | RFC-103 |
+| C | Duplicate review | `Germplasm/DuplicateReview/` | RFC-104 |
+| C | Crosswalks | `Interoperability/Crosswalk/` | RFC-105 |
+| B | Location geometry reference | `Geospatial/LocationGeometry/` | RFC-092 |
+| B | Reference data versioning | `ReferenceData/ReferenceDataVersion/` | RFC-093 |
+| G | Developmental stage vocabulary | `ReferenceData/DevelopmentalStage/` | RFC-079 |
+| G | Units and quantity semantics | `ReferenceData/UnitsAndQuantity/` | RFC-082 |
+| G | External vocabulary sync | `ReferenceData/ExternalVocabulary/` | RFC-083 |
+| G | Terminology versioning and provenance | `ReferenceData/TerminologyVersion/` | RFC-084 |
+| G | Ontology term and synonym registry | `ReferenceData/OntologyTerm/` | RFC-085 |
+| G | Ontology mapping and crosswalks | `ReferenceData/OntologyMapping/` | RFC-086 |
+| G | Measurement scale and value domain | `ReferenceData/MeasurementScale/` | RFC-087 |
+| G | Crop-specific trait dictionary | `ReferenceData/CropTraitDictionary/` | RFC-088 |
+| I | Genomic dataset release/access | `Genotyping/GenomicDatasets/` | RFC-013 |
+| S | FAIR packages | `Interoperability/FAIR/` | RFC-006 |
+| S | Research asset registry, persistent identifiers / DOI, license/access, embargo | `Research/ResearchAssets/` | RFC-016 |
 
 D3 row 9 named gaps are now covered (genotype call semantics, marker/probe registry, vendor order/result ingestion). D1 row 4 named gaps are now covered. D6 row 11 named gaps are now covered (field scouting/work orders, operational field boundary/history). Still open
 D5 row 12 named gaps are now covered (emissions, soil texture/chemistry/moisture depth, environmental treatments/stress).
