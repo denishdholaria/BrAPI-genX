@@ -196,7 +196,7 @@ These concerns apply across domain classes and should be modeled as reusable spe
 | CropSpecies / CropSpecies | (none, cross-cutting) | C1, C2, C3, C4, C9 | Crop and species registry entries; no BrAPI v2.1 equivalent; terminology governance |
 | InstitutionCode / InstitutionCode | (none, cross-cutting) | C1, C2, C3, C4, C9 | Institution and collection code entries; no BrAPI v2.1 equivalent; terminology governance |
 | PersonReference / PersonReference | (none, cross-cutting) | C1, C2, C3, C6, C9 | Person reference entries; no BrAPI v2.1 equivalent |
-| ResearchProgram / ResearchProgram | (none, cross-cutting) | C1, C2, C3, C6, C9 | Research program records; no BrAPI v2.1 equivalent |
+| ResearchProgram / ResearchProgram | (none, cross-cutting) | C1, C2, C3, C6, C9 | Deferred by D-BP-12. BrAPI v2.1 Program owns the overlapping responsibility. |
 | CapabilityMetadata / CapabilityMetadata | (none, cross-cutting) | C1, C2, C3, C6, C9 | Capability metadata records; no BrAPI v2.1 equivalent |
 | ResearchLocation / ResearchLocation | (none, cross-cutting) | C1, C2, C3, C6, C9 | Research location records; no BrAPI v2.1 equivalent |
 | CollectingMission / CollectingMission | (none, cross-cutting) | C1, C2, C3, C6, C9 | Collecting mission records; no BrAPI v2.1 equivalent |
@@ -236,14 +236,23 @@ Crosswalk rules:
 9. **Version rule:** existing identifiers, schemas, routes and operationIds are not renamed solely to match taxonomy.
 10. **Evidence rule:** claims of standards alignment must cite a specific adopted standard or decision; implementation evidence from BijMantra is evidence only, not authority for the standard.
 
-## 7. Proposed folder and documentation strategy
+## 7. Folder organization
 
-Do not immediately relocate the current modules. First add a stable classification registry that maps module, schema and operationId to primary domain class and facets. A later review can choose whether physical folders should follow the taxonomy.
+The [specification index](./README.md) groups GenX modules by topic. Each module has
+one directory at `<Section>/<Module>/` with its OpenAPI operations, schemas, and
+documentation. [RFCs](./RFCs/README.md) form a numbered design series. Conformance
+material and the legacy implementation inventory have separate directories.
 
-Suggested additions:
-- `Specification/BrAPI-GenX/CLASSIFICATION.md` — this policy and rationale.
-- `Specification/BrAPI-GenX/Conformance/domain-classification.yaml` — machine-readable module/schema/operation mappings.
-- An automated conformance check: every GenX module/schema/operation must be classified or explicitly marked cross-cutting; no duplicate primary owners; all cross-generation semantic overlaps remain documented.
+The [module registry](./Conformance/domain-classification.yaml) records the
+canonical source paths alongside the proposed scientific primary class and
+facets. Sections are for navigation. For example, the crop-production section
+holds yield forecasts alongside records of field operations. They can retain
+different scientific classifications and maturity levels. A null primary class
+may indicate a genuinely shared concern or an unresolved ownership question.
+
+The endpoint registry check verifies that each module sits under a declared
+section, that every module directory has a registry entry, and that operations
+point to source files within their registered module.
 
 ## 8. Open design questions
 
@@ -252,7 +261,6 @@ These should remain explicit rather than silently treated as solved:
 - Whether seed-lot custody and material operations should sit under D1 or D6. This proposal assigns identity/conservation to D1 and custody/movement/handling to D6.
 - Whether analytical model registry is large enough to merit a distinct D7 subdomain later. For now, it belongs with analysis and derived evidence.
 - Whether future telemetry must be split into common transport plus context-specific D4/D5 domain payloads. The current TelemetryPoint schema is deliberately generic.
-- Whether the proposed seven classes should become folder names. Classification should be validated before restructuring files.
 
 ## 9. Status and adoption
 

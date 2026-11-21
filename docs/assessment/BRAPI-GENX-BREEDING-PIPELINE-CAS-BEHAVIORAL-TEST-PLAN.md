@@ -2,7 +2,7 @@
 
 **Status:** Candidate acceptance plan; implementation-independent.  
 **Decision:** D-BP-14 — optimistic compare-and-set for the current published revision pointer.  
-**Canonical contract:** [RFC-154 §12.7](../../Specification/BrAPI-GenX/RFC-154-BreedingPipeline.md).  
+**Canonical contract:** [RFC-154 §12.7](../../Specification/BrAPI-GenX/RFCs/RFC-154-BreedingPipeline.md).\
 **Scope:** Behavioral evidence required before the CAS (Compare-and-Set) profile can be used as a normative interoperability guarantee.
 
 BrAPI (Breeding Application Programming Interface)-GenX is a specification project: this plan validates the contract against an independently implemented service, not a production application shipped by this repository.

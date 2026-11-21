@@ -65,7 +65,7 @@ I will:
 - [Adoption guide](Specification/BrAPI-GenX/ADOPTION.md)
 - [GenX conformance probes](Specification/BrAPI-GenX/Conformance/probes.yaml)
 - [Recorded conformance results](Specification/BrAPI-GenX/Conformance/RESULTS.md)
-- [GenX skeleton proposal](Specification/BrAPI-GenX/RFC-001-GenX-Skeleton.md)
+- [GenX skeleton proposal](Specification/BrAPI-GenX/RFCs/RFC-001-GenX-Skeleton.md)
 - [Existing schema-generation workflow](.github/workflows/generate-schema.yml)
 
 ## 3. Non-negotiable engineering and standards guardrails

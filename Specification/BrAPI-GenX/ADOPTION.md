@@ -6,14 +6,14 @@ step is independently shippable and leaves V2.1 behavior byte-identical.
 
 ## Order
 
-1. **ServerInfoV3** (`ServerInfoV3/`). Serve `GET /genx/v1/serverinfo`
+1. **ServerInfoV3** (`Core/ServerInfoV3/`). Serve `GET /genx/v1/serverinfo`
    (`genxGetServerInfoV3`) alongside the untouched V2.1 endpoint
    `GET /brapi/v2/serverinfo`. Zero behavior change;
    unlocks negotiation for everything below.
-2. **ProvenanceEnvelope** (`Provenance/`). Embed optional `provenance` on
+2. **ProvenanceEnvelope** (`Core/Provenance/`). Embed optional `provenance` on
    observations and results first — highest value per line changed, no
    endpoints.
-3. **Jobs** (`Jobs/`). Submit work via `POST /genx/v1/jobs`
+3. **Jobs** (`Core/Jobs/`). Submit work via `POST /genx/v1/jobs`
    (`genxSubmitAsyncJob`), poll via `GET /genx/v1/jobs/{jobDbId}`
    (`genxGetAsyncJobById`), and request cancellation via `DELETE
    /genx/v1/jobs/{jobDbId}` (`genxRequestAsyncJobCancellation`). Existing

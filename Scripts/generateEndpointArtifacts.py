@@ -2,6 +2,7 @@
 """Generate BrAPI-GenX endpoint documentation from the canonical JSON registry."""
 from __future__ import annotations
 import argparse, difflib, json, sys
+from posixpath import relpath
 from pathlib import Path
 from urllib.parse import quote
 
@@ -67,7 +68,7 @@ def domain(e):
     if c.get("reason"): out.append("Crosswalk note: "+str(c["reason"]))
     return "; ".join(out)
 
-def render_entry(e):
+def render_entry(e, catalogue=CATALOGUE):
     lines=["### "+m(e.get("method"))+" "+BT+m(e.get("basePath","")+e.get("path",""))+BT,""]
     lines.append("- **Catalogue ID:** "+BT+m(e.get("catalogId"))+BT)
     lines.append("- **BrAPI-GenX operation identity:** "+BT+m(e.get("recommendedOperationId"))+BT+" (advisory where absent from source)")
@@ -100,7 +101,11 @@ def render_entry(e):
     if e.get("semanticNeighborCatalogIds"): lines.append("- **Related catalogue IDs:** "+lst(e["semanticNeighborCatalogIds"]))
     if e.get("decisionReferences"): lines.append("- **Relevant RFC / decision references:** "+lst(e["decisionReferences"]))
     src=e.get("source") or {}
-    if src.get("path"): lines.append("- **Contract source:** ["+BT+m(src["path"])+BT+"]("+source_url(src)+")")
+    if src.get("path"):
+        link = source_url(src)
+        if e.get("apiGeneration") == "genx-v1":
+            link = relpath(src["path"], catalogue.parent.relative_to(ROOT).as_posix())
+        lines.append("- **Contract source:** ["+BT+m(src["path"])+BT+"]("+link+")")
     if src.get("inventoryLine"):
         n=src["inventoryLine"]; lines.append("- **BijMantra inventory row:** [line "+str(n)+"](https://github.com/denishdholaria/bijmantraorg/blob/main/endpoints-inventory.md#L"+str(n)+"); static evidence only.")
     cw=e.get("bijmantraCrosswalk") or {}
@@ -225,19 +230,25 @@ def render_genx_catalog(reg):
         "# BrAPI-GenX Endpoint Catalogue (Focused View)", "",
         "> Generated from the master registry by Scripts/generateEndpointArtifacts.py on " + str(reg.get("generatedAt", "unknown date")) + ". Do not edit by hand.", "",
         "This is a focused view of the " + str(len(genx)) + " proposed GenX operations, not a separate source of truth. The complete catalogue covering BrAPI v2.1 and GenX is the [master endpoint catalogue](../ENDPOINT-CATALOG.md); authoritative structured records live in the [master registry](../ENDPOINT-REGISTRY.json). The [BijMantra crosswalk](../BIJMANTRA-CROSSWALK.md) records source-level implementation candidates without implying runtime availability or contract equivalence.", "",
-        "| Source module | Operation count | Status |", "|---|---:|---|"
+        "| Section | Source module | Operation count | Status |", "|---|---|---:|---|"
     ]
-    modules = sorted({e.get("genxModule") or "Unclassified" for e in genx})
-    for module in modules:
-        group = [e for e in genx if (e.get("genxModule") or "Unclassified") == module]
-        lines.append("| " + m(module) + " | " + str(len(group)) + " | proposed, non-normative |")
+    groups = {}
+    for entry in genx:
+        module = entry["genxModule"]
+        module_path = Path(entry["source"]["path"]).parent
+        section = module_path.parent.name
+        groups.setdefault((section, module), []).append(entry)
+    modules = sorted(groups)
+    for section, module in modules:
+        count = len(groups[section, module])
+        lines.append(f"| [{section}](./{section}/) | [{module}](./{section}/{module}/) | {count} | proposed, non-normative |")
     lines.extend(["", "## Operations", ""])
-    for module in modules:
-        group = sorted([e for e in genx if (e.get("genxModule") or "Unclassified") == module],
+    for section, module in modules:
+        group = sorted(groups[section, module],
                        key=lambda e: (e.get("path", ""), e.get("method", ""), e.get("catalogId", "")))
         lines.extend(["### " + m(module) + " — " + str(len(group)) + " operations", ""])
         for e in group:
-            lines.extend(render_entry(e))
+            lines.extend(render_entry(e, GENX_CATALOGUE))
     lines.extend(["", "## Non-normative status", "",
                   "Every operation in this view remains a proposal. This focused catalogue is generated from operation-level x-brapi-genx metadata and must not be edited independently. Change the OpenAPI operation metadata and master registry inputs, then regenerate this document and the all-generation catalogue.", ""])
     return "\n".join(lines)

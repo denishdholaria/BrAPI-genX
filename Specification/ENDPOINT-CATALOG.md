@@ -7788,7 +7788,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordAcquisition, genxGetAcquisition
 - **Related catalogue IDs:** brapi-genx.genx.v1.acquisitions.record, brapi-genx.genx.v1.acquisitions.get
 - **Relevant RFC / decision references:** RFC-041
-- **Contract source:** [`Specification/BrAPI-GenX/Acquisition/Acquisition_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Acquisition/Acquisition_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/Acquisition/Acquisition_GET_POST.yaml`](BrAPI-GenX/Germplasm/Acquisition/Acquisition_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -7823,7 +7823,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListAcquisitions, genxGetAcquisition
 - **Related catalogue IDs:** brapi-genx.genx.v1.acquisitions.list, brapi-genx.genx.v1.acquisitions.get
 - **Relevant RFC / decision references:** RFC-041
-- **Contract source:** [`Specification/BrAPI-GenX/Acquisition/Acquisition_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Acquisition/Acquisition_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/Acquisition/Acquisition_GET_POST.yaml`](BrAPI-GenX/Germplasm/Acquisition/Acquisition_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -7856,7 +7856,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordAcquisition, genxListAcquisitions
 - **Related catalogue IDs:** brapi-genx.genx.v1.acquisitions.list, brapi-genx.genx.v1.acquisitions.record
 - **Relevant RFC / decision references:** RFC-041
-- **Contract source:** [`Specification/BrAPI-GenX/Acquisition/Acquisition_AcquisitionRecordDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Acquisition/Acquisition_AcquisitionRecordDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/Acquisition/Acquisition_AcquisitionRecordDbId_GET.yaml`](BrAPI-GenX/Germplasm/Acquisition/Acquisition_AcquisitionRecordDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -7893,7 +7893,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterAnalysisMethod, genxGetAnalysisMethod, genxSubmitAsyncJob
 - **Related catalogue IDs:** brapi-genx.genx.v1.analysis-methods.register, brapi-genx.genx.v1.analysis-methods.get
 - **Relevant RFC / decision references:** RFC-009
-- **Contract source:** [`Specification/BrAPI-GenX/AnalysisMethods/AnalysisMethods_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/AnalysisMethods/AnalysisMethods_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/AnalysisMethods/AnalysisMethods_GET_POST.yaml`](BrAPI-GenX/Research/AnalysisMethods/AnalysisMethods_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -7929,7 +7929,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListAnalysisMethods, genxGetAnalysisMethod, genxSubmitAsyncJob
 - **Related catalogue IDs:** brapi-genx.genx.v1.analysis-methods.list, brapi-genx.genx.v1.analysis-methods.get
 - **Relevant RFC / decision references:** RFC-009
-- **Contract source:** [`Specification/BrAPI-GenX/AnalysisMethods/AnalysisMethods_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/AnalysisMethods/AnalysisMethods_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/AnalysisMethods/AnalysisMethods_GET_POST.yaml`](BrAPI-GenX/Research/AnalysisMethods/AnalysisMethods_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -7962,7 +7962,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterAnalysisMethod, genxListAnalysisMethods, genxSubmitAsyncJob
 - **Related catalogue IDs:** brapi-genx.genx.v1.analysis-methods.list, brapi-genx.genx.v1.analysis-methods.register
 - **Relevant RFC / decision references:** RFC-009
-- **Contract source:** [`Specification/BrAPI-GenX/AnalysisMethods/AnalysisMethods_AnalysisMethodDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/AnalysisMethods/AnalysisMethods_AnalysisMethodDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/AnalysisMethods/AnalysisMethods_AnalysisMethodDbId_GET.yaml`](BrAPI-GenX/Research/AnalysisMethods/AnalysisMethods_AnalysisMethodDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -7999,7 +7999,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordAnalysisResult, genxGetAnalysisResult, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.analysis-results.record, brapi-genx.genx.v1.analysis-results.get
 - **Relevant RFC / decision references:** RFC-045
-- **Contract source:** [`Specification/BrAPI-GenX/AnalysisResult/AnalysisResult_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/AnalysisResult/AnalysisResult_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/AnalysisResult/AnalysisResult_GET_POST.yaml`](BrAPI-GenX/Research/AnalysisResult/AnalysisResult_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8034,7 +8034,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListAnalysisResults, genxGetAnalysisResult, genxRegisterAnalysisMethod, genxSubmitAsyncJob
 - **Related catalogue IDs:** brapi-genx.genx.v1.analysis-results.list, brapi-genx.genx.v1.analysis-results.get
 - **Relevant RFC / decision references:** RFC-045
-- **Contract source:** [`Specification/BrAPI-GenX/AnalysisResult/AnalysisResult_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/AnalysisResult/AnalysisResult_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/AnalysisResult/AnalysisResult_GET_POST.yaml`](BrAPI-GenX/Research/AnalysisResult/AnalysisResult_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8067,7 +8067,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordAnalysisResult, genxListAnalysisResults, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.analysis-results.list, brapi-genx.genx.v1.analysis-results.record
 - **Relevant RFC / decision references:** RFC-045
-- **Contract source:** [`Specification/BrAPI-GenX/AnalysisResult/AnalysisResult_AnalysisResultDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/AnalysisResult/AnalysisResult_AnalysisResultDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/AnalysisResult/AnalysisResult_AnalysisResultDbId_GET.yaml`](BrAPI-GenX/Research/AnalysisResult/AnalysisResult_AnalysisResultDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8104,7 +8104,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterArtifactCatalogue, genxGetArtifactCatalogue, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.artifact-catalogues.record, brapi-genx.genx.v1.artifact-catalogues.get
 - **Relevant RFC / decision references:** RFC-118
-- **Contract source:** [`Specification/BrAPI-GenX/ArtifactCatalogue/ArtifactCatalogue_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ArtifactCatalogue/ArtifactCatalogue_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/ArtifactCatalogue/ArtifactCatalogue_GET_POST.yaml`](BrAPI-GenX/Research/ArtifactCatalogue/ArtifactCatalogue_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8139,7 +8139,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListArtifactCatalogues, genxGetArtifactCatalogue, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.artifact-catalogues.list, brapi-genx.genx.v1.artifact-catalogues.get
 - **Relevant RFC / decision references:** RFC-118
-- **Contract source:** [`Specification/BrAPI-GenX/ArtifactCatalogue/ArtifactCatalogue_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ArtifactCatalogue/ArtifactCatalogue_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/ArtifactCatalogue/ArtifactCatalogue_GET_POST.yaml`](BrAPI-GenX/Research/ArtifactCatalogue/ArtifactCatalogue_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8172,7 +8172,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterArtifactCatalogue, genxListArtifactCatalogues, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.artifact-catalogues.list, brapi-genx.genx.v1.artifact-catalogues.record
 - **Relevant RFC / decision references:** RFC-118
-- **Contract source:** [`Specification/BrAPI-GenX/ArtifactCatalogue/ArtifactCatalogue_ArtifactCatalogueDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ArtifactCatalogue/ArtifactCatalogue_ArtifactCatalogueDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/ArtifactCatalogue/ArtifactCatalogue_ArtifactCatalogueDbId_GET.yaml`](BrAPI-GenX/Research/ArtifactCatalogue/ArtifactCatalogue_ArtifactCatalogueDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8209,7 +8209,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordAssayDesign, genxGetAssayDesign, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.assay-designs.record, brapi-genx.genx.v1.assay-designs.get
 - **Relevant RFC / decision references:** RFC-061
-- **Contract source:** [`Specification/BrAPI-GenX/AssayDesign/AssayDesign_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/AssayDesign/AssayDesign_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/AssayDesign/AssayDesign_GET_POST.yaml`](BrAPI-GenX/Genotyping/AssayDesign/AssayDesign_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8244,7 +8244,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListAssayDesigns, genxGetAssayDesign, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.assay-designs.list, brapi-genx.genx.v1.assay-designs.get
 - **Relevant RFC / decision references:** RFC-061
-- **Contract source:** [`Specification/BrAPI-GenX/AssayDesign/AssayDesign_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/AssayDesign/AssayDesign_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/AssayDesign/AssayDesign_GET_POST.yaml`](BrAPI-GenX/Genotyping/AssayDesign/AssayDesign_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8277,7 +8277,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordAssayDesign, genxListAssayDesigns, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.assay-designs.list, brapi-genx.genx.v1.assay-designs.record
 - **Relevant RFC / decision references:** RFC-061
-- **Contract source:** [`Specification/BrAPI-GenX/AssayDesign/AssayDesign_AssayDesignDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/AssayDesign/AssayDesign_AssayDesignDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/AssayDesign/AssayDesign_AssayDesignDbId_GET.yaml`](BrAPI-GenX/Genotyping/AssayDesign/AssayDesign_AssayDesignDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8314,7 +8314,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterAssayExecution, genxGetAssayExecution, genxRecordAssayDesign
 - **Related catalogue IDs:** brapi-genx.genx.v1.assay-executions.record, brapi-genx.genx.v1.assay-executions.get
 - **Relevant RFC / decision references:** RFC-113
-- **Contract source:** [`Specification/BrAPI-GenX/AssayExecution/AssayExecution_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/AssayExecution/AssayExecution_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/AssayExecution/AssayExecution_GET_POST.yaml`](BrAPI-GenX/Genotyping/AssayExecution/AssayExecution_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8349,7 +8349,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListAssayExecutions, genxGetAssayExecution, genxRecordAssayDesign
 - **Related catalogue IDs:** brapi-genx.genx.v1.assay-executions.list, brapi-genx.genx.v1.assay-executions.get
 - **Relevant RFC / decision references:** RFC-113
-- **Contract source:** [`Specification/BrAPI-GenX/AssayExecution/AssayExecution_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/AssayExecution/AssayExecution_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/AssayExecution/AssayExecution_GET_POST.yaml`](BrAPI-GenX/Genotyping/AssayExecution/AssayExecution_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8382,7 +8382,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterAssayExecution, genxListAssayExecutions, genxRecordAssayDesign
 - **Related catalogue IDs:** brapi-genx.genx.v1.assay-executions.list, brapi-genx.genx.v1.assay-executions.record
 - **Relevant RFC / decision references:** RFC-113
-- **Contract source:** [`Specification/BrAPI-GenX/AssayExecution/AssayExecution_AssayExecutionDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/AssayExecution/AssayExecution_AssayExecutionDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/AssayExecution/AssayExecution_AssayExecutionDbId_GET.yaml`](BrAPI-GenX/Genotyping/AssayExecution/AssayExecution_AssayExecutionDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8419,7 +8419,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterBiodiversityExport, genxGetBiodiversityExport, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.biodiversity-exports.record, brapi-genx.genx.v1.biodiversity-exports.get
 - **Relevant RFC / decision references:** RFC-121
-- **Contract source:** [`Specification/BrAPI-GenX/BiodiversityExport/BiodiversityExport_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/BiodiversityExport/BiodiversityExport_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Interoperability/BiodiversityExport/BiodiversityExport_GET_POST.yaml`](BrAPI-GenX/Interoperability/BiodiversityExport/BiodiversityExport_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8454,7 +8454,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListBiodiversityExports, genxGetBiodiversityExport, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.biodiversity-exports.list, brapi-genx.genx.v1.biodiversity-exports.get
 - **Relevant RFC / decision references:** RFC-121
-- **Contract source:** [`Specification/BrAPI-GenX/BiodiversityExport/BiodiversityExport_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/BiodiversityExport/BiodiversityExport_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Interoperability/BiodiversityExport/BiodiversityExport_GET_POST.yaml`](BrAPI-GenX/Interoperability/BiodiversityExport/BiodiversityExport_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8487,7 +8487,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterBiodiversityExport, genxListBiodiversityExports, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.biodiversity-exports.list, brapi-genx.genx.v1.biodiversity-exports.record
 - **Relevant RFC / decision references:** RFC-121
-- **Contract source:** [`Specification/BrAPI-GenX/BiodiversityExport/BiodiversityExport_BiodiversityExportDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/BiodiversityExport/BiodiversityExport_BiodiversityExportDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Interoperability/BiodiversityExport/BiodiversityExport_BiodiversityExportDbId_GET.yaml`](BrAPI-GenX/Interoperability/BiodiversityExport/BiodiversityExport_BiodiversityExportDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8525,7 +8525,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterBreedingPipeline, genxGetBreedingPipeline
 - **Related catalogue IDs:** brapi-genx.genx.v1.breeding-pipelines.record, brapi-genx.genx.v1.breeding-pipelines.get
 - **Relevant RFC / decision references:** RFC-154, D-BP-01, D-BP-03, D-BP-13
-- **Contract source:** [`Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/implementation/bgx-p1-06-approved-breeding-contract/Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/BreedingPipeline/BreedingPipeline_GET_POST.yaml`](BrAPI-GenX/Breeding/BreedingPipeline/BreedingPipeline_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8562,7 +8562,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListBreedingPipelines, genxGetBreedingPipeline
 - **Related catalogue IDs:** brapi-genx.genx.v1.breeding-pipelines.list, brapi-genx.genx.v1.breeding-pipelines.get
 - **Relevant RFC / decision references:** RFC-154, D-BP-01, D-BP-02, D-BP-03, D-BP-13, D-BP-14
-- **Contract source:** [`Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/implementation/bgx-p1-06-approved-breeding-contract/Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/BreedingPipeline/BreedingPipeline_GET_POST.yaml`](BrAPI-GenX/Breeding/BreedingPipeline/BreedingPipeline_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8597,7 +8597,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterBreedingPipeline, genxListBreedingPipelines
 - **Related catalogue IDs:** brapi-genx.genx.v1.breeding-pipelines.list, brapi-genx.genx.v1.breeding-pipelines.record
 - **Relevant RFC / decision references:** RFC-154, D-BP-03, D-BP-13
-- **Contract source:** [`Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_BreedingPipelineDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/implementation/bgx-p1-06-approved-breeding-contract/Specification/BrAPI-GenX/BreedingPipeline/BreedingPipeline_BreedingPipelineDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/BreedingPipeline/BreedingPipeline_BreedingPipelineDbId_GET.yaml`](BrAPI-GenX/Breeding/BreedingPipeline/BreedingPipeline_BreedingPipelineDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8634,7 +8634,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordBulkCapture, genxGetBulkCapture
 - **Related catalogue IDs:** brapi-genx.genx.v1.bulk-captures.record, brapi-genx.genx.v1.bulk-captures.get
 - **Relevant RFC / decision references:** RFC-040
-- **Contract source:** [`Specification/BrAPI-GenX/BulkCapture/BulkCapture_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/BulkCapture/BulkCapture_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/BulkCapture/BulkCapture_GET_POST.yaml`](BrAPI-GenX/Phenotyping/BulkCapture/BulkCapture_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8669,7 +8669,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListBulkCaptures, genxGetBulkCapture
 - **Related catalogue IDs:** brapi-genx.genx.v1.bulk-captures.list, brapi-genx.genx.v1.bulk-captures.get
 - **Relevant RFC / decision references:** RFC-040
-- **Contract source:** [`Specification/BrAPI-GenX/BulkCapture/BulkCapture_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/BulkCapture/BulkCapture_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/BulkCapture/BulkCapture_GET_POST.yaml`](BrAPI-GenX/Phenotyping/BulkCapture/BulkCapture_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8702,7 +8702,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordBulkCapture, genxListBulkCaptures
 - **Related catalogue IDs:** brapi-genx.genx.v1.bulk-captures.list, brapi-genx.genx.v1.bulk-captures.record
 - **Relevant RFC / decision references:** RFC-040
-- **Contract source:** [`Specification/BrAPI-GenX/BulkCapture/BulkCapture_BulkCaptureDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/BulkCapture/BulkCapture_BulkCaptureDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/BulkCapture/BulkCapture_BulkCaptureDbId_GET.yaml`](BrAPI-GenX/Phenotyping/BulkCapture/BulkCapture_BulkCaptureDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8739,7 +8739,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCalendar, genxGetCalendar, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.calendars.record, brapi-genx.genx.v1.calendars.get
 - **Relevant RFC / decision references:** RFC-091
-- **Contract source:** [`Specification/BrAPI-GenX/Calendar/Calendar_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Calendar/Calendar_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/Calendar/Calendar_GET_POST.yaml`](BrAPI-GenX/ReferenceData/Calendar/Calendar_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8774,7 +8774,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListCalendars, genxGetCalendar, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.calendars.list, brapi-genx.genx.v1.calendars.get
 - **Relevant RFC / decision references:** RFC-091
-- **Contract source:** [`Specification/BrAPI-GenX/Calendar/Calendar_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Calendar/Calendar_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/Calendar/Calendar_GET_POST.yaml`](BrAPI-GenX/ReferenceData/Calendar/Calendar_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8807,7 +8807,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCalendar, genxListCalendars, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.calendars.list, brapi-genx.genx.v1.calendars.record
 - **Relevant RFC / decision references:** RFC-091
-- **Contract source:** [`Specification/BrAPI-GenX/Calendar/Calendar_CalendarDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Calendar/Calendar_CalendarDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/Calendar/Calendar_CalendarDbId_GET.yaml`](BrAPI-GenX/ReferenceData/Calendar/Calendar_CalendarDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8844,7 +8844,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCalibrationQuality, genxGetCalibrationQuality, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.calibration-qualities.record, brapi-genx.genx.v1.calibration-qualities.get
 - **Relevant RFC / decision references:** RFC-150
-- **Contract source:** [`Specification/BrAPI-GenX/CalibrationQuality/CalibrationQuality_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CalibrationQuality/CalibrationQuality_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Instrumentation/CalibrationQuality/CalibrationQuality_GET_POST.yaml`](BrAPI-GenX/Instrumentation/CalibrationQuality/CalibrationQuality_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8879,7 +8879,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListCalibrationQualitys, genxGetCalibrationQuality, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.calibration-qualities.list, brapi-genx.genx.v1.calibration-qualities.get
 - **Relevant RFC / decision references:** RFC-150
-- **Contract source:** [`Specification/BrAPI-GenX/CalibrationQuality/CalibrationQuality_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CalibrationQuality/CalibrationQuality_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Instrumentation/CalibrationQuality/CalibrationQuality_GET_POST.yaml`](BrAPI-GenX/Instrumentation/CalibrationQuality/CalibrationQuality_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8912,7 +8912,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCalibrationQuality, genxListCalibrationQualitys, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.calibration-qualities.list, brapi-genx.genx.v1.calibration-qualities.record
 - **Relevant RFC / decision references:** RFC-150
-- **Contract source:** [`Specification/BrAPI-GenX/CalibrationQuality/CalibrationQuality_CalibrationQualityDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CalibrationQuality/CalibrationQuality_CalibrationQualityDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Instrumentation/CalibrationQuality/CalibrationQuality_CalibrationQualityDbId_GET.yaml`](BrAPI-GenX/Instrumentation/CalibrationQuality/CalibrationQuality_CalibrationQualityDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8949,7 +8949,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCandidateVariety, genxGetCandidateVariety
 - **Related catalogue IDs:** brapi-genx.genx.v1.candidate-varieties.register, brapi-genx.genx.v1.candidate-varieties.get
 - **Relevant RFC / decision references:** RFC-039
-- **Contract source:** [`Specification/BrAPI-GenX/CandidateVarietyLifecycle/CandidateVarietyLifecycle_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CandidateVarietyLifecycle/CandidateVarietyLifecycle_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/CandidateVarietyLifecycle/CandidateVarietyLifecycle_GET_POST.yaml`](BrAPI-GenX/Breeding/CandidateVarietyLifecycle/CandidateVarietyLifecycle_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -8984,7 +8984,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListCandidateVarieties, genxGetCandidateVariety
 - **Related catalogue IDs:** brapi-genx.genx.v1.candidate-varieties.list, brapi-genx.genx.v1.candidate-varieties.get
 - **Relevant RFC / decision references:** RFC-039
-- **Contract source:** [`Specification/BrAPI-GenX/CandidateVarietyLifecycle/CandidateVarietyLifecycle_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CandidateVarietyLifecycle/CandidateVarietyLifecycle_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/CandidateVarietyLifecycle/CandidateVarietyLifecycle_GET_POST.yaml`](BrAPI-GenX/Breeding/CandidateVarietyLifecycle/CandidateVarietyLifecycle_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9017,7 +9017,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCandidateVariety, genxListCandidateVarieties
 - **Related catalogue IDs:** brapi-genx.genx.v1.candidate-varieties.list, brapi-genx.genx.v1.candidate-varieties.register
 - **Relevant RFC / decision references:** RFC-039
-- **Contract source:** [`Specification/BrAPI-GenX/CandidateVarietyLifecycle/CandidateVarietyLifecycle_CandidateVarietyDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CandidateVarietyLifecycle/CandidateVarietyLifecycle_CandidateVarietyDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/CandidateVarietyLifecycle/CandidateVarietyLifecycle_CandidateVarietyDbId_GET.yaml`](BrAPI-GenX/Breeding/CandidateVarietyLifecycle/CandidateVarietyLifecycle_CandidateVarietyDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9054,7 +9054,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCapabilityMetadata, genxGetCapabilityMetadata, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.capability-metadata.record, brapi-genx.genx.v1.capability-metadata.get
 - **Relevant RFC / decision references:** RFC-099
-- **Contract source:** [`Specification/BrAPI-GenX/CapabilityMetadata/CapabilityMetadata_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CapabilityMetadata/CapabilityMetadata_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Core/CapabilityMetadata/CapabilityMetadata_GET_POST.yaml`](BrAPI-GenX/Core/CapabilityMetadata/CapabilityMetadata_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9089,7 +9089,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListCapabilityMetadata, genxGetCapabilityMetadata, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.capability-metadata.list, brapi-genx.genx.v1.capability-metadata.get
 - **Relevant RFC / decision references:** RFC-099
-- **Contract source:** [`Specification/BrAPI-GenX/CapabilityMetadata/CapabilityMetadata_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CapabilityMetadata/CapabilityMetadata_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Core/CapabilityMetadata/CapabilityMetadata_GET_POST.yaml`](BrAPI-GenX/Core/CapabilityMetadata/CapabilityMetadata_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9122,7 +9122,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCapabilityMetadata, genxListCapabilityMetadata, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.capability-metadata.list, brapi-genx.genx.v1.capability-metadata.record
 - **Relevant RFC / decision references:** RFC-099
-- **Contract source:** [`Specification/BrAPI-GenX/CapabilityMetadata/CapabilityMetadata_CapabilityMetadataDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CapabilityMetadata/CapabilityMetadata_CapabilityMetadataDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Core/CapabilityMetadata/CapabilityMetadata_CapabilityMetadataDbId_GET.yaml`](BrAPI-GenX/Core/CapabilityMetadata/CapabilityMetadata_CapabilityMetadataDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9159,7 +9159,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCapabilityNegotiation, genxGetCapabilityNegotiation, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.capability-negotiations.record, brapi-genx.genx.v1.capability-negotiations.get
 - **Relevant RFC / decision references:** RFC-153
-- **Contract source:** [`Specification/BrAPI-GenX/CapabilityNegotiation/CapabilityNegotiation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CapabilityNegotiation/CapabilityNegotiation_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Core/CapabilityNegotiation/CapabilityNegotiation_GET_POST.yaml`](BrAPI-GenX/Core/CapabilityNegotiation/CapabilityNegotiation_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9194,7 +9194,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListCapabilityNegotiations, genxGetCapabilityNegotiation, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.capability-negotiations.list, brapi-genx.genx.v1.capability-negotiations.get
 - **Relevant RFC / decision references:** RFC-153
-- **Contract source:** [`Specification/BrAPI-GenX/CapabilityNegotiation/CapabilityNegotiation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CapabilityNegotiation/CapabilityNegotiation_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Core/CapabilityNegotiation/CapabilityNegotiation_GET_POST.yaml`](BrAPI-GenX/Core/CapabilityNegotiation/CapabilityNegotiation_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9227,7 +9227,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCapabilityNegotiation, genxListCapabilityNegotiations, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.capability-negotiations.list, brapi-genx.genx.v1.capability-negotiations.record
 - **Relevant RFC / decision references:** RFC-153
-- **Contract source:** [`Specification/BrAPI-GenX/CapabilityNegotiation/CapabilityNegotiation_CapabilityNegotiationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CapabilityNegotiation/CapabilityNegotiation_CapabilityNegotiationDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Core/CapabilityNegotiation/CapabilityNegotiation_CapabilityNegotiationDbId_GET.yaml`](BrAPI-GenX/Core/CapabilityNegotiation/CapabilityNegotiation_CapabilityNegotiationDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9264,7 +9264,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCaptureWorkflow, genxGetCaptureWorkflow, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.capture-workflows.record, brapi-genx.genx.v1.capture-workflows.get
 - **Relevant RFC / decision references:** RFC-110
-- **Contract source:** [`Specification/BrAPI-GenX/CaptureWorkflow/CaptureWorkflow_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CaptureWorkflow/CaptureWorkflow_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/CaptureWorkflow/CaptureWorkflow_GET_POST.yaml`](BrAPI-GenX/Phenotyping/CaptureWorkflow/CaptureWorkflow_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9299,7 +9299,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListCaptureWorkflows, genxGetCaptureWorkflow, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.capture-workflows.list, brapi-genx.genx.v1.capture-workflows.get
 - **Relevant RFC / decision references:** RFC-110
-- **Contract source:** [`Specification/BrAPI-GenX/CaptureWorkflow/CaptureWorkflow_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CaptureWorkflow/CaptureWorkflow_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/CaptureWorkflow/CaptureWorkflow_GET_POST.yaml`](BrAPI-GenX/Phenotyping/CaptureWorkflow/CaptureWorkflow_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9332,7 +9332,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCaptureWorkflow, genxListCaptureWorkflows, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.capture-workflows.list, brapi-genx.genx.v1.capture-workflows.record
 - **Relevant RFC / decision references:** RFC-110
-- **Contract source:** [`Specification/BrAPI-GenX/CaptureWorkflow/CaptureWorkflow_CaptureWorkflowDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CaptureWorkflow/CaptureWorkflow_CaptureWorkflowDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/CaptureWorkflow/CaptureWorkflow_CaptureWorkflowDbId_GET.yaml`](BrAPI-GenX/Phenotyping/CaptureWorkflow/CaptureWorkflow_CaptureWorkflowDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9369,7 +9369,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordCarbonStock, genxGetCarbonStock, genxRegisterSoilProfile
 - **Related catalogue IDs:** brapi-genx.genx.v1.carbon-stocks.record, brapi-genx.genx.v1.carbon-stocks.get
 - **Relevant RFC / decision references:** RFC-067
-- **Contract source:** [`Specification/BrAPI-GenX/CarbonStock/CarbonStock_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CarbonStock/CarbonStock_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/CarbonStock/CarbonStock_GET_POST.yaml`](BrAPI-GenX/Environment/CarbonStock/CarbonStock_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9404,7 +9404,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListCarbonStocks, genxGetCarbonStock, genxRegisterSoilProfile
 - **Related catalogue IDs:** brapi-genx.genx.v1.carbon-stocks.list, brapi-genx.genx.v1.carbon-stocks.get
 - **Relevant RFC / decision references:** RFC-067
-- **Contract source:** [`Specification/BrAPI-GenX/CarbonStock/CarbonStock_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CarbonStock/CarbonStock_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/CarbonStock/CarbonStock_GET_POST.yaml`](BrAPI-GenX/Environment/CarbonStock/CarbonStock_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9437,7 +9437,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordCarbonStock, genxListCarbonStocks, genxRegisterSoilProfile
 - **Related catalogue IDs:** brapi-genx.genx.v1.carbon-stocks.list, brapi-genx.genx.v1.carbon-stocks.record
 - **Relevant RFC / decision references:** RFC-067
-- **Contract source:** [`Specification/BrAPI-GenX/CarbonStock/CarbonStock_CarbonStockDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CarbonStock/CarbonStock_CarbonStockDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/CarbonStock/CarbonStock_CarbonStockDbId_GET.yaml`](BrAPI-GenX/Environment/CarbonStock/CarbonStock_CarbonStockDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9474,7 +9474,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterClimateNormal, genxGetClimateNormal
 - **Related catalogue IDs:** brapi-genx.genx.v1.climate-normals.register, brapi-genx.genx.v1.climate-normals.get
 - **Relevant RFC / decision references:** RFC-033
-- **Contract source:** [`Specification/BrAPI-GenX/ClimateNormals/ClimateNormals_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ClimateNormals/ClimateNormals_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/ClimateNormals/ClimateNormals_GET_POST.yaml`](BrAPI-GenX/Environment/ClimateNormals/ClimateNormals_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9509,7 +9509,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListClimateNormals, genxGetClimateNormal
 - **Related catalogue IDs:** brapi-genx.genx.v1.climate-normals.list, brapi-genx.genx.v1.climate-normals.get
 - **Relevant RFC / decision references:** RFC-033
-- **Contract source:** [`Specification/BrAPI-GenX/ClimateNormals/ClimateNormals_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ClimateNormals/ClimateNormals_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/ClimateNormals/ClimateNormals_GET_POST.yaml`](BrAPI-GenX/Environment/ClimateNormals/ClimateNormals_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9542,7 +9542,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterClimateNormal, genxListClimateNormals
 - **Related catalogue IDs:** brapi-genx.genx.v1.climate-normals.list, brapi-genx.genx.v1.climate-normals.register
 - **Relevant RFC / decision references:** RFC-033
-- **Contract source:** [`Specification/BrAPI-GenX/ClimateNormals/ClimateNormals_ClimateNormalDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ClimateNormals/ClimateNormals_ClimateNormalDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/ClimateNormals/ClimateNormals_ClimateNormalDbId_GET.yaml`](BrAPI-GenX/Environment/ClimateNormals/ClimateNormals_ClimateNormalDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9579,7 +9579,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCloudMask, genxGetCloudMask, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.cloud-masks.record, brapi-genx.genx.v1.cloud-masks.get
 - **Relevant RFC / decision references:** RFC-147
-- **Contract source:** [`Specification/BrAPI-GenX/CloudMask/CloudMask_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CloudMask/CloudMask_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/CloudMask/CloudMask_GET_POST.yaml`](BrAPI-GenX/Geospatial/CloudMask/CloudMask_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9614,7 +9614,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListCloudMasks, genxGetCloudMask, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.cloud-masks.list, brapi-genx.genx.v1.cloud-masks.get
 - **Relevant RFC / decision references:** RFC-147
-- **Contract source:** [`Specification/BrAPI-GenX/CloudMask/CloudMask_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CloudMask/CloudMask_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/CloudMask/CloudMask_GET_POST.yaml`](BrAPI-GenX/Geospatial/CloudMask/CloudMask_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9647,7 +9647,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCloudMask, genxListCloudMasks, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.cloud-masks.list, brapi-genx.genx.v1.cloud-masks.record
 - **Relevant RFC / decision references:** RFC-147
-- **Contract source:** [`Specification/BrAPI-GenX/CloudMask/CloudMask_CloudMaskDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CloudMask/CloudMask_CloudMaskDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/CloudMask/CloudMask_CloudMaskDbId_GET.yaml`](BrAPI-GenX/Geospatial/CloudMask/CloudMask_CloudMaskDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9684,7 +9684,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCollectingMission, genxGetCollectingMission, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.collecting-missions.record, brapi-genx.genx.v1.collecting-missions.get
 - **Relevant RFC / decision references:** RFC-101
-- **Contract source:** [`Specification/BrAPI-GenX/CollectingMission/CollectingMission_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CollectingMission/CollectingMission_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/CollectingMission/CollectingMission_GET_POST.yaml`](BrAPI-GenX/Germplasm/CollectingMission/CollectingMission_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9719,7 +9719,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListCollectingMissions, genxGetCollectingMission, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.collecting-missions.list, brapi-genx.genx.v1.collecting-missions.get
 - **Relevant RFC / decision references:** RFC-101
-- **Contract source:** [`Specification/BrAPI-GenX/CollectingMission/CollectingMission_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CollectingMission/CollectingMission_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/CollectingMission/CollectingMission_GET_POST.yaml`](BrAPI-GenX/Germplasm/CollectingMission/CollectingMission_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9752,7 +9752,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCollectingMission, genxListCollectingMissions, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.collecting-missions.list, brapi-genx.genx.v1.collecting-missions.record
 - **Relevant RFC / decision references:** RFC-101
-- **Contract source:** [`Specification/BrAPI-GenX/CollectingMission/CollectingMission_CollectingMissionDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CollectingMission/CollectingMission_CollectingMissionDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/CollectingMission/CollectingMission_CollectingMissionDbId_GET.yaml`](BrAPI-GenX/Germplasm/CollectingMission/CollectingMission_CollectingMissionDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9789,7 +9789,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCommonCropName, genxGetCommonCropName, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.common-crop-names.record, brapi-genx.genx.v1.common-crop-names.get
 - **Relevant RFC / decision references:** RFC-094
-- **Contract source:** [`Specification/BrAPI-GenX/CommonCropName/CommonCropName_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CommonCropName/CommonCropName_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/CommonCropName/CommonCropName_GET_POST.yaml`](BrAPI-GenX/ReferenceData/CommonCropName/CommonCropName_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9824,7 +9824,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListCommonCropNames, genxGetCommonCropName, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.common-crop-names.list, brapi-genx.genx.v1.common-crop-names.get
 - **Relevant RFC / decision references:** RFC-094
-- **Contract source:** [`Specification/BrAPI-GenX/CommonCropName/CommonCropName_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CommonCropName/CommonCropName_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/CommonCropName/CommonCropName_GET_POST.yaml`](BrAPI-GenX/ReferenceData/CommonCropName/CommonCropName_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9857,7 +9857,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCommonCropName, genxListCommonCropNames, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.common-crop-names.list, brapi-genx.genx.v1.common-crop-names.record
 - **Relevant RFC / decision references:** RFC-094
-- **Contract source:** [`Specification/BrAPI-GenX/CommonCropName/CommonCropName_CommonCropNameDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CommonCropName/CommonCropName_CommonCropNameDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/CommonCropName/CommonCropName_CommonCropNameDbId_GET.yaml`](BrAPI-GenX/ReferenceData/CommonCropName/CommonCropName_CommonCropNameDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9894,7 +9894,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterConformanceProbe, genxGetConformanceProbe, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.conformance-probes.record, brapi-genx.genx.v1.conformance-probes.get
 - **Relevant RFC / decision references:** RFC-155
-- **Contract source:** [`Specification/BrAPI-GenX/ConformanceProbe/ConformanceProbe_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ConformanceProbe/ConformanceProbe_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Interoperability/ConformanceProbe/ConformanceProbe_GET_POST.yaml`](BrAPI-GenX/Interoperability/ConformanceProbe/ConformanceProbe_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9929,7 +9929,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListConformanceProbes, genxGetConformanceProbe, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.conformance-probes.list, brapi-genx.genx.v1.conformance-probes.get
 - **Relevant RFC / decision references:** RFC-155
-- **Contract source:** [`Specification/BrAPI-GenX/ConformanceProbe/ConformanceProbe_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ConformanceProbe/ConformanceProbe_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Interoperability/ConformanceProbe/ConformanceProbe_GET_POST.yaml`](BrAPI-GenX/Interoperability/ConformanceProbe/ConformanceProbe_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9962,7 +9962,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterConformanceProbe, genxListConformanceProbes, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.conformance-probes.list, brapi-genx.genx.v1.conformance-probes.record
 - **Relevant RFC / decision references:** RFC-155
-- **Contract source:** [`Specification/BrAPI-GenX/ConformanceProbe/ConformanceProbe_ConformanceProbeDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ConformanceProbe/ConformanceProbe_ConformanceProbeDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Interoperability/ConformanceProbe/ConformanceProbe_ConformanceProbeDbId_GET.yaml`](BrAPI-GenX/Interoperability/ConformanceProbe/ConformanceProbe_ConformanceProbeDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -9999,7 +9999,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterConservationMembership, genxGetConservationMembership, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.conservation-memberships.record, brapi-genx.genx.v1.conservation-memberships.get
 - **Relevant RFC / decision references:** RFC-102
-- **Contract source:** [`Specification/BrAPI-GenX/ConservationMembership/ConservationMembership_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ConservationMembership/ConservationMembership_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/ConservationMembership/ConservationMembership_GET_POST.yaml`](BrAPI-GenX/Germplasm/ConservationMembership/ConservationMembership_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10034,7 +10034,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListConservationMemberships, genxGetConservationMembership, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.conservation-memberships.list, brapi-genx.genx.v1.conservation-memberships.get
 - **Relevant RFC / decision references:** RFC-102
-- **Contract source:** [`Specification/BrAPI-GenX/ConservationMembership/ConservationMembership_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ConservationMembership/ConservationMembership_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/ConservationMembership/ConservationMembership_GET_POST.yaml`](BrAPI-GenX/Germplasm/ConservationMembership/ConservationMembership_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10067,7 +10067,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterConservationMembership, genxListConservationMemberships, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.conservation-memberships.list, brapi-genx.genx.v1.conservation-memberships.record
 - **Relevant RFC / decision references:** RFC-102
-- **Contract source:** [`Specification/BrAPI-GenX/ConservationMembership/ConservationMembership_ConservationMembershipDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ConservationMembership/ConservationMembership_ConservationMembershipDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/ConservationMembership/ConservationMembership_ConservationMembershipDbId_GET.yaml`](BrAPI-GenX/Germplasm/ConservationMembership/ConservationMembership_ConservationMembershipDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10104,7 +10104,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCropCycle, genxGetCropCycle
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-cycles.register, brapi-genx.genx.v1.crop-cycles.get
 - **Relevant RFC / decision references:** RFC-029
-- **Contract source:** [`Specification/BrAPI-GenX/CropCycle/CropCycle_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CropCycle/CropCycle_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/CropCycle/CropCycle_GET_POST.yaml`](BrAPI-GenX/CropProduction/CropCycle/CropCycle_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10139,7 +10139,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListCropCycles, genxGetCropCycle
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-cycles.list, brapi-genx.genx.v1.crop-cycles.get
 - **Relevant RFC / decision references:** RFC-029
-- **Contract source:** [`Specification/BrAPI-GenX/CropCycle/CropCycle_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CropCycle/CropCycle_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/CropCycle/CropCycle_GET_POST.yaml`](BrAPI-GenX/CropProduction/CropCycle/CropCycle_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10172,7 +10172,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCropCycle, genxListCropCycles
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-cycles.list, brapi-genx.genx.v1.crop-cycles.register
 - **Relevant RFC / decision references:** RFC-029
-- **Contract source:** [`Specification/BrAPI-GenX/CropCycle/CropCycle_CropCycleDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CropCycle/CropCycle_CropCycleDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/CropCycle/CropCycle_CropCycleDbId_GET.yaml`](BrAPI-GenX/CropProduction/CropCycle/CropCycle_CropCycleDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10209,7 +10209,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCropHealthImage, genxGetCropHealthImage, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-health-images.record, brapi-genx.genx.v1.crop-health-images.get
 - **Relevant RFC / decision references:** RFC-128
-- **Contract source:** [`Specification/BrAPI-GenX/CropHealthImage/CropHealthImage_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CropHealthImage/CropHealthImage_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/CropHealthImage/CropHealthImage_GET_POST.yaml`](BrAPI-GenX/PlantHealth/CropHealthImage/CropHealthImage_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10244,7 +10244,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListCropHealthImages, genxGetCropHealthImage, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-health-images.list, brapi-genx.genx.v1.crop-health-images.get
 - **Relevant RFC / decision references:** RFC-128
-- **Contract source:** [`Specification/BrAPI-GenX/CropHealthImage/CropHealthImage_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CropHealthImage/CropHealthImage_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/CropHealthImage/CropHealthImage_GET_POST.yaml`](BrAPI-GenX/PlantHealth/CropHealthImage/CropHealthImage_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10277,7 +10277,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCropHealthImage, genxListCropHealthImages, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-health-images.list, brapi-genx.genx.v1.crop-health-images.record
 - **Relevant RFC / decision references:** RFC-128
-- **Contract source:** [`Specification/BrAPI-GenX/CropHealthImage/CropHealthImage_CropHealthImageDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CropHealthImage/CropHealthImage_CropHealthImageDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/CropHealthImage/CropHealthImage_CropHealthImageDbId_GET.yaml`](BrAPI-GenX/PlantHealth/CropHealthImage/CropHealthImage_CropHealthImageDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10314,7 +10314,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCropRecommendation, genxGetCropRecommendation, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-recommendations.record, brapi-genx.genx.v1.crop-recommendations.get
 - **Relevant RFC / decision references:** RFC-129
-- **Contract source:** [`Specification/BrAPI-GenX/CropRecommendation/CropRecommendation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CropRecommendation/CropRecommendation_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/CropRecommendation/CropRecommendation_GET_POST.yaml`](BrAPI-GenX/CropProduction/CropRecommendation/CropRecommendation_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10349,7 +10349,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListCropRecommendations, genxGetCropRecommendation, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-recommendations.list, brapi-genx.genx.v1.crop-recommendations.get
 - **Relevant RFC / decision references:** RFC-129
-- **Contract source:** [`Specification/BrAPI-GenX/CropRecommendation/CropRecommendation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CropRecommendation/CropRecommendation_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/CropRecommendation/CropRecommendation_GET_POST.yaml`](BrAPI-GenX/CropProduction/CropRecommendation/CropRecommendation_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10382,7 +10382,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCropRecommendation, genxListCropRecommendations, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-recommendations.list, brapi-genx.genx.v1.crop-recommendations.record
 - **Relevant RFC / decision references:** RFC-129
-- **Contract source:** [`Specification/BrAPI-GenX/CropRecommendation/CropRecommendation_CropRecommendationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CropRecommendation/CropRecommendation_CropRecommendationDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/CropRecommendation/CropRecommendation_CropRecommendationDbId_GET.yaml`](BrAPI-GenX/CropProduction/CropRecommendation/CropRecommendation_CropRecommendationDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10419,7 +10419,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCropSpecies, genxGetCropSpecies, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-species.record, brapi-genx.genx.v1.crop-species.get
 - **Relevant RFC / decision references:** RFC-095
-- **Contract source:** [`Specification/BrAPI-GenX/CropSpecies/CropSpecies_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CropSpecies/CropSpecies_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/CropSpecies/CropSpecies_GET_POST.yaml`](BrAPI-GenX/ReferenceData/CropSpecies/CropSpecies_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10454,7 +10454,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListCropSpecies, genxGetCropSpecies, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-species.list, brapi-genx.genx.v1.crop-species.get
 - **Relevant RFC / decision references:** RFC-095
-- **Contract source:** [`Specification/BrAPI-GenX/CropSpecies/CropSpecies_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CropSpecies/CropSpecies_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/CropSpecies/CropSpecies_GET_POST.yaml`](BrAPI-GenX/ReferenceData/CropSpecies/CropSpecies_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10487,7 +10487,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCropSpecies, genxListCropSpecies, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-species.list, brapi-genx.genx.v1.crop-species.record
 - **Relevant RFC / decision references:** RFC-095
-- **Contract source:** [`Specification/BrAPI-GenX/CropSpecies/CropSpecies_CropSpeciesDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CropSpecies/CropSpecies_CropSpeciesDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/CropSpecies/CropSpecies_CropSpeciesDbId_GET.yaml`](BrAPI-GenX/ReferenceData/CropSpecies/CropSpecies_CropSpeciesDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10524,7 +10524,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCropSuitability, genxGetCropSuitability, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-suitabilities.record, brapi-genx.genx.v1.crop-suitabilities.get
 - **Relevant RFC / decision references:** RFC-135
-- **Contract source:** [`Specification/BrAPI-GenX/CropSuitability/CropSuitability_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CropSuitability/CropSuitability_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/CropSuitability/CropSuitability_GET_POST.yaml`](BrAPI-GenX/CropProduction/CropSuitability/CropSuitability_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10559,7 +10559,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListCropSuitabilities, genxGetCropSuitability, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-suitabilities.list, brapi-genx.genx.v1.crop-suitabilities.get
 - **Relevant RFC / decision references:** RFC-135
-- **Contract source:** [`Specification/BrAPI-GenX/CropSuitability/CropSuitability_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CropSuitability/CropSuitability_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/CropSuitability/CropSuitability_GET_POST.yaml`](BrAPI-GenX/CropProduction/CropSuitability/CropSuitability_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10592,7 +10592,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCropSuitability, genxListCropSuitabilities, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-suitabilities.list, brapi-genx.genx.v1.crop-suitabilities.record
 - **Relevant RFC / decision references:** RFC-135
-- **Contract source:** [`Specification/BrAPI-GenX/CropSuitability/CropSuitability_CropSuitabilityDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CropSuitability/CropSuitability_CropSuitabilityDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/CropSuitability/CropSuitability_CropSuitabilityDbId_GET.yaml`](BrAPI-GenX/CropProduction/CropSuitability/CropSuitability_CropSuitabilityDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10629,7 +10629,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCropTraitDictionary, genxGetCropTraitDictionary, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-trait-dictionaries.record, brapi-genx.genx.v1.crop-trait-dictionaries.get
 - **Relevant RFC / decision references:** RFC-088
-- **Contract source:** [`Specification/BrAPI-GenX/CropTraitDictionary/CropTraitDictionary_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CropTraitDictionary/CropTraitDictionary_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/CropTraitDictionary/CropTraitDictionary_GET_POST.yaml`](BrAPI-GenX/ReferenceData/CropTraitDictionary/CropTraitDictionary_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10664,7 +10664,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListCropTraitDictionaries, genxGetCropTraitDictionary, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-trait-dictionaries.list, brapi-genx.genx.v1.crop-trait-dictionaries.get
 - **Relevant RFC / decision references:** RFC-088
-- **Contract source:** [`Specification/BrAPI-GenX/CropTraitDictionary/CropTraitDictionary_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CropTraitDictionary/CropTraitDictionary_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/CropTraitDictionary/CropTraitDictionary_GET_POST.yaml`](BrAPI-GenX/ReferenceData/CropTraitDictionary/CropTraitDictionary_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10697,7 +10697,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCropTraitDictionary, genxListCropTraitDictionaries, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-trait-dictionaries.list, brapi-genx.genx.v1.crop-trait-dictionaries.record
 - **Relevant RFC / decision references:** RFC-088
-- **Contract source:** [`Specification/BrAPI-GenX/CropTraitDictionary/CropTraitDictionary_CropTraitDictionaryDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CropTraitDictionary/CropTraitDictionary_CropTraitDictionaryDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/CropTraitDictionary/CropTraitDictionary_CropTraitDictionaryDbId_GET.yaml`](BrAPI-GenX/ReferenceData/CropTraitDictionary/CropTraitDictionary_CropTraitDictionaryDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10734,7 +10734,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCrossingSchedule, genxGetCrossingSchedule
 - **Related catalogue IDs:** brapi-genx.genx.v1.crossing-schedules.register, brapi-genx.genx.v1.crossing-schedules.get
 - **Relevant RFC / decision references:** RFC-037
-- **Contract source:** [`Specification/BrAPI-GenX/CrossingSchedule/CrossingSchedule_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CrossingSchedule/CrossingSchedule_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/CrossingSchedule/CrossingSchedule_GET_POST.yaml`](BrAPI-GenX/Breeding/CrossingSchedule/CrossingSchedule_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10769,7 +10769,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListCrossingSchedules, genxGetCrossingSchedule
 - **Related catalogue IDs:** brapi-genx.genx.v1.crossing-schedules.list, brapi-genx.genx.v1.crossing-schedules.get
 - **Relevant RFC / decision references:** RFC-037
-- **Contract source:** [`Specification/BrAPI-GenX/CrossingSchedule/CrossingSchedule_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CrossingSchedule/CrossingSchedule_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/CrossingSchedule/CrossingSchedule_GET_POST.yaml`](BrAPI-GenX/Breeding/CrossingSchedule/CrossingSchedule_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10802,7 +10802,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCrossingSchedule, genxListCrossingSchedules
 - **Related catalogue IDs:** brapi-genx.genx.v1.crossing-schedules.list, brapi-genx.genx.v1.crossing-schedules.register
 - **Relevant RFC / decision references:** RFC-037
-- **Contract source:** [`Specification/BrAPI-GenX/CrossingSchedule/CrossingSchedule_CrossingScheduleDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CrossingSchedule/CrossingSchedule_CrossingScheduleDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/CrossingSchedule/CrossingSchedule_CrossingScheduleDbId_GET.yaml`](BrAPI-GenX/Breeding/CrossingSchedule/CrossingSchedule_CrossingScheduleDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10839,7 +10839,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCrosswalk, genxGetCrosswalk, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.crosswalks.record, brapi-genx.genx.v1.crosswalks.get
 - **Relevant RFC / decision references:** RFC-105
-- **Contract source:** [`Specification/BrAPI-GenX/Crosswalk/Crosswalk_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Crosswalk/Crosswalk_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Interoperability/Crosswalk/Crosswalk_GET_POST.yaml`](BrAPI-GenX/Interoperability/Crosswalk/Crosswalk_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10874,7 +10874,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListCrosswalks, genxGetCrosswalk, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.crosswalks.list, brapi-genx.genx.v1.crosswalks.get
 - **Relevant RFC / decision references:** RFC-105
-- **Contract source:** [`Specification/BrAPI-GenX/Crosswalk/Crosswalk_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Crosswalk/Crosswalk_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Interoperability/Crosswalk/Crosswalk_GET_POST.yaml`](BrAPI-GenX/Interoperability/Crosswalk/Crosswalk_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10907,7 +10907,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCrosswalk, genxListCrosswalks, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.crosswalks.list, brapi-genx.genx.v1.crosswalks.record
 - **Relevant RFC / decision references:** RFC-105
-- **Contract source:** [`Specification/BrAPI-GenX/Crosswalk/Crosswalk_CrosswalkDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Crosswalk/Crosswalk_CrosswalkDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Interoperability/Crosswalk/Crosswalk_CrosswalkDbId_GET.yaml`](BrAPI-GenX/Interoperability/Crosswalk/Crosswalk_CrosswalkDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10944,7 +10944,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCrsTransform, genxGetCrsTransform, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.crs-transforms.record, brapi-genx.genx.v1.crs-transforms.get
 - **Relevant RFC / decision references:** RFC-140
-- **Contract source:** [`Specification/BrAPI-GenX/CrsTransform/CrsTransform_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CrsTransform/CrsTransform_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/CrsTransform/CrsTransform_GET_POST.yaml`](BrAPI-GenX/Geospatial/CrsTransform/CrsTransform_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -10979,7 +10979,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListCrsTransforms, genxGetCrsTransform, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.crs-transforms.list, brapi-genx.genx.v1.crs-transforms.get
 - **Relevant RFC / decision references:** RFC-140
-- **Contract source:** [`Specification/BrAPI-GenX/CrsTransform/CrsTransform_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CrsTransform/CrsTransform_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/CrsTransform/CrsTransform_GET_POST.yaml`](BrAPI-GenX/Geospatial/CrsTransform/CrsTransform_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11012,7 +11012,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterCrsTransform, genxListCrsTransforms, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.crs-transforms.list, brapi-genx.genx.v1.crs-transforms.record
 - **Relevant RFC / decision references:** RFC-140
-- **Contract source:** [`Specification/BrAPI-GenX/CrsTransform/CrsTransform_CrsTransformDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CrsTransform/CrsTransform_CrsTransformDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/CrsTransform/CrsTransform_CrsTransformDbId_GET.yaml`](BrAPI-GenX/Geospatial/CrsTransform/CrsTransform_CrsTransformDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11049,7 +11049,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordCustodyTransfer, genxGetCustodyTransfer, genxAppendSeedLotLedgerEntry
 - **Related catalogue IDs:** brapi-genx.genx.v1.custody-transfers.record, brapi-genx.genx.v1.custody-transfers.get
 - **Relevant RFC / decision references:** RFC-063
-- **Contract source:** [`Specification/BrAPI-GenX/CustodyTransfer/CustodyTransfer_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CustodyTransfer/CustodyTransfer_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/CustodyTransfer/CustodyTransfer_GET_POST.yaml`](BrAPI-GenX/Germplasm/CustodyTransfer/CustodyTransfer_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11084,7 +11084,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListCustodyTransfers, genxGetCustodyTransfer, genxAppendSeedLotLedgerEntry
 - **Related catalogue IDs:** brapi-genx.genx.v1.custody-transfers.list, brapi-genx.genx.v1.custody-transfers.get
 - **Relevant RFC / decision references:** RFC-063
-- **Contract source:** [`Specification/BrAPI-GenX/CustodyTransfer/CustodyTransfer_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CustodyTransfer/CustodyTransfer_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/CustodyTransfer/CustodyTransfer_GET_POST.yaml`](BrAPI-GenX/Germplasm/CustodyTransfer/CustodyTransfer_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11117,7 +11117,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordCustodyTransfer, genxListCustodyTransfers, genxAppendSeedLotLedgerEntry
 - **Related catalogue IDs:** brapi-genx.genx.v1.custody-transfers.list, brapi-genx.genx.v1.custody-transfers.record
 - **Relevant RFC / decision references:** RFC-063
-- **Contract source:** [`Specification/BrAPI-GenX/CustodyTransfer/CustodyTransfer_CustodyTransferDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/CustodyTransfer/CustodyTransfer_CustodyTransferDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/CustodyTransfer/CustodyTransfer_CustodyTransferDbId_GET.yaml`](BrAPI-GenX/Germplasm/CustodyTransfer/CustodyTransfer_CustodyTransferDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11154,7 +11154,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterDevelopmentalStage, genxGetDevelopmentalStage, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.developmental-stages.record, brapi-genx.genx.v1.developmental-stages.get
 - **Relevant RFC / decision references:** RFC-079
-- **Contract source:** [`Specification/BrAPI-GenX/DevelopmentalStage/DevelopmentalStage_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/DevelopmentalStage/DevelopmentalStage_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/DevelopmentalStage/DevelopmentalStage_GET_POST.yaml`](BrAPI-GenX/ReferenceData/DevelopmentalStage/DevelopmentalStage_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11189,7 +11189,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListDevelopmentalStages, genxGetDevelopmentalStage, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.developmental-stages.list, brapi-genx.genx.v1.developmental-stages.get
 - **Relevant RFC / decision references:** RFC-079
-- **Contract source:** [`Specification/BrAPI-GenX/DevelopmentalStage/DevelopmentalStage_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/DevelopmentalStage/DevelopmentalStage_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/DevelopmentalStage/DevelopmentalStage_GET_POST.yaml`](BrAPI-GenX/ReferenceData/DevelopmentalStage/DevelopmentalStage_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11222,7 +11222,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterDevelopmentalStage, genxListDevelopmentalStages, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.developmental-stages.list, brapi-genx.genx.v1.developmental-stages.record
 - **Relevant RFC / decision references:** RFC-079
-- **Contract source:** [`Specification/BrAPI-GenX/DevelopmentalStage/DevelopmentalStage_DevelopmentalStageDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/DevelopmentalStage/DevelopmentalStage_DevelopmentalStageDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/DevelopmentalStage/DevelopmentalStage_DevelopmentalStageDbId_GET.yaml`](BrAPI-GenX/ReferenceData/DevelopmentalStage/DevelopmentalStage_DevelopmentalStageDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11259,7 +11259,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterDiagnosticEvidence, genxGetDiagnosticEvidence, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.diagnostic-evidences.record, brapi-genx.genx.v1.diagnostic-evidences.get
 - **Relevant RFC / decision references:** RFC-124
-- **Contract source:** [`Specification/BrAPI-GenX/DiagnosticEvidence/DiagnosticEvidence_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/DiagnosticEvidence/DiagnosticEvidence_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/DiagnosticEvidence/DiagnosticEvidence_GET_POST.yaml`](BrAPI-GenX/PlantHealth/DiagnosticEvidence/DiagnosticEvidence_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11294,7 +11294,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListDiagnosticEvidences, genxGetDiagnosticEvidence, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.diagnostic-evidences.list, brapi-genx.genx.v1.diagnostic-evidences.get
 - **Relevant RFC / decision references:** RFC-124
-- **Contract source:** [`Specification/BrAPI-GenX/DiagnosticEvidence/DiagnosticEvidence_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/DiagnosticEvidence/DiagnosticEvidence_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/DiagnosticEvidence/DiagnosticEvidence_GET_POST.yaml`](BrAPI-GenX/PlantHealth/DiagnosticEvidence/DiagnosticEvidence_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11327,7 +11327,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterDiagnosticEvidence, genxListDiagnosticEvidences, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.diagnostic-evidences.list, brapi-genx.genx.v1.diagnostic-evidences.record
 - **Relevant RFC / decision references:** RFC-124
-- **Contract source:** [`Specification/BrAPI-GenX/DiagnosticEvidence/DiagnosticEvidence_DiagnosticEvidenceDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/DiagnosticEvidence/DiagnosticEvidence_DiagnosticEvidenceDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/DiagnosticEvidence/DiagnosticEvidence_DiagnosticEvidenceDbId_GET.yaml`](BrAPI-GenX/PlantHealth/DiagnosticEvidence/DiagnosticEvidence_DiagnosticEvidenceDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11364,7 +11364,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterDiseaseObservation, genxGetDiseaseObservation, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.disease-observations.record, brapi-genx.genx.v1.disease-observations.get
 - **Relevant RFC / decision references:** RFC-123
-- **Contract source:** [`Specification/BrAPI-GenX/DiseaseObservation/DiseaseObservation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/DiseaseObservation/DiseaseObservation_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/DiseaseObservation/DiseaseObservation_GET_POST.yaml`](BrAPI-GenX/PlantHealth/DiseaseObservation/DiseaseObservation_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11399,7 +11399,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListDiseaseObservations, genxGetDiseaseObservation, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.disease-observations.list, brapi-genx.genx.v1.disease-observations.get
 - **Relevant RFC / decision references:** RFC-123
-- **Contract source:** [`Specification/BrAPI-GenX/DiseaseObservation/DiseaseObservation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/DiseaseObservation/DiseaseObservation_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/DiseaseObservation/DiseaseObservation_GET_POST.yaml`](BrAPI-GenX/PlantHealth/DiseaseObservation/DiseaseObservation_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11432,7 +11432,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterDiseaseObservation, genxListDiseaseObservations, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.disease-observations.list, brapi-genx.genx.v1.disease-observations.record
 - **Relevant RFC / decision references:** RFC-123
-- **Contract source:** [`Specification/BrAPI-GenX/DiseaseObservation/DiseaseObservation_DiseaseObservationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/DiseaseObservation/DiseaseObservation_DiseaseObservationDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/DiseaseObservation/DiseaseObservation_DiseaseObservationDbId_GET.yaml`](BrAPI-GenX/PlantHealth/DiseaseObservation/DiseaseObservation_DiseaseObservationDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11469,7 +11469,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterDiseaseResistance, genxGetDiseaseResistance, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.disease-resistances.record, brapi-genx.genx.v1.disease-resistances.get
 - **Relevant RFC / decision references:** RFC-127
-- **Contract source:** [`Specification/BrAPI-GenX/DiseaseResistance/DiseaseResistance_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/DiseaseResistance/DiseaseResistance_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/DiseaseResistance/DiseaseResistance_GET_POST.yaml`](BrAPI-GenX/PlantHealth/DiseaseResistance/DiseaseResistance_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11504,7 +11504,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListDiseaseResistances, genxGetDiseaseResistance, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.disease-resistances.list, brapi-genx.genx.v1.disease-resistances.get
 - **Relevant RFC / decision references:** RFC-127
-- **Contract source:** [`Specification/BrAPI-GenX/DiseaseResistance/DiseaseResistance_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/DiseaseResistance/DiseaseResistance_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/DiseaseResistance/DiseaseResistance_GET_POST.yaml`](BrAPI-GenX/PlantHealth/DiseaseResistance/DiseaseResistance_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11537,7 +11537,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterDiseaseResistance, genxListDiseaseResistances, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.disease-resistances.list, brapi-genx.genx.v1.disease-resistances.record
 - **Relevant RFC / decision references:** RFC-127
-- **Contract source:** [`Specification/BrAPI-GenX/DiseaseResistance/DiseaseResistance_DiseaseResistanceDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/DiseaseResistance/DiseaseResistance_DiseaseResistanceDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/DiseaseResistance/DiseaseResistance_DiseaseResistanceDbId_GET.yaml`](BrAPI-GenX/PlantHealth/DiseaseResistance/DiseaseResistance_DiseaseResistanceDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11574,7 +11574,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordDisposalRecord, genxGetDisposalRecord, genxRecordCustodyTransfer
 - **Related catalogue IDs:** brapi-genx.genx.v1.disposal-records.record, brapi-genx.genx.v1.disposal-records.get
 - **Relevant RFC / decision references:** RFC-065
-- **Contract source:** [`Specification/BrAPI-GenX/DisposalRecord/DisposalRecord_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/DisposalRecord/DisposalRecord_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/DisposalRecord/DisposalRecord_GET_POST.yaml`](BrAPI-GenX/Germplasm/DisposalRecord/DisposalRecord_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11609,7 +11609,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListDisposalRecords, genxGetDisposalRecord, genxRecordCustodyTransfer
 - **Related catalogue IDs:** brapi-genx.genx.v1.disposal-records.list, brapi-genx.genx.v1.disposal-records.get
 - **Relevant RFC / decision references:** RFC-065
-- **Contract source:** [`Specification/BrAPI-GenX/DisposalRecord/DisposalRecord_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/DisposalRecord/DisposalRecord_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/DisposalRecord/DisposalRecord_GET_POST.yaml`](BrAPI-GenX/Germplasm/DisposalRecord/DisposalRecord_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11642,7 +11642,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordDisposalRecord, genxListDisposalRecords, genxRecordCustodyTransfer
 - **Related catalogue IDs:** brapi-genx.genx.v1.disposal-records.list, brapi-genx.genx.v1.disposal-records.record
 - **Relevant RFC / decision references:** RFC-065
-- **Contract source:** [`Specification/BrAPI-GenX/DisposalRecord/DisposalRecord_DisposalRecordDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/DisposalRecord/DisposalRecord_DisposalRecordDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/DisposalRecord/DisposalRecord_DisposalRecordDbId_GET.yaml`](BrAPI-GenX/Germplasm/DisposalRecord/DisposalRecord_DisposalRecordDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11679,7 +11679,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterDoubledHaploidProgram, genxGetDoubledHaploidProgram
 - **Related catalogue IDs:** brapi-genx.genx.v1.doubled-haploid-programs.register, brapi-genx.genx.v1.doubled-haploid-programs.get
 - **Relevant RFC / decision references:** RFC-020
-- **Contract source:** [`Specification/BrAPI-GenX/DoubledHaploid/DoubledHaploid_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/DoubledHaploid/DoubledHaploid_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/DoubledHaploid/DoubledHaploid_GET_POST.yaml`](BrAPI-GenX/Breeding/DoubledHaploid/DoubledHaploid_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11714,7 +11714,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListDoubledHaploidPrograms, genxGetDoubledHaploidProgram
 - **Related catalogue IDs:** brapi-genx.genx.v1.doubled-haploid-programs.list, brapi-genx.genx.v1.doubled-haploid-programs.get
 - **Relevant RFC / decision references:** RFC-020
-- **Contract source:** [`Specification/BrAPI-GenX/DoubledHaploid/DoubledHaploid_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/DoubledHaploid/DoubledHaploid_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/DoubledHaploid/DoubledHaploid_GET_POST.yaml`](BrAPI-GenX/Breeding/DoubledHaploid/DoubledHaploid_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11747,7 +11747,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterDoubledHaploidProgram, genxListDoubledHaploidPrograms
 - **Related catalogue IDs:** brapi-genx.genx.v1.doubled-haploid-programs.list, brapi-genx.genx.v1.doubled-haploid-programs.register
 - **Relevant RFC / decision references:** RFC-020
-- **Contract source:** [`Specification/BrAPI-GenX/DoubledHaploid/DoubledHaploid_DoubledHaploidProgramDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/DoubledHaploid/DoubledHaploid_DoubledHaploidProgramDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/DoubledHaploid/DoubledHaploid_DoubledHaploidProgramDbId_GET.yaml`](BrAPI-GenX/Breeding/DoubledHaploid/DoubledHaploid_DoubledHaploidProgramDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11784,7 +11784,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterDuplicateReview, genxGetDuplicateReview, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.duplicate-reviews.record, brapi-genx.genx.v1.duplicate-reviews.get
 - **Relevant RFC / decision references:** RFC-104
-- **Contract source:** [`Specification/BrAPI-GenX/DuplicateReview/DuplicateReview_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/DuplicateReview/DuplicateReview_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/DuplicateReview/DuplicateReview_GET_POST.yaml`](BrAPI-GenX/Germplasm/DuplicateReview/DuplicateReview_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11819,7 +11819,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListDuplicateReviews, genxGetDuplicateReview, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.duplicate-reviews.list, brapi-genx.genx.v1.duplicate-reviews.get
 - **Relevant RFC / decision references:** RFC-104
-- **Contract source:** [`Specification/BrAPI-GenX/DuplicateReview/DuplicateReview_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/DuplicateReview/DuplicateReview_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/DuplicateReview/DuplicateReview_GET_POST.yaml`](BrAPI-GenX/Germplasm/DuplicateReview/DuplicateReview_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11852,7 +11852,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterDuplicateReview, genxListDuplicateReviews, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.duplicate-reviews.list, brapi-genx.genx.v1.duplicate-reviews.record
 - **Relevant RFC / decision references:** RFC-104
-- **Contract source:** [`Specification/BrAPI-GenX/DuplicateReview/DuplicateReview_DuplicateReviewDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/DuplicateReview/DuplicateReview_DuplicateReviewDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/DuplicateReview/DuplicateReview_DuplicateReviewDbId_GET.yaml`](BrAPI-GenX/Germplasm/DuplicateReview/DuplicateReview_DuplicateReviewDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11889,7 +11889,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterEdgeGatewayHealth, genxGetEdgeGatewayHealth, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.edge-gateway-healths.record, brapi-genx.genx.v1.edge-gateway-healths.get
 - **Relevant RFC / decision references:** RFC-151
-- **Contract source:** [`Specification/BrAPI-GenX/EdgeGatewayHealth/EdgeGatewayHealth_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/EdgeGatewayHealth/EdgeGatewayHealth_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Instrumentation/EdgeGatewayHealth/EdgeGatewayHealth_GET_POST.yaml`](BrAPI-GenX/Instrumentation/EdgeGatewayHealth/EdgeGatewayHealth_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11924,7 +11924,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListEdgeGatewayHealths, genxGetEdgeGatewayHealth, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.edge-gateway-healths.list, brapi-genx.genx.v1.edge-gateway-healths.get
 - **Relevant RFC / decision references:** RFC-151
-- **Contract source:** [`Specification/BrAPI-GenX/EdgeGatewayHealth/EdgeGatewayHealth_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/EdgeGatewayHealth/EdgeGatewayHealth_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Instrumentation/EdgeGatewayHealth/EdgeGatewayHealth_GET_POST.yaml`](BrAPI-GenX/Instrumentation/EdgeGatewayHealth/EdgeGatewayHealth_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11957,7 +11957,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterEdgeGatewayHealth, genxListEdgeGatewayHealths, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.edge-gateway-healths.list, brapi-genx.genx.v1.edge-gateway-healths.record
 - **Relevant RFC / decision references:** RFC-151
-- **Contract source:** [`Specification/BrAPI-GenX/EdgeGatewayHealth/EdgeGatewayHealth_EdgeGatewayHealthDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/EdgeGatewayHealth/EdgeGatewayHealth_EdgeGatewayHealthDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Instrumentation/EdgeGatewayHealth/EdgeGatewayHealth_EdgeGatewayHealthDbId_GET.yaml`](BrAPI-GenX/Instrumentation/EdgeGatewayHealth/EdgeGatewayHealth_EdgeGatewayHealthDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -11994,7 +11994,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterEmissions, genxGetEmissions, genxRegisterCarbonStock
 - **Related catalogue IDs:** brapi-genx.genx.v1.emissions.record, brapi-genx.genx.v1.emissions.get
 - **Relevant RFC / decision references:** RFC-076
-- **Contract source:** [`Specification/BrAPI-GenX/Emissions/Emissions_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Emissions/Emissions_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/Emissions/Emissions_GET_POST.yaml`](BrAPI-GenX/Environment/Emissions/Emissions_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12029,7 +12029,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListEmissions, genxGetEmissions, genxRegisterCarbonStock
 - **Related catalogue IDs:** brapi-genx.genx.v1.emissions.list, brapi-genx.genx.v1.emissions.get
 - **Relevant RFC / decision references:** RFC-076
-- **Contract source:** [`Specification/BrAPI-GenX/Emissions/Emissions_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Emissions/Emissions_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/Emissions/Emissions_GET_POST.yaml`](BrAPI-GenX/Environment/Emissions/Emissions_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12062,7 +12062,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterEmissions, genxListEmissions, genxRegisterCarbonStock
 - **Related catalogue IDs:** brapi-genx.genx.v1.emissions.list, brapi-genx.genx.v1.emissions.record
 - **Relevant RFC / decision references:** RFC-076
-- **Contract source:** [`Specification/BrAPI-GenX/Emissions/Emissions_EmissionsDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Emissions/Emissions_EmissionsDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/Emissions/Emissions_EmissionsDbId_GET.yaml`](BrAPI-GenX/Environment/Emissions/Emissions_EmissionsDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12099,7 +12099,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterEnvironmentalTreatment, genxGetEnvironmentalTreatment, genxRecordExtremeWeather
 - **Related catalogue IDs:** brapi-genx.genx.v1.environmental-treatments.record, brapi-genx.genx.v1.environmental-treatments.get
 - **Relevant RFC / decision references:** RFC-078
-- **Contract source:** [`Specification/BrAPI-GenX/EnvironmentalTreatment/EnvironmentalTreatment_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/EnvironmentalTreatment/EnvironmentalTreatment_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/EnvironmentalTreatment/EnvironmentalTreatment_GET_POST.yaml`](BrAPI-GenX/Environment/EnvironmentalTreatment/EnvironmentalTreatment_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12134,7 +12134,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListEnvironmentalTreatments, genxGetEnvironmentalTreatment, genxRecordExtremeWeather
 - **Related catalogue IDs:** brapi-genx.genx.v1.environmental-treatments.list, brapi-genx.genx.v1.environmental-treatments.get
 - **Relevant RFC / decision references:** RFC-078
-- **Contract source:** [`Specification/BrAPI-GenX/EnvironmentalTreatment/EnvironmentalTreatment_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/EnvironmentalTreatment/EnvironmentalTreatment_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/EnvironmentalTreatment/EnvironmentalTreatment_GET_POST.yaml`](BrAPI-GenX/Environment/EnvironmentalTreatment/EnvironmentalTreatment_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12167,7 +12167,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterEnvironmentalTreatment, genxListEnvironmentalTreatments, genxRecordExtremeWeather
 - **Related catalogue IDs:** brapi-genx.genx.v1.environmental-treatments.list, brapi-genx.genx.v1.environmental-treatments.record
 - **Relevant RFC / decision references:** RFC-078
-- **Contract source:** [`Specification/BrAPI-GenX/EnvironmentalTreatment/EnvironmentalTreatment_EnvironmentalTreatmentDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/EnvironmentalTreatment/EnvironmentalTreatment_EnvironmentalTreatmentDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/EnvironmentalTreatment/EnvironmentalTreatment_EnvironmentalTreatmentDbId_GET.yaml`](BrAPI-GenX/Environment/EnvironmentalTreatment/EnvironmentalTreatment_EnvironmentalTreatmentDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12204,7 +12204,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterEvidencePack, genxGetEvidencePack, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.evidence-packs.record, brapi-genx.genx.v1.evidence-packs.get
 - **Relevant RFC / decision references:** RFC-122
-- **Contract source:** [`Specification/BrAPI-GenX/EvidencePack/EvidencePack_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/EvidencePack/EvidencePack_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/EvidencePack/EvidencePack_GET_POST.yaml`](BrAPI-GenX/Research/EvidencePack/EvidencePack_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12239,7 +12239,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListEvidencePacks, genxGetEvidencePack, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.evidence-packs.list, brapi-genx.genx.v1.evidence-packs.get
 - **Relevant RFC / decision references:** RFC-122
-- **Contract source:** [`Specification/BrAPI-GenX/EvidencePack/EvidencePack_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/EvidencePack/EvidencePack_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/EvidencePack/EvidencePack_GET_POST.yaml`](BrAPI-GenX/Research/EvidencePack/EvidencePack_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12272,7 +12272,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterEvidencePack, genxListEvidencePacks, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.evidence-packs.list, brapi-genx.genx.v1.evidence-packs.record
 - **Relevant RFC / decision references:** RFC-122
-- **Contract source:** [`Specification/BrAPI-GenX/EvidencePack/EvidencePack_EvidencePackDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/EvidencePack/EvidencePack_EvidencePackDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/EvidencePack/EvidencePack_EvidencePackDbId_GET.yaml`](BrAPI-GenX/Research/EvidencePack/EvidencePack_EvidencePackDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12309,7 +12309,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterExperimentalDesign, genxGetExperimentalDesign
 - **Related catalogue IDs:** brapi-genx.genx.v1.experimental-designs.register, brapi-genx.genx.v1.experimental-designs.get
 - **Relevant RFC / decision references:** RFC-018
-- **Contract source:** [`Specification/BrAPI-GenX/ExperimentalDesign/ExperimentalDesign_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ExperimentalDesign/ExperimentalDesign_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/ExperimentalDesign/ExperimentalDesign_GET_POST.yaml`](BrAPI-GenX/Breeding/ExperimentalDesign/ExperimentalDesign_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12344,7 +12344,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListExperimentalDesigns, genxGetExperimentalDesign
 - **Related catalogue IDs:** brapi-genx.genx.v1.experimental-designs.list, brapi-genx.genx.v1.experimental-designs.get
 - **Relevant RFC / decision references:** RFC-018
-- **Contract source:** [`Specification/BrAPI-GenX/ExperimentalDesign/ExperimentalDesign_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ExperimentalDesign/ExperimentalDesign_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/ExperimentalDesign/ExperimentalDesign_GET_POST.yaml`](BrAPI-GenX/Breeding/ExperimentalDesign/ExperimentalDesign_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12377,7 +12377,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterExperimentalDesign, genxListExperimentalDesigns
 - **Related catalogue IDs:** brapi-genx.genx.v1.experimental-designs.list, brapi-genx.genx.v1.experimental-designs.register
 - **Relevant RFC / decision references:** RFC-018
-- **Contract source:** [`Specification/BrAPI-GenX/ExperimentalDesign/ExperimentalDesign_ExperimentalDesignDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ExperimentalDesign/ExperimentalDesign_ExperimentalDesignDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/ExperimentalDesign/ExperimentalDesign_ExperimentalDesignDbId_GET.yaml`](BrAPI-GenX/Breeding/ExperimentalDesign/ExperimentalDesign_ExperimentalDesignDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12414,7 +12414,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterExperimentalProtocol, genxGetExperimentalProtocol, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.experimental-protocols.record, brapi-genx.genx.v1.experimental-protocols.get
 - **Relevant RFC / decision references:** RFC-117
-- **Contract source:** [`Specification/BrAPI-GenX/ExperimentalProtocol/ExperimentalProtocol_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ExperimentalProtocol/ExperimentalProtocol_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/ExperimentalProtocol/ExperimentalProtocol_GET_POST.yaml`](BrAPI-GenX/Breeding/ExperimentalProtocol/ExperimentalProtocol_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12449,7 +12449,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListExperimentalProtocols, genxGetExperimentalProtocol, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.experimental-protocols.list, brapi-genx.genx.v1.experimental-protocols.get
 - **Relevant RFC / decision references:** RFC-117
-- **Contract source:** [`Specification/BrAPI-GenX/ExperimentalProtocol/ExperimentalProtocol_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ExperimentalProtocol/ExperimentalProtocol_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/ExperimentalProtocol/ExperimentalProtocol_GET_POST.yaml`](BrAPI-GenX/Breeding/ExperimentalProtocol/ExperimentalProtocol_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12482,7 +12482,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterExperimentalProtocol, genxListExperimentalProtocols, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.experimental-protocols.list, brapi-genx.genx.v1.experimental-protocols.record
 - **Relevant RFC / decision references:** RFC-117
-- **Contract source:** [`Specification/BrAPI-GenX/ExperimentalProtocol/ExperimentalProtocol_ExperimentalProtocolDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ExperimentalProtocol/ExperimentalProtocol_ExperimentalProtocolDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/ExperimentalProtocol/ExperimentalProtocol_ExperimentalProtocolDbId_GET.yaml`](BrAPI-GenX/Breeding/ExperimentalProtocol/ExperimentalProtocol_ExperimentalProtocolDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12519,7 +12519,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterExplanationEvidence, genxGetExplanationEvidence, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.explanation-evidences.record, brapi-genx.genx.v1.explanation-evidences.get
 - **Relevant RFC / decision references:** RFC-137
-- **Contract source:** [`Specification/BrAPI-GenX/ExplanationEvidence/ExplanationEvidence_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ExplanationEvidence/ExplanationEvidence_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/ExplanationEvidence/ExplanationEvidence_GET_POST.yaml`](BrAPI-GenX/Research/ExplanationEvidence/ExplanationEvidence_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12554,7 +12554,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListExplanationEvidences, genxGetExplanationEvidence, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.explanation-evidences.list, brapi-genx.genx.v1.explanation-evidences.get
 - **Relevant RFC / decision references:** RFC-137
-- **Contract source:** [`Specification/BrAPI-GenX/ExplanationEvidence/ExplanationEvidence_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ExplanationEvidence/ExplanationEvidence_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/ExplanationEvidence/ExplanationEvidence_GET_POST.yaml`](BrAPI-GenX/Research/ExplanationEvidence/ExplanationEvidence_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12587,7 +12587,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterExplanationEvidence, genxListExplanationEvidences, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.explanation-evidences.list, brapi-genx.genx.v1.explanation-evidences.record
 - **Relevant RFC / decision references:** RFC-137
-- **Contract source:** [`Specification/BrAPI-GenX/ExplanationEvidence/ExplanationEvidence_ExplanationEvidenceDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ExplanationEvidence/ExplanationEvidence_ExplanationEvidenceDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/ExplanationEvidence/ExplanationEvidence_ExplanationEvidenceDbId_GET.yaml`](BrAPI-GenX/Research/ExplanationEvidence/ExplanationEvidence_ExplanationEvidenceDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12624,7 +12624,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordExpressionQtl, genxGetExpressionQtl, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.expression-qtls.record, brapi-genx.genx.v1.expression-qtls.get
 - **Relevant RFC / decision references:** RFC-058
-- **Contract source:** [`Specification/BrAPI-GenX/ExpressionQtl/ExpressionQtl_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ExpressionQtl/ExpressionQtl_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/ExpressionQtl/ExpressionQtl_GET_POST.yaml`](BrAPI-GenX/Genotyping/ExpressionQtl/ExpressionQtl_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12659,7 +12659,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListExpressionQtls, genxGetExpressionQtl, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.expression-qtls.list, brapi-genx.genx.v1.expression-qtls.get
 - **Relevant RFC / decision references:** RFC-058
-- **Contract source:** [`Specification/BrAPI-GenX/ExpressionQtl/ExpressionQtl_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ExpressionQtl/ExpressionQtl_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/ExpressionQtl/ExpressionQtl_GET_POST.yaml`](BrAPI-GenX/Genotyping/ExpressionQtl/ExpressionQtl_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12692,7 +12692,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordExpressionQtl, genxListExpressionQtls, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.expression-qtls.list, brapi-genx.genx.v1.expression-qtls.record
 - **Relevant RFC / decision references:** RFC-058
-- **Contract source:** [`Specification/BrAPI-GenX/ExpressionQtl/ExpressionQtl_ExpressionQtlDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ExpressionQtl/ExpressionQtl_ExpressionQtlDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/ExpressionQtl/ExpressionQtl_ExpressionQtlDbId_GET.yaml`](BrAPI-GenX/Genotyping/ExpressionQtl/ExpressionQtl_ExpressionQtlDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12729,7 +12729,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterExternalVocabulary, genxGetExternalVocabulary, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.external-vocabularies.record, brapi-genx.genx.v1.external-vocabularies.get
 - **Relevant RFC / decision references:** RFC-083
-- **Contract source:** [`Specification/BrAPI-GenX/ExternalVocabulary/ExternalVocabulary_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ExternalVocabulary/ExternalVocabulary_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/ExternalVocabulary/ExternalVocabulary_GET_POST.yaml`](BrAPI-GenX/ReferenceData/ExternalVocabulary/ExternalVocabulary_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12764,7 +12764,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListExternalVocabularies, genxGetExternalVocabulary, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.external-vocabularies.list, brapi-genx.genx.v1.external-vocabularies.get
 - **Relevant RFC / decision references:** RFC-083
-- **Contract source:** [`Specification/BrAPI-GenX/ExternalVocabulary/ExternalVocabulary_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ExternalVocabulary/ExternalVocabulary_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/ExternalVocabulary/ExternalVocabulary_GET_POST.yaml`](BrAPI-GenX/ReferenceData/ExternalVocabulary/ExternalVocabulary_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12797,7 +12797,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterExternalVocabulary, genxListExternalVocabularies, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.external-vocabularies.list, brapi-genx.genx.v1.external-vocabularies.record
 - **Relevant RFC / decision references:** RFC-083
-- **Contract source:** [`Specification/BrAPI-GenX/ExternalVocabulary/ExternalVocabulary_ExternalVocabularyDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ExternalVocabulary/ExternalVocabulary_ExternalVocabularyDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/ExternalVocabulary/ExternalVocabulary_ExternalVocabularyDbId_GET.yaml`](BrAPI-GenX/ReferenceData/ExternalVocabulary/ExternalVocabulary_ExternalVocabularyDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12834,7 +12834,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordExtremeWeather, genxGetExtremeWeatherEvent
 - **Related catalogue IDs:** brapi-genx.genx.v1.extreme-weather-events.record, brapi-genx.genx.v1.extreme-weather-events.get
 - **Relevant RFC / decision references:** RFC-042
-- **Contract source:** [`Specification/BrAPI-GenX/ExtremeWeather/ExtremeWeather_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ExtremeWeather/ExtremeWeather_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/ExtremeWeather/ExtremeWeather_GET_POST.yaml`](BrAPI-GenX/Environment/ExtremeWeather/ExtremeWeather_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12869,7 +12869,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListExtremeWeatherEvents, genxGetExtremeWeatherEvent
 - **Related catalogue IDs:** brapi-genx.genx.v1.extreme-weather-events.list, brapi-genx.genx.v1.extreme-weather-events.get
 - **Relevant RFC / decision references:** RFC-042
-- **Contract source:** [`Specification/BrAPI-GenX/ExtremeWeather/ExtremeWeather_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ExtremeWeather/ExtremeWeather_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/ExtremeWeather/ExtremeWeather_GET_POST.yaml`](BrAPI-GenX/Environment/ExtremeWeather/ExtremeWeather_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12902,7 +12902,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordExtremeWeather, genxListExtremeWeatherEvents
 - **Related catalogue IDs:** brapi-genx.genx.v1.extreme-weather-events.list, brapi-genx.genx.v1.extreme-weather-events.record
 - **Relevant RFC / decision references:** RFC-042
-- **Contract source:** [`Specification/BrAPI-GenX/ExtremeWeather/ExtremeWeather_ExtremeWeatherEventDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ExtremeWeather/ExtremeWeather_ExtremeWeatherEventDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/ExtremeWeather/ExtremeWeather_ExtremeWeatherEventDbId_GET.yaml`](BrAPI-GenX/Environment/ExtremeWeather/ExtremeWeather_ExtremeWeatherEventDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12939,7 +12939,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** SEM-05
 - **Related catalogue IDs:** brapi-genx.genx.v1.fair-packages.get-metadata, brapi-genx.genx.v1.fair-packages.register
 - **Relevant RFC / decision references:** RFC-006, D-13, D-14, D-15
-- **Contract source:** [`Specification/BrAPI-GenX/FAIR/FairPackages_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/FAIR/FairPackages_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Interoperability/FAIR/FairPackages_GET_POST.yaml`](BrAPI-GenX/Interoperability/FAIR/FairPackages_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -12976,7 +12976,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** SEM-05
 - **Related catalogue IDs:** brapi-genx.genx.v1.fair-packages.get-metadata, brapi-genx.genx.v1.fair-packages.list-metadata
 - **Relevant RFC / decision references:** RFC-006, D-13, D-14, D-15
-- **Contract source:** [`Specification/BrAPI-GenX/FAIR/FairPackages_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/FAIR/FairPackages_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Interoperability/FAIR/FairPackages_GET_POST.yaml`](BrAPI-GenX/Interoperability/FAIR/FairPackages_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13010,7 +13010,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** SEM-05
 - **Related catalogue IDs:** brapi-genx.genx.v1.fair-packages.list-metadata, brapi-genx.genx.v1.fair-packages.register
 - **Relevant RFC / decision references:** RFC-006, D-15
-- **Contract source:** [`Specification/BrAPI-GenX/FAIR/FairPackages_PackageDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/FAIR/FairPackages_PackageDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Interoperability/FAIR/FairPackages_PackageDbId_GET.yaml`](BrAPI-GenX/Interoperability/FAIR/FairPackages_PackageDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13047,7 +13047,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterFarm, genxGetFarm, genxRegisterCropCycle
 - **Related catalogue IDs:** brapi-genx.genx.v1.farms.register, brapi-genx.genx.v1.farms.get
 - **Relevant RFC / decision references:** RFC-069
-- **Contract source:** [`Specification/BrAPI-GenX/Farm/Farm_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Farm/Farm_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/Farm/Farm_GET_POST.yaml`](BrAPI-GenX/CropProduction/Farm/Farm_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13082,7 +13082,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListFarms, genxGetFarm, genxRegisterCropCycle
 - **Related catalogue IDs:** brapi-genx.genx.v1.farms.list, brapi-genx.genx.v1.farms.get
 - **Relevant RFC / decision references:** RFC-069
-- **Contract source:** [`Specification/BrAPI-GenX/Farm/Farm_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Farm/Farm_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/Farm/Farm_GET_POST.yaml`](BrAPI-GenX/CropProduction/Farm/Farm_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13115,7 +13115,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterFarm, genxListFarms, genxRegisterCropCycle
 - **Related catalogue IDs:** brapi-genx.genx.v1.farms.list, brapi-genx.genx.v1.farms.register
 - **Relevant RFC / decision references:** RFC-069
-- **Contract source:** [`Specification/BrAPI-GenX/Farm/Farm_FarmDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Farm/Farm_FarmDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/Farm/Farm_FarmDbId_GET.yaml`](BrAPI-GenX/CropProduction/Farm/Farm_FarmDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13152,7 +13152,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordFertilizerApplication, genxGetFertilizerApplication
 - **Related catalogue IDs:** brapi-genx.genx.v1.fertilizer-applications.record, brapi-genx.genx.v1.fertilizer-applications.get
 - **Relevant RFC / decision references:** RFC-026
-- **Contract source:** [`Specification/BrAPI-GenX/FertilizerApplication/FertilizerApplication_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/FertilizerApplication/FertilizerApplication_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/FertilizerApplication/FertilizerApplication_GET_POST.yaml`](BrAPI-GenX/CropProduction/FertilizerApplication/FertilizerApplication_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13187,7 +13187,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListFertilizerApplications, genxGetFertilizerApplication
 - **Related catalogue IDs:** brapi-genx.genx.v1.fertilizer-applications.list, brapi-genx.genx.v1.fertilizer-applications.get
 - **Relevant RFC / decision references:** RFC-026
-- **Contract source:** [`Specification/BrAPI-GenX/FertilizerApplication/FertilizerApplication_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/FertilizerApplication/FertilizerApplication_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/FertilizerApplication/FertilizerApplication_GET_POST.yaml`](BrAPI-GenX/CropProduction/FertilizerApplication/FertilizerApplication_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13220,7 +13220,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordFertilizerApplication, genxListFertilizerApplications
 - **Related catalogue IDs:** brapi-genx.genx.v1.fertilizer-applications.list, brapi-genx.genx.v1.fertilizer-applications.record
 - **Relevant RFC / decision references:** RFC-026
-- **Contract source:** [`Specification/BrAPI-GenX/FertilizerApplication/FertilizerApplication_FertilizerApplicationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/FertilizerApplication/FertilizerApplication_FertilizerApplicationDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/FertilizerApplication/FertilizerApplication_FertilizerApplicationDbId_GET.yaml`](BrAPI-GenX/CropProduction/FertilizerApplication/FertilizerApplication_FertilizerApplicationDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13257,7 +13257,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterFieldBook, genxGetFieldBook, genxRegisterFieldScouting
 - **Related catalogue IDs:** brapi-genx.genx.v1.field-books.record, brapi-genx.genx.v1.field-books.get
 - **Relevant RFC / decision references:** RFC-108
-- **Contract source:** [`Specification/BrAPI-GenX/FieldBook/FieldBook_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/FieldBook/FieldBook_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/FieldBook/FieldBook_GET_POST.yaml`](BrAPI-GenX/Breeding/FieldBook/FieldBook_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13292,7 +13292,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListFieldBooks, genxGetFieldBook, genxRegisterFieldScouting
 - **Related catalogue IDs:** brapi-genx.genx.v1.field-books.list, brapi-genx.genx.v1.field-books.get
 - **Relevant RFC / decision references:** RFC-108
-- **Contract source:** [`Specification/BrAPI-GenX/FieldBook/FieldBook_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/FieldBook/FieldBook_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/FieldBook/FieldBook_GET_POST.yaml`](BrAPI-GenX/Breeding/FieldBook/FieldBook_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13325,7 +13325,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterFieldBook, genxListFieldBooks, genxRegisterFieldScouting
 - **Related catalogue IDs:** brapi-genx.genx.v1.field-books.list, brapi-genx.genx.v1.field-books.record
 - **Relevant RFC / decision references:** RFC-108
-- **Contract source:** [`Specification/BrAPI-GenX/FieldBook/FieldBook_FieldBookDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/FieldBook/FieldBook_FieldBookDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/FieldBook/FieldBook_FieldBookDbId_GET.yaml`](BrAPI-GenX/Breeding/FieldBook/FieldBook_FieldBookDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13362,7 +13362,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterFieldBoundary, genxGetFieldBoundary, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.field-boundaries.record, brapi-genx.genx.v1.field-boundaries.get
 - **Relevant RFC / decision references:** RFC-075
-- **Contract source:** [`Specification/BrAPI-GenX/FieldBoundary/FieldBoundary_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/FieldBoundary/FieldBoundary_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/FieldBoundary/FieldBoundary_GET_POST.yaml`](BrAPI-GenX/Geospatial/FieldBoundary/FieldBoundary_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13397,7 +13397,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListFieldBoundaries, genxGetFieldBoundary, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.field-boundaries.list, brapi-genx.genx.v1.field-boundaries.get
 - **Relevant RFC / decision references:** RFC-075
-- **Contract source:** [`Specification/BrAPI-GenX/FieldBoundary/FieldBoundary_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/FieldBoundary/FieldBoundary_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/FieldBoundary/FieldBoundary_GET_POST.yaml`](BrAPI-GenX/Geospatial/FieldBoundary/FieldBoundary_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13430,7 +13430,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterFieldBoundary, genxListFieldBoundaries, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.field-boundaries.list, brapi-genx.genx.v1.field-boundaries.record
 - **Relevant RFC / decision references:** RFC-075
-- **Contract source:** [`Specification/BrAPI-GenX/FieldBoundary/FieldBoundary_FieldBoundaryDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/FieldBoundary/FieldBoundary_FieldBoundaryDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/FieldBoundary/FieldBoundary_FieldBoundaryDbId_GET.yaml`](BrAPI-GenX/Geospatial/FieldBoundary/FieldBoundary_FieldBoundaryDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13467,7 +13467,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterFieldGeometry, genxGetFieldGeometry, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.field-geometries.record, brapi-genx.genx.v1.field-geometries.get
 - **Relevant RFC / decision references:** RFC-142
-- **Contract source:** [`Specification/BrAPI-GenX/FieldGeometry/FieldGeometry_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/FieldGeometry/FieldGeometry_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/FieldGeometry/FieldGeometry_GET_POST.yaml`](BrAPI-GenX/Geospatial/FieldGeometry/FieldGeometry_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13502,7 +13502,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListFieldGeometries, genxGetFieldGeometry, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.field-geometries.list, brapi-genx.genx.v1.field-geometries.get
 - **Relevant RFC / decision references:** RFC-142
-- **Contract source:** [`Specification/BrAPI-GenX/FieldGeometry/FieldGeometry_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/FieldGeometry/FieldGeometry_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/FieldGeometry/FieldGeometry_GET_POST.yaml`](BrAPI-GenX/Geospatial/FieldGeometry/FieldGeometry_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13535,7 +13535,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterFieldGeometry, genxListFieldGeometries, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.field-geometries.list, brapi-genx.genx.v1.field-geometries.record
 - **Relevant RFC / decision references:** RFC-142
-- **Contract source:** [`Specification/BrAPI-GenX/FieldGeometry/FieldGeometry_FieldGeometryDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/FieldGeometry/FieldGeometry_FieldGeometryDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/FieldGeometry/FieldGeometry_FieldGeometryDbId_GET.yaml`](BrAPI-GenX/Geospatial/FieldGeometry/FieldGeometry_FieldGeometryDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13572,7 +13572,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterFieldScouting, genxGetFieldScouting, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.field-scouting.record, brapi-genx.genx.v1.field-scouting.get
 - **Relevant RFC / decision references:** RFC-074
-- **Contract source:** [`Specification/BrAPI-GenX/FieldScouting/FieldScouting_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/FieldScouting/FieldScouting_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/FieldScouting/FieldScouting_GET_POST.yaml`](BrAPI-GenX/PlantHealth/FieldScouting/FieldScouting_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13607,7 +13607,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListFieldScouting, genxGetFieldScouting, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.field-scouting.list, brapi-genx.genx.v1.field-scouting.get
 - **Relevant RFC / decision references:** RFC-074
-- **Contract source:** [`Specification/BrAPI-GenX/FieldScouting/FieldScouting_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/FieldScouting/FieldScouting_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/FieldScouting/FieldScouting_GET_POST.yaml`](BrAPI-GenX/PlantHealth/FieldScouting/FieldScouting_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13640,7 +13640,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterFieldScouting, genxListFieldScouting, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.field-scouting.list, brapi-genx.genx.v1.field-scouting.record
 - **Relevant RFC / decision references:** RFC-074
-- **Contract source:** [`Specification/BrAPI-GenX/FieldScouting/FieldScouting_FieldScoutingDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/FieldScouting/FieldScouting_FieldScoutingDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/FieldScouting/FieldScouting_FieldScoutingDbId_GET.yaml`](BrAPI-GenX/PlantHealth/FieldScouting/FieldScouting_FieldScoutingDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13677,7 +13677,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterStorageLocation, genxGetStorageLocation
 - **Related catalogue IDs:** brapi-genx.genx.v1.genebank-storage.register, brapi-genx.genx.v1.genebank-storage.get
 - **Relevant RFC / decision references:** RFC-015
-- **Contract source:** [`Specification/BrAPI-GenX/GenebankStorage/GenebankStorage_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GenebankStorage/GenebankStorage_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/GenebankStorage/GenebankStorage_GET_POST.yaml`](BrAPI-GenX/Germplasm/GenebankStorage/GenebankStorage_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13712,7 +13712,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListStorageLocations, genxGetStorageLocation
 - **Related catalogue IDs:** brapi-genx.genx.v1.genebank-storage.list, brapi-genx.genx.v1.genebank-storage.get
 - **Relevant RFC / decision references:** RFC-015
-- **Contract source:** [`Specification/BrAPI-GenX/GenebankStorage/GenebankStorage_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GenebankStorage/GenebankStorage_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/GenebankStorage/GenebankStorage_GET_POST.yaml`](BrAPI-GenX/Germplasm/GenebankStorage/GenebankStorage_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13745,7 +13745,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterStorageLocation, genxListStorageLocations
 - **Related catalogue IDs:** brapi-genx.genx.v1.genebank-storage.list, brapi-genx.genx.v1.genebank-storage.register
 - **Relevant RFC / decision references:** RFC-015
-- **Contract source:** [`Specification/BrAPI-GenX/GenebankStorage/GenebankStorage_StorageLocationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GenebankStorage/GenebankStorage_StorageLocationDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/GenebankStorage/GenebankStorage_StorageLocationDbId_GET.yaml`](BrAPI-GenX/Germplasm/GenebankStorage/GenebankStorage_StorageLocationDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13782,7 +13782,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordGeneticGain, genxGetGeneticGain
 - **Related catalogue IDs:** brapi-genx.genx.v1.genetic-gains.record, brapi-genx.genx.v1.genetic-gains.get
 - **Relevant RFC / decision references:** RFC-046
-- **Contract source:** [`Specification/BrAPI-GenX/GeneticGain/GeneticGain_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GeneticGain/GeneticGain_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/GeneticGain/GeneticGain_GET_POST.yaml`](BrAPI-GenX/Breeding/GeneticGain/GeneticGain_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13817,7 +13817,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListGeneticGains, genxGetGeneticGain
 - **Related catalogue IDs:** brapi-genx.genx.v1.genetic-gains.list, brapi-genx.genx.v1.genetic-gains.get
 - **Relevant RFC / decision references:** RFC-046
-- **Contract source:** [`Specification/BrAPI-GenX/GeneticGain/GeneticGain_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GeneticGain/GeneticGain_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/GeneticGain/GeneticGain_GET_POST.yaml`](BrAPI-GenX/Breeding/GeneticGain/GeneticGain_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13850,7 +13850,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordGeneticGain, genxListGeneticGains
 - **Related catalogue IDs:** brapi-genx.genx.v1.genetic-gains.list, brapi-genx.genx.v1.genetic-gains.record
 - **Relevant RFC / decision references:** RFC-046
-- **Contract source:** [`Specification/BrAPI-GenX/GeneticGain/GeneticGain_GeneticGainRecordDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GeneticGain/GeneticGain_GeneticGainRecordDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/GeneticGain/GeneticGain_GeneticGainRecordDbId_GET.yaml`](BrAPI-GenX/Breeding/GeneticGain/GeneticGain_GeneticGainRecordDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13887,7 +13887,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterGenomicDataset, genxGetGenomicDataset, genxRegisterVariantMatrixReference
 - **Related catalogue IDs:** brapi-genx.genx.v1.genomic-datasets.register, brapi-genx.genx.v1.genomic-datasets.get
 - **Relevant RFC / decision references:** RFC-013
-- **Contract source:** [`Specification/BrAPI-GenX/GenomicDatasets/GenomicDatasets_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GenomicDatasets/GenomicDatasets_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/GenomicDatasets/GenomicDatasets_GET_POST.yaml`](BrAPI-GenX/Genotyping/GenomicDatasets/GenomicDatasets_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13923,7 +13923,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListGenomicDatasets, genxGetGenomicDataset, genxRegisterVariantMatrixReference
 - **Related catalogue IDs:** brapi-genx.genx.v1.genomic-datasets.list, brapi-genx.genx.v1.genomic-datasets.get
 - **Relevant RFC / decision references:** RFC-013
-- **Contract source:** [`Specification/BrAPI-GenX/GenomicDatasets/GenomicDatasets_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GenomicDatasets/GenomicDatasets_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/GenomicDatasets/GenomicDatasets_GET_POST.yaml`](BrAPI-GenX/Genotyping/GenomicDatasets/GenomicDatasets_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13956,7 +13956,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterGenomicDataset, genxListGenomicDatasets, genxRegisterVariantMatrixReference
 - **Related catalogue IDs:** brapi-genx.genx.v1.genomic-datasets.list, brapi-genx.genx.v1.genomic-datasets.register
 - **Relevant RFC / decision references:** RFC-013
-- **Contract source:** [`Specification/BrAPI-GenX/GenomicDatasets/GenomicDatasets_GenomicDatasetDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GenomicDatasets/GenomicDatasets_GenomicDatasetDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/GenomicDatasets/GenomicDatasets_GenomicDatasetDbId_GET.yaml`](BrAPI-GenX/Genotyping/GenomicDatasets/GenomicDatasets_GenomicDatasetDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -13993,7 +13993,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordGenomicPrediction, genxGetGenomicPrediction, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.genomic-predictions.record, brapi-genx.genx.v1.genomic-predictions.get
 - **Relevant RFC / decision references:** RFC-054
-- **Contract source:** [`Specification/BrAPI-GenX/GenomicPrediction/GenomicPrediction_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GenomicPrediction/GenomicPrediction_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/GenomicPrediction/GenomicPrediction_GET_POST.yaml`](BrAPI-GenX/Breeding/GenomicPrediction/GenomicPrediction_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14028,7 +14028,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListGenomicPredictions, genxGetGenomicPrediction, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.genomic-predictions.list, brapi-genx.genx.v1.genomic-predictions.get
 - **Relevant RFC / decision references:** RFC-054
-- **Contract source:** [`Specification/BrAPI-GenX/GenomicPrediction/GenomicPrediction_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GenomicPrediction/GenomicPrediction_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/GenomicPrediction/GenomicPrediction_GET_POST.yaml`](BrAPI-GenX/Breeding/GenomicPrediction/GenomicPrediction_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14061,7 +14061,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordGenomicPrediction, genxListGenomicPredictions, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.genomic-predictions.list, brapi-genx.genx.v1.genomic-predictions.record
 - **Relevant RFC / decision references:** RFC-054
-- **Contract source:** [`Specification/BrAPI-GenX/GenomicPrediction/GenomicPrediction_GenomicPredictionDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GenomicPrediction/GenomicPrediction_GenomicPredictionDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/GenomicPrediction/GenomicPrediction_GenomicPredictionDbId_GET.yaml`](BrAPI-GenX/Breeding/GenomicPrediction/GenomicPrediction_GenomicPredictionDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14098,7 +14098,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterGenomicRelationship, genxGetGenomicRelationship, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.genomic-relationships.register, brapi-genx.genx.v1.genomic-relationships.get
 - **Relevant RFC / decision references:** RFC-056
-- **Contract source:** [`Specification/BrAPI-GenX/GenomicRelationship/GenomicRelationship_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GenomicRelationship/GenomicRelationship_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/GenomicRelationship/GenomicRelationship_GET_POST.yaml`](BrAPI-GenX/Genotyping/GenomicRelationship/GenomicRelationship_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14133,7 +14133,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListGenomicRelationships, genxGetGenomicRelationship, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.genomic-relationships.list, brapi-genx.genx.v1.genomic-relationships.get
 - **Relevant RFC / decision references:** RFC-056
-- **Contract source:** [`Specification/BrAPI-GenX/GenomicRelationship/GenomicRelationship_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GenomicRelationship/GenomicRelationship_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/GenomicRelationship/GenomicRelationship_GET_POST.yaml`](BrAPI-GenX/Genotyping/GenomicRelationship/GenomicRelationship_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14166,7 +14166,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterGenomicRelationship, genxListGenomicRelationships, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.genomic-relationships.list, brapi-genx.genx.v1.genomic-relationships.register
 - **Relevant RFC / decision references:** RFC-056
-- **Contract source:** [`Specification/BrAPI-GenX/GenomicRelationship/GenomicRelationship_GenomicRelationshipDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GenomicRelationship/GenomicRelationship_GenomicRelationshipDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/GenomicRelationship/GenomicRelationship_GenomicRelationshipDbId_GET.yaml`](BrAPI-GenX/Genotyping/GenomicRelationship/GenomicRelationship_GenomicRelationshipDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14203,7 +14203,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordGenomicSelection, genxGetGenomicSelection, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.genomic-selections.record, brapi-genx.genx.v1.genomic-selections.get
 - **Relevant RFC / decision references:** RFC-055
-- **Contract source:** [`Specification/BrAPI-GenX/GenomicSelection/GenomicSelection_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GenomicSelection/GenomicSelection_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/GenomicSelection/GenomicSelection_GET_POST.yaml`](BrAPI-GenX/Breeding/GenomicSelection/GenomicSelection_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14238,7 +14238,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListGenomicSelections, genxGetGenomicSelection, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.genomic-selections.list, brapi-genx.genx.v1.genomic-selections.get
 - **Relevant RFC / decision references:** RFC-055
-- **Contract source:** [`Specification/BrAPI-GenX/GenomicSelection/GenomicSelection_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GenomicSelection/GenomicSelection_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/GenomicSelection/GenomicSelection_GET_POST.yaml`](BrAPI-GenX/Breeding/GenomicSelection/GenomicSelection_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14271,7 +14271,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordGenomicSelection, genxListGenomicSelections, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.genomic-selections.list, brapi-genx.genx.v1.genomic-selections.record
 - **Relevant RFC / decision references:** RFC-055
-- **Contract source:** [`Specification/BrAPI-GenX/GenomicSelection/GenomicSelection_GenomicSelectionDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GenomicSelection/GenomicSelection_GenomicSelectionDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/GenomicSelection/GenomicSelection_GenomicSelectionDbId_GET.yaml`](BrAPI-GenX/Breeding/GenomicSelection/GenomicSelection_GenomicSelectionDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14308,7 +14308,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** SEM-04
 - **Related catalogue IDs:** brapi-genx.brapi-v2-1.genotyping.get.allelematrix, brapi-genx.brapi-v2-1.genotyping.get.calls, brapi-genx.brapi-v2-1.genotyping.get.callsets, brapi-genx.brapi-v2-1.genotyping.get.callsets.by-callsetdbid, brapi-genx.brapi-v2-1.genotyping.get.callsets.by-callsetdbid.calls, brapi-genx.brapi-v2-1.genotyping.get.variants, brapi-genx.brapi-v2-1.genotyping.get.variants.by-variantdbid, brapi-genx.brapi-v2-1.genotyping.get.variants.by-variantdbid.calls, brapi-genx.brapi-v2-1.genotyping.get.variantsets, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.calls, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.callsets, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.variants, brapi-genx.brapi-v2-1.genotyping.post.variantsets.extract, brapi-genx.brapi-v2-1.genotyping.put.calls, brapi-genx.genx.v1.variant-matrices.get, brapi-genx.genx.v1.variant-matrices.register
 - **Relevant RFC / decision references:** RFC-005, D-11, D-12, D-19
-- **Contract source:** [`Specification/BrAPI-GenX/Genomics/VariantMatrices_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Genomics/VariantMatrices_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/Genomics/VariantMatrices_GET_POST.yaml`](BrAPI-GenX/Genotyping/Genomics/VariantMatrices_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14345,7 +14345,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** SEM-04
 - **Related catalogue IDs:** brapi-genx.brapi-v2-1.genotyping.get.allelematrix, brapi-genx.brapi-v2-1.genotyping.get.calls, brapi-genx.brapi-v2-1.genotyping.get.callsets, brapi-genx.brapi-v2-1.genotyping.get.callsets.by-callsetdbid, brapi-genx.brapi-v2-1.genotyping.get.callsets.by-callsetdbid.calls, brapi-genx.brapi-v2-1.genotyping.get.variants, brapi-genx.brapi-v2-1.genotyping.get.variants.by-variantdbid, brapi-genx.brapi-v2-1.genotyping.get.variants.by-variantdbid.calls, brapi-genx.brapi-v2-1.genotyping.get.variantsets, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.calls, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.callsets, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.variants, brapi-genx.brapi-v2-1.genotyping.post.variantsets.extract, brapi-genx.brapi-v2-1.genotyping.put.calls, brapi-genx.genx.v1.variant-matrices.get, brapi-genx.genx.v1.variant-matrices.list
 - **Relevant RFC / decision references:** RFC-005, D-11, D-12, D-19
-- **Contract source:** [`Specification/BrAPI-GenX/Genomics/VariantMatrices_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Genomics/VariantMatrices_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/Genomics/VariantMatrices_GET_POST.yaml`](BrAPI-GenX/Genotyping/Genomics/VariantMatrices_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14378,7 +14378,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** SEM-04
 - **Related catalogue IDs:** brapi-genx.brapi-v2-1.genotyping.get.allelematrix, brapi-genx.brapi-v2-1.genotyping.get.calls, brapi-genx.brapi-v2-1.genotyping.get.callsets, brapi-genx.brapi-v2-1.genotyping.get.callsets.by-callsetdbid, brapi-genx.brapi-v2-1.genotyping.get.callsets.by-callsetdbid.calls, brapi-genx.brapi-v2-1.genotyping.get.variants, brapi-genx.brapi-v2-1.genotyping.get.variants.by-variantdbid, brapi-genx.brapi-v2-1.genotyping.get.variants.by-variantdbid.calls, brapi-genx.brapi-v2-1.genotyping.get.variantsets, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.calls, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.callsets, brapi-genx.brapi-v2-1.genotyping.get.variantsets.by-variantsetdbid.variants, brapi-genx.brapi-v2-1.genotyping.post.variantsets.extract, brapi-genx.brapi-v2-1.genotyping.put.calls, brapi-genx.genx.v1.variant-matrices.list, brapi-genx.genx.v1.variant-matrices.register
 - **Relevant RFC / decision references:** RFC-005, D-11, D-12, D-19
-- **Contract source:** [`Specification/BrAPI-GenX/Genomics/VariantMatrices_MatrixDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Genomics/VariantMatrices_MatrixDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/Genomics/VariantMatrices_MatrixDbId_GET.yaml`](BrAPI-GenX/Genotyping/Genomics/VariantMatrices_MatrixDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14415,7 +14415,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterGenotypeCallSemantics, genxGetGenotypeCallSemantics, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.genotype-call-semantics.record, brapi-genx.genx.v1.genotype-call-semantics.get
 - **Relevant RFC / decision references:** RFC-072
-- **Contract source:** [`Specification/BrAPI-GenX/GenotypeCallSemantics/GenotypeCallSemantics_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GenotypeCallSemantics/GenotypeCallSemantics_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/GenotypeCallSemantics/GenotypeCallSemantics_GET_POST.yaml`](BrAPI-GenX/Genotyping/GenotypeCallSemantics/GenotypeCallSemantics_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14450,7 +14450,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListGenotypeCallSemantics, genxGetGenotypeCallSemantics, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.genotype-call-semantics.list, brapi-genx.genx.v1.genotype-call-semantics.get
 - **Relevant RFC / decision references:** RFC-072
-- **Contract source:** [`Specification/BrAPI-GenX/GenotypeCallSemantics/GenotypeCallSemantics_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GenotypeCallSemantics/GenotypeCallSemantics_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/GenotypeCallSemantics/GenotypeCallSemantics_GET_POST.yaml`](BrAPI-GenX/Genotyping/GenotypeCallSemantics/GenotypeCallSemantics_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14483,7 +14483,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterGenotypeCallSemantics, genxListGenotypeCallSemantics, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.genotype-call-semantics.list, brapi-genx.genx.v1.genotype-call-semantics.record
 - **Relevant RFC / decision references:** RFC-072
-- **Contract source:** [`Specification/BrAPI-GenX/GenotypeCallSemantics/GenotypeCallSemantics_GenotypeCallSemanticsDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GenotypeCallSemantics/GenotypeCallSemantics_GenotypeCallSemanticsDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/GenotypeCallSemantics/GenotypeCallSemantics_GenotypeCallSemanticsDbId_GET.yaml`](BrAPI-GenX/Genotyping/GenotypeCallSemantics/GenotypeCallSemantics_GenotypeCallSemanticsDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14520,7 +14520,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordGenotypeQcReport, genxGetGenotypeQcReport, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.genotype-qc-reports.record, brapi-genx.genx.v1.genotype-qc-reports.get
 - **Relevant RFC / decision references:** RFC-064
-- **Contract source:** [`Specification/BrAPI-GenX/GenotypeQc/GenotypeQcReport_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GenotypeQc/GenotypeQcReport_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/GenotypeQc/GenotypeQcReport_GET_POST.yaml`](BrAPI-GenX/Genotyping/GenotypeQc/GenotypeQcReport_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14555,7 +14555,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListGenotypeQcReports, genxGetGenotypeQcReport, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.genotype-qc-reports.list, brapi-genx.genx.v1.genotype-qc-reports.get
 - **Relevant RFC / decision references:** RFC-064
-- **Contract source:** [`Specification/BrAPI-GenX/GenotypeQc/GenotypeQcReport_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GenotypeQc/GenotypeQcReport_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/GenotypeQc/GenotypeQcReport_GET_POST.yaml`](BrAPI-GenX/Genotyping/GenotypeQc/GenotypeQcReport_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14588,7 +14588,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordGenotypeQcReport, genxListGenotypeQcReports, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.genotype-qc-reports.list, brapi-genx.genx.v1.genotype-qc-reports.record
 - **Relevant RFC / decision references:** RFC-064
-- **Contract source:** [`Specification/BrAPI-GenX/GenotypeQc/GenotypeQcReport_GenotypeQcReportDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GenotypeQc/GenotypeQcReport_GenotypeQcReportDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/GenotypeQc/GenotypeQcReport_GenotypeQcReportDbId_GET.yaml`](BrAPI-GenX/Genotyping/GenotypeQc/GenotypeQcReport_GenotypeQcReportDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14625,7 +14625,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordGwasResult, genxGetGwasResult, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.gwas-results.record, brapi-genx.genx.v1.gwas-results.get
 - **Relevant RFC / decision references:** RFC-047
-- **Contract source:** [`Specification/BrAPI-GenX/GwasResult/GwasResult_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GwasResult/GwasResult_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/GwasResult/GwasResult_GET_POST.yaml`](BrAPI-GenX/Genotyping/GwasResult/GwasResult_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14660,7 +14660,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListGwasResults, genxGetGwasResult, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.gwas-results.list, brapi-genx.genx.v1.gwas-results.get
 - **Relevant RFC / decision references:** RFC-047
-- **Contract source:** [`Specification/BrAPI-GenX/GwasResult/GwasResult_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GwasResult/GwasResult_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/GwasResult/GwasResult_GET_POST.yaml`](BrAPI-GenX/Genotyping/GwasResult/GwasResult_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14693,7 +14693,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordGwasResult, genxListGwasResults, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.gwas-results.list, brapi-genx.genx.v1.gwas-results.record
 - **Relevant RFC / decision references:** RFC-047
-- **Contract source:** [`Specification/BrAPI-GenX/GwasResult/GwasResult_GwasResultDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GwasResult/GwasResult_GwasResultDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/GwasResult/GwasResult_GwasResultDbId_GET.yaml`](BrAPI-GenX/Genotyping/GwasResult/GwasResult_GwasResultDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14730,7 +14730,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordGxeAnalysis, genxGetGxeAnalysis, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.gxe-analyses.record, brapi-genx.genx.v1.gxe-analyses.get
 - **Relevant RFC / decision references:** RFC-051
-- **Contract source:** [`Specification/BrAPI-GenX/GxeAnalysis/GxeAnalysis_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GxeAnalysis/GxeAnalysis_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/GxeAnalysis/GxeAnalysis_GET_POST.yaml`](BrAPI-GenX/Breeding/GxeAnalysis/GxeAnalysis_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14765,7 +14765,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListGxeAnalyses, genxGetGxeAnalysis, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.gxe-analyses.list, brapi-genx.genx.v1.gxe-analyses.get
 - **Relevant RFC / decision references:** RFC-051
-- **Contract source:** [`Specification/BrAPI-GenX/GxeAnalysis/GxeAnalysis_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GxeAnalysis/GxeAnalysis_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/GxeAnalysis/GxeAnalysis_GET_POST.yaml`](BrAPI-GenX/Breeding/GxeAnalysis/GxeAnalysis_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14798,7 +14798,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordGxeAnalysis, genxListGxeAnalyses, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.gxe-analyses.list, brapi-genx.genx.v1.gxe-analyses.record
 - **Relevant RFC / decision references:** RFC-051
-- **Contract source:** [`Specification/BrAPI-GenX/GxeAnalysis/GxeAnalysis_GxeAnalysisResultDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/GxeAnalysis/GxeAnalysis_GxeAnalysisResultDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/GxeAnalysis/GxeAnalysis_GxeAnalysisResultDbId_GET.yaml`](BrAPI-GenX/Breeding/GxeAnalysis/GxeAnalysis_GxeAnalysisResultDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14835,7 +14835,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordHaplotypeAnalysis, genxGetHaplotypeAnalysis, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.haplotype-analyses.record, brapi-genx.genx.v1.haplotype-analyses.get
 - **Relevant RFC / decision references:** RFC-059
-- **Contract source:** [`Specification/BrAPI-GenX/HaplotypeAnalysis/HaplotypeAnalysis_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/HaplotypeAnalysis/HaplotypeAnalysis_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/HaplotypeAnalysis/HaplotypeAnalysis_GET_POST.yaml`](BrAPI-GenX/Genotyping/HaplotypeAnalysis/HaplotypeAnalysis_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14870,7 +14870,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListHaplotypeAnalyses, genxGetHaplotypeAnalysis, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.haplotype-analyses.list, brapi-genx.genx.v1.haplotype-analyses.get
 - **Relevant RFC / decision references:** RFC-059
-- **Contract source:** [`Specification/BrAPI-GenX/HaplotypeAnalysis/HaplotypeAnalysis_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/HaplotypeAnalysis/HaplotypeAnalysis_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/HaplotypeAnalysis/HaplotypeAnalysis_GET_POST.yaml`](BrAPI-GenX/Genotyping/HaplotypeAnalysis/HaplotypeAnalysis_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14903,7 +14903,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordHaplotypeAnalysis, genxListHaplotypeAnalyses, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.haplotype-analyses.list, brapi-genx.genx.v1.haplotype-analyses.record
 - **Relevant RFC / decision references:** RFC-059
-- **Contract source:** [`Specification/BrAPI-GenX/HaplotypeAnalysis/HaplotypeAnalysis_HaplotypeAnalysisDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/HaplotypeAnalysis/HaplotypeAnalysis_HaplotypeAnalysisDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/HaplotypeAnalysis/HaplotypeAnalysis_HaplotypeAnalysisDbId_GET.yaml`](BrAPI-GenX/Genotyping/HaplotypeAnalysis/HaplotypeAnalysis_HaplotypeAnalysisDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14940,7 +14940,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordHarvest, genxGetHarvestRecord
 - **Related catalogue IDs:** brapi-genx.genx.v1.harvest-records.record, brapi-genx.genx.v1.harvest-records.get
 - **Relevant RFC / decision references:** RFC-011
-- **Contract source:** [`Specification/BrAPI-GenX/HarvestRecords/HarvestRecords_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/HarvestRecords/HarvestRecords_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/HarvestRecords/HarvestRecords_GET_POST.yaml`](BrAPI-GenX/CropProduction/HarvestRecords/HarvestRecords_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -14975,7 +14975,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListHarvestRecords, genxGetHarvestRecord
 - **Related catalogue IDs:** brapi-genx.genx.v1.harvest-records.list, brapi-genx.genx.v1.harvest-records.get
 - **Relevant RFC / decision references:** RFC-011
-- **Contract source:** [`Specification/BrAPI-GenX/HarvestRecords/HarvestRecords_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/HarvestRecords/HarvestRecords_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/HarvestRecords/HarvestRecords_GET_POST.yaml`](BrAPI-GenX/CropProduction/HarvestRecords/HarvestRecords_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15008,7 +15008,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordHarvest, genxListHarvestRecords
 - **Related catalogue IDs:** brapi-genx.genx.v1.harvest-records.list, brapi-genx.genx.v1.harvest-records.record
 - **Relevant RFC / decision references:** RFC-011
-- **Contract source:** [`Specification/BrAPI-GenX/HarvestRecords/HarvestRecords_HarvestRecordDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/HarvestRecords/HarvestRecords_HarvestRecordDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/HarvestRecords/HarvestRecords_HarvestRecordDbId_GET.yaml`](BrAPI-GenX/CropProduction/HarvestRecords/HarvestRecords_HarvestRecordDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15045,7 +15045,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordHeritability, genxGetHeritabilityEstimate, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.heritability-estimates.record, brapi-genx.genx.v1.heritability-estimates.get
 - **Relevant RFC / decision references:** RFC-050
-- **Contract source:** [`Specification/BrAPI-GenX/Heritability/Heritability_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Heritability/Heritability_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/Heritability/Heritability_GET_POST.yaml`](BrAPI-GenX/Breeding/Heritability/Heritability_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15080,7 +15080,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListHeritabilityEstimates, genxGetHeritabilityEstimate, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.heritability-estimates.list, brapi-genx.genx.v1.heritability-estimates.get
 - **Relevant RFC / decision references:** RFC-050
-- **Contract source:** [`Specification/BrAPI-GenX/Heritability/Heritability_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Heritability/Heritability_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/Heritability/Heritability_GET_POST.yaml`](BrAPI-GenX/Breeding/Heritability/Heritability_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15113,7 +15113,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordHeritability, genxListHeritabilityEstimates, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.heritability-estimates.list, brapi-genx.genx.v1.heritability-estimates.record
 - **Relevant RFC / decision references:** RFC-050
-- **Contract source:** [`Specification/BrAPI-GenX/Heritability/Heritability_HeritabilityEstimateDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Heritability/Heritability_HeritabilityEstimateDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/Heritability/Heritability_HeritabilityEstimateDbId_GET.yaml`](BrAPI-GenX/Breeding/Heritability/Heritability_HeritabilityEstimateDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15150,7 +15150,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterHumanReview, genxGetHumanReview, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.human-reviews.record, brapi-genx.genx.v1.human-reviews.get
 - **Relevant RFC / decision references:** RFC-136
-- **Contract source:** [`Specification/BrAPI-GenX/HumanReview/HumanReview_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/HumanReview/HumanReview_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/HumanReview/HumanReview_GET_POST.yaml`](BrAPI-GenX/Research/HumanReview/HumanReview_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15185,7 +15185,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListHumanReviews, genxGetHumanReview, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.human-reviews.list, brapi-genx.genx.v1.human-reviews.get
 - **Relevant RFC / decision references:** RFC-136
-- **Contract source:** [`Specification/BrAPI-GenX/HumanReview/HumanReview_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/HumanReview/HumanReview_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/HumanReview/HumanReview_GET_POST.yaml`](BrAPI-GenX/Research/HumanReview/HumanReview_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15218,7 +15218,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterHumanReview, genxListHumanReviews, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.human-reviews.list, brapi-genx.genx.v1.human-reviews.record
 - **Relevant RFC / decision references:** RFC-136
-- **Contract source:** [`Specification/BrAPI-GenX/HumanReview/HumanReview_HumanReviewDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/HumanReview/HumanReview_HumanReviewDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/HumanReview/HumanReview_HumanReviewDbId_GET.yaml`](BrAPI-GenX/Research/HumanReview/HumanReview_HumanReviewDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15255,7 +15255,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterImageMetadata, genxGetImageMetadata
 - **Related catalogue IDs:** brapi-genx.genx.v1.image-metadata.register, brapi-genx.genx.v1.image-metadata.get
 - **Relevant RFC / decision references:** RFC-032
-- **Contract source:** [`Specification/BrAPI-GenX/ImageMetadata/ImageMetadata_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ImageMetadata/ImageMetadata_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/ImageMetadata/ImageMetadata_GET_POST.yaml`](BrAPI-GenX/Phenotyping/ImageMetadata/ImageMetadata_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15290,7 +15290,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListImageMetadata, genxGetImageMetadata
 - **Related catalogue IDs:** brapi-genx.genx.v1.image-metadata.list, brapi-genx.genx.v1.image-metadata.get
 - **Relevant RFC / decision references:** RFC-032
-- **Contract source:** [`Specification/BrAPI-GenX/ImageMetadata/ImageMetadata_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ImageMetadata/ImageMetadata_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/ImageMetadata/ImageMetadata_GET_POST.yaml`](BrAPI-GenX/Phenotyping/ImageMetadata/ImageMetadata_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15323,7 +15323,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterImageMetadata, genxListImageMetadata
 - **Related catalogue IDs:** brapi-genx.genx.v1.image-metadata.list, brapi-genx.genx.v1.image-metadata.register
 - **Relevant RFC / decision references:** RFC-032
-- **Contract source:** [`Specification/BrAPI-GenX/ImageMetadata/ImageMetadata_ImageMetadataDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ImageMetadata/ImageMetadata_ImageMetadataDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/ImageMetadata/ImageMetadata_ImageMetadataDbId_GET.yaml`](BrAPI-GenX/Phenotyping/ImageMetadata/ImageMetadata_ImageMetadataDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15360,7 +15360,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterInstitutionCode, genxGetInstitutionCode, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.institution-codes.record, brapi-genx.genx.v1.institution-codes.get
 - **Relevant RFC / decision references:** RFC-096
-- **Contract source:** [`Specification/BrAPI-GenX/InstitutionCode/InstitutionCode_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/InstitutionCode/InstitutionCode_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/InstitutionCode/InstitutionCode_GET_POST.yaml`](BrAPI-GenX/ReferenceData/InstitutionCode/InstitutionCode_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15395,7 +15395,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListInstitutionCodes, genxGetInstitutionCode, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.institution-codes.list, brapi-genx.genx.v1.institution-codes.get
 - **Relevant RFC / decision references:** RFC-096
-- **Contract source:** [`Specification/BrAPI-GenX/InstitutionCode/InstitutionCode_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/InstitutionCode/InstitutionCode_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/InstitutionCode/InstitutionCode_GET_POST.yaml`](BrAPI-GenX/ReferenceData/InstitutionCode/InstitutionCode_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15428,7 +15428,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterInstitutionCode, genxListInstitutionCodes, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.institution-codes.list, brapi-genx.genx.v1.institution-codes.record
 - **Relevant RFC / decision references:** RFC-096
-- **Contract source:** [`Specification/BrAPI-GenX/InstitutionCode/InstitutionCode_InstitutionCodeDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/InstitutionCode/InstitutionCode_InstitutionCodeDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/InstitutionCode/InstitutionCode_InstitutionCodeDbId_GET.yaml`](BrAPI-GenX/ReferenceData/InstitutionCode/InstitutionCode_InstitutionCodeDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15465,7 +15465,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterIpmStrategy, genxGetIpmStrategy, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.ipm-strategies.record, brapi-genx.genx.v1.ipm-strategies.get
 - **Relevant RFC / decision references:** RFC-125
-- **Contract source:** [`Specification/BrAPI-GenX/IpmStrategy/IpmStrategy_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/IpmStrategy/IpmStrategy_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/IpmStrategy/IpmStrategy_GET_POST.yaml`](BrAPI-GenX/PlantHealth/IpmStrategy/IpmStrategy_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15500,7 +15500,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListIpmStrategies, genxGetIpmStrategy, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.ipm-strategies.list, brapi-genx.genx.v1.ipm-strategies.get
 - **Relevant RFC / decision references:** RFC-125
-- **Contract source:** [`Specification/BrAPI-GenX/IpmStrategy/IpmStrategy_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/IpmStrategy/IpmStrategy_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/IpmStrategy/IpmStrategy_GET_POST.yaml`](BrAPI-GenX/PlantHealth/IpmStrategy/IpmStrategy_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15533,7 +15533,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterIpmStrategy, genxListIpmStrategies, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.ipm-strategies.list, brapi-genx.genx.v1.ipm-strategies.record
 - **Relevant RFC / decision references:** RFC-125
-- **Contract source:** [`Specification/BrAPI-GenX/IpmStrategy/IpmStrategy_IpmStrategyDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/IpmStrategy/IpmStrategy_IpmStrategyDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/IpmStrategy/IpmStrategy_IpmStrategyDbId_GET.yaml`](BrAPI-GenX/PlantHealth/IpmStrategy/IpmStrategy_IpmStrategyDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15570,7 +15570,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterIrrigationAdvice, genxGetIrrigationAdvice, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.irrigation-advices.record, brapi-genx.genx.v1.irrigation-advices.get
 - **Relevant RFC / decision references:** RFC-131
-- **Contract source:** [`Specification/BrAPI-GenX/IrrigationAdvice/IrrigationAdvice_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/IrrigationAdvice/IrrigationAdvice_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/IrrigationAdvice/IrrigationAdvice_GET_POST.yaml`](BrAPI-GenX/CropProduction/IrrigationAdvice/IrrigationAdvice_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15605,7 +15605,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListIrrigationAdvices, genxGetIrrigationAdvice, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.irrigation-advices.list, brapi-genx.genx.v1.irrigation-advices.get
 - **Relevant RFC / decision references:** RFC-131
-- **Contract source:** [`Specification/BrAPI-GenX/IrrigationAdvice/IrrigationAdvice_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/IrrigationAdvice/IrrigationAdvice_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/IrrigationAdvice/IrrigationAdvice_GET_POST.yaml`](BrAPI-GenX/CropProduction/IrrigationAdvice/IrrigationAdvice_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15638,7 +15638,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterIrrigationAdvice, genxListIrrigationAdvices, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.irrigation-advices.list, brapi-genx.genx.v1.irrigation-advices.record
 - **Relevant RFC / decision references:** RFC-131
-- **Contract source:** [`Specification/BrAPI-GenX/IrrigationAdvice/IrrigationAdvice_IrrigationAdviceDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/IrrigationAdvice/IrrigationAdvice_IrrigationAdviceDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/IrrigationAdvice/IrrigationAdvice_IrrigationAdviceDbId_GET.yaml`](BrAPI-GenX/CropProduction/IrrigationAdvice/IrrigationAdvice_IrrigationAdviceDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15675,7 +15675,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordIrrigation, genxGetIrrigation
 - **Related catalogue IDs:** brapi-genx.genx.v1.irrigation-operations.record, brapi-genx.genx.v1.irrigation-operations.get
 - **Relevant RFC / decision references:** RFC-024
-- **Contract source:** [`Specification/BrAPI-GenX/IrrigationOperation/IrrigationOperation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/IrrigationOperation/IrrigationOperation_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/IrrigationOperation/IrrigationOperation_GET_POST.yaml`](BrAPI-GenX/CropProduction/IrrigationOperation/IrrigationOperation_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15710,7 +15710,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListIrrigations, genxGetIrrigation
 - **Related catalogue IDs:** brapi-genx.genx.v1.irrigation-operations.list, brapi-genx.genx.v1.irrigation-operations.get
 - **Relevant RFC / decision references:** RFC-024
-- **Contract source:** [`Specification/BrAPI-GenX/IrrigationOperation/IrrigationOperation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/IrrigationOperation/IrrigationOperation_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/IrrigationOperation/IrrigationOperation_GET_POST.yaml`](BrAPI-GenX/CropProduction/IrrigationOperation/IrrigationOperation_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15743,7 +15743,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordIrrigation, genxListIrrigations
 - **Related catalogue IDs:** brapi-genx.genx.v1.irrigation-operations.list, brapi-genx.genx.v1.irrigation-operations.record
 - **Relevant RFC / decision references:** RFC-024
-- **Contract source:** [`Specification/BrAPI-GenX/IrrigationOperation/IrrigationOperation_IrrigationEventDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/IrrigationOperation/IrrigationOperation_IrrigationEventDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/IrrigationOperation/IrrigationOperation_IrrigationEventDbId_GET.yaml`](BrAPI-GenX/CropProduction/IrrigationOperation/IrrigationOperation_IrrigationEventDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15780,7 +15780,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** SEM-02
 - **Related catalogue IDs:** brapi-genx.brapi-v2-1.core.get.search.lists.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.locations.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.people.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.programs.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.studies.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.trials.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.post.search.lists, brapi-genx.brapi-v2-1.core.post.search.locations, brapi-genx.brapi-v2-1.core.post.search.people, brapi-genx.brapi-v2-1.core.post.search.programs, brapi-genx.brapi-v2-1.core.post.search.studies, brapi-genx.brapi-v2-1.core.post.search.trials, brapi-genx.brapi-v2-1.genotyping.get.search.allelematrix.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.calls.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.callsets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.markerpositions.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.plates.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.references.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.referencesets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.samples.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.variants.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.variantsets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.post.search.allelematrix, brapi-genx.brapi-v2-1.genotyping.post.search.calls, brapi-genx.brapi-v2-1.genotyping.post.search.callsets, brapi-genx.brapi-v2-1.genotyping.post.search.markerpositions, brapi-genx.brapi-v2-1.genotyping.post.search.plates, brapi-genx.brapi-v2-1.genotyping.post.search.references, brapi-genx.brapi-v2-1.genotyping.post.search.referencesets, brapi-genx.brapi-v2-1.genotyping.post.search.samples, brapi-genx.brapi-v2-1.genotyping.post.search.variants, brapi-genx.brapi-v2-1.genotyping.post.search.variantsets, brapi-genx.brapi-v2-1.germplasm.get.search.attributes.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.attributevalues.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.germplasm.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.pedigree.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.post.search.attributes, brapi-genx.brapi-v2-1.germplasm.post.search.attributevalues, brapi-genx.brapi-v2-1.germplasm.post.search.germplasm, brapi-genx.brapi-v2-1.germplasm.post.search.pedigree, brapi-genx.brapi-v2-1.phenotyping.get.search.images.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.observations.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.observationunits.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.variables.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.post.search.images, brapi-genx.brapi-v2-1.phenotyping.post.search.observations, brapi-genx.brapi-v2-1.phenotyping.post.search.observationunits, brapi-genx.brapi-v2-1.phenotyping.post.search.variables, brapi-genx.genx.v1.jobs.get, brapi-genx.genx.v1.jobs.request-cancellation, brapi-genx.genx.v1.jobs.submit
 - **Relevant RFC / decision references:** RFC-001
-- **Contract source:** [`Specification/BrAPI-GenX/Jobs/Jobs_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Jobs/Jobs_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Core/Jobs/Jobs_GET_POST.yaml`](BrAPI-GenX/Core/Jobs/Jobs_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15818,7 +15818,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** SEM-02, SEM-07
 - **Related catalogue IDs:** brapi-genx.brapi-v2-1.core.get.search.lists.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.locations.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.people.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.programs.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.studies.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.trials.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.post.search.lists, brapi-genx.brapi-v2-1.core.post.search.locations, brapi-genx.brapi-v2-1.core.post.search.people, brapi-genx.brapi-v2-1.core.post.search.programs, brapi-genx.brapi-v2-1.core.post.search.studies, brapi-genx.brapi-v2-1.core.post.search.trials, brapi-genx.brapi-v2-1.genotyping.get.search.allelematrix.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.calls.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.callsets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.markerpositions.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.plates.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.references.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.referencesets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.samples.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.variants.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.variantsets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.post.search.allelematrix, brapi-genx.brapi-v2-1.genotyping.post.search.calls, brapi-genx.brapi-v2-1.genotyping.post.search.callsets, brapi-genx.brapi-v2-1.genotyping.post.search.markerpositions, brapi-genx.brapi-v2-1.genotyping.post.search.plates, brapi-genx.brapi-v2-1.genotyping.post.search.references, brapi-genx.brapi-v2-1.genotyping.post.search.referencesets, brapi-genx.brapi-v2-1.genotyping.post.search.samples, brapi-genx.brapi-v2-1.genotyping.post.search.variants, brapi-genx.brapi-v2-1.genotyping.post.search.variantsets, brapi-genx.brapi-v2-1.germplasm.get.search.attributes.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.attributevalues.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.germplasm.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.pedigree.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.post.search.attributes, brapi-genx.brapi-v2-1.germplasm.post.search.attributevalues, brapi-genx.brapi-v2-1.germplasm.post.search.germplasm, brapi-genx.brapi-v2-1.germplasm.post.search.pedigree, brapi-genx.brapi-v2-1.phenotyping.get.search.images.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.observations.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.observationunits.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.variables.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.post.search.images, brapi-genx.brapi-v2-1.phenotyping.post.search.observations, brapi-genx.brapi-v2-1.phenotyping.post.search.observationunits, brapi-genx.brapi-v2-1.phenotyping.post.search.variables, brapi-genx.genx.v1.jobs.get, brapi-genx.genx.v1.jobs.list, brapi-genx.genx.v1.jobs.request-cancellation, brapi-genx.genx.v1.models.get-version, brapi-genx.genx.v1.models.list, brapi-genx.genx.v1.models.register-version
 - **Relevant RFC / decision references:** RFC-001, A-04, A-07
-- **Contract source:** [`Specification/BrAPI-GenX/Jobs/Jobs_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Jobs/Jobs_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Core/Jobs/Jobs_GET_POST.yaml`](BrAPI-GenX/Core/Jobs/Jobs_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15852,7 +15852,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxGetAsyncJobById, SEM-02
 - **Related catalogue IDs:** brapi-genx.brapi-v2-1.core.get.search.lists.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.locations.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.people.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.programs.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.studies.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.trials.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.post.search.lists, brapi-genx.brapi-v2-1.core.post.search.locations, brapi-genx.brapi-v2-1.core.post.search.people, brapi-genx.brapi-v2-1.core.post.search.programs, brapi-genx.brapi-v2-1.core.post.search.studies, brapi-genx.brapi-v2-1.core.post.search.trials, brapi-genx.brapi-v2-1.genotyping.get.search.allelematrix.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.calls.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.callsets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.markerpositions.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.plates.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.references.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.referencesets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.samples.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.variants.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.variantsets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.post.search.allelematrix, brapi-genx.brapi-v2-1.genotyping.post.search.calls, brapi-genx.brapi-v2-1.genotyping.post.search.callsets, brapi-genx.brapi-v2-1.genotyping.post.search.markerpositions, brapi-genx.brapi-v2-1.genotyping.post.search.plates, brapi-genx.brapi-v2-1.genotyping.post.search.references, brapi-genx.brapi-v2-1.genotyping.post.search.referencesets, brapi-genx.brapi-v2-1.genotyping.post.search.samples, brapi-genx.brapi-v2-1.genotyping.post.search.variants, brapi-genx.brapi-v2-1.genotyping.post.search.variantsets, brapi-genx.brapi-v2-1.germplasm.get.search.attributes.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.attributevalues.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.germplasm.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.pedigree.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.post.search.attributes, brapi-genx.brapi-v2-1.germplasm.post.search.attributevalues, brapi-genx.brapi-v2-1.germplasm.post.search.germplasm, brapi-genx.brapi-v2-1.germplasm.post.search.pedigree, brapi-genx.brapi-v2-1.phenotyping.get.search.images.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.observations.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.observationunits.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.variables.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.post.search.images, brapi-genx.brapi-v2-1.phenotyping.post.search.observations, brapi-genx.brapi-v2-1.phenotyping.post.search.observationunits, brapi-genx.brapi-v2-1.phenotyping.post.search.variables, brapi-genx.genx.v1.jobs.get, brapi-genx.genx.v1.jobs.list, brapi-genx.genx.v1.jobs.submit
 - **Relevant RFC / decision references:** RFC-001
-- **Contract source:** [`Specification/BrAPI-GenX/Jobs/Jobs_JobDbId_GET_DELETE.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Jobs/Jobs_JobDbId_GET_DELETE.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Core/Jobs/Jobs_JobDbId_GET_DELETE.yaml`](BrAPI-GenX/Core/Jobs/Jobs_JobDbId_GET_DELETE.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15887,7 +15887,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxSubmitAsyncJob, genxRequestAsyncJobCancellation, SEM-02, SEM-07
 - **Related catalogue IDs:** brapi-genx.brapi-v2-1.core.get.search.lists.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.locations.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.people.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.programs.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.studies.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.get.search.trials.by-searchresultsdbid, brapi-genx.brapi-v2-1.core.post.search.lists, brapi-genx.brapi-v2-1.core.post.search.locations, brapi-genx.brapi-v2-1.core.post.search.people, brapi-genx.brapi-v2-1.core.post.search.programs, brapi-genx.brapi-v2-1.core.post.search.studies, brapi-genx.brapi-v2-1.core.post.search.trials, brapi-genx.brapi-v2-1.genotyping.get.search.allelematrix.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.calls.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.callsets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.markerpositions.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.plates.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.references.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.referencesets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.samples.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.variants.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.get.search.variantsets.by-searchresultsdbid, brapi-genx.brapi-v2-1.genotyping.post.search.allelematrix, brapi-genx.brapi-v2-1.genotyping.post.search.calls, brapi-genx.brapi-v2-1.genotyping.post.search.callsets, brapi-genx.brapi-v2-1.genotyping.post.search.markerpositions, brapi-genx.brapi-v2-1.genotyping.post.search.plates, brapi-genx.brapi-v2-1.genotyping.post.search.references, brapi-genx.brapi-v2-1.genotyping.post.search.referencesets, brapi-genx.brapi-v2-1.genotyping.post.search.samples, brapi-genx.brapi-v2-1.genotyping.post.search.variants, brapi-genx.brapi-v2-1.genotyping.post.search.variantsets, brapi-genx.brapi-v2-1.germplasm.get.search.attributes.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.attributevalues.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.germplasm.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.get.search.pedigree.by-searchresultsdbid, brapi-genx.brapi-v2-1.germplasm.post.search.attributes, brapi-genx.brapi-v2-1.germplasm.post.search.attributevalues, brapi-genx.brapi-v2-1.germplasm.post.search.germplasm, brapi-genx.brapi-v2-1.germplasm.post.search.pedigree, brapi-genx.brapi-v2-1.phenotyping.get.search.images.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.observations.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.observationunits.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.variables.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.post.search.images, brapi-genx.brapi-v2-1.phenotyping.post.search.observations, brapi-genx.brapi-v2-1.phenotyping.post.search.observationunits, brapi-genx.brapi-v2-1.phenotyping.post.search.variables, brapi-genx.genx.v1.jobs.list, brapi-genx.genx.v1.jobs.request-cancellation, brapi-genx.genx.v1.jobs.submit, brapi-genx.genx.v1.models.get-version, brapi-genx.genx.v1.models.list, brapi-genx.genx.v1.models.register-version
 - **Relevant RFC / decision references:** RFC-001
-- **Contract source:** [`Specification/BrAPI-GenX/Jobs/Jobs_JobDbId_GET_DELETE.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Jobs/Jobs_JobDbId_GET_DELETE.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Core/Jobs/Jobs_JobDbId_GET_DELETE.yaml`](BrAPI-GenX/Core/Jobs/Jobs_JobDbId_GET_DELETE.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15924,7 +15924,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterKinshipMatrix, genxGetKinshipMatrix, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.kinship-matrices.register, brapi-genx.genx.v1.kinship-matrices.get
 - **Relevant RFC / decision references:** RFC-052
-- **Contract source:** [`Specification/BrAPI-GenX/Kinship/Kinship_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Kinship/Kinship_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/Kinship/Kinship_GET_POST.yaml`](BrAPI-GenX/Breeding/Kinship/Kinship_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15959,7 +15959,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListKinshipMatrices, genxGetKinshipMatrix, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.kinship-matrices.list, brapi-genx.genx.v1.kinship-matrices.get
 - **Relevant RFC / decision references:** RFC-052
-- **Contract source:** [`Specification/BrAPI-GenX/Kinship/Kinship_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Kinship/Kinship_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/Kinship/Kinship_GET_POST.yaml`](BrAPI-GenX/Breeding/Kinship/Kinship_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -15992,7 +15992,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterKinshipMatrix, genxListKinshipMatrices, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.kinship-matrices.list, brapi-genx.genx.v1.kinship-matrices.register
 - **Relevant RFC / decision references:** RFC-052
-- **Contract source:** [`Specification/BrAPI-GenX/Kinship/Kinship_KinshipMatrixDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Kinship/Kinship_KinshipMatrixDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/Kinship/Kinship_KinshipMatrixDbId_GET.yaml`](BrAPI-GenX/Breeding/Kinship/Kinship_KinshipMatrixDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16029,7 +16029,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterLocalConstraint, genxGetLocalConstraint, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.local-constraints.record, brapi-genx.genx.v1.local-constraints.get
 - **Relevant RFC / decision references:** RFC-139
-- **Contract source:** [`Specification/BrAPI-GenX/LocalConstraint/LocalConstraint_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/LocalConstraint/LocalConstraint_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/LocalConstraint/LocalConstraint_GET_POST.yaml`](BrAPI-GenX/CropProduction/LocalConstraint/LocalConstraint_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16064,7 +16064,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListLocalConstraints, genxGetLocalConstraint, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.local-constraints.list, brapi-genx.genx.v1.local-constraints.get
 - **Relevant RFC / decision references:** RFC-139
-- **Contract source:** [`Specification/BrAPI-GenX/LocalConstraint/LocalConstraint_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/LocalConstraint/LocalConstraint_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/LocalConstraint/LocalConstraint_GET_POST.yaml`](BrAPI-GenX/CropProduction/LocalConstraint/LocalConstraint_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16097,7 +16097,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterLocalConstraint, genxListLocalConstraints, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.local-constraints.list, brapi-genx.genx.v1.local-constraints.record
 - **Relevant RFC / decision references:** RFC-139
-- **Contract source:** [`Specification/BrAPI-GenX/LocalConstraint/LocalConstraint_LocalConstraintDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/LocalConstraint/LocalConstraint_LocalConstraintDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/LocalConstraint/LocalConstraint_LocalConstraintDbId_GET.yaml`](BrAPI-GenX/CropProduction/LocalConstraint/LocalConstraint_LocalConstraintDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16134,7 +16134,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterLocationGeometry, genxGetLocationGeometry, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.location-geometries.record, brapi-genx.genx.v1.location-geometries.get
 - **Relevant RFC / decision references:** RFC-092
-- **Contract source:** [`Specification/BrAPI-GenX/LocationGeometry/LocationGeometry_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/LocationGeometry/LocationGeometry_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/LocationGeometry/LocationGeometry_GET_POST.yaml`](BrAPI-GenX/Geospatial/LocationGeometry/LocationGeometry_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16169,7 +16169,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListLocationGeometries, genxGetLocationGeometry, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.location-geometries.list, brapi-genx.genx.v1.location-geometries.get
 - **Relevant RFC / decision references:** RFC-092
-- **Contract source:** [`Specification/BrAPI-GenX/LocationGeometry/LocationGeometry_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/LocationGeometry/LocationGeometry_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/LocationGeometry/LocationGeometry_GET_POST.yaml`](BrAPI-GenX/Geospatial/LocationGeometry/LocationGeometry_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16202,7 +16202,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterLocationGeometry, genxListLocationGeometries, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.location-geometries.list, brapi-genx.genx.v1.location-geometries.record
 - **Relevant RFC / decision references:** RFC-092
-- **Contract source:** [`Specification/BrAPI-GenX/LocationGeometry/LocationGeometry_LocationGeometryDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/LocationGeometry/LocationGeometry_LocationGeometryDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/LocationGeometry/LocationGeometry_LocationGeometryDbId_GET.yaml`](BrAPI-GenX/Geospatial/LocationGeometry/LocationGeometry_LocationGeometryDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16239,7 +16239,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** SEM-01
 - **Related catalogue IDs:** brapi-genx.brapi-v2-1.germplasm.get.seedlots.by-seedlotdbid.transactions, brapi-genx.brapi-v2-1.germplasm.get.seedlots.transactions, brapi-genx.brapi-v2-1.germplasm.post.seedlots.transactions, brapi-genx.genx.v1.seed-lot-ledger.append
 - **Relevant RFC / decision references:** RFC-003, D-07, D-08, D-20
-- **Contract source:** [`Specification/BrAPI-GenX/LotLedger/Ledger_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/LotLedger/Ledger_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/LotLedger/Ledger_GET_POST.yaml`](BrAPI-GenX/CropProduction/LotLedger/Ledger_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16276,7 +16276,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** SEM-01
 - **Related catalogue IDs:** brapi-genx.brapi-v2-1.germplasm.get.seedlots.by-seedlotdbid.transactions, brapi-genx.brapi-v2-1.germplasm.get.seedlots.transactions, brapi-genx.brapi-v2-1.germplasm.post.seedlots.transactions, brapi-genx.genx.v1.seed-lot-ledger.list
 - **Relevant RFC / decision references:** RFC-003, D-07, D-08, D-20, A-05, A-06
-- **Contract source:** [`Specification/BrAPI-GenX/LotLedger/Ledger_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/LotLedger/Ledger_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/LotLedger/Ledger_GET_POST.yaml`](BrAPI-GenX/CropProduction/LotLedger/Ledger_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16313,7 +16313,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterMarkerProbe, genxGetMarkerProbe, genxRecordAssayDesign
 - **Related catalogue IDs:** brapi-genx.genx.v1.marker-probes.record, brapi-genx.genx.v1.marker-probes.get
 - **Relevant RFC / decision references:** RFC-071
-- **Contract source:** [`Specification/BrAPI-GenX/MarkerProbe/MarkerProbe_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/MarkerProbe/MarkerProbe_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/MarkerProbe/MarkerProbe_GET_POST.yaml`](BrAPI-GenX/Genotyping/MarkerProbe/MarkerProbe_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16348,7 +16348,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListMarkerProbes, genxGetMarkerProbe, genxRecordAssayDesign
 - **Related catalogue IDs:** brapi-genx.genx.v1.marker-probes.list, brapi-genx.genx.v1.marker-probes.get
 - **Relevant RFC / decision references:** RFC-071
-- **Contract source:** [`Specification/BrAPI-GenX/MarkerProbe/MarkerProbe_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/MarkerProbe/MarkerProbe_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/MarkerProbe/MarkerProbe_GET_POST.yaml`](BrAPI-GenX/Genotyping/MarkerProbe/MarkerProbe_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16381,7 +16381,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterMarkerProbe, genxListMarkerProbes, genxRecordAssayDesign
 - **Related catalogue IDs:** brapi-genx.genx.v1.marker-probes.list, brapi-genx.genx.v1.marker-probes.record
 - **Relevant RFC / decision references:** RFC-071
-- **Contract source:** [`Specification/BrAPI-GenX/MarkerProbe/MarkerProbe_MarkerProbeDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/MarkerProbe/MarkerProbe_MarkerProbeDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/MarkerProbe/MarkerProbe_MarkerProbeDbId_GET.yaml`](BrAPI-GenX/Genotyping/MarkerProbe/MarkerProbe_MarkerProbeDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16418,7 +16418,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterMcpdAdapter, genxGetMcpdAdapter, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.mcpd-adapters.record, brapi-genx.genx.v1.mcpd-adapters.get
 - **Relevant RFC / decision references:** RFC-103
-- **Contract source:** [`Specification/BrAPI-GenX/McpdAdapter/McpdAdapter_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/McpdAdapter/McpdAdapter_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/McpdAdapter/McpdAdapter_GET_POST.yaml`](BrAPI-GenX/Germplasm/McpdAdapter/McpdAdapter_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16453,7 +16453,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListMcpdAdapters, genxGetMcpdAdapter, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.mcpd-adapters.list, brapi-genx.genx.v1.mcpd-adapters.get
 - **Relevant RFC / decision references:** RFC-103
-- **Contract source:** [`Specification/BrAPI-GenX/McpdAdapter/McpdAdapter_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/McpdAdapter/McpdAdapter_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/McpdAdapter/McpdAdapter_GET_POST.yaml`](BrAPI-GenX/Germplasm/McpdAdapter/McpdAdapter_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16486,7 +16486,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterMcpdAdapter, genxListMcpdAdapters, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.mcpd-adapters.list, brapi-genx.genx.v1.mcpd-adapters.record
 - **Relevant RFC / decision references:** RFC-103
-- **Contract source:** [`Specification/BrAPI-GenX/McpdAdapter/McpdAdapter_McpdAdapterDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/McpdAdapter/McpdAdapter_McpdAdapterDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/McpdAdapter/McpdAdapter_McpdAdapterDbId_GET.yaml`](BrAPI-GenX/Germplasm/McpdAdapter/McpdAdapter_McpdAdapterDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16523,7 +16523,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterMeasurementMethod, genxGetMeasurementMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.measurement-methods.register, brapi-genx.genx.v1.measurement-methods.get
 - **Relevant RFC / decision references:** RFC-017
-- **Contract source:** [`Specification/BrAPI-GenX/MeasurementMethods/MeasurementMethods_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/MeasurementMethods/MeasurementMethods_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/MeasurementMethods/MeasurementMethods_GET_POST.yaml`](BrAPI-GenX/ReferenceData/MeasurementMethods/MeasurementMethods_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16558,7 +16558,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListMeasurementMethods, genxGetMeasurementMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.measurement-methods.list, brapi-genx.genx.v1.measurement-methods.get
 - **Relevant RFC / decision references:** RFC-017
-- **Contract source:** [`Specification/BrAPI-GenX/MeasurementMethods/MeasurementMethods_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/MeasurementMethods/MeasurementMethods_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/MeasurementMethods/MeasurementMethods_GET_POST.yaml`](BrAPI-GenX/ReferenceData/MeasurementMethods/MeasurementMethods_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16591,7 +16591,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterMeasurementMethod, genxListMeasurementMethods
 - **Related catalogue IDs:** brapi-genx.genx.v1.measurement-methods.list, brapi-genx.genx.v1.measurement-methods.register
 - **Relevant RFC / decision references:** RFC-017
-- **Contract source:** [`Specification/BrAPI-GenX/MeasurementMethods/MeasurementMethods_MeasurementMethodDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/MeasurementMethods/MeasurementMethods_MeasurementMethodDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/MeasurementMethods/MeasurementMethods_MeasurementMethodDbId_GET.yaml`](BrAPI-GenX/ReferenceData/MeasurementMethods/MeasurementMethods_MeasurementMethodDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16628,7 +16628,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterMeasurementScale, genxGetMeasurementScale, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.measurement-scales.record, brapi-genx.genx.v1.measurement-scales.get
 - **Relevant RFC / decision references:** RFC-087
-- **Contract source:** [`Specification/BrAPI-GenX/MeasurementScale/MeasurementScale_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/MeasurementScale/MeasurementScale_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/MeasurementScale/MeasurementScale_GET_POST.yaml`](BrAPI-GenX/ReferenceData/MeasurementScale/MeasurementScale_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16663,7 +16663,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListMeasurementScales, genxGetMeasurementScale, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.measurement-scales.list, brapi-genx.genx.v1.measurement-scales.get
 - **Relevant RFC / decision references:** RFC-087
-- **Contract source:** [`Specification/BrAPI-GenX/MeasurementScale/MeasurementScale_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/MeasurementScale/MeasurementScale_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/MeasurementScale/MeasurementScale_GET_POST.yaml`](BrAPI-GenX/ReferenceData/MeasurementScale/MeasurementScale_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16696,7 +16696,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterMeasurementScale, genxListMeasurementScales, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.measurement-scales.list, brapi-genx.genx.v1.measurement-scales.record
 - **Relevant RFC / decision references:** RFC-087
-- **Contract source:** [`Specification/BrAPI-GenX/MeasurementScale/MeasurementScale_MeasurementScaleDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/MeasurementScale/MeasurementScale_MeasurementScaleDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/MeasurementScale/MeasurementScale_MeasurementScaleDbId_GET.yaml`](BrAPI-GenX/ReferenceData/MeasurementScale/MeasurementScale_MeasurementScaleDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16733,7 +16733,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordMethylationAnalysis, genxGetMethylationAnalysis, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.methylation-analyses.record, brapi-genx.genx.v1.methylation-analyses.get
 - **Relevant RFC / decision references:** RFC-057
-- **Contract source:** [`Specification/BrAPI-GenX/MethylationAnalysis/MethylationAnalysis_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/MethylationAnalysis/MethylationAnalysis_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/MethylationAnalysis/MethylationAnalysis_GET_POST.yaml`](BrAPI-GenX/Genotyping/MethylationAnalysis/MethylationAnalysis_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16768,7 +16768,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListMethylationAnalyses, genxGetMethylationAnalysis, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.methylation-analyses.list, brapi-genx.genx.v1.methylation-analyses.get
 - **Relevant RFC / decision references:** RFC-057
-- **Contract source:** [`Specification/BrAPI-GenX/MethylationAnalysis/MethylationAnalysis_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/MethylationAnalysis/MethylationAnalysis_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/MethylationAnalysis/MethylationAnalysis_GET_POST.yaml`](BrAPI-GenX/Genotyping/MethylationAnalysis/MethylationAnalysis_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16801,7 +16801,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordMethylationAnalysis, genxListMethylationAnalyses, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.methylation-analyses.list, brapi-genx.genx.v1.methylation-analyses.record
 - **Relevant RFC / decision references:** RFC-057
-- **Contract source:** [`Specification/BrAPI-GenX/MethylationAnalysis/MethylationAnalysis_MethylationAnalysisDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/MethylationAnalysis/MethylationAnalysis_MethylationAnalysisDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/MethylationAnalysis/MethylationAnalysis_MethylationAnalysisDbId_GET.yaml`](BrAPI-GenX/Genotyping/MethylationAnalysis/MethylationAnalysis_MethylationAnalysisDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16838,7 +16838,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordMixedModelResult, genxGetMixedModelResult, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.mixed-model-results.record, brapi-genx.genx.v1.mixed-model-results.get
 - **Relevant RFC / decision references:** RFC-048
-- **Contract source:** [`Specification/BrAPI-GenX/MixedModel/MixedModel_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/MixedModel/MixedModel_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/MixedModel/MixedModel_GET_POST.yaml`](BrAPI-GenX/Research/MixedModel/MixedModel_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16873,7 +16873,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListMixedModelResults, genxGetMixedModelResult, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.mixed-model-results.list, brapi-genx.genx.v1.mixed-model-results.get
 - **Relevant RFC / decision references:** RFC-048
-- **Contract source:** [`Specification/BrAPI-GenX/MixedModel/MixedModel_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/MixedModel/MixedModel_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/MixedModel/MixedModel_GET_POST.yaml`](BrAPI-GenX/Research/MixedModel/MixedModel_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16906,7 +16906,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordMixedModelResult, genxListMixedModelResults, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.mixed-model-results.list, brapi-genx.genx.v1.mixed-model-results.record
 - **Relevant RFC / decision references:** RFC-048
-- **Contract source:** [`Specification/BrAPI-GenX/MixedModel/MixedModel_MixedModelResultDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/MixedModel/MixedModel_MixedModelResultDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/MixedModel/MixedModel_MixedModelResultDbId_GET.yaml`](BrAPI-GenX/Research/MixedModel/MixedModel_MixedModelResultDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16943,7 +16943,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterModelVersion, genxGetModelVersion, genxSubmitAsyncJob, SEM-07
 - **Related catalogue IDs:** brapi-genx.genx.v1.jobs.get, brapi-genx.genx.v1.jobs.submit, brapi-genx.genx.v1.models.get-version, brapi-genx.genx.v1.models.register-version
 - **Relevant RFC / decision references:** RFC-004, D-09
-- **Contract source:** [`Specification/BrAPI-GenX/Models/Models_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Models/Models_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/Models/Models_GET_POST.yaml`](BrAPI-GenX/Research/Models/Models_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -16981,7 +16981,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListModelVersions, genxGetModelVersion, genxSubmitAsyncJob, SEM-07
 - **Related catalogue IDs:** brapi-genx.genx.v1.jobs.get, brapi-genx.genx.v1.jobs.submit, brapi-genx.genx.v1.models.get-version, brapi-genx.genx.v1.models.list
 - **Relevant RFC / decision references:** RFC-004, D-09, D-10
-- **Contract source:** [`Specification/BrAPI-GenX/Models/Models_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Models/Models_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/Models/Models_GET_POST.yaml`](BrAPI-GenX/Research/Models/Models_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17015,7 +17015,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterModelVersion, genxSubmitAsyncJob, SEM-07
 - **Related catalogue IDs:** brapi-genx.genx.v1.jobs.get, brapi-genx.genx.v1.jobs.submit, brapi-genx.genx.v1.models.list, brapi-genx.genx.v1.models.register-version
 - **Relevant RFC / decision references:** RFC-004, D-09, D-10
-- **Contract source:** [`Specification/BrAPI-GenX/Models/Models_ModelDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Models/Models_ModelDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/Models/Models_ModelDbId_GET.yaml`](BrAPI-GenX/Research/Models/Models_ModelDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17052,7 +17052,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterNutrientAdvice, genxGetNutrientAdvice, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.nutrient-advices.record, brapi-genx.genx.v1.nutrient-advices.get
 - **Relevant RFC / decision references:** RFC-132
-- **Contract source:** [`Specification/BrAPI-GenX/NutrientAdvice/NutrientAdvice_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/NutrientAdvice/NutrientAdvice_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/NutrientAdvice/NutrientAdvice_GET_POST.yaml`](BrAPI-GenX/CropProduction/NutrientAdvice/NutrientAdvice_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17087,7 +17087,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListNutrientAdvices, genxGetNutrientAdvice, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.nutrient-advices.list, brapi-genx.genx.v1.nutrient-advices.get
 - **Relevant RFC / decision references:** RFC-132
-- **Contract source:** [`Specification/BrAPI-GenX/NutrientAdvice/NutrientAdvice_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/NutrientAdvice/NutrientAdvice_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/NutrientAdvice/NutrientAdvice_GET_POST.yaml`](BrAPI-GenX/CropProduction/NutrientAdvice/NutrientAdvice_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17120,7 +17120,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterNutrientAdvice, genxListNutrientAdvices, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.nutrient-advices.list, brapi-genx.genx.v1.nutrient-advices.record
 - **Relevant RFC / decision references:** RFC-132
-- **Contract source:** [`Specification/BrAPI-GenX/NutrientAdvice/NutrientAdvice_NutrientAdviceDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/NutrientAdvice/NutrientAdvice_NutrientAdviceDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/NutrientAdvice/NutrientAdvice_NutrientAdviceDbId_GET.yaml`](BrAPI-GenX/CropProduction/NutrientAdvice/NutrientAdvice_NutrientAdviceDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17157,7 +17157,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterOntologyMapping, genxGetOntologyMapping, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.ontology-mappings.record, brapi-genx.genx.v1.ontology-mappings.get
 - **Relevant RFC / decision references:** RFC-086
-- **Contract source:** [`Specification/BrAPI-GenX/OntologyMapping/OntologyMapping_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/OntologyMapping/OntologyMapping_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/OntologyMapping/OntologyMapping_GET_POST.yaml`](BrAPI-GenX/ReferenceData/OntologyMapping/OntologyMapping_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17192,7 +17192,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListOntologyMappings, genxGetOntologyMapping, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.ontology-mappings.list, brapi-genx.genx.v1.ontology-mappings.get
 - **Relevant RFC / decision references:** RFC-086
-- **Contract source:** [`Specification/BrAPI-GenX/OntologyMapping/OntologyMapping_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/OntologyMapping/OntologyMapping_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/OntologyMapping/OntologyMapping_GET_POST.yaml`](BrAPI-GenX/ReferenceData/OntologyMapping/OntologyMapping_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17225,7 +17225,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterOntologyMapping, genxListOntologyMappings, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.ontology-mappings.list, brapi-genx.genx.v1.ontology-mappings.record
 - **Relevant RFC / decision references:** RFC-086
-- **Contract source:** [`Specification/BrAPI-GenX/OntologyMapping/OntologyMapping_OntologyMappingDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/OntologyMapping/OntologyMapping_OntologyMappingDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/OntologyMapping/OntologyMapping_OntologyMappingDbId_GET.yaml`](BrAPI-GenX/ReferenceData/OntologyMapping/OntologyMapping_OntologyMappingDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17262,7 +17262,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterOntologyTerm, genxGetOntologyTerm, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.ontology-terms.record, brapi-genx.genx.v1.ontology-terms.get
 - **Relevant RFC / decision references:** RFC-085
-- **Contract source:** [`Specification/BrAPI-GenX/OntologyTerm/OntologyTerm_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/OntologyTerm/OntologyTerm_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/OntologyTerm/OntologyTerm_GET_POST.yaml`](BrAPI-GenX/ReferenceData/OntologyTerm/OntologyTerm_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17297,7 +17297,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListOntologyTerms, genxGetOntologyTerm, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.ontology-terms.list, brapi-genx.genx.v1.ontology-terms.get
 - **Relevant RFC / decision references:** RFC-085
-- **Contract source:** [`Specification/BrAPI-GenX/OntologyTerm/OntologyTerm_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/OntologyTerm/OntologyTerm_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/OntologyTerm/OntologyTerm_GET_POST.yaml`](BrAPI-GenX/ReferenceData/OntologyTerm/OntologyTerm_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17330,7 +17330,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterOntologyTerm, genxListOntologyTerms, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.ontology-terms.list, brapi-genx.genx.v1.ontology-terms.record
 - **Relevant RFC / decision references:** RFC-085
-- **Contract source:** [`Specification/BrAPI-GenX/OntologyTerm/OntologyTerm_OntologyTermDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/OntologyTerm/OntologyTerm_OntologyTermDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/OntologyTerm/OntologyTerm_OntologyTermDbId_GET.yaml`](BrAPI-GenX/ReferenceData/OntologyTerm/OntologyTerm_OntologyTermDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17367,7 +17367,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterOutcomeFeedback, genxGetOutcomeFeedback, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.outcome-feedbacks.record, brapi-genx.genx.v1.outcome-feedbacks.get
 - **Relevant RFC / decision references:** RFC-138
-- **Contract source:** [`Specification/BrAPI-GenX/OutcomeFeedback/OutcomeFeedback_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/OutcomeFeedback/OutcomeFeedback_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/OutcomeFeedback/OutcomeFeedback_GET_POST.yaml`](BrAPI-GenX/Research/OutcomeFeedback/OutcomeFeedback_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17402,7 +17402,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListOutcomeFeedbacks, genxGetOutcomeFeedback, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.outcome-feedbacks.list, brapi-genx.genx.v1.outcome-feedbacks.get
 - **Relevant RFC / decision references:** RFC-138
-- **Contract source:** [`Specification/BrAPI-GenX/OutcomeFeedback/OutcomeFeedback_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/OutcomeFeedback/OutcomeFeedback_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/OutcomeFeedback/OutcomeFeedback_GET_POST.yaml`](BrAPI-GenX/Research/OutcomeFeedback/OutcomeFeedback_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17435,7 +17435,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterOutcomeFeedback, genxListOutcomeFeedbacks, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.outcome-feedbacks.list, brapi-genx.genx.v1.outcome-feedbacks.record
 - **Relevant RFC / decision references:** RFC-138
-- **Contract source:** [`Specification/BrAPI-GenX/OutcomeFeedback/OutcomeFeedback_OutcomeFeedbackDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/OutcomeFeedback/OutcomeFeedback_OutcomeFeedbackDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/OutcomeFeedback/OutcomeFeedback_OutcomeFeedbackDbId_GET.yaml`](BrAPI-GenX/Research/OutcomeFeedback/OutcomeFeedback_OutcomeFeedbackDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17472,7 +17472,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordParentCandidateSelection, genxGetParentCandidateSelection
 - **Related catalogue IDs:** brapi-genx.genx.v1.parent-candidate-selections.record, brapi-genx.genx.v1.parent-candidate-selections.get
 - **Relevant RFC / decision references:** RFC-028
-- **Contract source:** [`Specification/BrAPI-GenX/ParentCandidateSelection/ParentCandidateSelection_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ParentCandidateSelection/ParentCandidateSelection_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/ParentCandidateSelection/ParentCandidateSelection_GET_POST.yaml`](BrAPI-GenX/Breeding/ParentCandidateSelection/ParentCandidateSelection_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17507,7 +17507,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListParentCandidateSelections, genxGetParentCandidateSelection
 - **Related catalogue IDs:** brapi-genx.genx.v1.parent-candidate-selections.list, brapi-genx.genx.v1.parent-candidate-selections.get
 - **Relevant RFC / decision references:** RFC-028
-- **Contract source:** [`Specification/BrAPI-GenX/ParentCandidateSelection/ParentCandidateSelection_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ParentCandidateSelection/ParentCandidateSelection_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/ParentCandidateSelection/ParentCandidateSelection_GET_POST.yaml`](BrAPI-GenX/Breeding/ParentCandidateSelection/ParentCandidateSelection_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17540,7 +17540,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordParentCandidateSelection, genxListParentCandidateSelections
 - **Related catalogue IDs:** brapi-genx.genx.v1.parent-candidate-selections.list, brapi-genx.genx.v1.parent-candidate-selections.record
 - **Relevant RFC / decision references:** RFC-028
-- **Contract source:** [`Specification/BrAPI-GenX/ParentCandidateSelection/ParentCandidateSelection_ParentCandidateSelectionDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ParentCandidateSelection/ParentCandidateSelection_ParentCandidateSelectionDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/ParentCandidateSelection/ParentCandidateSelection_ParentCandidateSelectionDbId_GET.yaml`](BrAPI-GenX/Breeding/ParentCandidateSelection/ParentCandidateSelection_ParentCandidateSelectionDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17577,7 +17577,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordPcaResult, genxGetPcaResult, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.pca-results.record, brapi-genx.genx.v1.pca-results.get
 - **Relevant RFC / decision references:** RFC-053
-- **Contract source:** [`Specification/BrAPI-GenX/PcaResult/PcaResult_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PcaResult/PcaResult_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/PcaResult/PcaResult_GET_POST.yaml`](BrAPI-GenX/Research/PcaResult/PcaResult_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17612,7 +17612,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListPcaResults, genxGetPcaResult, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.pca-results.list, brapi-genx.genx.v1.pca-results.get
 - **Relevant RFC / decision references:** RFC-053
-- **Contract source:** [`Specification/BrAPI-GenX/PcaResult/PcaResult_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PcaResult/PcaResult_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/PcaResult/PcaResult_GET_POST.yaml`](BrAPI-GenX/Research/PcaResult/PcaResult_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17645,7 +17645,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordPcaResult, genxListPcaResults, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.pca-results.list, brapi-genx.genx.v1.pca-results.record
 - **Relevant RFC / decision references:** RFC-053
-- **Contract source:** [`Specification/BrAPI-GenX/PcaResult/PcaResult_PcaResultDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PcaResult/PcaResult_PcaResultDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/PcaResult/PcaResult_PcaResultDbId_GET.yaml`](BrAPI-GenX/Research/PcaResult/PcaResult_PcaResultDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17682,7 +17682,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordPedigreeAnalysis, genxGetPedigreeAnalysis, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.pedigree-analyses.record, brapi-genx.genx.v1.pedigree-analyses.get
 - **Relevant RFC / decision references:** RFC-060
-- **Contract source:** [`Specification/BrAPI-GenX/PedigreeAnalysis/PedigreeAnalysis_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PedigreeAnalysis/PedigreeAnalysis_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/PedigreeAnalysis/PedigreeAnalysis_GET_POST.yaml`](BrAPI-GenX/Breeding/PedigreeAnalysis/PedigreeAnalysis_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17717,7 +17717,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListPedigreeAnalyses, genxGetPedigreeAnalysis, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.pedigree-analyses.list, brapi-genx.genx.v1.pedigree-analyses.get
 - **Relevant RFC / decision references:** RFC-060
-- **Contract source:** [`Specification/BrAPI-GenX/PedigreeAnalysis/PedigreeAnalysis_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PedigreeAnalysis/PedigreeAnalysis_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/PedigreeAnalysis/PedigreeAnalysis_GET_POST.yaml`](BrAPI-GenX/Breeding/PedigreeAnalysis/PedigreeAnalysis_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17750,7 +17750,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordPedigreeAnalysis, genxListPedigreeAnalyses, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.pedigree-analyses.list, brapi-genx.genx.v1.pedigree-analyses.record
 - **Relevant RFC / decision references:** RFC-060
-- **Contract source:** [`Specification/BrAPI-GenX/PedigreeAnalysis/PedigreeAnalysis_PedigreeAnalysisDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PedigreeAnalysis/PedigreeAnalysis_PedigreeAnalysisDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/PedigreeAnalysis/PedigreeAnalysis_PedigreeAnalysisDbId_GET.yaml`](BrAPI-GenX/Breeding/PedigreeAnalysis/PedigreeAnalysis_PedigreeAnalysisDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17787,7 +17787,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterPersonReference, genxGetPersonReference, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.person-references.record, brapi-genx.genx.v1.person-references.get
 - **Relevant RFC / decision references:** RFC-097
-- **Contract source:** [`Specification/BrAPI-GenX/PersonReference/PersonReference_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PersonReference/PersonReference_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/PersonReference/PersonReference_GET_POST.yaml`](BrAPI-GenX/ReferenceData/PersonReference/PersonReference_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17822,7 +17822,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListPersonReferences, genxGetPersonReference, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.person-references.list, brapi-genx.genx.v1.person-references.get
 - **Relevant RFC / decision references:** RFC-097
-- **Contract source:** [`Specification/BrAPI-GenX/PersonReference/PersonReference_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PersonReference/PersonReference_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/PersonReference/PersonReference_GET_POST.yaml`](BrAPI-GenX/ReferenceData/PersonReference/PersonReference_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17855,7 +17855,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterPersonReference, genxListPersonReferences, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.person-references.list, brapi-genx.genx.v1.person-references.record
 - **Relevant RFC / decision references:** RFC-097
-- **Contract source:** [`Specification/BrAPI-GenX/PersonReference/PersonReference_PersonReferenceDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PersonReference/PersonReference_PersonReferenceDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/PersonReference/PersonReference_PersonReferenceDbId_GET.yaml`](BrAPI-GenX/ReferenceData/PersonReference/PersonReference_PersonReferenceDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17892,7 +17892,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterPestDiseaseRisk, genxGetPestDiseaseRisk, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.pest-disease-risks.record, brapi-genx.genx.v1.pest-disease-risks.get
 - **Relevant RFC / decision references:** RFC-133
-- **Contract source:** [`Specification/BrAPI-GenX/PestDiseaseRisk/PestDiseaseRisk_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PestDiseaseRisk/PestDiseaseRisk_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/PestDiseaseRisk/PestDiseaseRisk_GET_POST.yaml`](BrAPI-GenX/PlantHealth/PestDiseaseRisk/PestDiseaseRisk_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17927,7 +17927,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListPestDiseaseRisks, genxGetPestDiseaseRisk, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.pest-disease-risks.list, brapi-genx.genx.v1.pest-disease-risks.get
 - **Relevant RFC / decision references:** RFC-133
-- **Contract source:** [`Specification/BrAPI-GenX/PestDiseaseRisk/PestDiseaseRisk_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PestDiseaseRisk/PestDiseaseRisk_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/PestDiseaseRisk/PestDiseaseRisk_GET_POST.yaml`](BrAPI-GenX/PlantHealth/PestDiseaseRisk/PestDiseaseRisk_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17960,7 +17960,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterPestDiseaseRisk, genxListPestDiseaseRisks, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.pest-disease-risks.list, brapi-genx.genx.v1.pest-disease-risks.record
 - **Relevant RFC / decision references:** RFC-133
-- **Contract source:** [`Specification/BrAPI-GenX/PestDiseaseRisk/PestDiseaseRisk_PestDiseaseRiskDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PestDiseaseRisk/PestDiseaseRisk_PestDiseaseRiskDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/PestDiseaseRisk/PestDiseaseRisk_PestDiseaseRiskDbId_GET.yaml`](BrAPI-GenX/PlantHealth/PestDiseaseRisk/PestDiseaseRisk_PestDiseaseRiskDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -17997,7 +17997,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordPhenologyObservation, genxGetPhenologyObservation
 - **Related catalogue IDs:** brapi-genx.genx.v1.phenology-observations.record, brapi-genx.genx.v1.phenology-observations.get
 - **Relevant RFC / decision references:** RFC-027
-- **Contract source:** [`Specification/BrAPI-GenX/PhenologyObservation/PhenologyObservation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PhenologyObservation/PhenologyObservation_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/PhenologyObservation/PhenologyObservation_GET_POST.yaml`](BrAPI-GenX/Phenotyping/PhenologyObservation/PhenologyObservation_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18032,7 +18032,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListPhenologyObservations, genxGetPhenologyObservation
 - **Related catalogue IDs:** brapi-genx.genx.v1.phenology-observations.list, brapi-genx.genx.v1.phenology-observations.get
 - **Relevant RFC / decision references:** RFC-027
-- **Contract source:** [`Specification/BrAPI-GenX/PhenologyObservation/PhenologyObservation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PhenologyObservation/PhenologyObservation_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/PhenologyObservation/PhenologyObservation_GET_POST.yaml`](BrAPI-GenX/Phenotyping/PhenologyObservation/PhenologyObservation_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18065,7 +18065,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordPhenologyObservation, genxListPhenologyObservations
 - **Related catalogue IDs:** brapi-genx.genx.v1.phenology-observations.list, brapi-genx.genx.v1.phenology-observations.record
 - **Relevant RFC / decision references:** RFC-027
-- **Contract source:** [`Specification/BrAPI-GenX/PhenologyObservation/PhenologyObservation_PhenologyObservationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PhenologyObservation/PhenologyObservation_PhenologyObservationDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/PhenologyObservation/PhenologyObservation_PhenologyObservationDbId_GET.yaml`](BrAPI-GenX/Phenotyping/PhenologyObservation/PhenologyObservation_PhenologyObservationDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18102,7 +18102,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordPhenotypeAnnotation, genxGetPhenotypeAnnotation
 - **Related catalogue IDs:** brapi-genx.genx.v1.phenotype-annotations.record, brapi-genx.genx.v1.phenotype-annotations.get
 - **Relevant RFC / decision references:** RFC-044
-- **Contract source:** [`Specification/BrAPI-GenX/PhenotypeAnnotation/PhenotypeAnnotation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PhenotypeAnnotation/PhenotypeAnnotation_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/PhenotypeAnnotation/PhenotypeAnnotation_GET_POST.yaml`](BrAPI-GenX/Phenotyping/PhenotypeAnnotation/PhenotypeAnnotation_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18137,7 +18137,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListPhenotypeAnnotations, genxGetPhenotypeAnnotation
 - **Related catalogue IDs:** brapi-genx.genx.v1.phenotype-annotations.list, brapi-genx.genx.v1.phenotype-annotations.get
 - **Relevant RFC / decision references:** RFC-044
-- **Contract source:** [`Specification/BrAPI-GenX/PhenotypeAnnotation/PhenotypeAnnotation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PhenotypeAnnotation/PhenotypeAnnotation_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/PhenotypeAnnotation/PhenotypeAnnotation_GET_POST.yaml`](BrAPI-GenX/Phenotyping/PhenotypeAnnotation/PhenotypeAnnotation_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18170,7 +18170,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordPhenotypeAnnotation, genxListPhenotypeAnnotations
 - **Related catalogue IDs:** brapi-genx.genx.v1.phenotype-annotations.list, brapi-genx.genx.v1.phenotype-annotations.record
 - **Relevant RFC / decision references:** RFC-044
-- **Contract source:** [`Specification/BrAPI-GenX/PhenotypeAnnotation/PhenotypeAnnotation_PhenotypeAnnotationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PhenotypeAnnotation/PhenotypeAnnotation_PhenotypeAnnotationDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/PhenotypeAnnotation/PhenotypeAnnotation_PhenotypeAnnotationDbId_GET.yaml`](BrAPI-GenX/Phenotyping/PhenotypeAnnotation/PhenotypeAnnotation_PhenotypeAnnotationDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18207,7 +18207,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordPhenotypeCapture, genxGetPhenotypeCapture
 - **Related catalogue IDs:** brapi-genx.genx.v1.phenotype-captures.record, brapi-genx.genx.v1.phenotype-captures.get
 - **Relevant RFC / decision references:** RFC-012
-- **Contract source:** [`Specification/BrAPI-GenX/PhenotypeCapture/PhenotypeCapture_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PhenotypeCapture/PhenotypeCapture_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/PhenotypeCapture/PhenotypeCapture_GET_POST.yaml`](BrAPI-GenX/Phenotyping/PhenotypeCapture/PhenotypeCapture_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18242,7 +18242,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListPhenotypeCaptures, genxGetPhenotypeCapture
 - **Related catalogue IDs:** brapi-genx.genx.v1.phenotype-captures.list, brapi-genx.genx.v1.phenotype-captures.get
 - **Relevant RFC / decision references:** RFC-012
-- **Contract source:** [`Specification/BrAPI-GenX/PhenotypeCapture/PhenotypeCapture_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PhenotypeCapture/PhenotypeCapture_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/PhenotypeCapture/PhenotypeCapture_GET_POST.yaml`](BrAPI-GenX/Phenotyping/PhenotypeCapture/PhenotypeCapture_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18275,7 +18275,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordPhenotypeCapture, genxListPhenotypeCaptures
 - **Related catalogue IDs:** brapi-genx.genx.v1.phenotype-captures.list, brapi-genx.genx.v1.phenotype-captures.record
 - **Relevant RFC / decision references:** RFC-012
-- **Contract source:** [`Specification/BrAPI-GenX/PhenotypeCapture/PhenotypeCapture_PhenotypeCaptureDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PhenotypeCapture/PhenotypeCapture_PhenotypeCaptureDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/PhenotypeCapture/PhenotypeCapture_PhenotypeCaptureDbId_GET.yaml`](BrAPI-GenX/Phenotyping/PhenotypeCapture/PhenotypeCapture_PhenotypeCaptureDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18312,7 +18312,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterPipelineProvenance, genxGetPipelineProvenance, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.pipeline-provenances.record, brapi-genx.genx.v1.pipeline-provenances.get
 - **Relevant RFC / decision references:** RFC-116
-- **Contract source:** [`Specification/BrAPI-GenX/PipelineProvenance/PipelineProvenance_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PipelineProvenance/PipelineProvenance_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/PipelineProvenance/PipelineProvenance_GET_POST.yaml`](BrAPI-GenX/Genotyping/PipelineProvenance/PipelineProvenance_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18347,7 +18347,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListPipelineProvenances, genxGetPipelineProvenance, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.pipeline-provenances.list, brapi-genx.genx.v1.pipeline-provenances.get
 - **Relevant RFC / decision references:** RFC-116
-- **Contract source:** [`Specification/BrAPI-GenX/PipelineProvenance/PipelineProvenance_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PipelineProvenance/PipelineProvenance_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/PipelineProvenance/PipelineProvenance_GET_POST.yaml`](BrAPI-GenX/Genotyping/PipelineProvenance/PipelineProvenance_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18380,7 +18380,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterPipelineProvenance, genxListPipelineProvenances, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.pipeline-provenances.list, brapi-genx.genx.v1.pipeline-provenances.record
 - **Relevant RFC / decision references:** RFC-116
-- **Contract source:** [`Specification/BrAPI-GenX/PipelineProvenance/PipelineProvenance_PipelineProvenanceDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PipelineProvenance/PipelineProvenance_PipelineProvenanceDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/PipelineProvenance/PipelineProvenance_PipelineProvenanceDbId_GET.yaml`](BrAPI-GenX/Genotyping/PipelineProvenance/PipelineProvenance_PipelineProvenanceDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18417,7 +18417,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordPlantingOperation, genxGetPlantingOperation, genxRegisterCropCycle
 - **Related catalogue IDs:** brapi-genx.genx.v1.planting-operations.record, brapi-genx.genx.v1.planting-operations.get
 - **Relevant RFC / decision references:** RFC-066
-- **Contract source:** [`Specification/BrAPI-GenX/PlantingOperation/PlantingOperation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PlantingOperation/PlantingOperation_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/PlantingOperation/PlantingOperation_GET_POST.yaml`](BrAPI-GenX/CropProduction/PlantingOperation/PlantingOperation_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18452,7 +18452,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListPlantingOperations, genxGetPlantingOperation, genxRegisterCropCycle
 - **Related catalogue IDs:** brapi-genx.genx.v1.planting-operations.list, brapi-genx.genx.v1.planting-operations.get
 - **Relevant RFC / decision references:** RFC-066
-- **Contract source:** [`Specification/BrAPI-GenX/PlantingOperation/PlantingOperation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PlantingOperation/PlantingOperation_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/PlantingOperation/PlantingOperation_GET_POST.yaml`](BrAPI-GenX/CropProduction/PlantingOperation/PlantingOperation_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18485,7 +18485,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordPlantingOperation, genxListPlantingOperations, genxRegisterCropCycle
 - **Related catalogue IDs:** brapi-genx.genx.v1.planting-operations.list, brapi-genx.genx.v1.planting-operations.record
 - **Relevant RFC / decision references:** RFC-066
-- **Contract source:** [`Specification/BrAPI-GenX/PlantingOperation/PlantingOperation_PlantingOperationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PlantingOperation/PlantingOperation_PlantingOperationDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/PlantingOperation/PlantingOperation_PlantingOperationDbId_GET.yaml`](BrAPI-GenX/CropProduction/PlantingOperation/PlantingOperation_PlantingOperationDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18522,7 +18522,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterPlot, genxGetPlot, genxRegisterFieldScouting
 - **Related catalogue IDs:** brapi-genx.genx.v1.plots.record, brapi-genx.genx.v1.plots.get
 - **Relevant RFC / decision references:** RFC-107
-- **Contract source:** [`Specification/BrAPI-GenX/Plot/Plot_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Plot/Plot_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/Plot/Plot_GET_POST.yaml`](BrAPI-GenX/Breeding/Plot/Plot_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18557,7 +18557,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListPlots, genxGetPlot, genxRegisterFieldScouting
 - **Related catalogue IDs:** brapi-genx.genx.v1.plots.list, brapi-genx.genx.v1.plots.get
 - **Relevant RFC / decision references:** RFC-107
-- **Contract source:** [`Specification/BrAPI-GenX/Plot/Plot_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Plot/Plot_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/Plot/Plot_GET_POST.yaml`](BrAPI-GenX/Breeding/Plot/Plot_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18590,7 +18590,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterPlot, genxListPlots, genxRegisterFieldScouting
 - **Related catalogue IDs:** brapi-genx.genx.v1.plots.list, brapi-genx.genx.v1.plots.record
 - **Relevant RFC / decision references:** RFC-107
-- **Contract source:** [`Specification/BrAPI-GenX/Plot/Plot_PlotDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Plot/Plot_PlotDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/Plot/Plot_PlotDbId_GET.yaml`](BrAPI-GenX/Breeding/Plot/Plot_PlotDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18627,7 +18627,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordPopulationAdvancement, genxGetPopulationAdvancement
 - **Related catalogue IDs:** brapi-genx.genx.v1.population-advancements.record, brapi-genx.genx.v1.population-advancements.get
 - **Relevant RFC / decision references:** RFC-035
-- **Contract source:** [`Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/implementation/bgx-p1-06-approved-breeding-contract/Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml`](BrAPI-GenX/Breeding/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18662,7 +18662,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListPopulationAdvancements, genxGetPopulationAdvancement
 - **Related catalogue IDs:** brapi-genx.genx.v1.population-advancements.list, brapi-genx.genx.v1.population-advancements.get
 - **Relevant RFC / decision references:** RFC-035
-- **Contract source:** [`Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/implementation/bgx-p1-06-approved-breeding-contract/Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml`](BrAPI-GenX/Breeding/PopulationAdvancement/PopulationAdvancement_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18695,7 +18695,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordPopulationAdvancement, genxListPopulationAdvancements
 - **Related catalogue IDs:** brapi-genx.genx.v1.population-advancements.list, brapi-genx.genx.v1.population-advancements.record
 - **Relevant RFC / decision references:** RFC-035
-- **Contract source:** [`Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_PopulationAdvancementDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/implementation/bgx-p1-06-approved-breeding-contract/Specification/BrAPI-GenX/PopulationAdvancement/PopulationAdvancement_PopulationAdvancementDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/PopulationAdvancement/PopulationAdvancement_PopulationAdvancementDbId_GET.yaml`](BrAPI-GenX/Breeding/PopulationAdvancement/PopulationAdvancement_PopulationAdvancementDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18732,7 +18732,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordProgeny, genxGetProgenyRecord
 - **Related catalogue IDs:** brapi-genx.genx.v1.progeny-records.record, brapi-genx.genx.v1.progeny-records.get
 - **Relevant RFC / decision references:** RFC-019
-- **Contract source:** [`Specification/BrAPI-GenX/ProgenyRecords/ProgenyRecords_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ProgenyRecords/ProgenyRecords_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/ProgenyRecords/ProgenyRecords_GET_POST.yaml`](BrAPI-GenX/Breeding/ProgenyRecords/ProgenyRecords_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18767,7 +18767,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListProgenyRecords, genxGetProgenyRecord
 - **Related catalogue IDs:** brapi-genx.genx.v1.progeny-records.list, brapi-genx.genx.v1.progeny-records.get
 - **Relevant RFC / decision references:** RFC-019
-- **Contract source:** [`Specification/BrAPI-GenX/ProgenyRecords/ProgenyRecords_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ProgenyRecords/ProgenyRecords_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/ProgenyRecords/ProgenyRecords_GET_POST.yaml`](BrAPI-GenX/Breeding/ProgenyRecords/ProgenyRecords_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18800,7 +18800,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordProgeny, genxListProgenyRecords
 - **Related catalogue IDs:** brapi-genx.genx.v1.progeny-records.list, brapi-genx.genx.v1.progeny-records.record
 - **Relevant RFC / decision references:** RFC-019
-- **Contract source:** [`Specification/BrAPI-GenX/ProgenyRecords/ProgenyRecords_ProgenyRecordDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ProgenyRecords/ProgenyRecords_ProgenyRecordDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/ProgenyRecords/ProgenyRecords_ProgenyRecordDbId_GET.yaml`](BrAPI-GenX/Breeding/ProgenyRecords/ProgenyRecords_ProgenyRecordDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18837,7 +18837,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterProject, genxGetProject, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.projects.record, brapi-genx.genx.v1.projects.get
 - **Relevant RFC / decision references:** RFC-089
-- **Contract source:** [`Specification/BrAPI-GenX/Project/Project_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Project/Project_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/Project/Project_GET_POST.yaml`](BrAPI-GenX/Research/Project/Project_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18872,7 +18872,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListProjects, genxGetProject, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.projects.list, brapi-genx.genx.v1.projects.get
 - **Relevant RFC / decision references:** RFC-089
-- **Contract source:** [`Specification/BrAPI-GenX/Project/Project_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Project/Project_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/Project/Project_GET_POST.yaml`](BrAPI-GenX/Research/Project/Project_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18905,7 +18905,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterProject, genxListProjects, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.projects.list, brapi-genx.genx.v1.projects.record
 - **Relevant RFC / decision references:** RFC-089
-- **Contract source:** [`Specification/BrAPI-GenX/Project/Project_ProjectDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Project/Project_ProjectDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/Project/Project_ProjectDbId_GET.yaml`](BrAPI-GenX/Research/Project/Project_ProjectDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18942,7 +18942,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterProtocolLibrary, genxGetProtocolLibrary, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.protocol-libraries.record, brapi-genx.genx.v1.protocol-libraries.get
 - **Relevant RFC / decision references:** RFC-119
-- **Contract source:** [`Specification/BrAPI-GenX/ProtocolLibrary/ProtocolLibrary_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ProtocolLibrary/ProtocolLibrary_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/ProtocolLibrary/ProtocolLibrary_GET_POST.yaml`](BrAPI-GenX/Research/ProtocolLibrary/ProtocolLibrary_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -18977,7 +18977,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListProtocolLibraries, genxGetProtocolLibrary, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.protocol-libraries.list, brapi-genx.genx.v1.protocol-libraries.get
 - **Relevant RFC / decision references:** RFC-119
-- **Contract source:** [`Specification/BrAPI-GenX/ProtocolLibrary/ProtocolLibrary_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ProtocolLibrary/ProtocolLibrary_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/ProtocolLibrary/ProtocolLibrary_GET_POST.yaml`](BrAPI-GenX/Research/ProtocolLibrary/ProtocolLibrary_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19010,7 +19010,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterProtocolLibrary, genxListProtocolLibraries, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.protocol-libraries.list, brapi-genx.genx.v1.protocol-libraries.record
 - **Relevant RFC / decision references:** RFC-119
-- **Contract source:** [`Specification/BrAPI-GenX/ProtocolLibrary/ProtocolLibrary_ProtocolLibraryDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ProtocolLibrary/ProtocolLibrary_ProtocolLibraryDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/ProtocolLibrary/ProtocolLibrary_ProtocolLibraryDbId_GET.yaml`](BrAPI-GenX/Research/ProtocolLibrary/ProtocolLibrary_ProtocolLibraryDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19047,7 +19047,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterPublicationReview, genxGetPublicationReview, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.publication-reviews.record, brapi-genx.genx.v1.publication-reviews.get
 - **Relevant RFC / decision references:** RFC-120
-- **Contract source:** [`Specification/BrAPI-GenX/PublicationReview/PublicationReview_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PublicationReview/PublicationReview_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/PublicationReview/PublicationReview_GET_POST.yaml`](BrAPI-GenX/Research/PublicationReview/PublicationReview_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19082,7 +19082,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListPublicationReviews, genxGetPublicationReview, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.publication-reviews.list, brapi-genx.genx.v1.publication-reviews.get
 - **Relevant RFC / decision references:** RFC-120
-- **Contract source:** [`Specification/BrAPI-GenX/PublicationReview/PublicationReview_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PublicationReview/PublicationReview_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/PublicationReview/PublicationReview_GET_POST.yaml`](BrAPI-GenX/Research/PublicationReview/PublicationReview_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19115,7 +19115,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterPublicationReview, genxListPublicationReviews, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.publication-reviews.list, brapi-genx.genx.v1.publication-reviews.record
 - **Relevant RFC / decision references:** RFC-120
-- **Contract source:** [`Specification/BrAPI-GenX/PublicationReview/PublicationReview_PublicationReviewDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/PublicationReview/PublicationReview_PublicationReviewDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/PublicationReview/PublicationReview_PublicationReviewDbId_GET.yaml`](BrAPI-GenX/Research/PublicationReview/PublicationReview_PublicationReviewDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19152,7 +19152,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterQualityFlag, genxGetQualityFlag, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.quality-flags.record, brapi-genx.genx.v1.quality-flags.get
 - **Relevant RFC / decision references:** RFC-111
-- **Contract source:** [`Specification/BrAPI-GenX/QualityFlag/QualityFlag_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/QualityFlag/QualityFlag_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/QualityFlag/QualityFlag_GET_POST.yaml`](BrAPI-GenX/Phenotyping/QualityFlag/QualityFlag_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19187,7 +19187,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListQualityFlags, genxGetQualityFlag, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.quality-flags.list, brapi-genx.genx.v1.quality-flags.get
 - **Relevant RFC / decision references:** RFC-111
-- **Contract source:** [`Specification/BrAPI-GenX/QualityFlag/QualityFlag_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/QualityFlag/QualityFlag_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/QualityFlag/QualityFlag_GET_POST.yaml`](BrAPI-GenX/Phenotyping/QualityFlag/QualityFlag_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19220,7 +19220,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterQualityFlag, genxListQualityFlags, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.quality-flags.list, brapi-genx.genx.v1.quality-flags.record
 - **Relevant RFC / decision references:** RFC-111
-- **Contract source:** [`Specification/BrAPI-GenX/QualityFlag/QualityFlag_QualityFlagDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/QualityFlag/QualityFlag_QualityFlagDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/QualityFlag/QualityFlag_QualityFlagDbId_GET.yaml`](BrAPI-GenX/Phenotyping/QualityFlag/QualityFlag_QualityFlagDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19257,7 +19257,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordQuarantine, genxGetQuarantineRecord
 - **Related catalogue IDs:** brapi-genx.genx.v1.quarantine-records.record, brapi-genx.genx.v1.quarantine-records.get
 - **Relevant RFC / decision references:** RFC-030
-- **Contract source:** [`Specification/BrAPI-GenX/Quarantine/Quarantine_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Quarantine/Quarantine_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/Quarantine/Quarantine_GET_POST.yaml`](BrAPI-GenX/Germplasm/Quarantine/Quarantine_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19292,7 +19292,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListQuarantineRecords, genxGetQuarantineRecord
 - **Related catalogue IDs:** brapi-genx.genx.v1.quarantine-records.list, brapi-genx.genx.v1.quarantine-records.get
 - **Relevant RFC / decision references:** RFC-030
-- **Contract source:** [`Specification/BrAPI-GenX/Quarantine/Quarantine_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Quarantine/Quarantine_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/Quarantine/Quarantine_GET_POST.yaml`](BrAPI-GenX/Germplasm/Quarantine/Quarantine_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19325,7 +19325,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordQuarantine, genxListQuarantineRecords
 - **Related catalogue IDs:** brapi-genx.genx.v1.quarantine-records.list, brapi-genx.genx.v1.quarantine-records.record
 - **Relevant RFC / decision references:** RFC-030
-- **Contract source:** [`Specification/BrAPI-GenX/Quarantine/Quarantine_QuarantineRecordDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Quarantine/Quarantine_QuarantineRecordDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/Quarantine/Quarantine_QuarantineRecordDbId_GET.yaml`](BrAPI-GenX/Germplasm/Quarantine/Quarantine_QuarantineRecordDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19362,7 +19362,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterRasterCatalogue, genxGetRasterCatalogue, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.raster-catalogues.record, brapi-genx.genx.v1.raster-catalogues.get
 - **Relevant RFC / decision references:** RFC-144
-- **Contract source:** [`Specification/BrAPI-GenX/RasterCatalogue/RasterCatalogue_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/RasterCatalogue/RasterCatalogue_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/RasterCatalogue/RasterCatalogue_GET_POST.yaml`](BrAPI-GenX/Geospatial/RasterCatalogue/RasterCatalogue_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19397,7 +19397,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListRasterCatalogues, genxGetRasterCatalogue, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.raster-catalogues.list, brapi-genx.genx.v1.raster-catalogues.get
 - **Relevant RFC / decision references:** RFC-144
-- **Contract source:** [`Specification/BrAPI-GenX/RasterCatalogue/RasterCatalogue_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/RasterCatalogue/RasterCatalogue_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/RasterCatalogue/RasterCatalogue_GET_POST.yaml`](BrAPI-GenX/Geospatial/RasterCatalogue/RasterCatalogue_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19430,7 +19430,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterRasterCatalogue, genxListRasterCatalogues, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.raster-catalogues.list, brapi-genx.genx.v1.raster-catalogues.record
 - **Relevant RFC / decision references:** RFC-144
-- **Contract source:** [`Specification/BrAPI-GenX/RasterCatalogue/RasterCatalogue_RasterCatalogueDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/RasterCatalogue/RasterCatalogue_RasterCatalogueDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/RasterCatalogue/RasterCatalogue_RasterCatalogueDbId_GET.yaml`](BrAPI-GenX/Geospatial/RasterCatalogue/RasterCatalogue_RasterCatalogueDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19467,7 +19467,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterReferenceAssembly, genxGetReferenceAssembly, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.reference-assemblies.record, brapi-genx.genx.v1.reference-assemblies.get
 - **Relevant RFC / decision references:** RFC-115
-- **Contract source:** [`Specification/BrAPI-GenX/ReferenceAssembly/ReferenceAssembly_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ReferenceAssembly/ReferenceAssembly_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/ReferenceAssembly/ReferenceAssembly_GET_POST.yaml`](BrAPI-GenX/Genotyping/ReferenceAssembly/ReferenceAssembly_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19502,7 +19502,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListReferenceAssemblies, genxGetReferenceAssembly, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.reference-assemblies.list, brapi-genx.genx.v1.reference-assemblies.get
 - **Relevant RFC / decision references:** RFC-115
-- **Contract source:** [`Specification/BrAPI-GenX/ReferenceAssembly/ReferenceAssembly_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ReferenceAssembly/ReferenceAssembly_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/ReferenceAssembly/ReferenceAssembly_GET_POST.yaml`](BrAPI-GenX/Genotyping/ReferenceAssembly/ReferenceAssembly_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19535,7 +19535,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterReferenceAssembly, genxListReferenceAssemblies, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.reference-assemblies.list, brapi-genx.genx.v1.reference-assemblies.record
 - **Relevant RFC / decision references:** RFC-115
-- **Contract source:** [`Specification/BrAPI-GenX/ReferenceAssembly/ReferenceAssembly_ReferenceAssemblyDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ReferenceAssembly/ReferenceAssembly_ReferenceAssemblyDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/ReferenceAssembly/ReferenceAssembly_ReferenceAssemblyDbId_GET.yaml`](BrAPI-GenX/Genotyping/ReferenceAssembly/ReferenceAssembly_ReferenceAssemblyDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19572,7 +19572,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterReferenceDataVersion, genxGetReferenceDataVersion, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.reference-data-versions.record, brapi-genx.genx.v1.reference-data-versions.get
 - **Relevant RFC / decision references:** RFC-093
-- **Contract source:** [`Specification/BrAPI-GenX/ReferenceDataVersion/ReferenceDataVersion_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ReferenceDataVersion/ReferenceDataVersion_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/ReferenceDataVersion/ReferenceDataVersion_GET_POST.yaml`](BrAPI-GenX/ReferenceData/ReferenceDataVersion/ReferenceDataVersion_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19607,7 +19607,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListReferenceDataVersions, genxGetReferenceDataVersion, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.reference-data-versions.list, brapi-genx.genx.v1.reference-data-versions.get
 - **Relevant RFC / decision references:** RFC-093
-- **Contract source:** [`Specification/BrAPI-GenX/ReferenceDataVersion/ReferenceDataVersion_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ReferenceDataVersion/ReferenceDataVersion_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/ReferenceDataVersion/ReferenceDataVersion_GET_POST.yaml`](BrAPI-GenX/ReferenceData/ReferenceDataVersion/ReferenceDataVersion_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19640,7 +19640,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterReferenceDataVersion, genxListReferenceDataVersions, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.reference-data-versions.list, brapi-genx.genx.v1.reference-data-versions.record
 - **Relevant RFC / decision references:** RFC-093
-- **Contract source:** [`Specification/BrAPI-GenX/ReferenceDataVersion/ReferenceDataVersion_ReferenceDataVersionDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ReferenceDataVersion/ReferenceDataVersion_ReferenceDataVersionDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/ReferenceDataVersion/ReferenceDataVersion_ReferenceDataVersionDbId_GET.yaml`](BrAPI-GenX/ReferenceData/ReferenceDataVersion/ReferenceDataVersion_ReferenceDataVersionDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19677,7 +19677,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordRegeneration, genxGetRegeneration
 - **Related catalogue IDs:** brapi-genx.genx.v1.regeneration-records.record, brapi-genx.genx.v1.regeneration-records.get
 - **Relevant RFC / decision references:** RFC-036
-- **Contract source:** [`Specification/BrAPI-GenX/Regeneration/Regeneration_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Regeneration/Regeneration_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/Regeneration/Regeneration_GET_POST.yaml`](BrAPI-GenX/Germplasm/Regeneration/Regeneration_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19712,7 +19712,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListRegenerations, genxGetRegeneration
 - **Related catalogue IDs:** brapi-genx.genx.v1.regeneration-records.list, brapi-genx.genx.v1.regeneration-records.get
 - **Relevant RFC / decision references:** RFC-036
-- **Contract source:** [`Specification/BrAPI-GenX/Regeneration/Regeneration_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Regeneration/Regeneration_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/Regeneration/Regeneration_GET_POST.yaml`](BrAPI-GenX/Germplasm/Regeneration/Regeneration_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19745,7 +19745,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordRegeneration, genxListRegenerations
 - **Related catalogue IDs:** brapi-genx.genx.v1.regeneration-records.list, brapi-genx.genx.v1.regeneration-records.record
 - **Relevant RFC / decision references:** RFC-036
-- **Contract source:** [`Specification/BrAPI-GenX/Regeneration/Regeneration_RegenerationRecordDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Regeneration/Regeneration_RegenerationRecordDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/Regeneration/Regeneration_RegenerationRecordDbId_GET.yaml`](BrAPI-GenX/Germplasm/Regeneration/Regeneration_RegenerationRecordDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19782,7 +19782,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterRemoteSensingMetadata, genxGetRemoteSensingMetadata, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.remote-sensing-metadata.record, brapi-genx.genx.v1.remote-sensing-metadata.get
 - **Relevant RFC / decision references:** RFC-145
-- **Contract source:** [`Specification/BrAPI-GenX/RemoteSensingMetadata/RemoteSensingMetadata_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/RemoteSensingMetadata/RemoteSensingMetadata_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/RemoteSensingMetadata/RemoteSensingMetadata_GET_POST.yaml`](BrAPI-GenX/Geospatial/RemoteSensingMetadata/RemoteSensingMetadata_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19817,7 +19817,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListRemoteSensingMetadata, genxGetRemoteSensingMetadata, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.remote-sensing-metadata.list, brapi-genx.genx.v1.remote-sensing-metadata.get
 - **Relevant RFC / decision references:** RFC-145
-- **Contract source:** [`Specification/BrAPI-GenX/RemoteSensingMetadata/RemoteSensingMetadata_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/RemoteSensingMetadata/RemoteSensingMetadata_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/RemoteSensingMetadata/RemoteSensingMetadata_GET_POST.yaml`](BrAPI-GenX/Geospatial/RemoteSensingMetadata/RemoteSensingMetadata_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19850,7 +19850,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterRemoteSensingMetadata, genxListRemoteSensingMetadata, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.remote-sensing-metadata.list, brapi-genx.genx.v1.remote-sensing-metadata.record
 - **Relevant RFC / decision references:** RFC-145
-- **Contract source:** [`Specification/BrAPI-GenX/RemoteSensingMetadata/RemoteSensingMetadata_RemoteSensingMetadataDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/RemoteSensingMetadata/RemoteSensingMetadata_RemoteSensingMetadataDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/RemoteSensingMetadata/RemoteSensingMetadata_RemoteSensingMetadataDbId_GET.yaml`](BrAPI-GenX/Geospatial/RemoteSensingMetadata/RemoteSensingMetadata_RemoteSensingMetadataDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19887,7 +19887,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordMeasurementSeries, genxGetMeasurementSeries
 - **Related catalogue IDs:** brapi-genx.genx.v1.repeated-measurements.record, brapi-genx.genx.v1.repeated-measurements.get
 - **Relevant RFC / decision references:** RFC-025
-- **Contract source:** [`Specification/BrAPI-GenX/RepeatedMeasurement/RepeatedMeasurement_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/RepeatedMeasurement/RepeatedMeasurement_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/RepeatedMeasurement/RepeatedMeasurement_GET_POST.yaml`](BrAPI-GenX/Phenotyping/RepeatedMeasurement/RepeatedMeasurement_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19922,7 +19922,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListMeasurementSeries, genxGetMeasurementSeries
 - **Related catalogue IDs:** brapi-genx.genx.v1.repeated-measurements.list, brapi-genx.genx.v1.repeated-measurements.get
 - **Relevant RFC / decision references:** RFC-025
-- **Contract source:** [`Specification/BrAPI-GenX/RepeatedMeasurement/RepeatedMeasurement_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/RepeatedMeasurement/RepeatedMeasurement_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/RepeatedMeasurement/RepeatedMeasurement_GET_POST.yaml`](BrAPI-GenX/Phenotyping/RepeatedMeasurement/RepeatedMeasurement_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19955,7 +19955,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordMeasurementSeries, genxListMeasurementSeries
 - **Related catalogue IDs:** brapi-genx.genx.v1.repeated-measurements.list, brapi-genx.genx.v1.repeated-measurements.record
 - **Relevant RFC / decision references:** RFC-025
-- **Contract source:** [`Specification/BrAPI-GenX/RepeatedMeasurement/RepeatedMeasurement_MeasurementSeriesDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/RepeatedMeasurement/RepeatedMeasurement_MeasurementSeriesDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/RepeatedMeasurement/RepeatedMeasurement_MeasurementSeriesDbId_GET.yaml`](BrAPI-GenX/Phenotyping/RepeatedMeasurement/RepeatedMeasurement_MeasurementSeriesDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -19992,7 +19992,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterResearchAsset, genxGetResearchAsset, genxRegisterFairPackage
 - **Related catalogue IDs:** brapi-genx.genx.v1.research-assets.register, brapi-genx.genx.v1.research-assets.get
 - **Relevant RFC / decision references:** RFC-016
-- **Contract source:** [`Specification/BrAPI-GenX/ResearchAssets/ResearchAssets_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ResearchAssets/ResearchAssets_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/ResearchAssets/ResearchAssets_GET_POST.yaml`](BrAPI-GenX/Research/ResearchAssets/ResearchAssets_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20027,7 +20027,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListResearchAssets, genxGetResearchAsset, genxRegisterFairPackage
 - **Related catalogue IDs:** brapi-genx.genx.v1.research-assets.list, brapi-genx.genx.v1.research-assets.get
 - **Relevant RFC / decision references:** RFC-016
-- **Contract source:** [`Specification/BrAPI-GenX/ResearchAssets/ResearchAssets_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ResearchAssets/ResearchAssets_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/ResearchAssets/ResearchAssets_GET_POST.yaml`](BrAPI-GenX/Research/ResearchAssets/ResearchAssets_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20060,7 +20060,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterResearchAsset, genxListResearchAssets, genxRegisterFairPackage
 - **Related catalogue IDs:** brapi-genx.genx.v1.research-assets.list, brapi-genx.genx.v1.research-assets.register
 - **Relevant RFC / decision references:** RFC-016
-- **Contract source:** [`Specification/BrAPI-GenX/ResearchAssets/ResearchAssets_ResearchAssetDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ResearchAssets/ResearchAssets_ResearchAssetDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/ResearchAssets/ResearchAssets_ResearchAssetDbId_GET.yaml`](BrAPI-GenX/Research/ResearchAssets/ResearchAssets_ResearchAssetDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20097,7 +20097,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterResearchLocation, genxGetResearchLocation, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.research-locations.record, brapi-genx.genx.v1.research-locations.get
 - **Relevant RFC / decision references:** RFC-100
-- **Contract source:** [`Specification/BrAPI-GenX/ResearchLocation/ResearchLocation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ResearchLocation/ResearchLocation_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/ResearchLocation/ResearchLocation_GET_POST.yaml`](BrAPI-GenX/Research/ResearchLocation/ResearchLocation_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20132,7 +20132,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListResearchLocations, genxGetResearchLocation, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.research-locations.list, brapi-genx.genx.v1.research-locations.get
 - **Relevant RFC / decision references:** RFC-100
-- **Contract source:** [`Specification/BrAPI-GenX/ResearchLocation/ResearchLocation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ResearchLocation/ResearchLocation_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/ResearchLocation/ResearchLocation_GET_POST.yaml`](BrAPI-GenX/Research/ResearchLocation/ResearchLocation_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20165,7 +20165,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterResearchLocation, genxListResearchLocations, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.research-locations.list, brapi-genx.genx.v1.research-locations.record
 - **Relevant RFC / decision references:** RFC-100
-- **Contract source:** [`Specification/BrAPI-GenX/ResearchLocation/ResearchLocation_ResearchLocationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ResearchLocation/ResearchLocation_ResearchLocationDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/ResearchLocation/ResearchLocation_ResearchLocationDbId_GET.yaml`](BrAPI-GenX/Research/ResearchLocation/ResearchLocation_ResearchLocationDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20202,7 +20202,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterResearchProgram, genxGetResearchProgram, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.research-programs.record, brapi-genx.genx.v1.research-programs.get
 - **Relevant RFC / decision references:** RFC-098
-- **Contract source:** [`Specification/BrAPI-GenX/ResearchProgram/ResearchProgram_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ResearchProgram/ResearchProgram_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/ResearchProgram/ResearchProgram_GET_POST.yaml`](BrAPI-GenX/Research/ResearchProgram/ResearchProgram_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20237,7 +20237,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListResearchPrograms, genxGetResearchProgram, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.research-programs.list, brapi-genx.genx.v1.research-programs.get
 - **Relevant RFC / decision references:** RFC-098
-- **Contract source:** [`Specification/BrAPI-GenX/ResearchProgram/ResearchProgram_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ResearchProgram/ResearchProgram_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/ResearchProgram/ResearchProgram_GET_POST.yaml`](BrAPI-GenX/Research/ResearchProgram/ResearchProgram_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20270,7 +20270,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterResearchProgram, genxListResearchPrograms, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.research-programs.list, brapi-genx.genx.v1.research-programs.record
 - **Relevant RFC / decision references:** RFC-098
-- **Contract source:** [`Specification/BrAPI-GenX/ResearchProgram/ResearchProgram_ResearchProgramDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ResearchProgram/ResearchProgram_ResearchProgramDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Research/ResearchProgram/ResearchProgram_ResearchProgramDbId_GET.yaml`](BrAPI-GenX/Research/ResearchProgram/ResearchProgram_ResearchProgramDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20307,7 +20307,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterReusableList, genxGetReusableList, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.reusable-lists.record, brapi-genx.genx.v1.reusable-lists.get
 - **Relevant RFC / decision references:** RFC-090
-- **Contract source:** [`Specification/BrAPI-GenX/ReusableList/ReusableList_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ReusableList/ReusableList_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/ReusableList/ReusableList_GET_POST.yaml`](BrAPI-GenX/ReferenceData/ReusableList/ReusableList_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20342,7 +20342,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListReusableLists, genxGetReusableList, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.reusable-lists.list, brapi-genx.genx.v1.reusable-lists.get
 - **Relevant RFC / decision references:** RFC-090
-- **Contract source:** [`Specification/BrAPI-GenX/ReusableList/ReusableList_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ReusableList/ReusableList_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/ReusableList/ReusableList_GET_POST.yaml`](BrAPI-GenX/ReferenceData/ReusableList/ReusableList_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20375,7 +20375,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterReusableList, genxListReusableLists, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.reusable-lists.list, brapi-genx.genx.v1.reusable-lists.record
 - **Relevant RFC / decision references:** RFC-090
-- **Contract source:** [`Specification/BrAPI-GenX/ReusableList/ReusableList_ReusableListDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ReusableList/ReusableList_ReusableListDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/ReusableList/ReusableList_ReusableListDbId_GET.yaml`](BrAPI-GenX/ReferenceData/ReusableList/ReusableList_ReusableListDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20412,7 +20412,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterSafetyDuplication, genxGetSafetyDuplication
 - **Related catalogue IDs:** brapi-genx.genx.v1.safety-duplications.register, brapi-genx.genx.v1.safety-duplications.get
 - **Relevant RFC / decision references:** RFC-034
-- **Contract source:** [`Specification/BrAPI-GenX/SafetyDuplication/SafetyDuplication_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SafetyDuplication/SafetyDuplication_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/SafetyDuplication/SafetyDuplication_GET_POST.yaml`](BrAPI-GenX/Germplasm/SafetyDuplication/SafetyDuplication_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20447,7 +20447,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListSafetyDuplications, genxGetSafetyDuplication
 - **Related catalogue IDs:** brapi-genx.genx.v1.safety-duplications.list, brapi-genx.genx.v1.safety-duplications.get
 - **Relevant RFC / decision references:** RFC-034
-- **Contract source:** [`Specification/BrAPI-GenX/SafetyDuplication/SafetyDuplication_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SafetyDuplication/SafetyDuplication_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/SafetyDuplication/SafetyDuplication_GET_POST.yaml`](BrAPI-GenX/Germplasm/SafetyDuplication/SafetyDuplication_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20480,7 +20480,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterSafetyDuplication, genxListSafetyDuplications
 - **Related catalogue IDs:** brapi-genx.genx.v1.safety-duplications.list, brapi-genx.genx.v1.safety-duplications.register
 - **Relevant RFC / decision references:** RFC-034
-- **Contract source:** [`Specification/BrAPI-GenX/SafetyDuplication/SafetyDuplication_SafetyDuplicationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SafetyDuplication/SafetyDuplication_SafetyDuplicationDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/SafetyDuplication/SafetyDuplication_SafetyDuplicationDbId_GET.yaml`](BrAPI-GenX/Germplasm/SafetyDuplication/SafetyDuplication_SafetyDuplicationDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20517,7 +20517,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterSchemaMapping, genxGetSchemaMapping, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.schema-mappings.record, brapi-genx.genx.v1.schema-mappings.get
 - **Relevant RFC / decision references:** RFC-152
-- **Contract source:** [`Specification/BrAPI-GenX/SchemaMapping/SchemaMapping_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SchemaMapping/SchemaMapping_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Interoperability/SchemaMapping/SchemaMapping_GET_POST.yaml`](BrAPI-GenX/Interoperability/SchemaMapping/SchemaMapping_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20552,7 +20552,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListSchemaMappings, genxGetSchemaMapping, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.schema-mappings.list, brapi-genx.genx.v1.schema-mappings.get
 - **Relevant RFC / decision references:** RFC-152
-- **Contract source:** [`Specification/BrAPI-GenX/SchemaMapping/SchemaMapping_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SchemaMapping/SchemaMapping_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Interoperability/SchemaMapping/SchemaMapping_GET_POST.yaml`](BrAPI-GenX/Interoperability/SchemaMapping/SchemaMapping_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20585,7 +20585,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterSchemaMapping, genxListSchemaMappings, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.schema-mappings.list, brapi-genx.genx.v1.schema-mappings.record
 - **Relevant RFC / decision references:** RFC-152
-- **Contract source:** [`Specification/BrAPI-GenX/SchemaMapping/SchemaMapping_SchemaMappingDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SchemaMapping/SchemaMapping_SchemaMappingDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Interoperability/SchemaMapping/SchemaMapping_SchemaMappingDbId_GET.yaml`](BrAPI-GenX/Interoperability/SchemaMapping/SchemaMapping_SchemaMappingDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20622,7 +20622,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordSelectionDecision, genxGetSelectionDecision
 - **Related catalogue IDs:** brapi-genx.genx.v1.selection-decisions.record, brapi-genx.genx.v1.selection-decisions.get
 - **Relevant RFC / decision references:** RFC-008
-- **Contract source:** [`Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/implementation/bgx-p1-06-approved-breeding-contract/Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/SelectionDecisions/SelectionDecisions_GET_POST.yaml`](BrAPI-GenX/Breeding/SelectionDecisions/SelectionDecisions_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20657,7 +20657,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListSelectionDecisions, genxGetSelectionDecision
 - **Related catalogue IDs:** brapi-genx.genx.v1.selection-decisions.list, brapi-genx.genx.v1.selection-decisions.get
 - **Relevant RFC / decision references:** RFC-008
-- **Contract source:** [`Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/implementation/bgx-p1-06-approved-breeding-contract/Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/SelectionDecisions/SelectionDecisions_GET_POST.yaml`](BrAPI-GenX/Breeding/SelectionDecisions/SelectionDecisions_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20690,7 +20690,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordSelectionDecision, genxListSelectionDecisions
 - **Related catalogue IDs:** brapi-genx.genx.v1.selection-decisions.list, brapi-genx.genx.v1.selection-decisions.record
 - **Relevant RFC / decision references:** RFC-008
-- **Contract source:** [`Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_SelectionDecisionDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/implementation/bgx-p1-06-approved-breeding-contract/Specification/BrAPI-GenX/SelectionDecisions/SelectionDecisions_SelectionDecisionDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/SelectionDecisions/SelectionDecisions_SelectionDecisionDbId_GET.yaml`](BrAPI-GenX/Breeding/SelectionDecisions/SelectionDecisions_SelectionDecisionDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20727,7 +20727,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterSensorDevice, genxGetSensorDevice, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.sensor-devices.record, brapi-genx.genx.v1.sensor-devices.get
 - **Relevant RFC / decision references:** RFC-149
-- **Contract source:** [`Specification/BrAPI-GenX/SensorDevice/SensorDevice_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SensorDevice/SensorDevice_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Instrumentation/SensorDevice/SensorDevice_GET_POST.yaml`](BrAPI-GenX/Instrumentation/SensorDevice/SensorDevice_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20762,7 +20762,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListSensorDevices, genxGetSensorDevice, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.sensor-devices.list, brapi-genx.genx.v1.sensor-devices.get
 - **Relevant RFC / decision references:** RFC-149
-- **Contract source:** [`Specification/BrAPI-GenX/SensorDevice/SensorDevice_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SensorDevice/SensorDevice_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Instrumentation/SensorDevice/SensorDevice_GET_POST.yaml`](BrAPI-GenX/Instrumentation/SensorDevice/SensorDevice_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20795,7 +20795,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterSensorDevice, genxListSensorDevices, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.sensor-devices.list, brapi-genx.genx.v1.sensor-devices.record
 - **Relevant RFC / decision references:** RFC-149
-- **Contract source:** [`Specification/BrAPI-GenX/SensorDevice/SensorDevice_SensorDeviceDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SensorDevice/SensorDevice_SensorDeviceDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Instrumentation/SensorDevice/SensorDevice_SensorDeviceDbId_GET.yaml`](BrAPI-GenX/Instrumentation/SensorDevice/SensorDevice_SensorDeviceDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20838,7 +20838,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** V2.1 GET /brapi/v2/serverinfo, OVERLAP-01
 - **Related catalogue IDs:** brapi-genx.brapi-v2-1.core.get.serverinfo
 - **Relevant RFC / decision references:** RFC-001, A-01
-- **Contract source:** [`Specification/BrAPI-GenX/ServerInfoV3/ServerInfoV3_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ServerInfoV3/ServerInfoV3_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Core/ServerInfoV3/ServerInfoV3_GET.yaml`](BrAPI-GenX/Core/ServerInfoV3/ServerInfoV3_GET.yaml)
 - **BijMantra relative-route candidates:** 1. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - [backend/app/api/brapi/v2/core/serverinfo.py](https://github.com/denishdholaria/bijmantraorg/blob/main/backend/app/api/brapi/v2/core/serverinfo.py#L145) — `get_server_info`; brapi-adapter-source-declaration.
   - Interpretation: Same relative method/path appears in BijMantra's static inventory. Do not infer V3 wiring, contract equivalence, or runtime mounting.
@@ -20876,7 +20876,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterSoilChemistry, genxGetSoilChemistry, genxRegisterSoilProfile
 - **Related catalogue IDs:** brapi-genx.genx.v1.soil-chemistry.record, brapi-genx.genx.v1.soil-chemistry.get
 - **Relevant RFC / decision references:** RFC-077
-- **Contract source:** [`Specification/BrAPI-GenX/SoilChemistry/SoilChemistry_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SoilChemistry/SoilChemistry_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/SoilChemistry/SoilChemistry_GET_POST.yaml`](BrAPI-GenX/Environment/SoilChemistry/SoilChemistry_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20911,7 +20911,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListSoilChemistry, genxGetSoilChemistry, genxRegisterSoilProfile
 - **Related catalogue IDs:** brapi-genx.genx.v1.soil-chemistry.list, brapi-genx.genx.v1.soil-chemistry.get
 - **Relevant RFC / decision references:** RFC-077
-- **Contract source:** [`Specification/BrAPI-GenX/SoilChemistry/SoilChemistry_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SoilChemistry/SoilChemistry_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/SoilChemistry/SoilChemistry_GET_POST.yaml`](BrAPI-GenX/Environment/SoilChemistry/SoilChemistry_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20944,7 +20944,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterSoilChemistry, genxListSoilChemistry, genxRegisterSoilProfile
 - **Related catalogue IDs:** brapi-genx.genx.v1.soil-chemistry.list, brapi-genx.genx.v1.soil-chemistry.record
 - **Relevant RFC / decision references:** RFC-077
-- **Contract source:** [`Specification/BrAPI-GenX/SoilChemistry/SoilChemistry_SoilChemistryDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SoilChemistry/SoilChemistry_SoilChemistryDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/SoilChemistry/SoilChemistry_SoilChemistryDbId_GET.yaml`](BrAPI-GenX/Environment/SoilChemistry/SoilChemistry_SoilChemistryDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -20981,7 +20981,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterSoilProfile, genxGetSoilProfile
 - **Related catalogue IDs:** brapi-genx.genx.v1.soil-profiles.register, brapi-genx.genx.v1.soil-profiles.get
 - **Relevant RFC / decision references:** RFC-023
-- **Contract source:** [`Specification/BrAPI-GenX/SoilProfile/SoilProfile_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SoilProfile/SoilProfile_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/SoilProfile/SoilProfile_GET_POST.yaml`](BrAPI-GenX/Environment/SoilProfile/SoilProfile_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21016,7 +21016,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListSoilProfiles, genxGetSoilProfile
 - **Related catalogue IDs:** brapi-genx.genx.v1.soil-profiles.list, brapi-genx.genx.v1.soil-profiles.get
 - **Relevant RFC / decision references:** RFC-023
-- **Contract source:** [`Specification/BrAPI-GenX/SoilProfile/SoilProfile_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SoilProfile/SoilProfile_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/SoilProfile/SoilProfile_GET_POST.yaml`](BrAPI-GenX/Environment/SoilProfile/SoilProfile_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21049,7 +21049,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterSoilProfile, genxListSoilProfiles
 - **Related catalogue IDs:** brapi-genx.genx.v1.soil-profiles.list, brapi-genx.genx.v1.soil-profiles.register
 - **Relevant RFC / decision references:** RFC-023
-- **Contract source:** [`Specification/BrAPI-GenX/SoilProfile/SoilProfile_SoilProfileDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SoilProfile/SoilProfile_SoilProfileDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/SoilProfile/SoilProfile_SoilProfileDbId_GET.yaml`](BrAPI-GenX/Environment/SoilProfile/SoilProfile_SoilProfileDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21086,7 +21086,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterSowingWindow, genxGetSowingWindow, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.sowing-windows.record, brapi-genx.genx.v1.sowing-windows.get
 - **Relevant RFC / decision references:** RFC-130
-- **Contract source:** [`Specification/BrAPI-GenX/SowingWindow/SowingWindow_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SowingWindow/SowingWindow_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/SowingWindow/SowingWindow_GET_POST.yaml`](BrAPI-GenX/CropProduction/SowingWindow/SowingWindow_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21121,7 +21121,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListSowingWindows, genxGetSowingWindow, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.sowing-windows.list, brapi-genx.genx.v1.sowing-windows.get
 - **Relevant RFC / decision references:** RFC-130
-- **Contract source:** [`Specification/BrAPI-GenX/SowingWindow/SowingWindow_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SowingWindow/SowingWindow_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/SowingWindow/SowingWindow_GET_POST.yaml`](BrAPI-GenX/CropProduction/SowingWindow/SowingWindow_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21154,7 +21154,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterSowingWindow, genxListSowingWindows, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.sowing-windows.list, brapi-genx.genx.v1.sowing-windows.record
 - **Relevant RFC / decision references:** RFC-130
-- **Contract source:** [`Specification/BrAPI-GenX/SowingWindow/SowingWindow_SowingWindowDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SowingWindow/SowingWindow_SowingWindowDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/SowingWindow/SowingWindow_SowingWindowDbId_GET.yaml`](BrAPI-GenX/CropProduction/SowingWindow/SowingWindow_SowingWindowDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21191,7 +21191,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterSpatialIndex, genxGetSpatialIndex, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.spatial-indexes.record, brapi-genx.genx.v1.spatial-indexes.get
 - **Relevant RFC / decision references:** RFC-141
-- **Contract source:** [`Specification/BrAPI-GenX/SpatialIndex/SpatialIndex_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SpatialIndex/SpatialIndex_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/SpatialIndex/SpatialIndex_GET_POST.yaml`](BrAPI-GenX/Geospatial/SpatialIndex/SpatialIndex_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21226,7 +21226,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListSpatialIndexes, genxGetSpatialIndex, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.spatial-indexes.list, brapi-genx.genx.v1.spatial-indexes.get
 - **Relevant RFC / decision references:** RFC-141
-- **Contract source:** [`Specification/BrAPI-GenX/SpatialIndex/SpatialIndex_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SpatialIndex/SpatialIndex_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/SpatialIndex/SpatialIndex_GET_POST.yaml`](BrAPI-GenX/Geospatial/SpatialIndex/SpatialIndex_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21259,7 +21259,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterSpatialIndex, genxListSpatialIndexes, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.spatial-indexes.list, brapi-genx.genx.v1.spatial-indexes.record
 - **Relevant RFC / decision references:** RFC-141
-- **Contract source:** [`Specification/BrAPI-GenX/SpatialIndex/SpatialIndex_SpatialIndexDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SpatialIndex/SpatialIndex_SpatialIndexDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/SpatialIndex/SpatialIndex_SpatialIndexDbId_GET.yaml`](BrAPI-GenX/Geospatial/SpatialIndex/SpatialIndex_SpatialIndexDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21296,7 +21296,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterSpatialQuery, genxGetSpatialQuery, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.spatial-queries.record, brapi-genx.genx.v1.spatial-queries.get
 - **Relevant RFC / decision references:** RFC-143
-- **Contract source:** [`Specification/BrAPI-GenX/SpatialQuery/SpatialQuery_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SpatialQuery/SpatialQuery_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/SpatialQuery/SpatialQuery_GET_POST.yaml`](BrAPI-GenX/Geospatial/SpatialQuery/SpatialQuery_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21331,7 +21331,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListSpatialQueries, genxGetSpatialQuery, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.spatial-queries.list, brapi-genx.genx.v1.spatial-queries.get
 - **Relevant RFC / decision references:** RFC-143
-- **Contract source:** [`Specification/BrAPI-GenX/SpatialQuery/SpatialQuery_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SpatialQuery/SpatialQuery_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/SpatialQuery/SpatialQuery_GET_POST.yaml`](BrAPI-GenX/Geospatial/SpatialQuery/SpatialQuery_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21364,7 +21364,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterSpatialQuery, genxListSpatialQueries, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.spatial-queries.list, brapi-genx.genx.v1.spatial-queries.record
 - **Relevant RFC / decision references:** RFC-143
-- **Contract source:** [`Specification/BrAPI-GenX/SpatialQuery/SpatialQuery_SpatialQueryDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SpatialQuery/SpatialQuery_SpatialQueryDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/SpatialQuery/SpatialQuery_SpatialQueryDbId_GET.yaml`](BrAPI-GenX/Geospatial/SpatialQuery/SpatialQuery_SpatialQueryDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21401,7 +21401,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterSpeedBreedingProtocol, genxGetSpeedBreedingProtocol
 - **Related catalogue IDs:** brapi-genx.genx.v1.speed-breeding-protocols.register, brapi-genx.genx.v1.speed-breeding-protocols.get
 - **Relevant RFC / decision references:** RFC-022
-- **Contract source:** [`Specification/BrAPI-GenX/SpeedBreeding/SpeedBreeding_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SpeedBreeding/SpeedBreeding_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/SpeedBreeding/SpeedBreeding_GET_POST.yaml`](BrAPI-GenX/Breeding/SpeedBreeding/SpeedBreeding_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21436,7 +21436,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListSpeedBreedingProtocols, genxGetSpeedBreedingProtocol
 - **Related catalogue IDs:** brapi-genx.genx.v1.speed-breeding-protocols.list, brapi-genx.genx.v1.speed-breeding-protocols.get
 - **Relevant RFC / decision references:** RFC-022
-- **Contract source:** [`Specification/BrAPI-GenX/SpeedBreeding/SpeedBreeding_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SpeedBreeding/SpeedBreeding_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/SpeedBreeding/SpeedBreeding_GET_POST.yaml`](BrAPI-GenX/Breeding/SpeedBreeding/SpeedBreeding_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21469,7 +21469,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterSpeedBreedingProtocol, genxListSpeedBreedingProtocols
 - **Related catalogue IDs:** brapi-genx.genx.v1.speed-breeding-protocols.list, brapi-genx.genx.v1.speed-breeding-protocols.register
 - **Relevant RFC / decision references:** RFC-022
-- **Contract source:** [`Specification/BrAPI-GenX/SpeedBreeding/SpeedBreeding_SpeedBreedingProtocolDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SpeedBreeding/SpeedBreeding_SpeedBreedingProtocolDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/SpeedBreeding/SpeedBreeding_SpeedBreedingProtocolDbId_GET.yaml`](BrAPI-GenX/Breeding/SpeedBreeding/SpeedBreeding_SpeedBreedingProtocolDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21506,7 +21506,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterSprayApplication, genxGetSprayApplication, genxRegisterFieldScouting
 - **Related catalogue IDs:** brapi-genx.genx.v1.spray-applications.record, brapi-genx.genx.v1.spray-applications.get
 - **Relevant RFC / decision references:** RFC-081
-- **Contract source:** [`Specification/BrAPI-GenX/SprayApplication/SprayApplication_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SprayApplication/SprayApplication_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/SprayApplication/SprayApplication_GET_POST.yaml`](BrAPI-GenX/CropProduction/SprayApplication/SprayApplication_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21541,7 +21541,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListSprayApplications, genxGetSprayApplication, genxRegisterFieldScouting
 - **Related catalogue IDs:** brapi-genx.genx.v1.spray-applications.list, brapi-genx.genx.v1.spray-applications.get
 - **Relevant RFC / decision references:** RFC-081
-- **Contract source:** [`Specification/BrAPI-GenX/SprayApplication/SprayApplication_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SprayApplication/SprayApplication_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/SprayApplication/SprayApplication_GET_POST.yaml`](BrAPI-GenX/CropProduction/SprayApplication/SprayApplication_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21574,7 +21574,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterSprayApplication, genxListSprayApplications, genxRegisterFieldScouting
 - **Related catalogue IDs:** brapi-genx.genx.v1.spray-applications.list, brapi-genx.genx.v1.spray-applications.record
 - **Relevant RFC / decision references:** RFC-081
-- **Contract source:** [`Specification/BrAPI-GenX/SprayApplication/SprayApplication_SprayApplicationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/SprayApplication/SprayApplication_SprayApplicationDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/SprayApplication/SprayApplication_SprayApplicationDbId_GET.yaml`](BrAPI-GenX/CropProduction/SprayApplication/SprayApplication_SprayApplicationDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21611,7 +21611,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordStabilityAnalysis, genxGetStabilityAnalysis, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.stability-analyses.record, brapi-genx.genx.v1.stability-analyses.get
 - **Relevant RFC / decision references:** RFC-049
-- **Contract source:** [`Specification/BrAPI-GenX/StabilityAnalysis/StabilityAnalysis_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/StabilityAnalysis/StabilityAnalysis_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/StabilityAnalysis/StabilityAnalysis_GET_POST.yaml`](BrAPI-GenX/Breeding/StabilityAnalysis/StabilityAnalysis_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21646,7 +21646,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListStabilityAnalyses, genxGetStabilityAnalysis, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.stability-analyses.list, brapi-genx.genx.v1.stability-analyses.get
 - **Relevant RFC / decision references:** RFC-049
-- **Contract source:** [`Specification/BrAPI-GenX/StabilityAnalysis/StabilityAnalysis_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/StabilityAnalysis/StabilityAnalysis_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/StabilityAnalysis/StabilityAnalysis_GET_POST.yaml`](BrAPI-GenX/Breeding/StabilityAnalysis/StabilityAnalysis_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21679,7 +21679,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordStabilityAnalysis, genxListStabilityAnalyses, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.stability-analyses.list, brapi-genx.genx.v1.stability-analyses.record
 - **Relevant RFC / decision references:** RFC-049
-- **Contract source:** [`Specification/BrAPI-GenX/StabilityAnalysis/StabilityAnalysis_StabilityAnalysisResultDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/StabilityAnalysis/StabilityAnalysis_StabilityAnalysisResultDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/StabilityAnalysis/StabilityAnalysis_StabilityAnalysisResultDbId_GET.yaml`](BrAPI-GenX/Breeding/StabilityAnalysis/StabilityAnalysis_StabilityAnalysisResultDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21716,7 +21716,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterTaxonName, genxGetTaxonName, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.taxon-names.record, brapi-genx.genx.v1.taxon-names.get
 - **Relevant RFC / decision references:** RFC-080
-- **Contract source:** [`Specification/BrAPI-GenX/TaxonName/TaxonName_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/TaxonName/TaxonName_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/TaxonName/TaxonName_GET_POST.yaml`](BrAPI-GenX/ReferenceData/TaxonName/TaxonName_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21751,7 +21751,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListTaxonNames, genxGetTaxonName, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.taxon-names.list, brapi-genx.genx.v1.taxon-names.get
 - **Relevant RFC / decision references:** RFC-080
-- **Contract source:** [`Specification/BrAPI-GenX/TaxonName/TaxonName_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/TaxonName/TaxonName_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/TaxonName/TaxonName_GET_POST.yaml`](BrAPI-GenX/ReferenceData/TaxonName/TaxonName_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21784,7 +21784,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterTaxonName, genxListTaxonNames, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.taxon-names.list, brapi-genx.genx.v1.taxon-names.record
 - **Relevant RFC / decision references:** RFC-080
-- **Contract source:** [`Specification/BrAPI-GenX/TaxonName/TaxonName_TaxonNameDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/TaxonName/TaxonName_TaxonNameDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/TaxonName/TaxonName_TaxonNameDbId_GET.yaml`](BrAPI-GenX/ReferenceData/TaxonName/TaxonName_TaxonNameDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21825,7 +21825,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** SEM-03
 - **Related catalogue IDs:** brapi-genx.brapi-v2-1.phenotyping.get.observations, brapi-genx.brapi-v2-1.phenotyping.get.observations.by-observationdbid, brapi-genx.brapi-v2-1.phenotyping.get.observations.table, brapi-genx.brapi-v2-1.phenotyping.get.observationunits, brapi-genx.brapi-v2-1.phenotyping.get.observationunits.by-observationunitdbid, brapi-genx.brapi-v2-1.phenotyping.get.observationunits.table, brapi-genx.brapi-v2-1.phenotyping.get.search.observations.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.observationunits.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.variables.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.variables, brapi-genx.brapi-v2-1.phenotyping.get.variables.by-observationvariabledbid, brapi-genx.brapi-v2-1.phenotyping.post.delete.observations, brapi-genx.brapi-v2-1.phenotyping.post.observations, brapi-genx.brapi-v2-1.phenotyping.post.observationunits, brapi-genx.brapi-v2-1.phenotyping.post.search.observations, brapi-genx.brapi-v2-1.phenotyping.post.search.observationunits, brapi-genx.brapi-v2-1.phenotyping.post.search.variables, brapi-genx.brapi-v2-1.phenotyping.post.variables, brapi-genx.brapi-v2-1.phenotyping.put.observations, brapi-genx.brapi-v2-1.phenotyping.put.observations.by-observationdbid, brapi-genx.brapi-v2-1.phenotyping.put.observationunits, brapi-genx.brapi-v2-1.phenotyping.put.observationunits.by-observationunitdbid, brapi-genx.brapi-v2-1.phenotyping.put.variables.by-observationvariabledbid, brapi-genx.genx.v1.telemetry.append-batch
 - **Relevant RFC / decision references:** RFC-007, D-16, D-17, D-18
-- **Contract source:** [`Specification/BrAPI-GenX/Telemetry/Telemetry_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Telemetry/Telemetry_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Instrumentation/Telemetry/Telemetry_GET_POST.yaml`](BrAPI-GenX/Instrumentation/Telemetry/Telemetry_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21863,7 +21863,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** SEM-03
 - **Related catalogue IDs:** brapi-genx.brapi-v2-1.phenotyping.get.observations, brapi-genx.brapi-v2-1.phenotyping.get.observations.by-observationdbid, brapi-genx.brapi-v2-1.phenotyping.get.observations.table, brapi-genx.brapi-v2-1.phenotyping.get.observationunits, brapi-genx.brapi-v2-1.phenotyping.get.observationunits.by-observationunitdbid, brapi-genx.brapi-v2-1.phenotyping.get.observationunits.table, brapi-genx.brapi-v2-1.phenotyping.get.search.observations.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.observationunits.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.search.variables.by-searchresultsdbid, brapi-genx.brapi-v2-1.phenotyping.get.variables, brapi-genx.brapi-v2-1.phenotyping.get.variables.by-observationvariabledbid, brapi-genx.brapi-v2-1.phenotyping.post.delete.observations, brapi-genx.brapi-v2-1.phenotyping.post.observations, brapi-genx.brapi-v2-1.phenotyping.post.observationunits, brapi-genx.brapi-v2-1.phenotyping.post.search.observations, brapi-genx.brapi-v2-1.phenotyping.post.search.observationunits, brapi-genx.brapi-v2-1.phenotyping.post.search.variables, brapi-genx.brapi-v2-1.phenotyping.post.variables, brapi-genx.brapi-v2-1.phenotyping.put.observations, brapi-genx.brapi-v2-1.phenotyping.put.observations.by-observationdbid, brapi-genx.brapi-v2-1.phenotyping.put.observationunits, brapi-genx.brapi-v2-1.phenotyping.put.observationunits.by-observationunitdbid, brapi-genx.brapi-v2-1.phenotyping.put.variables.by-observationvariabledbid, brapi-genx.genx.v1.telemetry.query
 - **Relevant RFC / decision references:** RFC-007, D-16, D-17, D-18
-- **Contract source:** [`Specification/BrAPI-GenX/Telemetry/Telemetry_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Telemetry/Telemetry_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Instrumentation/Telemetry/Telemetry_GET_POST.yaml`](BrAPI-GenX/Instrumentation/Telemetry/Telemetry_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21900,7 +21900,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterTelemetryNormalization, genxGetTelemetryNormalization, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.telemetry-normalizations.record, brapi-genx.genx.v1.telemetry-normalizations.get
 - **Relevant RFC / decision references:** RFC-148
-- **Contract source:** [`Specification/BrAPI-GenX/TelemetryNormalization/TelemetryNormalization_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/TelemetryNormalization/TelemetryNormalization_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Instrumentation/TelemetryNormalization/TelemetryNormalization_GET_POST.yaml`](BrAPI-GenX/Instrumentation/TelemetryNormalization/TelemetryNormalization_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21935,7 +21935,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListTelemetryNormalizations, genxGetTelemetryNormalization, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.telemetry-normalizations.list, brapi-genx.genx.v1.telemetry-normalizations.get
 - **Relevant RFC / decision references:** RFC-148
-- **Contract source:** [`Specification/BrAPI-GenX/TelemetryNormalization/TelemetryNormalization_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/TelemetryNormalization/TelemetryNormalization_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Instrumentation/TelemetryNormalization/TelemetryNormalization_GET_POST.yaml`](BrAPI-GenX/Instrumentation/TelemetryNormalization/TelemetryNormalization_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -21968,7 +21968,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterTelemetryNormalization, genxListTelemetryNormalizations, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.telemetry-normalizations.list, brapi-genx.genx.v1.telemetry-normalizations.record
 - **Relevant RFC / decision references:** RFC-148
-- **Contract source:** [`Specification/BrAPI-GenX/TelemetryNormalization/TelemetryNormalization_TelemetryNormalizationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/TelemetryNormalization/TelemetryNormalization_TelemetryNormalizationDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Instrumentation/TelemetryNormalization/TelemetryNormalization_TelemetryNormalizationDbId_GET.yaml`](BrAPI-GenX/Instrumentation/TelemetryNormalization/TelemetryNormalization_TelemetryNormalizationDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22005,7 +22005,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterTerminologyVersion, genxGetTerminologyVersion, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.terminology-versions.record, brapi-genx.genx.v1.terminology-versions.get
 - **Relevant RFC / decision references:** RFC-084
-- **Contract source:** [`Specification/BrAPI-GenX/TerminologyVersion/TerminologyVersion_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/TerminologyVersion/TerminologyVersion_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/TerminologyVersion/TerminologyVersion_GET_POST.yaml`](BrAPI-GenX/ReferenceData/TerminologyVersion/TerminologyVersion_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22040,7 +22040,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListTerminologyVersions, genxGetTerminologyVersion, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.terminology-versions.list, brapi-genx.genx.v1.terminology-versions.get
 - **Relevant RFC / decision references:** RFC-084
-- **Contract source:** [`Specification/BrAPI-GenX/TerminologyVersion/TerminologyVersion_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/TerminologyVersion/TerminologyVersion_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/TerminologyVersion/TerminologyVersion_GET_POST.yaml`](BrAPI-GenX/ReferenceData/TerminologyVersion/TerminologyVersion_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22073,7 +22073,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterTerminologyVersion, genxListTerminologyVersions, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.terminology-versions.list, brapi-genx.genx.v1.terminology-versions.record
 - **Relevant RFC / decision references:** RFC-084
-- **Contract source:** [`Specification/BrAPI-GenX/TerminologyVersion/TerminologyVersion_TerminologyVersionDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/TerminologyVersion/TerminologyVersion_TerminologyVersionDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/TerminologyVersion/TerminologyVersion_TerminologyVersionDbId_GET.yaml`](BrAPI-GenX/ReferenceData/TerminologyVersion/TerminologyVersion_TerminologyVersionDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22110,7 +22110,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterThresholdAlert, genxGetThresholdAlert, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.threshold-alerts.record, brapi-genx.genx.v1.threshold-alerts.get
 - **Relevant RFC / decision references:** RFC-126
-- **Contract source:** [`Specification/BrAPI-GenX/ThresholdAlert/ThresholdAlert_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ThresholdAlert/ThresholdAlert_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/ThresholdAlert/ThresholdAlert_GET_POST.yaml`](BrAPI-GenX/PlantHealth/ThresholdAlert/ThresholdAlert_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22145,7 +22145,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListThresholdAlerts, genxGetThresholdAlert, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.threshold-alerts.list, brapi-genx.genx.v1.threshold-alerts.get
 - **Relevant RFC / decision references:** RFC-126
-- **Contract source:** [`Specification/BrAPI-GenX/ThresholdAlert/ThresholdAlert_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ThresholdAlert/ThresholdAlert_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/ThresholdAlert/ThresholdAlert_GET_POST.yaml`](BrAPI-GenX/PlantHealth/ThresholdAlert/ThresholdAlert_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22178,7 +22178,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterThresholdAlert, genxListThresholdAlerts, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.threshold-alerts.list, brapi-genx.genx.v1.threshold-alerts.record
 - **Relevant RFC / decision references:** RFC-126
-- **Contract source:** [`Specification/BrAPI-GenX/ThresholdAlert/ThresholdAlert_ThresholdAlertDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ThresholdAlert/ThresholdAlert_ThresholdAlertDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/ThresholdAlert/ThresholdAlert_ThresholdAlertDbId_GET.yaml`](BrAPI-GenX/PlantHealth/ThresholdAlert/ThresholdAlert_ThresholdAlertDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22215,7 +22215,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordTillage, genxGetTillage
 - **Related catalogue IDs:** brapi-genx.genx.v1.tillage-records.record, brapi-genx.genx.v1.tillage-records.get
 - **Relevant RFC / decision references:** RFC-038
-- **Contract source:** [`Specification/BrAPI-GenX/Tillage/Tillage_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Tillage/Tillage_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/Tillage/Tillage_GET_POST.yaml`](BrAPI-GenX/CropProduction/Tillage/Tillage_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22250,7 +22250,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListTillageRecords, genxGetTillage
 - **Related catalogue IDs:** brapi-genx.genx.v1.tillage-records.list, brapi-genx.genx.v1.tillage-records.get
 - **Relevant RFC / decision references:** RFC-038
-- **Contract source:** [`Specification/BrAPI-GenX/Tillage/Tillage_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Tillage/Tillage_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/Tillage/Tillage_GET_POST.yaml`](BrAPI-GenX/CropProduction/Tillage/Tillage_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22283,7 +22283,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordTillage, genxListTillageRecords
 - **Related catalogue IDs:** brapi-genx.genx.v1.tillage-records.list, brapi-genx.genx.v1.tillage-records.record
 - **Relevant RFC / decision references:** RFC-038
-- **Contract source:** [`Specification/BrAPI-GenX/Tillage/Tillage_TillageRecordDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/Tillage/Tillage_TillageRecordDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/Tillage/Tillage_TillageRecordDbId_GET.yaml`](BrAPI-GenX/CropProduction/Tillage/Tillage_TillageRecordDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22320,7 +22320,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterTreatmentAssignment, genxGetTreatmentAssignment, genxRegisterFieldScouting
 - **Related catalogue IDs:** brapi-genx.genx.v1.treatment-assignments.record, brapi-genx.genx.v1.treatment-assignments.get
 - **Relevant RFC / decision references:** RFC-106
-- **Contract source:** [`Specification/BrAPI-GenX/TreatmentAssignment/TreatmentAssignment_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/TreatmentAssignment/TreatmentAssignment_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/TreatmentAssignment/TreatmentAssignment_GET_POST.yaml`](BrAPI-GenX/Breeding/TreatmentAssignment/TreatmentAssignment_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22355,7 +22355,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListTreatmentAssignments, genxGetTreatmentAssignment, genxRegisterFieldScouting
 - **Related catalogue IDs:** brapi-genx.genx.v1.treatment-assignments.list, brapi-genx.genx.v1.treatment-assignments.get
 - **Relevant RFC / decision references:** RFC-106
-- **Contract source:** [`Specification/BrAPI-GenX/TreatmentAssignment/TreatmentAssignment_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/TreatmentAssignment/TreatmentAssignment_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/TreatmentAssignment/TreatmentAssignment_GET_POST.yaml`](BrAPI-GenX/Breeding/TreatmentAssignment/TreatmentAssignment_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22388,7 +22388,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterTreatmentAssignment, genxListTreatmentAssignments, genxRegisterFieldScouting
 - **Related catalogue IDs:** brapi-genx.genx.v1.treatment-assignments.list, brapi-genx.genx.v1.treatment-assignments.record
 - **Relevant RFC / decision references:** RFC-106
-- **Contract source:** [`Specification/BrAPI-GenX/TreatmentAssignment/TreatmentAssignment_TreatmentAssignmentDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/TreatmentAssignment/TreatmentAssignment_TreatmentAssignmentDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/TreatmentAssignment/TreatmentAssignment_TreatmentAssignmentDbId_GET.yaml`](BrAPI-GenX/Breeding/TreatmentAssignment/TreatmentAssignment_TreatmentAssignmentDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22425,7 +22425,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterTrialNetwork, genxGetTrialNetwork, genxRegisterFieldScouting
 - **Related catalogue IDs:** brapi-genx.genx.v1.trial-networks.record, brapi-genx.genx.v1.trial-networks.get
 - **Relevant RFC / decision references:** RFC-109
-- **Contract source:** [`Specification/BrAPI-GenX/TrialNetwork/TrialNetwork_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/TrialNetwork/TrialNetwork_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/TrialNetwork/TrialNetwork_GET_POST.yaml`](BrAPI-GenX/Breeding/TrialNetwork/TrialNetwork_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22460,7 +22460,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListTrialNetworks, genxGetTrialNetwork, genxRegisterFieldScouting
 - **Related catalogue IDs:** brapi-genx.genx.v1.trial-networks.list, brapi-genx.genx.v1.trial-networks.get
 - **Relevant RFC / decision references:** RFC-109
-- **Contract source:** [`Specification/BrAPI-GenX/TrialNetwork/TrialNetwork_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/TrialNetwork/TrialNetwork_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/TrialNetwork/TrialNetwork_GET_POST.yaml`](BrAPI-GenX/Breeding/TrialNetwork/TrialNetwork_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22493,7 +22493,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterTrialNetwork, genxListTrialNetworks, genxRegisterFieldScouting
 - **Related catalogue IDs:** brapi-genx.genx.v1.trial-networks.list, brapi-genx.genx.v1.trial-networks.record
 - **Relevant RFC / decision references:** RFC-109
-- **Contract source:** [`Specification/BrAPI-GenX/TrialNetwork/TrialNetwork_TrialNetworkDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/TrialNetwork/TrialNetwork_TrialNetworkDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Breeding/TrialNetwork/TrialNetwork_TrialNetworkDbId_GET.yaml`](BrAPI-GenX/Breeding/TrialNetwork/TrialNetwork_TrialNetworkDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22530,7 +22530,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterUnitsAndQuantity, genxGetUnitsAndQuantity, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.units-and-quantities.record, brapi-genx.genx.v1.units-and-quantities.get
 - **Relevant RFC / decision references:** RFC-082
-- **Contract source:** [`Specification/BrAPI-GenX/UnitsAndQuantity/UnitsAndQuantity_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/UnitsAndQuantity/UnitsAndQuantity_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/UnitsAndQuantity/UnitsAndQuantity_GET_POST.yaml`](BrAPI-GenX/ReferenceData/UnitsAndQuantity/UnitsAndQuantity_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22565,7 +22565,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListUnitsAndQuantities, genxGetUnitsAndQuantity, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.units-and-quantities.list, brapi-genx.genx.v1.units-and-quantities.get
 - **Relevant RFC / decision references:** RFC-082
-- **Contract source:** [`Specification/BrAPI-GenX/UnitsAndQuantity/UnitsAndQuantity_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/UnitsAndQuantity/UnitsAndQuantity_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/UnitsAndQuantity/UnitsAndQuantity_GET_POST.yaml`](BrAPI-GenX/ReferenceData/UnitsAndQuantity/UnitsAndQuantity_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22598,7 +22598,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterUnitsAndQuantity, genxListUnitsAndQuantities, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.units-and-quantities.list, brapi-genx.genx.v1.units-and-quantities.record
 - **Relevant RFC / decision references:** RFC-082
-- **Contract source:** [`Specification/BrAPI-GenX/UnitsAndQuantity/UnitsAndQuantity_UnitsAndQuantityDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/UnitsAndQuantity/UnitsAndQuantity_UnitsAndQuantityDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/UnitsAndQuantity/UnitsAndQuantity_UnitsAndQuantityDbId_GET.yaml`](BrAPI-GenX/ReferenceData/UnitsAndQuantity/UnitsAndQuantity_UnitsAndQuantityDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22635,7 +22635,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterValueMissingness, genxGetValueMissingness, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.value-missingness.record, brapi-genx.genx.v1.value-missingness.get
 - **Relevant RFC / decision references:** RFC-112
-- **Contract source:** [`Specification/BrAPI-GenX/ValueMissingness/ValueMissingness_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ValueMissingness/ValueMissingness_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/ValueMissingness/ValueMissingness_GET_POST.yaml`](BrAPI-GenX/Phenotyping/ValueMissingness/ValueMissingness_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22670,7 +22670,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListValueMissingness, genxGetValueMissingness, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.value-missingness.list, brapi-genx.genx.v1.value-missingness.get
 - **Relevant RFC / decision references:** RFC-112
-- **Contract source:** [`Specification/BrAPI-GenX/ValueMissingness/ValueMissingness_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ValueMissingness/ValueMissingness_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/ValueMissingness/ValueMissingness_GET_POST.yaml`](BrAPI-GenX/Phenotyping/ValueMissingness/ValueMissingness_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22703,7 +22703,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterValueMissingness, genxListValueMissingness, genxPublishVariableTermVersion
 - **Related catalogue IDs:** brapi-genx.genx.v1.value-missingness.list, brapi-genx.genx.v1.value-missingness.record
 - **Relevant RFC / decision references:** RFC-112
-- **Contract source:** [`Specification/BrAPI-GenX/ValueMissingness/ValueMissingness_ValueMissingnessDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ValueMissingness/ValueMissingness_ValueMissingnessDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/ValueMissingness/ValueMissingness_ValueMissingnessDbId_GET.yaml`](BrAPI-GenX/Phenotyping/ValueMissingness/ValueMissingness_ValueMissingnessDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22740,7 +22740,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** V2.1 /brapi/v2/variables, V2.1 OntologyTerm schema, SEM-06
 - **Related catalogue IDs:** brapi-genx.brapi-v2-1.phenotyping.get.methods, brapi-genx.brapi-v2-1.phenotyping.get.methods.by-methoddbid, brapi-genx.brapi-v2-1.phenotyping.get.ontologies, brapi-genx.brapi-v2-1.phenotyping.get.ontologies.by-ontologydbid, brapi-genx.brapi-v2-1.phenotyping.get.scales, brapi-genx.brapi-v2-1.phenotyping.get.scales.by-scaledbid, brapi-genx.brapi-v2-1.phenotyping.get.traits, brapi-genx.brapi-v2-1.phenotyping.get.traits.by-traitdbid, brapi-genx.brapi-v2-1.phenotyping.get.variables, brapi-genx.brapi-v2-1.phenotyping.get.variables.by-observationvariabledbid, brapi-genx.brapi-v2-1.phenotyping.post.methods, brapi-genx.brapi-v2-1.phenotyping.post.ontologies, brapi-genx.brapi-v2-1.phenotyping.post.scales, brapi-genx.brapi-v2-1.phenotyping.post.traits, brapi-genx.brapi-v2-1.phenotyping.post.variables, brapi-genx.brapi-v2-1.phenotyping.put.methods.by-methoddbid, brapi-genx.brapi-v2-1.phenotyping.put.ontologies.by-ontologydbid, brapi-genx.brapi-v2-1.phenotyping.put.scales.by-scaledbid, brapi-genx.brapi-v2-1.phenotyping.put.traits.by-traitdbid, brapi-genx.brapi-v2-1.phenotyping.put.variables.by-observationvariabledbid, brapi-genx.genx.v1.variable-terms.get-version, brapi-genx.genx.v1.variable-terms.publish-version
 - **Relevant RFC / decision references:** RFC-002, A-03
-- **Contract source:** [`Specification/BrAPI-GenX/VariableTerms/VariableTerms_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/VariableTerms/VariableTerms_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/VariableTerms/VariableTerms_GET_POST.yaml`](BrAPI-GenX/ReferenceData/VariableTerms/VariableTerms_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22778,7 +22778,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListVariableTermVersions, genxGetVariableTermVersion, V2.1 /brapi/v2/variables, SEM-06
 - **Related catalogue IDs:** brapi-genx.brapi-v2-1.phenotyping.get.methods, brapi-genx.brapi-v2-1.phenotyping.get.methods.by-methoddbid, brapi-genx.brapi-v2-1.phenotyping.get.ontologies, brapi-genx.brapi-v2-1.phenotyping.get.ontologies.by-ontologydbid, brapi-genx.brapi-v2-1.phenotyping.get.scales, brapi-genx.brapi-v2-1.phenotyping.get.scales.by-scaledbid, brapi-genx.brapi-v2-1.phenotyping.get.traits, brapi-genx.brapi-v2-1.phenotyping.get.traits.by-traitdbid, brapi-genx.brapi-v2-1.phenotyping.get.variables, brapi-genx.brapi-v2-1.phenotyping.get.variables.by-observationvariabledbid, brapi-genx.brapi-v2-1.phenotyping.post.methods, brapi-genx.brapi-v2-1.phenotyping.post.ontologies, brapi-genx.brapi-v2-1.phenotyping.post.scales, brapi-genx.brapi-v2-1.phenotyping.post.traits, brapi-genx.brapi-v2-1.phenotyping.post.variables, brapi-genx.brapi-v2-1.phenotyping.put.methods.by-methoddbid, brapi-genx.brapi-v2-1.phenotyping.put.ontologies.by-ontologydbid, brapi-genx.brapi-v2-1.phenotyping.put.scales.by-scaledbid, brapi-genx.brapi-v2-1.phenotyping.put.traits.by-traitdbid, brapi-genx.brapi-v2-1.phenotyping.put.variables.by-observationvariabledbid, brapi-genx.genx.v1.variable-terms.get-version, brapi-genx.genx.v1.variable-terms.list
 - **Relevant RFC / decision references:** RFC-002, A-03
-- **Contract source:** [`Specification/BrAPI-GenX/VariableTerms/VariableTerms_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/VariableTerms/VariableTerms_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/VariableTerms/VariableTerms_GET_POST.yaml`](BrAPI-GenX/ReferenceData/VariableTerms/VariableTerms_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22813,7 +22813,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxPublishVariableTermVersion, V2.1 OntologyTerm schema, SEM-06
 - **Related catalogue IDs:** brapi-genx.brapi-v2-1.phenotyping.get.methods, brapi-genx.brapi-v2-1.phenotyping.get.methods.by-methoddbid, brapi-genx.brapi-v2-1.phenotyping.get.ontologies, brapi-genx.brapi-v2-1.phenotyping.get.ontologies.by-ontologydbid, brapi-genx.brapi-v2-1.phenotyping.get.scales, brapi-genx.brapi-v2-1.phenotyping.get.scales.by-scaledbid, brapi-genx.brapi-v2-1.phenotyping.get.traits, brapi-genx.brapi-v2-1.phenotyping.get.traits.by-traitdbid, brapi-genx.brapi-v2-1.phenotyping.get.variables, brapi-genx.brapi-v2-1.phenotyping.get.variables.by-observationvariabledbid, brapi-genx.brapi-v2-1.phenotyping.post.methods, brapi-genx.brapi-v2-1.phenotyping.post.ontologies, brapi-genx.brapi-v2-1.phenotyping.post.scales, brapi-genx.brapi-v2-1.phenotyping.post.traits, brapi-genx.brapi-v2-1.phenotyping.post.variables, brapi-genx.brapi-v2-1.phenotyping.put.methods.by-methoddbid, brapi-genx.brapi-v2-1.phenotyping.put.ontologies.by-ontologydbid, brapi-genx.brapi-v2-1.phenotyping.put.scales.by-scaledbid, brapi-genx.brapi-v2-1.phenotyping.put.traits.by-traitdbid, brapi-genx.brapi-v2-1.phenotyping.put.variables.by-observationvariabledbid, brapi-genx.genx.v1.variable-terms.list, brapi-genx.genx.v1.variable-terms.publish-version
 - **Relevant RFC / decision references:** RFC-002, D-05, D-06, A-03
-- **Contract source:** [`Specification/BrAPI-GenX/VariableTerms/VariableTerms_VariableDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/VariableTerms/VariableTerms_VariableDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/ReferenceData/VariableTerms/VariableTerms_VariableDbId_GET.yaml`](BrAPI-GenX/ReferenceData/VariableTerms/VariableTerms_VariableDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22850,7 +22850,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordVariantAnnotation, genxGetVariantAnnotation, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.variant-annotations.record, brapi-genx.genx.v1.variant-annotations.get
 - **Relevant RFC / decision references:** RFC-062
-- **Contract source:** [`Specification/BrAPI-GenX/VariantAnnotation/VariantAnnotation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/VariantAnnotation/VariantAnnotation_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/VariantAnnotation/VariantAnnotation_GET_POST.yaml`](BrAPI-GenX/Genotyping/VariantAnnotation/VariantAnnotation_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22885,7 +22885,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListVariantAnnotations, genxGetVariantAnnotation, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.variant-annotations.list, brapi-genx.genx.v1.variant-annotations.get
 - **Relevant RFC / decision references:** RFC-062
-- **Contract source:** [`Specification/BrAPI-GenX/VariantAnnotation/VariantAnnotation_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/VariantAnnotation/VariantAnnotation_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/VariantAnnotation/VariantAnnotation_GET_POST.yaml`](BrAPI-GenX/Genotyping/VariantAnnotation/VariantAnnotation_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22918,7 +22918,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordVariantAnnotation, genxListVariantAnnotations, genxRegisterAnalysisMethod
 - **Related catalogue IDs:** brapi-genx.genx.v1.variant-annotations.list, brapi-genx.genx.v1.variant-annotations.record
 - **Relevant RFC / decision references:** RFC-062
-- **Contract source:** [`Specification/BrAPI-GenX/VariantAnnotation/VariantAnnotation_VariantAnnotationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/VariantAnnotation/VariantAnnotation_VariantAnnotationDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/VariantAnnotation/VariantAnnotation_VariantAnnotationDbId_GET.yaml`](BrAPI-GenX/Genotyping/VariantAnnotation/VariantAnnotation_VariantAnnotationDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22955,7 +22955,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterVcfExport, genxGetVcfExport, genxRecordVcfImport
 - **Related catalogue IDs:** brapi-genx.genx.v1.vcf-exports.record, brapi-genx.genx.v1.vcf-exports.get
 - **Relevant RFC / decision references:** RFC-114
-- **Contract source:** [`Specification/BrAPI-GenX/VcfExport/VcfExport_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/VcfExport/VcfExport_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/VcfExport/VcfExport_GET_POST.yaml`](BrAPI-GenX/Genotyping/VcfExport/VcfExport_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -22990,7 +22990,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListVcfExports, genxGetVcfExport, genxRecordVcfImport
 - **Related catalogue IDs:** brapi-genx.genx.v1.vcf-exports.list, brapi-genx.genx.v1.vcf-exports.get
 - **Relevant RFC / decision references:** RFC-114
-- **Contract source:** [`Specification/BrAPI-GenX/VcfExport/VcfExport_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/VcfExport/VcfExport_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/VcfExport/VcfExport_GET_POST.yaml`](BrAPI-GenX/Genotyping/VcfExport/VcfExport_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23023,7 +23023,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterVcfExport, genxListVcfExports, genxRecordVcfImport
 - **Related catalogue IDs:** brapi-genx.genx.v1.vcf-exports.list, brapi-genx.genx.v1.vcf-exports.record
 - **Relevant RFC / decision references:** RFC-114
-- **Contract source:** [`Specification/BrAPI-GenX/VcfExport/VcfExport_VcfExportDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/VcfExport/VcfExport_VcfExportDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/VcfExport/VcfExport_VcfExportDbId_GET.yaml`](BrAPI-GenX/Genotyping/VcfExport/VcfExport_VcfExportDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23060,7 +23060,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordVcfImport, genxGetVcfImport, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.vcf-imports.record, brapi-genx.genx.v1.vcf-imports.get
 - **Relevant RFC / decision references:** RFC-043
-- **Contract source:** [`Specification/BrAPI-GenX/VcfImport/VcfImport_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/VcfImport/VcfImport_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/VcfImport/VcfImport_GET_POST.yaml`](BrAPI-GenX/Genotyping/VcfImport/VcfImport_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23095,7 +23095,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListVcfImports, genxGetVcfImport, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.vcf-imports.list, brapi-genx.genx.v1.vcf-imports.get
 - **Relevant RFC / decision references:** RFC-043
-- **Contract source:** [`Specification/BrAPI-GenX/VcfImport/VcfImport_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/VcfImport/VcfImport_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/VcfImport/VcfImport_GET_POST.yaml`](BrAPI-GenX/Genotyping/VcfImport/VcfImport_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23128,7 +23128,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordVcfImport, genxListVcfImports, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.vcf-imports.list, brapi-genx.genx.v1.vcf-imports.record
 - **Relevant RFC / decision references:** RFC-043
-- **Contract source:** [`Specification/BrAPI-GenX/VcfImport/VcfImport_VcfImportDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/VcfImport/VcfImport_VcfImportDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/VcfImport/VcfImport_VcfImportDbId_GET.yaml`](BrAPI-GenX/Genotyping/VcfImport/VcfImport_VcfImportDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23165,7 +23165,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterVegetationIndex, genxGetVegetationIndex, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.vegetation-indexes.record, brapi-genx.genx.v1.vegetation-indexes.get
 - **Relevant RFC / decision references:** RFC-146
-- **Contract source:** [`Specification/BrAPI-GenX/VegetationIndex/VegetationIndex_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/VegetationIndex/VegetationIndex_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/VegetationIndex/VegetationIndex_GET_POST.yaml`](BrAPI-GenX/Geospatial/VegetationIndex/VegetationIndex_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23200,7 +23200,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListVegetationIndexes, genxGetVegetationIndex, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.vegetation-indexes.list, brapi-genx.genx.v1.vegetation-indexes.get
 - **Relevant RFC / decision references:** RFC-146
-- **Contract source:** [`Specification/BrAPI-GenX/VegetationIndex/VegetationIndex_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/VegetationIndex/VegetationIndex_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/VegetationIndex/VegetationIndex_GET_POST.yaml`](BrAPI-GenX/Geospatial/VegetationIndex/VegetationIndex_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23233,7 +23233,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterVegetationIndex, genxListVegetationIndexes, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.vegetation-indexes.list, brapi-genx.genx.v1.vegetation-indexes.record
 - **Relevant RFC / decision references:** RFC-146
-- **Contract source:** [`Specification/BrAPI-GenX/VegetationIndex/VegetationIndex_VegetationIndexDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/VegetationIndex/VegetationIndex_VegetationIndexDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/VegetationIndex/VegetationIndex_VegetationIndexDbId_GET.yaml`](BrAPI-GenX/Geospatial/VegetationIndex/VegetationIndex_VegetationIndexDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23270,7 +23270,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterVendorOrder, genxGetVendorOrder, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.vendor-orders.record, brapi-genx.genx.v1.vendor-orders.get
 - **Relevant RFC / decision references:** RFC-073
-- **Contract source:** [`Specification/BrAPI-GenX/VendorOrder/VendorOrder_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/VendorOrder/VendorOrder_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/VendorOrder/VendorOrder_GET_POST.yaml`](BrAPI-GenX/Genotyping/VendorOrder/VendorOrder_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23305,7 +23305,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListVendorOrders, genxGetVendorOrder, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.vendor-orders.list, brapi-genx.genx.v1.vendor-orders.get
 - **Relevant RFC / decision references:** RFC-073
-- **Contract source:** [`Specification/BrAPI-GenX/VendorOrder/VendorOrder_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/VendorOrder/VendorOrder_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/VendorOrder/VendorOrder_GET_POST.yaml`](BrAPI-GenX/Genotyping/VendorOrder/VendorOrder_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23338,7 +23338,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterVendorOrder, genxListVendorOrders, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.vendor-orders.list, brapi-genx.genx.v1.vendor-orders.record
 - **Relevant RFC / decision references:** RFC-073
-- **Contract source:** [`Specification/BrAPI-GenX/VendorOrder/VendorOrder_VendorOrderDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/VendorOrder/VendorOrder_VendorOrderDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Genotyping/VendorOrder/VendorOrder_VendorOrderDbId_GET.yaml`](BrAPI-GenX/Genotyping/VendorOrder/VendorOrder_VendorOrderDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23375,7 +23375,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordViabilityTest, genxGetViabilityTest
 - **Related catalogue IDs:** brapi-genx.genx.v1.viability-tests.record, brapi-genx.genx.v1.viability-tests.get
 - **Relevant RFC / decision references:** RFC-021
-- **Contract source:** [`Specification/BrAPI-GenX/ViabilityTesting/ViabilityTesting_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ViabilityTesting/ViabilityTesting_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/ViabilityTesting/ViabilityTesting_GET_POST.yaml`](BrAPI-GenX/Germplasm/ViabilityTesting/ViabilityTesting_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23410,7 +23410,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListViabilityTests, genxGetViabilityTest
 - **Related catalogue IDs:** brapi-genx.genx.v1.viability-tests.list, brapi-genx.genx.v1.viability-tests.get
 - **Relevant RFC / decision references:** RFC-021
-- **Contract source:** [`Specification/BrAPI-GenX/ViabilityTesting/ViabilityTesting_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ViabilityTesting/ViabilityTesting_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/ViabilityTesting/ViabilityTesting_GET_POST.yaml`](BrAPI-GenX/Germplasm/ViabilityTesting/ViabilityTesting_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23443,7 +23443,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordViabilityTest, genxListViabilityTests
 - **Related catalogue IDs:** brapi-genx.genx.v1.viability-tests.list, brapi-genx.genx.v1.viability-tests.record
 - **Relevant RFC / decision references:** RFC-021
-- **Contract source:** [`Specification/BrAPI-GenX/ViabilityTesting/ViabilityTesting_ViabilityTestDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/ViabilityTesting/ViabilityTesting_ViabilityTestDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Germplasm/ViabilityTesting/ViabilityTesting_ViabilityTestDbId_GET.yaml`](BrAPI-GenX/Germplasm/ViabilityTesting/ViabilityTesting_ViabilityTestDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23480,7 +23480,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordWaterBalance, genxGetWaterBalance, genxRegisterCropCycle
 - **Related catalogue IDs:** brapi-genx.genx.v1.water-balances.record, brapi-genx.genx.v1.water-balances.get
 - **Relevant RFC / decision references:** RFC-068
-- **Contract source:** [`Specification/BrAPI-GenX/WaterBalance/WaterBalance_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/WaterBalance/WaterBalance_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/WaterBalance/WaterBalance_GET_POST.yaml`](BrAPI-GenX/Environment/WaterBalance/WaterBalance_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23515,7 +23515,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListWaterBalances, genxGetWaterBalance, genxRegisterCropCycle
 - **Related catalogue IDs:** brapi-genx.genx.v1.water-balances.list, brapi-genx.genx.v1.water-balances.get
 - **Relevant RFC / decision references:** RFC-068
-- **Contract source:** [`Specification/BrAPI-GenX/WaterBalance/WaterBalance_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/WaterBalance/WaterBalance_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/WaterBalance/WaterBalance_GET_POST.yaml`](BrAPI-GenX/Environment/WaterBalance/WaterBalance_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23548,7 +23548,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordWaterBalance, genxListWaterBalances, genxRegisterCropCycle
 - **Related catalogue IDs:** brapi-genx.genx.v1.water-balances.list, brapi-genx.genx.v1.water-balances.record
 - **Relevant RFC / decision references:** RFC-068
-- **Contract source:** [`Specification/BrAPI-GenX/WaterBalance/WaterBalance_WaterBalanceDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/WaterBalance/WaterBalance_WaterBalanceDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/WaterBalance/WaterBalance_WaterBalanceDbId_GET.yaml`](BrAPI-GenX/Environment/WaterBalance/WaterBalance_WaterBalanceDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23585,7 +23585,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterWeatherForecast, genxGetWeatherForecast
 - **Related catalogue IDs:** brapi-genx.genx.v1.weather-forecasts.register, brapi-genx.genx.v1.weather-forecasts.get
 - **Relevant RFC / decision references:** RFC-031
-- **Contract source:** [`Specification/BrAPI-GenX/WeatherForecast/WeatherForecast_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/WeatherForecast/WeatherForecast_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/WeatherForecast/WeatherForecast_GET_POST.yaml`](BrAPI-GenX/Environment/WeatherForecast/WeatherForecast_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23620,7 +23620,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListWeatherForecasts, genxGetWeatherForecast
 - **Related catalogue IDs:** brapi-genx.genx.v1.weather-forecasts.list, brapi-genx.genx.v1.weather-forecasts.get
 - **Relevant RFC / decision references:** RFC-031
-- **Contract source:** [`Specification/BrAPI-GenX/WeatherForecast/WeatherForecast_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/WeatherForecast/WeatherForecast_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/WeatherForecast/WeatherForecast_GET_POST.yaml`](BrAPI-GenX/Environment/WeatherForecast/WeatherForecast_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23653,7 +23653,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterWeatherForecast, genxListWeatherForecasts
 - **Related catalogue IDs:** brapi-genx.genx.v1.weather-forecasts.list, brapi-genx.genx.v1.weather-forecasts.register
 - **Relevant RFC / decision references:** RFC-031
-- **Contract source:** [`Specification/BrAPI-GenX/WeatherForecast/WeatherForecast_WeatherForecastDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/WeatherForecast/WeatherForecast_WeatherForecastDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/WeatherForecast/WeatherForecast_WeatherForecastDbId_GET.yaml`](BrAPI-GenX/Environment/WeatherForecast/WeatherForecast_WeatherForecastDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23690,7 +23690,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordWeatherObservation, genxGetWeatherObservation, genxQueryTelemetrySamplesOrAggregates
 - **Related catalogue IDs:** brapi-genx.genx.v1.weather-observations.record, brapi-genx.genx.v1.weather-observations.get
 - **Relevant RFC / decision references:** RFC-010
-- **Contract source:** [`Specification/BrAPI-GenX/WeatherObservations/WeatherObservations_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/WeatherObservations/WeatherObservations_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/WeatherObservations/WeatherObservations_GET_POST.yaml`](BrAPI-GenX/Environment/WeatherObservations/WeatherObservations_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23725,7 +23725,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListWeatherObservations, genxGetWeatherObservation, genxAppendTelemetryBatch
 - **Related catalogue IDs:** brapi-genx.genx.v1.weather-observations.list, brapi-genx.genx.v1.weather-observations.get
 - **Relevant RFC / decision references:** RFC-010
-- **Contract source:** [`Specification/BrAPI-GenX/WeatherObservations/WeatherObservations_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/WeatherObservations/WeatherObservations_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/WeatherObservations/WeatherObservations_GET_POST.yaml`](BrAPI-GenX/Environment/WeatherObservations/WeatherObservations_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23758,7 +23758,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRecordWeatherObservation, genxListWeatherObservations, genxQueryTelemetrySamplesOrAggregates
 - **Related catalogue IDs:** brapi-genx.genx.v1.weather-observations.list, brapi-genx.genx.v1.weather-observations.record
 - **Relevant RFC / decision references:** RFC-010
-- **Contract source:** [`Specification/BrAPI-GenX/WeatherObservations/WeatherObservations_WeatherObservationDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/WeatherObservations/WeatherObservations_WeatherObservationDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Environment/WeatherObservations/WeatherObservations_WeatherObservationDbId_GET.yaml`](BrAPI-GenX/Environment/WeatherObservations/WeatherObservations_WeatherObservationDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23795,7 +23795,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterYieldForecast, genxGetYieldForecast, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.yield-forecasts.record, brapi-genx.genx.v1.yield-forecasts.get
 - **Relevant RFC / decision references:** RFC-134
-- **Contract source:** [`Specification/BrAPI-GenX/YieldForecast/YieldForecast_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/YieldForecast/YieldForecast_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/YieldForecast/YieldForecast_GET_POST.yaml`](BrAPI-GenX/CropProduction/YieldForecast/YieldForecast_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23830,7 +23830,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListYieldForecasts, genxGetYieldForecast, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.yield-forecasts.list, brapi-genx.genx.v1.yield-forecasts.get
 - **Relevant RFC / decision references:** RFC-134
-- **Contract source:** [`Specification/BrAPI-GenX/YieldForecast/YieldForecast_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/YieldForecast/YieldForecast_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/YieldForecast/YieldForecast_GET_POST.yaml`](BrAPI-GenX/CropProduction/YieldForecast/YieldForecast_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23863,7 +23863,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterYieldForecast, genxListYieldForecasts, genxRegisterGenomicDataset
 - **Related catalogue IDs:** brapi-genx.genx.v1.yield-forecasts.list, brapi-genx.genx.v1.yield-forecasts.record
 - **Relevant RFC / decision references:** RFC-134
-- **Contract source:** [`Specification/BrAPI-GenX/YieldForecast/YieldForecast_YieldForecastDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/YieldForecast/YieldForecast_YieldForecastDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/CropProduction/YieldForecast/YieldForecast_YieldForecastDbId_GET.yaml`](BrAPI-GenX/CropProduction/YieldForecast/YieldForecast_YieldForecastDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23900,7 +23900,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterYieldMap, genxGetYieldMap, genxRecordHarvest
 - **Related catalogue IDs:** brapi-genx.genx.v1.yield-maps.register, brapi-genx.genx.v1.yield-maps.get
 - **Relevant RFC / decision references:** RFC-070
-- **Contract source:** [`Specification/BrAPI-GenX/YieldMap/YieldMap_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/YieldMap/YieldMap_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/YieldMap/YieldMap_GET_POST.yaml`](BrAPI-GenX/Geospatial/YieldMap/YieldMap_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23935,7 +23935,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxListYieldMaps, genxGetYieldMap, genxRecordHarvest
 - **Related catalogue IDs:** brapi-genx.genx.v1.yield-maps.list, brapi-genx.genx.v1.yield-maps.get
 - **Relevant RFC / decision references:** RFC-070
-- **Contract source:** [`Specification/BrAPI-GenX/YieldMap/YieldMap_GET_POST.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/YieldMap/YieldMap_GET_POST.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/YieldMap/YieldMap_GET_POST.yaml`](BrAPI-GenX/Geospatial/YieldMap/YieldMap_GET_POST.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
@@ -23968,7 +23968,7 @@ Every operation below is proposal-only. Reference-test-server evidence is not co
 - **Semantic relationship IDs / labels:** genxRegisterYieldMap, genxListYieldMaps, genxRecordHarvest
 - **Related catalogue IDs:** brapi-genx.genx.v1.yield-maps.list, brapi-genx.genx.v1.yield-maps.register
 - **Relevant RFC / decision references:** RFC-070
-- **Contract source:** [`Specification/BrAPI-GenX/YieldMap/YieldMap_YieldMapDbId_GET.yaml`](https://github.com/denishdholaria/BrAPI-genX/blob/main/Specification/BrAPI-GenX/YieldMap/YieldMap_YieldMapDbId_GET.yaml)
+- **Contract source:** [`Specification/BrAPI-GenX/Geospatial/YieldMap/YieldMap_YieldMapDbId_GET.yaml`](BrAPI-GenX/Geospatial/YieldMap/YieldMap_YieldMapDbId_GET.yaml)
 - **BijMantra relative-route candidates:** 0. Matching relative paths do not prove GenX v3 mounting or contract equivalence.
   - Interpretation: No exact relative method/path candidate was found in the supplied static inventory; this is not proof of runtime absence.
 
