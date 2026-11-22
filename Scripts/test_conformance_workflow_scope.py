@@ -21,12 +21,15 @@ REQUIRED_PATHS = {
     "Scripts/test_specification_structure.py",
     "Scripts/test_conformance_workflow_scope.py",
     "Scripts/auditEndpointRegistrySourceConsistency.py",
+    "Scripts/test_registry_source_consistency.py",
 }
 REQUIRED_COMMANDS = {
     "python Scripts/specification_structure.py",
     "python Scripts/test_specification_structure.py",
     "python Scripts/checkGenXConformance.py",
     "python Scripts/checkEndpointRegistry.py",
+    "python Scripts/auditEndpointRegistrySourceConsistency.py --strict",
+    "python Scripts/test_registry_source_consistency.py",
     "python Scripts/generateEndpointArtifacts.py --check",
 }
 
