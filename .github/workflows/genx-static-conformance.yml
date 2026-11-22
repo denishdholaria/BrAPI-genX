@@ -29,6 +29,8 @@ on:
       - 'Scripts/specification_structure.py'
       - 'Scripts/test_specification_structure.py'
       - 'Scripts/test_conformance_workflow_scope.py'
+      - 'Scripts/check_registry_drift_regression.py'
+      - 'Scripts/test_registry_drift_regression.py'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-DECISIONS-APPROVED.md'
@@ -62,6 +64,8 @@ on:
       - 'Scripts/specification_structure.py'
       - 'Scripts/test_specification_structure.py'
       - 'Scripts/test_conformance_workflow_scope.py'
+      - 'Scripts/check_registry_drift_regression.py'
+      - 'Scripts/test_registry_drift_regression.py'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-DECISIONS-APPROVED.md'
@@ -82,6 +86,8 @@ jobs:
     steps:
       - name: Check out source
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0  # Pinned source/registry drift baseline requires history.
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
@@ -142,6 +148,10 @@ jobs:
         run: python Scripts/checkEndpointRegistry.py
       - name: Audit descriptive registry metadata against source OpenAPI (report only)
         run: python Scripts/auditEndpointRegistrySourceConsistency.py --plan-json
+      - name: Test registry/source drift regression behavior
+        run: python Scripts/test_registry_drift_regression.py
+      - name: Enforce no new registry/source descriptive drift
+        run: python Scripts/check_registry_drift_regression.py
       - name: Verify generated endpoint catalogue and crosswalk
         run: python Scripts/generateEndpointArtifacts.py --check
       - name: Collect static conformance failure diagnostics
@@ -170,6 +180,8 @@ jobs:
             run_check python Scripts/checkGenXEndpointCatalog.py
             run_check python Scripts/checkEndpointRegistry.py
             run_check python Scripts/auditEndpointRegistrySourceConsistency.py --plan-json
+            run_check python Scripts/test_registry_drift_regression.py
+            run_check python Scripts/check_registry_drift_regression.py
             run_check python Scripts/generateEndpointArtifacts.py --check
           } | tee "$RUNNER_TEMP/genx-static-diagnostics.log"
       - name: Upload static conformance diagnostics
