@@ -115,6 +115,37 @@ class RegistrySourceConsistencyTests(unittest.TestCase):
             reg_path.write_text(json.dumps(reg, indent=2) + "\n")
             self.assertNotEqual(0, run_strict(checkout))
 
+    def test_unregistered_legacy_label_fails(self):
+        with tempfile.TemporaryDirectory() as td:
+            checkout = copy_checkout(Path(td))
+            reg_path = checkout / "Specification" / "ENDPOINT-REGISTRY.json"
+            reg = json.loads(reg_path.read_text())
+            target = next(e for e in reg["entries"]
+                          if e["apiGeneration"] == "genx-v1"
+                          and e.get("semanticNeighborIds"))
+            target["semanticNeighborIds"] = list(target["semanticNeighborIds"]) + [
+                "V2.1 invented resource label"
+            ]
+            reg_path.write_text(json.dumps(reg, indent=2) + "\n")
+            self.assertNotEqual(0, run_strict(checkout))
+
+    def test_missing_source_governed_relationship_fails(self):
+        import yaml
+        with tempfile.TemporaryDirectory() as td:
+            checkout = copy_checkout(Path(td))
+            reg_path = checkout / "Specification" / "ENDPOINT-REGISTRY.json"
+            reg = json.loads(reg_path.read_text())
+            target = next(e for e in reg["entries"]
+                          if e["apiGeneration"] == "genx-v1"
+                          and "SEM-01" not in e.get("semanticNeighborIds", []))
+            src = checkout / target["source"]["path"]
+            doc = yaml.safe_load(src.read_text())
+            operation = doc["paths"][target["path"]][target["method"].lower()]
+            extension = operation["x-brapi-genx"]
+            extension["semanticNeighbors"] = list(extension.get("semanticNeighbors", [])) + ["SEM-01"]
+            src.write_text(yaml.safe_dump(doc, sort_keys=False))
+            self.assertNotEqual(0, run_strict(checkout))
+
     def test_additional_verified_neighbor_passes(self):
         # Adding a valid GenX operation reference keeps strict passing.
         with tempfile.TemporaryDirectory() as td:
