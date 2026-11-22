@@ -242,6 +242,7 @@ def audit(strict: bool, plan_json: bool, report_json: bool = False) -> int:
 
 
 def main() -> int:
+    global ROOT, REGISTRY
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--strict",
@@ -265,7 +266,6 @@ def main() -> int:
         help="repository checkout to audit (defaults to this script's checkout)",
     )
     args = parser.parse_args()
-    global ROOT, REGISTRY
     ROOT = args.root.resolve()
     REGISTRY = ROOT / "Specification/ENDPOINT-REGISTRY.json"
     try:
