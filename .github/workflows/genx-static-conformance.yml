@@ -3,10 +3,9 @@ name: GenX conformance (static and live)
 on:
   pull_request:
     paths:
-      - 'Specification/BrAPI-GenX/**'
-      - 'Specification/ENDPOINT-REGISTRY.json'
-      - 'Specification/ENDPOINT-CATALOG.md'
-      - 'Specification/BIJMANTRA-CROSSWALK.md'
+      # Source contracts, shared components, catalogues, and generated artefacts
+      # all affect GenX verification; keep the complete Specification/ tree watched.
+      - 'Specification/**'
       - 'Scripts/checkGenXConformance.py'
       - 'Scripts/checkGenXEndpointCatalog.py'
       - 'Scripts/checkEndpointRegistry.py'
@@ -27,6 +26,8 @@ on:
       - 'Scripts/validate_breeding_pipeline_contract_fixtures.py'
       - 'Scripts/test_breeding_pipeline_contract_fixture_validator.py'
       - 'Scripts/check_breeding_pipeline_api_contract.py'
+      - 'Scripts/test_specification_structure.py'
+      - 'Scripts/test_conformance_workflow_scope.py'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-DECISIONS-APPROVED.md'
@@ -34,10 +35,9 @@ on:
       - '.github/workflows/genx-static-conformance.yml'
   push:
     paths:
-      - 'Specification/BrAPI-GenX/**'
-      - 'Specification/ENDPOINT-REGISTRY.json'
-      - 'Specification/ENDPOINT-CATALOG.md'
-      - 'Specification/BIJMANTRA-CROSSWALK.md'
+      # Source contracts, shared components, catalogues, and generated artefacts
+      # all affect GenX verification; keep the complete Specification/ tree watched.
+      - 'Specification/**'
       - 'Scripts/checkGenXConformance.py'
       - 'Scripts/checkGenXEndpointCatalog.py'
       - 'Scripts/checkEndpointRegistry.py'
@@ -58,6 +58,8 @@ on:
       - 'Scripts/validate_breeding_pipeline_contract_fixtures.py'
       - 'Scripts/test_breeding_pipeline_contract_fixture_validator.py'
       - 'Scripts/check_breeding_pipeline_api_contract.py'
+      - 'Scripts/test_specification_structure.py'
+      - 'Scripts/test_conformance_workflow_scope.py'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-DECISIONS-APPROVED.md'
