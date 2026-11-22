@@ -6,10 +6,12 @@ implementation evidence. Source OpenAPI operation summaries/descriptions and
 x-brapi-genx descriptive metadata are treated as the source of truth for the
 fields compared here.
 
-The default command is report-only. Pass --strict to require zero drift;
-the baseline regression gate separately prevents *new* discrepancies while
-historic mismatches are being reconciled. --report-json exposes the full
-deterministic discrepancy set for review and regression checks.
+The default command is report-only. Pass --strict to reject source/registry
+disagreements and invalid references while permitting verified additional
+registry-only relationships. The baseline regression gate separately rejects
+new unreviewed additional relationships. --report-json emits the complete
+deterministic discrepancy set; reference validation does not establish scientific
+equivalence or interoperability.
 """
 from __future__ import annotations
 
@@ -23,6 +25,14 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "Specification" / "ENDPOINT-REGISTRY.json"
+
+# Deliberately allowed human-readable labels for the frozen BrAPI v2.1
+# baseline; a generic "V2.1 " prefix must not bypass referential validation.
+LEGACY_V21_NEIGHBOR_LABELS = frozenset({
+    "V2.1 GET /brapi/v2/serverinfo",
+    "V2.1 /brapi/v2/variables",
+    "V2.1 OntologyTerm schema",
+})
 
 FIELD_MAP = {
     "operationName": ("summary", None),
@@ -146,8 +156,8 @@ def audit(strict: bool, plan_json: bool, report_json: bool = False) -> int:
                                 f"{catalog_id}: unknown governed semantic relationship {ref}"
                             )
                     elif ref.startswith("V2.1 "):
-                        # Explicitly documented historical BrAPI v2.1 reference.
-                        pass
+                        if ref not in LEGACY_V21_NEIGHBOR_LABELS:
+                            errors.append(f"{catalog_id}: unregistered historical BrAPI v2.1 label {ref}")
                     else:
                         genx_operation_ids = {
                             item.get("recommendedOperationId")
@@ -184,7 +194,8 @@ def audit(strict: bool, plan_json: bool, report_json: bool = False) -> int:
                                 f"{catalog_id}: unknown governed semantic relationship {ref} in source"
                             )
                     elif ref.startswith("V2.1 "):
-                        pass
+                        if ref not in LEGACY_V21_NEIGHBOR_LABELS:
+                            errors.append(f"{catalog_id}: unregistered historical BrAPI v2.1 source label {ref}")
                     else:
                         genx_operation_ids = {
                             item.get("recommendedOperationId")
@@ -207,9 +218,11 @@ def audit(strict: bool, plan_json: bool, report_json: bool = False) -> int:
                 registry_operation_neighbors = [
                     value for value in registry_neighbors if value not in relationship_ids
                 ]
+                # All source-declared relationships, including governed
+                # SEM-/OVERLAP- identifiers, must be mirrored in the registry.
                 missing = [
-                    value for value in source_operation_neighbors
-                    if value not in registry_operation_neighbors
+                    value for value in source_neighbors
+                    if value not in registry_neighbors
                 ]
                 extra = [
                     value for value in registry_operation_neighbors
