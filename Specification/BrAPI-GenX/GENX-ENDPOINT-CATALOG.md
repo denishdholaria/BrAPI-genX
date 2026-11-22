@@ -724,7 +724,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterExperimentalProtocol, genxGetExperimentalProtocol, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterExperimentalProtocol, genxGetExperimentalProtocol, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.experimental-protocols.record, brapi-genx.genx.v1.experimental-protocols.get
 - **Relevant RFC / decision references:** RFC-117
 - **Contract source:** [`Specification/BrAPI-GenX/Breeding/ExperimentalProtocol/ExperimentalProtocol_GET_POST.yaml`](Breeding/ExperimentalProtocol/ExperimentalProtocol_GET_POST.yaml)
@@ -759,7 +759,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** ExperimentalProtocolNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListExperimentalProtocols, genxGetExperimentalProtocol, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListExperimentalProtocols, genxGetExperimentalProtocol, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.experimental-protocols.list, brapi-genx.genx.v1.experimental-protocols.get
 - **Relevant RFC / decision references:** RFC-117
 - **Contract source:** [`Specification/BrAPI-GenX/Breeding/ExperimentalProtocol/ExperimentalProtocol_GET_POST.yaml`](Breeding/ExperimentalProtocol/ExperimentalProtocol_GET_POST.yaml)
@@ -792,7 +792,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterExperimentalProtocol, genxListExperimentalProtocols, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterExperimentalProtocol, genxListExperimentalProtocols, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.experimental-protocols.list, brapi-genx.genx.v1.experimental-protocols.record
 - **Relevant RFC / decision references:** RFC-117
 - **Contract source:** [`Specification/BrAPI-GenX/Breeding/ExperimentalProtocol/ExperimentalProtocol_ExperimentalProtocolDbId_GET.yaml`](Breeding/ExperimentalProtocol/ExperimentalProtocol_ExperimentalProtocolDbId_GET.yaml)
@@ -829,7 +829,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterFieldBook, genxGetFieldBook, genxRegisterFieldScouting
+- **Semantic relationship IDs / labels:** genxRegisterFieldBook, genxGetFieldBook, genxRegisterFieldScouting, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.field-books.record, brapi-genx.genx.v1.field-books.get
 - **Relevant RFC / decision references:** RFC-108
 - **Contract source:** [`Specification/BrAPI-GenX/Breeding/FieldBook/FieldBook_GET_POST.yaml`](Breeding/FieldBook/FieldBook_GET_POST.yaml)
@@ -864,7 +864,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** FieldBookNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListFieldBooks, genxGetFieldBook, genxRegisterFieldScouting
+- **Semantic relationship IDs / labels:** genxListFieldBooks, genxGetFieldBook, genxRegisterFieldScouting, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.field-books.list, brapi-genx.genx.v1.field-books.get
 - **Relevant RFC / decision references:** RFC-108
 - **Contract source:** [`Specification/BrAPI-GenX/Breeding/FieldBook/FieldBook_GET_POST.yaml`](Breeding/FieldBook/FieldBook_GET_POST.yaml)
@@ -897,7 +897,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterFieldBook, genxListFieldBooks, genxRegisterFieldScouting
+- **Semantic relationship IDs / labels:** genxRegisterFieldBook, genxListFieldBooks, genxRegisterFieldScouting, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.field-books.list, brapi-genx.genx.v1.field-books.record
 - **Relevant RFC / decision references:** RFC-108
 - **Contract source:** [`Specification/BrAPI-GenX/Breeding/FieldBook/FieldBook_FieldBookDbId_GET.yaml`](Breeding/FieldBook/FieldBook_FieldBookDbId_GET.yaml)
@@ -1774,7 +1774,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterPlot, genxGetPlot, genxRegisterFieldScouting
+- **Semantic relationship IDs / labels:** genxRegisterPlot, genxGetPlot, genxRegisterFieldScouting, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.plots.record, brapi-genx.genx.v1.plots.get
 - **Relevant RFC / decision references:** RFC-107
 - **Contract source:** [`Specification/BrAPI-GenX/Breeding/Plot/Plot_GET_POST.yaml`](Breeding/Plot/Plot_GET_POST.yaml)
@@ -1809,7 +1809,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** PlotNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListPlots, genxGetPlot, genxRegisterFieldScouting
+- **Semantic relationship IDs / labels:** genxListPlots, genxGetPlot, genxRegisterFieldScouting, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.plots.list, brapi-genx.genx.v1.plots.get
 - **Relevant RFC / decision references:** RFC-107
 - **Contract source:** [`Specification/BrAPI-GenX/Breeding/Plot/Plot_GET_POST.yaml`](Breeding/Plot/Plot_GET_POST.yaml)
@@ -1842,7 +1842,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterPlot, genxListPlots, genxRegisterFieldScouting
+- **Semantic relationship IDs / labels:** genxRegisterPlot, genxListPlots, genxRegisterFieldScouting, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.plots.list, brapi-genx.genx.v1.plots.record
 - **Relevant RFC / decision references:** RFC-107
 - **Contract source:** [`Specification/BrAPI-GenX/Breeding/Plot/Plot_PlotDbId_GET.yaml`](Breeding/Plot/Plot_PlotDbId_GET.yaml)
@@ -2404,7 +2404,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterTreatmentAssignment, genxGetTreatmentAssignment, genxRegisterFieldScouting
+- **Semantic relationship IDs / labels:** genxRegisterTreatmentAssignment, genxGetTreatmentAssignment, genxRegisterFieldScouting, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.treatment-assignments.record, brapi-genx.genx.v1.treatment-assignments.get
 - **Relevant RFC / decision references:** RFC-106
 - **Contract source:** [`Specification/BrAPI-GenX/Breeding/TreatmentAssignment/TreatmentAssignment_GET_POST.yaml`](Breeding/TreatmentAssignment/TreatmentAssignment_GET_POST.yaml)
@@ -2439,7 +2439,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** TreatmentAssignmentNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListTreatmentAssignments, genxGetTreatmentAssignment, genxRegisterFieldScouting
+- **Semantic relationship IDs / labels:** genxListTreatmentAssignments, genxGetTreatmentAssignment, genxRegisterFieldScouting, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.treatment-assignments.list, brapi-genx.genx.v1.treatment-assignments.get
 - **Relevant RFC / decision references:** RFC-106
 - **Contract source:** [`Specification/BrAPI-GenX/Breeding/TreatmentAssignment/TreatmentAssignment_GET_POST.yaml`](Breeding/TreatmentAssignment/TreatmentAssignment_GET_POST.yaml)
@@ -2472,7 +2472,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterTreatmentAssignment, genxListTreatmentAssignments, genxRegisterFieldScouting
+- **Semantic relationship IDs / labels:** genxRegisterTreatmentAssignment, genxListTreatmentAssignments, genxRegisterFieldScouting, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.treatment-assignments.list, brapi-genx.genx.v1.treatment-assignments.record
 - **Relevant RFC / decision references:** RFC-106
 - **Contract source:** [`Specification/BrAPI-GenX/Breeding/TreatmentAssignment/TreatmentAssignment_TreatmentAssignmentDbId_GET.yaml`](Breeding/TreatmentAssignment/TreatmentAssignment_TreatmentAssignmentDbId_GET.yaml)
@@ -2509,7 +2509,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterTrialNetwork, genxGetTrialNetwork, genxRegisterFieldScouting
+- **Semantic relationship IDs / labels:** genxRegisterTrialNetwork, genxGetTrialNetwork, genxRegisterFieldScouting, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.trial-networks.record, brapi-genx.genx.v1.trial-networks.get
 - **Relevant RFC / decision references:** RFC-109
 - **Contract source:** [`Specification/BrAPI-GenX/Breeding/TrialNetwork/TrialNetwork_GET_POST.yaml`](Breeding/TrialNetwork/TrialNetwork_GET_POST.yaml)
@@ -2544,7 +2544,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** TrialNetworkNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListTrialNetworks, genxGetTrialNetwork, genxRegisterFieldScouting
+- **Semantic relationship IDs / labels:** genxListTrialNetworks, genxGetTrialNetwork, genxRegisterFieldScouting, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.trial-networks.list, brapi-genx.genx.v1.trial-networks.get
 - **Relevant RFC / decision references:** RFC-109
 - **Contract source:** [`Specification/BrAPI-GenX/Breeding/TrialNetwork/TrialNetwork_GET_POST.yaml`](Breeding/TrialNetwork/TrialNetwork_GET_POST.yaml)
@@ -2577,7 +2577,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterTrialNetwork, genxListTrialNetworks, genxRegisterFieldScouting
+- **Semantic relationship IDs / labels:** genxRegisterTrialNetwork, genxListTrialNetworks, genxRegisterFieldScouting, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.trial-networks.list, brapi-genx.genx.v1.trial-networks.record
 - **Relevant RFC / decision references:** RFC-109
 - **Contract source:** [`Specification/BrAPI-GenX/Breeding/TrialNetwork/TrialNetwork_TrialNetworkDbId_GET.yaml`](Breeding/TrialNetwork/TrialNetwork_TrialNetworkDbId_GET.yaml)
@@ -2719,7 +2719,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterCapabilityNegotiation, genxGetCapabilityNegotiation, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterCapabilityNegotiation, genxGetCapabilityNegotiation, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.capability-negotiations.record, brapi-genx.genx.v1.capability-negotiations.get
 - **Relevant RFC / decision references:** RFC-153
 - **Contract source:** [`Specification/BrAPI-GenX/Core/CapabilityNegotiation/CapabilityNegotiation_GET_POST.yaml`](Core/CapabilityNegotiation/CapabilityNegotiation_GET_POST.yaml)
@@ -2754,7 +2754,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** CapabilityNegotiationNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListCapabilityNegotiations, genxGetCapabilityNegotiation, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListCapabilityNegotiations, genxGetCapabilityNegotiation, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.capability-negotiations.list, brapi-genx.genx.v1.capability-negotiations.get
 - **Relevant RFC / decision references:** RFC-153
 - **Contract source:** [`Specification/BrAPI-GenX/Core/CapabilityNegotiation/CapabilityNegotiation_GET_POST.yaml`](Core/CapabilityNegotiation/CapabilityNegotiation_GET_POST.yaml)
@@ -2787,7 +2787,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterCapabilityNegotiation, genxListCapabilityNegotiations, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterCapabilityNegotiation, genxListCapabilityNegotiations, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.capability-negotiations.list, brapi-genx.genx.v1.capability-negotiations.record
 - **Relevant RFC / decision references:** RFC-153
 - **Contract source:** [`Specification/BrAPI-GenX/Core/CapabilityNegotiation/CapabilityNegotiation_CapabilityNegotiationDbId_GET.yaml`](Core/CapabilityNegotiation/CapabilityNegotiation_CapabilityNegotiationDbId_GET.yaml)
@@ -3117,7 +3117,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterCropRecommendation, genxGetCropRecommendation, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterCropRecommendation, genxGetCropRecommendation, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-recommendations.record, brapi-genx.genx.v1.crop-recommendations.get
 - **Relevant RFC / decision references:** RFC-129
 - **Contract source:** [`Specification/BrAPI-GenX/CropProduction/CropRecommendation/CropRecommendation_GET_POST.yaml`](CropProduction/CropRecommendation/CropRecommendation_GET_POST.yaml)
@@ -3152,7 +3152,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** CropRecommendationNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListCropRecommendations, genxGetCropRecommendation, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListCropRecommendations, genxGetCropRecommendation, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-recommendations.list, brapi-genx.genx.v1.crop-recommendations.get
 - **Relevant RFC / decision references:** RFC-129
 - **Contract source:** [`Specification/BrAPI-GenX/CropProduction/CropRecommendation/CropRecommendation_GET_POST.yaml`](CropProduction/CropRecommendation/CropRecommendation_GET_POST.yaml)
@@ -3185,7 +3185,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterCropRecommendation, genxListCropRecommendations, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterCropRecommendation, genxListCropRecommendations, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-recommendations.list, brapi-genx.genx.v1.crop-recommendations.record
 - **Relevant RFC / decision references:** RFC-129
 - **Contract source:** [`Specification/BrAPI-GenX/CropProduction/CropRecommendation/CropRecommendation_CropRecommendationDbId_GET.yaml`](CropProduction/CropRecommendation/CropRecommendation_CropRecommendationDbId_GET.yaml)
@@ -3222,7 +3222,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterCropSuitability, genxGetCropSuitability, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterCropSuitability, genxGetCropSuitability, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-suitabilities.record, brapi-genx.genx.v1.crop-suitabilities.get
 - **Relevant RFC / decision references:** RFC-135
 - **Contract source:** [`Specification/BrAPI-GenX/CropProduction/CropSuitability/CropSuitability_GET_POST.yaml`](CropProduction/CropSuitability/CropSuitability_GET_POST.yaml)
@@ -3257,7 +3257,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** CropSuitabilityNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListCropSuitabilities, genxGetCropSuitability, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListCropSuitabilities, genxGetCropSuitability, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-suitabilities.list, brapi-genx.genx.v1.crop-suitabilities.get
 - **Relevant RFC / decision references:** RFC-135
 - **Contract source:** [`Specification/BrAPI-GenX/CropProduction/CropSuitability/CropSuitability_GET_POST.yaml`](CropProduction/CropSuitability/CropSuitability_GET_POST.yaml)
@@ -3290,7 +3290,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterCropSuitability, genxListCropSuitabilities, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterCropSuitability, genxListCropSuitabilities, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-suitabilities.list, brapi-genx.genx.v1.crop-suitabilities.record
 - **Relevant RFC / decision references:** RFC-135
 - **Contract source:** [`Specification/BrAPI-GenX/CropProduction/CropSuitability/CropSuitability_CropSuitabilityDbId_GET.yaml`](CropProduction/CropSuitability/CropSuitability_CropSuitabilityDbId_GET.yaml)
@@ -3642,7 +3642,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterIrrigationAdvice, genxGetIrrigationAdvice, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterIrrigationAdvice, genxGetIrrigationAdvice, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.irrigation-advices.record, brapi-genx.genx.v1.irrigation-advices.get
 - **Relevant RFC / decision references:** RFC-131
 - **Contract source:** [`Specification/BrAPI-GenX/CropProduction/IrrigationAdvice/IrrigationAdvice_GET_POST.yaml`](CropProduction/IrrigationAdvice/IrrigationAdvice_GET_POST.yaml)
@@ -3677,7 +3677,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** IrrigationAdviceNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListIrrigationAdvices, genxGetIrrigationAdvice, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListIrrigationAdvices, genxGetIrrigationAdvice, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.irrigation-advices.list, brapi-genx.genx.v1.irrigation-advices.get
 - **Relevant RFC / decision references:** RFC-131
 - **Contract source:** [`Specification/BrAPI-GenX/CropProduction/IrrigationAdvice/IrrigationAdvice_GET_POST.yaml`](CropProduction/IrrigationAdvice/IrrigationAdvice_GET_POST.yaml)
@@ -3710,7 +3710,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterIrrigationAdvice, genxListIrrigationAdvices, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterIrrigationAdvice, genxListIrrigationAdvices, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.irrigation-advices.list, brapi-genx.genx.v1.irrigation-advices.record
 - **Relevant RFC / decision references:** RFC-131
 - **Contract source:** [`Specification/BrAPI-GenX/CropProduction/IrrigationAdvice/IrrigationAdvice_IrrigationAdviceDbId_GET.yaml`](CropProduction/IrrigationAdvice/IrrigationAdvice_IrrigationAdviceDbId_GET.yaml)
@@ -3852,7 +3852,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterLocalConstraint, genxGetLocalConstraint, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterLocalConstraint, genxGetLocalConstraint, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.local-constraints.record, brapi-genx.genx.v1.local-constraints.get
 - **Relevant RFC / decision references:** RFC-139
 - **Contract source:** [`Specification/BrAPI-GenX/CropProduction/LocalConstraint/LocalConstraint_GET_POST.yaml`](CropProduction/LocalConstraint/LocalConstraint_GET_POST.yaml)
@@ -3887,7 +3887,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** LocalConstraintNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListLocalConstraints, genxGetLocalConstraint, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListLocalConstraints, genxGetLocalConstraint, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.local-constraints.list, brapi-genx.genx.v1.local-constraints.get
 - **Relevant RFC / decision references:** RFC-139
 - **Contract source:** [`Specification/BrAPI-GenX/CropProduction/LocalConstraint/LocalConstraint_GET_POST.yaml`](CropProduction/LocalConstraint/LocalConstraint_GET_POST.yaml)
@@ -3920,7 +3920,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterLocalConstraint, genxListLocalConstraints, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterLocalConstraint, genxListLocalConstraints, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.local-constraints.list, brapi-genx.genx.v1.local-constraints.record
 - **Relevant RFC / decision references:** RFC-139
 - **Contract source:** [`Specification/BrAPI-GenX/CropProduction/LocalConstraint/LocalConstraint_LocalConstraintDbId_GET.yaml`](CropProduction/LocalConstraint/LocalConstraint_LocalConstraintDbId_GET.yaml)
@@ -4031,7 +4031,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterNutrientAdvice, genxGetNutrientAdvice, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterNutrientAdvice, genxGetNutrientAdvice, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.nutrient-advices.record, brapi-genx.genx.v1.nutrient-advices.get
 - **Relevant RFC / decision references:** RFC-132
 - **Contract source:** [`Specification/BrAPI-GenX/CropProduction/NutrientAdvice/NutrientAdvice_GET_POST.yaml`](CropProduction/NutrientAdvice/NutrientAdvice_GET_POST.yaml)
@@ -4066,7 +4066,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** NutrientAdviceNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListNutrientAdvices, genxGetNutrientAdvice, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListNutrientAdvices, genxGetNutrientAdvice, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.nutrient-advices.list, brapi-genx.genx.v1.nutrient-advices.get
 - **Relevant RFC / decision references:** RFC-132
 - **Contract source:** [`Specification/BrAPI-GenX/CropProduction/NutrientAdvice/NutrientAdvice_GET_POST.yaml`](CropProduction/NutrientAdvice/NutrientAdvice_GET_POST.yaml)
@@ -4099,7 +4099,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterNutrientAdvice, genxListNutrientAdvices, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterNutrientAdvice, genxListNutrientAdvices, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.nutrient-advices.list, brapi-genx.genx.v1.nutrient-advices.record
 - **Relevant RFC / decision references:** RFC-132
 - **Contract source:** [`Specification/BrAPI-GenX/CropProduction/NutrientAdvice/NutrientAdvice_NutrientAdviceDbId_GET.yaml`](CropProduction/NutrientAdvice/NutrientAdvice_NutrientAdviceDbId_GET.yaml)
@@ -4241,7 +4241,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterSowingWindow, genxGetSowingWindow, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterSowingWindow, genxGetSowingWindow, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.sowing-windows.record, brapi-genx.genx.v1.sowing-windows.get
 - **Relevant RFC / decision references:** RFC-130
 - **Contract source:** [`Specification/BrAPI-GenX/CropProduction/SowingWindow/SowingWindow_GET_POST.yaml`](CropProduction/SowingWindow/SowingWindow_GET_POST.yaml)
@@ -4276,7 +4276,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** SowingWindowNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListSowingWindows, genxGetSowingWindow, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListSowingWindows, genxGetSowingWindow, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.sowing-windows.list, brapi-genx.genx.v1.sowing-windows.get
 - **Relevant RFC / decision references:** RFC-130
 - **Contract source:** [`Specification/BrAPI-GenX/CropProduction/SowingWindow/SowingWindow_GET_POST.yaml`](CropProduction/SowingWindow/SowingWindow_GET_POST.yaml)
@@ -4309,7 +4309,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterSowingWindow, genxListSowingWindows, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterSowingWindow, genxListSowingWindows, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.sowing-windows.list, brapi-genx.genx.v1.sowing-windows.record
 - **Relevant RFC / decision references:** RFC-130
 - **Contract source:** [`Specification/BrAPI-GenX/CropProduction/SowingWindow/SowingWindow_SowingWindowDbId_GET.yaml`](CropProduction/SowingWindow/SowingWindow_SowingWindowDbId_GET.yaml)
@@ -4556,7 +4556,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterYieldForecast, genxGetYieldForecast, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterYieldForecast, genxGetYieldForecast, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.yield-forecasts.record, brapi-genx.genx.v1.yield-forecasts.get
 - **Relevant RFC / decision references:** RFC-134
 - **Contract source:** [`Specification/BrAPI-GenX/CropProduction/YieldForecast/YieldForecast_GET_POST.yaml`](CropProduction/YieldForecast/YieldForecast_GET_POST.yaml)
@@ -4591,7 +4591,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** YieldForecastNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListYieldForecasts, genxGetYieldForecast, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListYieldForecasts, genxGetYieldForecast, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.yield-forecasts.list, brapi-genx.genx.v1.yield-forecasts.get
 - **Relevant RFC / decision references:** RFC-134
 - **Contract source:** [`Specification/BrAPI-GenX/CropProduction/YieldForecast/YieldForecast_GET_POST.yaml`](CropProduction/YieldForecast/YieldForecast_GET_POST.yaml)
@@ -4624,7 +4624,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterYieldForecast, genxListYieldForecasts, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterYieldForecast, genxListYieldForecasts, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.yield-forecasts.list, brapi-genx.genx.v1.yield-forecasts.record
 - **Relevant RFC / decision references:** RFC-134
 - **Contract source:** [`Specification/BrAPI-GenX/CropProduction/YieldForecast/YieldForecast_YieldForecastDbId_GET.yaml`](CropProduction/YieldForecast/YieldForecast_YieldForecastDbId_GET.yaml)
@@ -4871,7 +4871,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterEmissions, genxGetEmissions, genxRegisterCarbonStock
+- **Semantic relationship IDs / labels:** genxRegisterEmissions, genxGetEmissions, genxRecordCarbonStock
 - **Related catalogue IDs:** brapi-genx.genx.v1.emissions.record, brapi-genx.genx.v1.emissions.get
 - **Relevant RFC / decision references:** RFC-076
 - **Contract source:** [`Specification/BrAPI-GenX/Environment/Emissions/Emissions_GET_POST.yaml`](Environment/Emissions/Emissions_GET_POST.yaml)
@@ -4906,7 +4906,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** EmissionsNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListEmissions, genxGetEmissions, genxRegisterCarbonStock
+- **Semantic relationship IDs / labels:** genxListEmissions, genxGetEmissions, genxRecordCarbonStock
 - **Related catalogue IDs:** brapi-genx.genx.v1.emissions.list, brapi-genx.genx.v1.emissions.get
 - **Relevant RFC / decision references:** RFC-076
 - **Contract source:** [`Specification/BrAPI-GenX/Environment/Emissions/Emissions_GET_POST.yaml`](Environment/Emissions/Emissions_GET_POST.yaml)
@@ -4939,7 +4939,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterEmissions, genxListEmissions, genxRegisterCarbonStock
+- **Semantic relationship IDs / labels:** genxRegisterEmissions, genxListEmissions, genxRecordCarbonStock
 - **Related catalogue IDs:** brapi-genx.genx.v1.emissions.list, brapi-genx.genx.v1.emissions.record
 - **Relevant RFC / decision references:** RFC-076
 - **Contract source:** [`Specification/BrAPI-GenX/Environment/Emissions/Emissions_EmissionsDbId_GET.yaml`](Environment/Emissions/Emissions_EmissionsDbId_GET.yaml)
@@ -5816,7 +5816,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterAssayExecution, genxGetAssayExecution, genxRecordAssayDesign
+- **Semantic relationship IDs / labels:** genxRegisterAssayExecution, genxGetAssayExecution, genxRecordAssayDesign, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.assay-executions.record, brapi-genx.genx.v1.assay-executions.get
 - **Relevant RFC / decision references:** RFC-113
 - **Contract source:** [`Specification/BrAPI-GenX/Genotyping/AssayExecution/AssayExecution_GET_POST.yaml`](Genotyping/AssayExecution/AssayExecution_GET_POST.yaml)
@@ -5851,7 +5851,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** AssayExecutionNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListAssayExecutions, genxGetAssayExecution, genxRecordAssayDesign
+- **Semantic relationship IDs / labels:** genxListAssayExecutions, genxGetAssayExecution, genxRecordAssayDesign, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.assay-executions.list, brapi-genx.genx.v1.assay-executions.get
 - **Relevant RFC / decision references:** RFC-113
 - **Contract source:** [`Specification/BrAPI-GenX/Genotyping/AssayExecution/AssayExecution_GET_POST.yaml`](Genotyping/AssayExecution/AssayExecution_GET_POST.yaml)
@@ -5884,7 +5884,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterAssayExecution, genxListAssayExecutions, genxRecordAssayDesign
+- **Semantic relationship IDs / labels:** genxRegisterAssayExecution, genxListAssayExecutions, genxRecordAssayDesign, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.assay-executions.list, brapi-genx.genx.v1.assay-executions.record
 - **Relevant RFC / decision references:** RFC-113
 - **Contract source:** [`Specification/BrAPI-GenX/Genotyping/AssayExecution/AssayExecution_AssayExecutionDbId_GET.yaml`](Genotyping/AssayExecution/AssayExecution_AssayExecutionDbId_GET.yaml)
@@ -6974,7 +6974,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterPipelineProvenance, genxGetPipelineProvenance, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterPipelineProvenance, genxGetPipelineProvenance, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.pipeline-provenances.record, brapi-genx.genx.v1.pipeline-provenances.get
 - **Relevant RFC / decision references:** RFC-116
 - **Contract source:** [`Specification/BrAPI-GenX/Genotyping/PipelineProvenance/PipelineProvenance_GET_POST.yaml`](Genotyping/PipelineProvenance/PipelineProvenance_GET_POST.yaml)
@@ -7009,7 +7009,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** PipelineProvenanceNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListPipelineProvenances, genxGetPipelineProvenance, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListPipelineProvenances, genxGetPipelineProvenance, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.pipeline-provenances.list, brapi-genx.genx.v1.pipeline-provenances.get
 - **Relevant RFC / decision references:** RFC-116
 - **Contract source:** [`Specification/BrAPI-GenX/Genotyping/PipelineProvenance/PipelineProvenance_GET_POST.yaml`](Genotyping/PipelineProvenance/PipelineProvenance_GET_POST.yaml)
@@ -7042,7 +7042,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterPipelineProvenance, genxListPipelineProvenances, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterPipelineProvenance, genxListPipelineProvenances, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.pipeline-provenances.list, brapi-genx.genx.v1.pipeline-provenances.record
 - **Relevant RFC / decision references:** RFC-116
 - **Contract source:** [`Specification/BrAPI-GenX/Genotyping/PipelineProvenance/PipelineProvenance_PipelineProvenanceDbId_GET.yaml`](Genotyping/PipelineProvenance/PipelineProvenance_PipelineProvenanceDbId_GET.yaml)
@@ -7079,7 +7079,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterReferenceAssembly, genxGetReferenceAssembly, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterReferenceAssembly, genxGetReferenceAssembly, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.reference-assemblies.record, brapi-genx.genx.v1.reference-assemblies.get
 - **Relevant RFC / decision references:** RFC-115
 - **Contract source:** [`Specification/BrAPI-GenX/Genotyping/ReferenceAssembly/ReferenceAssembly_GET_POST.yaml`](Genotyping/ReferenceAssembly/ReferenceAssembly_GET_POST.yaml)
@@ -7114,7 +7114,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** ReferenceAssemblyNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListReferenceAssemblies, genxGetReferenceAssembly, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListReferenceAssemblies, genxGetReferenceAssembly, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.reference-assemblies.list, brapi-genx.genx.v1.reference-assemblies.get
 - **Relevant RFC / decision references:** RFC-115
 - **Contract source:** [`Specification/BrAPI-GenX/Genotyping/ReferenceAssembly/ReferenceAssembly_GET_POST.yaml`](Genotyping/ReferenceAssembly/ReferenceAssembly_GET_POST.yaml)
@@ -7147,7 +7147,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterReferenceAssembly, genxListReferenceAssemblies, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterReferenceAssembly, genxListReferenceAssemblies, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.reference-assemblies.list, brapi-genx.genx.v1.reference-assemblies.record
 - **Relevant RFC / decision references:** RFC-115
 - **Contract source:** [`Specification/BrAPI-GenX/Genotyping/ReferenceAssembly/ReferenceAssembly_ReferenceAssemblyDbId_GET.yaml`](Genotyping/ReferenceAssembly/ReferenceAssembly_ReferenceAssemblyDbId_GET.yaml)
@@ -7289,7 +7289,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterVcfExport, genxGetVcfExport, genxRecordVcfImport
+- **Semantic relationship IDs / labels:** genxRegisterVcfExport, genxGetVcfExport, genxRecordVcfImport, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.vcf-exports.record, brapi-genx.genx.v1.vcf-exports.get
 - **Relevant RFC / decision references:** RFC-114
 - **Contract source:** [`Specification/BrAPI-GenX/Genotyping/VcfExport/VcfExport_GET_POST.yaml`](Genotyping/VcfExport/VcfExport_GET_POST.yaml)
@@ -7324,7 +7324,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** VcfExportNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListVcfExports, genxGetVcfExport, genxRecordVcfImport
+- **Semantic relationship IDs / labels:** genxListVcfExports, genxGetVcfExport, genxRecordVcfImport, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.vcf-exports.list, brapi-genx.genx.v1.vcf-exports.get
 - **Relevant RFC / decision references:** RFC-114
 - **Contract source:** [`Specification/BrAPI-GenX/Genotyping/VcfExport/VcfExport_GET_POST.yaml`](Genotyping/VcfExport/VcfExport_GET_POST.yaml)
@@ -7357,7 +7357,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterVcfExport, genxListVcfExports, genxRecordVcfImport
+- **Semantic relationship IDs / labels:** genxRegisterVcfExport, genxListVcfExports, genxRecordVcfImport, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.vcf-exports.list, brapi-genx.genx.v1.vcf-exports.record
 - **Relevant RFC / decision references:** RFC-114
 - **Contract source:** [`Specification/BrAPI-GenX/Genotyping/VcfExport/VcfExport_VcfExportDbId_GET.yaml`](Genotyping/VcfExport/VcfExport_VcfExportDbId_GET.yaml)
@@ -7604,7 +7604,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterCloudMask, genxGetCloudMask, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterCloudMask, genxGetCloudMask, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.cloud-masks.record, brapi-genx.genx.v1.cloud-masks.get
 - **Relevant RFC / decision references:** RFC-147
 - **Contract source:** [`Specification/BrAPI-GenX/Geospatial/CloudMask/CloudMask_GET_POST.yaml`](Geospatial/CloudMask/CloudMask_GET_POST.yaml)
@@ -7639,7 +7639,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** CloudMaskNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListCloudMasks, genxGetCloudMask, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListCloudMasks, genxGetCloudMask, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.cloud-masks.list, brapi-genx.genx.v1.cloud-masks.get
 - **Relevant RFC / decision references:** RFC-147
 - **Contract source:** [`Specification/BrAPI-GenX/Geospatial/CloudMask/CloudMask_GET_POST.yaml`](Geospatial/CloudMask/CloudMask_GET_POST.yaml)
@@ -7672,7 +7672,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterCloudMask, genxListCloudMasks, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterCloudMask, genxListCloudMasks, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.cloud-masks.list, brapi-genx.genx.v1.cloud-masks.record
 - **Relevant RFC / decision references:** RFC-147
 - **Contract source:** [`Specification/BrAPI-GenX/Geospatial/CloudMask/CloudMask_CloudMaskDbId_GET.yaml`](Geospatial/CloudMask/CloudMask_CloudMaskDbId_GET.yaml)
@@ -7709,7 +7709,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterCrsTransform, genxGetCrsTransform, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterCrsTransform, genxGetCrsTransform, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.crs-transforms.record, brapi-genx.genx.v1.crs-transforms.get
 - **Relevant RFC / decision references:** RFC-140
 - **Contract source:** [`Specification/BrAPI-GenX/Geospatial/CrsTransform/CrsTransform_GET_POST.yaml`](Geospatial/CrsTransform/CrsTransform_GET_POST.yaml)
@@ -7744,7 +7744,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** CrsTransformNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListCrsTransforms, genxGetCrsTransform, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListCrsTransforms, genxGetCrsTransform, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.crs-transforms.list, brapi-genx.genx.v1.crs-transforms.get
 - **Relevant RFC / decision references:** RFC-140
 - **Contract source:** [`Specification/BrAPI-GenX/Geospatial/CrsTransform/CrsTransform_GET_POST.yaml`](Geospatial/CrsTransform/CrsTransform_GET_POST.yaml)
@@ -7777,7 +7777,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterCrsTransform, genxListCrsTransforms, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterCrsTransform, genxListCrsTransforms, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.crs-transforms.list, brapi-genx.genx.v1.crs-transforms.record
 - **Relevant RFC / decision references:** RFC-140
 - **Contract source:** [`Specification/BrAPI-GenX/Geospatial/CrsTransform/CrsTransform_CrsTransformDbId_GET.yaml`](Geospatial/CrsTransform/CrsTransform_CrsTransformDbId_GET.yaml)
@@ -7919,7 +7919,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterFieldGeometry, genxGetFieldGeometry, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterFieldGeometry, genxGetFieldGeometry, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.field-geometries.record, brapi-genx.genx.v1.field-geometries.get
 - **Relevant RFC / decision references:** RFC-142
 - **Contract source:** [`Specification/BrAPI-GenX/Geospatial/FieldGeometry/FieldGeometry_GET_POST.yaml`](Geospatial/FieldGeometry/FieldGeometry_GET_POST.yaml)
@@ -7954,7 +7954,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** FieldGeometryNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListFieldGeometries, genxGetFieldGeometry, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListFieldGeometries, genxGetFieldGeometry, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.field-geometries.list, brapi-genx.genx.v1.field-geometries.get
 - **Relevant RFC / decision references:** RFC-142
 - **Contract source:** [`Specification/BrAPI-GenX/Geospatial/FieldGeometry/FieldGeometry_GET_POST.yaml`](Geospatial/FieldGeometry/FieldGeometry_GET_POST.yaml)
@@ -7987,7 +7987,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterFieldGeometry, genxListFieldGeometries, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterFieldGeometry, genxListFieldGeometries, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.field-geometries.list, brapi-genx.genx.v1.field-geometries.record
 - **Relevant RFC / decision references:** RFC-142
 - **Contract source:** [`Specification/BrAPI-GenX/Geospatial/FieldGeometry/FieldGeometry_FieldGeometryDbId_GET.yaml`](Geospatial/FieldGeometry/FieldGeometry_FieldGeometryDbId_GET.yaml)
@@ -8129,7 +8129,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterRasterCatalogue, genxGetRasterCatalogue, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterRasterCatalogue, genxGetRasterCatalogue, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.raster-catalogues.record, brapi-genx.genx.v1.raster-catalogues.get
 - **Relevant RFC / decision references:** RFC-144
 - **Contract source:** [`Specification/BrAPI-GenX/Geospatial/RasterCatalogue/RasterCatalogue_GET_POST.yaml`](Geospatial/RasterCatalogue/RasterCatalogue_GET_POST.yaml)
@@ -8164,7 +8164,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** RasterCatalogueNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListRasterCatalogues, genxGetRasterCatalogue, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListRasterCatalogues, genxGetRasterCatalogue, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.raster-catalogues.list, brapi-genx.genx.v1.raster-catalogues.get
 - **Relevant RFC / decision references:** RFC-144
 - **Contract source:** [`Specification/BrAPI-GenX/Geospatial/RasterCatalogue/RasterCatalogue_GET_POST.yaml`](Geospatial/RasterCatalogue/RasterCatalogue_GET_POST.yaml)
@@ -8197,7 +8197,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterRasterCatalogue, genxListRasterCatalogues, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterRasterCatalogue, genxListRasterCatalogues, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.raster-catalogues.list, brapi-genx.genx.v1.raster-catalogues.record
 - **Relevant RFC / decision references:** RFC-144
 - **Contract source:** [`Specification/BrAPI-GenX/Geospatial/RasterCatalogue/RasterCatalogue_RasterCatalogueDbId_GET.yaml`](Geospatial/RasterCatalogue/RasterCatalogue_RasterCatalogueDbId_GET.yaml)
@@ -8234,7 +8234,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterRemoteSensingMetadata, genxGetRemoteSensingMetadata, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterRemoteSensingMetadata, genxGetRemoteSensingMetadata, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.remote-sensing-metadata.record, brapi-genx.genx.v1.remote-sensing-metadata.get
 - **Relevant RFC / decision references:** RFC-145
 - **Contract source:** [`Specification/BrAPI-GenX/Geospatial/RemoteSensingMetadata/RemoteSensingMetadata_GET_POST.yaml`](Geospatial/RemoteSensingMetadata/RemoteSensingMetadata_GET_POST.yaml)
@@ -8269,7 +8269,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** RemoteSensingMetadataNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListRemoteSensingMetadata, genxGetRemoteSensingMetadata, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListRemoteSensingMetadata, genxGetRemoteSensingMetadata, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.remote-sensing-metadata.list, brapi-genx.genx.v1.remote-sensing-metadata.get
 - **Relevant RFC / decision references:** RFC-145
 - **Contract source:** [`Specification/BrAPI-GenX/Geospatial/RemoteSensingMetadata/RemoteSensingMetadata_GET_POST.yaml`](Geospatial/RemoteSensingMetadata/RemoteSensingMetadata_GET_POST.yaml)
@@ -8302,7 +8302,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterRemoteSensingMetadata, genxListRemoteSensingMetadata, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterRemoteSensingMetadata, genxListRemoteSensingMetadata, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.remote-sensing-metadata.list, brapi-genx.genx.v1.remote-sensing-metadata.record
 - **Relevant RFC / decision references:** RFC-145
 - **Contract source:** [`Specification/BrAPI-GenX/Geospatial/RemoteSensingMetadata/RemoteSensingMetadata_RemoteSensingMetadataDbId_GET.yaml`](Geospatial/RemoteSensingMetadata/RemoteSensingMetadata_RemoteSensingMetadataDbId_GET.yaml)
@@ -8339,7 +8339,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterSpatialIndex, genxGetSpatialIndex, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterSpatialIndex, genxGetSpatialIndex, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.spatial-indexes.record, brapi-genx.genx.v1.spatial-indexes.get
 - **Relevant RFC / decision references:** RFC-141
 - **Contract source:** [`Specification/BrAPI-GenX/Geospatial/SpatialIndex/SpatialIndex_GET_POST.yaml`](Geospatial/SpatialIndex/SpatialIndex_GET_POST.yaml)
@@ -8374,7 +8374,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** SpatialIndexNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListSpatialIndexes, genxGetSpatialIndex, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListSpatialIndexes, genxGetSpatialIndex, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.spatial-indexes.list, brapi-genx.genx.v1.spatial-indexes.get
 - **Relevant RFC / decision references:** RFC-141
 - **Contract source:** [`Specification/BrAPI-GenX/Geospatial/SpatialIndex/SpatialIndex_GET_POST.yaml`](Geospatial/SpatialIndex/SpatialIndex_GET_POST.yaml)
@@ -8407,7 +8407,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterSpatialIndex, genxListSpatialIndexes, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterSpatialIndex, genxListSpatialIndexes, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.spatial-indexes.list, brapi-genx.genx.v1.spatial-indexes.record
 - **Relevant RFC / decision references:** RFC-141
 - **Contract source:** [`Specification/BrAPI-GenX/Geospatial/SpatialIndex/SpatialIndex_SpatialIndexDbId_GET.yaml`](Geospatial/SpatialIndex/SpatialIndex_SpatialIndexDbId_GET.yaml)
@@ -8444,7 +8444,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterSpatialQuery, genxGetSpatialQuery, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterSpatialQuery, genxGetSpatialQuery, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.spatial-queries.record, brapi-genx.genx.v1.spatial-queries.get
 - **Relevant RFC / decision references:** RFC-143
 - **Contract source:** [`Specification/BrAPI-GenX/Geospatial/SpatialQuery/SpatialQuery_GET_POST.yaml`](Geospatial/SpatialQuery/SpatialQuery_GET_POST.yaml)
@@ -8479,7 +8479,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** SpatialQueryNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListSpatialQueries, genxGetSpatialQuery, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListSpatialQueries, genxGetSpatialQuery, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.spatial-queries.list, brapi-genx.genx.v1.spatial-queries.get
 - **Relevant RFC / decision references:** RFC-143
 - **Contract source:** [`Specification/BrAPI-GenX/Geospatial/SpatialQuery/SpatialQuery_GET_POST.yaml`](Geospatial/SpatialQuery/SpatialQuery_GET_POST.yaml)
@@ -8512,7 +8512,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterSpatialQuery, genxListSpatialQueries, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterSpatialQuery, genxListSpatialQueries, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.spatial-queries.list, brapi-genx.genx.v1.spatial-queries.record
 - **Relevant RFC / decision references:** RFC-143
 - **Contract source:** [`Specification/BrAPI-GenX/Geospatial/SpatialQuery/SpatialQuery_SpatialQueryDbId_GET.yaml`](Geospatial/SpatialQuery/SpatialQuery_SpatialQueryDbId_GET.yaml)
@@ -8549,7 +8549,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterVegetationIndex, genxGetVegetationIndex, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterVegetationIndex, genxGetVegetationIndex, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.vegetation-indexes.record, brapi-genx.genx.v1.vegetation-indexes.get
 - **Relevant RFC / decision references:** RFC-146
 - **Contract source:** [`Specification/BrAPI-GenX/Geospatial/VegetationIndex/VegetationIndex_GET_POST.yaml`](Geospatial/VegetationIndex/VegetationIndex_GET_POST.yaml)
@@ -8584,7 +8584,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** VegetationIndexNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListVegetationIndexes, genxGetVegetationIndex, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListVegetationIndexes, genxGetVegetationIndex, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.vegetation-indexes.list, brapi-genx.genx.v1.vegetation-indexes.get
 - **Relevant RFC / decision references:** RFC-146
 - **Contract source:** [`Specification/BrAPI-GenX/Geospatial/VegetationIndex/VegetationIndex_GET_POST.yaml`](Geospatial/VegetationIndex/VegetationIndex_GET_POST.yaml)
@@ -8617,7 +8617,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterVegetationIndex, genxListVegetationIndexes, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterVegetationIndex, genxListVegetationIndexes, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.vegetation-indexes.list, brapi-genx.genx.v1.vegetation-indexes.record
 - **Relevant RFC / decision references:** RFC-146
 - **Contract source:** [`Specification/BrAPI-GenX/Geospatial/VegetationIndex/VegetationIndex_VegetationIndexDbId_GET.yaml`](Geospatial/VegetationIndex/VegetationIndex_VegetationIndexDbId_GET.yaml)
@@ -10019,7 +10019,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterCalibrationQuality, genxGetCalibrationQuality, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterCalibrationQuality, genxGetCalibrationQuality, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.calibration-qualities.record, brapi-genx.genx.v1.calibration-qualities.get
 - **Relevant RFC / decision references:** RFC-150
 - **Contract source:** [`Specification/BrAPI-GenX/Instrumentation/CalibrationQuality/CalibrationQuality_GET_POST.yaml`](Instrumentation/CalibrationQuality/CalibrationQuality_GET_POST.yaml)
@@ -10054,7 +10054,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** CalibrationQualityNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListCalibrationQualitys, genxGetCalibrationQuality, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListCalibrationQualitys, genxGetCalibrationQuality, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.calibration-qualities.list, brapi-genx.genx.v1.calibration-qualities.get
 - **Relevant RFC / decision references:** RFC-150
 - **Contract source:** [`Specification/BrAPI-GenX/Instrumentation/CalibrationQuality/CalibrationQuality_GET_POST.yaml`](Instrumentation/CalibrationQuality/CalibrationQuality_GET_POST.yaml)
@@ -10087,7 +10087,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterCalibrationQuality, genxListCalibrationQualitys, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterCalibrationQuality, genxListCalibrationQualitys, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.calibration-qualities.list, brapi-genx.genx.v1.calibration-qualities.record
 - **Relevant RFC / decision references:** RFC-150
 - **Contract source:** [`Specification/BrAPI-GenX/Instrumentation/CalibrationQuality/CalibrationQuality_CalibrationQualityDbId_GET.yaml`](Instrumentation/CalibrationQuality/CalibrationQuality_CalibrationQualityDbId_GET.yaml)
@@ -10124,7 +10124,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterEdgeGatewayHealth, genxGetEdgeGatewayHealth, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterEdgeGatewayHealth, genxGetEdgeGatewayHealth, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.edge-gateway-healths.record, brapi-genx.genx.v1.edge-gateway-healths.get
 - **Relevant RFC / decision references:** RFC-151
 - **Contract source:** [`Specification/BrAPI-GenX/Instrumentation/EdgeGatewayHealth/EdgeGatewayHealth_GET_POST.yaml`](Instrumentation/EdgeGatewayHealth/EdgeGatewayHealth_GET_POST.yaml)
@@ -10159,7 +10159,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** EdgeGatewayHealthNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListEdgeGatewayHealths, genxGetEdgeGatewayHealth, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListEdgeGatewayHealths, genxGetEdgeGatewayHealth, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.edge-gateway-healths.list, brapi-genx.genx.v1.edge-gateway-healths.get
 - **Relevant RFC / decision references:** RFC-151
 - **Contract source:** [`Specification/BrAPI-GenX/Instrumentation/EdgeGatewayHealth/EdgeGatewayHealth_GET_POST.yaml`](Instrumentation/EdgeGatewayHealth/EdgeGatewayHealth_GET_POST.yaml)
@@ -10192,7 +10192,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterEdgeGatewayHealth, genxListEdgeGatewayHealths, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterEdgeGatewayHealth, genxListEdgeGatewayHealths, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.edge-gateway-healths.list, brapi-genx.genx.v1.edge-gateway-healths.record
 - **Relevant RFC / decision references:** RFC-151
 - **Contract source:** [`Specification/BrAPI-GenX/Instrumentation/EdgeGatewayHealth/EdgeGatewayHealth_EdgeGatewayHealthDbId_GET.yaml`](Instrumentation/EdgeGatewayHealth/EdgeGatewayHealth_EdgeGatewayHealthDbId_GET.yaml)
@@ -10229,7 +10229,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterSensorDevice, genxGetSensorDevice, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterSensorDevice, genxGetSensorDevice, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.sensor-devices.record, brapi-genx.genx.v1.sensor-devices.get
 - **Relevant RFC / decision references:** RFC-149
 - **Contract source:** [`Specification/BrAPI-GenX/Instrumentation/SensorDevice/SensorDevice_GET_POST.yaml`](Instrumentation/SensorDevice/SensorDevice_GET_POST.yaml)
@@ -10264,7 +10264,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** SensorDeviceNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListSensorDevices, genxGetSensorDevice, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListSensorDevices, genxGetSensorDevice, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.sensor-devices.list, brapi-genx.genx.v1.sensor-devices.get
 - **Relevant RFC / decision references:** RFC-149
 - **Contract source:** [`Specification/BrAPI-GenX/Instrumentation/SensorDevice/SensorDevice_GET_POST.yaml`](Instrumentation/SensorDevice/SensorDevice_GET_POST.yaml)
@@ -10297,7 +10297,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterSensorDevice, genxListSensorDevices, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterSensorDevice, genxListSensorDevices, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.sensor-devices.list, brapi-genx.genx.v1.sensor-devices.record
 - **Relevant RFC / decision references:** RFC-149
 - **Contract source:** [`Specification/BrAPI-GenX/Instrumentation/SensorDevice/SensorDevice_SensorDeviceDbId_GET.yaml`](Instrumentation/SensorDevice/SensorDevice_SensorDeviceDbId_GET.yaml)
@@ -10413,7 +10413,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterTelemetryNormalization, genxGetTelemetryNormalization, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterTelemetryNormalization, genxGetTelemetryNormalization, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.telemetry-normalizations.record, brapi-genx.genx.v1.telemetry-normalizations.get
 - **Relevant RFC / decision references:** RFC-148
 - **Contract source:** [`Specification/BrAPI-GenX/Instrumentation/TelemetryNormalization/TelemetryNormalization_GET_POST.yaml`](Instrumentation/TelemetryNormalization/TelemetryNormalization_GET_POST.yaml)
@@ -10448,7 +10448,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** TelemetryNormalizationNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListTelemetryNormalizations, genxGetTelemetryNormalization, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListTelemetryNormalizations, genxGetTelemetryNormalization, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.telemetry-normalizations.list, brapi-genx.genx.v1.telemetry-normalizations.get
 - **Relevant RFC / decision references:** RFC-148
 - **Contract source:** [`Specification/BrAPI-GenX/Instrumentation/TelemetryNormalization/TelemetryNormalization_GET_POST.yaml`](Instrumentation/TelemetryNormalization/TelemetryNormalization_GET_POST.yaml)
@@ -10481,7 +10481,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterTelemetryNormalization, genxListTelemetryNormalizations, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterTelemetryNormalization, genxListTelemetryNormalizations, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.telemetry-normalizations.list, brapi-genx.genx.v1.telemetry-normalizations.record
 - **Relevant RFC / decision references:** RFC-148
 - **Contract source:** [`Specification/BrAPI-GenX/Instrumentation/TelemetryNormalization/TelemetryNormalization_TelemetryNormalizationDbId_GET.yaml`](Instrumentation/TelemetryNormalization/TelemetryNormalization_TelemetryNormalizationDbId_GET.yaml)
@@ -10518,7 +10518,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterBiodiversityExport, genxGetBiodiversityExport, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterBiodiversityExport, genxGetBiodiversityExport, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.biodiversity-exports.record, brapi-genx.genx.v1.biodiversity-exports.get
 - **Relevant RFC / decision references:** RFC-121
 - **Contract source:** [`Specification/BrAPI-GenX/Interoperability/BiodiversityExport/BiodiversityExport_GET_POST.yaml`](Interoperability/BiodiversityExport/BiodiversityExport_GET_POST.yaml)
@@ -10553,7 +10553,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** BiodiversityExportNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListBiodiversityExports, genxGetBiodiversityExport, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListBiodiversityExports, genxGetBiodiversityExport, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.biodiversity-exports.list, brapi-genx.genx.v1.biodiversity-exports.get
 - **Relevant RFC / decision references:** RFC-121
 - **Contract source:** [`Specification/BrAPI-GenX/Interoperability/BiodiversityExport/BiodiversityExport_GET_POST.yaml`](Interoperability/BiodiversityExport/BiodiversityExport_GET_POST.yaml)
@@ -10586,7 +10586,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterBiodiversityExport, genxListBiodiversityExports, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterBiodiversityExport, genxListBiodiversityExports, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.biodiversity-exports.list, brapi-genx.genx.v1.biodiversity-exports.record
 - **Relevant RFC / decision references:** RFC-121
 - **Contract source:** [`Specification/BrAPI-GenX/Interoperability/BiodiversityExport/BiodiversityExport_BiodiversityExportDbId_GET.yaml`](Interoperability/BiodiversityExport/BiodiversityExport_BiodiversityExportDbId_GET.yaml)
@@ -10623,7 +10623,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterConformanceProbe, genxGetConformanceProbe, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterConformanceProbe, genxGetConformanceProbe, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.conformance-probes.record, brapi-genx.genx.v1.conformance-probes.get
 - **Relevant RFC / decision references:** RFC-155
 - **Contract source:** [`Specification/BrAPI-GenX/Interoperability/ConformanceProbe/ConformanceProbe_GET_POST.yaml`](Interoperability/ConformanceProbe/ConformanceProbe_GET_POST.yaml)
@@ -10658,7 +10658,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** ConformanceProbeNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListConformanceProbes, genxGetConformanceProbe, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListConformanceProbes, genxGetConformanceProbe, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.conformance-probes.list, brapi-genx.genx.v1.conformance-probes.get
 - **Relevant RFC / decision references:** RFC-155
 - **Contract source:** [`Specification/BrAPI-GenX/Interoperability/ConformanceProbe/ConformanceProbe_GET_POST.yaml`](Interoperability/ConformanceProbe/ConformanceProbe_GET_POST.yaml)
@@ -10691,7 +10691,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterConformanceProbe, genxListConformanceProbes, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterConformanceProbe, genxListConformanceProbes, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.conformance-probes.list, brapi-genx.genx.v1.conformance-probes.record
 - **Relevant RFC / decision references:** RFC-155
 - **Contract source:** [`Specification/BrAPI-GenX/Interoperability/ConformanceProbe/ConformanceProbe_ConformanceProbeDbId_GET.yaml`](Interoperability/ConformanceProbe/ConformanceProbe_ConformanceProbeDbId_GET.yaml)
@@ -10941,7 +10941,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterSchemaMapping, genxGetSchemaMapping, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterSchemaMapping, genxGetSchemaMapping, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.schema-mappings.record, brapi-genx.genx.v1.schema-mappings.get
 - **Relevant RFC / decision references:** RFC-152
 - **Contract source:** [`Specification/BrAPI-GenX/Interoperability/SchemaMapping/SchemaMapping_GET_POST.yaml`](Interoperability/SchemaMapping/SchemaMapping_GET_POST.yaml)
@@ -10976,7 +10976,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** SchemaMappingNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListSchemaMappings, genxGetSchemaMapping, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListSchemaMappings, genxGetSchemaMapping, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.schema-mappings.list, brapi-genx.genx.v1.schema-mappings.get
 - **Relevant RFC / decision references:** RFC-152
 - **Contract source:** [`Specification/BrAPI-GenX/Interoperability/SchemaMapping/SchemaMapping_GET_POST.yaml`](Interoperability/SchemaMapping/SchemaMapping_GET_POST.yaml)
@@ -11009,7 +11009,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterSchemaMapping, genxListSchemaMappings, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterSchemaMapping, genxListSchemaMappings, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.schema-mappings.list, brapi-genx.genx.v1.schema-mappings.record
 - **Relevant RFC / decision references:** RFC-152
 - **Contract source:** [`Specification/BrAPI-GenX/Interoperability/SchemaMapping/SchemaMapping_SchemaMappingDbId_GET.yaml`](Interoperability/SchemaMapping/SchemaMapping_SchemaMappingDbId_GET.yaml)
@@ -11151,7 +11151,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterCaptureWorkflow, genxGetCaptureWorkflow, genxPublishVariableTermVersion
+- **Semantic relationship IDs / labels:** genxRegisterCaptureWorkflow, genxGetCaptureWorkflow, genxPublishVariableTermVersion, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.capture-workflows.record, brapi-genx.genx.v1.capture-workflows.get
 - **Relevant RFC / decision references:** RFC-110
 - **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/CaptureWorkflow/CaptureWorkflow_GET_POST.yaml`](Phenotyping/CaptureWorkflow/CaptureWorkflow_GET_POST.yaml)
@@ -11186,7 +11186,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** CaptureWorkflowNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListCaptureWorkflows, genxGetCaptureWorkflow, genxPublishVariableTermVersion
+- **Semantic relationship IDs / labels:** genxListCaptureWorkflows, genxGetCaptureWorkflow, genxPublishVariableTermVersion, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.capture-workflows.list, brapi-genx.genx.v1.capture-workflows.get
 - **Relevant RFC / decision references:** RFC-110
 - **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/CaptureWorkflow/CaptureWorkflow_GET_POST.yaml`](Phenotyping/CaptureWorkflow/CaptureWorkflow_GET_POST.yaml)
@@ -11219,7 +11219,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterCaptureWorkflow, genxListCaptureWorkflows, genxPublishVariableTermVersion
+- **Semantic relationship IDs / labels:** genxRegisterCaptureWorkflow, genxListCaptureWorkflows, genxPublishVariableTermVersion, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.capture-workflows.list, brapi-genx.genx.v1.capture-workflows.record
 - **Relevant RFC / decision references:** RFC-110
 - **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/CaptureWorkflow/CaptureWorkflow_CaptureWorkflowDbId_GET.yaml`](Phenotyping/CaptureWorkflow/CaptureWorkflow_CaptureWorkflowDbId_GET.yaml)
@@ -11676,7 +11676,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterQualityFlag, genxGetQualityFlag, genxPublishVariableTermVersion
+- **Semantic relationship IDs / labels:** genxRegisterQualityFlag, genxGetQualityFlag, genxPublishVariableTermVersion, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.quality-flags.record, brapi-genx.genx.v1.quality-flags.get
 - **Relevant RFC / decision references:** RFC-111
 - **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/QualityFlag/QualityFlag_GET_POST.yaml`](Phenotyping/QualityFlag/QualityFlag_GET_POST.yaml)
@@ -11711,7 +11711,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** QualityFlagNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListQualityFlags, genxGetQualityFlag, genxPublishVariableTermVersion
+- **Semantic relationship IDs / labels:** genxListQualityFlags, genxGetQualityFlag, genxPublishVariableTermVersion, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.quality-flags.list, brapi-genx.genx.v1.quality-flags.get
 - **Relevant RFC / decision references:** RFC-111
 - **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/QualityFlag/QualityFlag_GET_POST.yaml`](Phenotyping/QualityFlag/QualityFlag_GET_POST.yaml)
@@ -11744,7 +11744,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterQualityFlag, genxListQualityFlags, genxPublishVariableTermVersion
+- **Semantic relationship IDs / labels:** genxRegisterQualityFlag, genxListQualityFlags, genxPublishVariableTermVersion, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.quality-flags.list, brapi-genx.genx.v1.quality-flags.record
 - **Relevant RFC / decision references:** RFC-111
 - **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/QualityFlag/QualityFlag_QualityFlagDbId_GET.yaml`](Phenotyping/QualityFlag/QualityFlag_QualityFlagDbId_GET.yaml)
@@ -11886,7 +11886,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterValueMissingness, genxGetValueMissingness, genxPublishVariableTermVersion
+- **Semantic relationship IDs / labels:** genxRegisterValueMissingness, genxGetValueMissingness, genxPublishVariableTermVersion, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.value-missingness.record, brapi-genx.genx.v1.value-missingness.get
 - **Relevant RFC / decision references:** RFC-112
 - **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/ValueMissingness/ValueMissingness_GET_POST.yaml`](Phenotyping/ValueMissingness/ValueMissingness_GET_POST.yaml)
@@ -11921,7 +11921,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** ValueMissingnessNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListValueMissingness, genxGetValueMissingness, genxPublishVariableTermVersion
+- **Semantic relationship IDs / labels:** genxListValueMissingness, genxGetValueMissingness, genxPublishVariableTermVersion, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.value-missingness.list, brapi-genx.genx.v1.value-missingness.get
 - **Relevant RFC / decision references:** RFC-112
 - **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/ValueMissingness/ValueMissingness_GET_POST.yaml`](Phenotyping/ValueMissingness/ValueMissingness_GET_POST.yaml)
@@ -11954,7 +11954,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterValueMissingness, genxListValueMissingness, genxPublishVariableTermVersion
+- **Semantic relationship IDs / labels:** genxRegisterValueMissingness, genxListValueMissingness, genxPublishVariableTermVersion, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.value-missingness.list, brapi-genx.genx.v1.value-missingness.record
 - **Relevant RFC / decision references:** RFC-112
 - **Contract source:** [`Specification/BrAPI-GenX/Phenotyping/ValueMissingness/ValueMissingness_ValueMissingnessDbId_GET.yaml`](Phenotyping/ValueMissingness/ValueMissingness_ValueMissingnessDbId_GET.yaml)
@@ -11991,7 +11991,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterCropHealthImage, genxGetCropHealthImage, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterCropHealthImage, genxGetCropHealthImage, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-health-images.record, brapi-genx.genx.v1.crop-health-images.get
 - **Relevant RFC / decision references:** RFC-128
 - **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/CropHealthImage/CropHealthImage_GET_POST.yaml`](PlantHealth/CropHealthImage/CropHealthImage_GET_POST.yaml)
@@ -12026,7 +12026,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** CropHealthImageNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListCropHealthImages, genxGetCropHealthImage, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListCropHealthImages, genxGetCropHealthImage, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-health-images.list, brapi-genx.genx.v1.crop-health-images.get
 - **Relevant RFC / decision references:** RFC-128
 - **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/CropHealthImage/CropHealthImage_GET_POST.yaml`](PlantHealth/CropHealthImage/CropHealthImage_GET_POST.yaml)
@@ -12059,7 +12059,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterCropHealthImage, genxListCropHealthImages, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterCropHealthImage, genxListCropHealthImages, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.crop-health-images.list, brapi-genx.genx.v1.crop-health-images.record
 - **Relevant RFC / decision references:** RFC-128
 - **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/CropHealthImage/CropHealthImage_CropHealthImageDbId_GET.yaml`](PlantHealth/CropHealthImage/CropHealthImage_CropHealthImageDbId_GET.yaml)
@@ -12096,7 +12096,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterDiagnosticEvidence, genxGetDiagnosticEvidence, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterDiagnosticEvidence, genxGetDiagnosticEvidence, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.diagnostic-evidences.record, brapi-genx.genx.v1.diagnostic-evidences.get
 - **Relevant RFC / decision references:** RFC-124
 - **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/DiagnosticEvidence/DiagnosticEvidence_GET_POST.yaml`](PlantHealth/DiagnosticEvidence/DiagnosticEvidence_GET_POST.yaml)
@@ -12131,7 +12131,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** DiagnosticEvidenceNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListDiagnosticEvidences, genxGetDiagnosticEvidence, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListDiagnosticEvidences, genxGetDiagnosticEvidence, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.diagnostic-evidences.list, brapi-genx.genx.v1.diagnostic-evidences.get
 - **Relevant RFC / decision references:** RFC-124
 - **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/DiagnosticEvidence/DiagnosticEvidence_GET_POST.yaml`](PlantHealth/DiagnosticEvidence/DiagnosticEvidence_GET_POST.yaml)
@@ -12164,7 +12164,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterDiagnosticEvidence, genxListDiagnosticEvidences, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterDiagnosticEvidence, genxListDiagnosticEvidences, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.diagnostic-evidences.list, brapi-genx.genx.v1.diagnostic-evidences.record
 - **Relevant RFC / decision references:** RFC-124
 - **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/DiagnosticEvidence/DiagnosticEvidence_DiagnosticEvidenceDbId_GET.yaml`](PlantHealth/DiagnosticEvidence/DiagnosticEvidence_DiagnosticEvidenceDbId_GET.yaml)
@@ -12201,7 +12201,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterDiseaseObservation, genxGetDiseaseObservation, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterDiseaseObservation, genxGetDiseaseObservation, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.disease-observations.record, brapi-genx.genx.v1.disease-observations.get
 - **Relevant RFC / decision references:** RFC-123
 - **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/DiseaseObservation/DiseaseObservation_GET_POST.yaml`](PlantHealth/DiseaseObservation/DiseaseObservation_GET_POST.yaml)
@@ -12236,7 +12236,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** DiseaseObservationNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListDiseaseObservations, genxGetDiseaseObservation, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListDiseaseObservations, genxGetDiseaseObservation, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.disease-observations.list, brapi-genx.genx.v1.disease-observations.get
 - **Relevant RFC / decision references:** RFC-123
 - **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/DiseaseObservation/DiseaseObservation_GET_POST.yaml`](PlantHealth/DiseaseObservation/DiseaseObservation_GET_POST.yaml)
@@ -12269,7 +12269,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterDiseaseObservation, genxListDiseaseObservations, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterDiseaseObservation, genxListDiseaseObservations, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.disease-observations.list, brapi-genx.genx.v1.disease-observations.record
 - **Relevant RFC / decision references:** RFC-123
 - **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/DiseaseObservation/DiseaseObservation_DiseaseObservationDbId_GET.yaml`](PlantHealth/DiseaseObservation/DiseaseObservation_DiseaseObservationDbId_GET.yaml)
@@ -12306,7 +12306,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterDiseaseResistance, genxGetDiseaseResistance, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterDiseaseResistance, genxGetDiseaseResistance, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.disease-resistances.record, brapi-genx.genx.v1.disease-resistances.get
 - **Relevant RFC / decision references:** RFC-127
 - **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/DiseaseResistance/DiseaseResistance_GET_POST.yaml`](PlantHealth/DiseaseResistance/DiseaseResistance_GET_POST.yaml)
@@ -12341,7 +12341,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** DiseaseResistanceNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListDiseaseResistances, genxGetDiseaseResistance, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListDiseaseResistances, genxGetDiseaseResistance, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.disease-resistances.list, brapi-genx.genx.v1.disease-resistances.get
 - **Relevant RFC / decision references:** RFC-127
 - **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/DiseaseResistance/DiseaseResistance_GET_POST.yaml`](PlantHealth/DiseaseResistance/DiseaseResistance_GET_POST.yaml)
@@ -12374,7 +12374,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterDiseaseResistance, genxListDiseaseResistances, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterDiseaseResistance, genxListDiseaseResistances, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.disease-resistances.list, brapi-genx.genx.v1.disease-resistances.record
 - **Relevant RFC / decision references:** RFC-127
 - **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/DiseaseResistance/DiseaseResistance_DiseaseResistanceDbId_GET.yaml`](PlantHealth/DiseaseResistance/DiseaseResistance_DiseaseResistanceDbId_GET.yaml)
@@ -12516,7 +12516,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterIpmStrategy, genxGetIpmStrategy, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterIpmStrategy, genxGetIpmStrategy, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.ipm-strategies.record, brapi-genx.genx.v1.ipm-strategies.get
 - **Relevant RFC / decision references:** RFC-125
 - **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/IpmStrategy/IpmStrategy_GET_POST.yaml`](PlantHealth/IpmStrategy/IpmStrategy_GET_POST.yaml)
@@ -12551,7 +12551,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** IpmStrategyNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListIpmStrategies, genxGetIpmStrategy, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListIpmStrategies, genxGetIpmStrategy, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.ipm-strategies.list, brapi-genx.genx.v1.ipm-strategies.get
 - **Relevant RFC / decision references:** RFC-125
 - **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/IpmStrategy/IpmStrategy_GET_POST.yaml`](PlantHealth/IpmStrategy/IpmStrategy_GET_POST.yaml)
@@ -12584,7 +12584,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterIpmStrategy, genxListIpmStrategies, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterIpmStrategy, genxListIpmStrategies, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.ipm-strategies.list, brapi-genx.genx.v1.ipm-strategies.record
 - **Relevant RFC / decision references:** RFC-125
 - **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/IpmStrategy/IpmStrategy_IpmStrategyDbId_GET.yaml`](PlantHealth/IpmStrategy/IpmStrategy_IpmStrategyDbId_GET.yaml)
@@ -12621,7 +12621,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterPestDiseaseRisk, genxGetPestDiseaseRisk, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterPestDiseaseRisk, genxGetPestDiseaseRisk, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.pest-disease-risks.record, brapi-genx.genx.v1.pest-disease-risks.get
 - **Relevant RFC / decision references:** RFC-133
 - **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/PestDiseaseRisk/PestDiseaseRisk_GET_POST.yaml`](PlantHealth/PestDiseaseRisk/PestDiseaseRisk_GET_POST.yaml)
@@ -12656,7 +12656,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** PestDiseaseRiskNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListPestDiseaseRisks, genxGetPestDiseaseRisk, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListPestDiseaseRisks, genxGetPestDiseaseRisk, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.pest-disease-risks.list, brapi-genx.genx.v1.pest-disease-risks.get
 - **Relevant RFC / decision references:** RFC-133
 - **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/PestDiseaseRisk/PestDiseaseRisk_GET_POST.yaml`](PlantHealth/PestDiseaseRisk/PestDiseaseRisk_GET_POST.yaml)
@@ -12689,7 +12689,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterPestDiseaseRisk, genxListPestDiseaseRisks, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterPestDiseaseRisk, genxListPestDiseaseRisks, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.pest-disease-risks.list, brapi-genx.genx.v1.pest-disease-risks.record
 - **Relevant RFC / decision references:** RFC-133
 - **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/PestDiseaseRisk/PestDiseaseRisk_PestDiseaseRiskDbId_GET.yaml`](PlantHealth/PestDiseaseRisk/PestDiseaseRisk_PestDiseaseRiskDbId_GET.yaml)
@@ -12726,7 +12726,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterThresholdAlert, genxGetThresholdAlert, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterThresholdAlert, genxGetThresholdAlert, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.threshold-alerts.record, brapi-genx.genx.v1.threshold-alerts.get
 - **Relevant RFC / decision references:** RFC-126
 - **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/ThresholdAlert/ThresholdAlert_GET_POST.yaml`](PlantHealth/ThresholdAlert/ThresholdAlert_GET_POST.yaml)
@@ -12761,7 +12761,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** ThresholdAlertNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListThresholdAlerts, genxGetThresholdAlert, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListThresholdAlerts, genxGetThresholdAlert, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.threshold-alerts.list, brapi-genx.genx.v1.threshold-alerts.get
 - **Relevant RFC / decision references:** RFC-126
 - **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/ThresholdAlert/ThresholdAlert_GET_POST.yaml`](PlantHealth/ThresholdAlert/ThresholdAlert_GET_POST.yaml)
@@ -12794,7 +12794,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterThresholdAlert, genxListThresholdAlerts, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterThresholdAlert, genxListThresholdAlerts, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.threshold-alerts.list, brapi-genx.genx.v1.threshold-alerts.record
 - **Relevant RFC / decision references:** RFC-126
 - **Contract source:** [`Specification/BrAPI-GenX/PlantHealth/ThresholdAlert/ThresholdAlert_ThresholdAlertDbId_GET.yaml`](PlantHealth/ThresholdAlert/ThresholdAlert_ThresholdAlertDbId_GET.yaml)
@@ -14937,7 +14937,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterArtifactCatalogue, genxGetArtifactCatalogue, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterArtifactCatalogue, genxGetArtifactCatalogue, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.artifact-catalogues.record, brapi-genx.genx.v1.artifact-catalogues.get
 - **Relevant RFC / decision references:** RFC-118
 - **Contract source:** [`Specification/BrAPI-GenX/Research/ArtifactCatalogue/ArtifactCatalogue_GET_POST.yaml`](Research/ArtifactCatalogue/ArtifactCatalogue_GET_POST.yaml)
@@ -14972,7 +14972,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** ArtifactCatalogueNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListArtifactCatalogues, genxGetArtifactCatalogue, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListArtifactCatalogues, genxGetArtifactCatalogue, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.artifact-catalogues.list, brapi-genx.genx.v1.artifact-catalogues.get
 - **Relevant RFC / decision references:** RFC-118
 - **Contract source:** [`Specification/BrAPI-GenX/Research/ArtifactCatalogue/ArtifactCatalogue_GET_POST.yaml`](Research/ArtifactCatalogue/ArtifactCatalogue_GET_POST.yaml)
@@ -15005,7 +15005,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterArtifactCatalogue, genxListArtifactCatalogues, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterArtifactCatalogue, genxListArtifactCatalogues, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.artifact-catalogues.list, brapi-genx.genx.v1.artifact-catalogues.record
 - **Relevant RFC / decision references:** RFC-118
 - **Contract source:** [`Specification/BrAPI-GenX/Research/ArtifactCatalogue/ArtifactCatalogue_ArtifactCatalogueDbId_GET.yaml`](Research/ArtifactCatalogue/ArtifactCatalogue_ArtifactCatalogueDbId_GET.yaml)
@@ -15042,7 +15042,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterEvidencePack, genxGetEvidencePack, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterEvidencePack, genxGetEvidencePack, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.evidence-packs.record, brapi-genx.genx.v1.evidence-packs.get
 - **Relevant RFC / decision references:** RFC-122
 - **Contract source:** [`Specification/BrAPI-GenX/Research/EvidencePack/EvidencePack_GET_POST.yaml`](Research/EvidencePack/EvidencePack_GET_POST.yaml)
@@ -15077,7 +15077,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** EvidencePackNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListEvidencePacks, genxGetEvidencePack, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListEvidencePacks, genxGetEvidencePack, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.evidence-packs.list, brapi-genx.genx.v1.evidence-packs.get
 - **Relevant RFC / decision references:** RFC-122
 - **Contract source:** [`Specification/BrAPI-GenX/Research/EvidencePack/EvidencePack_GET_POST.yaml`](Research/EvidencePack/EvidencePack_GET_POST.yaml)
@@ -15110,7 +15110,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterEvidencePack, genxListEvidencePacks, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterEvidencePack, genxListEvidencePacks, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.evidence-packs.list, brapi-genx.genx.v1.evidence-packs.record
 - **Relevant RFC / decision references:** RFC-122
 - **Contract source:** [`Specification/BrAPI-GenX/Research/EvidencePack/EvidencePack_EvidencePackDbId_GET.yaml`](Research/EvidencePack/EvidencePack_EvidencePackDbId_GET.yaml)
@@ -15147,7 +15147,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterExplanationEvidence, genxGetExplanationEvidence, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterExplanationEvidence, genxGetExplanationEvidence, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.explanation-evidences.record, brapi-genx.genx.v1.explanation-evidences.get
 - **Relevant RFC / decision references:** RFC-137
 - **Contract source:** [`Specification/BrAPI-GenX/Research/ExplanationEvidence/ExplanationEvidence_GET_POST.yaml`](Research/ExplanationEvidence/ExplanationEvidence_GET_POST.yaml)
@@ -15182,7 +15182,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** ExplanationEvidenceNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListExplanationEvidences, genxGetExplanationEvidence, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListExplanationEvidences, genxGetExplanationEvidence, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.explanation-evidences.list, brapi-genx.genx.v1.explanation-evidences.get
 - **Relevant RFC / decision references:** RFC-137
 - **Contract source:** [`Specification/BrAPI-GenX/Research/ExplanationEvidence/ExplanationEvidence_GET_POST.yaml`](Research/ExplanationEvidence/ExplanationEvidence_GET_POST.yaml)
@@ -15215,7 +15215,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterExplanationEvidence, genxListExplanationEvidences, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterExplanationEvidence, genxListExplanationEvidences, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.explanation-evidences.list, brapi-genx.genx.v1.explanation-evidences.record
 - **Relevant RFC / decision references:** RFC-137
 - **Contract source:** [`Specification/BrAPI-GenX/Research/ExplanationEvidence/ExplanationEvidence_ExplanationEvidenceDbId_GET.yaml`](Research/ExplanationEvidence/ExplanationEvidence_ExplanationEvidenceDbId_GET.yaml)
@@ -15252,7 +15252,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterHumanReview, genxGetHumanReview, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterHumanReview, genxGetHumanReview, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.human-reviews.record, brapi-genx.genx.v1.human-reviews.get
 - **Relevant RFC / decision references:** RFC-136
 - **Contract source:** [`Specification/BrAPI-GenX/Research/HumanReview/HumanReview_GET_POST.yaml`](Research/HumanReview/HumanReview_GET_POST.yaml)
@@ -15287,7 +15287,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** HumanReviewNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListHumanReviews, genxGetHumanReview, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListHumanReviews, genxGetHumanReview, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.human-reviews.list, brapi-genx.genx.v1.human-reviews.get
 - **Relevant RFC / decision references:** RFC-136
 - **Contract source:** [`Specification/BrAPI-GenX/Research/HumanReview/HumanReview_GET_POST.yaml`](Research/HumanReview/HumanReview_GET_POST.yaml)
@@ -15320,7 +15320,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterHumanReview, genxListHumanReviews, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterHumanReview, genxListHumanReviews, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.human-reviews.list, brapi-genx.genx.v1.human-reviews.record
 - **Relevant RFC / decision references:** RFC-136
 - **Contract source:** [`Specification/BrAPI-GenX/Research/HumanReview/HumanReview_HumanReviewDbId_GET.yaml`](Research/HumanReview/HumanReview_HumanReviewDbId_GET.yaml)
@@ -15571,7 +15571,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterOutcomeFeedback, genxGetOutcomeFeedback, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterOutcomeFeedback, genxGetOutcomeFeedback, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.outcome-feedbacks.record, brapi-genx.genx.v1.outcome-feedbacks.get
 - **Relevant RFC / decision references:** RFC-138
 - **Contract source:** [`Specification/BrAPI-GenX/Research/OutcomeFeedback/OutcomeFeedback_GET_POST.yaml`](Research/OutcomeFeedback/OutcomeFeedback_GET_POST.yaml)
@@ -15606,7 +15606,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** OutcomeFeedbackNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListOutcomeFeedbacks, genxGetOutcomeFeedback, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListOutcomeFeedbacks, genxGetOutcomeFeedback, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.outcome-feedbacks.list, brapi-genx.genx.v1.outcome-feedbacks.get
 - **Relevant RFC / decision references:** RFC-138
 - **Contract source:** [`Specification/BrAPI-GenX/Research/OutcomeFeedback/OutcomeFeedback_GET_POST.yaml`](Research/OutcomeFeedback/OutcomeFeedback_GET_POST.yaml)
@@ -15639,7 +15639,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterOutcomeFeedback, genxListOutcomeFeedbacks, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterOutcomeFeedback, genxListOutcomeFeedbacks, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.outcome-feedbacks.list, brapi-genx.genx.v1.outcome-feedbacks.record
 - **Relevant RFC / decision references:** RFC-138
 - **Contract source:** [`Specification/BrAPI-GenX/Research/OutcomeFeedback/OutcomeFeedback_OutcomeFeedbackDbId_GET.yaml`](Research/OutcomeFeedback/OutcomeFeedback_OutcomeFeedbackDbId_GET.yaml)
@@ -15886,7 +15886,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterProtocolLibrary, genxGetProtocolLibrary, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterProtocolLibrary, genxGetProtocolLibrary, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.protocol-libraries.record, brapi-genx.genx.v1.protocol-libraries.get
 - **Relevant RFC / decision references:** RFC-119
 - **Contract source:** [`Specification/BrAPI-GenX/Research/ProtocolLibrary/ProtocolLibrary_GET_POST.yaml`](Research/ProtocolLibrary/ProtocolLibrary_GET_POST.yaml)
@@ -15921,7 +15921,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** ProtocolLibraryNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListProtocolLibraries, genxGetProtocolLibrary, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListProtocolLibraries, genxGetProtocolLibrary, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.protocol-libraries.list, brapi-genx.genx.v1.protocol-libraries.get
 - **Relevant RFC / decision references:** RFC-119
 - **Contract source:** [`Specification/BrAPI-GenX/Research/ProtocolLibrary/ProtocolLibrary_GET_POST.yaml`](Research/ProtocolLibrary/ProtocolLibrary_GET_POST.yaml)
@@ -15954,7 +15954,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterProtocolLibrary, genxListProtocolLibraries, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterProtocolLibrary, genxListProtocolLibraries, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.protocol-libraries.list, brapi-genx.genx.v1.protocol-libraries.record
 - **Relevant RFC / decision references:** RFC-119
 - **Contract source:** [`Specification/BrAPI-GenX/Research/ProtocolLibrary/ProtocolLibrary_ProtocolLibraryDbId_GET.yaml`](Research/ProtocolLibrary/ProtocolLibrary_ProtocolLibraryDbId_GET.yaml)
@@ -15991,7 +15991,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxRegisterPublicationReview, genxGetPublicationReview, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterPublicationReview, genxGetPublicationReview, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.publication-reviews.record, brapi-genx.genx.v1.publication-reviews.get
 - **Relevant RFC / decision references:** RFC-120
 - **Contract source:** [`Specification/BrAPI-GenX/Research/PublicationReview/PublicationReview_GET_POST.yaml`](Research/PublicationReview/PublicationReview_GET_POST.yaml)
@@ -16026,7 +16026,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** PublicationReviewNewRequest
 - **Response status codes recorded:** 200, 400, 401, 403
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden
-- **Semantic relationship IDs / labels:** genxListPublicationReviews, genxGetPublicationReview, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxListPublicationReviews, genxGetPublicationReview, genxRegisterGenomicDataset, genxRegisterFarm
 - **Related catalogue IDs:** brapi-genx.genx.v1.publication-reviews.list, brapi-genx.genx.v1.publication-reviews.get
 - **Relevant RFC / decision references:** RFC-120
 - **Contract source:** [`Specification/BrAPI-GenX/Research/PublicationReview/PublicationReview_GET_POST.yaml`](Research/PublicationReview/PublicationReview_GET_POST.yaml)
@@ -16059,7 +16059,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 - **Request schema refs recorded:** —
 - **Response status codes recorded:** 200, 400, 401, 403, 404
 - **Response component refs recorded:** 400BadRequest, 401Unauthorized, 403Forbidden, 404NotFound
-- **Semantic relationship IDs / labels:** genxRegisterPublicationReview, genxListPublicationReviews, genxRegisterGenomicDataset
+- **Semantic relationship IDs / labels:** genxRegisterPublicationReview, genxListPublicationReviews, genxRegisterGenomicDataset, genxRegisterResearchAsset
 - **Related catalogue IDs:** brapi-genx.genx.v1.publication-reviews.list, brapi-genx.genx.v1.publication-reviews.record
 - **Relevant RFC / decision references:** RFC-120
 - **Contract source:** [`Specification/BrAPI-GenX/Research/PublicationReview/PublicationReview_PublicationReviewDbId_GET.yaml`](Research/PublicationReview/PublicationReview_PublicationReviewDbId_GET.yaml)

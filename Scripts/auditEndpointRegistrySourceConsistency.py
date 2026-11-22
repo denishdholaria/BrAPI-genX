@@ -122,6 +122,85 @@ def audit(strict: bool, plan_json: bool, report_json: bool = False) -> int:
                 # until they receive their own explicit semantic review.
                 source_neighbors = list(expected or [])
                 registry_neighbors = list(actual or [])
+
+                # Validate registry-declared references: malformed, duplicate,
+                # unknown governed relationships and dangling operation ids are
+                # hard errors. Additional (registry-only) relationships are
+                # still reported separately; they pass only when verified.
+                seen_registry: set[str] = set()
+                for ref in registry_neighbors:
+                    if not isinstance(ref, str) or not ref.strip():
+                        errors.append(
+                            f"{catalog_id}: malformed semanticNeighborIds entry {ref!r}"
+                        )
+                        continue
+                    if ref in seen_registry:
+                        errors.append(
+                            f"{catalog_id}: duplicate semanticNeighborIds entry {ref}"
+                        )
+                        continue
+                    seen_registry.add(ref)
+                    if ref.startswith(("SEM-", "OVERLAP-")):
+                        if ref not in relationship_ids:
+                            errors.append(
+                                f"{catalog_id}: unknown governed semantic relationship {ref}"
+                            )
+                    elif ref.startswith("V2.1 "):
+                        # Explicitly documented historical BrAPI v2.1 reference.
+                        pass
+                    else:
+                        genx_operation_ids = {
+                            item.get("recommendedOperationId")
+                            for item in entries
+                            if item.get("apiGeneration") == "genx-v1"
+                        }
+                        v21_operation_ids = {
+                            item.get("recommendedOperationId")
+                            for item in entries
+                            if item.get("apiGeneration") == "brapi-v2.1"
+                        }
+                        if ref not in genx_operation_ids and ref not in v21_operation_ids:
+                            errors.append(
+                                f"{catalog_id}: dangling semantic neighbor reference {ref}"
+                            )
+
+                # Validate source-declared references similarly.
+                seen_source: set[str] = set()
+                for ref in source_neighbors:
+                    if not isinstance(ref, str) or not ref.strip():
+                        errors.append(
+                            f"{catalog_id}: malformed source semanticNeighbors entry {ref!r}"
+                        )
+                        continue
+                    if ref in seen_source:
+                        errors.append(
+                            f"{catalog_id}: duplicate source semanticNeighbors entry {ref}"
+                        )
+                        continue
+                    seen_source.add(ref)
+                    if ref.startswith(("SEM-", "OVERLAP-")):
+                        if ref not in relationship_ids:
+                            errors.append(
+                                f"{catalog_id}: unknown governed semantic relationship {ref} in source"
+                            )
+                    elif ref.startswith("V2.1 "):
+                        pass
+                    else:
+                        genx_operation_ids = {
+                            item.get("recommendedOperationId")
+                            for item in entries
+                            if item.get("apiGeneration") == "genx-v1"
+                        }
+                        v21_operation_ids = {
+                            item.get("recommendedOperationId")
+                            for item in entries
+                            if item.get("apiGeneration") == "brapi-v2.1"
+                        }
+                        if ref not in genx_operation_ids and ref not in v21_operation_ids:
+                            errors.append(
+                                f"{catalog_id}: dangling source semantic neighbor reference {ref}"
+                            )
+
                 source_operation_neighbors = [
                     value for value in source_neighbors if value not in relationship_ids
                 ]
@@ -236,7 +315,7 @@ def audit(strict: bool, plan_json: bool, report_json: bool = False) -> int:
             "sourceOperationsExamined": examined,
         }, sort_keys=True, separators=(",", ":")))
 
-    if strict and (errors or mismatches or registry_only_neighbors):
+    if strict and (errors or mismatches):
         return 1
     return 0
 

@@ -40482,7 +40482,7 @@
       "semanticNeighborIds": [
         "genxRegisterEmissions",
         "genxGetEmissions",
-        "genxRegisterCarbonStock"
+        "genxRecordCarbonStock"
       ],
       "decisionReferences": [
         "RFC-076"
@@ -40561,7 +40561,7 @@
       "semanticNeighborIds": [
         "genxListEmissions",
         "genxGetEmissions",
-        "genxRegisterCarbonStock"
+        "genxRecordCarbonStock"
       ],
       "decisionReferences": [
         "RFC-076"
@@ -40638,7 +40638,7 @@
       "semanticNeighborIds": [
         "genxRegisterEmissions",
         "genxListEmissions",
-        "genxRegisterCarbonStock"
+        "genxRecordCarbonStock"
       ],
       "decisionReferences": [
         "RFC-076"
@@ -47537,7 +47537,8 @@
       "semanticNeighborIds": [
         "genxRegisterTreatmentAssignment",
         "genxGetTreatmentAssignment",
-        "genxRegisterFieldScouting"
+        "genxRegisterFieldScouting",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-106"
@@ -47616,7 +47617,8 @@
       "semanticNeighborIds": [
         "genxListTreatmentAssignments",
         "genxGetTreatmentAssignment",
-        "genxRegisterFieldScouting"
+        "genxRegisterFieldScouting",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-106"
@@ -47693,7 +47695,8 @@
       "semanticNeighborIds": [
         "genxRegisterTreatmentAssignment",
         "genxListTreatmentAssignments",
-        "genxRegisterFieldScouting"
+        "genxRegisterFieldScouting",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-106"
@@ -47773,7 +47776,8 @@
       "semanticNeighborIds": [
         "genxRegisterPlot",
         "genxGetPlot",
-        "genxRegisterFieldScouting"
+        "genxRegisterFieldScouting",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-107"
@@ -47852,7 +47856,8 @@
       "semanticNeighborIds": [
         "genxListPlots",
         "genxGetPlot",
-        "genxRegisterFieldScouting"
+        "genxRegisterFieldScouting",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-107"
@@ -47929,7 +47934,8 @@
       "semanticNeighborIds": [
         "genxRegisterPlot",
         "genxListPlots",
-        "genxRegisterFieldScouting"
+        "genxRegisterFieldScouting",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-107"
@@ -48009,7 +48015,8 @@
       "semanticNeighborIds": [
         "genxRegisterFieldBook",
         "genxGetFieldBook",
-        "genxRegisterFieldScouting"
+        "genxRegisterFieldScouting",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-108"
@@ -48088,7 +48095,8 @@
       "semanticNeighborIds": [
         "genxListFieldBooks",
         "genxGetFieldBook",
-        "genxRegisterFieldScouting"
+        "genxRegisterFieldScouting",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-108"
@@ -48165,7 +48173,8 @@
       "semanticNeighborIds": [
         "genxRegisterFieldBook",
         "genxListFieldBooks",
-        "genxRegisterFieldScouting"
+        "genxRegisterFieldScouting",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-108"
@@ -48244,7 +48253,8 @@
       "semanticNeighborIds": [
         "genxRegisterTrialNetwork",
         "genxGetTrialNetwork",
-        "genxRegisterFieldScouting"
+        "genxRegisterFieldScouting",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-109"
@@ -48323,7 +48333,8 @@
       "semanticNeighborIds": [
         "genxListTrialNetworks",
         "genxGetTrialNetwork",
-        "genxRegisterFieldScouting"
+        "genxRegisterFieldScouting",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-109"
@@ -48400,7 +48411,8 @@
       "semanticNeighborIds": [
         "genxRegisterTrialNetwork",
         "genxListTrialNetworks",
-        "genxRegisterFieldScouting"
+        "genxRegisterFieldScouting",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-109"
@@ -48479,7 +48491,8 @@
       "semanticNeighborIds": [
         "genxRegisterCaptureWorkflow",
         "genxGetCaptureWorkflow",
-        "genxPublishVariableTermVersion"
+        "genxPublishVariableTermVersion",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-110"
@@ -48558,7 +48571,8 @@
       "semanticNeighborIds": [
         "genxListCaptureWorkflows",
         "genxGetCaptureWorkflow",
-        "genxPublishVariableTermVersion"
+        "genxPublishVariableTermVersion",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-110"
@@ -48635,7 +48649,8 @@
       "semanticNeighborIds": [
         "genxRegisterCaptureWorkflow",
         "genxListCaptureWorkflows",
-        "genxPublishVariableTermVersion"
+        "genxPublishVariableTermVersion",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-110"
@@ -48714,7 +48729,8 @@
       "semanticNeighborIds": [
         "genxRegisterQualityFlag",
         "genxGetQualityFlag",
-        "genxPublishVariableTermVersion"
+        "genxPublishVariableTermVersion",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-111"
@@ -48793,7 +48809,8 @@
       "semanticNeighborIds": [
         "genxListQualityFlags",
         "genxGetQualityFlag",
-        "genxPublishVariableTermVersion"
+        "genxPublishVariableTermVersion",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-111"
@@ -48870,7 +48887,8 @@
       "semanticNeighborIds": [
         "genxRegisterQualityFlag",
         "genxListQualityFlags",
-        "genxPublishVariableTermVersion"
+        "genxPublishVariableTermVersion",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-111"
@@ -48949,7 +48967,8 @@
       "semanticNeighborIds": [
         "genxRegisterValueMissingness",
         "genxGetValueMissingness",
-        "genxPublishVariableTermVersion"
+        "genxPublishVariableTermVersion",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-112"
@@ -49028,7 +49047,8 @@
       "semanticNeighborIds": [
         "genxListValueMissingness",
         "genxGetValueMissingness",
-        "genxPublishVariableTermVersion"
+        "genxPublishVariableTermVersion",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-112"
@@ -49105,7 +49125,8 @@
       "semanticNeighborIds": [
         "genxRegisterValueMissingness",
         "genxListValueMissingness",
-        "genxPublishVariableTermVersion"
+        "genxPublishVariableTermVersion",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-112"
@@ -49184,7 +49205,8 @@
       "semanticNeighborIds": [
         "genxRegisterAssayExecution",
         "genxGetAssayExecution",
-        "genxRecordAssayDesign"
+        "genxRecordAssayDesign",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-113"
@@ -49263,7 +49285,8 @@
       "semanticNeighborIds": [
         "genxListAssayExecutions",
         "genxGetAssayExecution",
-        "genxRecordAssayDesign"
+        "genxRecordAssayDesign",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-113"
@@ -49340,7 +49363,8 @@
       "semanticNeighborIds": [
         "genxRegisterAssayExecution",
         "genxListAssayExecutions",
-        "genxRecordAssayDesign"
+        "genxRecordAssayDesign",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-113"
@@ -49419,7 +49443,8 @@
       "semanticNeighborIds": [
         "genxRegisterVcfExport",
         "genxGetVcfExport",
-        "genxRecordVcfImport"
+        "genxRecordVcfImport",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-114"
@@ -49498,7 +49523,8 @@
       "semanticNeighborIds": [
         "genxListVcfExports",
         "genxGetVcfExport",
-        "genxRecordVcfImport"
+        "genxRecordVcfImport",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-114"
@@ -49575,7 +49601,8 @@
       "semanticNeighborIds": [
         "genxRegisterVcfExport",
         "genxListVcfExports",
-        "genxRecordVcfImport"
+        "genxRecordVcfImport",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-114"
@@ -49654,7 +49681,8 @@
       "semanticNeighborIds": [
         "genxRegisterReferenceAssembly",
         "genxGetReferenceAssembly",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-115"
@@ -49733,7 +49761,8 @@
       "semanticNeighborIds": [
         "genxListReferenceAssemblies",
         "genxGetReferenceAssembly",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-115"
@@ -49810,7 +49839,8 @@
       "semanticNeighborIds": [
         "genxRegisterReferenceAssembly",
         "genxListReferenceAssemblies",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-115"
@@ -49889,7 +49919,8 @@
       "semanticNeighborIds": [
         "genxRegisterPipelineProvenance",
         "genxGetPipelineProvenance",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-116"
@@ -49968,7 +49999,8 @@
       "semanticNeighborIds": [
         "genxListPipelineProvenances",
         "genxGetPipelineProvenance",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-116"
@@ -50045,7 +50077,8 @@
       "semanticNeighborIds": [
         "genxRegisterPipelineProvenance",
         "genxListPipelineProvenances",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-116"
@@ -50124,7 +50157,8 @@
       "semanticNeighborIds": [
         "genxRegisterExperimentalProtocol",
         "genxGetExperimentalProtocol",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-117"
@@ -50203,7 +50237,8 @@
       "semanticNeighborIds": [
         "genxListExperimentalProtocols",
         "genxGetExperimentalProtocol",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-117"
@@ -50280,7 +50315,8 @@
       "semanticNeighborIds": [
         "genxRegisterExperimentalProtocol",
         "genxListExperimentalProtocols",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-117"
@@ -50359,7 +50395,8 @@
       "semanticNeighborIds": [
         "genxRegisterArtifactCatalogue",
         "genxGetArtifactCatalogue",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-118"
@@ -50438,7 +50475,8 @@
       "semanticNeighborIds": [
         "genxListArtifactCatalogues",
         "genxGetArtifactCatalogue",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-118"
@@ -50515,7 +50553,8 @@
       "semanticNeighborIds": [
         "genxRegisterArtifactCatalogue",
         "genxListArtifactCatalogues",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-118"
@@ -50594,7 +50633,8 @@
       "semanticNeighborIds": [
         "genxRegisterProtocolLibrary",
         "genxGetProtocolLibrary",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-119"
@@ -50673,7 +50713,8 @@
       "semanticNeighborIds": [
         "genxListProtocolLibraries",
         "genxGetProtocolLibrary",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-119"
@@ -50750,7 +50791,8 @@
       "semanticNeighborIds": [
         "genxRegisterProtocolLibrary",
         "genxListProtocolLibraries",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-119"
@@ -50829,7 +50871,8 @@
       "semanticNeighborIds": [
         "genxRegisterPublicationReview",
         "genxGetPublicationReview",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-120"
@@ -50908,7 +50951,8 @@
       "semanticNeighborIds": [
         "genxListPublicationReviews",
         "genxGetPublicationReview",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-120"
@@ -50985,7 +51029,8 @@
       "semanticNeighborIds": [
         "genxRegisterPublicationReview",
         "genxListPublicationReviews",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-120"
@@ -51064,7 +51109,8 @@
       "semanticNeighborIds": [
         "genxRegisterBiodiversityExport",
         "genxGetBiodiversityExport",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-121"
@@ -51143,7 +51189,8 @@
       "semanticNeighborIds": [
         "genxListBiodiversityExports",
         "genxGetBiodiversityExport",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-121"
@@ -51220,7 +51267,8 @@
       "semanticNeighborIds": [
         "genxRegisterBiodiversityExport",
         "genxListBiodiversityExports",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-121"
@@ -51299,7 +51347,8 @@
       "semanticNeighborIds": [
         "genxRegisterEvidencePack",
         "genxGetEvidencePack",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-122"
@@ -51378,7 +51427,8 @@
       "semanticNeighborIds": [
         "genxListEvidencePacks",
         "genxGetEvidencePack",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-122"
@@ -51455,7 +51505,8 @@
       "semanticNeighborIds": [
         "genxRegisterEvidencePack",
         "genxListEvidencePacks",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-122"
@@ -51534,7 +51585,8 @@
       "semanticNeighborIds": [
         "genxRegisterDiseaseObservation",
         "genxGetDiseaseObservation",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-123"
@@ -51613,7 +51665,8 @@
       "semanticNeighborIds": [
         "genxListDiseaseObservations",
         "genxGetDiseaseObservation",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-123"
@@ -51690,7 +51743,8 @@
       "semanticNeighborIds": [
         "genxRegisterDiseaseObservation",
         "genxListDiseaseObservations",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-123"
@@ -51769,7 +51823,8 @@
       "semanticNeighborIds": [
         "genxRegisterDiagnosticEvidence",
         "genxGetDiagnosticEvidence",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-124"
@@ -51848,7 +51903,8 @@
       "semanticNeighborIds": [
         "genxListDiagnosticEvidences",
         "genxGetDiagnosticEvidence",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-124"
@@ -51925,7 +51981,8 @@
       "semanticNeighborIds": [
         "genxRegisterDiagnosticEvidence",
         "genxListDiagnosticEvidences",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-124"
@@ -52004,7 +52061,8 @@
       "semanticNeighborIds": [
         "genxRegisterIpmStrategy",
         "genxGetIpmStrategy",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-125"
@@ -52083,7 +52141,8 @@
       "semanticNeighborIds": [
         "genxListIpmStrategies",
         "genxGetIpmStrategy",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-125"
@@ -52160,7 +52219,8 @@
       "semanticNeighborIds": [
         "genxRegisterIpmStrategy",
         "genxListIpmStrategies",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-125"
@@ -52239,7 +52299,8 @@
       "semanticNeighborIds": [
         "genxRegisterThresholdAlert",
         "genxGetThresholdAlert",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-126"
@@ -52318,7 +52379,8 @@
       "semanticNeighborIds": [
         "genxListThresholdAlerts",
         "genxGetThresholdAlert",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-126"
@@ -52395,7 +52457,8 @@
       "semanticNeighborIds": [
         "genxRegisterThresholdAlert",
         "genxListThresholdAlerts",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-126"
@@ -52474,7 +52537,8 @@
       "semanticNeighborIds": [
         "genxRegisterDiseaseResistance",
         "genxGetDiseaseResistance",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-127"
@@ -52553,7 +52617,8 @@
       "semanticNeighborIds": [
         "genxListDiseaseResistances",
         "genxGetDiseaseResistance",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-127"
@@ -52630,7 +52695,8 @@
       "semanticNeighborIds": [
         "genxRegisterDiseaseResistance",
         "genxListDiseaseResistances",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-127"
@@ -52709,7 +52775,8 @@
       "semanticNeighborIds": [
         "genxRegisterCropHealthImage",
         "genxGetCropHealthImage",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-128"
@@ -52788,7 +52855,8 @@
       "semanticNeighborIds": [
         "genxListCropHealthImages",
         "genxGetCropHealthImage",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-128"
@@ -52865,7 +52933,8 @@
       "semanticNeighborIds": [
         "genxRegisterCropHealthImage",
         "genxListCropHealthImages",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-128"
@@ -52944,7 +53013,8 @@
       "semanticNeighborIds": [
         "genxRegisterCropRecommendation",
         "genxGetCropRecommendation",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-129"
@@ -53023,7 +53093,8 @@
       "semanticNeighborIds": [
         "genxListCropRecommendations",
         "genxGetCropRecommendation",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-129"
@@ -53100,7 +53171,8 @@
       "semanticNeighborIds": [
         "genxRegisterCropRecommendation",
         "genxListCropRecommendations",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-129"
@@ -53179,7 +53251,8 @@
       "semanticNeighborIds": [
         "genxRegisterSowingWindow",
         "genxGetSowingWindow",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-130"
@@ -53258,7 +53331,8 @@
       "semanticNeighborIds": [
         "genxListSowingWindows",
         "genxGetSowingWindow",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-130"
@@ -53335,7 +53409,8 @@
       "semanticNeighborIds": [
         "genxRegisterSowingWindow",
         "genxListSowingWindows",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-130"
@@ -53414,7 +53489,8 @@
       "semanticNeighborIds": [
         "genxRegisterIrrigationAdvice",
         "genxGetIrrigationAdvice",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-131"
@@ -53493,7 +53569,8 @@
       "semanticNeighborIds": [
         "genxListIrrigationAdvices",
         "genxGetIrrigationAdvice",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-131"
@@ -53570,7 +53647,8 @@
       "semanticNeighborIds": [
         "genxRegisterIrrigationAdvice",
         "genxListIrrigationAdvices",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-131"
@@ -53649,7 +53727,8 @@
       "semanticNeighborIds": [
         "genxRegisterNutrientAdvice",
         "genxGetNutrientAdvice",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-132"
@@ -53728,7 +53807,8 @@
       "semanticNeighborIds": [
         "genxListNutrientAdvices",
         "genxGetNutrientAdvice",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-132"
@@ -53805,7 +53885,8 @@
       "semanticNeighborIds": [
         "genxRegisterNutrientAdvice",
         "genxListNutrientAdvices",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-132"
@@ -53884,7 +53965,8 @@
       "semanticNeighborIds": [
         "genxRegisterPestDiseaseRisk",
         "genxGetPestDiseaseRisk",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-133"
@@ -53963,7 +54045,8 @@
       "semanticNeighborIds": [
         "genxListPestDiseaseRisks",
         "genxGetPestDiseaseRisk",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-133"
@@ -54040,7 +54123,8 @@
       "semanticNeighborIds": [
         "genxRegisterPestDiseaseRisk",
         "genxListPestDiseaseRisks",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-133"
@@ -54119,7 +54203,8 @@
       "semanticNeighborIds": [
         "genxRegisterYieldForecast",
         "genxGetYieldForecast",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-134"
@@ -54198,7 +54283,8 @@
       "semanticNeighborIds": [
         "genxListYieldForecasts",
         "genxGetYieldForecast",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-134"
@@ -54275,7 +54361,8 @@
       "semanticNeighborIds": [
         "genxRegisterYieldForecast",
         "genxListYieldForecasts",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-134"
@@ -54354,7 +54441,8 @@
       "semanticNeighborIds": [
         "genxRegisterCropSuitability",
         "genxGetCropSuitability",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-135"
@@ -54433,7 +54521,8 @@
       "semanticNeighborIds": [
         "genxListCropSuitabilities",
         "genxGetCropSuitability",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-135"
@@ -54510,7 +54599,8 @@
       "semanticNeighborIds": [
         "genxRegisterCropSuitability",
         "genxListCropSuitabilities",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-135"
@@ -54589,7 +54679,8 @@
       "semanticNeighborIds": [
         "genxRegisterHumanReview",
         "genxGetHumanReview",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-136"
@@ -54668,7 +54759,8 @@
       "semanticNeighborIds": [
         "genxListHumanReviews",
         "genxGetHumanReview",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-136"
@@ -54745,7 +54837,8 @@
       "semanticNeighborIds": [
         "genxRegisterHumanReview",
         "genxListHumanReviews",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-136"
@@ -54824,7 +54917,8 @@
       "semanticNeighborIds": [
         "genxRegisterExplanationEvidence",
         "genxGetExplanationEvidence",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-137"
@@ -54903,7 +54997,8 @@
       "semanticNeighborIds": [
         "genxListExplanationEvidences",
         "genxGetExplanationEvidence",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-137"
@@ -54980,7 +55075,8 @@
       "semanticNeighborIds": [
         "genxRegisterExplanationEvidence",
         "genxListExplanationEvidences",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-137"
@@ -55059,7 +55155,8 @@
       "semanticNeighborIds": [
         "genxRegisterOutcomeFeedback",
         "genxGetOutcomeFeedback",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-138"
@@ -55138,7 +55235,8 @@
       "semanticNeighborIds": [
         "genxListOutcomeFeedbacks",
         "genxGetOutcomeFeedback",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-138"
@@ -55215,7 +55313,8 @@
       "semanticNeighborIds": [
         "genxRegisterOutcomeFeedback",
         "genxListOutcomeFeedbacks",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-138"
@@ -55294,7 +55393,8 @@
       "semanticNeighborIds": [
         "genxRegisterLocalConstraint",
         "genxGetLocalConstraint",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-139"
@@ -55373,7 +55473,8 @@
       "semanticNeighborIds": [
         "genxListLocalConstraints",
         "genxGetLocalConstraint",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-139"
@@ -55450,7 +55551,8 @@
       "semanticNeighborIds": [
         "genxRegisterLocalConstraint",
         "genxListLocalConstraints",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-139"
@@ -55529,7 +55631,8 @@
       "semanticNeighborIds": [
         "genxRegisterCrsTransform",
         "genxGetCrsTransform",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-140"
@@ -55608,7 +55711,8 @@
       "semanticNeighborIds": [
         "genxListCrsTransforms",
         "genxGetCrsTransform",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-140"
@@ -55685,7 +55789,8 @@
       "semanticNeighborIds": [
         "genxRegisterCrsTransform",
         "genxListCrsTransforms",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-140"
@@ -55764,7 +55869,8 @@
       "semanticNeighborIds": [
         "genxRegisterSpatialIndex",
         "genxGetSpatialIndex",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-141"
@@ -55843,7 +55949,8 @@
       "semanticNeighborIds": [
         "genxListSpatialIndexes",
         "genxGetSpatialIndex",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-141"
@@ -55920,7 +56027,8 @@
       "semanticNeighborIds": [
         "genxRegisterSpatialIndex",
         "genxListSpatialIndexes",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-141"
@@ -55999,7 +56107,8 @@
       "semanticNeighborIds": [
         "genxRegisterFieldGeometry",
         "genxGetFieldGeometry",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-142"
@@ -56078,7 +56187,8 @@
       "semanticNeighborIds": [
         "genxListFieldGeometries",
         "genxGetFieldGeometry",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-142"
@@ -56155,7 +56265,8 @@
       "semanticNeighborIds": [
         "genxRegisterFieldGeometry",
         "genxListFieldGeometries",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-142"
@@ -56234,7 +56345,8 @@
       "semanticNeighborIds": [
         "genxRegisterSpatialQuery",
         "genxGetSpatialQuery",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-143"
@@ -56313,7 +56425,8 @@
       "semanticNeighborIds": [
         "genxListSpatialQueries",
         "genxGetSpatialQuery",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-143"
@@ -56390,7 +56503,8 @@
       "semanticNeighborIds": [
         "genxRegisterSpatialQuery",
         "genxListSpatialQueries",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-143"
@@ -56469,7 +56583,8 @@
       "semanticNeighborIds": [
         "genxRegisterRasterCatalogue",
         "genxGetRasterCatalogue",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-144"
@@ -56548,7 +56663,8 @@
       "semanticNeighborIds": [
         "genxListRasterCatalogues",
         "genxGetRasterCatalogue",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-144"
@@ -56625,7 +56741,8 @@
       "semanticNeighborIds": [
         "genxRegisterRasterCatalogue",
         "genxListRasterCatalogues",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-144"
@@ -56704,7 +56821,8 @@
       "semanticNeighborIds": [
         "genxRegisterRemoteSensingMetadata",
         "genxGetRemoteSensingMetadata",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-145"
@@ -56783,7 +56901,8 @@
       "semanticNeighborIds": [
         "genxListRemoteSensingMetadata",
         "genxGetRemoteSensingMetadata",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-145"
@@ -56860,7 +56979,8 @@
       "semanticNeighborIds": [
         "genxRegisterRemoteSensingMetadata",
         "genxListRemoteSensingMetadata",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-145"
@@ -56939,7 +57059,8 @@
       "semanticNeighborIds": [
         "genxRegisterVegetationIndex",
         "genxGetVegetationIndex",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-146"
@@ -57018,7 +57139,8 @@
       "semanticNeighborIds": [
         "genxListVegetationIndexes",
         "genxGetVegetationIndex",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-146"
@@ -57095,7 +57217,8 @@
       "semanticNeighborIds": [
         "genxRegisterVegetationIndex",
         "genxListVegetationIndexes",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-146"
@@ -57174,7 +57297,8 @@
       "semanticNeighborIds": [
         "genxRegisterCloudMask",
         "genxGetCloudMask",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-147"
@@ -57253,7 +57377,8 @@
       "semanticNeighborIds": [
         "genxListCloudMasks",
         "genxGetCloudMask",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-147"
@@ -57330,7 +57455,8 @@
       "semanticNeighborIds": [
         "genxRegisterCloudMask",
         "genxListCloudMasks",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-147"
@@ -57409,7 +57535,8 @@
       "semanticNeighborIds": [
         "genxRegisterTelemetryNormalization",
         "genxGetTelemetryNormalization",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-148"
@@ -57488,7 +57615,8 @@
       "semanticNeighborIds": [
         "genxListTelemetryNormalizations",
         "genxGetTelemetryNormalization",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-148"
@@ -57565,7 +57693,8 @@
       "semanticNeighborIds": [
         "genxRegisterTelemetryNormalization",
         "genxListTelemetryNormalizations",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-148"
@@ -57644,7 +57773,8 @@
       "semanticNeighborIds": [
         "genxRegisterSensorDevice",
         "genxGetSensorDevice",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-149"
@@ -57723,7 +57853,8 @@
       "semanticNeighborIds": [
         "genxListSensorDevices",
         "genxGetSensorDevice",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-149"
@@ -57800,7 +57931,8 @@
       "semanticNeighborIds": [
         "genxRegisterSensorDevice",
         "genxListSensorDevices",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-149"
@@ -57879,7 +58011,8 @@
       "semanticNeighborIds": [
         "genxRegisterCalibrationQuality",
         "genxGetCalibrationQuality",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-150"
@@ -57958,7 +58091,8 @@
       "semanticNeighborIds": [
         "genxListCalibrationQualitys",
         "genxGetCalibrationQuality",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-150"
@@ -58035,7 +58169,8 @@
       "semanticNeighborIds": [
         "genxRegisterCalibrationQuality",
         "genxListCalibrationQualitys",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-150"
@@ -58114,7 +58249,8 @@
       "semanticNeighborIds": [
         "genxRegisterEdgeGatewayHealth",
         "genxGetEdgeGatewayHealth",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-151"
@@ -58193,7 +58329,8 @@
       "semanticNeighborIds": [
         "genxListEdgeGatewayHealths",
         "genxGetEdgeGatewayHealth",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-151"
@@ -58270,7 +58407,8 @@
       "semanticNeighborIds": [
         "genxRegisterEdgeGatewayHealth",
         "genxListEdgeGatewayHealths",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-151"
@@ -58349,7 +58487,8 @@
       "semanticNeighborIds": [
         "genxRegisterSchemaMapping",
         "genxGetSchemaMapping",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-152"
@@ -58428,7 +58567,8 @@
       "semanticNeighborIds": [
         "genxListSchemaMappings",
         "genxGetSchemaMapping",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-152"
@@ -58505,7 +58645,8 @@
       "semanticNeighborIds": [
         "genxRegisterSchemaMapping",
         "genxListSchemaMappings",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-152"
@@ -58584,7 +58725,8 @@
       "semanticNeighborIds": [
         "genxRegisterCapabilityNegotiation",
         "genxGetCapabilityNegotiation",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-153"
@@ -58663,7 +58805,8 @@
       "semanticNeighborIds": [
         "genxListCapabilityNegotiations",
         "genxGetCapabilityNegotiation",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-153"
@@ -58740,7 +58883,8 @@
       "semanticNeighborIds": [
         "genxRegisterCapabilityNegotiation",
         "genxListCapabilityNegotiations",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-153"
@@ -58912,7 +59056,8 @@
       "semanticNeighborIds": [
         "genxRegisterConformanceProbe",
         "genxGetConformanceProbe",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-155"
@@ -58991,7 +59136,8 @@
       "semanticNeighborIds": [
         "genxListConformanceProbes",
         "genxGetConformanceProbe",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterFarm"
       ],
       "decisionReferences": [
         "RFC-155"
@@ -59068,7 +59214,8 @@
       "semanticNeighborIds": [
         "genxRegisterConformanceProbe",
         "genxListConformanceProbes",
-        "genxRegisterGenomicDataset"
+        "genxRegisterGenomicDataset",
+        "genxRegisterResearchAsset"
       ],
       "decisionReferences": [
         "RFC-155"

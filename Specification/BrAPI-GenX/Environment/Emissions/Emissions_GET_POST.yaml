@@ -24,7 +24,7 @@ paths:
         semanticNeighbors:
           - "genxRegisterEmissions"
           - "genxGetEmissions"
-          - "genxRegisterCarbonStock"
+          - "genxRecordCarbonStock"
         decisions: ["RFC-076"]
         proposalStatus: "draft-non-normative"
       summary: List emissions records
@@ -80,7 +80,7 @@ paths:
         semanticNeighbors:
           - "genxListEmissions"
           - "genxGetEmissions"
-          - "genxRegisterCarbonStock"
+          - "genxRecordCarbonStock"
         decisions: ["RFC-076"]
         proposalStatus: "draft-non-normative"
       summary: Register one emissions record
