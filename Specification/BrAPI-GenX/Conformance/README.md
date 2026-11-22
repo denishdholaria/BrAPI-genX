@@ -15,15 +15,17 @@ establish production readiness.
 Static probes run by default. Live probes `SKIP` without `--server` and fail
 closed with it.
 
-Note: `probes.yaml` currently registers S-01…S-21 only. References to an
-"S-22" guardrail in this document and in `RESULTS.md` describe a proposed
-capability-to-operation guardrail that is not yet a registered probe; this
-discrepancy is tracked in the Phase 0 consistency register. Run the endpoint-identity negative tests separately with
-`python Scripts/test_endpoint_identity.py`; these exercise deliberately broken
-synthetic contracts to ensure identity errors fail closed. Both tiers are declared in [`probes.yaml`](./probes.yaml);
-fixtures live in [`fixtures/`](./fixtures). The probe list is the authority —
-the runner is one execution of it, replaceable by a future BRAVA harness.
-Recorded runs live in [`RESULTS.md`](./RESULTS.md).
+The authoritative [`probes.yaml`](./probes.yaml) currently registers **S-01
+through S-21** and **L-01 through L-28**. Historical experimental branches
+recorded results for an additional S-22 capability-mapping guard and L-29
+advertisement check; neither identifier is registered in the present probe list.
+Do not count them as active probes. The separately executed
+`Scripts/test_capability_negotiation.py` and
+`Scripts/test_endpoint_identity.py` exercise capability metadata and
+deliberately invalid operation identities. Fixtures live in [`fixtures/`](./fixtures);
+historical runs (not necessarily on the current commit) live in
+[`RESULTS.md`](./RESULTS.md). Passing a historical run is not a substitute for
+validating the current revision.
 
 ## Reference test servers
 
@@ -69,10 +71,9 @@ relations (S-06), capability advertisement grounding (S-07), V2.1 fallback
 shape (S-08), namespaced term identifiers (S-10), decimal-string quantities
 (S-12), model artifact shape (S-13, S-14), matrix reference shape (S-15, S-16),
 package envelope shape (S-17, S-18), telemetry point shape (S-19, S-20), endpoint
-identity/operationId uniqueness/registered overlaps (S-21), and capability-to-operation
-mapping plus advertised job-type validation against the experimental ServerInfoV3
-registry (S-22). S-22 is a review guardrail for this proposal profile, not an accepted
-BrAPI requirement.
+identity/operationId uniqueness/registered overlaps (S-21). Capability-to-operation
+mapping is tested separately by `Scripts/test_capability_negotiation.py`; the
+historical S-22 designation is **not** a registered probe.
 
 Live: idempotent replay (L-01), key conflict (L-02), terminal-cancel rejection
 (L-03), unknown job type (L-04), expiry (L-05), V2.1-only fallback negotiation
@@ -83,8 +84,11 @@ rejection (L-15), matrix replay (L-16), matrix conflict (L-17), package
 replay (L-18), package conflict (L-19), embargo denial (L-20), telemetry
 replay (L-21), telemetry conflict (L-22), aggregate recomputation (L-23),
 concurrent-submit single effect (L-24), list envelopes (L-25), windowed
-buckets (L-26), deprecated warning (L-27), pagination slice (L-28), and live
-capability-advertisement/route-registry agreement including supported job types (L-29). Older static checks have historical mutation evidence in RESULTS.md run 8. The endpoint-identity guardrail has dedicated synthetic negative tests in `Scripts/test_endpoint_identity.py`.
+buckets (L-26), deprecated warning (L-27), and pagination slice (L-28).
+Historical L-29 results describe a branch-specific experimental live
+advertisement check, not a currently registered probe. Older static checks
+have mutation evidence in `RESULTS.md` run 8. Endpoint-identity negative tests
+run separately via `Scripts/test_endpoint_identity.py`.
 
 ## Status contract
 
@@ -101,7 +105,7 @@ The experimental [capability registry](./capability-registry.json) maps every ex
 python Scripts/test_capability_negotiation.py
 ```
 
-The suite proves that duplicate/unregistered capability names, duplicate or changed versions, false method summaries, stale routes/operation IDs, missing maps, wrong/missing/duplicate/malformed job type lists, job-type/runtime drift, malformed scope lists, duplicate auth profiles, and duplicated operation references fail closed. S-22 validates the checked-in fixture against the registry/OpenAPI files; L-29 checks the in-memory reference server’s live advertisement against the same registry. Neither probe treats scopes or auth-profile names as proof of access-control enforcement.
+The dedicated suite checks that duplicate/unregistered capability names, changed versions, false method summaries, stale routes or operation IDs, malformed job-type lists, and invalid scope/profile metadata fail closed. The historical S-22 and L-29 labels refer to experiments that are **not** registered in the current probe manifest. A passing metadata test does not prove authorization enforcement or production security.
 
 D-21 (operation mapping and version-token semantics), D-22 (scope/auth-profile semantics), and D-23 (job-type advertisement and compatibility) remain deferred. In particular, the reference server accepts and ignores bearer tokens; it is an in-memory conformance prototype, not a secured deployment.
 
