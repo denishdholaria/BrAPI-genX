@@ -12,6 +12,11 @@ ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW = ROOT / ".github/workflows/genx-static-conformance.yml"
 REQUIRED_PATHS = {
     "Specification/**",
+    ".github/workflows/genx-static-conformance.yml",
+    "Scripts/checkGenXConformance.py",
+    "Scripts/checkGenXEndpointCatalog.py",
+    "Scripts/checkEndpointRegistry.py",
+    "Scripts/generateEndpointArtifacts.py",
     "Scripts/specification_structure.py",
     "Scripts/test_specification_structure.py",
     "Scripts/test_conformance_workflow_scope.py",
