@@ -6,8 +6,10 @@ implementation evidence. Source OpenAPI operation summaries/descriptions and
 x-brapi-genx descriptive metadata are treated as the source of truth for the
 fields compared here.
 
-This audit is initially report-only. Pass --strict after existing drift has
-been reconciled to make any mismatch fail the command.
+The default command is report-only. Pass --strict to require zero drift;
+the baseline regression gate separately prevents *new* discrepancies while
+historic mismatches are being reconciled. --report-json exposes the full
+deterministic discrepancy set for review and regression checks.
 """
 from __future__ import annotations
 
@@ -68,7 +70,7 @@ def source_value(operation: dict[str, Any], entry: dict[str, Any], field: str) -
     return extension.get(extension_key)
 
 
-def audit(strict: bool, plan_json: bool) -> int:
+def audit(strict: bool, plan_json: bool, report_json: bool = False) -> int:
     registry = load_registry()
     entries = [e for e in registry.get("entries", []) if e.get("apiGeneration") == "genx-v1"]
     documents, errors = load_source_documents(entries)
@@ -226,6 +228,14 @@ def audit(strict: bool, plan_json: bool) -> int:
         ]
         print("REGISTRY_SOURCE_SYNC_PLAN=" + json.dumps(plan, separators=(",", ":")))
 
+    if report_json:
+        print("REGISTRY_DRIFT_REPORT=" + json.dumps({
+            "errors": errors,
+            "mismatches": mismatches,
+            "registryOnlyNeighbors": registry_only_neighbors,
+            "sourceOperationsExamined": examined,
+        }, sort_keys=True, separators=(",", ":")))
+
     if strict and (errors or mismatches or registry_only_neighbors):
         return 1
     return 0
@@ -243,9 +253,14 @@ def main() -> int:
         action="store_true",
         help="emit a machine-readable metadata reconciliation plan",
     )
+    parser.add_argument(
+        "--report-json",
+        action="store_true",
+        help="emit complete machine-readable discrepancies for deterministic review",
+    )
     args = parser.parse_args()
     try:
-        return audit(strict=args.strict, plan_json=args.plan_json)
+        return audit(strict=args.strict, plan_json=args.plan_json, report_json=args.report_json)
     except (OSError, json.JSONDecodeError) as exc:
         print(f"Cannot audit the endpoint registry: {exc}")
         return 1
