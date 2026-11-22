@@ -258,7 +258,16 @@ def main() -> int:
         action="store_true",
         help="emit complete machine-readable discrepancies for deterministic review",
     )
+    parser.add_argument(
+        "--root",
+        type=Path,
+        default=ROOT,
+        help="repository checkout to audit (defaults to this script's checkout)",
+    )
     args = parser.parse_args()
+    global ROOT, REGISTRY
+    ROOT = args.root.resolve()
+    REGISTRY = ROOT / "Specification/ENDPOINT-REGISTRY.json"
     try:
         return audit(strict=args.strict, plan_json=args.plan_json, report_json=args.report_json)
     except (OSError, json.JSONDecodeError) as exc:
