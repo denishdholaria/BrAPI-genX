@@ -82,9 +82,13 @@ def registry_source_errors(root: Path, registry: dict) -> list[str]:
     if not isinstance(entries, list):
         return ["Master endpoint registry has no entries"]
     for item in entries:
+        if not isinstance(item, dict):
+            errors.append("Invalid endpoint registry record")
+            continue
         if item.get("apiGeneration") != "genx-v1":
             continue
-        source = (item.get("source") or {}).get("path")
+        source_record = item.get("source")
+        source = source_record.get("path") if isinstance(source_record, dict) else None
         if not isinstance(source, str) or ".." in PurePosixPath(source).parts:
             errors.append(f"{item.get('catalogId')}: unsafe/missing source")
             continue
