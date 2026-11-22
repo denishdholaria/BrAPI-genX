@@ -31,6 +31,7 @@ on:
       - 'Scripts/test_conformance_workflow_scope.py'
       - 'Scripts/check_registry_drift_regression.py'
       - 'Scripts/test_registry_drift_regression.py'
+      - 'Scripts/test_registry_source_consistency.py'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-DECISIONS-APPROVED.md'
@@ -66,6 +67,7 @@ on:
       - 'Scripts/test_conformance_workflow_scope.py'
       - 'Scripts/check_registry_drift_regression.py'
       - 'Scripts/test_registry_drift_regression.py'
+      - 'Scripts/test_registry_source_consistency.py'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-DECISIONS-APPROVED.md'
@@ -148,6 +150,10 @@ jobs:
         run: python Scripts/checkEndpointRegistry.py
       - name: Audit descriptive registry metadata against source OpenAPI (report only)
         run: python Scripts/auditEndpointRegistrySourceConsistency.py --plan-json
+      - name: Enforce strict source and registry semantic-neighbor integrity
+        run: python Scripts/auditEndpointRegistrySourceConsistency.py --strict
+      - name: Test semantic-neighbor reference integrity mutations
+        run: python Scripts/test_registry_source_consistency.py
       - name: Test registry/source drift regression behavior
         run: python Scripts/test_registry_drift_regression.py
       - name: Enforce no new registry/source descriptive drift
@@ -180,6 +186,8 @@ jobs:
             run_check python Scripts/checkGenXEndpointCatalog.py
             run_check python Scripts/checkEndpointRegistry.py
             run_check python Scripts/auditEndpointRegistrySourceConsistency.py --plan-json
+            run_check python Scripts/auditEndpointRegistrySourceConsistency.py --strict
+            run_check python Scripts/test_registry_source_consistency.py
             run_check python Scripts/test_registry_drift_regression.py
             run_check python Scripts/check_registry_drift_regression.py
             run_check python Scripts/generateEndpointArtifacts.py --check
