@@ -135,7 +135,7 @@ def validate() -> list[str]:
             if isinstance(catalog_id, str):
                 catalog_ids.append(catalog_id)
                 if not catalog_id.startswith("brapi-genx.genx."):
-                    errors.append(f"{operation_id}: catalogId must use the brapi-den.genx namespace")
+                    errors.append(f"{operation_id}: catalogId must use the brapi-genx.genx namespace")
 
     duplicate_operation_ids = sorted(key for key, count in Counter(operation_ids).items() if count > 1)
     duplicate_catalog_ids = sorted(key for key, count in Counter(catalog_ids).items() if count > 1)
