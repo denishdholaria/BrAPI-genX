@@ -14,8 +14,8 @@ The generated OpenAPI YAML files by module are
 The generated single JSON file from the [JSON Schema](../BrAPI-Schema) is
 * [brapi_generated.json](brapi_generated.json)
 
-The compiled single JSON file from the [YML specification files](../) is 
-* [brapi_generated.json](brapi_generated.json)
+The compiled single JSON file from the [YAML specification files](../) is
+* [brapi_openapi.json](brapi_openapi.json)
 
 The comparison between the generated and compiled JSON file can be found here
 * [brapi_openapi_comparison.md](brapi_openapi_comparison.md)

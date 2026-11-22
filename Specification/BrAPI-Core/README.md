@@ -1,5 +1,12 @@
 FORMAT: 1A
 
+> **Specification provenance:** This directory contains BrAPI v2.1
+> specification contracts. The V2.0 links retained below are historical
+> navigation links, **not** the version of the contracts in this checkout.
+> For the current module index and v2.1 references, see
+> [Specification/README.md](../README.md). No published contracts are changed
+> by this documentation clarification.
+
 # BrAPI Core
 
 The Breeding API (BrAPI) is a Standardized REST-ful Web Service API Specification for communicating Plant Breeding Data. BrAPI allows for easy data sharing between databases and tools involved in plant breeding.

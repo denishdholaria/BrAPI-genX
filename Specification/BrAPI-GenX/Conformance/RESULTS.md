@@ -1,8 +1,13 @@
 # GenX Conformance Results
 
-- Date (UTC): 2026-09-07
+- First recorded run (UTC): 2026-09-07
 - Reference server: `Scripts/genx_test_server.py` (stdlib only, in-memory)
 - Runner: `Scripts/checkGenXConformance.py`
+- This file is a **historical evidence log**, not a statement that all checks
+  passed on the current branch. The present `probes.yaml` manifest registers
+  S-01–S-21 and L-01–L-28. Reports of S-22 and L-29 below belong to
+  experimental branch runs; they must not be counted as present-day registered
+  checks unless those probes are explicitly restored and verified.
 
 > **Ratification update (2026-11-03):** These historical results predate the maintainer's internal approval of D-02, D-24, and D-25. D-02 now selects JCS-RFC8785 for generic canonical JSON, but these runs do not show implementation migration, security enforcement, durable idempotency, or production conformance.
 

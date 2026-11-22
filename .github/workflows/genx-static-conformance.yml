@@ -3,10 +3,9 @@ name: GenX conformance (static and live)
 on:
   pull_request:
     paths:
-      - 'Specification/BrAPI-GenX/**'
-      - 'Specification/ENDPOINT-REGISTRY.json'
-      - 'Specification/ENDPOINT-CATALOG.md'
-      - 'Specification/BIJMANTRA-CROSSWALK.md'
+      # Source contracts, shared components, catalogues, and generated artefacts
+      # all affect GenX verification; keep the complete Specification/ tree watched.
+      - 'Specification/**'
       - 'Scripts/checkGenXConformance.py'
       - 'Scripts/checkGenXEndpointCatalog.py'
       - 'Scripts/checkEndpointRegistry.py'
@@ -27,6 +26,11 @@ on:
       - 'Scripts/validate_breeding_pipeline_contract_fixtures.py'
       - 'Scripts/test_breeding_pipeline_contract_fixture_validator.py'
       - 'Scripts/check_breeding_pipeline_api_contract.py'
+      - 'Scripts/specification_structure.py'
+      - 'Scripts/test_specification_structure.py'
+      - 'Scripts/test_conformance_workflow_scope.py'
+      - 'Scripts/check_registry_drift_regression.py'
+      - 'Scripts/test_registry_drift_regression.py'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-DECISIONS-APPROVED.md'
@@ -34,10 +38,9 @@ on:
       - '.github/workflows/genx-static-conformance.yml'
   push:
     paths:
-      - 'Specification/BrAPI-GenX/**'
-      - 'Specification/ENDPOINT-REGISTRY.json'
-      - 'Specification/ENDPOINT-CATALOG.md'
-      - 'Specification/BIJMANTRA-CROSSWALK.md'
+      # Source contracts, shared components, catalogues, and generated artefacts
+      # all affect GenX verification; keep the complete Specification/ tree watched.
+      - 'Specification/**'
       - 'Scripts/checkGenXConformance.py'
       - 'Scripts/checkGenXEndpointCatalog.py'
       - 'Scripts/checkEndpointRegistry.py'
@@ -58,6 +61,11 @@ on:
       - 'Scripts/validate_breeding_pipeline_contract_fixtures.py'
       - 'Scripts/test_breeding_pipeline_contract_fixture_validator.py'
       - 'Scripts/check_breeding_pipeline_api_contract.py'
+      - 'Scripts/specification_structure.py'
+      - 'Scripts/test_specification_structure.py'
+      - 'Scripts/test_conformance_workflow_scope.py'
+      - 'Scripts/check_registry_drift_regression.py'
+      - 'Scripts/test_registry_drift_regression.py'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-DECISIONS-APPROVED.md'
@@ -78,6 +86,8 @@ jobs:
     steps:
       - name: Check out source
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0  # Pinned source/registry drift baseline requires history.
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
@@ -128,10 +138,20 @@ jobs:
         run: python Scripts/checkGenXEndpointCatalog.py
       - name: Run domain classification mutation tests
         run: python Scripts/test_domain_classification.py
+      - name: Validate GenX specification folder and generated baseline links
+        run: python Scripts/specification_structure.py
+      - name: Run structural specification mutation tests
+        run: python Scripts/test_specification_structure.py
+      - name: Test CI workflow dependency coverage
+        run: python Scripts/test_conformance_workflow_scope.py
       - name: Validate master endpoint registry and semantic links
         run: python Scripts/checkEndpointRegistry.py
       - name: Audit descriptive registry metadata against source OpenAPI (report only)
         run: python Scripts/auditEndpointRegistrySourceConsistency.py --plan-json
+      - name: Test registry/source drift regression behavior
+        run: python Scripts/test_registry_drift_regression.py
+      - name: Enforce no new registry/source descriptive drift
+        run: python Scripts/check_registry_drift_regression.py
       - name: Verify generated endpoint catalogue and crosswalk
         run: python Scripts/generateEndpointArtifacts.py --check
       - name: Collect static conformance failure diagnostics
@@ -154,9 +174,14 @@ jobs:
             run_check python Scripts/test_capability_negotiation.py
             run_check python Scripts/test_job_idempotency.py
             run_check python Scripts/checkGenXConformance.py
+            run_check python Scripts/specification_structure.py
+            run_check python Scripts/test_specification_structure.py
+            run_check python Scripts/test_conformance_workflow_scope.py
             run_check python Scripts/checkGenXEndpointCatalog.py
             run_check python Scripts/checkEndpointRegistry.py
             run_check python Scripts/auditEndpointRegistrySourceConsistency.py --plan-json
+            run_check python Scripts/test_registry_drift_regression.py
+            run_check python Scripts/check_registry_drift_regression.py
             run_check python Scripts/generateEndpointArtifacts.py --check
           } | tee "$RUNNER_TEMP/genx-static-diagnostics.log"
       - name: Upload static conformance diagnostics

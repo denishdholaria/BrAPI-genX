@@ -56,13 +56,17 @@ is reversible without breaking the rest; objections belong against the ID.
 | A-11 | Static fixtures use `institute-a:*`, live runs use `test-*` ids | No collision between checked-in examples and test runs |
 | A-12 | `TelemetryBatchResult` under `components.schemas`, not `responses` | It is a result object; S-01 proved the original placement dangling |
 
-## Verification state
+## Historical verification state (original RFC-001–RFC-007 drafting snapshot)
 
-- Static: 20 probes green. Live: 28 probes green vs the reference server
-  (`Scripts/genx_test_server.py`), plus applicable subsets vs the v21 profile
-  and the TypeScript server.
-- Eleven recorded runs in `Conformance/RESULTS.md`; every static check has
-  /tmp mutation evidence proving fail-closed behavior, and L-24 proves
+The counts below describe an earlier recorded verification snapshot, **not**
+the current branch or the latest registered probe manifest. The authoritative
+probe list is `Conformance/probes.yaml` (currently S-01–S-21 and L-01–L-28);
+`Conformance/RESULTS.md` retains the later dated run records.
+
+- At this historical snapshot: 20 static probes and 28 live probes passed against
+  the reference server (`Scripts/genx_test_server.py`), with subsets against
+  the v21 profile and TypeScript server.
+- The then-recorded eleven runs included static mutation evidence; L-24 checked
   single-effect idempotency under 8-thread concurrency (control: 8 keys → 8 jobs).
 - A second, black-box TypeScript/Bun implementation passes 13/13 applicable
   live probes (run 9), including cross-runtime digest agreement.
