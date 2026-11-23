@@ -5,7 +5,9 @@
 - Decision: D-BP-11 — the broad CrossingSchedule surface is deferred; reopen only for scheduling/booking semantics beyond BrAPI PlannedCross and CrossingProject.
 - Related: RFC-001 (GenX skeleton), `../CLASSIFICATION.md` (D2).
 
-## 1. Problem
+## 1. Historical problem statement (not an accepted gap)
+
+> The proposed planned-cross information overlaps BrAPI v2.1 PlannedCross and CrossingProject. D-BP-11 deferred this candidate pending proof of distinct resource scheduling semantics. The text below is historical, not a current gap assertion.
 
 BrAPI v2.1 standardizes crosses and crossing projects but not crossing
 schedules: planned crosses with parents and dates. Without this record,

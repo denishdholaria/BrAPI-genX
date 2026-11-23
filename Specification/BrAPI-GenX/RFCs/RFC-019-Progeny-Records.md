@@ -5,7 +5,9 @@
 - Decision: D-BP-08 — the broad ProgenyRecords surface is deferred; BrAPI Pedigree remains authoritative. Reopen only for a distinct immutable formation/family event or typed generation/cohort association that does not duplicate parentage.
 - Related: RFC-001 (GenX skeleton), `../CLASSIFICATION.md` (D2).
 
-## 1. Problem
+## 1. Historical problem statement (not an accepted gap)
+
+> The broad progeny/family proposal overlaps BrAPI v2.1 Germplasm, Pedigree, and crossing records. D-BP-08 deferred this candidate; the text below is preserved as a historical claim, not current evidence of a standards gap.
 
 BrAPI v2.1 standardizes pedigree and crosses but not progeny/family records
 that link parents to offspring within a breeding program, including generation

@@ -5,7 +5,9 @@
 - Decision: D-BP-12 — the duplicate ResearchProgram surface is deferred; BrAPI Program remains authoritative.
 - Related: RFC-001 (GenX skeleton), `../CLASSIFICATION.md` (cross-cutting).
 
-## 1. Problem
+## 1. Historical problem statement (not an accepted gap)
+
+> The opening claim below is contradicted by the official BrAPI v2.1 Program resource. D-BP-12 deferred this duplicate candidate. This section is retained only for historical traceability.
 
 BrAPI v2.1 has no place to record research programs. Research programs are the
 routine reference for research organization. Without a record, programs arrive

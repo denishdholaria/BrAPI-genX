@@ -36,6 +36,21 @@ Nothing here changes V2.1.
 | D-19 | Pangenome graph encodings (no format value claimed) | RFC-005 §5 | None | Format specification maturity |
 | D-20 | Relationship, mapping, authority, and double-counting rules between V2.1 `SeedLotTransaction` and GenX `LotLedgerEntry` | RFC-003 §1/§3; ENDPOINT-IDENTITY.md | Structurally different contracts describe overlapping real-world material movements; no proven shared event identity or one-to-one mapping | Community and implementer decision defining authority, event correlation, mapping loss, and safe dual-read/dual-write behavior |
 
+### RFC-008 local questions — unresolved, non-normative
+
+These questions belong to SelectionDecision and do **not** reuse the global
+D-21/D-22/D-23 decisions on capability negotiation and security. The
+globally assigned decision numbers retain their original meanings.
+
+| Local question | Topic | Current candidate behavior | Authority |
+|---|---|---|---|
+| RFC-008-Q1 | Scope to Program versus optional Trial/Study | Program required; Study optional | Maintainer decision pending |
+| RFC-008-Q2 | Required Observation evidence for selection | Linked Observation evidence optional | Maintainer decision pending |
+| RFC-008-Q3 | Authority to supersede an actual verdict | Decision-maker versus other authorized breeder unresolved | Maintainer decision pending |
+
+Source: `Specification/BrAPI-GenX/RFCs/RFC-008-Selection-Decisions.md`.
+This ID reconciliation does not accept a scientific or security policy.
+
 ## Part B — Taken autonomously (reviewable)
 
 These were decided during drafting because a defensible answer existed. Each

@@ -42,11 +42,11 @@ their evidence.
 
 ## 6. Deferred questions
 
-- D-21: Should selection decisions be scoped per breeding program only, or
+- RFC-008-Q1: Should selection decisions be scoped per breeding program only, or
   also per trial/study? (Current: program required, study optional.)
-- D-22: Should linked BrAPI Observation evidence be required when `decision`
+- RFC-008-Q2: Should linked BrAPI Observation evidence be required when `decision`
   is `selected`? (Current: optional authority-qualified `linkedObservationReferences`.)
-- D-23: Should a decision be cancellable/superseded only by the original
+- RFC-008-Q3: Should a decision be cancellable/superseded only by the original
   decision maker or by any authorized breeder? (Current: requires decision.)
 
 ## 7. Classification

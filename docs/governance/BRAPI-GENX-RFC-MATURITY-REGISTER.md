@@ -22,7 +22,7 @@
 | RFC-016 | RFC-016 — Research Assets (Publication & Knowledge) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
 | RFC-017 | RFC-017 — Measurement Methods (Terminology) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
 | RFC-018 | RFC-018 — Experimental Design (Trial Layout) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
-| RFC-019 | RFC-019 — Progeny Records (Breeding) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
+| RFC-019 | RFC-019 — Progeny Records (Breeding) | DEFERRED | Broad ProgenyRecord surface deferred by approved D-BP-08; BrAPI Germplasm/Pedigree remain authoritative. Retained for a separately evidenced formation/family-event gap. |
 | RFC-020 | RFC-020 — Doubled Haploid Programs (Breeding) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
 | RFC-021 | RFC-021 — Viability Testing (Genebank Conservation) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
 | RFC-022 | RFC-022 — Speed Breeding (Breeding) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
@@ -40,7 +40,7 @@
 | RFC-034 | RFC-034 — Safety Duplication (Genebank Conservation) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
 | RFC-035 | RFC-035 — Population Advancement (Breeding) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
 | RFC-036 | RFC-036 — Regeneration (Genebank Conservation) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
-| RFC-037 | RFC-037 — Crossing Schedule (Breeding) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
+| RFC-037 | RFC-037 — Crossing Schedule (Breeding) | DEFERRED | Broad CrossingSchedule surface deferred by approved D-BP-11; BrAPI PlannedCross/CrossingProject remain authoritative. A distinct scheduling gap requires evidence. |
 | RFC-038 | RFC-038 — Tillage (Crop Production) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
 | RFC-039 | RFC-039 — Candidate Variety Lifecycle (Breeding) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
 | RFC-040 | RFC-040 — Bulk Capture (Phenotyping) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
@@ -101,7 +101,7 @@
 | RFC-095 | RFC-095 — Crop Species (Reference Data) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
 | RFC-096 | RFC-096 — Institution Code (Reference Data) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
 | RFC-097 | RFC-097 — Person Reference (Reference Data) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
-| RFC-098 | RFC-098 — Research Program (Reference Data) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
+| RFC-098 | RFC-098 — Research Program (Reference Data) | DEFERRED | Duplicate ResearchProgram surface deferred by approved D-BP-12; existing BrAPI Program remains authoritative. Historical proposal retained. |
 | RFC-099 | RFC-099 — Capability Metadata (Reference Data) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
 | RFC-100 | RFC-100 — Research Location (Reference Data) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
 | RFC-101 | RFC-101 — Collecting Mission (Germplasm) | STRUCTURAL_DRAFT | Templated structure; scientific semantics, units, identifiers, lifecycle and security require review. |
