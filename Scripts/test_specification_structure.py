@@ -11,7 +11,13 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 
-from specification_structure import generated_link_errors, module_errors, registry_source_errors
+from specification_structure import (
+    _is_trivial_group_description,
+    generated_link_errors,
+    mature_module_paths,
+    module_errors,
+    registry_source_errors,
+)
 
 
 class StructureTests(unittest.TestCase):
@@ -113,6 +119,27 @@ class StructureTests(unittest.TestCase):
             (ROOT / "Specification/BrAPI-GenX/Conformance/domain-classification.yaml").read_text(encoding="utf-8")
         )
         self.assertEqual([], module_errors(ROOT, classification))
+
+    def test_trivial_group_description_detection(self):
+        self.assertTrue(_is_trivial_group_description("# Jobs\n"))
+        self.assertTrue(_is_trivial_group_description(""))
+        self.assertTrue(_is_trivial_group_description("# Jobs\n\n"))
+        self.assertFalse(_is_trivial_group_description("# Jobs\n\nLifecycle details.\n"))
+
+    def test_real_repository_mature_modules(self):
+        self.assertEqual(
+            {
+                "Core/Jobs/",
+                "Core/ServerInfoV3/",
+                "CropProduction/LotLedger/",
+                "Genotyping/Genomics/",
+                "Instrumentation/Telemetry/",
+                "Interoperability/FAIR/",
+                "ReferenceData/VariableTerms/",
+                "Research/Models/",
+            },
+            mature_module_paths(ROOT),
+        )
 
 if __name__ == "__main__":
     unittest.main()
