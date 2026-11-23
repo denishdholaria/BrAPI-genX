@@ -23,5 +23,6 @@
 
 `Scripts/specification_structure.py` derives the mature module set from the
 maturity register and RFC module references, and validates each mature module's
-`GroupDescription.md`. `Scripts/test_specification_structure.py` covers
-positive and negative mutation cases.
+`GroupDescription.md`. It accepts `--root` for portable validation.
+`Scripts/test_specification_structure.py` covers positive and negative mutation
+cases.
