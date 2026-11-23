@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 import json
+import json
 import shutil
 import subprocess
 import sys
@@ -15,16 +16,23 @@ ROOT = Path(__file__).resolve().parents[1]
 VALIDATOR = ROOT / "Scripts" / "check_semantic_neighbor_governance.py"
 PYTHON = sys.executable
 LEDGER_REL = Path("Specification/BrAPI-GenX/Conformance/semantic-neighbor-review.yaml")
+REGISTRY_REL = Path("Specification/ENDPOINT-REGISTRY.json")
 
 
-def run_validator(checkout: Path) -> int:
-    result = subprocess.run(
-        [PYTHON, str(VALIDATOR), "--root", str(checkout)],
-        cwd=checkout,
-        capture_output=True,
-        text=True,
-    )
+def run_validator(checkout: Path, extra_args=None) -> int:
+    cmd = [PYTHON, str(VALIDATOR), "--root", str(checkout)]
+    if extra_args:
+        cmd.extend(extra_args)
+    result = subprocess.run(cmd, cwd=checkout, capture_output=True, text=True)
     return result.returncode
+
+
+def run_validator_output(checkout: Path, extra_args=None) -> tuple[int, str]:
+    cmd = [PYTHON, str(VALIDATOR), "--root", str(checkout)]
+    if extra_args:
+        cmd.extend(extra_args)
+    result = subprocess.run(cmd, cwd=checkout, capture_output=True, text=True)
+    return result.returncode, (result.stdout + "\n" + result.stderr)
 
 
 def copy_checkout(directory: Path) -> Path:
@@ -40,17 +48,45 @@ class SemanticNeighborGovernanceTests(unittest.TestCase):
     def test_current_ledger_passes(self):
         with tempfile.TemporaryDirectory() as td:
             checkout = copy_checkout(Path(td))
-            self.assertEqual(0, run_validator(checkout))
+            code, output = run_validator_output(checkout)
+            self.assertEqual(0, code, output)
 
     def test_missing_entry_fails(self):
         with tempfile.TemporaryDirectory() as td:
             checkout = copy_checkout(Path(td))
             ledger_path = checkout / LEDGER_REL
             ledger = yaml.safe_load(ledger_path.read_text())
+            removed_id = ledger["entries"][0]["id"]
             ledger["entries"].pop(0)
             ledger["entry_count"] = len(ledger["entries"])
             ledger_path.write_text(yaml.safe_dump(ledger, sort_keys=False))
-            self.assertNotEqual(0, run_validator(checkout))
+            code, output = run_validator_output(checkout)
+            self.assertNotEqual(0, code)
+            self.assertIn(f"Missing retained semantic-neighbor relationship: {removed_id}", output)
+
+    def test_paired_deletion_fails_with_missing_relationship_id(self):
+        with tempfile.TemporaryDirectory() as td:
+            checkout = copy_checkout(Path(td))
+            ledger_path = checkout / LEDGER_REL
+            reg_path = checkout / REGISTRY_REL
+            ledger = yaml.safe_load(ledger_path.read_text())
+            reg = json.loads(reg_path.read_text())
+            entry = ledger["entries"][0]
+            rid = entry["id"]
+            src_cat = entry["sourceCatalogId"]
+            target_op = entry["targetOperationId"]
+            # remove from registry neighbor list
+            for e in reg["entries"]:
+                if e.get("catalogId") == src_cat:
+                    e["semanticNeighborIds"] = [n for n in e.get("semanticNeighborIds", []) if n != target_op]
+            reg_path.write_text(json.dumps(reg, indent=2) + "\n")
+            # remove from ledger
+            ledger["entries"] = [e for e in ledger["entries"] if e["id"] != rid]
+            ledger["entry_count"] = len(ledger["entries"])
+            ledger_path.write_text(yaml.safe_dump(ledger, sort_keys=False))
+            code, output = run_validator_output(checkout)
+            self.assertNotEqual(0, code)
+            self.assertIn(f"Missing retained semantic-neighbor relationship: {rid}", output)
 
     def test_duplicate_id_fails(self):
         with tempfile.TemporaryDirectory() as td:
@@ -58,13 +94,12 @@ class SemanticNeighborGovernanceTests(unittest.TestCase):
             ledger_path = checkout / LEDGER_REL
             ledger = yaml.safe_load(ledger_path.read_text())
             dup = copy.deepcopy(ledger["entries"][0])
-            dup["id"] = dup["id"] + " (dup)"
-            # make pair unique to isolate id duplicate? Keep same pair would also fail; change id only not enough for pair dup.
-            # Change source/target to a new non-inherited pair to avoid pair duplicate masking.
             ledger["entries"].append(dup)
             ledger["entry_count"] = len(ledger["entries"])
             ledger_path.write_text(yaml.safe_dump(ledger, sort_keys=False))
-            self.assertNotEqual(0, run_validator(checkout))
+            code, output = run_validator_output(checkout)
+            self.assertNotEqual(0, code)
+            self.assertIn("Duplicate ledger entry id", output)
 
     def test_duplicate_pair_fails(self):
         with tempfile.TemporaryDirectory() as td:
@@ -76,7 +111,20 @@ class SemanticNeighborGovernanceTests(unittest.TestCase):
             ledger["entries"].append(dup)
             ledger["entry_count"] = len(ledger["entries"])
             ledger_path.write_text(yaml.safe_dump(ledger, sort_keys=False))
-            self.assertNotEqual(0, run_validator(checkout))
+            code, output = run_validator_output(checkout)
+            self.assertNotEqual(0, code)
+            self.assertTrue("Duplicate source-target relationship" in output or "Non-canonical" in output)
+
+    def test_rewritten_id_fails(self):
+        with tempfile.TemporaryDirectory() as td:
+            checkout = copy_checkout(Path(td))
+            ledger_path = checkout / LEDGER_REL
+            ledger = yaml.safe_load(ledger_path.read_text())
+            ledger["entries"][0]["id"] = "rewritten -> id"
+            ledger_path.write_text(yaml.safe_dump(ledger, sort_keys=False))
+            code, output = run_validator_output(checkout)
+            self.assertNotEqual(0, code)
+            self.assertIn("Non-canonical semantic-neighbor relationship id", output)
 
     def test_invalid_status_fails(self):
         with tempfile.TemporaryDirectory() as td:
@@ -85,7 +133,9 @@ class SemanticNeighborGovernanceTests(unittest.TestCase):
             ledger = yaml.safe_load(ledger_path.read_text())
             ledger["entries"][0]["reviewStatus"] = "approved"
             ledger_path.write_text(yaml.safe_dump(ledger, sort_keys=False))
-            self.assertNotEqual(0, run_validator(checkout))
+            code, output = run_validator_output(checkout)
+            self.assertNotEqual(0, code)
+            self.assertIn("invalid reviewStatus", output)
 
     def test_invalid_boundary_fails(self):
         with tempfile.TemporaryDirectory() as td:
@@ -93,11 +143,10 @@ class SemanticNeighborGovernanceTests(unittest.TestCase):
             ledger_path = checkout / LEDGER_REL
             ledger = yaml.safe_load(ledger_path.read_text())
             ledger["entries"][0]["boundary"] = "within-module"
-            # force mismatch with actual cross-module by also ensuring not recomputed; validator recomputes
             ledger_path.write_text(yaml.safe_dump(ledger, sort_keys=False))
-            # Only fail if actual not within-module; pick an entry that is cross-module.
-            # entries[0] is cross-module, so boundary mismatch should fail.
-            self.assertNotEqual(0, run_validator(checkout))
+            code, output = run_validator_output(checkout)
+            self.assertNotEqual(0, code)
+            self.assertTrue("boundary" in output and "does not match" in output)
 
     def test_dangling_source_fails(self):
         with tempfile.TemporaryDirectory() as td:
@@ -106,7 +155,9 @@ class SemanticNeighborGovernanceTests(unittest.TestCase):
             ledger = yaml.safe_load(ledger_path.read_text())
             ledger["entries"][0]["sourceCatalogId"] = "brapi-genx.genx.v1.does-not-exist"
             ledger_path.write_text(yaml.safe_dump(ledger, sort_keys=False))
-            self.assertNotEqual(0, run_validator(checkout))
+            code, output = run_validator_output(checkout)
+            self.assertNotEqual(0, code)
+            self.assertIn("does not resolve to a registry entry", output)
 
     def test_dangling_target_fails(self):
         with tempfile.TemporaryDirectory() as td:
@@ -115,7 +166,9 @@ class SemanticNeighborGovernanceTests(unittest.TestCase):
             ledger = yaml.safe_load(ledger_path.read_text())
             ledger["entries"][0]["targetOperationId"] = "genxDoesNotExist"
             ledger_path.write_text(yaml.safe_dump(ledger, sort_keys=False))
-            self.assertNotEqual(0, run_validator(checkout))
+            code, output = run_validator_output(checkout)
+            self.assertNotEqual(0, code)
+            self.assertIn("does not resolve to an operation or governed relationship", output)
 
     def test_evidence_backed_missing_fields_fails(self):
         with tempfile.TemporaryDirectory() as td:
@@ -126,14 +179,80 @@ class SemanticNeighborGovernanceTests(unittest.TestCase):
             ledger["entries"][0]["rationale"] = ""
             ledger["entries"][0]["evidence"] = []
             ledger_path.write_text(yaml.safe_dump(ledger, sort_keys=False))
-            self.assertNotEqual(0, run_validator(checkout))
+            code, output = run_validator_output(checkout)
+            self.assertNotEqual(0, code)
+            self.assertIn("requires non-empty", output.lower().replace("'", "") or "requires" in output)
+
+    def test_forbidden_transition_fails(self):
+        with tempfile.TemporaryDirectory() as td:
+            checkout = copy_checkout(Path(td))
+            ledger_path = checkout / LEDGER_REL
+            ledger = yaml.safe_load(ledger_path.read_text())
+            # comparison ledger: one entry advanced to evidence-backed-proposed
+            comparison = copy.deepcopy(ledger)
+            comparison["entries"][0]["reviewStatus"] = "evidence-backed-proposed"
+            comparison["entries"][0]["rationale"] = "r"
+            comparison["entries"][0]["evidence"] = ["e"]
+            comparison["entries"][0]["reviewedBy"] = "reviewer"
+            comparison["entries"][0]["reviewedAt"] = "2026-01-01"
+            comp_path = Path(td) / "comparison.yaml"
+            comp_path.write_text(yaml.safe_dump(comparison, sort_keys=False))
+            # current: same entry back to inherited-unreviewed (forbidden)
+            ledger["entries"][0]["reviewStatus"] = "inherited-unreviewed"
+            ledger_path.write_text(yaml.safe_dump(ledger, sort_keys=False))
+            code, output = run_validator_output(checkout, ["--comparison-ledger", str(comp_path)])
+            self.assertNotEqual(0, code)
+            self.assertIn("Forbidden semantic-neighbor status transition", output)
+
+    def test_missing_authorization_fails(self):
+        with tempfile.TemporaryDirectory() as td:
+            checkout = copy_checkout(Path(td))
+            ledger_path = checkout / LEDGER_REL
+            ledger = yaml.safe_load(ledger_path.read_text())
+            ledger["entries"][0]["reviewStatus"] = "rejected"
+            ledger["entries"][0]["rationale"] = "r"
+            ledger_path.write_text(yaml.safe_dump(ledger, sort_keys=False))
+            code, output = run_validator_output(checkout)
+            self.assertNotEqual(0, code)
+            self.assertIn("authorizationReference", output)
+
+    def test_missing_successor_fails(self):
+        with tempfile.TemporaryDirectory() as td:
+            checkout = copy_checkout(Path(td))
+            ledger_path = checkout / LEDGER_REL
+            ledger = yaml.safe_load(ledger_path.read_text())
+            ledger["entries"][0]["reviewStatus"] = "superseded"
+            ledger["entries"][0]["rationale"] = "r"
+            ledger["entries"][0]["authorizationReference"] = "AUTH-1"
+            ledger["entries"][0]["supersededBy"] = "does-not-exist"
+            ledger_path.write_text(yaml.safe_dump(ledger, sort_keys=False))
+            code, output = run_validator_output(checkout)
+            self.assertNotEqual(0, code)
+            self.assertIn("supersededBy does not resolve", output)
+
+    def test_valid_control_passes(self):
+        with tempfile.TemporaryDirectory() as td:
+            checkout = copy_checkout(Path(td))
+            ledger_path = checkout / LEDGER_REL
+            ledger = yaml.safe_load(ledger_path.read_text())
+            comparison = copy.deepcopy(ledger)
+            comp_path = Path(td) / "comparison.yaml"
+            comp_path.write_text(yaml.safe_dump(comparison, sort_keys=False))
+            # advance one entry with full evidence
+            ledger["entries"][0]["reviewStatus"] = "evidence-backed-proposed"
+            ledger["entries"][0]["rationale"] = "r"
+            ledger["entries"][0]["evidence"] = ["e"]
+            ledger["entries"][0]["reviewedBy"] = "reviewer"
+            ledger["entries"][0]["reviewedAt"] = "2026-01-01"
+            ledger_path.write_text(yaml.safe_dump(ledger, sort_keys=False))
+            code, output = run_validator_output(checkout, ["--comparison-ledger", str(comp_path)])
+            self.assertEqual(0, code, output)
 
     def test_non_inherited_without_provenance_fails(self):
         with tempfile.TemporaryDirectory() as td:
             checkout = copy_checkout(Path(td))
             ledger_path = checkout / LEDGER_REL
             ledger = yaml.safe_load(ledger_path.read_text())
-            # Build a new entry from an existing one but point to a non-inherited pair.
             new_entry = copy.deepcopy(ledger["entries"][0])
             new_entry["id"] = "brapi-genx.genx.v1.farms.list -> genxGetFarm"
             new_entry["sourceCatalogId"] = "brapi-genx.genx.v1.farms.list"
@@ -150,7 +269,9 @@ class SemanticNeighborGovernanceTests(unittest.TestCase):
             ledger["entries"].append(new_entry)
             ledger["entry_count"] = len(ledger["entries"])
             ledger_path.write_text(yaml.safe_dump(ledger, sort_keys=False))
-            self.assertNotEqual(0, run_validator(checkout))
+            code, output = run_validator_output(checkout)
+            self.assertNotEqual(0, code)
+            self.assertIn("inherited-registry-only", output)
 
     def test_entry_count_mismatch_fails(self):
         with tempfile.TemporaryDirectory() as td:
@@ -159,7 +280,9 @@ class SemanticNeighborGovernanceTests(unittest.TestCase):
             ledger = yaml.safe_load(ledger_path.read_text())
             ledger["entry_count"] = 999
             ledger_path.write_text(yaml.safe_dump(ledger, sort_keys=False))
-            self.assertNotEqual(0, run_validator(checkout))
+            code, output = run_validator_output(checkout)
+            self.assertNotEqual(0, code)
+            self.assertIn("entry_count", output)
 
 
 if __name__ == "__main__":

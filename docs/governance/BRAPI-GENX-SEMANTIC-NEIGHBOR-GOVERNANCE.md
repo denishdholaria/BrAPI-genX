@@ -85,3 +85,30 @@ unresolved rather than approved.
 This framework does not modify official BrAPI v2.1 specifications, GenX routes,
 operation identifiers, or resource schemas; does not delete the 153
 relationships; and does not declare scientific equivalence.
+
+## Retention and baseline selection
+
+The original 153 relationship identities are retained against the trusted
+ledger-bearing baseline commit `3125fbc35dd32abbf8166b990c5597f1aea6e61f`.
+The validator compares the current ledger to that baseline and fails if any
+original identity is missing.
+
+- First ledger-bearing PR: the comparison revision is the baseline commit
+  itself (or absent ledger), so retention is enforced and status transitions
+  are not yet constrained beyond the allowed graph.
+- Subsequent revisions: the comparison revision is the base branch version of
+  the ledger (for example `origin/main`), selected via `--comparison-ref`
+  or `--comparison-ledger`. This enforces documented status transitions
+  against the previously reviewed state.
+
+## Canonical identity and terminal decisions
+
+- Each entry `id` must equal `"<sourceCatalogId> -> <targetOperationId>"`.
+- `evidence-backed-proposed` requires `rationale`, `evidence`,
+  `reviewedBy`, and `reviewedAt`.
+- `rejected` and `superseded` require `authorizationReference` (maintainer
+  authority).
+- `superseded` requires `supersededBy` resolving to a known ledger entry,
+  governed relationship, or operation.
+
+Allowed transitions are enforced against the trusted comparison revision.

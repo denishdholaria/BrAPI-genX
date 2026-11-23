@@ -20,12 +20,176 @@ ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "Specification" / "ENDPOINT-REGISTRY.json"
 LEDGER = ROOT / "Specification" / "BrAPI-GenX" / "Conformance" / "semantic-neighbor-review.yaml"
 AUDIT = ROOT / "Scripts" / "auditEndpointRegistrySourceConsistency.py"
+BASELINE_REF = "3125fbc35dd32abbf8166b990c5597f1aea6e61f"
+BASELINE_LEDGER_IDS = frozenset({
+'brapi-genx.genx.v1.artifact-catalogues.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.artifact-catalogues.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.artifact-catalogues.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.assay-executions.get -> genxRecordAssayDesign',
+'brapi-genx.genx.v1.assay-executions.list -> genxRecordAssayDesign',
+'brapi-genx.genx.v1.assay-executions.record -> genxRecordAssayDesign',
+'brapi-genx.genx.v1.biodiversity-exports.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.biodiversity-exports.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.biodiversity-exports.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.calibration-qualities.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.calibration-qualities.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.calibration-qualities.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.capability-negotiations.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.capability-negotiations.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.capability-negotiations.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.capture-workflows.get -> genxPublishVariableTermVersion',
+'brapi-genx.genx.v1.capture-workflows.list -> genxPublishVariableTermVersion',
+'brapi-genx.genx.v1.capture-workflows.record -> genxPublishVariableTermVersion',
+'brapi-genx.genx.v1.cloud-masks.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.cloud-masks.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.cloud-masks.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.conformance-probes.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.conformance-probes.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.conformance-probes.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.crop-health-images.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.crop-health-images.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.crop-health-images.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.crop-recommendations.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.crop-recommendations.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.crop-recommendations.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.crop-suitabilities.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.crop-suitabilities.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.crop-suitabilities.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.crs-transforms.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.crs-transforms.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.crs-transforms.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.diagnostic-evidences.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.diagnostic-evidences.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.diagnostic-evidences.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.disease-observations.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.disease-observations.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.disease-observations.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.disease-resistances.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.disease-resistances.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.disease-resistances.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.edge-gateway-healths.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.edge-gateway-healths.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.edge-gateway-healths.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.evidence-packs.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.evidence-packs.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.evidence-packs.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.experimental-protocols.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.experimental-protocols.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.experimental-protocols.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.explanation-evidences.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.explanation-evidences.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.explanation-evidences.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.farms.get -> genxRegisterCropCycle',
+'brapi-genx.genx.v1.farms.list -> genxRegisterCropCycle',
+'brapi-genx.genx.v1.farms.register -> genxRegisterCropCycle',
+'brapi-genx.genx.v1.field-books.get -> genxRegisterFieldScouting',
+'brapi-genx.genx.v1.field-books.list -> genxRegisterFieldScouting',
+'brapi-genx.genx.v1.field-books.record -> genxRegisterFieldScouting',
+'brapi-genx.genx.v1.field-geometries.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.field-geometries.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.field-geometries.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.human-reviews.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.human-reviews.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.human-reviews.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.ipm-strategies.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.ipm-strategies.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.ipm-strategies.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.irrigation-advices.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.irrigation-advices.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.irrigation-advices.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.local-constraints.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.local-constraints.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.local-constraints.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.nutrient-advices.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.nutrient-advices.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.nutrient-advices.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.outcome-feedbacks.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.outcome-feedbacks.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.outcome-feedbacks.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.pest-disease-risks.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.pest-disease-risks.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.pest-disease-risks.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.pipeline-provenances.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.pipeline-provenances.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.pipeline-provenances.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.plots.get -> genxRegisterFieldScouting',
+'brapi-genx.genx.v1.plots.list -> genxRegisterFieldScouting',
+'brapi-genx.genx.v1.plots.record -> genxRegisterFieldScouting',
+'brapi-genx.genx.v1.protocol-libraries.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.protocol-libraries.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.protocol-libraries.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.publication-reviews.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.publication-reviews.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.publication-reviews.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.quality-flags.get -> genxPublishVariableTermVersion',
+'brapi-genx.genx.v1.quality-flags.list -> genxPublishVariableTermVersion',
+'brapi-genx.genx.v1.quality-flags.record -> genxPublishVariableTermVersion',
+'brapi-genx.genx.v1.raster-catalogues.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.raster-catalogues.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.raster-catalogues.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.reference-assemblies.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.reference-assemblies.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.reference-assemblies.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.remote-sensing-metadata.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.remote-sensing-metadata.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.remote-sensing-metadata.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.schema-mappings.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.schema-mappings.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.schema-mappings.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.sensor-devices.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.sensor-devices.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.sensor-devices.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.sowing-windows.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.sowing-windows.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.sowing-windows.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.spatial-indexes.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.spatial-indexes.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.spatial-indexes.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.spatial-queries.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.spatial-queries.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.spatial-queries.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.telemetry-normalizations.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.telemetry-normalizations.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.telemetry-normalizations.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.threshold-alerts.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.threshold-alerts.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.threshold-alerts.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.treatment-assignments.get -> genxRegisterFieldScouting',
+'brapi-genx.genx.v1.treatment-assignments.list -> genxRegisterFieldScouting',
+'brapi-genx.genx.v1.treatment-assignments.record -> genxRegisterFieldScouting',
+'brapi-genx.genx.v1.trial-networks.get -> genxRegisterFieldScouting',
+'brapi-genx.genx.v1.trial-networks.list -> genxRegisterFieldScouting',
+'brapi-genx.genx.v1.trial-networks.record -> genxRegisterFieldScouting',
+'brapi-genx.genx.v1.value-missingness.get -> genxPublishVariableTermVersion',
+'brapi-genx.genx.v1.value-missingness.list -> genxPublishVariableTermVersion',
+'brapi-genx.genx.v1.value-missingness.record -> genxPublishVariableTermVersion',
+'brapi-genx.genx.v1.vcf-exports.get -> genxRecordVcfImport',
+'brapi-genx.genx.v1.vcf-exports.list -> genxRecordVcfImport',
+'brapi-genx.genx.v1.vcf-exports.record -> genxRecordVcfImport',
+'brapi-genx.genx.v1.vegetation-indexes.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.vegetation-indexes.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.vegetation-indexes.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.yield-forecasts.get -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.yield-forecasts.list -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.yield-forecasts.record -> genxRegisterGenomicDataset',
+'brapi-genx.genx.v1.yield-maps.get -> genxRecordHarvest',
+'brapi-genx.genx.v1.yield-maps.list -> genxRecordHarvest',
+'brapi-genx.genx.v1.yield-maps.register -> genxRecordHarvest'
+})
+
 
 ALLOWED_STATUSES = {"inherited-unreviewed", "evidence-backed-proposed",
                     "requires-decision", "rejected", "superseded"}
 ALLOWED_PROVENANCE = {"inherited-registry-only", "source-openapi-declared",
                       "registry-and-source", "documented-mapping", "manual-review"}
 ALLOWED_BOUNDARIES = {"within-module", "cross-module", "cross-domain"}
+ALLOWED_TRANSITIONS = {
+    "inherited-unreviewed": {"evidence-backed-proposed", "requires-decision", "rejected", "superseded"},
+    "evidence-backed-proposed": {"requires-decision", "rejected", "superseded"},
+    "requires-decision": {"evidence-backed-proposed", "rejected", "superseded"},
+    "rejected": {"superseded"},
+    "superseded": set(),
+}
 REQUIRED_FIELDS = [
     "id", "sourceCatalogId", "sourceOperationId", "targetOperationId",
     "targetCatalogId", "sourceModule", "targetModule", "boundary",
@@ -35,8 +199,8 @@ REQUIRED_FIELDS = [
 EVIDENCE_REQUIRED = {
     "evidence-backed-proposed": ["rationale", "evidence", "reviewedBy", "reviewedAt"],
     "requires-decision": ["rationale", "openQuestion"],
-    "rejected": ["rationale"],
-    "superseded": ["rationale", "supersededBy"],
+    "rejected": ["rationale", "authorizationReference"],
+    "superseded": ["rationale", "supersededBy", "authorizationReference"],
 }
 
 
@@ -51,6 +215,30 @@ def run_audit(root: Path) -> dict[str, Any]:
             if isinstance(report, dict):
                 return report
     raise RuntimeError("Audit did not emit a structured report")
+
+
+
+def load_ledger_from_git(root: Path, ref: str) -> dict[str, Any] | None:
+    path = "Specification/BrAPI-GenX/Conformance/semantic-neighbor-review.yaml"
+    result = subprocess.run(
+        ["git", "show", f"{ref}:{path}"],
+        cwd=root, capture_output=True, text=True, check=False,
+    )
+    if result.returncode != 0:
+        return None
+    try:
+        loaded = yaml.safe_load(result.stdout)
+    except yaml.YAMLError:
+        return None
+    return loaded if isinstance(loaded, dict) else None
+
+
+def load_ledger_from_path(path: Path) -> dict[str, Any] | None:
+    try:
+        loaded = yaml.safe_load(path.read_text(encoding="utf-8"))
+    except (OSError, yaml.YAMLError):
+        return None
+    return loaded if isinstance(loaded, dict) else None
 
 
 def module_path(entry: dict[str, Any]) -> str:
@@ -80,7 +268,9 @@ def inherited_set(root: Path) -> set[tuple[str, str]]:
     return result
 
 
-def check(root: Path = ROOT) -> list[str]:
+def check(root: Path = ROOT, baseline_ref: str = BASELINE_REF,
+        comparison_ref: str | None = BASELINE_REF,
+        comparison_ledger_path: Path | None = None) -> list[str]:
     errors: list[str] = []
     root = root.resolve()
     registry_path = root / "Specification" / "ENDPOINT-REGISTRY.json"
@@ -122,6 +312,35 @@ def check(root: Path = ROOT) -> list[str]:
         return errors + ["Ledger 'entries' must be a list."]
 
     entries = ledger["entries"]
+
+    # Retention: all original 153 identities must remain present.
+    current_ids = {e.get("id") for e in entries if isinstance(e, dict)}
+    for retained in sorted(BASELINE_LEDGER_IDS - current_ids):
+        errors.append(f"Missing retained semantic-neighbor relationship: {retained}")
+
+    # Canonical sourceCatalogId -> targetOperationId identity.
+    for entry in entries:
+        if not isinstance(entry, dict):
+            continue
+        expected_id = f"{entry.get('sourceCatalogId')} -> {entry.get('targetOperationId')}"
+        if entry.get("id") != expected_id:
+            errors.append(
+                f"Non-canonical semantic-neighbor relationship id: {entry.get('id')!r} "
+                f"(expected {expected_id!r})"
+            )
+
+    # Comparison ledger for status transitions.
+    comparison_ledger = None
+    if comparison_ledger_path is not None:
+        comparison_ledger = load_ledger_from_path(comparison_ledger_path)
+    elif comparison_ref:
+        comparison_ledger = load_ledger_from_git(root, comparison_ref)
+    comparison_status = {}
+    if isinstance(comparison_ledger, dict):
+        for e in comparison_ledger.get("entries", []):
+            if isinstance(e, dict) and isinstance(e.get("id"), str):
+                comparison_status[e["id"]] = e.get("reviewStatus")
+
     try:
         current_inherited_global = inherited_set(root)
     except RuntimeError as exc:
@@ -152,6 +371,16 @@ def check(root: Path = ROOT) -> list[str]:
         status = entry.get("reviewStatus")
         if status not in ALLOWED_STATUSES:
             errors.append(f"{eid}: invalid reviewStatus {status!r}.")
+
+        # Status transitions.
+        old_status = comparison_status.get(eid)
+        if old_status is not None and old_status != status:
+            allowed = ALLOWED_TRANSITIONS.get(old_status, [])
+            if status not in allowed:
+                errors.append(
+                    f"Forbidden semantic-neighbor status transition for {eid}: "
+                    f"{old_status} -> {status}"
+                )
 
         boundary = entry.get("boundary")
         if boundary not in ALLOWED_BOUNDARIES:
@@ -226,6 +455,13 @@ def check(root: Path = ROOT) -> list[str]:
                 if value in (None, "", [], {}):
                     errors.append(f"{eid}: status {status!r} requires field '{field}'.")
 
+        # Resolvable successor for superseded entries.
+        if status == "superseded":
+            successor = entry.get("supersededBy")
+            if not (successor in {e.get("id") for e in entries if isinstance(e, dict)}
+                    or successor in gov_ids or successor in by_opid):
+                errors.append(f"{eid}: supersededBy does not resolve to a known relationship or operation: {successor!r}.")
+
         # Documentary evidence type check.
         de = entry.get("documentaryEvidence")
         if not isinstance(de, list):
@@ -285,13 +521,20 @@ def main() -> int:
     global ROOT, REGISTRY, LEDGER, AUDIT
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=ROOT, help="repository root")
+    parser.add_argument("--baseline-ref", default=BASELINE_REF, help="trusted Git baseline retaining original identities")
+    parser.add_argument("--comparison-ref", default=BASELINE_REF, help="trusted comparison revision for status transitions")
+    parser.add_argument("--no-comparison-ref", action="store_true", help="disable Git comparison revision")
+    parser.add_argument("--comparison-ledger", type=Path, default=None, help="path to comparison ledger for status transitions")
     args = parser.parse_args()
     root = args.root.resolve()
     ROOT = root
     REGISTRY = root / "Specification" / "ENDPOINT-REGISTRY.json"
     LEDGER = root / "Specification" / "BrAPI-GenX" / "Conformance" / "semantic-neighbor-review.yaml"
     AUDIT = root / "Scripts" / "auditEndpointRegistrySourceConsistency.py"
-    errors = check(root)
+    comparison_ref = None if args.no_comparison_ref else args.comparison_ref
+    errors = check(root, baseline_ref=args.baseline_ref,
+                   comparison_ref=comparison_ref,
+                   comparison_ledger_path=args.comparison_ledger)
     if errors:
         print("Semantic-neighbor governance validation FAILED:")
         for error in errors:
