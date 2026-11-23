@@ -192,7 +192,7 @@ class SemanticNeighborGovernanceTests(unittest.TestCase):
             comparison = copy.deepcopy(ledger)
             comparison["entries"][0]["reviewStatus"] = "evidence-backed-proposed"
             comparison["entries"][0]["rationale"] = "r"
-            comparison["entries"][0]["evidence"] = ["e"]
+            comparison["entries"][0]["evidence"] = ["RFC-002"]
             comparison["entries"][0]["reviewedBy"] = "reviewer"
             comparison["entries"][0]["reviewedAt"] = "2026-01-01"
             comp_path = Path(td) / "comparison.yaml"
@@ -223,7 +223,7 @@ class SemanticNeighborGovernanceTests(unittest.TestCase):
             ledger = yaml.safe_load(ledger_path.read_text())
             ledger["entries"][0]["reviewStatus"] = "superseded"
             ledger["entries"][0]["rationale"] = "r"
-            ledger["entries"][0]["authorizationReference"] = "AUTH-1"
+            ledger["entries"][0]["authorizationReference"] = "D-20"
             ledger["entries"][0]["supersededBy"] = "does-not-exist"
             ledger_path.write_text(yaml.safe_dump(ledger, sort_keys=False))
             code, output = run_validator_output(checkout)
@@ -241,7 +241,7 @@ class SemanticNeighborGovernanceTests(unittest.TestCase):
             # advance one entry with full evidence
             ledger["entries"][0]["reviewStatus"] = "evidence-backed-proposed"
             ledger["entries"][0]["rationale"] = "r"
-            ledger["entries"][0]["evidence"] = ["e"]
+            ledger["entries"][0]["evidence"] = ["RFC-002"]
             ledger["entries"][0]["reviewedBy"] = "reviewer"
             ledger["entries"][0]["reviewedAt"] = "2026-01-01"
             ledger_path.write_text(yaml.safe_dump(ledger, sort_keys=False))
@@ -322,7 +322,7 @@ class SemanticNeighborGovernanceTests(unittest.TestCase):
             rid = ledger["entries"][0]["id"]
             ledger["entries"][0]["reviewStatus"] = "superseded"
             ledger["entries"][0]["rationale"] = "r"
-            ledger["entries"][0]["authorizationReference"] = "AUTH-1"
+            ledger["entries"][0]["authorizationReference"] = "D-20"
             ledger["entries"][0]["supersededBy"] = rid
             ledger_path.write_text(yaml.safe_dump(ledger, sort_keys=False))
             code, output = run_validator_output(checkout)
@@ -334,6 +334,21 @@ class SemanticNeighborGovernanceTests(unittest.TestCase):
         code, output = run_validator_output(ROOT, ["--comparison-ref", "definitely-not-a-ref"])
         self.assertNotEqual(0, code)
         self.assertIn("Comparison ledger could not be loaded", output)
+
+
+    def test_empty_comparison_ledger_fails(self):
+        with tempfile.TemporaryDirectory() as td:
+            checkout = copy_checkout(Path(td))
+            empty = Path(td) / "empty.yaml"
+            empty.write_text("{}\n")
+            code, output = run_validator_output(checkout, ["--comparison-ledger", str(empty)])
+            self.assertNotEqual(0, code)
+            self.assertIn("entries must be a list", output)
+
+    def test_empty_comparison_ref_fails(self):
+        code, output = run_validator_output(ROOT, ["--comparison-ref", ""])
+        self.assertNotEqual(0, code)
+        self.assertIn("comparison ref must not be empty", output)
 
 if __name__ == "__main__":
     unittest.main()

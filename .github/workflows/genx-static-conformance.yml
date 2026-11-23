@@ -78,6 +78,11 @@ on:
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-OPEN-DECISIONS.md'
       - '.github/workflows/genx-static-conformance.yml'
   workflow_dispatch:
+    inputs:
+      comparison_sha:
+        description: 'Comparison commit SHA (required for manual dispatch)'
+        required: true
+        type: string
 
 concurrency:
   group: genx-conformance-${{ github.ref }}
@@ -162,8 +167,21 @@ jobs:
         run: python Scripts/test_registry_drift_regression.py
       - name: Validate semantic-neighbor governance ledger
         run: |
-          COMPARE="${{ github.event.pull_request.base.sha || github.event.before }}"
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            COMPARE="${{ github.event.pull_request.base.sha }}"
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            COMPARE="${{ github.event.inputs.comparison_sha }}"
+          else
+            COMPARE="${{ github.event.before }}"
+          fi
+          if [ -z "$COMPARE" ]; then
+            echo "comparison SHA is required" >&2
+            exit 1
+          fi
           if [ "$COMPARE" = "0000000000000000000000000000000000000000" ]; then
+            COMPARE="$(git merge-base HEAD origin/main 2>/dev/null || true)"
+          fi
+          if [ -z "$COMPARE" ]; then
             python Scripts/check_semantic_neighbor_governance.py
           else
             python Scripts/check_semantic_neighbor_governance.py --comparison-ref "$COMPARE"

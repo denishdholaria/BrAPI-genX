@@ -233,6 +233,9 @@ def load_ledger_from_git(root: Path, ref: str) -> tuple[dict[str, Any] | None, s
         return None, f"malformed comparison ledger from Git ref {ref}: {exc}"
     if not isinstance(loaded, dict):
         return None, f"malformed comparison ledger from Git ref {ref}: expected a mapping"
+    err = _validate_comparison_ledger(loaded, f"Git ref {ref}")
+    if err:
+        return None, err
     return loaded, None
 
 
@@ -243,6 +246,9 @@ def load_ledger_from_path(path: Path) -> tuple[dict[str, Any] | None, str | None
         return None, f"cannot read comparison ledger {path}: {exc}"
     if not isinstance(loaded, dict):
         return None, f"malformed comparison ledger {path}: expected a mapping"
+    err = _validate_comparison_ledger(loaded, str(path))
+    if err:
+        return None, err
     return loaded, None
 
 
@@ -253,6 +259,34 @@ def is_ancestor(root: Path, ancestor: str, descendant: str) -> bool:
         cwd=root, capture_output=True, text=True, check=False,
     )
     return result.returncode == 0
+
+
+def _validate_comparison_ledger(loaded: dict[str, Any], source: str) -> str | None:
+    if not isinstance(loaded.get("entries"), list):
+        return f"malformed comparison ledger {source}: entries must be a list"
+    for entry in loaded["entries"]:
+        if not isinstance(entry, dict):
+            return f"malformed comparison ledger {source}: entry must be a mapping"
+        if not isinstance(entry.get("id"), str) or not entry["id"].strip():
+            return f"malformed comparison ledger {source}: entry missing id"
+        if entry.get("reviewStatus") not in ALLOWED_STATUSES:
+            return f"malformed comparison ledger {source}: invalid reviewStatus {entry.get('reviewStatus')!r}"
+    return None
+
+
+def _is_followable_reference(value: str, root: Path) -> bool:
+    value = value.strip()
+    if not value or len(value) < 3:
+        return False
+    if "://" in value:
+        return True
+    if value.startswith(("RFC-", "D-", "A-")):
+        return True
+    # repository-local target
+    if ("/" in value or "\\" in value or "." in value) and (root / value).is_file():
+        return True
+    return False
+
 
 def module_path(entry: dict[str, Any]) -> str:
     source = entry.get("source") or {}
@@ -347,7 +381,10 @@ def check(root: Path = ROOT,
     comparison_selected = comparison_ref is not None or comparison_ledger_path is not None
     comparison_ledger = None
     comparison_error = None
-    if comparison_ledger_path is not None:
+    if comparison_ref is not None and not str(comparison_ref).strip():
+        comparison_selected = True
+        comparison_error = "comparison ref must not be empty"
+    elif comparison_ledger_path is not None:
         comparison_ledger, comparison_error = load_ledger_from_path(comparison_ledger_path)
     elif comparison_ref is not None:
         comparison_ledger, comparison_error = load_ledger_from_git(root, comparison_ref)
@@ -507,17 +544,22 @@ def check(root: Path = ROOT,
 
         # Usable evidence citations for proposed relationships.
         if status == "evidence-backed-proposed":
-            for item in entry.get("evidence", []):
+            evidence_items = entry.get("evidence", [])
+            if not isinstance(evidence_items, list) or not evidence_items:
+                errors.append(f"{eid}: evidence-backed status requires non-empty 'evidence' list.")
+            for item in evidence_items:
                 if not isinstance(item, str) or not item.strip():
                     errors.append(f"{eid}: evidence entries must be non-empty strings.")
+                elif not _is_followable_reference(item, root):
+                    errors.append(f"{eid}: evidence citation is not followable: {item!r}.")
 
         # Authorization references for terminal decisions must be followable.
         if status in ("rejected", "superseded"):
             auth = entry.get("authorizationReference")
             if not isinstance(auth, str) or not auth.strip():
                 errors.append(f"{eid}: status {status!r} requires a non-empty authorizationReference.")
-            elif len(auth.strip()) < 3:
-                errors.append(f"{eid}: authorizationReference is too vague to follow: {auth!r}.")
+            elif not _is_followable_reference(auth, root):
+                errors.append(f"{eid}: authorizationReference is not followable: {auth!r}.")
 
         # Reject self-supersession.
         if status == "superseded" and entry.get("supersededBy") == eid:
@@ -591,6 +633,15 @@ def main() -> int:
     REGISTRY = root / "Specification" / "ENDPOINT-REGISTRY.json"
     LEDGER = root / "Specification" / "BrAPI-GenX" / "Conformance" / "semantic-neighbor-review.yaml"
     AUDIT = root / "Scripts" / "auditEndpointRegistrySourceConsistency.py"
+    if args.comparison_ref is not None:
+        resolved = subprocess.run(["git", "rev-parse", f"{args.comparison_ref}^{{commit}}"],
+                                 cwd=root, capture_output=True, text=True, check=False)
+        if resolved.returncode == 0:
+            print(f"Comparison revision: {resolved.stdout.strip()}")
+        else:
+            print(f"Comparison revision: {args.comparison_ref} (unresolved)")
+    else:
+        print("Comparison revision: bootstrap (verified pre-ledger base or committed HEAD)")
     errors = check(root,
                    comparison_ref=args.comparison_ref,
                    comparison_ledger_path=args.comparison_ledger,
