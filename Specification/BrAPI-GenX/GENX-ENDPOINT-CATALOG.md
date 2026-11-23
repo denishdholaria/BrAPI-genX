@@ -180,7 +180,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > List stable BreedingPipeline workstream identities and their available revision summaries.
 **Source contract description:**
-> Get a paged list of stable pipeline workstream identities. By default, each logical pipeline is represented by its current published revision summary; includeRevisions=true includes all available revision summaries.
+> Get a paged list of stable pipeline workstream identities. By default, each item includes its currentRevisionSummary when a current published revision exists. includeRevisions=true additionally returns revisionSummaries for all known immutable revisions; the summaries do not include full historical revision payloads.
 **Can be used for:**
 - Discover stable breeding-pipeline workstream identities.
 - Compare workstream purpose, current revision, and provenance across returned records.
@@ -216,7 +216,7 @@ This is a focused view of the 462 proposed GenX operations, not a separate sourc
 **Purpose:**
 > Create a stable BreedingPipeline workstream and append its first immutable revision, or append a new immutable revision to an existing workstream.
 **Source contract description:**
-> Creates or references a stable workstream identity and registers one immutable pipeline revision. The outer breedingPipelineDbId must exactly match breedingPipelineVersion.breedingPipelineDbId; mismatch is rejected with 400 Bad Request. A new breedingPipelineVersionDbId is required for every additional revision. An append to an existing workstream supplies expectedCurrentBreedingPipelineVersionDbId as an atomic compare-and-set precondition; explicit null means no currently published revision. Drafts record their preparation baseline using basedOnBreedingPipelineVersionDbId and omit revisionRelationship; published successors use supersedes/corrects and withdrawal revisions use withdraws, each identifying the exact current published revision.
+> Creates or references a stable workstream identity and registers one immutable pipeline revision. The outer breedingPipelineDbId must exactly match breedingPipelineVersion.breedingPipelineDbId; mismatch is rejected with 400 Bad Request. A new breedingPipelineVersionDbId is required for every additional revision. An append to an existing workstream also supplies expectedCurrentBreedingPipelineVersionDbId as an atomic compare-and-set precondition; explicit null means no currently published revision. Draft revisions record their preparation baseline using basedOnBreedingPipelineVersionDbId and must not claim supersedes/corrects. Published successors use supersedes/corrects; withdrawal revisions use withdraws. Both identify the exact current published revision through revisionRelationship.
 **Can be used for:**
 - Register a stable workstream identity with a new immutable breedingPipelineVersionDbId.
 - Retry an identical revision safely using the same breedingPipelineVersionDbId.

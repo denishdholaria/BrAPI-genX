@@ -44,7 +44,8 @@ def scope_errors(document: dict) -> list[str]:
             errors.append(f"{event} trigger missing dependency: {dep}")
     jobs = document.get("jobs") or {}
     job = jobs.get("static-conformance") or {}
-    commands = "\n".join(str(s.get("run", "")) for s in job.get("steps", []) if isinstance(s, dict))
+    commands = "\n".join(str(s.get("run", "")) for s in job.get("steps", [])
+                        if isinstance(s, dict) and "failure()" not in str(s.get("if", "")))
     for command in sorted(REQUIRED_COMMANDS):
         if command not in commands:
             errors.append(f"static-conformance job missing command: {command}")
