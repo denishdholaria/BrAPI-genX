@@ -7,7 +7,17 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from specification_structure import generated_link_errors, module_errors, registry_source_errors
+import yaml
+
+ROOT = Path(__file__).resolve().parents[1]
+
+from specification_structure import (
+    _is_trivial_group_description,
+    generated_link_errors,
+    mature_module_paths,
+    module_errors,
+    registry_source_errors,
+)
 
 
 class StructureTests(unittest.TestCase):
@@ -19,7 +29,7 @@ class StructureTests(unittest.TestCase):
         self.module = self.genx / "Core/Jobs"
         (self.module / "Schemas").mkdir(parents=True)
         (self.module / "README.md").write_text("# Jobs\n")
-        (self.module / "GroupDescription.md").write_text("# Jobs\n")
+        (self.module / "GroupDescription.md").write_text("# Jobs\n\nLifecycle details.\n")
         (self.module / "Schemas/Job.yaml").write_text("components:\n  schemas:\n    Job: {}\n")
         (self.module / "Jobs_GET_POST.yaml").write_text("paths: {}\n")
         self.classification = {"modules": [{"path": "Core/Jobs/"}]}
@@ -74,6 +84,62 @@ class StructureTests(unittest.TestCase):
         (dest / "brapi_openapi.json").unlink()
         self.assertTrue(any("Missing declared generated" in x for x in generated_link_errors(self.root)))
 
+
+    def test_mature_module_empty_group_description_fails(self):
+        (self.module / "GroupDescription.md").write_text("# Jobs\n")
+        errors = module_errors(self.root, self.classification)
+        self.assertTrue(any("GroupDescription.md must contain non-trivial content" in x for x in errors), errors)
+
+    def test_mature_module_substantive_group_description_passes(self):
+        (self.module / "GroupDescription.md").write_text("# Jobs\n\nLifecycle details.\n")
+        self.assertEqual([], module_errors(self.root, self.classification))
+
+    def test_draft_module_title_only_group_description_passes(self):
+        draft = self.genx / "Breeding/BreedingPipeline"
+        (draft / "Schemas").mkdir(parents=True)
+        (draft / "README.md").write_text("# BreedingPipeline\n")
+        (draft / "GroupDescription.md").write_text("# Group BreedingPipeline\n")
+        (draft / "Schemas/Pipeline.yaml").write_text("components:\n  schemas:\n    Pipeline: {}\n")
+        (draft / "Pipeline_GET.yaml").write_text("paths: {}\n")
+        classification = {"modules": [{"path": "Breeding/BreedingPipeline/"}]}
+        self.assertEqual([], module_errors(self.root, classification))
+
+    def test_draft_module_missing_group_description_fails(self):
+        draft = self.genx / "Breeding/BreedingPipeline"
+        (draft / "Schemas").mkdir(parents=True)
+        (draft / "README.md").write_text("# BreedingPipeline\n")
+        (draft / "Schemas/Pipeline.yaml").write_text("components:\n  schemas:\n    Pipeline: {}\n")
+        (draft / "Pipeline_GET.yaml").write_text("paths: {}\n")
+        classification = {"modules": [{"path": "Breeding/BreedingPipeline/"}]}
+        errors = module_errors(self.root, classification)
+        self.assertTrue(any("missing GroupDescription.md" in x for x in errors), errors)
+
+    def test_real_repository_structure_passes(self):
+        classification = yaml.safe_load(
+            (ROOT / "Specification/BrAPI-GenX/Conformance/domain-classification.yaml").read_text(encoding="utf-8")
+        )
+        self.assertEqual([], module_errors(ROOT, classification))
+
+    def test_trivial_group_description_detection(self):
+        self.assertTrue(_is_trivial_group_description("# Jobs\n"))
+        self.assertTrue(_is_trivial_group_description(""))
+        self.assertTrue(_is_trivial_group_description("# Jobs\n\n"))
+        self.assertFalse(_is_trivial_group_description("# Jobs\n\nLifecycle details.\n"))
+
+    def test_real_repository_mature_modules(self):
+        self.assertEqual(
+            {
+                "Core/Jobs/",
+                "Core/ServerInfoV3/",
+                "CropProduction/LotLedger/",
+                "Genotyping/Genomics/",
+                "Instrumentation/Telemetry/",
+                "Interoperability/FAIR/",
+                "ReferenceData/VariableTerms/",
+                "Research/Models/",
+            },
+            mature_module_paths(ROOT),
+        )
 
 if __name__ == "__main__":
     unittest.main()
