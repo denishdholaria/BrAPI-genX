@@ -11,8 +11,9 @@ Priority relationships include the governed `SEM-*` relationships in
 `Specification/ENDPOINT-REGISTRY.json` and
 `Specification/BrAPI-GenX/Conformance/endpoint-overlaps.yaml`, plus the
 cross-scientific-domain registry-only references (ExperimentalProtocol ->
-GenomicDatasets). The 153 inherited registry-only references remain
-`inherited-unreviewed` in `semantic-neighbor-review.yaml`.
+GenomicDatasets). All 153 original registry-only identities remain in the ledger: 150 are still
+`inherited-unreviewed` and three ExperimentalProtocol to GenomicDataset links
+are now `requires-decision` after a bounded source-contract review.
 
 ## SEM-01 Seed-lot transactions versus GenX ledger records (D-20)
 
@@ -97,6 +98,12 @@ GenomicDatasets). The 153 inherited registry-only references remain
 - Status: distinct-resources.
 
 ## Cross-scientific-domain registry-only references
+
+**2026-11-23 triage:** All three inherited ExperimentalProtocol get/list/register
+→ GenomicDataset register links now require a maintainer decision; this is
+not an accepted relationship, approval to delete, or scientific equivalence.
+See [the source-contract review](../../docs/assessment/BRAPI-GENX-EXPERIMENTAL-PROTOCOL-GENOMIC-DATASET-REVIEW.md).
+
 
 - Relationship: ExperimentalProtocol (D2, Breeding) -> GenomicDatasets (D3,
   Genotyping) appears in 3 inherited registry-only references.

@@ -80,6 +80,15 @@ for, references resolve, duplicates and invalid statuses fail, evidence-backed
 claims carry required evidence, and grandfathered entries remain explicitly
 unresolved rather than approved.
 
+## First priority triage — 2026-11-23
+
+Three cross-domain ExperimentalProtocol operation neighbors to
+`genxRegisterGenomicDataset` advanced to `requires-decision`, based
+on documented source-schema absence of a typed linkage. All original 153
+relationships remain inventoried; 150 retain `inherited-unreviewed`.
+No terminal rejection or scientific mapping has been approved. See
+`docs/assessment/BRAPI-GENX-EXPERIMENTAL-PROTOCOL-GENOMIC-DATASET-REVIEW.md`.
+
 ## Non-goals
 
 This framework does not modify official BrAPI v2.1 specifications, GenX routes,

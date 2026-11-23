@@ -1252,9 +1252,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-domain
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: true
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-EXPERIMENTAL-PROTOCOL-GENOMIC-DATASET-REVIEW.md
+  - Specification/BrAPI-GenX/Breeding/ExperimentalProtocol/Schemas/ExperimentalProtocol.yaml
+  - Specification/BrAPI-GenX/Genotyping/GenomicDatasets/Schemas/GenomicDataset.yaml
   decisionReferences:
   - RFC-013
   - RFC-117
@@ -1263,7 +1266,8 @@ entries:
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses scientific domain classes: D2 -> D3.'
   - 'Crosses GenX modules: ExperimentalProtocol -> GenomicDatasets.'
-  rationale: ''
+  rationale: 'ExperimentalProtocol is a design-time procedure; GenomicDataset describes prepared molecular data. Neither schema defines a typed reference to the other. A protocol read/list/register operation is not evidence of scientific equivalence or dataset derivation. This inherited operation-neighbor relationship has no documented mapping.'
+  openQuestion: 'Should these generated operation-neighbor associations be rejected, or should an explicit optional protocol-to-dataset provenance relationship be designed after a real use case and authority, identity, versioning and authorization evidence? Maintainer decision required.'
   evidence: []
 - id: brapi-genx.genx.v1.experimental-protocols.list -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.experimental-protocols.list
@@ -1276,9 +1280,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-domain
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: true
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-EXPERIMENTAL-PROTOCOL-GENOMIC-DATASET-REVIEW.md
+  - Specification/BrAPI-GenX/Breeding/ExperimentalProtocol/Schemas/ExperimentalProtocol.yaml
+  - Specification/BrAPI-GenX/Genotyping/GenomicDatasets/Schemas/GenomicDataset.yaml
   decisionReferences:
   - RFC-013
   - RFC-117
@@ -1287,7 +1294,8 @@ entries:
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses scientific domain classes: D2 -> D3.'
   - 'Crosses GenX modules: ExperimentalProtocol -> GenomicDatasets.'
-  rationale: ''
+  rationale: 'ExperimentalProtocol is a design-time procedure; GenomicDataset describes prepared molecular data. Neither schema defines a typed reference to the other. A protocol read/list/register operation is not evidence of scientific equivalence or dataset derivation. This inherited operation-neighbor relationship has no documented mapping.'
+  openQuestion: 'Should these generated operation-neighbor associations be rejected, or should an explicit optional protocol-to-dataset provenance relationship be designed after a real use case and authority, identity, versioning and authorization evidence? Maintainer decision required.'
   evidence: []
 - id: brapi-genx.genx.v1.experimental-protocols.record -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.experimental-protocols.record
@@ -1300,9 +1308,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-domain
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: true
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-EXPERIMENTAL-PROTOCOL-GENOMIC-DATASET-REVIEW.md
+  - Specification/BrAPI-GenX/Breeding/ExperimentalProtocol/Schemas/ExperimentalProtocol.yaml
+  - Specification/BrAPI-GenX/Genotyping/GenomicDatasets/Schemas/GenomicDataset.yaml
   decisionReferences:
   - RFC-013
   - RFC-117
@@ -1311,7 +1322,8 @@ entries:
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses scientific domain classes: D2 -> D3.'
   - 'Crosses GenX modules: ExperimentalProtocol -> GenomicDatasets.'
-  rationale: ''
+  rationale: 'ExperimentalProtocol is a design-time procedure; GenomicDataset describes prepared molecular data. Neither schema defines a typed reference to the other. A protocol read/list/register operation is not evidence of scientific equivalence or dataset derivation. This inherited operation-neighbor relationship has no documented mapping.'
+  openQuestion: 'Should these generated operation-neighbor associations be rejected, or should an explicit optional protocol-to-dataset provenance relationship be designed after a real use case and authority, identity, versioning and authorization evidence? Maintainer decision required.'
   evidence: []
 - id: brapi-genx.genx.v1.explanation-evidences.get -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.explanation-evidences.get
