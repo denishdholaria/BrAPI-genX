@@ -6,10 +6,12 @@ implementation evidence. Source OpenAPI operation summaries/descriptions and
 x-brapi-genx descriptive metadata are treated as the source of truth for the
 fields compared here.
 
-The default command is report-only. Pass --strict to require zero drift;
-the baseline regression gate separately prevents *new* discrepancies while
-historic mismatches are being reconciled. --report-json exposes the full
-deterministic discrepancy set for review and regression checks.
+The default command is report-only. Pass --strict to reject source/registry
+disagreements and invalid references while permitting verified additional
+registry-only relationships. The baseline regression gate separately rejects
+new unreviewed additional relationships. --report-json emits the complete
+deterministic discrepancy set; reference validation does not establish scientific
+equivalence or interoperability.
 """
 from __future__ import annotations
 
@@ -23,6 +25,14 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "Specification" / "ENDPOINT-REGISTRY.json"
+
+# Deliberately allowed human-readable labels for the frozen BrAPI v2.1
+# baseline; a generic "V2.1 " prefix must not bypass referential validation.
+LEGACY_V21_NEIGHBOR_LABELS = frozenset({
+    "V2.1 GET /brapi/v2/serverinfo",
+    "V2.1 /brapi/v2/variables",
+    "V2.1 OntologyTerm schema",
+})
 
 FIELD_MAP = {
     "operationName": ("summary", None),
@@ -122,15 +132,97 @@ def audit(strict: bool, plan_json: bool, report_json: bool = False) -> int:
                 # until they receive their own explicit semantic review.
                 source_neighbors = list(expected or [])
                 registry_neighbors = list(actual or [])
+
+                # Validate registry-declared references: malformed, duplicate,
+                # unknown governed relationships and dangling operation ids are
+                # hard errors. Additional (registry-only) relationships are
+                # still reported separately; they pass only when verified.
+                seen_registry: set[str] = set()
+                for ref in registry_neighbors:
+                    if not isinstance(ref, str) or not ref.strip():
+                        errors.append(
+                            f"{catalog_id}: malformed semanticNeighborIds entry {ref!r}"
+                        )
+                        continue
+                    if ref in seen_registry:
+                        errors.append(
+                            f"{catalog_id}: duplicate semanticNeighborIds entry {ref}"
+                        )
+                        continue
+                    seen_registry.add(ref)
+                    if ref.startswith(("SEM-", "OVERLAP-")):
+                        if ref not in relationship_ids:
+                            errors.append(
+                                f"{catalog_id}: unknown governed semantic relationship {ref}"
+                            )
+                    elif ref.startswith("V2.1 "):
+                        if ref not in LEGACY_V21_NEIGHBOR_LABELS:
+                            errors.append(f"{catalog_id}: unregistered historical BrAPI v2.1 label {ref}")
+                    else:
+                        genx_operation_ids = {
+                            item.get("recommendedOperationId")
+                            for item in entries
+                            if item.get("apiGeneration") == "genx-v1"
+                        }
+                        v21_operation_ids = {
+                            item.get("recommendedOperationId")
+                            for item in entries
+                            if item.get("apiGeneration") == "brapi-v2.1"
+                        }
+                        if ref not in genx_operation_ids and ref not in v21_operation_ids:
+                            errors.append(
+                                f"{catalog_id}: dangling semantic neighbor reference {ref}"
+                            )
+
+                # Validate source-declared references similarly.
+                seen_source: set[str] = set()
+                for ref in source_neighbors:
+                    if not isinstance(ref, str) or not ref.strip():
+                        errors.append(
+                            f"{catalog_id}: malformed source semanticNeighbors entry {ref!r}"
+                        )
+                        continue
+                    if ref in seen_source:
+                        errors.append(
+                            f"{catalog_id}: duplicate source semanticNeighbors entry {ref}"
+                        )
+                        continue
+                    seen_source.add(ref)
+                    if ref.startswith(("SEM-", "OVERLAP-")):
+                        if ref not in relationship_ids:
+                            errors.append(
+                                f"{catalog_id}: unknown governed semantic relationship {ref} in source"
+                            )
+                    elif ref.startswith("V2.1 "):
+                        if ref not in LEGACY_V21_NEIGHBOR_LABELS:
+                            errors.append(f"{catalog_id}: unregistered historical BrAPI v2.1 source label {ref}")
+                    else:
+                        genx_operation_ids = {
+                            item.get("recommendedOperationId")
+                            for item in entries
+                            if item.get("apiGeneration") == "genx-v1"
+                        }
+                        v21_operation_ids = {
+                            item.get("recommendedOperationId")
+                            for item in entries
+                            if item.get("apiGeneration") == "brapi-v2.1"
+                        }
+                        if ref not in genx_operation_ids and ref not in v21_operation_ids:
+                            errors.append(
+                                f"{catalog_id}: dangling source semantic neighbor reference {ref}"
+                            )
+
                 source_operation_neighbors = [
                     value for value in source_neighbors if value not in relationship_ids
                 ]
                 registry_operation_neighbors = [
                     value for value in registry_neighbors if value not in relationship_ids
                 ]
+                # All source-declared relationships, including governed
+                # SEM-/OVERLAP- identifiers, must be mirrored in the registry.
                 missing = [
-                    value for value in source_operation_neighbors
-                    if value not in registry_operation_neighbors
+                    value for value in source_neighbors
+                    if value not in registry_neighbors
                 ]
                 extra = [
                     value for value in registry_operation_neighbors
@@ -236,7 +328,7 @@ def audit(strict: bool, plan_json: bool, report_json: bool = False) -> int:
             "sourceOperationsExamined": examined,
         }, sort_keys=True, separators=(",", ":")))
 
-    if strict and (errors or mismatches or registry_only_neighbors):
+    if strict and (errors or mismatches):
         return 1
     return 0
 
