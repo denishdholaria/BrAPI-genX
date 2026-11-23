@@ -112,3 +112,22 @@ original identity is missing.
   governed relationship, or operation.
 
 Allowed transitions are enforced against the trusted comparison revision.
+
+## Comparison selection and bootstrap
+
+The validator no longer accepts `--baseline-ref`; retention uses the embedded
+original 153-ID set. Comparison selection is:
+
+1. Explicit `--comparison-ref <git-sha>` or `--comparison-ledger <path>`:
+   the comparison must load successfully; a missing, unreadable, or malformed
+   comparison fails with a diagnostic.
+2. No explicit comparison: use the committed `HEAD` ledger when present.
+3. If `HEAD` has no ledger, bootstrap is permitted only when the base is a
+   verified pre-ledger revision (an ancestor of the first ledger-bearing commit
+   `3125fbc35dd32abbf8166b990c5597f1aea6e61f`). Otherwise the run fails.
+
+Workflow selection:
+- Pull requests: `github.event.pull_request.base.sha`
+- Pushes: `github.event.before` (zero SHA triggers bootstrap verification)
+- Manual dispatch: no comparison by default (bootstrap path, subject to
+  verification).

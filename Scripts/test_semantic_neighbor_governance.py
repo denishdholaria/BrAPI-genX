@@ -285,5 +285,55 @@ class SemanticNeighborGovernanceTests(unittest.TestCase):
             self.assertIn("entry_count", output)
 
 
+
+    def test_evidence_null_placeholder_fails(self):
+        with tempfile.TemporaryDirectory() as td:
+            checkout = copy_checkout(Path(td))
+            ledger_path = checkout / LEDGER_REL
+            ledger = yaml.safe_load(ledger_path.read_text())
+            ledger["entries"][0]["reviewStatus"] = "evidence-backed-proposed"
+            ledger["entries"][0]["rationale"] = "r"
+            ledger["entries"][0]["evidence"] = [None]
+            ledger["entries"][0]["reviewedBy"] = "reviewer"
+            ledger["entries"][0]["reviewedAt"] = "2026-01-01"
+            ledger_path.write_text(yaml.safe_dump(ledger, sort_keys=False))
+            code, output = run_validator_output(checkout)
+            self.assertNotEqual(0, code)
+            self.assertIn("evidence entries must be non-empty strings", output)
+
+    def test_whitespace_authorization_fails(self):
+        with tempfile.TemporaryDirectory() as td:
+            checkout = copy_checkout(Path(td))
+            ledger_path = checkout / LEDGER_REL
+            ledger = yaml.safe_load(ledger_path.read_text())
+            ledger["entries"][0]["reviewStatus"] = "rejected"
+            ledger["entries"][0]["rationale"] = "r"
+            ledger["entries"][0]["authorizationReference"] = "   "
+            ledger_path.write_text(yaml.safe_dump(ledger, sort_keys=False))
+            code, output = run_validator_output(checkout)
+            self.assertNotEqual(0, code)
+            self.assertIn("authorizationReference", output)
+
+    def test_self_supersession_fails(self):
+        with tempfile.TemporaryDirectory() as td:
+            checkout = copy_checkout(Path(td))
+            ledger_path = checkout / LEDGER_REL
+            ledger = yaml.safe_load(ledger_path.read_text())
+            rid = ledger["entries"][0]["id"]
+            ledger["entries"][0]["reviewStatus"] = "superseded"
+            ledger["entries"][0]["rationale"] = "r"
+            ledger["entries"][0]["authorizationReference"] = "AUTH-1"
+            ledger["entries"][0]["supersededBy"] = rid
+            ledger_path.write_text(yaml.safe_dump(ledger, sort_keys=False))
+            code, output = run_validator_output(checkout)
+            self.assertNotEqual(0, code)
+            self.assertIn("self-supersession is not allowed", output)
+
+    def test_unreadable_comparison_ref_fails(self):
+        # Use the real repository checkout (has .git) so the ref is resolved.
+        code, output = run_validator_output(ROOT, ["--comparison-ref", "definitely-not-a-ref"])
+        self.assertNotEqual(0, code)
+        self.assertIn("Comparison ledger could not be loaded", output)
+
 if __name__ == "__main__":
     unittest.main()

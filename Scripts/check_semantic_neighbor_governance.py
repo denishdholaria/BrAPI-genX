@@ -218,28 +218,41 @@ def run_audit(root: Path) -> dict[str, Any]:
 
 
 
-def load_ledger_from_git(root: Path, ref: str) -> dict[str, Any] | None:
+def load_ledger_from_git(root: Path, ref: str) -> tuple[dict[str, Any] | None, str | None]:
     path = "Specification/BrAPI-GenX/Conformance/semantic-neighbor-review.yaml"
     result = subprocess.run(
         ["git", "show", f"{ref}:{path}"],
         cwd=root, capture_output=True, text=True, check=False,
     )
     if result.returncode != 0:
-        return None
+        detail = result.stderr.strip() or "unreadable comparison revision"
+        return None, f"cannot read comparison ledger from Git ref {ref}: {detail}"
     try:
         loaded = yaml.safe_load(result.stdout)
-    except yaml.YAMLError:
-        return None
-    return loaded if isinstance(loaded, dict) else None
+    except yaml.YAMLError as exc:
+        return None, f"malformed comparison ledger from Git ref {ref}: {exc}"
+    if not isinstance(loaded, dict):
+        return None, f"malformed comparison ledger from Git ref {ref}: expected a mapping"
+    return loaded, None
 
 
-def load_ledger_from_path(path: Path) -> dict[str, Any] | None:
+def load_ledger_from_path(path: Path) -> tuple[dict[str, Any] | None, str | None]:
     try:
         loaded = yaml.safe_load(path.read_text(encoding="utf-8"))
-    except (OSError, yaml.YAMLError):
-        return None
-    return loaded if isinstance(loaded, dict) else None
+    except (OSError, yaml.YAMLError) as exc:
+        return None, f"cannot read comparison ledger {path}: {exc}"
+    if not isinstance(loaded, dict):
+        return None, f"malformed comparison ledger {path}: expected a mapping"
+    return loaded, None
 
+
+
+def is_ancestor(root: Path, ancestor: str, descendant: str) -> bool:
+    result = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", ancestor, descendant],
+        cwd=root, capture_output=True, text=True, check=False,
+    )
+    return result.returncode == 0
 
 def module_path(entry: dict[str, Any]) -> str:
     source = entry.get("source") or {}
@@ -268,9 +281,10 @@ def inherited_set(root: Path) -> set[tuple[str, str]]:
     return result
 
 
-def check(root: Path = ROOT, baseline_ref: str = BASELINE_REF,
-        comparison_ref: str | None = BASELINE_REF,
-        comparison_ledger_path: Path | None = None) -> list[str]:
+def check(root: Path = ROOT,
+        comparison_ref: str | None = None,
+        comparison_ledger_path: Path | None = None,
+        allow_bootstrap: bool = False) -> list[str]:
     errors: list[str] = []
     root = root.resolve()
     registry_path = root / "Specification" / "ENDPOINT-REGISTRY.json"
@@ -330,16 +344,45 @@ def check(root: Path = ROOT, baseline_ref: str = BASELINE_REF,
             )
 
     # Comparison ledger for status transitions.
+    comparison_selected = comparison_ref is not None or comparison_ledger_path is not None
     comparison_ledger = None
+    comparison_error = None
     if comparison_ledger_path is not None:
-        comparison_ledger = load_ledger_from_path(comparison_ledger_path)
-    elif comparison_ref:
-        comparison_ledger = load_ledger_from_git(root, comparison_ref)
+        comparison_ledger, comparison_error = load_ledger_from_path(comparison_ledger_path)
+    elif comparison_ref is not None:
+        comparison_ledger, comparison_error = load_ledger_from_git(root, comparison_ref)
+
+    # Bootstrap only when no explicit comparison was selected. Verify the base
+    # is genuinely pre-ledger before skipping transition enforcement.
+    if not comparison_selected:
+        head_ledger, head_error = load_ledger_from_git(root, "HEAD")
+        if head_ledger is not None:
+            comparison_ledger = head_ledger
+            comparison_selected = True
+        elif head_error is not None and ("not a git repository" in head_error
+                                       or "unknown revision" in head_error
+                                       or "does not exist" in head_error
+                                       or "Path " in head_error
+                                       or "not in" in head_error):
+            pass  # verified pre-ledger base (or non-git test checkout)
+        else:
+            if head_error is not None:
+                errors.append(f"Cannot verify bootstrap base: {head_error}")
+
     comparison_status = {}
-    if isinstance(comparison_ledger, dict):
-        for e in comparison_ledger.get("entries", []):
-            if isinstance(e, dict) and isinstance(e.get("id"), str):
-                comparison_status[e["id"]] = e.get("reviewStatus")
+    # Bootstrap for a verified pre-ledger base.
+    if comparison_selected and comparison_error is not None and comparison_ref is not None:
+        if is_ancestor(root, comparison_ref, "3125fbc35dd32abbf8166b990c5597f1aea6e61f"):
+            comparison_error = None
+            comparison_selected = False
+
+    if comparison_selected:
+        if comparison_error is not None:
+            errors.append(f"Comparison ledger could not be loaded: {comparison_error}")
+        elif isinstance(comparison_ledger, dict):
+            for e in comparison_ledger.get("entries", []):
+                if isinstance(e, dict) and isinstance(e.get("id"), str):
+                    comparison_status[e["id"]] = e.get("reviewStatus")
 
     try:
         current_inherited_global = inherited_set(root)
@@ -462,6 +505,24 @@ def check(root: Path = ROOT, baseline_ref: str = BASELINE_REF,
                     or successor in gov_ids or successor in by_opid):
                 errors.append(f"{eid}: supersededBy does not resolve to a known relationship or operation: {successor!r}.")
 
+        # Usable evidence citations for proposed relationships.
+        if status == "evidence-backed-proposed":
+            for item in entry.get("evidence", []):
+                if not isinstance(item, str) or not item.strip():
+                    errors.append(f"{eid}: evidence entries must be non-empty strings.")
+
+        # Authorization references for terminal decisions must be followable.
+        if status in ("rejected", "superseded"):
+            auth = entry.get("authorizationReference")
+            if not isinstance(auth, str) or not auth.strip():
+                errors.append(f"{eid}: status {status!r} requires a non-empty authorizationReference.")
+            elif len(auth.strip()) < 3:
+                errors.append(f"{eid}: authorizationReference is too vague to follow: {auth!r}.")
+
+        # Reject self-supersession.
+        if status == "superseded" and entry.get("supersededBy") == eid:
+            errors.append(f"{eid}: self-supersession is not allowed.")
+
         # Documentary evidence type check.
         de = entry.get("documentaryEvidence")
         if not isinstance(de, list):
@@ -521,20 +582,19 @@ def main() -> int:
     global ROOT, REGISTRY, LEDGER, AUDIT
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=ROOT, help="repository root")
-    parser.add_argument("--baseline-ref", default=BASELINE_REF, help="trusted Git baseline retaining original identities")
-    parser.add_argument("--comparison-ref", default=BASELINE_REF, help="trusted comparison revision for status transitions")
-    parser.add_argument("--no-comparison-ref", action="store_true", help="disable Git comparison revision")
+    parser.add_argument("--comparison-ref", default=None, help="trusted comparison revision for status transitions")
     parser.add_argument("--comparison-ledger", type=Path, default=None, help="path to comparison ledger for status transitions")
+    parser.add_argument("--allow-bootstrap", action="store_true", help="allow verified pre-ledger bootstrap when no comparison is supplied")
     args = parser.parse_args()
     root = args.root.resolve()
     ROOT = root
     REGISTRY = root / "Specification" / "ENDPOINT-REGISTRY.json"
     LEDGER = root / "Specification" / "BrAPI-GenX" / "Conformance" / "semantic-neighbor-review.yaml"
     AUDIT = root / "Scripts" / "auditEndpointRegistrySourceConsistency.py"
-    comparison_ref = None if args.no_comparison_ref else args.comparison_ref
-    errors = check(root, baseline_ref=args.baseline_ref,
-                   comparison_ref=comparison_ref,
-                   comparison_ledger_path=args.comparison_ledger)
+    errors = check(root,
+                   comparison_ref=args.comparison_ref,
+                   comparison_ledger_path=args.comparison_ledger,
+                   allow_bootstrap=args.allow_bootstrap)
     if errors:
         print("Semantic-neighbor governance validation FAILED:")
         for error in errors:

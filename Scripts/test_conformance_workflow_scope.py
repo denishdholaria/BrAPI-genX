@@ -33,6 +33,7 @@ REQUIRED_COMMANDS = {
     "python Scripts/auditEndpointRegistrySourceConsistency.py --strict",
     "python Scripts/test_registry_source_consistency.py",
     "python Scripts/check_semantic_neighbor_governance.py",
+    "python Scripts/check_semantic_neighbor_governance.py --comparison-ref",
     "python Scripts/test_semantic_neighbor_governance.py",
     "python Scripts/generateEndpointArtifacts.py --check",
 }

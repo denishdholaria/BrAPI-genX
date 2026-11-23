@@ -161,7 +161,13 @@ jobs:
       - name: Test registry/source drift regression behavior
         run: python Scripts/test_registry_drift_regression.py
       - name: Validate semantic-neighbor governance ledger
-        run: python Scripts/check_semantic_neighbor_governance.py
+        run: |
+          COMPARE="${{ github.event.pull_request.base.sha || github.event.before }}"
+          if [ "$COMPARE" = "0000000000000000000000000000000000000000" ]; then
+            python Scripts/check_semantic_neighbor_governance.py
+          else
+            python Scripts/check_semantic_neighbor_governance.py --comparison-ref "$COMPARE"
+          fi
       - name: Test semantic-neighbor governance mutations
         run: python Scripts/test_semantic_neighbor_governance.py
       - name: Enforce no new registry/source descriptive drift
