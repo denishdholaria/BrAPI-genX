@@ -7,6 +7,10 @@ import tempfile
 import unittest
 from pathlib import Path
 
+import yaml
+
+ROOT = Path(__file__).resolve().parents[1]
+
 from specification_structure import generated_link_errors, module_errors, registry_source_errors
 
 
@@ -103,6 +107,12 @@ class StructureTests(unittest.TestCase):
         classification = {"modules": [{"path": "Breeding/BreedingPipeline/"}]}
         errors = module_errors(self.root, classification)
         self.assertTrue(any("missing GroupDescription.md" in x for x in errors), errors)
+
+    def test_real_repository_structure_passes(self):
+        classification = yaml.safe_load(
+            (ROOT / "Specification/BrAPI-GenX/Conformance/domain-classification.yaml").read_text(encoding="utf-8")
+        )
+        self.assertEqual([], module_errors(ROOT, classification))
 
 if __name__ == "__main__":
     unittest.main()
