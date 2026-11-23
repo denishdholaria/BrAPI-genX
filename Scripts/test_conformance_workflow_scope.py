@@ -22,6 +22,8 @@ REQUIRED_PATHS = {
     "Scripts/test_conformance_workflow_scope.py",
     "Scripts/auditEndpointRegistrySourceConsistency.py",
     "Scripts/test_registry_source_consistency.py",
+    "Scripts/check_semantic_neighbor_governance.py",
+    "Scripts/test_semantic_neighbor_governance.py",
 }
 REQUIRED_COMMANDS = {
     "python Scripts/specification_structure.py",
@@ -30,6 +32,9 @@ REQUIRED_COMMANDS = {
     "python Scripts/checkEndpointRegistry.py",
     "python Scripts/auditEndpointRegistrySourceConsistency.py --strict",
     "python Scripts/test_registry_source_consistency.py",
+    "python Scripts/check_semantic_neighbor_governance.py",
+    "python Scripts/check_semantic_neighbor_governance.py --comparison-ref",
+    "python Scripts/test_semantic_neighbor_governance.py",
     "python Scripts/generateEndpointArtifacts.py --check",
 }
 

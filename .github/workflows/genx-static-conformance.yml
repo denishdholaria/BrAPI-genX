@@ -32,6 +32,8 @@ on:
       - 'Scripts/check_registry_drift_regression.py'
       - 'Scripts/test_registry_drift_regression.py'
       - 'Scripts/test_registry_source_consistency.py'
+      - 'Scripts/check_semantic_neighbor_governance.py'
+      - 'Scripts/test_semantic_neighbor_governance.py'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-DECISIONS-APPROVED.md'
@@ -68,12 +70,19 @@ on:
       - 'Scripts/check_registry_drift_regression.py'
       - 'Scripts/test_registry_drift_regression.py'
       - 'Scripts/test_registry_source_consistency.py'
+      - 'Scripts/check_semantic_neighbor_governance.py'
+      - 'Scripts/test_semantic_neighbor_governance.py'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-DECISIONS-APPROVED.md'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-OPEN-DECISIONS.md'
       - '.github/workflows/genx-static-conformance.yml'
   workflow_dispatch:
+    inputs:
+      comparison_sha:
+        description: 'Comparison commit SHA (required for manual dispatch)'
+        required: true
+        type: string
 
 concurrency:
   group: genx-conformance-${{ github.ref }}
@@ -156,6 +165,29 @@ jobs:
         run: python Scripts/test_registry_source_consistency.py
       - name: Test registry/source drift regression behavior
         run: python Scripts/test_registry_drift_regression.py
+      - name: Validate semantic-neighbor governance ledger
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            COMPARE="${{ github.event.pull_request.base.sha }}"
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            COMPARE="${{ github.event.inputs.comparison_sha }}"
+          else
+            COMPARE="${{ github.event.before }}"
+          fi
+          if [ -z "$COMPARE" ]; then
+            echo "comparison SHA is required" >&2
+            exit 1
+          fi
+          if [ "$COMPARE" = "0000000000000000000000000000000000000000" ]; then
+            COMPARE="$(git merge-base HEAD origin/main 2>/dev/null || true)"
+          fi
+          if [ -z "$COMPARE" ]; then
+            python Scripts/check_semantic_neighbor_governance.py
+          else
+            python Scripts/check_semantic_neighbor_governance.py --comparison-ref "$COMPARE"
+          fi
+      - name: Test semantic-neighbor governance mutations
+        run: python Scripts/test_semantic_neighbor_governance.py
       - name: Enforce no new registry/source descriptive drift
         run: python Scripts/check_registry_drift_regression.py
       - name: Verify generated endpoint catalogue and crosswalk
@@ -189,6 +221,8 @@ jobs:
             run_check python Scripts/auditEndpointRegistrySourceConsistency.py --strict
             run_check python Scripts/test_registry_source_consistency.py
             run_check python Scripts/test_registry_drift_regression.py
+            run_check python Scripts/check_semantic_neighbor_governance.py
+            run_check python Scripts/test_semantic_neighbor_governance.py
             run_check python Scripts/check_registry_drift_regression.py
             run_check python Scripts/generateEndpointArtifacts.py --check
           } | tee "$RUNNER_TEMP/genx-static-diagnostics.log"

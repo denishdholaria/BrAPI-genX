@@ -1,0 +1,3598 @@
+schema_version: 1.0.0
+title: BrAPI-GenX semantic-neighbor review inventory
+status: proposed-non-normative
+owner: BrAPI-GenX conformance and governance
+authority: docs/governance/BRAPI-GENX-PROJECT-DECISION-AUTHORITY.md
+scope: Operation-level registry-only semantic-neighbor references reported by Scripts/auditEndpointRegistrySourceConsistency.py.
+  This ledger governs review status only; it does not alter endpoint contracts or declare scientific equivalence.
+generated_from:
+  registry: Specification/ENDPOINT-REGISTRY.json
+  audit_script: Scripts/auditEndpointRegistrySourceConsistency.py
+  baseline_registry_only_count: 153
+allowed_statuses:
+- inherited-unreviewed
+- evidence-backed-proposed
+- requires-decision
+- rejected
+- superseded
+status_meanings:
+  inherited-unreviewed: Inherited registry-only reference awaiting semantic review. Not approved and not rejected.
+  evidence-backed-proposed: A safe mapping or relationship is proposed with traceable evidence. Still requires maintainer/architect
+    review before acceptance.
+  requires-decision: Requires an explicit architectural or scientific decision before progress.
+  rejected: Independently authorized rejection of the relationship. Requires rationale.
+  superseded: Superseded by another governed relationship or decision. Requires rationale and successor reference.
+allowed_provenance:
+- inherited-registry-only
+- source-openapi-declared
+- registry-and-source
+- documented-mapping
+- manual-review
+allowed_boundaries:
+- within-module
+- cross-module
+- cross-domain
+allowed_transitions:
+  inherited-unreviewed:
+  - evidence-backed-proposed
+  - requires-decision
+  - rejected
+  - superseded
+  evidence-backed-proposed:
+  - requires-decision
+  - rejected
+  - superseded
+  requires-decision:
+  - evidence-backed-proposed
+  - rejected
+  - superseded
+  rejected:
+  - superseded
+  superseded: []
+required_evidence_for_statuses:
+  evidence-backed-proposed:
+  - rationale
+  - evidence
+  - reviewedBy
+  - reviewedAt
+  requires-decision:
+  - rationale
+  - openQuestion
+  rejected:
+  - rationale
+  superseded:
+  - rationale
+  - supersededBy
+entry_count: 153
+entries:
+- id: brapi-genx.genx.v1.artifact-catalogues.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.artifact-catalogues.get
+  sourceOperationId: genxGetArtifactCatalogue
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: ArtifactCatalogue
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-118
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: ArtifactCatalogue -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.artifact-catalogues.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.artifact-catalogues.list
+  sourceOperationId: genxListArtifactCatalogues
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: ArtifactCatalogue
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-118
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: ArtifactCatalogue -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.artifact-catalogues.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.artifact-catalogues.record
+  sourceOperationId: genxRegisterArtifactCatalogue
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: ArtifactCatalogue
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-118
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: ArtifactCatalogue -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.assay-executions.get -> genxRecordAssayDesign
+  sourceCatalogId: brapi-genx.genx.v1.assay-executions.get
+  sourceOperationId: genxGetAssayExecution
+  targetOperationId: genxRecordAssayDesign
+  targetCatalogId: brapi-genx.genx.v1.assay-designs.record
+  sourceModule: AssayExecution
+  targetModule: AssayDesign
+  sourceDomainClass: D3
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-061
+  - RFC-113
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: AssayExecution -> AssayDesign.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.assay-executions.list -> genxRecordAssayDesign
+  sourceCatalogId: brapi-genx.genx.v1.assay-executions.list
+  sourceOperationId: genxListAssayExecutions
+  targetOperationId: genxRecordAssayDesign
+  targetCatalogId: brapi-genx.genx.v1.assay-designs.record
+  sourceModule: AssayExecution
+  targetModule: AssayDesign
+  sourceDomainClass: D3
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-061
+  - RFC-113
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: AssayExecution -> AssayDesign.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.assay-executions.record -> genxRecordAssayDesign
+  sourceCatalogId: brapi-genx.genx.v1.assay-executions.record
+  sourceOperationId: genxRegisterAssayExecution
+  targetOperationId: genxRecordAssayDesign
+  targetCatalogId: brapi-genx.genx.v1.assay-designs.record
+  sourceModule: AssayExecution
+  targetModule: AssayDesign
+  sourceDomainClass: D3
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-061
+  - RFC-113
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: AssayExecution -> AssayDesign.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.biodiversity-exports.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.biodiversity-exports.get
+  sourceOperationId: genxGetBiodiversityExport
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: BiodiversityExport
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-121
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: BiodiversityExport -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.biodiversity-exports.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.biodiversity-exports.list
+  sourceOperationId: genxListBiodiversityExports
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: BiodiversityExport
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-121
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: BiodiversityExport -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.biodiversity-exports.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.biodiversity-exports.record
+  sourceOperationId: genxRegisterBiodiversityExport
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: BiodiversityExport
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-121
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: BiodiversityExport -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.calibration-qualities.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.calibration-qualities.get
+  sourceOperationId: genxGetCalibrationQuality
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: CalibrationQuality
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-150
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: CalibrationQuality -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.calibration-qualities.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.calibration-qualities.list
+  sourceOperationId: genxListCalibrationQualitys
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: CalibrationQuality
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-150
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: CalibrationQuality -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.calibration-qualities.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.calibration-qualities.record
+  sourceOperationId: genxRegisterCalibrationQuality
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: CalibrationQuality
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-150
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: CalibrationQuality -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.capability-negotiations.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.capability-negotiations.get
+  sourceOperationId: genxGetCapabilityNegotiation
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: CapabilityNegotiation
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-153
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: CapabilityNegotiation -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.capability-negotiations.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.capability-negotiations.list
+  sourceOperationId: genxListCapabilityNegotiations
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: CapabilityNegotiation
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-153
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: CapabilityNegotiation -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.capability-negotiations.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.capability-negotiations.record
+  sourceOperationId: genxRegisterCapabilityNegotiation
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: CapabilityNegotiation
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-153
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: CapabilityNegotiation -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.capture-workflows.get -> genxPublishVariableTermVersion
+  sourceCatalogId: brapi-genx.genx.v1.capture-workflows.get
+  sourceOperationId: genxGetCaptureWorkflow
+  targetOperationId: genxPublishVariableTermVersion
+  targetCatalogId: brapi-genx.genx.v1.variable-terms.publish-version
+  sourceModule: CaptureWorkflow
+  targetModule: VariableTerms
+  sourceDomainClass: D4
+  targetDomainClass: null
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - A-03
+  - RFC-002
+  - RFC-110
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: CaptureWorkflow -> VariableTerms.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.capture-workflows.list -> genxPublishVariableTermVersion
+  sourceCatalogId: brapi-genx.genx.v1.capture-workflows.list
+  sourceOperationId: genxListCaptureWorkflows
+  targetOperationId: genxPublishVariableTermVersion
+  targetCatalogId: brapi-genx.genx.v1.variable-terms.publish-version
+  sourceModule: CaptureWorkflow
+  targetModule: VariableTerms
+  sourceDomainClass: D4
+  targetDomainClass: null
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - A-03
+  - RFC-002
+  - RFC-110
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: CaptureWorkflow -> VariableTerms.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.capture-workflows.record -> genxPublishVariableTermVersion
+  sourceCatalogId: brapi-genx.genx.v1.capture-workflows.record
+  sourceOperationId: genxRegisterCaptureWorkflow
+  targetOperationId: genxPublishVariableTermVersion
+  targetCatalogId: brapi-genx.genx.v1.variable-terms.publish-version
+  sourceModule: CaptureWorkflow
+  targetModule: VariableTerms
+  sourceDomainClass: D4
+  targetDomainClass: null
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - A-03
+  - RFC-002
+  - RFC-110
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: CaptureWorkflow -> VariableTerms.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.cloud-masks.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.cloud-masks.get
+  sourceOperationId: genxGetCloudMask
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: CloudMask
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-147
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: CloudMask -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.cloud-masks.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.cloud-masks.list
+  sourceOperationId: genxListCloudMasks
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: CloudMask
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-147
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: CloudMask -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.cloud-masks.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.cloud-masks.record
+  sourceOperationId: genxRegisterCloudMask
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: CloudMask
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-147
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: CloudMask -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.conformance-probes.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.conformance-probes.get
+  sourceOperationId: genxGetConformanceProbe
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: ConformanceProbe
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-155
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: ConformanceProbe -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.conformance-probes.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.conformance-probes.list
+  sourceOperationId: genxListConformanceProbes
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: ConformanceProbe
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-155
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: ConformanceProbe -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.conformance-probes.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.conformance-probes.record
+  sourceOperationId: genxRegisterConformanceProbe
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: ConformanceProbe
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-155
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: ConformanceProbe -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.crop-health-images.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.crop-health-images.get
+  sourceOperationId: genxGetCropHealthImage
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: CropHealthImage
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-128
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: CropHealthImage -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.crop-health-images.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.crop-health-images.list
+  sourceOperationId: genxListCropHealthImages
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: CropHealthImage
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-128
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: CropHealthImage -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.crop-health-images.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.crop-health-images.record
+  sourceOperationId: genxRegisterCropHealthImage
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: CropHealthImage
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-128
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: CropHealthImage -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.crop-recommendations.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.crop-recommendations.get
+  sourceOperationId: genxGetCropRecommendation
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: CropRecommendation
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-129
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: CropRecommendation -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.crop-recommendations.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.crop-recommendations.list
+  sourceOperationId: genxListCropRecommendations
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: CropRecommendation
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-129
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: CropRecommendation -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.crop-recommendations.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.crop-recommendations.record
+  sourceOperationId: genxRegisterCropRecommendation
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: CropRecommendation
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-129
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: CropRecommendation -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.crop-suitabilities.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.crop-suitabilities.get
+  sourceOperationId: genxGetCropSuitability
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: CropSuitability
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-135
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: CropSuitability -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.crop-suitabilities.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.crop-suitabilities.list
+  sourceOperationId: genxListCropSuitabilities
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: CropSuitability
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-135
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: CropSuitability -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.crop-suitabilities.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.crop-suitabilities.record
+  sourceOperationId: genxRegisterCropSuitability
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: CropSuitability
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-135
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: CropSuitability -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.crs-transforms.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.crs-transforms.get
+  sourceOperationId: genxGetCrsTransform
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: CrsTransform
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-140
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: CrsTransform -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.crs-transforms.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.crs-transforms.list
+  sourceOperationId: genxListCrsTransforms
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: CrsTransform
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-140
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: CrsTransform -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.crs-transforms.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.crs-transforms.record
+  sourceOperationId: genxRegisterCrsTransform
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: CrsTransform
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-140
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: CrsTransform -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.diagnostic-evidences.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.diagnostic-evidences.get
+  sourceOperationId: genxGetDiagnosticEvidence
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: DiagnosticEvidence
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-124
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: DiagnosticEvidence -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.diagnostic-evidences.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.diagnostic-evidences.list
+  sourceOperationId: genxListDiagnosticEvidences
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: DiagnosticEvidence
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-124
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: DiagnosticEvidence -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.diagnostic-evidences.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.diagnostic-evidences.record
+  sourceOperationId: genxRegisterDiagnosticEvidence
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: DiagnosticEvidence
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-124
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: DiagnosticEvidence -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.disease-observations.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.disease-observations.get
+  sourceOperationId: genxGetDiseaseObservation
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: DiseaseObservation
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-123
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: DiseaseObservation -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.disease-observations.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.disease-observations.list
+  sourceOperationId: genxListDiseaseObservations
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: DiseaseObservation
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-123
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: DiseaseObservation -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.disease-observations.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.disease-observations.record
+  sourceOperationId: genxRegisterDiseaseObservation
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: DiseaseObservation
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-123
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: DiseaseObservation -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.disease-resistances.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.disease-resistances.get
+  sourceOperationId: genxGetDiseaseResistance
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: DiseaseResistance
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-127
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: DiseaseResistance -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.disease-resistances.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.disease-resistances.list
+  sourceOperationId: genxListDiseaseResistances
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: DiseaseResistance
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-127
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: DiseaseResistance -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.disease-resistances.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.disease-resistances.record
+  sourceOperationId: genxRegisterDiseaseResistance
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: DiseaseResistance
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-127
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: DiseaseResistance -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.edge-gateway-healths.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.edge-gateway-healths.get
+  sourceOperationId: genxGetEdgeGatewayHealth
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: EdgeGatewayHealth
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-151
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: EdgeGatewayHealth -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.edge-gateway-healths.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.edge-gateway-healths.list
+  sourceOperationId: genxListEdgeGatewayHealths
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: EdgeGatewayHealth
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-151
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: EdgeGatewayHealth -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.edge-gateway-healths.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.edge-gateway-healths.record
+  sourceOperationId: genxRegisterEdgeGatewayHealth
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: EdgeGatewayHealth
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-151
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: EdgeGatewayHealth -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.evidence-packs.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.evidence-packs.get
+  sourceOperationId: genxGetEvidencePack
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: EvidencePack
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-122
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: EvidencePack -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.evidence-packs.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.evidence-packs.list
+  sourceOperationId: genxListEvidencePacks
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: EvidencePack
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-122
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: EvidencePack -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.evidence-packs.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.evidence-packs.record
+  sourceOperationId: genxRegisterEvidencePack
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: EvidencePack
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-122
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: EvidencePack -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.experimental-protocols.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.experimental-protocols.get
+  sourceOperationId: genxGetExperimentalProtocol
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: ExperimentalProtocol
+  targetModule: GenomicDatasets
+  sourceDomainClass: D2
+  targetDomainClass: D3
+  boundary: cross-domain
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: true
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-117
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses scientific domain classes: D2 -> D3.'
+  - 'Crosses GenX modules: ExperimentalProtocol -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.experimental-protocols.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.experimental-protocols.list
+  sourceOperationId: genxListExperimentalProtocols
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: ExperimentalProtocol
+  targetModule: GenomicDatasets
+  sourceDomainClass: D2
+  targetDomainClass: D3
+  boundary: cross-domain
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: true
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-117
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses scientific domain classes: D2 -> D3.'
+  - 'Crosses GenX modules: ExperimentalProtocol -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.experimental-protocols.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.experimental-protocols.record
+  sourceOperationId: genxRegisterExperimentalProtocol
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: ExperimentalProtocol
+  targetModule: GenomicDatasets
+  sourceDomainClass: D2
+  targetDomainClass: D3
+  boundary: cross-domain
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: true
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-117
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses scientific domain classes: D2 -> D3.'
+  - 'Crosses GenX modules: ExperimentalProtocol -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.explanation-evidences.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.explanation-evidences.get
+  sourceOperationId: genxGetExplanationEvidence
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: ExplanationEvidence
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-137
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: ExplanationEvidence -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.explanation-evidences.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.explanation-evidences.list
+  sourceOperationId: genxListExplanationEvidences
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: ExplanationEvidence
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-137
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: ExplanationEvidence -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.explanation-evidences.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.explanation-evidences.record
+  sourceOperationId: genxRegisterExplanationEvidence
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: ExplanationEvidence
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-137
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: ExplanationEvidence -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.farms.get -> genxRegisterCropCycle
+  sourceCatalogId: brapi-genx.genx.v1.farms.get
+  sourceOperationId: genxGetFarm
+  targetOperationId: genxRegisterCropCycle
+  targetCatalogId: brapi-genx.genx.v1.crop-cycles.register
+  sourceModule: Farm
+  targetModule: CropCycle
+  sourceDomainClass: D6
+  targetDomainClass: D6
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-029
+  - RFC-069
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: Farm -> CropCycle.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.farms.list -> genxRegisterCropCycle
+  sourceCatalogId: brapi-genx.genx.v1.farms.list
+  sourceOperationId: genxListFarms
+  targetOperationId: genxRegisterCropCycle
+  targetCatalogId: brapi-genx.genx.v1.crop-cycles.register
+  sourceModule: Farm
+  targetModule: CropCycle
+  sourceDomainClass: D6
+  targetDomainClass: D6
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-029
+  - RFC-069
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: Farm -> CropCycle.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.farms.register -> genxRegisterCropCycle
+  sourceCatalogId: brapi-genx.genx.v1.farms.register
+  sourceOperationId: genxRegisterFarm
+  targetOperationId: genxRegisterCropCycle
+  targetCatalogId: brapi-genx.genx.v1.crop-cycles.register
+  sourceModule: Farm
+  targetModule: CropCycle
+  sourceDomainClass: D6
+  targetDomainClass: D6
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-029
+  - RFC-069
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: Farm -> CropCycle.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.field-books.get -> genxRegisterFieldScouting
+  sourceCatalogId: brapi-genx.genx.v1.field-books.get
+  sourceOperationId: genxGetFieldBook
+  targetOperationId: genxRegisterFieldScouting
+  targetCatalogId: brapi-genx.genx.v1.field-scouting.record
+  sourceModule: FieldBook
+  targetModule: FieldScouting
+  sourceDomainClass: D6
+  targetDomainClass: D6
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-074
+  - RFC-108
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: FieldBook -> FieldScouting.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.field-books.list -> genxRegisterFieldScouting
+  sourceCatalogId: brapi-genx.genx.v1.field-books.list
+  sourceOperationId: genxListFieldBooks
+  targetOperationId: genxRegisterFieldScouting
+  targetCatalogId: brapi-genx.genx.v1.field-scouting.record
+  sourceModule: FieldBook
+  targetModule: FieldScouting
+  sourceDomainClass: D6
+  targetDomainClass: D6
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-074
+  - RFC-108
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: FieldBook -> FieldScouting.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.field-books.record -> genxRegisterFieldScouting
+  sourceCatalogId: brapi-genx.genx.v1.field-books.record
+  sourceOperationId: genxRegisterFieldBook
+  targetOperationId: genxRegisterFieldScouting
+  targetCatalogId: brapi-genx.genx.v1.field-scouting.record
+  sourceModule: FieldBook
+  targetModule: FieldScouting
+  sourceDomainClass: D6
+  targetDomainClass: D6
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-074
+  - RFC-108
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: FieldBook -> FieldScouting.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.field-geometries.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.field-geometries.get
+  sourceOperationId: genxGetFieldGeometry
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: FieldGeometry
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-142
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: FieldGeometry -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.field-geometries.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.field-geometries.list
+  sourceOperationId: genxListFieldGeometries
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: FieldGeometry
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-142
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: FieldGeometry -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.field-geometries.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.field-geometries.record
+  sourceOperationId: genxRegisterFieldGeometry
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: FieldGeometry
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-142
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: FieldGeometry -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.human-reviews.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.human-reviews.get
+  sourceOperationId: genxGetHumanReview
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: HumanReview
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-136
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: HumanReview -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.human-reviews.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.human-reviews.list
+  sourceOperationId: genxListHumanReviews
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: HumanReview
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-136
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: HumanReview -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.human-reviews.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.human-reviews.record
+  sourceOperationId: genxRegisterHumanReview
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: HumanReview
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-136
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: HumanReview -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.ipm-strategies.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.ipm-strategies.get
+  sourceOperationId: genxGetIpmStrategy
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: IpmStrategy
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-125
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: IpmStrategy -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.ipm-strategies.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.ipm-strategies.list
+  sourceOperationId: genxListIpmStrategies
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: IpmStrategy
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-125
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: IpmStrategy -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.ipm-strategies.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.ipm-strategies.record
+  sourceOperationId: genxRegisterIpmStrategy
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: IpmStrategy
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-125
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: IpmStrategy -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.irrigation-advices.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.irrigation-advices.get
+  sourceOperationId: genxGetIrrigationAdvice
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: IrrigationAdvice
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-131
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: IrrigationAdvice -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.irrigation-advices.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.irrigation-advices.list
+  sourceOperationId: genxListIrrigationAdvices
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: IrrigationAdvice
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-131
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: IrrigationAdvice -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.irrigation-advices.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.irrigation-advices.record
+  sourceOperationId: genxRegisterIrrigationAdvice
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: IrrigationAdvice
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-131
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: IrrigationAdvice -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.local-constraints.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.local-constraints.get
+  sourceOperationId: genxGetLocalConstraint
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: LocalConstraint
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-139
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: LocalConstraint -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.local-constraints.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.local-constraints.list
+  sourceOperationId: genxListLocalConstraints
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: LocalConstraint
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-139
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: LocalConstraint -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.local-constraints.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.local-constraints.record
+  sourceOperationId: genxRegisterLocalConstraint
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: LocalConstraint
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-139
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: LocalConstraint -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.nutrient-advices.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.nutrient-advices.get
+  sourceOperationId: genxGetNutrientAdvice
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: NutrientAdvice
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-132
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: NutrientAdvice -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.nutrient-advices.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.nutrient-advices.list
+  sourceOperationId: genxListNutrientAdvices
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: NutrientAdvice
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-132
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: NutrientAdvice -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.nutrient-advices.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.nutrient-advices.record
+  sourceOperationId: genxRegisterNutrientAdvice
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: NutrientAdvice
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-132
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: NutrientAdvice -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.outcome-feedbacks.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.outcome-feedbacks.get
+  sourceOperationId: genxGetOutcomeFeedback
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: OutcomeFeedback
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-138
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: OutcomeFeedback -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.outcome-feedbacks.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.outcome-feedbacks.list
+  sourceOperationId: genxListOutcomeFeedbacks
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: OutcomeFeedback
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-138
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: OutcomeFeedback -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.outcome-feedbacks.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.outcome-feedbacks.record
+  sourceOperationId: genxRegisterOutcomeFeedback
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: OutcomeFeedback
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-138
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: OutcomeFeedback -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.pest-disease-risks.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.pest-disease-risks.get
+  sourceOperationId: genxGetPestDiseaseRisk
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: PestDiseaseRisk
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-133
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: PestDiseaseRisk -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.pest-disease-risks.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.pest-disease-risks.list
+  sourceOperationId: genxListPestDiseaseRisks
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: PestDiseaseRisk
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-133
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: PestDiseaseRisk -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.pest-disease-risks.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.pest-disease-risks.record
+  sourceOperationId: genxRegisterPestDiseaseRisk
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: PestDiseaseRisk
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-133
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: PestDiseaseRisk -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.pipeline-provenances.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.pipeline-provenances.get
+  sourceOperationId: genxGetPipelineProvenance
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: PipelineProvenance
+  targetModule: GenomicDatasets
+  sourceDomainClass: D3
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-116
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: PipelineProvenance -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.pipeline-provenances.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.pipeline-provenances.list
+  sourceOperationId: genxListPipelineProvenances
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: PipelineProvenance
+  targetModule: GenomicDatasets
+  sourceDomainClass: D3
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-116
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: PipelineProvenance -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.pipeline-provenances.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.pipeline-provenances.record
+  sourceOperationId: genxRegisterPipelineProvenance
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: PipelineProvenance
+  targetModule: GenomicDatasets
+  sourceDomainClass: D3
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-116
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: PipelineProvenance -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.plots.get -> genxRegisterFieldScouting
+  sourceCatalogId: brapi-genx.genx.v1.plots.get
+  sourceOperationId: genxGetPlot
+  targetOperationId: genxRegisterFieldScouting
+  targetCatalogId: brapi-genx.genx.v1.field-scouting.record
+  sourceModule: Plot
+  targetModule: FieldScouting
+  sourceDomainClass: D6
+  targetDomainClass: D6
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-074
+  - RFC-107
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: Plot -> FieldScouting.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.plots.list -> genxRegisterFieldScouting
+  sourceCatalogId: brapi-genx.genx.v1.plots.list
+  sourceOperationId: genxListPlots
+  targetOperationId: genxRegisterFieldScouting
+  targetCatalogId: brapi-genx.genx.v1.field-scouting.record
+  sourceModule: Plot
+  targetModule: FieldScouting
+  sourceDomainClass: D6
+  targetDomainClass: D6
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-074
+  - RFC-107
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: Plot -> FieldScouting.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.plots.record -> genxRegisterFieldScouting
+  sourceCatalogId: brapi-genx.genx.v1.plots.record
+  sourceOperationId: genxRegisterPlot
+  targetOperationId: genxRegisterFieldScouting
+  targetCatalogId: brapi-genx.genx.v1.field-scouting.record
+  sourceModule: Plot
+  targetModule: FieldScouting
+  sourceDomainClass: D6
+  targetDomainClass: D6
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-074
+  - RFC-107
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: Plot -> FieldScouting.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.protocol-libraries.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.protocol-libraries.get
+  sourceOperationId: genxGetProtocolLibrary
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: ProtocolLibrary
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-119
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: ProtocolLibrary -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.protocol-libraries.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.protocol-libraries.list
+  sourceOperationId: genxListProtocolLibraries
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: ProtocolLibrary
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-119
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: ProtocolLibrary -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.protocol-libraries.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.protocol-libraries.record
+  sourceOperationId: genxRegisterProtocolLibrary
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: ProtocolLibrary
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-119
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: ProtocolLibrary -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.publication-reviews.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.publication-reviews.get
+  sourceOperationId: genxGetPublicationReview
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: PublicationReview
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-120
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: PublicationReview -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.publication-reviews.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.publication-reviews.list
+  sourceOperationId: genxListPublicationReviews
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: PublicationReview
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-120
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: PublicationReview -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.publication-reviews.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.publication-reviews.record
+  sourceOperationId: genxRegisterPublicationReview
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: PublicationReview
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-120
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: PublicationReview -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.quality-flags.get -> genxPublishVariableTermVersion
+  sourceCatalogId: brapi-genx.genx.v1.quality-flags.get
+  sourceOperationId: genxGetQualityFlag
+  targetOperationId: genxPublishVariableTermVersion
+  targetCatalogId: brapi-genx.genx.v1.variable-terms.publish-version
+  sourceModule: QualityFlag
+  targetModule: VariableTerms
+  sourceDomainClass: D4
+  targetDomainClass: null
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - A-03
+  - RFC-002
+  - RFC-111
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: QualityFlag -> VariableTerms.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.quality-flags.list -> genxPublishVariableTermVersion
+  sourceCatalogId: brapi-genx.genx.v1.quality-flags.list
+  sourceOperationId: genxListQualityFlags
+  targetOperationId: genxPublishVariableTermVersion
+  targetCatalogId: brapi-genx.genx.v1.variable-terms.publish-version
+  sourceModule: QualityFlag
+  targetModule: VariableTerms
+  sourceDomainClass: D4
+  targetDomainClass: null
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - A-03
+  - RFC-002
+  - RFC-111
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: QualityFlag -> VariableTerms.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.quality-flags.record -> genxPublishVariableTermVersion
+  sourceCatalogId: brapi-genx.genx.v1.quality-flags.record
+  sourceOperationId: genxRegisterQualityFlag
+  targetOperationId: genxPublishVariableTermVersion
+  targetCatalogId: brapi-genx.genx.v1.variable-terms.publish-version
+  sourceModule: QualityFlag
+  targetModule: VariableTerms
+  sourceDomainClass: D4
+  targetDomainClass: null
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - A-03
+  - RFC-002
+  - RFC-111
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: QualityFlag -> VariableTerms.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.raster-catalogues.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.raster-catalogues.get
+  sourceOperationId: genxGetRasterCatalogue
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: RasterCatalogue
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-144
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: RasterCatalogue -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.raster-catalogues.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.raster-catalogues.list
+  sourceOperationId: genxListRasterCatalogues
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: RasterCatalogue
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-144
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: RasterCatalogue -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.raster-catalogues.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.raster-catalogues.record
+  sourceOperationId: genxRegisterRasterCatalogue
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: RasterCatalogue
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-144
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: RasterCatalogue -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.reference-assemblies.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.reference-assemblies.get
+  sourceOperationId: genxGetReferenceAssembly
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: ReferenceAssembly
+  targetModule: GenomicDatasets
+  sourceDomainClass: D3
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-115
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: ReferenceAssembly -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.reference-assemblies.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.reference-assemblies.list
+  sourceOperationId: genxListReferenceAssemblies
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: ReferenceAssembly
+  targetModule: GenomicDatasets
+  sourceDomainClass: D3
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-115
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: ReferenceAssembly -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.reference-assemblies.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.reference-assemblies.record
+  sourceOperationId: genxRegisterReferenceAssembly
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: ReferenceAssembly
+  targetModule: GenomicDatasets
+  sourceDomainClass: D3
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-115
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: ReferenceAssembly -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.remote-sensing-metadata.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.remote-sensing-metadata.get
+  sourceOperationId: genxGetRemoteSensingMetadata
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: RemoteSensingMetadata
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-145
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: RemoteSensingMetadata -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.remote-sensing-metadata.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.remote-sensing-metadata.list
+  sourceOperationId: genxListRemoteSensingMetadata
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: RemoteSensingMetadata
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-145
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: RemoteSensingMetadata -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.remote-sensing-metadata.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.remote-sensing-metadata.record
+  sourceOperationId: genxRegisterRemoteSensingMetadata
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: RemoteSensingMetadata
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-145
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: RemoteSensingMetadata -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.schema-mappings.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.schema-mappings.get
+  sourceOperationId: genxGetSchemaMapping
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: SchemaMapping
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-152
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: SchemaMapping -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.schema-mappings.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.schema-mappings.list
+  sourceOperationId: genxListSchemaMappings
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: SchemaMapping
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-152
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: SchemaMapping -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.schema-mappings.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.schema-mappings.record
+  sourceOperationId: genxRegisterSchemaMapping
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: SchemaMapping
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-152
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: SchemaMapping -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.sensor-devices.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.sensor-devices.get
+  sourceOperationId: genxGetSensorDevice
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: SensorDevice
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-149
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: SensorDevice -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.sensor-devices.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.sensor-devices.list
+  sourceOperationId: genxListSensorDevices
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: SensorDevice
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-149
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: SensorDevice -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.sensor-devices.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.sensor-devices.record
+  sourceOperationId: genxRegisterSensorDevice
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: SensorDevice
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-149
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: SensorDevice -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.sowing-windows.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.sowing-windows.get
+  sourceOperationId: genxGetSowingWindow
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: SowingWindow
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-130
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: SowingWindow -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.sowing-windows.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.sowing-windows.list
+  sourceOperationId: genxListSowingWindows
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: SowingWindow
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-130
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: SowingWindow -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.sowing-windows.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.sowing-windows.record
+  sourceOperationId: genxRegisterSowingWindow
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: SowingWindow
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-130
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: SowingWindow -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.spatial-indexes.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.spatial-indexes.get
+  sourceOperationId: genxGetSpatialIndex
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: SpatialIndex
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-141
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: SpatialIndex -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.spatial-indexes.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.spatial-indexes.list
+  sourceOperationId: genxListSpatialIndexes
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: SpatialIndex
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-141
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: SpatialIndex -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.spatial-indexes.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.spatial-indexes.record
+  sourceOperationId: genxRegisterSpatialIndex
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: SpatialIndex
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-141
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: SpatialIndex -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.spatial-queries.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.spatial-queries.get
+  sourceOperationId: genxGetSpatialQuery
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: SpatialQuery
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-143
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: SpatialQuery -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.spatial-queries.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.spatial-queries.list
+  sourceOperationId: genxListSpatialQueries
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: SpatialQuery
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-143
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: SpatialQuery -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.spatial-queries.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.spatial-queries.record
+  sourceOperationId: genxRegisterSpatialQuery
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: SpatialQuery
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-143
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: SpatialQuery -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.telemetry-normalizations.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.telemetry-normalizations.get
+  sourceOperationId: genxGetTelemetryNormalization
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: TelemetryNormalization
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-148
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: TelemetryNormalization -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.telemetry-normalizations.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.telemetry-normalizations.list
+  sourceOperationId: genxListTelemetryNormalizations
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: TelemetryNormalization
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-148
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: TelemetryNormalization -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.telemetry-normalizations.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.telemetry-normalizations.record
+  sourceOperationId: genxRegisterTelemetryNormalization
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: TelemetryNormalization
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-148
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: TelemetryNormalization -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.threshold-alerts.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.threshold-alerts.get
+  sourceOperationId: genxGetThresholdAlert
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: ThresholdAlert
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-126
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: ThresholdAlert -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.threshold-alerts.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.threshold-alerts.list
+  sourceOperationId: genxListThresholdAlerts
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: ThresholdAlert
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-126
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: ThresholdAlert -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.threshold-alerts.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.threshold-alerts.record
+  sourceOperationId: genxRegisterThresholdAlert
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: ThresholdAlert
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-126
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: ThresholdAlert -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.treatment-assignments.get -> genxRegisterFieldScouting
+  sourceCatalogId: brapi-genx.genx.v1.treatment-assignments.get
+  sourceOperationId: genxGetTreatmentAssignment
+  targetOperationId: genxRegisterFieldScouting
+  targetCatalogId: brapi-genx.genx.v1.field-scouting.record
+  sourceModule: TreatmentAssignment
+  targetModule: FieldScouting
+  sourceDomainClass: D6
+  targetDomainClass: D6
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-074
+  - RFC-106
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: TreatmentAssignment -> FieldScouting.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.treatment-assignments.list -> genxRegisterFieldScouting
+  sourceCatalogId: brapi-genx.genx.v1.treatment-assignments.list
+  sourceOperationId: genxListTreatmentAssignments
+  targetOperationId: genxRegisterFieldScouting
+  targetCatalogId: brapi-genx.genx.v1.field-scouting.record
+  sourceModule: TreatmentAssignment
+  targetModule: FieldScouting
+  sourceDomainClass: D6
+  targetDomainClass: D6
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-074
+  - RFC-106
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: TreatmentAssignment -> FieldScouting.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.treatment-assignments.record -> genxRegisterFieldScouting
+  sourceCatalogId: brapi-genx.genx.v1.treatment-assignments.record
+  sourceOperationId: genxRegisterTreatmentAssignment
+  targetOperationId: genxRegisterFieldScouting
+  targetCatalogId: brapi-genx.genx.v1.field-scouting.record
+  sourceModule: TreatmentAssignment
+  targetModule: FieldScouting
+  sourceDomainClass: D6
+  targetDomainClass: D6
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-074
+  - RFC-106
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: TreatmentAssignment -> FieldScouting.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.trial-networks.get -> genxRegisterFieldScouting
+  sourceCatalogId: brapi-genx.genx.v1.trial-networks.get
+  sourceOperationId: genxGetTrialNetwork
+  targetOperationId: genxRegisterFieldScouting
+  targetCatalogId: brapi-genx.genx.v1.field-scouting.record
+  sourceModule: TrialNetwork
+  targetModule: FieldScouting
+  sourceDomainClass: D6
+  targetDomainClass: D6
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-074
+  - RFC-109
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: TrialNetwork -> FieldScouting.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.trial-networks.list -> genxRegisterFieldScouting
+  sourceCatalogId: brapi-genx.genx.v1.trial-networks.list
+  sourceOperationId: genxListTrialNetworks
+  targetOperationId: genxRegisterFieldScouting
+  targetCatalogId: brapi-genx.genx.v1.field-scouting.record
+  sourceModule: TrialNetwork
+  targetModule: FieldScouting
+  sourceDomainClass: D6
+  targetDomainClass: D6
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-074
+  - RFC-109
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: TrialNetwork -> FieldScouting.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.trial-networks.record -> genxRegisterFieldScouting
+  sourceCatalogId: brapi-genx.genx.v1.trial-networks.record
+  sourceOperationId: genxRegisterTrialNetwork
+  targetOperationId: genxRegisterFieldScouting
+  targetCatalogId: brapi-genx.genx.v1.field-scouting.record
+  sourceModule: TrialNetwork
+  targetModule: FieldScouting
+  sourceDomainClass: D6
+  targetDomainClass: D6
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-074
+  - RFC-109
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: TrialNetwork -> FieldScouting.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.value-missingness.get -> genxPublishVariableTermVersion
+  sourceCatalogId: brapi-genx.genx.v1.value-missingness.get
+  sourceOperationId: genxGetValueMissingness
+  targetOperationId: genxPublishVariableTermVersion
+  targetCatalogId: brapi-genx.genx.v1.variable-terms.publish-version
+  sourceModule: ValueMissingness
+  targetModule: VariableTerms
+  sourceDomainClass: D4
+  targetDomainClass: null
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - A-03
+  - RFC-002
+  - RFC-112
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: ValueMissingness -> VariableTerms.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.value-missingness.list -> genxPublishVariableTermVersion
+  sourceCatalogId: brapi-genx.genx.v1.value-missingness.list
+  sourceOperationId: genxListValueMissingness
+  targetOperationId: genxPublishVariableTermVersion
+  targetCatalogId: brapi-genx.genx.v1.variable-terms.publish-version
+  sourceModule: ValueMissingness
+  targetModule: VariableTerms
+  sourceDomainClass: D4
+  targetDomainClass: null
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - A-03
+  - RFC-002
+  - RFC-112
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: ValueMissingness -> VariableTerms.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.value-missingness.record -> genxPublishVariableTermVersion
+  sourceCatalogId: brapi-genx.genx.v1.value-missingness.record
+  sourceOperationId: genxRegisterValueMissingness
+  targetOperationId: genxPublishVariableTermVersion
+  targetCatalogId: brapi-genx.genx.v1.variable-terms.publish-version
+  sourceModule: ValueMissingness
+  targetModule: VariableTerms
+  sourceDomainClass: D4
+  targetDomainClass: null
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - A-03
+  - RFC-002
+  - RFC-112
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: ValueMissingness -> VariableTerms.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.vcf-exports.get -> genxRecordVcfImport
+  sourceCatalogId: brapi-genx.genx.v1.vcf-exports.get
+  sourceOperationId: genxGetVcfExport
+  targetOperationId: genxRecordVcfImport
+  targetCatalogId: brapi-genx.genx.v1.vcf-imports.record
+  sourceModule: VcfExport
+  targetModule: VcfImport
+  sourceDomainClass: D3
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-043
+  - RFC-114
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: VcfExport -> VcfImport.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.vcf-exports.list -> genxRecordVcfImport
+  sourceCatalogId: brapi-genx.genx.v1.vcf-exports.list
+  sourceOperationId: genxListVcfExports
+  targetOperationId: genxRecordVcfImport
+  targetCatalogId: brapi-genx.genx.v1.vcf-imports.record
+  sourceModule: VcfExport
+  targetModule: VcfImport
+  sourceDomainClass: D3
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-043
+  - RFC-114
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: VcfExport -> VcfImport.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.vcf-exports.record -> genxRecordVcfImport
+  sourceCatalogId: brapi-genx.genx.v1.vcf-exports.record
+  sourceOperationId: genxRegisterVcfExport
+  targetOperationId: genxRecordVcfImport
+  targetCatalogId: brapi-genx.genx.v1.vcf-imports.record
+  sourceModule: VcfExport
+  targetModule: VcfImport
+  sourceDomainClass: D3
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-043
+  - RFC-114
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: VcfExport -> VcfImport.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.vegetation-indexes.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.vegetation-indexes.get
+  sourceOperationId: genxGetVegetationIndex
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: VegetationIndex
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-146
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: VegetationIndex -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.vegetation-indexes.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.vegetation-indexes.list
+  sourceOperationId: genxListVegetationIndexes
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: VegetationIndex
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-146
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: VegetationIndex -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.vegetation-indexes.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.vegetation-indexes.record
+  sourceOperationId: genxRegisterVegetationIndex
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: VegetationIndex
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-146
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: VegetationIndex -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.yield-forecasts.get -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.yield-forecasts.get
+  sourceOperationId: genxGetYieldForecast
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: YieldForecast
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-134
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: YieldForecast -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.yield-forecasts.list -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.yield-forecasts.list
+  sourceOperationId: genxListYieldForecasts
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: YieldForecast
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-134
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: YieldForecast -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.yield-forecasts.record -> genxRegisterGenomicDataset
+  sourceCatalogId: brapi-genx.genx.v1.yield-forecasts.record
+  sourceOperationId: genxRegisterYieldForecast
+  targetOperationId: genxRegisterGenomicDataset
+  targetCatalogId: brapi-genx.genx.v1.genomic-datasets.register
+  sourceModule: YieldForecast
+  targetModule: GenomicDatasets
+  sourceDomainClass: null
+  targetDomainClass: D3
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-013
+  - RFC-134
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: YieldForecast -> GenomicDatasets.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.yield-maps.get -> genxRecordHarvest
+  sourceCatalogId: brapi-genx.genx.v1.yield-maps.get
+  sourceOperationId: genxGetYieldMap
+  targetOperationId: genxRecordHarvest
+  targetCatalogId: brapi-genx.genx.v1.harvest-records.record
+  sourceModule: YieldMap
+  targetModule: HarvestRecords
+  sourceDomainClass: D6
+  targetDomainClass: D6
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-011
+  - RFC-070
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: YieldMap -> HarvestRecords.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.yield-maps.list -> genxRecordHarvest
+  sourceCatalogId: brapi-genx.genx.v1.yield-maps.list
+  sourceOperationId: genxListYieldMaps
+  targetOperationId: genxRecordHarvest
+  targetCatalogId: brapi-genx.genx.v1.harvest-records.record
+  sourceModule: YieldMap
+  targetModule: HarvestRecords
+  sourceDomainClass: D6
+  targetDomainClass: D6
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-011
+  - RFC-070
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: YieldMap -> HarvestRecords.'
+  rationale: ''
+  evidence: []
+- id: brapi-genx.genx.v1.yield-maps.register -> genxRecordHarvest
+  sourceCatalogId: brapi-genx.genx.v1.yield-maps.register
+  sourceOperationId: genxRegisterYieldMap
+  targetOperationId: genxRecordHarvest
+  targetCatalogId: brapi-genx.genx.v1.harvest-records.record
+  sourceModule: YieldMap
+  targetModule: HarvestRecords
+  sourceDomainClass: D6
+  targetDomainClass: D6
+  boundary: cross-module
+  provenance: inherited-registry-only
+  reviewStatus: inherited-unreviewed
+  priority: false
+  documentaryEvidence: []
+  decisionReferences:
+  - RFC-011
+  - RFC-070
+  scientificConcerns:
+  - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
+  - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
+  - 'Crosses GenX modules: YieldMap -> HarvestRecords.'
+  rationale: ''
+  evidence: []
