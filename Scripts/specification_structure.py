@@ -289,8 +289,14 @@ def validate(root: Path = ROOT) -> list[str]:
     return errors
 
 
-def main() -> int:
-    errors = validate()
+def main(argv=None) -> int:
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Validate GenX specification structure.")
+    parser.add_argument("--root", type=Path, default=ROOT, help="Repository root to validate.")
+    args = parser.parse_args(argv)
+    root = args.root.resolve()
+    errors = validate(root)
     if errors:
         print("Specification structural assurance FAILED:")
         for error in errors:
