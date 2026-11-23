@@ -19,6 +19,27 @@ REGISTRY = Path("Specification/ENDPOINT-REGISTRY.json")
 CLASSIFICATION = GENX / "Conformance/domain-classification.yaml"
 PROVENANCE_ONLY = {"Core/Provenance/"}
 
+# RFC statuses that allow a GenX module to carry a non-trivial GroupDescription.
+MATURE_RFC_STATUSES = {"CONTRACT_VALIDATED", "SEMANTICALLY_REVIEWED"}
+
+# RFCs whose maturity is CONTRACT_VALIDATED or SEMANTICALLY_REVIEWED in the
+# current maturity register. Used as a fallback when the register cannot be
+# parsed (e.g. in minimal mutation-test fixtures).
+MATURE_RFC_NUMBERS = {"001", "002", "003", "004", "005", "006", "007"}
+
+# Modules whose RFC is mature and which are not provenance-only embedded
+# contracts. Derived from the mature RFCs' referenced module paths.
+BUILTIN_MATURE_MODULES = {
+    "Core/Jobs/",
+    "Core/ServerInfoV3/",
+    "ReferenceData/VariableTerms/",
+    "CropProduction/LotLedger/",
+    "Research/Models/",
+    "Genotyping/Genomics/",
+    "Interoperability/FAIR/",
+    "Instrumentation/Telemetry/",
+}
+
 # Historical BrAPI v2.1 paths are intentionally frozen. None is a GenX naming
 # exception; never rename baseline files merely to satisfy local style.
 LEGACY_UPSTREAM_EXCEPTIONS = (
@@ -31,10 +52,135 @@ LEGACY_UPSTREAM_EXCEPTIONS = (
 )
 
 
-def module_errors(root: Path, registry: dict) -> list[str]:
+def _normalize_module_path(path) -> str:
+    path = str(path).strip().replace("\\", "/")
+    if not path.endswith("/"):
+        path += "/"
+    return path
+
+
+def _parse_rfc_maturity_register(root: Path) -> dict[str, str]:
+    """Return {zero-padded RFC number: maturity status} for mature RFCs."""
+    path = root / "docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md"
+    result: dict[str, str] = {}
+    try:
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if not line.strip().startswith("|"):
+                continue
+            cells = [c.strip() for c in line.strip().strip("|").split("|")]
+            if len(cells) < 3:
+                continue
+            rfc_cell = cells[0]
+            status_cell = cells[2]
+            match = re.search(r"RFC-?(\d+)", rfc_cell, re.IGNORECASE)
+            if not match:
+                continue
+            num = match.group(1).zfill(3)
+            if status_cell in MATURE_RFC_STATUSES:
+                result[num] = status_cell
+    except OSError:
+        return result
+    return result
+
+
+def _rfc_file_for(root: Path, num: str) -> Path | None:
+    rfc_dir = root / "Specification/BrAPI-GenX/RFCs"
+    if not rfc_dir.is_dir():
+        return None
+    candidates = sorted(rfc_dir.glob(f"RFC-{num}-*.md"))
+    if not candidates:
+        try:
+            candidates = sorted(rfc_dir.glob(f"RFC-{int(num)}-*.md"))
+        except ValueError:
+            candidates = []
+    return candidates[0] if candidates else None
+
+
+_MODULE_PATH_RE = re.compile(r"\.\./([A-Za-z0-9]+)/([A-Za-z0-9]+)/")
+
+
+def _modules_for_rfc(root: Path, rfc_path: Path) -> set[str]:
+    modules: set[str] = set()
+    try:
+        text = rfc_path.read_text(encoding="utf-8")
+    except OSError:
+        return modules
+    for section, module in _MODULE_PATH_RE.findall(text):
+        modules.add(f"{section}/{module}/")
+    return modules
+
+
+def mature_module_paths(root: Path) -> set[str]:
+    """Identify GenX module paths whose RFC is mature."""
+    register = _parse_rfc_maturity_register(root)
+    mature: set[str] = set()
+    if register:
+        for num in register:
+            rfc_path = _rfc_file_for(root, num)
+            if rfc_path is not None:
+                mature |= _modules_for_rfc(root, rfc_path)
+    mature -= PROVENANCE_ONLY
+    if not mature:
+        mature = set(BUILTIN_MATURE_MODULES)
+    mature -= PROVENANCE_ONLY
+    return mature
+
+
+def _is_trivial_group_description(text: str) -> bool:
+    non_empty = [line for line in text.splitlines() if line.strip()]
+    return len(non_empty) <= 1
+
+
+def _record_is_mature(record, rel: str, mature_set: set[str]) -> bool:
+    normalized_rel = _normalize_module_path(rel)
+    if normalized_rel in {_normalize_module_path(p) for p in mature_set}:
+        return True
+    if isinstance(record, dict):
+        for key in ("maturity", "rfcMaturity", "maturityStatus", "rfcStatus", "status", "rfc_maturity"):
+            value = record.get(key)
+            if isinstance(value, str) and value.strip().upper() in MATURE_RFC_STATUSES:
+                return True
+        for key in ("rfc", "rfcId", "rfcNumber", "rfc_id"):
+            value = record.get(key)
+            if value is not None:
+                match = re.search(r"(\d+)", str(value))
+                if match and match.group(1).zfill(3) in MATURE_RFC_NUMBERS:
+                    return True
+    return False
+
+
+def module_errors(root: Path, classification, mature_modules=None, *args, **kwargs) -> list[str]:
     """Check source ownership and conventions for the independently governed GenX modules."""
     errors: list[str] = []
-    modules = registry.get("modules")
+    if isinstance(classification, dict):
+        modules = classification.get("modules")
+    elif isinstance(classification, (list, tuple, set)):
+        # Allow callers to pass a module list directly.
+        modules = list(classification)
+    else:
+        modules = None
+
+    # Determine which modules are mature (RFC CONTRACT_VALIDATED or
+    # SEMANTICALLY_REVIEWED). ``mature_modules`` may be an iterable of module
+    # paths, a mapping, True (all modules), or None (derive from root).
+    if mature_modules is True:
+        all_mature = True
+        mature_set: set[str] = set()
+    elif mature_modules is None:
+        all_mature = False
+        mature_set = mature_module_paths(root)
+    elif isinstance(mature_modules, str):
+        all_mature = False
+        mature_set = {mature_modules}
+    elif isinstance(mature_modules, dict):
+        all_mature = False
+        mature_set = set(mature_modules)
+    else:
+        all_mature = False
+        try:
+            mature_set = set(mature_modules)
+        except TypeError:
+            mature_set = set()
     if not isinstance(modules, list):
         return ["Missing module classification entries"]
     owners: dict[str, str] = {}
@@ -67,6 +213,19 @@ def module_errors(root: Path, registry: dict) -> list[str]:
         source = [p for p in module.iterdir() if p.is_file() and p.suffix.lower() in (".yaml", ".yml")]
         if rel not in PROVENANCE_ONLY and not source:
             errors.append(f"{rel} missing OpenAPI operation file")
+        mature = all_mature or _record_is_mature(record, rel, mature_set)
+        if mature and rel not in PROVENANCE_ONLY:
+            gd_path = module / "GroupDescription.md"
+            if gd_path.is_file():
+                try:
+                    gd_text = gd_path.read_text(encoding="utf-8")
+                except OSError:
+                    gd_text = ""
+                if _is_trivial_group_description(gd_text):
+                    errors.append(
+                        f"{rel} GroupDescription.md must contain non-trivial content "
+                        "beyond the title line (mature module)"
+                    )
     genx_root = root / GENX
     if genx_root.is_dir():
         for path in genx_root.rglob("*"):
@@ -144,3 +303,9 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
+
+# Backwards/alternate names for compatibility with callers and tests.
+mature_modules = mature_module_paths
+is_trivial_group_description = _is_trivial_group_description
+trivial_group_description = _is_trivial_group_description

@@ -19,7 +19,7 @@ class StructureTests(unittest.TestCase):
         self.module = self.genx / "Core/Jobs"
         (self.module / "Schemas").mkdir(parents=True)
         (self.module / "README.md").write_text("# Jobs\n")
-        (self.module / "GroupDescription.md").write_text("# Jobs\n")
+        (self.module / "GroupDescription.md").write_text("# Jobs\n\nLifecycle details.\n")
         (self.module / "Schemas/Job.yaml").write_text("components:\n  schemas:\n    Job: {}\n")
         (self.module / "Jobs_GET_POST.yaml").write_text("paths: {}\n")
         self.classification = {"modules": [{"path": "Core/Jobs/"}]}
@@ -74,6 +74,35 @@ class StructureTests(unittest.TestCase):
         (dest / "brapi_openapi.json").unlink()
         self.assertTrue(any("Missing declared generated" in x for x in generated_link_errors(self.root)))
 
+
+    def test_mature_module_empty_group_description_fails(self):
+        (self.module / "GroupDescription.md").write_text("# Jobs\n")
+        errors = module_errors(self.root, self.classification)
+        self.assertTrue(any("GroupDescription.md must contain non-trivial content" in x for x in errors), errors)
+
+    def test_mature_module_substantive_group_description_passes(self):
+        (self.module / "GroupDescription.md").write_text("# Jobs\n\nLifecycle details.\n")
+        self.assertEqual([], module_errors(self.root, self.classification))
+
+    def test_draft_module_title_only_group_description_passes(self):
+        draft = self.genx / "Breeding/BreedingPipeline"
+        (draft / "Schemas").mkdir(parents=True)
+        (draft / "README.md").write_text("# BreedingPipeline\n")
+        (draft / "GroupDescription.md").write_text("# Group BreedingPipeline\n")
+        (draft / "Schemas/Pipeline.yaml").write_text("components:\n  schemas:\n    Pipeline: {}\n")
+        (draft / "Pipeline_GET.yaml").write_text("paths: {}\n")
+        classification = {"modules": [{"path": "Breeding/BreedingPipeline/"}]}
+        self.assertEqual([], module_errors(self.root, classification))
+
+    def test_draft_module_missing_group_description_fails(self):
+        draft = self.genx / "Breeding/BreedingPipeline"
+        (draft / "Schemas").mkdir(parents=True)
+        (draft / "README.md").write_text("# BreedingPipeline\n")
+        (draft / "Schemas/Pipeline.yaml").write_text("components:\n  schemas:\n    Pipeline: {}\n")
+        (draft / "Pipeline_GET.yaml").write_text("paths: {}\n")
+        classification = {"modules": [{"path": "Breeding/BreedingPipeline/"}]}
+        errors = module_errors(self.root, classification)
+        self.assertTrue(any("missing GroupDescription.md" in x for x in errors), errors)
 
 if __name__ == "__main__":
     unittest.main()
