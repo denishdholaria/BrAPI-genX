@@ -6,9 +6,11 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no assay design record. Assay designs are essential for
-genotyping workflows. Without this record, assay designs cannot be audited
-or reproduced.
+BrAPI v2.1 provides Samples, Variants, CallSets and genotyping-result
+operations, but does not define this proposed standalone assay-design
+registration. Its absence does not itself prove that existing exchange
+metadata or laboratory systems are insufficient. The candidate records
+limited design metadata pending interoperable use-case evidence.
 
 ## 2. Object
 
@@ -25,8 +27,10 @@ or reproduced.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Assay designs reference GenX AnalysisMethod by identifier when applicable;
-  they do not duplicate that resource.
+- The optional `analysisMethodDbId` string can name a proposed GenX
+  AnalysisMethod; no referential integrity or stable mapping is enforced.
+- The candidate contains no explicit GenomicDataset or MarkerProbe
+  reference. Neither link may be inferred from navigational neighbors.
 - A design is not a BrAPI data resource and must not be treated as one.
 
 ## 5. Invariants
@@ -40,7 +44,7 @@ or reproduced.
 
 - D-181: Should `platform` be required? (Current: optional.)
 - D-182: Should assay designs link to GenX `GenomicDataset`? (Current:
-  optional, not required.)
+  no explicit dataset field; no link is defined.)
 - D-183: Should marker count be required? (Current: optional.)
 
 ## 7. Classification

@@ -40,6 +40,8 @@ REVIEWED = frozenset({
     'Phenotyping/QualityFlag', 'Phenotyping/ValueMissingness',
     'Phenotyping/CaptureWorkflow',
     'Genotyping/ReferenceAssembly', 'Genotyping/PipelineProvenance', 'Genotyping/VcfImport',
+    'Genotyping/AssayDesign', 'Genotyping/AssayExecution',
+    'Genotyping/VendorOrder', 'Genotyping/MarkerProbe',
     'Phenotyping/PhenotypeCapture', 'Phenotyping/RepeatedMeasurement',
     'Phenotyping/PhenotypeAnnotation',
     'Geospatial/LocationGeometry', 'Geospatial/FieldGeometry',

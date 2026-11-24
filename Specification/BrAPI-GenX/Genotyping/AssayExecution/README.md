@@ -1,7 +1,9 @@
 # BrAPI-GenX — Assay Execution (Genotyping)
 
-Assay execution records describe assay executions.
-BrAPI v2.1 has no assay execution record.
+AssayExecution is a candidate registration record, distinct from official
+BrAPI version 2.1 Sample, CallSet and result resources. Its optional
+`assayDbId` is not a validated link to GenX `assayDesignDbId`, and
+registration does not establish that a laboratory run occurred.
 
 - `POST /genx/v1/assay-executions` (`genxRegisterAssayExecution`) registers one
   `AssayExecution` (`Schemas/AssayExecutionNewRequest.yaml`). Same

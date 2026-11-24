@@ -1,7 +1,9 @@
 # BrAPI-GenX — Marker Probe (Genomics)
 
-Marker probe records describe a probe (oligo/vendor probe) targeting a BrAPI
-Marker on a genotyping platform. BrAPI v2.1 has no marker probe registry.
+MarkerProbe is a candidate physical-probe metadata register. BrAPI v2.1
+already covers Variants and marker positions; `markerDbId` in this candidate
+is not proven equivalent to official `variantDbId`, and the optional probe
+sequence has not been biologically validated.
 
 - `POST /genx/v1/marker-probes` (`genxRegisterMarkerProbe`) registers one
   `MarkerProbe` (`Schemas/MarkerProbeNewRequest.yaml`). Same

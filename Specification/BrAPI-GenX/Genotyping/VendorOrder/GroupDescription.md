@@ -1,1 +1,9 @@
 # Group VendorOrder
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 073. This candidate is not a replacement for the existing BrAPI version 2.1 vendor-order interface or a verified submitted order.
+
+**Official overlap:** BrAPI v2.1 already defines `GET` and `POST /brapi/v2/vendor/orders`, plus vendor order status and results operations, in its VendorSamples module. The candidate GenX `VendorOrderRecord` is a different shape and identity. The proposed vendorOrderDbId is not established as an alias for official vendor `orderId`; no translation, synchronization or lifecycle equivalence is proven.
+
+**Actual schema scope:** The response requires vendorOrderDbId and lifecycle status; the request requires only vendorOrderDbId. vendor, platform, sampleCount and resultIngestedAt are optional. The candidate contains no sampleDbId, genomicDatasetDbId, official serviceIds, or vendor orderId field, and does not enumerate submitted samples or plates. A timestamp string does not prove ingestion, successful genotype calling, accepted vendor delivery or traceable BrAPI CallSets. Any bridge to the official vendor interface requires an independently evidenced mapping and maintainer decision. D-217–D-219 remain unresolved; proposed replay is not persistent-service conformance.
+
+**Sources:** [module overview](./README.md), [record schema](./Schemas/VendorOrder.yaml), [registration schema](./Schemas/VendorOrderNewRequest.yaml), [operation](./VendorOrder_GET_POST.yaml), [RFC](../../RFCs/RFC-073-Vendor-Order.md), [official vendor orders](../../../BrAPI-Genotyping/VendorSamples/Vendor_Orders_GET_POST.yaml), [official vendor order results](../../../BrAPI-Genotyping/VendorSamples/Vendor_Orders_OrderId_Results_GET.yaml), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

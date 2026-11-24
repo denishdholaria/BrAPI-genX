@@ -1,8 +1,10 @@
 # BrAPI-GenX — Vendor Order (Genomics)
 
-Vendor genotyping order records describe an order submitted to a genotyping
-vendor, its platform, sample count, and result ingestion. BrAPI v2.1 has no
-vendor order record.
+VendorOrderRecord is a proposed internal metadata register. Official BrAPI
+version 2.1 already has `GET` and `POST /brapi/v2/vendor/orders`. This
+candidate is not an equivalent substitute: its identity is distinct and its
+schema has no official orderId, Sample or GenomicDataset identifier; an
+ingestion timestamp alone does not verify results.
 
 - `POST /genx/v1/vendor-orders` (`genxRegisterVendorOrder`) registers one
   `VendorOrderRecord` (`Schemas/VendorOrderNewRequest.yaml`). Same

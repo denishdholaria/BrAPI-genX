@@ -6,17 +6,18 @@
 
 ## 1. Problem
 
-BrAPI v2.1 standardizes variants, call sets, and calls but has no place to
-record a genotyping order submitted to a vendor, its platform, sample count,
-and result ingestion. Vendor orders are the routine interface between a
-breeding program and a genotyping service. Without an order record, results
-arrive as unversioned files with no stated vendor, platform, or sample scope,
-so they cannot be audited or reproduced.
+BrAPI v2.1 already includes `GET` and `POST /brapi/v2/vendor/orders`
+and vendor order status, result and plate operations. GenX VendorOrderRecord
+therefore overlaps an established vendor-facing workflow. A separate
+candidate record may support internal audit or other needs, but the gap
+and interoperable mapping have not been demonstrated. Absence of a
+GenX-specific field is not evidence that BrAPI lacks vendor ordering.
 
 ## 2. Object
 
-`VendorOrderRecord` — one immutable record of a genotyping order submitted to a
-vendor, with its vendor, platform, sample count, status, and result ingestion.
+`VendorOrderRecord` — a candidate immutable metadata record describing
+an asserted genotyping order, with optional vendor, platform, sample count
+and ingestion timestamp; it does not prove actual submission or ingestion.
 
 ## 3. Endpoints
 
@@ -29,11 +30,16 @@ vendor, with its vendor, platform, sample count, status, and result ingestion.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Vendor orders reference BrAPI `Sample` and GenX `GenomicDataset` by
-  identifier; they do not duplicate those resources.
-- A vendor order is not a BrAPI data resource and must not be treated as one.
-- Result bytes are not transported by this API. The record names and verifies
-  the ingestion; retrieval uses the referenced storage.
+- Official BrAPI v2.1 vendor orders use `/brapi/v2/vendor/orders`,
+  including an official `orderId`. The candidate `vendorOrderDbId`
+  has no established equivalence or synchronization with that identifier.
+- The candidate has no `sampleDbId`, `genomicDatasetDbId`, official
+  `orderId` or `serviceIds` field. It does not reference BrAPI Sample or
+  GenX GenomicDataset by identifier and is not a substitute for official
+  vendor ordering.
+- Result bytes are not transported by this proposal. Optional
+  `resultIngestedAt` is a string claim, not independently verified ingestion
+  or a link to retrieved data.
 
 ## 5. Invariants
 

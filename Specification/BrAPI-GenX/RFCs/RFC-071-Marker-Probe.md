@@ -6,12 +6,12 @@
 
 ## 1. Problem
 
-BrAPI v2.1 standardizes markers, variants, and call sets but has no place to
-record the physical probe (oligo or vendor-defined probe) that targets a marker
-on a given genotyping platform. Probe sequences, vendor part numbers, and the
-marker linkage they implement are exactly the evidence a reviewer needs to
-reproduce an assay or audit a vendor order. Without a probe record, the same
-marker can be assayed with different probes across runs and no audit trail.
+BrAPI v2.1 already models Variants and their map positions; the official
+`/brapi/v2/markerpositions` query uses `variantDbId`. It does not
+establish the candidate's separate physical-probe registry or a mapping
+from a vendor probe to a variant. A probe metadata record may be useful
+for assay design, but the need for an independent wire resource and
+its biological target identity require evidence.
 
 ## 2. Object
 
@@ -29,9 +29,11 @@ genotyping platform, with its sequence, platform, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Marker probes reference BrAPI `Marker` by identifier; they do not duplicate
-  the Marker registry.
-- A marker probe is not a BrAPI Marker and must not be treated as one.
+- `markerDbId` is optional candidate text, not an established BrAPI
+  `variantDbId` or a validated join to MarkerPosition. No identity
+  equivalence or mapping may be inferred.
+- A marker probe is not a BrAPI Variant or marker-position record and
+  must not be treated as one.
 - Probe sequences and vendor part numbers are opaque metadata; the API does not
   validate biological correctness.
 

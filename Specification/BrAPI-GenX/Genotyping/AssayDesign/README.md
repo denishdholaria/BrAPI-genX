@@ -1,7 +1,9 @@
 # BrAPI-GenX — Assay Design (Genomics)
 
-Assay design records describe genotyping assay designs and provenance.
-BrAPI v2.1 has no assay design record.
+AssayDesign proposes metadata for a genotyping assay design, distinct
+from BrAPI version 2.1 Samples, Variants and genotype results. The
+optional analysisMethodDbId is not a verified join; the design schema has
+no GenomicDataset or MarkerProbe reference.
 
 - `POST /genx/v1/assay-designs` (`genxRecordAssayDesign`) registers one
   `AssayDesign` (`Schemas/AssayDesignNewRequest.yaml`). Same

@@ -6,6 +6,8 @@ import tempfile
 import os
 import unittest
 
+import yaml
+
 from check_genx_group_descriptions import audit, REL, REVIEWED
 
 GOOD = ('# Group Jobs\n\n**Status:** candidate and proposed, not normative.\n\n'
@@ -817,6 +819,73 @@ class GroupEvidenceTests(unittest.TestCase):
         rfc = (root / 'Specification/BrAPI-GenX/RFCs' /
                'RFC-104-Duplicate-Review.md').read_text()
         self.assertIn('no validated BrAPI', ' '.join(rfc.split()))
+
+    def test_genotyping_assay_design_execution_vendor_probe_evidence(self):
+        root = Path(__file__).resolve().parents[1]
+        genx = root / 'Specification/BrAPI-GenX'
+        cases = (
+            ('AssayDesign', 'AssayDesign', 'D-181', 'assayDesignDbId'),
+            ('AssayExecution', 'AssayExecution', 'D-337', 'assayExecutionDbId'),
+            ('VendorOrder', 'VendorOrderRecord', 'D-217', 'vendorOrderDbId'),
+            ('MarkerProbe', 'MarkerProbe', 'D-211', 'markerProbeDbId'),
+        )
+        for module, resource, decision, identifier in cases:
+            with self.subTest(module=module):
+                self.assertIn('Genotyping/' + module, REVIEWED)
+                folder = genx / 'Genotyping' / module
+                doc = (folder / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', doc)
+                self.assertIn(decision, doc)
+                self.assertIn('**Sources:**', doc)
+                schema = yaml.safe_load(
+                    (folder / 'Schemas' / (module + '.yaml')).read_text()
+                )['components']['schemas'][resource]
+                self.assertEqual(set(schema['required']), {identifier, 'status'})
+                self.assertIn('provenance', schema['properties'])
+
+        assay = yaml.safe_load(
+            (genx / 'Genotyping/AssayExecution/Schemas/AssayExecution.yaml').read_text()
+        )['components']['schemas']['AssayExecution']
+        self.assertIn('assayDbId', assay['properties'])
+        self.assertNotIn('assayDbId', assay['required'])
+        self.assertNotIn('assayDesignDbId', assay['properties'])
+        vendor = yaml.safe_load(
+            (genx / 'Genotyping/VendorOrder/Schemas/VendorOrder.yaml').read_text()
+        )['components']['schemas']['VendorOrderRecord']
+        for missing in ('sampleDbId', 'genomicDatasetDbId', 'orderId', 'serviceIds'):
+            self.assertNotIn(missing, vendor['properties'])
+        official_vendor = yaml.safe_load(
+            (root / 'Specification/BrAPI-Genotyping/VendorSamples/'
+             'Vendor_Orders_GET_POST.yaml').read_text()
+        )
+        self.assertIn('/vendor/orders', official_vendor['paths'])
+        self.assertTrue({'get', 'post'}.issubset(
+            official_vendor['paths']['/vendor/orders']))
+        vendor_rfc = (genx / 'RFCs/RFC-073-Vendor-Order.md').read_text()
+        vendor_readme = (
+            genx / 'Genotyping/VendorOrder/README.md'
+        ).read_text()
+        self.assertIn('/brapi/v2/vendor/orders', vendor_rfc)
+        self.assertIn('/brapi/v2/vendor/orders', vendor_readme)
+        self.assertNotIn('BrAPI v2.1 has no vendor order record', vendor_readme)
+
+        official_markers = yaml.safe_load(
+            (root / 'Specification/BrAPI-Genotyping/GenomeMaps/'
+             'MarkerPositions_GET.yaml').read_text()
+        )
+        self.assertIn('variantDbId', [
+            p.get('name') for p in
+            official_markers['paths']['/markerpositions']['get']['parameters']
+            if isinstance(p, dict)
+        ])
+        marker = yaml.safe_load(
+            (genx / 'Genotyping/MarkerProbe/Schemas/MarkerProbe.yaml').read_text()
+        )['components']['schemas']['MarkerProbe']
+        self.assertIn('markerDbId', marker['properties'])
+        self.assertNotIn('markerDbId', marker['required'])
+        self.assertIn('variantDbId', (
+            genx / 'RFCs/RFC-071-Marker-Probe.md'
+        ).read_text())
 
 
 if __name__ == '__main__':

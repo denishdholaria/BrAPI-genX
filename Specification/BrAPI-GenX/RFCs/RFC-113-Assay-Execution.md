@@ -6,10 +6,11 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record assay executions. Assay executions are the
-routine reference for genotyping. Without a record, executions arrive as
-unversioned notes with no stated assay design or provenance, so they cannot be
-audited or reproduced.
+BrAPI v2.1 provides Samples, CallSets and genotype results; it does not
+define this proposed standalone assay-execution register. Such a register
+could describe a laboratory workflow, but its utility and cross-system
+mapping require separate evidence. A stored record is not proof of a
+completed assay or reproducible results.
 
 ## 2. Object
 
@@ -27,8 +28,9 @@ reference and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Assay execution records reference GenX `AssayDesign` by identifier; they do
-  not duplicate those resources.
+- `assayDbId` is optional in the current schema and is not named
+  `assayDesignDbId`; no typed or validated mapping to GenX AssayDesign
+  has been established. The record has no sample, result or dataset field.
 - A record is not a BrAPI data resource and must not be treated as one.
 
 ## 5. Invariants
