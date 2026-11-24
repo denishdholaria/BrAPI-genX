@@ -6,9 +6,12 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no methylation analysis result record. Methylation patterns
-are essential for epigenetic analysis. Without this record, methylation
-results cannot be audited or reproduced.
+GenX proposes a separate DNA (Deoxyribonucleic Acid) methylation analysis
+metadata record alongside official BrAPI version 2.1 resources. Scientific
+interpretation depends on sample and tissue identity, assay method, cytosine
+context, reference coordinates, coverage and calibrated measurements. The
+candidate does not require these, so registration is not proof of valid
+epigenetic inference.
 
 ## 2. Object
 
@@ -25,8 +28,8 @@ results cannot be audited or reproduced.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Methylation analyses reference GenX AnalysisMethod by identifier; they do not
-  duplicate that resource.
+- `analysisMethodDbId` is a required identifier string, but an exact method
+  version and independently verified assay execution are not required.
 - A result is not a BrAPI data resource and must not be treated as one.
 
 ## 5. Invariants
@@ -34,15 +37,20 @@ results cannot be audited or reproduced.
 - A published `methylationAnalysisDbId` record never mutates in place.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional results linked by `supersedes`.
-- `analysisMethodDbId` is required.
-- A result does not imply scientific validation or approval.
+- `analysisMethodDbId` is required; `regions`, `jobDbId`,
+  `studyDbId` and provenance are optional.
+- `regions` is an unconstrained object with no enforced cytosine context,
+  sample identity, coverage, coordinate convention, units or confidence.
+- A result does not imply scientific approval, reproducible differential
+  methylation, calibration or biological function.
 
 ## 6. Deferred questions
 
 - D-169: Should `regions` be required? (Current: optional.)
 - D-170: Should methylation analyses link to GenX `GenomicDataset`? (Current:
-  optional, not required.)
-- D-171: Should methylation level be required? (Current: optional.)
+  no `genomicDatasetDbId` field is modelled.)
+- D-171: Should methylation level be required? (Current: no first-class
+  methylation-level field is modelled; the `regions` object is opaque.)
 
 ## 7. Classification
 

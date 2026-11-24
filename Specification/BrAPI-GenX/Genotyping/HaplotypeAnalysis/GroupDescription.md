@@ -1,1 +1,9 @@
 # Group HaplotypeAnalysis
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 059. `HaplotypeAnalysis` proposes a result record for haplotype-block metadata; it does not prove statistically resolved phased haplotypes or modify authoritative Breeding Application Programming Interface (BrAPI) version 2.1 Variant and Call records.
+
+The response schema requires `haplotypeAnalysisDbId`, `analysisMethodDbId`, and lifecycle `status`; the registration request requires the identifier and method reference only. `haplotypes`, `studyDbId`, `jobDbId`, and `provenance` are optional. `haplotypes` is an unconstrained object, without required sample identities, per-allele phase, ploidy, reference assembly, haplotype block boundaries, coordinate conventions, phase-set confidence, genotype-source dataset, or explicit method-version binding.
+
+**Scientific boundary:** A stored object cannot establish that haplotypes are true phased observations, that a block applies to a specific germplasm or reference assembly, or that blocks can be compared across pipelines. The required `analysisMethodDbId` is a string not an enforced, authority-matched method-version join. The candidate has no `genomicDatasetDbId`; D-175–D-177 remain unresolved, including the length question. Draft idempotency and immutable record text do not prove persistent execution or independent scientific reproducibility.
+
+**Sources:** [module overview](./README.md), [record schema](./Schemas/HaplotypeAnalysis.yaml), [registration schema](./Schemas/HaplotypeAnalysisNewRequest.yaml), [operations](./HaplotypeAnalysis_GET_POST.yaml), [RFC](../../RFCs/RFC-059-Haplotype-Analysis.md), [official Variant schema](../../../BrAPI-Genotyping/Variants/Schemas/Variant.yaml), [AnalysisMethod schema](../../Research/AnalysisMethods/Schemas/AnalysisMethod.yaml), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

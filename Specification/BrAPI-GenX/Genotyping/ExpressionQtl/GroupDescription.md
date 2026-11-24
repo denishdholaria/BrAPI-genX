@@ -1,1 +1,9 @@
 # Group ExpressionQtl
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 058. An expression quantitative trait locus (eQTL) describes a statistical association between genetic variation and expression; this proposed record does not prove validated association significance, gene regulation, causality, or comparison-ready transcriptomic findings.
+
+The response schema requires `expressionQtlDbId`, `analysisMethodDbId`, and lifecycle `status`; registration requires the identifier and method reference only. `qtls`, `studyDbId`, `jobDbId`, and `provenance` are optional. The `qtls` property is an unconstrained object without required gene/transcript identifiers, normalized expression scale, tissue and developmental stage, allele or variant reference, cis/trans definition, covariates, sample size, genomic coordinates, statistical effect, p-value correction, or confidence estimates.
+
+**Scientific boundary:** Illustrative example values such as `pValue` inside `qtls` are not schema-enforced fields or evidence of statistical validity. No testing threshold, false-discovery control, platform batch correction, sample identity, or method-version binding is mandatory. Required `analysisMethodDbId` does not verify execution. No `genomicDatasetDbId` is modelled; D-172–D-174 remain open. A registered record cannot be treated as a confirmed genetic regulator, validated transcriptomic association, or official BrAPI v2.1 resource.
+
+**Sources:** [module overview](./README.md), [record schema](./Schemas/ExpressionQtl.yaml), [registration schema](./Schemas/ExpressionQtlNewRequest.yaml), [operations](./ExpressionQtl_GET_POST.yaml), [RFC](../../RFCs/RFC-058-Expression-Qtl.md), [official Variant schema](../../../BrAPI-Genotyping/Variants/Schemas/Variant.yaml), [AnalysisMethod schema](../../Research/AnalysisMethods/Schemas/AnalysisMethod.yaml), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

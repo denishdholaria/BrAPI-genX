@@ -15,7 +15,7 @@
 ## Mission plan
 
 - [x] **Mission 078 — Kinship, GenomicRelationship, PedigreeAnalysis evidence.** Three matrix/pedigree-related draft modules; preserve the distinction between relatedness estimands, matrix storage metadata, and authoritative germplasm ancestry. Documentation and regression assertions committed to a dedicated branch; **not executed or merged**.
-- [ ] **Mission 079 — Population/genomics assumptions.** Inspect `Genotyping/HaplotypeAnalysis`, `Genotyping/ExpressionQtl`, and `Genotyping/MethylationAnalysis` against actual schemas and authoritative official genomics resources. Prioritize phasing, sample context, units and reproducibility; do not infer scientific validity.
+- [x] **Mission 079 — Population/genomics assumptions.** Reviewed `Genotyping/HaplotypeAnalysis`, `Genotyping/ExpressionQtl`, and `Genotyping/MethylationAnalysis` against actual response/request schemas. Source-linked draft evidence and regression assertions written. **Tests not executed; not merged; scientific validity not inferred.**
 - [ ] **Mission 080 — Field phenotyping and environmental context.** Review `Phenotyping/ImageMetadata`, `Phenotyping/PhenologyObservation`, and `Geospatial/VegetationIndex`. Distinguish metadata capture from field-proven observations; examine units, sensor calibration, temporal alignment, and observation identity.
 - [ ] **Mission 081 — Breeding decision provenance.** Assess `Breeding/PopulationAdvancement`, `Breeding/SelectionDecisions`, and crossing/lifecycle proposals for distinctions between candidate scores, approved verdicts and actual material movement. Avoid retrofitting verified pipeline decisions into draft resources.
 - [ ] **Mission 082 — Environmental and spatial reasoning.** Review `Environment/ExtremeWeather`, `Environment/SoilChemistry`, and `Geospatial/RemoteSensingMetadata` for reference coordinate systems, thresholds, standards, measurement method and data quality.
@@ -28,6 +28,10 @@
 For each reviewed module, record (1) **what the current schema requires**, (2) what is optional or unmodelled, (3) authoritative official BrAPI overlap where applicable, (4) scientific interpretation limits, (5) source-local evidence and open decision references, and (6) a regression assertion tied to actual source properties.
 
 A retained numerical field, matrix URI (Uniform Resource Identifier), object map or identifier string is **not** evidence of population validity, calibrated statistics, referential integrity, security enforcement or deployed persistence.
+
+## Draft Mission 079 checkpoint
+
+Mission 079 adds three evidence-reviewed descriptions to the preceding 124, yielding **127 of 156** guarded modules and **29 deferred** on the stacked development branch only. This coverage is not reflected on `main` until reviewed and merged.
 
 ## Current review coverage
 
