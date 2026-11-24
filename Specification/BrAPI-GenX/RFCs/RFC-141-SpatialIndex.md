@@ -6,14 +6,16 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record spatial indexes. Spatial indexes
-circulate without a stated index type, coverage area, or provenance, so they
-cannot be used for spatial queries.
+BrAPI v2.1 has no dedicated spatial-index metadata registry. This optional
+candidate records descriptive metadata; spatial indexes can be built and used
+by database or geospatial systems without a GenX metadata record. Registration
+here does **not** build an index, bind one to a dataset, or permit a query.
 
 ## 2. Object
 
-`SpatialIndex` — one immutable spatial index record, with its index type,
-name, coverage area, resolution, and provenance.
+`SpatialIndex` — one proposed immutable descriptive record. The index type,
+name, coverage area, resolution and provenance are all optional. A record is
+not a physical index, search plan or executable spatial service.
 
 ## 3. Endpoints
 

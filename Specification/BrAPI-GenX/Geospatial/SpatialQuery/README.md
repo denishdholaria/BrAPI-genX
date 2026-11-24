@@ -1,7 +1,9 @@
 # BrAPI-GenX — SpatialQuery
 
-SpatialQuery records describe SpatialQuery entries.
-BrAPI v2.1 has no SpatialQuery record.
+SpatialQuery is a **STRUCTURAL_DRAFT**, metadata-only registration candidate.
+`queryType`, `queryGeometry`, `queryParams` and `resultReference` are optional;
+no query target, execution step or returned-result validity is established.
+Mission 090's G-090-2 governance decision is open.
 
 - `POST /genx/v1/spatial-queries` (`genxRegisterSpatialQuery`) registers one
   `SpatialQuery` (`Schemas/SpatialQueryNewRequest.yaml`). Same

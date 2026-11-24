@@ -6,16 +6,18 @@
 
 ## 1. Problem
 
-BrAPI v2.1 records harvest observations but has no way to describe a spatial
-yield surface. Yield maps are the routine output of combine monitors, remote
-sensing pipelines, and yield-model post-processing. Without a record, a map is
-an unversioned file with no stated location, crop cycle, harvest source, cell
-size, or integrity digest, so results cannot be compared or reproduced.
+BrAPI v2.1 supports agricultural observations and image metadata, but does
+not define this specific yield-surface descriptor. The candidate proposes a
+record for harvest-derived or model-derived spatial-map metadata. Its Study,
+Location, crop-cycle and harvest references, cell size, storage address and
+content digest are optional; simply registering an ID does not yield a
+retrievable, scientifically comparable or independently verified map.
 
 ## 2. Object
 
-`YieldMap` — one immutable reference to a spatial yield surface, with its
-location, source harvest record, resolution, storage URI, and digest.
+`YieldMap` — a proposed immutable metadata record **which may optionally**
+identify a spatial yield surface, source harvest, nominal resolution, storage
+URI and digest. The draft does not require published payload bytes.
 
 ## 3. Endpoints
 
@@ -28,19 +30,22 @@ location, source harvest record, resolution, storage URI, and digest.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Yield maps reference BrAPI `Study` and `Location` and GenX `CropCycle` and
-  `HarvestRecord` by identifier; they do not duplicate those resources.
+- The draft may carry optional raw-string `studyDbId`, `locationDbId`,
+  `cropCycleDbId` and `harvestRecordDbId`. No typed or verified authoritative
+  join to BrAPI or GenX resources is established.
 - A yield map is not a BrAPI data resource and must not be treated as one.
-- Map bytes are not transported by this API. The record names and verifies the
-  payload; retrieval uses the referenced storage URI.
+- No map bytes are transported by these record operations. `storageUri` and
+  `fileDigest` are optional unvalidated strings; the record does **not** verify
+  that an asset is retrievable or that its bytes match a digest.
 
 ## 5. Invariants
 
 - A published `yieldMapDbId` record never mutates in place.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional versions linked by `supersedes`.
-- New bytes under an existing identity require a new `fileDigest` and hence a
-  new record; silent payload replacement is forbidden.
+- A future published-payload policy could require a new digest and immutable
+  version when bytes change, but the current schema has no such conditional
+  validation, compulsory digest, retrieval contract or independent byte check.
 - `resolutionM` describes the nominal grid, not a guarantee of accuracy or
   interpolation quality.
 - A map record does not imply that the underlying yield was measured, cleaned,
