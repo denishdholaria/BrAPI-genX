@@ -1,7 +1,7 @@
 # BrAPI-GenX — Measurement Scale (Terminology)
 
 Measurement scale and value domain entries describe scales and allowed values.
-BrAPI v2.1 has no measurement scale record.
+Official BrAPI v2.1 already defines `Scale` records and `/brapi/v2/scales` operations. This optional GenX proposal explores independently versioned, namespaced scale-convention metadata; it does not replace an official Scale or establish a mapping to one. The need for a distinct record remains under review.
 
 - `POST /genx/v1/measurement-scales` (`genxRegisterMeasurementScale`) registers one
   `MeasurementScale` (`Schemas/MeasurementScaleNewRequest.yaml`). Same

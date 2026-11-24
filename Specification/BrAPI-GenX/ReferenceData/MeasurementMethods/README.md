@@ -1,8 +1,10 @@
 # BrAPI-GenX — Measurement Methods (Terminology)
 
 Measurement methods record the procedures, equipment, and precision used to
-measure traits. BrAPI v2.1 has methods but GenX adds versioned, namespaced
-method definitions with provenance. They are complementary to VariableTerm.
+measure traits. Official BrAPI v2.1 already includes `Method` records and
+`/brapi/v2/methods` operations; GenX proposes a separate, namespaced,
+immutable method-definition record with provenance. The current draft has
+no typed BrAPI Method or Scale linkage, and does not establish equivalence.
 
 - `POST /genx/v1/measurement-methods` (`genxRegisterMeasurementMethod`) registers one
   `MeasurementMethod` (`Schemas/MeasurementMethodNewRequest.yaml`). Same

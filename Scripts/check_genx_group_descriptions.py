@@ -20,6 +20,7 @@ REVIEWED = frozenset({
     'Core/ServerInfoV3',
     'Interoperability/ConformanceProbe', 'Interoperability/Crosswalk',
     'Interoperability/SchemaMapping',
+    'ReferenceData/MeasurementScale', 'ReferenceData/MeasurementMethods',
 })
 LINK = re.compile(r'\]\(([^)]+)\)')
 

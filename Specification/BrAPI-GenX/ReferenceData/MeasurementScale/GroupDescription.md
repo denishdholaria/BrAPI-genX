@@ -1,1 +1,9 @@
 # Group MeasurementScale
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 087, not an accepted or independently validated standard. Official Breeding Application Programming Interface (BrAPI) version 2.1 already includes `Scale` resources and dedicated `/brapi/v2/scales` operations.
+
+The proposed `MeasurementScale` record uses a namespaced `measurementScaleDbId`, required lifecycle `status` (`active`, `superseded`, `withdrawn`), optional `scaleName`, plain-text `valueDomain`, `supersedes`, and provenance. Proposed GenX operations register, list by optional status, and retrieve such metadata entries. RFC-087 describes identical-identity replay, immutable publication, and conflicts on differing content as **candidate behavior**, not verified persistence or interoperability.
+
+**Boundaries:** The official BrAPI `Scale` describes value types, units, and acceptable values and remains authoritative for official observation-variable exchange. GenX `MeasurementScale` does not redefine it; its name and fields do not establish identity or lossless conversion to a BrAPI Scale. The candidate lacks typed links to official BrAPI Scale and GenX `VariableTerm`; a separate record's necessity and any mapping must be scientifically justified. Requiredness, value-domain structure, and links remain open (D-259–D-261). An operation-neighbor reference is advisory navigation, not a typed relationship.
+
+**Sources:** [GenX module overview](./README.md), [candidate record schema](./Schemas/MeasurementScale.yaml), [registration schema](./Schemas/MeasurementScaleNewRequest.yaml), [draft operation](./MeasurementScale_GET_POST.yaml), [RFC-087](../../RFCs/RFC-087-Measurement-Scale.md), [official BrAPI Scales source](../../../BrAPI-Phenotyping/Scales/README.md), [official Scale schema](../../../BrAPI-Phenotyping/Scales/schemas/Scale.yaml), and [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

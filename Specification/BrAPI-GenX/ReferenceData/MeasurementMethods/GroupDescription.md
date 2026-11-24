@@ -1,1 +1,9 @@
 # Group MeasurementMethods
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 017, not a validated scientific method governance standard. Official Breeding Application Programming Interface (BrAPI) version 2.1 already has `Method` resources and `/brapi/v2/methods` operations.
+
+This group proposes a separately namespaced, immutable `MeasurementMethod` record with required `measurementMethodDbId`, `methodName`, and lifecycle `status` (`active`, `deprecated`, `superseded`). Optional properties describe `methodType`, method scope, procedure, equipment, precision, result unit, `supersedes`, and provenance. Draft operations register, list with optional type/status filters, and retrieve methods. Same-identity replay and changed-payload conflict remain proposal behavior until verified against an independent persistent implementation.
+
+**Boundaries:** Existing BrAPI Method and Scale identities and observation-variable semantics remain unchanged. Although method procedures and equipment may be useful as independent descriptive metadata, a separate GenX record must not be equated to an official BrAPI Method merely by sharing a name. The current schema includes no typed BrAPI Method reference (D-49 remains open); method-type vocabulary (D-48) and structured precision semantics (D-50) also remain unresolved. A precision string or instrument name is not proof of calibration or scientific validation.
+
+**Sources:** [Module overview](./README.md), [candidate method schema](./Schemas/MeasurementMethod.yaml), [registration schema](./Schemas/MeasurementMethodNewRequest.yaml), [draft operation](./MeasurementMethods_GET_POST.yaml), [RFC-017](../../RFCs/RFC-017-Measurement-Methods.md), [official BrAPI Methods source](../../../BrAPI-Phenotyping/Methods/README.md), and [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

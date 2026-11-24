@@ -113,5 +113,29 @@ class GroupEvidenceTests(unittest.TestCase):
                                 for error in self.audit()['errors']))
 
 
+    def test_official_method_scale_sources_are_retained(self):
+        repository = Path(__file__).resolve().parents[1]
+        official = repository / 'Specification/BrAPI-Phenotyping'
+        self.assertIn('/scales:', (official / 'Scales/Scales_GET_POST.yaml').read_text())
+        self.assertIn('/methods:', (official / 'Methods/Methods_GET_POST.yaml').read_text())
+        for path in (
+            'Specification/BrAPI-GenX/ReferenceData/MeasurementScale/README.md',
+            'Specification/BrAPI-GenX/RFCs/RFC-087-Measurement-Scale.md',
+        ):
+            content = (repository / path).read_text()
+            self.assertIn('BrAPI v2.1', content)
+            self.assertIn('/brapi/v2/scales', content)
+            self.assertNotIn('BrAPI v2.1 has no place to record measurement scales', content)
+        for path in (
+            'Specification/BrAPI-GenX/ReferenceData/MeasurementMethods/README.md',
+            'Specification/BrAPI-GenX/RFCs/RFC-017-Measurement-Methods.md',
+        ):
+            self.assertIn('/brapi/v2/methods', (repository / path).read_text())
+
+    def test_reviewed_methods_and_scales_are_pinned(self):
+        self.assertTrue({'ReferenceData/MeasurementScale',
+                         'ReferenceData/MeasurementMethods'}.issubset(REVIEWED))
+
+
 if __name__ == '__main__':
     unittest.main()

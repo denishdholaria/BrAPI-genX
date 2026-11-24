@@ -6,10 +6,12 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record measurement scales and value domains. Scales
-are the routine reference for observation interpretation. Without a record,
-scales arrive as unversioned strings with no stated value domain or provenance,
-so they cannot be audited or reproduced.
+BrAPI v2.1 already defines a Scale resource and dedicated `/brapi/v2/scales`
+operations, including units and permitted values. This GenX proposal explores
+a distinct, immutable, namespaced metadata entry for governing scale
+descriptions across authorities. The necessity of a separate record and its
+mapping to official BrAPI Scale identifiers remain to be demonstrated.
+It must not be presented as filling an absent BrAPI Scale capability.
 
 ## 2. Object
 
@@ -27,8 +29,10 @@ with its scale name, value domain, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Measurement scale entries reference GenX `VariableTerm` by identifier; they
-  do not duplicate those resources.
+- The candidate `MeasurementScale` schema defines no typed link to GenX
+  `VariableTerm` or to the official BrAPI `Scale` resource. Such links are
+  not implied by shared labels or operation-neighbor navigation.
+- Official BrAPI Scale records and operations retain their published meaning.
 - An entry is not a BrAPI Observation and must not be treated as one.
 
 ## 5. Invariants

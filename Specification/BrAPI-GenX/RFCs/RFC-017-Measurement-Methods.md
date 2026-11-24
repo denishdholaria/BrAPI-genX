@@ -6,10 +6,12 @@
 
 ## 1. Problem
 
-BrAPI v2.1 standardizes methods as part of observation variables but GenX
-adds versioned, namespaced method definitions with procedure, equipment,
-precision, and provenance. Without this record, measurement methods cannot be
-governed, versioned, or cited independently of variables.
+BrAPI v2.1 already defines a Method resource and dedicated
+`/brapi/v2/methods` operations alongside observation variables. This GenX
+proposal explores an additional immutable, namespaced method-definition
+record with optional procedure, equipment, precision, and provenance fields.
+It has not established that the official Method model cannot support the
+intended governance workflow, nor that a separate identity is always needed.
 
 ## 2. Object
 
@@ -26,8 +28,9 @@ governed, versioned, or cited independently of variables.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Measurement methods reference BrAPI Method and Scale by identifier where
-  applicable; they do not duplicate those resources.
+- A typed link to an official BrAPI Method or Scale is not present in the
+  current candidate `MeasurementMethod` schema. Equivalence or identity
+  between these resources must not be inferred; D-49 remains open.
 - A GenX measurement method is not a BrAPI Method and must not be treated as
   one.
 
