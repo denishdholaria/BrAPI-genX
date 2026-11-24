@@ -52,9 +52,14 @@ workflows or a complete runtime checkout.
 
 The two workflows failed in approximately 3–5 seconds with no executed job steps,
 on the baseline commit **before** Mission 006 and on subsequent commits.
-The root cause has not been established; check-run annotation content was not
-accessible through this connector. Do not infer Python/test failure from this
-status. Track diagnosis in
+**Maintainer clarification (2026-11-24): monthly GitHub Actions minutes are
+exhausted and the account's usage budget is expected to reset on 2026-12-01.**
+This is maintainer-provided billing information, not independently checked
+against account usage records; the behavior is consistent with that condition.
+Do not infer Python/test failure from the pre-step failures. Until the reset,
+run relevant local checks where possible; on or after 2026-12-01, rerun both
+hosted workflows, inspect their real results, and preserve a commit-pinned
+verification record. Track follow-up in
 [GitHub issue #15](https://github.com/denishdholaria/BrAPI-genX/issues/15).
 
 ## Scientific maintainer decision
@@ -71,8 +76,9 @@ and `docs/assessment/BRAPI-GENX-EXPERIMENTAL-PROTOCOL-GENOMIC-DATASET-REVIEW.md`
   route paths or operation identifiers modified.
 - No RFC renumbering, archive deletion, scientific-policy ratification, or
   unsupported maturity promotion.
-- **Immediate:** diagnose CI startup using GitHub's job annotation, then rerun
-  the whole conformance suite and record the exact successful or failing run.
+- **Until 2026-12-01:** continue offline/local verification where possible; hosted
+  checks are budget-blocked per maintainer report. After the reset, rerun both
+  workflows and inspect actual results rather than assuming success.
 - **Then:** maintain the 51-group review queue, review the remaining 39 groups
   converging on GenomicDataset registration in small batches with source-schema
   evidence, and execute a separately authorized decision for the first three.
