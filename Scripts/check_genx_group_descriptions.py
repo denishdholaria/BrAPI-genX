@@ -43,6 +43,7 @@ REVIEWED = frozenset({
     'Genotyping/AssayDesign', 'Genotyping/AssayExecution',
     'Genotyping/VendorOrder', 'Genotyping/MarkerProbe',
     'Genotyping/GenomicDatasets', 'Genotyping/VcfExport',
+    'Genotyping/GenotypeQc', 'Genotyping/GenotypeCallSemantics',
     'Phenotyping/PhenotypeCapture', 'Phenotyping/RepeatedMeasurement',
     'Phenotyping/PhenotypeAnnotation',
     'Geospatial/LocationGeometry', 'Geospatial/FieldGeometry',

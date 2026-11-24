@@ -30,8 +30,9 @@ conventions applied to a BrAPI CallSet.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Semantics records reference BrAPI `CallSet` by identifier; they do not
-  duplicate the CallSet or modify its calls.
+- `callSetDbId` is optional and does not establish a validated,
+  required or authority-checked BrAPI CallSet join. A semantics record
+  does not duplicate the CallSet or modify the underlying calls.
 - A semantics record is not a BrAPI data resource and must not be treated as
   one.
 
@@ -40,8 +41,10 @@ conventions applied to a BrAPI CallSet.
 - A published `genotypeCallSemanticsDbId` record never mutates in place.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional records linked by `supersedes`.
-- A semantics record does not alter BrAPI VariantCall values; it only documents
-  conventions.
+- A semantics record does not alter BrAPI Call values; it only documents
+  candidate conventions. Free-text policies and an unconstrained numeric
+  confidenceThreshold do not establish equivalent missingness or zygosity
+  interpretation across independently produced CallSets.
 - A record does not imply that a call set passed QC, was released, or is
   scientifically valid.
 

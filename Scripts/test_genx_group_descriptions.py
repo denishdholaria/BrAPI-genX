@@ -941,5 +941,60 @@ class GroupEvidenceTests(unittest.TestCase):
         ).read_text())
 
 
+    def test_genotype_qc_and_call_semantics_optional_links(self):
+        root = Path(__file__).resolve().parents[1]
+        genx = root / 'Specification/BrAPI-GenX'
+        cases = (
+            ('GenotypeQc', 'GenotypeQcReport', 'D-190', 'genotypeQcReportDbId',
+             ('genomicDatasetDbId', 'vcfImportDbId', 'metrics')),
+            ('GenotypeCallSemantics', 'GenotypeCallSemantics', 'D-214',
+             'genotypeCallSemanticsDbId',
+             ('callSetDbId', 'missingCallPolicy', 'zygosityEncoding',
+              'confidenceThreshold')),
+        )
+        for module, resource, decision, identifier, optional in cases:
+            with self.subTest(module=module):
+                self.assertIn('Genotyping/' + module, REVIEWED)
+                folder = genx / 'Genotyping' / module
+                description = (folder / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', description)
+                self.assertIn(decision, description)
+                self.assertIn('**Sources:**', description)
+                schema = yaml.safe_load(
+                    (folder / 'Schemas' / (resource + '.yaml')).read_text()
+                )['components']['schemas'][resource]
+                self.assertEqual({identifier, 'status'}, set(schema['required']))
+                self.assertTrue(set(optional).issubset(schema['properties']))
+                for field in optional:
+                    self.assertNotIn(field, schema['required'])
+                request = yaml.safe_load(
+                    (folder / 'Schemas' / (resource + 'NewRequest.yaml')).read_text()
+                )['components']['schemas'][resource + 'NewRequest']
+                self.assertEqual({identifier}, set(request['required']))
+
+        quality = yaml.safe_load(
+            (genx / 'Genotyping/GenotypeQc/Schemas/GenotypeQcReport.yaml').read_text()
+        )['components']['schemas']['GenotypeQcReport']
+        self.assertEqual('object', quality['properties']['metrics']['type'])
+        self.assertNotIn('properties', quality['properties']['metrics'])
+        self.assertNotIn('verdict', quality['properties'])
+        call = yaml.safe_load(
+            (genx / 'Genotyping/GenotypeCallSemantics/Schemas/'
+             'GenotypeCallSemantics.yaml').read_text()
+        )['components']['schemas']['GenotypeCallSemantics']
+        self.assertEqual('number',
+                         call['properties']['confidenceThreshold']['type'])
+        self.assertNotIn('minimum', call['properties']['confidenceThreshold'])
+        self.assertNotIn('maximum', call['properties']['confidenceThreshold'])
+        official = yaml.safe_load(
+            (root / 'Specification/BrAPI-Genotyping/CallSets/'
+             'CallSets_GET.yaml').read_text()
+        )
+        self.assertIn('get', official['paths']['/callsets'])
+        self.assertIn('callSetDbId', [
+            p.get('name') for p in official['paths']['/callsets']['get']['parameters']
+            if isinstance(p, dict)])
+
+
 if __name__ == '__main__':
     unittest.main()

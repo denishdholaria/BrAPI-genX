@@ -29,8 +29,10 @@ applied to a prepared genotyping dataset.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- QC reports reference GenX `GenomicDataset` and `VcfImport` by identifier; they
-  do not duplicate those resources.
+- Optional `genomicDatasetDbId` and `vcfImportDbId` strings may name
+  GenX records, but neither identifier is required nor validated as an
+  existing, authority-matched resource by the candidate schema.
+  Their presence does not prove successful import, data integrity or QC.
 - A QC report is not a BrAPI data resource and must not be treated as one.
 
 ## 5. Invariants
@@ -38,8 +40,10 @@ applied to a prepared genotyping dataset.
 - A published `genotypeQcReportDbId` record never mutates in place.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional reports linked by `supersedes`.
-- `metrics` is opaque to the transport; the metric vocabulary and pass/fail
-  interpretation are governed by the referenced method and provenance.
+- `metrics` is an optional unconstrained object: the current schema
+  provides no mandatory metric keys, value ranges, controlled methods or
+  pass/fail verdict. External method/provenance claims require separate
+  evidence and are not schema-enforced.
 - A report does not imply that a dataset passed, was released, or is scientifically
   valid. Pass/fail policy is separate evidence.
 

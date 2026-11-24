@@ -1,1 +1,9 @@
 # Group GenotypeCallSemantics
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 072. It describes proposed call-interpretation metadata; it does not overwrite official Breeding Application Programming Interface (BrAPI) version 2.1 Calls or provide an independently validated calling model.
+
+The `GenotypeCallSemantics` response schema requires only genotypeCallSemanticsDbId and status; its registration request requires only genotypeCallSemanticsDbId. The optional `callSetDbId` text can name a BrAPI CallSet but is not a validated join, required dataset scope or authority-checked linkage. Optional `missingCallPolicy` and `zygosityEncoding` are free-text strings. `confidenceThreshold` is a number with no defined numeric range, calibrated probability interpretation or unit/scale semantics. The schema has no explicit allele-encoding reference, method version or rule to distinguish policy descriptions from applied calculations.
+
+**Interpretation and conformance boundary:** Two records cannot be declared scientifically comparable solely because their free-text policies match; ploidy, allele representation, missingness conventions, phased/unphased calls and provenance may differ. A registration does not change the underlying Calls or verify that its conventions were applied. D-214–D-216 remain open, and immutable-revision/replay descriptions remain candidate behaviors rather than independently verified service guarantees.
+
+**Sources:** [module overview](./README.md), [record schema](./Schemas/GenotypeCallSemantics.yaml), [registration schema](./Schemas/GenotypeCallSemanticsNewRequest.yaml), [operation](./GenotypeCallSemantics_GET_POST.yaml), [RFC](../../RFCs/RFC-072-Genotype-Call-Semantics.md), [official call sets](../../../BrAPI-Genotyping/CallSets/CallSets_GET.yaml), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

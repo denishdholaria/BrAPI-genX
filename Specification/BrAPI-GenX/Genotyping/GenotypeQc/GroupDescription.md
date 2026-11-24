@@ -1,1 +1,9 @@
 # Group GenotypeQc
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 064. A candidate genotype quality-control (QC) record is not proof that a laboratory run, genomic dataset or official Breeding Application Programming Interface (BrAPI) version 2.1 CallSet passed an accepted quality threshold.
+
+The `GenotypeQcReport` response schema requires only genotypeQcReportDbId and lifecycle status, while the registration request requires only genotypeQcReportDbId. Optional `genomicDatasetDbId` and `vcfImportDbId` string fields can name candidate source records; the schema does not enforce existence, authority, matching data content or successful variant ingestion. `metrics` is an optional unconstrained object rather than a typed, mandatory panel of call rate, sample missingness, duplicate rate, heterozygosity, metric units, thresholds or per-sample results.
+
+**Scientific interpretation boundary:** Neither a metric map nor a record status establishes pass/fail validity, sample-level quality, confidence calibration, release approval, or independently reproducible quality analysis. No verdict field or required laboratory method exists in this schema. Deferred D-190–D-192 remain open; any operation neighbors are advisory navigation and proposed replay/lifecycle semantics are not persistent-service conformance.
+
+**Sources:** [module overview](./README.md), [record schema](./Schemas/GenotypeQcReport.yaml), [registration schema](./Schemas/GenotypeQcReportNewRequest.yaml), [operation](./GenotypeQcReport_GET_POST.yaml), [RFC](../../RFCs/RFC-064-Genotype-Qc.md), [official call sets](../../../BrAPI-Genotyping/CallSets/CallSets_GET.yaml), [candidate genomic dataset](../GenomicDatasets/Schemas/GenomicDataset.yaml), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

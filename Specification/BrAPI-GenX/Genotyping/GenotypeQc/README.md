@@ -1,7 +1,9 @@
 # BrAPI-GenX — Genotype QC (Genomics)
 
-Genotype QC records report quality control outcomes for a prepared genotyping
-dataset. BrAPI v2.1 has no genotype QC report record.
+GenotypeQcReport is a candidate quality-control (QC) metadata record alongside
+official BrAPI version 2.1 genotype resources. Its optional dataset/import
+identifiers and unconstrained metrics object do not establish a validated
+CallSet, required quality measurements or an independently verified verdict.
 
 - `POST /genx/v1/genotype-qc-reports` (`genxRecordGenotypeQcReport`) registers one
   `GenotypeQcReport` (`Schemas/GenotypeQcReportNewRequest.yaml`). Same
