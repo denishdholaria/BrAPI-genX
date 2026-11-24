@@ -6,10 +6,12 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no variant annotation record. Functional variant annotation
-is essential for interpreting genotyping results. Without this record,
-annotations produced by different pipelines cannot be audited, compared, or
-reproduced.
+BrAPI v2.1 provides a `Variant` resource with an open `additionalInfo` object,
+but not the separately identified annotation lifecycle proposed here.
+Functional variant interpretation requires controlled methods and reference
+context to be comparable across pipelines. The present GenX candidate can
+carry annotation metadata; it does not guarantee that an annotation is
+scientifically interpretable, comparable, or independently reproducible.
 
 ## 2. Object
 
@@ -26,10 +28,12 @@ reproduced.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Variant annotations reference BrAPI `Variant` by identifier; they do not
-  duplicate that resource.
-- Variant annotations reference GenX AnalysisMethod by identifier when
-  applicable; they do not duplicate that resource.
+- `variantDbId` is optional and does not establish a validated, authority-
+  matched link to a BrAPI `Variant`; a candidate annotation does not duplicate
+  or amend that official resource.
+- `analysisMethodDbId` is optional, and no exact method-version binding is
+  enforced by this record's schema. A supplied string does not establish that
+  the named analysis was executed.
 - An annotation is not a BrAPI data resource and must not be treated as one.
 
 ## 5. Invariants
@@ -38,8 +42,10 @@ reproduced.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional annotations linked by `supersedes`.
 - A record does not imply scientific validation or approval.
-- Annotation content is opaque to the transport; interpretation is governed
-  by the referenced method and provenance.
+- `annotations` is an optional unconstrained object. No gene, transcript,
+  consequence vocabulary, reference assembly, allele-normalization rule,
+  provenance or method-version constraint is enforced. External scientific
+  interpretation requires independent evidence.
 
 ## 6. Deferred questions
 
