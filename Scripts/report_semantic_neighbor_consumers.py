@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Inventory executable references to semantic-neighbor metadata without asserting semantics.
 
-This is a lexical guard for newly introduced consumer surfaces. It does not
-prove that a consumer invokes an operation or that a relationship is valid.
+This is a lexical guard for newly introduced consumer surfaces. Python source
+comments and syntactic docstrings are excluded. It does not prove that a
+consumer invokes an operation or that a relationship is valid.
 """
 from __future__ import annotations
 
@@ -10,6 +11,8 @@ import argparse
 import json
 from pathlib import Path
 import re
+
+from semantic_neighbor_python_scan import executable_python_lines
 
 ROOT = Path(__file__).resolve().parents[1]
 CODE_ROOTS = ('Scripts', 'src', 'generator')
@@ -42,7 +45,9 @@ def inventory(root: Path, *, reviewed: dict[str, str] | None = None) -> dict:
             if rel in SELF or path.name.startswith('test_') or '__pycache__' in path.parts:
                 continue
             try:
-                lines = path.read_text(encoding='utf-8').splitlines()
+                source = path.read_text(encoding='utf-8')
+                lines = (executable_python_lines(source) if path.suffix == '.py'
+                         else source.splitlines())
             except (OSError, UnicodeError) as exc:
                 problems.append(f'{rel}: cannot inspect source: {exc}')
                 continue
@@ -60,7 +65,7 @@ def inventory(root: Path, *, reviewed: dict[str, str] | None = None) -> dict:
             problems.append(f'{path}: reviewed consumer missing or no longer matches; update the inventory')
     return {'consumerCount': len(findings), 'consumers': findings,
             'problems': sorted(problems),
-            'limitations': ('Literal reference scanner over executable source roots only; '
+            'limitations': ('Literal reference scanner over executable source roots; Python comments and docstrings filtered; '
                             'does not detect indirect/dynamic access or prove semantic safety.')}
 
 

@@ -28,6 +28,24 @@ class ConsumerInventoryTests(unittest.TestCase):
         self.assertEqual([], result['problems'])
         self.assertEqual('validator', result['consumers'][0]['role'])
 
+    def test_module_docstring_only_is_not_a_new_consumer(self):
+        self.write('Scripts/doc.py', '"""Explain semanticNeighborIds in documentation."""\n')
+        self.assertEqual([], inventory(self.root, reviewed={})['problems'])
+
+    def test_comment_only_is_not_a_new_consumer(self):
+        self.write('Scripts/doc.py', '# semanticNeighborIds is a legacy navigation field\n')
+        self.assertEqual([], inventory(self.root, reviewed={})['problems'])
+
+    def test_python_runtime_key_after_docstring_is_still_detected(self):
+        self.write('Scripts/reader.py',
+                   '"""semanticNeighborIds docs"""\n'
+                   'def read(row):\n'
+                   '    return row["semanticNeighborIds"]\n')
+        result = inventory(self.root, reviewed={})
+        self.assertEqual(1, result['consumerCount'])
+        self.assertEqual([3], [x['line'] for x in result['consumers'][0]['hits']])
+        self.assertIn('unreviewed executable', result['problems'][0])
+
     def test_unreviewed_script_fails(self):
         self.write('Scripts/run.py', 'neighbors = item.get("semanticNeighbors")\n')
         result = inventory(self.root, reviewed={})

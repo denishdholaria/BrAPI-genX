@@ -44,6 +44,8 @@ on:
       - 'Scripts/test_semantic_neighbor_lineage.py'
       - 'Scripts/report_semantic_neighbor_consumers.py'
       - 'Scripts/test_semantic_neighbor_consumers.py'
+      - 'Scripts/semantic_neighbor_python_scan.py'
+      - 'Scripts/test_semantic_neighbor_python_scan.py'
       - 'Scripts/validate_semantic_decision_candidate.py'
       - 'Scripts/test_semantic_decision_candidate.py'
       - 'Scripts/verify_breeding_pipeline_cas_trace.py'
@@ -106,6 +108,8 @@ on:
       - 'Scripts/test_semantic_neighbor_lineage.py'
       - 'Scripts/report_semantic_neighbor_consumers.py'
       - 'Scripts/test_semantic_neighbor_consumers.py'
+      - 'Scripts/semantic_neighbor_python_scan.py'
+      - 'Scripts/test_semantic_neighbor_python_scan.py'
       - 'Scripts/validate_semantic_decision_candidate.py'
       - 'Scripts/test_semantic_decision_candidate.py'
       - 'Scripts/verify_breeding_pipeline_cas_trace.py'
@@ -237,6 +241,8 @@ jobs:
         run: python Scripts/test_breeding_pipeline_cas_trace.py
       - name: Test draft decision candidate validator (not authorization)
         run: python Scripts/test_semantic_decision_candidate.py
+      - name: Test Python metadata scanner documentation filtering
+        run: python Scripts/test_semantic_neighbor_python_scan.py
       - name: Test executable consumer regression gate
         run: python Scripts/test_semantic_neighbor_consumers.py
       - name: Test historically retained neighbor provenance
@@ -319,6 +325,7 @@ jobs:
             run_check python Scripts/test_semantic_neighbor_lineage.py
             run_check python Scripts/report_semantic_neighbor_consumers.py
             run_check python Scripts/test_semantic_neighbor_consumers.py
+            run_check python Scripts/test_semantic_neighbor_python_scan.py
             run_check python Scripts/test_semantic_decision_candidate.py
             run_check python Scripts/test_breeding_pipeline_cas_trace.py
             run_check python Scripts/report_semantic_neighbor_inventory.py --check
