@@ -55,7 +55,12 @@ python3 -m py_compile check_semantic_neighbor_evidence.py test_semantic_neighbor
 ```
 
 Result: **12/12 tests passed**, and Python compilation completed. This checks
-a faithful local copy of the committed checker against synthetic fixture trees.
+the **exact committed script and test bytes** (validated by matching Git
+blob object hashes before the final rerun) against synthetic fixture trees.
+
+- Checker Git blob: `15a819e29a34fd045546056d0d78ac6b7301b6ab`.
+- Mutation-test Git blob: `de205a8eb29f419819689299455422265b4d7fe5`.
+- The local and GitHub objects match byte-for-byte by Git blob hashing.
 It is **not** a full repository conformance run.
 
 **Independent connector-backed repository cross-check:** the current GitHub
