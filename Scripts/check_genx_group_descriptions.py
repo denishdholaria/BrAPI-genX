@@ -18,6 +18,8 @@ REVIEWED = frozenset({
     'Instrumentation/Telemetry', 'Genotyping/Genomics',
     'Core/CapabilityMetadata', 'Core/CapabilityNegotiation',
     'Core/ServerInfoV3',
+    'Interoperability/ConformanceProbe', 'Interoperability/Crosswalk',
+    'Interoperability/SchemaMapping',
 })
 LINK = re.compile(r'\]\(([^)]+)\)')
 

@@ -1,1 +1,9 @@
 # Group ConformanceProbe
+
+**Status:** BrAPI-GenX **DEFERRED** candidate under RFC-155; a structural proposal for recording probe evidence, not a ratified conformance framework, an independent test execution, or an official BrAPI version 2.1 resource.
+
+This group sketches an immutable `ConformanceProbe` record with a namespaced `conformanceProbeDbId`, required lifecycle `status` (`active`, `superseded`, `withdrawn`), and optional `probeType`, `targetEndpoint`, `expectedResponse`, `actualResponse`, `supersedes`, and provenance. The draft includes operations to register, list, and retrieve probe records. Its registration request includes `expectedResponse` but not `actualResponse`, even though the response-side record schema contains the latter; the mechanism for establishing an observed result is not settled by these files. Identical-record retry and conflicting same-identity writes are proposed behaviors, not evidence of durable execution.
+
+**Boundaries:** A stored probe assertion cannot itself prove that a network request ran, that the service is independently implemented, that the trace is authentic, or that current security and concurrency behavior conform. This proposal must not be conflated with the repository's executable static conformance checks or an externally instrumented persistent-service test. RFC-155-Q1 through Q3 leave the requiredness of the expected result, probe-type vocabulary, and any `ResearchAsset` linkage open. Historical operation neighbors are advisory navigation only.
+
+**Sources:** [Module overview](./README.md), [record schema](./Schemas/ConformanceProbe.yaml), [registration schema](./Schemas/ConformanceProbeNewRequest.yaml), [proposed operations](./ConformanceProbe_GET_POST.yaml), [deferred RFC-155](../../RFCs/RFC-155-ConformanceProbe.md), and [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

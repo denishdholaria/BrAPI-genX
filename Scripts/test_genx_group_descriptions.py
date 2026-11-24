@@ -78,6 +78,13 @@ class GroupEvidenceTests(unittest.TestCase):
         }
         self.assertTrue(required.issubset(REVIEWED))
 
+    def test_reviewed_interoperability_modules_are_pinned(self):
+        self.assertTrue({
+            'Interoperability/ConformanceProbe',
+            'Interoperability/Crosswalk',
+            'Interoperability/SchemaMapping',
+        }.issubset(REVIEWED))
+
 
 if __name__ == '__main__':
     unittest.main()
