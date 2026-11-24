@@ -6,14 +6,18 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record remote sensing metadata. Remote sensing
-records circulate without a stated platform, sensor, CRS, or provenance, so
-they cannot be used for remote sensing analysis.
+GenX proposes separately identified remote-sensing **metadata** for
+discovery alongside official BrAPI version 2.1 resources. A scientifically
+usable image product also requires a source raster, footprint, calibrated
+bands, timing, spatial reference and processing provenance. The current
+candidate requires none of those fields except record identity, so the
+presence of a catalogue record is not evidence of image usability.
 
 ## 2. Object
 
-`RemoteSensingMetadata` — one immutable remote sensing metadata record, with
-its platform, sensor, acquisition date, CRS, resolution, and provenance.
+`RemoteSensingMetadata` — one proposed immutable discovery record.
+Platform, sensor, acquisition date, coordinate reference, resolution and
+provenance are optional; no source raster or acquisition quality is required.
 
 ## 3. Endpoints
 
@@ -30,9 +34,13 @@ its platform, sensor, acquisition date, CRS, resolution, and provenance.
 
 ## 5. Invariants
 
-- A published `remoteSensingMetadataDbId` record never mutates in place.
-- Replay: same id + identical body replays; same id + different body → 409.
-- Corrections are recorded as additional records linked by `supersedes`.
+- `remoteSensingMetadataDbId` is proposed to be immutable; registration
+  requires this identifier only.
+- Replay is a draft contract: same id + identical body replays; same id +
+  different body → 409, subject to independent service verification.
+- Corrections are proposed as additional records linked by `supersedes`.
+- `platform`, `sensor`, `acquisitionDate`, `crs`, `resolution`, and
+  provenance are optional; none verifies calibrated/georeferenced imagery.
 
 ## 6. Deferred questions
 
