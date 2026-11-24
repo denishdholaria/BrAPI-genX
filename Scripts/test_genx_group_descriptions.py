@@ -737,6 +737,20 @@ class GroupEvidenceTests(unittest.TestCase):
                 self.assertIn(decision, description)
                 self.assertIn('**Sources:**', description)
 
+    def test_analysis_method_and_result_evidence_pinned(self):
+        root = Path(__file__).resolve().parents[1]
+        for module, decision in (
+            ('AnalysisMethods', 'D-24'), ('AnalysisResult', 'D-133'),
+            ('MixedModel', 'D-142'), ('PcaResult', 'D-157'),
+        ):
+            with self.subTest(module=module):
+                self.assertIn('Research/' + module, REVIEWED)
+                description = (root / 'Specification/BrAPI-GenX/Research' /
+                               module / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', description)
+                self.assertIn(decision, description)
+                self.assertIn('**Sources:**', description)
+
 
 if __name__ == '__main__':
     unittest.main()
