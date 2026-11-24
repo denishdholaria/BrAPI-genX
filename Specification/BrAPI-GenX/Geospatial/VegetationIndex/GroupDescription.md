@@ -1,1 +1,9 @@
 # Group VegetationIndex
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 146. `VegetationIndex` proposes a catalogue metadata record—not a measured vegetation-index value, computed raster, verified plant-phenotype observation, or official Breeding Application Programming Interface (BrAPI) version 2.1 result.
+
+The response schema requires only `vegetationIndexDbId` and lifecycle `status`; the registration request requires only the identifier. `indexType`, `indexName`, `acquisitionDate`, `crs` (coordinate reference system), `resolution`, and `provenance` are optional strings or objects. `acquisitionDate` has no date format constraint; `crs` and `resolution` are not structured or validated. Crucially, no numerical index value, satellite/sensor band mapping, image/raster payload reference, algorithm/formula, footprint, atmospheric correction, cloud mask, quality flag, acquisition timestamp, or source image identifier is modelled.
+
+**Scientific and route boundary:** The `indexType` example, such as the normalized difference vegetation index, is an unconstrained label, not evidence of a particular formula or calibrated spectrum. A record cannot prove vegetation condition, canopy biomass, yield, reliable temporal comparison or crop-level identity. The source OpenAPI path is **`/vegetation-indexes`**, with `genxListVegetationIndexes`; the older README's singular `/vegetation-index` and `genxListVegetationIndex` were inconsistent with the authoritative source and require documentation-only correction. D-436–D-438 remain deferred.
+
+**Sources:** [module overview](./README.md), [response schema](./Schemas/VegetationIndex.yaml), [registration schema](./Schemas/VegetationIndexNewRequest.yaml), [operations](./VegetationIndex_GET_POST.yaml), [RFC](../../RFCs/RFC-146-VegetationIndex.md), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).
