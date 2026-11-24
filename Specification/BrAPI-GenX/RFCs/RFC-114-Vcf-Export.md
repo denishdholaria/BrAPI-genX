@@ -6,10 +6,11 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record VCF exports. VCF exports are the routine
-reference for genotyping. Without a record, exports arrive as unversioned
-files with no stated format or provenance, so they cannot be audited or
-reproduced.
+BrAPI v2.1 provides genotype retrieval and `POST /brapi/v2/variantsets/extract`
+to create a VariantSet from selected Calls; this is not itself a verified
+Variant Call Format (VCF) file export. The candidate metadata register does
+not identify an export source, file, digest or VCF version. Its additional
+interoperability value and file semantics require evidence.
 
 ## 2. Object
 
@@ -26,8 +27,10 @@ reproduced.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- VCF export records reference GenX `VcfImport` by identifier; they do not
-  duplicate those resources.
+- The current schema has no `vcfImportDbId`, `genomicDatasetDbId`,
+  `variantSetDbId`, output-file locator or content digest; no typed
+  import/dataset/VariantSet relationship is present and registration is
+  not evidence that a VCF file was generated.
 - A record is not a BrAPI data resource and must not be treated as one.
 
 ## 5. Invariants

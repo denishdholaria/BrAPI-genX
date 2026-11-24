@@ -1,1 +1,9 @@
 # Group VcfExport
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 114, not a verified Variant Call Format (VCF) export, independently retrievable genomic file or accepted BrAPI v2.1 operation.
+
+The proposed response requires only vcfExportDbId and lifecycle status; the request requires only vcfExportDbId. The format string is optional and unconstrained. There is no vcfImportDbId, genomicDatasetDbId, variantSetDbId, input reference, file Uniform Resource Identifier (URI), content digest, export timestamp, reference-assembly identifier, VCF header/record content or validation result. A record can therefore be created without identifying a source dataset, export target, file or VCF version.
+
+**Official and scientific boundary:** BrAPI version 2.1 models VariantSets and supports `POST /brapi/v2/variantsets/extract` to create a VariantSet from selected calls; that operation does not by itself establish VCF file export. The candidate VcfExport does not reference VcfImport despite the earlier RFC claim. It does not establish successful file generation, secure delivery, variant normalization, ploidy preservation or provenance readback. Deferred decisions D-340–D-342 remain open; proposed replay and immutable versioning are not independently tested persistent-service behavior.
+
+**Sources:** [module overview](./README.md), [export schema](./Schemas/VcfExport.yaml), [registration schema](./Schemas/VcfExportNewRequest.yaml), [operation](./VcfExport_GET_POST.yaml), [RFC](../../RFCs/RFC-114-Vcf-Export.md), [official VariantSet extract](../../../BrAPI-Genotyping/VariantSets/VariantSets_Extract_POST.yaml), [candidate import schema](../VcfImport/Schemas/VcfImport.yaml), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

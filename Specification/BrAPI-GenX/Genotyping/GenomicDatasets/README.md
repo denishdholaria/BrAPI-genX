@@ -1,10 +1,10 @@
 # BrAPI-GenX — Genomic Datasets (Molecular Data Preparation)
 
-Genomic datasets record prepared molecular data: reference assembly, pipeline
-provenance, sample/variant counts, access policy, and release status. They
-support reproducibility and publication of genotyping results. BrAPI v2.1
-standardizes variants, call sets, and external matrix references but not dataset
-preparation, pipeline provenance, or release/access policy.
+GenomicDataset proposes metadata alongside official BrAPI version 2.1
+VariantSets, CallSets and ReferenceSets. The current schema has no typed
+VariantSet, CallSet or VariantMatrix identifier; optional pipeline, digest,
+release and access-policy values do not establish reproducibility, released
+files or enforced permissions.
 
 - `POST /genx/v1/genomic-datasets` (`genxRegisterGenomicDataset`) registers one
   `GenomicDataset` (`Schemas/GenomicDatasetNewRequest.yaml`). Same

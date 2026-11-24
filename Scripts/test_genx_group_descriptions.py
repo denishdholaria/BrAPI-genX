@@ -888,5 +888,58 @@ class GroupEvidenceTests(unittest.TestCase):
         ).read_text())
 
 
+    def test_genomic_dataset_vcf_export_source_identity(self):
+        root = Path(__file__).resolve().parents[1]
+        genx = root / 'Specification/BrAPI-GenX'
+        cases = (
+            ('GenomicDatasets', 'GenomicDataset', 'D-36',
+             {'genomicDatasetDbId', 'datasetName', 'datasetType',
+              'referenceAssembly', 'status'}),
+            ('VcfExport', 'VcfExport', 'D-340',
+             {'vcfExportDbId', 'status'}),
+        )
+        for module, resource, decision, required in cases:
+            with self.subTest(module=module):
+                self.assertIn('Genotyping/' + module, REVIEWED)
+                folder = genx / 'Genotyping' / module
+                doc = (folder / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', doc)
+                self.assertIn(decision, doc)
+                self.assertIn('**Sources:**', doc)
+                schema = yaml.safe_load(
+                    (folder / 'Schemas' / (resource + '.yaml')).read_text()
+                )['components']['schemas'][resource]
+                self.assertEqual(required, set(schema['required']))
+                for absent in ('variantSetDbId', 'callSetDbId',
+                               'variantMatrixDbId'):
+                    self.assertNotIn(absent, schema['properties'])
+
+        dataset = yaml.safe_load(
+            (genx / 'Genotyping/GenomicDatasets/Schemas/GenomicDataset.yaml').read_text()
+        )['components']['schemas']['GenomicDataset']
+        self.assertEqual('string', dataset['properties']['referenceAssembly']['type'])
+        for field in ('pipelineName', 'pipelineVersion', 'inputDigest',
+                      'outputDigest', 'accessPolicy', 'releaseStatus'):
+            self.assertNotIn(field, dataset['required'])
+        exported = yaml.safe_load(
+            (genx / 'Genotyping/VcfExport/Schemas/VcfExport.yaml').read_text()
+        )['components']['schemas']['VcfExport']
+        for absent in ('vcfImportDbId', 'genomicDatasetDbId',
+                       'exportFileUri', 'outputDigest'):
+            self.assertNotIn(absent, exported['properties'])
+        self.assertNotIn('format', exported['required'])
+        official = yaml.safe_load(
+            (root / 'Specification/BrAPI-Genotyping/VariantSets/'
+             'VariantSets_Extract_POST.yaml').read_text()
+        )
+        self.assertIn('post', official['paths']['/variantsets/extract'])
+        self.assertIn('variantSetDbId', (
+            genx / 'RFCs/RFC-013-Genomic-Datasets.md'
+        ).read_text())
+        self.assertIn('vcfImportDbId', (
+            genx / 'RFCs/RFC-114-Vcf-Export.md'
+        ).read_text())
+
+
 if __name__ == '__main__':
     unittest.main()

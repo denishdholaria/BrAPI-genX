@@ -9,8 +9,8 @@
 BrAPI v2.1 standardizes variants, call sets, calls, references, and external
 matrix references, but not the prepared dataset as a whole: its reference
 assembly, bioinformatics pipeline provenance, sample/variant counts, access
-policy, and release status. Without this record, genomic datasets cannot be
-cited, compared, or released with provenance.
+policy, and release status. Additional dataset metadata may be useful, but the proposed register must not
+be presented as proof of a released, reproducible or retrievable dataset.
 
 ## 2. Object
 
@@ -27,8 +27,11 @@ cited, compared, or released with provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Genomic datasets reference BrAPI VariantSet, CallSet, and GenX VariantMatrix
-  by identifier; they do not duplicate those resources.
+- The current GenomicDataset schema contains no `variantSetDbId`, `callSetDbId`,
+  or `variantMatrixDbId`, so it defines no typed link to those sources.
+- The free-text `referenceAssembly` field is not a verified mapping to an
+  official BrAPI ReferenceSet. Recorded digest, release and access-policy
+  strings are not proof of checked content, publication or authorization.
 - A genomic dataset is not a VariantSet or VariantMatrix and must not be treated
   as one.
 

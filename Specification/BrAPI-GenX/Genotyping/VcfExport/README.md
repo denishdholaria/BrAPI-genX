@@ -1,7 +1,9 @@
 # BrAPI-GenX — VCF Export (Genotyping)
 
-VCF export records describe VCF exports.
-BrAPI v2.1 has no VCF export record.
+VcfExport is a candidate metadata record, not proof that a Variant Call
+Format (VCF) file was generated. Official BrAPI version 2.1 already supports
+`POST /brapi/v2/variantsets/extract` to create a VariantSet; the GenX record
+has no VcfImport, dataset, output-file or digest reference.
 
 - `POST /genx/v1/vcf-exports` (`genxRegisterVcfExport`) registers one
   `VcfExport` (`Schemas/VcfExportNewRequest.yaml`). Same
