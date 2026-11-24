@@ -78,8 +78,8 @@ All **14 passed** locally, and Python compilation passed.
 
 Local tested blob hashes (verify after GitHub commit):
 
-- checker: `80f93b8eec73b0ce8c2940799fc0f395ff94100f`;
-- tests: `01a669876936b5f54b8b5e9e75cd449a5883a7d8`.
+- checker: `01a669876936b5f54b8b5e9e75cd449a5883a7d8`;
+- tests: `80f93b8eec73b0ce8c2940799fc0f395ff94100f`.
 
 This schema validates *form*, not scientific evidence content or approval
 authority. Choosing a maintainer-ratified authorization mechanism (e.g.
