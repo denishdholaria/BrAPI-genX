@@ -1,1 +1,9 @@
 # Group TrialNetwork
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 109; not a normative or independently conformant scientific experimental-design contract.
+
+This proposed group registers, lists with an optional lifecycle filter, and retrieves immutable namespaced records. Its replay and changed-body conflict rules are **candidate claims**, not persistent service evidence. BrAPI version 2.1 already models Trials spanning multiple Studies and locations. A separately named GenX TrialNetwork record does not provide typed Study membership, environmental arrangement or a confirmed interoperability gap. The candidate `trialNetworkDbId` and optional `name` are not a multi-environment trial design. No typed BrAPI Study or GenX ExperimentalDesign link is defined; D-325–D-327 remain open. The current schema requires a namespaced primary identifier and lifecycle `status`, with other descriptive and provenance properties optional. D-326 remains an open decision.
+
+**Boundaries:** Official Breeding Application Programming Interface (BrAPI) version 2.1 Trials, Studies and Observation Units retain their existing resource identities and semantics. Neither candidate names nor advisory operation-neighbor relationships establish scientific equivalence, field ownership, experimental treatments, spatial positions, multi-study membership, or production conformance.
+
+**Sources:** [module overview](./README.md), [candidate schema](./Schemas/TrialNetwork.yaml), [registration schema](./Schemas/TrialNetworkNewRequest.yaml), [draft operations](./TrialNetwork_GET_POST.yaml), [RFC-109](../../RFCs/RFC-109-Trial-Network.md), [official BrAPI source](../../../BrAPI-Core/Trials/README.md), [official Studies](../../../BrAPI-Core/Studies/README.md), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

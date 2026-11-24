@@ -6,10 +6,7 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record trial networks and MET designs. Trial
-networks are the routine reference for experimental design. Without a record,
-networks arrive as unversioned notes with no stated name or provenance, so
-they cannot be audited or reproduced.
+BrAPI version 2.1 already models Trials spanning multiple Studies and locations. A separately named GenX TrialNetwork record does not provide typed Study membership, environmental arrangement or a confirmed interoperability gap.
 
 ## 2. Object
 
@@ -27,8 +24,7 @@ name and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Trial network records reference BrAPI `Study` by identifier; they do not
-  duplicate those resources.
+- The proposed record has no typed link to an official BrAPI identity and no validated identity mapping. The candidate `trialNetworkDbId` and optional `name` are not a multi-environment trial design. No typed BrAPI Study or GenX ExperimentalDesign link is defined; D-325–D-327 remain open. D-326 remains open.
 - A record is not a BrAPI Study and must not be treated as one.
 
 ## 5. Invariants

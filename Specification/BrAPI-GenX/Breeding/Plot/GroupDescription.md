@@ -1,1 +1,9 @@
 # Group Plot
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 107; not a normative or independently conformant scientific experimental-design contract.
+
+This proposed group registers, lists with an optional lifecycle filter, and retrieves immutable namespaced records. Its replay and changed-body conflict rules are **candidate claims**, not persistent service evidence. BrAPI version 2.1 Observation Units already represent a `plot` hierarchy level. A separate GenX plot identity must be justified and mapped explicitly; absence of a `/plots` route does not prove a missing plot concept. A candidate `plotDbId` is not an official observation-unit ID, level code or validated field position. `fieldDbId` and `plotName` are optional strings and no typed Study, Location or GenX ExperimentalDesign link is defined. The current schema requires a namespaced primary identifier and lifecycle `status`, with other descriptive and provenance properties optional. D-321 remains an open decision.
+
+**Boundaries:** Official Breeding Application Programming Interface (BrAPI) version 2.1 Trials, Studies and Observation Units retain their existing resource identities and semantics. Neither candidate names nor advisory operation-neighbor relationships establish scientific equivalence, field ownership, experimental treatments, spatial positions, multi-study membership, or production conformance.
+
+**Sources:** [module overview](./README.md), [candidate schema](./Schemas/Plot.yaml), [registration schema](./Schemas/PlotNewRequest.yaml), [draft operations](./Plot_GET_POST.yaml), [RFC-107](../../RFCs/RFC-107-Plot.md), [official BrAPI source](../../../BrAPI-Phenotyping/ObservationUnits/Schemas/ObservationUnitLevel.yaml), [official Observation Unit request](../../../BrAPI-Phenotyping/ObservationUnits/Schemas/ObservationUnitNewRequest.yaml), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

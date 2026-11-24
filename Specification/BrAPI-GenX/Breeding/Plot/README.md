@@ -1,7 +1,7 @@
 # BrAPI-GenX — Plot (Experimental Design)
 
 Plot identity records describe plots in experimental designs.
-BrAPI v2.1 has no plot identity record.
+BrAPI version 2.1 Observation Units already represent a `plot` hierarchy level. A separate GenX plot identity must be justified and mapped explicitly; absence of a `/plots` route does not prove a missing plot concept.
 
 - `POST /genx/v1/plots` (`genxRegisterPlot`) registers one
   `Plot` (`Schemas/PlotNewRequest.yaml`). Same

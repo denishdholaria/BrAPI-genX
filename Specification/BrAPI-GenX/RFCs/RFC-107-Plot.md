@@ -6,10 +6,7 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record plot identities. Plots are the routine
-reference for experimental design. Without a record, plots arrive as unversioned
-notes with no stated field, name, or provenance, so they cannot be audited or
-reproduced.
+BrAPI version 2.1 Observation Units already represent a `plot` hierarchy level. A separate GenX plot identity must be justified and mapped explicitly; absence of a `/plots` route does not prove a missing plot concept.
 
 ## 2. Object
 
@@ -27,8 +24,7 @@ provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Plot records reference BrAPI `Study`/`Location` by identifier; they do not
-  duplicate those resources.
+- The proposed record has no typed link to an official BrAPI identity and no validated identity mapping. A candidate `plotDbId` is not an official observation-unit ID, level code or validated field position. `fieldDbId` and `plotName` are optional strings and no typed Study, Location or GenX ExperimentalDesign link is defined. D-321 remains open.
 - A plot record is not a BrAPI Observation and must not be treated as one.
 
 ## 5. Invariants

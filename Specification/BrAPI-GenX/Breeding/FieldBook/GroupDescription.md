@@ -1,1 +1,9 @@
 # Group FieldBook
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 108; not a normative or independently conformant scientific experimental-design contract.
+
+This proposed group registers, lists with an optional lifecycle filter, and retrieves immutable namespaced records. Its replay and changed-body conflict rules are **candidate claims**, not persistent service evidence. BrAPI version 2.1 already provides Studies, Observation Units and variables. A separate candidate FieldBook definition may record capture-configuration provenance, but it is not established as an interoperable capture schema merely by naming it. The candidate `fieldBookDbId` is not a BrAPI Study or Location identity. Optional free-text `definition` and `fieldDbId` do not bind observation variables or define validated field layout; no typed GenX ExperimentalDesign reference exists. The current schema requires a namespaced primary identifier and lifecycle `status`, with other descriptive and provenance properties optional. D-324 remains an open decision.
+
+**Boundaries:** Official Breeding Application Programming Interface (BrAPI) version 2.1 Trials, Studies and Observation Units retain their existing resource identities and semantics. Neither candidate names nor advisory operation-neighbor relationships establish scientific equivalence, field ownership, experimental treatments, spatial positions, multi-study membership, or production conformance.
+
+**Sources:** [module overview](./README.md), [candidate schema](./Schemas/FieldBook.yaml), [registration schema](./Schemas/FieldBookNewRequest.yaml), [draft operations](./FieldBook_GET_POST.yaml), [RFC-108](../../RFCs/RFC-108-Field-Book.md), [official BrAPI source](../../../BrAPI-Core/Studies/README.md), [official Observation Units](../../../BrAPI-Phenotyping/ObservationUnits/README.md), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

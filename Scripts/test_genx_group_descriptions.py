@@ -242,6 +242,31 @@ class GroupEvidenceTests(unittest.TestCase):
                 self.assertIn('STRUCTURAL_DRAFT', desc)
                 self.assertIn(decision, desc)
 
+    def test_experimental_design_group_review_is_pinned(self):
+        self.assertTrue({'Breeding/Plot', 'Breeding/FieldBook',
+                         'Breeding/TrialNetwork'}.issubset(REVIEWED))
+
+    def test_official_plot_and_multistudy_semantics_are_preserved(self):
+        root = Path(__file__).resolve().parents[1]
+        level = (root / 'Specification/BrAPI-Phenotyping/ObservationUnits/Schemas'
+                 / 'ObservationUnitLevel.yaml').read_text()
+        self.assertIn('plot,', level)
+        trials = (root / 'Specification/BrAPI-Core/Trials/README.md').read_text()
+        self.assertIn('multiple studies', trials)
+        for module, rfc, decision in (
+            ('Plot', 'RFC-107-Plot.md', 'D-321'),
+            ('FieldBook', 'RFC-108-Field-Book.md', 'D-324'),
+            ('TrialNetwork', 'RFC-109-Trial-Network.md', 'D-326'),
+        ):
+            with self.subTest(module=module):
+                proposal = (root / 'Specification/BrAPI-GenX/RFCs' / rfc).read_text()
+                self.assertIn('no typed', proposal)
+                self.assertIn(decision, proposal)
+                description = (root / 'Specification/BrAPI-GenX/Breeding' /
+                               module / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', description)
+                self.assertIn(decision, description)
+
 
 if __name__ == '__main__':
     unittest.main()

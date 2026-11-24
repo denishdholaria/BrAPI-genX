@@ -6,10 +6,7 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record field book definitions. Field books are the
-routine reference for experimental design. Without a record, field books arrive
-as unversioned notes with no stated field, definition, or provenance, so they
-cannot be audited or reproduced.
+BrAPI version 2.1 already provides Studies, Observation Units and variables. A separate candidate FieldBook definition may record capture-configuration provenance, but it is not established as an interoperable capture schema merely by naming it.
 
 ## 2. Object
 
@@ -27,8 +24,7 @@ linkage, definition, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Field book records reference BrAPI `Study`/`Location` by identifier; they do
-  not duplicate those resources.
+- The proposed record has no typed link to an official BrAPI identity and no validated identity mapping. The candidate `fieldBookDbId` is not a BrAPI Study or Location identity. Optional free-text `definition` and `fieldDbId` do not bind observation variables or define validated field layout; no typed GenX ExperimentalDesign reference exists. D-324 remains open.
 - A record is not a BrAPI Observation and must not be treated as one.
 
 ## 5. Invariants

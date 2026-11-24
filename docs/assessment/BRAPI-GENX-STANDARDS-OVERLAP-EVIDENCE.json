@@ -107,6 +107,27 @@
       "resource": "CropTraitDictionary",
       "target": "VariableTerm",
       "decision": "D-264"
+    },
+    {
+      "module": "Breeding/Plot",
+      "rfc": "RFC-107-Plot.md",
+      "resource": "Plot",
+      "target": "ExperimentalDesign",
+      "decision": "D-321"
+    },
+    {
+      "module": "Breeding/FieldBook",
+      "rfc": "RFC-108-Field-Book.md",
+      "resource": "FieldBook",
+      "target": "ExperimentalDesign",
+      "decision": "D-324"
+    },
+    {
+      "module": "Breeding/TrialNetwork",
+      "rfc": "RFC-109-Trial-Network.md",
+      "resource": "TrialNetwork",
+      "target": "Study",
+      "decision": "D-326"
     }
   ]
 }

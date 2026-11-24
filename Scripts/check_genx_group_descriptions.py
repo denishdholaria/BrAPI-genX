@@ -29,6 +29,7 @@ REVIEWED = frozenset({
     'ReferenceData/InstitutionCode',
     'ReferenceData/ExternalVocabulary', 'ReferenceData/TerminologyVersion',
     'ReferenceData/ReferenceDataVersion', 'ReferenceData/CropTraitDictionary',
+    'Breeding/Plot', 'Breeding/FieldBook', 'Breeding/TrialNetwork',
 })
 LINK = re.compile(r'\]\(([^)]+)\)')
 
