@@ -1,1 +1,9 @@
 # Group GeneticGain
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 046. This record proposes a genetic-gain estimate, not a validated rate of genetic improvement or an official Breeding Application Programming Interface (BrAPI) version 2.1 Program or Trait result.
+
+The response schema requires `geneticGainRecordDbId`, `programDbId`, `traitDbId`, `gainValue`, and lifecycle `status`; the registration request requires all except status. `gainValue` is a mandatory number but `unit`, `period`, `method`, and `provenance` are optional. The candidate does not enforce whether the value is absolute gain or rate per year, a baseline genetic mean, reference cohort, generation interval, environmental adjustment, estimator uncertainty, or cross-year comparability. `unit` and `period` are free-text strings, not structured quantities or validated temporal intervals.
+
+**Scientific and identity boundary:** Required Program and Trait identifiers are plain strings rather than authority-checked links; a successful registration does not prove correct program ownership, reliable trait equivalence, or observed genetic progress. The optional `method` string is not a typed or versioned `AnalysisMethod` reference; `analysisMethodDbId` is not modelled. Deferred D-136–D-138 remain unresolved. Claims of immutability, idempotent replay and supersession are draft contract statements, not independent evidence of a persistent runtime. Genetic gain cannot be inferred solely from a nearby stability or genomic prediction result.
+
+**Sources:** [module overview](./README.md), [response schema](./Schemas/GeneticGainRecord.yaml), [registration schema](./Schemas/GeneticGainRecordNewRequest.yaml), [endpoint operations](./GeneticGain_GET_POST.yaml), [RFC](../../RFCs/RFC-046-Genetic-Gain.md), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).
