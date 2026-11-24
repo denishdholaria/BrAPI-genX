@@ -1,7 +1,13 @@
 # BrAPI-GenX — Extreme Weather (Environment)
 
-Extreme weather records capture severe weather events affecting a location.
-BrAPI v2.1 has no extreme weather record.
+ExtremeWeatherEvent proposes metadata about a reported extreme-weather
+event, not a calibrated meteorological warning or independently verified
+crop-impact estimate. Location, event time and free-text event type are
+required; severity and provenance are optional.
+
+No measured meteorological threshold, climatological baseline, observation
+station or authoritative location join is required. Official BrAPI version
+2.1 location resources remain unchanged.
 
 - `POST /genx/v1/extreme-weather-events` (`genxRecordExtremeWeather`) registers one
   `ExtremeWeatherEvent` (`Schemas/ExtremeWeatherEventNewRequest.yaml`). Same
