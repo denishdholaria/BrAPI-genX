@@ -1346,5 +1346,80 @@ class GroupEvidenceTests(unittest.TestCase):
             self.assertIn(deferred, (genx / 'RFCs' / rfc).read_text())
 
 
+    def test_haplotype_eqtl_methylation_scientific_payloads_are_opaque(self):
+        root = Path(__file__).resolve().parents[1]
+        genx = root / 'Specification/BrAPI-GenX'
+        cases = (
+            ('HaplotypeAnalysis', 'haplotypeAnalysisDbId', 'haplotypes',
+             'D-175', 'RFC-059-Haplotype-Analysis.md'),
+            ('ExpressionQtl', 'expressionQtlDbId', 'qtls',
+             'D-172', 'RFC-058-Expression-Qtl.md'),
+            ('MethylationAnalysis', 'methylationAnalysisDbId', 'regions',
+             'D-169', 'RFC-057-Methylation-Analysis.md'),
+        )
+        for name, identity, result_field, decision, rfc in cases:
+            with self.subTest(group=name):
+                self.assertIn('Genotyping/' + name, REVIEWED)
+                folder = genx / 'Genotyping' / name
+                description = (folder / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', description)
+                self.assertIn('**Sources:**', description)
+                self.assertIn(decision, description)
+                response = yaml.safe_load(
+                    (folder / 'Schemas' / (name + '.yaml')).read_text()
+                )['components']['schemas'][name]
+                request = yaml.safe_load(
+                    (folder / 'Schemas' / (name + 'NewRequest.yaml')).read_text()
+                )['components']['schemas'][name + 'NewRequest']
+                self.assertEqual({identity, 'analysisMethodDbId', 'status'},
+                                 set(response['required']))
+                self.assertEqual({identity, 'analysisMethodDbId'},
+                                 set(request['required']))
+                for field in (result_field, 'jobDbId', 'studyDbId', 'provenance'):
+                    self.assertIn(field, response['properties'])
+                    self.assertNotIn(field, response['required'])
+                    self.assertNotIn(field, request['required'])
+                self.assertEqual('object',
+                                 response['properties'][result_field]['type'])
+                self.assertNotIn('properties',
+                                 response['properties'][result_field])
+                for absent in ('methodVersion', 'genomicDatasetDbId'):
+                    self.assertNotIn(absent, response['properties'])
+                    self.assertNotIn(absent, request['properties'])
+                self.assertIn('not modelled',
+                              (genx / 'RFCs' / rfc).read_text())
+
+        # Examples nested inside opaque objects must not become required
+        # statistical, phasing or methylation fields by assertion.
+        hap = yaml.safe_load(
+            (genx / 'Genotyping/HaplotypeAnalysis/Schemas/'
+             'HaplotypeAnalysis.yaml').read_text()
+        )['components']['schemas']['HaplotypeAnalysis']
+        eqtl = yaml.safe_load(
+            (genx / 'Genotyping/ExpressionQtl/Schemas/'
+             'ExpressionQtl.yaml').read_text()
+        )['components']['schemas']['ExpressionQtl']
+        methyl = yaml.safe_load(
+            (genx / 'Genotyping/MethylationAnalysis/Schemas/'
+             'MethylationAnalysis.yaml').read_text()
+        )['components']['schemas']['MethylationAnalysis']
+        for document, property_name in (
+            (hap, 'haplotypes'), (eqtl, 'qtls'), (methyl, 'regions')
+        ):
+            self.assertNotIn('required',
+                             document['properties'][property_name])
+            self.assertNotIn('additionalProperties',
+                             document['properties'][property_name])
+        for key in ('pValue', 'pValueThreshold', 'methylationLevel',
+                    'haplotypeLength', 'phaseConfidence', 'referenceAssembly'):
+            for document in (hap, eqtl, methyl):
+                self.assertNotIn(key, document['properties'])
+        method = yaml.safe_load(
+            (genx / 'Research/AnalysisMethods/Schemas/'
+             'AnalysisMethod.yaml').read_text()
+        )['components']['schemas']['AnalysisMethod']
+        self.assertIn('methodVersion', method['required'])
+
+
 if __name__ == '__main__':
     unittest.main()
