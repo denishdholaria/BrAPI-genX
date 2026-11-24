@@ -6,9 +6,12 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no heritability estimate record. Heritability is essential
-for breeding value estimation. Without this record, heritability estimates
-cannot be audited or reproduced.
+The GenX proposal introduces a separately identified statistical heritability
+estimate alongside official BrAPI version 2.1 records. Interpretation depends
+on population, sampling design, chosen estimand, variance components and
+method/version assumptions. The present candidate does not require all of
+these and therefore does not alone establish an auditable or reproducible
+heritability analysis.
 
 ## 2. Object
 
@@ -25,8 +28,8 @@ cannot be audited or reproduced.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Heritability estimates reference GenX AnalysisMethod by identifier; they
-  do not duplicate that resource.
+- `analysisMethodDbId` is a required string reference, not a required exact
+  `methodVersion` or independently verified, authority-matched method join.
 - An estimate is not a BrAPI data resource and must not be treated as one.
 
 ## 5. Invariants
@@ -34,14 +37,18 @@ cannot be audited or reproduced.
 - A published `heritabilityEstimateDbId` record never mutates in place.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional estimates linked by `supersedes`.
-- `analysisMethodDbId` is required.
-- An estimate does not imply scientific validation or approval.
+- `analysisMethodDbId` is required, but `heritabilityValue`, `traitDbId`,
+  `studyDbId`, `jobDbId` and provenance are optional.
+- The numeric `heritabilityValue` has no enforced heritability estimand,
+  variance-decomposition model, uncertainty interval, or interpretation range.
+- An estimate does not imply scientific validation, comparable genetic
+  parameters, breeding-value accuracy or independent reproducibility.
 
 ## 6. Deferred questions
 
 - D-148: Should `heritabilityValue` be required? (Current: optional.)
 - D-149: Should heritability estimates link to GenX `GenomicDataset`?
-  (Current: optional, not required.)
+  (Current: `genomicDatasetDbId` is not modelled in this schema.)
 - D-150: Should heritability be a structured quantity? (Current: number.)
 
 ## 7. Classification
