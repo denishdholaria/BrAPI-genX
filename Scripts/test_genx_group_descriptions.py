@@ -1578,5 +1578,77 @@ class GroupEvidenceTests(unittest.TestCase):
         self.assertNotIn('Breeding/CrossingSchedule', REVIEWED)
 
 
+    def test_environment_soil_and_remote_sensing_are_not_validated_measurements(self):
+        root = Path(__file__).resolve().parents[1]
+        genx = root / 'Specification/BrAPI-GenX'
+        cases = (
+            ('Environment/ExtremeWeather', 'ExtremeWeatherEvent',
+             'D-124', {'extremeWeatherEventDbId', 'locationDbId',
+                       'occurredAt', 'eventType'}),
+            ('Environment/SoilChemistry', 'SoilChemistry', 'D-229',
+             {'soilChemistryDbId'}),
+            ('Geospatial/RemoteSensingMetadata', 'RemoteSensingMetadata',
+             'D-433', {'remoteSensingMetadataDbId'}),
+        )
+        for module, resource, decision, required in cases:
+            with self.subTest(module=module):
+                self.assertIn(module, REVIEWED)
+                folder = genx / module
+                doc = (folder / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', doc)
+                self.assertIn('**Sources:**', doc)
+                self.assertIn(decision, doc)
+                record = yaml.safe_load(
+                    (folder / 'Schemas' / (resource + '.yaml')).read_text()
+                )['components']['schemas'][resource]
+                request = yaml.safe_load(
+                    (folder / 'Schemas' / (resource + 'NewRequest.yaml')).read_text()
+                )['components']['schemas'][resource + 'NewRequest']
+                self.assertEqual(required | {'status'}, set(record['required']))
+                self.assertEqual(required, set(request['required']))
+
+        weather = yaml.safe_load(
+            (genx / 'Environment/ExtremeWeather/Schemas/'
+             'ExtremeWeatherEvent.yaml').read_text()
+        )['components']['schemas']['ExtremeWeatherEvent']
+        self.assertEqual('date-time', weather['properties']['occurredAt']['format'])
+        self.assertNotIn('enum', weather['properties']['eventType'])
+        self.assertEqual({'low', 'moderate', 'high', 'extreme'},
+                         set(weather['properties']['severity']['enum']))
+        self.assertNotIn('severity', weather['required'])
+        self.assertNotIn('weatherObservationDbId', weather['properties'])
+
+        soil = yaml.safe_load(
+            (genx / 'Environment/SoilChemistry/Schemas/'
+             'SoilChemistry.yaml').read_text()
+        )['components']['schemas']['SoilChemistry']
+        for field in ('siteDbId', 'texture', 'chemistry',
+                      'moistureDepthCm', 'provenance'):
+            self.assertIn(field, soil['properties'])
+            self.assertNotIn(field, soil['required'])
+        self.assertEqual('object', soil['properties']['chemistry']['type'])
+        self.assertNotIn('properties', soil['properties']['chemistry'])
+        self.assertEqual('number', soil['properties']['moistureDepthCm']['type'])
+        for field in ('soilProfileDbId', 'moistureContent', 'sampledAt'):
+            self.assertNotIn(field, soil['properties'])
+
+        sensing = yaml.safe_load(
+            (genx / 'Geospatial/RemoteSensingMetadata/Schemas/'
+             'RemoteSensingMetadata.yaml').read_text()
+        )['components']['schemas']['RemoteSensingMetadata']
+        for field in ('platform', 'sensor', 'acquisitionDate', 'crs',
+                      'resolution', 'provenance'):
+            self.assertIn(field, sensing['properties'])
+            self.assertNotIn(field, sensing['required'])
+        for field in ('acquisitionDate', 'crs', 'resolution'):
+            self.assertEqual('string', sensing['properties'][field]['type'])
+        self.assertNotIn('format', sensing['properties']['acquisitionDate'])
+        for absent in ('rasterRef', 'sourceImageDbId',
+                       'bandMapping', 'cloudMaskDbId'):
+            self.assertNotIn(absent, sensing['properties'])
+        self.assertIn('D-435', (
+            genx / 'RFCs/RFC-145-RemoteSensingMetadata.md').read_text())
+
+
 if __name__ == '__main__':
     unittest.main()

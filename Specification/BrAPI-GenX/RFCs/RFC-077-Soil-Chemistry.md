@@ -6,16 +6,17 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record soil texture, chemistry, and moisture
-observations. These are the routine inputs to agronomic and environmental
-analysis. Without a record, soil observations arrive as unversioned figures
-with no stated site, depth, or provenance, so they cannot be audited or
-reproduced.
+GenX proposes separately identified soil texture and chemistry metadata
+alongside official BrAPI version 2.1 observations and locations.
+Soil analysis requires a known sampling site, depth, date, laboratory
+method, analytes and units to be comparable. The current candidate requires
+none of those data on registration, and a generic chemistry object cannot
+independently substantiate scientific reproducibility.
 
 ## 2. Object
 
-`SoilChemistry` — one immutable record of soil texture, chemistry, and
-moisture observations for a site, with depth and provenance.
+`SoilChemistry` — one proposed immutable record; texture, site, chemistry,
+measurement depth and provenance are optional and unvalidated.
 
 ## 3. Endpoints
 
@@ -28,17 +29,24 @@ moisture observations for a site, with depth and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Soil chemistry records reference BrAPI `Location` and GenX `SoilProfile` by
-  identifier; they do not duplicate those resources.
+- `siteDbId` is an optional plain string; the schema does not enforce an
+  authority-matched BrAPI Location or a GenX SoilProfile relationship.
+  No `soilProfileDbId` field is modelled. Advisory operation neighbors
+  do not establish typed links.
 - A soil chemistry record is not a BrAPI Observation and must not be treated
   as one.
 
 ## 5. Invariants
 
-- A published `soilChemistryDbId` record never mutates in place.
-- Replay: same id + identical body replays; same id + different body → 409.
-- Corrections are recorded as additional records linked by `supersedes`.
-- A record does not imply that the soil was validated or certified.
+- A published `soilChemistryDbId` is proposed to be immutable.
+- Replay: same id + identical body replays; same id + different body → 409;
+  this requires independent persistent-service testing.
+- Corrections are proposed as additional records linked by `supersedes`.
+- Only `soilChemistryDbId` is required on registration. `chemistry` is an
+  optional, unconstrained object; `moistureDepthCm` indicates a depth,
+  not a validated moisture-content measurement.
+- A record does not imply analytically comparable results, independent
+  laboratory validation, soil certification or scientific approval.
 
 ## 6. Deferred questions
 
