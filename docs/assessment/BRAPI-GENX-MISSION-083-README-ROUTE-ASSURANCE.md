@@ -18,7 +18,7 @@ Mission 080 found a concrete drift in `Geospatial/VegetationIndex/README.md`: th
 
 ## Evidence and limitations
 
-The seven synthetic tests in `Scripts/test_genx_readme_routes.py` **ran locally** using only the standard Python library and passed. The authoritative registry was independently checked in GitHub: three VegetationIndex entries use `GET /vegetation-indexes`, `POST /vegetation-indexes` and `GET /vegetation-indexes/{vegetationIndexDbId}` with matching GenX operation IDs. The corrected README from Mission 080 claims the corresponding `/genx/v1` paths.
+The eight synthetic tests in `Scripts/test_genx_readme_routes.py` **ran locally** using only the standard Python library and passed. The authoritative registry was independently checked in GitHub: three VegetationIndex entries use `GET /vegetation-indexes`, `POST /vegetation-indexes` and `GET /vegetation-indexes/{vegetationIndexDbId}` with matching GenX operation IDs. The corrected README from Mission 080 claims the corresponding `/genx/v1` paths.
 
 These tests run on isolated temporary directory fixtures, not a cloned full repo. The complete workflow, original suite, and live conformance have **not** executed on the stacked repository branch in this environment. This is not proof of end-to-end readiness.
 
@@ -26,7 +26,7 @@ These tests run on isolated temporary directory fixtures, not a cloned full repo
 
 ```sh
 python Scripts/test_genx_readme_routes.py
-python Scripts/audit_genx_readme_routes.py --module Geospatial/VegetationIndex --strict
+python Scripts/audit_genx_readme_routes.py --module Geospatial/VegetationIndex --strict --require-coverage
 python Scripts/test_conformance_workflow_scope.py
 python Scripts/test_genx_group_descriptions.py
 python Scripts/check_genx_group_descriptions.py
