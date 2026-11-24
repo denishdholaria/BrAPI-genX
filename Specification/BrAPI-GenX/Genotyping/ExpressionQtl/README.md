@@ -1,7 +1,12 @@
 # BrAPI-GenX — Expression QTL (Scientific Compute)
 
-Expression QTL results record expression quantitative trait loci and provenance.
-BrAPI v2.1 has no expression QTL result record.
+ExpressionQtl proposes a record for expression quantitative trait loci (eQTL)
+analysis, not a validated regulatory association. Its `qtls` data are
+optional and unconstrained. No expression platform, tissue, sample identity,
+statistical test, multiple-testing correction or effect-size model is required.
+
+Official BrAPI version 2.1 records remain unchanged. A candidate eQTL object
+does not establish gene regulation, statistical significance or causality.
 
 - `POST /genx/v1/expression-qtls` (`genxRecordExpressionQtl`) registers one
   `ExpressionQtl` (`Schemas/ExpressionQtlNewRequest.yaml`). Same
