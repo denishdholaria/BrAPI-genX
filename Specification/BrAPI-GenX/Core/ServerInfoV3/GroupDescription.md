@@ -1,1 +1,9 @@
 # Group ServerInfoV3
+
+**Status:** Experimental BrAPI-GenX **candidate** capability-discovery document, served at a GenX-native route; not the official BrAPI version 2.1 ServerInfo response, and not an official released BrAPI version 3. The `3.0-draft` strings in schema examples are illustrative draft tokens, not a claim of an official release.
+
+The proposed read-only `GET /genx/v1/serverinfo` returns a `ServerInfoV3` document retaining version 2.1 `ServerInfo` fields such as `calls` while adding `brapiVersions` and `capabilities`, with optional `authProfiles`. A capability advertises a name, version tokens, and a summary of methods; an experimental optional `operations[]` mapping provides exact method, route template, and operation identifiers. The draft also allows optional `jobs.jobTypes[]` to enumerate supported job-type tokens. These are proposed discovery and negotiation aids, not an independently verified implementation guarantee.
+
+**Boundaries:** A method summary alone cannot locate a route, and an advertised capability or scope never grants access or proves that a backend enforces authorization. Unknown capability names and version strings must not be promoted into invented official compatibility claims; conservative exact-token behavior is discussed in the local audit. A client talking only to an official version 2.1 server uses its existing `calls` information instead of assuming GenX support. The operation mapping and version semantics (D-21), authentication/scope meaning (D-22), and job-type advertisement semantics (D-23) remain unresolved. This is distinct from the persisted `CapabilityMetadata` and deferred `CapabilityNegotiation` record proposals.
+
+**Sources:** [Module overview](./README.md), [discovery schema](./Schemas/ServerInfoV3.yaml), [GET operation](./ServerInfoV3_GET.yaml), [capability negotiation audit](./CAPABILITY-NEGOTIATION.md), and [open D-21/D-22/D-23 decisions](../../DECISIONS.md).

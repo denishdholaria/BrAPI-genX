@@ -5,7 +5,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from check_genx_group_descriptions import audit, REL
+from check_genx_group_descriptions import audit, REL, REVIEWED
 
 GOOD = ('# Group Jobs\n\n**Status:** candidate and proposed, not normative.\n\n'
         + 'This module covers a reviewed metadata scope. ' * 10
@@ -66,6 +66,17 @@ class GroupEvidenceTests(unittest.TestCase):
 
     def test_unavailable_root_fails_closed(self):
         self.assertTrue(audit(self.root / 'no-such-repo', frozenset({'Core/Jobs'}))['errors'])
+
+    def test_reviewed_discovery_modules_are_pinned(self):
+        required = {
+            'Core/Jobs', 'Core/Provenance', 'ReferenceData/VariableTerms',
+            'Breeding/BreedingPipeline', 'CropProduction/LotLedger',
+            'Research/Models', 'Interoperability/FAIR',
+            'Instrumentation/Telemetry', 'Genotyping/Genomics',
+            'Core/CapabilityMetadata', 'Core/CapabilityNegotiation',
+            'Core/ServerInfoV3',
+        }
+        self.assertTrue(required.issubset(REVIEWED))
 
 
 if __name__ == '__main__':
