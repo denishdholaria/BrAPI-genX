@@ -1,1 +1,9 @@
 # Group MethylationAnalysis
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 057. `MethylationAnalysis` proposes metadata for methylation patterns, not an independently verified epigenetic assay or reproducible site-level methylation estimate.
+
+The response schema requires `methylationAnalysisDbId`, `analysisMethodDbId`, and lifecycle `status`; the registration request requires only the identifier and method reference. `regions`, `studyDbId`, `jobDbId`, and `provenance` are optional. The `regions` value is an unconstrained object; a specimen, tissue, assay platform, cytosine context (CG, CHG, CHH), reference genome assembly, genomic coordinate convention, methylation read depth, coverage, normalization method, measurement units, and uncertainty are not required.
+
+**Scientific boundary:** An example numeric `level` within `regions` is not a required schema property or calibrated methylation fraction. No range, assay quality criterion, coverage threshold, strand/context definition, sample mapping, or tested differential methylation model is enforced. `analysisMethodDbId` is not an exact method-version or verified execution join. No `genomicDatasetDbId` is modelled; D-169–D-171 remain deferred. A stored result does not certify epigenetic function or scientific approval and is not an official BrAPI v2.1 resource.
+
+**Sources:** [module overview](./README.md), [record schema](./Schemas/MethylationAnalysis.yaml), [registration schema](./Schemas/MethylationAnalysisNewRequest.yaml), [operations](./MethylationAnalysis_GET_POST.yaml), [RFC](../../RFCs/RFC-057-Methylation-Analysis.md), [AnalysisMethod schema](../../Research/AnalysisMethods/Schemas/AnalysisMethod.yaml), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).
