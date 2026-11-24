@@ -1,7 +1,14 @@
 # BrAPI-GenX — Image Metadata (Phenotyping)
 
-Image metadata records the capture details and provenance of phenotyping
-images. BrAPI v2.1 has images but no image metadata record.
+ImageMetadata proposes a separate capture-context record, not an alternative
+to the official BrAPI (Breeding Application Programming Interface) version 2.1
+Image resource. The official ImageNewRequest already carries timestamp,
+width, height, location, observation-unit references and additionalInfo.
+
+GenX requires only capture-record identity, image identifier and capture time
+on registration; camera, resolution, context and provenance remain optional.
+This draft does not validate sensor calibration, image content, authoritative
+image joins, or scientific phenotyping interpretations.
 
 - `POST /genx/v1/image-metadata` (`genxRegisterImageMetadata`) registers one
   `ImageMetadata` (`Schemas/ImageMetadataNewRequest.yaml`). Same

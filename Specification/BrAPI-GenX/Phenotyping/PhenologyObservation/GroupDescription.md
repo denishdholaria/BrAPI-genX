@@ -1,1 +1,9 @@
 # Group PhenologyObservation
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 027. `PhenologyObservation` proposes a developmental-stage event associated with an observation unit; it is not an automatically harmonized official BrAPI version 2.1 Observation or independently verified field phenology result.
+
+The registration request requires `phenologyObservationDbId`, `studyDbId`, `observationUnitDbId`, `observedAt` and `stage`; the response additionally requires lifecycle `status`. `observedAt` is a date-time formatted string. The `stage` field is an unconstrained string; `bbchCode` (BBCH: Biologische Bundesanstalt, Bundessortenamt und Chemische Industrie) and `provenance` are optional. No BBCH coding vocabulary, crop-specific scale, observer qualification, sampling denominator, repeat-observation semantics or controlled link to an official ObservationVariable is enforced.
+
+**Interpretation and identity boundary:** Required Study and ObservationUnit strings do not prove that an observation unit exists in the named server or belongs to the Study. Stage descriptions across crops, timezones, observers and experimental protocols are not automatically comparable. Official BrAPI Observations remain separate authoritative data; the proposal does not replace them or authorize an equivalence mapping. D-78–D-80 remain deferred, including a MeasurementSeries link that is not modelled in the record schema.
+
+**Sources:** [module overview](./README.md), [response schema](./Schemas/PhenologyObservation.yaml), [registration schema](./Schemas/PhenologyObservationNewRequest.yaml), [operations](./PhenologyObservation_GET_POST.yaml), [RFC](../../RFCs/RFC-027-Phenology-Observation.md), [official BrAPI Observation](../../../BrAPI-Phenotyping/Observations/Schemas/Observation.yaml), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

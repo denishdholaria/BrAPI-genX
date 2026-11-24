@@ -1421,5 +1421,94 @@ class GroupEvidenceTests(unittest.TestCase):
         self.assertIn('methodVersion', method['required'])
 
 
+    def test_image_phenology_and_vegetation_index_source_boundaries(self):
+        root = Path(__file__).resolve().parents[1]
+        genx = root / 'Specification/BrAPI-GenX'
+        cases = (
+            ('Phenotyping/ImageMetadata', 'ImageMetadata', 'D-93',
+             {'imageMetadataDbId', 'imageDbId', 'capturedAt'}),
+            ('Phenotyping/PhenologyObservation', 'PhenologyObservation',
+             'D-78', {'phenologyObservationDbId', 'studyDbId',
+                      'observationUnitDbId', 'observedAt', 'stage'}),
+            ('Geospatial/VegetationIndex', 'VegetationIndex',
+             'D-436', {'vegetationIndexDbId'}),
+        )
+        for module, name, decision, request_required in cases:
+            with self.subTest(module=module):
+                self.assertIn(module, REVIEWED)
+                folder = genx / module
+                desc = (folder / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', desc)
+                self.assertIn('**Sources:**', desc)
+                self.assertIn(decision, desc)
+                response = yaml.safe_load(
+                    (folder / 'Schemas' / (name + '.yaml')).read_text()
+                )['components']['schemas'][name]
+                request = yaml.safe_load(
+                    (folder / 'Schemas' / (name + 'NewRequest.yaml')).read_text()
+                )['components']['schemas'][name + 'NewRequest']
+                self.assertEqual(request_required,
+                                 set(request['required']))
+                self.assertEqual(request_required | {'status'},
+                                 set(response['required']))
+
+        image = yaml.safe_load(
+            (genx / 'Phenotyping/ImageMetadata/Schemas/ImageMetadata.yaml'
+             ).read_text()
+        )['components']['schemas']['ImageMetadata']
+        self.assertEqual('date-time', image['properties']['capturedAt']['format'])
+        for field in ('camera', 'resolution', 'observationUnitDbId',
+                      'studyDbId', 'provenance'):
+            self.assertIn(field, image['properties'])
+            self.assertNotIn(field, image['required'])
+        self.assertEqual('string', image['properties']['resolution']['type'])
+        official = yaml.safe_load(
+            (root / 'Specification/BrAPI-Phenotyping/Images/Schemas/'
+             'ImageNewRequest.yaml').read_text()
+        )['components']['schemas']['ImageNewRequest']
+        for overlapping in ('imageTimeStamp', 'imageHeight', 'imageWidth',
+                            'imageLocation', 'observationUnitDbId',
+                            'additionalInfo'):
+            self.assertIn(overlapping, official['properties'])
+
+        phen = yaml.safe_load(
+            (genx / 'Phenotyping/PhenologyObservation/Schemas/'
+             'PhenologyObservation.yaml').read_text()
+        )['components']['schemas']['PhenologyObservation']
+        self.assertIn('bbchCode', phen['properties'])
+        self.assertNotIn('bbchCode', phen['required'])
+        self.assertEqual('string', phen['properties']['stage']['type'])
+        for attribute in ('enum', 'pattern'):
+            self.assertNotIn(attribute, phen['properties']['stage'])
+            self.assertNotIn(attribute, phen['properties']['bbchCode'])
+        self.assertNotIn('measurementSeriesDbId', phen['properties'])
+
+        vegetation = yaml.safe_load(
+            (genx / 'Geospatial/VegetationIndex/Schemas/'
+             'VegetationIndex.yaml').read_text()
+        )['components']['schemas']['VegetationIndex']
+        for field in ('indexType', 'indexName', 'acquisitionDate',
+                      'crs', 'resolution', 'provenance'):
+            self.assertIn(field, vegetation['properties'])
+            self.assertNotIn(field, vegetation['required'])
+        for unmodelled in ('indexValue', 'rasterRef', 'sourceImageDbId',
+                           'algorithm', 'bandMapping'):
+            self.assertNotIn(unmodelled, vegetation['properties'])
+        self.assertNotIn('format',
+                         vegetation['properties']['acquisitionDate'])
+        ops = yaml.safe_load(
+            (genx / 'Geospatial/VegetationIndex/'
+             'VegetationIndex_GET_POST.yaml').read_text()
+        )['paths']
+        self.assertEqual(['/vegetation-indexes'], list(ops))
+        self.assertEqual('genxListVegetationIndexes',
+                         ops['/vegetation-indexes']['get']['operationId'])
+        self.assertEqual('genxRegisterVegetationIndex',
+                         ops['/vegetation-indexes']['post']['operationId'])
+        overview = (genx / 'Geospatial/VegetationIndex/README.md').read_text()
+        self.assertIn('GET /genx/v1/vegetation-indexes', overview)
+        self.assertNotIn('GET /genx/v1/vegetation-index`', overview)
+
+
 if __name__ == '__main__':
     unittest.main()
