@@ -1,7 +1,12 @@
 # BrAPI-GenX — Pedigree Analysis (Scientific Compute)
 
-Pedigree analysis results record pedigree-derived metrics and provenance.
-BrAPI v2.1 has no pedigree analysis result record.
+PedigreeAnalysis proposes a record for pedigree-derived analysis metadata,
+not a validated estimate of inbreeding or kinship. The pedigreeMetrics
+object, provenance and analysis Job are optional, and no parentage pedigree
+completeness, ancestor-depth, or estimator constraints are required.
+
+This result does not replace authoritative BrAPI version 2.1 Germplasm
+identities or establish equivalence to genomic relatedness matrices.
 
 - `POST /genx/v1/pedigree-analyses` (`genxRecordPedigreeAnalysis`) registers one
   `PedigreeAnalysis` (`Schemas/PedigreeAnalysisNewRequest.yaml`). Same

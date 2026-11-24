@@ -6,9 +6,12 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no kinship matrix record. Relationship matrices are essential
-for genomic analysis. Without this record, kinship matrices cannot be audited
-or reproduced.
+GenX proposes a separately identified kinship-matrix metadata record alongside
+official BrAPI version 2.1 resources. Scientifically useful kinship estimates
+require a defined population, sample ordering, estimator, matrix semantics,
+storage integrity and method/version evidence. The present candidate does not
+require those inputs; registration cannot by itself establish a reproducible
+or scientifically comparable matrix.
 
 ## 2. Object
 
@@ -25,8 +28,8 @@ or reproduced.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Kinship matrices reference GenX AnalysisMethod by identifier; they do not
-  duplicate that resource.
+- `analysisMethodDbId` is a required string, not an enforced exact
+  `methodVersion` join or independently verified method execution.
 - A matrix is not a BrAPI data resource and must not be treated as one.
 
 ## 5. Invariants
@@ -34,14 +37,18 @@ or reproduced.
 - A published `kinshipMatrixDbId` record never mutates in place.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional matrices linked by `supersedes`.
-- `analysisMethodDbId` is required.
-- A matrix does not imply scientific validation or approval.
+- `analysisMethodDbId` is required but `matrixRef`, `matrixDigest`,
+  `jobDbId`, `studyDbId` and provenance are optional.
+- Neither matrix dimensions nor ordering, population composition, storage
+  reachability or digest verification are required.
+- A matrix record does not imply validated kinship, equivalence to a
+  GenomicRelationship record, scientific approval or reproducible computation.
 
 ## 6. Deferred questions
 
 - D-154: Should `matrixRef` be required? (Current: optional.)
 - D-155: Should kinship matrices link to GenX `GenomicDataset`? (Current:
-  optional, not required.)
+  no `genomicDatasetDbId` field is modelled.)
 - D-156: Should matrix digest be required? (Current: optional.)
 
 ## 7. Classification
