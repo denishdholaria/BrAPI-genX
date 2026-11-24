@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import unittest
 
-from semantic_neighbor_lineage import noncurrent_lineage_errors
+from semantic_neighbor_lineage import noncurrent_lineage_errors, terminal_publication_errors
 
 HIST = 'original.source -> target'
 BASELINE = frozenset({HIST})
@@ -70,6 +70,38 @@ class LineageTests(unittest.TestCase):
         row = entry(id='new.source -> target', sourceCatalogId='new.source',
                     provenance='manual-review', rationale=['untrusted'])
         self.assertTrue(noncurrent_lineage_errors(row, set(), BASELINE))
+
+
+class TerminalPublicationTests(unittest.TestCase):
+    def test_rejected_link_still_active_fails(self):
+        row = entry(reviewStatus='rejected')
+        self.assertTrue(any('remains published' in msg
+                            for msg in terminal_publication_errors(row, {PAIR})))
+
+    def test_superseded_link_still_active_fails(self):
+        row = entry(reviewStatus='superseded')
+        self.assertTrue(any('remains published' in msg
+                            for msg in terminal_publication_errors(row, {PAIR})))
+
+    def test_terminal_registry_removal_passes(self):
+        for status in ('rejected', 'superseded'):
+            self.assertEqual([], terminal_publication_errors(
+                entry(reviewStatus=status), set()))
+
+    def test_nonterminal_link_can_be_active(self):
+        for status in ('inherited-unreviewed', 'requires-decision',
+                       'evidence-backed-proposed'):
+            self.assertEqual([], terminal_publication_errors(
+                entry(reviewStatus=status), {PAIR}))
+
+    def test_different_source_is_not_the_same_link(self):
+        self.assertEqual([], terminal_publication_errors(
+            entry(reviewStatus='rejected'), {('another.source', 'target')}))
+
+    def test_publication_guard_does_not_claim_approval(self):
+        # Authorization is separately required by the canonical validator.
+        self.assertEqual([], terminal_publication_errors(
+            entry(reviewStatus='rejected'), set()))
 
 
 if __name__ == '__main__':

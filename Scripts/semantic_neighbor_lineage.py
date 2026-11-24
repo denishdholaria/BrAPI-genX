@@ -46,3 +46,25 @@ def noncurrent_lineage_errors(
     if not isinstance(rationale, str) or not rationale.strip():
         errors.append(f"{identity}: a non-inherited relationship requires a non-empty rationale.")
     return errors
+
+
+def terminal_publication_errors(
+    entry: dict[str, Any],
+    active_neighbors: set[tuple[str, str]],
+) -> list[str]:
+    """Disallow simultaneously retiring and actively advertising the same edge.
+
+    This checks publication consistency, not whether a terminal status was
+    authorized. The canonical ledger validator owns authorization and history.
+    """
+    status = entry.get("reviewStatus")
+    if status not in {"rejected", "superseded"}:
+        return []
+    pair = (entry.get("sourceCatalogId"), entry.get("targetOperationId"))
+    if pair not in active_neighbors:
+        return []
+    return [
+        f"{entry.get('id', '<missing id>')}: terminal status {status!r} remains "
+        "published in registry semanticNeighborIds; retire the active reference "
+        "and record the authorized ledger disposition atomically."
+    ]

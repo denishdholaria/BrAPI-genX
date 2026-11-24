@@ -158,6 +158,21 @@ ledger and split by source group and target operation. The reporter does not
 promote any relationship or assert interoperability. Its 12 mutation and
 positive tests run in the static conformance workflow.
 
+## Mission 016 — terminal publication consistency (2026-11-24)
+
+The canonical governance validator now prevents a ledger relationship marked
+`rejected` or `superseded` from remaining advertised as an active
+`semanticNeighborIds` link by the same source catalogue operation. A future
+authorized cleanup must preserve the immutable historical ledger entry, record
+its terminal disposition, and withdraw its active registry reference in one
+controlled change. Status, authorization, transition and successor validation
+remain governed by the existing canonical validator; the new guard makes no
+scientific decision.
+
+Six additional positive/mutation tests extend the existing
+`Scripts/test_semantic_neighbor_lineage.py` suite to 17 tests. No current
+status, neighbor edge, or public specification was changed.
+
 ## Mission 014 — historically retained relationship retirement (2026-11-24)
 
 The canonical validator now distinguishes **newly invented relationships** from

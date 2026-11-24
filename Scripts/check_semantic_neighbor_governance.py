@@ -16,7 +16,7 @@ from typing import Any
 
 import yaml
 
-from semantic_neighbor_lineage import noncurrent_lineage_errors
+from semantic_neighbor_lineage import noncurrent_lineage_errors, terminal_publication_errors
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "Specification" / "ENDPOINT-REGISTRY.json"
@@ -353,6 +353,15 @@ def check(root: Path = ROOT,
     gov_ids = {r.get("id") for r in registry.get("semanticRelationships", [])
                if isinstance(r, dict) and isinstance(r.get("id"), str)}
 
+    # Detect an inconsistent terminal disposition still advertised to consumers.
+    active_registry_neighbors = {
+        (row.get("catalogId"), neighbor)
+        for row in registry.get("entries", [])
+        if isinstance(row, dict)
+        for neighbor in (row.get("semanticNeighborIds") or [])
+        if isinstance(neighbor, str)
+    }
+
     # Schema-level checks.
     if ledger.get("allowed_statuses") != sorted(ALLOWED_STATUSES):
         # Allow same set, order-independent.
@@ -587,6 +596,7 @@ def check(root: Path = ROOT,
         errors.extend(noncurrent_lineage_errors(
             entry, current_inherited_global, BASELINE_LEDGER_IDS
         ))
+        errors.extend(terminal_publication_errors(entry, active_registry_neighbors))
 
     # Completeness: every current inherited relationship must be in ledger.
     try:
