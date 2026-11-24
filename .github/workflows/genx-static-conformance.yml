@@ -52,6 +52,8 @@ on:
       - 'Scripts/test_breeding_pipeline_cas_trace.py'
       - 'Scripts/breeding_pipeline_draft_trace.py'
       - 'Scripts/test_breeding_pipeline_draft_trace.py'
+      - 'Scripts/breeding_pipeline_trace_integrity.py'
+      - 'Scripts/test_breeding_pipeline_trace_integrity.py'
       - 'Scripts/report_semantic_neighbor_inventory.py'
       - 'Scripts/test_semantic_neighbor_inventory.py'
       - 'Scripts/check_semantic_neighbor_governance.py'
@@ -118,6 +120,8 @@ on:
       - 'Scripts/test_breeding_pipeline_cas_trace.py'
       - 'Scripts/breeding_pipeline_draft_trace.py'
       - 'Scripts/test_breeding_pipeline_draft_trace.py'
+      - 'Scripts/breeding_pipeline_trace_integrity.py'
+      - 'Scripts/test_breeding_pipeline_trace_integrity.py'
       - 'Scripts/report_semantic_neighbor_inventory.py'
       - 'Scripts/test_semantic_neighbor_inventory.py'
       - 'Scripts/check_semantic_neighbor_governance.py'
@@ -241,6 +245,8 @@ jobs:
         run: python Scripts/test_semantic_neighbor_inventory.py
       - name: Audit executable semantic-neighbor consumers
         run: python Scripts/report_semantic_neighbor_consumers.py
+      - name: Test BreedingPipeline trace snapshot consistency
+        run: python Scripts/test_breeding_pipeline_trace_integrity.py
       - name: Test BreedingPipeline draft and first-publication traces
         run: python Scripts/test_breeding_pipeline_draft_trace.py
       - name: Test BreedingPipeline CAS observation-trace invariants
@@ -335,6 +341,7 @@ jobs:
             run_check python Scripts/test_semantic_decision_candidate.py
             run_check python Scripts/test_breeding_pipeline_cas_trace.py
             run_check python Scripts/test_breeding_pipeline_draft_trace.py
+            run_check python Scripts/test_breeding_pipeline_trace_integrity.py
             run_check python Scripts/report_semantic_neighbor_inventory.py --check
             run_check python Scripts/test_semantic_neighbor_inventory.py
             run_check python Scripts/check_registry_drift_regression.py

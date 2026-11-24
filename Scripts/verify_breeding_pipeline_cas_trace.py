@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any
 
 from breeding_pipeline_draft_trace import validate_draft_trace
+from breeding_pipeline_trace_integrity import snapshot_integrity_errors
 
 SCENARIOS = frozenset({'CAS-01', 'CAS-02', 'CAS-03', 'CAS-04', 'CAS-06', 'CAS-07', 'CAS-08', 'CAS-09'})
 
@@ -33,6 +34,10 @@ def validate(trace: Any) -> list[str]:
             errors.append(f'{label}.revisions must be a mapping')
         if not isinstance(state.get('effects'), dict):
             errors.append(f'{label}.effects must map event IDs to affected revision IDs')
+    if errors:
+        return errors
+    for label, state in [('before', before), ('after', after)]:
+        errors.extend(snapshot_integrity_errors(label, state))
     if errors:
         return errors
     old, new = before['revisions'], after['revisions']

@@ -192,6 +192,26 @@ class CasTraceTests(unittest.TestCase):
         t['after']['revisions']['V3']['fingerprint'] = 'changed'
         self.assertTrue(validate(t))
 
+    def test_orphan_current_pointer_fails(self):
+        t = trace()
+        t['before']['currentVersionId'] = 'Vmissing'
+        t['after']['currentVersionId'] = 'Vmissing'
+        self.assertTrue(any('resolve to an included revision' in e
+                            for e in validate(t)))
+
+    def test_draft_as_current_fails(self):
+        t = trace()
+        t['before']['revisions']['V3']['publicationState'] = 'draft'
+        t['after']['revisions']['V3']['publicationState'] = 'draft'
+        self.assertTrue(any('resolve to a published revision' in e
+                            for e in validate(t)))
+
+    def test_lifecycle_event_for_absent_version_fails(self):
+        t = trace()
+        t['before']['effects']['orphan'] = 'Vunknown'
+        t['after']['effects']['orphan'] = 'Vunknown'
+        self.assertTrue(any('lifecycle event' in e for e in validate(t)))
+
     def test_missing_snapshot_fails(self):
         t = trace(); t['after'].pop('revisions')
         self.assertTrue(validate(t))
