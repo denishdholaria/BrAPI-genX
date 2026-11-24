@@ -668,5 +668,60 @@ class GroupEvidenceTests(unittest.TestCase):
         self.assertIn('does not encode a farm-membership', farm)
 
 
+    def test_crop_production_rfc_route_and_operation_parity(self):
+        """Pinned CropProduction RFCs, module overviews and source YAML agree.
+
+        Prevent reintroducing the routing drift seen in RFC-131 and RFC-132.
+        This checks documented contract identity, not interoperability maturity.
+        """
+        import re
+        import yaml
+
+        root = Path(__file__).resolve().parents[1]
+        contract_re = re.compile(
+            r'`((?:GET|POST|PUT|PATCH|DELETE) /genx/v1/[^`]+)` '
+            r'\(`(genx[A-Za-z0-9]+)`\)'
+        )
+        candidates = (
+            ('CropCycle', '029-Crop-Cycle'),
+            ('CropRecommendation', '129-CropRecommendation'),
+            ('CropSuitability', '135-CropSuitability'),
+            ('Farm', '069-Farm'),
+            ('FertilizerApplication', '026-Fertilizer-Application'),
+            ('HarvestRecords', '011-Harvest-Records'),
+            ('IrrigationAdvice', '131-IrrigationAdvice'),
+            ('IrrigationOperation', '024-Irrigation-Operation'),
+            ('LocalConstraint', '139-LocalConstraint'),
+            ('LotLedger', '003-Seed-Lot-Ledger'),
+            ('NutrientAdvice', '132-NutrientAdvice'),
+            ('PlantingOperation', '066-Planting-Operation'),
+            ('SowingWindow', '130-SowingWindow'),
+            ('SprayApplication', '081-Spray-Application'),
+            ('Tillage', '038-Tillage'),
+            ('YieldForecast', '134-YieldForecast'),
+        )
+        spec_root = root / 'Specification/BrAPI-GenX'
+        for name, rfc_number in candidates:
+            with self.subTest(module=name):
+                folder = spec_root / 'CropProduction' / name
+                overview = (folder / 'README.md').read_text()
+                rfc = (spec_root / 'RFCs' / ('RFC-' + rfc_number + '.md')).read_text()
+                readme_operations = set(contract_re.findall(overview))
+                rfc_operations = set(contract_re.findall(rfc))
+                self.assertTrue(readme_operations, msg=name + ' missing documented routes')
+                self.assertEqual(readme_operations, rfc_operations,
+                                 msg=name + ' README / RFC route disagreement')
+                published = set()
+                for path in folder.glob('*.yaml'):
+                    spec = yaml.safe_load(path.read_text())
+                    for route, operations in spec.get('paths', {}).items():
+                        for method, operation in operations.items():
+                            if method in ('get', 'post', 'put', 'patch', 'delete'):
+                                published.add((method.upper() + ' /genx/v1' + route,
+                                               operation.get('operationId')))
+                self.assertEqual(readme_operations, published,
+                                 msg=name + ' README / YAML source disagreement')
+
+
 if __name__ == '__main__':
     unittest.main()
