@@ -99,7 +99,9 @@ def main() -> int:
     parser.add_argument("--module", action="append", default=None,
                         help="Only audit this Domain/Module; repeat for more")
     parser.add_argument("--strict", action="store_true",
-                        help="Fail for mismatched README claims, not absent claims")
+                        help="Fail for mismatched README claims")
+    parser.add_argument("--require-coverage", action="store_true",
+                        help="Fail for missing operation claims in curated modules")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
     result = audit(args.root, args.module)
@@ -115,7 +117,9 @@ def main() -> int:
         for item in result['mismatches']:
             print("MISMATCH: " + json.dumps(item, sort_keys=True))
         print("README coverage gaps are advisory; endpoint contracts are authoritative.")
-    return int(bool(result['errors']) or (args.strict and bool(result['mismatches'])))
+    return int(bool(result['errors']) or
+               (args.strict and bool(result['mismatches'])) or
+               (args.require_coverage and bool(result['uncovered'])))
 
 
 if __name__ == "__main__":
