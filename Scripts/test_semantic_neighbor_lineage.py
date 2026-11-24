@@ -72,6 +72,7 @@ class LineageTests(unittest.TestCase):
         self.assertTrue(noncurrent_lineage_errors(row, set(), BASELINE))
 
 
+
 class TerminalPublicationTests(unittest.TestCase):
     def test_rejected_link_still_active_fails(self):
         row = entry(reviewStatus='rejected')
