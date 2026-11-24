@@ -1,7 +1,16 @@
 # BrAPI-GenX — Candidate Variety Lifecycle (Breeding)
 
-Candidate variety lifecycle records the status and progression of a candidate
-variety through registration. BrAPI v2.1 has no candidate variety record.
+CandidateVariety proposes internal status metadata for a breeding-program
+candidate. The request requires only candidate identity, Program identifier,
+and variety name; its `status` defaults to `candidate`. Values such as
+`registered` and `released` are candidate record labels, **not evidence of
+official variety registration, statutory notification, seed certification,
+or approval for commercial release**.
+
+Neither the owning registration authority nor a legal decision document is
+modelled. `registeredAt` is optional, and no validated Germplasm or
+BreedingPipeline link is required. Official BrAPI version 2.1 Germplasm and
+Program resources remain separately authoritative.
 
 - `POST /genx/v1/candidate-varieties` (`genxRegisterCandidateVariety`) registers one
   `CandidateVariety` (`Schemas/CandidateVarietyNewRequest.yaml`). Same
