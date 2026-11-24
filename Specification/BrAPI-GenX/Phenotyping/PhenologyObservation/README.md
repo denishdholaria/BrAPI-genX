@@ -1,8 +1,14 @@
 # BrAPI-GenX — Phenology Observation (Phenotyping)
 
-Phenology observations record developmental stage observations for an
-observation unit, including BBCH codes. BrAPI v2.1 has observations but no
-phenology-specific record.
+PhenologyObservation proposes a separately identified developmental-stage
+event, not a validated or automatically harmonized BrAPI version 2.1
+Observation. Study identity, observation-unit identity, observed time and
+free-text stage are required, while `bbchCode` and provenance are optional.
+
+There is no mandated crop-specific BBCH (Biologische Bundesanstalt,
+Bundessortenamt und Chemische Industrie) vocabulary or enforced link to an
+official ObservationVariable. A string stage cannot establish comparable
+phenology measurements across crops or observers.
 
 - `POST /genx/v1/phenology-observations` (`genxRecordPhenologyObservation`) records one
   `PhenologyObservation` (`Schemas/PhenologyObservationNewRequest.yaml`). Same
