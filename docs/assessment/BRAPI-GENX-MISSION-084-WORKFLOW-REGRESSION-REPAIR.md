@@ -15,7 +15,7 @@ Consequently, the test's `next(...)` would raise `StopIteration` before exercisi
 - Add a negative regression test that removes only the coverage flag and verifies `scope_errors` reports the missing mandatory command.
 - The existing failure-only-diagnostic exclusion remains unchanged.
 
-Direct GitHub source checks after the correction show the workflow contains exactly one unconditional `run:` command matching the required full command, while its diagnostic command is separately reported. The corrected VegetationIndex README lists three actual GET/POST endpoint claims, all of which match the authoritative source method/path/operation identities. These checks are source inspection, not an executed Python suite.
+Direct GitHub source checks after the correction show the workflow contains exactly one unconditional `run:` command matching the required full command, while its diagnostic command is separately reported. The corrected VegetationIndex README lists three actual GET/POST endpoint claims, all of which match the authoritative source method/path/operation identities. The source check above is not an executed workflow-scope test. A separate isolated execution of the **exact upstream GitHub blob contents** of `Scripts/audit_genx_readme_routes.py` and `Scripts/test_genx_readme_routes.py` was completed in the available container using `python test_genx_readme_routes.py -v`: **8 tests ran, 8 passed** (exit 0). The copied files' local Git blob hashes matched the connector's authoritative GitHub blob identities exactly: `fd73cf06c458f90de51e7dbf0b514f193b0ab565` (auditor) and `bcef551808afe27435f44c6ca4e63bb77bbb2cd4` (unit tests). This verifies the bounded synthetic mutation suite only, not the real full-repository fixture, the workflow-scope suite, or live conformance.
 
 ## Integration/testing requirements
 
@@ -36,4 +36,4 @@ python Scripts/generateEndpointArtifacts.py --check
 python Scripts/checkGenXConformance.py
 ```
 
-Repository checkout/testing is blocked from this session's container because GitHub's hostname could not be resolved. GitHub Actions is independently blocked by account billing. Neither issue should be misrepresented as a passing test or repaired by weakening tests. Do not mark the stacked pull requests ready or merge until actual validation is available.
+Full repository checkout is blocked from this session's container because GitHub's hostname could not be resolved. The separately materialized route-audit unit files were tested as noted above. GitHub Actions is independently blocked by account billing. Neither issue should be misrepresented as a passing test or repaired by weakening tests. Do not mark the stacked pull requests ready or merge until actual validation is available.
