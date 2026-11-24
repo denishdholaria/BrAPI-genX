@@ -1386,7 +1386,7 @@ class GroupEvidenceTests(unittest.TestCase):
                 for absent in ('methodVersion', 'genomicDatasetDbId'):
                     self.assertNotIn(absent, response['properties'])
                     self.assertNotIn(absent, request['properties'])
-                self.assertIn('not modelled',
+                self.assertIn('no `genomicDatasetDbId`',
                               (genx / 'RFCs' / rfc).read_text())
 
         # Examples nested inside opaque objects must not become required
