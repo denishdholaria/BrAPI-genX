@@ -56,7 +56,8 @@
       "rfc": "RFC-085-Ontology-Term.md",
       "resource": "OntologyTermRecord",
       "target": "VariableTerm",
-      "decision": "D-255"
+      "decision": "D-255",
+      "schema_file": "OntologyTerm.yaml"
     },
     {
       "module": "ReferenceData/OntologyMapping",

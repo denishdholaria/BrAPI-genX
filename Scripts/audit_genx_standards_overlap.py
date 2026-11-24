@@ -35,8 +35,8 @@ def _read(root: Path, path: Path, errors: list[str]) -> str | None:
 
 
 def _schema(root: Path, module: str, resource: str,
-            errors: list[str]) -> dict | None:
-    path = GENX / module / 'Schemas' / f'{resource}.yaml'
+            errors: list[str], schema_file: str | None = None) -> dict | None:
+    path = GENX / module / 'Schemas' / (schema_file or f'{resource}.yaml')
     body = _read(root, path, errors)
     if body is None:
         return None
@@ -98,8 +98,9 @@ def audit(root: Path, manifest: Path = MANIFEST) -> dict:
                 continue
             if public not in prose:
                 errors.append(f'{path}: must acknowledge official {public}')
+            human_resource = re.sub(r'(?<=[a-z])(?=[A-Z])', ' ', resource)
             if re.search(r'BrAPI\s+v2\.1\s+has\s+no\s+(?:place\s+to\s+record\s+)?'
-                         r'(?:' + re.escape(resource) + r')\b',
+                         + re.escape(human_resource) + r'\b',
                          prose, flags=re.IGNORECASE):
                 errors.append(f'{path}: unsupported absence claim for {resource}')
     if seen != REVIEWED:
@@ -113,7 +114,7 @@ def audit(root: Path, manifest: Path = MANIFEST) -> dict:
         except (KeyError, TypeError) as exc:
             errors.append(f'malformed unratified-link entry: {exc}')
             continue
-        schema = _schema(root, module, resource, errors)
+        schema = _schema(root, module, resource, errors, entry.get('schema_file'))
         if schema is None:
             continue
         checked_links += 1

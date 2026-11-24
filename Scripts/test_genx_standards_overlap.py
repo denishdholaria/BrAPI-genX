@@ -28,7 +28,7 @@ class StandardsOverlapAuditTests(unittest.TestCase):
                             (entry['resource'] + '.yaml'), GENX / 'RFCs' / entry['rfc']))
         for entry in self.manifest['unratified_links']:
             module = GENX / entry['module']
-            targets.update((module / 'Schemas' / (entry['resource'] + '.yaml'),
+            targets.update((module / 'Schemas' / entry.get('schema_file', entry['resource'] + '.yaml'),
                             GENX / 'RFCs' / entry['rfc']))
         for relative in targets:
             full = self.root / relative
@@ -57,7 +57,7 @@ class StandardsOverlapAuditTests(unittest.TestCase):
 
     def test_unratified_link_added_to_candidate_fails(self):
         row = self.manifest['unratified_links'][0]
-        path = self.root / GENX / row['module'] / 'Schemas' / (row['resource'] + '.yaml')
+        path = self.root / GENX / row['module'] / 'Schemas' / row.get('schema_file', row['resource'] + '.yaml')
         schema = yaml.safe_load(path.read_text())
         schema['components']['schemas'][row['resource']]['properties']['linkedTerm'] = {
             '$ref': '#/components/schemas/VariableTerm'
@@ -77,6 +77,21 @@ class StandardsOverlapAuditTests(unittest.TestCase):
     def test_missing_manifest_fails_closed(self):
         (self.root / MANIFEST).unlink()
         self.assertTrue(self.run_audit()['errors'])
+
+    def test_schema_key_and_filename_may_differ(self):
+        report = self.run_audit()
+        self.assertEqual([], report['errors'])
+        row = next(x for x in self.manifest['unratified_links']
+                   if x['resource'] == 'OntologyTermRecord')
+        self.assertEqual('OntologyTerm.yaml', row['schema_file'])
+        self.assertEqual(5, report['links_checked'])
+
+    def test_reintroduced_absence_claim_fails(self):
+        row = self.manifest['official_overlap'][0]
+        path = self.root / GENX / row['module'] / 'README.md'
+        path.write_text(path.read_text() + '\\nBrAPI v2.1 has no measurement scale record.\\n')
+        self.assertTrue(any('unsupported absence claim' in x
+                            for x in self.run_audit()['errors']))
 
     def test_missing_rfc_decision_fails(self):
         row = self.manifest['unratified_links'][0]

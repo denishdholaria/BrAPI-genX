@@ -23,3 +23,7 @@ The mutation suite exercises missing incumbent routes, missing acknowledgments, 
 ## Acceptance
 
 Run `python Scripts/audit_genx_standards_overlap.py` and `python Scripts/test_genx_standards_overlap.py`; then the existing full static/live workflow and separate specification generation. Hosted results must be reported separately. No official BrAPI source, GenX OpenAPI contract, generated catalogue, terminal scientific decision or RFC maturity was altered.
+
+## Hosted correction 043a
+
+Initial static run identified that the `OntologyTermRecord` component uses the file `OntologyTerm.yaml`, rather than deriving the filename from its component key. The evidence manifest now records an explicit `schema_file` override and the audit and tests honor it. A mutation test also protects against reintroduction of a false missing-Scale claim using human-readable resource names. This correction does not change any GenX contract or RFC maturity.
