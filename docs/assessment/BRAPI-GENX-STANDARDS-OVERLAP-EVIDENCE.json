@@ -170,6 +170,20 @@
       "resource": "CaptureWorkflow",
       "target": "PhenotypeCapture",
       "decision": "D-330"
+    },
+    {
+      "module": "Genotyping/ReferenceAssembly",
+      "rfc": "RFC-115-Reference-Assembly.md",
+      "resource": "ReferenceAssembly",
+      "target": "GenomicDataset",
+      "decision": "D-345"
+    },
+    {
+      "module": "Genotyping/PipelineProvenance",
+      "rfc": "RFC-116-Pipeline-Provenance.md",
+      "resource": "PipelineProvenance",
+      "target": "GenomicDataset",
+      "decision": "D-348"
     }
   ]
 }

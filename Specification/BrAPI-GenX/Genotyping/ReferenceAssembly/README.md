@@ -1,7 +1,7 @@
 # BrAPI-GenX — Reference Assembly (Genotyping)
 
 Reference assembly records describe reference genome assemblies.
-BrAPI v2.1 has no reference assembly record.
+Official BrAPI version 2.1 already has `ReferenceSet` and `Reference` resources representing reference genome assemblies. This distinct GenX candidate has no typed mapping to an official ReferenceSet or GenX GenomicDataset.
 
 - `POST /genx/v1/reference-assemblies` (`genxRegisterReferenceAssembly`) registers one
   `ReferenceAssembly` (`Schemas/ReferenceAssemblyNewRequest.yaml`). Same

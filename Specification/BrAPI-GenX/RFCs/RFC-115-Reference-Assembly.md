@@ -6,10 +6,7 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record reference genome assemblies. Reference
-assemblies are the routine reference for genotyping and variant calling.
-Without a record, assemblies arrive as unversioned files with no stated
-accession or provenance, so they cannot be audited or reproduced.
+Official BrAPI version 2.1 already represents reference genomes through `ReferenceSet` resources composed of `Reference` sequences, including assembly coordinate space and source identifiers. A separately governed GenX `ReferenceAssembly` record is a proposal whose distinct need and reference-identity mapping remain unproven.
 
 ## 2. Object
 
@@ -27,8 +24,7 @@ accession, version, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Reference assembly records reference GenX `GenomicDataset` by identifier; they
-  do not duplicate those resources.
+- The candidate schema contains no typed GenX `GenomicDataset` or official BrAPI `ReferenceSet` reference. Any correspondence needs evidence and explicit design; D-345 remains open.
 - A record is not a BrAPI data resource and must not be treated as one.
 
 ## 5. Invariants

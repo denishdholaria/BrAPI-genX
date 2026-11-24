@@ -1,7 +1,7 @@
 # BrAPI-GenX — Pipeline Provenance (Genotyping)
 
 Pipeline provenance records describe bioinformatics pipeline runs.
-BrAPI v2.1 has no pipeline provenance record.
+Official BrAPI version 2.1 already supports genotyping reference and variant records. This GenX candidate describes optional pipeline metadata, not an executed workflow, verified computing environment, or typed dataset lineage.
 
 - `POST /genx/v1/pipeline-provenances` (`genxRegisterPipelineProvenance`) registers one
   `PipelineProvenance` (`Schemas/PipelineProvenanceNewRequest.yaml`). Same

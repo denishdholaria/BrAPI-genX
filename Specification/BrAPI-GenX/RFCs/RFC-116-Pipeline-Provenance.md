@@ -6,15 +6,11 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record reference genome assemblies. Reference
-assemblies are the routine reference for genotyping and variant calling.
-Without a record, assemblies arrive as unversioned files with no stated
-accession or provenance, so they cannot be audited or reproduced.
+Bioinformatics processing provenance may require pipeline versions, parameters, input/output identities, execution environment and traceable computation. This candidate records only optional pipelineName, pipelineVersion, parameters, inputs and outputs as metadata: it does not prove execution, stable software environments, reproducible results, or a valid genomic dataset linkage.
 
 ## 2. Object
 
-`PipelineProvenance` — one immutable pipeline provenance record, with its
-accession, version, and provenance.
+`PipelineProvenance` — one candidate immutable bioinformatics pipeline metadata record with optional version, parameters, free-form inputs and outputs, and provenance. It is not a reference genome assembly.
 
 ## 3. Endpoints
 
@@ -27,8 +23,7 @@ accession, version, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Reference assembly records reference GenX `GenomicDataset` by identifier; they
-  do not duplicate those resources.
+- The candidate records optional string `inputs` and `outputs`, which have no typed GenX `GenomicDataset` references. D-348 remains open; a dataset-like string does not prove actual lineage.
 - A record is not a BrAPI data resource and must not be treated as one.
 
 ## 5. Invariants
@@ -36,7 +31,7 @@ accession, version, and provenance.
 - A published `pipelineProvenanceDbId` record never mutates in place.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional records linked by `supersedes`.
-- A record does not imply that the assembly is validated or endorsed.
+- A record does not prove that the pipeline executed, produced the stated outputs, or can be reproduced.
 
 ## 6. Deferred questions
 

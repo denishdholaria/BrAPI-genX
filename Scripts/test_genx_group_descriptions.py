@@ -325,6 +325,33 @@ class GroupEvidenceTests(unittest.TestCase):
                 self.assertIn('STRUCTURAL_DRAFT', group)
                 self.assertIn(decision, group)
 
+    def test_genomic_reference_and_pipeline_provenance_are_reviewed(self):
+        self.assertTrue({'Genotyping/ReferenceAssembly',
+                         'Genotyping/PipelineProvenance'}.issubset(REVIEWED))
+
+    def test_reference_assembly_and_pipeline_are_not_conflated(self):
+        root = Path(__file__).resolve().parents[1]
+        official = (root / 'Specification/BrAPI-Genotyping/ReferenceSets/Schemas'
+                    / 'ReferenceSet.yaml').read_text()
+        self.assertIn('referenceSetDbId:', official)
+        self.assertIn('referenceSetName:', official)
+        for module, proposal, decision in (
+            ('ReferenceAssembly', 'RFC-115-Reference-Assembly.md', 'D-345'),
+            ('PipelineProvenance', 'RFC-116-Pipeline-Provenance.md', 'D-348'),
+        ):
+            with self.subTest(module=module):
+                rfc = (root / 'Specification/BrAPI-GenX/RFCs' / proposal).read_text()
+                self.assertIn('no typed', rfc)
+                self.assertIn(decision, rfc)
+                group = (root / 'Specification/BrAPI-GenX/Genotyping' /
+                         module / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', group)
+                self.assertIn(decision, group)
+        pipeline = (root / 'Specification/BrAPI-GenX/RFCs'
+                    / 'RFC-116-Pipeline-Provenance.md').read_text()
+        self.assertIn('not a reference genome assembly', pipeline)
+        self.assertNotIn('the assembly is validated or endorsed', pipeline)
+
 
 if __name__ == '__main__':
     unittest.main()
