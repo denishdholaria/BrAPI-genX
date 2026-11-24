@@ -1,7 +1,7 @@
 # BrAPI-GenX — Terminology Version (Terminology)
 
 Terminology version entries describe versioned terminology/vocabulary records.
-BrAPI v2.1 has no terminology version record.
+Official BrAPI version 2.1 ontology metadata already contains a `version` field and `/brapi/v2/ontologies` operations. The GenX proposal concerns separate terminology release records, not replacement ontology version semantics or a typed VariableTerm linkage.
 
 - `POST /genx/v1/terminology-versions` (`genxRegisterTerminologyVersion`) registers one
   `TerminologyVersion` (`Schemas/TerminologyVersionNewRequest.yaml`). Same

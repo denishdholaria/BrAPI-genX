@@ -6,10 +6,7 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record terminology versioning and provenance.
-Terminology versioning is the routine reference for reproducible analytics.
-Without a record, terminology versions arrive as unversioned strings with no
-stated version, provenance, or status, so they cannot be audited or reproduced.
+Official BrAPI version 2.1 Ontology metadata already supports a version label through `/brapi/v2/ontologies`. This candidate explores separate namespaced terminology release metadata, but a version string and provenance alone do not pin the content of an external vocabulary, guarantee reproducible resolution, or justify a distinct record.
 
 ## 2. Object
 
@@ -27,8 +24,7 @@ terminology name, version label, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Terminology version entries reference GenX `VariableTerm` by identifier; they
-  do not duplicate those resources.
+- The candidate contains no typed GenX `VariableTerm` reference (D-252 remains open), and a shared label does not establish terminology release equivalence to an official BrAPI Ontology.
 - An entry is not a BrAPI Observation and must not be treated as one.
 
 ## 5. Invariants

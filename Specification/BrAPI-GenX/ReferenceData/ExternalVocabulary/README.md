@@ -1,7 +1,7 @@
 # BrAPI-GenX — External Vocabulary (Terminology)
 
 External vocabulary sync entries describe synchronization of external
-vocabularies into GenX. BrAPI v2.1 has no external vocabulary record.
+vocabularies into GenX. Official BrAPI version 2.1 already exposes metadata about available ontologies through `/brapi/v2/ontologies`. This draft GenX vocabulary-sync record is only proposed bookkeeping; it does not implement synchronization, term conversion, or a typed link to VariableTerm.
 
 - `POST /genx/v1/external-vocabularies` (`genxRegisterExternalVocabulary`) registers one
   `ExternalVocabulary` (`Schemas/ExternalVocabularyNewRequest.yaml`). Same

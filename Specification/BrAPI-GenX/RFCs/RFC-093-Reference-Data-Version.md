@@ -6,10 +6,7 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record reference data versions. Reference data
-versioning is the routine reference for reproducible analysis. Without a
-record, versions arrive as unversioned strings with no stated source, version,
-or provenance, so they cannot be audited or reproduced.
+Official BrAPI version 2.1 already carries version metadata for Ontology resources. A separately versioned generic reference-data source is a proposed different scope: the present draft contains optional source/version strings, not an immutable snapshot digest, authoritative source binding, or independently reproducible dataset. Necessity and meaning must be established before normative adoption.
 
 ## 2. Object
 
@@ -27,8 +24,7 @@ source, version label, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Reference data version records reference BrAPI entities by identifier; they
-  do not duplicate those resources.
+- The candidate contains no typed BrAPI entity or GenX `VariableTerm` reference (D-279 remains open). `source` and `version` strings alone do not identify a guaranteed immutable external snapshot.
 - A record is not a BrAPI data resource and must not be treated as one.
 
 ## 5. Invariants

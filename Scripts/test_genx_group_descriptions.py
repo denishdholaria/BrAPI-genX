@@ -213,6 +213,35 @@ class GroupEvidenceTests(unittest.TestCase):
                 self.assertIn('STRUCTURAL_DRAFT', description)
                 self.assertIn(decision, description)
 
+    def test_version_and_vocabulary_group_reviews_are_pinned(self):
+        required = {
+            'ReferenceData/ExternalVocabulary',
+            'ReferenceData/TerminologyVersion',
+            'ReferenceData/ReferenceDataVersion',
+            'ReferenceData/CropTraitDictionary',
+        }
+        self.assertTrue(required.issubset(REVIEWED))
+
+    def test_incumbent_ontology_and_trait_apis_are_acknowledged(self):
+        root = Path(__file__).resolve().parents[1]
+        sources = [
+            root / 'Specification/BrAPI-Phenotyping/Ontologies/README.md',
+            root / 'Specification/BrAPI-Phenotyping/Traits/README.md',
+        ]
+        self.assertIn('/brapi/v2/ontologies', sources[0].read_text())
+        self.assertIn('/brapi/v2/traits', sources[1].read_text())
+        for name, decision in (
+            ('ExternalVocabulary', 'D-249'),
+            ('TerminologyVersion', 'D-252'),
+            ('ReferenceDataVersion', 'D-279'),
+            ('CropTraitDictionary', 'D-264'),
+        ):
+            with self.subTest(module=name):
+                desc = (root / 'Specification/BrAPI-GenX/ReferenceData' /
+                        name / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', desc)
+                self.assertIn(decision, desc)
+
 
 if __name__ == '__main__':
     unittest.main()

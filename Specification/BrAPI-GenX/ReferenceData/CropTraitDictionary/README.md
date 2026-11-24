@@ -1,7 +1,7 @@
 # BrAPI-GenX — Crop Trait Dictionary (Terminology)
 
 Crop trait dictionary entries describe crop-specific trait definitions.
-BrAPI v2.1 has no crop trait dictionary record.
+Official BrAPI version 2.1 already provides Traits, Ontologies, and Observation Variables. The candidate GenX crop-trait dictionary is a separate ungoverned record; a free-form crop reference and trait string cannot establish an official crop/trait mapping.
 
 - `POST /genx/v1/crop-trait-dictionaries` (`genxRegisterCropTraitDictionary`) registers one
   `CropTraitDictionary` (`Schemas/CropTraitDictionaryNewRequest.yaml`). Same

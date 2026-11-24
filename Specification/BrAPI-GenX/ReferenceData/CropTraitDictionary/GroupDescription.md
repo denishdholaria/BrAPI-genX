@@ -1,1 +1,9 @@
 # Group CropTraitDictionary
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 088. This proposed record is not a ratified mapping, independently verified synchronization mechanism, or official Breeding Application Programming Interface (BrAPI) version 2.1 resource.
+
+The group proposes immutable, namespaced registration, paged retrieval and optional lifecycle filtering, with same-identity replay and changed-payload conflict as **candidate behavior**, not demonstrated persistence. The draft requires namespaced `cropTraitDictionaryDbId` and lifecycle `status`; `cropDbId`, `trait`, `definition`, `supersedes`, and provenance are optional. Official BrAPI version 2.1 already manages traits, ontologies and observation variables. The candidate `cropDbId` is an untyped string; it neither establishes a BrAPI Germplasm relationship nor a governed crop taxonomy. D-262–D-264 remain unresolved, including the absent typed VariableTerm linkage.
+
+**Boundaries:** A recorded vocabulary name, version label, source/target system string, or candidate trait mapping does not establish source ownership, trustworthy release pinning, executable conversion, scientific equivalence, or an implemented synchronization process. Official BrAPI Ontology/Trait semantics remain unchanged. Advisory operation neighbors cannot create typed identity mappings; independent service conformance and normative promotion have not been established.
+
+**Sources:** [module overview](./README.md), [candidate record](./Schemas/CropTraitDictionary.yaml), [registration schema](./Schemas/CropTraitDictionaryNewRequest.yaml), [proposed operations](./CropTraitDictionary_GET_POST.yaml), [candidate RFC](../../RFCs/RFC-088-Crop-Trait-Dictionary.md), [official BrAPI comparison source](../../../BrAPI-Phenotyping/Traits/README.md), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

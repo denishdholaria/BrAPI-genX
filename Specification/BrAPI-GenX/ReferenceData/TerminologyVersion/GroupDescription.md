@@ -1,1 +1,9 @@
 # Group TerminologyVersion
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 084. This proposed record is not a ratified mapping, independently verified synchronization mechanism, or official Breeding Application Programming Interface (BrAPI) version 2.1 resource.
+
+The group proposes immutable, namespaced registration, paged retrieval and optional lifecycle filtering, with same-identity replay and changed-payload conflict as **candidate behavior**, not demonstrated persistence. The proposed namespaced `terminologyVersionDbId` and lifecycle `status` are required, while `terminology`, `version`, `provenance` and `supersedes` are optional. BrAPI version 2.1 Ontology metadata already carries a version label. A free string does not prove a content-addressed snapshot, published release, or stable vocabulary membership; the candidate has no typed GenX VariableTerm link. D-250–D-252 remain open.
+
+**Boundaries:** A recorded vocabulary name, version label, source/target system string, or candidate trait mapping does not establish source ownership, trustworthy release pinning, executable conversion, scientific equivalence, or an implemented synchronization process. Official BrAPI Ontology/Trait semantics remain unchanged. Advisory operation neighbors cannot create typed identity mappings; independent service conformance and normative promotion have not been established.
+
+**Sources:** [module overview](./README.md), [candidate record](./Schemas/TerminologyVersion.yaml), [registration schema](./Schemas/TerminologyVersionNewRequest.yaml), [proposed operations](./TerminologyVersion_GET_POST.yaml), [candidate RFC](../../RFCs/RFC-084-Terminology-Version.md), [official BrAPI comparison source](../../../BrAPI-Phenotyping/Ontologies/README.md), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

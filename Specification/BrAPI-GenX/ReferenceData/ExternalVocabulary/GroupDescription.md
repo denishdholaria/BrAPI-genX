@@ -1,1 +1,9 @@
 # Group ExternalVocabulary
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 083. This proposed record is not a ratified mapping, independently verified synchronization mechanism, or official Breeding Application Programming Interface (BrAPI) version 2.1 resource.
+
+The group proposes immutable, namespaced registration, paged retrieval and optional lifecycle filtering, with same-identity replay and changed-payload conflict as **candidate behavior**, not demonstrated persistence. Its required namespaced `externalVocabularyDbId` and `status` identify one proposed record; `source`, `target`, the free-form `mapping` object, `supersedes`, and provenance are optional. BrAPI already exposes the metadata of available ontologies via `/brapi/v2/ontologies`. This draft does not execute synchronization, validate term mapping, or reference GenX VariableTerm by a typed property. D-247–D-249 remain open.
+
+**Boundaries:** A recorded vocabulary name, version label, source/target system string, or candidate trait mapping does not establish source ownership, trustworthy release pinning, executable conversion, scientific equivalence, or an implemented synchronization process. Official BrAPI Ontology/Trait semantics remain unchanged. Advisory operation neighbors cannot create typed identity mappings; independent service conformance and normative promotion have not been established.
+
+**Sources:** [module overview](./README.md), [candidate record](./Schemas/ExternalVocabulary.yaml), [registration schema](./Schemas/ExternalVocabularyNewRequest.yaml), [proposed operations](./ExternalVocabulary_GET_POST.yaml), [candidate RFC](../../RFCs/RFC-083-External-Vocabulary.md), [official BrAPI comparison source](../../../BrAPI-Phenotyping/Ontologies/README.md), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

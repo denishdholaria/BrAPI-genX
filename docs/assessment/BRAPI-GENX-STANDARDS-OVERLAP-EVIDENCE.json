@@ -79,6 +79,34 @@
       "resource": "MeasurementMethod",
       "target": "BrAPI Method",
       "decision": "D-49"
+    },
+    {
+      "module": "ReferenceData/ExternalVocabulary",
+      "rfc": "RFC-083-External-Vocabulary.md",
+      "resource": "ExternalVocabulary",
+      "target": "VariableTerm",
+      "decision": "D-249"
+    },
+    {
+      "module": "ReferenceData/TerminologyVersion",
+      "rfc": "RFC-084-Terminology-Version.md",
+      "resource": "TerminologyVersion",
+      "target": "VariableTerm",
+      "decision": "D-252"
+    },
+    {
+      "module": "ReferenceData/ReferenceDataVersion",
+      "rfc": "RFC-093-Reference-Data-Version.md",
+      "resource": "ReferenceDataVersion",
+      "target": "VariableTerm",
+      "decision": "D-279"
+    },
+    {
+      "module": "ReferenceData/CropTraitDictionary",
+      "rfc": "RFC-088-Crop-Trait-Dictionary.md",
+      "resource": "CropTraitDictionary",
+      "target": "VariableTerm",
+      "decision": "D-264"
     }
   ]
 }

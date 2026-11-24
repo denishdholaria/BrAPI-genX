@@ -1,1 +1,9 @@
 # Group ReferenceDataVersion
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 093. This proposed record is not a ratified mapping, independently verified synchronization mechanism, or official Breeding Application Programming Interface (BrAPI) version 2.1 resource.
+
+The group proposes immutable, namespaced registration, paged retrieval and optional lifecycle filtering, with same-identity replay and changed-payload conflict as **candidate behavior**, not demonstrated persistence. Required `referenceDataVersionDbId` and `status` coexist with optional `source`, `version`, `supersedes`, and provenance. The draft is generic reference-data metadata, not a certified immutable data release, content checksum, source access license, or executable import. Official BrAPI Ontology already carries version labels; this candidate has no typed BrAPI entity or GenX VariableTerm reference, and D-277–D-279 remain unresolved.
+
+**Boundaries:** A recorded vocabulary name, version label, source/target system string, or candidate trait mapping does not establish source ownership, trustworthy release pinning, executable conversion, scientific equivalence, or an implemented synchronization process. Official BrAPI Ontology/Trait semantics remain unchanged. Advisory operation neighbors cannot create typed identity mappings; independent service conformance and normative promotion have not been established.
+
+**Sources:** [module overview](./README.md), [candidate record](./Schemas/ReferenceDataVersion.yaml), [registration schema](./Schemas/ReferenceDataVersionNewRequest.yaml), [proposed operations](./ReferenceDataVersion_GET_POST.yaml), [candidate RFC](../../RFCs/RFC-093-Reference-Data-Version.md), [official BrAPI comparison source](../../../BrAPI-Phenotyping/Ontologies/README.md), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).
