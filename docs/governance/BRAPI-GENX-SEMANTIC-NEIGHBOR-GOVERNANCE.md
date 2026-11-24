@@ -147,6 +147,15 @@ signal that an engineer must update the evidence, tests and relevant contracts
 together. They are not scientific proof or normative maturity promotion.
 The complete hosted suite remains pending monthly Actions minutes reset.
 
+## Mission 012 — field-experiment relationship triage (2026-11-24)
+
+Fifteen inherited neighbors from Farm, Plot, TrialNetwork,
+TreatmentAssignment, and CaptureWorkflow have been assessed as
+`requires-decision`, without deletion, endorsement, or route changes.
+See `docs/assessment/BRAPI-GENX-MISSION-012-FIELD-EXPERIMENT-NEIGHBOR-REVIEW.md` for the five distinct scientific questions,
+source-schema evidence and mapping falsifiers. The ledger retains all 153
+original identities: 51 require decisions; 102 await review.
+
 ## Non-goals
 
 This framework does not modify official BrAPI v2.1 specifications, GenX routes,

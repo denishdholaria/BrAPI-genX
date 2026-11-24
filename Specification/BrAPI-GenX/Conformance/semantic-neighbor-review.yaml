@@ -457,9 +457,12 @@ entries:
   targetDomainClass: null
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-012-FIELD-EXPERIMENT-NEIGHBOR-REVIEW.md
+  - Specification/BrAPI-GenX/Phenotyping/CaptureWorkflow/Schemas/CaptureWorkflow.yaml
+  - Specification/BrAPI-GenX/ReferenceData/VariableTerms/Schemas/VariableTerm.yaml
   decisionReferences:
   - A-03
   - RFC-002
@@ -468,7 +471,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: CaptureWorkflow -> VariableTerms.'
-  rationale: ''
+  rationale: 'CaptureWorkflow describes an immutable workflowType such as manual-entry while VariableTerm defines a versioned trait/method/scale observation-variable definition. Neither schema contains a typed reference to the other. Executing or retrieving a capture workflow does not publish an observation-variable term.'
+  openQuestion: 'Should a versioned capture workflow declare required ObservationVariable term versions and transformation methods in a separate typed design contract, without mutating or republishing the scientific vocabulary?'
   evidence: []
 - id: brapi-genx.genx.v1.capture-workflows.list -> genxPublishVariableTermVersion
   sourceCatalogId: brapi-genx.genx.v1.capture-workflows.list
@@ -481,9 +485,12 @@ entries:
   targetDomainClass: null
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-012-FIELD-EXPERIMENT-NEIGHBOR-REVIEW.md
+  - Specification/BrAPI-GenX/Phenotyping/CaptureWorkflow/Schemas/CaptureWorkflow.yaml
+  - Specification/BrAPI-GenX/ReferenceData/VariableTerms/Schemas/VariableTerm.yaml
   decisionReferences:
   - A-03
   - RFC-002
@@ -492,7 +499,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: CaptureWorkflow -> VariableTerms.'
-  rationale: ''
+  rationale: 'CaptureWorkflow describes an immutable workflowType such as manual-entry while VariableTerm defines a versioned trait/method/scale observation-variable definition. Neither schema contains a typed reference to the other. Executing or retrieving a capture workflow does not publish an observation-variable term.'
+  openQuestion: 'Should a versioned capture workflow declare required ObservationVariable term versions and transformation methods in a separate typed design contract, without mutating or republishing the scientific vocabulary?'
   evidence: []
 - id: brapi-genx.genx.v1.capture-workflows.record -> genxPublishVariableTermVersion
   sourceCatalogId: brapi-genx.genx.v1.capture-workflows.record
@@ -505,9 +513,12 @@ entries:
   targetDomainClass: null
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-012-FIELD-EXPERIMENT-NEIGHBOR-REVIEW.md
+  - Specification/BrAPI-GenX/Phenotyping/CaptureWorkflow/Schemas/CaptureWorkflow.yaml
+  - Specification/BrAPI-GenX/ReferenceData/VariableTerms/Schemas/VariableTerm.yaml
   decisionReferences:
   - A-03
   - RFC-002
@@ -516,7 +527,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: CaptureWorkflow -> VariableTerms.'
-  rationale: ''
+  rationale: 'CaptureWorkflow describes an immutable workflowType such as manual-entry while VariableTerm defines a versioned trait/method/scale observation-variable definition. Neither schema contains a typed reference to the other. Executing or retrieving a capture workflow does not publish an observation-variable term.'
+  openQuestion: 'Should a versioned capture workflow declare required ObservationVariable term versions and transformation methods in a separate typed design contract, without mutating or republishing the scientific vocabulary?'
   evidence: []
 - id: brapi-genx.genx.v1.cloud-masks.get -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.cloud-masks.get
@@ -1453,9 +1465,12 @@ entries:
   targetDomainClass: D6
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-012-FIELD-EXPERIMENT-NEIGHBOR-REVIEW.md
+  - Specification/BrAPI-GenX/CropProduction/Farm/Schemas/Farm.yaml
+  - Specification/BrAPI-GenX/CropProduction/CropCycle/Schemas/CropCycle.yaml
   decisionReferences:
   - RFC-029
   - RFC-069
@@ -1463,7 +1478,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: Farm -> CropCycle.'
-  rationale: ''
+  rationale: 'Farm represents a site/holding with locationDbIds and totalAreaHa; CropCycle represents an episode of crop production with locationDbId, studyDbId, plantingDate and harvestDate. A crop cycle may occur on one farm location, but neither schema carries a typed Farm-to-CropCycle reference or an authority-resolved membership rule. Listing a farm does not register a crop cycle.'
+  openQuestion: 'Should a CropCycle be linked to a Farm only through official BrAPI Location authority, or through an explicit farm membership relationship; how are multiple farms, location scope, tenant ownership, season dates and reference versions governed?'
   evidence: []
 - id: brapi-genx.genx.v1.farms.list -> genxRegisterCropCycle
   sourceCatalogId: brapi-genx.genx.v1.farms.list
@@ -1476,9 +1492,12 @@ entries:
   targetDomainClass: D6
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-012-FIELD-EXPERIMENT-NEIGHBOR-REVIEW.md
+  - Specification/BrAPI-GenX/CropProduction/Farm/Schemas/Farm.yaml
+  - Specification/BrAPI-GenX/CropProduction/CropCycle/Schemas/CropCycle.yaml
   decisionReferences:
   - RFC-029
   - RFC-069
@@ -1486,7 +1505,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: Farm -> CropCycle.'
-  rationale: ''
+  rationale: 'Farm represents a site/holding with locationDbIds and totalAreaHa; CropCycle represents an episode of crop production with locationDbId, studyDbId, plantingDate and harvestDate. A crop cycle may occur on one farm location, but neither schema carries a typed Farm-to-CropCycle reference or an authority-resolved membership rule. Listing a farm does not register a crop cycle.'
+  openQuestion: 'Should a CropCycle be linked to a Farm only through official BrAPI Location authority, or through an explicit farm membership relationship; how are multiple farms, location scope, tenant ownership, season dates and reference versions governed?'
   evidence: []
 - id: brapi-genx.genx.v1.farms.register -> genxRegisterCropCycle
   sourceCatalogId: brapi-genx.genx.v1.farms.register
@@ -1499,9 +1519,12 @@ entries:
   targetDomainClass: D6
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-012-FIELD-EXPERIMENT-NEIGHBOR-REVIEW.md
+  - Specification/BrAPI-GenX/CropProduction/Farm/Schemas/Farm.yaml
+  - Specification/BrAPI-GenX/CropProduction/CropCycle/Schemas/CropCycle.yaml
   decisionReferences:
   - RFC-029
   - RFC-069
@@ -1509,7 +1532,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: Farm -> CropCycle.'
-  rationale: ''
+  rationale: 'Farm represents a site/holding with locationDbIds and totalAreaHa; CropCycle represents an episode of crop production with locationDbId, studyDbId, plantingDate and harvestDate. A crop cycle may occur on one farm location, but neither schema carries a typed Farm-to-CropCycle reference or an authority-resolved membership rule. Listing a farm does not register a crop cycle.'
+  openQuestion: 'Should a CropCycle be linked to a Farm only through official BrAPI Location authority, or through an explicit farm membership relationship; how are multiple farms, location scope, tenant ownership, season dates and reference versions governed?'
   evidence: []
 - id: brapi-genx.genx.v1.field-books.get -> genxRegisterFieldScouting
   sourceCatalogId: brapi-genx.genx.v1.field-books.get
@@ -2248,9 +2272,12 @@ entries:
   targetDomainClass: D6
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-012-FIELD-EXPERIMENT-NEIGHBOR-REVIEW.md
+  - Specification/BrAPI-GenX/Breeding/Plot/Schemas/Plot.yaml
+  - Specification/BrAPI-GenX/PlantHealth/FieldScouting/Schemas/FieldScouting.yaml
   decisionReferences:
   - RFC-074
   - RFC-107
@@ -2258,7 +2285,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: Plot -> FieldScouting.'
-  rationale: ''
+  rationale: 'Plot has plotDbId, fieldDbId and plotName; FieldScouting uses fieldDbId, scoutingType and free-text observations, but has no plotDbId. A shared field does not identify the observed plot or the authoritative BrAPI ObservationUnit that may represent experimental units. Plot GET/LIST/POST operations do not equal a scouting event.'
+  openQuestion: 'Does a scouting event require an authority-qualified Plot or official BrAPI ObservationUnit reference with spatial support, observation variable and version context, or is field-level scouting the intended independent meaning?'
   evidence: []
 - id: brapi-genx.genx.v1.plots.list -> genxRegisterFieldScouting
   sourceCatalogId: brapi-genx.genx.v1.plots.list
@@ -2271,9 +2299,12 @@ entries:
   targetDomainClass: D6
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-012-FIELD-EXPERIMENT-NEIGHBOR-REVIEW.md
+  - Specification/BrAPI-GenX/Breeding/Plot/Schemas/Plot.yaml
+  - Specification/BrAPI-GenX/PlantHealth/FieldScouting/Schemas/FieldScouting.yaml
   decisionReferences:
   - RFC-074
   - RFC-107
@@ -2281,7 +2312,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: Plot -> FieldScouting.'
-  rationale: ''
+  rationale: 'Plot has plotDbId, fieldDbId and plotName; FieldScouting uses fieldDbId, scoutingType and free-text observations, but has no plotDbId. A shared field does not identify the observed plot or the authoritative BrAPI ObservationUnit that may represent experimental units. Plot GET/LIST/POST operations do not equal a scouting event.'
+  openQuestion: 'Does a scouting event require an authority-qualified Plot or official BrAPI ObservationUnit reference with spatial support, observation variable and version context, or is field-level scouting the intended independent meaning?'
   evidence: []
 - id: brapi-genx.genx.v1.plots.record -> genxRegisterFieldScouting
   sourceCatalogId: brapi-genx.genx.v1.plots.record
@@ -2294,9 +2326,12 @@ entries:
   targetDomainClass: D6
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-012-FIELD-EXPERIMENT-NEIGHBOR-REVIEW.md
+  - Specification/BrAPI-GenX/Breeding/Plot/Schemas/Plot.yaml
+  - Specification/BrAPI-GenX/PlantHealth/FieldScouting/Schemas/FieldScouting.yaml
   decisionReferences:
   - RFC-074
   - RFC-107
@@ -2304,7 +2339,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: Plot -> FieldScouting.'
-  rationale: ''
+  rationale: 'Plot has plotDbId, fieldDbId and plotName; FieldScouting uses fieldDbId, scoutingType and free-text observations, but has no plotDbId. A shared field does not identify the observed plot or the authoritative BrAPI ObservationUnit that may represent experimental units. Plot GET/LIST/POST operations do not equal a scouting event.'
+  openQuestion: 'Does a scouting event require an authority-qualified Plot or official BrAPI ObservationUnit reference with spatial support, observation variable and version context, or is field-level scouting the intended independent meaning?'
   evidence: []
 - id: brapi-genx.genx.v1.protocol-libraries.get -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.protocol-libraries.get
@@ -3241,9 +3277,12 @@ entries:
   targetDomainClass: D6
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-012-FIELD-EXPERIMENT-NEIGHBOR-REVIEW.md
+  - Specification/BrAPI-GenX/Breeding/TreatmentAssignment/Schemas/TreatmentAssignment.yaml
+  - Specification/BrAPI-GenX/PlantHealth/FieldScouting/Schemas/FieldScouting.yaml
   decisionReferences:
   - RFC-074
   - RFC-106
@@ -3251,7 +3290,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: TreatmentAssignment -> FieldScouting.'
-  rationale: ''
+  rationale: 'TreatmentAssignment records an intended treatment and fieldDbId; FieldScouting records scouting observations with the same opaque fieldDbId but no treatmentAssignmentDbId. Assigned treatment, actual application and observed response are different scientific events, and field identity alone does not establish treatment exposure or causal effect.'
+  openQuestion: 'Should field scouting optionally reference an exact, authority-qualified treatment assignment and actual application evidence, with timing, unit/dose, plot coverage and provenance, or are the concepts intentionally independent?'
   evidence: []
 - id: brapi-genx.genx.v1.treatment-assignments.list -> genxRegisterFieldScouting
   sourceCatalogId: brapi-genx.genx.v1.treatment-assignments.list
@@ -3264,9 +3304,12 @@ entries:
   targetDomainClass: D6
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-012-FIELD-EXPERIMENT-NEIGHBOR-REVIEW.md
+  - Specification/BrAPI-GenX/Breeding/TreatmentAssignment/Schemas/TreatmentAssignment.yaml
+  - Specification/BrAPI-GenX/PlantHealth/FieldScouting/Schemas/FieldScouting.yaml
   decisionReferences:
   - RFC-074
   - RFC-106
@@ -3274,7 +3317,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: TreatmentAssignment -> FieldScouting.'
-  rationale: ''
+  rationale: 'TreatmentAssignment records an intended treatment and fieldDbId; FieldScouting records scouting observations with the same opaque fieldDbId but no treatmentAssignmentDbId. Assigned treatment, actual application and observed response are different scientific events, and field identity alone does not establish treatment exposure or causal effect.'
+  openQuestion: 'Should field scouting optionally reference an exact, authority-qualified treatment assignment and actual application evidence, with timing, unit/dose, plot coverage and provenance, or are the concepts intentionally independent?'
   evidence: []
 - id: brapi-genx.genx.v1.treatment-assignments.record -> genxRegisterFieldScouting
   sourceCatalogId: brapi-genx.genx.v1.treatment-assignments.record
@@ -3287,9 +3331,12 @@ entries:
   targetDomainClass: D6
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-012-FIELD-EXPERIMENT-NEIGHBOR-REVIEW.md
+  - Specification/BrAPI-GenX/Breeding/TreatmentAssignment/Schemas/TreatmentAssignment.yaml
+  - Specification/BrAPI-GenX/PlantHealth/FieldScouting/Schemas/FieldScouting.yaml
   decisionReferences:
   - RFC-074
   - RFC-106
@@ -3297,7 +3344,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: TreatmentAssignment -> FieldScouting.'
-  rationale: ''
+  rationale: 'TreatmentAssignment records an intended treatment and fieldDbId; FieldScouting records scouting observations with the same opaque fieldDbId but no treatmentAssignmentDbId. Assigned treatment, actual application and observed response are different scientific events, and field identity alone does not establish treatment exposure or causal effect.'
+  openQuestion: 'Should field scouting optionally reference an exact, authority-qualified treatment assignment and actual application evidence, with timing, unit/dose, plot coverage and provenance, or are the concepts intentionally independent?'
   evidence: []
 - id: brapi-genx.genx.v1.trial-networks.get -> genxRegisterFieldScouting
   sourceCatalogId: brapi-genx.genx.v1.trial-networks.get
@@ -3310,9 +3358,12 @@ entries:
   targetDomainClass: D6
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-012-FIELD-EXPERIMENT-NEIGHBOR-REVIEW.md
+  - Specification/BrAPI-GenX/Breeding/TrialNetwork/Schemas/TrialNetwork.yaml
+  - Specification/BrAPI-GenX/PlantHealth/FieldScouting/Schemas/FieldScouting.yaml
   decisionReferences:
   - RFC-074
   - RFC-109
@@ -3320,7 +3371,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: TrialNetwork -> FieldScouting.'
-  rationale: ''
+  rationale: 'TrialNetwork defines a named multi-environment trial design identity; FieldScouting stores site observations or task notes. Neither inspected schema identifies the other; the network record does not carry a typed Trial or Study binding and the scouting record does not carry a network identity. They are different organizational and observational facts.'
+  openQuestion: 'What authoritative official BrAPI Trial, Study and Location links are needed to associate scouting evidence with a multi-environment TrialNetwork, without duplicating program/study facts or treating network discovery as scouting registration?'
   evidence: []
 - id: brapi-genx.genx.v1.trial-networks.list -> genxRegisterFieldScouting
   sourceCatalogId: brapi-genx.genx.v1.trial-networks.list
@@ -3333,9 +3385,12 @@ entries:
   targetDomainClass: D6
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-012-FIELD-EXPERIMENT-NEIGHBOR-REVIEW.md
+  - Specification/BrAPI-GenX/Breeding/TrialNetwork/Schemas/TrialNetwork.yaml
+  - Specification/BrAPI-GenX/PlantHealth/FieldScouting/Schemas/FieldScouting.yaml
   decisionReferences:
   - RFC-074
   - RFC-109
@@ -3343,7 +3398,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: TrialNetwork -> FieldScouting.'
-  rationale: ''
+  rationale: 'TrialNetwork defines a named multi-environment trial design identity; FieldScouting stores site observations or task notes. Neither inspected schema identifies the other; the network record does not carry a typed Trial or Study binding and the scouting record does not carry a network identity. They are different organizational and observational facts.'
+  openQuestion: 'What authoritative official BrAPI Trial, Study and Location links are needed to associate scouting evidence with a multi-environment TrialNetwork, without duplicating program/study facts or treating network discovery as scouting registration?'
   evidence: []
 - id: brapi-genx.genx.v1.trial-networks.record -> genxRegisterFieldScouting
   sourceCatalogId: brapi-genx.genx.v1.trial-networks.record
@@ -3356,9 +3412,12 @@ entries:
   targetDomainClass: D6
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-012-FIELD-EXPERIMENT-NEIGHBOR-REVIEW.md
+  - Specification/BrAPI-GenX/Breeding/TrialNetwork/Schemas/TrialNetwork.yaml
+  - Specification/BrAPI-GenX/PlantHealth/FieldScouting/Schemas/FieldScouting.yaml
   decisionReferences:
   - RFC-074
   - RFC-109
@@ -3366,7 +3425,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: TrialNetwork -> FieldScouting.'
-  rationale: ''
+  rationale: 'TrialNetwork defines a named multi-environment trial design identity; FieldScouting stores site observations or task notes. Neither inspected schema identifies the other; the network record does not carry a typed Trial or Study binding and the scouting record does not carry a network identity. They are different organizational and observational facts.'
+  openQuestion: 'What authoritative official BrAPI Trial, Study and Location links are needed to associate scouting evidence with a multi-environment TrialNetwork, without duplicating program/study facts or treating network discovery as scouting registration?'
   evidence: []
 - id: brapi-genx.genx.v1.value-missingness.get -> genxPublishVariableTermVersion
   sourceCatalogId: brapi-genx.genx.v1.value-missingness.get

@@ -36,6 +36,14 @@ are in `docs/assessment/BRAPI-GENX-MISSION-008-EXECUTION-EVIDENCE-REVIEW.md`.
 All 153 original links remain; 36 now require decisions and 117 await review.
 These are advisory classifications, not scientific equivalence decisions.
 
+## Mission 012 — source-backed field and capture relationships (2026-11-24)
+
+Five source/target operation triads were reviewed. Farm-to-CropCycle,
+plot/trial-network/treatment-to-field-scouting, and
+CaptureWorkflow-to-VariableTerms are not automatically interchangeable.
+See `docs/assessment/BRAPI-GENX-MISSION-012-FIELD-EXPERIMENT-NEIGHBOR-REVIEW.md`. All 153 original links remain;
+51 require decisions and 102 are not yet reviewed.
+
 ## SEM-01 Seed-lot transactions versus GenX ledger records (D-20)
 
 - Authoritative records: BrAPI v2.1 SeedLotTransaction; GenX LotLedgerEntry.
