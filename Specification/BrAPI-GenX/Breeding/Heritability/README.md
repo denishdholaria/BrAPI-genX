@@ -1,7 +1,13 @@
 # BrAPI-GenX — Heritability (Scientific Compute)
 
-Heritability estimates record the estimated heritability for a trait within a
-study. BrAPI v2.1 has no heritability record.
+HeritabilityEstimate proposes a separately identified statistical estimate, not
+a validated or universally comparable heritability parameter. Its `traitDbId`,
+`studyDbId`, `heritabilityValue`, job reference and provenance are optional.
+The value is a bare number without a standardized heritability estimand,
+variance-component definition or uncertainty model.
+
+Official BrAPI version 2.1 resources are unchanged. Method identity does not
+prove a version-bound analysis was run or its scientific assumptions verified.
 
 - `POST /genx/v1/heritability-estimates` (`genxRecordHeritability`) registers one
   `HeritabilityEstimate` (`Schemas/HeritabilityEstimateNewRequest.yaml`). Same
