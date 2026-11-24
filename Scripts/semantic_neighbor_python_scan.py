@@ -53,4 +53,3 @@ def executable_python_lines(source: str) -> list[str]:
         if token.type == tokenize.COMMENT:
             mask(token.start[0], token.start[1], token.end[0], token.end[1])
     return [''.join(line) for line in lines]
-
