@@ -1,1 +1,11 @@
 # Group TreatmentAssignment
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 106, not a scientifically validated randomization, official BrAPI Observation or proof of an applied intervention.
+
+**Current contract:** Registration requires only `treatmentAssignmentDbId`; the response also requires lifecycle `status`. Both `fieldDbId` and free-text `treatment` are optional, along with provenance and supersession. No `studyDbId`, `locationDbId`, `observationUnitDbId` or `experimentalDesignDbId` is present. There is no mandatory plot, replication, assignment date, application quantity, unit, duration or executed-versus-planned state. A free-text field identifier is not a validated official BrAPI Study/Location relationship.
+
+**Official overlap:** BrAPI version 2.1 `ObservationUnitNewRequest.treatments` already associates treatment factor/modality with observation units through `ObservationTreatment`. Its Events separately describe actual management interventions, time and affected units. Candidate planned assignments, observed factor values and executed interventions are distinct facts; this schema neither validates a random allocation nor proves application.
+
+**Deferred questions:** D-316 (field requiredness), D-317 (controlled treatment vocabulary), and D-318 (link to GenX ExperimentalDesign) remain open. No treatment efficacy, plot balance, official linkage, approved provenance rule or scientific conformance is inferred. `active` is record lifecycle, not execution status.
+
+**Sources:** [overview](./README.md), [registration schema](./Schemas/TreatmentAssignmentNewRequest.yaml), [response schema](./Schemas/TreatmentAssignment.yaml), [operations](./TreatmentAssignment_GET_POST.yaml), [RFC-106](../../RFCs/RFC-106-Treatment-Assignment.md), [official Observation Unit](../../../BrAPI-Phenotyping/ObservationUnits/Schemas/ObservationUnitNewRequest.yaml), [official treatment factor](../../../BrAPI-Phenotyping/ObservationUnits/Schemas/ObservationTreatment.yaml), [official Event](../../../BrAPI-Phenotyping/Events/Schemas/Event.yaml), [design draft](../ExperimentalDesign/Schemas/ExperimentalDesignNewRequest.yaml), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

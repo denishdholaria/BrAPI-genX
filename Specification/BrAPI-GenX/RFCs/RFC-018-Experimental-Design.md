@@ -6,9 +6,7 @@
 
 ## 1. Problem
 
-BrAPI v2.1 standardizes studies and observation units but not the experimental
-design: layout, replication, randomization, and treatment assignment. Without
-this record, trial structure and randomization cannot be audited or reproduced.
+BrAPI v2.1 `StudyNewRequest.experimentalDesign` already records experimental-design description and an ontology reference; Observation Unit hierarchy and positions encode plot/block layout and treatment metadata. This draft explores a separate versioned identity and planned allocation, but its incremental value and scientific reproducibility are not yet demonstrated.
 
 ## 2. Object
 
@@ -25,8 +23,7 @@ this record, trial structure and randomization cannot be audited or reproduced.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Experimental designs reference BrAPI Study by identifier; they do not
-  duplicate that resource.
+- Experimental designs store a required `studyDbId` string, but the draft does not validate an authoritative BrAPI Study link or replace official design metadata.
 - A design is not a BrAPI Study or Observation Unit and must not be treated as
   one.
 
@@ -35,8 +32,7 @@ this record, trial structure and randomization cannot be audited or reproduced.
 - A published `experimentalDesignDbId` record never mutates in place.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional designs linked by `supersedes`.
-- `designType`, `replicationCount`, and `treatmentAssignments` are recorded,
-  not inferred.
+- `designType` is required; `replicationCount`, `randomizationSeed` and `treatmentAssignments` are optional. No allocation balance, complete plot identity mapping or statistically reproducible design is validated.
 - A design does not imply an approved protocol or release.
 
 ## 6. Deferred questions
