@@ -1802,5 +1802,73 @@ class GroupEvidenceTests(unittest.TestCase):
             self.assertIn(d, (genx / 'Geospatial/RasterCatalogue/GroupDescription.md').read_text())
 
 
+    def test_bulk_capture_is_not_official_observation_batch_ingestion(self):
+        root = Path(__file__).resolve().parents[1]
+        genx = root / 'Specification/BrAPI-GenX'
+        module = 'Phenotyping/BulkCapture'
+        self.assertIn(module, REVIEWED)
+        folder = genx / module
+        desc = (folder / 'GroupDescription.md').read_text()
+        self.assertIn('STRUCTURAL_DRAFT', desc)
+        self.assertIn('**Sources:**', desc)
+        for decision in ('D-118', 'D-119', 'D-120'):
+            self.assertIn(decision, desc)
+
+        response = yaml.safe_load(
+            (folder / 'Schemas/BulkCapture.yaml').read_text()
+        )['components']['schemas']['BulkCapture']
+        request = yaml.safe_load(
+            (folder / 'Schemas/BulkCaptureNewRequest.yaml').read_text()
+        )['components']['schemas']['BulkCaptureNewRequest']
+        required = {'bulkCaptureDbId', 'studyDbId', 'capturedAt', 'entries'}
+        self.assertEqual(required, set(request['required']))
+        self.assertEqual(required | {'status'}, set(response['required']))
+        self.assertEqual('date-time', response['properties']['capturedAt']['format'])
+
+        for record in (response, request):
+            entries = record['properties']['entries']
+            self.assertEqual('array', entries['type'])
+            self.assertNotIn('minItems', entries)
+            item = entries['items']
+            self.assertEqual({'variableDbId'}, set(item['required']))
+            for optional in ('observationUnitDbId', 'value', 'unit', 'qualityFlag'):
+                self.assertIn(optional, item['properties'])
+                self.assertNotIn(optional, item['required'])
+            self.assertEqual('number', item['properties']['value']['type'])
+            self.assertIs(True, item['properties']['value']['nullable'])
+            self.assertEqual(
+                {'valid', 'suspect', 'invalid', 'missing'},
+                set(item['properties']['qualityFlag']['enum'])
+            )
+            for absent in ('observationDbId', 'observationVariableDbId',
+                           'missingReason', 'capturedAt'):
+                self.assertNotIn(absent, item['properties'])
+            for absent in ('phenotypeCaptureDbId', 'fieldBookDbId'):
+                self.assertNotIn(absent, record['properties'])
+
+        official_operations = yaml.safe_load(
+            (root / 'Specification/BrAPI-Phenotyping/Observations/'
+             'Observations_GET_POST_PUT.yaml').read_text()
+        )
+        official_batch = (
+            official_operations['paths']['/observations']['post']
+            ['requestBody']['content']['application/json']['schema']
+        )
+        self.assertEqual('array', official_batch['type'])
+        self.assertEqual(
+            '#/components/schemas/ObservationNewRequest',
+            official_batch['items']['$ref']
+        )
+        official_request = yaml.safe_load(
+            (root / 'Specification/BrAPI-Phenotyping/Observations/Schemas/'
+             'ObservationNewRequest.yaml').read_text()
+        )['components']['schemas']['ObservationNewRequest']
+        self.assertEqual('string', official_request['properties']['value']['type'])
+        self.assertIs(True, official_request['properties']['value']['nullable'])
+        rfc = (genx / 'RFCs/RFC-040-Bulk-Capture.md').read_text()
+        self.assertIn('no `phenotypeCaptureDbId` property', rfc)
+        self.assertIn('no `fieldBookDbId` property', rfc)
+
+
 if __name__ == '__main__':
     unittest.main()
