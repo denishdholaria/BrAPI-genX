@@ -45,6 +45,8 @@ REVIEWED = frozenset({
     'PlantHealth/FieldScouting', 'PlantHealth/DiseaseResistance',
     'PlantHealth/CropHealthImage', 'PlantHealth/IpmStrategy',
     'PlantHealth/PestDiseaseRisk', 'PlantHealth/ThresholdAlert',
+    'CropProduction/HarvestRecords', 'CropProduction/IrrigationOperation',
+    'CropProduction/PlantingOperation', 'CropProduction/SprayApplication',
     'Environment/WeatherObservations', 'Environment/WeatherForecast',
     'Environment/ClimateNormals', 'Environment/SoilProfile',
     'Environment/WaterBalance',

@@ -25,8 +25,9 @@ cannot be audited or linked to studies with provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Irrigation events reference BrAPI Location and Study by identifier; they do
-  not duplicate those resources.
+- Optional `locationDbId` and `studyDbId` fields are intended as
+  BrAPI identifiers but are plain strings, without typed validation
+  rules or proof of cross-system referential integrity.
 - An irrigation event is not a BrAPI Location and must not be treated as one.
 
 ## 5. Invariants

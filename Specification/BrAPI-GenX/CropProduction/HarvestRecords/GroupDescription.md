@@ -1,1 +1,9 @@
 # Group HarvestRecords
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 011; not a validated agronomic event ledger, official Breeding Application Programming Interface (BrAPI) version 2.1 resource, or independently tested persistent implementation.
+
+The proposed `HarvestRecord` contract defines an independently namespaced identity, optional `supersedes` and provenance metadata, and candidate operations for registration, listing and retrieval. The actual required scientific fields and lifecycle status vary by resource; their documented immutable publication and identical-body replay are candidate expectations, not demonstrated persistence guarantees.
+
+**Agronomic and interoperability boundaries:** The required `harvestedAt`, numeric `quantity`, and string `unit` capture a claimed harvest event, not a validated yield estimate. Optional moisture lacks standardized wet/dry basis and measurement method; areaHarvested has optional units; a single event does not establish seed-lot mass balance. The optional Study, Location, Germplasm and SeedLot identifiers are plain strings, not automatically validated foreign keys. D-20 also guards against counting a harvest alongside an official SeedLotTransaction as separate inventory gain. Open scientific-design decisions include D-30 and the remaining unresolved questions in its governing RFC. Operation-neighbor links do not automatically establish biological identity, verified delivery, causality or transaction effects.
+
+**Sources:** [module overview](./README.md), [record schema](./Schemas/HarvestRecord.yaml), [registration schema](./Schemas/HarvestRecordNewRequest.yaml), [draft operation](./HarvestRecords_GET_POST.yaml), [governing RFC](../../RFCs/RFC-011-Harvest-Records.md), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

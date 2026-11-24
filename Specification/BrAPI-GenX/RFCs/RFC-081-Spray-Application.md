@@ -27,8 +27,9 @@ with its product, rate, timestamp, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Spray records reference BrAPI `Location` and GenX `FieldScouting` by
-  identifier; they do not duplicate those resources.
+- The proposed `fieldDbId` is an untyped, optional string, not a
+  validated BrAPI `Location` reference or GenX `FieldScouting` link.
+  No typed spray-to-scouting relation is defined.
 - A spray record is not a BrAPI Observation and must not be treated as one.
 
 ## 5. Invariants

@@ -578,6 +578,29 @@ class GroupEvidenceTests(unittest.TestCase):
                'RFC-128-CropHealthImage.md').read_text()
         self.assertIn('/brapi/v2/images', rfc)
 
+    def test_crop_operation_source_boundaries_are_pinned(self):
+        root = Path(__file__).resolve().parents[1]
+        entries = (
+            ('HarvestRecords', 'D-30', 'HarvestRecord'),
+            ('IrrigationOperation', 'D-69', 'IrrigationEvent'),
+            ('PlantingOperation', 'D-196', 'PlantingOperation'),
+            ('SprayApplication', 'D-241', 'SprayApplication'),
+        )
+        for folder, decision, resource in entries:
+            with self.subTest(module=folder):
+                self.assertIn(f'CropProduction/{folder}', REVIEWED)
+                path = (root / 'Specification/BrAPI-GenX/CropProduction' /
+                        folder / 'GroupDescription.md')
+                text = path.read_text()
+                self.assertIn('STRUCTURAL_DRAFT', text)
+                self.assertIn(decision, text)
+                self.assertIn(resource, text)
+        for name in ('RFC-024-Irrigation-Operation.md', 'RFC-081-Spray-Application.md'):
+            path = root / 'Specification/BrAPI-GenX/RFCs' / name
+            text = ' '.join(path.read_text().split())
+            self.assertIn('plain strings' if name.startswith('RFC-024')
+                          else 'untyped', text)
+
 
 if __name__ == '__main__':
     unittest.main()
