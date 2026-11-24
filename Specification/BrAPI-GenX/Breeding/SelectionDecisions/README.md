@@ -1,15 +1,11 @@
 # BrAPI-GenX — Selection Decisions (Breeding Verdicts)
 
-SelectionDecision records an actual, immutable selection verdict and its rationale/evidence. It is not a planned selection rule or a scheme TaskDefinition.
+This **STRUCTURAL_DRAFT** records an asserted breeding selection verdict, not a verified authorization, mandatory evidence review, executed cross, commercial approval or independent service conformance. The request requires an authority-qualified Program reference, dated enumerated verdict and immutable decision ID. Candidate, decision maker, rationale, linked observations and provenance are **optional**.
 
-- The decision may reference an exact BreedingPipeline revision and exact BreedingScheme version when those definitions governed the decision.
-- `schemeContext` is optional and contains both `breedingSchemeDbId` and `breedingSchemeVersionDbId`. Any `stageId` must be nested inside this context and resolve within that exact scheme version.
-- `pipelineContext` is optional and contains both the stable pipeline ID and exact immutable pipeline revision. When both contexts are supplied, that pipeline revision must embed the referenced scheme version.
-- A decision made outside a registered pipeline or scheme may omit both contexts.
-- BrAPI Program, Study, Germplasm and Observation resources remain authoritative; references preserve their owning BrAPI server context.
+- The optional `pipelineContext` and `schemeContext` describe exact process versions when applicable. They do not prove an approved decision.
+- `schemeContext` contains `breedingSchemeDbId` and `breedingSchemeVersionDbId`; `stageId` must resolve within that version.
+- `pipelineContext` contains `breedingPipelineDbId` and `breedingPipelineVersionDbId`; when both contexts exist, their scheme bindings must agree.
+- The list filters use authority pairs: `programDbId`/`programServer`, `studyDbId`/`studyServer`, and `candidateGermplasmDbId`/`candidateGermplasmServer`. The stated paired-filter law remains a candidate rule subject to conformance tests.
+- GenX ParentCandidateSelection separately represents a parent-specific Boolean verdict using unqualified Program/Germplasm strings. No typed link or lossless mapping between these candidate resources is specified.
 
-The list filters require authority pairs: `programDbId` with `programServer`, `studyDbId` with `studyServer`, and `candidateGermplasmDbId` with `candidateGermplasmServer`. These are the authoritative BrAPI v2.1 server base URIs that issued the identifiers.
-
-The existing list, record, and retrieve operations remain non-normative until the referenced schema and conformance gates pass.
-
-Details: `../../RFCs/RFC-008-Selection-Decisions.md`.
+Official BrAPI version 2.1 resources remain authoritative for Program, Study, Germplasm, Observation and actual/planned crosses. See [evidence](./GroupDescription.md) and [RFC-008](../../RFCs/RFC-008-Selection-Decisions.md); Q1–Q3 remain open.

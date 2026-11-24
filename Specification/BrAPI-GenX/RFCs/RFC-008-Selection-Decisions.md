@@ -10,9 +10,7 @@
 BrAPI v2.1 standardizes breeding programs, trials, studies, observations, and
 germplasm, but it has no record for the **verdict** a breeder reaches for a
 candidate: selected, rejected, deferred, or advanced. Programs and trials exist;
-the decision and its rationale do not. Without this record, breeding history
-cannot be audited or reproduced, and downstream selection decisions cannot cite
-their evidence.
+there is no dedicated typed verdict resource. This candidate provides a dated, enumerated verdict, but rationale, responsible actor, candidate Germplasm and linked observations are optional, so historical audit completeness is not guaranteed.
 
 ## 2. Object
 
@@ -38,7 +36,7 @@ their evidence.
 - Corrections are recorded as additional decisions linked by `supersedes`.
 - Replay: same id + identical body replays; same id + different body → 409.
 - `decision` is one of `selected`, `rejected`, `deferred`, `advanced`.
-- A decision does not imply release, registration, or commercial approval.
+- A decision does not imply release, registration, commercial approval, an actual cross, or verified decision-maker authority. `decisionMaker`, `candidateGermplasmReference`, rationale, linked observations and provenance are optional.
 
 ## 6. Deferred questions
 
@@ -46,8 +44,7 @@ their evidence.
   also per trial/study? (Current: program required, study optional.)
 - RFC-008-Q2: Should linked BrAPI Observation evidence be required when `decision`
   is `selected`? (Current: optional authority-qualified `linkedObservationReferences`.)
-- RFC-008-Q3: Should a decision be cancellable/superseded only by the original
-  decision maker or by any authorized breeder? (Current: requires decision.)
+- RFC-008-Q3: Should a decision be cancellable/superseded only by the original decision maker or by any authorized breeder? (Current: requires decision; `decisionMaker` is optional and cannot enforce original-actor authorization alone.)
 
 ## 7. Classification
 

@@ -25,8 +25,7 @@ parent selection decisions cannot be audited or reproduced.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Parent candidate selections reference BrAPI Program and Germplasm by
-  identifier; they do not duplicate those resources.
+- Parent candidate selections store required `programDbId` and `candidateGermplasmDbId` as strings, without typed authoritative-server references or proven cross-resource joins. They do not replace official Program/Germplasm records.
 - A record is not a BrAPI Germplasm or Cross and must not be treated as one.
 
 ## 5. Invariants
@@ -35,15 +34,14 @@ parent selection decisions cannot be audited or reproduced.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional records linked by `supersedes`.
 - `candidateGermplasmDbId` and `selected` are required.
-- A record does not imply an approved breeding plan or release.
+- A record does not imply an approved breeding plan, authorized decision, performed cross or release. `selectionCriterion`, rationale, decision-maker evidence and provenance are not required; `selected: false` cannot distinguish rejection from deferral.
 
 ## 6. Deferred questions
 
 - D-81: Should `selected` be required? (Current: required.)
 - D-82: Should selection criterion be a governed enumeration? (Current: free
   string.)
-- D-83: Should records link to GenX `SelectionDecision`? (Current: optional,
-  not required.)
+- D-83: Should records link to GenX `SelectionDecision`? (Current: no `selectionDecisionDbId` or typed relationship in the schema; a link is not implemented.)
 
 ## 7. Classification
 
