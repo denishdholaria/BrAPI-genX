@@ -787,6 +787,20 @@ class GroupEvidenceTests(unittest.TestCase):
                     'RFC-100-Research-Location.md').read_text()
         self.assertIn('already defines', location)
 
+    def test_genebank_storage_viability_regeneration_safety_evidence(self):
+        root = Path(__file__).resolve().parents[1]
+        for module, decision in (
+            ('GenebankStorage', 'D-42'), ('ViabilityTesting', 'D-60'),
+            ('Regeneration', 'D-106'), ('SafetyDuplication', 'D-99'),
+        ):
+            with self.subTest(module=module):
+                self.assertIn('Germplasm/' + module, REVIEWED)
+                doc = (root / 'Specification/BrAPI-GenX/Germplasm' /
+                       module / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', doc)
+                self.assertIn(decision, doc)
+                self.assertIn('**Sources:**', doc)
+
 
 if __name__ == '__main__':
     unittest.main()

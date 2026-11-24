@@ -1,1 +1,9 @@
 # Group ViabilityTesting
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 021; not a scientifically validated conservation outcome, official Breeding Application Programming Interface (BrAPI) version 2.1 resource, or independently implemented persistent service.
+
+The proposed `ViabilityTest` record carries a namespaced identity, required fields according to its source schema, and a lifecycle state with optional supersession and provenance. The register, list and retrieve operations are candidate contracts; idempotent replay and immutable record claims remain unverified against an independently deployed persistent implementation.
+
+**Conservation, material identity and experimental evidence boundaries:** The draft requires a seedLotDbId and testDate, but germinationPercent, viabilityPercent, sampleSize and method are optional. It lacks replicate counts, number of normal seedlings, abnormal/dead seed classification, germination conditions, test-stage protocol, test repeatability, sampling design and uncertainty. A viability percentage is not equivalent to germination percentage, and neither demonstrates validated seed certification. The source proposal still defers questions beginning at D-60. Optional or plain-string seed-lot identifiers should not be treated as independently checked custody, germplasm provenance, facility ownership, transactional inventory movement or authoritative biological test results.
+
+**Sources:** [module overview](./README.md), [candidate record schema](./Schemas/ViabilityTest.yaml), [registration request](./Schemas/ViabilityTestNewRequest.yaml), [draft operations](./ViabilityTesting_GET_POST.yaml), [RFC](../../RFCs/RFC-021-Viability-Testing.md), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).
