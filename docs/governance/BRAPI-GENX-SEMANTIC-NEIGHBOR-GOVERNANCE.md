@@ -89,6 +89,23 @@ relationships remain inventoried; 150 retain `inherited-unreviewed`.
 No terminal rejection or scientific mapping has been approved. See
 `docs/assessment/BRAPI-GENX-EXPERIMENTAL-PROTOCOL-GENOMIC-DATASET-REVIEW.md`.
 
+## Reviewed-entry evidence integrity
+
+`Scripts/check_semantic_neighbor_evidence.py` validates repository-local
+documentary paths for entries at `requires-decision` or
+`evidence-backed-proposed`. Each must cite an existing source-module schema,
+an existing target-module schema, and a recorded assessment document; an
+unresolved decision also needs a rationale and question. This is deliberately
+stricter than the historic `inherited-unreviewed` population and complements,
+not replaces, the canonical ledger status-transition validator. A file's
+existence is **not** proof of scientific correctness or acceptance.
+
+`Scripts/test_semantic_neighbor_evidence.py` exercises positive fixtures and
+mutations for missing schemas, missing assessments, invalid paths, duplicates,
+and missing questions. GitHub workflow steps run after the existing PyYAML
+dependency installation; monthly hosted usage budget remains unavailable
+until the maintainer-reported reset.
+
 ## Mission 007 — additional five-group triage (2026-11-24)
 
 Fifteen operation-level links from CapabilityNegotiation, ConformanceProbe,

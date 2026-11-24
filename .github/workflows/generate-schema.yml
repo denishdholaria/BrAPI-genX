@@ -26,6 +26,10 @@ jobs:
           python-version: '3.12'
       - name: Install contract fixture validation dependencies
         run: python -m pip install 'PyYAML==6.0.2' 'rfc8785==0.1.4'
+      - name: Check reviewed semantic-neighbor source evidence
+        run: python Scripts/check_semantic_neighbor_evidence.py
+      - name: Regression-test semantic-neighbor source evidence
+        run: python Scripts/test_semantic_neighbor_evidence.py
       - name: Check RFC governance and approved deferrals
         run: python Scripts/check_rfc_governance.py
       - name: Regression-test RFC governance gate
