@@ -191,6 +191,21 @@
       "resource": "VcfImport",
       "target": "VariantMatrix",
       "decision": "D-128"
+    },
+    {
+      "module": "Phenotyping/RepeatedMeasurement",
+      "rfc": "RFC-025-Repeated-Measurement.md",
+      "resource": "MeasurementSeries",
+      "schema_file": "MeasurementSeries.yaml",
+      "target": "PhenotypeCapture",
+      "decision": "D-74"
+    },
+    {
+      "module": "Phenotyping/PhenotypeAnnotation",
+      "rfc": "RFC-044-Phenotype-Annotation.md",
+      "resource": "PhenotypeAnnotation",
+      "target": "PhenotypeCapture",
+      "decision": "D-131"
     }
   ]
 }

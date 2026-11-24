@@ -35,6 +35,8 @@ REVIEWED = frozenset({
     'Phenotyping/QualityFlag', 'Phenotyping/ValueMissingness',
     'Phenotyping/CaptureWorkflow',
     'Genotyping/ReferenceAssembly', 'Genotyping/PipelineProvenance', 'Genotyping/VcfImport',
+    'Phenotyping/PhenotypeCapture', 'Phenotyping/RepeatedMeasurement',
+    'Phenotyping/PhenotypeAnnotation',
 })
 LINK = re.compile(r'\]\(([^)]+)\)')
 

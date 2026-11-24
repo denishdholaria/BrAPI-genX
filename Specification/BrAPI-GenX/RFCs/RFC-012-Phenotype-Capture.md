@@ -35,13 +35,13 @@ audited for capture quality or corrected with provenance.
 - A published `phenotypeCaptureDbId` record never mutates in place.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional captures linked by `supersedes`.
-- Missing values require a `missingReason` when `qualityFlag` is `missing`.
+- Proposed behavior: a missing value should have `missingReason` when `qualityFlag` is `missing`, but this cross-field requirement is not enforced by the current candidate OpenAPI schema. Validation and error handling require a separate scientific decision and conformance test.
 - Quality flags are recorded, not inferred.
 
 ## 6. Deferred questions
 
 - D-33: Should `entries` require at least one BrAPI Observation Variable
-  reference? (Current: requires variableDbId per entry.)
+  reference? (Current: requires a string `variableDbId` per entry but does not establish reference resolution or non-empty entries.)
 - D-34: Should repeated measurements/time series be a separate object?
   (Current: each capture is one event; time series is a sequence of captures.)
 - D-35: Should bulk capture require a field-book reference? (Current: optional.)

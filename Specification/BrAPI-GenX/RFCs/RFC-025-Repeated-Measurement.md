@@ -28,24 +28,23 @@ phenotype monitoring and time-series analysis cannot be audited or reproduced.
 - Measurement series reference BrAPI Study, ObservationUnit, and Observation
   Variable by identifier; they do not duplicate those resources.
 - A measurement series is not a BrAPI Observation and must not be treated as
-  one.
+  one. No typed link to GenX `PhenotypeCapture` is present (D-74).
 
 ## 5. Invariants
 
 - A published `measurementSeriesDbId` record never mutates in place.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional series linked by `supersedes`.
-- `measurements` are time-ordered; quality flags are recorded, not inferred.
+- Time ordering is proposed, but the current array schema has no ordering constraint or independent evidence of enforced chronology. Quality flags are recorded strings, not inferred scientific validity.
 - A series does not imply a complete phenotype dataset.
 
 ## 6. Deferred questions
 
 - D-72: Should `measurements` require at least one entry? (Current: required
   array, may be empty.)
-- D-73: Should missing values require a `missingReason`? (Current: qualityFlag
-  `missing` only.)
+- D-73: Should missing values require a `missingReason`? (Current: `measurements[].value` is a required non-nullable number and no `missingReason` field exists; a missing value cannot be represented unambiguously.)
 - D-74: Should measurement series link to GenX `PhenotypeCapture`? (Current:
-  optional, not required.)
+  no typed PhenotypeCapture reference property exists in the candidate schema.)
 
 ## 7. Classification
 

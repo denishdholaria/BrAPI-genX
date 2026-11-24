@@ -28,7 +28,7 @@ record, annotation and scoring workflows cannot be audited or reproduced.
 - Phenotype annotations reference BrAPI Study, ObservationUnit, and
   Observation Variable by identifier; they do not duplicate those resources.
 - A phenotype annotation is not a BrAPI Observation and must not be treated
-  as one.
+  as one. No typed link to GenX `PhenotypeCapture` is present (D-131).
 
 ## 5. Invariants
 
@@ -43,7 +43,7 @@ record, annotation and scoring workflows cannot be audited or reproduced.
 - D-130: Should `annotation` be a governed vocabulary? (Current: free
   string.)
 - D-131: Should phenotype annotations link to GenX `PhenotypeCapture`?
-  (Current: optional, not required.)
+  (Current: no typed PhenotypeCapture reference property exists in the candidate schema.)
 - D-132: Should `annotatedAt` be required? (Current: optional.)
 
 ## 7. Classification

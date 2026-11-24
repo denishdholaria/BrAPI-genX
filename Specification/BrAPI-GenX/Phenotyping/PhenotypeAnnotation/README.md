@@ -1,8 +1,7 @@
 # BrAPI-GenX — Phenotype Annotation (Phenotyping)
 
 Phenotype annotations record scored or annotated observations for an
-observation unit and variable. BrAPI v2.1 has observations but no
-annotation record.
+observation unit and variable. Official BrAPI version 2.1 already represents observation values and variables; the GenX candidate adds a separate annotation record but has no typed PhenotypeCapture reference or verified semantic equivalence to an official Observation.
 
 - `POST /genx/v1/phenotype-annotations` (`genxRecordPhenotypeAnnotation`) registers one
   `PhenotypeAnnotation` (`Schemas/PhenotypeAnnotationNewRequest.yaml`). Same

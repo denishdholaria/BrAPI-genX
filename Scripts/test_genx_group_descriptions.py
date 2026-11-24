@@ -372,6 +372,44 @@ class GroupEvidenceTests(unittest.TestCase):
         self.assertIn('STRUCTURAL_DRAFT', desc)
         self.assertIn('D-128', desc)
 
+    def test_phenotype_capture_series_annotation_review_is_pinned(self):
+        self.assertTrue({'Phenotyping/PhenotypeCapture',
+                         'Phenotyping/RepeatedMeasurement',
+                         'Phenotyping/PhenotypeAnnotation'}.issubset(REVIEWED))
+
+    def test_numeric_capture_and_missing_series_conflict_is_documented(self):
+        import yaml
+        root = Path(__file__).resolve().parents[1]
+        official = yaml.safe_load(
+            (root / 'Specification/BrAPI-Phenotyping/Observations/Schemas'
+             / 'ObservationNewRequest.yaml').read_text())
+        source_props = official['components']['schemas']['ObservationNewRequest']['properties']
+        self.assertEqual('string', source_props['value']['type'])
+        capture = yaml.safe_load(
+            (root / 'Specification/BrAPI-GenX/Phenotyping/PhenotypeCapture/Schemas'
+             / 'PhenotypeCapture.yaml').read_text())
+        item = capture['components']['schemas']['PhenotypeCapture']['properties']['entries']['items']
+        self.assertEqual('number', item['properties']['value']['type'])
+        self.assertTrue(item['properties']['value']['nullable'])
+        self.assertNotIn('missingReason', item.get('required', []))
+        series = yaml.safe_load(
+            (root / 'Specification/BrAPI-GenX/Phenotyping/RepeatedMeasurement/Schemas'
+             / 'MeasurementSeries.yaml').read_text())
+        entry = series['components']['schemas']['MeasurementSeries']['properties']['measurements']['items']
+        self.assertIn('value', entry['required'])
+        self.assertEqual('number', entry['properties']['value']['type'])
+        self.assertNotIn('nullable', entry['properties']['value'])
+        self.assertNotIn('missingReason', entry['properties'])
+        for module, decision in (
+            ('PhenotypeCapture', 'D-33'),
+            ('RepeatedMeasurement', 'D-73'),
+            ('PhenotypeAnnotation', 'D-131'),
+        ):
+            group = (root / 'Specification/BrAPI-GenX/Phenotyping' /
+                     module / 'GroupDescription.md').read_text()
+            self.assertIn('STRUCTURAL_DRAFT', group)
+            self.assertIn(decision, group)
+
 
 if __name__ == '__main__':
     unittest.main()

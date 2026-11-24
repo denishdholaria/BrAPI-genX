@@ -2,8 +2,7 @@
 
 Phenotype capture records the act of capturing observations for an observation
 unit, including quality flags, missingness, corrections, and image linkage.
-BrAPI v2.1 standardizes observations and observation units but not the capture
-workflow, quality, or correction lifecycle.
+Official BrAPI version 2.1 already standardizes observations and observation units. This GenX candidate separately records capture context, flags, corrections and image references; its entry values are numeric or null, unlike the official Observation string value. The missingReason requirement is not enforced by the candidate schema.
 
 - `POST /genx/v1/phenotype-captures` (`genxRecordPhenotypeCapture`) records one
   `PhenotypeCapture` (`Schemas/PhenotypeCaptureNewRequest.yaml`). Same
