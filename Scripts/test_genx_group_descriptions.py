@@ -1650,5 +1650,78 @@ class GroupEvidenceTests(unittest.TestCase):
             genx / 'RFCs/RFC-145-RemoteSensingMetadata.md').read_text())
 
 
+    def test_calendar_and_developmental_stage_source_boundaries(self):
+        root = Path(__file__).resolve().parents[1]
+        genx = root / 'Specification/BrAPI-GenX'
+        cases = (
+            ('ReferenceData/Calendar', 'Calendar', 'calendarDbId', 'D-271'),
+            ('ReferenceData/DevelopmentalStage', 'DevelopmentalStage',
+             'developmentalStageDbId', 'D-235'),
+        )
+        for module, name, identity, decision in cases:
+            with self.subTest(module=module):
+                self.assertIn(module, REVIEWED)
+                folder = genx / module
+                desc = (folder / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', desc)
+                self.assertIn('**Sources:**', desc)
+                self.assertIn(decision, desc)
+                response = yaml.safe_load(
+                    (folder / 'Schemas' / (name + '.yaml')).read_text()
+                )['components']['schemas'][name]
+                request = yaml.safe_load(
+                    (folder / 'Schemas' / (name + 'NewRequest.yaml')).read_text()
+                )['components']['schemas'][name + 'NewRequest']
+                self.assertEqual({identity, 'status'}, set(response['required']))
+                self.assertEqual({identity}, set(request['required']))
+                self.assertEqual(
+                    {'active', 'superseded', 'withdrawn'},
+                    set(response['properties']['status']['enum'])
+                )
+
+        cal = yaml.safe_load(
+            (genx / 'ReferenceData/Calendar/Schemas/Calendar.yaml').read_text()
+        )['components']['schemas']['Calendar']
+        for optional in ('name', 'convention', 'supersedes', 'provenance'):
+            self.assertIn(optional, cal['properties'])
+            self.assertNotIn(optional, cal['required'])
+        self.assertEqual('string', cal['properties']['convention']['type'])
+        self.assertNotIn('enum', cal['properties']['convention'])
+        for absent in ('studyDbId', 'seasonDbId', 'timezone', 'startDate', 'endDate'):
+            self.assertNotIn(absent, cal['properties'])
+        official_season = yaml.safe_load(
+            (root / 'Specification/BrAPI-Core/Seasons/Schemas/Season.yaml').read_text()
+        )['components']['schemas']['Season']
+        self.assertIn('seasonDbId', official_season['required'])
+        for field in ('seasonName', 'year'):
+            self.assertIn(field, official_season['properties'])
+        cal_rfc = (genx / 'RFCs/RFC-091-Calendar.md').read_text()
+        self.assertIn('no `studyDbId` or `seasonDbId`', cal_rfc)
+
+        stage = yaml.safe_load(
+            (genx / 'ReferenceData/DevelopmentalStage/Schemas/'
+             'DevelopmentalStage.yaml').read_text()
+        )['components']['schemas']['DevelopmentalStage']
+        for optional in ('cropDbId', 'stageCode', 'stageName', 'definition',
+                         'supersedes', 'provenance'):
+            self.assertIn(optional, stage['properties'])
+            self.assertNotIn(optional, stage['required'])
+        self.assertEqual('string', stage['properties']['stageCode']['type'])
+        self.assertNotIn('enum', stage['properties']['stageCode'])
+        for absent in ('observationVariableDbId', 'variableDbId',
+                       'stageVocabularyDbId', 'bbchCode'):
+            self.assertNotIn(absent, stage['properties'])
+        official_variable = yaml.safe_load(
+            (root / 'Specification/BrAPI-Phenotyping/ObservationVariables/'
+             'Schemas/ObservationVariable.yaml').read_text()
+        )['components']['schemas']['ObservationVariable']
+        self.assertTrue(any(
+            'observationVariableDbId' in part.get('required', [])
+            for part in official_variable['allOf']
+        ))
+        stage_rfc = (genx / 'RFCs/RFC-079-Developmental-Stage.md').read_text()
+        self.assertIn('Optional `cropDbId`', stage_rfc)
+
+
 if __name__ == '__main__':
     unittest.main()

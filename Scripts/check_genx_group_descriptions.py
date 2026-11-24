@@ -29,6 +29,7 @@ REVIEWED = frozenset({
     'ReferenceData/InstitutionCode',
     'ReferenceData/ExternalVocabulary', 'ReferenceData/TerminologyVersion',
     'ReferenceData/ReferenceDataVersion', 'ReferenceData/CropTraitDictionary',
+    'ReferenceData/Calendar', 'ReferenceData/DevelopmentalStage',
     'Breeding/Plot', 'Breeding/FieldBook', 'Breeding/TrialNetwork',
     'Germplasm/CollectingMission', 'Germplasm/ConservationMembership',
     'Germplasm/McpdAdapter',
