@@ -301,7 +301,7 @@ jobs:
       - name: Test group-description evidence guard
         run: python Scripts/test_genx_group_descriptions.py
       - name: Enforce vegetation-index README route/source identity
-        run: python Scripts/audit_genx_readme_routes.py --module Geospatial/VegetationIndex --strict
+        run: python Scripts/audit_genx_readme_routes.py --module Geospatial/VegetationIndex --strict --require-coverage
       - name: Test README endpoint identity mutation cases
         run: python Scripts/test_genx_readme_routes.py
       - name: Verify separate documentation and RFC maturity evidence
@@ -360,7 +360,7 @@ jobs:
             run_check python Scripts/test_genx_standards_overlap.py
             run_check python Scripts/check_genx_group_descriptions.py
             run_check python Scripts/test_genx_group_descriptions.py
-            run_check python Scripts/audit_genx_readme_routes.py --module Geospatial/VegetationIndex --strict
+            run_check python Scripts/audit_genx_readme_routes.py --module Geospatial/VegetationIndex --strict --require-coverage
             run_check python Scripts/test_genx_readme_routes.py
             run_check python Scripts/report_genx_evidence_coverage.py --check
             run_check python Scripts/test_genx_evidence_coverage.py
