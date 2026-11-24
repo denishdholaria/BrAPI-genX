@@ -6,9 +6,11 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no haplotype analysis result record. Haplotype blocks are
-essential for genomic analysis. Without this record, haplotype results
-cannot be audited or reproduced.
+GenX proposes a separate record for haplotype-block metadata alongside
+official BrAPI version 2.1 genotype resources. Meaningful inference requires
+reference assembly, sample identities, ploidy, phased allele representation,
+coordinate rules and inference confidence. This candidate does not require
+those concepts and does not itself establish comparable, reproducible phase.
 
 ## 2. Object
 
@@ -25,8 +27,8 @@ cannot be audited or reproduced.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Haplotype analyses reference GenX AnalysisMethod by identifier; they do not
-  duplicate that resource.
+- `analysisMethodDbId` is a required string reference, not a verified exact
+  method version, genotype-source join, or proof of phasing execution.
 - A result is not a BrAPI data resource and must not be treated as one.
 
 ## 5. Invariants
@@ -34,15 +36,20 @@ cannot be audited or reproduced.
 - A published `haplotypeAnalysisDbId` record never mutates in place.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional results linked by `supersedes`.
-- `analysisMethodDbId` is required.
-- A result does not imply scientific validation or approval.
+- `analysisMethodDbId` is required, while `haplotypes`, `jobDbId`,
+  `studyDbId`, and provenance are optional.
+- The `haplotypes` object is unconstrained, with no required sample identity,
+  phasing confidence, allele encodings, reference coordinates or block length.
+- A registered record does not establish valid phase, completeness,
+  reproducibility or scientific approval.
 
 ## 6. Deferred questions
 
 - D-175: Should `haplotypes` be required? (Current: optional.)
 - D-176: Should haplotype analyses link to GenX `GenomicDataset`? (Current:
-  optional, not required.)
-- D-177: Should haplotype length be required? (Current: optional.)
+  no `genomicDatasetDbId` property is modelled.)
+- D-177: Should haplotype length be required? (Current: no dedicated
+  haplotype-length field is modelled; `haplotypes` is opaque.)
 
 ## 7. Classification
 
