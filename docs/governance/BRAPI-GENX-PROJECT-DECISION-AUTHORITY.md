@@ -71,6 +71,30 @@ open for re-litigation during implementation:
 These decisions were ratified in commit `55f970d9`. Their substantive meaning must be
 preserved in implementation.
 
+### Subsequent maintainer approvals — 2026-11-24
+
+The maintainer subsequently approved two internal architectural directions
+during the BrAPI-GenX development conversation:
+
+- **D-026:** Existing `semanticNeighborIds` and related operation-neighbor
+  metadata are advisory navigation, **not** proof of a typed scientific
+  relationship, operational equivalence, or permission to execute writes.
+  Typed scientific relationships are governed in a separate proposal track.
+- **D-027:** Rejection or supersession of an individual inherited relationship
+  requires a uniquely identified, exact-source/target/action
+  maintainer-approved decision record. The current decision register is
+  empty; this architecture approval is **not** an approval to retire
+  any specific relationship.
+
+The authoritative detailed decisions are recorded in
+[`Specification/BrAPI-GenX/DECISIONS.md`](../../Specification/BrAPI-GenX/DECISIONS.md).
+These are internal project directions, not official BrAPI changes or
+claims of implementation-independent conformance. The exact-decision checker
+validates record binding, while genuine approval attribution relies on
+maintainer-controlled review; a Git commit or YAML file is not itself
+cryptographic proof of maintainer consent.
+
+
 ## 5. Relationship to official BrAPI and Ambika
 
 - **Official BrAPI** (latest stable v2.1) remains a separate, community-governed

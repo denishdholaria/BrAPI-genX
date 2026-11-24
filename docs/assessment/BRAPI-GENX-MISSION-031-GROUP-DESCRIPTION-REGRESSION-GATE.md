@@ -28,7 +28,7 @@ object hashes of tested files: checker
 `49daf500252e13eeec55a997580df53a8e11d75a`.
 
 The repository's GitHub tree and the nine committed files were
-inspected separately: 44 direct module-documentation links were
+inspected separately: 42 direct module-documentation links were
 verified as tracked files; the nine reviewed descriptions all have
 source citations and explicit maturity labels.
 
