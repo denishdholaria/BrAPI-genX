@@ -30,8 +30,9 @@ provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Research program records reference BrAPI `Study` by identifier; they do not
-  duplicate those resources.
+- This proposal is deferred under D-BP-12: the official BrAPI `Program`
+  is authoritative. The historical candidate schema contains no typed
+  BrAPI `Study` reference or separate approved program ownership.
 - A record is not a BrAPI Study and must not be treated as one.
 
 ## 5. Invariants

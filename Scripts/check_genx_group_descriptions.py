@@ -59,6 +59,8 @@ REVIEWED = frozenset({
     'Research/MixedModel', 'Research/PcaResult',
     'Research/ArtifactCatalogue', 'Research/ProtocolLibrary',
     'Research/PublicationReview', 'Research/ResearchAssets',
+    'Research/Project', 'Research/ResearchLocation',
+    'Research/ResearchProgram',
     'Environment/WeatherObservations', 'Environment/WeatherForecast',
     'Environment/ClimateNormals', 'Environment/SoilProfile',
     'Environment/WaterBalance',

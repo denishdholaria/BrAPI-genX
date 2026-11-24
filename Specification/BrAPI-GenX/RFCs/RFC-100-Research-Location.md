@@ -6,10 +6,11 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record research locations. Research locations are
-the routine reference for research organization. Without a record, locations
-arrive as unversioned notes with no stated name or provenance, so they cannot
-be audited or reproduced.
+BrAPI v2.1 already defines `Location` resources and related research
+location metadata. The separate GenX candidate presently contains only
+an optional name besides its identity, status and provenance. The
+reason to introduce another location identity and a mapping to official
+BrAPI locations has not been established.
 
 ## 2. Object
 
@@ -27,8 +28,9 @@ provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Research location records reference BrAPI `Location` by identifier; they do
-  not duplicate those resources.
+- The current schema contains no BrAPI `Location` identifier and no GenX
+  `Farm` link (D-299 and D-300 remain open). Geographic or institutional
+  equivalence with a BrAPI Location cannot be inferred.
 - A record is not a BrAPI Location and must not be treated as one.
 
 ## 5. Invariants

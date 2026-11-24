@@ -27,8 +27,9 @@ funding, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Project records reference BrAPI `Study` by identifier; they do not duplicate
-  those resources.
+- The current candidate `Project` schema contains no typed BrAPI
+  `Study` reference. A project title or funding string cannot establish
+  a Study-to-Project relationship or authoritative grant linkage.
 - A project record is not a BrAPI Study and must not be treated as one.
 
 ## 5. Invariants

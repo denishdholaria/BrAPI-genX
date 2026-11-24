@@ -1,7 +1,7 @@
 # BrAPI-GenX — Research Location (Reference Data)
 
 Research location records describe research locations.
-BrAPI v2.1 has no research location record.
+Official BrAPI v2.1 already provides `/brapi/v2/locations` and Location resources; the proposed GenX ResearchLocation identity is currently a draft duplicate without a typed mapping.
 
 - `POST /genx/v1/research-locations` (`genxRegisterResearchLocation`) registers one
   `ResearchLocation` (`Schemas/ResearchLocationNewRequest.yaml`). Same

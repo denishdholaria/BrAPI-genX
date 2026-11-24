@@ -767,6 +767,26 @@ class GroupEvidenceTests(unittest.TestCase):
                'RFC-016-Research-Assets.md').read_text()
         self.assertIn('no typed BrAPI data-resource references', ' '.join(rfc.split()))
 
+    def test_research_reference_deferred_program_authority(self):
+        root = Path(__file__).resolve().parents[1]
+        for name, decision, status in (
+            ('Project', 'D-265', 'STRUCTURAL_DRAFT'),
+            ('ResearchLocation', 'D-298', 'STRUCTURAL_DRAFT'),
+            ('ResearchProgram', 'D-BP-12', 'DEFERRED'),
+        ):
+            with self.subTest(module=name):
+                self.assertIn('Research/' + name, REVIEWED)
+                doc = (root / 'Specification/BrAPI-GenX/Research' /
+                       name / 'GroupDescription.md').read_text()
+                self.assertIn(status, doc)
+                self.assertIn(decision, doc)
+        historical = (root / 'Specification/BrAPI-GenX/RFCs' /
+                      'RFC-098-Research-Program.md').read_text()
+        self.assertIn('deferred under D-BP-12', historical)
+        location = (root / 'Specification/BrAPI-GenX/RFCs' /
+                    'RFC-100-Research-Location.md').read_text()
+        self.assertIn('already defines', location)
+
 
 if __name__ == '__main__':
     unittest.main()
