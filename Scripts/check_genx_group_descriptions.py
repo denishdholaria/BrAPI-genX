@@ -53,6 +53,8 @@ REVIEWED = frozenset({
     'CropProduction/CropSuitability', 'CropProduction/LocalConstraint',
     'CropProduction/Farm', 'CropProduction/NutrientAdvice',
     'CropProduction/CropRecommendation',
+    'Research/HumanReview', 'Research/ExplanationEvidence',
+    'Research/EvidencePack', 'Research/OutcomeFeedback',
     'Environment/WeatherObservations', 'Environment/WeatherForecast',
     'Environment/ClimateNormals', 'Environment/SoilProfile',
     'Environment/WaterBalance',

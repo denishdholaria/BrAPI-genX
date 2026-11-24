@@ -722,6 +722,21 @@ class GroupEvidenceTests(unittest.TestCase):
                 self.assertEqual(readme_operations, published,
                                  msg=name + ' README / YAML source disagreement')
 
+    def test_research_review_and_evidence_groups_are_pinned(self):
+        root = Path(__file__).resolve().parents[1]
+        groups = (
+            ('HumanReview', 'D-406'), ('ExplanationEvidence', 'D-409'),
+            ('EvidencePack', 'D-364'), ('OutcomeFeedback', 'D-412'),
+        )
+        for name, decision in groups:
+            with self.subTest(module=name):
+                self.assertIn(f'Research/{name}', REVIEWED)
+                description = (root / 'Specification/BrAPI-GenX/Research' /
+                               name / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', description)
+                self.assertIn(decision, description)
+                self.assertIn('**Sources:**', description)
+
 
 if __name__ == '__main__':
     unittest.main()
