@@ -1,6 +1,11 @@
 # BrAPI-GenX — Population Advancement (Breeding)
 
-PopulationAdvancement records an actual, immutable movement/progression event for a population or family. It is an execution record, not a definition of a permitted scheme transition.
+PopulationAdvancement proposes an actual, immutable population/family
+progression event. It is an execution record, **not** a definition of a
+permitted scheme transition. A registered event does not independently
+prove that material was physically transferred, that the event was
+authorized by an owning external server, or that an official
+`SelectionDecision` verdict has been recorded.
 
 - The event may reference the exact BreedingPipeline logical ID and revision and the exact BreedingScheme logical ID and version that governed it.
 - `schemeContext` is optional. When supplied, it contains both `breedingSchemeDbId` and exact `breedingSchemeVersionDbId`. Any `fromStageId` or `toStageId` must be nested inside this context and resolve within the embedded scheme version.

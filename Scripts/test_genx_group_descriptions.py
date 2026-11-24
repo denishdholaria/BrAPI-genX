@@ -1510,5 +1510,73 @@ class GroupEvidenceTests(unittest.TestCase):
         self.assertNotIn('GET /genx/v1/vegetation-index`', overview)
 
 
+    def test_advancement_variety_not_scheme_or_regulatory_approval(self):
+        root = Path(__file__).resolve().parents[1]
+        genx = root / 'Specification/BrAPI-GenX'
+        advance = genx / 'Breeding/PopulationAdvancement'
+        variety = genx / 'Breeding/CandidateVarietyLifecycle'
+        for module, decision in (
+            ('Breeding/PopulationAdvancement', 'D-BP-10'),
+            ('Breeding/CandidateVarietyLifecycle', 'D-115'),
+        ):
+            with self.subTest(module=module):
+                self.assertIn(module, REVIEWED)
+                text = (genx / module / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', text)
+                self.assertIn('**Sources:**', text)
+                self.assertIn(decision, text)
+
+        actual = yaml.safe_load(
+            (advance / 'Schemas/PopulationAdvancement.yaml').read_text()
+        )['components']['schemas']['PopulationAdvancement']
+        request = yaml.safe_load(
+            (advance / 'Schemas/PopulationAdvancementNewRequest.yaml').read_text()
+        )['components']['schemas']['PopulationAdvancementNewRequest']
+        base = {'populationAdvancementDbId', 'programReference',
+                'populationReference', 'advancedAt'}
+        self.assertEqual(base | {'status'}, set(actual['required']))
+        self.assertEqual(base, set(request['required']))
+        self.assertEqual('date', actual['properties']['advancedAt']['format'])
+        for field in ('pipelineContext', 'schemeContext', 'provenance'):
+            self.assertIn(field, actual['properties'])
+            self.assertNotIn(field, actual['required'])
+            self.assertNotIn(field, request['required'])
+        for field in ('fromStageId', 'toStageId', 'decision', 'decisionDate'):
+            self.assertNotIn(field, actual['properties'])
+        for field in ('programReference', 'populationReference'):
+            self.assertTrue(
+                actual['properties'][field]['$ref'].endswith(
+                    '/BrapiResourceReference'))
+        decision = yaml.safe_load(
+            (genx / 'Breeding/SelectionDecisions/Schemas/'
+             'SelectionDecision.yaml').read_text()
+        )['components']['schemas']['SelectionDecision']
+        self.assertTrue({'decision', 'decisionDate'}.issubset(
+            set(decision['required'])))
+
+        registration = yaml.safe_load(
+            (variety / 'Schemas/CandidateVarietyNewRequest.yaml').read_text()
+        )['components']['schemas']['CandidateVarietyNewRequest']
+        response = yaml.safe_load(
+            (variety / 'Schemas/CandidateVariety.yaml').read_text()
+        )['components']['schemas']['CandidateVariety']
+        expected = {'candidateVarietyDbId', 'programDbId', 'varietyName'}
+        self.assertEqual(expected, set(registration['required']))
+        self.assertEqual(expected | {'status'}, set(response['required']))
+        self.assertEqual('candidate',
+                         registration['properties']['status']['default'])
+        self.assertTrue({'registered', 'released'}.issubset(
+            set(response['properties']['status']['enum'])))
+        self.assertNotIn('registeredAt', registration['required'])
+        for not_modelled in ('registrationAuthority', 'certificateId',
+                             'germplasmDbId', 'breedingPipelineDbId'):
+            self.assertNotIn(not_modelled, response['properties'])
+            self.assertNotIn(not_modelled, registration['properties'])
+        crossing = (genx / 'Breeding/CrossingSchedule/README.md').read_text()
+        self.assertIn('D-BP-11', crossing)
+        self.assertIn('Deferred', crossing)
+        self.assertNotIn('Breeding/CrossingSchedule', REVIEWED)
+
+
 if __name__ == '__main__':
     unittest.main()
