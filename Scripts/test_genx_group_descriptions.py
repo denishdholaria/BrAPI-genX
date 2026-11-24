@@ -1723,5 +1723,84 @@ class GroupEvidenceTests(unittest.TestCase):
         self.assertIn('Optional `cropDbId`', stage_rfc)
 
 
+    def test_cloud_mask_and_raster_catalogue_remain_unverified_metadata(self):
+        root = Path(__file__).resolve().parents[1]
+        genx = root / 'Specification/BrAPI-GenX'
+        cases = (
+            ('Geospatial/CloudMask', 'CloudMask', 'cloudMaskDbId', 'D-439'),
+            ('Geospatial/RasterCatalogue', 'RasterCatalogue',
+             'rasterCatalogueDbId', 'D-430'),
+        )
+        for module, resource, identity, decision in cases:
+            with self.subTest(module=module):
+                self.assertIn(module, REVIEWED)
+                folder = genx / module
+                doc = (folder / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', doc)
+                self.assertIn('**Sources:**', doc)
+                self.assertIn(decision, doc)
+                response = yaml.safe_load(
+                    (folder / 'Schemas' / (resource + '.yaml')).read_text()
+                )['components']['schemas'][resource]
+                request = yaml.safe_load(
+                    (folder / 'Schemas' / (resource + 'NewRequest.yaml')).read_text()
+                )['components']['schemas'][resource + 'NewRequest']
+                self.assertEqual({identity, 'status'}, set(response['required']))
+                self.assertEqual({identity}, set(request['required']))
+                for optional in ('crs', 'resolution', 'extent', 'provenance',
+                                 'supersedes'):
+                    self.assertIn(optional, response['properties'])
+                    self.assertNotIn(optional, response['required'])
+                    self.assertEqual('string', response['properties'][optional]['type']) if optional in ('crs', 'resolution', 'extent') else None
+                for missing in ('imageDbId', 'rasterCatalogueDbId',
+                                'assetUri', 'pixelData', 'cloudCoverPercent'):
+                    if missing != identity:
+                        self.assertNotIn(missing, response['properties'])
+
+        cloud = yaml.safe_load(
+            (genx / 'Geospatial/CloudMask/Schemas/CloudMask.yaml').read_text()
+        )['components']['schemas']['CloudMask']
+        for optional in ('maskType', 'acquisitionDate'):
+            self.assertIn(optional, cloud['properties'])
+            self.assertNotIn(optional, cloud['required'])
+            self.assertEqual('string', cloud['properties'][optional]['type'])
+        self.assertNotIn('enum', cloud['properties']['maskType'])
+        self.assertNotIn('format', cloud['properties']['acquisitionDate'])
+        cloud_ops = yaml.safe_load(
+            (genx / 'Geospatial/CloudMask/CloudMask_GET_POST.yaml').read_text()
+        )
+        self.assertEqual(
+            'genxListCloudMasks',
+            cloud_ops['paths']['/cloud-masks']['get']['operationId']
+        )
+        cloud_readme = (genx / 'Geospatial/CloudMask/README.md').read_text()
+        self.assertIn('(`genxListCloudMasks`)', cloud_readme)
+        self.assertNotIn('(`genxListCloudMask`)', cloud_readme)
+        self.assertIn('../../RFCs/RFC-147-CloudMask.md', cloud_readme)
+        for d in ('D-439', 'D-440', 'D-441'):
+            self.assertIn(d, (genx / 'Geospatial/CloudMask/GroupDescription.md').read_text())
+
+        raster = yaml.safe_load(
+            (genx / 'Geospatial/RasterCatalogue/Schemas/RasterCatalogue.yaml').read_text()
+        )['components']['schemas']['RasterCatalogue']
+        for optional in ('datasetName', 'datasetType'):
+            self.assertIn(optional, raster['properties'])
+            self.assertNotIn(optional, raster['required'])
+            self.assertEqual('string', raster['properties'][optional]['type'])
+        self.assertNotIn('enum', raster['properties']['datasetType'])
+        for missing in ('rasterUri', 'imageURL', 'bandMetadata',
+                        'pixelWidth', 'pixelHeight', 'contentDigest'):
+            self.assertNotIn(missing, raster['properties'])
+        official_image = yaml.safe_load(
+            (root / 'Specification/BrAPI-Phenotyping/Images/Schemas/'
+             'ImageNewRequest.yaml').read_text()
+        )['components']['schemas']['ImageNewRequest']
+        for field in ('imageURL', 'imageLocation', 'imageWidth',
+                      'imageHeight', 'imageTimeStamp'):
+            self.assertIn(field, official_image['properties'])
+        for d in ('D-430', 'D-431', 'D-432'):
+            self.assertIn(d, (genx / 'Geospatial/RasterCatalogue/GroupDescription.md').read_text())
+
+
 if __name__ == '__main__':
     unittest.main()
