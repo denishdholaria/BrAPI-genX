@@ -1,7 +1,7 @@
 # BrAPI-GenX — Crop Species (Reference Data)
 
 Crop and species registry entries describe crop species.
-BrAPI v2.1 has no crop species record.
+Official BrAPI version 2.1 already exposes supported common crop names and Germplasm taxonomic metadata. This separate GenX draft does not define a typed relationship to an official germplasm or a GenX TaxonName.
 
 - `POST /genx/v1/crop-species` (`genxRegisterCropSpecies`) registers one
   `CropSpecies` (`Schemas/CropSpeciesNewRequest.yaml`). Same

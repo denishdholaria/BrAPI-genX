@@ -6,10 +6,7 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record taxon names and synonyms. Taxon names are
-the routine reference for germplasm and species resolution. Without a record,
-taxon names arrive as unversioned strings with no stated synonyms or
-provenance, so they cannot be audited or reproduced.
+Official BrAPI version 2.1 Germplasm already contains genus, species, species authority and source-scoped taxon identifiers. An independently governed synonym and taxonomic-name service is a potential additional workflow, not an already proven deficiency in BrAPI. The need for a distinct candidate identity remains to be demonstrated.
 
 ## 2. Object
 
@@ -27,8 +24,7 @@ name, synonyms, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Taxon name entries reference BrAPI `Germplasm` by identifier; they do not
-  duplicate those resources.
+- The candidate has no typed BrAPI Germplasm or TaxonID identifier link. Scientific-name strings and synonyms do not establish accepted-name or external taxonomic identity; D-240 remains open.
 - A taxon name entry is not a BrAPI Germplasm and must not be treated as one.
 
 ## 5. Invariants

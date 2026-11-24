@@ -25,6 +25,8 @@ REVIEWED = frozenset({
     'ReferenceData/OntologyMapping',
     'ReferenceData/ReusableList', 'ReferenceData/CommonCropName',
     'ReferenceData/PersonReference',
+    'ReferenceData/TaxonName', 'ReferenceData/CropSpecies',
+    'ReferenceData/InstitutionCode',
 })
 LINK = re.compile(r'\]\(([^)]+)\)')
 

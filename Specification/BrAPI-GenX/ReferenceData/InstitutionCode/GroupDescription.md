@@ -1,1 +1,9 @@
 # Group InstitutionCode
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 096; not a ratified scientific reference standard, authoritative external registry or independently conformant service.
+
+The proposed group offers registration, optional lifecycle-filtered listing, and retrieval of an immutable, namespaced metadata record. Same-identifier replay and different-body conflict are **candidate behavior**, not service-level evidence. The draft uses required namespaced `institutionCodeDbId` and lifecycle `status`, with optional `code`, `name`, `supersedes`, and provenance. Official BrAPI Germplasm already carries institute codes; MCPD version 2.1 identifies holding institutions through WIEWS `INSTCODE`. The proposed string is not validated against WIEWS and carries no typed Germplasm reference. D-286–D-288 remain open, including an unsubstantiated proposal to link institution identity to GenX TaxonName.
+
+**Boundaries:** Names, codes and untyped strings cannot confer biological equivalence, externally validated identity, authority, custody, or permissions. The published official Breeding Application Programming Interface (BrAPI) version 2.1 resources retain their existing meanings. Metadata presence does not justify an independent GenX identity or a new normative semantic relationship. No operation-neighbor entry is evidence of a typed relationship.
+
+**Sources:** [module overview](./README.md), [record schema](./Schemas/InstitutionCode.yaml), [registration request](./Schemas/InstitutionCodeNewRequest.yaml), [draft operations](./InstitutionCode_GET_POST.yaml), [candidate RFC](../../RFCs/RFC-096-Institution-Code.md), [official Germplasm metadata](../../../BrAPI-Germplasm/Germplasm/Schemas/GermplasmNewRequest.yaml), [official MCPD record](../../../BrAPI-Germplasm/Germplasm/Schemas/GermplasmMCPD.yaml), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

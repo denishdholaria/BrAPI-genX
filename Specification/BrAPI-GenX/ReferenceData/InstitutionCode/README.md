@@ -1,7 +1,7 @@
 # BrAPI-GenX — Institution Code (Reference Data)
 
 Institution and collection code entries describe institution codes.
-BrAPI v2.1 has no institution code record.
+Official BrAPI version 2.1 Germplasm already carries institute codes and Multi-Crop Passport Descriptors (MCPD) fields. The candidate GenX record is not a registered Food and Agriculture Organization (FAO) World Information and Early Warning System (WIEWS) code authority.
 
 - `POST /genx/v1/institution-codes` (`genxRegisterInstitutionCode`) registers one
   `InstitutionCode` (`Schemas/InstitutionCodeNewRequest.yaml`). Same

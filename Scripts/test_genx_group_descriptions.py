@@ -186,6 +186,33 @@ class GroupEvidenceTests(unittest.TestCase):
                 proposal = repository / 'Specification/BrAPI-GenX/RFCs' / rfc
                 self.assertIn(route, proposal.read_text())
 
+    def test_taxonomy_and_institution_descriptions_are_pinned(self):
+        self.assertTrue({
+            'ReferenceData/TaxonName', 'ReferenceData/CropSpecies',
+            'ReferenceData/InstitutionCode',
+        }.issubset(REVIEWED))
+
+    def test_official_taxonomy_and_institute_fields_preserved(self):
+        root = Path(__file__).resolve().parents[1]
+        official = (root / 'Specification/BrAPI-Germplasm/Germplasm/Schemas'
+                    / 'GermplasmNewRequest.yaml').read_text()
+        for field in ('genus:', 'species:', 'taxonIds:',
+                      'speciesAuthority:', 'instituteCode:'):
+            self.assertIn(field, official)
+        for filename, module, decision in (
+            ('RFC-080-Taxon-Name.md', 'TaxonName', 'D-240'),
+            ('RFC-095-Crop-Species.md', 'CropSpecies', 'D-285'),
+            ('RFC-096-Institution-Code.md', 'InstitutionCode', 'D-288'),
+        ):
+            with self.subTest(module=module):
+                proposal = (root / 'Specification/BrAPI-GenX/RFCs' / filename).read_text()
+                self.assertIn('no typed', proposal)
+                self.assertIn(decision, proposal)
+                description = (root / 'Specification/BrAPI-GenX/ReferenceData' /
+                               module / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', description)
+                self.assertIn(decision, description)
+
 
 if __name__ == '__main__':
     unittest.main()

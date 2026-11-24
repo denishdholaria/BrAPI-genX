@@ -1,1 +1,9 @@
 # Group TaxonName
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 080; not a ratified scientific reference standard, authoritative external registry or independently conformant service.
+
+The proposed group offers registration, optional lifecycle-filtered listing, and retrieval of an immutable, namespaced metadata record. Same-identifier replay and different-body conflict are **candidate behavior**, not service-level evidence. Optional `scientificName`, `synonyms`, `supersedes` and provenance describe a proposed immutable entry, with required namespaced `taxonNameDbId` and lifecycle `status`. Official Germplasm already expresses genus/species, taxon authority and `taxonIds`. The draft contains no typed Germplasm or external TaxonID reference; synonyms are not validated accepted-name usage. Requiredness, synonym governance, and external taxonomy linkage remain unresolved (D-238–D-240).
+
+**Boundaries:** Names, codes and untyped strings cannot confer biological equivalence, externally validated identity, authority, custody, or permissions. The published official Breeding Application Programming Interface (BrAPI) version 2.1 resources retain their existing meanings. Metadata presence does not justify an independent GenX identity or a new normative semantic relationship. No operation-neighbor entry is evidence of a typed relationship.
+
+**Sources:** [module overview](./README.md), [record schema](./Schemas/TaxonName.yaml), [registration request](./Schemas/TaxonNameNewRequest.yaml), [draft operations](./TaxonName_GET_POST.yaml), [candidate RFC](../../RFCs/RFC-080-Taxon-Name.md), [official Germplasm metadata](../../../BrAPI-Germplasm/Germplasm/Schemas/GermplasmNewRequest.yaml), [official TaxonID](../../../BrAPI-Germplasm/Germplasm/Schemas/TaxonID.yaml), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

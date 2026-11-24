@@ -6,10 +6,7 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record institution and collection codes. Institution
-codes are the routine reference for germplasm and collection resolution.
-Without a record, codes arrive as unversioned strings with no stated name or
-provenance, so they cannot be audited or reproduced.
+Official BrAPI version 2.1 Germplasm already carries holding and donor institute codes. Multi-Crop Passport Descriptors (MCPD) version 2.1 defines an INSTCODE convention governed through the Food and Agriculture Organization (FAO) World Information and Early Warning System (WIEWS). This GenX proposal is an unproven additional metadata record, not a replacement for externally issued identifiers.
 
 ## 2. Object
 
@@ -27,8 +24,7 @@ its code, name, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Institution code entries reference BrAPI entities by identifier; they do not
-  duplicate those resources.
+- The candidate defines no typed official BrAPI Germplasm or WIEWS institute reference, and its optional code cannot be treated as externally verified. The proposed link to GenX TaxonName under D-288 is not implemented or scientifically established.
 - An entry is not a BrAPI data resource and must not be treated as one.
 
 ## 5. Invariants

@@ -6,10 +6,7 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record crop and species registries. Crop species
-are the routine reference for germplasm and species resolution. Without a
-record, species arrive as unversioned strings with no stated scientific name
-or provenance, so they cannot be audited or reproduced.
+Official BrAPI version 2.1 already exposes supported common crop names and germplasm genus, species and source-scoped taxon identifiers. A candidate standalone crop/species record may address a different governance workflow, but its separate authority and necessity have not yet been evidenced.
 
 ## 2. Object
 
@@ -27,8 +24,7 @@ scientific name, crop name, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Crop species entries reference BrAPI `Germplasm` by identifier; they do not
-  duplicate those resources.
+- The candidate has no typed BrAPI Germplasm or GenX TaxonName identifier link. Matching crop and scientific-name strings do not establish equivalence; D-285 remains open.
 - An entry is not a BrAPI Germplasm and must not be treated as one.
 
 ## 5. Invariants

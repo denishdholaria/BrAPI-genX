@@ -1,1 +1,9 @@
 # Group CropSpecies
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 095; not a ratified scientific reference standard, authoritative external registry or independently conformant service.
+
+The proposed group offers registration, optional lifecycle-filtered listing, and retrieval of an immutable, namespaced metadata record. Same-identifier replay and different-body conflict are **candidate behavior**, not service-level evidence. The candidate provides required namespaced `cropSpeciesDbId` and lifecycle `status`, while `scientificName`, `cropName`, `supersedes` and provenance remain optional. Official BrAPI already supports common crop discovery and Germplasm taxonomy fields, including `taxonIds`. The proposed record lacks a typed Germplasm or GenX TaxonName link and cannot attest to taxonomic acceptance. Required names and the identity-link question remain unresolved (D-283–D-285).
+
+**Boundaries:** Names, codes and untyped strings cannot confer biological equivalence, externally validated identity, authority, custody, or permissions. The published official Breeding Application Programming Interface (BrAPI) version 2.1 resources retain their existing meanings. Metadata presence does not justify an independent GenX identity or a new normative semantic relationship. No operation-neighbor entry is evidence of a typed relationship.
+
+**Sources:** [module overview](./README.md), [record schema](./Schemas/CropSpecies.yaml), [registration request](./Schemas/CropSpeciesNewRequest.yaml), [draft operations](./CropSpecies_GET_POST.yaml), [candidate RFC](../../RFCs/RFC-095-Crop-Species.md), [official Germplasm metadata](../../../BrAPI-Germplasm/Germplasm/Schemas/GermplasmNewRequest.yaml), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).
