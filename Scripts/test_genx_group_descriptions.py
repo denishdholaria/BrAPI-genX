@@ -1139,5 +1139,72 @@ class GroupEvidenceTests(unittest.TestCase):
         self.assertIn('methodVersion', method['required'])
 
 
+    def test_genomic_prediction_and_selection_are_not_verified_decisions(self):
+        root = Path(__file__).resolve().parents[1]
+        genx = root / 'Specification/BrAPI-GenX'
+        cases = (
+            ('GenomicPrediction', 'genomicPredictionDbId', 'D-160',
+             ('predictions', 'accuracy', 'traitDbId')),
+            ('GenomicSelection', 'genomicSelectionDbId', 'D-163',
+             ('selectedGermplasm', 'selectionThreshold')),
+        )
+        for name, identifier, decision, optional_fields in cases:
+            with self.subTest(group=name):
+                folder = genx / 'Breeding' / name
+                self.assertIn('Breeding/' + name, REVIEWED)
+                description = (folder / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', description)
+                self.assertIn(decision, description)
+                self.assertIn('**Sources:**', description)
+                record = yaml.safe_load(
+                    (folder / 'Schemas' / (name + '.yaml')).read_text()
+                )['components']['schemas'][name]
+                request = yaml.safe_load(
+                    (folder / 'Schemas' / (name + 'NewRequest.yaml')).read_text()
+                )['components']['schemas'][name + 'NewRequest']
+                self.assertEqual({identifier, 'analysisMethodDbId', 'status'},
+                                 set(record['required']))
+                self.assertEqual({identifier, 'analysisMethodDbId'},
+                                 set(request['required']))
+                for field in (*optional_fields, 'studyDbId', 'jobDbId', 'provenance'):
+                    self.assertIn(field, record['properties'])
+                    self.assertNotIn(field, record['required'])
+                    self.assertNotIn(field, request['required'])
+                for absent in ('methodVersion', 'genomicDatasetDbId'):
+                    self.assertNotIn(absent, record['properties'])
+                    self.assertNotIn(absent, request['properties'])
+
+        predicted = yaml.safe_load(
+            (genx / 'Breeding/GenomicPrediction/Schemas/GenomicPrediction.yaml'
+             ).read_text()
+        )['components']['schemas']['GenomicPrediction']
+        self.assertEqual('object', predicted['properties']['predictions']['type'])
+        self.assertNotIn('properties', predicted['properties']['predictions'])
+        self.assertEqual('number', predicted['properties']['accuracy']['type'])
+        for bound in ('minimum', 'maximum', 'exclusiveMinimum',
+                      'exclusiveMaximum'):
+            self.assertNotIn(bound, predicted['properties']['accuracy'])
+        self.assertIn('D-161', (
+            genx / 'RFCs/RFC-054-Genomic-Prediction.md').read_text())
+
+        selection = yaml.safe_load(
+            (genx / 'Breeding/GenomicSelection/Schemas/GenomicSelection.yaml'
+             ).read_text()
+        )['components']['schemas']['GenomicSelection']
+        self.assertEqual('array', selection['properties']['selectedGermplasm']['type'])
+        self.assertEqual('string',
+                         selection['properties']['selectedGermplasm']['items']['type'])
+        self.assertEqual('number', selection['properties']['selectionThreshold']['type'])
+        self.assertIn('D-164', (
+            genx / 'RFCs/RFC-055-Genomic-Selection.md').read_text())
+        verdict = yaml.safe_load(
+            (genx / 'Breeding/SelectionDecisions/Schemas/SelectionDecision.yaml'
+             ).read_text()
+        )['components']['schemas']['SelectionDecision']
+        self.assertTrue({'decision', 'decisionDate', 'programReference'}.issubset(
+            set(verdict['required'])))
+        self.assertNotIn('decision', selection['properties'])
+
+
 if __name__ == '__main__':
     unittest.main()
