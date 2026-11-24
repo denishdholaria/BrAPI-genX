@@ -27,8 +27,9 @@ reference, decision, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Duplicate review records reference BrAPI `Germplasm` by identifier; they do
-  not duplicate those resources.
+- The optional `candidateDbId` is an untyped string and has no
+  validated BrAPI `Germplasm` reference or second accession identity.
+  No equality, deduplication or merge relationship is inferred.
 - A record is not a BrAPI data resource and must not be treated as one.
 
 ## 5. Invariants

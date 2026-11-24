@@ -801,6 +801,23 @@ class GroupEvidenceTests(unittest.TestCase):
                 self.assertIn(decision, doc)
                 self.assertIn('**Sources:**', doc)
 
+    def test_germplasm_transfer_disposal_quarantine_duplicate_review(self):
+        root = Path(__file__).resolve().parents[1]
+        for module, decision in (
+            ('Acquisition', 'D-121'), ('CustodyTransfer', 'D-187'),
+            ('DisposalRecord', 'D-193'), ('Quarantine', 'D-87'),
+            ('DuplicateReview', 'D-310'),
+        ):
+            with self.subTest(module=module):
+                self.assertIn('Germplasm/' + module, REVIEWED)
+                doc = (root / 'Specification/BrAPI-GenX/Germplasm' /
+                       module / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', doc)
+                self.assertIn(decision, doc)
+        rfc = (root / 'Specification/BrAPI-GenX/RFCs' /
+               'RFC-104-Duplicate-Review.md').read_text()
+        self.assertIn('no validated BrAPI', ' '.join(rfc.split()))
+
 
 if __name__ == '__main__':
     unittest.main()
