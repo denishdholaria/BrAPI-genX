@@ -97,8 +97,8 @@ def render_entry(e, catalogue=CATALOGUE):
     for label,key in [("Side effects","sideEffects"),("Retry / idempotency","idempotency"),("Parameters recorded in registry","parameters"),("Request schema refs recorded","requestSchemaRefs"),("Response status codes recorded","responseCodes"),("Response component refs recorded","responseRefs")]:
         val=lst(e.get(key)) if key in {"parameters","requestSchemaRefs","responseCodes","responseRefs"} else m(e.get(key))
         lines.append("- **"+label+":** "+val)
-    if e.get("semanticNeighborIds"): lines.append("- **Semantic relationship IDs / labels:** "+lst(e["semanticNeighborIds"]))
-    if e.get("semanticNeighborCatalogIds"): lines.append("- **Related catalogue IDs:** "+lst(e["semanticNeighborCatalogIds"]))
+    if e.get("semanticNeighborIds"): lines.append("- **Advisory operation neighbors (not verified scientific relationships):** "+lst(e["semanticNeighborIds"]))
+    if e.get("semanticNeighborCatalogIds"): lines.append("- **Related catalogue IDs (advisory navigation):** "+lst(e["semanticNeighborCatalogIds"]))
     if e.get("decisionReferences"): lines.append("- **Relevant RFC / decision references:** "+lst(e["decisionReferences"]))
     src=e.get("source") or {}
     if src.get("path"):
@@ -135,7 +135,7 @@ def render_catalog(reg):
     lines=["# BrAPI-GenX Master Endpoint Catalogue","",
     "> Generated from [ENDPOINT-REGISTRY.json](./ENDPOINT-REGISTRY.json) by Scripts/generateEndpointArtifacts.py on "+str(reg.get("generatedAt","unknown date"))+". Do not edit by hand.","",
     "## Purpose and authority","",
-    "This catalogue is the human-readable index for operation contracts and semantic boundaries. Source OpenAPI operations remain authoritative for wire contracts. The JSON registry is authoritative for catalogue identity, proposed crosswalk metadata, implementation-evidence status, and semantic-neighbor relationships.","",
+    "This catalogue is the human-readable index for operation contracts and semantic boundaries. Source OpenAPI operations remain authoritative for wire contracts. The JSON registry is authoritative for catalogue identity, proposed crosswalk metadata, implementation-evidence status, and advisory operation-neighbor navigation metadata. Navigation alone does not establish scientific equivalence, shared authority, or permission to invoke operations.","",
     "A catalogue identifier does not replace a source operationId or route. Classification is a BrAPI-GenX crosswalk, not an official BrAPI community reclassification. Static source declarations do not prove that an endpoint is mounted, reachable, secure, or conformant.","",
     "## Coverage","","| Surface | Operations | Contract status |","|---|---:|---|",
     "| BrAPI v2.1 official modules | "+str(len(v21))+" | Released specification; implementation availability not inferred |",
@@ -163,7 +163,7 @@ def render_catalog(reg):
         group=sorted([e for e in v21 if e.get("brapiModule")==module],key=lambda e:(e.get("path",""),e.get("method",""),e.get("catalogId","")))
         lines.extend(["### "+module+" — "+str(len(group))+" operations",""])
         for e in group: lines.extend(render_entry(e))
-    lines.extend(["## BrAPI GenX — proposed /genx/v1 operations","","Every operation below is proposal-only. Reference-test-server evidence is not community acceptance or production deployment.",""])
+    lines.extend(["## BrAPI GenX — proposed /genx/v1 operations","","Every operation below is proposal-only. Reference-test-server evidence is not community acceptance or production deployment. Operation-neighbor IDs are advisory navigation, not typed scientific relationships or invocation authority (D-026).",""])
     for module in sorted({e.get("genxModule") or "Unclassified" for e in genx}):
         group=sorted([e for e in genx if (e.get("genxModule") or "Unclassified")==module],key=lambda e:(e.get("path",""),e.get("method",""),e.get("catalogId","")))
         lines.extend(["### "+module+" — "+str(len(group))+" operations",""])
@@ -229,7 +229,7 @@ def render_genx_catalog(reg):
     lines = [
         "# BrAPI-GenX Endpoint Catalogue (Focused View)", "",
         "> Generated from the master registry by Scripts/generateEndpointArtifacts.py on " + str(reg.get("generatedAt", "unknown date")) + ". Do not edit by hand.", "",
-        "This is a focused view of the " + str(len(genx)) + " proposed GenX operations, not a separate source of truth. The complete catalogue covering BrAPI v2.1 and GenX is the [master endpoint catalogue](../ENDPOINT-CATALOG.md); authoritative structured records live in the [master registry](../ENDPOINT-REGISTRY.json). The [BijMantra crosswalk](../BIJMANTRA-CROSSWALK.md) records source-level implementation candidates without implying runtime availability or contract equivalence.", "",
+        "This is a focused view of the " + str(len(genx)) + " proposed GenX operations, not a separate source of truth. The complete catalogue covering BrAPI v2.1 and GenX is the [master endpoint catalogue](../ENDPOINT-CATALOG.md); authoritative structured records live in the [master registry](../ENDPOINT-REGISTRY.json). The [BijMantra crosswalk](../BIJMANTRA-CROSSWALK.md) records source-level implementation candidates without implying runtime availability or contract equivalence. Operation-neighbor labels below are advisory navigation, not verified scientific relationships (D-026).", "",
         "| Section | Source module | Operation count | Status |", "|---|---|---:|---|"
     ]
     groups = {}
