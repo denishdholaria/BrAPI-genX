@@ -1,1 +1,9 @@
 # Group Heritability
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 050. The proposed `HeritabilityEstimate` describes a statistical estimate, not a validated genetic parameter or an official Breeding Application Programming Interface (BrAPI) version 2.1 resource.
+
+The response schema requires `heritabilityEstimateDbId`, `analysisMethodDbId`, and lifecycle `status`; the registration request requires `heritabilityEstimateDbId` and `analysisMethodDbId` only. `heritabilityValue`, `studyDbId`, `traitDbId`, `jobDbId`, and `provenance` are optional. The `heritabilityValue` field is a bare number without a required narrow-sense/broad-sense estimand, population scope, field environment, genetic and residual variance decomposition, sampling uncertainty, transformation, or interpretation rule. The schema does not restrict the numeric range.
+
+**Scientific boundary:** A registered number must not be interpreted automatically as comparable heritability across studies or populations, as breeding-value predictability, or as an independently reproduced estimate. A mandatory `analysisMethodDbId` string does not bind a specific `methodVersion` or verify execution; the separate GenX AnalysisMethod schema has its own required `methodVersion`. No GenomicDataset identifier is modelled, although D-149 asks whether one should be introduced. D-148–D-150 remain deferred, and draft replay/immutability claims are not evidence of production service behavior.
+
+**Sources:** [module overview](./README.md), [response schema](./Schemas/HeritabilityEstimate.yaml), [registration schema](./Schemas/HeritabilityEstimateNewRequest.yaml), [endpoint operations](./Heritability_GET_POST.yaml), [RFC](../../RFCs/RFC-050-Heritability.md), [AnalysisMethod schema](../../Research/AnalysisMethods/Schemas/AnalysisMethod.yaml), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).
