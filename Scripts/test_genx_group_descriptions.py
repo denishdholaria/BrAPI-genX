@@ -1270,5 +1270,81 @@ class GroupEvidenceTests(unittest.TestCase):
             genx / 'RFCs/RFC-049-Stability-Analysis.md').read_text())
 
 
+    def test_relatedness_and_pedigree_matrix_evidence_is_optional(self):
+        root = Path(__file__).resolve().parents[1]
+        genx = root / 'Specification/BrAPI-GenX'
+        cases = (
+            ('Breeding/Kinship', 'KinshipMatrix', 'kinshipMatrixDbId',
+             ('matrixRef', 'matrixDigest'), 'D-154'),
+            ('Genotyping/GenomicRelationship', 'GenomicRelationship',
+             'genomicRelationshipDbId', ('matrixRef', 'digest'), 'D-166'),
+            ('Breeding/PedigreeAnalysis', 'PedigreeAnalysis',
+             'pedigreeAnalysisDbId', ('pedigreeMetrics',), 'D-178'),
+        )
+        for module, resource, identifier, special, decision in cases:
+            with self.subTest(module=module):
+                self.assertIn(module, REVIEWED)
+                folder = genx / module
+                desc = (folder / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', desc)
+                self.assertIn('**Sources:**', desc)
+                self.assertIn(decision, desc)
+                response = yaml.safe_load(
+                    (folder / 'Schemas' / (resource + '.yaml')).read_text()
+                )['components']['schemas'][resource]
+                request = yaml.safe_load(
+                    (folder / 'Schemas' / (resource + 'NewRequest.yaml')).read_text()
+                )['components']['schemas'][resource + 'NewRequest']
+                self.assertEqual({identifier, 'analysisMethodDbId', 'status'},
+                                 set(response['required']))
+                self.assertEqual({identifier, 'analysisMethodDbId'},
+                                 set(request['required']))
+                for field in (*special, 'jobDbId', 'studyDbId', 'provenance'):
+                    self.assertIn(field, response['properties'])
+                    self.assertNotIn(field, response['required'])
+                    self.assertNotIn(field, request['required'])
+                for missing in ('methodVersion', 'genomicDatasetDbId',
+                                'sampleOrder', 'referencePopulation'):
+                    self.assertNotIn(missing, response['properties'])
+                    self.assertNotIn(missing, request['properties'])
+
+        kin = yaml.safe_load(
+            (genx / 'Breeding/Kinship/Schemas/KinshipMatrix.yaml').read_text()
+        )['components']['schemas']['KinshipMatrix']
+        genomic = yaml.safe_load(
+            (genx / 'Genotyping/GenomicRelationship/Schemas/'
+             'GenomicRelationship.yaml').read_text()
+        )['components']['schemas']['GenomicRelationship']
+        self.assertEqual('string', kin['properties']['matrixDigest']['type'])
+        self.assertNotIn('pattern', kin['properties']['matrixDigest'])
+        self.assertEqual('string', genomic['properties']['digest']['type'])
+        self.assertNotIn('pattern', genomic['properties']['digest'])
+        for resource in (kin, genomic):
+            self.assertEqual('string', resource['properties']['matrixRef']['type'])
+
+        pedigree = yaml.safe_load(
+            (genx / 'Breeding/PedigreeAnalysis/Schemas/'
+             'PedigreeAnalysis.yaml').read_text()
+        )['components']['schemas']['PedigreeAnalysis']
+        self.assertEqual('object', pedigree['properties']['pedigreeMetrics']['type'])
+        self.assertNotIn('properties', pedigree['properties']['pedigreeMetrics'])
+        official = yaml.safe_load(
+            (root / 'Specification/BrAPI-Germplasm/Germplasm/Schemas/'
+             'Germplasm.yaml').read_text()
+        )['components']['schemas']['Germplasm']
+        self.assertIn('allOf', official)
+        method = yaml.safe_load(
+            (genx / 'Research/AnalysisMethods/Schemas/'
+             'AnalysisMethod.yaml').read_text()
+        )['components']['schemas']['AnalysisMethod']
+        self.assertIn('methodVersion', method['required'])
+        for rfc, deferred in (
+            ('RFC-052-Kinship.md', 'D-155'),
+            ('RFC-056-Genomic-Relationship.md', 'D-167'),
+            ('RFC-060-Pedigree-Analysis.md', 'D-179'),
+        ):
+            self.assertIn(deferred, (genx / 'RFCs' / rfc).read_text())
+
+
 if __name__ == '__main__':
     unittest.main()
