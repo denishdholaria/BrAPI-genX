@@ -158,6 +158,18 @@ ledger and split by source group and target operation. The reporter does not
 promote any relationship or assert interoperability. Its 12 mutation and
 positive tests run in the static conformance workflow.
 
+## Mission 018 — relationship taxonomy decision proposal (2026-11-24)
+
+The non-normative architecture decision package
+`docs/assessment/BRAPI-GENX-MISSION-018-SEMANTIC-RELATIONSHIP-ARCHITECTURE-PROPOSAL.md`
+distinguishes discovery/navigation, typed resource references, provenance
+derivations, operation contract equivalence, and governed overlaps.
+Legacy `semanticNeighborIds` are not sufficient evidence for an automated
+scientific data join or for invoking a write operation. A proposed
+separate typed-relationship store is **not yet approved** and has not been
+implemented. The maintainer retains final authority on the field's
+future interpretation and compatibility migration (issues #17 and #20).
+
 ## Mission 016 — terminal publication consistency (2026-11-24)
 
 The canonical governance validator now prevents a ledger relationship marked
