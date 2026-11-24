@@ -17,9 +17,9 @@ type, recommended nutrient/rate, region/zone, crop type, and provenance.
 
 ## 3. Endpoints
 
-- `GET /genx/v1/nutrient-advice` (`genxListNutrientAdvices`)
-- `POST /genx/v1/nutrient-advice` (`genxRegisterNutrientAdvice`)
-- `GET /genx/v1/nutrient-advice/{nutrientAdviceDbId}` (`genxGetNutrientAdvice`)
+- `GET /genx/v1/nutrient-advices` (`genxListNutrientAdvices`)
+- `POST /genx/v1/nutrient-advices` (`genxRegisterNutrientAdvice`)
+- `GET /genx/v1/nutrient-advices/{nutrientAdviceDbId}` (`genxGetNutrientAdvice`)
 
 ## 4. Compatibility law
 

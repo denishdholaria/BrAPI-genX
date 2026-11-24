@@ -644,6 +644,29 @@ class GroupEvidenceTests(unittest.TestCase):
                  'RFC-029-Crop-Cycle.md').read_text()
         self.assertIn('no typed', ' '.join(cycle.split()))
 
+    def test_remaining_crop_production_groups_and_nutrient_route(self):
+        root = Path(__file__).resolve().parents[1]
+        for group, decision in (
+            ('Farm', 'D-205'), ('NutrientAdvice', 'D-394'),
+            ('CropRecommendation', 'D-385'),
+        ):
+            with self.subTest(group=group):
+                self.assertIn('CropProduction/' + group, REVIEWED)
+                doc = (root / 'Specification/BrAPI-GenX/CropProduction' /
+                       group / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', doc)
+                self.assertIn(decision, doc)
+        source = (root / 'Specification/BrAPI-GenX/CropProduction' /
+                  'NutrientAdvice/NutrientAdvice_GET_POST.yaml').read_text()
+        rfc = (root / 'Specification/BrAPI-GenX/RFCs' /
+               'RFC-132-NutrientAdvice.md').read_text()
+        self.assertIn('/nutrient-advices:', source)
+        self.assertIn('/genx/v1/nutrient-advices', rfc)
+        self.assertNotIn('/genx/v1/nutrient-advice`', rfc)
+        farm = (root / 'Specification/BrAPI-GenX/RFCs' /
+                'RFC-069-Farm.md').read_text()
+        self.assertIn('does not encode a farm-membership', farm)
+
 
 if __name__ == '__main__':
     unittest.main()

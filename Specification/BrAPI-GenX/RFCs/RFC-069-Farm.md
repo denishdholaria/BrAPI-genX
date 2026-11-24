@@ -42,8 +42,10 @@ make it up.
 - Corrections are recorded as additional versions linked by `supersedes`.
 - `totalAreaHa` is in hectares and is the farm's declared area, not the summed
   area of its locations; the two may disagree and the difference is evidence.
-- A location may belong to more than one farm only when the overlap is
-  explicitly recorded; the API does not enforce an exclusive partition.
+- The current `locationDbIds` array does not encode a farm-membership
+  interval, polygon overlap or exclusive-partition rule. No current field
+  verifies an overlap agreement, so shared location membership cannot be
+  interpreted as an accepted land-tenure or boundary relationship.
 - `inactive` and `withdrawn` farms remain visible; they are never deleted.
 
 ## 6. Deferred questions
