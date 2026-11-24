@@ -1,1 +1,9 @@
 # Group ImageMetadata
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 032. `ImageMetadata` proposes a separate capture-context record, not a replacement for the official Breeding Application Programming Interface (BrAPI) version 2.1 `Image` resource or independent evidence of phenotypic observations.
+
+The registration request requires `imageMetadataDbId`, `imageDbId`, and `capturedAt`; the response additionally requires lifecycle `status`. The `capturedAt` field has a date-time format. `studyDbId`, `observationUnitDbId`, `camera`, `resolution`, `notes` and `provenance` are optional; `resolution` is an unstructured string. These identifier strings do not enforce authority-matched image/observation-unit joins, capture-device calibration, sensor geometry, spectral bands, lens metadata, radiometric correction, image integrity digest or accessible pixel content.
+
+**Official-contract overlap:** Official BrAPI v2.1 `ImageNewRequest` already has `imageTimeStamp`, `imageWidth`, `imageHeight`, `imageLocation`, `observationUnitDbId`, and `additionalInfo`. Therefore, it is **incorrect** to say official BrAPI lacks image metadata. The GenX proposal may support an independent capture-detail lifecycle, but duplication, mapping rules, synchronization and authoritative ownership remain unresolved. A GenX record does not validate a photograph, phenotyping interpretation, image quality or equivalent official Image metadata.
+
+**Sources:** [module overview](./README.md), [response schema](./Schemas/ImageMetadata.yaml), [registration schema](./Schemas/ImageMetadataNewRequest.yaml), [operations](./ImageMetadata_GET_POST.yaml), [RFC](../../RFCs/RFC-032-Image-Metadata.md), [official BrAPI ImageNewRequest](../../../BrAPI-Phenotyping/Images/Schemas/ImageNewRequest.yaml), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).
