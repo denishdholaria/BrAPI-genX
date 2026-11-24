@@ -7,10 +7,13 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no population advancement record. Movement of populations
-between breeding stages is essential for breeding process tracking. Without
-this record, advancement cannot be audited or linked to programs with
-provenance.
+GenX proposes a separately identified *actual* population-progression
+event in addition to official BrAPI version 2.1 breeding and material
+records. D-BP-10 requires this event to remain distinct from a permitted
+BreedingScheme transition definition. A registered event does not by
+itself prove physical transfer, authorization by an external owning
+server, or a separately recorded breeder selection verdict; those claims
+require execution and provenance evidence.
 
 ## 2. Object
 
