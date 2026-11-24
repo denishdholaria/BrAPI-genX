@@ -67,6 +67,16 @@ class ReadmeRouteAuditTests(unittest.TestCase):
         self.assertEqual([], result["mismatches"])
         self.assertEqual(1, len(result["uncovered"]))
 
+    def test_coverage_gate_rejects_missing_documented_operation(self):
+        self.readme.write_text(GOOD.splitlines(keepends=True)[0])
+        cmd = [sys.executable, str(HERE / "audit_genx_readme_routes.py"),
+               "--root", str(self.root), "--module", MODULE]
+        advisory = subprocess.run(cmd, capture_output=True, text=True)
+        required = subprocess.run(cmd + ["--require-coverage"],
+                                  capture_output=True, text=True)
+        self.assertEqual(0, advisory.returncode, advisory.stdout)
+        self.assertEqual(1, required.returncode, required.stdout)
+
     def test_unknown_module_is_rejected(self):
         self.assertTrue(audit(self.root, ["Unknown/Module"])["errors"])
         self.assertTrue(audit(self.root, ["../unsafe"])["errors"])
