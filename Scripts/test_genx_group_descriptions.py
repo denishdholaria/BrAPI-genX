@@ -2243,5 +2243,106 @@ class GroupEvidenceTests(unittest.TestCase):
             self.assertEqual(write_id, ops['paths'][route]['post']['operationId'])
 
 
+
+    def test_doubled_haploid_and_speed_breeding_science_boundaries(self):
+        """Protect source claims without asserting validated lifecycle science."""
+        root = Path(__file__).resolve().parents[1]
+        genx = root / 'Specification/BrAPI-GenX'
+        cases = (
+            ('DoubledHaploid', 'DoubledHaploidProgram',
+             {'doubledHaploidProgramDbId', 'programDbId', 'method'},
+             {'active', 'completed', 'superseded'},
+             ('D-57', 'D-58', 'D-59')),
+            ('SpeedBreeding', 'SpeedBreedingProtocol',
+             {'speedBreedingProtocolDbId', 'programDbId', 'protocolName'},
+             {'active', 'deprecated', 'superseded'},
+             ('D-63', 'D-64', 'D-65')),
+        )
+        for module, model, mandatory, statuses, decisions in cases:
+            with self.subTest(module=module):
+                folder = genx / 'Breeding' / module
+                self.assertIn('Breeding/' + module, REVIEWED)
+                desc = (folder / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', desc)
+                self.assertIn('**Sources:**', desc)
+                for decision in decisions:
+                    self.assertIn(decision, desc)
+                request = yaml.safe_load(
+                    (folder / 'Schemas' / (model + 'NewRequest.yaml')).read_text()
+                )['components']['schemas'][model + 'NewRequest']
+                record = yaml.safe_load(
+                    (folder / 'Schemas' / (model + '.yaml')).read_text()
+                )['components']['schemas'][model]
+                self.assertEqual(mandatory, set(request['required']))
+                self.assertEqual(mandatory | {'status'}, set(record['required']))
+                self.assertEqual(statuses, set(record['properties']['status']['enum']))
+                for optional in ('provenance', 'supersedes'):
+                    self.assertIn(optional, request['properties'])
+                    self.assertNotIn(optional, request['required'])
+
+        dh = yaml.safe_load(
+            (genx / 'Breeding/DoubledHaploid/Schemas/'
+             'DoubledHaploidProgram.yaml').read_text()
+        )['components']['schemas']['DoubledHaploidProgram']
+        for name in ('haploidCount', 'doubledCount'):
+            self.assertEqual('integer', dh['properties'][name]['type'])
+            self.assertNotIn('minimum', dh['properties'][name])
+            self.assertNotIn(name, dh['required'])
+        for name in ('startedAt', 'completedAt'):
+            self.assertEqual('date', dh['properties'][name]['format'])
+            self.assertNotIn(name, dh['required'])
+        self.assertNotIn('donorGermplasmDbId', dh['required'])
+        for absent in ('crossDbId', 'ploidyAssayDbId', 'doublingTreatment',
+                       'generationDbId', 'offspringGermplasmDbIds'):
+            self.assertNotIn(absent, dh['properties'])
+
+        sb = yaml.safe_load(
+            (genx / 'Breeding/SpeedBreeding/Schemas/'
+             'SpeedBreedingProtocol.yaml').read_text()
+        )['components']['schemas']['SpeedBreedingProtocol']
+        self.assertEqual('number', sb['properties']['photoperiod']['type'])
+        self.assertEqual('integer', sb['properties']['generationTime']['type'])
+        for field in ('photoperiod', 'generationTime'):
+            self.assertNotIn(field, sb['required'])
+            self.assertNotIn('minimum', sb['properties'][field])
+            self.assertNotIn('maximum', sb['properties'][field])
+        for field in ('lightRegime', 'temperatureRegime'):
+            self.assertEqual('string', sb['properties'][field]['type'])
+            self.assertNotIn(field, sb['required'])
+        for absent in ('studyDbId', 'breedingPipelineDbId', 'cropDbId',
+                       'lightIntensity', 'relativeHumidity', 'measuredAt'):
+            self.assertNotIn(absent, sb['properties'])
+
+        cross = yaml.safe_load(
+            (root / 'Specification/BrAPI-Germplasm/Crosses/Schemas/'
+             'CrossNewRequest.yaml').read_text()
+        )['components']['schemas']['CrossNewRequest']
+        self.assertIn('DOUBLE_HAPLOID', cross['properties']['crossType']['enum'])
+        self.assertIn('parent1', cross['properties'])
+
+        study = yaml.safe_load(
+            (root / 'Specification/BrAPI-Core/Studies/Schemas/'
+             'StudyNewRequest.yaml').read_text()
+        )['components']['schemas']['StudyNewRequest']
+        for field in ('environmentParameters', 'growthFacility',
+                      'culturalPractices', 'experimentalDesign'):
+            self.assertIn(field, study['properties'])
+
+        dh_rfc = (genx / 'RFCs/RFC-020-Doubled-Haploid.md').read_text()
+        self.assertIn('crossType: DOUBLE_HAPLOID', dh_rfc)
+        sb_rfc = (genx / 'RFCs/RFC-022-Speed-Breeding.md').read_text()
+        self.assertIn('no `breedingPipelineDbId`', sb_rfc)
+        for module, route, listing, posting in (
+            ('DoubledHaploid', '/doubled-haploid-programs',
+             'genxListDoubledHaploidPrograms', 'genxRegisterDoubledHaploidProgram'),
+            ('SpeedBreeding', '/speed-breeding-protocols',
+             'genxListSpeedBreedingProtocols', 'genxRegisterSpeedBreedingProtocol'),
+        ):
+            f = genx / 'Breeding' / module / (module + '_GET_POST.yaml')
+            operations = yaml.safe_load(f.read_text())
+            self.assertEqual(listing, operations['paths'][route]['get']['operationId'])
+            self.assertEqual(posting, operations['paths'][route]['post']['operationId'])
+
+
 if __name__ == '__main__':
     unittest.main()

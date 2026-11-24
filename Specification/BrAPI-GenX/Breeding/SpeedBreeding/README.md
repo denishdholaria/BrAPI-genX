@@ -1,16 +1,9 @@
 # BrAPI-GenX — Speed Breeding (Breeding)
 
-Speed breeding protocols record the environmental conditions and generation
-time used to accelerate plant development. BrAPI v2.1 has no speed breeding
-record.
+This **STRUCTURAL_DRAFT** records a proposed speed-breeding protocol description, not an applied light/temperature schedule, measured generation acceleration or validated reproducibility. Official BrAPI version 2.1 Study already represents environmental parameters, growth facility and cultural practices.
 
-- `POST /genx/v1/speed-breeding-protocols` (`genxRegisterSpeedBreedingProtocol`) registers one
-  `SpeedBreedingProtocol` (`Schemas/SpeedBreedingProtocolNewRequest.yaml`). Same
-  `speedBreedingProtocolDbId` + identical body replays; different body is
-  rejected with `409`.
-- `GET /genx/v1/speed-breeding-protocols` (`genxListSpeedBreedingProtocols`) lists protocols,
-  optionally filtered by program or status.
-- `GET /genx/v1/speed-breeding-protocols/{speedBreedingProtocolDbId}`
-  (`genxGetSpeedBreedingProtocol`) retrieves one protocol.
+- `POST /genx/v1/speed-breeding-protocols` (`genxRegisterSpeedBreedingProtocol`) registers `SpeedBreedingProtocol` (`Schemas/SpeedBreedingProtocolNewRequest.yaml`), requiring only candidate ID, Program string and `protocolName`. Light/temperature regime, photoperiod, generation time and provenance remain optional.
+- `GET /genx/v1/speed-breeding-protocols` (`genxListSpeedBreedingProtocols`) lists by optional Program/status.
+- `GET /genx/v1/speed-breeding-protocols/{speedBreedingProtocolDbId}` (`genxGetSpeedBreedingProtocol`) retrieves a record.
 
-Details and falsifiers: `../../RFCs/RFC-022-Speed-Breeding.md`.
+Identical-body replay and `409` conflict are candidate service behavior. There is no typed BreedingPipeline relationship or measured generation result. See [evidence](./GroupDescription.md), [RFC-022](../../RFCs/RFC-022-Speed-Breeding.md); D-63–D-65 remain open.
