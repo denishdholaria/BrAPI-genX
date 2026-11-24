@@ -17,9 +17,9 @@ type, recommended amount/frequency, region/zone, crop type, and provenance.
 
 ## 3. Endpoints
 
-- `GET /genx/v1/irrigation-advice` (`genxListIrrigationAdvice`)
-- `POST /genx/v1/irrigation-advice` (`genxRegisterIrrigationAdvice`)
-- `GET /genx/v1/irrigation-advice/{irrigationAdviceDbId}` (`genxGetIrrigationAdvice`)
+- `GET /genx/v1/irrigation-advices` (`genxListIrrigationAdvices`)
+- `POST /genx/v1/irrigation-advices` (`genxRegisterIrrigationAdvice`)
+- `GET /genx/v1/irrigation-advices/{irrigationAdviceDbId}` (`genxGetIrrigationAdvice`)
 
 ## 4. Compatibility law
 

@@ -601,6 +601,29 @@ class GroupEvidenceTests(unittest.TestCase):
             self.assertIn('plain strings' if name.startswith('RFC-024')
                           else 'untyped', text)
 
+    def test_crop_input_and_forecast_group_evidence(self):
+        root = Path(__file__).resolve().parents[1]
+        groups = (
+            ('FertilizerApplication', 'D-75'),
+            ('Tillage', 'D-112'),
+            ('YieldForecast', 'D-400'),
+            ('IrrigationAdvice', 'D-391'),
+        )
+        for module, decision in groups:
+            with self.subTest(module=module):
+                self.assertIn(f'CropProduction/{module}', REVIEWED)
+                content = (root / 'Specification/BrAPI-GenX/CropProduction' /
+                           module / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', content)
+                self.assertIn(decision, content)
+        candidate = (root / 'Specification/BrAPI-GenX/CropProduction' /
+                     'IrrigationAdvice/IrrigationAdvice_GET_POST.yaml').read_text()
+        rfc = (root / 'Specification/BrAPI-GenX/RFCs' /
+               'RFC-131-IrrigationAdvice.md').read_text()
+        self.assertIn('/irrigation-advices:', candidate)
+        self.assertIn('genxListIrrigationAdvices', rfc)
+        self.assertNotIn('/genx/v1/irrigation-advice`', rfc)
+
 
 if __name__ == '__main__':
     unittest.main()
