@@ -89,6 +89,8 @@ REVIEWED = frozenset({
     'Environment/WeatherObservations', 'Environment/WeatherForecast',
     'Environment/ClimateNormals', 'Environment/SoilProfile',
     'Environment/WaterBalance',
+    'Environment/CarbonStock', 'Environment/Emissions',
+    'Environment/EnvironmentalTreatment',
 })
 LINK = re.compile(r'\]\(([^)]+)\)')
 

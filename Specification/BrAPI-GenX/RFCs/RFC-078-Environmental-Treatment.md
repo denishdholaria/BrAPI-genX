@@ -7,14 +7,16 @@
 ## 1. Problem
 
 BrAPI v2.1 has no place to record environmental treatments or stress exposures.
-These are the routine inputs to stress and climate experiments. Without a
-record, treatments arrive as unversioned notes with no stated site, type,
-exposure, or provenance, so they cannot be audited or reproduced.
+Environmental stress trials require measured or defined treatment conditions,
+site and experimental-unit identity, time interval, comparisons, methods and
+provenance. The current candidate only requires its identifier; type,
+exposure and site are optional strings and do not establish a reproducible
+or independently validated treatment.
 
 ## 2. Object
 
-`EnvironmentalTreatment` — one immutable record of an environmental treatment
-or stress exposure for a site, with its type, exposure, and provenance.
+`EnvironmentalTreatment` — proposed immutable treatment metadata. Site,
+treatment type, exposure and provenance remain optional.
 
 ## 3. Endpoints
 
@@ -27,8 +29,9 @@ or stress exposure for a site, with its type, exposure, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Treatment records reference BrAPI `Location` and GenX `ExtremeWeather` by
-  identifier; they do not duplicate those resources.
+- `siteDbId` is an optional string rather than an authority-verified BrAPI
+  Location link. No `extremeWeatherEventDbId` or other typed ExtremeWeather
+  reference exists in the current model.
 - A treatment record is not a BrAPI Observation and must not be treated as one.
 
 ## 5. Invariants
@@ -36,6 +39,8 @@ or stress exposure for a site, with its type, exposure, and provenance.
 - A published `environmentalTreatmentDbId` record never mutates in place.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional records linked by `supersedes`.
+- `exposure` is free text without schema-enforced dose, unit, duration,
+  baseline, intervention confirmation or a link to observational outcomes.
 - A record does not imply that the treatment was validated or effective.
 
 ## 6. Deferred questions

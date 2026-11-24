@@ -1870,5 +1870,98 @@ class GroupEvidenceTests(unittest.TestCase):
         self.assertIn('no `fieldBookDbId` property', rfc)
 
 
+    def test_environmental_carbon_emissions_and_treatment_science_boundaries(self):
+        root = Path(__file__).resolve().parents[1]
+        genx = root / 'Specification/BrAPI-GenX'
+        cases = (
+            ('CarbonStock', 'carbonStockDbId', ('D-199', 'D-200', 'D-201')),
+            ('Emissions', 'emissionsDbId', ('D-226', 'D-227', 'D-228')),
+            ('EnvironmentalTreatment', 'environmentalTreatmentDbId',
+             ('D-232', 'D-233', 'D-234')),
+        )
+        for name, identity, decisions in cases:
+            with self.subTest(module=name):
+                module = 'Environment/' + name
+                self.assertIn(module, REVIEWED)
+                folder = genx / module
+                description = (folder / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', description)
+                self.assertIn('**Sources:**', description)
+                for decision in decisions:
+                    self.assertIn(decision, description)
+                record = yaml.safe_load(
+                    (folder / 'Schemas' / (name + '.yaml')).read_text()
+                )['components']['schemas'][name]
+                request = yaml.safe_load(
+                    (folder / 'Schemas' / (name + 'NewRequest.yaml')).read_text()
+                )['components']['schemas'][name + 'NewRequest']
+                self.assertEqual({identity}, set(request['required']))
+                self.assertEqual({identity, 'status'}, set(record['required']))
+                self.assertEqual(
+                    {'active', 'superseded', 'withdrawn'},
+                    set(record['properties']['status']['enum'])
+                )
+                self.assertNotIn('provenance', request['required'])
+
+        carbon = yaml.safe_load(
+            (genx / 'Environment/CarbonStock/Schemas/CarbonStock.yaml').read_text()
+        )['components']['schemas']['CarbonStock']
+        for field in ('studyDbId', 'locationDbId', 'pool', 'stockMgPerHa',
+                      'depthCm', 'measuredAt', 'supersedes', 'provenance'):
+            self.assertIn(field, carbon['properties'])
+            self.assertNotIn(field, carbon['required'])
+        self.assertEqual(
+            {'soil', 'biomass', 'litter', 'coarse-woody-debris'},
+            set(carbon['properties']['pool']['enum'])
+        )
+        for field in ('stockMgPerHa', 'depthCm'):
+            self.assertEqual('number', carbon['properties'][field]['type'])
+        self.assertEqual('date-time', carbon['properties']['measuredAt']['format'])
+        for missing in ('bulkDensity', 'uncertainty', 'samplingArea',
+                        'telemetryDbId', 'analysisResultDbId'):
+            self.assertNotIn(missing, carbon['properties'])
+
+        emissions = yaml.safe_load(
+            (genx / 'Environment/Emissions/Schemas/Emissions.yaml').read_text()
+        )['components']['schemas']['Emissions']
+        for field in ('siteDbId', 'period', 'greenhouseGas',
+                      'quantity', 'unit', 'provenance'):
+            self.assertIn(field, emissions['properties'])
+            self.assertNotIn(field, emissions['required'])
+        self.assertEqual('number', emissions['properties']['quantity']['type'])
+        for field in ('period', 'greenhouseGas', 'unit'):
+            self.assertEqual('string', emissions['properties'][field]['type'])
+            self.assertNotIn('enum', emissions['properties'][field])
+        self.assertNotIn('format', emissions['properties']['period'])
+        for missing in ('carbonStockDbId', 'globalWarmingPotentialVersion',
+                        'reportingScope', 'emissionFactorDbId'):
+            self.assertNotIn(missing, emissions['properties'])
+        self.assertIn('no', (genx / 'RFCs/RFC-076-Emissions.md').read_text())
+
+        treatment = yaml.safe_load(
+            (genx / 'Environment/EnvironmentalTreatment/Schemas/'
+             'EnvironmentalTreatment.yaml').read_text()
+        )['components']['schemas']['EnvironmentalTreatment']
+        for field in ('siteDbId', 'treatmentType', 'exposure', 'provenance'):
+            self.assertIn(field, treatment['properties'])
+            self.assertNotIn(field, treatment['required'])
+        for field in ('treatmentType', 'exposure'):
+            self.assertEqual('string', treatment['properties'][field]['type'])
+            self.assertNotIn('enum', treatment['properties'][field])
+        for missing in ('extremeWeatherEventDbId', 'studyDbId',
+                        'observationUnitDbId', 'exposureDuration',
+                        'controlGroupDbId'):
+            self.assertNotIn(missing, treatment['properties'])
+        self.assertIn('No `extremeWeatherEventDbId`',
+                      (genx / 'RFCs/RFC-078-Environmental-Treatment.md').read_text())
+
+        official = yaml.safe_load(
+            (root / 'Specification/BrAPI-Phenotyping/Observations/Schemas/'
+             'ObservationNewRequest.yaml').read_text()
+        )['components']['schemas']['ObservationNewRequest']
+        self.assertEqual('string', official['properties']['value']['type'])
+        self.assertIn('studyDbId', official['properties'])
+
+
 if __name__ == '__main__':
     unittest.main()

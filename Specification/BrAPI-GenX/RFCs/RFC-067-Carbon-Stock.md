@@ -7,14 +7,16 @@
 ## 1. Problem
 
 BrAPI v2.1 covers weather observations and locations but has no record of carbon
-stocks in soil, biomass, litter, or coarse woody debris. Carbon reporting,
-cropping-system comparison, and climate-smart breeding claims all depend on
-comparable stock measurements with a stated pool, depth, and method. Without a
-record, the same site can carry contradictory carbon claims with no audit trail.
+stocks in soil, biomass, litter, or coarse woody debris. Carbon reporting and comparison require identified pools, sampling strata,
+measurement or estimation methods, uncertainty, depth and provenance. The
+current GenX candidate requires **only its identifier** at registration;
+none of those scientific parameters is mandatory. A registry record is not
+an audited carbon inventory or a climate-smart breeding claim.
 
 ## 2. Object
 
-`CarbonStock` — one immutable carbon stock observation for a named pool.
+`CarbonStock` — proposed immutable stock *metadata* for an optionally named
+pool; the current source does not require a carbon quantity or sampling evidence.
 
 ## 3. Endpoints
 
@@ -27,8 +29,8 @@ record, the same site can carry contradictory carbon claims with no audit trail.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Carbon stocks reference BrAPI `Study` and `Location` by identifier; they do
-  not duplicate those resources.
+- `studyDbId` and `locationDbId` are optional strings; there is no
+  authority-checked BrAPI Study or Location join defined by the schema.
 - A carbon stock record is not a BrAPI data resource and must not be treated as
   one.
 - A carbon stock record is not an emissions factor, a carbon credit, or a
@@ -39,9 +41,11 @@ record, the same site can carry contradictory carbon claims with no audit trail.
 - A published `carbonStockDbId` record never mutates in place.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional records linked by `supersedes`.
-- `stockMgPerHa` is always in megagrams per hectare; unit conversion is the
-  client's responsibility and must not be silently applied.
-- `depthCm` is only meaningful for soil and litter pools.
+- The optional numeric `stockMgPerHa` has a nominal unit of megagrams per
+  hectare; its presence does not validate sampling, stock calculation, pool
+  boundaries or the reported mass basis.
+- Optional `depthCm` is not constrained by pool type; the source contains no
+  condition requiring a depth for soil or litter or disallowing it elsewhere.
 - A record does not imply measurement quality, verification, or accreditation.
 
 ## 6. Deferred questions
