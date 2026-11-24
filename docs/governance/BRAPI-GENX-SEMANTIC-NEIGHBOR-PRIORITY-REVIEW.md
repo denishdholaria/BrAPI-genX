@@ -15,6 +15,18 @@ GenomicDatasets). All 153 original registry-only identities remain in the ledger
 `inherited-unreviewed` and three ExperimentalProtocol to GenomicDataset links
 are now `requires-decision` after a bounded source-contract review.
 
+## Mission 007 update (2026-11-24)
+
+Since the earlier three-link review, five more source-module triads were
+examined against current source schemas (15 operation links). The ledger
+still retains all 153 identities, with **18 requires-decision** and
+**135 inherited-unreviewed**. These five modules are not presumed to be
+scientifically equivalent to genomic dataset registration; ArtifactCatalogue
+and PipelineProvenance remain plausible *resource* relationship candidates
+only with a typed mapping and independent evidence. See
+`docs/assessment/BRAPI-GENX-MISSION-007-CROSS-MODULE-RELATIONSHIP-REVIEW.md`. Earlier snapshot counts describe their respective
+review dates, not the current ledger.
+
 ## SEM-01 Seed-lot transactions versus GenX ledger records (D-20)
 
 - Authoritative records: BrAPI v2.1 SeedLotTransaction; GenX LotLedgerEntry.

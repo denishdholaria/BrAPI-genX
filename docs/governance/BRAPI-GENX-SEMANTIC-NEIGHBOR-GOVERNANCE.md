@@ -89,6 +89,19 @@ relationships remain inventoried; 150 retain `inherited-unreviewed`.
 No terminal rejection or scientific mapping has been approved. See
 `docs/assessment/BRAPI-GENX-EXPERIMENTAL-PROTOCOL-GENOMIC-DATASET-REVIEW.md`.
 
+## Mission 007 — additional five-group triage (2026-11-24)
+
+Fifteen operation-level links from CapabilityNegotiation, ConformanceProbe,
+IrrigationAdvice, ArtifactCatalogue and PipelineProvenance to
+`genxRegisterGenomicDataset` moved to `requires-decision` after source-schema
+review. None was approved, rejected, or deleted. The statuses now are
+**18 requires-decision** and **135 inherited-unreviewed** out of **153 retained**.
+The review distinguishes clearly unrelated use cases from potentially legitimate
+artifact/provenance relationships without inferring operation equivalence.
+See `docs/assessment/BRAPI-GENX-MISSION-007-CROSS-MODULE-RELATIONSHIP-REVIEW.md` for the module-specific evidence, alternatives,
+and missing independent conformance criteria. The original grouped queue remains
+a pinned historical snapshot, not a live status counter.
+
 ## Non-goals
 
 This framework does not modify official BrAPI v2.1 specifications, GenX routes,

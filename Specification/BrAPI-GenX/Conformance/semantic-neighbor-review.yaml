@@ -76,9 +76,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-007-CROSS-MODULE-RELATIONSHIP-REVIEW.md
+  - Specification/BrAPI-GenX/Research/ArtifactCatalogue/Schemas/ArtifactCatalogue.yaml
+  - Specification/BrAPI-GenX/Genotyping/GenomicDatasets/Schemas/GenomicDataset.yaml
   decisionReferences:
   - RFC-013
   - RFC-118
@@ -86,7 +89,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: ArtifactCatalogue -> GenomicDatasets.'
-  rationale: ''
+  rationale: 'ArtifactCatalogue models file location, byte digest and artifact type; GenomicDataset models a biological dataset, pipeline and assembly metadata. A catalogue entry might describe a file belonging to a dataset, but neither schema specifies a typed identity/reference mapping or cardinality.'
+  openQuestion: 'Is a documented artifact-to-dataset membership/reference contract needed, with stable identifiers, content digest purpose, one-to-many cardinality and access rules, or are the current operation neighbors misleading?'
   evidence: []
 - id: brapi-genx.genx.v1.artifact-catalogues.list -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.artifact-catalogues.list
@@ -99,9 +103,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-007-CROSS-MODULE-RELATIONSHIP-REVIEW.md
+  - Specification/BrAPI-GenX/Research/ArtifactCatalogue/Schemas/ArtifactCatalogue.yaml
+  - Specification/BrAPI-GenX/Genotyping/GenomicDatasets/Schemas/GenomicDataset.yaml
   decisionReferences:
   - RFC-013
   - RFC-118
@@ -109,7 +116,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: ArtifactCatalogue -> GenomicDatasets.'
-  rationale: ''
+  rationale: 'ArtifactCatalogue models file location, byte digest and artifact type; GenomicDataset models a biological dataset, pipeline and assembly metadata. A catalogue entry might describe a file belonging to a dataset, but neither schema specifies a typed identity/reference mapping or cardinality.'
+  openQuestion: 'Is a documented artifact-to-dataset membership/reference contract needed, with stable identifiers, content digest purpose, one-to-many cardinality and access rules, or are the current operation neighbors misleading?'
   evidence: []
 - id: brapi-genx.genx.v1.artifact-catalogues.record -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.artifact-catalogues.record
@@ -122,9 +130,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-007-CROSS-MODULE-RELATIONSHIP-REVIEW.md
+  - Specification/BrAPI-GenX/Research/ArtifactCatalogue/Schemas/ArtifactCatalogue.yaml
+  - Specification/BrAPI-GenX/Genotyping/GenomicDatasets/Schemas/GenomicDataset.yaml
   decisionReferences:
   - RFC-013
   - RFC-118
@@ -132,7 +143,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: ArtifactCatalogue -> GenomicDatasets.'
-  rationale: ''
+  rationale: 'ArtifactCatalogue models file location, byte digest and artifact type; GenomicDataset models a biological dataset, pipeline and assembly metadata. A catalogue entry might describe a file belonging to a dataset, but neither schema specifies a typed identity/reference mapping or cardinality.'
+  openQuestion: 'Is a documented artifact-to-dataset membership/reference contract needed, with stable identifiers, content digest purpose, one-to-many cardinality and access rules, or are the current operation neighbors misleading?'
   evidence: []
 - id: brapi-genx.genx.v1.assay-executions.get -> genxRecordAssayDesign
   sourceCatalogId: brapi-genx.genx.v1.assay-executions.get
@@ -352,9 +364,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-007-CROSS-MODULE-RELATIONSHIP-REVIEW.md
+  - Specification/BrAPI-GenX/Core/CapabilityNegotiation/Schemas/CapabilityNegotiation.yaml
+  - Specification/BrAPI-GenX/Genotyping/GenomicDatasets/Schemas/GenomicDataset.yaml
   decisionReferences:
   - RFC-013
   - RFC-153
@@ -362,7 +377,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: CapabilityNegotiation -> GenomicDatasets.'
-  rationale: ''
+  rationale: 'CapabilityNegotiation records counterparty/negotiation metadata; GenomicDataset describes prepared molecular data. Neither schema carries a typed link to the other. A capability discovery exchange is not equivalent to dataset registration.'
+  openQuestion: 'Is there a proven operation-discovery rule connecting capability negotiation to genomic dataset registration, or should these inherited operation neighbors be rejected after maintainer authorization?'
   evidence: []
 - id: brapi-genx.genx.v1.capability-negotiations.list -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.capability-negotiations.list
@@ -375,9 +391,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-007-CROSS-MODULE-RELATIONSHIP-REVIEW.md
+  - Specification/BrAPI-GenX/Core/CapabilityNegotiation/Schemas/CapabilityNegotiation.yaml
+  - Specification/BrAPI-GenX/Genotyping/GenomicDatasets/Schemas/GenomicDataset.yaml
   decisionReferences:
   - RFC-013
   - RFC-153
@@ -385,7 +404,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: CapabilityNegotiation -> GenomicDatasets.'
-  rationale: ''
+  rationale: 'CapabilityNegotiation records counterparty/negotiation metadata; GenomicDataset describes prepared molecular data. Neither schema carries a typed link to the other. A capability discovery exchange is not equivalent to dataset registration.'
+  openQuestion: 'Is there a proven operation-discovery rule connecting capability negotiation to genomic dataset registration, or should these inherited operation neighbors be rejected after maintainer authorization?'
   evidence: []
 - id: brapi-genx.genx.v1.capability-negotiations.record -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.capability-negotiations.record
@@ -398,9 +418,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-007-CROSS-MODULE-RELATIONSHIP-REVIEW.md
+  - Specification/BrAPI-GenX/Core/CapabilityNegotiation/Schemas/CapabilityNegotiation.yaml
+  - Specification/BrAPI-GenX/Genotyping/GenomicDatasets/Schemas/GenomicDataset.yaml
   decisionReferences:
   - RFC-013
   - RFC-153
@@ -408,7 +431,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: CapabilityNegotiation -> GenomicDatasets.'
-  rationale: ''
+  rationale: 'CapabilityNegotiation records counterparty/negotiation metadata; GenomicDataset describes prepared molecular data. Neither schema carries a typed link to the other. A capability discovery exchange is not equivalent to dataset registration.'
+  openQuestion: 'Is there a proven operation-discovery rule connecting capability negotiation to genomic dataset registration, or should these inherited operation neighbors be rejected after maintainer authorization?'
   evidence: []
 - id: brapi-genx.genx.v1.capture-workflows.get -> genxPublishVariableTermVersion
   sourceCatalogId: brapi-genx.genx.v1.capture-workflows.get
@@ -562,9 +586,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-007-CROSS-MODULE-RELATIONSHIP-REVIEW.md
+  - Specification/BrAPI-GenX/Interoperability/ConformanceProbe/Schemas/ConformanceProbe.yaml
+  - Specification/BrAPI-GenX/Genotyping/GenomicDatasets/Schemas/GenomicDataset.yaml
   decisionReferences:
   - RFC-013
   - RFC-155
@@ -572,7 +599,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: ConformanceProbe -> GenomicDatasets.'
-  rationale: ''
+  rationale: 'ConformanceProbe has a generic targetEndpoint string for testing an operation, not a typed genomic-dataset relationship. A probe could target any endpoint; GET/LIST/POST probe operations are not substitutes for registering genomic datasets.'
+  openQuestion: 'Is a generic probe-targets-operation discovery relation intended for all endpoints, or should these three dataset-specific inherited neighbors be rejected by an authorized registry migration?'
   evidence: []
 - id: brapi-genx.genx.v1.conformance-probes.list -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.conformance-probes.list
@@ -585,9 +613,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-007-CROSS-MODULE-RELATIONSHIP-REVIEW.md
+  - Specification/BrAPI-GenX/Interoperability/ConformanceProbe/Schemas/ConformanceProbe.yaml
+  - Specification/BrAPI-GenX/Genotyping/GenomicDatasets/Schemas/GenomicDataset.yaml
   decisionReferences:
   - RFC-013
   - RFC-155
@@ -595,7 +626,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: ConformanceProbe -> GenomicDatasets.'
-  rationale: ''
+  rationale: 'ConformanceProbe has a generic targetEndpoint string for testing an operation, not a typed genomic-dataset relationship. A probe could target any endpoint; GET/LIST/POST probe operations are not substitutes for registering genomic datasets.'
+  openQuestion: 'Is a generic probe-targets-operation discovery relation intended for all endpoints, or should these three dataset-specific inherited neighbors be rejected by an authorized registry migration?'
   evidence: []
 - id: brapi-genx.genx.v1.conformance-probes.record -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.conformance-probes.record
@@ -608,9 +640,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-007-CROSS-MODULE-RELATIONSHIP-REVIEW.md
+  - Specification/BrAPI-GenX/Interoperability/ConformanceProbe/Schemas/ConformanceProbe.yaml
+  - Specification/BrAPI-GenX/Genotyping/GenomicDatasets/Schemas/GenomicDataset.yaml
   decisionReferences:
   - RFC-013
   - RFC-155
@@ -618,7 +653,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: ConformanceProbe -> GenomicDatasets.'
-  rationale: ''
+  rationale: 'ConformanceProbe has a generic targetEndpoint string for testing an operation, not a typed genomic-dataset relationship. A probe could target any endpoint; GET/LIST/POST probe operations are not substitutes for registering genomic datasets.'
+  openQuestion: 'Is a generic probe-targets-operation discovery relation intended for all endpoints, or should these three dataset-specific inherited neighbors be rejected by an authorized registry migration?'
   evidence: []
 - id: brapi-genx.genx.v1.crop-health-images.get -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.crop-health-images.get
@@ -1750,9 +1786,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-007-CROSS-MODULE-RELATIONSHIP-REVIEW.md
+  - Specification/BrAPI-GenX/CropProduction/IrrigationAdvice/Schemas/IrrigationAdvice.yaml
+  - Specification/BrAPI-GenX/Genotyping/GenomicDatasets/Schemas/GenomicDataset.yaml
   decisionReferences:
   - RFC-013
   - RFC-131
@@ -1760,7 +1799,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: IrrigationAdvice -> GenomicDatasets.'
-  rationale: ''
+  rationale: 'IrrigationAdvice models crop-region water recommendations while GenomicDataset models prepared molecular data. The schemas have no shared authority-qualified identifier or evidence of one resource deriving from the other.'
+  openQuestion: 'Can a documented crop-water genomic analysis demonstrate a typed provenance relationship, or should these generic operation-neighbor links be rejected while retaining separate scientific ownership?'
   evidence: []
 - id: brapi-genx.genx.v1.irrigation-advices.list -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.irrigation-advices.list
@@ -1773,9 +1813,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-007-CROSS-MODULE-RELATIONSHIP-REVIEW.md
+  - Specification/BrAPI-GenX/CropProduction/IrrigationAdvice/Schemas/IrrigationAdvice.yaml
+  - Specification/BrAPI-GenX/Genotyping/GenomicDatasets/Schemas/GenomicDataset.yaml
   decisionReferences:
   - RFC-013
   - RFC-131
@@ -1783,7 +1826,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: IrrigationAdvice -> GenomicDatasets.'
-  rationale: ''
+  rationale: 'IrrigationAdvice models crop-region water recommendations while GenomicDataset models prepared molecular data. The schemas have no shared authority-qualified identifier or evidence of one resource deriving from the other.'
+  openQuestion: 'Can a documented crop-water genomic analysis demonstrate a typed provenance relationship, or should these generic operation-neighbor links be rejected while retaining separate scientific ownership?'
   evidence: []
 - id: brapi-genx.genx.v1.irrigation-advices.record -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.irrigation-advices.record
@@ -1796,9 +1840,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-007-CROSS-MODULE-RELATIONSHIP-REVIEW.md
+  - Specification/BrAPI-GenX/CropProduction/IrrigationAdvice/Schemas/IrrigationAdvice.yaml
+  - Specification/BrAPI-GenX/Genotyping/GenomicDatasets/Schemas/GenomicDataset.yaml
   decisionReferences:
   - RFC-013
   - RFC-131
@@ -1806,7 +1853,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: IrrigationAdvice -> GenomicDatasets.'
-  rationale: ''
+  rationale: 'IrrigationAdvice models crop-region water recommendations while GenomicDataset models prepared molecular data. The schemas have no shared authority-qualified identifier or evidence of one resource deriving from the other.'
+  openQuestion: 'Can a documented crop-water genomic analysis demonstrate a typed provenance relationship, or should these generic operation-neighbor links be rejected while retaining separate scientific ownership?'
   evidence: []
 - id: brapi-genx.genx.v1.local-constraints.get -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.local-constraints.get
@@ -2095,9 +2143,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-007-CROSS-MODULE-RELATIONSHIP-REVIEW.md
+  - Specification/BrAPI-GenX/Genotyping/PipelineProvenance/Schemas/PipelineProvenance.yaml
+  - Specification/BrAPI-GenX/Genotyping/GenomicDatasets/Schemas/GenomicDataset.yaml
   decisionReferences:
   - RFC-013
   - RFC-116
@@ -2105,7 +2156,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: PipelineProvenance -> GenomicDatasets.'
-  rationale: ''
+  rationale: 'PipelineProvenance records bioinformatics execution metadata with free-string inputs/outputs, while GenomicDataset holds pipelineName/pipelineVersion but no typed PipelineProvenance identity. A workflow relationship is plausible but not specified as operation equivalence or an interoperable link.'
+  openQuestion: 'Should GenomicDataset link to a versioned, authority-qualified PipelineProvenance run with typed input/output dataset references and authorization, or should these inherited operation neighbors be removed without asserting a mapping?'
   evidence: []
 - id: brapi-genx.genx.v1.pipeline-provenances.list -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.pipeline-provenances.list
@@ -2118,9 +2170,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-007-CROSS-MODULE-RELATIONSHIP-REVIEW.md
+  - Specification/BrAPI-GenX/Genotyping/PipelineProvenance/Schemas/PipelineProvenance.yaml
+  - Specification/BrAPI-GenX/Genotyping/GenomicDatasets/Schemas/GenomicDataset.yaml
   decisionReferences:
   - RFC-013
   - RFC-116
@@ -2128,7 +2183,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: PipelineProvenance -> GenomicDatasets.'
-  rationale: ''
+  rationale: 'PipelineProvenance records bioinformatics execution metadata with free-string inputs/outputs, while GenomicDataset holds pipelineName/pipelineVersion but no typed PipelineProvenance identity. A workflow relationship is plausible but not specified as operation equivalence or an interoperable link.'
+  openQuestion: 'Should GenomicDataset link to a versioned, authority-qualified PipelineProvenance run with typed input/output dataset references and authorization, or should these inherited operation neighbors be removed without asserting a mapping?'
   evidence: []
 - id: brapi-genx.genx.v1.pipeline-provenances.record -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.pipeline-provenances.record
@@ -2141,9 +2197,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-007-CROSS-MODULE-RELATIONSHIP-REVIEW.md
+  - Specification/BrAPI-GenX/Genotyping/PipelineProvenance/Schemas/PipelineProvenance.yaml
+  - Specification/BrAPI-GenX/Genotyping/GenomicDatasets/Schemas/GenomicDataset.yaml
   decisionReferences:
   - RFC-013
   - RFC-116
@@ -2151,7 +2210,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: PipelineProvenance -> GenomicDatasets.'
-  rationale: ''
+  rationale: 'PipelineProvenance records bioinformatics execution metadata with free-string inputs/outputs, while GenomicDataset holds pipelineName/pipelineVersion but no typed PipelineProvenance identity. A workflow relationship is plausible but not specified as operation equivalence or an interoperable link.'
+  openQuestion: 'Should GenomicDataset link to a versioned, authority-qualified PipelineProvenance run with typed input/output dataset references and authorization, or should these inherited operation neighbors be removed without asserting a mapping?'
   evidence: []
 - id: brapi-genx.genx.v1.plots.get -> genxRegisterFieldScouting
   sourceCatalogId: brapi-genx.genx.v1.plots.get
