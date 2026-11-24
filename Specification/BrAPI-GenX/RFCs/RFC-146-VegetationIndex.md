@@ -6,14 +6,19 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record vegetation index records. Vegetation
-indices circulate without a stated type, CRS, resolution, or provenance, so
-they cannot be used for vegetation monitoring.
+GenX proposes a separately identified vegetation-index **metadata**
+catalogue alongside official BrAPI version 2.1 resources. The current
+candidate does not require index type, coordinate reference system,
+resolution, acquisition date, scientific algorithm, numeric index value,
+raster reference, calibrated bands or provenance. Registering a catalogue
+identity cannot itself substantiate vegetation monitoring, phenotypic
+observations or source-image integrity.
 
 ## 2. Object
 
-`VegetationIndex` — one immutable vegetation index record, with its index
-type, name, acquisition date, CRS, resolution, and provenance.
+`VegetationIndex` — one proposed immutable *metadata* record. Index type,
+name, acquisition date, coordinate reference system, resolution and
+provenance are optional, with no index value or raster payload reference.
 
 ## 3. Endpoints
 
@@ -30,9 +35,13 @@ type, name, acquisition date, CRS, resolution, and provenance.
 
 ## 5. Invariants
 
-- A published `vegetationIndexDbId` record never mutates in place.
-- Replay: same id + identical body replays; same id + different body → 409.
-- Corrections are recorded as additional records linked by `supersedes`.
+- A published `vegetationIndexDbId` record is proposed to be immutable.
+- Replay is a draft contract: same id + identical body replays; same id +
+  different body → 409. Persistent-service behavior requires testing.
+- Corrections are proposed as additional records linked by `supersedes`.
+- Only `vegetationIndexDbId` is required for registration. No
+  `indexValue`, `rasterRef`, pixel source or vegetation-index formula
+  is modelled, so the record cannot be assumed to contain measurements.
 
 ## 6. Deferred questions
 
