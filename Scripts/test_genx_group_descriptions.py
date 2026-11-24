@@ -751,6 +751,22 @@ class GroupEvidenceTests(unittest.TestCase):
                 self.assertIn(decision, description)
                 self.assertIn('**Sources:**', description)
 
+    def test_research_artifact_protocol_publication_evidence(self):
+        root = Path(__file__).resolve().parents[1]
+        for module, decision in (
+            ('ArtifactCatalogue', 'D-352'), ('ProtocolLibrary', 'D-355'),
+            ('PublicationReview', 'D-358'), ('ResearchAssets', 'D-45'),
+        ):
+            with self.subTest(module=module):
+                self.assertIn('Research/' + module, REVIEWED)
+                doc = (root / 'Specification/BrAPI-GenX/Research' /
+                       module / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', doc)
+                self.assertIn(decision, doc)
+        rfc = (root / 'Specification/BrAPI-GenX/RFCs' /
+               'RFC-016-Research-Assets.md').read_text()
+        self.assertIn('no typed BrAPI data-resource references', ' '.join(rfc.split()))
+
 
 if __name__ == '__main__':
     unittest.main()

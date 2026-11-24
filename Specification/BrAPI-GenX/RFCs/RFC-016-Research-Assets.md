@@ -27,8 +27,10 @@ metadata that the envelope wraps.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Research assets reference BrAPI data resources and GenX FAIR packages by
-  identifier; they do not duplicate those resources.
+- The optional `fairPackageDbId` is a plain-string identifier intended
+  for a GenX FAIR package; the draft schema does not enforce referential
+  integrity. It provides no typed BrAPI data-resource references, and
+  does not establish direct links or scientific equivalence by itself.
 - An asset is not a BrAPI data resource and must not be treated as one.
 
 ## 5. Invariants
