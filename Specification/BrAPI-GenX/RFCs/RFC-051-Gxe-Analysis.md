@@ -6,9 +6,11 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no GxE analysis result record. Genotype-by-environment
-interaction is essential for breeding. Without this record, GxE results
-cannot be audited or reproduced.
+Genotype-by-environment (GxE) results require a defined genotype population,
+environment design, trait, statistical model and uncertainty interpretation to
+support cross-study comparison. This GenX candidate proposes a separately
+identified analysis-result record alongside official BrAPI version 2.1
+resources, but does not require those inputs or prove reproducibility.
 
 ## 2. Object
 
@@ -25,8 +27,8 @@ cannot be audited or reproduced.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- GxE results reference GenX AnalysisMethod by identifier; they do not
-  duplicate that resource.
+- `analysisMethodDbId` is a required string reference, not an enforced join
+  to an exact AnalysisMethod version or proof of method execution.
 - A result is not a BrAPI data resource and must not be treated as one.
 
 ## 5. Invariants
@@ -34,14 +36,19 @@ cannot be audited or reproduced.
 - A published `gxeAnalysisResultDbId` record never mutates in place.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional results linked by `supersedes`.
-- `analysisMethodDbId` is required.
-- A result does not imply scientific validation or approval.
+- `analysisMethodDbId` is required, but `gxeEffect`, `studyDbId`, `traitDbId`,
+  `jobDbId` and provenance are optional.
+- `gxeEffect` is an unconstrained object without required genotype or
+  environment identity, interaction estimand, inferential uncertainty,
+  statistical test, or multiple-testing rule.
+- A result does not imply a validated interaction, statistical significance,
+  scientific approval or cross-environment comparability.
 
 ## 6. Deferred questions
 
 - D-151: Should `gxeEffect` be required? (Current: optional.)
 - D-152: Should GxE results link to GenX `GenomicDataset`? (Current:
-  optional, not required.)
+  no `genomicDatasetDbId` field is modelled in this schema.)
 - D-153: Should GxE results require a GenX Job reference? (Current:
   optional.)
 

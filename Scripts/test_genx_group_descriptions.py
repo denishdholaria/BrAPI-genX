@@ -1077,5 +1077,67 @@ class GroupEvidenceTests(unittest.TestCase):
             genx / 'RFCs/RFC-047-Gwas-Result.md').read_text())
 
 
+    def test_heritability_and_gxe_require_statistical_context_not_assumed(self):
+        root = Path(__file__).resolve().parents[1]
+        genx = root / 'Specification/BrAPI-GenX'
+        cases = (
+            ('Heritability', 'HeritabilityEstimate', 'D-148',
+             'heritabilityEstimateDbId', 'heritabilityValue'),
+            ('GxeAnalysis', 'GxeAnalysisResult', 'D-151',
+             'gxeAnalysisResultDbId', 'gxeEffect'),
+        )
+        for module, resource, decision, identifier, measurement in cases:
+            with self.subTest(module=module):
+                self.assertIn('Breeding/' + module, REVIEWED)
+                folder = genx / 'Breeding' / module
+                description = (folder / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', description)
+                self.assertIn(decision, description)
+                self.assertIn('**Sources:**', description)
+                response = yaml.safe_load(
+                    (folder / 'Schemas' / (resource + '.yaml')).read_text()
+                )['components']['schemas'][resource]
+                request = yaml.safe_load(
+                    (folder / 'Schemas' / (resource + 'NewRequest.yaml')).read_text()
+                )['components']['schemas'][resource + 'NewRequest']
+                self.assertEqual({identifier, 'analysisMethodDbId', 'status'},
+                                 set(response['required']))
+                self.assertEqual({identifier, 'analysisMethodDbId'},
+                                 set(request['required']))
+                for field in ('jobDbId', 'studyDbId', 'traitDbId',
+                              measurement, 'provenance'):
+                    self.assertIn(field, response['properties'])
+                    self.assertNotIn(field, response['required'])
+                    self.assertNotIn(field, request['required'])
+                for field in ('methodVersion', 'genomicDatasetDbId'):
+                    self.assertNotIn(field, response['properties'])
+                    self.assertNotIn(field, request['properties'])
+                self.assertIn('type', response['properties'][measurement])
+
+        estimate = yaml.safe_load(
+            (genx / 'Breeding/Heritability/Schemas/HeritabilityEstimate.yaml'
+             ).read_text()
+        )['components']['schemas']['HeritabilityEstimate']
+        self.assertEqual('number', estimate['properties']['heritabilityValue']['type'])
+        for constraint in ('minimum', 'maximum', 'exclusiveMinimum',
+                           'exclusiveMaximum'):
+            self.assertNotIn(constraint, estimate['properties']['heritabilityValue'])
+        self.assertIn('D-149', (
+            genx / 'RFCs/RFC-050-Heritability.md').read_text())
+
+        gxe = yaml.safe_load(
+            (genx / 'Breeding/GxeAnalysis/Schemas/GxeAnalysisResult.yaml').read_text()
+        )['components']['schemas']['GxeAnalysisResult']
+        self.assertEqual('object', gxe['properties']['gxeEffect']['type'])
+        self.assertNotIn('properties', gxe['properties']['gxeEffect'])
+        self.assertIn('D-152', (
+            genx / 'RFCs/RFC-051-Gxe-Analysis.md').read_text())
+
+        method = yaml.safe_load(
+            (genx / 'Research/AnalysisMethods/Schemas/AnalysisMethod.yaml').read_text()
+        )['components']['schemas']['AnalysisMethod']
+        self.assertIn('methodVersion', method['required'])
+
+
 if __name__ == '__main__':
     unittest.main()

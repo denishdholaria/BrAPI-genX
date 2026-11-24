@@ -1,1 +1,9 @@
 # Group GxeAnalysis
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 051. Genotype-by-environment (GxE) analysis is a statistical interpretation of genotype responses across environments; this proposed record does not establish independently validated interaction effects or official BrAPI version 2.1 conformance.
+
+The response schema requires `gxeAnalysisResultDbId`, `analysisMethodDbId`, and lifecycle `status`; the registration request requires only `gxeAnalysisResultDbId` and `analysisMethodDbId`. `gxeEffect`, `studyDbId`, `traitDbId`, `jobDbId`, and `provenance` are optional. The proposed `gxeEffect` is an unconstrained object without required genotype and environment identifiers, variance components, effect estimates, standard errors, hypothesis tests, multiplicity correction, stability metrics, or method-specific units and assumptions.
+
+**Scientific boundary:** Registration does not demonstrate a nonzero GxE effect, an interaction significance threshold, rank stability, multi-environment trial validity, causal response, or cross-study comparability. `analysisMethodDbId` is a required string reference but does not require a specific `methodVersion` or verified method execution. No `genomicDatasetDbId` field is modelled, notwithstanding the deferred linkage question D-152. D-151–D-153 remain open; proposed replay and immutable lifecycle statements are not independently verified persistent-service guarantees.
+
+**Sources:** [module overview](./README.md), [response schema](./Schemas/GxeAnalysisResult.yaml), [registration schema](./Schemas/GxeAnalysisResultNewRequest.yaml), [endpoint operations](./GxeAnalysis_GET_POST.yaml), [RFC](../../RFCs/RFC-051-Gxe-Analysis.md), [AnalysisMethod schema](../../Research/AnalysisMethods/Schemas/AnalysisMethod.yaml), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).
