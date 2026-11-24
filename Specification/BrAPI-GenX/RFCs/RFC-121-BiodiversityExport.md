@@ -6,15 +6,18 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record biodiversity occurrence/specimen exports.
-Specimen exports occur without a stated type, occurrence reference, collection
-date, or provenance, so they cannot be traced or audited.
+The checked official BrAPI v2.1 source has Germplasm collecting/passport
+metadata, but no dedicated BiodiversityExport record. The GenX candidate
+requires only its own identifier on registration: occurrence reference,
+collection date, specimen type, taxon, location and provenance are all
+optional. It cannot itself demonstrate an actual biodiversity-data export,
+a validated occurrence or a publication accepted by an external network.
 
 ## 2. Object
 
-`BiodiversityExport` — one immutable biodiversity export record, with its
-specimen type, occurrence reference, collection date, location, taxon, and
-provenance.
+`BiodiversityExport` — a proposed immutable export-*description* record.
+The typed schema does not define a dataset payload, export destination,
+Darwin Core Archive representation, delivery state or publisher license.
 
 ## 3. Endpoints
 
@@ -28,12 +31,18 @@ provenance.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
 - A record is not a BrAPI data resource and must not be treated as one.
+- No `germplasmDbId`, Darwin Core crosswalk, archive address, or verified
+  export receipt is modelled; `active` is a record lifecycle state, not
+  evidence that the data was delivered, published or accepted.
 
 ## 5. Invariants
 
 - A published `biodiversityExportDbId` record never mutates in place.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional records linked by `supersedes`.
+- The optional `collectionDate` has no date format validation; optional
+  location and taxon strings do not prove coordinates or taxonomic authority.
+  No biodiversity export payload or external publication job is defined.
 
 ## 6. Deferred questions
 
