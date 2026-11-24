@@ -1,1 +1,11 @@
 # Group EnvironmentalTreatment
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 078. This proposed immutable environmental-treatment or stress-exposure *metadata* record is not a verified environmental intervention, calibrated exposure history, controlled experiment, causal stress-response measurement or evidence of treatment efficacy.
+
+The request requires **only** `environmentalTreatmentDbId`; response additionally requires lifecycle `status`. Optional `siteDbId`, `treatmentType`, `exposure`, `supersedes`, and `provenance` do not guarantee that a site, stress treatment or experimental measurement is specified. `treatmentType` and `exposure` are unconstrained strings; `14 days at 40% field capacity` is only an example and does not enforce duration, soil water potential, baseline, start/end time, units, method, control group, actual versus intended exposure, or application/verification. There is no `studyDbId`, `observationUnitDbId`, independent treatment or comparator identifier, or `extremeWeatherEventDbId`.
+
+**Relationship boundary:** The original RFC claimed links to BrAPI Location and GenX ExtremeWeather. The current schema contains only optional `siteDbId` text and **no ExtremeWeather identifier**; no authority-matched join can be inferred. This draft cannot establish the meaning or effect of drought/heat treatments across crops or sites. BrAPI Observations can separately represent observed outcomes, but no approved mapping exists from this record to those observations.
+
+**Deferred decisions:** D-232 considers required site identity (optional); D-233 considers structured exposure (currently free text); D-234 considers controlled treatment vocabulary (currently free text). None is ratified.
+
+**Sources:** [module overview](./README.md), [response schema](./Schemas/EnvironmentalTreatment.yaml), [registration schema](./Schemas/EnvironmentalTreatmentNewRequest.yaml), [operations](./EnvironmentalTreatment_GET_POST.yaml), [RFC-078](../../RFCs/RFC-078-Environmental-Treatment.md), [related ExtremeWeather schema](../ExtremeWeather/Schemas/ExtremeWeatherEvent.yaml), [official Observation request](../../../BrAPI-Phenotyping/Observations/Schemas/ObservationNewRequest.yaml), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).
