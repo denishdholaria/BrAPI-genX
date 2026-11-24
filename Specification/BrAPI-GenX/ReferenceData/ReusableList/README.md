@@ -1,7 +1,10 @@
 # BrAPI-GenX — Reusable List (Reference Data)
 
 Reusable list and cohort records describe reusable germplasm/sample lists.
-BrAPI v2.1 has no reusable list record.
+Official BrAPI v2.1 already defines generic `List` resources and
+`/brapi/v2/lists` operations. The GenX proposal is an optional, namespaced,
+immutable list/cohort record, not a replacement or an established identity
+mapping to BrAPI Lists.
 
 - `POST /genx/v1/reusable-lists` (`genxRegisterReusableList`) registers one
   `ReusableList` (`Schemas/ReusableListNewRequest.yaml`). Same

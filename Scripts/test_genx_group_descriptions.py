@@ -158,6 +158,34 @@ class GroupEvidenceTests(unittest.TestCase):
                 self.assertIn('no typed reference', content)
                 self.assertIn(target, content)
 
+    def test_reviewed_core_reference_overlaps_are_pinned(self):
+        self.assertTrue({
+            'ReferenceData/ReusableList',
+            'ReferenceData/CommonCropName',
+            'ReferenceData/PersonReference',
+        }.issubset(REVIEWED))
+
+    def test_official_list_crop_and_people_sources_are_acknowledged(self):
+        repository = Path(__file__).resolve().parents[1]
+        official = repository / 'Specification/BrAPI-Core'
+        cases = (
+            ('Lists/Lists_GET_POST.yaml', '/lists:',
+             'ReusableList/README.md', 'RFC-090-Reusable-List.md', '/brapi/v2/lists'),
+            ('Common Crop Names/CommonCropNames_GET.yaml', '/commoncropnames:',
+             'CommonCropName/README.md', 'RFC-094-Common-Crop-Name.md',
+             '/brapi/v2/commoncropnames'),
+            ('People/People_GET_POST.yaml', '/people:',
+             'PersonReference/README.md', 'RFC-097-Person-Reference.md',
+             '/brapi/v2/people'),
+        )
+        for source, operation, readme, rfc, route in cases:
+            with self.subTest(route=route):
+                self.assertIn(operation, (official / source).read_text())
+                path = repository / 'Specification/BrAPI-GenX/ReferenceData' / readme
+                self.assertIn(route, path.read_text())
+                proposal = repository / 'Specification/BrAPI-GenX/RFCs' / rfc
+                self.assertIn(route, proposal.read_text())
+
 
 if __name__ == '__main__':
     unittest.main()

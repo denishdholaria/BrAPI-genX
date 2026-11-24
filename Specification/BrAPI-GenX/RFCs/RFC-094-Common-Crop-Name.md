@@ -6,10 +6,12 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record common crop names. Common crop names are
-the routine reference for germplasm and species resolution. Without a record,
-names arrive as unversioned strings with no stated scientific name or
-provenance, so they cannot be audited or reproduced.
+BrAPI v2.1 already publishes common crop names through
+`GET /brapi/v2/commoncropnames`, which is required for multi-crop
+servers. The candidate GenX record instead explores separate namespaced,
+immutable common-name/scientific-name metadata. Its distinct necessity,
+authority, and compatibility with the official server-advertised crop
+names have not yet been established.
 
 ## 2. Object
 
@@ -27,8 +29,9 @@ name, common name, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Common crop name entries reference BrAPI `Germplasm` by identifier; they do
-  not duplicate those resources.
+- The candidate schema contains no typed Germplasm, official
+  `commoncropnames`, or GenX `TaxonName` reference. D-282 remains open;
+  no equivalence with an official crop-name value is assumed.
 - An entry is not a BrAPI Germplasm and must not be treated as one.
 
 ## 5. Invariants

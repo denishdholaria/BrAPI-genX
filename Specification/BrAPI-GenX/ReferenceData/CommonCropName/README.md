@@ -1,7 +1,10 @@
 # BrAPI-GenX — Common Crop Name (Reference Data)
 
 Common crop name entries describe common names for crops.
-BrAPI v2.1 has no common crop name record.
+Official BrAPI v2.1 already offers `GET /brapi/v2/commoncropnames` for
+advertised crop names. This GenX proposal describes a distinct candidate
+metadata record and does not replace the official call or infer compatible
+crop-name authority.
 
 - `POST /genx/v1/common-crop-names` (`genxRegisterCommonCropName`) registers one
   `CommonCropName` (`Schemas/CommonCropNameNewRequest.yaml`). Same

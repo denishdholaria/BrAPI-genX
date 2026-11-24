@@ -23,6 +23,8 @@ REVIEWED = frozenset({
     'ReferenceData/MeasurementScale', 'ReferenceData/MeasurementMethods',
     'ReferenceData/UnitsAndQuantity', 'ReferenceData/OntologyTerm',
     'ReferenceData/OntologyMapping',
+    'ReferenceData/ReusableList', 'ReferenceData/CommonCropName',
+    'ReferenceData/PersonReference',
 })
 LINK = re.compile(r'\]\(([^)]+)\)')
 

@@ -6,10 +6,12 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record reusable lists and cohorts. Reusable lists
-are the routine reference for research organization. Without a record, lists
-arrive as unversioned notes with no stated members or provenance, so they
-cannot be audited or reproduced.
+BrAPI v2.1 already provides the generic List resource and dedicated
+`/brapi/v2/lists` operations for lists of item identifiers. This GenX
+proposal explores a *separate* immutable, namespaced list/cohort record.
+The need for a second list identity and any relationship to BrAPI List
+remain unproven. A missing GenX-specific title is not evidence that BrAPI
+lacks reusable lists.
 
 ## 2. Object
 
@@ -27,8 +29,9 @@ members, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Reusable list records reference BrAPI `Germplasm`/`Sample` by identifier;
-  they do not duplicate those resources.
+- The candidate `members` array is currently a collection of unconstrained
+  strings, not enforced typed BrAPI Germplasm or Sample references. D-270
+  remains open, and no identity mapping to an official BrAPI List exists.
 - A list record is not a BrAPI Study and must not be treated as one.
 
 ## 5. Invariants

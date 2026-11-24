@@ -6,10 +6,11 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record person references. Person references are
-the routine reference for research organization. Without a record, people
-arrive as unversioned strings with no stated name, role, or provenance, so
-they cannot be audited or reproduced.
+BrAPI v2.1 already supplies `People` resources and dedicated
+`/brapi/v2/people` operations. This GenX proposal explores an additional
+immutable, namespaced person-reference record with optional role and
+provenance metadata; whether it serves a distinct evidence-backed use case
+beyond existing BrAPI People fields has not yet been demonstrated.
 
 ## 2. Object
 
@@ -27,8 +28,9 @@ and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Person reference entries reference BrAPI entities by identifier; they do not
-  duplicate those resources.
+- The current candidate schema defines no typed `Person`, `People`,
+  `Project` or other BrAPI entity reference; an identifier relationship to
+  official People is not implied. D-291 remains open.
 - An entry is not a BrAPI data resource and must not be treated as one.
 
 ## 5. Invariants
