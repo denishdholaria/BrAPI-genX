@@ -35,6 +35,7 @@ REVIEWED = frozenset({
     'Breeding/ExperimentalDesign', 'Breeding/ExperimentalProtocol',
     'Breeding/TreatmentAssignment',
     'Breeding/ParentCandidateSelection', 'Breeding/SelectionDecisions',
+    'Breeding/DoubledHaploid', 'Breeding/SpeedBreeding',
     'Germplasm/CollectingMission', 'Germplasm/ConservationMembership',
     'Germplasm/McpdAdapter',
     'Germplasm/GenebankStorage', 'Germplasm/ViabilityTesting',
