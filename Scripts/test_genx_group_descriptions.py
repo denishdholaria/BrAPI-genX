@@ -2144,5 +2144,104 @@ class GroupEvidenceTests(unittest.TestCase):
             self.assertEqual(setter, operations['paths'][route]['post']['operationId'])
 
 
+
+    def test_parent_candidate_and_selection_decisions_are_not_equivalent(self):
+        """Pin difference between a parent Boolean and a dated verdict."""
+        root = Path(__file__).resolve().parents[1]
+        genx = root / 'Specification/BrAPI-GenX'
+        parent = genx / 'Breeding/ParentCandidateSelection'
+        verdict = genx / 'Breeding/SelectionDecisions'
+        for module, folder in (('ParentCandidateSelection', parent),
+                               ('SelectionDecisions', verdict)):
+            self.assertIn('Breeding/' + module, REVIEWED)
+            description = (folder / 'GroupDescription.md').read_text()
+            self.assertIn('STRUCTURAL_DRAFT', description)
+            self.assertIn('**Sources:**', description)
+
+        parent_request = yaml.safe_load(
+            (parent / 'Schemas/ParentCandidateSelectionNewRequest.yaml')
+            .read_text()
+        )['components']['schemas']['ParentCandidateSelectionNewRequest']
+        parent_response = yaml.safe_load(
+            (parent / 'Schemas/ParentCandidateSelection.yaml').read_text()
+        )['components']['schemas']['ParentCandidateSelection']
+        required_parent = {'parentCandidateSelectionDbId', 'programDbId',
+                           'candidateGermplasmDbId', 'selected'}
+        self.assertEqual(required_parent, set(parent_request['required']))
+        self.assertEqual(required_parent | {'status'},
+                         set(parent_response['required']))
+        self.assertEqual('boolean', parent_request['properties']['selected']['type'])
+        for optional in ('selectionCriterion', 'rationale', 'provenance'):
+            self.assertIn(optional, parent_request['properties'])
+            self.assertNotIn(optional, parent_request['required'])
+        for raw in ('programDbId', 'candidateGermplasmDbId'):
+            self.assertEqual('string', parent_request['properties'][raw]['type'])
+        for absent in ('selectionDecisionDbId', 'decisionDate', 'decisionMaker',
+                       'linkedObservationReferences', 'crossDbId', 'plannedCrossDbId'):
+            self.assertNotIn(absent, parent_request['properties'])
+
+        selection_request = yaml.safe_load(
+            (verdict / 'Schemas/SelectionDecisionNewRequest.yaml')
+            .read_text()
+        )['components']['schemas']['SelectionDecisionNewRequest']
+        selection_response = yaml.safe_load(
+            (verdict / 'Schemas/SelectionDecision.yaml').read_text()
+        )['components']['schemas']['SelectionDecision']
+        required_verdict = {'selectionDecisionDbId', 'programReference',
+                            'decision', 'decisionDate'}
+        self.assertEqual(required_verdict, set(selection_request['required']))
+        self.assertEqual(required_verdict, set(selection_response['required']))
+        self.assertEqual({'selected', 'rejected', 'deferred', 'advanced'},
+                         set(selection_request['properties']['decision']['enum']))
+        self.assertEqual('date',
+                         selection_request['properties']['decisionDate']['format'])
+        self.assertEqual('#/components/schemas/BrapiResourceReference',
+                         selection_request['properties']['programReference']['$ref'])
+        for optional in ('candidateGermplasmReference', 'studyReference',
+                         'decisionMaker', 'selectionCriterion', 'rationale',
+                         'linkedObservationReferences', 'pipelineContext',
+                         'schemeContext', 'status', 'provenance'):
+            self.assertIn(optional, selection_request['properties'])
+            self.assertNotIn(optional, selection_request['required'])
+        self.assertNotIn('parentCandidateSelectionDbId',
+                         selection_request['properties'])
+
+        reference = yaml.safe_load(
+            (genx / 'Breeding/BreedingPipeline/Schemas/'
+             'BreedingPipeline.yaml').read_text()
+        )['components']['schemas']['BrapiResourceReference']
+        self.assertEqual({'apiGeneration', 'resourceType', 'server', 'dbId'},
+                         set(reference['required']))
+        cross_parent = yaml.safe_load(
+            (root / 'Specification/BrAPI-Germplasm/Crosses/Schemas/'
+             'CrossParent.yaml').read_text()
+        )['components']['schemas']['CrossParent']
+        self.assertTrue({'germplasmDbId', 'parentType'}
+                        .issubset(cross_parent['properties']))
+        planned = yaml.safe_load(
+            (root / 'Specification/BrAPI-Germplasm/PlannedCrosses/Schemas/'
+             'PlannedCrossNewRequest.yaml').read_text()
+        )['components']['schemas']['PlannedCrossNewRequest']
+        self.assertTrue({'parent1', 'parent2'}.issubset(planned['properties']))
+
+        parent_rfc = (genx / 'RFCs/RFC-028-Parent-Candidate-Selection.md').read_text()
+        self.assertIn('no `selectionDecisionDbId`', parent_rfc)
+        self.assertIn('D-83:', parent_rfc)
+        verdict_rfc = (genx / 'RFCs/RFC-008-Selection-Decisions.md').read_text()
+        self.assertIn('`decisionMaker` is optional', verdict_rfc)
+
+        for folder, route, read_id, write_id in (
+            (parent, '/parent-candidate-selections',
+             'genxListParentCandidateSelections',
+             'genxRecordParentCandidateSelection'),
+            (verdict, '/selection-decisions',
+             'genxListSelectionDecisions', 'genxRecordSelectionDecision'),
+        ):
+            name = folder.name
+            ops = yaml.safe_load((folder / (name + '_GET_POST.yaml')).read_text())
+            self.assertEqual(read_id, ops['paths'][route]['get']['operationId'])
+            self.assertEqual(write_id, ops['paths'][route]['post']['operationId'])
+
+
 if __name__ == '__main__':
     unittest.main()
