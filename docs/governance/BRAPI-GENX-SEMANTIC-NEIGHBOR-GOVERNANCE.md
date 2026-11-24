@@ -147,6 +147,17 @@ signal that an engineer must update the evidence, tests and relevant contracts
 together. They are not scientific proof or normative maturity promotion.
 The complete hosted suite remains pending monthly Actions minutes reset.
 
+## Mission 015 — live review-queue reporting (2026-11-24)
+
+The historical 51-group markdown inventory is a **pinned snapshot**, not a
+current status summary. Use `python Scripts/report_semantic_neighbor_inventory.py`
+from the repository root to generate an up-to-date read-only Markdown review
+queue, `--json` for structured input to planning agents, or `--check` for
+a quick deterministic structural check. Counts are derived from the active
+ledger and split by source group and target operation. The reporter does not
+promote any relationship or assert interoperability. Its 12 mutation and
+positive tests run in the static conformance workflow.
+
 ## Mission 014 — historically retained relationship retirement (2026-11-24)
 
 The canonical validator now distinguishes **newly invented relationships** from

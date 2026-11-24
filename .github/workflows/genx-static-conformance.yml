@@ -41,6 +41,8 @@ on:
       - 'Scripts/test_rfc_governance.py'
       - 'Scripts/semantic_neighbor_lineage.py'
       - 'Scripts/test_semantic_neighbor_lineage.py'
+      - 'Scripts/report_semantic_neighbor_inventory.py'
+      - 'Scripts/test_semantic_neighbor_inventory.py'
       - 'Scripts/check_semantic_neighbor_governance.py'
       - 'Scripts/test_semantic_neighbor_governance.py'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
@@ -88,6 +90,8 @@ on:
       - 'Scripts/test_rfc_governance.py'
       - 'Scripts/semantic_neighbor_lineage.py'
       - 'Scripts/test_semantic_neighbor_lineage.py'
+      - 'Scripts/report_semantic_neighbor_inventory.py'
+      - 'Scripts/test_semantic_neighbor_inventory.py'
       - 'Scripts/check_semantic_neighbor_governance.py'
       - 'Scripts/test_semantic_neighbor_governance.py'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
@@ -197,6 +201,10 @@ jobs:
         run: python Scripts/test_registry_source_consistency.py
       - name: Test registry/source drift regression behavior
         run: python Scripts/test_registry_drift_regression.py
+      - name: Validate live semantic-neighbor review inventory
+        run: python Scripts/report_semantic_neighbor_inventory.py --check
+      - name: Test semantic-neighbor inventory reporting
+        run: python Scripts/test_semantic_neighbor_inventory.py
       - name: Test historically retained neighbor provenance
         run: python Scripts/test_semantic_neighbor_lineage.py
       - name: Validate semantic-neighbor governance ledger
@@ -258,6 +266,8 @@ jobs:
             run_check python Scripts/check_semantic_neighbor_governance.py
             run_check python Scripts/test_semantic_neighbor_governance.py
             run_check python Scripts/test_semantic_neighbor_lineage.py
+            run_check python Scripts/report_semantic_neighbor_inventory.py --check
+            run_check python Scripts/test_semantic_neighbor_inventory.py
             run_check python Scripts/check_registry_drift_regression.py
             run_check python Scripts/generateEndpointArtifacts.py --check
           } | tee "$RUNNER_TEMP/genx-static-diagnostics.log"

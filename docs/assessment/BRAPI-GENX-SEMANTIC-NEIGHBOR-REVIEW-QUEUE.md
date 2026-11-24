@@ -1,5 +1,10 @@
 # BrAPI-GenX — Semantic Neighbor Work Queue (Mission 006)
 
+**For live status and current unreviewed groups:** run
+`python Scripts/report_semantic_neighbor_inventory.py` from the repository root,
+or add `--json` for a structured report. All counts below are historical
+snapshot values, not necessarily the latest ledger state.
+
 **Pinned ledger snapshot:** `09f94568d445905b3db17aacebd85876e34b83b0` (2026-11-23)  
 **Status:** generated-style analytical inventory, advisory and non-normative. The source of truth remains the semantic-neighbor governance ledger.
 
