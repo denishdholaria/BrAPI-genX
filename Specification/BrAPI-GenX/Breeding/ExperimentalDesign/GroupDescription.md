@@ -1,1 +1,11 @@
 # Group ExperimentalDesign
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 018, not an approved statistical-design standard or independently demonstrated service.
+
+**Current contract:** Registration requires `experimentalDesignDbId`, `studyDbId` and free-text `designType`; the response additionally requires lifecycle `status`. `replicationCount`, `blockSize`, `randomizationSeed`, `treatmentAssignments` and `provenance` are optional. The assignments array has no minimum length or required `plotId`, `treatment`, `replication` or `block` per item. No balanced design, allocation algorithm, reproducible randomization or validated Study foreign key is specified. A `studyDbId` string does not validate the target resource.
+
+**Official overlap:** Official Breeding Application Programming Interface (BrAPI) version 2.1 `StudyNewRequest.experimentalDesign` already records design description and ontology reference; `observationLevels` and `ObservationUnitPosition` represent field, block and plot hierarchy. Official Observation Units also carry treatment-factor values. A distinct registered design might support versioned allocations, but it cannot claim that BrAPI has no experimental-design metadata or that this draft is statistically valid.
+
+**Boundaries and deferred decisions:** There is no typed `observationUnitDbId`, `experimentalProtocolDbId`, or enforced randomization/replication constraint. A design is not an official Study or Observation Unit, nor evidence that a treatment was applied. D-51 (plot identity), D-52 (randomization seed), and D-53 (block/replication modelling) remain unratified.
+
+**Sources:** [overview](./README.md), [registration schema](./Schemas/ExperimentalDesignNewRequest.yaml), [response schema](./Schemas/ExperimentalDesign.yaml), [operations](./ExperimentalDesign_GET_POST.yaml), [RFC-018](../../RFCs/RFC-018-Experimental-Design.md), [official Study](../../../BrAPI-Core/Studies/Schemas/StudyNewRequest.yaml), [official Observation Unit](../../../BrAPI-Phenotyping/ObservationUnits/Schemas/ObservationUnitNewRequest.yaml), [official position](../../../BrAPI-Phenotyping/ObservationUnits/Schemas/ObservationUnitPosition.yaml), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

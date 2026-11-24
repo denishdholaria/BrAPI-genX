@@ -6,9 +6,7 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record ExperimentalProtocol. Without a record, ExperimentalProtocol arrive as
-unversioned entries with no stated provenance, so they cannot be audited or
-reproduced.
+BrAPI v2.1 Study already carries experimental-design and cultural-practice metadata; Observation Units describe applied factors, and Events actual interventions. This candidate explores separately versioned protocol descriptions, but optional free-text properties cannot validate executable steps or scientific reproducibility.
 
 ## 2. Object
 
@@ -25,18 +23,19 @@ reproduced.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- A record is not a BrAPI data resource and must not be treated as one.
+- A record is not an official BrAPI Study, Observation Unit or Event. No typed Study, ExperimentalDesign, ProtocolLibrary or GenomicDataset reference appears in this schema.
 
 ## 5. Invariants
 
 - A published `experimentalProtocolDbId` record never mutates in place.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional records linked by `supersedes`.
+- Only `experimentalProtocolDbId` is mandatory in registration; `protocolName`, `provenance` and method details are optional. `treatments`, `replicates` and `blocks` are strings, not validated numeric or structural models.
 
 ## 6. Deferred questions
 
-- D-349: Should `name` be required? (Current: optional.)
-- D-350: Should `name` be a controlled vocabulary? (Current: free-form string.)
+- D-349: Should `protocolName` be required? (Current: optional.)
+- D-350: Should `protocolName` use controlled terminology? (Current: free-form string.)
 - D-351: Should records link to GenX `GenomicDataset`? (Current: no link.)
 
 ## 7. Classification

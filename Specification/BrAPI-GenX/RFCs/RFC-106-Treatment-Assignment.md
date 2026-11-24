@@ -6,10 +6,7 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record treatment assignments. Treatment assignments
-are the routine reference for experimental design. Without a record, assignments
-arrive as unversioned notes with no stated field, treatment, or provenance, so
-they cannot be audited or reproduced.
+BrAPI v2.1 Observation Unit `treatments` already represents applied treatment-factor values, while Events record actual interventions. This candidate explores separate planned assignment records, but neither randomized allocation nor field execution is validated by its current minimal schema.
 
 ## 2. Object
 
@@ -27,8 +24,7 @@ field linkage, treatment, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Treatment assignment records reference BrAPI `Study`/`Location` by
-  identifier; they do not duplicate those resources.
+- The draft only has optional free-text `fieldDbId`; no typed BrAPI `studyDbId`, `locationDbId` or `observationUnitDbId` exists. No authoritative cross-resource join is established.
 - A record is not a BrAPI Observation and must not be treated as one.
 
 ## 5. Invariants
@@ -36,7 +32,7 @@ field linkage, treatment, and provenance.
 - A published `treatmentAssignmentDbId` record never mutates in place.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional records linked by `supersedes`.
-- A record does not imply that the assignment is validated or endorsed.
+- A record does not imply that the assignment was randomized, validated, applied or endorsed. `fieldDbId`, `treatment` and provenance are optional, and no `experimentalDesignDbId` link exists.
 
 ## 6. Deferred questions
 
