@@ -6,9 +6,7 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record quality flags. Quality flags are the routine
-reference for phenotyping. Without a record, flags arrive as unversioned notes
-with no stated value or provenance, so they cannot be audited or reproduced.
+BrAPI version 2.1 already represents individual Observations with values, variables, timestamps, units of observation and collectors. A separate quality-flag history may be useful, but the candidate is only an optional string flag and lifecycle metadata. It does not define an observation linkage, controlled quality taxonomy or validated quality assessment.
 
 ## 2. Object
 
@@ -26,8 +24,7 @@ provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Quality flag records reference BrAPI `Observation` by identifier; they do not
-  duplicate those resources.
+- No typed link to an official BrAPI Observation or GenX PhenotypeCapture record is present in this candidate schema; D-333 remains unresolved. Matching labels or navigation links do not create scientific identity.
 - A record is not a BrAPI Observation and must not be treated as one.
 
 ## 5. Invariants

@@ -6,10 +6,7 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record capture workflows. Capture workflows are the
-routine reference for phenotyping. Without a record, workflows arrive as
-unversioned notes with no stated type or provenance, so they cannot be audited
-or reproduced.
+BrAPI version 2.1 already models Studies, Observation Units, observations, variables and metadata about data collection. A separate capture-workflow record might describe orchestration, but this candidate contains only an optional workflowType string and lifecycle metadata; it does not define a runnable workflow, observation association or authenticated collection protocol.
 
 ## 2. Object
 
@@ -27,8 +24,7 @@ type and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Capture workflow records reference BrAPI `Study`/`Location` by identifier;
-  they do not duplicate those resources.
+- No typed link to an official BrAPI Observation or GenX PhenotypeCapture record is present in this candidate schema; D-330 remains unresolved. Matching labels or navigation links do not create scientific identity.
 - A record is not a BrAPI Observation and must not be treated as one.
 
 ## 5. Invariants

@@ -1,7 +1,7 @@
 # BrAPI-GenX — Capture Workflow (Phenotyping)
 
 Capture workflow records describe capture workflows.
-BrAPI v2.1 has no capture workflow record.
+BrAPI version 2.1 already models Studies, Observation Units, observations, variables and metadata about data collection. A separate capture-workflow record might describe orchestration, but this candidate contains only an optional workflowType string and lifecycle metadata; it does not define a runnable workflow, observation association or authenticated collection protocol.
 
 - `POST /genx/v1/capture-workflows` (`genxRegisterCaptureWorkflow`) registers one
   `CaptureWorkflow` (`Schemas/CaptureWorkflowNewRequest.yaml`). Same

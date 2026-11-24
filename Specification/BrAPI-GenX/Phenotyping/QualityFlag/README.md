@@ -1,7 +1,7 @@
 # BrAPI-GenX — Quality Flag (Phenotyping)
 
 Quality flag records describe quality flags.
-BrAPI v2.1 has no quality flag record.
+BrAPI version 2.1 already represents individual Observations with values, variables, timestamps, units of observation and collectors. A separate quality-flag history may be useful, but the candidate is only an optional string flag and lifecycle metadata. It does not define an observation linkage, controlled quality taxonomy or validated quality assessment.
 
 - `POST /genx/v1/quality-flags` (`genxRegisterQualityFlag`) registers one
   `QualityFlag` (`Schemas/QualityFlagNewRequest.yaml`). Same

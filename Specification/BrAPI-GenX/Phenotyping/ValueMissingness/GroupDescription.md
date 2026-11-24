@@ -1,1 +1,9 @@
 # Group ValueMissingness
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 112. This record proposal is not an official Breeding Application Programming Interface (BrAPI) version 2.1 Observation contract or verified measurement-quality workflow.
+
+Proposed operations register, list by lifecycle status, and retrieve immutable namespaced metadata. Same-body replay and changed-body conflict remain candidate behavior without independent persistent-service evidence. The draft requires `valueMissingnessDbId` and `status`, while `value`, boolean `missing`, `supersedes`, and provenance are optional. No cross-field rule defines whether a non-empty value can coexist with `missing=true`, or what absence of either property means. No typed BrAPI Observation or GenX PhenotypeCapture link exists. D-334–D-336 are open; the potential ambiguity is a design question, not grounds to invent validation.
+
+**Boundaries:** BrAPI version 2.1 Observations already carry reported value, timestamp, variable, observation-unit, study and collector context. The draft metadata must not be assumed to mutate these official observations, authenticate collectors, validate a sensor reading, infer scientific missingness, or perform a correction. Advisory neighbor links establish no typed relationship. Further policy and scientific semantics require explicit decisions.
+
+**Sources:** [candidate overview](./README.md), [candidate schema](./Schemas/ValueMissingness.yaml), [registration request](./Schemas/ValueMissingnessNewRequest.yaml), [draft operations](./ValueMissingness_GET_POST.yaml), [RFC-112](../../RFCs/RFC-112-Value-Missingness.md), [official BrAPI Observation request](../../../BrAPI-Phenotyping/Observations/Schemas/ObservationNewRequest.yaml), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

@@ -149,6 +149,27 @@
       "resource": "McpdAdapter",
       "target": "Germplasm",
       "decision": "D-308"
+    },
+    {
+      "module": "Phenotyping/QualityFlag",
+      "rfc": "RFC-111-Quality-Flag.md",
+      "resource": "QualityFlag",
+      "target": "PhenotypeCapture",
+      "decision": "D-333"
+    },
+    {
+      "module": "Phenotyping/ValueMissingness",
+      "rfc": "RFC-112-Value-Missingness.md",
+      "resource": "ValueMissingness",
+      "target": "PhenotypeCapture",
+      "decision": "D-336"
+    },
+    {
+      "module": "Phenotyping/CaptureWorkflow",
+      "rfc": "RFC-110-Capture-Workflow.md",
+      "resource": "CaptureWorkflow",
+      "target": "PhenotypeCapture",
+      "decision": "D-330"
     }
   ]
 }

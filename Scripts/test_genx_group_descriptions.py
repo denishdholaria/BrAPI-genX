@@ -294,6 +294,37 @@ class GroupEvidenceTests(unittest.TestCase):
                 self.assertIn('STRUCTURAL_DRAFT', group)
                 self.assertIn(decision, group)
 
+    def test_phenotyping_quality_and_capture_groups_are_pinned(self):
+        self.assertTrue({'Phenotyping/QualityFlag',
+                         'Phenotyping/ValueMissingness',
+                         'Phenotyping/CaptureWorkflow'}.issubset(REVIEWED))
+
+    def test_missingness_ambiguity_is_explicit_not_assumed(self):
+        root = Path(__file__).resolve().parents[1]
+        official = (root / 'Specification/BrAPI-Phenotyping/Observations/Schemas'
+                    / 'ObservationNewRequest.yaml').read_text()
+        for token in ('observationTimeStamp:', 'observationUnitDbId:',
+                      'observationVariableDbId:', 'value:'):
+            self.assertIn(token, official)
+        candidate = (root / 'Specification/BrAPI-GenX/Phenotyping'
+                     / 'ValueMissingness/Schemas/ValueMissingness.yaml').read_text()
+        self.assertIn('missing:', candidate)
+        self.assertIn('value:', candidate)
+        self.assertNotIn('oneOf:', candidate)
+        for name, rfc, decision in (
+            ('QualityFlag', 'RFC-111-Quality-Flag.md', 'D-333'),
+            ('ValueMissingness', 'RFC-112-Value-Missingness.md', 'D-336'),
+            ('CaptureWorkflow', 'RFC-110-Capture-Workflow.md', 'D-330'),
+        ):
+            with self.subTest(name=name):
+                proposal = (root / 'Specification/BrAPI-GenX/RFCs' / rfc).read_text()
+                self.assertIn('No typed link', proposal)
+                self.assertIn(decision, proposal)
+                group = (root / 'Specification/BrAPI-GenX/Phenotyping' /
+                         name / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', group)
+                self.assertIn(decision, group)
+
 
 if __name__ == '__main__':
     unittest.main()

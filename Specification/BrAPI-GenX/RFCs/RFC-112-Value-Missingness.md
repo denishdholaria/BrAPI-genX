@@ -6,10 +6,7 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record value and missingness. Value and missingness
-are the routine reference for phenotyping. Without a record, values arrive as
-unversioned notes with no stated value, missingness, or provenance, so they
-cannot be audited or reproduced.
+BrAPI version 2.1 already defines the Observation `value` field and observation identity and context. This candidate separately records optional `value` and optional boolean `missing`, but it does not specify how their combinations behave, how an observation is referenced, or how missingness differs from invalid, corrected or imputed values.
 
 ## 2. Object
 
@@ -27,8 +24,7 @@ value, missingness flag, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Value and missingness records reference BrAPI `Observation` by identifier;
-  they do not duplicate those resources.
+- No typed link to an official BrAPI Observation or GenX PhenotypeCapture record is present in this candidate schema; D-336 remains unresolved. Matching labels or navigation links do not create scientific identity.
 - A record is not a BrAPI Observation and must not be treated as one.
 
 ## 5. Invariants
