@@ -33,6 +33,7 @@ def race():
     t['after'] = state(current='V4A', revisions={'V3': 'digest3', 'V4A': 'digestA'}, effects={'e3': 'V3', 'e4a': 'V4A'})
     return t
 
+
 def first_create_race():
     t = race()
     t['scenario'] = 'CAS-06'
