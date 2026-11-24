@@ -80,6 +80,45 @@ class CasTraceTests(unittest.TestCase):
         t = first_create_race(); t['after']['effects']['e4b'] = 'V4B'
         self.assertTrue(validate(t))
 
+    def test_cas07_dispatch_first_publication(self):
+        t = trace('CAS-07')
+        t['pipelineExistsBefore'] = True
+        t['before'] = state(current=None, revisions={}, effects={})
+        t['after'] = state(current='V4', revisions={'V4': 'digest4'}, effects={})
+        t['requests'][0].update(expectedCurrentVersionId=None,
+                                requestedPublicationState='published')
+        t['responses'][0] = dict(client='A', status=201, resultVersionId='V4')
+        self.assertEqual([], validate(t))
+
+    def test_cas08_dispatch_draft_append(self):
+        t = trace('CAS-08')
+        t['requests'][0].update(expectedCurrentVersionId='V3',
+                                basedOnVersionId='V3',
+                                requestedPublicationState='draft')
+        t['responses'][0] = dict(client='A', status=201, resultVersionId='V4')
+        t['after'] = state(current='V3', revisions={'V3': 'digest3', 'V4': 'digest4'})
+        t['after']['revisions']['V4']['publicationState'] = 'draft'
+        self.assertEqual([], validate(t))
+
+    def test_cas09_dispatch_parallel_drafts(self):
+        t = trace('CAS-09')
+        t['barrierObserved'] = True
+        t['requests'] = [
+            dict(client='A', versionId='V4A', fingerprint='dA',
+                 expectedCurrentVersionId='V3', basedOnVersionId='V3',
+                 requestedPublicationState='draft'),
+            dict(client='B', versionId='V4B', fingerprint='dB',
+                 expectedCurrentVersionId='V3', basedOnVersionId='V3',
+                 requestedPublicationState='draft'),
+        ]
+        t['responses'] = [dict(client='A', status=201, resultVersionId='V4A'),
+                          dict(client='B', status=200, resultVersionId='V4B')]
+        t['after'] = state(current='V3',
+                           revisions={'V3': 'digest3', 'V4A': 'dA', 'V4B': 'dB'})
+        for v in ('V4A', 'V4B'):
+            t['after']['revisions'][v]['publicationState'] = 'draft'
+        self.assertEqual([], validate(t))
+
     def test_race_one_winner_passes(self):
         self.assertEqual([], validate(race()))
 

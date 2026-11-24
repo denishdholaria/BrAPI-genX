@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify recorded BreedingPipeline CAS-01..04 outcomes against D-BP-14.
+"""Verify selected recorded BreedingPipeline CAS-01..09 outcomes against D-BP-14.
 
 A trace is supplied by an external harness, not gathered by this module.
 Passing a synthetic or self-reported trace does NOT prove service conformance.
@@ -11,7 +11,9 @@ import json
 from pathlib import Path
 from typing import Any
 
-SCENARIOS = frozenset({'CAS-01', 'CAS-02', 'CAS-03', 'CAS-04', 'CAS-06'})
+from breeding_pipeline_draft_trace import validate_draft_trace
+
+SCENARIOS = frozenset({'CAS-01', 'CAS-02', 'CAS-03', 'CAS-04', 'CAS-06', 'CAS-07', 'CAS-08', 'CAS-09'})
 
 
 def validate(trace: Any) -> list[str]:
@@ -20,7 +22,7 @@ def validate(trace: Any) -> list[str]:
     errors = []
     scenario = trace.get('scenario')
     if scenario not in SCENARIOS:
-        return ['unsupported scenario; this verifier covers CAS-01..04 and CAS-06 only']
+        return ['unsupported scenario; this verifier covers CAS-01..04 and CAS-06..09 only']
     before, after = trace.get('before'), trace.get('after')
     if not isinstance(before, dict) or not isinstance(after, dict):
         return ['before and after must be state snapshots']
@@ -54,7 +56,7 @@ def validate(trace: Any) -> list[str]:
     requests, responses = trace.get('requests'), trace.get('responses')
     if not isinstance(requests, list) or not isinstance(responses, list):
         return errors + ['requests and responses must be lists']
-    if len(requests) != len(responses) or len(requests) != (2 if scenario in ('CAS-02', 'CAS-06') else 1):
+    if len(requests) != len(responses) or len(requests) != (2 if scenario in ('CAS-02', 'CAS-06', 'CAS-09') else 1):
         return errors + ['unexpected request/response count for this scenario']
     if any(not isinstance(row, dict) for row in requests + responses):
         return errors + ['requests and responses must contain objects']
@@ -118,6 +120,8 @@ def validate(trace: Any) -> list[str]:
                                       if event not in before['effects']}
             if any(version != winner['versionId'] for version in newly_observed_effects.values()):
                 errors.append(f'{scenario} losing request must not emit a lifecycle side effect')
+    elif scenario in ('CAS-07', 'CAS-08', 'CAS-09'):
+        errors.extend(validate_draft_trace(trace, before, after, requests, by_response))
     elif scenario == 'CAS-03':
         request, response = requests[0], by_response[clients[0]]
         if request['versionId'] not in old or old[request['versionId']]['fingerprint'] != request['fingerprint']:
