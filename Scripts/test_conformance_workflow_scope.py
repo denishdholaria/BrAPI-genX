@@ -38,7 +38,7 @@ REQUIRED_COMMANDS = {
     "python Scripts/check_semantic_neighbor_governance.py --comparison-ref",
     "python Scripts/test_semantic_neighbor_governance.py",
     "python Scripts/generateEndpointArtifacts.py --check",
-    "python Scripts/audit_genx_readme_routes.py --module Geospatial/VegetationIndex --strict",
+    "python Scripts/audit_genx_readme_routes.py --module Geospatial/VegetationIndex --strict --require-coverage",
     "python Scripts/test_genx_readme_routes.py",
 }
 
