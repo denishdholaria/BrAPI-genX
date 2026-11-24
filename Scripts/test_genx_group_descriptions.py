@@ -2344,5 +2344,93 @@ class GroupEvidenceTests(unittest.TestCase):
             self.assertEqual(posting, operations['paths'][route]['post']['operationId'])
 
 
+
+    def test_spatial_registry_records_remain_non_executable_until_decision(self):
+        """Do not reinterpret sparse draft records as executable geospatial APIs."""
+        root = Path(__file__).resolve().parents[1]
+        genx = root / 'Specification/BrAPI-GenX'
+        candidates = (
+            ('SpatialIndex', 'spatialIndexDbId', 'RFC-141-SpatialIndex.md',
+             'G-090-1'),
+            ('SpatialQuery', 'spatialQueryDbId', 'RFC-143-SpatialQuery.md',
+             'G-090-2'),
+            ('YieldMap', 'yieldMapDbId', 'RFC-070-Yield-Map.md',
+             'G-090-3'),
+        )
+        for module, identity, rfc_name, decision in candidates:
+            with self.subTest(module=module):
+                folder = genx / 'Geospatial' / module
+                self.assertNotIn('Geospatial/' + module, REVIEWED)
+                description = (folder / 'GroupDescription.md').read_text()
+                self.assertLess(len(description.strip()), 100)
+                request = yaml.safe_load(
+                    (folder / 'Schemas' / (module + 'NewRequest.yaml'))
+                    .read_text()
+                )['components']['schemas'][module + 'NewRequest']
+                response = yaml.safe_load(
+                    (folder / 'Schemas' / (module + '.yaml')).read_text()
+                )['components']['schemas'][module]
+                self.assertEqual({identity}, set(request['required']))
+                self.assertEqual({identity, 'status'}, set(response['required']))
+                self.assertIn(decision, (folder / 'README.md').read_text())
+                rfc = (genx / 'RFCs' / rfc_name).read_text()
+                self.assertIn('non-normative', rfc)
+
+        spatial_index = yaml.safe_load(
+            (genx / 'Geospatial/SpatialIndex/Schemas/SpatialIndex.yaml')
+            .read_text()
+        )['components']['schemas']['SpatialIndex']
+        for optional in ('indexType', 'indexName', 'coverageArea',
+                         'resolution', 'provenance'):
+            self.assertIn(optional, spatial_index['properties'])
+            self.assertNotIn(optional, spatial_index['required'])
+        self.assertEqual('string', spatial_index['properties']['coverageArea']['type'])
+        for absent in ('datasetDbId', 'indexUri', 'geometryCrs', 'queryExecution'):
+            self.assertNotIn(absent, spatial_index['properties'])
+
+        spatial_query = yaml.safe_load(
+            (genx / 'Geospatial/SpatialQuery/Schemas/SpatialQuery.yaml')
+            .read_text()
+        )['components']['schemas']['SpatialQuery']
+        self.assertEqual('object', spatial_query['properties']['queryGeometry']['type'])
+        self.assertEqual('string', spatial_query['properties']['queryParams']['type'])
+        for optional in ('queryType', 'queryGeometry',
+                         'queryParams', 'resultReference', 'provenance'):
+            self.assertNotIn(optional, spatial_query['required'])
+        for absent in ('datasetDbId', 'spatialIndexDbId', 'executionState',
+                       'resultData', 'spatialPredicate'):
+            self.assertNotIn(absent, spatial_query['properties'])
+
+        yield_map = yaml.safe_load(
+            (genx / 'Geospatial/YieldMap/Schemas/YieldMap.yaml').read_text()
+        )['components']['schemas']['YieldMap']
+        for optional in ('studyDbId', 'locationDbId', 'cropCycleDbId',
+                         'harvestRecordDbId', 'mapType', 'resolutionM',
+                         'storageUri', 'fileDigest', 'provenance'):
+            self.assertIn(optional, yield_map['properties'])
+            self.assertNotIn(optional, yield_map['required'])
+        self.assertEqual('number', yield_map['properties']['resolutionM']['type'])
+        self.assertNotIn('pattern', yield_map['properties']['fileDigest'])
+        self.assertNotIn('format', yield_map['properties']['storageUri'])
+        for absent in ('coordinateReferenceSystem', 'crs',
+                       'verifiedAt', 'publishedAt', 'payloadStatus'):
+            self.assertNotIn(absent, yield_map['properties'])
+
+        self.assertIn('does **not** verify',
+                      (genx / 'RFCs/RFC-070-Yield-Map.md').read_text())
+        self.assertIn('does **not** build an index',
+                      (genx / 'RFCs/RFC-141-SpatialIndex.md').read_text())
+        self.assertIn('does not execute a query',
+                      (genx / 'RFCs/RFC-143-SpatialQuery.md').read_text())
+
+        assessment = (root / 'docs/assessment/'
+                      'BRAPI-GENX-MISSION-090-SPATIAL-GOVERNANCE-PREFLIGHT.md')
+        self.assertTrue(assessment.is_file())
+        old = assessment.read_text()
+        for decision in ('G-090-1', 'G-090-2', 'G-090-3'):
+            self.assertIn(decision, old)
+        self.assertIn('no ratification', old.lower())
+
+
 if __name__ == '__main__':
     unittest.main()
