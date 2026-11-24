@@ -1,1 +1,9 @@
 # Group TelemetryNormalization
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 148, not an approved instrumentation calibration standard, independent service conformance result, or certified measurement workflow.
+
+The proposed group registers, lists by optional lifecycle status and retrieves immutable namespaced metadata records. Identical-body replay and changed-body conflict remain **candidate behavior**, not evidence of a persistent implementation. The draft requires namespaced `telemetryNormalizationDbId` and lifecycle `status`; optional `rawDataReference`, `normalizedDataReference`, `normalizationType`, method, `supersedes`, and provenance are free-form metadata, not a validated transformation, unit conversion, error model or verified raw-to-normalized data lineage. D-442–D-444 remain open.
+
+**Boundaries:** A physical instrument cannot be assumed calibrated, a gateway cannot be assumed healthy, and measurement normalization cannot be assumed mathematically correct merely because the candidate record exists. String references to devices or raw telemetry do not establish authenticated identity, unit compatibility, time alignment or provenance verification. The absent typed GenX `ResearchAsset` link (D-444) remains an unresolved question; any operation-neighbor links are advisory navigation only. Published Breeding Application Programming Interface (BrAPI) version 2.1 observation meanings remain unchanged.
+
+**Sources:** [module overview](./README.md), [candidate record](./Schemas/TelemetryNormalization.yaml), [registration request](./Schemas/TelemetryNormalizationNewRequest.yaml), [draft operations](./TelemetryNormalization_GET_POST.yaml), [RFC-148](../../RFCs/RFC-148-TelemetryNormalization.md), and [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

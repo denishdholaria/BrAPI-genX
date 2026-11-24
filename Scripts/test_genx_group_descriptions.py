@@ -450,6 +450,40 @@ class GroupEvidenceTests(unittest.TestCase):
         self.assertEqual('string', transform['components']['schemas']['CrsTransform']
                          ['properties']['parameters']['type'])
 
+    def test_instrumentation_device_quality_groups_are_reviewed(self):
+        self.assertTrue({
+            'Instrumentation/CalibrationQuality', 'Instrumentation/SensorDevice',
+            'Instrumentation/TelemetryNormalization', 'Instrumentation/EdgeGatewayHealth',
+        }.issubset(REVIEWED))
+
+    def test_instrumentation_route_docs_match_source_operation_identity(self):
+        import yaml
+        root = Path(__file__).resolve().parents[1]
+        for name, number in (
+            ('CalibrationQuality', '150'),
+            ('SensorDevice', '149'),
+            ('TelemetryNormalization', '148'),
+            ('EdgeGatewayHealth', '151'),
+        ):
+            with self.subTest(module=name):
+                module = root / 'Specification/BrAPI-GenX/Instrumentation' / name
+                paths = yaml.safe_load((module / (name + '_GET_POST.yaml')).read_text())['paths']
+                source_route, ops = next(iter(paths.items()))
+                route = '/genx/v1' + source_route
+                opid = ops['get']['operationId']
+                readme = (module / 'README.md').read_text()
+                rfc = (root / 'Specification/BrAPI-GenX/RFCs' /
+                       ('RFC-' + number + '-' + name + '.md')).read_text()
+                for prose in (readme, rfc):
+                    self.assertIn(route, prose)
+                    self.assertIn(opid, prose)
+                candidate = yaml.safe_load((module / 'Schemas' /
+                                             (name + '.yaml')).read_text())
+                self.assertNotIn('researchAssetDbId',
+                    candidate['components']['schemas'][name]['properties'])
+                self.assertIn('STRUCTURAL_DRAFT',
+                    (module / 'GroupDescription.md').read_text())
+
 
 if __name__ == '__main__':
     unittest.main()

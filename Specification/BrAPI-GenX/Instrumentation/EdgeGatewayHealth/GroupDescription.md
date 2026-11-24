@@ -1,1 +1,9 @@
 # Group EdgeGatewayHealth
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 151, not an approved instrumentation calibration standard, independent service conformance result, or certified measurement workflow.
+
+The proposed group registers, lists by optional lifecycle status and retrieves immutable namespaced metadata records. Identical-body replay and changed-body conflict remain **candidate behavior**, not evidence of a persistent implementation. The candidate requires namespaced `edgeGatewayHealthDbId` and lifecycle `status`; optional `deviceId`, free-text `healthStatus`, `lastSeen` string, `gatewayType`, `regionOrZone`, `supersedes`, and provenance do not prove a running gateway, health-monitoring policy, authenticated actor or calibrated device. D-451–D-453 remain open.
+
+**Boundaries:** A physical instrument cannot be assumed calibrated, a gateway cannot be assumed healthy, and measurement normalization cannot be assumed mathematically correct merely because the candidate record exists. String references to devices or raw telemetry do not establish authenticated identity, unit compatibility, time alignment or provenance verification. The absent typed GenX `ResearchAsset` link (D-453) remains an unresolved question; any operation-neighbor links are advisory navigation only. Published Breeding Application Programming Interface (BrAPI) version 2.1 observation meanings remain unchanged.
+
+**Sources:** [module overview](./README.md), [candidate record](./Schemas/EdgeGatewayHealth.yaml), [registration request](./Schemas/EdgeGatewayHealthNewRequest.yaml), [draft operations](./EdgeGatewayHealth_GET_POST.yaml), [RFC-151](../../RFCs/RFC-151-EdgeGatewayHealth.md), and [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

@@ -18,9 +18,9 @@ and provenance.
 
 ## 3. Endpoints
 
-- `GET /genx/v1/telemetry-normalization` (`genxListTelemetryNormalization`)
-- `POST /genx/v1/telemetry-normalization` (`genxRegisterTelemetryNormalization`)
-- `GET /genx/v1/telemetry-normalization/{telemetryNormalizationDbId}` (`genxGetTelemetryNormalization`)
+- `GET /genx/v1/telemetry-normalizations` (`genxListTelemetryNormalizations`)
+- `POST /genx/v1/telemetry-normalizations` (`genxRegisterTelemetryNormalization`)
+- `GET /genx/v1/telemetry-normalizations/{telemetryNormalizationDbId}` (`genxGetTelemetryNormalization`)
 
 ## 4. Compatibility law
 
@@ -28,6 +28,7 @@ and provenance.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
 - A record is not a BrAPI data resource and must not be treated as one.
+- The candidate has no typed GenX `ResearchAsset` reference; D-444 remains open. An advisory operation-neighbor link cannot establish scientific identity.
 
 ## 5. Invariants
 

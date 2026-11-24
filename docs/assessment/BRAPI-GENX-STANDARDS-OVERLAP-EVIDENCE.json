@@ -220,6 +220,34 @@
       "resource": "CrsTransform",
       "target": "ResearchAsset",
       "decision": "D-420"
+    },
+    {
+      "module": "Instrumentation/CalibrationQuality",
+      "rfc": "RFC-150-CalibrationQuality.md",
+      "resource": "CalibrationQuality",
+      "target": "ResearchAsset",
+      "decision": "D-450"
+    },
+    {
+      "module": "Instrumentation/SensorDevice",
+      "rfc": "RFC-149-SensorDevice.md",
+      "resource": "SensorDevice",
+      "target": "ResearchAsset",
+      "decision": "D-447"
+    },
+    {
+      "module": "Instrumentation/TelemetryNormalization",
+      "rfc": "RFC-148-TelemetryNormalization.md",
+      "resource": "TelemetryNormalization",
+      "target": "ResearchAsset",
+      "decision": "D-444"
+    },
+    {
+      "module": "Instrumentation/EdgeGatewayHealth",
+      "rfc": "RFC-151-EdgeGatewayHealth.md",
+      "resource": "EdgeGatewayHealth",
+      "target": "ResearchAsset",
+      "decision": "D-453"
     }
   ]
 }
