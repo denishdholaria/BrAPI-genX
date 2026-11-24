@@ -169,6 +169,20 @@ ledger and split by source group and target operation. The reporter does not
 promote any relationship or assert interoperability. Its 12 mutation and
 positive tests run in the static conformance workflow.
 
+## D-026 shadow register — typed scientific relationship proposals (2026-11-24)
+
+`Specification/BrAPI-GenX/Conformance/typed-relationship-candidates.yaml`
+is intentionally **separate** from historical `semanticNeighborIds` and
+the original 153-ID review ledger. It starts with **zero candidates**.
+New records can be only `proposal-only` and distinguish typed resource
+references, provenance derivations and operation-contract equivalence.
+Every proposal requires source and target schema locations, a falsifiable
+claim, traceable evidence, and explicit unresolved questions. The
+`Scripts/validate_typed_relationship_candidates.py` guard rejects
+approval claims and malformed schema paths. Its 14 positive/negative tests
+run in static conformance. A passing proposal is **not** a verified
+scientific relation or a public endpoint contract.
+
 ## D-027 enforcement — exact terminal decision binding (2026-11-24)
 
 `Specification/BrAPI-GenX/Conformance/semantic-neighbor-terminal-decisions.yaml`

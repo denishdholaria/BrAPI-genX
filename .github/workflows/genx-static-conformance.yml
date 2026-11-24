@@ -53,6 +53,8 @@ on:
       - 'Scripts/test_semantic_neighbor_governance.py'
       - 'Scripts/semantic_neighbor_terminal_decisions.py'
       - 'Scripts/test_semantic_neighbor_terminal_decisions.py'
+      - 'Scripts/validate_typed_relationship_candidates.py'
+      - 'Scripts/test_typed_relationship_candidates.py'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-DECISIONS-APPROVED.md'
@@ -110,6 +112,8 @@ on:
       - 'Scripts/test_semantic_neighbor_governance.py'
       - 'Scripts/semantic_neighbor_terminal_decisions.py'
       - 'Scripts/test_semantic_neighbor_terminal_decisions.py'
+      - 'Scripts/validate_typed_relationship_candidates.py'
+      - 'Scripts/test_typed_relationship_candidates.py'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-DECISIONS-APPROVED.md'
@@ -252,6 +256,10 @@ jobs:
           else
             python Scripts/check_semantic_neighbor_governance.py --comparison-ref "$COMPARE"
           fi
+      - name: Validate independent scientific relationship proposals
+        run: python Scripts/validate_typed_relationship_candidates.py
+      - name: Test proposal-only typed relationship checks
+        run: python Scripts/test_typed_relationship_candidates.py
       - name: Test exact terminal-decision binding
         run: python Scripts/test_semantic_neighbor_terminal_decisions.py
       - name: Test semantic-neighbor governance mutations
@@ -292,6 +300,8 @@ jobs:
             run_check python Scripts/check_semantic_neighbor_governance.py
             run_check python Scripts/test_semantic_neighbor_governance.py
             run_check python Scripts/test_semantic_neighbor_terminal_decisions.py
+            run_check python Scripts/validate_typed_relationship_candidates.py
+            run_check python Scripts/test_typed_relationship_candidates.py
             run_check python Scripts/test_semantic_neighbor_lineage.py
             run_check python Scripts/report_semantic_neighbor_consumers.py
             run_check python Scripts/test_semantic_neighbor_consumers.py
