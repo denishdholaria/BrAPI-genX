@@ -553,7 +553,7 @@ class GroupEvidenceTests(unittest.TestCase):
             self.assertIn('/brapi/v2/observations', readme)
         scouting = (root / 'Specification/BrAPI-GenX/RFCs' /
                     'RFC-074-Field-Scouting.md').read_text()
-        self.assertIn('does not implement typed references', scouting)
+        self.assertIn('does not implement typed references', ' '.join(scouting.split()))
 
 
 if __name__ == '__main__':
