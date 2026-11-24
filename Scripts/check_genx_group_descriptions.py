@@ -19,6 +19,7 @@ REVIEWED = frozenset({
     'Core/CapabilityMetadata', 'Core/CapabilityNegotiation',
     'Core/ServerInfoV3',
     'Interoperability/ConformanceProbe', 'Interoperability/Crosswalk',
+    'Interoperability/BiodiversityExport',
     'Interoperability/SchemaMapping',
     'ReferenceData/MeasurementScale', 'ReferenceData/MeasurementMethods',
     'ReferenceData/UnitsAndQuantity', 'ReferenceData/OntologyTerm',

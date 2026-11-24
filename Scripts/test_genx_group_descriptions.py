@@ -1963,5 +1963,59 @@ class GroupEvidenceTests(unittest.TestCase):
         self.assertIn('studyDbId', official['properties'])
 
 
+    def test_biodiversity_export_is_metadata_not_a_published_archive(self):
+        root = Path(__file__).resolve().parents[1]
+        genx = root / 'Specification/BrAPI-GenX'
+        module = 'Interoperability/BiodiversityExport'
+        self.assertIn(module, REVIEWED)
+        folder = genx / module
+        description = (folder / 'GroupDescription.md').read_text()
+        self.assertIn('STRUCTURAL_DRAFT', description)
+        self.assertIn('**Sources:**', description)
+        for decision in ('D-361', 'D-362', 'D-363'):
+            self.assertIn(decision, description)
+        record = yaml.safe_load(
+            (folder / 'Schemas/BiodiversityExport.yaml').read_text()
+        )['components']['schemas']['BiodiversityExport']
+        request = yaml.safe_load(
+            (folder / 'Schemas/BiodiversityExportNewRequest.yaml').read_text()
+        )['components']['schemas']['BiodiversityExportNewRequest']
+        self.assertEqual({'biodiversityExportDbId'}, set(request['required']))
+        self.assertEqual({'biodiversityExportDbId', 'status'},
+                         set(record['required']))
+        self.assertEqual({'active', 'superseded', 'withdrawn'},
+                         set(record['properties']['status']['enum']))
+        for optional in ('specimenType', 'occurrenceId', 'collectionDate',
+                         'location', 'taxon', 'supersedes', 'provenance'):
+            self.assertIn(optional, record['properties'])
+            self.assertNotIn(optional, record['required'])
+            self.assertNotIn(optional, request['required'])
+        for optional in ('specimenType', 'occurrenceId', 'collectionDate',
+                         'location', 'taxon'):
+            self.assertEqual('string', record['properties'][optional]['type'])
+        self.assertNotIn('format', record['properties']['collectionDate'])
+        self.assertNotIn('enum', record['properties']['taxon'])
+        for missing in ('germplasmDbId', 'basisOfRecord', 'scientificName',
+                        'decimalLatitude', 'decimalLongitude', 'datasetId',
+                        'archiveUri', 'archiveDigest', 'license',
+                        'publisherId', 'deliveryStatus', 'researchAssetDbId'):
+            self.assertNotIn(missing, record['properties'])
+            self.assertNotIn(missing, request['properties'])
+        operations = yaml.safe_load(
+            (folder / 'BiodiversityExport_GET_POST.yaml').read_text()
+        )
+        self.assertEqual(
+            'genxListBiodiversityExports',
+            operations['paths']['/biodiversity-exports']['get']['operationId']
+        )
+        self.assertEqual(
+            'genxRegisterBiodiversityExport',
+            operations['paths']['/biodiversity-exports']['post']['operationId']
+        )
+        rfc = (genx / 'RFCs/RFC-121-BiodiversityExport.md').read_text()
+        self.assertIn('no `germplasmDbId`', rfc.lower())
+        self.assertIn('Darwin Core Archive', rfc)
+
+
 if __name__ == '__main__':
     unittest.main()
