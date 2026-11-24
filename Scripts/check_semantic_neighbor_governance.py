@@ -351,7 +351,9 @@ def check(root: Path = ROOT,
 
     # Reconcile terminal decision identity before inspecting any ledger status.
     # A missing, malformed or unauthorized manifest is a hard failure.
-    retained_ids = {item.get("id") for item in ledger.get("entries", [])
+    if not isinstance(ledger.get("entries"), list):
+        return errors + ["Ledger 'entries' must be a list."]
+    retained_ids = {item.get("id") for item in ledger["entries"]
                     if isinstance(item, dict) and isinstance(item.get("id"), str)}
     decision_register, register_errors = load_register(root, known_ids=retained_ids)
     if register_errors:
