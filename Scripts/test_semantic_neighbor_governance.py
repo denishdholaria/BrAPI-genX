@@ -350,5 +350,70 @@ class SemanticNeighborGovernanceTests(unittest.TestCase):
         self.assertNotEqual(0, code)
         self.assertIn("comparison ref must not be empty", output)
 
+
+    def _retirement_checkout(self, directory: Path, *, status: str | None, remove_edge: bool):
+        """Construct a copied-repository mutation; never alter the real registry."""
+        checkout = copy_checkout(directory)
+        ledger_path = checkout / LEDGER_REL
+        registry_path = checkout / REGISTRY_REL
+        ledger = yaml.safe_load(ledger_path.read_text(encoding="utf-8"))
+        registry = json.loads(registry_path.read_text(encoding="utf-8"))
+        row = ledger["entries"][0]
+        source = next(e for e in registry["entries"]
+                      if e.get("catalogId") == row["sourceCatalogId"])
+        self.assertIn(row["targetOperationId"], source["semanticNeighborIds"])
+
+        comparison_path = directory / "comparison-before-retirement.yaml"
+        comparison_path.write_text(yaml.safe_dump(ledger, sort_keys=False),
+                                   encoding="utf-8")
+
+        if status is not None:
+            row["reviewStatus"] = status
+            row["rationale"] = "Synthetic test-only terminal decision"
+            # Existing validator checks whether the reference is followable.
+            # This test token is NOT evidence of real maintainer approval.
+            row["authorizationReference"] = "RFC-002"
+            if status == "superseded":
+                row["supersededBy"] = next(e["id"] for e in ledger["entries"]
+                                            if e["id"] != row["id"])
+            ledger_path.write_text(yaml.safe_dump(ledger, sort_keys=False),
+                                   encoding="utf-8")
+        if remove_edge:
+            source["semanticNeighborIds"] = [
+                n for n in source["semanticNeighborIds"]
+                if n != row["targetOperationId"]
+            ]
+            registry_path.write_text(json.dumps(registry, indent=2) + "\n",
+                                     encoding="utf-8")
+        return checkout, comparison_path
+
+    def test_terminal_rejected_neighbor_still_published_fails(self):
+        with tempfile.TemporaryDirectory() as td:
+            checkout, baseline = self._retirement_checkout(
+                Path(td), status="rejected", remove_edge=False)
+            code, output = run_validator_output(
+                checkout, ["--comparison-ledger", str(baseline)])
+            self.assertNotEqual(0, code)
+            self.assertIn("remains published in registry semanticNeighborIds", output)
+
+    def test_consistent_terminal_removal_passes_structural_governance(self):
+        with tempfile.TemporaryDirectory() as td:
+            checkout, baseline = self._retirement_checkout(
+                Path(td), status="rejected", remove_edge=True)
+            code, output = run_validator_output(
+                checkout, ["--comparison-ledger", str(baseline)])
+            # Structural acceptance is not real scientific approval. The
+            # synthetic authorization token cannot ratify a disposition.
+            self.assertEqual(0, code, output)
+
+    def test_registry_removal_without_terminal_disposition_fails(self):
+        with tempfile.TemporaryDirectory() as td:
+            checkout, baseline = self._retirement_checkout(
+                Path(td), status=None, remove_edge=True)
+            code, output = run_validator_output(
+                checkout, ["--comparison-ledger", str(baseline)])
+            self.assertNotEqual(0, code)
+            self.assertIn("authorized terminal disposition", output)
+
 if __name__ == "__main__":
     unittest.main()
