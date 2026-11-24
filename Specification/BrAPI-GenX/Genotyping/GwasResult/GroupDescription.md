@@ -1,1 +1,11 @@
 # Group GwasResult
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 047. Genome-wide association study (GWAS) output metadata is proposed, not an approved statistical result or an official BrAPI v2.1 resource.
+
+The `GwasResult` response schema requires `gwasResultDbId`, `analysisMethodDbId`, and lifecycle `status`. The registration request requires `gwasResultDbId` and `analysisMethodDbId`. `jobDbId`, `studyDbId`, `significantMarkers`, `topPValue`, `resultData`, and `provenance` are optional. Neither schema requires an input dataset, phenotype or trait identifier, population structure, statistical model version, multiple-testing correction, association threshold, allele-effect estimate, or inferential uncertainty measure.
+
+**Statistical interpretation boundary:** `significantMarkers` is an optional integer without a schema-defined decision threshold; `topPValue` is an optional number without an enforced 0–1 range, significance policy, or multiple-testing correction. `resultData` is an opaque object rather than a standardized association-result table. A low numeric p-value or nonzero marker count alone is not evidence of calibrated genome-wide significance, biological causality, replication, or comparability across studies.
+
+**Method and lifecycle boundary:** A required `analysisMethodDbId` is only a string reference; the result schema does not require an exact `methodVersion` or enforce resolution of an authority-matched method. The GenX `AnalysisMethod` schema separately has a required `methodVersion`, which does not by itself bind an individual GWAS result to a version. Optional `jobDbId` and provenance do not prove actual execution. Registering a record does not establish scientifically reproducible analysis or verified persistent replay. D-139–D-141 remain deferred.
+
+**Sources:** [module overview](./README.md), [record schema](./Schemas/GwasResult.yaml), [registration schema](./Schemas/GwasResultNewRequest.yaml), [endpoint operations](./GwasResult_GET_POST.yaml), [RFC](../../RFCs/RFC-047-Gwas-Result.md), [AnalysisMethod schema](../../Research/AnalysisMethods/Schemas/AnalysisMethod.yaml), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).
