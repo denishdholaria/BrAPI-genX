@@ -95,11 +95,12 @@ jobs:
       - name: Convert compiled specification
         working-directory: ./docker
         run: docker compose run gen-swagger
-      - name: Set up JDK 21
+      - name: Set up JDK 22 and cache Gradle dependencies
         uses: actions/setup-java@v5
         with:
           java-version: '22'
           distribution: 'temurin'
+          cache: gradle
       - name: Change wrapper permissions
         working-directory: ./generator
         run: chmod +x ./gradlew
