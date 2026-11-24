@@ -89,7 +89,24 @@ class BoundaryTests(unittest.TestCase):
     def test_review_state_regression_fails(self):
         self.entries[0]['reviewStatus'] = 'inherited-unreviewed'
         self.save_ledger()
-        self.assertTrue(any('expected requires-decision' in x for x in check(self.root)))
+        self.assertTrue(any('reviewed relation reverted' in x for x in check(self.root)))
+
+    def test_evidence_backed_proposal_can_retain_review_evidence(self):
+        self.entries[0]['reviewStatus'] = 'evidence-backed-proposed'
+        self.save_ledger()
+        self.assertEqual([], check(self.root))
+
+    def test_terminal_authorized_state_can_retain_review_evidence(self):
+        # Authorization and allowed transitions are enforced by the canonical ledger validator.
+        for state in ('rejected', 'superseded'):
+            self.entries[0]['reviewStatus'] = state
+            self.save_ledger()
+            self.assertEqual([], check(self.root))
+
+    def test_unknown_review_status_fails(self):
+        self.entries[0]['reviewStatus'] = 'accepted'
+        self.save_ledger()
+        self.assertTrue(any('reviewed relation reverted' in x for x in check(self.root)))
 
     def test_assessment_citation_missing_fails(self):
         self.entries[0]['documentaryEvidence'] = []

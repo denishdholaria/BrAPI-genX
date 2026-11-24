@@ -29,6 +29,9 @@ SCHEMAS = {
     'ReferenceAssembly': ('Genotyping/ReferenceAssembly/Schemas/ReferenceAssembly.yaml', 'ReferenceAssembly', ('assemblyAccession', 'version'), ('referenceAssemblyDbId',), ()),
     'GenomicDatasets': ('Genotyping/GenomicDatasets/Schemas/GenomicDataset.yaml', 'GenomicDataset', (), ('genomicDatasetDbId', 'referenceAssembly'), ('referenceAssemblyDbId',)),
 }
+# Legal progression is validated by check_semantic_neighbor_governance.py.
+# This source-evidence guard only rejects a regression to unreviewed or unknown status.
+REVIEWED_STATES = frozenset({'requires-decision', 'evidence-backed-proposed', 'rejected', 'superseded'})
 PAIRS = (
     ('AssayExecution', 'AssayDesign'),
     ('VcfExport', 'VcfImport'),
@@ -88,8 +91,8 @@ def check(root: Path) -> list[str]:
             problems.append(f'{source} -> {target}: expected three distinct retained neighbors')
             continue
         for e in matches:
-            if e.get('reviewStatus') != 'requires-decision':
-                problems.append(f'{source} -> {target}: expected requires-decision, found {e.get("reviewStatus")}')
+            if e.get('reviewStatus') not in REVIEWED_STATES:
+                problems.append(f'{source} -> {target}: reviewed relation reverted or has unknown status: {e.get("reviewStatus")}')
             evidence = e.get('documentaryEvidence')
             if not isinstance(evidence, list) or str(REVIEW) not in evidence:
                 problems.append(f'{source} -> {target}: assessment citation missing from {e.get("id")}')
