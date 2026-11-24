@@ -6,9 +6,13 @@
 
 ## 1. Problem
 
-BrAPI v2.1 standardizes images but not image metadata: capture details,
-camera, resolution, and provenance. Without this record, image provenance and
-capture context cannot be audited or linked to studies.
+Official BrAPI version 2.1 already defines `Image` metadata, including
+`imageTimeStamp`, `imageWidth`, `imageHeight`, `imageLocation`,
+`observationUnitDbId` and `additionalInfo`. GenX proposes a **separate**
+capture-context lifecycle and cannot assert that existing BrAPI Images lack
+metadata. The candidate does not itself validate camera calibration,
+capture correctness, scientific content or links to an authority-matched
+Image or Study.
 
 ## 2. Object
 
@@ -25,8 +29,10 @@ capture context cannot be audited or linked to studies.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Image metadata references BrAPI Image, Study, and ObservationUnit by
-  identifier; it does not duplicate those resources.
+- `imageDbId` is a required string referencing an official BrAPI Image;
+  `studyDbId` and `observationUnitDbId` are optional strings.
+  No server-context join or synchronization with overlapping official Image
+  metadata is established by this schema.
 - Image metadata is not a BrAPI Image and must not be treated as one.
 
 ## 5. Invariants
@@ -34,14 +40,20 @@ capture context cannot be audited or linked to studies.
 - A published `imageMetadataDbId` record never mutates in place.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional records linked by `supersedes`.
-- `imageDbId` and `capturedAt` are required.
-- A record does not imply a complete image repository.
+- `imageDbId` and `capturedAt` are required, with the registration
+  identity; `camera`, `resolution`, study, observation unit and provenance
+  are optional.
+- `resolution` is an unstructured string; image dimensions already
+  exist in official BrAPI ImageNewRequest.
+- A record does not imply a complete image repository, validated
+  sensor calibration, verified original image, or a scientifically
+  interpretable phenotype.
 
 ## 6. Deferred questions
 
 - D-93: Should `imageDbId` be required? (Current: required.)
 - D-94: Should image metadata link to GenX `PhenotypeCapture`? (Current:
-  optional, not required.)
+  no `phenotypeCaptureDbId` field is modelled.)
 - D-95: Should resolution be a structured quantity? (Current: string.)
 
 ## 7. Classification
