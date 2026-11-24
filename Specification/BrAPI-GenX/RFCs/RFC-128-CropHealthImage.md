@@ -6,9 +6,12 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record crop health images. Crop health imagery
-circulates without a stated image type, capture date, sensor, or provenance,
-so it cannot be used for crop monitoring or stress detection.
+BrAPI v2.1 already exchanges image metadata and image content through
+`/brapi/v2/images`. This proposed GenX crop-health classification entry
+is not a substitute for official image identity or transfer. The candidate
+schema presently contains neither a typed image identifier nor an image
+location/content field, spatial support, method version, or a validated
+health classification; the need for a distinct record is not demonstrated.
 
 ## 2. Object
 

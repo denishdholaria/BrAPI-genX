@@ -555,6 +555,29 @@ class GroupEvidenceTests(unittest.TestCase):
                     'RFC-074-Field-Scouting.md').read_text()
         self.assertIn('does not implement typed references', ' '.join(scouting.split()))
 
+    def test_plant_health_image_and_alert_reviewed(self):
+        root = Path(__file__).resolve().parents[1]
+        modules = ('CropHealthImage', 'IpmStrategy', 'PestDiseaseRisk',
+                   'ThresholdAlert')
+        self.assertTrue({f'PlantHealth/{name}' for name in modules}.issubset(REVIEWED))
+        image_source = (root / 'Specification/BrAPI-Phenotyping/Images' /
+                        'Images_GET_POST.yaml').read_text()
+        self.assertIn('/images:', image_source)
+        for name, decision in (
+            ('CropHealthImage', 'D-382'), ('IpmStrategy', 'D-373'),
+            ('PestDiseaseRisk', 'D-397'), ('ThresholdAlert', 'D-376')
+        ):
+            doc = (root / 'Specification/BrAPI-GenX/PlantHealth' /
+                   name / 'GroupDescription.md').read_text()
+            self.assertIn('STRUCTURAL_DRAFT', doc)
+            self.assertIn(decision, doc)
+        readme = (root / 'Specification/BrAPI-GenX/PlantHealth' /
+                  'CropHealthImage/README.md').read_text()
+        self.assertIn('/brapi/v2/images', readme)
+        rfc = (root / 'Specification/BrAPI-GenX/RFCs' /
+               'RFC-128-CropHealthImage.md').read_text()
+        self.assertIn('/brapi/v2/images', rfc)
+
 
 if __name__ == '__main__':
     unittest.main()

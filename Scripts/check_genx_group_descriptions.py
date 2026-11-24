@@ -43,6 +43,8 @@ REVIEWED = frozenset({
     'Instrumentation/TelemetryNormalization', 'Instrumentation/EdgeGatewayHealth',
     'PlantHealth/DiseaseObservation', 'PlantHealth/DiagnosticEvidence',
     'PlantHealth/FieldScouting', 'PlantHealth/DiseaseResistance',
+    'PlantHealth/CropHealthImage', 'PlantHealth/IpmStrategy',
+    'PlantHealth/PestDiseaseRisk', 'PlantHealth/ThresholdAlert',
     'Environment/WeatherObservations', 'Environment/WeatherForecast',
     'Environment/ClimateNormals', 'Environment/SoilProfile',
     'Environment/WaterBalance',

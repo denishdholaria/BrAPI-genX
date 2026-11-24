@@ -1,7 +1,7 @@
 # BrAPI-GenX — CropHealthImage
 
 CropHealthImage records describe CropHealthImage entries.
-BrAPI v2.1 has no CropHealthImage record.
+Official BrAPI v2.1 already provides image metadata and image-content operations through `/brapi/v2/images`. This GenX crop-health classification entry is only a proposed metadata record and currently has no image reference or content identifier.
 
 - `POST /genx/v1/crop-health-images` (`genxRegisterCropHealthImage`) registers one
   `CropHealthImage` (`Schemas/CropHealthImageNewRequest.yaml`). Same

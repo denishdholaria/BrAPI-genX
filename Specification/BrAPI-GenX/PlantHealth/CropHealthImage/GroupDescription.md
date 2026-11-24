@@ -1,1 +1,9 @@
 # Group CropHealthImage
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 128; not a scientifically validated recommendation, official Breeding Application Programming Interface (BrAPI) version 2.1 contract, or independently verified service.
+
+The `CropHealthImage` record requires its namespaced identifier and a lifecycle `status` (`active`, `superseded`, `withdrawn`), while `imageType`, `captureDate`, `sensorOrPlatform`, `vegetationIndex`, `healthStatus`, `supersedes`, and provenance are optional. The draft supports register, list, and retrieve operations; its purported idempotency and immutable-publication semantics have no independent persistent-service evidence.
+
+**Scientific and operational boundaries:** The proposed record includes no image content, image identifier, pixel footprint, georeference, classification method, numeric vegetation-index result or uncertainty. Official BrAPI already defines Images and image content; the candidate cannot function as an image exchange by itself. The healthStatus string does not prove crop stress cause or diagnosis. Requiredness, controlled vocabularies, and reference relationships remain unresolved under decisions D-382 and its associated RFC question list. Any semantic-neighbor links between proposed operations are advisory only, not scientific causality or executable workflow dependencies.
+
+**Sources:** [module overview](./README.md), [candidate record schema](./Schemas/CropHealthImage.yaml), [registration schema](./Schemas/CropHealthImageNewRequest.yaml), [candidate operations](./CropHealthImage_GET_POST.yaml), [RFC source](../../RFCs/RFC-128-CropHealthImage.md), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md), [official BrAPI Images](../../../BrAPI-Phenotyping/Images/README.md).
