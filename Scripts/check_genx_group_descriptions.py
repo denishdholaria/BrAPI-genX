@@ -50,6 +50,8 @@ REVIEWED = frozenset({
     'Breeding/GeneticGain', 'Breeding/StabilityAnalysis',
     'Breeding/Kinship', 'Genotyping/GenomicRelationship',
     'Breeding/PedigreeAnalysis',
+    'Genotyping/HaplotypeAnalysis', 'Genotyping/ExpressionQtl',
+    'Genotyping/MethylationAnalysis',
     'Phenotyping/PhenotypeCapture', 'Phenotyping/RepeatedMeasurement',
     'Phenotyping/PhenotypeAnnotation',
     'Geospatial/LocationGeometry', 'Geospatial/FieldGeometry',
