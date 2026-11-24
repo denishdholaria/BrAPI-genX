@@ -147,6 +147,23 @@ signal that an engineer must update the evidence, tests and relevant contracts
 together. They are not scientific proof or normative maturity promotion.
 The complete hosted suite remains pending monthly Actions minutes reset.
 
+## Mission 014 — historically retained relationship retirement (2026-11-24)
+
+The canonical validator now distinguishes **newly invented relationships** from
+relationships in the original 153-ID retention baseline that have since been
+removed from the active registry. For a historical ID absent from the current
+registry-only set, `rejected` or `superseded` is required. Terminal
+authorization and any successor resolution are still independently enforced by
+the canonical validator; the historical ledger entry remains in place with its
+original provenance. New non-inherited links still need traceable provenance,
+a reviewed status, and rationale. The pure helper
+`Scripts/semantic_neighbor_lineage.py` has 11 mutation and positive tests.
+
+This change enables **future explicitly authorized** removal of an invalid
+registry-only neighbor without deleting its historical record. No terminal
+decision has actually been made and no current edge has been removed. The
+earlier immutable baseline and transition comparator remain authoritative.
+
 ## Mission 012 — field-experiment relationship triage (2026-11-24)
 
 Fifteen inherited neighbors from Farm, Plot, TrialNetwork,

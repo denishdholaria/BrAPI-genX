@@ -16,6 +16,8 @@ from typing import Any
 
 import yaml
 
+from semantic_neighbor_lineage import noncurrent_lineage_errors
+
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "Specification" / "ENDPOINT-REGISTRY.json"
 LEDGER = ROOT / "Specification" / "BrAPI-GenX" / "Conformance" / "semantic-neighbor-review.yaml"
@@ -580,16 +582,11 @@ def check(root: Path = ROOT,
         if not isinstance(dr, list):
             errors.append(f"{eid}: decisionReferences must be a list.")
 
-        # Newly proposed/non-inherited relationships need traceable provenance.
-        pair = (src_cat, target_op)
-        if pair not in current_inherited_global:
-            # Not a current registry-only inherited reference.
-            if status == "inherited-unreviewed":
-                errors.append(f"{eid}: a non-inherited relationship cannot be 'inherited-unreviewed'.")
-            if provenance == "inherited-registry-only":
-                errors.append(f"{eid}: a non-inherited relationship requires traceable provenance beyond inherited-registry-only.")
-            if not isinstance(entry.get("rationale"), str) or not entry.get("rationale", "").strip():
-                errors.append(f"{eid}: a non-inherited relationship requires a non-empty rationale.")
+        # Lineage is pinned to the original 153 IDs, not merely the *current*
+        # registry-only set. A later authorized retirement keeps its history.
+        errors.extend(noncurrent_lineage_errors(
+            entry, current_inherited_global, BASELINE_LEDGER_IDS
+        ))
 
     # Completeness: every current inherited relationship must be in ledger.
     try:
