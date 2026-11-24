@@ -372,12 +372,33 @@ class SemanticNeighborGovernanceTests(unittest.TestCase):
             row["rationale"] = "Synthetic test-only terminal decision"
             # Existing validator checks whether the reference is followable.
             # This test token is NOT evidence of real maintainer approval.
-            row["authorizationReference"] = "RFC-002"
+            row["authorizationReference"] = "SEM-DEC-0001"
             if status == "superseded":
                 row["supersededBy"] = next(e["id"] for e in ledger["entries"]
                                             if e["id"] != row["id"])
             ledger_path.write_text(yaml.safe_dump(ledger, sort_keys=False),
                                    encoding="utf-8")
+            # Test-only synthetic record. The URL is a *fixture string*, not
+            # proof of actual approval: these bytes live in a disposable copy.
+            decisions_path = checkout / (
+                "Specification/BrAPI-GenX/Conformance/semantic-neighbor-terminal-decisions.yaml")
+            decision = {
+                "decisionId": "SEM-DEC-0001",
+                "relationshipId": row["id"],
+                "action": "supersede" if status == "superseded" else "reject",
+                "approvedBy": "project-maintainer",
+                "approvedAt": "2026-11-24",
+                "approvalEvidence": (
+                    "https://github.com/denishdholaria/BrAPI-genX/"
+                    "issues/17#issuecomment-1234"),
+                "rationale": "Synthetic canonical-validation fixture, not approval",
+                "evidenceRefs": ["docs/assessment/BRAPI-GENX-MISSION-017-RETIREMENT-MUTATION-TESTS.md"],
+            }
+            if status == "superseded":
+                decision["supersededBy"] = row["supersededBy"]
+            decisions_path.write_text(
+                yaml.safe_dump({"schemaVersion": 1, "entries": [decision]}, sort_keys=False),
+                encoding="utf-8")
         if remove_edge:
             source["semanticNeighborIds"] = [
                 n for n in source["semanticNeighborIds"]
@@ -405,6 +426,20 @@ class SemanticNeighborGovernanceTests(unittest.TestCase):
             # Structural acceptance is not real scientific approval. The
             # synthetic authorization token cannot ratify a disposition.
             self.assertEqual(0, code, output)
+
+    def test_syntactically_followable_rfc_does_not_authorize_retirement(self):
+        with tempfile.TemporaryDirectory() as td:
+            checkout, baseline = self._retirement_checkout(
+                Path(td), status="rejected", remove_edge=True)
+            ledger_path = checkout / LEDGER_REL
+            ledger = yaml.safe_load(ledger_path.read_text(encoding="utf-8"))
+            ledger["entries"][0]["authorizationReference"] = "RFC-002"
+            ledger_path.write_text(yaml.safe_dump(ledger, sort_keys=False),
+                                   encoding="utf-8")
+            code, output = run_validator_output(
+                checkout, ["--comparison-ledger", str(baseline)])
+            self.assertNotEqual(0, code)
+            self.assertIn("must name an exact SEM-DEC decision", output)
 
     def test_registry_removal_without_terminal_disposition_fails(self):
         with tempfile.TemporaryDirectory() as td:

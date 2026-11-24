@@ -169,6 +169,24 @@ ledger and split by source group and target operation. The reporter does not
 promote any relationship or assert interoperability. Its 12 mutation and
 positive tests run in the static conformance workflow.
 
+## D-027 enforcement — exact terminal decision binding (2026-11-24)
+
+`Specification/BrAPI-GenX/Conformance/semantic-neighbor-terminal-decisions.yaml`
+is the repository-controlled record of **individual** maintainer-approved
+terminal decisions. The register starts with **zero entries**. A terminal
+ledger row must cite a unique `SEM-DEC-` record matching its exact canonical
+relationship ID, `reject` or `supersede` action and successor, if any.
+The validator fails closed on absent, malformed, duplicated or mismatched
+records; generic `RFC-002`, `D-20` and arbitrary URLs no longer count.
+
+The register format requires a project-maintainer approval claim, date,
+rationale, evidence and a project-owned immutable GitHub commit or issue
+comment link. **The validator confirms structure and identity, not who
+actually authored that remote approval.** The maintainer must verify the
+specific link and control review/merge of approval-register changes; simple
+file edits cannot cryptographically authenticate consent. The policy
+decision D-027 is approved, **no individual relationship retirement is**.
+
 ## Mission 018 — relationship taxonomy decision proposal (2026-11-24)
 
 The non-normative architecture decision package

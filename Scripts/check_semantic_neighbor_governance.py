@@ -17,6 +17,7 @@ from typing import Any
 import yaml
 
 from semantic_neighbor_lineage import noncurrent_lineage_errors, terminal_publication_errors
+from semantic_neighbor_terminal_decisions import load_register, terminal_decision_errors
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "Specification" / "ENDPOINT-REGISTRY.json"
@@ -348,6 +349,14 @@ def check(root: Path = ROOT,
     if not isinstance(dc_modules, list):
         dc_modules = []
 
+    # Reconcile terminal decision identity before inspecting any ledger status.
+    # A missing, malformed or unauthorized manifest is a hard failure.
+    retained_ids = {item.get("id") for item in ledger.get("entries", [])
+                    if isinstance(item, dict) and isinstance(item.get("id"), str)}
+    decision_register, register_errors = load_register(root, known_ids=retained_ids)
+    if register_errors:
+        return errors + register_errors
+
     by_cat = {e["catalogId"]: e for e in registry.get("entries", [])}
     by_opid = {e["recommendedOperationId"]: e for e in registry.get("entries", [])}
     gov_ids = {r.get("id") for r in registry.get("semanticRelationships", [])
@@ -564,13 +573,11 @@ def check(root: Path = ROOT,
                 elif not _is_followable_reference(item, root):
                     errors.append(f"{eid}: evidence citation is not followable: {item!r}.")
 
-        # Authorization references for terminal decisions must be followable.
+        # D-027: only an exact ID/action/successor decision in the
+        # maintainer-reviewed register can structurally authorize retirement.
+        # Record approval provenance is separately controlled by maintainers.
         if status in ("rejected", "superseded"):
-            auth = entry.get("authorizationReference")
-            if not isinstance(auth, str) or not auth.strip():
-                errors.append(f"{eid}: status {status!r} requires a non-empty authorizationReference.")
-            elif not _is_followable_reference(auth, root):
-                errors.append(f"{eid}: authorizationReference is not followable: {auth!r}.")
+            errors.extend(terminal_decision_errors(entry, decision_register))
 
         # Reject self-supersession.
         if status == "superseded" and entry.get("supersededBy") == eid:
