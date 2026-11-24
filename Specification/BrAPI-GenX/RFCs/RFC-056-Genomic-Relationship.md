@@ -6,9 +6,11 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no genomic relationship matrix record. Relationship matrices
-are essential for genomic analysis. Without this record, genomic relationships
-cannot be audited or reproduced.
+GenX proposes metadata for a separately identified genomic-relationship
+matrix alongside official BrAPI version 2.1 data. Meaningful comparison
+requires a defined sample order, genotype source, ploidy, allele-frequency
+baseline and genomic relatedness estimator. The current candidate does not
+mandate those semantics or a verifiable matrix payload.
 
 ## 2. Object
 
@@ -25,8 +27,8 @@ cannot be audited or reproduced.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Genomic relationships reference GenX AnalysisMethod by identifier; they do not
-  duplicate that resource.
+- `analysisMethodDbId` is a required string but does not verify an exact
+  method version, input dataset or executed computation.
 - A matrix is not a BrAPI data resource and must not be treated as one.
 
 ## 5. Invariants
@@ -34,14 +36,20 @@ cannot be audited or reproduced.
 - A published `genomicRelationshipDbId` record never mutates in place.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional matrices linked by `supersedes`.
-- `analysisMethodDbId` is required.
-- A matrix does not imply scientific validation or approval.
+- `analysisMethodDbId` is required; `matrixRef`, `digest`, `jobDbId`,
+  `studyDbId` and provenance are optional.
+- The optional digest has no mandatory algorithm format or verified storage
+  binding; a matrix source, ordered sample identities and estimator are not
+  required.
+- A registered record does not imply validated genomic relatedness,
+  equivalence to kinship or pedigree coefficients, scientific approval or
+  independent reproducibility.
 
 ## 6. Deferred questions
 
 - D-166: Should `matrixRef` be required? (Current: optional.)
 - D-167: Should genomic relationships link to GenX `GenomicDataset`? (Current:
-  optional, not required.)
+  no `genomicDatasetDbId` field is modelled.)
 - D-168: Should matrix digest be required? (Current: optional.)
 
 ## 7. Classification
