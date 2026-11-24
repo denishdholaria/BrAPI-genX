@@ -19,7 +19,7 @@
 - [x] **Mission 080 — Field phenotyping and environmental context.** Source-reviewed `Phenotyping/ImageMetadata`, `Phenotyping/PhenologyObservation`, and `Geospatial/VegetationIndex`. Corrected official BrAPI image-metadata overlap claim and singular-vs-plural VegetationIndex README route; added guarded source-backed descriptions and test assertions. **Tests not yet executed; draft only.**
 - [x] **Mission 081 — Breeding decision provenance.** Reviewed `Breeding/PopulationAdvancement` and `Breeding/CandidateVarietyLifecycle` against exact source contracts and existing SelectionDecision. Preserved the accepted D-BP-10 actual-event distinction and **did not revive CrossingSchedule (DEFERRED D-BP-11)**. Added review documents and regression assertions. **Tests not executed; no maturity promotion.**
 - [x] **Mission 082 — Environmental and spatial reasoning.** Reviewed ExtremeWeather, SoilChemistry and RemoteSensingMetadata against authoritative schemas, corrected claims of required links/measurements in their RFCs, and added guarded source evidence plus tests. **Not executed or merged; no scientific maturity promotion.**
-- [ ] **Mission 083 — Stronger science tests.** Consolidate repeated schema-derived assertions into reusable helpers where this reduces maintenance burden **without weakening mutation sensitivity**. Verify decision references against the governed decision register; preserve existing scientific boundary checks.
+- [x] **Mission 083 — README endpoint identity assurance.** Found that comprehensive contract checks did not verify human-readable README endpoint identities. Implemented report-first audit with a scoped strict vegetation-index gate, seven locally passed synthetic mutation tests, and workflow-scope safeguards. **Full repository suite not executed; draft only.** Keep shared schema-test refactors for a later separate mission if they can be justified without weakening assertions.
 - [ ] **Mission 084 — Local integration assurance.** Execute the full modified Python test suite, group-description checker, registry/source consistency, generated catalogue reproducibility, source standards overlap, reference-server conformance, and any affected cross-language digest tests on the final stacked branch. Record exact commands and failure evidence.
 - [ ] **Mission 085 — Merge and baseline closure.** Only after actual verification, merge the stacked PR sequence through normal repository policy, retargeting each dependent PR to `main`. Record resulting merge hashes, module counts and irreversible decisions. Do not bypass branch protection or change billing.
 
@@ -44,6 +44,10 @@ Mission 081 adds two reviewed group descriptions to the preceding 130, for **132
 ## Draft Mission 082 checkpoint
 
 Mission 082 adds three reviewed descriptions to the preceding 132 for **135 of 156** evidence-reviewed modules (**21 deferred**) on the unmerged development stack only. These records are not meteorological certifications, validated soil tests, or calibrated geospatial observations.
+
+## Draft Mission 083 assurance checkpoint
+
+The reported 135/156 documentation-review count is unchanged. Mission 083 adds a new **source/README identity** control, not scientific maturity or additional reviewed groups. Only a previously reconciled VegetationIndex README is subject to a strict scope gate. Synthetic mutation tests passed; the full stacked branch still requires local integration assurance.
 
 ## Current review coverage
 
