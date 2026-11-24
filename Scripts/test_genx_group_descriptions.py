@@ -2013,7 +2013,7 @@ class GroupEvidenceTests(unittest.TestCase):
             operations['paths']['/biodiversity-exports']['post']['operationId']
         )
         rfc = (genx / 'RFCs/RFC-121-BiodiversityExport.md').read_text()
-        self.assertIn('no `germplasmDbId`', rfc.lower())
+        self.assertIn('No `germplasmDbId`', rfc)
         self.assertIn('Darwin Core Archive', rfc)
 
 
