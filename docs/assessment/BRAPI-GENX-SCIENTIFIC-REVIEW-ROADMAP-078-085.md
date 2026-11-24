@@ -16,7 +16,7 @@
 
 - [x] **Mission 078 — Kinship, GenomicRelationship, PedigreeAnalysis evidence.** Three matrix/pedigree-related draft modules; preserve the distinction between relatedness estimands, matrix storage metadata, and authoritative germplasm ancestry. Documentation and regression assertions committed to a dedicated branch; **not executed or merged**.
 - [x] **Mission 079 — Population/genomics assumptions.** Reviewed `Genotyping/HaplotypeAnalysis`, `Genotyping/ExpressionQtl`, and `Genotyping/MethylationAnalysis` against actual response/request schemas. Source-linked draft evidence and regression assertions written. **Tests not executed; not merged; scientific validity not inferred.**
-- [ ] **Mission 080 — Field phenotyping and environmental context.** Review `Phenotyping/ImageMetadata`, `Phenotyping/PhenologyObservation`, and `Geospatial/VegetationIndex`. Distinguish metadata capture from field-proven observations; examine units, sensor calibration, temporal alignment, and observation identity.
+- [x] **Mission 080 — Field phenotyping and environmental context.** Source-reviewed `Phenotyping/ImageMetadata`, `Phenotyping/PhenologyObservation`, and `Geospatial/VegetationIndex`. Corrected official BrAPI image-metadata overlap claim and singular-vs-plural VegetationIndex README route; added guarded source-backed descriptions and test assertions. **Tests not yet executed; draft only.**
 - [ ] **Mission 081 — Breeding decision provenance.** Assess `Breeding/PopulationAdvancement`, `Breeding/SelectionDecisions`, and crossing/lifecycle proposals for distinctions between candidate scores, approved verdicts and actual material movement. Avoid retrofitting verified pipeline decisions into draft resources.
 - [ ] **Mission 082 — Environmental and spatial reasoning.** Review `Environment/ExtremeWeather`, `Environment/SoilChemistry`, and `Geospatial/RemoteSensingMetadata` for reference coordinate systems, thresholds, standards, measurement method and data quality.
 - [ ] **Mission 083 — Stronger science tests.** Consolidate repeated schema-derived assertions into reusable helpers where this reduces maintenance burden **without weakening mutation sensitivity**. Verify decision references against the governed decision register; preserve existing scientific boundary checks.
@@ -32,6 +32,10 @@ A retained numerical field, matrix URI (Uniform Resource Identifier), object map
 ## Draft Mission 079 checkpoint
 
 Mission 079 adds three evidence-reviewed descriptions to the preceding 124, yielding **127 of 156** guarded modules and **29 deferred** on the stacked development branch only. This coverage is not reflected on `main` until reviewed and merged.
+
+## Draft Mission 080 checkpoint
+
+Mission 080 adds three reviewed descriptions to the preceding 127 for **130 of 156** guarded modules (**26 remain deferred**) on the stacked branch only. This is draft documentation coverage, not scientific validation or merged `main` state.
 
 ## Current review coverage
 
