@@ -55,6 +55,8 @@ REVIEWED = frozenset({
     'Phenotyping/ImageMetadata', 'Phenotyping/PhenologyObservation',
     'Geospatial/VegetationIndex',
     'Breeding/PopulationAdvancement', 'Breeding/CandidateVarietyLifecycle',
+    'Environment/ExtremeWeather', 'Environment/SoilChemistry',
+    'Geospatial/RemoteSensingMetadata',
     'Phenotyping/PhenotypeCapture', 'Phenotyping/RepeatedMeasurement',
     'Phenotyping/PhenotypeAnnotation',
     'Geospatial/LocationGeometry', 'Geospatial/FieldGeometry',
