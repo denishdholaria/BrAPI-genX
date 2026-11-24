@@ -130,6 +130,23 @@ missing. Source schemas and unresolved questions are recorded in
 **117 inherited-unreviewed** entries (153 original identities retained).
 No operation equivalence or normative mapping was approved.
 
+## Mission 009 — source-field drift regression guard (2026-11-24)
+
+`Scripts/check_scientific_contract_boundaries.py` pins the **specific field
+presence, requiredness and known field absences** underlying the six
+Mission 008 source-contract assessments. For example, it protects the
+existing optional `YieldMap.harvestRecordDbId` from accidental removal,
+preserves required `HarvestRecord.quantity` and `HarvestRecord.unit`,
+and detects additions to fields previously documented as absent.
+It also verifies that each reviewed three-operation group remains traceable
+in the ledger and continues to cite its assessment. The dedicated
+`Scripts/test_scientific_contract_boundaries.py` has 12 mutation tests.
+
+These checks do **not** prohibit intentional schema evolution: failures
+signal that an engineer must update the evidence, tests and relevant contracts
+together. They are not scientific proof or normative maturity promotion.
+The complete hosted suite remains pending monthly Actions minutes reset.
+
 ## Non-goals
 
 This framework does not modify official BrAPI v2.1 specifications, GenX routes,

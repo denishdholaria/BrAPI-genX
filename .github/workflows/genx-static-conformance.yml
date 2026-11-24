@@ -32,6 +32,8 @@ on:
       - 'Scripts/check_registry_drift_regression.py'
       - 'Scripts/test_registry_drift_regression.py'
       - 'Scripts/test_registry_source_consistency.py'
+      - 'Scripts/check_scientific_contract_boundaries.py'
+      - 'Scripts/test_scientific_contract_boundaries.py'
       - 'Scripts/check_semantic_neighbor_evidence.py'
       - 'Scripts/test_semantic_neighbor_evidence.py'
       - 'Scripts/check_rfc_governance.py'
@@ -74,6 +76,8 @@ on:
       - 'Scripts/check_registry_drift_regression.py'
       - 'Scripts/test_registry_drift_regression.py'
       - 'Scripts/test_registry_source_consistency.py'
+      - 'Scripts/check_scientific_contract_boundaries.py'
+      - 'Scripts/test_scientific_contract_boundaries.py'
       - 'Scripts/check_semantic_neighbor_evidence.py'
       - 'Scripts/test_semantic_neighbor_evidence.py'
       - 'Scripts/check_rfc_governance.py'
@@ -113,6 +117,10 @@ jobs:
           python-version: '3.12'
       - name: Install conformance dependencies
         run: python -m pip install 'PyYAML==6.0.2' 'rfc8785==0.1.4'
+      - name: Guard scientific source-contract field evidence
+        run: python Scripts/check_scientific_contract_boundaries.py
+      - name: Test scientific source-contract drift detection
+        run: python Scripts/test_scientific_contract_boundaries.py
       - name: Check reviewed semantic-neighbor source evidence
         run: python Scripts/check_semantic_neighbor_evidence.py
       - name: Regression-test semantic-neighbor source evidence

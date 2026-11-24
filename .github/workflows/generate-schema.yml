@@ -26,6 +26,10 @@ jobs:
           python-version: '3.12'
       - name: Install contract fixture validation dependencies
         run: python -m pip install 'PyYAML==6.0.2' 'rfc8785==0.1.4'
+      - name: Guard scientific source-contract field evidence
+        run: python Scripts/check_scientific_contract_boundaries.py
+      - name: Test scientific source-contract drift detection
+        run: python Scripts/test_scientific_contract_boundaries.py
       - name: Check reviewed semantic-neighbor source evidence
         run: python Scripts/check_semantic_neighbor_evidence.py
       - name: Regression-test semantic-neighbor source evidence
