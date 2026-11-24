@@ -6,8 +6,7 @@
 
 ## 1. Problem
 
-BrAPI v2.1 records weather observations, locations, and irrigation events but
-has no record that reconciles them into a water balance. Irrigation scheduling,
+BrAPI version 2.1 includes Locations and Observation records but does not define this proposed water-balance accounting object. WeatherObservation and IrrigationOperation are distinct GenX candidates, not official BrAPI v2.1 source records. Irrigation scheduling,
 drought-stress interpretation, drainage and runoff accounting, and climate
 reporting all require a period-level statement of inputs, outputs, and storage
 change. Without a balance record, the same field can carry contradictory water
@@ -28,9 +27,7 @@ claims and no auditable budget.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Water balances reference BrAPI `Study` and `Location` and GenX `CropCycle`,
-  `WeatherObservation`, and `IrrigationOperation` by identifier; they do not
-  duplicate those resources.
+- The candidate has optional string `studyDbId` and `locationDbId` fields. It has no typed GenX `CropCycle`, `WeatherObservation`, or `IrrigationOperation` references (D-204). Source data reconciliation is not implemented by this record.
 - A water balance record is not a BrAPI data resource and must not be treated
   as one.
 - A water balance record is not irrigation advice, a water right, or a
@@ -43,8 +40,7 @@ claims and no auditable budget.
 - Corrections are recorded as additional records linked by `supersedes`.
 - Every quantity is in millimetres over the stated period; unit conversion is
   the client's responsibility and must not be silently applied.
-- `periodStart` and `periodEnd` define the accounting window; components from
-  different windows must not be compared as if they were the same balance.
+- `periodStart` and `periodEnd` can describe an accounting window when supplied, but neither is required. A common window and components from consistent source intervals are proposed obligations, not enforced schema rules.
 - The sign convention for `storageChangeMm` is the change in stored water, not
   a flux; consumers must not treat it as an input or output.
 - A record does not imply measurement quality, model validation, or that the

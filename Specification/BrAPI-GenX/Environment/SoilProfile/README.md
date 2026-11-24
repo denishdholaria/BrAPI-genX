@@ -1,7 +1,7 @@
 # BrAPI-GenX — Soil Profile (Environment)
 
 Soil profiles record soil texture, chemistry, moisture, and health
-measurements at a location. BrAPI v2.1 has locations but no soil record.
+measurements at a location. Official BrAPI version 2.1 supplies Location context; this proposed soil record does not specify sampling depth or controlled nutrient measurement units.
 
 - `POST /genx/v1/soil-profiles` (`genxRegisterSoilProfile`) registers one
   `SoilProfile` (`Schemas/SoilProfileNewRequest.yaml`). Same

@@ -248,6 +248,35 @@
       "resource": "EdgeGatewayHealth",
       "target": "ResearchAsset",
       "decision": "D-453"
+    },
+    {
+      "module": "Environment/WeatherForecast",
+      "rfc": "RFC-031-Weather-Forecast.md",
+      "resource": "WeatherForecast",
+      "target": "WeatherObservation",
+      "decision": "D-91"
+    },
+    {
+      "module": "Environment/ClimateNormals",
+      "rfc": "RFC-033-Climate-Normals.md",
+      "resource": "ClimateNormal",
+      "target": "WeatherObservation",
+      "decision": "D-97",
+      "schema_file": "ClimateNormal.yaml"
+    },
+    {
+      "module": "Environment/SoilProfile",
+      "rfc": "RFC-023-Soil-Profile.md",
+      "resource": "SoilProfile",
+      "target": "WeatherObservation",
+      "decision": "D-67"
+    },
+    {
+      "module": "Environment/WaterBalance",
+      "rfc": "RFC-068-Water-Balance.md",
+      "resource": "WaterBalance",
+      "target": "WeatherObservation",
+      "decision": "D-204"
     }
   ]
 }

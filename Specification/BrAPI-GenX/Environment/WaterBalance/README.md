@@ -1,7 +1,6 @@
 # BrAPI-GenX — Water Balance (Environment and Climate)
 
-Water balance records document the water inputs, outputs, and storage change for
-a location over a period. BrAPI v2.1 has no water balance record.
+Water balance entries document optional water inputs, outputs and storage-change metadata. Official BrAPI version 2.1 supplies Location and Observation context, not a validated water budget; the proposed GenX record requires neither an accounting window nor closed-balance evidence.
 
 - `POST /genx/v1/water-balances` (`genxRecordWaterBalance`) registers one
   `WaterBalance` (`Schemas/WaterBalanceNewRequest.yaml`). Same

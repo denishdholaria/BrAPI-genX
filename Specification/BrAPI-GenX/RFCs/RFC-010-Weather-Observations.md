@@ -27,8 +27,7 @@ data cannot be cited, quality-controlled, or linked to studies with provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Weather observations reference BrAPI Location and GenX VariableTerm by
-  identifier; they do not duplicate those resources.
+- The candidate `locationDbId` and `measurements[].variableDbId` are explicit strings naming BrAPI Location and candidate variable records; this does not prove reference resolution or validity.
 - Telemetry remains the device/sensor stream; WeatherObservation is a
   scientific environmental record. They are complementary, not equivalent.
 
@@ -43,7 +42,7 @@ data cannot be cited, quality-controlled, or linked to studies with provenance.
 ## 6. Deferred questions
 
 - D-27: Should `measurements` require at least one BrAPI Observation Variable
-  reference? (Current: requires variableDbId per measurement.)
+  reference? (Current: requires variableDbId per measurement, but an empty measurements array is allowed and no referenced variable is verified.)
 - D-28: Should forecast and climate-normal products be separate objects?
   (Current: only observations.)
 - D-29: Should `qualityFlag` be governed by a controlled vocabulary beyond

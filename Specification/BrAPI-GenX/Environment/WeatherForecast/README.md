@@ -1,7 +1,7 @@
 # BrAPI-GenX — Weather Forecast (Environment)
 
 Weather forecasts record predicted environmental conditions for a station or
-location over a validity window. BrAPI v2.1 has no forecast record.
+location over a validity window. This draft forecast record requires issue and validity timestamps but does not enforce their chronological ordering, measurement presence or a typed WeatherObservation link.
 
 - `POST /genx/v1/weather-forecasts` (`genxRegisterWeatherForecast`) registers one
   `WeatherForecast` (`Schemas/WeatherForecastNewRequest.yaml`). Same

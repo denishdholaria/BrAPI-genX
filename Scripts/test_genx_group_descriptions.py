@@ -484,6 +484,49 @@ class GroupEvidenceTests(unittest.TestCase):
                 self.assertIn('STRUCTURAL_DRAFT',
                     (module / 'GroupDescription.md').read_text())
 
+    def test_environmental_source_evidence_is_pinned(self):
+        self.assertTrue({
+            'Environment/WeatherObservations', 'Environment/WeatherForecast',
+            'Environment/ClimateNormals', 'Environment/SoilProfile',
+            'Environment/WaterBalance',
+        }.issubset(REVIEWED))
+
+    def test_weather_climate_soil_water_accounting_limits(self):
+        import yaml
+        root = Path(__file__).resolve().parents[1]
+        def schema(folder, record):
+            filename = root / 'Specification/BrAPI-GenX/Environment' / folder
+            data = yaml.safe_load((filename / 'Schemas' / (record + '.yaml')).read_text())
+            return data['components']['schemas'][record]
+        observed = schema('WeatherObservations', 'WeatherObservation')
+        self.assertIn('measurements', observed['required'])
+        self.assertNotIn('minItems', observed['properties']['measurements'])
+        forecast = schema('WeatherForecast', 'WeatherForecast')
+        for time in ('forecastedAt', 'validFrom', 'validTo'):
+            self.assertIn(time, forecast['required'])
+        self.assertNotIn('weatherObservationDbId', forecast['properties'])
+        normal = schema('ClimateNormals', 'ClimateNormal')
+        self.assertEqual('string', normal['properties']['period']['type'])
+        soil = schema('SoilProfile', 'SoilProfile')
+        self.assertNotIn('samplingDepth', soil['properties'])
+        water = schema('WaterBalance', 'WaterBalance')
+        for column in ('periodStart', 'periodEnd', 'precipitationMm',
+                       'irrigationMm', 'storageChangeMm'):
+            self.assertIn(column, water['properties'])
+            self.assertNotIn(column, water['required'])
+        for name, decision in (
+            ('WeatherObservations', 'D-27'),
+            ('WeatherForecast', 'D-91'),
+            ('ClimateNormals', 'D-97'),
+            ('SoilProfile', 'D-67'),
+            ('WaterBalance', 'D-204'),
+        ):
+            with self.subTest(group=name):
+                group = (root / 'Specification/BrAPI-GenX/Environment' /
+                         name / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', group)
+                self.assertIn(decision, group)
+
 
 if __name__ == '__main__':
     unittest.main()

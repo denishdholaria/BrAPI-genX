@@ -1,7 +1,7 @@
 # BrAPI-GenX — Climate Normals (Environment)
 
 Climate normals record long-term average environmental conditions for a
-location and period. BrAPI v2.1 has no climate normal record.
+location and reference period. Its draft period string and mean do not prove statistically derived climate normals, underlying sample completeness or a typed WeatherObservation link.
 
 - `POST /genx/v1/climate-normals` (`genxRegisterClimateNormal`) registers one
   `ClimateNormal` (`Schemas/ClimateNormalNewRequest.yaml`). Same

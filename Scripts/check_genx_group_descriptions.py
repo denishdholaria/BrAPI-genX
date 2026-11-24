@@ -41,6 +41,9 @@ REVIEWED = frozenset({
     'Geospatial/CrsTransform', 'Geospatial/FieldBoundary',
     'Instrumentation/CalibrationQuality', 'Instrumentation/SensorDevice',
     'Instrumentation/TelemetryNormalization', 'Instrumentation/EdgeGatewayHealth',
+    'Environment/WeatherObservations', 'Environment/WeatherForecast',
+    'Environment/ClimateNormals', 'Environment/SoilProfile',
+    'Environment/WaterBalance',
 })
 LINK = re.compile(r'\]\(([^)]+)\)')
 

@@ -28,6 +28,7 @@ forecasts cannot be cited or linked to studies with provenance.
 - Weather forecasts reference BrAPI Location by identifier; they do not
   duplicate that resource.
 - A forecast is not a BrAPI Location and must not be treated as one.
+- There is no typed GenX `WeatherObservation` reference (D-91); a forecast must not be mistaken for measured conditions.
 
 ## 5. Invariants
 
@@ -42,7 +43,7 @@ forecasts cannot be cited or linked to studies with provenance.
 - D-90: Should `measurements` require at least one entry? (Current: required
   array, may be empty.)
 - D-91: Should forecasts link to GenX `WeatherObservation`? (Current:
-  optional, not required.)
+  no typed WeatherObservation reference property is defined in the candidate schema.)
 - D-92: Should source be a governed vocabulary? (Current: free string.)
 
 ## 7. Classification

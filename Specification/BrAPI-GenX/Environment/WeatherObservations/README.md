@@ -2,8 +2,7 @@
 
 Weather and environmental observations record measured conditions at a station
 or location over time, with quality flags and provenance. They provide the
-environmental context for trials, studies, and crop models. BrAPI v2.1 has
-locations but no weather or environmental observation resource.
+environmental context for trials, studies and models. Official BrAPI version 2.1 already represents Locations and Observations; the separate GenX weather candidate contains numerical environmental entries and does not prove station identity or scientific quality.
 
 - `POST /genx/v1/weather-observations` (`genxRecordWeatherObservation`) records
   one `WeatherObservation` (`Schemas/WeatherObservationNewRequest.yaml`). Same

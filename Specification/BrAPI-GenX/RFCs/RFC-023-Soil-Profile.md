@@ -29,6 +29,7 @@ provenance.
 - Soil profiles reference BrAPI Location by identifier; they do not duplicate
   that resource.
 - A soil profile is not a BrAPI Location and must not be treated as one.
+- There is no typed GenX `WeatherObservation` reference (D-67); soil properties require their own depth and analysis context.
 
 ## 5. Invariants
 
@@ -43,7 +44,7 @@ provenance.
 - D-66: Should `nutrients` require a governed vocabulary? (Current: free
   strings.)
 - D-67: Should soil profiles link to GenX `WeatherObservation`? (Current:
-  optional, not required.)
+  no typed WeatherObservation reference exists in the candidate schema.)
 - D-68: Should sampling depth be recorded? (Current: not in this slice.)
 
 ## 7. Classification

@@ -28,6 +28,7 @@ normals cannot be cited or linked to locations with provenance.
 - Climate normals reference BrAPI Location and Observation Variable by
   identifier; they do not duplicate those resources.
 - A climate normal is not a BrAPI Location and must not be treated as one.
+- There is no typed GenX `WeatherObservation` reference (D-97); its mean is not independently validated.
 
 ## 5. Invariants
 
@@ -42,7 +43,7 @@ normals cannot be cited or linked to locations with provenance.
 - D-96: Should `mean`, `min`, and `max` be required? (Current: mean
   required, min/max optional.)
 - D-97: Should climate normals link to GenX `WeatherObservation`? (Current:
-  optional, not required.)
+  no typed WeatherObservation reference property exists in the candidate schema.)
 - D-98: Should period be a governed vocabulary? (Current: free string.)
 
 ## 7. Classification
