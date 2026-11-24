@@ -1,7 +1,13 @@
 # BrAPI-GenX — Stability Analysis (Scientific Compute)
 
-Stability analysis results record genotype stability and adaptability across
-environments. BrAPI v2.1 has no stability analysis record.
+StabilityAnalysisResult proposes analysis metadata for genotype performance
+stability across environments, not a verified adaptability or stability
+conclusion. The `stabilityIndex`, trait, study, job and provenance are
+optional; the index is a bare number without a specified estimation method,
+orientation, range, environmental design or uncertainty.
+
+Official BrAPI version 2.1 data resources are unchanged. Method identity alone
+does not establish an applied model version or comparable stability measure.
 
 - `POST /genx/v1/stability-analyses` (`genxRecordStabilityAnalysis`) registers one
   `StabilityAnalysisResult` (`Schemas/StabilityAnalysisResultNewRequest.yaml`). Same
