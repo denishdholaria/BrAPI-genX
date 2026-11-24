@@ -706,8 +706,8 @@ class GroupEvidenceTests(unittest.TestCase):
                 folder = spec_root / 'CropProduction' / name
                 overview = (folder / 'README.md').read_text()
                 rfc = (spec_root / 'RFCs' / ('RFC-' + rfc_number + '.md')).read_text()
-                readme_operations = set(contract_re.findall(overview))
-                rfc_operations = set(contract_re.findall(rfc))
+                readme_operations = set(contract_re.findall(' '.join(overview.split())))
+                rfc_operations = set(contract_re.findall(' '.join(rfc.split())))
                 self.assertTrue(readme_operations, msg=name + ' missing documented routes')
                 self.assertEqual(readme_operations, rfc_operations,
                                  msg=name + ' README / RFC route disagreement')
