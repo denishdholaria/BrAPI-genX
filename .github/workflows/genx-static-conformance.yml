@@ -68,6 +68,8 @@ on:
       - 'Scripts/test_genx_evidence_coverage.py'
       - 'Scripts/check_genx_group_descriptions.py'
       - 'Scripts/test_genx_group_descriptions.py'
+      - 'Scripts/audit_genx_readme_routes.py'
+      - 'Scripts/test_genx_readme_routes.py'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-DECISIONS-APPROVED.md'
@@ -140,6 +142,8 @@ on:
       - 'Scripts/test_genx_evidence_coverage.py'
       - 'Scripts/check_genx_group_descriptions.py'
       - 'Scripts/test_genx_group_descriptions.py'
+      - 'Scripts/audit_genx_readme_routes.py'
+      - 'Scripts/test_genx_readme_routes.py'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-DECISIONS-APPROVED.md'
@@ -296,6 +300,10 @@ jobs:
         run: python Scripts/check_genx_group_descriptions.py
       - name: Test group-description evidence guard
         run: python Scripts/test_genx_group_descriptions.py
+      - name: Enforce vegetation-index README route/source identity
+        run: python Scripts/audit_genx_readme_routes.py --module Geospatial/VegetationIndex --strict
+      - name: Test README endpoint identity mutation cases
+        run: python Scripts/test_genx_readme_routes.py
       - name: Verify separate documentation and RFC maturity evidence
         run: python Scripts/report_genx_evidence_coverage.py --check
       - name: Test evidence coverage report
@@ -352,6 +360,8 @@ jobs:
             run_check python Scripts/test_genx_standards_overlap.py
             run_check python Scripts/check_genx_group_descriptions.py
             run_check python Scripts/test_genx_group_descriptions.py
+            run_check python Scripts/audit_genx_readme_routes.py --module Geospatial/VegetationIndex --strict
+            run_check python Scripts/test_genx_readme_routes.py
             run_check python Scripts/report_genx_evidence_coverage.py --check
             run_check python Scripts/test_genx_evidence_coverage.py
             run_check python Scripts/test_semantic_neighbor_lineage.py
