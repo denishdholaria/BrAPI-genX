@@ -1,7 +1,7 @@
 # BrAPI-GenX — Conservation Membership (Germplasm)
 
 Conservation membership records describe conservation program memberships.
-BrAPI v2.1 has no conservation membership record.
+Official BrAPI Germplasm and MCPD records already describe accession and institute context. A conservation-program membership may be a distinct workflow, but this draft currently stores only optional `memberDbId` and free-form `program` strings, without typed identity, consent, custody, or a verified conservation obligation.
 
 - `POST /genx/v1/conservation-memberships` (`genxRegisterConservationMembership`) registers one
   `ConservationMembership` (`Schemas/ConservationMembershipNewRequest.yaml`). Same

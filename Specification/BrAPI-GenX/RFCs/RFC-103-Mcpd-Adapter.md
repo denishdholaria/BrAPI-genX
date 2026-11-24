@@ -6,10 +6,7 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record MCPD adapters. MCPD adapters are the routine
-reference for germplasm and genetic resources. Without a record, adapters arrive
-as unversioned notes with no stated source or provenance, so they cannot be
-audited or reproduced.
+Official BrAPI version 2.1 already provides `GET /brapi/v2/germplasm/{germplasmDbId}/mcpd` and a GermplasmMCPD schema. This candidate adapter record includes only an optional source string and provenance; it does not execute a transform, define a verified data mapping, or replace the official MCPD representation.
 
 ## 2. Object
 
@@ -27,8 +24,7 @@ provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- MCPD adapter records reference BrAPI `Germplasm` by identifier; they do not
-  duplicate those resources.
+- No typed link to an official BrAPI Germplasm or other candidate entity is established by the current record. Any externally meaningful resource linkage requires evidence and an explicit decision. D-308 remains open.
 - A record is not a BrAPI data resource and must not be treated as one.
 
 ## 5. Invariants

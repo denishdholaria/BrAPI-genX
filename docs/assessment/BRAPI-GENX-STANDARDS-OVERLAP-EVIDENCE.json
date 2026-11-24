@@ -128,6 +128,27 @@
       "resource": "TrialNetwork",
       "target": "Study",
       "decision": "D-326"
+    },
+    {
+      "module": "Germplasm/CollectingMission",
+      "rfc": "RFC-101-Collecting-Mission.md",
+      "resource": "CollectingMission",
+      "target": "Germplasm",
+      "decision": "D-302"
+    },
+    {
+      "module": "Germplasm/ConservationMembership",
+      "rfc": "RFC-102-Conservation-Membership.md",
+      "resource": "ConservationMembership",
+      "target": "CollectingMission",
+      "decision": "D-306"
+    },
+    {
+      "module": "Germplasm/McpdAdapter",
+      "rfc": "RFC-103-Mcpd-Adapter.md",
+      "resource": "McpdAdapter",
+      "target": "Germplasm",
+      "decision": "D-308"
     }
   ]
 }

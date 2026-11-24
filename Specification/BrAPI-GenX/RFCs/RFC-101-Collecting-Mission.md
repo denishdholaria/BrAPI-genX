@@ -6,10 +6,7 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record collecting missions. Collecting missions are
-the routine reference for germplasm and genetic resources. Without a record,
-missions arrive as unversioned notes with no stated title or provenance, so
-they cannot be audited or reproduced.
+Official BrAPI version 2.1 Germplasm Multi-Crop Passport Descriptors (MCPD) data already includes `collectingMissionIdentifier`. This draft proposes a separate CollectingMission metadata record, but it does not establish a typed germplasm membership, mission participants, expedition provenance or a demonstrated need for a new identifier.
 
 ## 2. Object
 
@@ -27,8 +24,7 @@ and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Collecting mission records reference BrAPI `Germplasm` by identifier; they
-  do not duplicate those resources.
+- No typed link to an official BrAPI Germplasm or other candidate entity is established by the current record. Any externally meaningful resource linkage requires evidence and an explicit decision. D-302 remains open.
 - A record is not a BrAPI data resource and must not be treated as one.
 
 ## 5. Invariants

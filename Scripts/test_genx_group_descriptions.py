@@ -267,6 +267,33 @@ class GroupEvidenceTests(unittest.TestCase):
                 self.assertIn('STRUCTURAL_DRAFT', description)
                 self.assertIn(decision, description)
 
+    def test_germplasm_conservation_source_groups_are_pinned(self):
+        self.assertTrue({'Germplasm/CollectingMission',
+                         'Germplasm/ConservationMembership',
+                         'Germplasm/McpdAdapter'}.issubset(REVIEWED))
+
+    def test_official_passport_source_precedes_candidate_adapter(self):
+        root = Path(__file__).resolve().parents[1]
+        route = (root / 'Specification/BrAPI-Germplasm/Germplasm'
+                 / 'Germplasm_GermplasmDbId_MCPD_GET.yaml').read_text()
+        self.assertIn('/germplasm/{germplasmDbId}/mcpd:', route)
+        mcpd = (root / 'Specification/BrAPI-Germplasm/Germplasm/Schemas'
+                / 'GermplasmMCPD.yaml').read_text()
+        self.assertIn('collectingMissionIdentifier:', mcpd)
+        for name, rfc, decision in (
+            ('CollectingMission', 'RFC-101-Collecting-Mission.md', 'D-302'),
+            ('ConservationMembership', 'RFC-102-Conservation-Membership.md', 'D-306'),
+            ('McpdAdapter', 'RFC-103-Mcpd-Adapter.md', 'D-308'),
+        ):
+            with self.subTest(name=name):
+                proposal = (root / 'Specification/BrAPI-GenX/RFCs' / rfc).read_text()
+                self.assertIn('No typed link', proposal)
+                self.assertIn(decision, proposal)
+                group = (root / 'Specification/BrAPI-GenX/Germplasm' /
+                         name / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', group)
+                self.assertIn(decision, group)
+
 
 if __name__ == '__main__':
     unittest.main()

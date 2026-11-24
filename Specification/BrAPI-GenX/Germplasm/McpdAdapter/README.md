@@ -1,7 +1,7 @@
 # BrAPI-GenX — MCPD Adapter (Germplasm)
 
 MCPD adapter records describe MCPD source adapters.
-BrAPI v2.1 has no MCPD adapter record.
+Official BrAPI version 2.1 already provides `GET /brapi/v2/germplasm/{germplasmDbId}/mcpd` and a GermplasmMCPD schema. This candidate adapter record includes only an optional source string and provenance; it does not execute a transform, define a verified data mapping, or replace the official MCPD representation.
 
 - `POST /genx/v1/mcpd-adapters` (`genxRegisterMcpdAdapter`) registers one
   `McpdAdapter` (`Schemas/McpdAdapterNewRequest.yaml`). Same

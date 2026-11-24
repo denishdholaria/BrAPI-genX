@@ -1,7 +1,7 @@
 # BrAPI-GenX — Collecting Mission (Germplasm)
 
 Collecting mission records describe collecting missions.
-BrAPI v2.1 has no collecting mission record.
+Official BrAPI version 2.1 Germplasm Multi-Crop Passport Descriptors (MCPD) data already includes `collectingMissionIdentifier`. This draft proposes a separate CollectingMission metadata record, but it does not establish a typed germplasm membership, mission participants, expedition provenance or a demonstrated need for a new identifier.
 
 - `POST /genx/v1/collecting-missions` (`genxRegisterCollectingMission`) registers one
   `CollectingMission` (`Schemas/CollectingMissionNewRequest.yaml`). Same

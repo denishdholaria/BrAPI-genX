@@ -6,10 +6,7 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record conservation memberships. Conservation
-memberships are the routine reference for germplasm and genetic resources.
-Without a record, memberships arrive as unversioned notes with no stated
-member, program, or provenance, so they cannot be audited or reproduced.
+Official BrAPI Germplasm and MCPD records already describe accession and institute context. A conservation-program membership may be a distinct workflow, but this draft currently stores only optional `memberDbId` and free-form `program` strings, without typed identity, consent, custody, or a verified conservation obligation.
 
 ## 2. Object
 
@@ -27,8 +24,7 @@ its member reference, program, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Conservation membership records reference BrAPI `Germplasm` by identifier;
-  they do not duplicate those resources.
+- No typed link to an official BrAPI Germplasm or other candidate entity is established by the current record. An optional `memberDbId` is an unconstrained string, and the GenX CollectingMission relationship remains unratified. D-306 remains open.
 - A record is not a BrAPI data resource and must not be treated as one.
 
 ## 5. Invariants
