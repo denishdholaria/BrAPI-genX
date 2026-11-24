@@ -25,8 +25,9 @@ record, crop timing cannot be audited or linked to studies with provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Crop cycles reference BrAPI Location and Study by identifier; they do not
-  duplicate those resources.
+- CropCycle has optional `locationDbId` and `studyDbId` string
+  properties intended to identify BrAPI resources, but no typed
+  relationship or reference-integrity rule currently enforces those links.
 - A cycle is not a BrAPI Study and must not be treated as one.
 
 ## 5. Invariants

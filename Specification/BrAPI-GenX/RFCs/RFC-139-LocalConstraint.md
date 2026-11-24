@@ -6,9 +6,12 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record local constraints. Local constraints
-(water restrictions, application limits, etc.) circulate without a stated
-constraint type, value, region, or provenance, so they cannot be enforced.
+BrAPI v2.1 does not define a dedicated local-constraint rule-exchange
+operation. However, this candidate currently records only free-text
+constraint type, value, region and source; it specifies no issuing
+authority, effective interval, legal jurisdiction, binding rule or
+evaluation engine. Such a metadata record cannot itself enforce
+water restrictions, application limits or other legal requirements.
 
 ## 2. Object
 

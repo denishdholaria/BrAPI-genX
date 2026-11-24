@@ -624,6 +624,26 @@ class GroupEvidenceTests(unittest.TestCase):
         self.assertIn('genxListIrrigationAdvices', rfc)
         self.assertNotIn('/genx/v1/irrigation-advice`', rfc)
 
+    def test_crop_cycle_sowing_and_constraint_reviewed(self):
+        root = Path(__file__).resolve().parents[1]
+        modules = (
+            ('CropCycle', 'D-84'), ('SowingWindow', 'D-388'),
+            ('CropSuitability', 'D-403'), ('LocalConstraint', 'D-415'),
+        )
+        for module, decision in modules:
+            with self.subTest(module=module):
+                self.assertIn(f'CropProduction/{module}', REVIEWED)
+                content = (root / 'Specification/BrAPI-GenX/CropProduction' /
+                           module / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', content)
+                self.assertIn(decision, content)
+        rfc = (root / 'Specification/BrAPI-GenX/RFCs' /
+               'RFC-139-LocalConstraint.md').read_text()
+        self.assertIn('cannot itself enforce', rfc)
+        cycle = (root / 'Specification/BrAPI-GenX/RFCs' /
+                 'RFC-029-Crop-Cycle.md').read_text()
+        self.assertIn('no typed', ' '.join(cycle.split()))
+
 
 if __name__ == '__main__':
     unittest.main()
