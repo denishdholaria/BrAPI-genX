@@ -37,6 +37,8 @@ REVIEWED = frozenset({
     'Genotyping/ReferenceAssembly', 'Genotyping/PipelineProvenance', 'Genotyping/VcfImport',
     'Phenotyping/PhenotypeCapture', 'Phenotyping/RepeatedMeasurement',
     'Phenotyping/PhenotypeAnnotation',
+    'Geospatial/LocationGeometry', 'Geospatial/FieldGeometry',
+    'Geospatial/CrsTransform', 'Geospatial/FieldBoundary',
 })
 LINK = re.compile(r'\]\(([^)]+)\)')
 

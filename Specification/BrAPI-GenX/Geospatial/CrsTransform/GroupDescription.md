@@ -1,1 +1,9 @@
 # Group CrsTransform
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 140; not an approved spatial coordinate standard, a geospatial transformation engine, or an independently verified geographic authority.
+
+Proposed registration, optional lifecycle-filtered listing and retrieval produce candidate immutable metadata records, with replay and conflict behavior not established against an independent service. This record requires a namespaced `crsTransformDbId` and lifecycle `status`, while `sourceCrs`, `targetCrs`, `transformMethod`, string `parameters`, `supersedes` and provenance are optional. No executable transform, axis-order validation, coordinate error budget, or scientific accuracy rule is present. D-418–D-420 remain unresolved.
+
+**Boundaries:** Official Location coordinates and uncertainty remain independent of this proposal. Existing Breeding Application Programming Interface (BrAPI) version 2.1 Location identity, coordinate uncertainty and GeoJSON geometry remain authoritative for official exchange. Free-form geometry objects, geographic URIs, coordinate-reference strings and area labels do not prove coordinate validity, field identity, unit conversion, accuracy, payload integrity or external custody. No approved geometry transform or scientific mapping follows from these operation descriptions. D-420 remains an unresolved decision.
+
+**Sources:** [module overview](./README.md), [candidate schema](./Schemas/CrsTransform.yaml), [registration request](./Schemas/CrsTransformNewRequest.yaml), [draft operations](./CrsTransform_GET_POST.yaml), [RFC-140](../../RFCs/RFC-140-CrsTransform.md), [official BrAPI Location](../../../BrAPI-Core/Locations/Schemas/LocationNewRequest.yaml), and [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

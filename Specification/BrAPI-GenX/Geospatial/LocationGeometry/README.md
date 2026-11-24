@@ -1,7 +1,7 @@
 # BrAPI-GenX — Location Geometry (Reference Data)
 
 Location geometry records describe geometry references for locations.
-BrAPI v2.1 has no location geometry record.
+Official BrAPI version 2.1 Location already has GeoJSON-compatible coordinates and uncertainty. The GenX draft proposes optional external geometry-URI metadata, without a payload verification mechanism.
 
 - `POST /genx/v1/location-geometries` (`genxRegisterLocationGeometry`) registers one
   `LocationGeometry` (`Schemas/LocationGeometryNewRequest.yaml`). Same

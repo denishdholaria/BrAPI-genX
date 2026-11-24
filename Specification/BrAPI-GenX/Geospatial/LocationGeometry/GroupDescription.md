@@ -1,1 +1,9 @@
 # Group LocationGeometry
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 092; not an approved spatial coordinate standard, a geospatial transformation engine, or an independently verified geographic authority.
+
+Proposed registration, optional lifecycle-filtered listing and retrieval produce candidate immutable metadata records, with replay and conflict behavior not established against an independent service. The draft requires a namespaced `locationGeometryDbId` and lifecycle `status`; `locationDbId`, `geometryUri`, `supersedes` and provenance are optional. The `locationDbId` string is an explicit candidate reference to an official Location, not evidence that the Location exists or is authorized. No geometry format, coordinate reference system, digest or payload-validation rule is defined (D-274–D-276).
+
+**Boundaries:** The official Location coordinates field is already linked to a GeoJSON schema. Existing Breeding Application Programming Interface (BrAPI) version 2.1 Location identity, coordinate uncertainty and GeoJSON geometry remain authoritative for official exchange. Free-form geometry objects, geographic URIs, coordinate-reference strings and area labels do not prove coordinate validity, field identity, unit conversion, accuracy, payload integrity or external custody. No approved geometry transform or scientific mapping follows from these operation descriptions. D-276 remains an unresolved decision.
+
+**Sources:** [module overview](./README.md), [candidate schema](./Schemas/LocationGeometry.yaml), [registration request](./Schemas/LocationGeometryNewRequest.yaml), [draft operations](./LocationGeometry_GET_POST.yaml), [RFC-092](../../RFCs/RFC-092-Location-Geometry.md), [official BrAPI Location](../../../BrAPI-Core/Locations/Schemas/LocationNewRequest.yaml), and [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

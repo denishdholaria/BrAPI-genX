@@ -6,9 +6,7 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record field geometries. Field geometries
-circulate without a stated type, CRS, area, or provenance, so they cannot
-be used for spatial analysis.
+Official BrAPI version 2.1 Location already provides GeoJSON-compatible coordinates. This separate field-geometry metadata candidate may cover operational polygons, but its schema currently has no `fieldDbId` or typed BrAPI Location reference and cannot by itself establish field ownership or spatial identity.
 
 ## 2. Object
 
@@ -27,6 +25,7 @@ geometry, CRS, area, and provenance.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
 - A record is not a BrAPI data resource and must not be treated as one.
+- There is no typed GenX `ResearchAsset` link in the candidate schema; D-426 remains open.
 
 ## 5. Invariants
 

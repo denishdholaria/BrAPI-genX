@@ -1,1 +1,9 @@
 # Group FieldGeometry
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 142; not an approved spatial coordinate standard, a geospatial transformation engine, or an independently verified geographic authority.
+
+Proposed registration, optional lifecycle-filtered listing and retrieval produce candidate immutable metadata records, with replay and conflict behavior not established against an independent service. The proposed namespaced `fieldGeometryDbId` and lifecycle `status` are required, but `geometryType`, free-form `geometry` object, string `crs`, string `area`, `supersedes` and provenance are optional. The schema imposes no GeoJSON geometry-object validation, area consistency rule, coordinate precision, or typed field/Location identity. D-424–D-426 remain unresolved.
+
+**Boundaries:** A free-form `geometry` object cannot be assumed to be a valid GeoJSON polygon. Existing Breeding Application Programming Interface (BrAPI) version 2.1 Location identity, coordinate uncertainty and GeoJSON geometry remain authoritative for official exchange. Free-form geometry objects, geographic URIs, coordinate-reference strings and area labels do not prove coordinate validity, field identity, unit conversion, accuracy, payload integrity or external custody. No approved geometry transform or scientific mapping follows from these operation descriptions. D-426 remains an unresolved decision.
+
+**Sources:** [module overview](./README.md), [candidate schema](./Schemas/FieldGeometry.yaml), [registration request](./Schemas/FieldGeometryNewRequest.yaml), [draft operations](./FieldGeometry_GET_POST.yaml), [RFC-142](../../RFCs/RFC-142-FieldGeometry.md), [official BrAPI Location](../../../BrAPI-Core/Locations/Schemas/LocationNewRequest.yaml), and [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

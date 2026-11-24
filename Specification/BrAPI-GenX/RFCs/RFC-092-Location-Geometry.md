@@ -6,10 +6,7 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record location geometry. Location geometry is
-the routine reference for spatial analysis. Without a record, geometries arrive
-as unversioned references with no stated location, version, or provenance, so
-they cannot be audited or reproduced.
+Official BrAPI version 2.1 Location already includes GeoJSON-compatible `coordinates` and coordinate uncertainty. A proposed separate immutable geometry-URI metadata record may address externally stored or versioned geometry, but its distinct identity, authoritative source and retrieval behavior remain unverified.
 
 ## 2. Object
 
@@ -27,12 +24,10 @@ reference, geometry URI, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Location geometry records reference BrAPI `Location` by identifier; they do
-  not duplicate those resources.
+- The candidate `locationDbId` string names a BrAPI Location but does not prove external referential integrity, authorization, geometry consistency, or an independently implemented adapter.
 - A location geometry record is not a BrAPI Location and must not be treated as
   one.
-- Geometry bytes are not transported by this API. The record names and verifies
-  the payload; retrieval uses the referenced geometry URI.
+- Geometry bytes are not transported by this API. The record optionally names a geometry URI, but defines no required format, checksum, fetch-and-verify operation, or retrieval guarantee.
 
 ## 5. Invariants
 

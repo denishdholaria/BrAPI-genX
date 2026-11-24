@@ -1,7 +1,7 @@
 # BrAPI-GenX — CrsTransform
 
 CrsTransform records describe CrsTransform entries.
-BrAPI v2.1 has no CrsTransform record.
+The GenX candidate only records source/target coordinate reference system strings and optional transform metadata. It is not an executable or accuracy-validated coordinate transformation.
 
 - `POST /genx/v1/crs-transforms` (`genxRegisterCrsTransform`) registers one
   `CrsTransform` (`Schemas/CrsTransformNewRequest.yaml`). Same

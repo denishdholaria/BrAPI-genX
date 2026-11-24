@@ -1,7 +1,7 @@
 # BrAPI-GenX — Field Boundary (Field Agronomy)
 
 Operational field boundary and history records describe boundary versions and
-geometry references for a field or site. BrAPI v2.1 has no field boundary record.
+geometry references for a field or site. Official BrAPI version 2.1 Locations already carry GeoJSON coordinates. This GenX candidate proposes operational boundary history, but an optional URI without checksum or format is not a verified geometry payload.
 
 - `POST /genx/v1/field-boundaries` (`genxRegisterFieldBoundary`) registers one
   `FieldBoundary` (`Schemas/FieldBoundaryNewRequest.yaml`). Same

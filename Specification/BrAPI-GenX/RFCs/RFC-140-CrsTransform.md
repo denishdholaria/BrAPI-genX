@@ -6,9 +6,7 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record CRS transforms. CRS transformations
-circulate without a stated source/target CRS, method, or provenance, so they
-cannot be audited or reproduced.
+Spatial coordinate transformations require explicit source and target coordinate reference systems, executable transformation parameters and error/accuracy considerations. The proposed GenX `CrsTransform` record is only optional metadata: neither a transformation function nor validation of actual geometry coordinates follows from recording a method string.
 
 ## 2. Object
 
@@ -27,6 +25,7 @@ target CRS, method, parameters, and provenance.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
 - A record is not a BrAPI data resource and must not be treated as one.
+- There is no typed GenX `ResearchAsset` link in the candidate schema; D-420 remains open.
 
 ## 5. Invariants
 

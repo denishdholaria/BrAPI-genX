@@ -410,6 +410,46 @@ class GroupEvidenceTests(unittest.TestCase):
             self.assertIn('STRUCTURAL_DRAFT', group)
             self.assertIn(decision, group)
 
+    def test_geospatial_source_evidence_groups_are_pinned(self):
+        self.assertTrue({
+            'Geospatial/LocationGeometry', 'Geospatial/FieldGeometry',
+            'Geospatial/CrsTransform', 'Geospatial/FieldBoundary',
+        }.issubset(REVIEWED))
+
+    def test_location_geometry_and_payload_verification_are_distinct(self):
+        import yaml
+        root = Path(__file__).resolve().parents[1]
+        source = yaml.safe_load((root / 'Specification/BrAPI-Core/Locations/Schemas'
+                                 / 'LocationNewRequest.yaml').read_text())
+        official = source['components']['schemas']['LocationNewRequest']['properties']
+        self.assertIn('coordinates', official)
+        self.assertIn('geoJSON', official['coordinates']['$ref'])
+        self.assertIn('coordinateUncertainty', official)
+        for name in ('LocationGeometry', 'FieldBoundary'):
+            with self.subTest(name=name):
+                candidate = yaml.safe_load(
+                    (root / 'Specification/BrAPI-GenX/Geospatial' /
+                     name / 'Schemas' / (name + '.yaml')).read_text())
+                properties = candidate['components']['schemas'][name]['properties']
+                self.assertIn('geometryUri', properties)
+                self.assertNotIn('checksum', properties)
+                group = (root / 'Specification/BrAPI-GenX/Geospatial' /
+                         name / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', group)
+                self.assertIn('payload integrity', group)
+        geometry = yaml.safe_load(
+            (root / 'Specification/BrAPI-GenX/Geospatial/FieldGeometry/Schemas'
+             / 'FieldGeometry.yaml').read_text())
+        self.assertEqual('object', geometry['components']['schemas']['FieldGeometry']
+                         ['properties']['geometry']['type'])
+        self.assertNotIn('fieldDbId',
+                         geometry['components']['schemas']['FieldGeometry']['properties'])
+        transform = yaml.safe_load(
+            (root / 'Specification/BrAPI-GenX/Geospatial/CrsTransform/Schemas'
+             / 'CrsTransform.yaml').read_text())
+        self.assertEqual('string', transform['components']['schemas']['CrsTransform']
+                         ['properties']['parameters']['type'])
+
 
 if __name__ == '__main__':
     unittest.main()

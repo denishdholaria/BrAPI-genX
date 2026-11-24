@@ -1,1 +1,9 @@
 # Group FieldBoundary
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 075; not an approved spatial coordinate standard, a geospatial transformation engine, or an independently verified geographic authority.
+
+Proposed registration, optional lifecycle-filtered listing and retrieval produce candidate immutable metadata records, with replay and conflict behavior not established against an independent service. The proposed namespaced `fieldBoundaryDbId` and `status` are required, while `fieldDbId`, `boundaryVersion`, `geometryUri`, `supersedes` and provenance are optional. A string `fieldDbId` does not establish a typed or validated BrAPI Location or GenX Farm reference. The candidate has no format, coordinate reference system, payload digest, geometry fetch operation or independent verification; D-223–D-225 remain open.
+
+**Boundaries:** Official BrAPI Locations already carry GeoJSON-compatible coordinates. Existing Breeding Application Programming Interface (BrAPI) version 2.1 Location identity, coordinate uncertainty and GeoJSON geometry remain authoritative for official exchange. Free-form geometry objects, geographic URIs, coordinate-reference strings and area labels do not prove coordinate validity, field identity, unit conversion, accuracy, payload integrity or external custody. No approved geometry transform or scientific mapping follows from these operation descriptions. D-224 remains an unresolved decision.
+
+**Sources:** [module overview](./README.md), [candidate schema](./Schemas/FieldBoundary.yaml), [registration request](./Schemas/FieldBoundaryNewRequest.yaml), [draft operations](./FieldBoundary_GET_POST.yaml), [RFC-075](../../RFCs/RFC-075-Field-Boundary.md), [official BrAPI Location](../../../BrAPI-Core/Locations/Schemas/LocationNewRequest.yaml), and [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

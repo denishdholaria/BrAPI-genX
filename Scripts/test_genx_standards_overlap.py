@@ -84,7 +84,7 @@ class StandardsOverlapAuditTests(unittest.TestCase):
         row = next(x for x in self.manifest['unratified_links']
                    if x['resource'] == 'OntologyTermRecord')
         self.assertEqual('OntologyTerm.yaml', row['schema_file'])
-        self.assertEqual(23, report['links_checked'])
+        self.assertEqual(25, report['links_checked'])
 
     def test_reintroduced_absence_claim_fails(self):
         row = self.manifest['official_overlap'][0]

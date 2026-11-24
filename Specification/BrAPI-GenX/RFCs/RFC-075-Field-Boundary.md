@@ -6,11 +6,7 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record operational field boundaries and their
-history. Field boundaries change over time (splits, merges, corrections) and
-are the spatial anchor for planting, scouting, and harvest records. Without a
-boundary record, a field is an unversioned geometry with no stated version,
-source, or provenance, so results cannot be compared or reproduced.
+Official BrAPI version 2.1 already records geographic coordinates for Locations. A distinct operational field-boundary history could represent field splits and revisions, but the current proposed record carries only optional `fieldDbId`, version label, and geometry URI without a canonical BrAPI Location or GenX Farm identity mapping.
 
 ## 2. Object
 
@@ -28,11 +24,9 @@ with its field linkage, version label, geometry reference, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Boundary records reference BrAPI `Location` and GenX `Farm` by identifier; they
-  do not duplicate those resources.
+- The candidate has an optional free-string `fieldDbId` but no typed official BrAPI `Location` or GenX `Farm` reference. It cannot establish either resource's identity or boundary ownership.
 - A boundary record is not a BrAPI Location and must not be treated as one.
-- Geometry bytes are not transported by this API. The record names and verifies
-  the payload; retrieval uses the referenced geometry URI.
+- Geometry bytes are not transported by this API. The record optionally names an external geometry URI but provides no required format, checksum, retrieval operation or verification guarantee.
 
 ## 5. Invariants
 

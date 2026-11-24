@@ -206,6 +206,20 @@
       "resource": "PhenotypeAnnotation",
       "target": "PhenotypeCapture",
       "decision": "D-131"
+    },
+    {
+      "module": "Geospatial/FieldGeometry",
+      "rfc": "RFC-142-FieldGeometry.md",
+      "resource": "FieldGeometry",
+      "target": "ResearchAsset",
+      "decision": "D-426"
+    },
+    {
+      "module": "Geospatial/CrsTransform",
+      "rfc": "RFC-140-CrsTransform.md",
+      "resource": "CrsTransform",
+      "target": "ResearchAsset",
+      "decision": "D-420"
     }
   ]
 }
