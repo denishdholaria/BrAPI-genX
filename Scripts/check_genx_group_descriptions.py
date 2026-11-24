@@ -30,6 +30,7 @@ def audit(root: Path, reviewed: frozenset[str] = REVIEWED) -> dict:
     if not genx.is_dir():
         return {'total': 0, 'reviewed': 0, 'deferred': 0,
                 'errors': [f'GenX specification directory absent: {genx}']}
+    repository_root = root.resolve()
     files = sorted(genx.glob('*/*/GroupDescription.md'))
     known = {path.parent.relative_to(genx).as_posix(): path for path in files}
     for module in sorted(reviewed):
@@ -57,7 +58,12 @@ def audit(root: Path, reviewed: frozenset[str] = REVIEWED) -> dict:
             if '://' in href or href.startswith('/') or '#' in href:
                 errors.append(f'{module}: source link must be a local, direct file path: {href}')
                 continue
-            target = file.parent / href
+            # Resolve both traversal components and symlinks before trusting
+            # a source link as repository-local evidence.
+            target = (file.parent / href).resolve()
+            if not target.is_relative_to(repository_root):
+                errors.append(f'{module}: source link escapes repository: {href}')
+                continue
             if not target.is_file():
                 errors.append(f'{module}: dangling evidence link: {href}')
     return {'total': len(files), 'reviewed': len(reviewed),

@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from pathlib import Path
 import tempfile
+import os
 import unittest
 
 from check_genx_group_descriptions import audit, REL, REVIEWED
@@ -84,6 +85,32 @@ class GroupEvidenceTests(unittest.TestCase):
             'Interoperability/Crosswalk',
             'Interoperability/SchemaMapping',
         }.issubset(REVIEWED))
+
+    def test_parent_relative_evidence_inside_repo_is_valid(self):
+        evidence = self.root / REL / 'DECISIONS.md'
+        evidence.write_text('Tracked project decision evidence')
+        self.doc.write_text(GOOD.replace('./README.md', '../../DECISIONS.md'))
+        self.assertEqual([], self.audit()['errors'])
+
+    def test_parent_traversal_outside_repo_is_rejected(self):
+        with tempfile.TemporaryDirectory() as outside:
+            evidence = Path(outside) / 'evidence.md'
+            evidence.write_text('Not a repository file')
+            href = Path(os.path.relpath(evidence, self.doc.parent)).as_posix()
+            self.doc.write_text(GOOD.replace('./README.md', href))
+            self.assertTrue(any('escapes repository' in error
+                                for error in self.audit()['errors']))
+
+    def test_symlink_to_external_evidence_is_rejected(self):
+        with tempfile.TemporaryDirectory() as outside:
+            evidence = Path(outside) / 'evidence.md'
+            evidence.write_text('Not a repository file')
+            (self.root / 'external-link.md').symlink_to(evidence)
+            self.doc.write_text(
+                GOOD.replace('./README.md', '../../../../external-link.md')
+            )
+            self.assertTrue(any('escapes repository' in error
+                                for error in self.audit()['errors']))
 
 
 if __name__ == '__main__':
