@@ -1,7 +1,13 @@
 # BrAPI-GenX — Variant Annotation (Genomics)
 
-Variant annotation records describe variant functional annotations and provenance.
-BrAPI v2.1 has no variant annotation record.
+VariantAnnotation proposes a separately identified functional-annotation record,
+not an independently validated biological consequence. Its `variantDbId`,
+`annotations`, method reference, and provenance are optional. The annotation
+object has no standardized gene, transcript, allele, or effect vocabulary.
+
+Official BrAPI version 2.1 `Variant` already offers flexible `additionalInfo`;
+the GenX proposal is not a replacement for that metadata or a verified join.
+Its scientific and lifecycle claims remain draft and require evidence.
 
 - `POST /genx/v1/variant-annotations` (`genxRecordVariantAnnotation`) registers one
   `VariantAnnotation` (`Schemas/VariantAnnotationNewRequest.yaml`). Same
