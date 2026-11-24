@@ -38,6 +38,8 @@ jobs:
         run: python Scripts/check_rfc_governance.py
       - name: Regression-test RFC governance gate
         run: python Scripts/test_rfc_governance.py
+      - name: Test BreedingPipeline authority-filter identity uniqueness
+        run: python Scripts/test_breeding_pipeline_parameter_duplicates.py
       - name: Validate advisory breeding design fixtures
         run: python3 Scripts/validate_breeding_pipeline_candidate_fixtures.py
       - name: Validate approved-candidate breeding contract fixtures

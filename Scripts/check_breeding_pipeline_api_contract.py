@@ -73,6 +73,24 @@ def parameter_map(parameters: list[dict[str, Any]]) -> dict[str, dict[str, Any]]
     }
 
 
+def require_unique_parameter_names(parameters: list[dict[str, Any]], label: str, errors: list[str]) -> None:
+    """Reject ambiguous explicit names or repeated references before dict mapping."""
+    seen: set[tuple[str, str]] = set()
+    for parameter in parameters:
+        if '$ref' in parameter:
+            ref = parameter['$ref']
+            identity = ('$ref', ref) if isinstance(ref, str) and ref else None
+        else:
+            location = parameter.get('in')
+            name = parameter.get('name')
+            identity = (location, name) if isinstance(location, str) and isinstance(name, str) else None
+        if identity is None:
+            continue
+        if identity in seen:
+            errors.append(f'{label}: duplicate parameter identity {identity!r}.')
+        seen.add(identity)
+
+
 def require_filter_pair(
     parameters: dict[str, dict[str, Any]],
     dbid_name: str,
@@ -483,6 +501,10 @@ def run(root: Path) -> list[str]:
     except (OSError, yaml.YAMLError, ValueError) as exc:
         errors.append(f"Cannot load execution list endpoints: {exc}")
         pop_params, sel_params = [], []
+
+    # Check raw declarations before dict coercion can conceal duplicate names.
+    require_unique_parameter_names(pop_params, "PopulationAdvancement GET", errors)
+    require_unique_parameter_names(sel_params, "SelectionDecisions GET", errors)
 
     pop_map = parameter_map(pop_params)
     sel_map = parameter_map(sel_params)
