@@ -112,6 +112,26 @@ class InventoryTests(unittest.TestCase):
             with patch('sys.argv', ['report', '--root', td, '--check']):
                 self.assertEqual(1, main())
 
+    def test_schema_mapping_to_dataset_triads_remain_decision_gated(self):
+        root = Path(__file__).resolve().parents[1]
+        live = yaml.safe_load((root / LEDGER).read_text(encoding='utf-8'))
+        summary = summarize(live)
+        self.assertEqual(153, summary['totalLinks'])
+        rows = [row for row in live['entries']
+                if row['sourceModule'] == 'SchemaMapping'
+                and row['targetOperationId'] == 'genxRegisterGenomicDataset']
+        self.assertEqual(3, len(rows))
+        for row in rows:
+            with self.subTest(link=row['id']):
+                self.assertEqual('requires-decision', row['reviewStatus'])
+                self.assertEqual('inherited-registry-only', row['provenance'])
+                self.assertIn('schemaMappingDbId', row['rationale'])
+                self.assertIn('transformation', row['openQuestion'])
+                self.assertIn(
+                    'docs/assessment/BRAPI-GENX-MISSION-050-SCHEMA-DATASET-RELATIONSHIP-TRIAGE.md',
+                    row['documentaryEvidence'])
+                self.assertEqual([], row['evidence'])
+
 
 if __name__ == '__main__':
     unittest.main()

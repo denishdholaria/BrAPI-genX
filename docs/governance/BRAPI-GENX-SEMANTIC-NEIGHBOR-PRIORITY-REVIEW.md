@@ -171,3 +171,7 @@ See `endpoint-overlaps.yaml` for full rationale.
 - Similar names or compatible field types do not establish equivalence.
 - The drift-regression gate remains in force; no new unreviewed references
   may be introduced.
+
+## Mission 050 — SchemaMapping → GenomicDataset triad (2026-11-24)
+
+Three previously inherited operation-neighbor entries (`SchemaMapping` get/list/record → `genxRegisterGenomicDataset`) now have `requires-decision` review status with exact source-schema citations and an explicit open question. The candidate `mappingRules` is optional free text; `GenomicDataset` has no typed SchemaMapping reference. This is a review status transition, **not** a normative link, equivalence or approval to remove any endpoint/neighbor. All 153 historical entries are preserved. Current review snapshot: **54 requires-decision**, **99 inherited-unreviewed**, no scientific relationship accepted. See [Mission 050 assessment](../../docs/assessment/BRAPI-GENX-MISSION-050-SCHEMA-DATASET-RELATIONSHIP-TRIAGE.md).

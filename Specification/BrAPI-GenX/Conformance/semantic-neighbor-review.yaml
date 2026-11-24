@@ -2794,9 +2794,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-050-SCHEMA-DATASET-RELATIONSHIP-TRIAGE.md
+  - Specification/BrAPI-GenX/Interoperability/SchemaMapping/Schemas/SchemaMapping.yaml
+  - Specification/BrAPI-GenX/Genotyping/GenomicDatasets/Schemas/GenomicDataset.yaml
   decisionReferences:
   - RFC-013
   - RFC-152
@@ -2804,7 +2807,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: SchemaMapping -> GenomicDatasets.'
-  rationale: ''
+  rationale: 'SchemaMapping has optional sourceSchema, targetSchema and free-text mappingRules; GenomicDataset has dataset identity and scientific dataset fields but no typed schemaMappingDbId. Their operation names do not establish transformation, dataset membership, or equivalent registration semantics.'
+  openQuestion: 'Should a future genomic dataset release explicitly cite a versioned authority-scoped executable schema transformation with input/output schema identities, cardinality, validation errors and authenticated provenance, or should this inherited operation neighbor remain navigation only?'
   evidence: []
 - id: brapi-genx.genx.v1.schema-mappings.list -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.schema-mappings.list
@@ -2817,9 +2821,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-050-SCHEMA-DATASET-RELATIONSHIP-TRIAGE.md
+  - Specification/BrAPI-GenX/Interoperability/SchemaMapping/Schemas/SchemaMapping.yaml
+  - Specification/BrAPI-GenX/Genotyping/GenomicDatasets/Schemas/GenomicDataset.yaml
   decisionReferences:
   - RFC-013
   - RFC-152
@@ -2827,7 +2834,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: SchemaMapping -> GenomicDatasets.'
-  rationale: ''
+  rationale: 'SchemaMapping has optional sourceSchema, targetSchema and free-text mappingRules; GenomicDataset has dataset identity and scientific dataset fields but no typed schemaMappingDbId. Their operation names do not establish transformation, dataset membership, or equivalent registration semantics.'
+  openQuestion: 'Should a future genomic dataset release explicitly cite a versioned authority-scoped executable schema transformation with input/output schema identities, cardinality, validation errors and authenticated provenance, or should this inherited operation neighbor remain navigation only?'
   evidence: []
 - id: brapi-genx.genx.v1.schema-mappings.record -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.schema-mappings.record
@@ -2840,9 +2848,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-050-SCHEMA-DATASET-RELATIONSHIP-TRIAGE.md
+  - Specification/BrAPI-GenX/Interoperability/SchemaMapping/Schemas/SchemaMapping.yaml
+  - Specification/BrAPI-GenX/Genotyping/GenomicDatasets/Schemas/GenomicDataset.yaml
   decisionReferences:
   - RFC-013
   - RFC-152
@@ -2850,7 +2861,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: SchemaMapping -> GenomicDatasets.'
-  rationale: ''
+  rationale: 'SchemaMapping has optional sourceSchema, targetSchema and free-text mappingRules; GenomicDataset has dataset identity and scientific dataset fields but no typed schemaMappingDbId. Their operation names do not establish transformation, dataset membership, or equivalent registration semantics.'
+  openQuestion: 'Should a future genomic dataset release explicitly cite a versioned authority-scoped executable schema transformation with input/output schema identities, cardinality, validation errors and authenticated provenance, or should this inherited operation neighbor remain navigation only?'
   evidence: []
 - id: brapi-genx.genx.v1.sensor-devices.get -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.sensor-devices.get
