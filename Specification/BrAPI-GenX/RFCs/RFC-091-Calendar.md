@@ -6,15 +6,18 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record calendars and time conventions. Calendars
-are the routine reference for research organization. Without a record,
-calendars arrive as unversioned notes with no stated convention or provenance,
-so they cannot be audited or reproduced.
+Official BrAPI v2.1 already has a `Season` resource with a required
+`seasonDbId` and optional `seasonName`/`year`; it does not constitute a
+validated calendar-convention registry. A separate convention catalogue
+could clarify time conventions, but this draft requires only `calendarDbId` on
+registration. No date system, timezone, Study mapping, or official Season
+crosswalk is enforced by the present schema.
 
 ## 2. Object
 
-`Calendar` — one immutable calendar or time convention record, with its name,
-convention, and provenance.
+`Calendar` — a proposed immutable calendar or time-convention metadata record.
+`name`, free-text `convention` and `provenance` are optional in the current
+contract, so the record need not describe a usable calendar convention.
 
 ## 3. Endpoints
 
@@ -27,9 +30,10 @@ convention, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Calendar records reference BrAPI `Study` by identifier; they do not duplicate
-  those resources.
-- A calendar record is not a BrAPI Study and must not be treated as one.
+- There is no `studyDbId` or `seasonDbId` in the current Calendar schema;
+  neither an authoritative Study relationship nor a mapping to official
+  BrAPI `Season` has been modelled.
+- A calendar record is not a BrAPI Study or Season and must not be treated as one.
 
 ## 5. Invariants
 

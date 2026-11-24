@@ -1,1 +1,11 @@
 # Group DevelopmentalStage
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 079. A proposed growth-stage vocabulary entry is not an official BrAPI version 2.1 Observation, ObservationVariable, endorsed Biologische Bundesanstalt, Bundessortenamt und Chemische Industrie (BBCH) crop-stage scale, or verified phenological event.
+
+The registration request requires only `developmentalStageDbId`; the response requires the identifier and lifecycle `status`. `cropDbId`, `stageCode`, `stageName`, `definition`, `supersedes`, and `provenance` are **optional**. `stageCode` is an unconstrained string; `BBCH-31` is an example, not validation against a BBCH ontology, crop-specific phenological scale, reference vocabulary, or stage hierarchy. An optional `cropDbId` string is not a verified join to an official Crop or Germplasm identity. No controlled crosswalk to an official ObservationVariable or GenX VariableTerm is modelled.
+
+**Official-contract boundary:** BrAPI version 2.1 already defines ObservationVariable as a Trait–Method–Scale context for observations. This repository's official specifications do not expose a dedicated DevelopmentalStage resource, but that narrower finding does **not** mean official BrAPI cannot represent phenology through observations. The proposed entry cannot establish biological comparability across crops, methods, growth environments or authority namespaces.
+
+**Deferred design decisions:** D-235 asks whether `cropDbId` should be required (currently optional); D-236 asks whether `stageCode` should use a controlled BBCH-like vocabulary (currently free text); D-237 asks for a GenX `VariableTerm` link (no such property exists). These remain unratified.
+
+**Sources:** [module overview](./README.md), [response schema](./Schemas/DevelopmentalStage.yaml), [registration schema](./Schemas/DevelopmentalStageNewRequest.yaml), [operations](./DevelopmentalStage_GET_POST.yaml), [RFC](../../RFCs/RFC-079-Developmental-Stage.md), [official ObservationVariable schema](../../../BrAPI-Phenotyping/ObservationVariables/Schemas/ObservationVariable.yaml), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

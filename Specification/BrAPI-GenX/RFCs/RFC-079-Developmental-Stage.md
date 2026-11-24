@@ -6,16 +6,18 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record developmental stage vocabulary. Growth-stage
-terms (BBCH, etc.) are the routine reference for phenology and observation
-annotation. Without a record, stage terms arrive as unversioned strings with no
-stated crop, code, definition, or provenance, so they cannot be audited or
-reproduced.
+The checked official BrAPI v2.1 source has ObservationVariables and
+Observations that can encode phenology measurements, but no dedicated
+`DevelopmentalStage` resource. A separate entry could document a crop,
+stage code, definition and provenance. These fields are currently optional;
+the candidate cannot guarantee that a stage term is standardized,
+crop-qualified, traceable to a controlled BBCH vocabulary, or comparable.
 
 ## 2. Object
 
-`DevelopmentalStage` — one immutable developmental stage vocabulary entry for a
-crop, with its code, name, definition, and provenance.
+`DevelopmentalStage` — a proposed immutable stage-vocabulary entry. The
+`cropDbId`, `stageCode`, name, definition and provenance are optional, and
+no controlled stage-code vocabulary is enforced.
 
 ## 3. Endpoints
 
@@ -28,9 +30,11 @@ crop, with its code, name, definition, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Developmental stage entries reference BrAPI `Germplasm`/crop by identifier;
-  they do not duplicate those resources.
-- A stage entry is not a BrAPI Observation and must not be treated as one.
+- Optional `cropDbId` is a string, not an enforced official Germplasm or
+  crop-authority relationship; no GenX `VariableTerm` or official
+  `ObservationVariable` crosswalk is modelled.
+- A stage entry is not a BrAPI Observation or ObservationVariable and must
+  not be treated as one.
 
 ## 5. Invariants
 
