@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "policy": "These observations show scope overlap or an unratified link, not semantic equivalence, external standard approval or conformance.",
+  "official_overlap": [
+    {
+      "module": "ReferenceData/MeasurementScale",
+      "rfc": "RFC-087-Measurement-Scale.md",
+      "resource": "MeasurementScale",
+      "official": "Specification/BrAPI-Phenotyping/Scales/Scales_GET_POST.yaml",
+      "route": "/scales",
+      "public_route": "/brapi/v2/scales"
+    },
+    {
+      "module": "ReferenceData/MeasurementMethods",
+      "rfc": "RFC-017-Measurement-Methods.md",
+      "resource": "MeasurementMethod",
+      "official": "Specification/BrAPI-Phenotyping/Methods/Methods_GET_POST.yaml",
+      "route": "/methods",
+      "public_route": "/brapi/v2/methods"
+    },
+    {
+      "module": "ReferenceData/ReusableList",
+      "rfc": "RFC-090-Reusable-List.md",
+      "resource": "ReusableList",
+      "official": "Specification/BrAPI-Core/Lists/Lists_GET_POST.yaml",
+      "route": "/lists",
+      "public_route": "/brapi/v2/lists"
+    },
+    {
+      "module": "ReferenceData/CommonCropName",
+      "rfc": "RFC-094-Common-Crop-Name.md",
+      "resource": "CommonCropName",
+      "official": "Specification/BrAPI-Core/Common Crop Names/CommonCropNames_GET.yaml",
+      "route": "/commoncropnames",
+      "public_route": "/brapi/v2/commoncropnames"
+    },
+    {
+      "module": "ReferenceData/PersonReference",
+      "rfc": "RFC-097-Person-Reference.md",
+      "resource": "PersonReference",
+      "official": "Specification/BrAPI-Core/People/People_GET_POST.yaml",
+      "route": "/people",
+      "public_route": "/brapi/v2/people"
+    }
+  ],
+  "unratified_links": [
+    {
+      "module": "ReferenceData/UnitsAndQuantity",
+      "rfc": "RFC-082-Units-And-Quantity.md",
+      "resource": "UnitsAndQuantity",
+      "target": "VariableTerm",
+      "decision": "D-246"
+    },
+    {
+      "module": "ReferenceData/OntologyTerm",
+      "rfc": "RFC-085-Ontology-Term.md",
+      "resource": "OntologyTermRecord",
+      "target": "VariableTerm",
+      "decision": "D-255"
+    },
+    {
+      "module": "ReferenceData/OntologyMapping",
+      "rfc": "RFC-086-Ontology-Mapping.md",
+      "resource": "OntologyMapping",
+      "target": "OntologyTerm",
+      "decision": "D-258"
+    },
+    {
+      "module": "ReferenceData/MeasurementScale",
+      "rfc": "RFC-087-Measurement-Scale.md",
+      "resource": "MeasurementScale",
+      "target": "VariableTerm",
+      "decision": "D-261"
+    },
+    {
+      "module": "ReferenceData/MeasurementMethods",
+      "rfc": "RFC-017-Measurement-Methods.md",
+      "resource": "MeasurementMethod",
+      "target": "BrAPI Method",
+      "decision": "D-49"
+    }
+  ]
+}

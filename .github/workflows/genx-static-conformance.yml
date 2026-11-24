@@ -62,6 +62,8 @@ on:
       - 'Scripts/test_semantic_neighbor_terminal_decisions.py'
       - 'Scripts/validate_typed_relationship_candidates.py'
       - 'Scripts/test_typed_relationship_candidates.py'
+      - 'Scripts/audit_genx_standards_overlap.py'
+      - 'Scripts/test_genx_standards_overlap.py'
       - 'Scripts/check_genx_group_descriptions.py'
       - 'Scripts/test_genx_group_descriptions.py'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
@@ -130,6 +132,8 @@ on:
       - 'Scripts/test_semantic_neighbor_terminal_decisions.py'
       - 'Scripts/validate_typed_relationship_candidates.py'
       - 'Scripts/test_typed_relationship_candidates.py'
+      - 'Scripts/audit_genx_standards_overlap.py'
+      - 'Scripts/test_genx_standards_overlap.py'
       - 'Scripts/check_genx_group_descriptions.py'
       - 'Scripts/test_genx_group_descriptions.py'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
@@ -280,6 +284,10 @@ jobs:
           else
             python Scripts/check_semantic_neighbor_governance.py --comparison-ref "$COMPARE"
           fi
+      - name: Audit official BrAPI reuse and unratified links
+        run: python Scripts/audit_genx_standards_overlap.py
+      - name: Test standards-overlap evidence mutations
+        run: python Scripts/test_genx_standards_overlap.py
       - name: Verify evidence-backed GenX group descriptions
         run: python Scripts/check_genx_group_descriptions.py
       - name: Test group-description evidence guard
@@ -332,6 +340,8 @@ jobs:
             run_check python Scripts/test_semantic_neighbor_terminal_decisions.py
             run_check python Scripts/validate_typed_relationship_candidates.py
             run_check python Scripts/test_typed_relationship_candidates.py
+            run_check python Scripts/audit_genx_standards_overlap.py
+            run_check python Scripts/test_genx_standards_overlap.py
             run_check python Scripts/check_genx_group_descriptions.py
             run_check python Scripts/test_genx_group_descriptions.py
             run_check python Scripts/test_semantic_neighbor_lineage.py
