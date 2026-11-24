@@ -1,1 +1,9 @@
 # Group DiagnosticEvidence
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate; not an accepted scientific diagnostic, official Breeding Application Programming Interface (BrAPI) version 2.1 resource, or independently verified persistent service.
+
+The proposed `DiagnosticEvidence` record requires a namespaced identity and a lifecycle `status` (`active`, `superseded`, `withdrawn`). Optional candidate scientific fields include `evidenceType`, `diagnosticMethod`, `result`, `confidence`, `observationDate`, `fieldOrPlot`, `supersedes`, and provenance. The draft operations register, retrieve and list entries, but their documented replay/conflict and immutable-publication semantics are not evidence of independent deployment or transactional conformance.
+
+**Scientific and interoperability boundaries:** A free-text diagnostic result and confidence level do not prove validated test sensitivity, specificity, controls or a pathogen diagnosis. The schema has no typed specimen, DiseaseObservation, or laboratory method-version link. Official BrAPI already supports phenotypic `/brapi/v2/observations`, which may contain disease observations or resistance measurements but does not by itself validate clinical or laboratory diagnostic claims. This record must not be considered a verified mapping to an incumbent observation or a decision to intervene. Deferred decisions D-370–D-372 remain unresolved.
+
+**Sources:** [module overview](./README.md), [candidate record schema](./Schemas/DiagnosticEvidence.yaml), [candidate request schema](./Schemas/DiagnosticEvidenceNewRequest.yaml), [operation draft](./DiagnosticEvidence_GET_POST.yaml), [governing RFC](../../RFCs/RFC-124-DiagnosticEvidence.md), [official BrAPI observation documentation](../../../BrAPI-Phenotyping/Observations/README.md), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

@@ -1,1 +1,9 @@
 # Group FieldScouting
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate; not an accepted scientific diagnostic, official Breeding Application Programming Interface (BrAPI) version 2.1 resource, or independently verified persistent service.
+
+The proposed `FieldScouting` record requires a namespaced identity and a lifecycle `status` (`active`, `superseded`, `withdrawn`). Optional candidate scientific fields include `fieldDbId`, `scoutingType`, `observations`, `supersedes`, and provenance. The draft operations register, retrieve and list entries, but their documented replay/conflict and immutable-publication semantics are not evidence of independent deployment or transactional conformance.
+
+**Scientific and interoperability boundaries:** An optional fieldDbId string does not establish typed Study, Location, or Farm identity. Scouting records conflate unstructured notes with work orders and contain no confirmed task completion, observer identity, observation time or sampling protocol. Official BrAPI already supports phenotypic `/brapi/v2/observations`, which may contain disease observations or resistance measurements but does not by itself validate clinical or laboratory diagnostic claims. This record must not be considered a verified mapping to an incumbent observation or a decision to intervene. Deferred decisions D-220–D-222 remain unresolved.
+
+**Sources:** [module overview](./README.md), [candidate record schema](./Schemas/FieldScouting.yaml), [candidate request schema](./Schemas/FieldScoutingNewRequest.yaml), [operation draft](./FieldScouting_GET_POST.yaml), [governing RFC](../../RFCs/RFC-074-Field-Scouting.md), [official BrAPI observation documentation](../../../BrAPI-Phenotyping/Observations/README.md), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

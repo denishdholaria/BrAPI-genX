@@ -27,8 +27,9 @@ for a field, with its type, observations, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Scouting records reference BrAPI `Study`/`Location` and GenX `Farm` by
-  identifier; they do not duplicate those resources.
+- The optional `fieldDbId` is an untyped string; the current schema does
+  not implement typed references to BrAPI `Study`/`Location` or GenX
+  `Farm`. Those scientific/operational identities cannot be inferred.
 - A scouting record is not a BrAPI Observation and must not be treated as one.
 
 ## 5. Invariants

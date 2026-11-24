@@ -1,1 +1,9 @@
 # Group DiseaseResistance
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate; not an accepted scientific diagnostic, official Breeding Application Programming Interface (BrAPI) version 2.1 resource, or independently verified persistent service.
+
+The proposed `DiseaseResistance` record requires a namespaced identity and a lifecycle `status` (`active`, `superseded`, `withdrawn`). Optional candidate scientific fields include `resistanceType`, `targetPestOrDisease`, `resistanceLevel`, `screeningMethod`, `supersedes`, and provenance. The draft operations register, retrieve and list entries, but their documented replay/conflict and immutable-publication semantics are not evidence of independent deployment or transactional conformance.
+
+**Scientific and interoperability boundaries:** A resistance score string is not evidence of stable genetic resistance. The record lacks typed germplasm, pathogen-isolate, environment, observation unit, assessment scale and BrAPI Observation links. Official BrAPI already supports phenotypic `/brapi/v2/observations`, which may contain disease observations or resistance measurements but does not by itself validate clinical or laboratory diagnostic claims. This record must not be considered a verified mapping to an incumbent observation or a decision to intervene. Deferred decisions D-379–D-381 remain unresolved.
+
+**Sources:** [module overview](./README.md), [candidate record schema](./Schemas/DiseaseResistance.yaml), [candidate request schema](./Schemas/DiseaseResistanceNewRequest.yaml), [operation draft](./DiseaseResistance_GET_POST.yaml), [governing RFC](../../RFCs/RFC-127-DiseaseResistance.md), [official BrAPI observation documentation](../../../BrAPI-Phenotyping/Observations/README.md), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

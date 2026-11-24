@@ -41,6 +41,8 @@ REVIEWED = frozenset({
     'Geospatial/CrsTransform', 'Geospatial/FieldBoundary',
     'Instrumentation/CalibrationQuality', 'Instrumentation/SensorDevice',
     'Instrumentation/TelemetryNormalization', 'Instrumentation/EdgeGatewayHealth',
+    'PlantHealth/DiseaseObservation', 'PlantHealth/DiagnosticEvidence',
+    'PlantHealth/FieldScouting', 'PlantHealth/DiseaseResistance',
     'Environment/WeatherObservations', 'Environment/WeatherForecast',
     'Environment/ClimateNormals', 'Environment/SoilProfile',
     'Environment/WaterBalance',

@@ -6,9 +6,12 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record disease/pest observations. Observations
-occur without a stated pest/disease, severity, date, or provenance, so they
-cannot be tracked or used for IPM decisions.
+BrAPI v2.1 already exchanges phenotypic Observations associated with
+ObservationVariables, including disease symptoms and severity traits.
+This candidate proposes a distinct disease-event record, but it lacks
+the required typed observation-unit identity, controlled pathogen vocabulary,
+assessment scale and contextual linkage needed to demonstrate an independent
+interoperability gap. The case for a separate identity is not yet established.
 
 ## 2. Object
 

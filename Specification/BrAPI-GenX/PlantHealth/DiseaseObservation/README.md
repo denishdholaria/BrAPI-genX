@@ -1,7 +1,7 @@
 # BrAPI-GenX — DiseaseObservation
 
 DiseaseObservation records describe DiseaseObservation entries.
-BrAPI v2.1 has no DiseaseObservation record.
+Official BrAPI v2.1 already exchanges phenotypic observations through `/brapi/v2/observations`, potentially including disease symptoms and severity. This separate GenX event record is only a structural draft; the case for a distinct identity and mapping remains unresolved.
 
 - `POST /genx/v1/disease-observations` (`genxRegisterDiseaseObservation`) registers one
   `DiseaseObservation` (`Schemas/DiseaseObservationNewRequest.yaml`). Same

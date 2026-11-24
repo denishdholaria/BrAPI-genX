@@ -527,6 +527,34 @@ class GroupEvidenceTests(unittest.TestCase):
                 self.assertIn('STRUCTURAL_DRAFT', group)
                 self.assertIn(decision, group)
 
+    def test_plant_health_source_claims_are_pinned(self):
+        root = Path(__file__).resolve().parents[1]
+        self.assertTrue({'PlantHealth/DiseaseObservation',
+                         'PlantHealth/DiagnosticEvidence',
+                         'PlantHealth/FieldScouting',
+                         'PlantHealth/DiseaseResistance'}.issubset(REVIEWED))
+        source = (root / 'Specification/BrAPI-Phenotyping/Observations' /
+                  'Observations_GET_POST_PUT.yaml').read_text()
+        self.assertIn('/observations:', source)
+        for name, decision in (
+            ('DiseaseObservation', 'D-367'),
+            ('DiagnosticEvidence', 'D-370'),
+            ('FieldScouting', 'D-220'),
+            ('DiseaseResistance', 'D-379'),
+        ):
+            group = (root / 'Specification/BrAPI-GenX/PlantHealth' /
+                     name / 'GroupDescription.md').read_text()
+            self.assertIn('STRUCTURAL_DRAFT', group)
+            self.assertIn(decision, group)
+            self.assertIn('**Sources:**', group)
+        for name in ('DiseaseObservation', 'DiseaseResistance'):
+            readme = (root / 'Specification/BrAPI-GenX/PlantHealth' /
+                      name / 'README.md').read_text()
+            self.assertIn('/brapi/v2/observations', readme)
+        scouting = (root / 'Specification/BrAPI-GenX/RFCs' /
+                    'RFC-074-Field-Scouting.md').read_text()
+        self.assertIn('does not implement typed references', scouting)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -6,9 +6,12 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record disease resistance. Resistance screening
-results circulate without a stated resistance type, target, level, or
-provenance, so they cannot be used for breeding decisions.
+BrAPI v2.1 already exchanges phenotypic Observations associated with
+ObservationVariables that may encode disease-resistance screening outcomes.
+This candidate summary does not yet establish the corresponding germplasm,
+observation unit, pathogen isolate, experimental context, measurement scale,
+or typed observation identity. Its need for a separate GenX identity remains
+an interoperability hypothesis, not an established absence in BrAPI.
 
 ## 2. Object
 

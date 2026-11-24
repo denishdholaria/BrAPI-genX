@@ -1,1 +1,9 @@
 # Group DiseaseObservation
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate; not an accepted scientific diagnostic, official Breeding Application Programming Interface (BrAPI) version 2.1 resource, or independently verified persistent service.
+
+The proposed `DiseaseObservation` record requires a namespaced identity and a lifecycle `status` (`active`, `superseded`, `withdrawn`). Optional candidate scientific fields include `observationType`, `pestOrDisease`, `severity`, `observationDate`, `fieldOrPlot`, `supersedes`, and provenance. The draft operations register, retrieve and list entries, but their documented replay/conflict and immutable-publication semantics are not evidence of independent deployment or transactional conformance.
+
+**Scientific and interoperability boundaries:** A symptom note does not establish pathogen causation. The strings do not establish controlled pathogen identity or calibrated severity. No typed BrAPI Observation or ObservationUnit link appears in the candidate schema. Official BrAPI already supports phenotypic `/brapi/v2/observations`, which may contain disease observations or resistance measurements but does not by itself validate clinical or laboratory diagnostic claims. This record must not be considered a verified mapping to an incumbent observation or a decision to intervene. Deferred decisions D-367–D-369 remain unresolved.
+
+**Sources:** [module overview](./README.md), [candidate record schema](./Schemas/DiseaseObservation.yaml), [candidate request schema](./Schemas/DiseaseObservationNewRequest.yaml), [operation draft](./DiseaseObservation_GET_POST.yaml), [governing RFC](../../RFCs/RFC-123-DiseaseObservation.md), [official BrAPI observation documentation](../../../BrAPI-Phenotyping/Observations/README.md), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).
