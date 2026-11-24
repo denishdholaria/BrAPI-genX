@@ -58,6 +58,7 @@ REVIEWED = frozenset({
     'Breeding/PopulationAdvancement', 'Breeding/CandidateVarietyLifecycle',
     'Environment/ExtremeWeather', 'Environment/SoilChemistry',
     'Geospatial/RemoteSensingMetadata',
+    'Geospatial/CloudMask', 'Geospatial/RasterCatalogue',
     'Phenotyping/PhenotypeCapture', 'Phenotyping/RepeatedMeasurement',
     'Phenotyping/PhenotypeAnnotation',
     'Geospatial/LocationGeometry', 'Geospatial/FieldGeometry',

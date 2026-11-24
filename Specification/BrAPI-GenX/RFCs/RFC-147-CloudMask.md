@@ -6,14 +6,19 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record cloud mask records. Cloud masks
-circulate without a stated type, CRS, resolution, or provenance, so they
-cannot be used for cloud masking analysis.
+Official BrAPI v2.1 already exposes an Image resource with an image URL,
+location, dimensions and acquisition timestamp, although its inspected
+source does not provide a dedicated CloudMask resource. The proposed
+metadata catalogue describes cloud masks without requiring the mask data,
+its classification grid, source-image association or quality information;
+registration of a metadata entry alone does not enable cloud masking analysis.
 
 ## 2. Object
 
-`CloudMask` — one immutable cloud mask record, with its mask type,
-acquisition date, CRS, resolution, extent, and provenance.
+`CloudMask` — proposed immutable cloud-mask *metadata*. The mask type,
+acquisition date, coordinate reference system (CRS), resolution, extent and
+provenance are **optional**, unstructured properties rather than validated
+raster artefacts, controlled classifications or required references.
 
 ## 3. Endpoints
 
@@ -33,6 +38,8 @@ acquisition date, CRS, resolution, extent, and provenance.
 - A published `cloudMaskDbId` record never mutates in place.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional records linked by `supersedes`.
+- No pixel mask, asset URI, cloud-percentage estimate, image relationship, or
+  authoritative mask-data linkage is present in this source contract.
 
 ## 6. Deferred questions
 

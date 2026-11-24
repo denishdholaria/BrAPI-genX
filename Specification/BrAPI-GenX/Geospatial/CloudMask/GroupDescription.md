@@ -1,1 +1,11 @@
 # Group CloudMask
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 147. The `CloudMask` proposal registers an identifier and optional descriptive metadata, not a binary cloud-mask raster, validated cloud classification, radiometrically corrected image or executable cloud-detection workflow.
+
+Registration requires only `cloudMaskDbId`; the response additionally requires lifecycle `status`. `maskType`, `acquisitionDate`, `crs` (coordinate reference system), `resolution`, `extent`, `supersedes` and `provenance` are optional. `maskType` is unconstrained free text; the other acquisition/spatial properties are strings. No date format or structured CRS, grid, extent geometry, resolution unit, footprint, pixel classification, class-meaning legend, cloud percentage, mask payload, mask asset address, checksum, or source-image/raster link is enforced. Even a complete-looking metadata record cannot be used to compute or apply a cloud mask without external data and algorithms.
+
+**Official-contract overlap:** Official Breeding Application Programming Interface (BrAPI) version 2.1 `ImageNewRequest` already supports `imageURL`, `imageLocation`, dimensions and `imageTimeStamp`. GenX CloudMask has no link to that Image resource and does not replace it. The neighboring GenX `RemoteSensingMetadata` and `RasterCatalogue` drafts do not establish a validated association with this mask.
+
+**Endpoint integrity:** The authoritative source uses `GET /cloud-masks` with `genxListCloudMasks` (plural), not the previous README's singular `genxListCloudMask`. D-439 (required resolution), D-440 (mask-type controlled vocabulary) and D-441 (ResearchAsset link) are all deferred—not approved mappings.
+
+**Sources:** [module overview](./README.md), [response schema](./Schemas/CloudMask.yaml), [registration schema](./Schemas/CloudMaskNewRequest.yaml), [operations](./CloudMask_GET_POST.yaml), [RFC](../../RFCs/RFC-147-CloudMask.md), [official ImageNewRequest](../../../BrAPI-Phenotyping/Images/Schemas/ImageNewRequest.yaml), [related RemoteSensingMetadata](../RemoteSensingMetadata/Schemas/RemoteSensingMetadata.yaml), [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

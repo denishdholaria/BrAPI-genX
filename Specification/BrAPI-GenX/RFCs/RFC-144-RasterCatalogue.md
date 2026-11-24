@@ -6,14 +6,19 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record raster catalogues. Raster datasets
-circulate without a stated type, resolution, CRS, or provenance, so they
-cannot be used for spatial analysis.
+Official BrAPI v2.1 already exposes Image metadata such as file URL,
+location, dimensions and timestamp, but the inspected source has no
+standalone RasterCatalogue record. This draft has no required dataset name,
+type, coordinate geometry, raster asset URI, spectral bands or pixel payload.
+A record is not evidence of a retrievable georeferenced raster or usable
+scientific analysis product.
 
 ## 2. Object
 
-`RasterCatalogue` — one immutable raster catalogue record, with its dataset
-name, type, resolution, CRS, extent, and provenance.
+`RasterCatalogue` — proposed immutable descriptive raster metadata.
+Dataset name, type, resolution, coordinate reference system (CRS), extent,
+and provenance remain optional; no raster storage or verified metadata
+crosswalk is implemented by these fields.
 
 ## 3. Endpoints
 
@@ -33,6 +38,8 @@ name, type, resolution, CRS, extent, and provenance.
 - A published `rasterCatalogueDbId` record never mutates in place.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional records linked by `supersedes`.
+- No dataset/raster URI, official Image relation, pixel dimensions, spectral
+  band inventory, checksum or scientific quality flag is modelled.
 
 ## 6. Deferred questions
 
