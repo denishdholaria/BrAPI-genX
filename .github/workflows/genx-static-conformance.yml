@@ -55,6 +55,8 @@ on:
       - 'Scripts/test_semantic_neighbor_terminal_decisions.py'
       - 'Scripts/validate_typed_relationship_candidates.py'
       - 'Scripts/test_typed_relationship_candidates.py'
+      - 'Scripts/check_genx_group_descriptions.py'
+      - 'Scripts/test_genx_group_descriptions.py'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-DECISIONS-APPROVED.md'
@@ -114,6 +116,8 @@ on:
       - 'Scripts/test_semantic_neighbor_terminal_decisions.py'
       - 'Scripts/validate_typed_relationship_candidates.py'
       - 'Scripts/test_typed_relationship_candidates.py'
+      - 'Scripts/check_genx_group_descriptions.py'
+      - 'Scripts/test_genx_group_descriptions.py'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json'
       - 'docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-DECISIONS-APPROVED.md'
@@ -256,6 +260,10 @@ jobs:
           else
             python Scripts/check_semantic_neighbor_governance.py --comparison-ref "$COMPARE"
           fi
+      - name: Verify evidence-backed GenX group descriptions
+        run: python Scripts/check_genx_group_descriptions.py
+      - name: Test group-description evidence guard
+        run: python Scripts/test_genx_group_descriptions.py
       - name: Validate independent scientific relationship proposals
         run: python Scripts/validate_typed_relationship_candidates.py
       - name: Test proposal-only typed relationship checks
@@ -302,6 +310,8 @@ jobs:
             run_check python Scripts/test_semantic_neighbor_terminal_decisions.py
             run_check python Scripts/validate_typed_relationship_candidates.py
             run_check python Scripts/test_typed_relationship_candidates.py
+            run_check python Scripts/check_genx_group_descriptions.py
+            run_check python Scripts/test_genx_group_descriptions.py
             run_check python Scripts/test_semantic_neighbor_lineage.py
             run_check python Scripts/report_semantic_neighbor_consumers.py
             run_check python Scripts/test_semantic_neighbor_consumers.py

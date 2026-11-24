@@ -1,0 +1,81 @@
+#!/usr/bin/env python3
+"""Protect reviewed GenX group descriptions without promoting draft modules.
+
+Unreviewed title-only placeholders are counted, never auto-populated or failed.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+from pathlib import Path
+import re
+
+REL = Path('Specification/BrAPI-GenX')
+REVIEWED = frozenset({
+    'Core/Jobs', 'Core/Provenance', 'ReferenceData/VariableTerms',
+    'Breeding/BreedingPipeline', 'CropProduction/LotLedger',
+    'Research/Models', 'Interoperability/FAIR',
+    'Instrumentation/Telemetry', 'Genotyping/Genomics',
+})
+LINK = re.compile(r'\]\(([^)]+)\)')
+
+
+def audit(root: Path, reviewed: frozenset[str] = REVIEWED) -> dict:
+    genx = root / REL
+    errors: list[str] = []
+    if not genx.is_dir():
+        return {'total': 0, 'reviewed': 0, 'deferred': 0,
+                'errors': [f'GenX specification directory absent: {genx}']}
+    files = sorted(genx.glob('*/*/GroupDescription.md'))
+    known = {path.parent.relative_to(genx).as_posix(): path for path in files}
+    for module in sorted(reviewed):
+        file = known.get(module)
+        if file is None:
+            errors.append(f'{module}: reviewed GroupDescription.md missing')
+            continue
+        try:
+            content = file.read_text(encoding='utf-8')
+        except (OSError, UnicodeError) as exc:
+            errors.append(f'{module}: unreadable group description: {exc}')
+            continue
+        if len(content.strip()) < 300:
+            errors.append(f'{module}: reviewed group description reverted to a placeholder')
+        if not re.search(r'^# Group\b', content, re.MULTILINE):
+            errors.append(f'{module}: missing group heading')
+        if '**Status:**' not in content or '**Sources:**' not in content:
+            errors.append(f'{module}: status and source citations required')
+        if not re.search(r'candidate|proposed', content, re.IGNORECASE):
+            errors.append(f'{module}: draft or candidate maturity qualification missing')
+        links = LINK.findall(content)
+        if not links:
+            errors.append(f'{module}: reviewed description requires local source links')
+        for href in links:
+            if '://' in href or href.startswith('/') or '#' in href:
+                errors.append(f'{module}: source link must be a local, direct file path: {href}')
+                continue
+            target = file.parent / href
+            if not target.is_file():
+                errors.append(f'{module}: dangling evidence link: {href}')
+    return {'total': len(files), 'reviewed': len(reviewed),
+            'deferred': len(set(known) - set(reviewed)), 'errors': errors,
+            'note': 'Unreviewed placeholders are not evidence of finished scientific contracts.'}
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--root', type=Path, default=Path(__file__).resolve().parents[1])
+    parser.add_argument('--json', action='store_true')
+    args = parser.parse_args()
+    report = audit(args.root)
+    if args.json:
+        print(json.dumps(report, indent=2, sort_keys=True))
+    else:
+        print(f"GenX groups: {report['total']}; reviewed: {report['reviewed']}; deferred: {report['deferred']}")
+        for error in report['errors']:
+            print('FAIL: ' + error)
+        print('No draft module is automatically deemed finalized.')
+    return int(bool(report['errors']))
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())
