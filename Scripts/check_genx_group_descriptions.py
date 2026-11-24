@@ -34,7 +34,7 @@ REVIEWED = frozenset({
     'Germplasm/McpdAdapter',
     'Phenotyping/QualityFlag', 'Phenotyping/ValueMissingness',
     'Phenotyping/CaptureWorkflow',
-    'Genotyping/ReferenceAssembly', 'Genotyping/PipelineProvenance',
+    'Genotyping/ReferenceAssembly', 'Genotyping/PipelineProvenance', 'Genotyping/VcfImport',
 })
 LINK = re.compile(r'\]\(([^)]+)\)')
 

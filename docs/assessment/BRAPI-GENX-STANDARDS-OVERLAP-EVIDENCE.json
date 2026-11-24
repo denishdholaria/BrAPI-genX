@@ -184,6 +184,13 @@
       "resource": "PipelineProvenance",
       "target": "GenomicDataset",
       "decision": "D-348"
+    },
+    {
+      "module": "Genotyping/VcfImport",
+      "rfc": "RFC-043-Vcf-Import.md",
+      "resource": "VcfImport",
+      "target": "VariantMatrix",
+      "decision": "D-128"
     }
   ]
 }

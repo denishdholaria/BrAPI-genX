@@ -352,6 +352,26 @@ class GroupEvidenceTests(unittest.TestCase):
         self.assertIn('not a reference genome assembly', pipeline)
         self.assertNotIn('the assembly is validated or endorsed', pipeline)
 
+    def test_vcf_import_group_is_evidence_reviewed(self):
+        self.assertIn('Genotyping/VcfImport', REVIEWED)
+
+    def test_vcf_import_dataset_link_is_present_but_unverified(self):
+        root = Path(__file__).resolve().parents[1]
+        candidate = (root / 'Specification/BrAPI-GenX/Genotyping/VcfImport/Schemas'
+                     / 'VcfImport.yaml').read_text()
+        request = (root / 'Specification/BrAPI-GenX/Genotyping/VcfImport/Schemas'
+                   / 'VcfImportNewRequest.yaml').read_text()
+        self.assertIn('genomicDatasetDbId:', candidate)
+        self.assertIn('genomicDatasetDbId:', request)
+        self.assertNotIn('variantMatrixDbId:', candidate)
+        rfc = (root / 'Specification/BrAPI-GenX/RFCs/RFC-043-Vcf-Import.md').read_text()
+        self.assertIn('explicit identifier property', rfc)
+        self.assertIn('no typed VariantMatrix', rfc)
+        desc = (root / 'Specification/BrAPI-GenX/Genotyping/VcfImport'
+                / 'GroupDescription.md').read_text()
+        self.assertIn('STRUCTURAL_DRAFT', desc)
+        self.assertIn('D-128', desc)
+
 
 if __name__ == '__main__':
     unittest.main()

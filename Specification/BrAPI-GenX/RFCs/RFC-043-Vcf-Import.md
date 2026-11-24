@@ -26,8 +26,7 @@ datasets.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- VCF imports reference GenX GenomicDataset by identifier; they do not
-  duplicate that resource.
+- The required `genomicDatasetDbId` string names a GenX GenomicDataset in the draft record. This is an explicit identifier property, not evidence that a service verifies or persists the referenced dataset.
 - A VCF import is not a BrAPI VariantSet and must not be treated as one.
 
 ## 5. Invariants
@@ -42,7 +41,7 @@ datasets.
 
 - D-127: Should `sourceFile` be required? (Current: optional.)
 - D-128: Should VCF imports link to GenX `VariantMatrix`? (Current:
-  optional, not required.)
+  no typed VariantMatrix property is defined in the candidate schema.)
 - D-129: Should source format be a governed vocabulary? (Current: free
   string.)
 
