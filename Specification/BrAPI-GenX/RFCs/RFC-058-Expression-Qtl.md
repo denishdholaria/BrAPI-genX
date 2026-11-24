@@ -6,9 +6,12 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no expression QTL result record. Expression QTLs are
-essential for transcriptomic analysis. Without this record, expression QTL
-results cannot be audited or reproduced.
+GenX proposes separately identified expression quantitative trait locus
+(eQTL) analysis metadata alongside official BrAPI version 2.1 resources.
+A reproducible association needs genetic and expression measurements,
+gene and variant identities, tissue context, covariate handling, statistical
+models, and multiple-testing policy. The current candidate does not require
+those details or independently validate gene regulation.
 
 ## 2. Object
 
@@ -25,8 +28,8 @@ results cannot be audited or reproduced.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Expression QTLs reference GenX AnalysisMethod by identifier; they do not
-  duplicate that resource.
+- `analysisMethodDbId` is a required method identifier string, not an
+  exact method-version binding or evidence of executed eQTL inference.
 - A result is not a BrAPI data resource and must not be treated as one.
 
 ## 5. Invariants
@@ -34,15 +37,21 @@ results cannot be audited or reproduced.
 - A published `expressionQtlDbId` record never mutates in place.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional results linked by `supersedes`.
-- `analysisMethodDbId` is required.
-- A result does not imply scientific validation or approval.
+- `analysisMethodDbId` is required; `qtls`, `jobDbId`, `studyDbId`,
+  and provenance are optional.
+- `qtls` is an unconstrained object. Marker/gene relationships, p-values,
+  multiple-testing correction, expression units and effect uncertainty
+  are not schema-enforced.
+- A registered result does not establish transcriptomic association
+  significance, regulatory causality, comparability or scientific approval.
 
 ## 6. Deferred questions
 
 - D-172: Should `qtls` be required? (Current: optional.)
 - D-173: Should expression QTLs link to GenX `GenomicDataset`? (Current:
-  optional, not required.)
-- D-174: Should p-value threshold be required? (Current: optional.)
+  no `genomicDatasetDbId` field is modelled.)
+- D-174: Should p-value threshold be required? (Current: no first-class
+  p-value threshold is modelled; `qtls` may contain opaque method data.)
 
 ## 7. Classification
 
