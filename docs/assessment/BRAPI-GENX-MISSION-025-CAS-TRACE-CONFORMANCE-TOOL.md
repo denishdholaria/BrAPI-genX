@@ -3,7 +3,7 @@
 **Date:** 2026-11-24  
 **Baseline `main`:** `6a901323deab73a41cb01e310f1e61552bd7c457`  
 **Status:** implementation-independent **offline trace verifier** for
-CAS-01 through CAS-04; not an independent service execution.
+CAS-01 through CAS-04 and CAS-06; not an independent service execution.
 
 ## Purpose and ratified boundary
 
@@ -19,7 +19,7 @@ alone establish those properties.
 ## Deliverables
 
 - `Scripts/verify_breeding_pipeline_cas_trace.py`: a read-only JavaScript
-  Object Notation (JSON) trace checker for four scenarios:
+  Object Notation (JSON) trace checker for five scenarios:
   - **CAS-01:** stale precondition returns HTTP (Hypertext Transfer Protocol)
     409 with `current-version-precondition-failed`; no changed pointer,
     revision or lifecycle event.
@@ -31,7 +31,11 @@ alone establish those properties.
     pointer evaluation and creates no additional revision or effect.
   - **CAS-04:** a reused immutable version ID with different fingerprint
     conflicts with `version-content-conflict` and leaves storage unchanged.
-- `Scripts/test_breeding_pipeline_cas_trace.py`: **21 local positive and
+  - **CAS-06:** two competing first creators race against a nonexistent
+    logical pipeline and omit (not null) the expected-current field. Exactly
+    one creates the pipeline; the other returns 409 with
+    `pipeline-identity-conflict`, with no losing revision or event.
+- `Scripts/test_breeding_pipeline_cas_trace.py`: **27 local positive and
   negative tests**, including reversed winning client, double success,
   wrong conflict code, changed historical fingerprints, missing barrier,
   leaked losing revision/side effects, draft winner, and replay side effects.
@@ -93,10 +97,10 @@ python -m unittest -v test_breeding_pipeline_cas_trace.py
 python -m py_compile verify_breeding_pipeline_cas_trace.py test_breeding_pipeline_cas_trace.py
 ```
 
-**21/21 synthetic tests passed.** Exact tested Git object hashes:
+**27/27 synthetic tests passed.** Exact tested Git object hashes:
 
-- verifier: `38c1b7cadebd13c0255eaac12f475b09429a50bb`;
-- tests: `67a90c621d38cc4ac6c454f706a52dc89bee3866`.
+- verifier: `fef4e29ab6597c911c982f64c01e8ea327815c14`;
+- tests: `154d01ce8da09271170fdfd83dad2aeb84560961`.
 
 Only trace-shape and selected state-invariant checks have been run;
 **no real concurrent service run was performed**. A complete

@@ -11,7 +11,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-SCENARIOS = frozenset({'CAS-01', 'CAS-02', 'CAS-03', 'CAS-04'})
+SCENARIOS = frozenset({'CAS-01', 'CAS-02', 'CAS-03', 'CAS-04', 'CAS-06'})
 
 
 def validate(trace: Any) -> list[str]:
@@ -20,7 +20,7 @@ def validate(trace: Any) -> list[str]:
     errors = []
     scenario = trace.get('scenario')
     if scenario not in SCENARIOS:
-        return ['unsupported scenario; this verifier covers CAS-01 through CAS-04 only']
+        return ['unsupported scenario; this verifier covers CAS-01..04 and CAS-06 only']
     before, after = trace.get('before'), trace.get('after')
     if not isinstance(before, dict) or not isinstance(after, dict):
         return ['before and after must be state snapshots']
@@ -54,7 +54,7 @@ def validate(trace: Any) -> list[str]:
     requests, responses = trace.get('requests'), trace.get('responses')
     if not isinstance(requests, list) or not isinstance(responses, list):
         return errors + ['requests and responses must be lists']
-    if len(requests) != len(responses) or len(requests) != (2 if scenario == 'CAS-02' else 1):
+    if len(requests) != len(responses) or len(requests) != (2 if scenario in ('CAS-02', 'CAS-06') else 1):
         return errors + ['unexpected request/response count for this scenario']
     if any(not isinstance(row, dict) for row in requests + responses):
         return errors + ['requests and responses must contain objects']
@@ -79,37 +79,45 @@ def validate(trace: Any) -> list[str]:
         if response.get('status') != 409 or response.get('errorCode') != 'current-version-precondition-failed':
             errors.append('CAS-01 must reject stale pointer with 409/current-version-precondition-failed')
         unchanged()
-    elif scenario == 'CAS-02':
+    elif scenario in ('CAS-02', 'CAS-06'):
         if trace.get('barrierObserved') is not True:
-            errors.append('CAS-02 requires a recorded simultaneous-start barrier')
-        if before.get('currentVersionId') is None:
-            errors.append('CAS-02 requires a prior current published revision')
-        if any(row.get('expectedCurrentVersionId') != before['currentVersionId'] for row in requests):
-            errors.append('both CAS-02 writers must target the same observed baseline')
+            errors.append(f'{scenario} requires a recorded simultaneous-start barrier')
+        if scenario == 'CAS-02':
+            if before.get('currentVersionId') is None:
+                errors.append('CAS-02 requires a prior current published revision')
+            if any(row.get('expectedCurrentVersionId') != before['currentVersionId'] for row in requests):
+                errors.append('both CAS-02 writers must target the same observed baseline')
+            conflict_code = 'current-version-precondition-failed'
+        else:
+            if before.get('currentVersionId') is not None or old:
+                errors.append('CAS-06 must start before the logical pipeline exists')
+            if any('expectedCurrentVersionId' in row for row in requests):
+                errors.append('CAS-06 first creation must omit expected-current (null is not omission)')
+            conflict_code = 'pipeline-identity-conflict'
         ids = [row['versionId'] for row in requests]
         if len(set(ids)) != 2 or any(version in old for version in ids):
-            errors.append('CAS-02 requires two distinct new revision identities')
+            errors.append(f'{scenario} requires two distinct new revision identities')
         winners = [row for row in requests if by_response[row['client']].get('status') in (200, 201)]
         losers = [row for row in requests if by_response[row['client']].get('status') == 409 and
-                  by_response[row['client']].get('errorCode') == 'current-version-precondition-failed']
+                  by_response[row['client']].get('errorCode') == conflict_code]
         if len(winners) != 1 or len(losers) != 1:
-            errors.append('CAS-02 requires one committed winner and one precondition-conflict loser')
+            errors.append(f'{scenario} requires one committed winner and one {conflict_code} loser')
         else:
             winner, loser = winners[0], losers[0]
             if (after['currentVersionId'] != winner['versionId']
                     or new.get(winner['versionId'], {}).get('fingerprint') != winner['fingerprint']
                     or new.get(winner['versionId'], {}).get('publicationState') != 'published'):
-                errors.append('CAS-02 final pointer/history must resolve to winner content')
+                errors.append(f'{scenario} final pointer/history must resolve to winner content')
             if loser['versionId'] in new:
-                errors.append('CAS-02 losing revision must not enter history')
+                errors.append(f'{scenario} losing revision must not enter history')
             if set(new) - set(old) != {winner['versionId']}:
-                errors.append('CAS-02 must append exactly the winning revision')
+                errors.append(f'{scenario} must append exactly the winning revision')
             if by_response[winner['client']].get('resultVersionId') != winner['versionId']:
-                errors.append('CAS-02 success must identify the winning revision')
+                errors.append(f'{scenario} success must identify the winning revision')
             newly_observed_effects = {event: version for event, version in after['effects'].items()
                                       if event not in before['effects']}
             if any(version != winner['versionId'] for version in newly_observed_effects.values()):
-                errors.append('CAS-02 losing request must not emit a lifecycle side effect')
+                errors.append(f'{scenario} losing request must not emit a lifecycle side effect')
     elif scenario == 'CAS-03':
         request, response = requests[0], by_response[clients[0]]
         if request['versionId'] not in old or old[request['versionId']]['fingerprint'] != request['fingerprint']:

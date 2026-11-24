@@ -11,7 +11,7 @@ from verify_breeding_pipeline_cas_trace import validate
 def state(current='V3', revisions=None, effects=None):
     return {'currentVersionId': current,
             'revisions': {k: {'fingerprint': v, 'publicationState': 'published'}
-                          for k, v in (revisions or {'V3': 'digest3'}).items()},
+                          for k, v in (revisions if revisions is not None else {'V3': 'digest3'}).items()},
             'effects': dict(effects if effects is not None else {'e3': 'V3'})}
 
 
@@ -33,6 +33,16 @@ def race():
     t['after'] = state(current='V4A', revisions={'V3': 'digest3', 'V4A': 'digestA'}, effects={'e3': 'V3', 'e4a': 'V4A'})
     return t
 
+def first_create_race():
+    t = race()
+    t['scenario'] = 'CAS-06'
+    t['before'] = state(current=None, revisions={}, effects={})
+    for row in t['requests']:
+        row.pop('expectedCurrentVersionId')
+    t['responses'][1]['errorCode'] = 'pipeline-identity-conflict'
+    t['after'] = state(current='V4A', revisions={'V4A': 'digestA'}, effects={'e4a': 'V4A'})
+    return t
+
 
 class CasTraceTests(unittest.TestCase):
     def test_stale_conflict_passes(self):
@@ -45,6 +55,29 @@ class CasTraceTests(unittest.TestCase):
     def test_rejected_revision_append_fails(self):
         t = trace(); t['after']['revisions']['V4'] = {'fingerprint': 'digest4', 'publicationState': 'published'}
         self.assertTrue(any('must not change' in e for e in validate(t)))
+
+    def test_first_creation_race_passes(self):
+        self.assertEqual([], validate(first_create_race()))
+
+    def test_first_creation_loser_wrong_error_fails(self):
+        t = first_create_race(); t['responses'][1]['errorCode'] = 'current-version-precondition-failed'
+        self.assertTrue(validate(t))
+
+    def test_first_creation_null_precondition_fails(self):
+        t = first_create_race(); t['requests'][0]['expectedCurrentVersionId'] = None
+        self.assertTrue(any('must omit expected-current' in e for e in validate(t)))
+
+    def test_first_creation_cannot_start_with_existing_revision(self):
+        t = first_create_race(); t['before'] = state()
+        self.assertTrue(any('before the logical pipeline exists' in e for e in validate(t)))
+
+    def test_first_creation_loser_does_not_append(self):
+        t = first_create_race(); t['after']['revisions']['V4B'] = {'fingerprint': 'digestB', 'publicationState': 'published'}
+        self.assertTrue(validate(t))
+
+    def test_first_creation_loser_cannot_emit_event(self):
+        t = first_create_race(); t['after']['effects']['e4b'] = 'V4B'
+        self.assertTrue(validate(t))
 
     def test_race_one_winner_passes(self):
         self.assertEqual([], validate(race()))
