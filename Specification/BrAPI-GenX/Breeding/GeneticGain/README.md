@@ -1,8 +1,13 @@
 # BrAPI-GenX — Genetic Gain (Scientific Compute)
 
-Genetic gain records capture the estimated genetic improvement for a trait
-over a period within a breeding program. BrAPI v2.1 has no genetic gain
-record.
+GeneticGainRecord proposes a numerical estimate of genetic improvement,
+not a verified program-level rate or response to selection. The `gainValue`,
+program and trait identifiers are required, but `unit`, `period`, `method`,
+and provenance are optional. No required baseline, annualization method,
+variance component or statistical uncertainty is specified.
+
+Official BrAPI version 2.1 Program and Trait resources remain authoritative;
+the candidate's string identifiers do not by themselves prove valid joins.
 
 - `POST /genx/v1/genetic-gains` (`genxRecordGeneticGain`) registers one
   `GeneticGainRecord` (`Schemas/GeneticGainRecordNewRequest.yaml`). Same
