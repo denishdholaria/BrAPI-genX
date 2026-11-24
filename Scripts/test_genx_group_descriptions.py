@@ -2017,5 +2017,132 @@ class GroupEvidenceTests(unittest.TestCase):
         self.assertIn('Darwin Core Archive', rfc)
 
 
+
+    def test_experimental_planning_drafts_and_official_overlap(self):
+        root = Path(__file__).resolve().parents[1]
+        genx = root / 'Specification/BrAPI-GenX'
+        official = root / 'Specification'
+        cases = (
+            ('ExperimentalDesign', 'experimentalDesignDbId',
+             {'experimentalDesignDbId', 'studyDbId', 'designType'},
+             ('D-51', 'D-52', 'D-53')),
+            ('ExperimentalProtocol', 'experimentalProtocolDbId',
+             {'experimentalProtocolDbId'}, ('D-349', 'D-350', 'D-351')),
+            ('TreatmentAssignment', 'treatmentAssignmentDbId',
+             {'treatmentAssignmentDbId'}, ('D-316', 'D-317', 'D-318')),
+        )
+        for module, identity, mandatory, decisions in cases:
+            with self.subTest(module=module):
+                folder = genx / 'Breeding' / module
+                self.assertIn('Breeding/' + module, REVIEWED)
+                description = (folder / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', description)
+                self.assertIn('**Sources:**', description)
+                for decision in decisions:
+                    self.assertIn(decision, description)
+                request = yaml.safe_load(
+                    (folder / 'Schemas' / (module + 'NewRequest.yaml')).read_text()
+                )['components']['schemas'][module + 'NewRequest']
+                response = yaml.safe_load(
+                    (folder / 'Schemas' / (module + '.yaml')).read_text()
+                )['components']['schemas'][module]
+                self.assertEqual(mandatory, set(request['required']))
+                self.assertEqual(mandatory | {'status'}, set(response['required']))
+                self.assertNotIn('provenance', request['required'])
+                self.assertNotIn('provenance', response['required'])
+                self.assertIn(identity, response['properties'])
+
+        design = yaml.safe_load(
+            (genx / 'Breeding/ExperimentalDesign/Schemas/ExperimentalDesign.yaml')
+            .read_text()
+        )['components']['schemas']['ExperimentalDesign']
+        for optional in ('replicationCount', 'blockSize', 'randomizationSeed',
+                         'treatmentAssignments'):
+            self.assertIn(optional, design['properties'])
+            self.assertNotIn(optional, design['required'])
+        entries = design['properties']['treatmentAssignments']
+        self.assertEqual('array', entries['type'])
+        self.assertNotIn('minItems', entries)
+        self.assertNotIn('required', entries['items'])
+        self.assertEqual({'plotId', 'treatment', 'replication', 'block'},
+                         set(entries['items']['properties']))
+        for absent in ('observationUnitDbId', 'experimentalProtocolDbId',
+                       'randomizationAlgorithm'):
+            self.assertNotIn(absent, design['properties'])
+
+        protocol = yaml.safe_load(
+            (genx / 'Breeding/ExperimentalProtocol/Schemas/'
+             'ExperimentalProtocol.yaml').read_text()
+        )['components']['schemas']['ExperimentalProtocol']
+        for field in ('protocolName', 'version', 'designType', 'treatments',
+                      'replicates', 'randomization', 'blocks'):
+            self.assertEqual('string', protocol['properties'][field]['type'])
+            self.assertNotIn(field, protocol['required'])
+        for absent in ('name', 'studyDbId', 'experimentalDesignDbId',
+                       'protocolLibraryDbId', 'genomicDatasetDbId', 'steps'):
+            self.assertNotIn(absent, protocol['properties'])
+
+        treatment = yaml.safe_load(
+            (genx / 'Breeding/TreatmentAssignment/Schemas/'
+             'TreatmentAssignment.yaml').read_text()
+        )['components']['schemas']['TreatmentAssignment']
+        for optional in ('fieldDbId', 'treatment'):
+            self.assertEqual('string', treatment['properties'][optional]['type'])
+            self.assertNotIn(optional, treatment['required'])
+        for absent in ('studyDbId', 'locationDbId', 'observationUnitDbId',
+                       'experimentalDesignDbId', 'replication', 'appliedAt',
+                       'dose', 'duration'):
+            self.assertNotIn(absent, treatment['properties'])
+
+        study = yaml.safe_load(
+            (official / 'BrAPI-Core/Studies/Schemas/StudyNewRequest.yaml')
+            .read_text()
+        )['components']['schemas']['StudyNewRequest']
+        self.assertIn('experimentalDesign', study['properties'])
+        self.assertIn('description',
+                      study['properties']['experimentalDesign']['properties'])
+        self.assertIn('observationLevels', study['properties'])
+        units = yaml.safe_load(
+            (official / 'BrAPI-Phenotyping/ObservationUnits/Schemas/'
+             'ObservationUnitNewRequest.yaml').read_text()
+        )['components']['schemas']['ObservationUnitNewRequest']
+        self.assertEqual('#/components/schemas/ObservationTreatment',
+                         units['properties']['treatments']['items']['$ref'])
+        self.assertIn('observationUnitPosition', units['properties'])
+        factors = yaml.safe_load(
+            (official / 'BrAPI-Phenotyping/ObservationUnits/Schemas/'
+             'ObservationTreatment.yaml').read_text()
+        )['components']['schemas']['ObservationTreatment']
+        self.assertTrue({'factor', 'modality'}.issubset(factors['properties']))
+        event = yaml.safe_load(
+            (official / 'BrAPI-Phenotyping/Events/Schemas/Event.yaml').read_text()
+        )['components']['schemas']['Event']
+        self.assertTrue({'studyDbId', 'observationUnitDbIds',
+                         'eventDateRange'}.issubset(event['properties']))
+
+        rfc18 = (genx / 'RFCs/RFC-018-Experimental-Design.md').read_text()
+        rfc106 = (genx / 'RFCs/RFC-106-Treatment-Assignment.md').read_text()
+        rfc117 = (genx / 'RFCs/RFC-117-ExperimentalProtocol.md').read_text()
+        self.assertIn('StudyNewRequest.experimentalDesign', rfc18)
+        self.assertIn('no typed BrAPI', rfc106)
+        self.assertNotIn('records reference BrAPI `Study`/`Location`', rfc106)
+        self.assertIn('D-349: Should `protocolName` be required?', rfc117)
+
+        for module, route, getter, setter in (
+            ('ExperimentalDesign', '/experimental-designs',
+             'genxListExperimentalDesigns', 'genxRegisterExperimentalDesign'),
+            ('ExperimentalProtocol', '/experimental-protocols',
+             'genxListExperimentalProtocols', 'genxRegisterExperimentalProtocol'),
+            ('TreatmentAssignment', '/treatment-assignments',
+             'genxListTreatmentAssignments', 'genxRegisterTreatmentAssignment'),
+        ):
+            operations = yaml.safe_load(
+                (genx / 'Breeding' / module / (module + '_GET_POST.yaml'))
+                .read_text()
+            )
+            self.assertEqual(getter, operations['paths'][route]['get']['operationId'])
+            self.assertEqual(setter, operations['paths'][route]['post']['operationId'])
+
+
 if __name__ == '__main__':
     unittest.main()
