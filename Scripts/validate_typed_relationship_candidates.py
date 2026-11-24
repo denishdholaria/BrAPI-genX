@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Validate proposal-only scientific relationship records; never promote them.
 
-Navigational semanticNeighborIds stay separate and are never an input here.
+Legacy navigation metadata stay separate and are never an input here.
 """
 from __future__ import annotations
 
