@@ -1,7 +1,13 @@
 # BrAPI-GenX — Genomic Selection (Scientific Compute)
 
-Genomic selection results record selected germplasm and selection indices.
-BrAPI v2.1 has no genomic selection result record.
+GenomicSelection proposes a candidate selection-result record, not an
+authorized breeder's decision. `selectedGermplasm` and `selectionThreshold`
+are optional; neither defines a validated population, index, authority or
+consistent measurement scale.
+
+The separate GenX `SelectionDecision` resource describes an actual verdict,
+whereas a candidate selection result cannot establish official advancement.
+Official BrAPI version 2.1 contracts remain unchanged.
 
 - `POST /genx/v1/genomic-selections` (`genxRecordGenomicSelection`) registers one
   `GenomicSelection` (`Schemas/GenomicSelectionNewRequest.yaml`). Same

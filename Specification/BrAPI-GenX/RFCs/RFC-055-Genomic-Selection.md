@@ -6,9 +6,11 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no genomic selection result record. Selection outcomes are
-essential for breeding programs. Without this record, genomic selections
-cannot be audited or reproduced.
+GenX proposes separately identified genomic selection results alongside
+official BrAPI v2.1 records. Such a result does not independently establish
+the breeder's authorized verdict, exact selection index, population
+eligibility, or prediction-model validity. The proposal's optional result
+fields cannot by themselves establish a reproducible breeding decision.
 
 ## 2. Object
 
@@ -25,8 +27,10 @@ cannot be audited or reproduced.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Genomic selections reference GenX AnalysisMethod by identifier; they do not
-  duplicate that resource.
+- `analysisMethodDbId` is a required string reference, not a verified
+  exact method-version join or evidence of authorized execution.
+- This proposal does not replace a separately authorized
+  `SelectionDecision` record or its required decision context.
 - A result is not a BrAPI data resource and must not be treated as one.
 
 ## 5. Invariants
@@ -34,14 +38,19 @@ cannot be audited or reproduced.
 - A published `genomicSelectionDbId` record never mutates in place.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional results linked by `supersedes`.
-- `analysisMethodDbId` is required.
-- A result does not imply scientific validation or approval.
+- `analysisMethodDbId` is required; `selectedGermplasm`,
+  `selectionThreshold`, `studyDbId`, `jobDbId`, and provenance are optional.
+- An array of germplasm identifier strings and a numeric threshold do not
+  require a validated ranking, index scale, trait weights, eligibility
+  population, breeder authorization, or a linked decision.
+- A result does not imply genetic merit, scientific validation, release,
+  advancement, or independent reproducibility.
 
 ## 6. Deferred questions
 
 - D-163: Should `selectedGermplasm` be required? (Current: optional.)
 - D-164: Should genomic selections link to GenX `GenomicDataset`? (Current:
-  optional, not required.)
+  no `genomicDatasetDbId` property is modelled.)
 - D-165: Should selection threshold be required? (Current: optional.)
 
 ## 7. Classification
