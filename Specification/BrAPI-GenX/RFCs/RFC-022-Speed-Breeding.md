@@ -6,9 +6,7 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no record for speed breeding protocols: environmental
-conditions and generation time used to accelerate plant development. Without
-this record, accelerated breeding processes cannot be audited or reproduced.
+BrAPI v2.1 Study already carries environmental parameters, growth-facility and cultural-practice metadata; Events capture actual interventions. This draft explores a separately registered protocol, but its optional regime descriptions and generation-time estimate do not establish an implemented treatment or experimentally validated acceleration.
 
 ## 2. Object
 
@@ -25,8 +23,7 @@ this record, accelerated breeding processes cannot be audited or reproduced.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Speed breeding protocols reference BrAPI Program by identifier; they do not
-  duplicate that resource.
+- Speed breeding protocols require a `programDbId` string, without an authority-qualified server or independently verified Program relationship. This does not replace official Study records.
 - A protocol record is not a BrAPI Program and must not be treated as one.
 
 ## 5. Invariants
@@ -34,8 +31,7 @@ this record, accelerated breeding processes cannot be audited or reproduced.
 - A published `speedBreedingProtocolDbId` record never mutates in place.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional records linked by `supersedes`.
-- `lightRegime`, `temperatureRegime`, `photoperiod`, and `generationTime` are
-  recorded, not inferred.
+- `protocolName` and `programDbId` are required; `lightRegime`, `temperatureRegime`, `photoperiod` and `generationTime` are optional. No time-resolved environmental schedule or measured generational response is enforced.
 - A record does not imply an approved breeding plan or release.
 
 ## 6. Deferred questions
@@ -43,7 +39,7 @@ this record, accelerated breeding processes cannot be audited or reproduced.
 - D-63: Should `photoperiod` and `generationTime` be required? (Current:
   optional.)
 - D-64: Should speed breeding protocols link to GenX `BreedingPipeline`?
-  (Current: optional, not required.)
+  (Current: no `breedingPipelineDbId` or typed relationship exists; the link is not implemented.)
 - D-65: Should generation time be a structured quantity? (Current: integer
   days.)
 
