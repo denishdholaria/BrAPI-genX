@@ -136,6 +136,30 @@ one prototype only, not a normative or production guarantee.
 
 For diagrams, acceptance criteria, evidence requirements, and complete cross-dependencies, see [`BRAPI-GENX-CLUSTER-1-APPROVED-DECISIONS.md`](../../docs/governance/BRAPI-GENX-CLUSTER-1-APPROVED-DECISIONS.md).
 
+### D-026 — Separate advisory navigation from typed scientific relationships (`ACCEPTED`)
+
+**Maintainer direction:** Approved in the ongoing 2026-11-24 BrAPI-GenX development conversation, following the Mission 018 recommendation and issue #17. The architectural direction is accepted **internally**, not on behalf of the official Breeding Application Programming Interface (BrAPI) community.
+
+**Resolution:** Legacy `semanticNeighborIds`, source `x-brapi-genx.semanticNeighbors` and related operation/catalogue navigation labels are **advisory discoverability metadata**. They are not proof of scientific equivalence, shared resource identity, lineage, ownership, unit conversion, authorization or permission to invoke a write operation. A distinct, separately governed typed scientific relationship track is selected for future work. Resource references, directed derivation, operation-contract equivalence and editorial navigation must remain explicitly distinguished.
+
+**Compatibility boundary:** Preserve the existing 153 historical ledger identities and current registry/source names. Adopt a non-breaking shadow proposal mechanism before changing published catalogues or clients. No pending source–target mapping is automatically approved, rejected or deleted. The specific typed relationship schema, evidence sufficiency, identifiers, and migration remain to be validated independently.
+
+**Evidence and alternatives:** `docs/assessment/BRAPI-GENX-MISSION-018-SEMANTIC-RELATIONSHIP-ARCHITECTURE-PROPOSAL.md`; alternatives: keep one ambiguous field, incorrectly treat every link as scientific equivalence, or separate advisory/typed semantics (selected).
+
+**Security and scientific impact:** Prevent algorithms and agents from treating navigation as authorized access or a valid scientific foreign key. Not a live access-control enforcement policy. **Status:** ACCEPTED architectural direction; **not** a normative endpoint specification.
+
+### D-027 — Exact-record maintainer authorization for terminal neighbor decisions (`ACCEPTED`)
+
+**Maintainer direction:** Approved in the 2026-11-24 development conversation, following Mission 020 and issue #20.
+
+**Resolution:** Terminal `rejected` or `superseded` changes to a semantic-neighbor ledger entry require an **explicit, uniquely identified, maintainer-approved repository decision record** bound to the exact `sourceCatalogId -> targetOperationId` identity, intended terminal action, and any successor. An unrelated Request for Comments (RFC) citation, arbitrary web link, or a draft candidate is not an authorization. The record must include rationale, evidence, approval attribution and a traceable immutable GitHub approval reference. The governance validator must fail closed on missing or mismatched records and preserve the original ledger identity through active registry withdrawal.
+
+**Approval authenticity limit:** Plain version-controlled metadata can be forged by an actor allowed to push to the branch. Only the maintainer's controlled review/approval of the *actual decision record* establishes authority. Local schema and identity checks detect mismatches but cannot cryptographically authenticate the approver, replace branch protection or confer consent. The initial approval register intentionally has **no terminal decisions**.
+
+**Compatibility and security impact:** No existing endpoint, registry edge, source schema or scientific relationship is reclassified. A future terminal disposition changes active publication and governance together after a separately recorded decision. This strengthens governance integrity but does not settle broader authentication or security-policy decision D-22.
+
+**Alternatives:** Unconstrained `authorizationReference` (unsafe), generic reviewable markdown with no exact link (ambiguous), or exact record binding with maintainer review (selected). **Status:** ACCEPTED governance architecture, not blanket acceptance of any terminal relationship status.
+
 ## Branch reconciliation record (2026-10-16)
 
 - The endpoint-identity foundation was merged to `brapi-V2.1` via PR #1,

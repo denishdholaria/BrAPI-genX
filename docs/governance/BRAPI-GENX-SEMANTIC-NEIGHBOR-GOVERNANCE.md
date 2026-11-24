@@ -2,6 +2,17 @@
 
 Status: proposed, non-normative. BrAPI v2.1 contracts remain unchanged.
 
+**Accepted internal architectural boundaries (D-026 and D-027, 2026-11-24):**
+legacy operation neighbors are *advisory navigation*, not scientific joins,
+operation equivalence or authorization. Scientifically typed relationships
+must be governed separately. Any historical `rejected`/`superseded`
+disposition needs a uniquely identified maintainer-approved decision record
+binding exact source, target, action and successor. These decisions do not
+ratify any individual inherited link or change the published GenX wire
+contract. See `Specification/BrAPI-GenX/DECISIONS.md` and issue #20.
+
+
+
 ## Purpose
 
 This document governs the review inventory for operation-level semantic-neighbor

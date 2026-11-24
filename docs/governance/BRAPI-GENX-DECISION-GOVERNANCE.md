@@ -44,6 +44,8 @@ community endorsement.
 | D-02 | Digest purposes and generic canonical JSON | ACCEPTED | BrAPI-GenX project maintainer | JCS implementation, profile/preimage use, cross-language conformance; hash algorithm remains separate |
 | D-24 | Idempotency lookup identity, equivalence, key conflict, replay | ACCEPTED | BrAPI-GenX project maintainer | Operation-specific fingerprint contracts, implementation, authorization and concurrency evidence |
 | D-25 | Idempotency durability, recovery, and retention architecture | ACCEPTED | BrAPI-GenX project maintainer | Durable implementation, recovery/retention policy, multi-instance and fault evidence |
+| D-026 | Advisory operation navigation separated from governed typed scientific relationships | ACCEPTED | BrAPI-GenX project maintainer, 2026-11-24 | Non-breaking shadow model, reader audit and independent semantic validation; no link is automatically accepted |
+| D-027 | Exact-record maintainer authorization for terminal semantic-neighbor dispositions | ACCEPTED | BrAPI-GenX project maintainer, 2026-11-24 | Exact-binding validator and maintainer-controlled approval review; register initially empty |
 
 The detailed explanatory record is
 [`BRAPI-GENX-CLUSTER-1-APPROVED-DECISIONS.md`](BRAPI-GENX-CLUSTER-1-APPROVED-DECISIONS.md).
