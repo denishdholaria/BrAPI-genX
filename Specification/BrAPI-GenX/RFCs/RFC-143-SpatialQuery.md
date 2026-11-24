@@ -6,14 +6,17 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no place to record spatial queries. Spatial queries
-circulate without a stated type, geometry, or parameters, so they cannot
-be reproduced or audited.
+BrAPI v2.1 has no dedicated saved-spatial-query metadata registry. This
+candidate records optional descriptive query fields, but does not define
+execution, dataset authority, query validation or a verifiable result. Its
+registration alone cannot establish a reproducible or auditable spatial query.
 
 ## 2. Object
 
-`SpatialQuery` — one immutable spatial query record, with its query type,
-geometry, parameters, result reference, and provenance.
+`SpatialQuery` — one proposed immutable metadata record. Its query type,
+geometry, parameters, result reference and provenance are optional; `queryParams`
+is a string and `queryGeometry` is an unconstrained object, despite their examples.
+The record does not execute a query or validate a spatial result.
 
 ## 3. Endpoints
 

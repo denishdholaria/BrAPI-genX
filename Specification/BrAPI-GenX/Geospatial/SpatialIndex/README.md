@@ -1,7 +1,8 @@
 # BrAPI-GenX — SpatialIndex
 
-SpatialIndex records describe SpatialIndex entries.
-BrAPI v2.1 has no SpatialIndex record.
+SpatialIndex is a **STRUCTURAL_DRAFT**, metadata-only registration candidate.
+An entry does not construct a spatial index, identify an indexed dataset or
+serve an executable query. Mission 090's G-090-1 governance decision is open.
 
 - `POST /genx/v1/spatial-indexes` (`genxRegisterSpatialIndex`) registers one
   `SpatialIndex` (`Schemas/SpatialIndexNewRequest.yaml`). Same
