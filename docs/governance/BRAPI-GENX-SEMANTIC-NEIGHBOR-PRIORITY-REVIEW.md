@@ -27,6 +27,15 @@ only with a typed mapping and independent evidence. See
 `docs/assessment/BRAPI-GENX-MISSION-007-CROSS-MODULE-RELATIONSHIP-REVIEW.md`. Earlier snapshot counts describe their respective
 review dates, not the current ledger.
 
+## Mission 008 — source-backed scientific links (2026-11-24)
+
+Reviewed six potentially related source/target module triads, including existing
+YieldMap.harvestRecordDbId and the ambiguous AssayExecution.assayDbId versus
+AssayDesign.assayDesignDbId. Source-schema evidence and questions M008-Q1..Q6
+are in `docs/assessment/BRAPI-GENX-MISSION-008-EXECUTION-EVIDENCE-REVIEW.md`.
+All 153 original links remain; 36 now require decisions and 117 await review.
+These are advisory classifications, not scientific equivalence decisions.
+
 ## SEM-01 Seed-lot transactions versus GenX ledger records (D-20)
 
 - Authoritative records: BrAPI v2.1 SeedLotTransaction; GenX LotLedgerEntry.

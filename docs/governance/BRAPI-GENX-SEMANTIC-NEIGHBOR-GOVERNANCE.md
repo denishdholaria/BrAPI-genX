@@ -119,6 +119,17 @@ See `docs/assessment/BRAPI-GENX-MISSION-007-CROSS-MODULE-RELATIONSHIP-REVIEW.md`
 and missing independent conformance criteria. The original grouped queue remains
 a pinned historical snapshot, not a live status counter.
 
+## Mission 008 — plausible scientific links (2026-11-24)
+
+Six source/target groups (18 inherited links) were reviewed specifically because
+they involve scientific design/execution, derived-data or controlled-term
+relationships. In one case, `YieldMap` already has an optional
+`harvestRecordDbId`; this must be preserved, not silently relabelled as
+missing. Source schemas and unresolved questions are recorded in
+`docs/assessment/BRAPI-GENX-MISSION-008-EXECUTION-EVIDENCE-REVIEW.md`. The ledger now contains **36 requires-decision** and
+**117 inherited-unreviewed** entries (153 original identities retained).
+No operation equivalence or normative mapping was approved.
+
 ## Non-goals
 
 This framework does not modify official BrAPI v2.1 specifications, GenX routes,

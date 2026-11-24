@@ -157,9 +157,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-008-EXECUTION-EVIDENCE-REVIEW.md
+  - Specification/BrAPI-GenX/Genotyping/AssayExecution/Schemas/AssayExecution.yaml
+  - Specification/BrAPI-GenX/Genotyping/AssayDesign/Schemas/AssayDesign.yaml
   decisionReferences:
   - RFC-061
   - RFC-113
@@ -167,7 +170,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: AssayExecution -> AssayDesign.'
-  rationale: ''
+  rationale: 'AssayExecution records an actual execution using opaque assayDbId; AssayDesign has an independent assayDesignDbId, platform and marker count. The schema does not define whether assayDbId refers to that design identity or which immutable version was executed. Reading an execution is not recording a design.'
+  openQuestion: 'Does assayDbId in AssayExecution identify a versioned AssayDesign, and what authority, exact revision, execution identity and cardinality must an explicit executes-design reference preserve?'
   evidence: []
 - id: brapi-genx.genx.v1.assay-executions.list -> genxRecordAssayDesign
   sourceCatalogId: brapi-genx.genx.v1.assay-executions.list
@@ -180,9 +184,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-008-EXECUTION-EVIDENCE-REVIEW.md
+  - Specification/BrAPI-GenX/Genotyping/AssayExecution/Schemas/AssayExecution.yaml
+  - Specification/BrAPI-GenX/Genotyping/AssayDesign/Schemas/AssayDesign.yaml
   decisionReferences:
   - RFC-061
   - RFC-113
@@ -190,7 +197,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: AssayExecution -> AssayDesign.'
-  rationale: ''
+  rationale: 'AssayExecution records an actual execution using opaque assayDbId; AssayDesign has an independent assayDesignDbId, platform and marker count. The schema does not define whether assayDbId refers to that design identity or which immutable version was executed. Reading an execution is not recording a design.'
+  openQuestion: 'Does assayDbId in AssayExecution identify a versioned AssayDesign, and what authority, exact revision, execution identity and cardinality must an explicit executes-design reference preserve?'
   evidence: []
 - id: brapi-genx.genx.v1.assay-executions.record -> genxRecordAssayDesign
   sourceCatalogId: brapi-genx.genx.v1.assay-executions.record
@@ -203,9 +211,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-008-EXECUTION-EVIDENCE-REVIEW.md
+  - Specification/BrAPI-GenX/Genotyping/AssayExecution/Schemas/AssayExecution.yaml
+  - Specification/BrAPI-GenX/Genotyping/AssayDesign/Schemas/AssayDesign.yaml
   decisionReferences:
   - RFC-061
   - RFC-113
@@ -213,7 +224,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: AssayExecution -> AssayDesign.'
-  rationale: ''
+  rationale: 'AssayExecution records an actual execution using opaque assayDbId; AssayDesign has an independent assayDesignDbId, platform and marker count. The schema does not define whether assayDbId refers to that design identity or which immutable version was executed. Reading an execution is not recording a design.'
+  openQuestion: 'Does assayDbId in AssayExecution identify a versioned AssayDesign, and what authority, exact revision, execution identity and cardinality must an explicit executes-design reference preserve?'
   evidence: []
 - id: brapi-genx.genx.v1.biodiversity-exports.get -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.biodiversity-exports.get
@@ -1510,9 +1522,12 @@ entries:
   targetDomainClass: D6
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-008-EXECUTION-EVIDENCE-REVIEW.md
+  - Specification/BrAPI-GenX/Breeding/FieldBook/Schemas/FieldBook.yaml
+  - Specification/BrAPI-GenX/PlantHealth/FieldScouting/Schemas/FieldScouting.yaml
   decisionReferences:
   - RFC-074
   - RFC-108
@@ -1520,7 +1535,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: FieldBook -> FieldScouting.'
-  rationale: ''
+  rationale: 'FieldBook describes a field-book definition and FieldScouting stores scouting observations or task notes. Both have fieldDbId as an opaque string, but FieldScouting contains no fieldBookDbId, version or execution reference; sharing a field identifier is not an equivalence relation.'
+  openQuestion: 'Should scouting records identify a specific published FieldBook protocol/version or a study/field context independently, and how are authority, observation provenance and recorded-versus-planned facts separated?'
   evidence: []
 - id: brapi-genx.genx.v1.field-books.list -> genxRegisterFieldScouting
   sourceCatalogId: brapi-genx.genx.v1.field-books.list
@@ -1533,9 +1549,12 @@ entries:
   targetDomainClass: D6
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-008-EXECUTION-EVIDENCE-REVIEW.md
+  - Specification/BrAPI-GenX/Breeding/FieldBook/Schemas/FieldBook.yaml
+  - Specification/BrAPI-GenX/PlantHealth/FieldScouting/Schemas/FieldScouting.yaml
   decisionReferences:
   - RFC-074
   - RFC-108
@@ -1543,7 +1562,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: FieldBook -> FieldScouting.'
-  rationale: ''
+  rationale: 'FieldBook describes a field-book definition and FieldScouting stores scouting observations or task notes. Both have fieldDbId as an opaque string, but FieldScouting contains no fieldBookDbId, version or execution reference; sharing a field identifier is not an equivalence relation.'
+  openQuestion: 'Should scouting records identify a specific published FieldBook protocol/version or a study/field context independently, and how are authority, observation provenance and recorded-versus-planned facts separated?'
   evidence: []
 - id: brapi-genx.genx.v1.field-books.record -> genxRegisterFieldScouting
   sourceCatalogId: brapi-genx.genx.v1.field-books.record
@@ -1556,9 +1576,12 @@ entries:
   targetDomainClass: D6
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-008-EXECUTION-EVIDENCE-REVIEW.md
+  - Specification/BrAPI-GenX/Breeding/FieldBook/Schemas/FieldBook.yaml
+  - Specification/BrAPI-GenX/PlantHealth/FieldScouting/Schemas/FieldScouting.yaml
   decisionReferences:
   - RFC-074
   - RFC-108
@@ -1566,7 +1589,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: FieldBook -> FieldScouting.'
-  rationale: ''
+  rationale: 'FieldBook describes a field-book definition and FieldScouting stores scouting observations or task notes. Both have fieldDbId as an opaque string, but FieldScouting contains no fieldBookDbId, version or execution reference; sharing a field identifier is not an equivalence relation.'
+  openQuestion: 'Should scouting records identify a specific published FieldBook protocol/version or a study/field context independently, and how are authority, observation provenance and recorded-versus-planned facts separated?'
   evidence: []
 - id: brapi-genx.genx.v1.field-geometries.get -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.field-geometries.get
@@ -2431,9 +2455,12 @@ entries:
   targetDomainClass: null
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-008-EXECUTION-EVIDENCE-REVIEW.md
+  - Specification/BrAPI-GenX/Phenotyping/QualityFlag/Schemas/QualityFlag.yaml
+  - Specification/BrAPI-GenX/ReferenceData/VariableTerms/Schemas/VariableTerm.yaml
   decisionReferences:
   - A-03
   - RFC-002
@@ -2442,7 +2469,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: QualityFlag -> VariableTerms.'
-  rationale: ''
+  rationale: 'QualityFlag stores a flag value and status; VariableTerm defines immutable observation-variable term versions linked to trait, method and scale. A quality assessment of a measurement is not publication of a new variable definition, and neither inspected schema defines a typed quality-flag-to-variable link.'
+  openQuestion: 'Should quality flags be linked to exact measurement/variable-term versions or a governed quality vocabulary, without making a quality flag operation equivalent to publishing a variable term?'
   evidence: []
 - id: brapi-genx.genx.v1.quality-flags.list -> genxPublishVariableTermVersion
   sourceCatalogId: brapi-genx.genx.v1.quality-flags.list
@@ -2455,9 +2483,12 @@ entries:
   targetDomainClass: null
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-008-EXECUTION-EVIDENCE-REVIEW.md
+  - Specification/BrAPI-GenX/Phenotyping/QualityFlag/Schemas/QualityFlag.yaml
+  - Specification/BrAPI-GenX/ReferenceData/VariableTerms/Schemas/VariableTerm.yaml
   decisionReferences:
   - A-03
   - RFC-002
@@ -2466,7 +2497,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: QualityFlag -> VariableTerms.'
-  rationale: ''
+  rationale: 'QualityFlag stores a flag value and status; VariableTerm defines immutable observation-variable term versions linked to trait, method and scale. A quality assessment of a measurement is not publication of a new variable definition, and neither inspected schema defines a typed quality-flag-to-variable link.'
+  openQuestion: 'Should quality flags be linked to exact measurement/variable-term versions or a governed quality vocabulary, without making a quality flag operation equivalent to publishing a variable term?'
   evidence: []
 - id: brapi-genx.genx.v1.quality-flags.record -> genxPublishVariableTermVersion
   sourceCatalogId: brapi-genx.genx.v1.quality-flags.record
@@ -2479,9 +2511,12 @@ entries:
   targetDomainClass: null
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-008-EXECUTION-EVIDENCE-REVIEW.md
+  - Specification/BrAPI-GenX/Phenotyping/QualityFlag/Schemas/QualityFlag.yaml
+  - Specification/BrAPI-GenX/ReferenceData/VariableTerms/Schemas/VariableTerm.yaml
   decisionReferences:
   - A-03
   - RFC-002
@@ -2490,7 +2525,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: QualityFlag -> VariableTerms.'
-  rationale: ''
+  rationale: 'QualityFlag stores a flag value and status; VariableTerm defines immutable observation-variable term versions linked to trait, method and scale. A quality assessment of a measurement is not publication of a new variable definition, and neither inspected schema defines a typed quality-flag-to-variable link.'
+  openQuestion: 'Should quality flags be linked to exact measurement/variable-term versions or a governed quality vocabulary, without making a quality flag operation equivalent to publishing a variable term?'
   evidence: []
 - id: brapi-genx.genx.v1.raster-catalogues.get -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.raster-catalogues.get
@@ -2572,9 +2608,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-008-EXECUTION-EVIDENCE-REVIEW.md
+  - Specification/BrAPI-GenX/Genotyping/ReferenceAssembly/Schemas/ReferenceAssembly.yaml
+  - Specification/BrAPI-GenX/Genotyping/GenomicDatasets/Schemas/GenomicDataset.yaml
   decisionReferences:
   - RFC-013
   - RFC-115
@@ -2582,7 +2621,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: ReferenceAssembly -> GenomicDatasets.'
-  rationale: ''
+  rationale: 'ReferenceAssembly owns assembly identity, accession, version and organism, while GenomicDataset requires a free-text referenceAssembly field describing a version used. This is a genuine candidate dataset-to-assembly reference but does not provide an authority-qualified assembly ID or immutable version binding, and a read of assembly is not dataset registration.'
+  openQuestion: 'Should GenomicDataset.referenceAssembly resolve to a specific authoritative ReferenceAssembly accession/immutable revision, how is backwards-compatible text preserved, and which dataset types require assembly context?'
   evidence: []
 - id: brapi-genx.genx.v1.reference-assemblies.list -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.reference-assemblies.list
@@ -2595,9 +2635,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-008-EXECUTION-EVIDENCE-REVIEW.md
+  - Specification/BrAPI-GenX/Genotyping/ReferenceAssembly/Schemas/ReferenceAssembly.yaml
+  - Specification/BrAPI-GenX/Genotyping/GenomicDatasets/Schemas/GenomicDataset.yaml
   decisionReferences:
   - RFC-013
   - RFC-115
@@ -2605,7 +2648,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: ReferenceAssembly -> GenomicDatasets.'
-  rationale: ''
+  rationale: 'ReferenceAssembly owns assembly identity, accession, version and organism, while GenomicDataset requires a free-text referenceAssembly field describing a version used. This is a genuine candidate dataset-to-assembly reference but does not provide an authority-qualified assembly ID or immutable version binding, and a read of assembly is not dataset registration.'
+  openQuestion: 'Should GenomicDataset.referenceAssembly resolve to a specific authoritative ReferenceAssembly accession/immutable revision, how is backwards-compatible text preserved, and which dataset types require assembly context?'
   evidence: []
 - id: brapi-genx.genx.v1.reference-assemblies.record -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.reference-assemblies.record
@@ -2618,9 +2662,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-008-EXECUTION-EVIDENCE-REVIEW.md
+  - Specification/BrAPI-GenX/Genotyping/ReferenceAssembly/Schemas/ReferenceAssembly.yaml
+  - Specification/BrAPI-GenX/Genotyping/GenomicDatasets/Schemas/GenomicDataset.yaml
   decisionReferences:
   - RFC-013
   - RFC-115
@@ -2628,7 +2675,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: ReferenceAssembly -> GenomicDatasets.'
-  rationale: ''
+  rationale: 'ReferenceAssembly owns assembly identity, accession, version and organism, while GenomicDataset requires a free-text referenceAssembly field describing a version used. This is a genuine candidate dataset-to-assembly reference but does not provide an authority-qualified assembly ID or immutable version binding, and a read of assembly is not dataset registration.'
+  openQuestion: 'Should GenomicDataset.referenceAssembly resolve to a specific authoritative ReferenceAssembly accession/immutable revision, how is backwards-compatible text preserved, and which dataset types require assembly context?'
   evidence: []
 - id: brapi-genx.genx.v1.remote-sensing-metadata.get -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.remote-sensing-metadata.get
@@ -3403,9 +3451,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-008-EXECUTION-EVIDENCE-REVIEW.md
+  - Specification/BrAPI-GenX/Genotyping/VcfExport/Schemas/VcfExport.yaml
+  - Specification/BrAPI-GenX/Genotyping/VcfImport/Schemas/VcfImport.yaml
   decisionReferences:
   - RFC-043
   - RFC-114
@@ -3413,7 +3464,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: VcfExport -> VcfImport.'
-  rationale: ''
+  rationale: 'VcfExport is a record of exporting a Variant Call Format artifact, with format but no typed file or dataset reference; VcfImport records an import with sourceFile, sourceFormat, importedAt and genomicDatasetDbId. Export and import are distinct events and neither current schema provides a shared artifact checksum or versioned identity linking the two operations.'
+  openQuestion: 'Is there a reproducible export-to-import handoff requiring a shared artifact/content digest and provenance with explicit origin, receiver authorization and identity, without equating export and import event records?'
   evidence: []
 - id: brapi-genx.genx.v1.vcf-exports.list -> genxRecordVcfImport
   sourceCatalogId: brapi-genx.genx.v1.vcf-exports.list
@@ -3426,9 +3478,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-008-EXECUTION-EVIDENCE-REVIEW.md
+  - Specification/BrAPI-GenX/Genotyping/VcfExport/Schemas/VcfExport.yaml
+  - Specification/BrAPI-GenX/Genotyping/VcfImport/Schemas/VcfImport.yaml
   decisionReferences:
   - RFC-043
   - RFC-114
@@ -3436,7 +3491,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: VcfExport -> VcfImport.'
-  rationale: ''
+  rationale: 'VcfExport is a record of exporting a Variant Call Format artifact, with format but no typed file or dataset reference; VcfImport records an import with sourceFile, sourceFormat, importedAt and genomicDatasetDbId. Export and import are distinct events and neither current schema provides a shared artifact checksum or versioned identity linking the two operations.'
+  openQuestion: 'Is there a reproducible export-to-import handoff requiring a shared artifact/content digest and provenance with explicit origin, receiver authorization and identity, without equating export and import event records?'
   evidence: []
 - id: brapi-genx.genx.v1.vcf-exports.record -> genxRecordVcfImport
   sourceCatalogId: brapi-genx.genx.v1.vcf-exports.record
@@ -3449,9 +3505,12 @@ entries:
   targetDomainClass: D3
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-008-EXECUTION-EVIDENCE-REVIEW.md
+  - Specification/BrAPI-GenX/Genotyping/VcfExport/Schemas/VcfExport.yaml
+  - Specification/BrAPI-GenX/Genotyping/VcfImport/Schemas/VcfImport.yaml
   decisionReferences:
   - RFC-043
   - RFC-114
@@ -3459,7 +3518,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: VcfExport -> VcfImport.'
-  rationale: ''
+  rationale: 'VcfExport is a record of exporting a Variant Call Format artifact, with format but no typed file or dataset reference; VcfImport records an import with sourceFile, sourceFormat, importedAt and genomicDatasetDbId. Export and import are distinct events and neither current schema provides a shared artifact checksum or versioned identity linking the two operations.'
+  openQuestion: 'Is there a reproducible export-to-import handoff requiring a shared artifact/content digest and provenance with explicit origin, receiver authorization and identity, without equating export and import event records?'
   evidence: []
 - id: brapi-genx.genx.v1.vegetation-indexes.get -> genxRegisterGenomicDataset
   sourceCatalogId: brapi-genx.genx.v1.vegetation-indexes.get
@@ -3610,9 +3670,12 @@ entries:
   targetDomainClass: D6
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-008-EXECUTION-EVIDENCE-REVIEW.md
+  - Specification/BrAPI-GenX/Geospatial/YieldMap/Schemas/YieldMap.yaml
+  - Specification/BrAPI-GenX/CropProduction/HarvestRecords/Schemas/HarvestRecord.yaml
   decisionReferences:
   - RFC-011
   - RFC-070
@@ -3620,7 +3683,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: YieldMap -> HarvestRecords.'
-  rationale: ''
+  rationale: 'YieldMap already has optional harvestRecordDbId described as derived-from HarvestRecord; HarvestRecord owns a dated harvest event with quantities, units, area and moisture. The existing direction is map-to-harvest, but the schema does not require an authority-qualified, versioned source reference or specify how map resolution and quantities reconcile. Reading a map is not recording a harvest.'
+  openQuestion: 'What does the existing optional YieldMap.harvestRecordDbId reference guarantee about authoritative server, immutable harvest revision, multiple harvest inputs, derivation, spatial/temporal alignment and access controls?'
   evidence: []
 - id: brapi-genx.genx.v1.yield-maps.list -> genxRecordHarvest
   sourceCatalogId: brapi-genx.genx.v1.yield-maps.list
@@ -3633,9 +3697,12 @@ entries:
   targetDomainClass: D6
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-008-EXECUTION-EVIDENCE-REVIEW.md
+  - Specification/BrAPI-GenX/Geospatial/YieldMap/Schemas/YieldMap.yaml
+  - Specification/BrAPI-GenX/CropProduction/HarvestRecords/Schemas/HarvestRecord.yaml
   decisionReferences:
   - RFC-011
   - RFC-070
@@ -3643,7 +3710,8 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: YieldMap -> HarvestRecords.'
-  rationale: ''
+  rationale: 'YieldMap already has optional harvestRecordDbId described as derived-from HarvestRecord; HarvestRecord owns a dated harvest event with quantities, units, area and moisture. The existing direction is map-to-harvest, but the schema does not require an authority-qualified, versioned source reference or specify how map resolution and quantities reconcile. Reading a map is not recording a harvest.'
+  openQuestion: 'What does the existing optional YieldMap.harvestRecordDbId reference guarantee about authoritative server, immutable harvest revision, multiple harvest inputs, derivation, spatial/temporal alignment and access controls?'
   evidence: []
 - id: brapi-genx.genx.v1.yield-maps.register -> genxRecordHarvest
   sourceCatalogId: brapi-genx.genx.v1.yield-maps.register
@@ -3656,9 +3724,12 @@ entries:
   targetDomainClass: D6
   boundary: cross-module
   provenance: inherited-registry-only
-  reviewStatus: inherited-unreviewed
+  reviewStatus: requires-decision
   priority: false
-  documentaryEvidence: []
+  documentaryEvidence:
+  - docs/assessment/BRAPI-GENX-MISSION-008-EXECUTION-EVIDENCE-REVIEW.md
+  - Specification/BrAPI-GenX/Geospatial/YieldMap/Schemas/YieldMap.yaml
+  - Specification/BrAPI-GenX/CropProduction/HarvestRecords/Schemas/HarvestRecord.yaml
   decisionReferences:
   - RFC-011
   - RFC-070
@@ -3666,5 +3737,6 @@ entries:
   - 'Registry-only reference: present in ENDPOINT-REGISTRY.json semanticNeighborIds but absent from source OpenAPI semanticNeighbors.'
   - No documented one-to-one semantic mapping or equivalence is established by the operation identifier alone.
   - 'Crosses GenX modules: YieldMap -> HarvestRecords.'
-  rationale: ''
+  rationale: 'YieldMap already has optional harvestRecordDbId described as derived-from HarvestRecord; HarvestRecord owns a dated harvest event with quantities, units, area and moisture. The existing direction is map-to-harvest, but the schema does not require an authority-qualified, versioned source reference or specify how map resolution and quantities reconcile. Reading a map is not recording a harvest.'
+  openQuestion: 'What does the existing optional YieldMap.harvestRecordDbId reference guarantee about authoritative server, immutable harvest revision, multiple harvest inputs, derivation, spatial/temporal alignment and access controls?'
   evidence: []
