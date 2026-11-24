@@ -21,6 +21,8 @@ REVIEWED = frozenset({
     'Interoperability/ConformanceProbe', 'Interoperability/Crosswalk',
     'Interoperability/SchemaMapping',
     'ReferenceData/MeasurementScale', 'ReferenceData/MeasurementMethods',
+    'ReferenceData/UnitsAndQuantity', 'ReferenceData/OntologyTerm',
+    'ReferenceData/OntologyMapping',
 })
 LINK = re.compile(r'\]\(([^)]+)\)')
 

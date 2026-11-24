@@ -137,5 +137,27 @@ class GroupEvidenceTests(unittest.TestCase):
                          'ReferenceData/MeasurementMethods'}.issubset(REVIEWED))
 
 
+    def test_reviewed_ontology_and_unit_modules_are_pinned(self):
+        self.assertTrue({
+            'ReferenceData/UnitsAndQuantity',
+            'ReferenceData/OntologyTerm',
+            'ReferenceData/OntologyMapping',
+        }.issubset(REVIEWED))
+
+    def test_typed_terminology_links_remain_unratified(self):
+        root = Path(__file__).resolve().parents[1]
+        cases = (
+            ('RFC-082-Units-And-Quantity.md', 'D-246', 'VariableTerm'),
+            ('RFC-085-Ontology-Term.md', 'D-255', 'VariableTerm'),
+            ('RFC-086-Ontology-Mapping.md', 'D-258', 'OntologyTerm'),
+        )
+        for filename, decision, target in cases:
+            with self.subTest(rfc=filename):
+                content = (root / 'Specification/BrAPI-GenX/RFCs' / filename).read_text()
+                self.assertIn(decision, content)
+                self.assertIn('no typed reference', content)
+                self.assertIn(target, content)
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -27,8 +27,9 @@ unit, quantity kind, definition, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Units and quantity entries reference GenX `VariableTerm` by identifier; they
-  do not duplicate those resources.
+- The current units-and-quantity candidate contains no typed reference to
+  GenX `VariableTerm` (D-246 remains unresolved). Matching descriptions,
+  unit symbols or advisory operation links do not establish identity.
 - A units entry is not a BrAPI Observation and must not be treated as one.
 
 ## 5. Invariants

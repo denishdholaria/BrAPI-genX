@@ -1,1 +1,9 @@
 # Group OntologyMapping
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 086, not a ratified ontology alignment, scientifically validated crosswalk or official Breeding Application Programming Interface (BrAPI) extension.
+
+This group sketches immutable `OntologyMapping` records with a namespaced `ontologyMappingDbId` and required lifecycle `status` (`active`, `superseded`, `withdrawn`). Optional `source` and `target` fields describe vocabulary *systems* as strings; the optional `mapping` field is an unconstrained object, alongside `supersedes` and provenance. Draft operations register, list with optional status filtering, and retrieve these records. A proposed replay rule distinguishes identical-content retries from changed-body conflicts; this has no independent service conformance evidence.
+
+**Boundaries:** Neither the schema nor its unstructured mapping object defines a controlled semantic relation such as exact equivalence, narrower/broader meaning, confidence score, context constraints or transformation algorithm. The schema does not contain typed references to GenX `OntologyTerm` records (D-258 remains open), even though earlier RFC prose implied them. Required source/target identifiers (D-256) and governing the mapping structure (D-257) also remain unresolved. This group is a record proposal, not authority to change external ontologies or automatically translate scientific observations.
+
+**Sources:** [Module overview](./README.md), [record schema](./Schemas/OntologyMapping.yaml), [registration schema](./Schemas/OntologyMappingNewRequest.yaml), [proposed operations](./OntologyMapping_GET_POST.yaml), [RFC-086](../../RFCs/RFC-086-Ontology-Mapping.md), and [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).

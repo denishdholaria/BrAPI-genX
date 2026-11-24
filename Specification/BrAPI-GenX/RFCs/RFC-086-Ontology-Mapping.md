@@ -27,8 +27,9 @@ source, target, mapping, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Ontology mapping entries reference GenX `OntologyTerm` by identifier; they
-  do not duplicate those resources.
+- The current ontology-mapping candidate contains no typed reference to GenX
+  `OntologyTerm` (D-258 remains unresolved). The unstructured mapping
+  object does not itself certify equivalence or define an executable crosswalk.
 - An entry is not a BrAPI Observation and must not be treated as one.
 
 ## 5. Invariants

@@ -27,8 +27,9 @@ synonyms, source ontology, and provenance.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Ontology term entries reference GenX `VariableTerm` by identifier; they do
-  not duplicate those resources.
+- The current ontology-term candidate contains no typed reference to GenX
+  `VariableTerm` (D-255 remains unresolved). Labels and synonyms alone do
+  not establish an external ontology identifier or term equivalence.
 - An entry is not a BrAPI Observation and must not be treated as one.
 
 ## 5. Invariants

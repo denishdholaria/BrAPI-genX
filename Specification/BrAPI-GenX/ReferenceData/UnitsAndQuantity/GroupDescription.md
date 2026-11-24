@@ -1,1 +1,9 @@
 # Group UnitsAndQuantity
+
+**Status:** BrAPI-GenX **STRUCTURAL_DRAFT** candidate under Request for Comments (RFC) 082, not an approved unit ontology, canonical conversion standard or independent conformance result.
+
+This group proposes immutable, namespaced `UnitsAndQuantity` records with required `unitsAndQuantityDbId` and lifecycle `status` (`active`, `superseded`, `withdrawn`). Its `unit` symbol/name, `quantity` kind, `definition`, `supersedes`, and provenance fields are optional in the draft. Proposed operations register, list by optional status, and retrieve such entries. Identical replay and conflict on changed content are **candidate contract behaviors** that have not been established against an independently deployed persistent service.
+
+**Boundaries:** Plain-text units and quantity kinds do not provide a controlled vocabulary, dimensional analysis, recognized conversion factors, normalization to an International System of Units (SI) representation, or reliable comparability of measurement results. Official Breeding Application Programming Interface (BrAPI) version 2.1 `Scale` records already describe units and valid observation values; this proposal must not replace their authority. No typed reference to GenX `VariableTerm` is present, despite earlier proposal prose, and no automatic equivalence is established. Requiring `unit`, governing `quantity`, and linking to `VariableTerm` remain open (D-244–D-246).
+
+**Sources:** [Module overview](./README.md), [record schema](./Schemas/UnitsAndQuantity.yaml), [registration schema](./Schemas/UnitsAndQuantityNewRequest.yaml), [proposed operations](./UnitsAndQuantity_GET_POST.yaml), [RFC-082](../../RFCs/RFC-082-Units-And-Quantity.md), [official BrAPI Scales description](../../../BrAPI-Phenotyping/Scales/README.md), and [maturity register](../../../../docs/governance/BRAPI-GENX-RFC-MATURITY-REGISTER.md).
