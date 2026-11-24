@@ -24,6 +24,8 @@ REQUIRED_PATHS = {
     "Scripts/test_registry_source_consistency.py",
     "Scripts/check_semantic_neighbor_governance.py",
     "Scripts/test_semantic_neighbor_governance.py",
+    "Scripts/audit_genx_readme_routes.py",
+    "Scripts/test_genx_readme_routes.py",
 }
 REQUIRED_COMMANDS = {
     "python Scripts/specification_structure.py",
@@ -36,6 +38,8 @@ REQUIRED_COMMANDS = {
     "python Scripts/check_semantic_neighbor_governance.py --comparison-ref",
     "python Scripts/test_semantic_neighbor_governance.py",
     "python Scripts/generateEndpointArtifacts.py --check",
+    "python Scripts/audit_genx_readme_routes.py --module Geospatial/VegetationIndex --strict --require-coverage",
+    "python Scripts/test_genx_readme_routes.py",
 }
 
 
@@ -82,6 +86,32 @@ class WorkflowScopeTests(unittest.TestCase):
         step["run"] = "echo skipped"
         self.assertTrue(any("job missing command: python Scripts/specification_structure.py" in x
                             for x in scope_errors(damaged)))
+
+
+    def test_readme_route_gate_cannot_hide_in_failure_only_diagnostics(self):
+        damaged = copy.deepcopy(self.workflow)
+        steps = damaged["jobs"]["static-conformance"]["steps"]
+        required = ("python Scripts/audit_genx_readme_routes.py "
+                    "--module Geospatial/VegetationIndex --strict --require-coverage")
+        step = next(s for s in steps if s.get("run") == required)
+        step["run"] = "echo route-audit-skipped"
+        self.assertTrue(any(
+            "job missing command: " + required in error
+            for error in scope_errors(damaged)
+        ))
+
+
+    def test_readme_coverage_flag_is_enforced_by_workflow(self):
+        damaged = copy.deepcopy(self.workflow)
+        steps = damaged["jobs"]["static-conformance"]["steps"]
+        expected = ("python Scripts/audit_genx_readme_routes.py "
+                    "--module Geospatial/VegetationIndex --strict --require-coverage")
+        step = next(s for s in steps if s.get("run") == expected)
+        step["run"] = expected.replace(" --require-coverage", "")
+        self.assertTrue(any(
+            "job missing command: " + expected in error
+            for error in scope_errors(damaged)
+        ))
 
 
 if __name__ == "__main__":
