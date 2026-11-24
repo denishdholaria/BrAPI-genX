@@ -41,6 +41,19 @@
       "official": "Specification/BrAPI-Core/People/People_GET_POST.yaml",
       "route": "/people",
       "public_route": "/brapi/v2/people"
+    },
+    {
+      "module": "Genotyping/VendorOrder",
+      "rfc": "RFC-073-Vendor-Order.md",
+      "resource": "VendorOrderRecord",
+      "schema_file": "VendorOrder.yaml",
+      "official": "Specification/BrAPI-Genotyping/VendorSamples/Vendor_Orders_GET_POST.yaml",
+      "route": "/vendor/orders",
+      "public_route": "/brapi/v2/vendor/orders",
+      "required_methods": [
+        "get",
+        "post"
+      ]
     }
   ],
   "unratified_links": [

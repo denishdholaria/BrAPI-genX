@@ -25,7 +25,8 @@ class StandardsOverlapAuditTests(unittest.TestCase):
             module = GENX / entry['module']
             targets.update((Path(entry['official']), module / 'README.md',
                             module / 'GroupDescription.md', module / 'Schemas' /
-                            (entry['resource'] + '.yaml'), GENX / 'RFCs' / entry['rfc']))
+                            entry.get('schema_file', entry['resource'] + '.yaml'),
+                            GENX / 'RFCs' / entry['rfc']))
         for entry in self.manifest['unratified_links']:
             module = GENX / entry['module']
             targets.update((module / 'Schemas' / entry.get('schema_file', entry['resource'] + '.yaml'),
@@ -98,6 +99,31 @@ class StandardsOverlapAuditTests(unittest.TestCase):
         path = self.root / GENX / 'RFCs' / row['rfc']
         path.write_text(path.read_text().replace(row['decision'], 'unreviewed-decision'))
         self.assertTrue(any('missing open decision' in x for x in self.run_audit()['errors']))
+
+    def test_official_vendor_order_overlap_is_guarded(self):
+        row = next(x for x in self.manifest['official_overlap']
+                   if x['module'] == 'Genotyping/VendorOrder')
+        self.assertEqual('VendorOrder.yaml', row['schema_file'])
+        self.assertEqual(['get', 'post'], row['required_methods'])
+        self.assertEqual(6, self.run_audit()['overlaps_checked'])
+        self.assertEqual([], self.run_audit()['errors'])
+
+    def test_official_vendor_order_post_removal_fails(self):
+        row = next(x for x in self.manifest['official_overlap']
+                   if x['module'] == 'Genotyping/VendorOrder')
+        path = self.root / row['official']
+        spec = yaml.safe_load(path.read_text())
+        spec['paths']['/vendor/orders'].pop('post')
+        path.write_text(yaml.safe_dump(spec))
+        self.assertTrue(any('missing required methods' in x
+                            for x in self.run_audit()['errors']))
+
+    def test_official_vendor_order_absence_claim_fails(self):
+        path = self.root / GENX / 'Genotyping/VendorOrder/README.md'
+        path.write_text(path.read_text() +
+                        '\\nBrAPI v2.1 has no vendor order record.\\n')
+        self.assertTrue(any('unsupported absence claim' in x
+                            for x in self.run_audit()['errors']))
 
 
 if __name__ == '__main__':

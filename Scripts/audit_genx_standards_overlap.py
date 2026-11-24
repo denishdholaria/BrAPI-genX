@@ -19,7 +19,7 @@ MANIFEST = Path('docs/assessment/BRAPI-GENX-STANDARDS-OVERLAP-EVIDENCE.json')
 GENX = Path('Specification/BrAPI-GenX')
 REVIEWED = {'ReferenceData/MeasurementScale', 'ReferenceData/MeasurementMethods',
             'ReferenceData/ReusableList', 'ReferenceData/CommonCropName',
-            'ReferenceData/PersonReference'}
+            'ReferenceData/PersonReference', 'Genotyping/VendorOrder'}
 
 
 def _read(root: Path, path: Path, errors: list[str]) -> str | None:
@@ -87,9 +87,18 @@ def audit(root: Path, manifest: Path = MANIFEST) -> dict:
                 operations = official_spec['paths'][route]
                 if not isinstance(operations, dict) or not ('get' in operations or 'post' in operations):
                     raise ValueError('missing GET/POST')
+                required_methods = entry.get('required_methods')
+                if required_methods is not None:
+                    if (not isinstance(required_methods, list) or not required_methods or
+                        any(method not in ('get', 'post', 'put', 'patch', 'delete')
+                            for method in required_methods)):
+                        raise ValueError('invalid required_methods evidence')
+                    missing = set(required_methods) - set(operations)
+                    if missing:
+                        raise ValueError('missing required methods: ' + ', '.join(sorted(missing)))
             except (KeyError, TypeError, ValueError, yaml.YAMLError) as exc:
                 errors.append(f'{module}: official operation {route} missing: {exc}')
-        _schema(root, module, resource, errors)
+        _schema(root, module, resource, errors, entry.get('schema_file'))
         for path in (GENX / module / 'README.md',
                      GENX / module / 'GroupDescription.md',
                      GENX / 'RFCs' / rfc):
