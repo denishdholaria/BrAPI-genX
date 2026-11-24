@@ -40,14 +40,42 @@ def normalized_records(records: list) -> Counter:
                    for item in records)
 
 
+def normalized_neighbor_edges(records: list) -> Counter:
+    """Compare registry-only neighbor identities individually, not as mutable lists.
+
+    A removed historic edge is remediation. A new edge, even on an existing
+    operation, is new drift. Preserve source operation and module identity.
+    """
+    if not isinstance(records, list):
+        raise ValueError("registryOnlyNeighbors must be a list")
+    edges: Counter = Counter()
+    for record in records:
+        if not isinstance(record, dict):
+            raise ValueError("registryOnlyNeighbors record must be a mapping")
+        catalog_id, module, neighbors = (record.get("catalogId"),
+                                         record.get("module"), record.get("neighbors"))
+        if (not isinstance(catalog_id, str) or not catalog_id.strip()
+                or not isinstance(module, str) or not module.strip()
+                or not isinstance(neighbors, list)):
+            raise ValueError("registryOnlyNeighbors record needs catalogId, module, and neighbor list")
+        for neighbor in neighbors:
+            if not isinstance(neighbor, str) or not neighbor.strip():
+                raise ValueError("registryOnlyNeighbors contains an invalid neighbor ID")
+            edge = {"catalogId": catalog_id, "module": module, "neighbor": neighbor}
+            edges[json.dumps(edge, sort_keys=True, ensure_ascii=False,
+                             separators=(",", ":"))] += 1
+    return edges
+
+
 def regression_errors(baseline: dict, current: dict) -> list[str]:
     errors: list[str] = []
     # Any current source load error fails immediately, whether or not old.
     for message in current.get("errors", []):
         errors.append(f"Source audit error: {message}")
     for field in ("mismatches", "registryOnlyNeighbors"):
-        old = normalized_records(baseline.get(field, []))
-        new = normalized_records(current.get(field, []))
+        normalize = normalized_neighbor_edges if field == "registryOnlyNeighbors" else normalized_records
+        old = normalize(baseline.get(field, []))
+        new = normalize(current.get(field, []))
         for representation, count in sorted((new - old).items()):
             errors.append(f"New or changed {field} ({count}): {representation[:450]}")
     return errors

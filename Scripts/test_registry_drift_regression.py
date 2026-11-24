@@ -56,6 +56,49 @@ class RegistryDriftRegressionTests(unittest.TestCase):
         self.assertTrue(any("Source audit error" in error
                             for error in regression_errors(baseline, current)))
 
+    def test_partial_removal_from_same_operation_is_permitted(self):
+        baseline = copy.deepcopy(BASELINE)
+        baseline["registryOnlyNeighbors"][0]["neighbors"] = ["genx.first", "genx.second", "genx.third"]
+        current = copy.deepcopy(baseline)
+        current["registryOnlyNeighbors"][0]["neighbors"] = ["genx.first", "genx.third"]
+        self.assertEqual([], regression_errors(baseline, current))
+
+    def test_reordering_historical_neighbors_is_not_new_drift(self):
+        baseline = copy.deepcopy(BASELINE)
+        baseline["registryOnlyNeighbors"][0]["neighbors"] = ["genx.first", "genx.second"]
+        current = copy.deepcopy(baseline)
+        current["registryOnlyNeighbors"][0]["neighbors"].reverse()
+        self.assertEqual([], regression_errors(baseline, current))
+
+    def test_replacing_one_existing_neighbor_fails(self):
+        baseline = copy.deepcopy(BASELINE)
+        baseline["registryOnlyNeighbors"][0]["neighbors"] = ["genx.first", "genx.second"]
+        current = copy.deepcopy(baseline)
+        current["registryOnlyNeighbors"][0]["neighbors"] = ["genx.first", "genx.third"]
+        self.assertTrue(any('genx.third' in x for x in regression_errors(baseline, current)))
+
+    def test_moving_neighbor_to_another_source_is_new_drift(self):
+        current = copy.deepcopy(BASELINE)
+        current["registryOnlyNeighbors"][0]["catalogId"] = "genx.another"
+        self.assertTrue(any('genx.another' in x for x in regression_errors(BASELINE, current)))
+
+    def test_duplicate_edge_cannot_bypass_regression(self):
+        current = copy.deepcopy(BASELINE)
+        current["registryOnlyNeighbors"][0]["neighbors"].append("genx.legacy")
+        self.assertTrue(any('registryOnlyNeighbors' in x for x in regression_errors(BASELINE, current)))
+
+    def test_invalid_edge_record_fails_closed(self):
+        current = copy.deepcopy(BASELINE)
+        current["registryOnlyNeighbors"][0]["neighbors"] = [None]
+        with self.assertRaisesRegex(ValueError, 'invalid neighbor'):
+            regression_errors(BASELINE, current)
+
+    def test_invalid_edge_list_fails_closed(self):
+        current = copy.deepcopy(BASELINE)
+        current["registryOnlyNeighbors"][0]["neighbors"] = 'genx.legacy'
+        with self.assertRaisesRegex(ValueError, 'neighbor list'):
+            regression_errors(BASELINE, current)
+
 
 if __name__ == "__main__":
     unittest.main()
