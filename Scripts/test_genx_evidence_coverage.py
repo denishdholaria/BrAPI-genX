@@ -6,7 +6,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from report_genx_evidence_coverage import summarize, register_maturity
+from report_genx_evidence_coverage import summarize, register_maturity, ROOT
 from check_genx_group_descriptions import REL
 
 GOOD = ('# Group Jobs\n\n**Status:** candidate and proposed, not normative.\n\n'
@@ -75,6 +75,71 @@ class EvidenceCoverageTests(unittest.TestCase):
         self.maturity.write_text('| RFC-087 | Candidate | PRODUCTION_READY | Not verified |\n')
         with self.assertRaisesRegex(ValueError, 'unknown RFC maturity'):
             register_maturity(self.root)
+
+
+
+class RepositoryDeferredMaturityReconciliationTests(unittest.TestCase):
+    """No draft description silently upgrades scientific or RFC maturity."""
+
+    def test_five_remaining_deferred_modules_are_explicit(self):
+        report = summarize(ROOT)
+        self.assertEqual(156, report['totalModules'])
+        self.assertEqual(151, report['reviewedDescriptions'])
+        self.assertEqual(5, report['deferredDescriptions'])
+        deferred = {
+            module['module']: module
+            for module in report['modules']
+            if module['descriptionEvidence'] == 'evidence-deferred'
+        }
+        expected = {
+            'Breeding/CrossingSchedule': ('RFC-037', 'DEFERRED'),
+            'Breeding/ProgenyRecords': ('RFC-019', 'DEFERRED'),
+            'Geospatial/SpatialIndex': ('RFC-141', 'STRUCTURAL_DRAFT'),
+            'Geospatial/SpatialQuery': ('RFC-143', 'STRUCTURAL_DRAFT'),
+            'Geospatial/YieldMap': ('RFC-070', 'STRUCTURAL_DRAFT'),
+        }
+        self.assertEqual(set(expected), set(deferred))
+        for module, (rfc, maturity) in expected.items():
+            with self.subTest(module=module):
+                self.assertEqual({rfc: maturity},
+                                 deferred[module]['rfcMaturityFromRegister'])
+                doc = ROOT / REL / module / 'GroupDescription.md'
+                self.assertTrue(doc.is_file())
+                self.assertLess(len(doc.read_text().strip()), 100)
+
+        approved = (ROOT / 'docs/assessment/'
+                    'BRAPI-GENX-BREEDING-PIPELINE-DECISIONS-APPROVED.md')
+        decisions = approved.read_text()
+        self.assertIn('D-BP-08', decisions)
+        self.assertIn('D-BP-11', decisions)
+        spatial = (ROOT / 'docs/assessment/'
+                   'BRAPI-GENX-MISSION-090-SPATIAL-GOVERNANCE-PREFLIGHT.md')
+        preflight = spatial.read_text()
+        for decision in ('G-090-1', 'G-090-2', 'G-090-3'):
+            self.assertIn(decision, preflight)
+        self.assertIn('no ratification', preflight.lower())
+
+    def test_newly_documented_science_remains_draft(self):
+        report = summarize(ROOT)
+        modules = {m['module']: m for m in report['modules']}
+        latest_reviewed = {
+            'Breeding/ExperimentalDesign': 'RFC-018',
+            'Breeding/ExperimentalProtocol': 'RFC-117',
+            'Breeding/TreatmentAssignment': 'RFC-106',
+            'Breeding/ParentCandidateSelection': 'RFC-028',
+            'Breeding/SelectionDecisions': 'RFC-008',
+            'Breeding/DoubledHaploid': 'RFC-020',
+            'Breeding/SpeedBreeding': 'RFC-022',
+        }
+        for module, rfc in latest_reviewed.items():
+            with self.subTest(module=module):
+                self.assertEqual('source-backed-description',
+                                 modules[module]['descriptionEvidence'])
+                self.assertEqual('STRUCTURAL_DRAFT',
+                                 modules[module]['rfcMaturityFromRegister'][rfc])
+        self.assertIn('Neither establishes scientific adoption',
+                      report['interpretation'])
+
 
 
 if __name__ == '__main__':
