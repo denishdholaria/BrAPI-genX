@@ -6,9 +6,12 @@
 
 ## 1. Problem
 
-BrAPI v2.1 has no stability analysis result record. Stability and
-adaptability across environments are essential for breeding. Without this
-record, stability results cannot be audited or reproduced.
+GenX proposes a separately identified stability analysis result alongside
+official BrAPI version 2.1 resources. Comparison of genotype performance
+across environments requires defined populations, environments, model
+assumptions, index semantics, and uncertainty. The present candidate does not
+require all of that context, so storing an index does not establish
+reproducibility or a validated adaptability conclusion.
 
 ## 2. Object
 
@@ -25,8 +28,8 @@ record, stability results cannot be audited or reproduced.
 - Additive and optional. A V2.1 client keeps working against a GenX server.
 - A GenX client tolerates a server that does not implement this object.
 - No change to BrAPI v2.1 paths, schemas, or operationIds.
-- Stability results reference GenX AnalysisMethod by identifier; they do
-  not duplicate that resource.
+- `analysisMethodDbId` is a required string reference, not a required exact
+  `methodVersion` or validated authority-matched method execution.
 - A result is not a BrAPI data resource and must not be treated as one.
 
 ## 5. Invariants
@@ -34,14 +37,18 @@ record, stability results cannot be audited or reproduced.
 - A published `stabilityAnalysisResultDbId` record never mutates in place.
 - Replay: same id + identical body replays; same id + different body → 409.
 - Corrections are recorded as additional results linked by `supersedes`.
-- `analysisMethodDbId` is required.
-- A result does not imply scientific validation or approval.
+- `analysisMethodDbId` is required; `stabilityIndex`, `traitDbId`,
+  `studyDbId`, `jobDbId`, and provenance are optional.
+- The numeric `stabilityIndex` has no required orientation, range,
+  environment definition, method-specific interpretation, or uncertainty.
+- A result does not imply validated genotype adaptation, rank stability,
+  scientific approval, cross-study comparability or reproducibility.
 
 ## 6. Deferred questions
 
 - D-145: Should `stabilityIndex` be required? (Current: optional.)
 - D-146: Should stability results link to GenX `GenomicDataset`? (Current:
-  optional, not required.)
+  no `genomicDatasetDbId` reference is modelled.)
 - D-147: Should stability index be a structured quantity? (Current: number.)
 
 ## 7. Classification

@@ -1206,5 +1206,69 @@ class GroupEvidenceTests(unittest.TestCase):
         self.assertNotIn('decision', selection['properties'])
 
 
+    def test_genetic_gain_and_stability_units_methods_and_optional_index(self):
+        root = Path(__file__).resolve().parents[1]
+        genx = root / 'Specification/BrAPI-GenX'
+        gain_folder = genx / 'Breeding/GeneticGain'
+        stability_folder = genx / 'Breeding/StabilityAnalysis'
+        for name, folder, decision in (
+            ('GeneticGain', gain_folder, 'D-136'),
+            ('StabilityAnalysis', stability_folder, 'D-145'),
+        ):
+            with self.subTest(group=name):
+                self.assertIn('Breeding/' + name, REVIEWED)
+                description = (folder / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', description)
+                self.assertIn('**Sources:**', description)
+                self.assertIn(decision, description)
+
+        gain = yaml.safe_load(
+            (gain_folder / 'Schemas/GeneticGainRecord.yaml').read_text()
+        )['components']['schemas']['GeneticGainRecord']
+        gain_req = yaml.safe_load(
+            (gain_folder / 'Schemas/GeneticGainRecordNewRequest.yaml').read_text()
+        )['components']['schemas']['GeneticGainRecordNewRequest']
+        base = {'geneticGainRecordDbId', 'programDbId', 'traitDbId', 'gainValue'}
+        self.assertEqual(base | {'status'}, set(gain['required']))
+        self.assertEqual(base, set(gain_req['required']))
+        self.assertEqual('number', gain['properties']['gainValue']['type'])
+        for field in ('unit', 'period', 'method', 'provenance'):
+            self.assertIn(field, gain['properties'])
+            self.assertNotIn(field, gain['required'])
+            self.assertNotIn(field, gain_req['required'])
+        for field in ('analysisMethodDbId', 'methodVersion'):
+            self.assertNotIn(field, gain['properties'])
+            self.assertNotIn(field, gain_req['properties'])
+        self.assertEqual('string', gain['properties']['unit']['type'])
+        self.assertEqual('string', gain['properties']['period']['type'])
+        self.assertIn('D-137', (
+            genx / 'RFCs/RFC-046-Genetic-Gain.md').read_text())
+
+        stability = yaml.safe_load(
+            (stability_folder / 'Schemas/StabilityAnalysisResult.yaml').read_text()
+        )['components']['schemas']['StabilityAnalysisResult']
+        stab_req = yaml.safe_load(
+            (stability_folder / 'Schemas/'
+             'StabilityAnalysisResultNewRequest.yaml').read_text()
+        )['components']['schemas']['StabilityAnalysisResultNewRequest']
+        main = {'stabilityAnalysisResultDbId', 'analysisMethodDbId'}
+        self.assertEqual(main | {'status'}, set(stability['required']))
+        self.assertEqual(main, set(stab_req['required']))
+        for field in ('stabilityIndex', 'traitDbId', 'studyDbId',
+                      'jobDbId', 'provenance'):
+            self.assertIn(field, stability['properties'])
+            self.assertNotIn(field, stability['required'])
+            self.assertNotIn(field, stab_req['required'])
+        self.assertEqual('number', stability['properties']['stabilityIndex']['type'])
+        for bound in ('minimum', 'maximum', 'exclusiveMinimum',
+                      'exclusiveMaximum'):
+            self.assertNotIn(bound, stability['properties']['stabilityIndex'])
+        for field in ('methodVersion', 'genomicDatasetDbId'):
+            self.assertNotIn(field, stability['properties'])
+            self.assertNotIn(field, stab_req['properties'])
+        self.assertIn('D-146', (
+            genx / 'RFCs/RFC-049-Stability-Analysis.md').read_text())
+
+
 if __name__ == '__main__':
     unittest.main()
