@@ -60,6 +60,7 @@ REVIEWED = frozenset({
     'Geospatial/RemoteSensingMetadata',
     'Geospatial/CloudMask', 'Geospatial/RasterCatalogue',
     'Phenotyping/PhenotypeCapture', 'Phenotyping/RepeatedMeasurement',
+    'Phenotyping/BulkCapture',
     'Phenotyping/PhenotypeAnnotation',
     'Geospatial/LocationGeometry', 'Geospatial/FieldGeometry',
     'Geospatial/CrsTransform', 'Geospatial/FieldBoundary',
