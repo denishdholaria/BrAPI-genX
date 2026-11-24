@@ -146,7 +146,11 @@ class CasTraceTests(unittest.TestCase):
 
     def test_race_loser_lifecycle_side_effect_fails(self):
         t = race(); t['after']['effects']['e4b'] = 'V4B'
-        self.assertTrue(any('must not emit' in e for e in validate(t)))
+        # The common snapshot-integrity gate rejects this orphan event
+        # before scenario-specific loser-side-effect checks execute.
+        errors = validate(t)
+        self.assertTrue(any('lifecycle event' in e and 'absent revision' in e
+                            for e in errors), errors)
 
     def test_race_pointer_must_advance_to_winner(self):
         t = race(); t['after']['currentVersionId'] = 'V3'
