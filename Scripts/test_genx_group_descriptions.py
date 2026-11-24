@@ -996,5 +996,86 @@ class GroupEvidenceTests(unittest.TestCase):
             if isinstance(p, dict)])
 
 
+    def test_variant_annotation_and_gwas_result_scientific_boundaries(self):
+        root = Path(__file__).resolve().parents[1]
+        genx = root / 'Specification/BrAPI-GenX'
+        cases = (
+            ('VariantAnnotation', 'VariantAnnotation', 'D-184',
+             {'variantAnnotationDbId', 'status'}, {'variantAnnotationDbId'}),
+            ('GwasResult', 'GwasResult', 'D-139',
+             {'gwasResultDbId', 'analysisMethodDbId', 'status'},
+             {'gwasResultDbId', 'analysisMethodDbId'}),
+        )
+        for module, resource, decision, response_required, request_required in cases:
+            with self.subTest(module=module):
+                self.assertIn('Genotyping/' + module, REVIEWED)
+                folder = genx / 'Genotyping' / module
+                description = (folder / 'GroupDescription.md').read_text()
+                self.assertIn('STRUCTURAL_DRAFT', description)
+                self.assertIn(decision, description)
+                self.assertIn('**Sources:**', description)
+                response = yaml.safe_load(
+                    (folder / 'Schemas' / (resource + '.yaml')).read_text()
+                )['components']['schemas'][resource]
+                request = yaml.safe_load(
+                    (folder / 'Schemas' / (resource + 'NewRequest.yaml')).read_text()
+                )['components']['schemas'][resource + 'NewRequest']
+                self.assertEqual(response_required, set(response['required']))
+                self.assertEqual(request_required, set(request['required']))
+                for field in ('provenance', 'studyDbId'):
+                    self.assertIn(field, response['properties'])
+                    self.assertNotIn(field, response['required'])
+                    self.assertNotIn(field, request['required'])
+
+        annotated = yaml.safe_load(
+            (genx / 'Genotyping/VariantAnnotation/Schemas/VariantAnnotation.yaml').read_text()
+        )['components']['schemas']['VariantAnnotation']
+        request = yaml.safe_load(
+            (genx / 'Genotyping/VariantAnnotation/Schemas/'
+             'VariantAnnotationNewRequest.yaml').read_text()
+        )['components']['schemas']['VariantAnnotationNewRequest']
+        for field in ('variantDbId', 'analysisMethodDbId', 'annotations'):
+            self.assertIn(field, annotated['properties'])
+            self.assertNotIn(field, annotated['required'])
+            self.assertNotIn(field, request['required'])
+        self.assertEqual('object', annotated['properties']['annotations']['type'])
+        self.assertNotIn('properties', annotated['properties']['annotations'])
+        self.assertNotIn('methodVersion', annotated['properties'])
+        official = yaml.safe_load(
+            (root / 'Specification/BrAPI-Genotyping/Variants/Schemas/Variant.yaml').read_text()
+        )['components']['schemas']['Variant']
+        self.assertIn('additionalInfo', official['properties'])
+        self.assertIn('variantDbId', official['required'])
+        self.assertIn('D-184', (
+            genx / 'RFCs/RFC-062-Variant-Annotation.md').read_text())
+
+        gwas = yaml.safe_load(
+            (genx / 'Genotyping/GwasResult/Schemas/GwasResult.yaml').read_text()
+        )['components']['schemas']['GwasResult']
+        new_gwas = yaml.safe_load(
+            (genx / 'Genotyping/GwasResult/Schemas/GwasResultNewRequest.yaml').read_text()
+        )['components']['schemas']['GwasResultNewRequest']
+        for field in ('significantMarkers', 'topPValue', 'jobDbId', 'resultData'):
+            self.assertIn(field, gwas['properties'])
+            self.assertNotIn(field, gwas['required'])
+            self.assertNotIn(field, new_gwas['required'])
+        self.assertEqual('integer', gwas['properties']['significantMarkers']['type'])
+        self.assertNotIn('minimum', gwas['properties']['significantMarkers'])
+        self.assertEqual('number', gwas['properties']['topPValue']['type'])
+        for constraint in ('minimum', 'maximum'):
+            self.assertNotIn(constraint, gwas['properties']['topPValue'])
+        self.assertEqual('object', gwas['properties']['resultData']['type'])
+        self.assertNotIn('properties', gwas['properties']['resultData'])
+        for field in ('methodVersion', 'genomicDatasetDbId'):
+            self.assertNotIn(field, gwas['properties'])
+            self.assertNotIn(field, new_gwas['properties'])
+        method = yaml.safe_load(
+            (genx / 'Research/AnalysisMethods/Schemas/AnalysisMethod.yaml').read_text()
+        )['components']['schemas']['AnalysisMethod']
+        self.assertIn('methodVersion', method['required'])
+        self.assertIn('D-140', (
+            genx / 'RFCs/RFC-047-Gwas-Result.md').read_text())
+
+
 if __name__ == '__main__':
     unittest.main()
