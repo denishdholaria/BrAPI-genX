@@ -88,6 +88,24 @@ class LiveAssertionManifestTests(unittest.TestCase):
         self.assertIn("must be paired",
             self.mutated("L-23", 1, lambda s: s["assert"].pop("telemetry_samples")))
 
+    def test_window_partition_assertion_must_remain_registered(self):
+        self.assertIn(
+            "telemetry_window_partitions GET assertion required",
+            self.mutated("L-26", 1,
+                         lambda s: s["assert"].pop("telemetry_window_partitions")))
+
+    def test_window_partition_assertion_cannot_be_false(self):
+        self.assertIn(
+            "telemetry_window_partitions must be true",
+            self.mutated("L-26", 1,
+                         lambda s: s["assert"].update(telemetry_window_partitions=False)))
+
+    def test_window_partition_assertion_typo_rejected(self):
+        self.assertIn(
+            "unknown live assertion",
+            self.mutated("L-26", 1,
+                         lambda s: s["assert"].update(telemetry_window_partition=True)))
+
     def test_replay_flag_needs_explicit_same_job_identity_assertion(self):
         self.assertIn("same_jobDbId assertion",
             self.mutated("L-01", 1, lambda s: s.update({"assert": {"status": 202}})))
