@@ -1184,3 +1184,22 @@ without an idempotency key remain valid. The mandatory
 negative and positive regression cases.
 
 See [Mission 166 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-166-L25-VISIBLE-JOB-IDENTITIES.md).
+
+## L-25 visible model-version identity integrity (Mission 167)
+
+Registered **L-25** now also checks that every model on its returned
+first page has a nonempty string `modelDbId`, a nonempty string
+`modelVersion`, and a unique identity pair
+`(modelDbId, modelVersion)`. Previously the probe could accept missing
+or duplicate *unrelated* model-version identities if its newly created
+version was correctly preserved.
+
+Separate versions of one model, as well as distinct models with the
+same version token, remain allowed. Only the **visible page** is
+validated; the probe does not claim an exhaustive multi-page scan.
+The already-mandatory
+`Scripts/test_collection_pagination_arithmetic.py` suite covers
+malformed unrelated identities, duplicate unrelated version pairs,
+legitimate versions, and a valid multi-page envelope.
+
+See [Mission 167 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-167-L25-VISIBLE-MODEL-VERSIONS.md).
