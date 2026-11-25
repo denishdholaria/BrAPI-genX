@@ -856,3 +856,23 @@ The existing mandatory `Scripts/test_collection_pagination_arithmetic.py` and
 `Scripts/test_collection_envelope_integrity.py` suites exercise these
 positive and negative cases. See
 [Mission 147 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-147-COLLECTION-ORIGINAL-RECORD-INTEGRITY.md).
+
+## Provenanced observation identity in reference echo jobs (Mission 148)
+
+Registered **L-07** now binds its completed analysis job to the submitted
+job type, accepted identifier and original idempotency key, and checks the
+returned observation's original scientific identifiers, value and every
+submitted field alongside the complete nested provenance. Previously, the
+probe checked only the provenance mapping and could pass if the observation
+value or variable was replaced while provenance remained identical.
+
+The registered workflow specifically exercises the **reference server's
+echo-style analysis job**; it does not impose payload equality on general
+analytical computations that legitimately derive new output observations.
+The existing mandatory
+`Scripts/test_provenance_roundtrip_integrity.py` regression suite now
+covers corrupted values, variable or observation identities, missing
+original fields, and job binding. The manifest guard prevents omitting the
+original request capture, terminal wait or completed-result readback.
+
+See [Mission 148 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-148-PROVENANCE-OBSERVATION-IDENTITY.md).
