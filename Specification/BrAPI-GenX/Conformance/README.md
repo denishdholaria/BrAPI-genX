@@ -708,3 +708,20 @@ embargo-time metadata visibility unresolved. This mission only verifies
 the **individual denial response**, not whether metadata should appear on
 `GET /fair-packages`. It does not redesign that policy. See
 [Mission 138 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-138-EMBARGO-DENIAL-PAYLOAD-INTEGRITY.md).
+
+## Collection first-page pagination arithmetic (Mission 139)
+
+Registered **L-25** now checks mathematical consistency between each
+collection's totalCount, pageSize, totalPages, currentPage and number of
+returned rows. For the unqualified first-page requests used by L-25,
+`currentPage` must be zero, `totalPages` must equal the ceiling of
+totalCount divided by pageSize, and the returned row count must match the
+actual first-page slice. The freshly created job and model must remain
+visible.
+
+This closes false positives where a collection reports inflated totals,
+too few records for its claimed page, the wrong current page, or inconsistent
+page counts. The required registered L-25 sequence is protected in the
+manifest, and `Scripts/test_collection_pagination_arithmetic.py` runs in
+hosted static conformance. See
+[Mission 139 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-139-COLLECTION-PAGINATION-ARITHMETIC.md).
