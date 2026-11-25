@@ -892,3 +892,21 @@ The already-mandatory
 reject booleans, floats, nulls, missing counters, strings and negative
 values, as well as a non-successful POST with the otherwise expected
 counts. See [Mission 149 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-149-TELEMETRY-COUNTER-TYPES.md).
+
+## Telemetry clean-append conflict consistency (Mission 150)
+
+Registered **L-21** now requires empty conflict arrays on both the first
+successful three-point append and the exact replay. The previously checked
+`appended/replayed` counts and original-stored-record readback did not
+reject a contradictory server response that fabricated rejected natural keys.
+A response with all three points appended or replayed cannot also claim an
+element was rejected for a conflicting value.
+
+The new registered `telemetry_no_conflicts` assertion requires HTTP 200 and
+exactly an empty JSON array. L-22 retains its existing genuine-conflict
+identity check. The manifest guard protects both L-21 POST steps, and the
+existing mandatory `Scripts/test_telemetry_replay_postcondition.py` and
+`Scripts/test_conformance_assertion_manifest.py` suites exercise fabricated,
+null, incorrectly typed and missing assertions.
+
+See [Mission 150 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-150-TELEMETRY-CLEAN-CONFLICTS.md).

@@ -2291,6 +2291,16 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         "telemetry counts must be nonnegative integers "
                         "matching original append/replay expectations"
                     )
+            if assertion.get("telemetry_no_conflicts"):
+                # Clean append and identical replay cannot report rejected
+                # natural keys; counts alone would miss fabricated conflicts.
+                result = payload.get("result") if isinstance(payload, dict) else None
+                conflicts = result.get("conflicts") if isinstance(result, dict) else None
+                if status != 200 or conflicts != []:
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "successful append or identical replay reported telemetry conflicts"
+                    )
             if "telemetry_conflicts" in assertion:
                 result = payload.get("result") if isinstance(payload, dict) else None
                 seen = result.get("conflicts") if isinstance(result, dict) else None
@@ -2720,7 +2730,7 @@ LIVE_BOOLEAN_ASSERTIONS = frozenset({
     "same_term", "same_ledger", "same_model", "same_matrix",
     "same_package", "unchanged_model_digest", "unchanged_matrix_digest",
     "telemetry_original_intact", "telemetry_window_partitions",
-    "telemetry_page_slice",
+    "telemetry_page_slice", "telemetry_no_conflicts",
     "deprecated_inference_completed",
     "unchanged_package_license", "unchanged_term_record", "ledger_original_intact",
     "term_replay_single_version", "matrix_replay_single_record",
@@ -2962,6 +2972,26 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-21":
+                if (len(calls) != 3
+                        or calls[0].get("method") != "POST"
+                        or calls[0].get("path") != "/telemetry"
+                        or calls[0].get("body_fixture") != "live_telemetry_batch"
+                        or calls[0].get("capture_telemetry") is not True
+                        or calls[0].get("assert", {}).get("telemetry_counts") != {
+                            "appended": 3, "replayed": 0}
+                        or calls[0].get("assert", {}).get("telemetry_no_conflicts")
+                            is not True
+                        or calls[1].get("method") != "POST"
+                        or calls[1].get("path") != "/telemetry"
+                        or calls[1].get("body_fixture") != "live_telemetry_batch"
+                        or calls[1].get("assert", {}).get("telemetry_counts") != {
+                            "appended": 0, "replayed": 3}
+                        or calls[1].get("assert", {}).get("telemetry_no_conflicts")
+                            is not True):
+                    raise ValueError(
+                        "probe L-21: clean append and replay conflict arrays required"
+                    )
             if probe_id == "L-22":
                 if (len(calls) != 3
                         or calls[0].get("method") != "POST"

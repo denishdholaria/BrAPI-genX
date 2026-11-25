@@ -26,9 +26,12 @@ class TelemetryReplayPostconditionTests(unittest.TestCase):
         self.assertEqual("GET", final["method"])
         self.assertIn("sensorDbId=air-temp-01", final["path"])
         self.assertIs(True, final["assert"]["telemetry_original_intact"])
+        self.assertIs(True, self.probe["calls"][0]["assert"]["telemetry_no_conflicts"])
+        self.assertIs(True, self.probe["calls"][1]["assert"]["telemetry_no_conflicts"])
 
     def exercise(self, change=None, read_status=200, replay_counts=None,
-                 first_counts=None, first_status=200, replay_status=200):
+                 first_counts=None, first_status=200, replay_status=200,
+                 first_conflicts=(), replay_conflicts=()):
         seen = []
         submitted = []
 
@@ -41,12 +44,14 @@ class TelemetryReplayPostconditionTests(unittest.TestCase):
                 counts = {"appended": 3, "replayed": 0}
                 if first_counts is not None:
                     counts = first_counts
-                return first_status, {"result": {**counts, "conflicts": []}}
+                conflicts = [] if first_conflicts == () else first_conflicts
+                return first_status, {"result": {**counts, "conflicts": conflicts}}
             if len(seen) == 2:
                 self.assertEqual(("POST", "/telemetry"), (method, path))
                 self.assertEqual(submitted, body)
                 counts = replay_counts or {"appended": 0, "replayed": 3}
-                return replay_status, {"result": {**counts, "conflicts": []}}
+                conflicts = [] if replay_conflicts == () else replay_conflicts
+                return replay_status, {"result": {**counts, "conflicts": conflicts}}
             if len(seen) == 3:
                 self.assertEqual("GET", method)
                 self.assertIn(f"deviceDbId={submitted[0]['deviceDbId']}", path)
@@ -63,7 +68,8 @@ class TelemetryReplayPostconditionTests(unittest.TestCase):
                 "http://example.test/genx/v1", self.probe,
                 {"conformance_dir": str(CONF)}, result, None, None)
         if (replay_counts is None and first_counts is None
-                and first_status == 200 and replay_status == 200):
+                and first_status == 200 and replay_status == 200
+                and first_conflicts == () and replay_conflicts == ()):
             self.assertEqual(3, len(seen))
         return result.failures
 
@@ -175,6 +181,34 @@ class TelemetryReplayPostconditionTests(unittest.TestCase):
 
     def test_first_post_non_success_with_correct_counts_fails(self):
         self.assertEqual(1, self.exercise(first_status=500))
+
+
+    def test_correct_zero_conflict_arrays_pass(self):
+        self.assertEqual(0, self.exercise(first_conflicts=[], replay_conflicts=[]))
+
+    def test_fabricated_conflict_on_first_append_fails(self):
+        self.assertEqual(1, self.exercise(first_conflicts=["unrelated-key"]))
+
+    def test_fabricated_conflict_on_identical_replay_fails(self):
+        self.assertEqual(1, self.exercise(replay_conflicts=["unrelated-key"]))
+
+    def test_null_first_conflicts_fails(self):
+        self.assertEqual(1, self.exercise(first_conflicts=None))
+
+    def test_null_replay_conflicts_fails(self):
+        self.assertEqual(1, self.exercise(replay_conflicts=None))
+
+    def test_string_conflicts_fails(self):
+        self.assertEqual(1, self.exercise(replay_conflicts="no-conflicts"))
+
+    def test_nonempty_nested_conflict_object_fails(self):
+        self.assertEqual(1, self.exercise(replay_conflicts=[{"key": "fabricated"}]))
+
+    def test_boolean_conflict_field_fails(self):
+        self.assertEqual(1, self.exercise(first_conflicts=False))
+
+    def test_integer_conflict_field_fails(self):
+        self.assertEqual(1, self.exercise(replay_conflicts=0))
 
 
 if __name__ == "__main__":

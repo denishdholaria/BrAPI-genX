@@ -124,6 +124,37 @@ class LiveAssertionManifestTests(unittest.TestCase):
             self.mutated("L-07", 1,
                          lambda s: s["assert"].update(provenance_intact=False)))
 
+    def test_clean_telemetry_first_append_no_conflict_required(self):
+        self.assertIn(
+            "clean append and replay conflict arrays required",
+            self.mutated("L-21", 0,
+                         lambda s: s["assert"].pop("telemetry_no_conflicts")))
+
+    def test_clean_telemetry_replay_no_conflict_required(self):
+        self.assertIn(
+            "clean append and replay conflict arrays required",
+            self.mutated("L-21", 1,
+                         lambda s: s["assert"].pop("telemetry_no_conflicts")))
+
+    def test_clean_telemetry_replay_assertion_cannot_be_false(self):
+        self.assertIn(
+            "telemetry_no_conflicts must be true",
+            self.mutated("L-21", 1,
+                         lambda s: s["assert"].update(telemetry_no_conflicts=False)))
+
+    def test_clean_telemetry_replay_must_use_original_batch(self):
+        self.assertIn(
+            "clean append and replay conflict arrays required",
+            self.mutated("L-21", 1,
+                         lambda s: s.update(body_fixture="live_telemetry_conflict")))
+
+    def test_clean_telemetry_initial_counts_cannot_change(self):
+        self.assertIn(
+            "clean append and replay conflict arrays required",
+            self.mutated("L-21", 0,
+                         lambda s: s["assert"].update(
+                             telemetry_counts={"appended": 2, "replayed": 1})))
+
     def test_telemetry_replay_readback_cannot_be_removed(self):
         self.assertIn(
             "telemetry_original_intact GET assertion required",
