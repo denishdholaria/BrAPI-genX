@@ -22,12 +22,17 @@ class TelemetryMeanSourceIntegrityTests(unittest.TestCase):
 
     def test_registered_source_get_precedes_mean(self):
         self.assertEqual(3, len(self.probe["calls"]))
+        self.assertEqual(
+            {"appended": 3, "replayed": 0},
+            self.probe["calls"][0]["assert"]["telemetry_counts"])
+        self.assertIs(
+            True, self.probe["calls"][0]["assert"]["telemetry_no_conflicts"])
         self.assertIs(True, self.probe["calls"][1]["assert"]["telemetry_original_intact"])
         self.assertEqual(21.7, self.probe["calls"][2]["assert"]["telemetry_mean"])
         self.assertEqual(3, self.probe["calls"][2]["assert"]["telemetry_samples"])
 
     def exercise(self, source_change=None, mean_change=None, read_status=200,
-                 source_status=200):
+                 source_status=200, initial_mutate=None, initial_status=200):
         calls = []
         original = []
 
@@ -45,7 +50,10 @@ class TelemetryMeanSourceIntegrityTests(unittest.TestCase):
             if len(calls) == 1:
                 self.assertEqual(("POST", "/telemetry"), (method, path))
                 original.extend(copy.deepcopy(body))
-                return 200, {"result": {"appended": 3, "replayed": 0}}
+                outcome = {"appended": 3, "replayed": 0, "conflicts": []}
+                if initial_mutate is not None:
+                    outcome = initial_mutate(outcome)
+                return initial_status, {"result": outcome}
             if len(calls) == 2:
                 self.assertEqual("GET", method)
                 self.assertIn("aggregation=none", path)
@@ -180,6 +188,29 @@ class TelemetryMeanSourceIntegrityTests(unittest.TestCase):
             data["metadata"].pop("pagination")
             return data
         self.assertEqual(1, self.exercise(mean_change=change)[0])
+
+
+    def test_initial_post_incorrect_append_count_fails(self):
+        self.assertEqual(1, self.exercise(
+            initial_mutate=lambda result: {**result, "appended": 2})[0])
+
+    def test_initial_post_boolean_replayed_count_fails(self):
+        self.assertEqual(1, self.exercise(
+            initial_mutate=lambda result: {**result, "replayed": False})[0])
+
+    def test_initial_post_fabricated_conflict_fails(self):
+        self.assertEqual(1, self.exercise(
+            initial_mutate=lambda result: {**result, "conflicts": ["fabricated"]})[0])
+
+    def test_initial_post_missing_conflict_array_fails(self):
+        self.assertEqual(1, self.exercise(
+            initial_mutate=lambda result: {
+                key: value for key, value in result.items()
+                if key != "conflicts"})[0])
+
+    def test_initial_post_non_success_status_fails(self):
+        self.assertEqual(1, self.exercise(initial_status=409)[0])
+
 
 
 if __name__ == "__main__":

@@ -3022,6 +3022,10 @@ def validate_probe_manifest(probes):
                         or calls[0].get("path") != "/telemetry"
                         or calls[0].get("body_fixture") != "live_telemetry_batch"
                         or calls[0].get("capture_telemetry") is not True
+                        or calls[0].get("assert") != {
+                            "telemetry_counts": {"appended": 3, "replayed": 0},
+                            "telemetry_no_conflicts": True,
+                        }
                         or calls[1].get("method") != "GET"
                         or calls[1].get("path") !=
                             "/telemetry?deviceDbId={telemetry_device}&sensorDbId=air-temp-01&from=2026-09-07T08:00:00Z&to=2026-09-07T08:03:00Z&aggregation=none"
@@ -3386,6 +3390,10 @@ def validate_probe_manifest(probes):
                         or calls[0].get("path") != "/telemetry"
                         or calls[0].get("body_fixture") != "live_telemetry_batch"
                         or calls[0].get("capture_telemetry") is not True
+                        or calls[0].get("assert") != {
+                            "telemetry_counts": {"appended": 3, "replayed": 0},
+                            "telemetry_no_conflicts": True,
+                        }
                         or any(
                             calls[idx].get("method") != "GET"
                             or calls[idx].get("path") != expected_pages[idx - 1]
@@ -3405,6 +3413,10 @@ def validate_probe_manifest(probes):
                         or calls[0].get("path") != "/telemetry"
                         or calls[0].get("body_fixture") != "live_telemetry_batch"
                         or calls[0].get("capture_telemetry") is not True
+                        or calls[0].get("assert") != {
+                            "telemetry_counts": {"appended": 3, "replayed": 0},
+                            "telemetry_no_conflicts": True,
+                        }
                         or calls[1].get("method") != "GET"
                         or calls[1].get("path") !=
                             "/telemetry?deviceDbId={telemetry_device}&sensorDbId=air-temp-01&aggregation=none"

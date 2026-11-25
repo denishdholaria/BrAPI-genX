@@ -22,6 +22,11 @@ class TelemetryPaginationSliceTests(unittest.TestCase):
 
     def test_registered_probe_checks_page_contents(self):
         self.assertEqual(3, len(self.probe["calls"]))
+        self.assertEqual(
+            {"appended": 3, "replayed": 0},
+            self.probe["calls"][0]["assert"]["telemetry_counts"])
+        self.assertIs(
+            True, self.probe["calls"][0]["assert"]["telemetry_no_conflicts"])
         first, last = self.probe["calls"][1:]
         self.assertEqual("GET", first["method"])
         self.assertEqual("GET", last["method"])
@@ -31,7 +36,8 @@ class TelemetryPaginationSliceTests(unittest.TestCase):
         self.assertIs(True, last["assert"]["telemetry_page_slice"])
 
     def exercise(self, mutate_rows=None, mutate_page=None, status=200,
-                 mutate_tail_rows=None, mutate_tail_page=None, tail_status=200):
+                 mutate_tail_rows=None, mutate_tail_page=None, tail_status=200,
+                 initial_mutate=None, initial_status=200):
         seen = []
         submitted = []
 
@@ -41,8 +47,10 @@ class TelemetryPaginationSliceTests(unittest.TestCase):
                 self.assertEqual(("POST", "/telemetry"), (method, path))
                 self.assertEqual(3, len(body))
                 submitted.extend(copy.deepcopy(body))
-                return 200, {"result": {
-                    "appended": 3, "replayed": 0, "conflicts": []}}
+                outcome = {"appended": 3, "replayed": 0, "conflicts": []}
+                if initial_mutate is not None:
+                    outcome = initial_mutate(outcome)
+                return initial_status, {"result": outcome}
             if len(seen) in (2, 3):
                 index = len(seen) - 2
                 self.assertEqual("GET", method)
@@ -74,7 +82,10 @@ class TelemetryPaginationSliceTests(unittest.TestCase):
                 "http://example.test/genx/v1", self.probe,
                 {"conformance_dir": str(CONF)}, result, None, None)
         # A failing first page exits before requesting the second page.
-        self.assertIn(len(seen), (2, 3))
+        if initial_mutate is None and initial_status == 200:
+            self.assertIn(len(seen), (2, 3))
+        else:
+            self.assertIn(len(seen), (1, 2, 3))
         return result.failures
 
     def test_correct_page_passes(self):
@@ -231,6 +242,29 @@ class TelemetryPaginationSliceTests(unittest.TestCase):
     def test_extra_tail_record_fails(self):
         self.assertEqual(1, self.exercise(
             mutate_tail_rows=lambda rows, source: rows + [copy.deepcopy(source[0])]))
+
+
+
+    def test_initial_post_incorrect_append_count_fails(self):
+        self.assertEqual(1, self.exercise(
+            initial_mutate=lambda result: {**result, "appended": 2}))
+
+    def test_initial_post_boolean_replayed_count_fails(self):
+        self.assertEqual(1, self.exercise(
+            initial_mutate=lambda result: {**result, "replayed": False}))
+
+    def test_initial_post_fabricated_conflict_fails(self):
+        self.assertEqual(1, self.exercise(
+            initial_mutate=lambda result: {**result, "conflicts": ["fabricated"]}))
+
+    def test_initial_post_missing_conflict_array_fails(self):
+        self.assertEqual(1, self.exercise(
+            initial_mutate=lambda result: {
+                key: value for key, value in result.items()
+                if key != "conflicts"}))
+
+    def test_initial_post_non_success_status_fails(self):
+        self.assertEqual(1, self.exercise(initial_status=409))
 
 
 

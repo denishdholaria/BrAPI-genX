@@ -308,6 +308,65 @@ class LiveAssertionManifestTests(unittest.TestCase):
             self.mutated("L-22", 0, lambda step: step.update(
                 body_fixture="live_telemetry_conflict")))
 
+    def test_L_23_initial_append_counters_mandatory(self):
+        self.assertIn(
+            "source telemetry GET and mean recomputation required",
+            self.mutated("L-23", 0,
+                         lambda step: step["assert"].pop("telemetry_counts")))
+
+    def test_L_23_initial_clean_conflicts_mandatory(self):
+        self.assertIn(
+            "source telemetry GET and mean recomputation required",
+            self.mutated("L-23", 0,
+                         lambda step: step["assert"].pop("telemetry_no_conflicts")))
+
+    def test_L_23_initial_incorrect_count_rejected(self):
+        self.assertIn(
+            "source telemetry GET and mean recomputation required",
+            self.mutated("L-23", 0,
+                         lambda step: step["assert"].update(
+                             telemetry_counts={"appended": 2, "replayed": 1})))
+
+
+    def test_L_26_initial_append_counters_mandatory(self):
+        self.assertIn(
+            "original telemetry source before window aggregation required",
+            self.mutated("L-26", 0,
+                         lambda step: step["assert"].pop("telemetry_counts")))
+
+    def test_L_26_initial_clean_conflicts_mandatory(self):
+        self.assertIn(
+            "original telemetry source before window aggregation required",
+            self.mutated("L-26", 0,
+                         lambda step: step["assert"].pop("telemetry_no_conflicts")))
+
+    def test_L_26_initial_incorrect_count_rejected(self):
+        self.assertIn(
+            "original telemetry source before window aggregation required",
+            self.mutated("L-26", 0,
+                         lambda step: step["assert"].update(
+                             telemetry_counts={"appended": 2, "replayed": 1})))
+
+
+    def test_L_28_initial_append_counters_mandatory(self):
+        self.assertIn(
+            "two-page telemetry slice and source integrity required",
+            self.mutated("L-28", 0,
+                         lambda step: step["assert"].pop("telemetry_counts")))
+
+    def test_L_28_initial_clean_conflicts_mandatory(self):
+        self.assertIn(
+            "two-page telemetry slice and source integrity required",
+            self.mutated("L-28", 0,
+                         lambda step: step["assert"].pop("telemetry_no_conflicts")))
+
+    def test_L_28_initial_incorrect_count_rejected(self):
+        self.assertIn(
+            "two-page telemetry slice and source integrity required",
+            self.mutated("L-28", 0,
+                         lambda step: step["assert"].update(
+                             telemetry_counts={"appended": 2, "replayed": 1})))
+
     def test_telemetry_conflict_identity_assertion_cannot_be_removed(self):
         self.assertIn(
             "rejected telemetry natural key and retained source required",
