@@ -622,3 +622,17 @@ suite `Scripts/test_rejected_inference_no_stored_job.py` runs in hosted
 static conformance. This proves no **observable stored job**, not that no
 unobservable side effect or processing ever occurred. See
 [Mission 132 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-132-REJECTED-INFERENCE-NO-STORED-JOB.md).
+
+## Job replay single stored-effect assurance (Mission 133)
+
+Registered **L-01** now reads the complete jobs collection after replay,
+rather than relying on the two equal job identifiers returned by POST.
+It requires exactly one stored job matching the original idempotency key
+and returned identifier, with an unchanged job type; unrelated jobs can
+coexist. A truncated or malformed collection fails closed.
+
+The `job_replay_single_stored` assertion is required on a GET after the
+original captured POST and identical replay. The mandatory regression
+suite `Scripts/test_job_replay_single_stored.py` tests falsifying
+duplicate/missing records, mismatched identity and incomplete pagination.
+See [Mission 133 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-133-JOB-REPLAY-SINGLE-STORED.md).
