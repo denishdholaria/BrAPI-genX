@@ -50,7 +50,7 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
                 job_body.update(copy.deepcopy(body))
                 return 202, {"result": {
                     "jobDbId": "JOB_PAGE", "jobType": body["jobType"],
-                    "idempotencyKey": body["idempotencyKey"]}}
+                    "idempotencyKey": body["idempotencyKey"], "status": "SUBMITTED"}}
             if len(requests) == 2:
                 self.assertEqual(("POST", "/models"), (method, path))
                 submitted_model.update(copy.deepcopy(body))

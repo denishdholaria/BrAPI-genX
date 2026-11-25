@@ -53,6 +53,14 @@ DECIMAL_RE = re.compile(r"^-?\d+(\.\d+)?$")
 HTTP_METHODS = {"GET", "POST", "PUT", "DELETE"}
 OPENAPI_METHODS = {"GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS", "TRACE"}
 TERMINAL = {"COMPLETED", "FAILED", "CANCELLED", "EXPIRED"}
+JOB_LIFECYCLE_STATES = frozenset(TERMINAL | {"SUBMITTED", "RUNNING"})
+
+
+def valid_job_lifecycle_status(job):
+    """Validate the required Job.status enum without constraining phase."""
+    return (isinstance(job, dict)
+            and isinstance(job.get("status"), str)
+            and job["status"] in JOB_LIFECYCLE_STATES)
 
 
 def load_yaml(path):
@@ -1688,6 +1696,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         or not isinstance(body, dict)
                         or not isinstance(accepted.get("jobDbId"), str)
                         or not accepted["jobDbId"]
+                        or not valid_job_lifecycle_status(accepted)
                         or not isinstance(body.get("jobType"), str)
                         or not body["jobType"]
                         or accepted.get("jobType") != body["jobType"]
@@ -1698,7 +1707,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
                         "initial job acceptance missing or changing original "
-                        "identifier, type or idempotency key"
+                        "identifier, type, idempotency key or Job status"
                     )
                 ctx["live_job"] = accepted["jobDbId"]
                 ctx["live_body"] = body
@@ -1840,14 +1849,14 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         or submitted.get("jobType") != "inference"
                         or not isinstance(submitted.get("idempotencyKey"), str)
                         or not submitted["idempotencyKey"]
-                        or not isinstance(accepted, dict)
+                        or not valid_job_lifecycle_status(accepted)
                         or accepted.get("jobType") != submitted["jobType"]
                         or accepted.get("idempotencyKey")
                             != submitted["idempotencyKey"]):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
                         "deprecated inference initial acknowledgment missing or "
-                        "changing original job identifier, type or key"
+                        "changing original job identifier, type, key or status"
                     )
                 terminal_payload = wait_terminal(server, job_id, token)
                 terminal_job = (terminal_payload.get("result")

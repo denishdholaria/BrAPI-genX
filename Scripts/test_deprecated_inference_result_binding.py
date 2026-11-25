@@ -65,7 +65,7 @@ class DeprecatedInferenceResultBindingTests(unittest.TestCase):
                 return acceptance_status, {
                     "result": {
                         "jobDbId": "JOB_WARNED", "jobType": body["jobType"],
-                        "idempotencyKey": body["idempotencyKey"],
+                        "idempotencyKey": body["idempotencyKey"], "status": "SUBMITTED",
                     },
                     "metadata": meta["status"] and meta or meta,
                 }

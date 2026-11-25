@@ -47,7 +47,7 @@ class JobConflictCollectionUnchangedTests(unittest.TestCase):
                 return 202, {"result": {
                     "jobDbId": "JOB_ONE",
                     "jobType": body["jobType"],
-                    "idempotencyKey": body["idempotencyKey"]}}
+                    "idempotencyKey": body["idempotencyKey"], "status": "SUBMITTED"}}
             if len(calls) == 2:
                 self.assertEqual(("GET", "/jobs"), (method, path))
                 rows = [{"jobDbId": "JOB_ONE",

@@ -1287,3 +1287,25 @@ the additional call and negative/positive readback cases.
 Manifest mutation tests require the intervening version-specific GET.
 
 See [Mission 171 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-171-DEPRECATED-MODEL-PERSISTENCE-READBACK.md).
+
+## Required Job lifecycle status in initial acknowledgments (Mission 172)
+
+The shared initial job capture used by **L-01**, **L-02**, **L-03**,
+**L-07**, **L-14**, and **L-25** now checks that the accepted Job
+contains a string `status` from the **published Job schema**:
+`SUBMITTED`, `RUNNING`, `COMPLETED`, `FAILED`, `CANCELLED`, or
+`EXPIRED`. The specialized **L-27** deprecated-model inference
+acceptance performs the same check before polling. Previously these
+paths validated the job identifier, type, and idempotency key but
+accepted a missing or malformed required lifecycle status.
+
+This enforces only the existing schema enum, **not a newly chosen
+initial status or lifecycle transition rule**. A valid `RUNNING`
+acknowledgment is explicitly permitted, and additional server-managed
+fields remain allowed. The mandatory replay and deprecated-inference
+synthetic suites now reject missing, nonstring, and out-of-enum initial
+status values before any subsequent replay, polling or readback.
+Existing positive synthetic fixtures have been aligned with the
+published required Job shape.
+
+See [Mission 172 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-172-INITIAL-JOB-STATUS-SCHEMA.md).
