@@ -83,6 +83,8 @@ def scope_errors(document: dict) -> list[str]:
             "bun Scripts/genx_test_server_ts.ts --port 18082",
             "python Scripts/genx_differential_check.py --a http://127.0.0.1:18080/genx/v1 --b http://127.0.0.1:18082/genx/v1 --expired-job JOB_EXPIRED",
             "python Scripts/test_genx_differential_check.py",
+            "python Scripts/checkGenXConformance.py --server http://127.0.0.1:18082/genx/v1 --expired-job JOB_EXPIRED --only L-14",
+            "python Scripts/checkGenXConformance.py --server http://127.0.0.1:18082/genx/v1 --expired-job JOB_EXPIRED --only L-24",
         ):
             if required not in commands:
                 errors.append(f"independent-runtime-differential missing command: {required}")
@@ -234,6 +236,37 @@ class WorkflowScopeTests(unittest.TestCase):
             "missing command: python Scripts/test_genx_differential_check.py" in error
             for error in scope_errors(damaged)
         ))
+
+
+    def test_typescript_live_probes_are_not_diagnostic_only(self):
+        for probe in ("L-14", "L-24"):
+            with self.subTest(probe=probe):
+                damaged = copy.deepcopy(self.workflow)
+                steps = damaged["jobs"]["independent-runtime-differential"]["steps"]
+                command = ("python Scripts/checkGenXConformance.py --server "
+                           "http://127.0.0.1:18082/genx/v1 --expired-job JOB_EXPIRED "
+                           f"--only {probe}")
+                step = next(s for s in steps if s.get("run") == command)
+                step["if"] = "failure()"
+                self.assertTrue(any(
+                    "independent-runtime-differential missing command: " + command in error
+                    for error in scope_errors(damaged)
+                ))
+
+    def test_typescript_live_probes_cannot_be_silently_removed(self):
+        for probe in ("L-14", "L-24"):
+            with self.subTest(probe=probe):
+                damaged = copy.deepcopy(self.workflow)
+                steps = damaged["jobs"]["independent-runtime-differential"]["steps"]
+                command = ("python Scripts/checkGenXConformance.py --server "
+                           "http://127.0.0.1:18082/genx/v1 --expired-job JOB_EXPIRED "
+                           f"--only {probe}")
+                step = next(s for s in steps if s.get("run") == command)
+                step["run"] = "echo probe-skipped"
+                self.assertTrue(any(
+                    "independent-runtime-differential missing command: " + command in error
+                    for error in scope_errors(damaged)
+                ))
 
 if __name__ == "__main__":
     unittest.main()
