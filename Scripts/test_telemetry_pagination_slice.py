@@ -184,15 +184,15 @@ class TelemetryPaginationSliceTests(unittest.TestCase):
 
     def test_tail_quality_changed_fails(self):
         def corrupt(rows, _):
-            rows[0]["qualityFlag"] = "REJECTED"
+            rows[0]["quality"] = "bad"
             return rows
         self.assertEqual(1, self.exercise(mutate_tail_rows=corrupt))
 
-    def test_tail_provenance_mutated_fails(self):
+    def test_first_page_nested_provenance_mutated_fails(self):
         def corrupt(rows, _):
-            rows[0]["provenance"] = {"origin": "fabricated"}
+            rows[0]["provenance"]["algorithmVersion"] = "fabricated"
             return rows
-        self.assertEqual(1, self.exercise(mutate_tail_rows=corrupt))
+        self.assertEqual(1, self.exercise(mutate_rows=corrupt))
 
     def test_first_page_unit_changed_fails(self):
         def corrupt(rows, _):
