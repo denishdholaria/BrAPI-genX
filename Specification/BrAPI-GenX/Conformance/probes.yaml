@@ -385,12 +385,13 @@ probes:
   object: variantMatrices
   title: Matrix registration replays identical records without duplication
   procedure:
-  - POST a VariantMatrixNewRequest under a fresh namespaced id; POST the identical body again.
-  expectation: Second response is 200 with the same matrixDbId and no new record.
-  falsifier: A second record is created for the identical replay.
+  - POST a VariantMatrixNewRequest under a fresh namespaced id; POST the identical body again; GET the complete matrix collection.
+  expectation: Second response is 200 with the same matrixDbId and exactly one unchanged stored reference exists for that id.
+  falsifier: A second record is stored, original matrix metadata or provenance changes, or the collection is incomplete.
   calls:
   - {method: POST, path: /variantmatrices, body_fixture: live_matrix_submit, capture_matrix: true}
   - {method: POST, path: /variantmatrices, body_fixture: live_matrix_submit, assert: {same_matrix: true}}
+  - {method: GET, path: /variantmatrices, assert: {status: 200, matrix_replay_single_record: true}}
 - id: L-17
   tier: live
   object: variantMatrices

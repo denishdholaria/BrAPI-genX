@@ -523,3 +523,17 @@ mutation suite runs in hosted static conformance. The existing Python
 reference server executes the L-08 live probe. This remains a synthetic,
 in-memory assurance test, not production durability or certification. See
 [Mission 125 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-125-TERM-REPLAY-UNIQUENESS.md).
+
+## Variant-matrix replay stored-state evidence (Mission 126)
+
+Registered **L-16** now reads the complete `/variantmatrices` collection
+after identical registration replay. It verifies a single stored occurrence
+of the freshly submitted matrix identifier and compares **all originally
+submitted attributes**, including file and index digests, remote access
+metadata, and nested provenance. Unrelated matrices may coexist.
+
+A malformed, incomplete or multipage collection fails closed rather than
+being treated as evidence that no duplicate exists. The mandatory assertion
+is checked by the manifest validator and its negative regression suite at
+`Scripts/test_matrix_replay_stored_state.py` runs in hosted static
+conformance. See [Mission 126 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-126-MATRIX-REPLAY-STORED-STATE.md).
