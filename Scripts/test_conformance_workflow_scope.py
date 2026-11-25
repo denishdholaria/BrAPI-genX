@@ -84,6 +84,9 @@ def scope_errors(document: dict) -> list[str]:
             "bun Scripts/genx_test_server_ts.ts --port 18082",
             "python Scripts/genx_differential_check.py --a http://127.0.0.1:18080/genx/v1 --b http://127.0.0.1:18082/genx/v1 --expired-job JOB_EXPIRED",
             "python Scripts/test_genx_differential_check.py",
+            "python Scripts/checkGenXConformance.py --server http://127.0.0.1:18082/genx/v1 --expired-job JOB_EXPIRED --only L-12",
+            "python Scripts/checkGenXConformance.py --server http://127.0.0.1:18082/genx/v1 --expired-job JOB_EXPIRED --only L-13",
+            "python Scripts/checkGenXConformance.py --server http://127.0.0.1:18082/genx/v1 --expired-job JOB_EXPIRED --only L-15",
             "python Scripts/checkGenXConformance.py --server http://127.0.0.1:18082/genx/v1 --expired-job JOB_EXPIRED --only L-14",
             "python Scripts/checkGenXConformance.py --server http://127.0.0.1:18082/genx/v1 --expired-job JOB_EXPIRED --only L-24",
         ):
@@ -280,6 +283,29 @@ class WorkflowScopeTests(unittest.TestCase):
             "static-conformance job missing command: python Scripts/test_conformance_probe_selection.py",
             scope_errors(damaged),
         )
+
+
+    def test_typescript_model_integrity_probes_cannot_be_skipped(self):
+        for probe_id in ("L-12", "L-13", "L-15"):
+            with self.subTest(probe=probe_id):
+                command = (
+                    "python Scripts/checkGenXConformance.py --server "
+                    "http://127.0.0.1:18082/genx/v1 --expired-job JOB_EXPIRED "
+                    f"--only {probe_id}"
+                )
+                for defect in ("removed", "diagnostic_only"):
+                    with self.subTest(defect=defect):
+                        damaged = copy.deepcopy(self.workflow)
+                        steps = damaged["jobs"]["independent-runtime-differential"]["steps"]
+                        step = next(s for s in steps if s.get("run") == command)
+                        if defect == "removed":
+                            step["run"] = "echo model-integrity-check-skipped"
+                        else:
+                            step["if"] = "failure()"
+                        self.assertIn(
+                            "independent-runtime-differential missing command: " + command,
+                            scope_errors(damaged),
+                        )
 
 if __name__ == "__main__":
     unittest.main()
