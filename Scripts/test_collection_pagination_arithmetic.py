@@ -234,6 +234,71 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
             return data
         self.assertEqual(1, self.exercise(modify=change)[0])
 
+    @classmethod
+    def append_unrelated_job(cls, kind, payload, job):
+        if kind == "jobs":
+            payload["result"]["data"].append(job)
+            cls.refresh_first_page(payload)
+        return payload
+
+    def test_duplicate_unrelated_job_identifiers_fail(self):
+        def change(kind, data):
+            if kind == "jobs":
+                data["result"]["data"].extend([
+                    {"jobDbId": "UNRELATED", "jobType": "analysis",
+                     "idempotencyKey": "other-key-1"},
+                    {"jobDbId": "UNRELATED", "jobType": "analysis",
+                     "idempotencyKey": "other-key-2"},
+                ])
+                self.refresh_first_page(data)
+            return data
+        self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_missing_unrelated_job_identifier_fails(self):
+        self.assertEqual(1, self.exercise(modify=lambda k, p:
+            self.append_unrelated_job(k, p, {"jobType": "analysis"}))[0])
+
+    def test_blank_unrelated_job_identifier_fails(self):
+        self.assertEqual(1, self.exercise(modify=lambda k, p:
+            self.append_unrelated_job(k, p, {
+                "jobDbId": "", "jobType": "analysis"}))[0])
+
+    def test_missing_unrelated_job_type_fails(self):
+        self.assertEqual(1, self.exercise(modify=lambda k, p:
+            self.append_unrelated_job(k, p, {"jobDbId": "UNRELATED"}))[0])
+
+    def test_blank_unrelated_job_type_fails(self):
+        self.assertEqual(1, self.exercise(modify=lambda k, p:
+            self.append_unrelated_job(k, p, {
+                "jobDbId": "UNRELATED", "jobType": ""}))[0])
+
+    def test_nonstring_unrelated_job_key_fails(self):
+        self.assertEqual(1, self.exercise(modify=lambda k, p:
+            self.append_unrelated_job(k, p, {
+                "jobDbId": "UNRELATED", "jobType": "analysis",
+                "idempotencyKey": False}))[0])
+
+    def test_unrelated_job_without_optional_key_allowed(self):
+        self.assertEqual(0, self.exercise(modify=lambda k, p:
+            self.append_unrelated_job(k, p, {
+                "jobDbId": "UNRELATED", "jobType": "analysis"}))[0])
+
+    def test_distinct_unrelated_job_with_key_allowed(self):
+        self.assertEqual(0, self.exercise(modify=lambda k, p:
+            self.append_unrelated_job(k, p, {
+                "jobDbId": "UNRELATED", "jobType": "analysis",
+                "idempotencyKey": "other-key"}))[0])
+
+    def test_valid_first_page_with_more_pages_allowed(self):
+        # L-25 only promises first-page evidence, unlike complete
+        # collection replay probes; later pages may exist legitimately.
+        def change(kind, data):
+            if kind == "jobs":
+                data["metadata"]["pagination"].update(
+                    totalCount=3, pageSize=1, totalPages=3, currentPage=0)
+            return data
+        self.assertEqual(0, self.exercise(modify=change)[0])
+
     def test_duplicate_model_version_fails_with_consistent_pagination(self):
         def change(kind, data):
             if kind == "models":
