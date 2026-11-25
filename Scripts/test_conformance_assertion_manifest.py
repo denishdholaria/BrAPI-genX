@@ -169,8 +169,11 @@ class LiveAssertionManifestTests(unittest.TestCase):
         self.assertIn(
             "job_replay_single_stored GET after replay required",
             self.mutated("L-01", 1,
-                         lambda s: s.update({"assert": {"status": 200},
-                                             "body_fixture": "live_submit"})))
+                         lambda s: (
+                             s.pop("replay_capture"),
+                             s.update({"assert": {"status": 200},
+                                       "body_fixture": "live_submit"}),
+                         )))
 
     def test_job_replay_stored_readback_must_capture_initial_job(self):
         self.assertIn(
