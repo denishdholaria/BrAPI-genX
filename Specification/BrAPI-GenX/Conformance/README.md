@@ -1396,3 +1396,23 @@ regression suites cover malformed progress and positive 0, fractional,
 and 1 values. The published wire schema is unchanged.
 
 See [Mission 176 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-176-OPTIONAL-JOB-PROGRESS-SCHEMA.md).
+
+## Optional Job timestamp encoding (Mission 177)
+
+The published Job fields `createdAt`, `updatedAt`, and
+`expiresAt` are **optional**. When present, each must be a valid
+timezone-bearing date-time string, including UTC `Z`, colonized
+offsets such as `+05:30`, and compact offsets such as `-0600`
+supported by the repository's Date and Time Encoding guidance.
+
+The shared validator enforces these existing constraints on initial,
+replay and concurrent Job acknowledgments, warned-inference
+acceptance, complete stored-job collections, and visible L-25
+first-page rows. Missing timezone offsets, invalid calendar dates,
+date-only and nonstring/null timestamp values fail closed.
+
+The fields remain optional. There is no new timestamp ordering
+constraint or Job lifecycle transition rule. The mandatory regression
+suites include malformed timestamps and supported offset controls.
+
+See [Mission 177 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-177-OPTIONAL-JOB-TIMESTAMP-ENCODING.md).
