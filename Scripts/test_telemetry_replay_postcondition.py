@@ -27,7 +27,8 @@ class TelemetryReplayPostconditionTests(unittest.TestCase):
         self.assertIn("sensorDbId=air-temp-01", final["path"])
         self.assertIs(True, final["assert"]["telemetry_original_intact"])
 
-    def exercise(self, change=None, read_status=200, replay_counts=None):
+    def exercise(self, change=None, read_status=200, replay_counts=None,
+                 first_counts=None, first_status=200, replay_status=200):
         seen = []
         submitted = []
 
@@ -37,13 +38,15 @@ class TelemetryReplayPostconditionTests(unittest.TestCase):
                 self.assertEqual(("POST", "/telemetry"), (method, path))
                 self.assertEqual(3, len(body))
                 submitted.extend(copy.deepcopy(body))
-                return 200, {"result": {
-                    "appended": 3, "replayed": 0, "conflicts": []}}
+                counts = {"appended": 3, "replayed": 0}
+                if first_counts is not None:
+                    counts = first_counts
+                return first_status, {"result": {**counts, "conflicts": []}}
             if len(seen) == 2:
                 self.assertEqual(("POST", "/telemetry"), (method, path))
                 self.assertEqual(submitted, body)
                 counts = replay_counts or {"appended": 0, "replayed": 3}
-                return 200, {"result": {**counts, "conflicts": []}}
+                return replay_status, {"result": {**counts, "conflicts": []}}
             if len(seen) == 3:
                 self.assertEqual("GET", method)
                 self.assertIn(f"deviceDbId={submitted[0]['deviceDbId']}", path)
@@ -59,7 +62,8 @@ class TelemetryReplayPostconditionTests(unittest.TestCase):
             checker.run_live_probe(
                 "http://example.test/genx/v1", self.probe,
                 {"conformance_dir": str(CONF)}, result, None, None)
-        if replay_counts is None:
+        if (replay_counts is None and first_counts is None
+                and first_status == 200 and replay_status == 200):
             self.assertEqual(3, len(seen))
         return result.failures
 
@@ -132,6 +136,45 @@ class TelemetryReplayPostconditionTests(unittest.TestCase):
 
     def test_false_replay_counters_fail(self):
         self.assertEqual(1, self.exercise(replay_counts={"appended": 1, "replayed": 2}))
+
+
+    def test_boolean_zero_replay_counter_fails(self):
+        self.assertEqual(1, self.exercise(
+            replay_counts={"appended": False, "replayed": 3}))
+
+    def test_boolean_initial_replayed_counter_fails(self):
+        self.assertEqual(1, self.exercise(
+            first_counts={"appended": 3, "replayed": False}))
+
+    def test_fractional_zero_replay_counter_fails(self):
+        self.assertEqual(1, self.exercise(
+            replay_counts={"appended": 0.0, "replayed": 3}))
+
+    def test_fractional_three_replayed_counter_fails(self):
+        self.assertEqual(1, self.exercise(
+            replay_counts={"appended": 0, "replayed": 3.0}))
+
+    def test_missing_replayed_counter_fails(self):
+        self.assertEqual(1, self.exercise(
+            replay_counts={"appended": 0}))
+
+    def test_null_appended_counter_fails(self):
+        self.assertEqual(1, self.exercise(
+            replay_counts={"appended": None, "replayed": 3}))
+
+    def test_string_appended_counter_fails(self):
+        self.assertEqual(1, self.exercise(
+            replay_counts={"appended": "0", "replayed": 3}))
+
+    def test_negative_replayed_counter_fails(self):
+        self.assertEqual(1, self.exercise(
+            replay_counts={"appended": 0, "replayed": -3}))
+
+    def test_replay_non_success_with_correct_counts_fails(self):
+        self.assertEqual(1, self.exercise(replay_status=500))
+
+    def test_first_post_non_success_with_correct_counts_fails(self):
+        self.assertEqual(1, self.exercise(first_status=500))
 
 
 if __name__ == "__main__":

@@ -876,3 +876,19 @@ original fields, and job binding. The manifest guard prevents omitting the
 original request capture, terminal wait or completed-result readback.
 
 See [Mission 148 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-148-PROVENANCE-OBSERVATION-IDENTITY.md).
+
+## Strict telemetry append and replay counter types (Mission 149)
+
+The existing L-21 and L-22 `telemetry_counts` assertions now require
+HTTP 200 and **actual nonnegative JSON integer** values for `appended`
+and `replayed`, in addition to their existing expected counts.
+Previously, Python equality treated JSON `false` as numeric zero,
+allowing malformed counter types to pass on some replay and conflict
+responses despite the existing TelemetryBatchResult integer schema.
+
+The already-mandatory
+`Scripts/test_telemetry_replay_postcondition.py` and
+`Scripts/test_telemetry_conflict_identity.py` regression suites now
+reject booleans, floats, nulls, missing counters, strings and negative
+values, as well as a non-successful POST with the otherwise expected
+counts. See [Mission 149 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-149-TELEMETRY-COUNTER-TYPES.md).

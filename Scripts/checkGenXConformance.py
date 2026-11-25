@@ -2277,14 +2277,20 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                             f"original telemetry field or nested provenance changed: {key!r}"
                         )
             if "telemetry_counts" in assertion:
-                seen = payload.get("result", {})
+                # JSON booleans must not pass integer-count checks: in
+                # Python, False == 0 and True == 1.
+                result = payload.get("result") if isinstance(payload, dict) else None
                 want = assertion["telemetry_counts"]
-                if (seen.get("appended"), seen.get("replayed")) != (
-                        want.get("appended"), want.get("replayed")):
+                if (status != 200 or not isinstance(result, dict)
+                        or any(type(result.get(name)) is not int
+                               or result[name] < 0 for name in ("appended", "replayed"))
+                        or (result["appended"], result["replayed"]) != (
+                            want["appended"], want["replayed"])):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        f"counts are {(seen.get('appended'), seen.get('replayed'))}, "
-                        f"expected {(want.get('appended'), want.get('replayed'))}")
+                        "telemetry counts must be nonnegative integers "
+                        "matching original append/replay expectations"
+                    )
             if "telemetry_conflicts" in assertion:
                 result = payload.get("result") if isinstance(payload, dict) else None
                 seen = result.get("conflicts") if isinstance(result, dict) else None
