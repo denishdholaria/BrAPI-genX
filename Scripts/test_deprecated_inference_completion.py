@@ -209,6 +209,30 @@ class DeprecatedInferenceCompletionTests(unittest.TestCase):
     def test_acceptance_missing_job_identifier_fails(self):
         self.assertEqual(1, self.exercise(include_id=False).failures)
 
+    def test_initial_ack_missing_status_fails_before_poll(self):
+        def drop_status(record):
+            record.pop("status")
+            return record
+        self.assertEqual(1, self.exercise(
+            ack_mutate=drop_status, reject_before_poll=True).failures)
+
+    def test_initial_ack_unknown_status_fails_before_poll(self):
+        self.assertEqual(1, self.exercise(
+            ack_mutate=lambda record: {**record, "status": "QUEUED"},
+            reject_before_poll=True).failures)
+
+    def test_initial_ack_nonstring_status_fails_before_poll(self):
+        for invalid in (None, False, 0, [], {}):
+            with self.subTest(invalid=invalid):
+                self.assertEqual(1, self.exercise(
+                    ack_mutate=lambda record: {**record, "status": invalid},
+                    reject_before_poll=True).failures)
+
+    def test_initial_ack_running_status_allowed(self):
+        self.assertEqual(0, self.exercise(
+            ack_mutate=lambda record: {**record, "status": "RUNNING"}
+        ).failures)
+
     def test_initial_ack_missing_job_type_fails_before_poll(self):
         def change(accepted):
             accepted.pop("jobType")
