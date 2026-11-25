@@ -284,9 +284,9 @@ probes:
   object: provenance
   title: A provenanced payload round-trips with its digests intact
   procedure:
-  - Submit a job carrying provenanced_observation.json parameters; on COMPLETED, compare echoed provenance digests.
-  expectation: inputsDigest and evidenceLinks survive the round-trip byte-identical.
-  falsifier: Any digest mutated or dropped in transit.
+  - Submit the reference echo-style analysis job carrying provenanced_observation.json; on COMPLETED, compare the returned job identity and the entire originally submitted observation.
+  expectation: The original observation identity, variable, value, and all nested provenance (including inputsDigest and evidenceLinks) survive the round-trip unchanged.
+  falsifier: A copied provenance object on a different or altered observation, wrong completed job identity, or any dropped or mutated original field.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_provenanced_submit, capture_job: true, wait_terminal: true}
   - {method: GET, path: "/jobs/{jobDbId}", assert: {provenance_intact: true}}
