@@ -594,3 +594,17 @@ The manifest validator requires the three-step publish → conflicting POST
 → readback sequence. The `Scripts/test_package_conflict_whole_record.py`
 regressions run in the mandatory hosted static conformance workflow. See
 [Mission 130 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-130-PACKAGE-CONFLICT-WHOLE-RECORD.md).
+
+## Model conflict whole-record verification (Mission 131)
+
+Registered **L-13** now checks all originally submitted model fields after
+rejecting a conflicting version with 409, not only the `artifactDigest`.
+The existing `unchanged_model_digest` assertion reuses the runner-local
+`published_record_problem` helper for versioned model identity, artifact
+and training-data metadata, metrics, framework and nested provenance.
+
+The manifest validator requires the exact submit, conflict and versioned
+GET procedure. The dedicated negative regression suite
+`Scripts/test_model_conflict_whole_record.py` is mandatory in hosted
+static conformance; prior model-conflict tests remain active. See
+[Mission 131 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-131-MODEL-CONFLICT-WHOLE-RECORD.md).
