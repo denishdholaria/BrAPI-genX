@@ -29,7 +29,8 @@ class DeprecatedInferenceCompletionTests(unittest.TestCase):
     def exercise(self, *, terminal_status="COMPLETED", terminal_id=None,
                  submit_status=202, include_warning=True, include_id=True,
                  missing_terminal=False, ack_mutate=None,
-                 reject_before_poll=False):
+                 reject_before_poll=False, model_ack_mutate=None,
+                 reject_before_inference=False):
         calls = []
         accepted_id = "JOB_DEPRECATED_TEST"
         model = {}
@@ -41,7 +42,10 @@ class DeprecatedInferenceCompletionTests(unittest.TestCase):
                 self.assertEqual(("POST", "/models"), (method, path))
                 model.update(copy.deepcopy(body))
                 self.assertEqual("deprecated", model["status"])
-                return 200, {"result": copy.deepcopy(body)}
+                acknowledged = copy.deepcopy(body)
+                if model_ack_mutate is not None:
+                    acknowledged = model_ack_mutate(acknowledged)
+                return 200, {"result": acknowledged}
             if len(calls) == 2:
                 self.assertEqual(("POST", "/jobs"), (method, path))
                 self.assertEqual(model["modelDbId"],
@@ -90,13 +94,49 @@ class DeprecatedInferenceCompletionTests(unittest.TestCase):
             checker.run_live_probe(
                 "http://example.test/genx/v1", self.probe,
                 {"conformance_dir": str(CONF)}, outcome, None, None)
-        if reject_before_poll:
+        if reject_before_poll or reject_before_inference:
             wait_mock.assert_not_called()
-        self.assertEqual(2, len(calls))
+        self.assertEqual(1 if reject_before_inference else 2, len(calls))
         return outcome
 
     def test_completed_deprecated_inference_with_warning_passes(self):
         self.assertEqual(0, self.exercise().failures)
+
+    def test_deprecated_ack_status_changed_fails_before_inference(self):
+        result = self.exercise(model_ack_mutate=lambda m: {
+            **m, "status": "active"}, reject_before_inference=True)
+        self.assertEqual(1, result.failures)
+
+    def test_deprecated_ack_digest_changed_fails_before_inference(self):
+        result = self.exercise(model_ack_mutate=lambda m: {
+            **m, "artifactDigest": "f" * 64},
+            reject_before_inference=True)
+        self.assertEqual(1, result.failures)
+
+    def test_deprecated_ack_nested_metrics_changed_fails_before_inference(self):
+        def change(model):
+            model["metrics"]["rmse"] = 2.0
+            return model
+        self.assertEqual(1, self.exercise(
+            model_ack_mutate=change, reject_before_inference=True).failures)
+
+    def test_deprecated_ack_missing_version_fails_before_inference(self):
+        def change(model):
+            del model["modelVersion"]
+            return model
+        self.assertEqual(1, self.exercise(
+            model_ack_mutate=change, reject_before_inference=True).failures)
+
+    def test_deprecated_ack_null_result_fails_before_inference(self):
+        self.assertEqual(1, self.exercise(
+            model_ack_mutate=lambda m: None,
+            reject_before_inference=True).failures)
+
+    def test_deprecated_ack_additional_server_metadata_allowed(self):
+        self.assertEqual(0, self.exercise(
+            model_ack_mutate=lambda m: {
+                **m, "serverReviewedAt": "2026-11-25T00:00:00Z"}
+        ).failures)
 
     def test_running_job_fails(self):
         self.assertEqual(1, self.exercise(terminal_status="RUNNING").failures)

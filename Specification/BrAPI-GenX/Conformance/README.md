@@ -1222,3 +1222,23 @@ now covers altered, missing, or malformed acceptance fields, asserting
 that failures precede polling.
 
 See [Mission 168 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-168-DEPRECATED-INFERENCE-ACK-BINDING.md).
+
+## Revoked and deprecated model registration acknowledgment integrity (Mission 169)
+
+Registered **L-15** and **L-27** now verify that the initial
+registration response for a revoked or deprecated model retains **every
+originally submitted model field**, including lifecycle status, artifact
+and training digests, metrics and nested provenance. The ordinary
+model-registration capture already enforced this invariant, but these
+two specialized captures previously checked only a successful response
+status before trusting the returned model identity.
+
+Both paths reuse `submitted_record_problem` and fail before any
+downstream inference submit if the initial acknowledgment changes or
+drops source fields or returns a malformed result. Additional
+server-managed response metadata is permitted. The mandatory
+`Scripts/test_rejected_inference_no_stored_job.py` and
+`Scripts/test_deprecated_inference_completion.py` suites cover
+negative mutations, early failure and positive extra-field cases.
+
+See [Mission 169 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-169-MODEL-LIFECYCLE-ACK-SOURCE-INTEGRITY.md).

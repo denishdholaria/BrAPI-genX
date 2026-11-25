@@ -29,7 +29,8 @@ class RejectedInferenceNoStoredJobTests(unittest.TestCase):
         self.assertIs(True, final["assert"]["rejected_inference_not_stored"])
 
     def exercise(self, create_job=None, mutate_page=None, read_status=200,
-                 unknown_status=400, revoked_status=400):
+                 unknown_status=400, revoked_status=400,
+                 mutate_revoked_ack=None):
         calls = []
         rejected = []
         accepted_revoked = []
@@ -45,7 +46,10 @@ class RejectedInferenceNoStoredJobTests(unittest.TestCase):
                 self.assertEqual(("POST", "/models"), (method, path))
                 self.assertEqual("revoked", body["status"])
                 accepted_revoked.append(copy.deepcopy(body))
-                return 200, {"result": copy.deepcopy(body)}
+                acknowledged = copy.deepcopy(body)
+                if mutate_revoked_ack is not None:
+                    acknowledged = mutate_revoked_ack(acknowledged)
+                return 200, {"result": acknowledged}
             if len(calls) == 3:
                 self.assertEqual(("POST", "/jobs"), (method, path))
                 rejected.append(copy.deepcopy(body))
@@ -87,6 +91,41 @@ class RejectedInferenceNoStoredJobTests(unittest.TestCase):
         failures, calls = self.exercise()
         self.assertEqual(0, failures)
         self.assertEqual(4, len(calls))
+
+    def test_revoked_ack_changed_status_rejected_before_inference(self):
+        failures, calls = self.exercise(
+            mutate_revoked_ack=lambda model: {**model, "status": "active"})
+        self.assertEqual((1, 2), (failures, len(calls)))
+
+    def test_revoked_ack_changed_artifact_rejected_before_inference(self):
+        failures, calls = self.exercise(
+            mutate_revoked_ack=lambda model: {
+                **model, "artifactDigest": "f" * 64})
+        self.assertEqual((1, 2), (failures, len(calls)))
+
+    def test_revoked_ack_dropped_field_rejected_before_inference(self):
+        def change(model):
+            del model["modelVersion"]
+            return model
+        failures, calls = self.exercise(mutate_revoked_ack=change)
+        self.assertEqual((1, 2), (failures, len(calls)))
+
+    def test_revoked_ack_nested_provenance_rejected_before_inference(self):
+        def change(model):
+            model["provenance"]["actor"] = "actor:other"
+            return model
+        failures, calls = self.exercise(mutate_revoked_ack=change)
+        self.assertEqual((1, 2), (failures, len(calls)))
+
+    def test_revoked_ack_null_result_rejected_before_inference(self):
+        failures, calls = self.exercise(mutate_revoked_ack=lambda model: None)
+        self.assertEqual((1, 2), (failures, len(calls)))
+
+    def test_revoked_ack_extra_server_metadata_allowed(self):
+        failures, calls = self.exercise(
+            mutate_revoked_ack=lambda model: {
+                **model, "serverReviewedAt": "2026-11-25T00:00:00Z"})
+        self.assertEqual((0, 4), (failures, len(calls)))
 
     def test_empty_job_collection_allowed(self):
         self.assertEqual(0, self.exercise(create_job=lambda rows, denied: [])[0])

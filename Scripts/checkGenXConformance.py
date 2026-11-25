@@ -1723,13 +1723,29 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                 if status not in (200, 202):
                     return results.report(
                         probe["id"], probe["title"], "FAIL", f"submit returned {status}")
-                seen = payload.get("result", {})
+                # A later rejected inference or completed result does not
+                # validate the initial model-registration acknowledgment.
+                problem = submitted_record_problem(payload, body)
+                if problem:
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "initial revoked model publication: " + problem
+                    )
+                seen = payload["result"]
                 ctx["live_model_revoked"] = (seen.get("modelDbId"), seen.get("modelVersion"))
             if step.get("capture_model_deprecated"):
                 if status not in (200, 202):
                     return results.report(
                         probe["id"], probe["title"], "FAIL", f"submit returned {status}")
-                seen = payload.get("result", {})
+                # A later rejected inference or completed result does not
+                # validate the initial model-registration acknowledgment.
+                problem = submitted_record_problem(payload, body)
+                if problem:
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "initial deprecated model publication: " + problem
+                    )
+                seen = payload["result"]
                 ctx["live_model_deprecated"] = (seen.get("modelDbId"), seen.get("modelVersion"))
                 ctx["live_model_deprecated_original"] = copy.deepcopy(body)
             if step.get("capture_matrix"):
