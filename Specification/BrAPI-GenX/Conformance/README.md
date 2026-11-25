@@ -636,3 +636,17 @@ original captured POST and identical replay. The mandatory regression
 suite `Scripts/test_job_replay_single_stored.py` tests falsifying
 duplicate/missing records, mismatched identity and incomplete pagination.
 See [Mission 133 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-133-JOB-REPLAY-SINGLE-STORED.md).
+
+## Job conflict immutable collection snapshot (Mission 134)
+
+Registered **L-02** now reads GET /jobs **before and after** a conflicting
+submission. A complete pre-conflict snapshot must contain the initially
+submitted job with its original identifier, job type and idempotency key.
+After a rejection, the full collection must contain exactly the same
+immutable identities, allowing legitimate changes in mutable job status.
+
+This also detects a hidden second job with an unrelated server-generated key.
+The dedicated regression suite
+`Scripts/test_job_conflict_collection_unchanged.py` is mandatory in hosted
+static conformance, and the manifest validator enforces the four-step
+procedure. See [Mission 134 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-134-JOB-CONFLICT-COLLECTION-UNCHANGED.md).

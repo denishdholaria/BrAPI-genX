@@ -1182,6 +1182,37 @@ def wait_terminal(server, job_id, token):
     return last
 
 
+def immutable_job_snapshot(status, payload):
+    """Return (job identity map, diagnostic) for a complete jobs collection."""
+    result = payload.get("result") if isinstance(payload, dict) else None
+    rows = result.get("data") if isinstance(result, dict) else None
+    metadata = payload.get("metadata") if isinstance(payload, dict) else None
+    page = metadata.get("pagination") if isinstance(metadata, dict) else None
+    if (status != 200 or not isinstance(rows, list)
+            or not isinstance(page, dict)
+            or any(type(page.get(field)) is not int
+                   for field in ("totalCount", "pageSize", "totalPages", "currentPage"))
+            or page["totalCount"] != len(rows)
+            or page["pageSize"] < len(rows)
+            or page["totalPages"] != 1 or page["currentPage"] != 0):
+        return None, "incomplete jobs collection or pagination"
+    snapshot = {}
+    for row in rows:
+        if (not isinstance(row, dict)
+                or not isinstance(row.get("jobDbId"), str)
+                or not row["jobDbId"]
+                or not isinstance(row.get("jobType"), str)
+                or not row["jobType"]
+                or ("idempotencyKey" in row
+                    and not isinstance(row["idempotencyKey"], str))
+                or row["jobDbId"] in snapshot):
+            return None, "malformed or duplicated job identity in collection"
+        snapshot[row["jobDbId"]] = (
+            row["jobType"], row.get("idempotencyKey")
+        )
+    return snapshot, None
+
+
 def published_record_problem(status, payload, original, expected_id, identity_field):
     """Return a diagnostic if a rejected rewrite changed the submitted record."""
     stored = payload.get("result") if isinstance(payload, dict) else None
@@ -1227,6 +1258,10 @@ def replay_collection_problem(status, payload, original, expected_id, identity_f
 def run_live_probe(server, probe, ctx, results, token, expired_job):
     conformance_dir = ctx["conformance_dir"]
     calls = probe.get("calls", [])
+    if any(isinstance(s.get("assert"), dict)
+           and s["assert"].get("capture_job_collection")
+           for s in calls):
+        ctx["live_job_conflict_baseline"] = None
     if any(s.get("capture_term") for s in calls):
         ctx["live_term_id"] = None
         ctx["live_term"] = None
@@ -1626,6 +1661,31 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
                         "deprecated inference did not complete as the accepted job"
+                    )
+            if assertion.get("capture_job_collection"):
+                snapshot, problem = immutable_job_snapshot(status, payload)
+                original = ctx.get("live_body")
+                original_id = ctx.get("live_job")
+                if (problem or not isinstance(original, dict)
+                        or not isinstance(original_id, str) or not original_id
+                        or not isinstance(snapshot, dict)
+                        or snapshot.get(original_id) != (
+                            original.get("jobType"), original.get("idempotencyKey"))):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "original job absent from pre-conflict collection: " +
+                        (problem or "identity or request mismatch")
+                    )
+                ctx["live_job_conflict_baseline"] = snapshot
+            if assertion.get("job_conflict_collection_unchanged"):
+                snapshot, problem = immutable_job_snapshot(status, payload)
+                baseline = ctx.get("live_job_conflict_baseline")
+                if (problem or not isinstance(baseline, dict)
+                        or snapshot != baseline):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "conflict changed job collection immutable identities: " +
+                        (problem or "stored jobs added, removed, or rewritten")
                     )
             if assertion.get("job_replay_single_stored"):
                 # A replay with one returned identifier can still create
@@ -2323,7 +2383,8 @@ LIVE_BOOLEAN_ASSERTIONS = frozenset({
     "package_replay_single_record", "model_replay_single_version",
     "inference_intact", "single_effect",
     "concurrent_single_stored_job", "rejected_inference_not_stored",
-    "job_replay_single_stored",
+    "job_replay_single_stored", "capture_job_collection",
+    "job_conflict_collection_unchanged",
     "capability_registry_match",
 })
 LIVE_COUNT_ASSERTIONS = frozenset({
@@ -2450,6 +2511,13 @@ def validate_live_step_assertions(probe_id, index, call):
             f"probe {probe_id} call {index}: "
             "unchanged_term_record requires versioned term GET"
         )
+    if ("capture_job_collection" in assertion
+            or "job_conflict_collection_unchanged" in assertion) and (
+            call.get("method") != "GET" or call.get("path") != "/jobs"):
+        raise ValueError(
+            f"probe {probe_id} call {index}: "
+            "job conflict collection assertions require GET /jobs"
+        )
     if "job_replay_single_stored" in assertion and (
             call.get("method") != "GET" or call.get("path") != "/jobs"):
         raise ValueError(
@@ -2520,6 +2588,27 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-02":
+                if (len(calls) != 4
+                        or calls[0].get("method") != "POST"
+                        or calls[0].get("path") != "/jobs"
+                        or calls[0].get("body_fixture") != "live_submit"
+                        or calls[0].get("capture_job") is not True
+                        or calls[1].get("method") != "GET"
+                        or calls[1].get("path") != "/jobs"
+                        or calls[1].get("assert", {}).get("capture_job_collection")
+                            is not True
+                        or calls[2].get("method") != "POST"
+                        or calls[2].get("path") != "/jobs"
+                        or calls[2].get("body_fixture") != "live_submit_conflict"
+                        or calls[2].get("assert", {}).get("rejected") is not True
+                        or calls[3].get("method") != "GET"
+                        or calls[3].get("path") != "/jobs"
+                        or calls[3].get("assert", {}).get("job_conflict_collection_unchanged")
+                            is not True):
+                    raise ValueError(
+                        "probe L-02: complete job collection before and after conflict required"
+                    )
             if probe_id == "L-01":
                 if (len(calls) != 3
                         or calls[0].get("method") != "POST"

@@ -228,12 +228,14 @@ probes:
   object: jobs
   title: Same key with a different body is a conflict, not a new job
   procedure:
-  - POST a body under a fresh key; POST a different body under the same key.
-  expectation: Second call is rejected (conflict status; exact code requires-decision per RFC-001 §8) and creates nothing.
-  falsifier: A second job is created or the first is mutated.
+  - POST a body under a fresh key; GET the complete job collection; POST a different body under the same key; reread the collection.
+  expectation: Second POST is rejected (conflict status; exact code requires-decision per RFC-001 §8), with no new job or change to stored job identities.
+  falsifier: A second job is created, a job is removed, or the original job's immutable identity fields are changed.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_submit, capture_job: true}
+  - {method: GET, path: /jobs, assert: {status: 200, capture_job_collection: true}}
   - {method: POST, path: /jobs, body_fixture: live_submit_conflict, assert: {rejected: true}}
+  - {method: GET, path: /jobs, assert: {status: 200, job_conflict_collection_unchanged: true}}
 - id: L-03
   tier: live
   object: jobs
