@@ -511,11 +511,12 @@ probes:
   object: telemetry
   title: Windowed buckets partition the range
   procedure:
-  - POST three one-minute-apart points; GET mean buckets with windowSeconds 60.
-  expectation: Three buckets, one sample each.
-  falsifier: Points landing in the wrong buckets or bucket counts disagreeing.
+  - POST three one-minute-apart points; GET their complete unaggregated stored records; then GET the three mean buckets with windowSeconds 60.
+  expectation: Every original source field persists unchanged and the three minute buckets each contain the corresponding one-sample mean.
+  falsifier: Missing or altered source records, fabricated aggregate-only data, incorrect minute boundaries, values or counts.
   calls:
   - {method: POST, path: /telemetry, body_fixture: live_telemetry_batch, capture_telemetry: true}
+  - {method: GET, path: "/telemetry?deviceDbId={telemetry_device}&sensorDbId=air-temp-01&aggregation=none", assert: {status: 200, telemetry_original_intact: true}}
   - {method: GET, path: "/telemetry?deviceDbId={telemetry_device}&sensorDbId=air-temp-01&aggregation=mean&windowSeconds=60", assert: {data_length: 3, telemetry_window_partitions: true}}
 - id: L-27
   tier: live
