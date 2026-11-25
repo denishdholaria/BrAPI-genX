@@ -168,6 +168,38 @@ class ConcurrentJobStoredEffectTests(unittest.TestCase):
         self.assertEqual(0, len([m for m, _ in calls if m == "GET"]))
 
 
+    def test_one_missing_status_reply_fails_before_collection(self):
+        failures, calls = self.exercise(
+            mutate_ack=lambda row, index: (
+                {key: value for key, value in row.items() if key != "status"}
+                if index == 8 else row))
+        self.assertEqual(1, failures)
+        self.assertEqual(0, sum(method == "GET" for method, _ in calls))
+
+    def test_one_unknown_status_reply_fails_before_collection(self):
+        failures, calls = self.exercise(
+            mutate_ack=lambda row, index: (
+                {**row, "status": "QUEUED"} if index == 8 else row))
+        self.assertEqual(1, failures)
+        self.assertEqual(0, sum(method == "GET" for method, _ in calls))
+
+    def test_one_nonstring_status_reply_fails_before_collection(self):
+        for invalid in (None, False, 0, [], {}):
+            with self.subTest(invalid=invalid):
+                failures, calls = self.exercise(
+                    mutate_ack=lambda row, index: (
+                        {**row, "status": invalid} if index == 8 else row))
+                self.assertEqual(1, failures)
+                self.assertEqual(
+                    0, sum(method == "GET" for method, _ in calls))
+
+    def test_mixed_valid_concurrent_lifecycle_statuses_allowed(self):
+        failures, calls = self.exercise(
+            mutate_ack=lambda row, index: {
+                **row, "status": "RUNNING" if index % 2 else "SUBMITTED"})
+        self.assertEqual(0, failures)
+        self.assertEqual(1, sum(method == "GET" for method, _ in calls))
+
     def test_one_corrupted_type_reply_fails_before_collection(self):
         failures, calls = self.exercise(
             mutate_ack=lambda row, index: (
