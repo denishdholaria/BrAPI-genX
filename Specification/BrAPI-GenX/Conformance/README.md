@@ -164,3 +164,19 @@ a wrong status is **not** a pass. Negative mutations in
 
 These are expectations for the current RFC-001/RFC-004 test sequence, not a
 complete normative response code catalogue for all GenX operations.
+
+## Independent TypeScript live probes (Mission 102)
+
+In addition to the nine immediate-response differential comparisons, the
+hosted cross-runtime job runs the **registered** live probes `L-14` and
+`L-24` directly against the TypeScript/Bun reference server. `L-14`
+registers a model, submits inference, awaits completion, and independently
+recomputes `inputsDigest` from the test inputs. `L-24` tests eight
+concurrent submissions with one idempotency key and checks that the server
+creates exactly one job. Both run via the existing
+`Scripts/checkGenXConformance.py --only` runner.
+
+These are **two additional, subset-specific executions** of registered live
+probes, not two newly registered probes, and do not validate the full GenX
+operation catalogue, durable multi-instance idempotency, authorization, or
+an external implementation. See [Mission 102 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-102-TYPESCRIPT-LIVE-PROBE-ASSURANCE.md).

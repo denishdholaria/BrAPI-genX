@@ -504,6 +504,10 @@ jobs:
           PY
       - name: Compare independent reference behavior
         run: python Scripts/genx_differential_check.py --a http://127.0.0.1:18080/genx/v1 --b http://127.0.0.1:18082/genx/v1 --expired-job JOB_EXPIRED
+      - name: Verify TypeScript completed inference and recomputed digest
+        run: python Scripts/checkGenXConformance.py --server http://127.0.0.1:18082/genx/v1 --expired-job JOB_EXPIRED --only L-14
+      - name: Verify TypeScript concurrent idempotent submit
+        run: python Scripts/checkGenXConformance.py --server http://127.0.0.1:18082/genx/v1 --expired-job JOB_EXPIRED --only L-24
       - name: Upload differential diagnostics
         if: failure()
         uses: actions/upload-artifact@v4
