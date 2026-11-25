@@ -786,3 +786,17 @@ The regression cases were added to the already mandatory hosted suites
 `Scripts/test_telemetry_mean_source_integrity.py`, avoiding a duplicate
 test command or unnecessary workflow wiring. See
 [Mission 143 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-143-TELEMETRY-METADATA-RETENTION.md).
+
+## Telemetry rejected natural-key identity (Mission 144)
+
+Registered **L-22** now verifies the concrete conflicting key returned by
+the batch append. The conflict must name the exact submitted
+`deviceDbId/sensorDbId/timestamp` tuple whose value disagrees with the
+original stored reading, not merely contain one arbitrary string.
+The existing complete original record readback remains mandatory.
+
+The runner captures the conflicting request independently of the response,
+manifest validation guards the L-22 sequence, and the new mandatory hosted
+suite `Scripts/test_telemetry_conflict_identity.py` tests fabricated keys,
+wrong sensors/devices/timestamps and malformed responses. See
+[Mission 144 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-144-TELEMETRY-CONFLICT-IDENTITY.md).

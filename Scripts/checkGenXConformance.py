@@ -1311,6 +1311,8 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
     if any(s.get("capture_telemetry") for s in calls):
         ctx["live_device"] = None
         ctx["live_batch"] = None
+    if any(s.get("body_fixture") == "live_telemetry_conflict" for s in calls):
+        ctx["live_telemetry_conflict_submitted"] = None
     if any("concurrent_posts" in s for s in calls):
         ctx["live_concurrent_job"] = None
         ctx["live_concurrent_key"] = None
@@ -1446,6 +1448,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                 point = copy.deepcopy(ctx["live_batch"][2])
                 point["value"] = round(point["value"] + 10.0, 3)
                 body = [point]
+                ctx["live_telemetry_conflict_submitted"] = copy.deepcopy(body)
             elif fixture in ("live_inference_submit", "live_inference_revoked",
                              "live_inference_unknown", "live_inference_deprecated"):
                 if fixture == "live_inference_unknown":
@@ -2238,11 +2241,40 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         f"counts are {(seen.get('appended'), seen.get('replayed'))}, "
                         f"expected {(want.get('appended'), want.get('replayed'))}")
             if "telemetry_conflicts" in assertion:
-                seen = payload.get("result", {}).get("conflicts", [])
-                if len(seen) != assertion["telemetry_conflicts"]:
+                result = payload.get("result") if isinstance(payload, dict) else None
+                seen = result.get("conflicts") if isinstance(result, dict) else None
+                submitted = ctx.get("live_telemetry_conflict_submitted")
+                original = ctx.get("live_batch")
+                if (status != 200 or not isinstance(seen, list)
+                        or not isinstance(submitted, list)
+                        or len(submitted) != 1
+                        or not isinstance(submitted[0], dict)
+                        or not isinstance(original, list)
+                        or not all(isinstance(point, dict) for point in original)
+                        or len(seen) != assertion["telemetry_conflicts"]):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        f"{len(seen)} conflicts, expected {assertion['telemetry_conflicts']}")
+                        "telemetry conflict response or original request unavailable"
+                    )
+                rejected = submitted[0]
+                identity = (
+                    rejected.get("deviceDbId"), rejected.get("sensorDbId"),
+                    rejected.get("timestamp"),
+                )
+                original_points = [
+                    point for point in original
+                    if (point.get("deviceDbId"), point.get("sensorDbId"),
+                        point.get("timestamp")) == identity
+                ]
+                if (len(original_points) != 1
+                        or original_points[0].get("value") == rejected.get("value")
+                        or any(not isinstance(value, str) or not value
+                               for value in identity)
+                        or seen != ["/".join(identity)]):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "telemetry conflict did not name the actual rejected natural key"
+                    )
             if assertion.get("telemetry_window_partitions"):
                 # L-26 must verify that each minute retains its own reading,
                 # not merely that an arbitrary three rows were returned.
@@ -2848,6 +2880,26 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-22":
+                if (len(calls) != 3
+                        or calls[0].get("method") != "POST"
+                        or calls[0].get("path") != "/telemetry"
+                        or calls[0].get("body_fixture") != "live_telemetry_batch"
+                        or calls[0].get("capture_telemetry") is not True
+                        or calls[1].get("method") != "POST"
+                        or calls[1].get("path") != "/telemetry"
+                        or calls[1].get("body_fixture") != "live_telemetry_conflict"
+                        or calls[1].get("assert", {}).get("telemetry_conflicts") != 1
+                        or calls[1].get("assert", {}).get("telemetry_counts") != {
+                            "appended": 0, "replayed": 0}
+                        or calls[2].get("method") != "GET"
+                        or calls[2].get("path") !=
+                            "/telemetry?deviceDbId={telemetry_device}&sensorDbId=air-temp-01&aggregation=none"
+                        or calls[2].get("assert", {}).get("telemetry_original_intact")
+                            is not True):
+                    raise ValueError(
+                        "probe L-22: rejected telemetry natural key and retained source required"
+                    )
             if probe_id == "L-23":
                 if (len(calls) != 3
                         or calls[0].get("method") != "POST"
