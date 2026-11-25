@@ -1782,10 +1782,24 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                 accepted = payload.get("result") if isinstance(payload, dict) else None
                 job_id = (accepted.get("jobDbId") if isinstance(accepted, dict)
                           else None)
-                if status != 202 or not isinstance(job_id, str) or not job_id:
+                # The terminal readback cannot repair a corrupted
+                # initial acknowledgment. Bind the accepted job's type
+                # and idempotency key to the original inference request
+                # before any polling occurs.
+                submitted = ctx.get("live_deprecated_inference_request")
+                if (status != 202 or not isinstance(job_id, str) or not job_id
+                        or not isinstance(submitted, dict)
+                        or submitted.get("jobType") != "inference"
+                        or not isinstance(submitted.get("idempotencyKey"), str)
+                        or not submitted["idempotencyKey"]
+                        or not isinstance(accepted, dict)
+                        or accepted.get("jobType") != submitted["jobType"]
+                        or accepted.get("idempotencyKey")
+                            != submitted["idempotencyKey"]):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        "deprecated inference accepted job identifier missing"
+                        "deprecated inference initial acknowledgment missing or "
+                        "changing original job identifier, type or key"
                     )
                 terminal_payload = wait_terminal(server, job_id, token)
                 terminal_job = (terminal_payload.get("result")
