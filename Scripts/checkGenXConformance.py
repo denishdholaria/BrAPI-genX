@@ -1224,6 +1224,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
         ctx["live_model_id"] = None
         ctx["live_model"] = None
         ctx["live_model_baseline"] = None
+        ctx["live_model_original"] = None
     if any(s.get("capture_model_revoked") for s in calls):
         ctx["live_model_revoked_id"] = None
         ctx["live_model_revoked"] = None
@@ -1535,6 +1536,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     body.get("modelDbId"), body.get("modelVersion"),
                     body.get("artifactDigest"),
                 )
+                ctx["live_model_original"] = copy.deepcopy(body)
             if step.get("capture_model_revoked"):
                 if status not in (200, 202):
                     return results.report(
@@ -1789,6 +1791,25 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         probe["id"], probe["title"], "FAIL",
                         f"package identity/license changed or unavailable: "
                         f"status={status}, expected={expected}, observed={observed}",
+                    )
+            if assertion.get("model_replay_single_version"):
+                original = ctx.get("live_model_original")
+                expected = ctx.get("live_model")
+                expected_id = expected[0] if isinstance(expected, tuple) and len(expected) == 2 else None
+                result = payload.get("result") if isinstance(payload, dict) else None
+                rows = result.get("data") if isinstance(result, dict) else None
+                problem = replay_collection_problem(
+                    status, payload, original, expected_id, "modelDbId"
+                )
+                if (problem or not isinstance(rows, list) or len(rows) != 1
+                        or not isinstance(expected, tuple) or len(expected) != 2
+                        or not isinstance(original, dict)
+                        or expected != (original.get("modelDbId"),
+                                        original.get("modelVersion"))):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "model replay version integrity failed: " +
+                        (problem or "filtered model versions incomplete or mismatched")
                     )
             if assertion.get("matrix_replay_single_record"):
                 problem = replay_collection_problem(
@@ -2184,7 +2205,7 @@ LIVE_BOOLEAN_ASSERTIONS = frozenset({
     "deprecated_inference_completed",
     "unchanged_package_license", "unchanged_term_record", "ledger_original_intact",
     "term_replay_single_version", "matrix_replay_single_record",
-    "package_replay_single_record",
+    "package_replay_single_record", "model_replay_single_version",
     "inference_intact", "single_effect",
     "concurrent_single_stored_job", "capability_registry_match",
 })
@@ -2269,6 +2290,13 @@ def validate_live_step_assertions(probe_id, index, call):
         raise ValueError(
             f"probe {probe_id} call {index}: telemetry_mean and "
             "telemetry_samples must be paired"
+        )
+    if "model_replay_single_version" in assertion and (
+            call.get("method") != "GET"
+            or call.get("path") != "/models?modelDbId={modelDbId}"):
+        raise ValueError(
+            f"probe {probe_id} call {index}: "
+            "model_replay_single_version requires filtered model collection GET"
         )
     if "package_replay_single_record" in assertion and (
             call.get("method") != "GET"
@@ -2363,6 +2391,19 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-12":
+                if (len(calls) != 3
+                        or calls[0].get("body_fixture") != "live_model_submit"
+                        or calls[0].get("capture_model") is not True
+                        or calls[1].get("body_fixture") != "live_model_submit"
+                        or calls[1].get("assert", {}).get("same_model") is not True
+                        or calls[2].get("method") != "GET"
+                        or calls[2].get("path") != "/models?modelDbId={modelDbId}"
+                        or calls[2].get("assert", {}).get("model_replay_single_version")
+                            is not True):
+                    raise ValueError(
+                        "probe L-12: model_replay_single_version GET after replay required"
+                    )
             if probe_id == "L-18":
                 if (len(calls) != 3
                         or calls[0].get("body_fixture") != "live_package_submit"
