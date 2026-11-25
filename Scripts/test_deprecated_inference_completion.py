@@ -209,6 +209,20 @@ class DeprecatedInferenceCompletionTests(unittest.TestCase):
     def test_acceptance_missing_job_identifier_fails(self):
         self.assertEqual(1, self.exercise(include_id=False).failures)
 
+    def test_initial_ack_invalid_progress_fails_before_poll(self):
+        for progress in (-0.25, 1.25, None, True, "0.4", float("nan")):
+            with self.subTest(progress=progress):
+                self.assertEqual(1, self.exercise(
+                    ack_mutate=lambda row: {**row, "progress": progress},
+                    reject_before_poll=True).failures)
+
+    def test_initial_ack_valid_optional_progress_allowed(self):
+        for progress in (0, 0.4, 1.0):
+            with self.subTest(progress=progress):
+                self.assertEqual(0, self.exercise(
+                    ack_mutate=lambda row: {**row, "progress": progress}
+                ).failures)
+
     def test_initial_ack_missing_status_fails_before_poll(self):
         def drop_status(record):
             record.pop("status")
