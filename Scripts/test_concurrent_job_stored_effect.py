@@ -212,6 +212,39 @@ class ConcurrentJobStoredEffectTests(unittest.TestCase):
         self.assertEqual(1, sum(method == "GET" for method, _ in calls))
 
 
+    def test_unrelated_job_without_type_fails(self):
+        self.assertEqual(1, self.exercise(
+            change_rows=lambda rows: rows + [
+                {"jobDbId": "OTHER", "idempotencyKey": "other-key"}])[0])
+
+    def test_duplicate_unrelated_job_id_fails(self):
+        def change(rows):
+            rows.extend([
+                {"jobDbId": "OTHER", "jobType": "analysis",
+                 "idempotencyKey": "other-1"},
+                {"jobDbId": "OTHER", "jobType": "analysis",
+                 "idempotencyKey": "other-2"},
+            ])
+            return rows
+        self.assertEqual(1, self.exercise(change_rows=change)[0])
+
+    def test_unrelated_job_blank_id_fails(self):
+        self.assertEqual(1, self.exercise(
+            change_rows=lambda rows: rows + [
+                {"jobDbId": "", "jobType": "analysis"}])[0])
+
+    def test_unrelated_job_boolean_key_fails(self):
+        self.assertEqual(1, self.exercise(
+            change_rows=lambda rows: rows + [
+                {"jobDbId": "OTHER", "jobType": "analysis",
+                 "idempotencyKey": True}])[0])
+
+    def test_unrelated_job_optional_key_may_be_missing(self):
+        self.assertEqual(0, self.exercise(
+            change_rows=lambda rows: rows + [
+                {"jobDbId": "OTHER", "jobType": "analysis"}])[0])
+
+
 
 if __name__ == "__main__":
     unittest.main()

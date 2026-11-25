@@ -217,7 +217,7 @@ probes:
   procedure:
   - POST JobNewRequest with a fresh idempotencyKey; record jobDbId.
   - POST the identical body and key again; GET the complete jobs collection.
-  expectation: Initial acceptance echoes the original jobType and idempotencyKey with a nonempty jobDbId; the second response is 200 or 202 with the same identity and exactly one stored job for that original key and identifier.
+  expectation: Initial acceptance echoes the original jobType and idempotencyKey with a nonempty jobDbId; the second response is 200 or 202 with the same identity, and a complete collection with unique well-formed job identities contains exactly one stored job for that original key.
   falsifier: A second jobDbId is issued or a duplicate/modified stored job exists despite matching responses.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_submit, capture_job: true}
@@ -488,7 +488,7 @@ probes:
   title: Concurrent identical submits yield exactly one job
   procedure:
   - POST the identical body and idempotency key from 8 threads at once; GET the complete jobs collection to inspect the stored effect.
-  expectation: All responses are 2xx with the same nonempty jobDbId, original jobType and echoed idempotencyKey; exactly one stored job has that original type, key and identifier.
+  expectation: All responses are 2xx with the same nonempty jobDbId, original jobType and echoed idempotencyKey; a complete collection with unique well-formed job identities contains exactly one stored job for that original type and key.
   falsifier: Two distinct response jobDbIds, missing stored identity, duplicate key, or incomplete collection evidence.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_submit, concurrent_posts: 8, assert: {single_effect: true}}

@@ -275,6 +275,40 @@ class JobReplaySingleStoredTests(unittest.TestCase):
         self.assertEqual(1, len(calls))
 
 
+    def test_malformed_unrelated_job_fails(self):
+        def corrupt(rows):
+            rows.append({"jobDbId": "OTHER", "idempotencyKey": "other-key"})
+            return rows
+        self.assertEqual(1, self.exercise(change_rows=corrupt)[0])
+
+    def test_duplicate_unrelated_job_identity_fails(self):
+        def corrupt(rows):
+            rows.extend([
+                {"jobDbId": "OTHER", "jobType": "analysis",
+                 "idempotencyKey": "key-1"},
+                {"jobDbId": "OTHER", "jobType": "analysis",
+                 "idempotencyKey": "key-2"},
+            ])
+            return rows
+        self.assertEqual(1, self.exercise(change_rows=corrupt)[0])
+
+    def test_unrelated_job_with_blank_id_fails(self):
+        self.assertEqual(1, self.exercise(
+            change_rows=lambda rows: rows + [
+                {"jobDbId": "", "jobType": "analysis"}])[0])
+
+    def test_unrelated_job_with_boolean_key_fails(self):
+        self.assertEqual(1, self.exercise(
+            change_rows=lambda rows: rows + [
+                {"jobDbId": "OTHER", "jobType": "analysis",
+                 "idempotencyKey": False}])[0])
+
+    def test_unrelated_job_without_optional_key_allowed(self):
+        self.assertEqual(0, self.exercise(
+            change_rows=lambda rows: rows + [
+                {"jobDbId": "OTHER", "jobType": "analysis"}])[0])
+
+
 
 if __name__ == "__main__":
     unittest.main()

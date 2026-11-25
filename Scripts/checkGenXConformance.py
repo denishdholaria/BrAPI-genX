@@ -1966,39 +1966,33 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         (problem or "stored jobs added, removed, or rewritten")
                     )
             if assertion.get("job_replay_single_stored"):
-                # A replay with one returned identifier can still create
-                # multiple stored records. Inspect the full job collection.
-                result = payload.get("result") if isinstance(payload, dict) else None
-                rows = result.get("data") if isinstance(result, dict) else None
-                metadata = payload.get("metadata") if isinstance(payload, dict) else None
-                page = metadata.get("pagination") if isinstance(metadata, dict) else None
+                # All visible jobs must have valid, distinct identifiers:
+                # a correct original row in a malformed collection is not
+                # reliable evidence that the identical replay had one effect.
+                snapshot, problem = immutable_job_snapshot(status, payload)
                 expected_id = ctx.get("live_job")
                 submitted = ctx.get("live_body")
                 expected_key = ctx.get("live_key")
-                if (status != 200
-                        or not isinstance(expected_id, str) or not expected_id
+                if (problem or not isinstance(expected_id, str)
+                        or not expected_id
                         or not isinstance(expected_key, str) or not expected_key
                         or not isinstance(submitted, dict)
                         or submitted.get("idempotencyKey") != expected_key
                         or not isinstance(submitted.get("jobType"), str)
-                        or not isinstance(rows, list) or not rows
-                        or not all(isinstance(row, dict) for row in rows)
-                        or not isinstance(page, dict)
-                        or any(type(page.get(k)) is not int
-                               for k in ("totalCount", "pageSize",
-                                         "totalPages", "currentPage"))
-                        or page["totalCount"] != len(rows)
-                        or page["pageSize"] < len(rows)
-                        or page["totalPages"] != 1 or page["currentPage"] != 0):
+                        or not submitted["jobType"]
+                        or not snapshot):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        "job replay readback incomplete or malformed"
+                        "job replay readback lacks valid, unique complete jobs: "
+                        + (problem or "original job identity unavailable")
                     )
-                by_key = [r for r in rows if r.get("idempotencyKey") == expected_key]
-                by_id = [r for r in rows if r.get("jobDbId") == expected_id]
-                if (len(by_key) != 1 or len(by_id) != 1
-                        or by_key[0] is not by_id[0]
-                        or by_key[0].get("jobType") != submitted["jobType"]):
+                matched_key = [
+                    job_id for job_id, (_, key) in snapshot.items()
+                    if key == expected_key
+                ]
+                if (matched_key != [expected_id]
+                        or snapshot.get(expected_id)
+                            != (submitted["jobType"], expected_key)):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
                         "job replay missing, duplicated, or changed stored identity"
@@ -2048,37 +2042,27 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         "rejected inference created a stored job despite HTTP 400"
                     )
             if assertion.get("concurrent_single_stored_job"):
-                # A uniform concurrent response is insufficient: independently
-                # read the stored jobs and check the original idempotency key.
-                result = payload.get("result") if isinstance(payload, dict) else None
-                rows = result.get("data") if isinstance(result, dict) else None
-                metadata = payload.get("metadata") if isinstance(payload, dict) else None
-                page = metadata.get("pagination") if isinstance(metadata, dict) else None
-                key = ctx.get("live_concurrent_key")
+                snapshot, problem = immutable_job_snapshot(status, payload)
+                expected_key = ctx.get("live_concurrent_key")
                 expected_id = ctx.get("live_concurrent_job")
                 expected_type = ctx.get("live_concurrent_type")
-                if (status != 200 or not key or not expected_id or not expected_type
-                        or not isinstance(rows, list) or not rows
-                        or not all(isinstance(row, dict) for row in rows)
-                        or not isinstance(page, dict)
-                        or any(type(page.get(field)) is not int
-                               for field in ("totalCount", "pageSize",
-                                             "totalPages", "currentPage"))
-                        or page["totalCount"] != len(rows)
-                        or page["pageSize"] < len(rows)
-                        or page["totalPages"] != 1 or page["currentPage"] != 0):
+                if (problem or not isinstance(expected_key, str)
+                        or not expected_key
+                        or not isinstance(expected_id, str) or not expected_id
+                        or not isinstance(expected_type, str)
+                        or not expected_type or not snapshot):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        "concurrent job readback lacks complete unpaged collection")
+                        "concurrent job readback lacks valid, unique complete "
+                        "jobs: " + (problem or "original concurrent identity unavailable")
+                    )
                 matched_key = [
-                    row for row in rows if row.get("idempotencyKey") == key
+                    job_id for job_id, (_, key) in snapshot.items()
+                    if key == expected_key
                 ]
-                matched_id = [
-                    row for row in rows if row.get("jobDbId") == expected_id
-                ]
-                if (len(matched_key) != 1 or len(matched_id) != 1
-                        or matched_key[0] is not matched_id[0]
-                        or matched_key[0].get("jobType") != expected_type):
+                if (matched_key != [expected_id]
+                        or snapshot.get(expected_id)
+                            != (expected_type, expected_key)):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
                         "concurrent submissions created missing, duplicate, "
