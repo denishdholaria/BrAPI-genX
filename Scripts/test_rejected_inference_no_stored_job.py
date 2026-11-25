@@ -82,6 +82,7 @@ class RejectedInferenceNoStoredJobTests(unittest.TestCase):
                     "jobDbId": "JOB_UNRELATED",
                     "jobType": "analysis",
                     "idempotencyKey": "unrelated-key",
+                    "status": "COMPLETED",
                     "parameters": {"data": "unrelated"},
                 }]
                 if create_job is not None:
@@ -231,6 +232,7 @@ class RejectedInferenceNoStoredJobTests(unittest.TestCase):
             return rows + [{"jobDbId": "JOB_OTHER",
                             "jobType": "inference",
                             "idempotencyKey": "unrelated-key-2",
+                            "status": "SUBMITTED",
                             "parameters": {"modelDbId": "different:model:allowed"}}]
         self.assertEqual(0, self.exercise(create_job=create)[0])
 
@@ -319,7 +321,7 @@ class RejectedInferenceNoStoredJobTests(unittest.TestCase):
     def test_unrelated_distinct_valid_job_allowed(self):
         def change(rows, denied):
             rows.append({"jobDbId": "JOB_OTHER", "jobType": "analysis",
-                         "idempotencyKey": "other-key-2"})
+                         "idempotencyKey": "other-key-2", "status": "RUNNING"})
             return rows
         self.assertEqual(0, self.exercise(create_job=change)[0])
 
