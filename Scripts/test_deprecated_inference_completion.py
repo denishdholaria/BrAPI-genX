@@ -209,6 +209,20 @@ class DeprecatedInferenceCompletionTests(unittest.TestCase):
     def test_acceptance_missing_job_identifier_fails(self):
         self.assertEqual(1, self.exercise(include_id=False).failures)
 
+    def test_initial_ack_bad_timestamp_fails_before_poll(self):
+        for value in (None, "2026-11-25T12:00:00",
+                      "2026-02-30T12:00:00Z"):
+            with self.subTest(value=value):
+                self.assertEqual(1, self.exercise(
+                    ack_mutate=lambda row: {**row, "createdAt": value},
+                    reject_before_poll=True).failures)
+
+    def test_initial_ack_valid_timestamp_offset_allowed(self):
+        self.assertEqual(0, self.exercise(
+            ack_mutate=lambda row: {
+                **row, "updatedAt": "2026-11-25T12:00:00+05:30"}
+        ).failures)
+
     def test_initial_ack_invalid_progress_fails_before_poll(self):
         for progress in (-0.25, 1.25, None, True, "0.4", float("nan")):
             with self.subTest(progress=progress):
