@@ -1352,3 +1352,26 @@ This is a **complete-collection** rule. The L-25 first-page-only
 probe has a separate pagination scope.
 
 See [Mission 174 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-174-COMPLETE-JOB-COLLECTION-STATUS.md).
+
+## L-25 visible first-page Job lifecycle status integrity (Mission 175)
+
+Registered **L-25** now also requires each Job on the returned
+**first page** to include the required string `status` from the
+published Job lifecycle enumeration. Previously L-25 validated
+pagination, unique visible Job identifiers, types and optional
+idempotency-key typing, but an unrelated job missing `status` or
+reporting an unsupported status could pass while the created job was
+correct.
+
+This completes the Job-status coverage of first-page evidence
+separately from Mission 174's exhaustive-collection validator.
+L-25 still permits valid later pages and distinct, valid Job
+lifecycle states on the same page. Additional server metadata and
+unrelated records lacking the optional client-supplied idempotency
+key remain valid.
+
+Mandatory L-25 pagination and envelope regression suites now
+cover missing, unsupported and nonstring Job status, including
+unrelated rows, plus positive mixed-state evidence.
+
+See [Mission 175 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-175-L25-VISIBLE-JOB-STATUS.md).

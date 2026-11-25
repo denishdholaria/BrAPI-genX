@@ -2227,13 +2227,14 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         if (not isinstance(job_id, str) or not job_id
                                 or not isinstance(row.get("jobType"), str)
                                 or not row["jobType"]
+                                or not valid_job_lifecycle_status(row)
                                 or ("idempotencyKey" in row
                                     and not isinstance(row["idempotencyKey"], str))
                                 or job_id in visible_job_ids):
                             return results.report(
                                 probe["id"], probe["title"], "FAIL",
                                 "jobs first page contains malformed or duplicated "
-                                "job identities"
+                                "job identities/statuses"
                             )
                         visible_job_ids.add(job_id)
                     same_id = [

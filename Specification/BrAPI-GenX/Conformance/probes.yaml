@@ -500,7 +500,7 @@ probes:
   title: List endpoints return paged envelopes
   procedure:
   - GET job and model collections after creating one of each; validate first-page arithmetic and bind the listed records to the original submission.
-  expectation: Initial job acceptance echoes the original jobType and idempotencyKey; each collection returns a consistent first-page envelope and exactly one matching created identity, with well-formed unique identities for all visible jobs and unique well-formed (modelDbId, modelVersion) pairs for all visible models, original job request binding and all submitted model fields including nested provenance intact.
+  expectation: Initial job acceptance echoes the original jobType and idempotencyKey; each collection returns a consistent first-page envelope and exactly one matching created identity, with well-formed unique identities and valid required Job lifecycle statuses for all visible jobs, and unique well-formed (modelDbId, modelVersion) pairs for all visible models, original job request binding and all submitted model fields including nested provenance intact.
   falsifier: Missing or duplicate created identities, a mismatched job type or request key, changed model fields, inconsistent pagination or missing created records.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_submit, capture_job: true}
