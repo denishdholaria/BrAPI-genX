@@ -400,6 +400,7 @@ probes:
   calls:
   - {method: POST, path: /variantmatrices, body_fixture: live_matrix_submit, capture_matrix: true}
   - {method: POST, path: /variantmatrices, body_fixture: live_matrix_conflict, assert: {status: 409}}
+  - {method: GET, path: "/variantmatrices/{matrixDbId}", assert: {unchanged_matrix_digest: true}}
 - id: L-18
   tier: live
   object: fairPackages
@@ -422,6 +423,7 @@ probes:
   calls:
   - {method: POST, path: /fair-packages, body_fixture: live_package_submit, capture_package: true}
   - {method: POST, path: /fair-packages, body_fixture: live_package_conflict, assert: {status: 409}}
+  - {method: GET, path: "/fair-packages/{packageDbId}", assert: {unchanged_package_license: true}}
 - id: L-20
   tier: live
   object: fairPackages

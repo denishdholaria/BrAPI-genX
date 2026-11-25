@@ -1188,9 +1188,11 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
     if any(s.get("capture_matrix") for s in calls):
         ctx["live_matrix_id"] = None
         ctx["live_matrix"] = None
+        ctx["live_matrix_baseline"] = None
     if any(s.get("capture_package") for s in calls):
         ctx["live_package_id"] = None
         ctx["live_package"] = None
+        ctx["live_package_baseline"] = None
     if any(s.get("capture_telemetry") for s in calls):
         ctx["live_device"] = None
         ctx["live_batch"] = None
@@ -1374,6 +1376,12 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                 if ctx.get("live_lot") is None:
                     return results.report(probe["id"], probe["title"], "FAIL", "no captured lot")
                 path = path.replace("{lotDbId}", ctx["live_lot"])
+            if "{matrixDbId}" in path:
+                baseline = ctx.get("live_matrix_baseline")
+                if not baseline or not baseline[0]:
+                    return results.report(probe["id"], probe["title"], "FAIL",
+                                          "no matrix baseline captured")
+                path = path.replace("{matrixDbId}", quote(baseline[0], safe=":"))
             if "{packageDbId}" in path:
                 if ctx.get("live_package_id") is None:
                     return results.report(probe["id"], probe["title"], "FAIL", "no captured package")
@@ -1460,12 +1468,14 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         probe["id"], probe["title"], "FAIL", f"submit returned {status}")
                 seen = payload.get("result", {})
                 ctx["live_matrix"] = seen.get("matrixDbId")
+                ctx["live_matrix_baseline"] = (body.get("matrixDbId"), body.get("fileDigest"))
             if step.get("capture_package"):
                 if status not in (200, 202):
                     return results.report(
                         probe["id"], probe["title"], "FAIL", f"submit returned {status}")
                 seen = payload.get("result", {})
                 ctx["live_package"] = seen.get("packageDbId")
+                ctx["live_package_baseline"] = (body.get("packageDbId"), body.get("license"))
             if step.get("capture_telemetry"):
                 if status not in (200, 202):
                     return results.report(
@@ -1529,6 +1539,26 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         probe["id"], probe["title"], "FAIL",
                         f"replay returned {(seen.get('modelDbId'), seen.get('modelVersion'))}, "
                         f"expected {ctx.get('live_model')}")
+            if assertion.get("unchanged_matrix_digest"):
+                seen = payload.get("result", {}) if isinstance(payload, dict) else {}
+                expected = ctx.get("live_matrix_baseline")
+                observed = (seen.get("matrixDbId"), seen.get("fileDigest")) if isinstance(seen, dict) else None
+                if status != 200 or observed != expected:
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        f"matrix identity/digest changed or unavailable: "
+                        f"status={status}, expected={expected}, observed={observed}",
+                    )
+            if assertion.get("unchanged_package_license"):
+                seen = payload.get("result", {}) if isinstance(payload, dict) else {}
+                expected = ctx.get("live_package_baseline")
+                observed = (seen.get("packageDbId"), seen.get("license")) if isinstance(seen, dict) else None
+                if status != 200 or observed != expected:
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        f"package identity/license changed or unavailable: "
+                        f"status={status}, expected={expected}, observed={observed}",
+                    )
             if assertion.get("same_matrix"):
                 seen = payload.get("result", {})
                 if seen.get("matrixDbId") != ctx.get("live_matrix"):

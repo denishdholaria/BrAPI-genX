@@ -245,6 +245,8 @@ jobs:
         run: python Scripts/test_conformance_probe_selection.py
       - name: Test model-conflict postcondition enforcement
         run: python Scripts/test_model_conflict_postcondition.py
+      - name: Test matrix and package post-conflict integrity
+        run: python Scripts/test_publication_conflict_postconditions.py
       - name: Run static GenX conformance probes
         run: python Scripts/checkGenXConformance.py
       - name: Validate semantic endpoint catalogue
@@ -360,6 +362,7 @@ jobs:
             run_check python Scripts/test_capability_negotiation.py
             run_check python Scripts/test_job_idempotency.py
             run_check python Scripts/checkGenXConformance.py
+            run_check python Scripts/test_publication_conflict_postconditions.py
             run_check python Scripts/test_model_conflict_postcondition.py
             run_check python Scripts/test_conformance_probe_selection.py
             run_check python Scripts/specification_structure.py
