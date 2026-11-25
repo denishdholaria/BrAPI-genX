@@ -301,12 +301,13 @@ probes:
   object: variableTerms
   title: Conflicting rewrite of a published variable-term version is rejected
   procedure:
-  - POST to /genx/v1/variable-terms; POST the same (variableDbId, version) with a different body.
+  - POST to /genx/v1/variable-terms; POST the same (variableDbId, version) with a different body; GET the original published version.
   expectation: Second call is rejected with 409 and the published version is unchanged on re-GET.
   falsifier: The published version is mutated or a conflicting version is stored.
   calls:
   - {method: POST, path: /variable-terms, body_fixture: live_term_submit, capture_term: true}
   - {method: POST, path: /variable-terms, body_fixture: live_term_conflict, assert: {status: 409}}
+  - {method: GET, path: "/variable-terms/{variableDbId}?version={termVersion}", assert: {status: 200, unchanged_term_record: true}}
 - id: L-10
   tier: live
   object: lotLedger

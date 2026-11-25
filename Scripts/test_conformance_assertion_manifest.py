@@ -147,6 +147,24 @@ class LiveAssertionManifestTests(unittest.TestCase):
                 s.update(body_fixture="live_submit"),
             )))
 
+    def test_variable_term_conflict_readback_cannot_be_removed(self):
+        self.assertIn(
+            "unchanged_term_record GET after conflict required",
+            self.mutated("L-09", 2,
+                         lambda s: s.update({"assert": {"status": 200}})))
+
+    def test_variable_term_conflict_readback_cannot_be_disabled(self):
+        self.assertIn(
+            "unchanged_term_record must be true",
+            self.mutated("L-09", 2,
+                         lambda s: s["assert"].update(unchanged_term_record=False)))
+
+    def test_variable_term_conflict_requires_versioned_get(self):
+        self.assertIn(
+            "requires versioned term GET",
+            self.mutated("L-09", 2,
+                         lambda s: s.update(path="/variable-terms")))
+
     def test_concurrent_stored_job_readback_must_remain(self):
         self.assertIn(
             "concurrent_single_stored_job GET assertion required",

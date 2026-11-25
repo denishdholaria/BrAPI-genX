@@ -460,3 +460,19 @@ is mandatory in hosted static conformance; L-24 executes against the Python
 and independent TypeScript/Bun in-memory reference servers. This is **not**
 a durable, distributed, or third-party exactly-once guarantee. See
 [Mission 121 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-121-CONCURRENT-JOB-STORED-EFFECT.md).
+
+## Variable-term publication conflict postcondition (Mission 122)
+
+Registered **L-09** now performs a version-qualified GET after a conflicting
+variable-term publication is rejected with 409. The runner compares all
+submitted original fields, including nested provenance, against the stored
+published version; matching only the resource identifiers is insufficient.
+The manifest validator requires this readback after the conflict POST.
+
+Mock-server mutations in `Scripts/test_variable_term_conflict_postcondition.py`
+verify that server responses cannot conceal changed scales, versions, actors,
+digests, omitted fields or unavailable published records. The suite executes
+in hosted static conformance and registered L-09 runs against the project's
+Python reference server. This does not establish external scientific truth,
+transaction durability or third-party interoperability. See
+[Mission 122 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-122-VARIABLE-TERM-CONFLICT-READBACK.md).
