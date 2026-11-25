@@ -1590,6 +1590,40 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         probe["id"], probe["title"], "FAIL",
                         f"replay returned {seen.get('packageDbId')}, "
                         f"expected {ctx.get('live_package')}")
+            if assertion.get("telemetry_original_intact"):
+                original = ctx.get("live_batch")
+                result = payload.get("result") if isinstance(payload, dict) else None
+                rows = result.get("data") if isinstance(result, dict) else None
+                if status != 200 or not isinstance(original, list) or not isinstance(rows, list):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "original telemetry unavailable after rejected conflict"
+                    )
+                identity = lambda point: (
+                    point.get("deviceDbId"), point.get("sensorDbId"),
+                    point.get("timestamp")
+                )
+                expected = {identity(point): point.get("value") for point in original}
+                actual = {}
+                for point in rows:
+                    if not isinstance(point, dict):
+                        return results.report(
+                            probe["id"], probe["title"], "FAIL",
+                            "malformed telemetry row after rejected conflict"
+                        )
+                    key = identity(point)
+                    if key in actual:
+                        return results.report(
+                            probe["id"], probe["title"], "FAIL",
+                            f"duplicate telemetry identity after conflict: {key!r}"
+                        )
+                    actual[key] = point.get("value")
+                if actual != expected or len(rows) != len(original):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "stored telemetry identity/value changed after rejected conflict: "
+                        f"expected={expected!r}; observed={actual!r}"
+                    )
             if "telemetry_counts" in assertion:
                 seen = payload.get("result", {})
                 want = assertion["telemetry_counts"]
@@ -1776,6 +1810,7 @@ LIVE_BOOLEAN_ASSERTIONS = frozenset({
     "same_jobDbId", "rejected", "negotiable", "provenance_intact",
     "same_term", "same_ledger", "same_model", "same_matrix",
     "same_package", "unchanged_model_digest", "unchanged_matrix_digest",
+    "telemetry_original_intact",
     "unchanged_package_license", "inference_intact", "single_effect",
     "capability_registry_match",
 })
