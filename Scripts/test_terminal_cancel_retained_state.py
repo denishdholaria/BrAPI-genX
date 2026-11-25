@@ -27,20 +27,45 @@ class TerminalCancelRetainedStateTests(unittest.TestCase):
 
     def exercise(self, baseline_status="COMPLETED", retrieved_status="COMPLETED",
                  baseline_id="JOB_TERMINAL", retrieved_id="JOB_TERMINAL",
-                 delete_status=400, read_status=200, result_type="normal"):
+                 delete_status=400, read_status=200, result_type="normal",
+                 baseline_mutation=None, readback_mutation=None):
         calls = []
+        original = {}
+
+        def terminal_record(job_id, state):
+            record = {
+                "jobDbId": job_id,
+                "status": state,
+                "jobType": original["jobType"],
+                "idempotencyKey": original["idempotencyKey"],
+            }
+            if state == "COMPLETED":
+                record["result"] = {
+                    "data": [{"germplasmDbId": "G-001", "evidence": {
+                        "source": "original", "revision": 1}}],
+                }
+            return record
+
+        def terminal_reply(_server, _job_id, _token):
+            row = terminal_record(baseline_id, baseline_status)
+            if baseline_mutation is not None:
+                baseline_mutation(row)
+            return {"result": row}
 
         def fake_http(_server, method, path, body=None, token=None):
             calls.append((method, path))
             if len(calls) == 1:
                 self.assertEqual(("POST", "/jobs"), (method, path))
+                original.update(body)
                 return 202, {"result": {"jobDbId": "JOB_TERMINAL"}}
             if len(calls) == 2:
                 self.assertEqual(("DELETE", "/jobs/JOB_TERMINAL"), (method, path))
                 return delete_status, {}
             if len(calls) == 3:
                 self.assertEqual(("GET", "/jobs/JOB_TERMINAL"), (method, path))
-                result = {"jobDbId": retrieved_id, "status": retrieved_status}
+                result = terminal_record(retrieved_id, retrieved_status)
+                if readback_mutation is not None:
+                    readback_mutation(result)
                 if result_type == "missing":
                     result = None
                 if result_type == "malformed":
@@ -51,8 +76,7 @@ class TerminalCancelRetainedStateTests(unittest.TestCase):
         outcome = checker.Results()
         with (mock.patch.object(checker, "http_call", side_effect=fake_http),
               mock.patch.object(checker, "wait_terminal",
-                                return_value={"result": {
-                                    "jobDbId": baseline_id, "status": baseline_status}})):
+                                side_effect=terminal_reply)):
             checker.run_live_probe(
                 "http://example.test/genx/v1", self.probe,
                 {"conformance_dir": str(CONF)}, outcome, None, None)
@@ -121,6 +145,65 @@ class TerminalCancelRetainedStateTests(unittest.TestCase):
 
     def test_conflict_client_status_still_rejected(self):
         self.assertEqual(0, self.exercise(delete_status=409)[0])
+
+
+    def test_rejected_delete_cannot_change_job_type(self):
+        def mutate(row):
+            row["jobType"] = "analysis"
+        self.assertEqual(1, self.exercise(readback_mutation=mutate)[0])
+
+    def test_rejected_delete_cannot_remove_job_type(self):
+        def mutate(row):
+            row.pop("jobType")
+        self.assertEqual(1, self.exercise(readback_mutation=mutate)[0])
+
+    def test_rejected_delete_cannot_change_idempotency_key(self):
+        def mutate(row):
+            row["idempotencyKey"] = "fabricated-key"
+        self.assertEqual(1, self.exercise(readback_mutation=mutate)[0])
+
+    def test_rejected_delete_cannot_remove_idempotency_key(self):
+        def mutate(row):
+            row.pop("idempotencyKey")
+        self.assertEqual(1, self.exercise(readback_mutation=mutate)[0])
+
+    def test_completed_result_cannot_change_with_same_status(self):
+        def mutate(row):
+            row["result"]["data"][0]["germplasmDbId"] = "G-REWRITTEN"
+        self.assertEqual(1, self.exercise(readback_mutation=mutate)[0])
+
+    def test_nested_completed_result_cannot_change(self):
+        def mutate(row):
+            row["result"]["data"][0]["evidence"]["revision"] = 2
+        self.assertEqual(1, self.exercise(readback_mutation=mutate)[0])
+
+    def test_completed_result_cannot_disappear(self):
+        def mutate(row):
+            row.pop("result")
+        self.assertEqual(1, self.exercise(readback_mutation=mutate)[0])
+
+    def test_completed_result_cannot_appear_after_rejected_delete(self):
+        def mutate(row):
+            row["result"] = {"data": []}
+        self.assertEqual(1, self.exercise(
+            baseline_status="FAILED", retrieved_status="FAILED",
+            readback_mutation=mutate)[0])
+
+    def test_terminal_baseline_cannot_mismatch_original_type(self):
+        def mutate(row):
+            row["jobType"] = "analysis"
+        self.assertEqual(1, self.exercise(baseline_mutation=mutate)[0])
+
+    def test_terminal_baseline_cannot_mismatch_original_key(self):
+        def mutate(row):
+            row["idempotencyKey"] = "fabricated-key"
+        self.assertEqual(1, self.exercise(baseline_mutation=mutate)[0])
+
+    def test_extra_server_metadata_allowed(self):
+        def mutate(row):
+            row["observedAt"] = "2026-11-25T10:00:00Z"
+        self.assertEqual(0, self.exercise(readback_mutation=mutate)[0])
+
 
 
 if __name__ == "__main__":
