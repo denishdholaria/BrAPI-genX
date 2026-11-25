@@ -86,7 +86,7 @@ class LiveAssertionManifestTests(unittest.TestCase):
 
     def test_telemetry_mean_without_samples_rejected(self):
         self.assertIn("must be paired",
-            self.mutated("L-23", 1, lambda s: s["assert"].pop("telemetry_samples")))
+            self.mutated("L-23", 2, lambda s: s["assert"].pop("telemetry_samples")))
 
     def test_telemetry_replay_readback_cannot_be_removed(self):
         self.assertIn(
