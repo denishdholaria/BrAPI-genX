@@ -734,20 +734,20 @@ class LiveAssertionManifestTests(unittest.TestCase):
     def test_rejected_inference_stored_job_readback_cannot_be_removed(self):
         self.assertIn(
             "rejected_inference_not_stored GET after both rejections required",
-            self.mutated("L-15", 3,
+            self.mutated("L-15", 4,
                          lambda s: s.update({"assert": {"status": 200}})))
 
     def test_rejected_inference_readback_cannot_be_disabled(self):
         self.assertIn(
             "rejected_inference_not_stored must be true",
-            self.mutated("L-15", 3,
+            self.mutated("L-15", 4,
                          lambda s: s["assert"].update(
                              rejected_inference_not_stored=False)))
 
     def test_rejected_inference_readback_requires_job_collection(self):
         self.assertIn(
             "rejected_inference_not_stored requires GET /jobs",
-            self.mutated("L-15", 3,
+            self.mutated("L-15", 4,
                          lambda s: s.update(path="/jobs/OTHER")))
 
     def test_rejected_inference_requires_original_unknown_submission(self):
@@ -759,8 +759,27 @@ class LiveAssertionManifestTests(unittest.TestCase):
     def test_rejected_inference_requires_revoked_submission(self):
         self.assertIn(
             "rejected_inference_not_stored GET after both rejections required",
-            self.mutated("L-15", 2,
+            self.mutated("L-15", 3,
                          lambda s: s.update(body_fixture="live_inference_unknown")))
+
+    def test_revoked_model_readback_cannot_be_removed(self):
+        self.assertIn(
+            "revoked_model_persisted GET before rejected inference required",
+            self.mutated("L-15", 2,
+                         lambda s: s.update({"assert": {"status": 200}})))
+
+    def test_revoked_model_readback_cannot_be_disabled(self):
+        self.assertIn(
+            "revoked_model_persisted must be true",
+            self.mutated("L-15", 2,
+                         lambda s: s["assert"].update(
+                             revoked_model_persisted=False)))
+
+    def test_revoked_model_readback_requires_versioned_path(self):
+        self.assertIn(
+            "revoked_model_persisted GET before rejected inference required",
+            self.mutated("L-15", 2,
+                         lambda s: s.update(path="/models/OTHER")))
 
     def test_model_conflict_readback_cannot_be_removed(self):
         self.assertIn(
