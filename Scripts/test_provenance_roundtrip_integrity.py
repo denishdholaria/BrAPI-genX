@@ -44,7 +44,9 @@ class ProvenanceRoundtripTests(unittest.TestCase):
                 self.assertEqual(("POST", "/jobs"), (method, path))
                 submission.update(copy.deepcopy(body))
                 return 202, {"result": {
-                    "jobDbId": "JOB_PROVENANCE_TEST", "status": "SUBMITTED"}}
+                    "jobDbId": "JOB_PROVENANCE_TEST", "status": "SUBMITTED",
+                    "jobType": body["jobType"],
+                    "idempotencyKey": body["idempotencyKey"]}}
             if len(calls) == 2:
                 self.assertEqual(("GET", "/jobs/JOB_PROVENANCE_TEST"), (method, path))
                 return status, completed_job()
