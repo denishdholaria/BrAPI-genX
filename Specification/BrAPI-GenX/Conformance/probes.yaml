@@ -241,12 +241,13 @@ probes:
   object: jobs
   title: Cancelling a terminal job is rejected
   procedure:
-  - Submit a job, wait for a terminal state, DELETE it.
-  expectation: DELETE is rejected; the terminal state is unchanged on re-GET.
-  falsifier: A terminal job changes state after DELETE.
+  - Submit a job, wait for a terminal state, attempt DELETE, and re-GET the original job.
+  expectation: DELETE is rejected; the same job remains in its original terminal state.
+  falsifier: A terminal job changes identity or status after rejected DELETE, or the readback is unavailable.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_submit, capture_job: true, wait_terminal: true}
   - {method: DELETE, path: "/jobs/{jobDbId}", assert: {rejected: true}}
+  - {method: GET, path: "/jobs/{jobDbId}", assert: {status: 200, terminal_state_unchanged: true}}
 - id: L-04
   tier: live
   object: jobs

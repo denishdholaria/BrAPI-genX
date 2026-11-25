@@ -1262,6 +1262,10 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
            and s["assert"].get("capture_job_collection")
            for s in calls):
         ctx["live_job_conflict_baseline"] = None
+    if any(isinstance(s.get("assert"), dict)
+           and s["assert"].get("terminal_state_unchanged")
+           for s in calls):
+        ctx["live_terminal_before_cancel"] = None
     if any(s.get("capture_term") for s in calls):
         ctx["live_term_id"] = None
         ctx["live_term"] = None
@@ -1579,6 +1583,10 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                 ctx["live_body"] = body
                 if step.get("wait_terminal"):
                     payload = wait_terminal(server, ctx["live_job"], token)
+                    if "live_terminal_before_cancel" in ctx:
+                        ctx["live_terminal_before_cancel"] = copy.deepcopy(
+                            payload.get("result") if isinstance(payload, dict) else None
+                        )
             if step.get("capture_term"):
                 if status not in (200, 202):
                     return results.report(
@@ -1661,6 +1669,21 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
                         "deprecated inference did not complete as the accepted job"
+                    )
+            if assertion.get("terminal_state_unchanged"):
+                baseline = ctx.get("live_terminal_before_cancel")
+                saved = payload.get("result") if isinstance(payload, dict) else None
+                terminal = {"COMPLETED", "FAILED", "CANCELLED", "EXPIRED"}
+                if (status != 200 or not isinstance(baseline, dict)
+                        or not isinstance(saved, dict)
+                        or not isinstance(ctx.get("live_job"), str)
+                        or baseline.get("jobDbId") != ctx["live_job"]
+                        or saved.get("jobDbId") != ctx["live_job"]
+                        or baseline.get("status") not in terminal
+                        or saved.get("status") != baseline["status"]):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "terminal job identity or status changed after rejected DELETE"
                     )
             if assertion.get("capture_job_collection"):
                 snapshot, problem = immutable_job_snapshot(status, payload)
@@ -2384,7 +2407,7 @@ LIVE_BOOLEAN_ASSERTIONS = frozenset({
     "inference_intact", "single_effect",
     "concurrent_single_stored_job", "rejected_inference_not_stored",
     "job_replay_single_stored", "capture_job_collection",
-    "job_conflict_collection_unchanged",
+    "job_conflict_collection_unchanged", "terminal_state_unchanged",
     "capability_registry_match",
 })
 LIVE_COUNT_ASSERTIONS = frozenset({
@@ -2511,6 +2534,13 @@ def validate_live_step_assertions(probe_id, index, call):
             f"probe {probe_id} call {index}: "
             "unchanged_term_record requires versioned term GET"
         )
+    if "terminal_state_unchanged" in assertion and (
+            call.get("method") != "GET"
+            or call.get("path") != "/jobs/{jobDbId}"):
+        raise ValueError(
+            f"probe {probe_id} call {index}: "
+            "terminal_state_unchanged requires captured job GET"
+        )
     if ("capture_job_collection" in assertion
             or "job_conflict_collection_unchanged" in assertion) and (
             call.get("method") != "GET" or call.get("path") != "/jobs"):
@@ -2588,6 +2618,23 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-03":
+                if (len(calls) != 3
+                        or calls[0].get("method") != "POST"
+                        or calls[0].get("path") != "/jobs"
+                        or calls[0].get("body_fixture") != "live_submit"
+                        or calls[0].get("capture_job") is not True
+                        or calls[0].get("wait_terminal") is not True
+                        or calls[1].get("method") != "DELETE"
+                        or calls[1].get("path") != "/jobs/{jobDbId}"
+                        or calls[1].get("assert", {}).get("rejected") is not True
+                        or calls[2].get("method") != "GET"
+                        or calls[2].get("path") != "/jobs/{jobDbId}"
+                        or calls[2].get("assert", {}).get("terminal_state_unchanged")
+                            is not True):
+                    raise ValueError(
+                        "probe L-03: terminal_state_unchanged GET after rejected cancellation required"
+                    )
             if probe_id == "L-02":
                 if (len(calls) != 4
                         or calls[0].get("method") != "POST"
