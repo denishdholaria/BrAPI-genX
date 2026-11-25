@@ -196,6 +196,32 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
             totalPages=1, currentPage=0)
         return target
 
+    def test_created_job_optional_progress_rejects_invalid_values(self):
+        for progress in (-0.01, 1.01, None, False, "0.8", float("inf")):
+            with self.subTest(progress=progress):
+                def change(kind, data):
+                    if kind == "jobs":
+                        data["result"]["data"][0]["progress"] = progress
+                    return data
+                self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_unrelated_visible_job_optional_progress_rejects_invalid(self):
+        def change(kind, data):
+            return self.append_unrelated_job(kind, data, {
+                "jobDbId": "OTHER", "jobType": "analysis",
+                "progress": float("nan")})
+        self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_valid_visible_job_progress_endpoints_allowed(self):
+        def change(kind, data):
+            if kind == "jobs":
+                data["result"]["data"][0]["progress"] = 0
+                return self.append_unrelated_job(kind, data, {
+                    "jobDbId": "OTHER", "jobType": "analysis",
+                    "progress": 1.0})
+            return data
+        self.assertEqual(0, self.exercise(modify=change)[0])
+
     def test_created_job_missing_status_fails(self):
         def change(kind, data):
             if kind == "jobs":
