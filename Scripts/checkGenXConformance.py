@@ -1673,6 +1673,19 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         probe["id"], probe["title"], "FAIL",
                         "deprecated inference did not complete as the accepted job"
                     )
+            if assertion.get("expired_result_withheld"):
+                # A visible EXPIRED status does not prove the result data
+                # was actually withheld from this expired job response.
+                expired = payload.get("result") if isinstance(payload, dict) else None
+                if (status != 200 or not isinstance(expired, dict)
+                        or not isinstance(expired_job, str) or not expired_job
+                        or expired.get("jobDbId") != expired_job
+                        or expired.get("status") != "EXPIRED"
+                        or ("result" in expired and expired["result"] is not None)):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "expired job identity/status invalid or result still exposed"
+                    )
             if assertion.get("unknown_job_type_not_stored"):
                 original = ctx.get("live_unknown_type_request")
                 result = payload.get("result") if isinstance(payload, dict) else None
@@ -2442,7 +2455,7 @@ LIVE_BOOLEAN_ASSERTIONS = frozenset({
     "concurrent_single_stored_job", "rejected_inference_not_stored",
     "job_replay_single_stored", "capture_job_collection",
     "job_conflict_collection_unchanged", "terminal_state_unchanged",
-    "unknown_job_type_not_stored",
+    "unknown_job_type_not_stored", "expired_result_withheld",
     "capability_registry_match",
 })
 LIVE_COUNT_ASSERTIONS = frozenset({
@@ -2569,6 +2582,13 @@ def validate_live_step_assertions(probe_id, index, call):
             f"probe {probe_id} call {index}: "
             "unchanged_term_record requires versioned term GET"
         )
+    if "expired_result_withheld" in assertion and (
+            call.get("method") != "GET"
+            or call.get("path") != "/jobs/{expiredJobDbId}"):
+        raise ValueError(
+            f"probe {probe_id} call {index}: "
+            "expired_result_withheld requires known-expired job GET"
+        )
     if "unknown_job_type_not_stored" in assertion and (
             call.get("method") != "GET"
             or call.get("path") != "/jobs"):
@@ -2660,6 +2680,17 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-05":
+                if (len(calls) != 1
+                        or calls[0].get("method") != "GET"
+                        or calls[0].get("path") != "/jobs/{expiredJobDbId}"
+                        or calls[0].get("assert", {}).get("expired_result_withheld")
+                            is not True
+                        or calls[0].get("assert", {}).get("body", {}).get(
+                            "result.status") != "EXPIRED"):
+                    raise ValueError(
+                        "probe L-05: expired_result_withheld on known-expired job required"
+                    )
             if probe_id == "L-04":
                 if (len(calls) != 2
                         or calls[0].get("method") != "POST"

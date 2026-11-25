@@ -147,6 +147,32 @@ class LiveAssertionManifestTests(unittest.TestCase):
                 s.update(body_fixture="live_submit"),
             )))
 
+    def test_expired_job_result_withheld_cannot_be_removed(self):
+        self.assertIn(
+            "expired_result_withheld on known-expired job required",
+            self.mutated("L-05", 0,
+                         lambda s: s.update({"assert": {"body": {
+                             "result.status": "EXPIRED"}}})))
+
+    def test_expired_job_result_withheld_cannot_be_disabled(self):
+        self.assertIn(
+            "expired_result_withheld must be true",
+            self.mutated("L-05", 0,
+                         lambda s: s["assert"].update(expired_result_withheld=False)))
+
+    def test_expired_job_requires_expired_job_get(self):
+        self.assertIn(
+            "expired_result_withheld requires known-expired job GET",
+            self.mutated("L-05", 0,
+                         lambda s: s.update(path="/jobs/JOB_OTHER")))
+
+    def test_expired_job_must_report_expired_status(self):
+        self.assertIn(
+            "expired_result_withheld on known-expired job required",
+            self.mutated("L-05", 0,
+                         lambda s: s["assert"]["body"].update(
+                             {"result.status": "COMPLETED"})))
+
     def test_unknown_job_type_readback_is_required(self):
         self.assertIn(
             "unknown_job_type_not_stored GET after rejection required",
