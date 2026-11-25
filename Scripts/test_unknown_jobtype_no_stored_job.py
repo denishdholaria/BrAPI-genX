@@ -62,6 +62,18 @@ class UnknownJobTypeNoStoredJobTests(unittest.TestCase):
     def test_unrelated_job_allowed(self):
         self.assertEqual(0, self.exercise()[0])
 
+    def test_unrelated_job_missing_status_fails(self):
+        def change(rows, req):
+            rows[0].pop("status")
+            return rows
+        self.assertEqual(1, self.exercise(add_jobs=change)[0])
+
+    def test_unrelated_job_invalid_status_fails(self):
+        def change(rows, req):
+            rows[0]["status"] = "QUEUED"
+            return rows
+        self.assertEqual(1, self.exercise(add_jobs=change)[0])
+
     def test_empty_job_collection_allowed(self):
         self.assertEqual(0, self.exercise(add_jobs=lambda rows, req: [])[0])
 
