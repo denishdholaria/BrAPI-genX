@@ -29,7 +29,8 @@ class ConcurrentJobStoredEffectTests(unittest.TestCase):
         self.assertIs(True, self.probe["calls"][1]["assert"]["concurrent_single_stored_job"])
 
     def exercise(self, change_rows=None, change_page=None, read_status=200,
-                 different_response_id=False, add_unrelated=False):
+                 different_response_id=False, add_unrelated=False,
+                 mutate_ack=None):
         lock = Lock()
         submitted = []
         calls = []
@@ -47,8 +48,13 @@ class ConcurrentJobStoredEffectTests(unittest.TestCase):
                 self.assertEqual(submitted[0]["idempotencyKey"], body["idempotencyKey"])
                 job_id = ("JOB_SECOND" if different_response_id and sequence == 8
                           else "JOB_ONE")
+                accepted = {
+                    "jobDbId": job_id, "jobType": body["jobType"],
+                    "idempotencyKey": body["idempotencyKey"]}
+                if mutate_ack is not None:
+                    accepted = mutate_ack(accepted, sequence)
                 return (202 if sequence == 1 else 200), {
-                    "result": {"jobDbId": job_id}}
+                    "result": accepted}
             self.assertEqual(("GET", "/jobs"), (method, path))
             self.assertEqual(8, len(submitted))
             rows = [{
@@ -159,6 +165,52 @@ class ConcurrentJobStoredEffectTests(unittest.TestCase):
         failures, calls = self.exercise(different_response_id=True)
         self.assertEqual(1, failures)
         self.assertEqual(0, len([m for m, _ in calls if m == "GET"]))
+
+
+    def test_one_corrupted_type_reply_fails_before_collection(self):
+        failures, calls = self.exercise(
+            mutate_ack=lambda row, index: (
+                {**row, "jobType": "analysis"} if index == 8 else row))
+        self.assertEqual(1, failures)
+        self.assertEqual(0, sum(method == "GET" for method, _ in calls))
+
+    def test_one_missing_type_reply_fails_before_collection(self):
+        failures, calls = self.exercise(
+            mutate_ack=lambda row, index: (
+                {key: value for key, value in row.items() if key != "jobType"}
+                if index == 8 else row))
+        self.assertEqual(1, failures)
+        self.assertEqual(0, sum(method == "GET" for method, _ in calls))
+
+    def test_one_corrupted_key_reply_fails_before_collection(self):
+        failures, calls = self.exercise(
+            mutate_ack=lambda row, index: (
+                {**row, "idempotencyKey": "unrelated"} if index == 8 else row))
+        self.assertEqual(1, failures)
+        self.assertEqual(0, sum(method == "GET" for method, _ in calls))
+
+    def test_one_missing_key_reply_fails_before_collection(self):
+        failures, calls = self.exercise(
+            mutate_ack=lambda row, index: (
+                {key: value for key, value in row.items()
+                 if key != "idempotencyKey"}
+                if index == 8 else row))
+        self.assertEqual(1, failures)
+        self.assertEqual(0, sum(method == "GET" for method, _ in calls))
+
+    def test_one_nonobject_reply_fails_before_collection(self):
+        failures, calls = self.exercise(
+            mutate_ack=lambda row, index: [] if index == 8 else row)
+        self.assertEqual(1, failures)
+        self.assertEqual(0, sum(method == "GET" for method, _ in calls))
+
+    def test_extra_server_metadata_on_all_responses_allowed(self):
+        failures, calls = self.exercise(
+            mutate_ack=lambda row, index: {
+                **row, "serverAudit": f"accepted-{index}"})
+        self.assertEqual(0, failures)
+        self.assertEqual(1, sum(method == "GET" for method, _ in calls))
+
 
 
 if __name__ == "__main__":

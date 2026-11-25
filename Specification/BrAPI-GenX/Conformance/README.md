@@ -1112,3 +1112,21 @@ occur *before* downstream calls when an initial acceptance is malformed
 or changes an original field.
 
 See [Mission 162 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-162-INITIAL-JOB-ACCEPTANCE-IDENTITY.md).
+
+## Concurrent Job acknowledgments retain original request binding (Mission 163)
+
+Registered **L-24** posts one identical request and idempotency key from
+eight concurrent workers. Each successful response must now return not
+only the same nonempty `jobDbId`, but also the exact original
+`jobType` and echoed `idempotencyKey`. Previously one worker's
+response could report a different type/key while all eight reported
+the same job identifier and the separate stored collection was correct.
+
+The test continues to permit the previously documented successful 2xx
+statuses, additional server metadata, and unrelated historical jobs.
+The existing mandatory
+`Scripts/test_concurrent_job_stored_effect.py` suite includes negative
+cases where only one of eight responses corrupts or drops fields;
+failure precedes the stored-collection readback.
+
+See [Mission 163 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-163-CONCURRENT-JOB-ACK-BINDING.md).

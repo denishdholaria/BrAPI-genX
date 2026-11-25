@@ -488,7 +488,7 @@ probes:
   title: Concurrent identical submits yield exactly one job
   procedure:
   - POST the identical body and idempotency key from 8 threads at once; GET the complete jobs collection to inspect the stored effect.
-  expectation: All responses are 2xx with one distinct jobDbId; exactly one stored job has that original idempotency key and identifier.
+  expectation: All responses are 2xx with the same nonempty jobDbId, original jobType and echoed idempotencyKey; exactly one stored job has that original type, key and identifier.
   falsifier: Two distinct response jobDbIds, missing stored identity, duplicate key, or incomplete collection evidence.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_submit, concurrent_posts: 8, assert: {single_effect: true}}

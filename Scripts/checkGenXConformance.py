@@ -1607,30 +1607,43 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                                             body=copy.deepcopy(body), token=token),
                         range(count)))
                 statuses = [s for s, _ in outcomes]
-                ids = [
-                    response.get("result", {}).get("jobDbId")
-                    if isinstance(response, dict)
-                    and isinstance(response.get("result"), dict) else None
+                returned = [
+                    response.get("result")
+                    if isinstance(response, dict) else None
                     for _, response in outcomes
                 ]
-                if (len(outcomes) != count
-                        or any(type(status) is not int or not (200 <= status < 300)
-                               for status in statuses)
-                        or not ids or not isinstance(ids[0], str) or not ids[0]
-                        or any(job_id != ids[0] for job_id in ids)):
-                    return results.report(
-                        probe["id"], probe["title"], "FAIL",
-                        f"concurrent statuses {statuses}, jobDbIds {ids}")
-                if not step.get("assert", {}).get("single_effect"):
-                    return results.report(
-                        probe["id"], probe["title"], "FAIL", "no assertion for concurrent step")
+                ids = [
+                    record.get("jobDbId") if isinstance(record, dict) else None
+                    for record in returned
+                ]
                 if (not isinstance(body, dict)
                         or not isinstance(body.get("idempotencyKey"), str)
                         or not body["idempotencyKey"].strip()
-                        or not isinstance(body.get("jobType"), str)):
+                        or not isinstance(body.get("jobType"), str)
+                        or not body["jobType"]):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
                         "concurrent request lacks original identity and job type")
+                if (len(outcomes) != count
+                        or any(type(code) is not int or not (200 <= code < 300)
+                               for code in statuses)
+                        or not ids or not isinstance(ids[0], str) or not ids[0]
+                        or any(job_id != ids[0] for job_id in ids)
+                        or any(
+                            not isinstance(record, dict)
+                            or record.get("jobType") != body["jobType"]
+                            or record.get("idempotencyKey")
+                                != body["idempotencyKey"]
+                            for record in returned
+                        )):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "concurrent job acknowledgments changed original "
+                        f"identity/type/key (statuses={statuses}, jobDbIds={ids})"
+                    )
+                if not step.get("assert", {}).get("single_effect"):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL", "no assertion for concurrent step")
                 ctx["live_concurrent_job"] = ids[0]
                 ctx["live_concurrent_key"] = body["idempotencyKey"]
                 ctx["live_concurrent_type"] = body["jobType"]
