@@ -122,5 +122,62 @@ class UnknownJobTypeNoStoredJobTests(unittest.TestCase):
         self.assertEqual(1, len(calls))
 
 
+    def test_two_unrelated_distinct_job_identities_allowed(self):
+        def add(rows, req):
+            return rows + [{"jobDbId": "JOB_OTHER",
+                            "jobType": "germplasm_search",
+                            "idempotencyKey": "other-key-2"}]
+        self.assertEqual(0, self.exercise(add_jobs=add)[0])
+
+    def test_duplicate_unrelated_job_identity_fails(self):
+        def add(rows, req):
+            return rows + [copy.deepcopy(rows[0])]
+        self.assertEqual(1, self.exercise(add_jobs=add)[0])
+
+    def test_two_unrelated_jobs_same_id_different_type_fail(self):
+        def add(rows, req):
+            return rows + [{"jobDbId": "JOB_UNRELATED",
+                            "jobType": "germplasm_search",
+                            "idempotencyKey": "other-key-2"}]
+        self.assertEqual(1, self.exercise(add_jobs=add)[0])
+
+    def test_missing_unrelated_job_id_fails(self):
+        def add(rows, req):
+            rows[0].pop("jobDbId")
+            return rows
+        self.assertEqual(1, self.exercise(add_jobs=add)[0])
+
+    def test_blank_unrelated_job_id_fails(self):
+        def add(rows, req):
+            rows[0]["jobDbId"] = ""
+            return rows
+        self.assertEqual(1, self.exercise(add_jobs=add)[0])
+
+    def test_missing_unrelated_job_type_fails(self):
+        def add(rows, req):
+            rows[0].pop("jobType")
+            return rows
+        self.assertEqual(1, self.exercise(add_jobs=add)[0])
+
+    def test_blank_unrelated_job_type_fails(self):
+        def add(rows, req):
+            rows[0]["jobType"] = ""
+            return rows
+        self.assertEqual(1, self.exercise(add_jobs=add)[0])
+
+    def test_nonstring_unrelated_idempotency_key_fails(self):
+        def add(rows, req):
+            rows[0]["idempotencyKey"] = False
+            return rows
+        self.assertEqual(1, self.exercise(add_jobs=add)[0])
+
+    def test_unrelated_job_without_optional_key_allowed(self):
+        def add(rows, req):
+            rows[0].pop("idempotencyKey")
+            return rows
+        self.assertEqual(0, self.exercise(add_jobs=add)[0])
+
+
+
 if __name__ == "__main__":
     unittest.main()
