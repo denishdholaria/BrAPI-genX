@@ -21,13 +21,17 @@ class TelemetryPaginationSliceTests(unittest.TestCase):
         cls.probe = next(p for p in manifest["probes"] if p["id"] == "L-28")
 
     def test_registered_probe_checks_page_contents(self):
-        self.assertEqual(2, len(self.probe["calls"]))
-        request = self.probe["calls"][1]
-        self.assertEqual("GET", request["method"])
-        self.assertIn("page=0&pageSize=2", request["path"])
-        self.assertIs(True, request["assert"]["telemetry_page_slice"])
+        self.assertEqual(3, len(self.probe["calls"]))
+        first, last = self.probe["calls"][1:]
+        self.assertEqual("GET", first["method"])
+        self.assertEqual("GET", last["method"])
+        self.assertIn("page=0&pageSize=2", first["path"])
+        self.assertIn("page=1&pageSize=2", last["path"])
+        self.assertIs(True, first["assert"]["telemetry_page_slice"])
+        self.assertIs(True, last["assert"]["telemetry_page_slice"])
 
-    def exercise(self, mutate_rows=None, mutate_page=None, status=200):
+    def exercise(self, mutate_rows=None, mutate_page=None, status=200,
+                 mutate_tail_rows=None, mutate_tail_page=None, tail_status=200):
         seen = []
         submitted = []
 
@@ -39,19 +43,28 @@ class TelemetryPaginationSliceTests(unittest.TestCase):
                 submitted.extend(copy.deepcopy(body))
                 return 200, {"result": {
                     "appended": 3, "replayed": 0, "conflicts": []}}
-            if len(seen) == 2:
+            if len(seen) in (2, 3):
+                index = len(seen) - 2
                 self.assertEqual("GET", method)
                 self.assertIn(f"deviceDbId={submitted[0]['deviceDbId']}", path)
-                self.assertIn("page=0&pageSize=2", path)
+                self.assertIn(f"page={index}&pageSize=2", path)
                 rows = copy.deepcopy(sorted(
-                    submitted, key=lambda point: point["timestamp"])[:2])
-                pagination = {"currentPage": 0, "pageSize": 2,
+                    submitted, key=lambda point: point["timestamp"])[index * 2:(index + 1) * 2])
+                pagination = {"currentPage": index, "pageSize": 2,
                               "totalCount": 3, "totalPages": 2}
-                if mutate_rows is not None:
-                    rows = mutate_rows(rows, submitted)
-                if mutate_page is not None:
-                    pagination = mutate_page(pagination)
-                return status, {"result": {"data": rows}, "metadata": {
+                if index == 0:
+                    if mutate_rows is not None:
+                        rows = mutate_rows(rows, submitted)
+                    if mutate_page is not None:
+                        pagination = mutate_page(pagination)
+                    response_status = status
+                else:
+                    if mutate_tail_rows is not None:
+                        rows = mutate_tail_rows(rows, submitted)
+                    if mutate_tail_page is not None:
+                        pagination = mutate_tail_page(pagination)
+                    response_status = tail_status
+                return response_status, {"result": {"data": rows}, "metadata": {
                     "pagination": pagination}}
             self.fail("unexpected extra live request")
 
@@ -60,7 +73,8 @@ class TelemetryPaginationSliceTests(unittest.TestCase):
             checker.run_live_probe(
                 "http://example.test/genx/v1", self.probe,
                 {"conformance_dir": str(CONF)}, result, None, None)
-        self.assertEqual(2, len(seen))
+        # A failing first page exits before requesting the second page.
+        self.assertIn(len(seen), (2, 3))
         return result.failures
 
     def test_correct_page_passes(self):
@@ -131,6 +145,93 @@ class TelemetryPaginationSliceTests(unittest.TestCase):
 
     def test_failed_read_does_not_pass(self):
         self.assertEqual(1, self.exercise(status=404))
+
+
+    def test_missing_tail_record_fails(self):
+        self.assertEqual(1, self.exercise(mutate_tail_rows=lambda rows, _: []))
+
+    def test_duplicated_first_page_row_in_tail_fails(self):
+        self.assertEqual(1, self.exercise(
+            mutate_tail_rows=lambda rows, source: [copy.deepcopy(source[0])]))
+
+    def test_second_page_substitutes_middle_record_fails(self):
+        self.assertEqual(1, self.exercise(
+            mutate_tail_rows=lambda rows, source: [copy.deepcopy(source[1])]))
+
+    def test_corrupted_tail_value_fails(self):
+        def corrupt(rows, _):
+            rows[0]["value"] += 1.0
+            return rows
+        self.assertEqual(1, self.exercise(mutate_tail_rows=corrupt))
+
+    def test_tail_sensor_changed_fails(self):
+        def corrupt(rows, _):
+            rows[0]["sensorDbId"] = "unrelated-sensor"
+            return rows
+        self.assertEqual(1, self.exercise(mutate_tail_rows=corrupt))
+
+    def test_tail_timestamp_changed_fails(self):
+        def corrupt(rows, _):
+            rows[0]["timestamp"] = "2026-09-07T08:01:30Z"
+            return rows
+        self.assertEqual(1, self.exercise(mutate_tail_rows=corrupt))
+
+    def test_tail_unit_removed_fails(self):
+        def corrupt(rows, _):
+            rows[0].pop("unit")
+            return rows
+        self.assertEqual(1, self.exercise(mutate_tail_rows=corrupt))
+
+    def test_tail_quality_changed_fails(self):
+        def corrupt(rows, _):
+            rows[0]["qualityFlag"] = "REJECTED"
+            return rows
+        self.assertEqual(1, self.exercise(mutate_tail_rows=corrupt))
+
+    def test_tail_provenance_mutated_fails(self):
+        def corrupt(rows, _):
+            rows[0]["provenance"] = {"origin": "fabricated"}
+            return rows
+        self.assertEqual(1, self.exercise(mutate_tail_rows=corrupt))
+
+    def test_first_page_unit_changed_fails(self):
+        def corrupt(rows, _):
+            rows[0]["unit"] = "kelvin"
+            return rows
+        self.assertEqual(1, self.exercise(mutate_rows=corrupt))
+
+    def test_wrong_tail_page_index_fails(self):
+        self.assertEqual(1, self.exercise(
+            mutate_tail_page=lambda p: {**p, "currentPage": 0}))
+
+    def test_wrong_tail_total_count_fails(self):
+        self.assertEqual(1, self.exercise(
+            mutate_tail_page=lambda p: {**p, "totalCount": 2}))
+
+    def test_wrong_tail_total_pages_fails(self):
+        self.assertEqual(1, self.exercise(
+            mutate_tail_page=lambda p: {**p, "totalPages": 1}))
+
+    def test_wrong_tail_page_size_fails(self):
+        self.assertEqual(1, self.exercise(
+            mutate_tail_page=lambda p: {**p, "pageSize": 1}))
+
+    def test_boolean_tail_pagination_value_fails(self):
+        self.assertEqual(1, self.exercise(
+            mutate_tail_page=lambda p: {**p, "currentPage": True}))
+
+    def test_missing_tail_pagination_fails(self):
+        self.assertEqual(1, self.exercise(
+            mutate_tail_page=lambda p: {k: v for k, v in p.items()
+                                        if k != "totalCount"}))
+
+    def test_non_successful_tail_read_fails(self):
+        self.assertEqual(1, self.exercise(tail_status=404))
+
+    def test_extra_tail_record_fails(self):
+        self.assertEqual(1, self.exercise(
+            mutate_tail_rows=lambda rows, source: rows + [copy.deepcopy(source[0])]))
+
 
 
 if __name__ == "__main__":
