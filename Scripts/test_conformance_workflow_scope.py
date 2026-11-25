@@ -38,6 +38,7 @@ REQUIRED_COMMANDS = {
     "python Scripts/test_conformance_probe_selection.py",
     "python Scripts/test_model_conflict_postcondition.py",
     "python Scripts/test_publication_conflict_postconditions.py",
+    "python Scripts/test_v21_fallback_envelope.py",
     "python Scripts/checkEndpointRegistry.py",
     "python Scripts/auditEndpointRegistrySourceConsistency.py --strict",
     "python Scripts/test_registry_source_consistency.py",
@@ -363,6 +364,18 @@ class WorkflowScopeTests(unittest.TestCase):
             "independent-runtime-differential missing command: " + command in error
             for error in scope_errors(damaged)
         ))
+
+
+    def test_v21_fallback_shape_regression_required(self):
+        damaged = copy.deepcopy(self.workflow)
+        steps = damaged["jobs"]["static-conformance"]["steps"]
+        step = next(s for s in steps
+                    if s.get("run") == "python Scripts/test_v21_fallback_envelope.py")
+        step["run"] = "echo v21-fallback-check-skipped"
+        self.assertIn(
+            "static-conformance job missing command: python Scripts/test_v21_fallback_envelope.py",
+            scope_errors(damaged),
+        )
 
 if __name__ == "__main__":
     unittest.main()
