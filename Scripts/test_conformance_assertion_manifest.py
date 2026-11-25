@@ -92,7 +92,7 @@ class LiveAssertionManifestTests(unittest.TestCase):
         self.assertIn(
             "telemetry_original_intact GET assertion required",
             self.mutated("L-21", 2,
-                         lambda s: s["assert"].pop("telemetry_original_intact")))
+                         lambda s: s.update({"assert": {"status": 200}})))
 
     def test_telemetry_replay_readback_cannot_be_disabled(self):
         self.assertIn(
