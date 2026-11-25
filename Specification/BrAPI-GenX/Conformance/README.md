@@ -1309,3 +1309,23 @@ Existing positive synthetic fixtures have been aligned with the
 published required Job shape.
 
 See [Mission 172 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-172-INITIAL-JOB-STATUS-SCHEMA.md).
+
+## Replay and concurrent Job acknowledgments require lifecycle status (Mission 173)
+
+Registered **L-01** checks that an identical replay returns a Job
+whose required `status` is a string from the same six-value Job
+lifecycle enumeration enforced for first acceptance in Mission 172.
+Registered **L-24** independently checks the required lifecycle status
+in **each of eight** concurrent Job acknowledgment responses. The
+original identity, type, idempotency-key and stored-single-effect
+checks remain mandatory.
+
+Different valid lifecycle states across simultaneous responses are
+allowed: a rapidly progressing asynchronous Job may change from
+`SUBMITTED` to `RUNNING` while callers observe it. The runner
+does not add a new phase constraint or require all eight statuses to
+be identical. The mandatory replay and concurrent synthetic suites
+reject missing, nonstring, or out-of-enum statuses *before* the
+collection readback and include positive changing-status cases.
+
+See [Mission 173 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-173-REPLAY-CONCURRENT-JOB-STATUS.md).

@@ -50,7 +50,8 @@ class JobReplaySingleStoredTests(unittest.TestCase):
                 self.assertEqual(original, body)
                 replay = {"jobDbId": replay_id,
                           "jobType": body["jobType"],
-                          "idempotencyKey": body["idempotencyKey"]}
+                          "idempotencyKey": body["idempotencyKey"],
+                          "status": "SUBMITTED"}
                 if replay_mutate is not None:
                     replay = replay_mutate(replay)
                 return replay_status, {"result": replay}
@@ -166,6 +167,27 @@ class JobReplaySingleStoredTests(unittest.TestCase):
 
     def test_replay_status_200_remains_allowed(self):
         self.assertEqual(0, self.exercise(replay_status=200)[0])
+
+    def test_replay_missing_status_rejected_before_collection(self):
+        failures, calls = self.exercise(replay_mutate=lambda row: {
+            key: value for key, value in row.items() if key != "status"})
+        self.assertEqual((1, 2), (failures, len(calls)))
+
+    def test_replay_unknown_status_rejected_before_collection(self):
+        failures, calls = self.exercise(
+            replay_mutate=lambda row: {**row, "status": "QUEUED"})
+        self.assertEqual((1, 2), (failures, len(calls)))
+
+    def test_replay_nonstring_status_rejected_before_collection(self):
+        for wrong in (None, False, 0, [], {}):
+            with self.subTest(wrong=wrong):
+                failures, calls = self.exercise(
+                    replay_mutate=lambda row: {**row, "status": wrong})
+                self.assertEqual((1, 2), (failures, len(calls)))
+
+    def test_replay_running_status_allowed(self):
+        self.assertEqual(0, self.exercise(
+            replay_mutate=lambda row: {**row, "status": "RUNNING"})[0])
 
     def test_other_success_status_rejected_before_readback(self):
         for code in (201, 204, 206):
