@@ -1661,9 +1661,15 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     return results.report(
                         probe["id"], probe["title"], "FAIL", f"submit returned {status}")
             assertion = step.get("assert", {})
-            if assertion.get("rejected") and not (status >= 400):
+            if assertion.get("rejected") and not (
+                    type(status) is int and 400 <= status < 500):
+                # An HTTP 5xx response is a server failure, not evidence
+                # that a conflicting or terminal-state operation was rejected.
+                # The precise 4xx conflict code remains an open proposal
+                # decision; do not silently select one here.
                 return results.report(
-                    probe["id"], probe["title"], "FAIL", f"expected rejection, got {status}")
+                    probe["id"], probe["title"], "FAIL",
+                    f"expected client-side rejection (4xx), got {status}")
             if "status" in assertion and status != assertion["status"]:
                 return results.report(
                     probe["id"], probe["title"], "FAIL",

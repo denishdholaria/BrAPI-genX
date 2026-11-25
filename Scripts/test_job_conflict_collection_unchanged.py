@@ -175,6 +175,17 @@ class JobConflictCollectionUnchangedTests(unittest.TestCase):
         self.assertEqual(1, failures)
         self.assertEqual(3, len(calls))
 
+    def test_server_error_is_not_a_conflict_rejection(self):
+        for code in (500, 503):
+            with self.subTest(code=code):
+                failures, calls = self.exercise(reject_status=code)
+                self.assertEqual(1, failures)
+                self.assertEqual(3, len(calls))
+
+    def test_other_client_error_still_rejected_without_new_policy(self):
+        # The exact conflict status remains open in RFC-001.
+        self.assertEqual(0, self.exercise(reject_status=400)[0])
+
     def test_initial_collection_unavailable_fails(self):
         self.assertEqual(1, self.exercise(get_before_status=404)[0])
 
