@@ -63,6 +63,20 @@ def valid_job_lifecycle_status(job):
             and job["status"] in JOB_LIFECYCLE_STATES)
 
 
+def valid_job_status_and_progress(job):
+    """Check the required lifecycle enum and optional bounded Job.progress."""
+    if not valid_job_lifecycle_status(job):
+        return False
+    if "progress" not in job:
+        return True
+    progress = job["progress"]
+    # bool is an int subclass; the schema explicitly requires a number.
+    # Test the range first to avoid overflow on arbitrarily large integers.
+    return (type(progress) in (int, float)
+            and 0 <= progress <= 1
+            and math.isfinite(progress))
+
+
 def load_yaml(path):
     with open(path, "r", encoding="utf-8") as fh:
         return yaml.safe_load(fh)
@@ -1230,7 +1244,7 @@ def immutable_job_snapshot(status, payload):
                 or not row["jobDbId"]
                 or not isinstance(row.get("jobType"), str)
                 or not row["jobType"]
-                or not valid_job_lifecycle_status(row)
+                or not valid_job_status_and_progress(row)
                 or ("idempotencyKey" in row
                     and not isinstance(row["idempotencyKey"], str))
                 or row["jobDbId"] in snapshot):
@@ -1622,7 +1636,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                             if isinstance(payload, dict) else None)
                 if (status in (200, 202)
                         and isinstance(original, dict)
-                        and valid_job_lifecycle_status(returned)
+                        and valid_job_status_and_progress(returned)
                         and isinstance(ctx.get("live_job"), str)
                         and ctx["live_job"]
                         and returned.get("jobDbId") == ctx["live_job"]
@@ -1670,7 +1684,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         or not ids or not isinstance(ids[0], str) or not ids[0]
                         or any(job_id != ids[0] for job_id in ids)
                         or any(
-                            not valid_job_lifecycle_status(record)
+                            not valid_job_status_and_progress(record)
                             or record.get("jobType") != body["jobType"]
                             or record.get("idempotencyKey")
                                 != body["idempotencyKey"]
@@ -1698,7 +1712,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         or not isinstance(body, dict)
                         or not isinstance(accepted.get("jobDbId"), str)
                         or not accepted["jobDbId"]
-                        or not valid_job_lifecycle_status(accepted)
+                        or not valid_job_status_and_progress(accepted)
                         or not isinstance(body.get("jobType"), str)
                         or not body["jobType"]
                         or accepted.get("jobType") != body["jobType"]
@@ -1851,7 +1865,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         or submitted.get("jobType") != "inference"
                         or not isinstance(submitted.get("idempotencyKey"), str)
                         or not submitted["idempotencyKey"]
-                        or not valid_job_lifecycle_status(accepted)
+                        or not valid_job_status_and_progress(accepted)
                         or accepted.get("jobType") != submitted["jobType"]
                         or accepted.get("idempotencyKey")
                             != submitted["idempotencyKey"]):
@@ -2227,7 +2241,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         if (not isinstance(job_id, str) or not job_id
                                 or not isinstance(row.get("jobType"), str)
                                 or not row["jobType"]
-                                or not valid_job_lifecycle_status(row)
+                                or not valid_job_status_and_progress(row)
                                 or ("idempotencyKey" in row
                                     and not isinstance(row["idempotencyKey"], str))
                                 or job_id in visible_job_ids):

@@ -94,6 +94,21 @@ class ConcurrentJobStoredEffectTests(unittest.TestCase):
         self.assertEqual(8, len([method for method, _ in calls if method == "POST"]))
         self.assertEqual(1, len([method for method, _ in calls if method == "GET"]))
 
+    def test_stored_job_invalid_progress_fails(self):
+        for progress in (-0.2, 1.2, None, True, "0.5", float("inf")):
+            with self.subTest(progress=progress):
+                def change(rows):
+                    rows[0]["progress"] = progress
+                    return rows
+                self.assertEqual(1, self.exercise(change_rows=change)[0])
+
+    def test_unrelated_stored_job_invalid_progress_fails(self):
+        def change(rows):
+            rows[1]["progress"] = 1.2
+            return rows
+        self.assertEqual(1, self.exercise(
+            add_unrelated=True, change_rows=change)[0])
+
     def test_single_stored_job_missing_status_fails(self):
         def change(rows):
             del rows[0]["status"]
@@ -190,6 +205,22 @@ class ConcurrentJobStoredEffectTests(unittest.TestCase):
         self.assertEqual(1, failures)
         self.assertEqual(0, len([m for m, _ in calls if m == "GET"]))
 
+
+    def test_one_invalid_progress_reply_fails_before_collection(self):
+        for progress in (-0.1, 1.2, None, False, "0.5", float("nan")):
+            with self.subTest(progress=progress):
+                failures, calls = self.exercise(
+                    mutate_ack=lambda row, index: (
+                        {**row, "progress": progress} if index == 8 else row))
+                self.assertEqual(1, failures)
+                self.assertEqual(0, sum(method == "GET" for method, _ in calls))
+
+    def test_mixed_valid_concurrent_progress_allowed(self):
+        failures, calls = self.exercise(
+            mutate_ack=lambda row, index: {
+                **row, "progress": 0 if index % 2 else 1.0})
+        self.assertEqual(0, failures)
+        self.assertEqual(1, sum(method == "GET" for method, _ in calls))
 
     def test_one_missing_status_reply_fails_before_collection(self):
         failures, calls = self.exercise(

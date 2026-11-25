@@ -88,6 +88,30 @@ class JobReplaySingleStoredTests(unittest.TestCase):
     def test_single_original_job_passes(self):
         self.assertEqual(0, self.exercise()[0])
 
+    def test_stored_job_invalid_progress_fails(self):
+        for progress in (-0.01, 1.01, None, True, "0.5", float("nan"),
+                         float("inf")):
+            with self.subTest(progress=progress):
+                def change(rows):
+                    rows[0]["progress"] = progress
+                    return rows
+                self.assertEqual(1, self.exercise(change_rows=change)[0])
+
+    def test_unrelated_stored_job_invalid_progress_fails(self):
+        def change(rows):
+            rows[1]["progress"] = -0.2
+            return rows
+        self.assertEqual(1, self.exercise(
+            unrelated=True, change_rows=change)[0])
+
+    def test_stored_job_zero_and_full_progress_allowed(self):
+        for progress in (0, 1.0):
+            with self.subTest(progress=progress):
+                def change(rows):
+                    rows[0]["progress"] = progress
+                    return rows
+                self.assertEqual(0, self.exercise(change_rows=change)[0])
+
     def test_stored_job_missing_status_fails(self):
         def change(rows):
             del rows[0]["status"]
@@ -197,6 +221,17 @@ class JobReplaySingleStoredTests(unittest.TestCase):
 
     def test_replay_status_200_remains_allowed(self):
         self.assertEqual(0, self.exercise(replay_status=200)[0])
+
+    def test_replay_invalid_progress_fails_before_readback(self):
+        for progress in (-1, 1.1, None, False, "0.3", float("nan")):
+            with self.subTest(progress=progress):
+                failures, calls = self.exercise(
+                    replay_mutate=lambda row: {**row, "progress": progress})
+                self.assertEqual((1, 2), (failures, len(calls)))
+
+    def test_replay_bounded_progress_allowed(self):
+        self.assertEqual(0, self.exercise(
+            replay_mutate=lambda row: {**row, "progress": 0.75})[0])
 
     def test_replay_missing_status_rejected_before_collection(self):
         failures, calls = self.exercise(replay_mutate=lambda row: {
@@ -337,6 +372,28 @@ class JobReplaySingleStoredTests(unittest.TestCase):
     def test_initial_job_running_status_allowed(self):
         self.assertEqual(0, self.exercise(
             initial_mutate=lambda row: {**row, "status": "RUNNING"})[0])
+
+    def test_initial_job_invalid_progress_fails_before_replay(self):
+        for progress in (-0.01, 1.01, None, True, "0.4", float("inf")):
+            with self.subTest(progress=progress):
+                failures, calls = self.exercise(
+                    initial_mutate=lambda row: {**row, "progress": progress})
+                self.assertEqual((1, 1), (failures, len(calls)))
+
+    def test_initial_job_optional_progress_bounds_allowed(self):
+        for progress in (0, 0.25, 1, 1.0):
+            with self.subTest(progress=progress):
+                self.assertEqual(0, self.exercise(
+                    initial_mutate=lambda row: {**row, "progress": progress})[0])
+
+    def test_progress_bounds_match_published_job_schema(self):
+        schema = yaml.safe_load((
+            ROOT / "Specification" / "BrAPI-GenX" / "Core" / "Jobs" /
+            "Schemas" / "Job.yaml").read_text(encoding="utf-8"))
+        progress = schema["components"]["schemas"]["Job"]["properties"]["progress"]
+        self.assertEqual("number", progress["type"])
+        self.assertEqual(0, progress["minimum"])
+        self.assertEqual(1, progress["maximum"])
 
     def test_initial_job_status_enum_matches_published_schema(self):
         schema = yaml.safe_load((
