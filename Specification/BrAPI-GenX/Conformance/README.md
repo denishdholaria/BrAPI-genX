@@ -1203,3 +1203,22 @@ malformed unrelated identities, duplicate unrelated version pairs,
 legitimate versions, and a valid multi-page envelope.
 
 See [Mission 167 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-167-L25-VISIBLE-MODEL-VERSIONS.md).
+
+## Deprecated inference initial acknowledgment binding (Mission 168)
+
+Registered **L-27** demonstrates that inference using a deprecated
+model can complete while returning a warning. Its initial HTTP 202
+job acknowledgment now must contain a nonempty `jobDbId`, the
+original `jobType` (`inference`), and the exact original
+`idempotencyKey` **before** the runner polls for completion.
+Previously the initial acknowledgment could omit or corrupt type/key
+while a correct terminal readback concealed the error.
+
+The existing model-version, completion, warning and recomputed input
+digest checks remain unchanged. Additional server-managed acknowledgment
+fields are permitted. The mandatory
+`Scripts/test_deprecated_inference_completion.py` regression suite
+now covers altered, missing, or malformed acceptance fields, asserting
+that failures precede polling.
+
+See [Mission 168 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-168-DEPRECATED-INFERENCE-ACK-BINDING.md).
