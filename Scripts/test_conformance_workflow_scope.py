@@ -37,6 +37,7 @@ REQUIRED_COMMANDS = {
     "python Scripts/checkGenXConformance.py",
     "python Scripts/test_conformance_probe_selection.py",
     "python Scripts/test_model_conflict_postcondition.py",
+    "python Scripts/test_publication_conflict_postconditions.py",
     "python Scripts/checkEndpointRegistry.py",
     "python Scripts/auditEndpointRegistrySourceConsistency.py --strict",
     "python Scripts/test_registry_source_consistency.py",
@@ -317,6 +318,18 @@ class WorkflowScopeTests(unittest.TestCase):
         test["run"] = "echo model-conflict-postcondition-skipped"
         self.assertIn(
             "static-conformance job missing command: python Scripts/test_model_conflict_postcondition.py",
+            scope_errors(damaged),
+        )
+
+
+    def test_publication_postcondition_regressions_cannot_be_skipped(self):
+        damaged = copy.deepcopy(self.workflow)
+        steps = damaged["jobs"]["static-conformance"]["steps"]
+        step = next(s for s in steps
+                    if s.get("run") == "python Scripts/test_publication_conflict_postconditions.py")
+        step["run"] = "echo publication-integrity-check-skipped"
+        self.assertIn(
+            "static-conformance job missing command: python Scripts/test_publication_conflict_postconditions.py",
             scope_errors(damaged),
         )
 

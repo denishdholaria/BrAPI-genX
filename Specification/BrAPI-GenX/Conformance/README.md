@@ -216,3 +216,17 @@ This checks an observable postcondition against both project-owned reference
 servers when their normal hosted suites execute L-13. It does not establish
 durable immutability, distributed race safety or production-grade authorization.
 See [Mission 105 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-105-MODEL-CONFLICT-POSTCONDITION.md).
+
+## Matrix and package post-conflict state verification (Mission 106)
+
+Registered live probes **L-17** and **L-19** now perform a GET after a
+conflicting registration is rejected, checking that the original matrix
+`fileDigest` or package `license` remains associated with the original
+resource identifier. Both compare against the initial submitted request, not
+against a potentially altered second response. Mutation tests exercise
+servers that reply `409` but silently change the stored record.
+
+These checks run against the Python in-memory reference server. They do not
+establish durable scientific-data integrity, real content-byte retrieval,
+third-party interoperability, licensing authority or deployment security.
+See [Mission 106 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-106-PUBLICATION-CONFLICT-POSTCONDITIONS.md).
