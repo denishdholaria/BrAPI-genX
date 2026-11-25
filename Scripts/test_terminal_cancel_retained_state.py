@@ -206,5 +206,40 @@ class TerminalCancelRetainedStateTests(unittest.TestCase):
 
 
 
+    def test_terminal_poll_rejects_error_even_with_completed_body(self):
+        completed = {"result": {"jobDbId": "JOB_TERMINAL",
+                                "status": "COMPLETED"}}
+        for status in (404, 503):
+            with self.subTest(status=status):
+                with mock.patch.object(checker, "http_call",
+                                       return_value=(status, completed)) as call:
+                    with self.assertRaisesRegex(
+                            ValueError, f"terminal job polling GET returned HTTP {status}"):
+                        checker.wait_terminal("http://example.test/genx/v1",
+                                              "JOB_TERMINAL", None)
+                self.assertEqual(1, call.call_count)
+
+    def test_terminal_poll_rejects_redirect_body(self):
+        completed = {"result": {"jobDbId": "JOB_TERMINAL",
+                                "status": "COMPLETED"}}
+        with mock.patch.object(checker, "http_call",
+                               return_value=(302, completed)):
+            with self.assertRaisesRegex(ValueError, "returned HTTP 302"):
+                checker.wait_terminal("http://example.test/genx/v1",
+                                      "JOB_TERMINAL", None)
+
+    def test_terminal_poll_accepts_completed_success(self):
+        completed = {"result": {"jobDbId": "JOB_TERMINAL",
+                                "status": "COMPLETED"}}
+        with mock.patch.object(checker, "http_call",
+                               return_value=(200, completed)) as call:
+            self.assertEqual(
+                completed,
+                checker.wait_terminal("http://example.test/genx/v1",
+                                      "JOB_TERMINAL", None))
+        self.assertEqual(1, call.call_count)
+
+
+
 if __name__ == "__main__":
     unittest.main()
