@@ -1207,6 +1207,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
         ctx["live_matrix_id"] = None
         ctx["live_matrix"] = None
         ctx["live_matrix_baseline"] = None
+        ctx["live_matrix_original"] = None
     if any(s.get("capture_package") for s in calls):
         ctx["live_package_id"] = None
         ctx["live_package"] = None
@@ -1525,6 +1526,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                 seen = payload.get("result", {})
                 ctx["live_matrix"] = seen.get("matrixDbId")
                 ctx["live_matrix_baseline"] = (body.get("matrixDbId"), body.get("fileDigest"))
+                ctx["live_matrix_original"] = copy.deepcopy(body)
             if step.get("capture_package"):
                 if status not in (200, 202):
                     return results.report(
@@ -1758,6 +1760,42 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         probe["id"], probe["title"], "FAIL",
                         f"package identity/license changed or unavailable: "
                         f"status={status}, expected={expected}, observed={observed}",
+                    )
+            if assertion.get("matrix_replay_single_record"):
+                # Confirm one visible stored copy of the originally submitted
+                # matrix, rather than trusting matching POST identifiers.
+                result = payload.get("result") if isinstance(payload, dict) else None
+                rows = result.get("data") if isinstance(result, dict) else None
+                metadata = payload.get("metadata") if isinstance(payload, dict) else None
+                pagination = (metadata.get("pagination")
+                              if isinstance(metadata, dict) else None)
+                original = ctx.get("live_matrix_original")
+                expected_id = ctx.get("live_matrix")
+                if (status != 200 or not isinstance(original, dict)
+                        or not isinstance(expected_id, str) or not expected_id
+                        or original.get("matrixDbId") != expected_id
+                        or not isinstance(rows, list) or not rows
+                        or not all(isinstance(row, dict) for row in rows)
+                        or not isinstance(pagination, dict)
+                        or any(type(pagination.get(k)) is not int
+                               for k in ("totalCount", "pageSize", "totalPages",
+                                         "currentPage"))
+                        or pagination["totalCount"] != len(rows)
+                        or pagination["pageSize"] < len(rows)
+                        or pagination["totalPages"] != 1
+                        or pagination["currentPage"] != 0):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "matrix replay collection is malformed, truncated, or unavailable"
+                    )
+                matches = [row for row in rows
+                           if row.get("matrixDbId") == expected_id]
+                if (len(matches) != 1
+                        or any(key not in matches[0] or matches[0][key] != value
+                               for key, value in original.items())):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "original matrix missing, duplicated, or modified after replay"
                     )
             if assertion.get("same_matrix"):
                 seen = payload.get("result", {})
@@ -2134,7 +2172,7 @@ LIVE_BOOLEAN_ASSERTIONS = frozenset({
     "telemetry_page_slice",
     "deprecated_inference_completed",
     "unchanged_package_license", "unchanged_term_record", "ledger_original_intact",
-    "term_replay_single_version",
+    "term_replay_single_version", "matrix_replay_single_record",
     "inference_intact", "single_effect",
     "concurrent_single_stored_job", "capability_registry_match",
 })
@@ -2220,6 +2258,13 @@ def validate_live_step_assertions(probe_id, index, call):
             f"probe {probe_id} call {index}: telemetry_mean and "
             "telemetry_samples must be paired"
         )
+    if "matrix_replay_single_record" in assertion and (
+            call.get("method") != "GET"
+            or call.get("path") != "/variantmatrices"):
+        raise ValueError(
+            f"probe {probe_id} call {index}: "
+            "matrix_replay_single_record requires GET /variantmatrices"
+        )
     if "term_replay_single_version" in assertion and (
             call.get("method") != "GET"
             or call.get("path") != "/variable-terms?variableDbId={variableDbId}"):
@@ -2299,6 +2344,19 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-16":
+                if (len(calls) != 3
+                        or calls[0].get("body_fixture") != "live_matrix_submit"
+                        or calls[0].get("capture_matrix") is not True
+                        or calls[1].get("body_fixture") != "live_matrix_submit"
+                        or calls[1].get("assert", {}).get("same_matrix") is not True
+                        or calls[2].get("method") != "GET"
+                        or calls[2].get("path") != "/variantmatrices"
+                        or calls[2].get("assert", {}).get("matrix_replay_single_record")
+                            is not True):
+                    raise ValueError(
+                        "probe L-16: matrix_replay_single_record GET after replay required"
+                    )
             if probe_id == "L-08":
                 if (len(calls) != 3
                         or calls[0].get("body_fixture") != "live_term_submit"
