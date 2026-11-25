@@ -497,9 +497,9 @@ probes:
   object: all
   title: List endpoints return paged envelopes
   procedure:
-  - GET collection endpoints after creating one job and one model.
-  expectation: Each returns 200 with result.data arrays and pagination totals.
-  falsifier: A collection read failing or missing pagination.
+  - GET collection endpoints after creating one job and one model; verify complete first-page arithmetic for both collections.
+  expectation: Each returns 200 with arrays containing the created resource, and consistent totalCount, pageSize, totalPages and first-page row counts.
+  falsifier: Missing created records, incomplete or inconsistent pagination, mismatched totalPages, or incorrect first-page offsets.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_submit, capture_job: true}
   - {method: POST, path: /models, body_fixture: live_model_submit, capture_model: true}

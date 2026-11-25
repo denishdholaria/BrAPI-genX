@@ -1940,7 +1940,13 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         or pagination["pageSize"] < 1
                         or pagination["currentPage"] < 0
                         or pagination["totalPages"] < 1
-                        or pagination["currentPage"] >= pagination["totalPages"]):
+                        or pagination["currentPage"] >= pagination["totalPages"]
+                        or pagination["currentPage"] != 0
+                        or pagination["totalPages"] != (
+                            pagination["totalCount"] + pagination["pageSize"] - 1
+                        ) // pagination["pageSize"]
+                        or len(rows) != min(
+                            pagination["pageSize"], pagination["totalCount"])):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
                         f"{kind} pagination counts/shape invalid: {pagination!r}"
@@ -2731,6 +2737,27 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-25":
+                if (len(calls) != 4
+                        or calls[0].get("method") != "POST"
+                        or calls[0].get("path") != "/jobs"
+                        or calls[0].get("body_fixture") != "live_submit"
+                        or calls[0].get("capture_job") is not True
+                        or calls[1].get("method") != "POST"
+                        or calls[1].get("path") != "/models"
+                        or calls[1].get("body_fixture") != "live_model_submit"
+                        or calls[1].get("capture_model") is not True
+                        or calls[2].get("method") != "GET"
+                        or calls[2].get("path") != "/jobs"
+                        or calls[2].get("assert", {}).get(
+                            "collection_contains_created") != "jobs"
+                        or calls[3].get("method") != "GET"
+                        or calls[3].get("path") != "/models"
+                        or calls[3].get("assert", {}).get(
+                            "collection_contains_created") != "models"):
+                    raise ValueError(
+                        "probe L-25: paged job and model collection evidence required"
+                    )
             if probe_id == "L-20":
                 if (len(calls) != 2
                         or calls[0].get("method") != "POST"

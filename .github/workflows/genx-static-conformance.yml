@@ -301,6 +301,8 @@ jobs:
         run: python Scripts/test_expired_job_result_withheld.py
       - name: Test embargo denial withholds package content
         run: python Scripts/test_embargo_denial_no_payload.py
+      - name: Test collection first-page pagination arithmetic
+        run: python Scripts/test_collection_pagination_arithmetic.py
       - name: Test deprecated model inference reaches completed job
         run: python Scripts/test_deprecated_inference_completion.py
       - name: Run static GenX conformance probes

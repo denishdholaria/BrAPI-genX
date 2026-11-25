@@ -147,6 +147,35 @@ class LiveAssertionManifestTests(unittest.TestCase):
                 s.update(body_fixture="live_submit"),
             )))
 
+    def test_collection_job_readback_cannot_be_removed(self):
+        self.assertIn(
+            "paged job and model collection evidence required",
+            self.mutated("L-25", 2,
+                         lambda s: s.update({"assert": {"status": 200}})))
+
+    def test_collection_model_readback_cannot_be_removed(self):
+        self.assertIn(
+            "paged job and model collection evidence required",
+            self.mutated("L-25", 3,
+                         lambda s: s.update({"assert": {"status": 200}})))
+
+    def test_collection_model_must_be_created(self):
+        self.assertIn(
+            "paged job and model collection evidence required",
+            self.mutated("L-25", 1,
+                         lambda s: s.update(body_fixture="live_model_conflict")))
+
+    def test_collection_job_must_be_created(self):
+        self.assertIn(
+            "paged job and model collection evidence required",
+            self.mutated("L-25", 0,
+                         lambda s: s.pop("capture_job")))
+
+    def test_collection_must_not_swap_endpoints(self):
+        self.assertIn(
+            "paged job and model collection evidence required",
+            self.mutated("L-25", 2, lambda s: s.update(path="/models")))
+
     def test_embargo_denial_postcondition_cannot_be_removed(self):
         self.assertIn(
             "embargo_denial_no_payload on rejected package GET required",
