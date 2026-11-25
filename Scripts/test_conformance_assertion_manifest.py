@@ -102,7 +102,7 @@ class LiveAssertionManifestTests(unittest.TestCase):
 
     def test_telemetry_page_slice_assertion_must_remain_registered(self):
         self.assertIn(
-            "telemetry_page_slice GET assertion required",
+            "two-page telemetry slice and source integrity required",
             self.mutated("L-28", 1,
                          lambda s: s["assert"].pop("telemetry_page_slice")))
 
@@ -117,6 +117,46 @@ class LiveAssertionManifestTests(unittest.TestCase):
             "unknown live assertion",
             self.mutated("L-28", 1,
                          lambda s: s["assert"].update(telemetry_page_slices=True)))
+
+    def test_telemetry_tail_page_cannot_be_removed(self):
+        probes = copy.deepcopy(self.source["probes"])
+        probe = next(p for p in probes if p["id"] == "L-28")
+        probe["calls"].pop(2)
+        with self.assertRaisesRegex(ValueError,
+                "two-page telemetry slice and source integrity required"):
+            validate_probe_manifest(probes)
+
+    def test_telemetry_tail_path_must_request_page_one(self):
+        self.assertIn(
+            "two-page telemetry slice and source integrity required",
+            self.mutated("L-28", 2,
+                         lambda s: s.update(
+                             path="/telemetry?deviceDbId={telemetry_device}&page=0&pageSize=2")))
+
+    def test_telemetry_tail_assertion_cannot_be_removed(self):
+        self.assertIn(
+            "two-page telemetry slice and source integrity required",
+            self.mutated("L-28", 2,
+                         lambda s: s["assert"].pop("telemetry_page_slice")))
+
+    def test_telemetry_tail_count_cannot_be_weakened(self):
+        self.assertIn(
+            "two-page telemetry slice and source integrity required",
+            self.mutated("L-28", 2,
+                         lambda s: s["assert"].update(data_length=2)))
+
+    def test_telemetry_initial_source_capture_required(self):
+        self.assertIn(
+            "two-page telemetry slice and source integrity required",
+            self.mutated("L-28", 0,
+                         lambda s: s.pop("capture_telemetry")))
+
+    def test_telemetry_first_page_query_cannot_be_changed(self):
+        self.assertIn(
+            "two-page telemetry slice and source integrity required",
+            self.mutated("L-28", 1,
+                         lambda s: s.update(
+                             path="/telemetry?deviceDbId={telemetry_device}&page=1&pageSize=2")))
 
     def test_window_partition_assertion_must_remain_registered(self):
         self.assertIn(

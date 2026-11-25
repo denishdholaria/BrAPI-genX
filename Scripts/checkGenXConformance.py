@@ -31,7 +31,7 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src"))
 from brapi_genx.canonicalization import jcs_canonicalize
 import uuid
-from urllib.parse import quote
+from urllib.parse import parse_qs, quote, urlsplit
 
 try:
     import yaml
@@ -2327,7 +2327,17 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         "telemetry window partition omitted a submitted minute"
                     )
             if assertion.get("telemetry_page_slice"):
-                # L-28 must verify the actual first page, not just its size.
+                # L-28 must traverse both pages, retaining every submitted field.
+                # Derive the expected slice from the actual requested page.
+                requested = parse_qs(urlsplit(path).query)
+                page_parts = requested.get("page")
+                size_parts = requested.get("pageSize")
+                if page_parts not in (["0"], ["1"]) or size_parts != ["2"]:
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "telemetry page slice requested unexpected page or page size"
+                    )
+                page_index = int(page_parts[0])
                 result = payload.get("result") if isinstance(payload, dict) else None
                 rows = result.get("data") if isinstance(result, dict) else None
                 metadata = payload.get("metadata") if isinstance(payload, dict) else None
@@ -2336,28 +2346,38 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                 original = ctx.get("live_batch")
                 if (status != 200 or not isinstance(rows, list)
                         or not isinstance(original, list) or len(original) != 3
-                        or len(rows) != 2 or not isinstance(pagination, dict)
+                        or not all(isinstance(point, dict) for point in original)
+                        or len({(p.get("deviceDbId"), p.get("sensorDbId"),
+                                 p.get("timestamp")) for p in original}) != 3
+                        or not isinstance(pagination, dict)
                         or any(type(pagination.get(k)) is not int
                                for k in ("currentPage", "pageSize",
                                          "totalCount", "totalPages"))
                         or (pagination["currentPage"], pagination["pageSize"],
                             pagination["totalCount"], pagination["totalPages"])
-                            != (0, 2, 3, 2)):
+                            != (page_index, 2, 3, 2)):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        "telemetry pagination envelope or expected page size incorrect"
+                        "telemetry pagination envelope or original source incorrect"
                     )
-                expected = sorted(original, key=lambda point: point["timestamp"])[:2]
+                expected = sorted(original, key=lambda point: point["timestamp"])
+                expected = expected[page_index * 2:(page_index + 1) * 2]
+                if len(rows) != len(expected):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "telemetry page slice has incorrect row count"
+                    )
                 for index, (point, wanted) in enumerate(zip(rows, expected)):
+                    value = point.get("value") if isinstance(point, dict) else None
                     if (not isinstance(point, dict)
-                            or any(point.get(k) != wanted.get(k) for k in
-                                   ("deviceDbId", "sensorDbId", "timestamp"))
-                            or type(point.get("value")) not in (int, float)
-                            or not (-float("inf") < point["value"] < float("inf"))
-                            or abs(point["value"] - wanted["value"]) > 1e-9):
+                            or type(value) not in (int, float)
+                            or not math.isfinite(value)
+                            or any(k not in point or point[k] != v
+                                   for k, v in wanted.items())):
                         return results.report(
                             probe["id"], probe["title"], "FAIL",
-                            f"telemetry page slice mismatch at row {index}: {point!r}"
+                            f"telemetry page {page_index} source mismatch "
+                            f"at row {index}: {point!r}"
                         )
             if "telemetry_mean" in assertion:
                 original = ctx.get("live_batch")
@@ -3247,14 +3267,29 @@ def validate_probe_manifest(probes):
                 raise ValueError(
                     "probe L-21: telemetry_original_intact GET assertion required"
                 )
-            if probe_id == "L-28" and not any(
-                    call.get("method") == "GET"
-                    and isinstance(call.get("assert"), dict)
-                    and call["assert"].get("telemetry_page_slice") is True
-                    for call in calls):
-                raise ValueError(
-                    "probe L-28: telemetry_page_slice GET assertion required"
+            if probe_id == "L-28":
+                expected_pages = (
+                    "/telemetry?deviceDbId={telemetry_device}&page=0&pageSize=2",
+                    "/telemetry?deviceDbId={telemetry_device}&page=1&pageSize=2",
                 )
+                if (len(calls) != 3
+                        or calls[0].get("method") != "POST"
+                        or calls[0].get("path") != "/telemetry"
+                        or calls[0].get("body_fixture") != "live_telemetry_batch"
+                        or calls[0].get("capture_telemetry") is not True
+                        or any(
+                            calls[idx].get("method") != "GET"
+                            or calls[idx].get("path") != expected_pages[idx - 1]
+                            or calls[idx].get("assert") != {
+                                "data_length": 2 if idx == 1 else 1,
+                                "total_count": 3,
+                                "telemetry_page_slice": True,
+                            }
+                            for idx in (1, 2)
+                        )):
+                    raise ValueError(
+                        "probe L-28: two-page telemetry slice and source integrity required"
+                    )
             if probe_id == "L-26" and not any(
                     call.get("method") == "GET"
                     and isinstance(call.get("assert"), dict)
