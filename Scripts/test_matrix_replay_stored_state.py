@@ -23,12 +23,13 @@ class MatrixReplayStoredStateTests(unittest.TestCase):
     def test_registered_probe_requires_readback(self):
         self.assertEqual(3, len(self.probe["calls"]))
         self.assertIs(True, self.probe["calls"][1]["assert"]["same_matrix"])
+        self.assertEqual(200, self.probe["calls"][1]["assert"]["status"])
         final = self.probe["calls"][2]
         self.assertEqual(("GET", "/variantmatrices"), (final["method"], final["path"]))
         self.assertIs(True, final["assert"]["matrix_replay_single_record"])
 
     def exercise(self, mutate_rows=None, mutate_page=None, read_status=200,
-                 replay_identifier=None, unrelated=False):
+                 replay_identifier=None, unrelated=False, replay_status=200):
         calls = []
         original = {}
 
@@ -44,7 +45,7 @@ class MatrixReplayStoredStateTests(unittest.TestCase):
                 returned = copy.deepcopy(body)
                 if replay_identifier is not None:
                     returned["matrixDbId"] = replay_identifier
-                return 200, {"result": returned}
+                return replay_status, {"result": returned}
             if len(calls) == 3:
                 self.assertEqual(("GET", "/variantmatrices"), (method, path))
                 rows = [copy.deepcopy(original)]
@@ -151,6 +152,18 @@ class MatrixReplayStoredStateTests(unittest.TestCase):
         failures, calls = self.exercise(replay_identifier="other:matrix:wrong")
         self.assertEqual(1, failures)
         self.assertEqual(2, len(calls))
+
+
+    def test_replay_accepted_as_new_write_fails(self):
+        failures, calls = self.exercise(replay_status=202)
+        self.assertEqual(1, failures)
+        self.assertEqual(2, len(calls))
+
+    def test_replay_server_failure_fails(self):
+        failures, calls = self.exercise(replay_status=500)
+        self.assertEqual(1, failures)
+        self.assertEqual(2, len(calls))
+
 
 
 if __name__ == "__main__":
