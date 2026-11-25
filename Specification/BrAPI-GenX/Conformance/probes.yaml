@@ -217,7 +217,7 @@ probes:
   procedure:
   - POST JobNewRequest with a fresh idempotencyKey; record jobDbId.
   - POST the identical body and key again; GET the complete jobs collection.
-  expectation: Initial acceptance echoes the original jobType and idempotencyKey with a nonempty jobDbId and a valid required Job lifecycle status; the second response is 200 or 202 with the same identity and a valid Job lifecycle status, and a complete collection with unique well-formed job identities contains exactly one stored job for that original key.
+  expectation: Initial acceptance echoes the original jobType and idempotencyKey with a nonempty jobDbId and a valid required Job lifecycle status; the second response is 200 or 202 with the same identity and a valid Job lifecycle status, and a complete collection with unique well-formed job identities and valid required Job statuses contains exactly one stored job for that original key.
   falsifier: A second jobDbId is issued or a duplicate/modified stored job exists despite matching responses.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_submit, capture_job: true}
@@ -229,7 +229,7 @@ probes:
   title: Same key with a different body is a conflict, not a new job
   procedure:
   - POST a body under a fresh key; GET the complete job collection; POST a different body under the same key; reread the collection.
-  expectation: Second POST is rejected (conflict status; exact code requires-decision per RFC-001 §8), with no new job or change to stored job identities.
+  expectation: Second POST is rejected (conflict status; exact code requires-decision per RFC-001 §8), with no new job or change to stored job identities; both complete readbacks require valid Job statuses.
   falsifier: A second job is created, a job is removed, or the original job's immutable identity fields are changed.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_submit, capture_job: true}
@@ -254,7 +254,7 @@ probes:
   title: Unknown jobType is rejected at submit
   procedure:
   - POST a JobNewRequest with jobType this-door-does-not-exist; GET the complete jobs collection.
-  expectation: Rejected with 400, with a complete jobs collection containing unique, well-formed existing job identities and no job for the rejected idempotency key or job type.
+  expectation: Rejected with 400, with a complete jobs collection containing unique, well-formed existing job identities, valid Job statuses, and no job for the rejected idempotency key or job type.
   falsifier: A job is accepted or stored for the unadvertised type despite the rejection response.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_submit_unknown_type, assert: {status: 400}}
@@ -380,7 +380,7 @@ probes:
   title: Inference on unknown or revoked models is rejected at submit
   procedure:
   - Submit inference naming an unregistered model; register a revoked model and read the exact stored version; submit inference naming that persisted revoked model; GET the complete jobs collection after both rejections.
-  expectation: Revoked-model registration echoes all originally submitted model fields; a versioned GET returns the same persisted revoked record; both inference submits are rejected with 400; a complete jobs collection with valid unique identities contains no stored job for either rejected request key or model identity.
+  expectation: Revoked-model registration echoes all originally submitted model fields; a versioned GET returns the same persisted revoked record; both inference submits are rejected with 400; a complete jobs collection with valid unique identities and required Job statuses contains no stored job for either rejected request key or model identity.
   falsifier: The registered revoked model is absent or changed on version-specific readback, or a job is accepted or stored for an unknown or revoked model despite rejection.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_inference_unknown, assert: {status: 400}}
@@ -489,7 +489,7 @@ probes:
   title: Concurrent identical submits yield exactly one job
   procedure:
   - POST the identical body and idempotency key from 8 threads at once; GET the complete jobs collection to inspect the stored effect.
-  expectation: All responses are 2xx with the same nonempty jobDbId, original jobType and echoed idempotencyKey, and each independently carries a valid required Job lifecycle status; a complete collection with unique well-formed job identities contains exactly one stored job for that original type and key.
+  expectation: All responses are 2xx with the same nonempty jobDbId, original jobType and echoed idempotencyKey, and each independently carries a valid required Job lifecycle status; a complete collection with unique well-formed job identities and required Job statuses contains exactly one stored job for that original type and key.
   falsifier: Two distinct response jobDbIds, missing stored identity, duplicate key, or incomplete collection evidence.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_submit, concurrent_posts: 8, assert: {single_effect: true}}
