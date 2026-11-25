@@ -1,6 +1,6 @@
 # Mission 101 — Reject shared wrong HTTP statuses in cross-runtime conformance
 
-**Date:** 2026-11-25. **Parent:** Mission 100 review head `b917477253fbee985a50ffd25fe9a0b9de0def03`. **Status:** stacked engineering review; retarget to the verified integrated `main` before merging.
+**Date:** 2026-11-25. **Starting source:** Mission 100 review head `b917477253fbee985a50ffd25fe9a0b9de0def03`. **Review base:** integrated `main` at `07e8dada4efb6d56701a5711fafc81600c7b0c60`. **Status:** implementation under verification; not merged or ratified by this assessment.
 
 ## Confirmed weakness
 
