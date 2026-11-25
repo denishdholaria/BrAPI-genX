@@ -128,5 +128,30 @@ class TelemetryConflictIdentityTests(unittest.TestCase):
         self.assertEqual(1, self.exercise(alter_original=change)[0])
 
 
+    def test_boolean_false_appended_conflict_counter_fails(self):
+        self.assertEqual(1, self.exercise(
+            mutate_counts={"appended": False})[0])
+
+    def test_boolean_false_replayed_conflict_counter_fails(self):
+        self.assertEqual(1, self.exercise(
+            mutate_counts={"replayed": False})[0])
+
+    def test_fractional_zero_conflict_counter_fails(self):
+        self.assertEqual(1, self.exercise(
+            mutate_counts={"appended": 0.0})[0])
+
+    def test_null_conflict_counter_fails(self):
+        self.assertEqual(1, self.exercise(
+            mutate_counts={"replayed": None})[0])
+
+    def test_string_conflict_counter_fails(self):
+        self.assertEqual(1, self.exercise(
+            mutate_counts={"appended": "0"})[0])
+
+    def test_negative_conflict_counter_fails(self):
+        self.assertEqual(1, self.exercise(
+            mutate_counts={"replayed": -1})[0])
+
+
 if __name__ == "__main__":
     unittest.main()
