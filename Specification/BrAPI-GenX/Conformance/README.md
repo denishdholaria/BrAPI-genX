@@ -820,3 +820,19 @@ silently disappear. The existing mandatory
 `Scripts/test_telemetry_pagination_slice.py` suite now covers the second
 page and first-page metadata mutation; no new workflow dependency is needed.
 See [Mission 145 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-145-TELEMETRY-TWO-PAGE-INTEGRITY.md).
+
+## Telemetry window source-readback integrity (Mission 146)
+
+Registered **L-26** now retrieves all original unaggregated telemetry
+records after their submission and before retrieving the per-minute means.
+The existing `telemetry_original_intact` assertion proves that the source
+readback retained the submitted device/sensor/timestamp identities, units,
+quality values and nested provenance, rather than merely accepting fabricated
+buckets that happen to agree with the submitted values.
+
+The manifest validator requires the complete POST → raw source GET → mean
+window GET procedure. The existing mandatory
+`Scripts/test_telemetry_window_partition.py` suite now includes malformed,
+missing, duplicated and altered source records in addition to the earlier
+mean-bucket mutation cases. See
+[Mission 146 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-146-TELEMETRY-WINDOW-SOURCE-READBACK.md).
