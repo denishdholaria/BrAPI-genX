@@ -1561,6 +1561,21 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                                     quote(original["modelDbId"], safe=":"))
                 path = path.replace("{revokedModelVersion}",
                                     quote(original["modelVersion"], safe=""))
+            if "{deprecatedModelDbId}" in path or "{deprecatedModelVersion}" in path:
+                original = ctx.get("live_model_deprecated_original")
+                if (not isinstance(original, dict)
+                        or not isinstance(original.get("modelDbId"), str)
+                        or not original["modelDbId"]
+                        or not isinstance(original.get("modelVersion"), str)
+                        or not original["modelVersion"]):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "no original deprecated model identity captured"
+                    )
+                path = path.replace("{deprecatedModelDbId}",
+                                    quote(original["modelDbId"], safe=":"))
+                path = path.replace("{deprecatedModelVersion}",
+                                    quote(original["modelVersion"], safe=""))
             if "{jobDbId}" in path:
                 if ctx.get("live_job") is None and "{expiredJobDbId}" not in path:
                     return results.report(probe["id"], probe["title"], "FAIL", "no captured job")
@@ -2043,6 +2058,24 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
                         "job replay missing, duplicated, or changed stored identity"
+                    )
+            if assertion.get("deprecated_model_persisted"):
+                original = ctx.get("live_model_deprecated_original")
+                identity = ctx.get("live_model_deprecated")
+                expected_id = (identity[0] if isinstance(identity, tuple)
+                               and len(identity) == 2 else None)
+                problem = published_record_problem(
+                    status, payload, original, expected_id, "modelDbId"
+                )
+                if (problem or not isinstance(original, dict)
+                        or original.get("status") != "deprecated"
+                        or not isinstance(identity, tuple) or len(identity) != 2
+                        or identity != (original.get("modelDbId"),
+                                        original.get("modelVersion"))):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "registered deprecated model not persisted intact: " +
+                        (problem or "original deprecated model version/status mismatch")
                     )
             if assertion.get("revoked_model_persisted"):
                 original = ctx.get("live_model_revoked_original")
@@ -2949,7 +2982,7 @@ LIVE_BOOLEAN_ASSERTIONS = frozenset({
     "package_replay_single_record", "model_replay_single_version",
     "inference_intact", "single_effect",
     "concurrent_single_stored_job", "rejected_inference_not_stored",
-    "revoked_model_persisted",
+    "revoked_model_persisted", "deprecated_model_persisted",
     "job_replay_single_stored", "capture_job_collection",
     "job_conflict_collection_unchanged", "terminal_state_unchanged",
     "unknown_job_type_not_stored", "expired_result_withheld",
@@ -3271,20 +3304,29 @@ def validate_probe_manifest(probes):
                         "probe L-14: bound inference result and completion GET required"
                     )
             if probe_id == "L-27":
-                if (len(calls) != 2
+                if (len(calls) != 3
                         or calls[0].get("method") != "POST"
                         or calls[0].get("path") != "/models"
                         or calls[0].get("body_fixture") != "live_model_deprecated"
                         or calls[0].get("capture_model_deprecated") is not True
-                        or calls[1].get("method") != "POST"
-                        or calls[1].get("path") != "/jobs"
-                        or calls[1].get("body_fixture") != "live_inference_deprecated"
-                        or calls[1].get("assert", {}).get("status") != 202
-                        or calls[1].get("assert", {}).get("status_message") != "WARNING"
-                        or calls[1].get("assert", {}).get("deprecated_inference_completed")
+                        or calls[2].get("method") != "POST"
+                        or calls[2].get("path") != "/jobs"
+                        or calls[2].get("body_fixture") != "live_inference_deprecated"
+                        or calls[2].get("assert", {}).get("status") != 202
+                        or calls[2].get("assert", {}).get("status_message") != "WARNING"
+                        or calls[2].get("assert", {}).get("deprecated_inference_completed")
                             is not True):
                     raise ValueError(
                         "probe L-27: bound deprecated inference completion and warning required"
+                    )
+                if (calls[1].get("method") != "GET"
+                        or calls[1].get("path") !=
+                            "/models/{deprecatedModelDbId}?version={deprecatedModelVersion}"
+                        or calls[1].get("assert", {}).get("status") != 200
+                        or calls[1].get("assert", {}).get("deprecated_model_persisted")
+                            is not True):
+                    raise ValueError(
+                        "probe L-27: deprecated_model_persisted GET before inference required"
                     )
             if probe_id == "L-07":
                 if (len(calls) != 2
