@@ -284,6 +284,30 @@ class LiveAssertionManifestTests(unittest.TestCase):
                 s.update(body_fixture="live_submit"),
             )))
 
+    def test_telemetry_conflict_original_append_counts_required(self):
+        self.assertIn(
+            "rejected telemetry natural key and retained source required",
+            self.mutated("L-22", 0, lambda step: step.update(
+                {"assert": {"telemetry_no_conflicts": True}})))
+
+    def test_telemetry_conflict_original_clean_state_required(self):
+        self.assertIn(
+            "rejected telemetry natural key and retained source required",
+            self.mutated("L-22", 0, lambda step: step["assert"].pop(
+                "telemetry_no_conflicts")))
+
+    def test_telemetry_conflict_original_counts_exact(self):
+        self.assertIn(
+            "rejected telemetry natural key and retained source required",
+            self.mutated("L-22", 0, lambda step: step["assert"].update(
+                telemetry_counts={"appended": 2, "replayed": 1})))
+
+    def test_telemetry_conflict_original_batch_required(self):
+        self.assertIn(
+            "rejected telemetry natural key and retained source required",
+            self.mutated("L-22", 0, lambda step: step.update(
+                body_fixture="live_telemetry_conflict")))
+
     def test_telemetry_conflict_identity_assertion_cannot_be_removed(self):
         self.assertIn(
             "rejected telemetry natural key and retained source required",
