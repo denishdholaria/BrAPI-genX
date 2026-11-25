@@ -196,9 +196,23 @@ different artifact digest under the same published version), and **L-15**
 L-14/L-24 probes, these constrain the observable RFC-004 model/inference
 subset without introducing any new wire contracts or probe identifiers.
 
-The existing L-13 probe asserts the conflict response but does **not** itself
-re-fetch the stored artifact to verify unchanged bytes. That additional
-post-conflict state invariant remains an independent verification gap; a
-rejection response alone must not be described as proof of unchanged storage.
+Mission 104 originally verified only the L-13 conflict response. **Mission 105**
+adds an explicit post-conflict retrieval and checks that the previously
+submitted `modelDbId`, `modelVersion`, and `artifactDigest` remain unchanged.
+This is an in-memory reference-server invariant, not a durability guarantee.
 The models are in-memory reference stubs, not scientifically validated models.
 See [Mission 104 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-104-TYPESCRIPT-MODEL-INTEGRITY-PROBES.md).
+
+## Post-conflict model state verification (Mission 105)
+
+The registered **L-13** model-conflict probe now fetches the exact version
+after a rejected conflicting artifact registration and compares its model
+identity, version and `artifactDigest` with the *original submitted request*.
+The runner fails on an absent record, wrong status, changed digest, wrong
+identity or incorrect version. Mutation tests model a server that returns the
+expected conflict response but silently overwrites the stored artifact.
+
+This checks an observable postcondition against both project-owned reference
+servers when their normal hosted suites execute L-13. It does not establish
+durable immutability, distributed race safety or production-grade authorization.
+See [Mission 105 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-105-MODEL-CONFLICT-POSTCONDITION.md).
