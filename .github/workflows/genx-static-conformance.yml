@@ -273,6 +273,8 @@ jobs:
         run: python Scripts/test_ledger_conflict_postcondition.py
       - name: Test ledger replay retained-state postcondition
         run: python Scripts/test_ledger_replay_postcondition.py
+      - name: Test variable-term replay collection uniqueness
+        run: python Scripts/test_term_replay_version_uniqueness.py
       - name: Test deprecated model inference reaches completed job
         run: python Scripts/test_deprecated_inference_completion.py
       - name: Run static GenX conformance probes

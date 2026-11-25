@@ -507,3 +507,19 @@ in hosted static conformance. The project-owned Python server exercises L-10
 live. This is observable in-memory behavior, not a durability or scientific
 certification. See
 [Mission 124 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-124-LEDGER-REPLAY-READBACK.md).
+
+## Variable-term replay uniqueness (Mission 125)
+
+Registered **L-08** now reads the collection filtered by its freshly
+generated variable-term identifier after an identical publication replay.
+It verifies a complete one-version collection and compares the stored
+record with all fields of the original submitted version, including nested
+provenance. Merely returning identical (variableDbId, version) identifiers
+no longer passes if another version was created.
+
+The `term_replay_single_version` assertion is required by the manifest
+validator, and the `Scripts/test_term_replay_version_uniqueness.py`
+mutation suite runs in hosted static conformance. The existing Python
+reference server executes the L-08 live probe. This remains a synthetic,
+in-memory assurance test, not production durability or certification. See
+[Mission 125 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-125-TERM-REPLAY-UNIQUENESS.md).

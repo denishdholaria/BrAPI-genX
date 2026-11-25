@@ -1660,6 +1660,40 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
                         f"no {assertion['status_message']} status message, got {levels}")
+            if assertion.get("term_replay_single_version"):
+                # L-08 must inspect all published versions for its fresh term,
+                # not just trust two identical response identifiers.
+                result = payload.get("result") if isinstance(payload, dict) else None
+                rows = result.get("data") if isinstance(result, dict) else None
+                metadata = payload.get("metadata") if isinstance(payload, dict) else None
+                page = metadata.get("pagination") if isinstance(metadata, dict) else None
+                baseline = ctx.get("live_term_baseline")
+                published_id = ctx.get("live_term")
+                if (status != 200 or not isinstance(baseline, dict)
+                        or not isinstance(published_id, tuple)
+                        or published_id != (baseline.get("variableDbId"),
+                                            baseline.get("version"))
+                        or not isinstance(rows, list) or len(rows) != 1
+                        or not isinstance(rows[0], dict)
+                        or not isinstance(page, dict)
+                        or any(type(page.get(k)) is not int
+                               for k in ("totalCount", "totalPages",
+                                         "currentPage", "pageSize"))
+                        or page["totalCount"] != 1 or page["totalPages"] != 1
+                        or page["currentPage"] != 0 or page["pageSize"] < 1):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "term replay did not expose a complete one-version collection"
+                    )
+                row = rows[0]
+                if (row.get("variableDbId") != baseline["variableDbId"]
+                        or row.get("version") != baseline["version"]
+                        or any(k not in row or row[k] != value
+                               for k, value in baseline.items())):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "original term version or content changed after replay"
+                    )
             if assertion.get("unchanged_term_record"):
                 # Verify the stored version against the original submitted
                 # content, never the potentially tampered conflict response.
@@ -2100,6 +2134,7 @@ LIVE_BOOLEAN_ASSERTIONS = frozenset({
     "telemetry_page_slice",
     "deprecated_inference_completed",
     "unchanged_package_license", "unchanged_term_record", "ledger_original_intact",
+    "term_replay_single_version",
     "inference_intact", "single_effect",
     "concurrent_single_stored_job", "capability_registry_match",
 })
@@ -2185,6 +2220,13 @@ def validate_live_step_assertions(probe_id, index, call):
             f"probe {probe_id} call {index}: telemetry_mean and "
             "telemetry_samples must be paired"
         )
+    if "term_replay_single_version" in assertion and (
+            call.get("method") != "GET"
+            or call.get("path") != "/variable-terms?variableDbId={variableDbId}"):
+        raise ValueError(
+            f"probe {probe_id} call {index}: "
+            "term_replay_single_version requires filtered term collection GET"
+        )
     if "ledger_original_intact" in assertion and (
             call.get("method") != "GET"
             or call.get("path") != "/seedlots/{lotDbId}/ledger"):
@@ -2257,6 +2299,20 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-08":
+                if (len(calls) != 3
+                        or calls[0].get("body_fixture") != "live_term_submit"
+                        or calls[0].get("capture_term") is not True
+                        or calls[1].get("body_fixture") != "live_term_submit"
+                        or calls[1].get("assert", {}).get("same_term") is not True
+                        or calls[2].get("method") != "GET"
+                        or calls[2].get("path")
+                            != "/variable-terms?variableDbId={variableDbId}"
+                        or calls[2].get("assert", {}).get("term_replay_single_version")
+                            is not True):
+                    raise ValueError(
+                        "probe L-08: term_replay_single_version GET after replay required"
+                    )
             if probe_id == "L-10":
                 if (len(calls) != 3
                         or calls[0].get("body_fixture") != "live_ledger_submit"

@@ -147,6 +147,23 @@ class LiveAssertionManifestTests(unittest.TestCase):
                 s.update(body_fixture="live_submit"),
             )))
 
+    def test_term_replay_readback_cannot_be_removed(self):
+        self.assertIn(
+            "term_replay_single_version GET after replay required",
+            self.mutated("L-08", 2, lambda s: s.update(
+                {"assert": {"status": 200}})))
+
+    def test_term_replay_readback_cannot_be_disabled(self):
+        self.assertIn(
+            "term_replay_single_version must be true",
+            self.mutated("L-08", 2, lambda s: s["assert"].update(
+                term_replay_single_version=False)))
+
+    def test_term_replay_requires_filtered_get(self):
+        self.assertIn(
+            "requires filtered term collection GET",
+            self.mutated("L-08", 2, lambda s: s.update(path="/variable-terms")))
+
     def test_ledger_replay_readback_cannot_be_removed(self):
         self.assertIn(
             "ledger_original_intact GET after replay required",
