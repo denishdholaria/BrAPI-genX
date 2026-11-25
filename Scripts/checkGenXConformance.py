@@ -1230,10 +1230,11 @@ def immutable_job_snapshot(status, payload):
                 or not row["jobDbId"]
                 or not isinstance(row.get("jobType"), str)
                 or not row["jobType"]
+                or not valid_job_lifecycle_status(row)
                 or ("idempotencyKey" in row
                     and not isinstance(row["idempotencyKey"], str))
                 or row["jobDbId"] in snapshot):
-            return None, "malformed or duplicated job identity in collection"
+            return None, "malformed or duplicated job identity/status in collection"
         snapshot[row["jobDbId"]] = (
             row["jobType"], row.get("idempotencyKey")
         )
