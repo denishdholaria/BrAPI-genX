@@ -59,11 +59,13 @@ class JobReplaySingleStoredTests(unittest.TestCase):
                 self.assertEqual(("GET", "/jobs"), (method, path))
                 rows = [{"jobDbId": "JOB_ORIGINAL",
                          "jobType": original["jobType"],
-                         "idempotencyKey": original["idempotencyKey"]}]
+                         "idempotencyKey": original["idempotencyKey"],
+                         "status": "SUBMITTED"}]
                 if unrelated:
                     rows.append({"jobDbId": "JOB_UNRELATED",
                                  "jobType": "analysis",
-                                 "idempotencyKey": "unrelated-key"})
+                                 "idempotencyKey": "unrelated-key",
+                                 "status": "RUNNING"})
                 if change_rows is not None:
                     rows = change_rows(copy.deepcopy(rows))
                 pagination = {
@@ -357,7 +359,8 @@ class JobReplaySingleStoredTests(unittest.TestCase):
     def test_unrelated_job_without_optional_key_allowed(self):
         self.assertEqual(0, self.exercise(
             change_rows=lambda rows: rows + [
-                {"jobDbId": "OTHER", "jobType": "analysis"}])[0])
+                {"jobDbId": "OTHER", "jobType": "analysis",
+                 "status": "SUBMITTED"}])[0])
 
 
 
