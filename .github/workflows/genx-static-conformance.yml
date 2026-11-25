@@ -291,6 +291,8 @@ jobs:
         run: python Scripts/test_rejected_inference_no_stored_job.py
       - name: Test job replay single stored effect
         run: python Scripts/test_job_replay_single_stored.py
+      - name: Test rejected job conflict leaves collection unchanged
+        run: python Scripts/test_job_conflict_collection_unchanged.py
       - name: Test deprecated model inference reaches completed job
         run: python Scripts/test_deprecated_inference_completion.py
       - name: Run static GenX conformance probes

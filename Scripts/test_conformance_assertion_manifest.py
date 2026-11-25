@@ -147,6 +147,42 @@ class LiveAssertionManifestTests(unittest.TestCase):
                 s.update(body_fixture="live_submit"),
             )))
 
+    def test_job_conflict_initial_collection_is_required(self):
+        self.assertIn(
+            "complete job collection before and after conflict required",
+            self.mutated("L-02", 1,
+                         lambda s: s.update({"assert": {"status": 200}})))
+
+    def test_job_conflict_final_collection_is_required(self):
+        self.assertIn(
+            "complete job collection before and after conflict required",
+            self.mutated("L-02", 3,
+                         lambda s: s.update({"assert": {"status": 200}})))
+
+    def test_job_conflict_capture_cannot_be_disabled(self):
+        self.assertIn(
+            "capture_job_collection must be true",
+            self.mutated("L-02", 1,
+                         lambda s: s["assert"].update(capture_job_collection=False)))
+
+    def test_job_conflict_readback_cannot_be_disabled(self):
+        self.assertIn(
+            "job_conflict_collection_unchanged must be true",
+            self.mutated("L-02", 3,
+                         lambda s: s["assert"].update(job_conflict_collection_unchanged=False)))
+
+    def test_job_conflict_requires_complete_collection_route(self):
+        self.assertIn(
+            "job conflict collection assertions require GET /jobs",
+            self.mutated("L-02", 3,
+                         lambda s: s.update(path="/jobs/OTHER")))
+
+    def test_job_conflict_requires_rejected_write(self):
+        self.assertIn(
+            "complete job collection before and after conflict required",
+            self.mutated("L-02", 2,
+                         lambda s: s.update({"assert": {"status": 409}})))
+
     def test_job_replay_stored_readback_cannot_be_removed(self):
         self.assertIn(
             "job_replay_single_stored GET after replay required",
