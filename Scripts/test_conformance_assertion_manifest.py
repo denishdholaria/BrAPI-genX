@@ -163,7 +163,7 @@ class LiveAssertionManifestTests(unittest.TestCase):
         self.assertIn(
             "full model original readback after conflict required",
             self.mutated("L-13", 0,
-                         lambda s: s.update(capture_model=False)))
+                         lambda s: s.pop("capture_model")))
 
     def test_model_conflict_readback_cannot_be_disabled(self):
         self.assertIn(
