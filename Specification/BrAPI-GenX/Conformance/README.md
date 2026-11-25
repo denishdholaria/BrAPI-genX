@@ -806,17 +806,17 @@ wrong sensors/devices/timestamps and malformed responses. See
 Registered **L-28** now creates three original telemetry samples and reads both
 pages with a page size of two. Its previously first-page-only assertion could
 pass even if the third sample was missing or corrupted on page one, despite
-a reported \`totalCount\` of three.
+a reported `totalCount` of three.
 
 Both page responses must contain the exact ordered **2 + 1** partition of
-the submitted readings. Each must report the correct \`currentPage\`,
-\`pageSize\`, \`totalCount\` and \`totalPages\`, using actual integer values.
+the submitted readings. Each must report the correct `currentPage`,
+`pageSize`, `totalCount` and `totalPages`, using actual integer values.
 Every originally submitted field (including unit, quality and any nested
 provenance) must survive both readbacks. Additional server-managed fields
 remain permitted. Duplicate, substituted, omitted and mutated records fail.
 
 The manifest validator requires the exact three-call sequence so no page can
 silently disappear. The existing mandatory
-\`Scripts/test_telemetry_pagination_slice.py\` suite now covers the second
+`Scripts/test_telemetry_pagination_slice.py` suite now covers the second
 page and first-page metadata mutation; no new workflow dependency is needed.
 See [Mission 145 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-145-TELEMETRY-TWO-PAGE-INTEGRITY.md).
