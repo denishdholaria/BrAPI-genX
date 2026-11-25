@@ -1188,6 +1188,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
     if any(s.get("capture_term") for s in calls):
         ctx["live_term_id"] = None
         ctx["live_term"] = None
+        ctx["live_term_baseline"] = None
     if any(s.get("capture_ledger") for s in calls):
         ctx["live_lot"] = None
         ctx["live_ledger"] = None
@@ -1377,6 +1378,21 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         "idempotencyKey": str(uuid.uuid4())}
                 ctx["live_inference_inputs"] = inputs
             path = step["path"]
+            if "{variableDbId}" in path or "{termVersion}" in path:
+                baseline = ctx.get("live_term_baseline")
+                if (not isinstance(baseline, dict)
+                        or not isinstance(baseline.get("variableDbId"), str)
+                        or not baseline["variableDbId"]
+                        or not isinstance(baseline.get("version"), str)
+                        or not baseline["version"]):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "no original variable-term identity captured"
+                    )
+                path = path.replace("{variableDbId}",
+                                    quote(baseline["variableDbId"], safe=":"))
+                path = path.replace("{termVersion}",
+                                    quote(baseline["version"], safe=""))
             if "{modelDbId}" in path or "{modelVersion}" in path:
                 baseline = ctx.get("live_model_baseline")
                 if (not baseline or len(baseline) != 3
@@ -1473,6 +1489,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         probe["id"], probe["title"], "FAIL", f"submit returned {status}")
                 seen = payload.get("result", {})
                 ctx["live_term"] = (seen.get("variableDbId"), seen.get("version"))
+                ctx["live_term_baseline"] = copy.deepcopy(body)
             if step.get("capture_ledger"):
                 if status not in (200, 202):
                     return results.report(
@@ -1643,6 +1660,19 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
                         f"no {assertion['status_message']} status message, got {levels}")
+            if assertion.get("unchanged_term_record"):
+                # Verify the stored version against the original submitted
+                # content, never the potentially tampered conflict response.
+                baseline = ctx.get("live_term_baseline")
+                stored = payload.get("result") if isinstance(payload, dict) else None
+                if (status != 200 or not isinstance(baseline, dict)
+                        or not isinstance(stored, dict)
+                        or any(field not in stored or stored[field] != expected
+                               for field, expected in baseline.items())):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "stored variable-term version changed after conflict"
+                    )
             if assertion.get("same_term"):
                 seen = payload.get("result", {})
                 if (seen.get("variableDbId"), seen.get("version")) != ctx.get("live_term"):
@@ -2033,7 +2063,7 @@ LIVE_BOOLEAN_ASSERTIONS = frozenset({
     "telemetry_original_intact", "telemetry_window_partitions",
     "telemetry_page_slice",
     "deprecated_inference_completed",
-    "unchanged_package_license", "inference_intact", "single_effect",
+    "unchanged_package_license", "unchanged_term_record", "inference_intact", "single_effect",
     "concurrent_single_stored_job", "capability_registry_match",
 })
 LIVE_COUNT_ASSERTIONS = frozenset({
@@ -2118,6 +2148,13 @@ def validate_live_step_assertions(probe_id, index, call):
             f"probe {probe_id} call {index}: telemetry_mean and "
             "telemetry_samples must be paired"
         )
+    if "unchanged_term_record" in assertion and (
+            call.get("method") != "GET"
+            or call.get("path") != "/variable-terms/{variableDbId}?version={termVersion}"):
+        raise ValueError(
+            f"probe {probe_id} call {index}: "
+            "unchanged_term_record requires versioned term GET"
+        )
     if "concurrent_single_stored_job" in assertion and (
             call.get("method") != "GET" or call.get("path") != "/jobs"):
         raise ValueError(
@@ -2176,6 +2213,19 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-09":
+                if (len(calls) != 3
+                        or calls[0].get("body_fixture") != "live_term_submit"
+                        or calls[0].get("capture_term") is not True
+                        or calls[1].get("body_fixture") != "live_term_conflict"
+                        or calls[2].get("method") != "GET"
+                        or calls[2].get("path")
+                            != "/variable-terms/{variableDbId}?version={termVersion}"
+                        or calls[2].get("assert", {}).get("unchanged_term_record")
+                            is not True):
+                    raise ValueError(
+                        "probe L-09: unchanged_term_record GET after conflict required"
+                    )
             if probe_id == "L-24":
                 if not any(
                         call.get("concurrent_posts") == 8

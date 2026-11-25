@@ -267,6 +267,8 @@ jobs:
         run: python Scripts/test_collection_envelope_integrity.py
       - name: Test concurrent job stored-effect postcondition
         run: python Scripts/test_concurrent_job_stored_effect.py
+      - name: Test variable-term conflict retained-state postcondition
+        run: python Scripts/test_variable_term_conflict_postcondition.py
       - name: Test deprecated model inference reaches completed job
         run: python Scripts/test_deprecated_inference_completion.py
       - name: Run static GenX conformance probes
