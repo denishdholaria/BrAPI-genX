@@ -1247,6 +1247,21 @@ def published_record_problem(status, payload, original, expected_id, identity_fi
     return None
 
 
+def replay_response_problem(payload, submitted):
+    """Return a diagnostic when an identical replay changes submitted fields.
+
+    The server may attach generated metadata, but every original scientific
+    field and nested value must survive in the replay response itself.
+    """
+    returned = payload.get("result") if isinstance(payload, dict) else None
+    if not isinstance(submitted, dict) or not isinstance(returned, dict):
+        return "replay response or original submission is not an object"
+    for field, value in submitted.items():
+        if field not in returned or returned[field] != value:
+            return f"replay response changed or dropped submitted field {field!r}"
+    return None
+
+
 def replay_collection_problem(status, payload, original, expected_id, identity_field):
     """Return a diagnostic when a replay's complete collection lacks one original."""
     result = payload.get("result") if isinstance(payload, dict) else None
@@ -2157,18 +2172,20 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         "stored variable-term version changed after conflict"
                     )
             if assertion.get("same_term"):
-                seen = payload.get("result", {})
-                if (seen.get("variableDbId"), seen.get("version")) != ctx.get("live_term"):
+                seen = payload.get("result") if isinstance(payload, dict) else None
+                problem = replay_response_problem(payload, ctx.get("live_term_baseline"))
+                if not isinstance(seen, dict) or problem or ((seen or {}).get("variableDbId"), (seen or {}).get("version")) != ctx.get("live_term"):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        f"replay returned {(seen.get('variableDbId'), seen.get('version'))}, "
+                        f"replay returned {((seen or {}).get('variableDbId'), (seen or {}).get('version'))}, "
                         f"expected {ctx.get('live_term')}")
             if assertion.get("same_ledger"):
-                seen = payload.get("result", {})
-                if (seen.get("seedLotDbId"), seen.get("entryDbId")) != ctx.get("live_ledger"):
+                seen = payload.get("result") if isinstance(payload, dict) else None
+                problem = replay_response_problem(payload, ctx.get("live_ledger_body"))
+                if not isinstance(seen, dict) or problem or ((seen or {}).get("seedLotDbId"), (seen or {}).get("entryDbId")) != ctx.get("live_ledger"):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        f"replay returned {(seen.get('seedLotDbId'), seen.get('entryDbId'))}, "
+                        f"replay returned {((seen or {}).get('seedLotDbId'), (seen or {}).get('entryDbId'))}, "
                         f"expected {ctx.get('live_ledger')}")
             if assertion.get("unchanged_model_digest"):
                 original = ctx.get("live_model_original")
@@ -2186,11 +2203,12 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         "model: " + (problem or "original model version mismatch")
                     )
             if assertion.get("same_model"):
-                seen = payload.get("result", {})
-                if (seen.get("modelDbId"), seen.get("modelVersion")) != ctx.get("live_model"):
+                seen = payload.get("result") if isinstance(payload, dict) else None
+                problem = replay_response_problem(payload, ctx.get("live_model_original"))
+                if not isinstance(seen, dict) or problem or ((seen or {}).get("modelDbId"), (seen or {}).get("modelVersion")) != ctx.get("live_model"):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        f"replay returned {(seen.get('modelDbId'), seen.get('modelVersion'))}, "
+                        f"replay returned {((seen or {}).get('modelDbId'), (seen or {}).get('modelVersion'))}, "
                         f"expected {ctx.get('live_model')}")
             if assertion.get("unchanged_matrix_digest"):
                 problem = published_record_problem(
@@ -2248,18 +2266,20 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         probe["id"], probe["title"], "FAIL", "package: " + problem
                     )
             if assertion.get("same_matrix"):
-                seen = payload.get("result", {})
-                if seen.get("matrixDbId") != ctx.get("live_matrix"):
+                seen = payload.get("result") if isinstance(payload, dict) else None
+                problem = replay_response_problem(payload, ctx.get("live_matrix_original"))
+                if not isinstance(seen, dict) or problem or (seen or {}).get("matrixDbId") != ctx.get("live_matrix"):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        f"replay returned {seen.get('matrixDbId')}, "
+                        f"replay returned {(seen or {}).get('matrixDbId')}, "
                         f"expected {ctx.get('live_matrix')}")
             if assertion.get("same_package"):
-                seen = payload.get("result", {})
-                if seen.get("packageDbId") != ctx.get("live_package"):
+                seen = payload.get("result") if isinstance(payload, dict) else None
+                problem = replay_response_problem(payload, ctx.get("live_package_original"))
+                if not isinstance(seen, dict) or problem or (seen or {}).get("packageDbId") != ctx.get("live_package"):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        f"replay returned {seen.get('packageDbId')}, "
+                        f"replay returned {(seen or {}).get('packageDbId')}, "
                         f"expected {ctx.get('live_package')}")
             if assertion.get("telemetry_original_intact"):
                 original = ctx.get("live_batch")
