@@ -490,8 +490,8 @@ probes:
   calls:
   - {method: POST, path: /jobs, body_fixture: live_submit, capture_job: true}
   - {method: POST, path: /models, body_fixture: live_model_submit, capture_model: true}
-  - {method: GET, path: /jobs, assert: {status: 200}}
-  - {method: GET, path: /models, assert: {status: 200}}
+  - {method: GET, path: /jobs, assert: {status: 200, collection_contains_created: jobs}}
+  - {method: GET, path: /models, assert: {status: 200, collection_contains_created: models}}
 - id: L-26
   tier: live
   object: telemetry

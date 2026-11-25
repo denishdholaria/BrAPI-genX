@@ -1505,6 +1505,47 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                 return results.report(
                     probe["id"], probe["title"], "FAIL",
                     f"expected {assertion['status']}, got {status}")
+            if "collection_contains_created" in assertion:
+                kind = assertion["collection_contains_created"]
+                result = payload.get("result") if isinstance(payload, dict) else None
+                rows = result.get("data") if isinstance(result, dict) else None
+                metadata = payload.get("metadata") if isinstance(payload, dict) else None
+                pagination = (metadata.get("pagination")
+                              if isinstance(metadata, dict) else None)
+                if (status != 200 or not isinstance(rows, list) or not rows
+                        or not isinstance(pagination, dict)
+                        or not all(isinstance(row, dict) for row in rows)):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        f"{kind} collection missing data or pagination"
+                    )
+                fields = ("totalCount", "pageSize", "totalPages", "currentPage")
+                if (any(type(pagination.get(k)) is not int for k in fields)
+                        or pagination["totalCount"] < len(rows)
+                        or pagination["pageSize"] < len(rows)
+                        or pagination["pageSize"] < 1
+                        or pagination["currentPage"] < 0
+                        or pagination["totalPages"] < 1
+                        or pagination["currentPage"] >= pagination["totalPages"]):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        f"{kind} pagination counts/shape invalid: {pagination!r}"
+                    )
+                if kind == "jobs":
+                    expected_id = ctx.get("live_job")
+                    included = bool(expected_id) and any(
+                        row.get("jobDbId") == expected_id for row in rows
+                    )
+                else:
+                    expected_model = ctx.get("live_model")
+                    included = (bool(expected_model) and any(
+                        (row.get("modelDbId"), row.get("modelVersion"))
+                        == expected_model for row in rows))
+                if not included:
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        f"{kind} collection does not contain the created resource"
+                    )
             if "data_length" in assertion:
                 rows = payload.get("result", {}).get("data", [])
                 if len(rows) != assertion["data_length"]:
@@ -1837,7 +1878,7 @@ LIVE_COUNT_ASSERTIONS = frozenset({
 })
 LIVE_ASSERTIONS = (LIVE_BOOLEAN_ASSERTIONS | LIVE_COUNT_ASSERTIONS |
                    {"status", "status_message", "telemetry_counts",
-                    "telemetry_mean", "body"})
+                    "telemetry_mean", "body", "collection_contains_created"})
 
 
 def validate_live_step_assertions(probe_id, index, call):
@@ -1885,6 +1926,12 @@ def validate_live_step_assertions(probe_id, index, call):
                        for key in body)):
             raise ValueError(
                 f"probe {probe_id} call {index}: body must be a nonempty path mapping"
+            )
+    if "collection_contains_created" in assertion:
+        if assertion["collection_contains_created"] not in ("jobs", "models"):
+            raise ValueError(
+                f"probe {probe_id} call {index}: "
+                "collection_contains_created must be jobs or models"
             )
     if "telemetry_counts" in assertion:
         counts = assertion["telemetry_counts"]
