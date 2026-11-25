@@ -308,6 +308,66 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
             return data
         self.assertEqual(1, self.exercise(modify=change)[0])
 
+    @classmethod
+    def append_unrelated_model(cls, kind, payload, model):
+        if kind == "models":
+            payload["result"]["data"].append(model)
+            cls.refresh_first_page(payload)
+        return payload
+
+    def test_duplicate_unrelated_model_version_fails(self):
+        def change(kind, data):
+            if kind == "models":
+                data["result"]["data"].extend([
+                    {"modelDbId": "other:model:duplicate", "modelVersion": "5"},
+                    {"modelDbId": "other:model:duplicate", "modelVersion": "5"},
+                ])
+                self.refresh_first_page(data)
+            return data
+        self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_unrelated_model_missing_identifier_fails(self):
+        self.assertEqual(1, self.exercise(modify=lambda k, p:
+            self.append_unrelated_model(k, p, {"modelVersion": "5"}))[0])
+
+    def test_unrelated_model_blank_identifier_fails(self):
+        self.assertEqual(1, self.exercise(modify=lambda k, p:
+            self.append_unrelated_model(k, p, {
+                "modelDbId": "", "modelVersion": "5"}))[0])
+
+    def test_unrelated_model_missing_version_fails(self):
+        self.assertEqual(1, self.exercise(modify=lambda k, p:
+            self.append_unrelated_model(k, p, {
+                "modelDbId": "other:model:missing"}))[0])
+
+    def test_unrelated_model_blank_version_fails(self):
+        self.assertEqual(1, self.exercise(modify=lambda k, p:
+            self.append_unrelated_model(k, p, {
+                "modelDbId": "other:model:blank", "modelVersion": ""}))[0])
+
+    def test_unrelated_model_nonstring_version_fails(self):
+        self.assertEqual(1, self.exercise(modify=lambda k, p:
+            self.append_unrelated_model(k, p, {
+                "modelDbId": "other:model:invalid", "modelVersion": False}))[0])
+
+    def test_unrelated_model_distinct_identifier_same_version_allowed(self):
+        def change(kind, data):
+            if kind == "models":
+                original_version = data["result"]["data"][0]["modelVersion"]
+                return self.append_unrelated_model(kind, data, {
+                    "modelDbId": "other:model:valid",
+                    "modelVersion": original_version})
+            return data
+        self.assertEqual(0, self.exercise(modify=change)[0])
+
+    def test_valid_model_first_page_with_more_pages_allowed(self):
+        def change(kind, data):
+            if kind == "models":
+                data["metadata"]["pagination"].update(
+                    totalCount=4, pageSize=1, totalPages=4, currentPage=0)
+            return data
+        self.assertEqual(0, self.exercise(modify=change)[0])
+
     def test_changed_model_artifact_digest_fails(self):
         def change(kind, data):
             if kind == "models":
