@@ -206,6 +206,25 @@ class ConcurrentJobStoredEffectTests(unittest.TestCase):
         self.assertEqual(0, len([m for m, _ in calls if m == "GET"]))
 
 
+    def test_invalid_timestamp_on_one_concurrent_ack_fails(self):
+        for field in ("createdAt", "updatedAt", "expiresAt"):
+            with self.subTest(field=field):
+                failures, calls = self.exercise(
+                    mutate_ack=lambda row, index: (
+                        {**row, field: "2026-11-25T12:00:00"}
+                        if index == 8 else row))
+                self.assertEqual(1, failures)
+                self.assertEqual(0, sum(method == "GET" for method, _ in calls))
+
+    def test_valid_mixed_concurrent_timestamp_offsets_pass(self):
+        failures, calls = self.exercise(
+            mutate_ack=lambda row, index: {
+                **row, "createdAt": (
+                    "2026-11-25T12:00:00Z" if index % 2
+                    else "2026-11-25T12:00:00-0600")})
+        self.assertEqual(0, failures)
+        self.assertEqual(1, sum(method == "GET" for method, _ in calls))
+
     def test_one_invalid_progress_reply_fails_before_collection(self):
         for progress in (-0.1, 1.2, None, False, "0.5", float("nan")):
             with self.subTest(progress=progress):
