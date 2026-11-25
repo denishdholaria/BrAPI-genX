@@ -12,6 +12,9 @@ ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW = ROOT / ".github/workflows/genx-static-conformance.yml"
 REQUIRED_PATHS = {
     "Specification/**",
+    "docs/governance/**",
+    "docs/assessment/**",
+    "Scripts/**",
     ".github/workflows/genx-static-conformance.yml",
     "Scripts/checkGenXConformance.py",
     "Scripts/checkGenXEndpointCatalog.py",
@@ -40,6 +43,10 @@ REQUIRED_COMMANDS = {
     "python Scripts/generateEndpointArtifacts.py --check",
     "python Scripts/audit_genx_readme_routes.py --module Geospatial/VegetationIndex --strict --require-coverage",
     "python Scripts/test_genx_readme_routes.py",
+    "python Scripts/check_rfc_governance.py",
+    "python Scripts/test_rfc_governance.py",
+    "python Scripts/report_genx_evidence_coverage.py --check",
+    "python Scripts/test_genx_evidence_coverage.py",
 }
 
 
@@ -113,6 +120,39 @@ class WorkflowScopeTests(unittest.TestCase):
             for error in scope_errors(damaged)
         ))
 
+
+
+    def test_governance_assessment_and_script_changes_trigger_both_events(self):
+        # A relevant file edit must not bypass the entire CI workflow.
+        for event in ("pull_request", "push"):
+            for dependency in ("docs/governance/**", "docs/assessment/**",
+                               "Scripts/**"):
+                with self.subTest(event=event, dependency=dependency):
+                    damaged = copy.deepcopy(self.workflow)
+                    triggers = damaged.get("on", damaged.get(True))
+                    triggers[event]["paths"].remove(dependency)
+                    self.assertIn(
+                        f"{event} trigger missing dependency: {dependency}",
+                        scope_errors(damaged),
+                    )
+
+    def test_maturity_and_evidence_commands_cannot_be_skipped(self):
+        commands = (
+            "python Scripts/check_rfc_governance.py",
+            "python Scripts/test_rfc_governance.py",
+            "python Scripts/report_genx_evidence_coverage.py --check",
+            "python Scripts/test_genx_evidence_coverage.py",
+        )
+        for required in commands:
+            with self.subTest(command=required):
+                damaged = copy.deepcopy(self.workflow)
+                steps = damaged["jobs"]["static-conformance"]["steps"]
+                step = next(s for s in steps if s.get("run") == required)
+                step["run"] = "echo validation-skipped"
+                self.assertIn(
+                    f"static-conformance job missing command: {required}",
+                    scope_errors(damaged),
+                )
 
 if __name__ == "__main__":
     unittest.main()
