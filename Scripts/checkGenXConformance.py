@@ -1295,6 +1295,8 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
     if any(s.get("capture_model_deprecated") for s in calls):
         ctx["live_model_deprecated_id"] = None
         ctx["live_model_deprecated"] = None
+        ctx["live_model_deprecated_original"] = None
+        ctx["live_deprecated_inference_request"] = None
     if any(s.get("capture_matrix") for s in calls):
         ctx["live_matrix_id"] = None
         ctx["live_matrix"] = None
@@ -1472,6 +1474,8 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                                        "inputs": inputs},
                         "idempotencyKey": str(uuid.uuid4())}
                 ctx["live_inference_inputs"] = inputs
+            if fixture == "live_inference_deprecated":
+                ctx["live_deprecated_inference_request"] = copy.deepcopy(body)
             if fixture in ("live_inference_unknown", "live_inference_revoked"):
                 # Retain the exact rejected request keys and model identities,
                 # rather than deriving them from the server's error response.
@@ -1631,6 +1635,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         probe["id"], probe["title"], "FAIL", f"submit returned {status}")
                 seen = payload.get("result", {})
                 ctx["live_model_deprecated"] = (seen.get("modelDbId"), seen.get("modelVersion"))
+                ctx["live_model_deprecated_original"] = copy.deepcopy(body)
             if step.get("capture_matrix"):
                 if status not in (200, 202):
                     return results.report(
@@ -1671,12 +1676,49 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                 terminal_payload = wait_terminal(server, job_id, token)
                 terminal_job = (terminal_payload.get("result")
                                 if isinstance(terminal_payload, dict) else None)
-                if (not isinstance(terminal_job, dict)
+                original_model = ctx.get("live_model_deprecated_original")
+                expected_model = ctx.get("live_model_deprecated")
+                submitted = ctx.get("live_deprecated_inference_request")
+                parameters = (submitted.get("parameters")
+                              if isinstance(submitted, dict) else None)
+                completed = (terminal_job.get("result")
+                             if isinstance(terminal_job, dict) else None)
+                rows = completed.get("data") if isinstance(completed, dict) else None
+                expected_digest = (
+                    hashlib.sha256(canonical(parameters["inputs"]).encode("utf-8"))
+                    .hexdigest()
+                    if isinstance(parameters, dict) and "inputs" in parameters
+                    else None
+                )
+                if (not isinstance(original_model, dict)
+                        or original_model.get("status") != "deprecated"
+                        or not isinstance(expected_model, tuple)
+                        or len(expected_model) != 2
+                        or expected_model != (
+                            original_model.get("modelDbId"),
+                            original_model.get("modelVersion"))
+                        or not isinstance(submitted, dict)
+                        or submitted.get("jobType") != "inference"
+                        or not isinstance(submitted.get("idempotencyKey"), str)
+                        or not submitted["idempotencyKey"]
+                        or not isinstance(parameters, dict)
+                        or (parameters.get("modelDbId"),
+                            parameters.get("modelVersion")) != expected_model
+                        or not isinstance(terminal_job, dict)
                         or terminal_job.get("jobDbId") != job_id
-                        or terminal_job.get("status") != "COMPLETED"):
+                        or terminal_job.get("jobType") != "inference"
+                        or terminal_job.get("idempotencyKey")
+                            != submitted["idempotencyKey"]
+                        or terminal_job.get("status") != "COMPLETED"
+                        or not isinstance(rows, list) or len(rows) != 1
+                        or not isinstance(rows[0], dict)
+                        or (rows[0].get("modelDbId"),
+                            rows[0].get("modelVersion")) != expected_model
+                        or rows[0].get("inputsDigest") != expected_digest):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        "deprecated inference did not complete as the accepted job"
+                        "deprecated inference completed without original model, "
+                        "request key, version or canonical input digest binding"
                     )
             if assertion.get("embargo_denial_no_payload"):
                 # A 403 can still echo a whole protected record, including
@@ -2737,6 +2779,22 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-27":
+                if (len(calls) != 2
+                        or calls[0].get("method") != "POST"
+                        or calls[0].get("path") != "/models"
+                        or calls[0].get("body_fixture") != "live_model_deprecated"
+                        or calls[0].get("capture_model_deprecated") is not True
+                        or calls[1].get("method") != "POST"
+                        or calls[1].get("path") != "/jobs"
+                        or calls[1].get("body_fixture") != "live_inference_deprecated"
+                        or calls[1].get("assert", {}).get("status") != 202
+                        or calls[1].get("assert", {}).get("status_message") != "WARNING"
+                        or calls[1].get("assert", {}).get("deprecated_inference_completed")
+                            is not True):
+                    raise ValueError(
+                        "probe L-27: bound deprecated inference completion and warning required"
+                    )
             if probe_id == "L-25":
                 if (len(calls) != 4
                         or calls[0].get("method") != "POST"
