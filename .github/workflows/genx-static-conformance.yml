@@ -241,6 +241,8 @@ jobs:
           bun run test
       - name: Run cross-language JCS interoperability
         run: python Scripts/test_cross_language_jcs.py
+      - name: Reject invalid single-probe conformance selections
+        run: python Scripts/test_conformance_probe_selection.py
       - name: Run static GenX conformance probes
         run: python Scripts/checkGenXConformance.py
       - name: Validate semantic endpoint catalogue
@@ -356,6 +358,7 @@ jobs:
             run_check python Scripts/test_capability_negotiation.py
             run_check python Scripts/test_job_idempotency.py
             run_check python Scripts/checkGenXConformance.py
+            run_check python Scripts/test_conformance_probe_selection.py
             run_check python Scripts/specification_structure.py
             run_check python Scripts/test_specification_structure.py
             run_check python Scripts/test_conformance_workflow_scope.py

@@ -35,6 +35,7 @@ REQUIRED_COMMANDS = {
     "python Scripts/specification_structure.py",
     "python Scripts/test_specification_structure.py",
     "python Scripts/checkGenXConformance.py",
+    "python Scripts/test_conformance_probe_selection.py",
     "python Scripts/checkEndpointRegistry.py",
     "python Scripts/auditEndpointRegistrySourceConsistency.py --strict",
     "python Scripts/test_registry_source_consistency.py",
@@ -267,6 +268,18 @@ class WorkflowScopeTests(unittest.TestCase):
                     "independent-runtime-differential missing command: " + command in error
                     for error in scope_errors(damaged)
                 ))
+
+
+    def test_selected_probe_fail_closed_regression_cannot_be_skipped(self):
+        damaged = copy.deepcopy(self.workflow)
+        steps = damaged["jobs"]["static-conformance"]["steps"]
+        step = next(s for s in steps
+                    if s.get("run") == "python Scripts/test_conformance_probe_selection.py")
+        step["run"] = "echo selected-probe-check-skipped"
+        self.assertIn(
+            "static-conformance job missing command: python Scripts/test_conformance_probe_selection.py",
+            scope_errors(damaged),
+        )
 
 if __name__ == "__main__":
     unittest.main()

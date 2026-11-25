@@ -1613,6 +1613,28 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
         results.report(probe["id"], probe["title"], "FAIL", f"{type(exc).__name__}: {exc}")
 
 
+
+def select_probes(probes, only=None, server=None):
+    """Fail closed for explicit single-probe execution.
+
+    An unfiltered static run retains its established SKIP semantics for live
+    probes when no server is supplied.
+    """
+    if only is None:
+        return probes
+    matches = [probe for probe in probes if probe.get("id") == only]
+    if len(matches) != 1:
+        raise ValueError(
+            f"--only {only!r}: expected exactly one registered probe, found {len(matches)}"
+        )
+    tier = matches[0].get("tier")
+    if tier not in ("static", "live"):
+        raise ValueError(f"--only {only!r}: invalid probe tier {tier!r}")
+    if tier == "live" and not server:
+        raise ValueError(f"--only {only!r}: live probe requires --server")
+    return matches
+
+
 def main():
     parser = argparse.ArgumentParser(description="BrAPI-GenX conformance checks")
     parser.add_argument("--root", default=".")
@@ -1626,6 +1648,11 @@ def main():
     root = os.path.abspath(args.root)
     conf = os.path.join(root, "Specification", "BrAPI-GenX", "Conformance")
     spec = load_yaml(os.path.join(conf, "probes.yaml"))
+    try:
+        selected = select_probes(spec.get("probes", []), args.only, args.server)
+    except ValueError as exc:
+        print(f"FAIL: {exc}", file=sys.stderr)
+        return 1
     ctx = {
         "required_map": spec.get("required_map", {}),
         "genx_object_names": spec.get("genx_object_names", []),
@@ -1656,9 +1683,7 @@ def main():
         "live_inference_inputs": None,
     }
     results = Results()
-    for probe in spec.get("probes", []):
-        if args.only and probe.get("id") != args.only:
-            continue
+    for probe in selected:
         if probe.get("tier") == "static":
             STATIC[probe["check"]](root, probe, ctx, results)
         elif args.server:
