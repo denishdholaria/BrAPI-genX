@@ -1279,6 +1279,8 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
         ctx["live_model"] = None
         ctx["live_model_baseline"] = None
         ctx["live_model_original"] = None
+    if any(s.get("body_fixture") == "live_submit_unknown_type" for s in calls):
+        ctx["live_unknown_type_request"] = None
     if any(s.get("body_fixture") in ("live_inference_unknown",
                                         "live_inference_revoked") for s in calls):
         ctx["live_rejected_inference"] = {}
@@ -1321,6 +1323,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                 body["idempotencyKey"] = ctx.get("live_key", body["idempotencyKey"])
             elif fixture == "live_submit_unknown_type":
                 body = fresh_submit(conformance_dir, job_type="this-door-does-not-exist")
+                ctx["live_unknown_type_request"] = copy.deepcopy(body)
             elif fixture == "live_provenanced_submit":
                 obs = load_json(
                     os.path.join(conformance_dir, "fixtures", "provenanced_observation.json")
@@ -1669,6 +1672,37 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
                         "deprecated inference did not complete as the accepted job"
+                    )
+            if assertion.get("unknown_job_type_not_stored"):
+                original = ctx.get("live_unknown_type_request")
+                result = payload.get("result") if isinstance(payload, dict) else None
+                rows = result.get("data") if isinstance(result, dict) else None
+                metadata = payload.get("metadata") if isinstance(payload, dict) else None
+                page = metadata.get("pagination") if isinstance(metadata, dict) else None
+                if (status != 200 or not isinstance(original, dict)
+                        or not isinstance(original.get("idempotencyKey"), str)
+                        or not original["idempotencyKey"]
+                        or not isinstance(original.get("jobType"), str)
+                        or not original["jobType"]
+                        or not isinstance(rows, list)
+                        or not all(isinstance(row, dict) for row in rows)
+                        or not isinstance(page, dict)
+                        or any(type(page.get(field)) is not int
+                               for field in ("totalCount", "pageSize",
+                                             "totalPages", "currentPage"))
+                        or page["totalCount"] != len(rows)
+                        or page["pageSize"] < len(rows)
+                        or page["totalPages"] != 1
+                        or page["currentPage"] != 0):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "unknown job-type rejection lacks complete jobs readback"
+                    )
+                if any(row.get("idempotencyKey") == original["idempotencyKey"]
+                       or row.get("jobType") == original["jobType"] for row in rows):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "unknown job type created a stored job despite HTTP 400"
                     )
             if assertion.get("terminal_state_unchanged"):
                 baseline = ctx.get("live_terminal_before_cancel")
@@ -2408,6 +2442,7 @@ LIVE_BOOLEAN_ASSERTIONS = frozenset({
     "concurrent_single_stored_job", "rejected_inference_not_stored",
     "job_replay_single_stored", "capture_job_collection",
     "job_conflict_collection_unchanged", "terminal_state_unchanged",
+    "unknown_job_type_not_stored",
     "capability_registry_match",
 })
 LIVE_COUNT_ASSERTIONS = frozenset({
@@ -2534,6 +2569,13 @@ def validate_live_step_assertions(probe_id, index, call):
             f"probe {probe_id} call {index}: "
             "unchanged_term_record requires versioned term GET"
         )
+    if "unknown_job_type_not_stored" in assertion and (
+            call.get("method") != "GET"
+            or call.get("path") != "/jobs"):
+        raise ValueError(
+            f"probe {probe_id} call {index}: "
+            "unknown_job_type_not_stored requires GET /jobs"
+        )
     if "terminal_state_unchanged" in assertion and (
             call.get("method") != "GET"
             or call.get("path") != "/jobs/{jobDbId}"):
@@ -2618,6 +2660,19 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-04":
+                if (len(calls) != 2
+                        or calls[0].get("method") != "POST"
+                        or calls[0].get("path") != "/jobs"
+                        or calls[0].get("body_fixture") != "live_submit_unknown_type"
+                        or calls[0].get("assert", {}).get("status") != 400
+                        or calls[1].get("method") != "GET"
+                        or calls[1].get("path") != "/jobs"
+                        or calls[1].get("assert", {}).get("unknown_job_type_not_stored")
+                            is not True):
+                    raise ValueError(
+                        "probe L-04: unknown_job_type_not_stored GET after rejection required"
+                    )
             if probe_id == "L-03":
                 if (len(calls) != 3
                         or calls[0].get("method") != "POST"

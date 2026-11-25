@@ -59,6 +59,7 @@ REQUIRED_COMMANDS = {
     "python Scripts/test_job_replay_single_stored.py",
     "python Scripts/test_job_conflict_collection_unchanged.py",
     "python Scripts/test_terminal_cancel_retained_state.py",
+    "python Scripts/test_unknown_jobtype_no_stored_job.py",
     "python Scripts/test_deprecated_inference_completion.py",
     "python Scripts/test_model_conflict_postcondition.py",
     "python Scripts/test_publication_conflict_postconditions.py",
