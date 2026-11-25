@@ -1181,7 +1181,12 @@ def wait_terminal(server, job_id, token):
     while time.time() < deadline:
         status, last = http_call(server, "GET", f"/jobs/{job_id}", token=token)
         if status != 200:
-            return last
+            # A terminal-looking body on a failed GET is not evidence that
+            # the accepted job completed. Propagate the transport failure to
+            # the live probe's fail-closed exception handler.
+            raise ValueError(
+                f"terminal job polling GET returned HTTP {status}"
+            )
         if last.get("result", {}).get("status") in TERMINAL:
             return last
         time.sleep(1)
