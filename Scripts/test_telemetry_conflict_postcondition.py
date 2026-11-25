@@ -92,6 +92,36 @@ class TelemetryConflictPostconditionTests(unittest.TestCase):
             return rows
         self.assertEqual(1, self.exercise(mutate).failures)
 
+    def test_changed_unit_after_conflict_fails(self):
+        def change(rows):
+            rows[1]["unit"] = "degree_fahrenheit"
+            return rows
+        self.assertEqual(1, self.exercise(change).failures)
+
+    def test_changed_quality_after_conflict_fails(self):
+        def change(rows):
+            rows[2]["quality"] = "good"
+            return rows
+        self.assertEqual(1, self.exercise(change).failures)
+
+    def test_changed_provenance_after_conflict_fails(self):
+        def change(rows):
+            rows[0]["provenance"]["algorithm"] = "malicious-algorithm"
+            return rows
+        self.assertEqual(1, self.exercise(change).failures)
+
+    def test_missing_original_unit_after_conflict_fails(self):
+        def change(rows):
+            rows[1].pop("unit")
+            return rows
+        self.assertEqual(1, self.exercise(change).failures)
+
+    def test_added_server_metadata_is_allowed(self):
+        def change(rows):
+            rows[1]["auditSeen"] = True
+            return rows
+        self.assertEqual(0, self.exercise(change).failures)
+
     def test_missing_data_shape_fails(self):
         self.assertEqual(1, self.exercise(lambda rows: None).failures)
 
