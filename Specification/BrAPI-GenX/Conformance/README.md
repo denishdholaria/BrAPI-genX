@@ -429,3 +429,18 @@ tests in `Scripts/test_telemetry_pagination_slice.py` are required by hosted
 static conformance; the Python reference server exercises L-28 live. This
 does not certify snapshot isolation or arbitrary pagination policies. See
 [Mission 119 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-119-TELEMETRY-PAGINATION-SLICE.md).
+
+## Replay retained-state verification (Mission 120)
+
+Registered **L-21** checks the first telemetry append and exact replay response
+counts, then reads back the same device/sensor readings and confirms that
+exactly the original three timestamp/value records survive, with no duplicated
+natural key. The existing `telemetry_original_intact` assertion is reused;
+the manifest validator requires the L-21 readback, so removing it fails closed.
+
+The regression suite at `Scripts/test_telemetry_replay_postcondition.py`
+simulates replay responses with correct reported counts but duplicate, missing,
+or mutated stored records. It is mandatory in hosted static conformance,
+while registered L-21 executes against the in-memory Python reference server.
+This does not establish durability, multi-server idempotency, or third-party
+interoperability. See [Mission 120 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-120-TELEMETRY-REPLAY-READBACK.md).

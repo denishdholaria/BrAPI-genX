@@ -440,12 +440,13 @@ probes:
   object: telemetry
   title: Telemetry batch append replays identical points without duplication
   procedure:
-  - POST a batch of three points; POST the identical batch again.
-  expectation: First response reports appended 3 replayed 0; second reports appended 0 replayed 3.
+  - POST a batch of three points; POST the identical batch again; reread the original device and sensor.
+  expectation: First response reports appended 3 replayed 0; second reports appended 0 replayed 3; the same three original readings remain stored exactly once.
   falsifier: A replayed point is stored twice.
   calls:
   - {method: POST, path: /telemetry, body_fixture: live_telemetry_batch, capture_telemetry: true, assert: {telemetry_counts: {appended: 3, replayed: 0}}}
   - {method: POST, path: /telemetry, body_fixture: live_telemetry_batch, assert: {telemetry_counts: {appended: 0, replayed: 3}}}
+  - {method: GET, path: "/telemetry?deviceDbId={telemetry_device}&sensorDbId=air-temp-01&aggregation=none", assert: {telemetry_original_intact: true}}
 - id: L-22
   tier: live
   object: telemetry
