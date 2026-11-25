@@ -88,6 +88,42 @@ class LiveAssertionManifestTests(unittest.TestCase):
         self.assertIn("must be paired",
             self.mutated("L-23", 2, lambda s: s["assert"].pop("telemetry_samples")))
 
+    def test_provenance_roundtrip_assertion_required(self):
+        self.assertIn(
+            "original observation and provenance round-trip required",
+            self.mutated("L-07", 1,
+                         lambda s: s.update({"assert": {"status": 200}})))
+
+    def test_provenance_roundtrip_get_identity_required(self):
+        self.assertIn(
+            "original observation and provenance round-trip required",
+            self.mutated("L-07", 1,
+                         lambda s: s.update(path="/jobs/JOB_UNRELATED")))
+
+    def test_provenance_roundtrip_post_fixture_required(self):
+        self.assertIn(
+            "original observation and provenance round-trip required",
+            self.mutated("L-07", 0,
+                         lambda s: s.update(body_fixture="live_submit")))
+
+    def test_provenance_roundtrip_job_capture_required(self):
+        self.assertIn(
+            "original observation and provenance round-trip required",
+            self.mutated("L-07", 0,
+                         lambda s: s.pop("capture_job")))
+
+    def test_provenance_roundtrip_terminal_wait_required(self):
+        self.assertIn(
+            "original observation and provenance round-trip required",
+            self.mutated("L-07", 0,
+                         lambda s: s.pop("wait_terminal")))
+
+    def test_provenance_roundtrip_false_flag_rejected(self):
+        self.assertIn(
+            "must be true",
+            self.mutated("L-07", 1,
+                         lambda s: s["assert"].update(provenance_intact=False)))
+
     def test_telemetry_replay_readback_cannot_be_removed(self):
         self.assertIn(
             "telemetry_original_intact GET assertion required",
