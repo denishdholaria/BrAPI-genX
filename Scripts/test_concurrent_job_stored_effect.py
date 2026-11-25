@@ -277,9 +277,9 @@ class ConcurrentJobStoredEffectTests(unittest.TestCase):
         def change(rows):
             rows.extend([
                 {"jobDbId": "OTHER", "jobType": "analysis",
-                 "idempotencyKey": "other-1"},
+                 "idempotencyKey": "other-1", "status": "SUBMITTED"},
                 {"jobDbId": "OTHER", "jobType": "analysis",
-                 "idempotencyKey": "other-2"},
+                 "idempotencyKey": "other-2", "status": "SUBMITTED"},
             ])
             return rows
         self.assertEqual(1, self.exercise(change_rows=change)[0])
@@ -287,13 +287,13 @@ class ConcurrentJobStoredEffectTests(unittest.TestCase):
     def test_unrelated_job_blank_id_fails(self):
         self.assertEqual(1, self.exercise(
             change_rows=lambda rows: rows + [
-                {"jobDbId": "", "jobType": "analysis"}])[0])
+                {"jobDbId": "", "jobType": "analysis", "status": "SUBMITTED"}])[0])
 
     def test_unrelated_job_boolean_key_fails(self):
         self.assertEqual(1, self.exercise(
             change_rows=lambda rows: rows + [
                 {"jobDbId": "OTHER", "jobType": "analysis",
-                 "idempotencyKey": True}])[0])
+                 "idempotencyKey": True, "status": "SUBMITTED"}])[0])
 
     def test_unrelated_job_optional_key_may_be_missing(self):
         self.assertEqual(0, self.exercise(
