@@ -34,10 +34,11 @@ class CollectionEnvelopeTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "must be jobs or models"):
             checker.validate_probe_manifest(candidate)
 
-    def exercise(self, mutate=None, bad_status=None):
+    def exercise(self, mutate=None, bad_status=None, mutate_accepted_model=None):
         calls = []
         job_id = "JOB_COLLECTION_TEST"
         model = {}
+        submitted_job = {}
 
         def paged(data):
             return {
@@ -52,14 +53,20 @@ class CollectionEnvelopeTests(unittest.TestCase):
             calls.append((method, path))
             if len(calls) == 1:
                 self.assertEqual(("POST", "/jobs"), (method, path))
+                submitted_job.update(copy.deepcopy(body))
                 return 202, {"result": {"jobDbId": job_id}}
             if len(calls) == 2:
                 self.assertEqual(("POST", "/models"), (method, path))
                 model.update(copy.deepcopy(body))
-                return 200, {"result": copy.deepcopy(body)}
+                accepted = copy.deepcopy(body)
+                if mutate_accepted_model is not None:
+                    accepted = mutate_accepted_model(accepted)
+                return 200, {"result": accepted}
             if len(calls) == 3:
                 self.assertEqual(("GET", "/jobs"), (method, path))
-                response = paged([{"jobDbId": job_id}])
+                response = paged([{"jobDbId": job_id,
+                                   "jobType": submitted_job["jobType"],
+                                   "idempotencyKey": submitted_job["idempotencyKey"]}])
                 return bad_status or 200, mutate("jobs", response) if mutate else response
             if len(calls) == 4:
                 self.assertEqual(("GET", "/models"), (method, path))
@@ -135,6 +142,47 @@ class CollectionEnvelopeTests(unittest.TestCase):
 
     def test_non_success_http_rejected(self):
         self.assertEqual(1, self.exercise(bad_status=500).failures)
+
+
+    def test_wrong_original_job_type_rejected(self):
+        def change(kind, payload):
+            if kind == "jobs":
+                payload["result"]["data"][0]["jobType"] = "fabricated"
+            return payload
+        self.assertEqual(1, self.exercise(change).failures)
+
+    def test_missing_original_idempotency_key_rejected(self):
+        def change(kind, payload):
+            if kind == "jobs":
+                payload["result"]["data"][0].pop("idempotencyKey")
+            return payload
+        self.assertEqual(1, self.exercise(change).failures)
+
+    def test_changed_model_training_digest_rejected(self):
+        def change(kind, payload):
+            if kind == "models":
+                payload["result"]["data"][0]["trainingDataDigest"] = "f" * 64
+            return payload
+        self.assertEqual(1, self.exercise(change).failures)
+
+    def test_changed_model_provenance_rejected(self):
+        def change(kind, payload):
+            if kind == "models":
+                payload["result"]["data"][0]["provenance"]["recordedAt"] = "2026-01-01"
+            return payload
+        self.assertEqual(1, self.exercise(change).failures)
+
+
+    def test_accepted_model_identifier_changed_rejected(self):
+        self.assertEqual(1, self.exercise(
+            mutate_accepted_model=lambda model: {
+                **model, "modelDbId": "fabricated:model:other"}).failures)
+
+    def test_accepted_model_version_changed_rejected(self):
+        self.assertEqual(1, self.exercise(
+            mutate_accepted_model=lambda model: {
+                **model, "modelVersion": "999"}).failures)
+
 
 
 if __name__ == "__main__":

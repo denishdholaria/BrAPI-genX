@@ -498,9 +498,9 @@ probes:
   object: all
   title: List endpoints return paged envelopes
   procedure:
-  - GET collection endpoints after creating one job and one model; verify complete first-page arithmetic for both collections.
-  expectation: Each returns 200 with arrays containing the created resource, and consistent totalCount, pageSize, totalPages and first-page row counts.
-  falsifier: Missing created records, incomplete or inconsistent pagination, mismatched totalPages, or incorrect first-page offsets.
+  - GET job and model collections after creating one of each; validate first-page arithmetic and bind the listed records to the original submission.
+  expectation: Each returns a consistent first-page envelope and exactly one matching created identity; the job retains its original type/idempotency key, and the model retains all submitted fields including nested provenance.
+  falsifier: Missing or duplicate created identities, a mismatched job type or request key, changed model fields, inconsistent pagination or missing created records.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_submit, capture_job: true}
   - {method: POST, path: /models, body_fixture: live_model_submit, capture_model: true}

@@ -1998,20 +1998,65 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         f"{kind} pagination counts/shape invalid: {pagination!r}"
                     )
                 if kind == "jobs":
+                    # The stored job must be the exact accepted job and
+                    # retain the original submitted type/idempotency key.
+                    # Two rows with the same key but distinct IDs are not a
+                    # single created resource, even with valid pagination.
                     expected_id = ctx.get("live_job")
-                    included = bool(expected_id) and any(
-                        row.get("jobDbId") == expected_id for row in rows
-                    )
+                    original = ctx.get("live_body")
+                    if (not isinstance(expected_id, str) or not expected_id
+                            or not isinstance(original, dict)
+                            or not isinstance(original.get("jobType"), str)
+                            or not isinstance(original.get("idempotencyKey"), str)
+                            or not original["idempotencyKey"]):
+                        return results.report(
+                            probe["id"], probe["title"], "FAIL",
+                            "jobs original submission or accepted identity missing"
+                        )
+                    same_id = [
+                        row for row in rows if row.get("jobDbId") == expected_id
+                    ]
+                    same_key = [
+                        row for row in rows
+                        if row.get("idempotencyKey") == original["idempotencyKey"]
+                    ]
+                    if (len(same_id) != 1 or len(same_key) != 1
+                            or same_id[0] is not same_key[0]
+                            or same_id[0].get("jobType") != original["jobType"]):
+                        return results.report(
+                            probe["id"], probe["title"], "FAIL",
+                            "jobs collection does not retain one original "
+                            "job identity, idempotency key and type"
+                        )
                 else:
+                    # The accepted version and the stored record must match
+                    # the original model submission, not just one another.
+                    original = ctx.get("live_model_original")
                     expected_model = ctx.get("live_model")
-                    included = (bool(expected_model) and any(
-                        (row.get("modelDbId"), row.get("modelVersion"))
-                        == expected_model for row in rows))
-                if not included:
-                    return results.report(
-                        probe["id"], probe["title"], "FAIL",
-                        f"{kind} collection does not contain the created resource"
-                    )
+                    if (not isinstance(original, dict)
+                            or not isinstance(expected_model, tuple)
+                            or len(expected_model) != 2
+                            or expected_model != (
+                                original.get("modelDbId"),
+                                original.get("modelVersion"))):
+                        return results.report(
+                            probe["id"], probe["title"], "FAIL",
+                            "models original submission or accepted version missing"
+                        )
+                    same_version = [
+                        row for row in rows
+                        if (row.get("modelDbId"), row.get("modelVersion"))
+                        == expected_model
+                    ]
+                    if (len(same_version) != 1
+                            or any(k not in same_version[0]
+                                   or same_version[0][k] != v
+                                   for k, v in original.items())):
+                        return results.report(
+                            probe["id"], probe["title"], "FAIL",
+                            "models collection does not retain one unchanged "
+                            "original model version"
+                        )
             if "data_length" in assertion:
                 rows = payload.get("result", {}).get("data", [])
                 if len(rows) != assertion["data_length"]:

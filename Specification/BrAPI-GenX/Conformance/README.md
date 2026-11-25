@@ -836,3 +836,23 @@ window GET procedure. The existing mandatory
 missing, duplicated and altered source records in addition to the earlier
 mean-bucket mutation cases. See
 [Mission 146 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-146-TELEMETRY-WINDOW-SOURCE-READBACK.md).
+
+## Created collection identity and source retention (Mission 147)
+
+Registered **L-25** still verifies the first-page pagination arithmetic for
+jobs and models, but now also binds each listed created record to the actual
+original POST request. A correctly paged collection is insufficient if the
+created job has a different job type or idempotency key, or if the model version
+has altered its training digest, metrics or nested provenance.
+
+The runner rejects multiple rows with the same created job identifier or
+original idempotency key, and multiple copies of the original model
+identifier/version pair. Unrelated pre-existing records and other versions
+of a model remain permitted. The model's accepted identifier and version must
+also match the original submitted identity. Every originally submitted model
+field must survive unchanged; additional server-managed fields are allowed.
+
+The existing mandatory `Scripts/test_collection_pagination_arithmetic.py` and
+`Scripts/test_collection_envelope_integrity.py` suites exercise these
+positive and negative cases. See
+[Mission 147 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-147-COLLECTION-ORIGINAL-RECORD-INTEGRITY.md).
