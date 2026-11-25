@@ -1240,6 +1240,9 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
         ctx["live_model"] = None
         ctx["live_model_baseline"] = None
         ctx["live_model_original"] = None
+    if any(s.get("body_fixture") in ("live_inference_unknown",
+                                        "live_inference_revoked") for s in calls):
+        ctx["live_rejected_inference"] = {}
     if any(s.get("capture_model_revoked") for s in calls):
         ctx["live_model_revoked_id"] = None
         ctx["live_model_revoked"] = None
@@ -1422,6 +1425,19 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                                        "inputs": inputs},
                         "idempotencyKey": str(uuid.uuid4())}
                 ctx["live_inference_inputs"] = inputs
+            if fixture in ("live_inference_unknown", "live_inference_revoked"):
+                # Retain the exact rejected request keys and model identities,
+                # rather than deriving them from the server's error response.
+                rejected = ctx.get("live_rejected_inference")
+                if not isinstance(rejected, dict):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "missing rejected inference capture context"
+                    )
+                rejected[fixture] = {
+                    "key": body["idempotencyKey"],
+                    "modelDbId": body["parameters"]["modelDbId"],
+                }
             path = step["path"]
             if "{variableDbId}" in path or "{termVersion}" in path:
                 baseline = ctx.get("live_term_baseline")
@@ -1610,6 +1626,50 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
                         "deprecated inference did not complete as the accepted job"
+                    )
+            if assertion.get("rejected_inference_not_stored"):
+                # HTTP 400 alone is not proof that the rejected inference
+                # produced no persistent job. Read back the full collection.
+                result = payload.get("result") if isinstance(payload, dict) else None
+                rows = result.get("data") if isinstance(result, dict) else None
+                metadata = payload.get("metadata") if isinstance(payload, dict) else None
+                page = metadata.get("pagination") if isinstance(metadata, dict) else None
+                denied = ctx.get("live_rejected_inference")
+                if (status != 200
+                        or not isinstance(denied, dict)
+                        or set(denied) != {"live_inference_unknown",
+                                          "live_inference_revoked"}
+                        or any(not isinstance(item, dict)
+                               or not isinstance(item.get("key"), str)
+                               or not item["key"]
+                               or not isinstance(item.get("modelDbId"), str)
+                               or not item["modelDbId"]
+                               for item in denied.values())
+                        or len({item["key"] for item in denied.values()}) != 2
+                        or not isinstance(rows, list)
+                        or not all(isinstance(row, dict) for row in rows)
+                        or not isinstance(page, dict)
+                        or any(type(page.get(field)) is not int
+                               for field in ("totalCount", "pageSize",
+                                             "totalPages", "currentPage"))
+                        or page["totalCount"] != len(rows)
+                        or page["pageSize"] < len(rows)
+                        or page["totalPages"] != 1 or page["currentPage"] != 0):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "rejected inference readback lacks complete jobs evidence"
+                    )
+                denied_keys = {item["key"] for item in denied.values()}
+                denied_models = {item["modelDbId"] for item in denied.values()}
+                if any(
+                        row.get("idempotencyKey") in denied_keys
+                        or (row.get("jobType") == "inference"
+                            and isinstance(row.get("parameters"), dict)
+                            and row["parameters"].get("modelDbId") in denied_models)
+                        for row in rows):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "rejected inference created a stored job despite HTTP 400"
                     )
             if assertion.get("concurrent_single_stored_job"):
                 # A uniform concurrent response is insufficient: independently
@@ -2224,7 +2284,8 @@ LIVE_BOOLEAN_ASSERTIONS = frozenset({
     "term_replay_single_version", "matrix_replay_single_record",
     "package_replay_single_record", "model_replay_single_version",
     "inference_intact", "single_effect",
-    "concurrent_single_stored_job", "capability_registry_match",
+    "concurrent_single_stored_job", "rejected_inference_not_stored",
+    "capability_registry_match",
 })
 LIVE_COUNT_ASSERTIONS = frozenset({
     "data_length", "total_count", "ledger_count", "telemetry_conflicts",
@@ -2350,6 +2411,12 @@ def validate_live_step_assertions(probe_id, index, call):
             f"probe {probe_id} call {index}: "
             "unchanged_term_record requires versioned term GET"
         )
+    if "rejected_inference_not_stored" in assertion and (
+            call.get("method") != "GET" or call.get("path") != "/jobs"):
+        raise ValueError(
+            f"probe {probe_id} call {index}: "
+            "rejected_inference_not_stored requires GET /jobs"
+        )
     if "concurrent_single_stored_job" in assertion and (
             call.get("method") != "GET" or call.get("path") != "/jobs"):
         raise ValueError(
@@ -2408,6 +2475,27 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-15":
+                if (len(calls) != 4
+                        or calls[0].get("method") != "POST"
+                        or calls[0].get("path") != "/jobs"
+                        or calls[0].get("body_fixture") != "live_inference_unknown"
+                        or calls[0].get("assert", {}).get("status") != 400
+                        or calls[1].get("method") != "POST"
+                        or calls[1].get("path") != "/models"
+                        or calls[1].get("body_fixture") != "live_model_revoked"
+                        or calls[1].get("capture_model_revoked") is not True
+                        or calls[2].get("method") != "POST"
+                        or calls[2].get("path") != "/jobs"
+                        or calls[2].get("body_fixture") != "live_inference_revoked"
+                        or calls[2].get("assert", {}).get("status") != 400
+                        or calls[3].get("method") != "GET"
+                        or calls[3].get("path") != "/jobs"
+                        or calls[3].get("assert", {}).get("rejected_inference_not_stored")
+                            is not True):
+                    raise ValueError(
+                        "probe L-15: rejected_inference_not_stored GET after both rejections required"
+                    )
             if probe_id == "L-13":
                 if (len(calls) != 3
                         or calls[0].get("method") != "POST"

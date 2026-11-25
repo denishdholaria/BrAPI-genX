@@ -608,3 +608,17 @@ GET procedure. The dedicated negative regression suite
 `Scripts/test_model_conflict_whole_record.py` is mandatory in hosted
 static conformance; prior model-conflict tests remain active. See
 [Mission 131 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-131-MODEL-CONFLICT-WHOLE-RECORD.md).
+
+## Rejected inference has no stored job (Mission 132)
+
+Registered **L-15** now follows HTTP 400 responses for unknown and revoked
+model inference with a complete jobs-collection readback. The original
+inference idempotency keys and model identifiers are recorded before
+submission and must be absent from the stored job records.
+
+The `rejected_inference_not_stored` assertion fails on incomplete or
+multipage collection evidence and is mandatory in the manifest. Regression
+suite `Scripts/test_rejected_inference_no_stored_job.py` runs in hosted
+static conformance. This proves no **observable stored job**, not that no
+unobservable side effect or processing ever occurred. See
+[Mission 132 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-132-REJECTED-INFERENCE-NO-STORED-JOB.md).

@@ -287,6 +287,8 @@ jobs:
         run: python Scripts/test_package_conflict_whole_record.py
       - name: Test model conflict whole-record retention
         run: python Scripts/test_model_conflict_whole_record.py
+      - name: Test rejected inference creates no stored job
+        run: python Scripts/test_rejected_inference_no_stored_job.py
       - name: Test deprecated model inference reaches completed job
         run: python Scripts/test_deprecated_inference_completion.py
       - name: Run static GenX conformance probes
