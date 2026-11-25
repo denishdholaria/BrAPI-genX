@@ -50,7 +50,8 @@ class JobReplaySingleStoredTests(unittest.TestCase):
                 self.assertEqual(original, body)
                 replay = {"jobDbId": replay_id,
                           "jobType": body["jobType"],
-                          "idempotencyKey": body["idempotencyKey"]}
+                          "idempotencyKey": body["idempotencyKey"],
+                          "status": "SUBMITTED"}
                 if replay_mutate is not None:
                     replay = replay_mutate(replay)
                 return replay_status, {"result": replay}
