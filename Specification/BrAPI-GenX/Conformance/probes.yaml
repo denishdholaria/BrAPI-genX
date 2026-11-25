@@ -457,6 +457,7 @@ probes:
   calls:
   - {method: POST, path: /telemetry, body_fixture: live_telemetry_batch, capture_telemetry: true}
   - {method: POST, path: /telemetry, body_fixture: live_telemetry_conflict, assert: {telemetry_counts: {appended: 0, replayed: 0}, telemetry_conflicts: 1}}
+  - {method: GET, path: "/telemetry?deviceDbId={telemetry_device}&sensorDbId=air-temp-01&aggregation=none", assert: {telemetry_original_intact: true}}
 - id: L-23
   tier: live
   object: telemetry

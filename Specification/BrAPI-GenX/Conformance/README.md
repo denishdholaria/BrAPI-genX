@@ -338,3 +338,19 @@ replay/wait and capture constraints, and is enforced by the static workflow.
 This protects the verification procedure; it does not modify production
 wire contracts or certify an external service. See
 [Mission 113 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-113-LIVE-STEP-FIXTURE-INTEGRITY.md).
+
+## Post-conflict telemetry retained-value verification (Mission 114)
+
+Registered live probe **L-22** already promised that a conflicting telemetry
+value would be rejected without overwriting the original stored reading, but
+previously stopped after checking the conflict response. It now performs a
+follow-up GET filtered by the unique test device and sensor, checks an HTTP
+200 response, and compares all three original device/sensor/timestamp keys
+and their numeric values against the initially submitted batch. Missing,
+duplicate or changed records fail.
+
+The regression suite includes deliberate value mutation despite the expected
+conflict response, and the check is mandatory in hosted Python live conformance.
+The TypeScript reference deliberately does not implement telemetry; this
+mission is not external production-data assurance. See
+[Mission 114 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-114-TELEMETRY-POSTCONFLICT-INTEGRITY.md).
