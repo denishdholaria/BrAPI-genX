@@ -1750,6 +1750,39 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         probe["id"], probe["title"], "FAIL",
                         "telemetry window partition omitted a submitted minute"
                     )
+            if assertion.get("telemetry_page_slice"):
+                # L-28 must verify the actual first page, not just its size.
+                result = payload.get("result") if isinstance(payload, dict) else None
+                rows = result.get("data") if isinstance(result, dict) else None
+                metadata = payload.get("metadata") if isinstance(payload, dict) else None
+                pagination = (metadata.get("pagination")
+                              if isinstance(metadata, dict) else None)
+                original = ctx.get("live_batch")
+                if (status != 200 or not isinstance(rows, list)
+                        or not isinstance(original, list) or len(original) != 3
+                        or len(rows) != 2 or not isinstance(pagination, dict)
+                        or any(type(pagination.get(k)) is not int
+                               for k in ("currentPage", "pageSize",
+                                         "totalCount", "totalPages"))
+                        or (pagination["currentPage"], pagination["pageSize"],
+                            pagination["totalCount"], pagination["totalPages"])
+                            != (0, 2, 3, 2)):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "telemetry pagination envelope or expected page size incorrect"
+                    )
+                expected = sorted(original, key=lambda point: point["timestamp"])[:2]
+                for index, (point, wanted) in enumerate(zip(rows, expected)):
+                    if (not isinstance(point, dict)
+                            or any(point.get(k) != wanted.get(k) for k in
+                                   ("deviceDbId", "sensorDbId", "timestamp"))
+                            or type(point.get("value")) not in (int, float)
+                            or not (-float("inf") < point["value"] < float("inf"))
+                            or abs(point["value"] - wanted["value"]) > 1e-9):
+                        return results.report(
+                            probe["id"], probe["title"], "FAIL",
+                            f"telemetry page slice mismatch at row {index}: {point!r}"
+                        )
             if "telemetry_mean" in assertion:
                 rows = payload.get("result", {}).get("data", [])
                 if len(rows) != 1:
@@ -1939,6 +1972,7 @@ LIVE_BOOLEAN_ASSERTIONS = frozenset({
     "same_term", "same_ledger", "same_model", "same_matrix",
     "same_package", "unchanged_model_digest", "unchanged_matrix_digest",
     "telemetry_original_intact", "telemetry_window_partitions",
+    "telemetry_page_slice",
     "deprecated_inference_completed",
     "unchanged_package_license", "inference_intact", "single_effect",
     "capability_registry_match",
@@ -2077,6 +2111,14 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-28" and not any(
+                    call.get("method") == "GET"
+                    and isinstance(call.get("assert"), dict)
+                    and call["assert"].get("telemetry_page_slice") is True
+                    for call in calls):
+                raise ValueError(
+                    "probe L-28: telemetry_page_slice GET assertion required"
+                )
             if probe_id == "L-26" and not any(
                     call.get("method") == "GET"
                     and isinstance(call.get("assert"), dict)
