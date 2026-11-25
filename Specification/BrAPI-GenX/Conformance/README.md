@@ -1264,3 +1264,26 @@ suite covers absent, altered, malformed and valid stored records.
 The manifest validator also makes this intervening readback mandatory.
 
 See [Mission 170 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-170-REVOKED-MODEL-PERSISTENCE-READBACK.md).
+
+## Persisted deprecated model before warned inference (Mission 171)
+
+Registered **L-27** now requires a version-specific readback of the
+newly registered deprecated model **before** submitting an inference
+job. The response must preserve the original `modelDbId`,
+`modelVersion`, `status: deprecated`, artifact and training digests,
+metrics, and all originally submitted nested provenance fields.
+
+Previously, a successful initial registration acknowledgment and
+eventual warned inference completion could pass without independently
+verifying that the exact deprecated model version was stored. The
+new readback fails closed on absence or mutation while preserving the
+existing job-acknowledgment, warning, completion and canonical input
+digest checks.
+
+The already-mandatory
+`Scripts/test_deprecated_inference_completion.py` and
+`Scripts/test_deprecated_inference_result_binding.py` suites cover
+the additional call and negative/positive readback cases.
+Manifest mutation tests require the intervening version-specific GET.
+
+See [Mission 171 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-171-DEPRECATED-MODEL-PERSISTENCE-READBACK.md).
