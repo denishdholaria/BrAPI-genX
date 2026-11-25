@@ -537,3 +537,18 @@ being treated as evidence that no duplicate exists. The mandatory assertion
 is checked by the manifest validator and its negative regression suite at
 `Scripts/test_matrix_replay_stored_state.py` runs in hosted static
 conformance. See [Mission 126 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-126-MATRIX-REPLAY-STORED-STATE.md).
+
+## Package replay stored-state assurance (Mission 127)
+
+Registered **L-18** now reads the complete `/fair-packages` collection
+after identical registration replay. It checks exactly one occurrence of
+the original package identifier and all originally submitted attributes,
+including license, access rights, nested payload references/digests and
+provenance. Unrelated packages may coexist; incomplete pagination fails
+closed.
+
+The runner shares its collection integrity helper with L-16 rather than
+duplicating the same validation logic. Manifest guards require this L-18
+readback, and the `Scripts/test_package_replay_stored_state.py`
+regression suite executes in hosted static conformance. See
+[Mission 127 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-127-PACKAGE-REPLAY-STORED-STATE.md).

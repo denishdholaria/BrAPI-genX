@@ -409,12 +409,13 @@ probes:
   object: fairPackages
   title: Package registration replays identical records without duplication
   procedure:
-  - POST a FAIRPackageNewRequest under a fresh namespaced id; POST the identical body again.
-  expectation: Second response is 200 with the same packageDbId and no new record.
-  falsifier: A second record is created for the identical replay.
+  - POST a FAIRPackageNewRequest under a fresh namespaced id; POST the identical body again; GET the complete package collection.
+  expectation: Second response is 200 with the same packageDbId and exactly one unchanged stored package for that identifier.
+  falsifier: A second record is stored, original license, links or provenance changes, or collection evidence is incomplete.
   calls:
   - {method: POST, path: /fair-packages, body_fixture: live_package_submit, capture_package: true}
   - {method: POST, path: /fair-packages, body_fixture: live_package_submit, assert: {same_package: true}}
+  - {method: GET, path: /fair-packages, assert: {status: 200, package_replay_single_record: true}}
 - id: L-19
   tier: live
   object: fairPackages
