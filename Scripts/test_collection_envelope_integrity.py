@@ -87,6 +87,20 @@ class CollectionEnvelopeTests(unittest.TestCase):
     def test_valid_collections_pass(self):
         self.assertEqual(0, self.exercise().failures)
 
+    def test_created_job_missing_status_rejected(self):
+        def change(kind, payload):
+            if kind == "jobs":
+                payload["result"]["data"][0].pop("status")
+            return payload
+        self.assertEqual(1, self.exercise(change).failures)
+
+    def test_created_job_invalid_status_rejected(self):
+        def change(kind, payload):
+            if kind == "jobs":
+                payload["result"]["data"][0]["status"] = "QUEUED"
+            return payload
+        self.assertEqual(1, self.exercise(change).failures)
+
     def test_missing_data_rejected(self):
         def change(kind, payload):
             if kind == "jobs":
