@@ -498,14 +498,14 @@ class LiveAssertionManifestTests(unittest.TestCase):
     def test_deprecated_completion_assertion_cannot_be_removed(self):
         self.assertIn(
             "bound deprecated inference completion and warning required",
-            self.mutated("L-27", 1,
+            self.mutated("L-27", 2,
                          lambda s: s.update({"assert": {
                              "status": 202, "status_message": "WARNING"}})))
 
     def test_deprecated_warning_cannot_be_removed(self):
         self.assertIn(
             "bound deprecated inference completion and warning required",
-            self.mutated("L-27", 1,
+            self.mutated("L-27", 2,
                          lambda s: s["assert"].pop("status_message")))
 
     def test_deprecated_model_original_capture_required(self):
@@ -517,8 +517,27 @@ class LiveAssertionManifestTests(unittest.TestCase):
     def test_deprecated_inference_fixture_required(self):
         self.assertIn(
             "bound deprecated inference completion and warning required",
-            self.mutated("L-27", 1,
+            self.mutated("L-27", 2,
                          lambda s: s.update(body_fixture="live_inference_submit")))
+
+    def test_deprecated_model_stored_readback_cannot_be_removed(self):
+        self.assertIn(
+            "deprecated_model_persisted GET before inference required",
+            self.mutated("L-27", 1,
+                         lambda s: s.update({"assert": {"status": 200}})))
+
+    def test_deprecated_model_stored_readback_cannot_be_disabled(self):
+        self.assertIn(
+            "deprecated_model_persisted must be true",
+            self.mutated("L-27", 1,
+                         lambda s: s["assert"].update(
+                             deprecated_model_persisted=False)))
+
+    def test_deprecated_model_stored_readback_requires_versioned_path(self):
+        self.assertIn(
+            "deprecated_model_persisted GET before inference required",
+            self.mutated("L-27", 1,
+                         lambda s: s.update(path="/models/OTHER")))
 
     def test_collection_job_readback_cannot_be_removed(self):
         self.assertIn(
