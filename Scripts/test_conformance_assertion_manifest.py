@@ -108,7 +108,7 @@ class LiveAssertionManifestTests(unittest.TestCase):
 
     def test_provenance_roundtrip_job_capture_required(self):
         self.assertIn(
-            "original observation and provenance round-trip required",
+            "wait_terminal requires capture_job",
             self.mutated("L-07", 0,
                          lambda s: s.pop("capture_job")))
 
