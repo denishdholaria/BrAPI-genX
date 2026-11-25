@@ -675,3 +675,17 @@ pagination or malformed responses and is mandatory on the L-04 GET step.
 The negative regression suite `Scripts/test_unknown_jobtype_no_stored_job.py`
 runs in hosted static conformance. See
 [Mission 136 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-136-UNKNOWN-JOBTYPE-NO-STORED-JOB.md).
+
+## Expired job result withholding (Mission 137)
+
+Registered **L-05** now asserts that a known expired job reports
+`EXPIRED` while omitting the actual job `result` field (or returning
+null), and that the returned identity matches the requested expired job.
+Reporting the correct status while leaking result data fails closed.
+
+The `expired_result_withheld` assertion is protected by the registered
+manifest and tested by `Scripts/test_expired_job_result_withheld.py` in
+hosted static conformance. Full live execution of L-05 still requires a
+known-expired identifier supplied using `--expired-job`; otherwise
+the live runner marks L-05 **SKIP**. See
+[Mission 137 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-137-EXPIRED-JOB-RESULT-WITHHELD.md).
