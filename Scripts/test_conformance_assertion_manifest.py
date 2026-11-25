@@ -147,6 +147,37 @@ class LiveAssertionManifestTests(unittest.TestCase):
                 s.update(body_fixture="live_submit"),
             )))
 
+    def test_rejected_inference_stored_job_readback_cannot_be_removed(self):
+        self.assertIn(
+            "rejected_inference_not_stored GET after both rejections required",
+            self.mutated("L-15", 3,
+                         lambda s: s.update({"assert": {"status": 200}})))
+
+    def test_rejected_inference_readback_cannot_be_disabled(self):
+        self.assertIn(
+            "rejected_inference_not_stored must be true",
+            self.mutated("L-15", 3,
+                         lambda s: s["assert"].update(
+                             rejected_inference_not_stored=False)))
+
+    def test_rejected_inference_readback_requires_job_collection(self):
+        self.assertIn(
+            "rejected_inference_not_stored requires GET /jobs",
+            self.mutated("L-15", 3,
+                         lambda s: s.update(path="/jobs/OTHER")))
+
+    def test_rejected_inference_requires_original_unknown_submission(self):
+        self.assertIn(
+            "rejected_inference_not_stored GET after both rejections required",
+            self.mutated("L-15", 0,
+                         lambda s: s.update(body_fixture="live_inference_submit")))
+
+    def test_rejected_inference_requires_revoked_submission(self):
+        self.assertIn(
+            "rejected_inference_not_stored GET after both rejections required",
+            self.mutated("L-15", 2,
+                         lambda s: s.update(body_fixture="live_inference_unknown")))
+
     def test_model_conflict_readback_cannot_be_removed(self):
         self.assertIn(
             "full model original readback after conflict required",

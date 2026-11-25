@@ -374,13 +374,14 @@ probes:
   object: modelRegistry
   title: Inference on unknown or revoked models is rejected at submit
   procedure:
-  - Submit inference naming an unregistered model; register a revoked model and submit inference naming it.
-  expectation: Both submits are rejected with 400 and no job runs.
-  falsifier: A job is accepted for an unknown or revoked model.
+  - Submit inference naming an unregistered model; register a revoked model and submit inference naming it; GET the complete jobs collection after both rejections.
+  expectation: Both submits are rejected with 400 and no stored job exists for either rejected request key or model identity.
+  falsifier: A job is accepted or a matching job is stored for an unknown or revoked model despite rejection.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_inference_unknown, assert: {status: 400}}
   - {method: POST, path: /models, body_fixture: live_model_revoked, capture_model_revoked: true}
   - {method: POST, path: /jobs, body_fixture: live_inference_revoked, assert: {status: 400}}
+  - {method: GET, path: /jobs, assert: {status: 200, rejected_inference_not_stored: true}}
 - id: L-16
   tier: live
   object: variantMatrices
