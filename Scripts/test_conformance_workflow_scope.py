@@ -82,6 +82,7 @@ def scope_errors(document: dict) -> list[str]:
             "python Scripts/genx_test_server.py --port 18080",
             "bun Scripts/genx_test_server_ts.ts --port 18082",
             "python Scripts/genx_differential_check.py --a http://127.0.0.1:18080/genx/v1 --b http://127.0.0.1:18082/genx/v1 --expired-job JOB_EXPIRED",
+            "python Scripts/test_genx_differential_check.py",
         ):
             if required not in commands:
                 errors.append(f"independent-runtime-differential missing command: {required}")
@@ -221,6 +222,18 @@ class WorkflowScopeTests(unittest.TestCase):
                     if step.get("uses") != "oven-sh/setup-bun@v2"]
         self.assertIn("independent-runtime-differential missing Bun setup",
                       scope_errors(damaged))
+
+
+    def test_differential_http_status_mutations_cannot_be_skipped(self):
+        damaged = copy.deepcopy(self.workflow)
+        steps = damaged["jobs"]["independent-runtime-differential"]["steps"]
+        step = next(item for item in steps
+                    if item.get("run") == "python Scripts/test_genx_differential_check.py")
+        step["run"] = "echo status-tests-skipped"
+        self.assertTrue(any(
+            "missing command: python Scripts/test_genx_differential_check.py" in error
+            for error in scope_errors(damaged)
+        ))
 
 if __name__ == "__main__":
     unittest.main()
