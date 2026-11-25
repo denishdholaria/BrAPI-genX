@@ -1416,3 +1416,24 @@ constraint or Job lifecycle transition rule. The mandatory regression
 suites include malformed timestamps and supported offset controls.
 
 See [Mission 177 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-177-OPTIONAL-JOB-TIMESTAMP-ENCODING.md).
+
+## Expired Job schema integrity on direct readback (Mission 178)
+
+Registered **L-05** already requires a known expired Job's result
+to be absent or null, protecting expired output from retrieval.
+Its direct GET response now additionally requires the original Job
+identifier, a nonempty string `jobType`, the existing `EXPIRED`
+lifecycle state, valid optional `progress` and timezone-bearing
+timestamps, and a string-typed optional `idempotencyKey`.
+
+Previously, an expired Job could pass L-05 with no `jobType` or
+malformed optional fields because the assertion checked only identity,
+status and withheld result contents. The strengthened check preserves
+both accepted forms of withheld result (missing or null) and all
+existing expiry evidence.
+
+The mandatory `Scripts/test_expired_job_result_withheld.py` suite
+now covers missing, blank or malformed job types; invalid optional
+fields; and positive valid schema-compliant expired records.
+
+See [Mission 178 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-178-EXPIRED-JOB-READBACK-SCHEMA.md).

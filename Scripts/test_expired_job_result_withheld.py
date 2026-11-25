@@ -25,15 +25,19 @@ class ExpiredJobResultWithheldTests(unittest.TestCase):
         self.assertIs(True, self.probe["calls"][0]["assert"]["expired_result_withheld"])
 
     def exercise(self, job_status="EXPIRED", job_id="JOB_EXPIRED",
-                 result_marker="absent", http_status=200, payload_shape="normal"):
+                 result_marker="absent", http_status=200, payload_shape="normal",
+                 mutate_job=None):
         observed = []
 
         def fake_http(_server, method, path, body=None, token=None):
             observed.append((method, path))
             self.assertEqual(("GET", "/jobs/JOB_EXPIRED"), (method, path))
-            job = {"jobDbId": job_id, "status": job_status}
+            job = {"jobDbId": job_id, "jobType": "germplasm_search",
+                   "status": job_status}
             if result_marker != "absent":
                 job["result"] = result_marker
+            if mutate_job is not None:
+                job = mutate_job(job)
             if payload_shape == "null":
                 job = None
             if payload_shape == "list":
@@ -64,6 +68,49 @@ class ExpiredJobResultWithheldTests(unittest.TestCase):
 
     def test_expired_job_with_scalar_result_fails(self):
         self.assertEqual(1, self.exercise(result_marker="secret") [0])
+
+    def test_missing_required_job_type_fails(self):
+        def change(job):
+            job.pop("jobType")
+            return job
+        self.assertEqual(1, self.exercise(mutate_job=change)[0])
+
+    def test_blank_required_job_type_fails(self):
+        self.assertEqual(1, self.exercise(
+            mutate_job=lambda job: {**job, "jobType": ""})[0])
+
+    def test_nonstring_required_job_type_fails(self):
+        self.assertEqual(1, self.exercise(
+            mutate_job=lambda job: {**job, "jobType": False})[0])
+
+    def test_invalid_optional_progress_fails(self):
+        for value in (None, True, -0.1, 1.1, "0.5", float("nan")):
+            with self.subTest(value=value):
+                self.assertEqual(1, self.exercise(
+                    mutate_job=lambda job: {**job, "progress": value})[0])
+
+    def test_invalid_optional_timestamp_fails(self):
+        for value in (None, "2026-11-25",
+                      "2026-11-25T12:00:00",
+                      "2026-02-30T12:00:00Z"):
+            with self.subTest(value=value):
+                self.assertEqual(1, self.exercise(
+                    mutate_job=lambda job: {**job, "expiresAt": value})[0])
+
+    def test_nonstring_optional_idempotency_key_fails(self):
+        self.assertEqual(1, self.exercise(
+            mutate_job=lambda job: {**job, "idempotencyKey": True})[0])
+
+    def test_valid_optional_job_fields_remain_allowed(self):
+        for progress in (0, 0.5, 1.0):
+            with self.subTest(progress=progress):
+                self.assertEqual(0, self.exercise(
+                    mutate_job=lambda job: {
+                        **job, "progress": progress,
+                        "createdAt": "2026-11-24T12:00:00Z",
+                        "updatedAt": "2026-11-24T12:01:00+00:00",
+                        "expiresAt": "2026-11-25T12:00:00-0600",
+                        "idempotencyKey": "client-key"})[0])
 
     def test_completed_job_response_fails(self):
         self.assertEqual(1, self.exercise(job_status="COMPLETED")[0])

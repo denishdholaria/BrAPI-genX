@@ -265,7 +265,7 @@ probes:
   title: Expired jobs report EXPIRED and refuse result retrieval
   procedure:
   - GET a known-expired jobDbId (server-provided fixture id or one aged past expiresAt).
-  expectation: Status EXPIRED; the requested expired job remains identifiable but its result field is absent or null.
+  expectation: Status EXPIRED; the requested job retains its required identifier and jobType with valid existing optional Job fields, and its result field is absent or null.
   falsifier: An expired job reports EXPIRED but still exposes a result payload, or serves a different job.
   calls:
   - {method: GET, path: "/jobs/{expiredJobDbId}", assert: {body: {'result.status': EXPIRED}, expired_result_withheld: true}}
