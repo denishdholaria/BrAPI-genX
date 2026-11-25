@@ -476,3 +476,19 @@ in hosted static conformance and registered L-09 runs against the project's
 Python reference server. This does not establish external scientific truth,
 transaction durability or third-party interoperability. See
 [Mission 122 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-122-VARIABLE-TERM-CONFLICT-READBACK.md).
+
+## Ledger conflict retained-value verification (Mission 123)
+
+Registered **L-11** already rejected a conflicting ledger append and checked
+that its collection still had one entry, but this could pass after the
+original entry was silently rewritten. It now checks the stored entry's
+identity and **all originally submitted fields**, including its fixed-scale
+quantity, actor, locations, idempotency key, and nested provenance. Readback
+pagination must prove exactly one entry is visible.
+
+The manifest validator requires the L-11 GET assertion after the conflict;
+the mutation suite `Scripts/test_ledger_conflict_postcondition.py` is
+mandatory in hosted static conformance. The registered probe executes
+against the project's Python reference server. This is not external scientific
+or database durability certification. See
+[Mission 123 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-123-LEDGER-CONFLICT-READBACK.md).
