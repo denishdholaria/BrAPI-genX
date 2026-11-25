@@ -976,3 +976,20 @@ second submission. The separate **L-01** asynchronous-job replay remains
 unchanged: its documented contract permits 200 or 202.
 
 See [Mission 154 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-154-PUBLISHED-REPLAY-STATUS.md).
+
+## Terminal cancellation retains original job and result (Mission 155)
+
+Registered **L-03** now checks that the job returned after a rejected
+terminal cancellation retains not only its captured identifier and terminal
+status but also the original submitted job type, idempotency key, and the
+full terminal `result` if one was present. Changes to nested completed
+evidence or the appearance/disappearance of a result now fail.
+
+The comparison is intentionally bounded to stable request identity, state,
+and result. Additional server-generated metadata is allowed; this does not
+impose byte-for-byte equality on potentially volatile polling fields.
+The existing mandatory `Scripts/test_terminal_cancel_retained_state.py`
+suite includes negative cases for altered original identity, changed nested
+results and withheld results.
+
+See [Mission 155 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-155-TERMINAL-CANCEL-RESULT-INTEGRITY.md).
