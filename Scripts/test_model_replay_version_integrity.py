@@ -31,7 +31,7 @@ class ModelReplayVersionIntegrityTests(unittest.TestCase):
         self.assertIs(True, last["assert"]["model_replay_single_version"])
 
     def exercise(self, mutate=None, page_change=None, read_status=200,
-                 replay_version=None, replay_status=200):
+                 replay_version=None, replay_status=200, replay_mutate=None):
         calls = []
         original = {}
 
@@ -47,6 +47,8 @@ class ModelReplayVersionIntegrityTests(unittest.TestCase):
                 replay = copy.deepcopy(body)
                 if replay_version is not None:
                     replay["modelVersion"] = replay_version
+                if replay_mutate is not None:
+                    replay = replay_mutate(replay)
                 return replay_status, {"result": replay}
             if len(calls) == 3:
                 expected_path = ("/models?modelDbId=" +
@@ -169,6 +171,37 @@ class ModelReplayVersionIntegrityTests(unittest.TestCase):
         failures, calls = self.exercise(replay_status=500)
         self.assertEqual(1, failures)
         self.assertEqual(2, len(calls))
+
+
+    def test_replay_artifact_digest_corruption_fails_before_readback(self):
+        def change(row):
+            row.__setitem__('artifactDigest', 'f' * 64)
+            return row
+        failures, calls = self.exercise(replay_mutate=change)
+        self.assertEqual(1, failures)
+        self.assertEqual(2, len(calls))
+
+    def test_replay_nested_metric_corruption_fails_before_readback(self):
+        def change(row):
+            row['metrics'].__setitem__('rmse', 9.8)
+            return row
+        failures, calls = self.exercise(replay_mutate=change)
+        self.assertEqual(1, failures)
+        self.assertEqual(2, len(calls))
+
+    def test_replay_missing_provenance_corruption_fails_before_readback(self):
+        def change(row):
+            row.pop('provenance')
+            return row
+        failures, calls = self.exercise(replay_mutate=change)
+        self.assertEqual(1, failures)
+        self.assertEqual(2, len(calls))
+
+    def test_replay_allows_additional_server_metadata(self):
+        failures, calls = self.exercise(
+            replay_mutate=lambda row: {**row, "serverAuditMarker": "verified"})
+        self.assertEqual(0, failures)
+        self.assertEqual(3, len(calls))
 
 
 
