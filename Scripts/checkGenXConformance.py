@@ -1697,6 +1697,110 @@ REQUIRED_REGISTERED_PROBES = (
 )
 
 
+
+# A misspelled live assertion must not be silently ignored by the probe runner.
+# Keep this vocabulary synchronized with the registered conformance executor.
+LIVE_BOOLEAN_ASSERTIONS = frozenset({
+    "same_jobDbId", "rejected", "negotiable", "provenance_intact",
+    "same_term", "same_ledger", "same_model", "same_matrix",
+    "same_package", "unchanged_model_digest", "unchanged_matrix_digest",
+    "unchanged_package_license", "inference_intact", "single_effect",
+    "capability_registry_match",
+})
+LIVE_COUNT_ASSERTIONS = frozenset({
+    "data_length", "total_count", "ledger_count", "telemetry_conflicts",
+    "telemetry_samples",
+})
+LIVE_ASSERTIONS = (LIVE_BOOLEAN_ASSERTIONS | LIVE_COUNT_ASSERTIONS |
+                   {"status", "status_message", "telemetry_counts",
+                    "telemetry_mean", "body"})
+
+
+def validate_live_step_assertions(probe_id, index, call):
+    """Validate assertions as executable evidence, not ignored metadata."""
+    assertion = call.get("assert")
+    if assertion is None and "assert" not in call:
+        assertion = {}
+    elif not isinstance(assertion, dict) or not assertion:
+        raise ValueError(
+            f"probe {probe_id} call {index}: assert must be a nonempty mapping"
+        )
+    unknown = set(assertion) - LIVE_ASSERTIONS
+    if unknown:
+        raise ValueError(
+            f"probe {probe_id} call {index}: unknown live assertion(s): "
+            + ", ".join(sorted(map(str, unknown)))
+        )
+    for name in LIVE_BOOLEAN_ASSERTIONS & assertion.keys():
+        if assertion[name] is not True:
+            raise ValueError(
+                f"probe {probe_id} call {index}: {name} must be true"
+            )
+    for name in LIVE_COUNT_ASSERTIONS & assertion.keys():
+        value = assertion[name]
+        if type(value) is not int or value < 0:
+            raise ValueError(
+                f"probe {probe_id} call {index}: {name} must be a nonnegative integer"
+            )
+    if "status" in assertion:
+        status = assertion["status"]
+        if type(status) is not int or not (100 <= status <= 599):
+            raise ValueError(
+                f"probe {probe_id} call {index}: status must be an HTTP status integer"
+            )
+    if "status_message" in assertion:
+        message = assertion["status_message"]
+        if not isinstance(message, str) or not message.strip():
+            raise ValueError(
+                f"probe {probe_id} call {index}: status_message must be a string"
+            )
+    if "body" in assertion:
+        body = assertion["body"]
+        if (not isinstance(body, dict) or not body
+                or any(not isinstance(key, str) or not key.strip()
+                       for key in body)):
+            raise ValueError(
+                f"probe {probe_id} call {index}: body must be a nonempty path mapping"
+            )
+    if "telemetry_counts" in assertion:
+        counts = assertion["telemetry_counts"]
+        if (not isinstance(counts, dict)
+                or set(counts) != {"appended", "replayed"}
+                or any(type(value) is not int or value < 0
+                       for value in counts.values())):
+            raise ValueError(
+                f"probe {probe_id} call {index}: telemetry_counts needs "
+                "nonnegative appended and replayed integers"
+            )
+    if "telemetry_mean" in assertion:
+        mean = assertion["telemetry_mean"]
+        if type(mean) not in (int, float) or not (-float("inf") < mean < float("inf")):
+            raise ValueError(
+                f"probe {probe_id} call {index}: telemetry_mean must be finite"
+            )
+    if ("telemetry_mean" in assertion) != ("telemetry_samples" in assertion):
+        raise ValueError(
+            f"probe {probe_id} call {index}: telemetry_mean and "
+            "telemetry_samples must be paired"
+        )
+    if bool(call.get("replay_capture")) != ("same_jobDbId" in assertion):
+        raise ValueError(
+            f"probe {probe_id} call {index}: replay_capture requires "
+            "same_jobDbId assertion and vice versa"
+        )
+    if "concurrent_posts" in call:
+        count = call["concurrent_posts"]
+        if type(count) is not int or count < 2:
+            raise ValueError(
+                f"probe {probe_id} call {index}: concurrent_posts must be >= 2"
+            )
+    if ("concurrent_posts" in call) != ("single_effect" in assertion):
+        raise ValueError(
+            f"probe {probe_id} call {index}: concurrent_posts requires "
+            "single_effect assertion and vice versa"
+        )
+
+
 def validate_probe_manifest(probes):
     """Reject silently dropped, duplicated or unexecutable registered probes."""
     if not isinstance(probes, list):
@@ -1729,6 +1833,7 @@ def validate_probe_manifest(probes):
                         or not isinstance(call.get("path"), str)
                         or not call["path"].startswith("/")):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
+                validate_live_step_assertions(probe_id, index, call)
     missing = sorted(REQUIRED_REGISTERED_PROBES - observed)
     if missing:
         raise ValueError(

@@ -306,3 +306,20 @@ malformed envelopes. The test is a subset-specific compatibility check of
 project-owned in-memory reference servers; it is not complete version 2.1
 schema certification, authenticated authorization or external conformance.
 See [Mission 111 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-111-V21-FALLBACK-SHAPE-VALIDATION.md).
+
+## Fail-closed live assertion manifest validation (Mission 112)
+
+The registered conformance runner previously tolerated unknown names in
+`calls[].assert`. A typo such as `stauts: 409` could therefore disable a
+negative check while the probe still reported success. Live assertion
+validation now rejects unknown assertion keys, empty/invalid assertion maps
+and non-executable values (including false values for affirmative Boolean
+assertions). It also requires the existing job replay and concurrent-request
+flags to carry their corresponding identity/effect assertions.
+
+The mutation suite checks these failure modes, including a command-line
+attempt to run a probe from a corrupted manifest without contacting a server.
+The suite executes in hosted static conformance and is protected against
+workflow removal. The registered probe list, proposed application programming
+interface and scientific semantics remain unchanged. See
+[Mission 112 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-112-ASSERTION-FAIL-CLOSED.md).

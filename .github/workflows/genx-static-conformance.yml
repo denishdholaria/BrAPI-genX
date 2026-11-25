@@ -249,6 +249,8 @@ jobs:
         run: python Scripts/test_publication_conflict_postconditions.py
       - name: Test legacy server-info fallback envelope
         run: python Scripts/test_v21_fallback_envelope.py
+      - name: Test fail-closed live assertion manifest
+        run: python Scripts/test_conformance_assertion_manifest.py
       - name: Run static GenX conformance probes
         run: python Scripts/checkGenXConformance.py
       - name: Validate semantic endpoint catalogue
@@ -364,6 +366,7 @@ jobs:
             run_check python Scripts/test_capability_negotiation.py
             run_check python Scripts/test_job_idempotency.py
             run_check python Scripts/checkGenXConformance.py
+            run_check python Scripts/test_conformance_assertion_manifest.py
             run_check python Scripts/test_v21_fallback_envelope.py
             run_check python Scripts/test_publication_conflict_postconditions.py
             run_check python Scripts/test_model_conflict_postcondition.py
