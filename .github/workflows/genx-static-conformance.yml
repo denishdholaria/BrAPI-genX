@@ -259,6 +259,8 @@ jobs:
         run: python Scripts/test_provenance_roundtrip_integrity.py
       - name: Test collection pagination and created-record evidence
         run: python Scripts/test_collection_envelope_integrity.py
+      - name: Test deprecated model inference reaches completed job
+        run: python Scripts/test_deprecated_inference_completion.py
       - name: Run static GenX conformance probes
         run: python Scripts/checkGenXConformance.py
       - name: Validate semantic endpoint catalogue
@@ -374,6 +376,7 @@ jobs:
             run_check python Scripts/test_capability_negotiation.py
             run_check python Scripts/test_job_idempotency.py
             run_check python Scripts/checkGenXConformance.py
+            run_check python Scripts/test_deprecated_inference_completion.py
             run_check python Scripts/test_collection_envelope_integrity.py
             run_check python Scripts/test_provenance_roundtrip_integrity.py
             run_check python Scripts/test_telemetry_conflict_postcondition.py

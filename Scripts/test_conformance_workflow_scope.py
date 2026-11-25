@@ -41,6 +41,7 @@ REQUIRED_COMMANDS = {
     "python Scripts/test_telemetry_conflict_postcondition.py",
     "python Scripts/test_provenance_roundtrip_integrity.py",
     "python Scripts/test_collection_envelope_integrity.py",
+    "python Scripts/test_deprecated_inference_completion.py",
     "python Scripts/test_model_conflict_postcondition.py",
     "python Scripts/test_publication_conflict_postconditions.py",
     "python Scripts/test_v21_fallback_envelope.py",
@@ -437,6 +438,18 @@ class WorkflowScopeTests(unittest.TestCase):
         command = "python Scripts/test_collection_envelope_integrity.py"
         step = next(s for s in steps if s.get("run") == command)
         step["run"] = "echo skip-paginated-collections"
+        self.assertIn(
+            "static-conformance job missing command: " + command,
+            scope_errors(damaged),
+        )
+
+
+    def test_deprecated_inference_completion_regressions_cannot_be_skipped(self):
+        damaged = copy.deepcopy(self.workflow)
+        steps = damaged["jobs"]["static-conformance"]["steps"]
+        command = "python Scripts/test_deprecated_inference_completion.py"
+        step = next(s for s in steps if s.get("run") == command)
+        step["run"] = "echo skip-deprecated-inference"
         self.assertIn(
             "static-conformance job missing command: " + command,
             scope_errors(damaged),
