@@ -112,6 +112,16 @@ class TerminalCancelRetainedStateTests(unittest.TestCase):
         self.assertEqual(1, failures)
         self.assertEqual(2, len(calls))
 
+    def test_server_failure_is_not_a_terminal_cancel_rejection(self):
+        for code in (500, 503):
+            with self.subTest(code=code):
+                failures, calls = self.exercise(delete_status=code)
+                self.assertEqual(1, failures)
+                self.assertEqual(2, len(calls))
+
+    def test_conflict_client_status_still_rejected(self):
+        self.assertEqual(0, self.exercise(delete_status=409)[0])
+
 
 if __name__ == "__main__":
     unittest.main()
