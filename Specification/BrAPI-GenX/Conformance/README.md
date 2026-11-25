@@ -1165,3 +1165,22 @@ covers malformed or duplicated unrelated records and positive
 unrelated-job controls.
 
 See [Mission 165 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-165-REJECTED-INFERENCE-COLLECTION-IDENTITIES.md).
+
+## L-25 first-page job identity integrity (Mission 166)
+
+Registered **L-25** verifies the first page of both the jobs and model
+collections following one accepted submission of each. Its jobs readback
+now requires **every visible job** to have a nonempty string `jobDbId`,
+a nonempty string `jobType`, a correctly typed optional
+`idempotencyKey`, and an identifier distinct from all other visible
+jobs. Previously, malformed or duplicated **unrelated** jobs could pass
+while the newly submitted job and pagination arithmetic were correct.
+
+This intentionally validates **only the returned page**; later pages
+remain allowed, unlike the complete-collection evidence required by
+job replay and concurrency probes. Legitimate unrelated jobs with or
+without an idempotency key remain valid. The mandatory
+`Scripts/test_collection_pagination_arithmetic.py` suite includes
+negative and positive regression cases.
+
+See [Mission 166 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-166-L25-VISIBLE-JOB-IDENTITIES.md).
