@@ -48,7 +48,7 @@ workflow results are the authoritative evidence.
 ## Boundaries
 
 No official Breeding Application Programming Interface (BrAPI) version 2.1
-contract, GenX schema, scientific maturity level or embryo/embargo metadata
+contract, GenX schema, scientific maturity level or embargo metadata
 policy is changed. This probes the persistence evidence exposed through
 the reference server; it does not prove database crash recovery, source-device
 authenticity or distributed atomicity.
