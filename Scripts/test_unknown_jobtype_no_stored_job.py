@@ -81,21 +81,24 @@ class UnknownJobTypeNoStoredJobTests(unittest.TestCase):
         def change(rows, req):
             return rows + [{"jobDbId": "JOB_FORBIDDEN",
                             "jobType": req["jobType"],
-                            "idempotencyKey": req["idempotencyKey"]}]
+                            "idempotencyKey": req["idempotencyKey"],
+                            "status": "SUBMITTED"}]
         self.assertEqual(1, self.exercise(add_jobs=change)[0])
 
     def test_same_rejected_key_with_changed_type_fails(self):
         def change(rows, req):
             return rows + [{"jobDbId": "JOB_FORBIDDEN",
                             "jobType": "analysis",
-                            "idempotencyKey": req["idempotencyKey"]}]
+                            "idempotencyKey": req["idempotencyKey"],
+                            "status": "SUBMITTED"}]
         self.assertEqual(1, self.exercise(add_jobs=change)[0])
 
     def test_same_unknown_type_with_changed_key_fails(self):
         def change(rows, req):
             return rows + [{"jobDbId": "JOB_FORBIDDEN",
                             "jobType": req["jobType"],
-                            "idempotencyKey": "server-generated-key"}]
+                            "idempotencyKey": "server-generated-key",
+                            "status": "SUBMITTED"}]
         self.assertEqual(1, self.exercise(add_jobs=change)[0])
 
     def test_null_record_fails(self):
@@ -152,7 +155,8 @@ class UnknownJobTypeNoStoredJobTests(unittest.TestCase):
         def add(rows, req):
             return rows + [{"jobDbId": "JOB_UNRELATED",
                             "jobType": "germplasm_search",
-                            "idempotencyKey": "other-key-2"}]
+                            "idempotencyKey": "other-key-2",
+                            "status": "SUBMITTED"}]
         self.assertEqual(1, self.exercise(add_jobs=add)[0])
 
     def test_missing_unrelated_job_id_fails(self):
