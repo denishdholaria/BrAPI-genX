@@ -204,6 +204,7 @@ class RejectedInferenceNoStoredJobTests(unittest.TestCase):
             return rows + [{"jobDbId": "JOB_FORBIDDEN",
                             "jobType": "inference",
                             "idempotencyKey": denied[0]["idempotencyKey"],
+                            "status": "SUBMITTED",
                             "parameters": denied[0]["parameters"]}]
         self.assertEqual(1, self.exercise(create_job=create)[0])
 
@@ -212,6 +213,7 @@ class RejectedInferenceNoStoredJobTests(unittest.TestCase):
             return rows + [{"jobDbId": "JOB_FORBIDDEN",
                             "jobType": "inference",
                             "idempotencyKey": denied[1]["idempotencyKey"],
+                            "status": "SUBMITTED",
                             "parameters": denied[1]["parameters"]}]
         self.assertEqual(1, self.exercise(create_job=create)[0])
 
@@ -220,6 +222,7 @@ class RejectedInferenceNoStoredJobTests(unittest.TestCase):
             return rows + [{"jobDbId": "JOB_FORBIDDEN",
                             "jobType": "inference",
                             "idempotencyKey": "changed-server-key",
+                            "status": "SUBMITTED",
                             "parameters": denied[0]["parameters"]}]
         self.assertEqual(1, self.exercise(create_job=create)[0])
 
@@ -228,6 +231,7 @@ class RejectedInferenceNoStoredJobTests(unittest.TestCase):
             return rows + [{"jobDbId": "JOB_FORBIDDEN",
                             "jobType": "inference",
                             "idempotencyKey": "changed-server-key",
+                            "status": "SUBMITTED",
                             "parameters": denied[1]["parameters"]}]
         self.assertEqual(1, self.exercise(create_job=create)[0])
 
@@ -236,6 +240,7 @@ class RejectedInferenceNoStoredJobTests(unittest.TestCase):
             return rows + [{"jobDbId": "JOB_FORBIDDEN",
                             "jobType": "analysis",
                             "idempotencyKey": denied[1]["idempotencyKey"],
+                            "status": "SUBMITTED",
                             "parameters": {}}]
         self.assertEqual(1, self.exercise(create_job=create)[0])
 
@@ -294,9 +299,9 @@ class RejectedInferenceNoStoredJobTests(unittest.TestCase):
         def change(rows, denied):
             return rows + [
                 {"jobDbId": "JOB_OTHER", "jobType": "analysis",
-                 "idempotencyKey": "other-2"},
+                 "idempotencyKey": "other-2", "status": "SUBMITTED"},
                 {"jobDbId": "JOB_OTHER", "jobType": "analysis",
-                 "idempotencyKey": "other-3"},
+                 "idempotencyKey": "other-3", "status": "SUBMITTED"},
             ]
         self.assertEqual(1, self.exercise(create_job=change)[0])
 
