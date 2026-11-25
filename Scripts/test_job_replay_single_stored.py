@@ -88,6 +88,34 @@ class JobReplaySingleStoredTests(unittest.TestCase):
     def test_single_original_job_passes(self):
         self.assertEqual(0, self.exercise()[0])
 
+    def test_stored_job_missing_status_fails(self):
+        def change(rows):
+            del rows[0]["status"]
+            return rows
+        self.assertEqual(1, self.exercise(change_rows=change)[0])
+
+    def test_unrelated_stored_job_unknown_status_fails(self):
+        def change(rows):
+            rows[1]["status"] = "QUEUED"
+            return rows
+        self.assertEqual(1, self.exercise(
+            unrelated=True, change_rows=change)[0])
+
+    def test_unrelated_stored_job_nonstring_status_fails(self):
+        for wrong in (None, False, 0, [], {}):
+            with self.subTest(wrong=wrong):
+                def change(rows):
+                    rows[1]["status"] = wrong
+                    return rows
+                self.assertEqual(1, self.exercise(
+                    unrelated=True, change_rows=change)[0])
+
+    def test_stored_running_status_is_valid(self):
+        def change(rows):
+            rows[0]["status"] = "RUNNING"
+            return rows
+        self.assertEqual(0, self.exercise(change_rows=change)[0])
+
     def test_unrelated_historical_job_allowed(self):
         self.assertEqual(0, self.exercise(unrelated=True)[0])
 
