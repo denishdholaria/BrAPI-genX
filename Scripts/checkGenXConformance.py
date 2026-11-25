@@ -2998,6 +2998,10 @@ def validate_probe_manifest(probes):
                         or calls[0].get("path") != "/telemetry"
                         or calls[0].get("body_fixture") != "live_telemetry_batch"
                         or calls[0].get("capture_telemetry") is not True
+                        or calls[0].get("assert") != {
+                            "telemetry_counts": {"appended": 3, "replayed": 0},
+                            "telemetry_no_conflicts": True,
+                        }
                         or calls[1].get("method") != "POST"
                         or calls[1].get("path") != "/telemetry"
                         or calls[1].get("body_fixture") != "live_telemetry_conflict"
