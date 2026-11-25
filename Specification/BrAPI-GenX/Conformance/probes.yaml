@@ -353,6 +353,7 @@ probes:
   calls:
   - {method: POST, path: /models, body_fixture: live_model_submit, capture_model: true}
   - {method: POST, path: /models, body_fixture: live_model_conflict, assert: {status: 409}}
+  - {method: GET, path: "/models/{modelDbId}?version={modelVersion}", assert: {unchanged_model_digest: true}}
 - id: L-14
   tier: live
   object: modelRegistry

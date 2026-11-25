@@ -30,6 +30,7 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src"))
 from brapi_genx.canonicalization import jcs_canonicalize
 import uuid
+from urllib.parse import quote
 
 try:
     import yaml
@@ -1177,6 +1178,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
     if any(s.get("capture_model") for s in calls):
         ctx["live_model_id"] = None
         ctx["live_model"] = None
+        ctx["live_model_baseline"] = None
     if any(s.get("capture_model_revoked") for s in calls):
         ctx["live_model_revoked_id"] = None
         ctx["live_model_revoked"] = None
@@ -1352,6 +1354,14 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         "idempotencyKey": str(uuid.uuid4())}
                 ctx["live_inference_inputs"] = inputs
             path = step["path"]
+            if "{modelDbId}" in path or "{modelVersion}" in path:
+                baseline = ctx.get("live_model_baseline")
+                if (not baseline or len(baseline) != 3
+                        or not all(isinstance(value, str) and value for value in baseline)):
+                    return results.report(probe["id"], probe["title"], "FAIL",
+                                          "no complete model baseline captured")
+                path = path.replace("{modelDbId}", quote(baseline[0], safe=":"))
+                path = path.replace("{modelVersion}", quote(baseline[1], safe=""))
             if "{jobDbId}" in path:
                 if ctx.get("live_job") is None and "{expiredJobDbId}" not in path:
                     return results.report(probe["id"], probe["title"], "FAIL", "no captured job")
@@ -1428,6 +1438,10 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         probe["id"], probe["title"], "FAIL", f"submit returned {status}")
                 seen = payload.get("result", {})
                 ctx["live_model"] = (seen.get("modelDbId"), seen.get("modelVersion"))
+                ctx["live_model_baseline"] = (
+                    body.get("modelDbId"), body.get("modelVersion"),
+                    body.get("artifactDigest"),
+                )
             if step.get("capture_model_revoked"):
                 if status not in (200, 202):
                     return results.report(
@@ -1497,6 +1511,17 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         probe["id"], probe["title"], "FAIL",
                         f"replay returned {(seen.get('seedLotDbId'), seen.get('entryDbId'))}, "
                         f"expected {ctx.get('live_ledger')}")
+            if assertion.get("unchanged_model_digest"):
+                seen = payload.get("result", {}) if isinstance(payload, dict) else {}
+                baseline = ctx.get("live_model_baseline")
+                observed = (seen.get("modelDbId"), seen.get("modelVersion"),
+                            seen.get("artifactDigest")) if isinstance(seen, dict) else None
+                if status != 200 or observed != baseline:
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        f"published model identity/digest changed or unavailable: "
+                        f"status={status}, expected={baseline}, observed={observed}",
+                    )
             if assertion.get("same_model"):
                 seen = payload.get("result", {})
                 if (seen.get("modelDbId"), seen.get("modelVersion")) != ctx.get("live_model"):

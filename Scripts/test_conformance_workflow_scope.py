@@ -36,6 +36,7 @@ REQUIRED_COMMANDS = {
     "python Scripts/test_specification_structure.py",
     "python Scripts/checkGenXConformance.py",
     "python Scripts/test_conformance_probe_selection.py",
+    "python Scripts/test_model_conflict_postcondition.py",
     "python Scripts/checkEndpointRegistry.py",
     "python Scripts/auditEndpointRegistrySourceConsistency.py --strict",
     "python Scripts/test_registry_source_consistency.py",
@@ -306,6 +307,18 @@ class WorkflowScopeTests(unittest.TestCase):
                             "independent-runtime-differential missing command: " + command,
                             scope_errors(damaged),
                         )
+
+
+    def test_model_conflict_postcondition_test_cannot_be_skipped(self):
+        damaged = copy.deepcopy(self.workflow)
+        steps = damaged["jobs"]["static-conformance"]["steps"]
+        test = next(s for s in steps if s.get("run")
+                    == "python Scripts/test_model_conflict_postcondition.py")
+        test["run"] = "echo model-conflict-postcondition-skipped"
+        self.assertIn(
+            "static-conformance job missing command: python Scripts/test_model_conflict_postcondition.py",
+            scope_errors(damaged),
+        )
 
 if __name__ == "__main__":
     unittest.main()
