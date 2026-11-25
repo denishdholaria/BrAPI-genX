@@ -384,3 +384,18 @@ The negative regression suite is part of hosted static conformance. This
 checks the current in-memory reference service's observable list behavior,
 not a complete pagination protocol or third-party certification. See
 [Mission 116 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-116-COLLECTION-ENVELOPE-EVIDENCE.md).
+
+## Deprecated inference completion assurance (Mission 117)
+
+Registered **L-27** already promised that inference with a deprecated model
+would be accepted with a warning *and complete*. Previously its actual
+assertions stopped at HTTP 202 and a warning status message. The runner now
+also polls the accepted job and requires that the same job reaches
+`COMPLETED`, rejecting failed, expired, running, missing or mismatched jobs.
+
+The existing warning assertion is evaluated on the original submission
+response before polling. Negative tests enforce both outcomes and run in
+hosted static conformance. This is reference-server behavior evidence, not
+scientific model validation, authentication, persistence or third-party
+certification. See
+[Mission 117 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-117-DEPRECATED-INFERENCE-COMPLETION.md).

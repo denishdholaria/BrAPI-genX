@@ -1505,6 +1505,25 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                 return results.report(
                     probe["id"], probe["title"], "FAIL",
                     f"expected {assertion['status']}, got {status}")
+            if assertion.get("deprecated_inference_completed"):
+                accepted = payload.get("result") if isinstance(payload, dict) else None
+                job_id = (accepted.get("jobDbId") if isinstance(accepted, dict)
+                          else None)
+                if status != 202 or not isinstance(job_id, str) or not job_id:
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "deprecated inference accepted job identifier missing"
+                    )
+                terminal_payload = wait_terminal(server, job_id, token)
+                terminal_job = (terminal_payload.get("result")
+                                if isinstance(terminal_payload, dict) else None)
+                if (not isinstance(terminal_job, dict)
+                        or terminal_job.get("jobDbId") != job_id
+                        or terminal_job.get("status") != "COMPLETED"):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "deprecated inference did not complete as the accepted job"
+                    )
             if "collection_contains_created" in assertion:
                 kind = assertion["collection_contains_created"]
                 result = payload.get("result") if isinstance(payload, dict) else None
@@ -1868,7 +1887,7 @@ LIVE_BOOLEAN_ASSERTIONS = frozenset({
     "same_jobDbId", "rejected", "negotiable", "provenance_intact",
     "same_term", "same_ledger", "same_model", "same_matrix",
     "same_package", "unchanged_model_digest", "unchanged_matrix_digest",
-    "telemetry_original_intact",
+    "telemetry_original_intact", "deprecated_inference_completed",
     "unchanged_package_license", "inference_intact", "single_effect",
     "capability_registry_match",
 })

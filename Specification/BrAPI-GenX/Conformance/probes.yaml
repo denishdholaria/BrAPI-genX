@@ -513,7 +513,7 @@ probes:
   falsifier: Silent acceptance without warning, or rejection.
   calls:
   - {method: POST, path: /models, body_fixture: live_model_deprecated, capture_model_deprecated: true}
-  - {method: POST, path: /jobs, body_fixture: live_inference_deprecated, assert: {status: 202, status_message: WARNING}}
+  - {method: POST, path: /jobs, body_fixture: live_inference_deprecated, assert: {status: 202, status_message: WARNING, deprecated_inference_completed: true}}
 - id: L-28
   tier: live
   object: telemetry
