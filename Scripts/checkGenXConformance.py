@@ -2174,19 +2174,23 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
             if assertion.get("same_term"):
                 seen = payload.get("result") if isinstance(payload, dict) else None
                 problem = replay_response_problem(payload, ctx.get("live_term_baseline"))
-                if not isinstance(seen, dict) or problem or ((seen or {}).get("variableDbId"), (seen or {}).get("version")) != ctx.get("live_term"):
+                identity = ((seen.get("variableDbId"), seen.get("version"))) if isinstance(seen, dict) else None
+                expected = ctx.get("live_term")
+                if problem or identity != expected:
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        f"replay returned {((seen or {}).get('variableDbId'), (seen or {}).get('version'))}, "
-                        f"expected {ctx.get('live_term')}")
+                        problem or f"term replay returned {identity}, expected {expected}"
+                    )
             if assertion.get("same_ledger"):
                 seen = payload.get("result") if isinstance(payload, dict) else None
                 problem = replay_response_problem(payload, ctx.get("live_ledger_body"))
-                if not isinstance(seen, dict) or problem or ((seen or {}).get("seedLotDbId"), (seen or {}).get("entryDbId")) != ctx.get("live_ledger"):
+                identity = ((seen.get("seedLotDbId"), seen.get("entryDbId"))) if isinstance(seen, dict) else None
+                expected = ctx.get("live_ledger")
+                if problem or identity != expected:
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        f"replay returned {((seen or {}).get('seedLotDbId'), (seen or {}).get('entryDbId'))}, "
-                        f"expected {ctx.get('live_ledger')}")
+                        problem or f"ledger replay returned {identity}, expected {expected}"
+                    )
             if assertion.get("unchanged_model_digest"):
                 original = ctx.get("live_model_original")
                 identity = ctx.get("live_model")
@@ -2205,11 +2209,13 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
             if assertion.get("same_model"):
                 seen = payload.get("result") if isinstance(payload, dict) else None
                 problem = replay_response_problem(payload, ctx.get("live_model_original"))
-                if not isinstance(seen, dict) or problem or ((seen or {}).get("modelDbId"), (seen or {}).get("modelVersion")) != ctx.get("live_model"):
+                identity = ((seen.get("modelDbId"), seen.get("modelVersion"))) if isinstance(seen, dict) else None
+                expected = ctx.get("live_model")
+                if problem or identity != expected:
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        f"replay returned {((seen or {}).get('modelDbId'), (seen or {}).get('modelVersion'))}, "
-                        f"expected {ctx.get('live_model')}")
+                        problem or f"model replay returned {identity}, expected {expected}"
+                    )
             if assertion.get("unchanged_matrix_digest"):
                 problem = published_record_problem(
                     status, payload, ctx.get("live_matrix_original"),
@@ -2268,19 +2274,23 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
             if assertion.get("same_matrix"):
                 seen = payload.get("result") if isinstance(payload, dict) else None
                 problem = replay_response_problem(payload, ctx.get("live_matrix_original"))
-                if not isinstance(seen, dict) or problem or (seen or {}).get("matrixDbId") != ctx.get("live_matrix"):
+                identity = (seen.get("matrixDbId")) if isinstance(seen, dict) else None
+                expected = ctx.get("live_matrix")
+                if problem or identity != expected:
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        f"replay returned {(seen or {}).get('matrixDbId')}, "
-                        f"expected {ctx.get('live_matrix')}")
+                        problem or f"matrix replay returned {identity}, expected {expected}"
+                    )
             if assertion.get("same_package"):
                 seen = payload.get("result") if isinstance(payload, dict) else None
                 problem = replay_response_problem(payload, ctx.get("live_package_original"))
-                if not isinstance(seen, dict) or problem or (seen or {}).get("packageDbId") != ctx.get("live_package"):
+                identity = (seen.get("packageDbId")) if isinstance(seen, dict) else None
+                expected = ctx.get("live_package")
+                if problem or identity != expected:
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        f"replay returned {(seen or {}).get('packageDbId')}, "
-                        f"expected {ctx.get('live_package')}")
+                        problem or f"package replay returned {identity}, expected {expected}"
+                    )
             if assertion.get("telemetry_original_intact"):
                 original = ctx.get("live_batch")
                 result = payload.get("result") if isinstance(payload, dict) else None
