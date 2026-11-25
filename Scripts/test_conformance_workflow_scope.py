@@ -84,6 +84,8 @@ def scope_errors(document: dict) -> list[str]:
         for required in (
             "python Scripts/genx_test_server.py --port 18080",
             "bun Scripts/genx_test_server_ts.ts --port 18082",
+            "bun Scripts/genx_test_server_ts.ts --port 18083 --delay 0.4 --profile v21",
+            "python Scripts/checkGenXConformance.py --server http://127.0.0.1:18083/genx/v1 --only L-06",
             "python Scripts/genx_differential_check.py --a http://127.0.0.1:18080/genx/v1 --b http://127.0.0.1:18082/genx/v1 --expired-job JOB_EXPIRED",
             "python Scripts/test_genx_differential_check.py",
             "python Scripts/checkGenXConformance.py --server http://127.0.0.1:18082/genx/v1 --expired-job JOB_EXPIRED --only L-12",
@@ -332,6 +334,35 @@ class WorkflowScopeTests(unittest.TestCase):
             "static-conformance job missing command: python Scripts/test_publication_conflict_postconditions.py",
             scope_errors(damaged),
         )
+
+
+    def test_typescript_v21_fallback_probe_required_and_active(self):
+        command = ("python Scripts/checkGenXConformance.py --server "
+                   "http://127.0.0.1:18083/genx/v1 --only L-06")
+        for defect in ("removed", "failure-only"):
+            with self.subTest(defect=defect):
+                damaged = copy.deepcopy(self.workflow)
+                steps = damaged["jobs"]["independent-runtime-differential"]["steps"]
+                step = next(s for s in steps if s.get("run") == command)
+                if defect == "removed":
+                    step["run"] = "echo skip-fallback-probe"
+                else:
+                    step["if"] = "failure()"
+                self.assertIn(
+                    "independent-runtime-differential missing command: " + command,
+                    scope_errors(damaged),
+                )
+
+    def test_typescript_v21_server_startup_required(self):
+        damaged = copy.deepcopy(self.workflow)
+        steps = damaged["jobs"]["independent-runtime-differential"]["steps"]
+        command = "bun Scripts/genx_test_server_ts.ts --port 18083 --delay 0.4 --profile v21"
+        step = next(s for s in steps if command in str(s.get("run", "")))
+        step["run"] = step["run"].replace(command, "echo skip-v21-server")
+        self.assertTrue(any(
+            "independent-runtime-differential missing command: " + command in error
+            for error in scope_errors(damaged)
+        ))
 
 if __name__ == "__main__":
     unittest.main()
