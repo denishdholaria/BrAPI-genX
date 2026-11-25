@@ -942,3 +942,20 @@ new initial-acceptance evidence and the existing mandatory regression suites
 include malformed first-POST responses. No GenX wire-schema changes are needed.
 
 See [Mission 152 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-152-TELEMETRY-AGGREGATE-SOURCE-INGEST.md).
+
+## Rejection is not a server failure (Mission 153)
+
+The shared live `rejected` assertion (registered in L-02 and L-03)
+now requires a client-error HTTP status in the 400–499 range. Previously
+any status of 400 or higher, including 500/503, counted as a successful
+rejection. A server crash, unavailable dependency or generic failure is
+not evidence for correct idempotency conflict or terminal cancellation
+behavior.
+
+This deliberately does **not** select a single exact conflict status:
+RFC-001 still records that choice as requiring a separate decision.
+The existing mandatory
+`Scripts/test_job_conflict_collection_unchanged.py` and
+`Scripts/test_terminal_cancel_retained_state.py` suites now reject
+server-side failures while accepting the already-supported client-error
+cases. See [Mission 153 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-153-REJECTION-IS-NOT-SERVER-ERROR.md).
