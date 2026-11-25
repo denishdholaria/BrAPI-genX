@@ -147,6 +147,31 @@ class LiveAssertionManifestTests(unittest.TestCase):
                 s.update(body_fixture="live_submit"),
             )))
 
+    def test_concurrent_stored_job_readback_must_remain(self):
+        self.assertIn(
+            "concurrent_single_stored_job GET assertion required",
+            self.mutated("L-24", 1, lambda s: s.update(
+                {"assert": {"status": 200}})))
+
+    def test_concurrent_readback_must_be_get_jobs(self):
+        self.assertIn(
+            "requires GET /jobs",
+            self.mutated("L-24", 1,
+                         lambda s: s.update(path="/jobs/unrelated")))
+
+    def test_concurrent_readback_boolean_cannot_be_false(self):
+        self.assertIn(
+            "concurrent_single_stored_job must be true",
+            self.mutated("L-24", 1,
+                         lambda s: s["assert"].update(
+                             concurrent_single_stored_job=False)))
+
+    def test_concurrent_count_must_remain_eight(self):
+        self.assertIn(
+            "eight concurrent submissions required",
+            self.mutated("L-24", 0, lambda s: s.update(
+                concurrent_posts=7)))
+
     def test_concurrent_submissions_require_single_effect(self):
         self.assertIn("single_effect assertion",
             self.mutated("L-24", 0, lambda s: s.update({"assert": {"status": 202}})))
