@@ -28,7 +28,8 @@ class JobReplaySingleStoredTests(unittest.TestCase):
         self.assertIs(True, final["assert"]["job_replay_single_stored"])
 
     def exercise(self, change_rows=None, change_page=None, read_status=200,
-                 replay_id="JOB_ORIGINAL", unrelated=False):
+                 replay_id="JOB_ORIGINAL", unrelated=False,
+                 replay_status=200, replay_mutate=None):
         calls = []
         original = {}
 
@@ -43,8 +44,12 @@ class JobReplaySingleStoredTests(unittest.TestCase):
             if len(calls) == 2:
                 self.assertEqual(("POST", "/jobs"), (method, path))
                 self.assertEqual(original, body)
-                return 200, {"result": {"jobDbId": replay_id,
-                                         "jobType": body["jobType"]}}
+                replay = {"jobDbId": replay_id,
+                          "jobType": body["jobType"],
+                          "idempotencyKey": body["idempotencyKey"]}
+                if replay_mutate is not None:
+                    replay = replay_mutate(replay)
+                return replay_status, {"result": replay}
             if len(calls) == 3:
                 self.assertEqual(("GET", "/jobs"), (method, path))
                 rows = [{"jobDbId": "JOB_ORIGINAL",
@@ -150,6 +155,60 @@ class JobReplaySingleStoredTests(unittest.TestCase):
         failures, calls = self.exercise(replay_id="JOB_WRONG")
         self.assertEqual(1, failures)
         self.assertEqual(2, len(calls))
+
+
+    def test_replay_status_202_remains_allowed(self):
+        self.assertEqual(0, self.exercise(replay_status=202)[0])
+
+    def test_replay_status_200_remains_allowed(self):
+        self.assertEqual(0, self.exercise(replay_status=200)[0])
+
+    def test_other_success_status_rejected_before_readback(self):
+        for code in (201, 204, 206):
+            with self.subTest(status=code):
+                failures, calls = self.exercise(replay_status=code)
+                self.assertEqual(1, failures)
+                self.assertEqual(2, len(calls))
+
+    def test_wrong_replay_job_type_rejected(self):
+        failures, calls = self.exercise(
+            replay_mutate=lambda row: {**row, "jobType": "analysis"})
+        self.assertEqual(1, failures)
+        self.assertEqual(2, len(calls))
+
+    def test_missing_replay_job_type_rejected(self):
+        def change(row):
+            row.pop("jobType")
+            return row
+        self.assertEqual(1, self.exercise(replay_mutate=change)[0])
+
+    def test_wrong_replay_idempotency_key_rejected(self):
+        failures, calls = self.exercise(
+            replay_mutate=lambda row: {**row, "idempotencyKey": "wrong-key"})
+        self.assertEqual(1, failures)
+        self.assertEqual(2, len(calls))
+
+    def test_missing_replay_idempotency_key_rejected(self):
+        def change(row):
+            row.pop("idempotencyKey")
+            return row
+        self.assertEqual(1, self.exercise(replay_mutate=change)[0])
+
+    def test_null_replay_job_body_rejected(self):
+        failures, calls = self.exercise(replay_mutate=lambda row: None)
+        self.assertEqual(1, failures)
+        self.assertEqual(2, len(calls))
+
+    def test_list_replay_job_body_rejected(self):
+        failures, calls = self.exercise(replay_mutate=lambda row: [])
+        self.assertEqual(1, failures)
+        self.assertEqual(2, len(calls))
+
+    def test_extra_replay_server_metadata_allowed(self):
+        self.assertEqual(0, self.exercise(
+            replay_mutate=lambda row: {
+                **row, "serverLastSeen": "2026-11-25T00:00:00Z"})[0])
+
 
 
 if __name__ == "__main__":
