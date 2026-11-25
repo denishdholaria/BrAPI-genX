@@ -197,7 +197,7 @@ class LiveAssertionManifestTests(unittest.TestCase):
         self.assertIn(
             "original telemetry source before window aggregation required",
             self.mutated("L-26", 1,
-                         lambda s: s.update(path=self.source["probes"][-1]["calls"][-1]["path"])))
+                         lambda s: s.update(path="/telemetry?deviceDbId={telemetry_device}&sensorDbId=air-temp-01&aggregation=mean&windowSeconds=60")))
 
     def test_window_mean_query_must_remain_registered(self):
         self.assertIn(
