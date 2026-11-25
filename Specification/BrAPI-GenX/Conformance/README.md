@@ -910,3 +910,19 @@ existing mandatory `Scripts/test_telemetry_replay_postcondition.py` and
 null, incorrectly typed and missing assertions.
 
 See [Mission 150 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-150-TELEMETRY-CLEAN-CONFLICTS.md).
+
+## Initial-ingest assurance for rejected telemetry conflicts (Mission 151)
+
+Registered **L-22** now confirms that its initial three-point telemetry
+submission was accepted as exactly three new samples, zero replays and an
+empty conflicts array *before* attempting a conflicting write. Previously
+the test could accept the expected conflict and retained source readback
+despite an inconsistent or explicitly rejected initial-ingest response.
+
+The existing `telemetry_counts` and `telemetry_no_conflicts` assertions
+are reused without changing the wire schema or adding a new assertion.
+The fail-closed L-22 manifest guard protects the first POST and the existing
+negative regression suite covers malformed counts, fabricated conflicts,
+missing fields and non-successful responses.
+
+See [Mission 151 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-151-TELEMETRY-CONFLICT-INITIAL-INGEST.md).
