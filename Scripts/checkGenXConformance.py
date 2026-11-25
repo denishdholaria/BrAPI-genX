@@ -1247,11 +1247,11 @@ def published_record_problem(status, payload, original, expected_id, identity_fi
     return None
 
 
-def replay_response_problem(payload, submitted):
-    """Return a diagnostic when an identical replay changes submitted fields.
+def submitted_record_problem(payload, submitted):
+    """Return a diagnostic when a publish response changes source fields.
 
-    The server may attach generated metadata, but every original scientific
-    field and nested value must survive in the replay response itself.
+    Additional server metadata is allowed, but every originally submitted
+    scientific and nested provenance value must survive unchanged.
     """
     returned = payload.get("result") if isinstance(payload, dict) else None
     if not isinstance(submitted, dict) or not isinstance(returned, dict):
@@ -1635,20 +1635,38 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                 if status not in (200, 202):
                     return results.report(
                         probe["id"], probe["title"], "FAIL", f"submit returned {status}")
-                seen = payload.get("result", {})
+                problem = submitted_record_problem(payload, body)
+                if problem:
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "initial term publication: " + problem
+                    )
+                seen = payload["result"]
                 ctx["live_term"] = (seen.get("variableDbId"), seen.get("version"))
                 ctx["live_term_baseline"] = copy.deepcopy(body)
             if step.get("capture_ledger"):
                 if status not in (200, 202):
                     return results.report(
                         probe["id"], probe["title"], "FAIL", f"submit returned {status}")
-                seen = payload.get("result", {})
+                problem = submitted_record_problem(payload, body)
+                if problem:
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "initial ledger publication: " + problem
+                    )
+                seen = payload["result"]
                 ctx["live_ledger"] = (seen.get("seedLotDbId"), seen.get("entryDbId"))
             if step.get("capture_model"):
                 if status not in (200, 202):
                     return results.report(
                         probe["id"], probe["title"], "FAIL", f"submit returned {status}")
-                seen = payload.get("result", {})
+                problem = submitted_record_problem(payload, body)
+                if problem:
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "initial model publication: " + problem
+                    )
+                seen = payload["result"]
                 ctx["live_model"] = (seen.get("modelDbId"), seen.get("modelVersion"))
                 ctx["live_model_baseline"] = (
                     body.get("modelDbId"), body.get("modelVersion"),
@@ -1672,7 +1690,13 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                 if status not in (200, 202):
                     return results.report(
                         probe["id"], probe["title"], "FAIL", f"submit returned {status}")
-                seen = payload.get("result", {})
+                problem = submitted_record_problem(payload, body)
+                if problem:
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "initial matrix publication: " + problem
+                    )
+                seen = payload["result"]
                 ctx["live_matrix"] = seen.get("matrixDbId")
                 ctx["live_matrix_baseline"] = (body.get("matrixDbId"), body.get("fileDigest"))
                 ctx["live_matrix_original"] = copy.deepcopy(body)
@@ -1680,7 +1704,13 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                 if status not in (200, 202):
                     return results.report(
                         probe["id"], probe["title"], "FAIL", f"submit returned {status}")
-                seen = payload.get("result", {})
+                problem = submitted_record_problem(payload, body)
+                if problem:
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "initial package publication: " + problem
+                    )
+                seen = payload["result"]
                 ctx["live_package"] = seen.get("packageDbId")
                 ctx["live_package_baseline"] = (body.get("packageDbId"), body.get("license"))
                 ctx["live_package_original"] = copy.deepcopy(body)
@@ -2173,7 +2203,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     )
             if assertion.get("same_term"):
                 seen = payload.get("result") if isinstance(payload, dict) else None
-                problem = replay_response_problem(payload, ctx.get("live_term_baseline"))
+                problem = submitted_record_problem(payload, ctx.get("live_term_baseline"))
                 identity = ((seen.get("variableDbId"), seen.get("version"))) if isinstance(seen, dict) else None
                 expected = ctx.get("live_term")
                 if problem or identity != expected:
@@ -2183,7 +2213,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     )
             if assertion.get("same_ledger"):
                 seen = payload.get("result") if isinstance(payload, dict) else None
-                problem = replay_response_problem(payload, ctx.get("live_ledger_body"))
+                problem = submitted_record_problem(payload, ctx.get("live_ledger_body"))
                 identity = ((seen.get("seedLotDbId"), seen.get("entryDbId"))) if isinstance(seen, dict) else None
                 expected = ctx.get("live_ledger")
                 if problem or identity != expected:
@@ -2208,7 +2238,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     )
             if assertion.get("same_model"):
                 seen = payload.get("result") if isinstance(payload, dict) else None
-                problem = replay_response_problem(payload, ctx.get("live_model_original"))
+                problem = submitted_record_problem(payload, ctx.get("live_model_original"))
                 identity = ((seen.get("modelDbId"), seen.get("modelVersion"))) if isinstance(seen, dict) else None
                 expected = ctx.get("live_model")
                 if problem or identity != expected:
@@ -2273,7 +2303,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     )
             if assertion.get("same_matrix"):
                 seen = payload.get("result") if isinstance(payload, dict) else None
-                problem = replay_response_problem(payload, ctx.get("live_matrix_original"))
+                problem = submitted_record_problem(payload, ctx.get("live_matrix_original"))
                 identity = (seen.get("matrixDbId")) if isinstance(seen, dict) else None
                 expected = ctx.get("live_matrix")
                 if problem or identity != expected:
@@ -2283,7 +2313,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     )
             if assertion.get("same_package"):
                 seen = payload.get("result") if isinstance(payload, dict) else None
-                problem = replay_response_problem(payload, ctx.get("live_package_original"))
+                problem = submitted_record_problem(payload, ctx.get("live_package_original"))
                 identity = (seen.get("packageDbId")) if isinstance(seen, dict) else None
                 expected = ctx.get("live_package")
                 if problem or identity != expected:
