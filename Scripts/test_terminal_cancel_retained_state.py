@@ -57,7 +57,10 @@ class TerminalCancelRetainedStateTests(unittest.TestCase):
             if len(calls) == 1:
                 self.assertEqual(("POST", "/jobs"), (method, path))
                 original.update(body)
-                return 202, {"result": {"jobDbId": "JOB_TERMINAL"}}
+                return 202, {"result": {
+                    "jobDbId": "JOB_TERMINAL",
+                    "jobType": body["jobType"],
+                    "idempotencyKey": body["idempotencyKey"]}}
             if len(calls) == 2:
                 self.assertEqual(("DELETE", "/jobs/JOB_TERMINAL"), (method, path))
                 return delete_status, {}
