@@ -1621,7 +1621,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                             if isinstance(payload, dict) else None)
                 if (status in (200, 202)
                         and isinstance(original, dict)
-                        and isinstance(returned, dict)
+                        and valid_job_lifecycle_status(returned)
                         and isinstance(ctx.get("live_job"), str)
                         and ctx["live_job"]
                         and returned.get("jobDbId") == ctx["live_job"]
@@ -1634,8 +1634,8 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     continue
                 return results.report(
                     probe["id"], probe["title"], "FAIL",
-                    "job replay status or original job identity/type/key "
-                    "not preserved in response"
+                    "job replay HTTP status, Job lifecycle status or original "
+                    "identity/type/key not preserved in response"
                 )
             if step.get("concurrent_posts"):
                 import concurrent.futures as futures
@@ -1669,7 +1669,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         or not ids or not isinstance(ids[0], str) or not ids[0]
                         or any(job_id != ids[0] for job_id in ids)
                         or any(
-                            not isinstance(record, dict)
+                            not valid_job_lifecycle_status(record)
                             or record.get("jobType") != body["jobType"]
                             or record.get("idempotencyKey")
                                 != body["idempotencyKey"]
@@ -1678,7 +1678,8 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
                         "concurrent job acknowledgments changed original "
-                        f"identity/type/key (statuses={statuses}, jobDbIds={ids})"
+                        f"identity/type/key or Job status "
+                        f"(HTTP statuses={statuses}, jobDbIds={ids})"
                     )
                 if not step.get("assert", {}).get("single_effect"):
                     return results.report(
