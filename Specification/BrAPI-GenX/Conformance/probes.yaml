@@ -314,12 +314,12 @@ probes:
   title: Ledger append replays identical entries without duplication
   procedure:
   - POST a LotLedgerEntryNewRequest under a fresh lot and idempotencyKey; POST the identical body again; re-GET the ledger.
-  expectation: Second response is 200 with the same entryDbId; the ledger holds exactly one entry with that key.
+  expectation: Second response is 200 with the same entryDbId; the ledger retains exactly one unchanged original entry with that key.
   falsifier: A second entry is appended for the identical replay.
   calls:
   - {method: POST, path: "/seedlots/{lotDbId}/ledger", body_fixture: live_ledger_submit, capture_ledger: true}
   - {method: POST, path: "/seedlots/{lotDbId}/ledger", body_fixture: live_ledger_submit, assert: {same_ledger: true}}
-  - {method: GET, path: "/seedlots/{lotDbId}/ledger", assert: {ledger_count: 1}}
+  - {method: GET, path: "/seedlots/{lotDbId}/ledger", assert: {ledger_count: 1, ledger_original_intact: true}}
 - id: L-11
   tier: live
   object: lotLedger

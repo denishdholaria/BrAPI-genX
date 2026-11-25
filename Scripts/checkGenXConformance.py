@@ -1930,7 +1930,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         or page["currentPage"] != 0 or page["pageSize"] < 1):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        "ledger post-conflict readback or pagination incomplete"
+                        "ledger replay/conflict readback or pagination incomplete"
                     )
                 row = rows[0]
                 if (row.get("seedLotDbId") != lot_id
@@ -1939,7 +1939,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                                for k, value in original.items())):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        "original ledger entry changed after rejected conflict"
+                        "original ledger entry changed after replay or rejected conflict"
                     )
             if "ledger_count" in assertion:
                 rows = payload.get("result", {}).get("data", [])
@@ -2257,6 +2257,19 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-10":
+                if (len(calls) != 3
+                        or calls[0].get("body_fixture") != "live_ledger_submit"
+                        or calls[0].get("capture_ledger") is not True
+                        or calls[1].get("body_fixture") != "live_ledger_submit"
+                        or calls[1].get("assert", {}).get("same_ledger") is not True
+                        or calls[2].get("method") != "GET"
+                        or calls[2].get("path") != "/seedlots/{lotDbId}/ledger"
+                        or calls[2].get("assert", {}).get("ledger_original_intact")
+                            is not True):
+                    raise ValueError(
+                        "probe L-10: ledger_original_intact GET after replay required"
+                    )
             if probe_id == "L-11":
                 if (len(calls) != 3
                         or calls[0].get("body_fixture") != "live_ledger_submit"

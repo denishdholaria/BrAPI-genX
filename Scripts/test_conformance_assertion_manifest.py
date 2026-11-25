@@ -147,6 +147,24 @@ class LiveAssertionManifestTests(unittest.TestCase):
                 s.update(body_fixture="live_submit"),
             )))
 
+    def test_ledger_replay_readback_cannot_be_removed(self):
+        self.assertIn(
+            "ledger_original_intact GET after replay required",
+            self.mutated("L-10", 2, lambda s: s.update(
+                {"assert": {"ledger_count": 1}})))
+
+    def test_ledger_replay_readback_cannot_be_disabled(self):
+        self.assertIn(
+            "ledger_original_intact must be true",
+            self.mutated("L-10", 2, lambda s: s["assert"].update(
+                ledger_original_intact=False)))
+
+    def test_ledger_replay_requires_same_identity_reply(self):
+        self.assertIn(
+            "ledger_original_intact GET after replay required",
+            self.mutated("L-10", 1,
+                         lambda s: s.update({"assert": {"status": 200}})))
+
     def test_ledger_conflict_readback_cannot_be_removed(self):
         self.assertIn(
             "ledger_original_intact GET after conflict required",

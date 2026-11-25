@@ -492,3 +492,18 @@ mandatory in hosted static conformance. The registered probe executes
 against the project's Python reference server. This is not external scientific
 or database durability certification. See
 [Mission 123 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-123-LEDGER-CONFLICT-READBACK.md).
+
+## Ledger replay retained-value verification (Mission 124)
+
+Registered **L-10** now validates the original stored ledger entry after
+an identical replay in addition to checking the response's identifier and
+record count. It reuses the full `ledger_original_intact` assertion from
+Mission 123, including the original quantity, actor, provenance, idempotency
+key, entry identity and complete collection pagination.
+
+Its manifest guard rejects losing the L-10 readback, and the dedicated
+`Scripts/test_ledger_replay_postcondition.py` mutation suite is mandatory
+in hosted static conformance. The project-owned Python server exercises L-10
+live. This is observable in-memory behavior, not a durability or scientific
+certification. See
+[Mission 124 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-124-LEDGER-REPLAY-READBACK.md).
