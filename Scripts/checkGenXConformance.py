@@ -1797,14 +1797,13 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         probe["id"], probe["title"], "FAIL", "matrix: " + problem
                     )
             if assertion.get("unchanged_package_license"):
-                seen = payload.get("result", {}) if isinstance(payload, dict) else {}
-                expected = ctx.get("live_package_baseline")
-                observed = (seen.get("packageDbId"), seen.get("license")) if isinstance(seen, dict) else None
-                if status != 200 or observed != expected:
+                problem = published_record_problem(
+                    status, payload, ctx.get("live_package_original"),
+                    ctx.get("live_package"), "packageDbId"
+                )
+                if problem:
                     return results.report(
-                        probe["id"], probe["title"], "FAIL",
-                        f"package identity/license changed or unavailable: "
-                        f"status={status}, expected={expected}, observed={observed}",
+                        probe["id"], probe["title"], "FAIL", "package: " + problem
                     )
             if assertion.get("model_replay_single_version"):
                 original = ctx.get("live_model_original")
@@ -2405,6 +2404,19 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-19":
+                if (len(calls) != 3
+                        or calls[0].get("body_fixture") != "live_package_submit"
+                        or calls[0].get("capture_package") is not True
+                        or calls[1].get("body_fixture") != "live_package_conflict"
+                        or calls[1].get("assert", {}).get("status") != 409
+                        or calls[2].get("method") != "GET"
+                        or calls[2].get("path") != "/fair-packages/{packageDbId}"
+                        or calls[2].get("assert", {}).get("unchanged_package_license")
+                            is not True):
+                    raise ValueError(
+                        "probe L-19: full package original readback after conflict required"
+                    )
             if probe_id == "L-17":
                 if (len(calls) != 3
                         or calls[0].get("body_fixture") != "live_matrix_submit"
