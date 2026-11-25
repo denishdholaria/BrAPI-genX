@@ -27,7 +27,7 @@ class LedgerReplayReadbackTests(unittest.TestCase):
         self.assertIs(True, self.probe["calls"][2]["assert"]["ledger_original_intact"])
 
     def exercise(self, mutate=None, mutate_page=None, get_status=200,
-                 replay_id="ENTRY_001", replay_status=200):
+                 replay_id="ENTRY_001", replay_status=200, replay_mutate=None):
         calls = []
         original = {}
         lot = []
@@ -45,9 +45,12 @@ class LedgerReplayReadbackTests(unittest.TestCase):
                 self.assertEqual(("POST", f"/seedlots/{lot[0]}/ledger"),
                                  (method, path))
                 self.assertEqual(original, body)
-                return replay_status, {"result": {
+                entry = {
                     **copy.deepcopy(body), "seedLotDbId": lot[0],
-                    "entryDbId": replay_id, "position": 0}}
+                    "entryDbId": replay_id, "position": 0}
+                if replay_mutate is not None:
+                    entry = replay_mutate(entry)
+                return replay_status, {"result": entry}
             if len(calls) == 3:
                 self.assertEqual(("GET", f"/seedlots/{lot[0]}/ledger"),
                                  (method, path))
@@ -147,6 +150,37 @@ class LedgerReplayReadbackTests(unittest.TestCase):
         failures, calls = self.exercise(replay_status=500)
         self.assertEqual(1, failures)
         self.assertEqual(2, len(calls))
+
+
+    def test_replay_quantity_corruption_fails_before_readback(self):
+        def change(row):
+            row.__setitem__('quantity', '99.000')
+            return row
+        failures, calls = self.exercise(replay_mutate=change)
+        self.assertEqual(1, failures)
+        self.assertEqual(2, len(calls))
+
+    def test_replay_nested_provenance_corruption_fails_before_readback(self):
+        def change(row):
+            row['provenance'].__setitem__('actor', 'actor:wrong')
+            return row
+        failures, calls = self.exercise(replay_mutate=change)
+        self.assertEqual(1, failures)
+        self.assertEqual(2, len(calls))
+
+    def test_replay_missing_units_corruption_fails_before_readback(self):
+        def change(row):
+            row.pop('units')
+            return row
+        failures, calls = self.exercise(replay_mutate=change)
+        self.assertEqual(1, failures)
+        self.assertEqual(2, len(calls))
+
+    def test_replay_allows_additional_server_metadata(self):
+        failures, calls = self.exercise(
+            replay_mutate=lambda row: {**row, "serverAuditMarker": "verified"})
+        self.assertEqual(0, failures)
+        self.assertEqual(3, len(calls))
 
 
 
