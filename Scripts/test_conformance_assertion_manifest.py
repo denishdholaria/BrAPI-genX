@@ -147,6 +147,23 @@ class LiveAssertionManifestTests(unittest.TestCase):
                 s.update(body_fixture="live_submit"),
             )))
 
+    def test_ledger_conflict_readback_cannot_be_removed(self):
+        self.assertIn(
+            "ledger_original_intact GET after conflict required",
+            self.mutated("L-11", 2, lambda s: s.update(
+                {"assert": {"ledger_count": 1}})))
+
+    def test_ledger_conflict_readback_cannot_be_disabled(self):
+        self.assertIn(
+            "ledger_original_intact must be true",
+            self.mutated("L-11", 2, lambda s: s["assert"].update(
+                ledger_original_intact=False)))
+
+    def test_ledger_conflict_readback_requires_lot_get(self):
+        self.assertIn(
+            "requires GET on captured seed lot",
+            self.mutated("L-11", 2, lambda s: s.update(path="/seedlots/OTHER/ledger")))
+
     def test_variable_term_conflict_readback_cannot_be_removed(self):
         self.assertIn(
             "unchanged_term_record GET after conflict required",

@@ -1905,6 +1905,42 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
                         f"inputsDigest {seen.get('inputsDigest')} != recomputed {want_digest}")
+            if assertion.get("ledger_original_intact"):
+                # L-11 must prove the original entry survived rejection,
+                # not just that the ledger still has one record.
+                result = payload.get("result") if isinstance(payload, dict) else None
+                rows = result.get("data") if isinstance(result, dict) else None
+                metadata = payload.get("metadata") if isinstance(payload, dict) else None
+                page = metadata.get("pagination") if isinstance(metadata, dict) else None
+                original = ctx.get("live_ledger_body")
+                identity = ctx.get("live_ledger")
+                lot_id = ctx.get("live_lot")
+                if (status != 200 or not isinstance(original, dict)
+                        or not isinstance(identity, tuple) or len(identity) != 2
+                        or not isinstance(lot_id, str) or not lot_id
+                        or identity[0] != lot_id
+                        or not isinstance(identity[1], str) or not identity[1]
+                        or not isinstance(rows, list) or len(rows) != 1
+                        or not isinstance(rows[0], dict)
+                        or not isinstance(page, dict)
+                        or any(type(page.get(k)) is not int
+                               for k in ("totalCount", "totalPages",
+                                         "currentPage", "pageSize"))
+                        or page["totalCount"] != 1 or page["totalPages"] != 1
+                        or page["currentPage"] != 0 or page["pageSize"] < 1):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "ledger post-conflict readback or pagination incomplete"
+                    )
+                row = rows[0]
+                if (row.get("seedLotDbId") != lot_id
+                        or row.get("entryDbId") != identity[1]
+                        or any(k not in row or row[k] != value
+                               for k, value in original.items())):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "original ledger entry changed after rejected conflict"
+                    )
             if "ledger_count" in assertion:
                 rows = payload.get("result", {}).get("data", [])
                 if len(rows) != assertion["ledger_count"]:
@@ -2063,7 +2099,8 @@ LIVE_BOOLEAN_ASSERTIONS = frozenset({
     "telemetry_original_intact", "telemetry_window_partitions",
     "telemetry_page_slice",
     "deprecated_inference_completed",
-    "unchanged_package_license", "unchanged_term_record", "inference_intact", "single_effect",
+    "unchanged_package_license", "unchanged_term_record", "ledger_original_intact",
+    "inference_intact", "single_effect",
     "concurrent_single_stored_job", "capability_registry_match",
 })
 LIVE_COUNT_ASSERTIONS = frozenset({
@@ -2148,6 +2185,13 @@ def validate_live_step_assertions(probe_id, index, call):
             f"probe {probe_id} call {index}: telemetry_mean and "
             "telemetry_samples must be paired"
         )
+    if "ledger_original_intact" in assertion and (
+            call.get("method") != "GET"
+            or call.get("path") != "/seedlots/{lotDbId}/ledger"):
+        raise ValueError(
+            f"probe {probe_id} call {index}: "
+            "ledger_original_intact requires GET on captured seed lot"
+        )
     if "unchanged_term_record" in assertion and (
             call.get("method") != "GET"
             or call.get("path") != "/variable-terms/{variableDbId}?version={termVersion}"):
@@ -2213,6 +2257,18 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-11":
+                if (len(calls) != 3
+                        or calls[0].get("body_fixture") != "live_ledger_submit"
+                        or calls[0].get("capture_ledger") is not True
+                        or calls[1].get("body_fixture") != "live_ledger_conflict"
+                        or calls[2].get("method") != "GET"
+                        or calls[2].get("path") != "/seedlots/{lotDbId}/ledger"
+                        or calls[2].get("assert", {}).get("ledger_original_intact")
+                            is not True):
+                    raise ValueError(
+                        "probe L-11: ledger_original_intact GET after conflict required"
+                    )
             if probe_id == "L-09":
                 if (len(calls) != 3
                         or calls[0].get("body_fixture") != "live_term_submit"

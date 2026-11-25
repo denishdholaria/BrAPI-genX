@@ -326,12 +326,12 @@ probes:
   title: Conflicting ledger write is rejected and the ledger is unchanged
   procedure:
   - POST a ledger entry; POST the same idempotencyKey with a different quantity; re-GET the ledger.
-  expectation: Second call is rejected with 409; the ledger still holds the original entry only.
+  expectation: Second call is rejected with 409; the original ledger entry, including quantity and provenance, remains unchanged and no additional entry is stored.
   falsifier: The original entry is mutated or a conflicting entry is stored.
   calls:
   - {method: POST, path: "/seedlots/{lotDbId}/ledger", body_fixture: live_ledger_submit, capture_ledger: true}
   - {method: POST, path: "/seedlots/{lotDbId}/ledger", body_fixture: live_ledger_conflict, assert: {status: 409}}
-  - {method: GET, path: "/seedlots/{lotDbId}/ledger", assert: {ledger_count: 1}}
+  - {method: GET, path: "/seedlots/{lotDbId}/ledger", assert: {ledger_count: 1, ledger_original_intact: true}}
 - id: L-12
   tier: live
   object: modelRegistry
