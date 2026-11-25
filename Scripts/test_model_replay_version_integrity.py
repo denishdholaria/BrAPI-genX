@@ -24,13 +24,14 @@ class ModelReplayVersionIntegrityTests(unittest.TestCase):
     def test_registered_probe_checks_filtered_collection(self):
         self.assertEqual(3, len(self.probe["calls"]))
         self.assertIs(True, self.probe["calls"][1]["assert"]["same_model"])
+        self.assertEqual(200, self.probe["calls"][1]["assert"]["status"])
         last = self.probe["calls"][2]
         self.assertEqual(("GET", "/models?modelDbId={modelDbId}"),
                          (last["method"], last["path"]))
         self.assertIs(True, last["assert"]["model_replay_single_version"])
 
     def exercise(self, mutate=None, page_change=None, read_status=200,
-                 replay_version=None):
+                 replay_version=None, replay_status=200):
         calls = []
         original = {}
 
@@ -46,7 +47,7 @@ class ModelReplayVersionIntegrityTests(unittest.TestCase):
                 replay = copy.deepcopy(body)
                 if replay_version is not None:
                     replay["modelVersion"] = replay_version
-                return 200, {"result": replay}
+                return replay_status, {"result": replay}
             if len(calls) == 3:
                 expected_path = ("/models?modelDbId=" +
                                  quote(original["modelDbId"], safe=":"))
@@ -157,6 +158,18 @@ class ModelReplayVersionIntegrityTests(unittest.TestCase):
         failed, calls = self.exercise(replay_version="8")
         self.assertEqual(1, failed)
         self.assertEqual(2, len(calls))
+
+
+    def test_replay_accepted_as_new_write_fails(self):
+        failures, calls = self.exercise(replay_status=202)
+        self.assertEqual(1, failures)
+        self.assertEqual(2, len(calls))
+
+    def test_replay_server_failure_fails(self):
+        failures, calls = self.exercise(replay_status=500)
+        self.assertEqual(1, failures)
+        self.assertEqual(2, len(calls))
+
 
 
 if __name__ == "__main__":
