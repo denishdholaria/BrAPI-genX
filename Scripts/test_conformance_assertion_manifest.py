@@ -90,7 +90,7 @@ class LiveAssertionManifestTests(unittest.TestCase):
 
     def test_replay_flag_needs_explicit_same_job_identity_assertion(self):
         self.assertIn("same_jobDbId assertion",
-            self.mutated("L-01", 1, lambda s: s["assert"].pop("same_jobDbId")))
+            self.mutated("L-01", 1, lambda s: s.update({"assert": {"status": 202}})))
 
     def test_replay_identity_assertion_without_flag_rejected(self):
         self.assertIn("same_jobDbId assertion",
@@ -98,7 +98,7 @@ class LiveAssertionManifestTests(unittest.TestCase):
 
     def test_concurrent_submissions_require_single_effect(self):
         self.assertIn("single_effect assertion",
-            self.mutated("L-24", 0, lambda s: s["assert"].pop("single_effect")))
+            self.mutated("L-24", 0, lambda s: s.update({"assert": {"status": 202}})))
 
     def test_concurrent_count_must_be_integer(self):
         self.assertIn("concurrent_posts must be >= 2",
