@@ -1041,3 +1041,21 @@ metrics or evidence, and permits harmless extra response metadata.
 
 The original stored-readback, identity, status and manifest assertions
 remain intact. See [Mission 158 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-158-PUBLICATION-REPLAY-RESPONSE-FIELDS.md).
+
+## Initial publication response preserves submitted source (Mission 159)
+
+The existing publication capture steps for variable terms, seed-lot ledger
+entries, models, variant matrices and FAIR packages now verify that the
+**first successful POST response** contains every submitted scientific
+field and nested provenance value. Previously, the runner captured
+the accepted identifier without validating the rest of the acknowledgment;
+later correct replay and readback responses could mask corrupted source
+fields in the first response.
+
+This reuses the shared submitted-field comparison from Mission 158, permits
+additional server-generated metadata, and does not change the allowed initial
+creation-status semantics. The five existing mandatory regression suites
+now reject altered or missing first-response scientific fields while still
+allowing extra server-managed metadata.
+
+See [Mission 159 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-159-INITIAL-PUBLICATION-SOURCE-INTEGRITY.md).
