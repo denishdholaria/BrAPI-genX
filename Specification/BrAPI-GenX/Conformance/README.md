@@ -926,3 +926,19 @@ negative regression suite covers malformed counts, fabricated conflicts,
 missing fields and non-successful responses.
 
 See [Mission 151 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-151-TELEMETRY-CONFLICT-INITIAL-INGEST.md).
+
+## Source-ingest assurance for telemetry reads and aggregates (Mission 152)
+
+Registered **L-23** (mean), **L-26** (window partitions) and **L-28**
+(two-page collection integrity) now verify that their original three-point
+batch was fully accepted: `appended=3`, `replayed=0`, and an exactly empty
+`conflicts` array. Previously each used the submitted fixture as its
+expected source, but a response reporting a partial or contradictory initial
+append could be ignored so long as later readbacks looked correct.
+
+The previously established original-field, aggregate and pagination
+assertions remain unchanged. The L-23/L-26/L-28 manifest guards require the
+new initial-acceptance evidence and the existing mandatory regression suites
+include malformed first-POST responses. No GenX wire-schema changes are needed.
+
+See [Mission 152 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-152-TELEMETRY-AGGREGATE-SOURCE-INGEST.md).
