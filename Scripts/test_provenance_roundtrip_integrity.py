@@ -28,6 +28,8 @@ class ProvenanceRoundtripTests(unittest.TestCase):
             observation = copy.deepcopy(submission["parameters"]["observation"])
             job = {
                 "jobDbId": "JOB_PROVENANCE_TEST",
+                "jobType": submission["jobType"],
+                "idempotencyKey": submission["idempotencyKey"],
                 "status": "COMPLETED",
                 "result": {"data": [observation]},
             }
@@ -122,6 +124,75 @@ class ProvenanceRoundtripTests(unittest.TestCase):
 
     def test_failed_http_response_fails(self):
         self.assertEqual(1, self.exercise(status=404).failures)
+
+
+    def test_changed_observation_value_fails_with_intact_provenance(self):
+        def mutate(resp):
+            resp["result"]["result"]["data"][0]["value"] = "99.9"
+            return resp
+        self.assertEqual(1, self.exercise(mutate).failures)
+
+    def test_changed_observation_unit_fails_with_intact_provenance(self):
+        def mutate(resp):
+            resp["result"]["result"]["data"][0]["observationUnitDbId"] = "OU_OTHER"
+            return resp
+        self.assertEqual(1, self.exercise(mutate).failures)
+
+    def test_changed_observation_variable_fails_with_intact_provenance(self):
+        def mutate(resp):
+            resp["result"]["result"]["data"][0]["observationVariableDbId"] = "CO_OTHER"
+            return resp
+        self.assertEqual(1, self.exercise(mutate).failures)
+
+    def test_changed_observation_identity_fails_with_intact_provenance(self):
+        def mutate(resp):
+            resp["result"]["result"]["data"][0]["observationDbId"] = "OBS_OTHER"
+            return resp
+        self.assertEqual(1, self.exercise(mutate).failures)
+
+    def test_missing_observation_value_fails_with_intact_provenance(self):
+        def mutate(resp):
+            resp["result"]["result"]["data"][0].pop("value")
+            return resp
+        self.assertEqual(1, self.exercise(mutate).failures)
+
+    def test_nonstring_numeric_observation_value_fails(self):
+        def mutate(resp):
+            resp["result"]["result"]["data"][0]["value"] = 4.2
+            return resp
+        self.assertEqual(1, self.exercise(mutate).failures)
+
+    def test_wrong_completed_job_type_fails(self):
+        def mutate(resp):
+            resp["result"]["jobType"] = "germplasm_search"
+            return resp
+        self.assertEqual(1, self.exercise(mutate).failures)
+
+    def test_wrong_completed_idempotency_key_fails(self):
+        def mutate(resp):
+            resp["result"]["idempotencyKey"] = "unrelated-request"
+            return resp
+        self.assertEqual(1, self.exercise(mutate).failures)
+
+    def test_missing_completed_idempotency_key_fails(self):
+        def mutate(resp):
+            resp["result"].pop("idempotencyKey")
+            return resp
+        self.assertEqual(1, self.exercise(mutate).failures)
+
+    def test_extra_server_generated_observation_field_allowed(self):
+        def mutate(resp):
+            resp["result"]["result"]["data"][0]["ingestedAt"] = "2026-11-25T00:00:00Z"
+            return resp
+        self.assertEqual(0, self.exercise(mutate).failures)
+
+    def test_extra_returned_observation_fails(self):
+        def mutate(resp):
+            rows = resp["result"]["result"]["data"]
+            rows.append(copy.deepcopy(rows[0]))
+            return resp
+        self.assertEqual(1, self.exercise(mutate).failures)
+
 
 
 if __name__ == "__main__":
