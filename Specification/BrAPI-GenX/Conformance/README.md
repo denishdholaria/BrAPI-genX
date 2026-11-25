@@ -150,3 +150,17 @@ external-vendor servers. Passing the comparison is not a comprehensive GenX
 interoperability certification, scientific validation, authorization proof
 or production-readiness guarantee. Non-ASCII and numerical boundary digest
 vectors are tested separately. See [Mission 100 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-100-CROSS-RUNTIME-DIFFERENTIAL-CI.md).
+
+## Differential status expectations (Mission 101)
+
+The nine-request cross-runtime checker validates the HTTP status returned by
+**each** reference implementation before comparing their normalized bodies.
+The expected statuses are `200, 202, 200, 409, 400, 200, 200, 200, 202` for,
+respectively, server information, initial job submission, exact replay,
+changed-body replay conflict, invalid job type, expired job retrieval, model
+registration, model replay and inference submission. Both servers agreeing on
+a wrong status is **not** a pass. Negative mutations in
+`Scripts/test_genx_differential_check.py` protect this check.
+
+These are expectations for the current RFC-001/RFC-004 test sequence, not a
+complete normative response code catalogue for all GenX operations.
