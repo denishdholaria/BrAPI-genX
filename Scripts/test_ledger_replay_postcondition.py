@@ -23,10 +23,11 @@ class LedgerReplayReadbackTests(unittest.TestCase):
     def test_registered_replay_reads_back_original(self):
         self.assertEqual(3, len(self.probe["calls"]))
         self.assertIs(True, self.probe["calls"][1]["assert"]["same_ledger"])
+        self.assertEqual(200, self.probe["calls"][1]["assert"]["status"])
         self.assertIs(True, self.probe["calls"][2]["assert"]["ledger_original_intact"])
 
     def exercise(self, mutate=None, mutate_page=None, get_status=200,
-                 replay_id="ENTRY_001"):
+                 replay_id="ENTRY_001", replay_status=200):
         calls = []
         original = {}
         lot = []
@@ -44,7 +45,7 @@ class LedgerReplayReadbackTests(unittest.TestCase):
                 self.assertEqual(("POST", f"/seedlots/{lot[0]}/ledger"),
                                  (method, path))
                 self.assertEqual(original, body)
-                return 200, {"result": {
+                return replay_status, {"result": {
                     **copy.deepcopy(body), "seedLotDbId": lot[0],
                     "entryDbId": replay_id, "position": 0}}
             if len(calls) == 3:
@@ -135,6 +136,18 @@ class LedgerReplayReadbackTests(unittest.TestCase):
         failures, calls = self.exercise(replay_id="ENTRY_DIFFERENT")
         self.assertEqual(1, failures)
         self.assertEqual(2, len(calls))
+
+
+    def test_replay_accepted_as_new_write_fails(self):
+        failures, calls = self.exercise(replay_status=202)
+        self.assertEqual(1, failures)
+        self.assertEqual(2, len(calls))
+
+    def test_replay_server_failure_fails(self):
+        failures, calls = self.exercise(replay_status=500)
+        self.assertEqual(1, failures)
+        self.assertEqual(2, len(calls))
+
 
 
 if __name__ == "__main__":
