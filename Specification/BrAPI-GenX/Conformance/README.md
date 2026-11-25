@@ -93,7 +93,13 @@ run separately via `Scripts/test_endpoint_identity.py`.
 ## Status contract
 
 Each probe reports `PASS`, `FAIL`, or `SKIP` (live without `--server` only).
-Any `FAIL` exits non-zero. No probe may depend on another probe's side
+Any `FAIL` exits non-zero. When `--only` is used, the runner now requires
+exactly one registered probe identifier. An unknown, duplicate or malformed
+selection fails; selecting a live probe without `--server` also fails rather
+than silently reporting a skip. An unfiltered static run still reports `SKIP`
+for live probes when no server is provided. See the selection regression tests
+in `Scripts/test_conformance_probe_selection.py` (Mission 103).
+No probe may depend on another probe's side
 effects; live probes that create server state use fresh idempotency keys.
 
 
