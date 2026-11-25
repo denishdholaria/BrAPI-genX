@@ -260,3 +260,20 @@ does not ratify new probes or change existing scientific contracts.
 The mutation suite is included in the already-required
 `Scripts/test_conformance_probe_selection.py` hosted static step. See
 [Mission 108 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-108-PROBE-MANIFEST-COMPLETENESS.md).
+
+## Binary exact-byte digest test corpus (Mission 109)
+
+The existing digest corpus tested the raw-byte category using only UTF-8
+strings. Mission 109 adds two **synthetic binary payloads** encoded as
+canonical Base64 in the test fixture (not to be confused with their hash
+preimages). Independent Python and TypeScript/Bun verifiers decode those
+fixtures to raw bytes before calculating SHA-256. The vectors include NUL
+octets, bytes above 127, an archive-like header and significant trailing
+zero bytes. Invalid Base64, absent or ambiguous byte sources, a changed digest
+and removal of a required vector are mutation-tested in both runtimes.
+
+This verifies the cross-runtime *hash of identical bytes*, **not** that a
+particular model archive, variant matrix or package digest actually binds to
+the authoritative production payload. File packaging, transport
+representation, field scope, scientific authority and durability remain
+outside this test. See [Mission 109 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-109-BINARY-EXACT-BYTE-VECTORS.md).

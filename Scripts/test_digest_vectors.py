@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Cross-language digest-vector checks for the accepted JCS method and candidate digest implementation."""
 import argparse
+import base64
 import hashlib
 import json
 import re
@@ -30,7 +31,9 @@ REQUIRED_VECTOR_IDS = {
         "empty-array",
         "safe-integer-interoperability-boundary",
     },
-    "exactByteVectors": {"http-body-whitespace-preserved", "http-body-key-order-preserved"},
+    "exactByteVectors": {"http-body-whitespace-preserved", "http-body-key-order-preserved",
+                         "binary-nul-high-bit-and-zip-header",
+                         "binary-leading-and-trailing-zero-are-significant"},
     "rejectionVectors": {
         "duplicate-property-name",
         "duplicate-property-name-after-unescaping",
@@ -138,10 +141,24 @@ def main():
             failures.append(vector["id"] + ": unexpected rejection/error: " + str(exc))
 
     for vector in corpus["exactByteVectors"]:
-        digest = hashlib.sha256(vector["inputUtf8"].encode("utf-8")).hexdigest()
-        if digest != vector["expectedSha256"]:
-            failures.append(vector["id"] + ": exact-byte SHA-256 differs (" + digest + ")")
-        exact_count += 1
+        try:
+            has_utf8 = isinstance(vector.get("inputUtf8"), str)
+            has_base64 = isinstance(vector.get("inputBase64"), str)
+            if has_utf8 == has_base64:
+                raise ValueError("expected exactly one of inputUtf8 or inputBase64")
+            if has_base64:
+                encoded = vector["inputBase64"]
+                raw_bytes = base64.b64decode(encoded, validate=True)
+                if base64.b64encode(raw_bytes).decode("ascii") != encoded:
+                    raise ValueError("noncanonical base64 representation")
+            else:
+                raw_bytes = vector["inputUtf8"].encode("utf-8")
+            digest = hashlib.sha256(raw_bytes).hexdigest()
+            if digest != vector["expectedSha256"]:
+                failures.append(vector["id"] + ": exact-byte SHA-256 differs (" + digest + ")")
+            exact_count += 1
+        except Exception as exc:
+            failures.append(str(vector.get("id")) + ": invalid exact-byte input: " + str(exc))
 
     for vector in corpus["rejectionVectors"]:
         try:
