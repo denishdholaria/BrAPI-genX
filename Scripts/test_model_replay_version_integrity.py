@@ -31,7 +31,7 @@ class ModelReplayVersionIntegrityTests(unittest.TestCase):
         self.assertIs(True, last["assert"]["model_replay_single_version"])
 
     def exercise(self, mutate=None, page_change=None, read_status=200,
-                 replay_version=None, replay_status=200, replay_mutate=None):
+                 replay_version=None, replay_status=200, replay_mutate=None, first_mutate=None):
         calls = []
         original = {}
 
@@ -40,7 +40,10 @@ class ModelReplayVersionIntegrityTests(unittest.TestCase):
             if len(calls) == 1:
                 self.assertEqual(("POST", "/models"), (method, path))
                 original.update(copy.deepcopy(body))
-                return 200, {"result": copy.deepcopy(body)}
+                created = copy.deepcopy(body)
+                if first_mutate is not None:
+                    created = first_mutate(created)
+                return 200, {"result": created}
             if len(calls) == 2:
                 self.assertEqual(("POST", "/models"), (method, path))
                 self.assertEqual(original, body)
@@ -200,6 +203,37 @@ class ModelReplayVersionIntegrityTests(unittest.TestCase):
     def test_replay_allows_additional_server_metadata(self):
         failures, calls = self.exercise(
             replay_mutate=lambda row: {**row, "serverAuditMarker": "verified"})
+        self.assertEqual(0, failures)
+        self.assertEqual(3, len(calls))
+
+
+    def test_initial_publication_altered_submitted_field_fails(self):
+        def change(row):
+            row.__setitem__('artifactDigest', 'f'*64)
+            return row
+        failures, calls = self.exercise(first_mutate=change)
+        self.assertEqual(1, failures)
+        self.assertEqual(1, len(calls))
+
+    def test_initial_publication_altered_nested_field_fails(self):
+        def change(row):
+            row['metrics'].__setitem__('rmse',9.9)
+            return row
+        failures, calls = self.exercise(first_mutate=change)
+        self.assertEqual(1, failures)
+        self.assertEqual(1, len(calls))
+
+    def test_initial_publication_missing_submitted_field_fails(self):
+        def change(row):
+            row.pop('trainingDataDigest')
+            return row
+        failures, calls = self.exercise(first_mutate=change)
+        self.assertEqual(1, failures)
+        self.assertEqual(1, len(calls))
+
+    def test_initial_publication_allows_extra_server_field(self):
+        failures, calls = self.exercise(
+            first_mutate=lambda row: {**row, "publicationAudit": "present"})
         self.assertEqual(0, failures)
         self.assertEqual(3, len(calls))
 
