@@ -839,6 +839,32 @@ def check_telemetry_shape(root, probe, ctx, results):
         results.report(probe["id"], probe["title"], "PASS", f"{checked} points")
 
 
+def v21_fallback_calls_problems(document):
+    """Minimum usable legacy server-info shape, not full version 2.1 certification."""
+    if not isinstance(document, dict):
+        return ["server-info response is not an object"]
+    result = document.get("result")
+    if not isinstance(result, dict):
+        return ["server-info result is not an object"]
+    calls = result.get("calls")
+    if not isinstance(calls, list) or not calls:
+        return ["server-info calls must be a nonempty array"]
+    problems = []
+    for index, call in enumerate(calls):
+        if not isinstance(call, dict):
+            problems.append(f"call {index}: not an object")
+            continue
+        service = call.get("service")
+        if not isinstance(service, str) or not service.strip():
+            problems.append(f"call {index}: missing usable service")
+        for field in ("versions", "methods"):
+            values = call.get(field)
+            if (not isinstance(values, list) or not values
+                    or any(not isinstance(v, str) or not v.strip() for v in values)):
+                problems.append(f"call {index}: {field} must be a nonempty string array")
+    return problems
+
+
 def check_v21_fallback_shape(root, probe, ctx, results):
     doc = load_json(
         os.path.join(
@@ -846,20 +872,11 @@ def check_v21_fallback_shape(root, probe, ctx, results):
             "fixtures", "serverinfo_v21_only.json",
         )
     )
-    problems = []
-    calls = doc.get("result", {}).get("calls")
-    if not calls:
-        problems.append("no calls array in fallback fixture")
-    else:
-        for call in calls:
-            for field in ("service", "versions", "methods"):
-                if field not in call:
-                    problems.append(f"call missing '{field}': {call}")
+    problems = v21_fallback_calls_problems(doc)
     if problems:
         results.report(probe["id"], probe["title"], "FAIL", "; ".join(problems))
     else:
         results.report(probe["id"], probe["title"], "PASS")
-
 
 
 def normalize_operation_path(path):
@@ -1629,11 +1646,13 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         f"ledger holds {len(rows)} entries, "
                         f"expected {assertion['ledger_count']}")
             if assertion.get("negotiable"):
-                result = payload.get("result", {})
-                if status == 200 and ("calls" in result):
+                problems = (v21_fallback_calls_problems(payload)
+                            if status == 200 else [f"unexpected HTTP status {status}"])
+                if not problems:
                     continue
                 return results.report(
-                    probe["id"], probe["title"], "FAIL", "serverinfo not negotiable")
+                    probe["id"], probe["title"], "FAIL",
+                    "serverinfo not negotiable: " + "; ".join(problems))
 
             if assertion.get("capability_registry_match"):
                 registry_path = ctx.get("capability_registry_path")
