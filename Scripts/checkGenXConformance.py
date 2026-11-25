@@ -1770,15 +1770,19 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         f"replay returned {(seen.get('seedLotDbId'), seen.get('entryDbId'))}, "
                         f"expected {ctx.get('live_ledger')}")
             if assertion.get("unchanged_model_digest"):
-                seen = payload.get("result", {}) if isinstance(payload, dict) else {}
-                baseline = ctx.get("live_model_baseline")
-                observed = (seen.get("modelDbId"), seen.get("modelVersion"),
-                            seen.get("artifactDigest")) if isinstance(seen, dict) else None
-                if status != 200 or observed != baseline:
+                original = ctx.get("live_model_original")
+                identity = ctx.get("live_model")
+                expected_id = (identity[0] if isinstance(identity, tuple)
+                               and len(identity) == 2 else None)
+                problem = published_record_problem(
+                    status, payload, original, expected_id, "modelDbId"
+                )
+                if (problem or not isinstance(identity, tuple) or len(identity) != 2
+                        or not isinstance(original, dict)
+                        or original.get("modelVersion") != identity[1]):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        f"published model identity/digest changed or unavailable: "
-                        f"status={status}, expected={baseline}, observed={observed}",
+                        "model: " + (problem or "original model version mismatch")
                     )
             if assertion.get("same_model"):
                 seen = payload.get("result", {})
@@ -2404,6 +2408,24 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-13":
+                if (len(calls) != 3
+                        or calls[0].get("method") != "POST"
+                        or calls[0].get("path") != "/models"
+                        or calls[0].get("body_fixture") != "live_model_submit"
+                        or calls[0].get("capture_model") is not True
+                        or calls[1].get("method") != "POST"
+                        or calls[1].get("path") != "/models"
+                        or calls[1].get("body_fixture") != "live_model_conflict"
+                        or calls[1].get("assert", {}).get("status") != 409
+                        or calls[2].get("method") != "GET"
+                        or calls[2].get("path")
+                            != "/models/{modelDbId}?version={modelVersion}"
+                        or calls[2].get("assert", {}).get("unchanged_model_digest")
+                            is not True):
+                    raise ValueError(
+                        "probe L-13: full model original readback after conflict required"
+                    )
             if probe_id == "L-19":
                 if (len(calls) != 3
                         or calls[0].get("body_fixture") != "live_package_submit"

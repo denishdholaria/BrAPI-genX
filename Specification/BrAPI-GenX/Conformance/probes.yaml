@@ -350,9 +350,9 @@ probes:
   object: modelRegistry
   title: Conflicting artifact under a published version is rejected
   procedure:
-  - POST a model version; POST the same (modelDbId, modelVersion) with a different artifactDigest.
-  expectation: Second call is rejected with 409 and the published version is unchanged on re-GET.
-  falsifier: The published artifact digest is mutated or a conflicting version is stored.
+  - POST a model version; POST the same (modelDbId, modelVersion) with a different artifactDigest; read back the original version.
+  expectation: Second call is rejected with 409 and every originally submitted field of the published version remains unchanged on re-GET.
+  falsifier: The artifact, training data, metrics, framework, or provenance is mutated despite a conflict response.
   calls:
   - {method: POST, path: /models, body_fixture: live_model_submit, capture_model: true}
   - {method: POST, path: /models, body_fixture: live_model_conflict, assert: {status: 409}}

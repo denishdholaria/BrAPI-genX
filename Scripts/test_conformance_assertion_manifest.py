@@ -147,6 +147,36 @@ class LiveAssertionManifestTests(unittest.TestCase):
                 s.update(body_fixture="live_submit"),
             )))
 
+    def test_model_conflict_readback_cannot_be_removed(self):
+        self.assertIn(
+            "full model original readback after conflict required",
+            self.mutated("L-13", 2,
+                         lambda s: s.update({"assert": {"status": 200}})))
+
+    def test_model_conflict_requires_conflicting_request(self):
+        self.assertIn(
+            "full model original readback after conflict required",
+            self.mutated("L-13", 1,
+                         lambda s: s.update(body_fixture="live_model_submit")))
+
+    def test_model_conflict_requires_original_capture(self):
+        self.assertIn(
+            "full model original readback after conflict required",
+            self.mutated("L-13", 0,
+                         lambda s: s.update(capture_model=False)))
+
+    def test_model_conflict_readback_cannot_be_disabled(self):
+        self.assertIn(
+            "unchanged_model_digest must be true",
+            self.mutated("L-13", 2,
+                         lambda s: s["assert"].update(unchanged_model_digest=False)))
+
+    def test_model_conflict_cannot_accept_200_response(self):
+        self.assertIn(
+            "full model original readback after conflict required",
+            self.mutated("L-13", 1,
+                         lambda s: s["assert"].update(status=200)))
+
     def test_package_conflict_readback_cannot_be_removed(self):
         self.assertIn(
             "full package original readback after conflict required",

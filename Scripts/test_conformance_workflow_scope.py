@@ -54,6 +54,7 @@ REQUIRED_COMMANDS = {
     "python Scripts/test_model_replay_version_integrity.py",
     "python Scripts/test_matrix_conflict_whole_record.py",
     "python Scripts/test_package_conflict_whole_record.py",
+    "python Scripts/test_model_conflict_whole_record.py",
     "python Scripts/test_deprecated_inference_completion.py",
     "python Scripts/test_model_conflict_postcondition.py",
     "python Scripts/test_publication_conflict_postconditions.py",
