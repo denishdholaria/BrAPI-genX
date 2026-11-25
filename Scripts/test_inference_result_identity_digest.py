@@ -46,7 +46,7 @@ class InferenceResultIdentityDigestTests(unittest.TestCase):
                 submitted.update(copy.deepcopy(body))
                 result = {"jobDbId": "JOB_INFERENCE",
                           "jobType": body["jobType"],
-                          "idempotencyKey": body["idempotencyKey"]}
+                          "idempotencyKey": body["idempotencyKey"], "status": "SUBMITTED"}
                 if mutate_submit_response:
                     result = mutate_submit_response(result)
                 return 202, {"result": result}
