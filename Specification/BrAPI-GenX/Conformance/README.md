@@ -725,3 +725,17 @@ page counts. The required registered L-25 sequence is protected in the
 manifest, and `Scripts/test_collection_pagination_arithmetic.py` runs in
 hosted static conformance. See
 [Mission 139 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-139-COLLECTION-PAGINATION-ARITHMETIC.md).
+
+## Deprecated inference result binding (Mission 140)
+
+Registered **L-27** now requires not merely a warning and a completed
+job identifier, but a completed inference record tied to the originally
+registered deprecated model's identifier and version and to the canonical
+digest of the original inference inputs. It also verifies that the
+completed job retains its accepted job identity, job type and idempotency
+key. A completion for an unrelated model or request fails.
+
+The required L-27 two-step procedure is guarded in manifest validation,
+and `Scripts/test_deprecated_inference_result_binding.py` runs in hosted
+static conformance. See
+[Mission 140 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-140-DEPRECATED-INFERENCE-RESULT-BINDING.md).

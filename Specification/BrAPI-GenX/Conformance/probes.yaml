@@ -521,9 +521,9 @@ probes:
   object: modelRegistry
   title: Deprecated models serve with a warning
   procedure:
-  - Register a deprecated model; submit inference naming it.
-  expectation: Submit is accepted with 202 and a WARNING status message; the job completes.
-  falsifier: Silent acceptance without warning, or rejection.
+  - Register a deprecated model; submit inference naming it; verify completed output is bound to the originally registered version and canonical input digest.
+  expectation: Submit is accepted with 202 and a WARNING status message; that exact inference job completes with the original model identity, version and input digest.
+  falsifier: Silent acceptance, rejection, another job completing, changed model version, or unrelated inference output.
   calls:
   - {method: POST, path: /models, body_fixture: live_model_deprecated, capture_model_deprecated: true}
   - {method: POST, path: /jobs, body_fixture: live_inference_deprecated, assert: {status: 202, status_message: WARNING, deprecated_inference_completed: true}}

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 from pathlib import Path
 from unittest import mock
 import unittest
@@ -31,6 +32,7 @@ class DeprecatedInferenceCompletionTests(unittest.TestCase):
         calls = []
         accepted_id = "JOB_DEPRECATED_TEST"
         model = {}
+        submitted_inference = {}
 
         def fake_http(_server, method, path, body=None, token=None):
             calls.append((method, path))
@@ -43,6 +45,7 @@ class DeprecatedInferenceCompletionTests(unittest.TestCase):
                 self.assertEqual(("POST", "/jobs"), (method, path))
                 self.assertEqual(model["modelDbId"],
                                  body["parameters"]["modelDbId"])
+                submitted_inference.update(copy.deepcopy(body))
                 return submit_status, {
                     "result": {"jobDbId": accepted_id} if include_id else {},
                     "metadata": {"status": (
@@ -56,9 +59,19 @@ class DeprecatedInferenceCompletionTests(unittest.TestCase):
             self.assertEqual(accepted_id, job_id)
             if missing_terminal:
                 return {"result": {}}
+            inputs = submitted_inference["parameters"]["inputs"]
+            digest = hashlib.sha256(
+                checker.canonical(inputs).encode("utf-8")).hexdigest()
             return {"result": {
                 "jobDbId": terminal_id if terminal_id is not None else accepted_id,
                 "status": terminal_status,
+                "jobType": "inference",
+                "idempotencyKey": submitted_inference["idempotencyKey"],
+                "result": {"data": [{
+                    "modelDbId": model["modelDbId"],
+                    "modelVersion": model["modelVersion"],
+                    "inputsDigest": digest,
+                }]},
             }}
 
         outcome = checker.Results()
