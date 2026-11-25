@@ -23,6 +23,7 @@ import copy
 import glob
 import hashlib
 import json
+import math
 import os
 import re
 import sys
@@ -2313,21 +2314,48 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                             f"telemetry page slice mismatch at row {index}: {point!r}"
                         )
             if "telemetry_mean" in assertion:
-                rows = payload.get("result", {}).get("data", [])
-                if len(rows) != 1:
+                original = ctx.get("live_batch")
+                values = ([point.get("value") for point in original]
+                          if isinstance(original, list)
+                          and all(isinstance(point, dict) for point in original)
+                          else None)
+                result = payload.get("result") if isinstance(payload, dict) else None
+                rows = result.get("data") if isinstance(result, dict) else None
+                metadata = payload.get("metadata") if isinstance(payload, dict) else None
+                page = metadata.get("pagination") if isinstance(metadata, dict) else None
+                if (status != 200 or not isinstance(values, list) or not values
+                        or any(type(v) not in (int, float) or not math.isfinite(v)
+                               for v in values)
+                        or not isinstance(rows, list) or len(rows) != 1
+                        or not isinstance(rows[0], dict)
+                        or not isinstance(page, dict)
+                        or any(type(page.get(k)) is not int
+                               for k in ("totalCount", "totalPages", "pageSize",
+                                         "currentPage"))
+                        or page["totalCount"] != 1
+                        or page["totalPages"] != 1
+                        or page["pageSize"] < 1
+                        or page["currentPage"] != 0):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        f"{len(rows)} buckets, expected 1")
-                if rows[0].get("sampleCount") != assertion.get("telemetry_samples"):
+                        "telemetry mean unavailable or incomplete aggregation envelope"
+                    )
+                expected_mean = sum(values) / len(values)
+                bucket = rows[0]
+                got_mean = bucket.get("value")
+                if (bucket.get("aggregation") != "mean"
+                        or bucket.get("windowStart") != original[0].get("timestamp")
+                        or type(bucket.get("sampleCount")) is not int
+                        or bucket["sampleCount"] != len(values)
+                        or bucket["sampleCount"] != assertion.get("telemetry_samples")
+                        or type(got_mean) not in (int, float)
+                        or not math.isfinite(got_mean)
+                        or abs(got_mean - expected_mean) > 1e-9
+                        or abs(got_mean - assertion["telemetry_mean"]) > 1e-9):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        f"sampleCount is {rows[0].get('sampleCount')}, "
-                        f"expected {assertion.get('telemetry_samples')}")
-                if abs(rows[0].get("value", 0) - assertion["telemetry_mean"]) > 1e-9:
-                    return results.report(
-                        probe["id"], probe["title"], "FAIL",
-                        f"mean is {rows[0].get('value')}, "
-                        f"expected {assertion['telemetry_mean']}")
+                        "mean bucket does not recompute from captured source samples"
+                    )
             if assertion.get("inference_intact"):
                 original_model = ctx.get("live_model_original")
                 expected_model = ctx.get("live_model")
@@ -2806,6 +2834,25 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-23":
+                if (len(calls) != 3
+                        or calls[0].get("method") != "POST"
+                        or calls[0].get("path") != "/telemetry"
+                        or calls[0].get("body_fixture") != "live_telemetry_batch"
+                        or calls[0].get("capture_telemetry") is not True
+                        or calls[1].get("method") != "GET"
+                        or calls[1].get("path") !=
+                            "/telemetry?deviceDbId={telemetry_device}&sensorDbId=air-temp-01&from=2026-09-07T08:00:00Z&to=2026-09-07T08:03:00Z&aggregation=none"
+                        or calls[1].get("assert", {}).get("telemetry_original_intact")
+                            is not True
+                        or calls[2].get("method") != "GET"
+                        or calls[2].get("path") !=
+                            "/telemetry?deviceDbId={telemetry_device}&sensorDbId=air-temp-01&from=2026-09-07T08:00:00Z&to=2026-09-07T08:03:00Z&aggregation=mean"
+                        or calls[2].get("assert", {}).get("telemetry_mean") != 21.7
+                        or calls[2].get("assert", {}).get("telemetry_samples") != 3):
+                    raise ValueError(
+                        "probe L-23: source telemetry GET and mean recomputation required"
+                    )
             if probe_id == "L-14":
                 if (len(calls) != 3
                         or calls[0].get("method") != "POST"

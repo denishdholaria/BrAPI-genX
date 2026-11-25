@@ -475,12 +475,13 @@ probes:
   object: telemetry
   title: Server aggregates recompute identically from stored points
   procedure:
-  - POST three known points; GET the mean over their range.
-  expectation: One bucket with sampleCount 3 and value equal to the arithmetic mean within 1e-9.
-  falsifier: An aggregate disagreeing with the stored points.
+  - POST three known points; GET the source readings over their exact range; GET the mean over that range and recompute from the original samples.
+  expectation: The three original stored readings are intact and exactly one mean bucket has sampleCount 3, consistent timestamp and value equal to the arithmetic mean within 1e-9.
+  falsifier: Source samples are missing/changed, an aggregation response is inconsistent or a bucket disagrees with the original points.
   calls:
   - {method: POST, path: /telemetry, body_fixture: live_telemetry_batch, capture_telemetry: true}
-  - {method: GET, path: "/telemetry?deviceDbId={telemetry_device}&sensorDbId=air-temp-01&from=2026-09-07T08:00:00Z&to=2026-09-07T08:03:00Z&aggregation=mean", assert: {telemetry_mean: 21.7, telemetry_samples: 3}}
+  - {method: GET, path: "/telemetry?deviceDbId={telemetry_device}&sensorDbId=air-temp-01&from=2026-09-07T08:00:00Z&to=2026-09-07T08:03:00Z&aggregation=none", assert: {status: 200, telemetry_original_intact: true}}
+  - {method: GET, path: "/telemetry?deviceDbId={telemetry_device}&sensorDbId=air-temp-01&from=2026-09-07T08:00:00Z&to=2026-09-07T08:03:00Z&aggregation=mean", assert: {status: 200, telemetry_mean: 21.7, telemetry_samples: 3}}
 - id: L-24
   tier: live
   object: jobs
