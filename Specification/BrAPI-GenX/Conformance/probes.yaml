@@ -217,7 +217,7 @@ probes:
   procedure:
   - POST JobNewRequest with a fresh idempotencyKey; record jobDbId.
   - POST the identical body and key again; GET the complete jobs collection.
-  expectation: Second response is 200 or 202 with the same jobDbId and exactly one stored job with that original key and identifier.
+  expectation: Second response is 200 or 202 with the same jobDbId, original jobType and echoed idempotencyKey, and exactly one stored job with that original key and identifier.
   falsifier: A second jobDbId is issued or a duplicate/modified stored job exists despite matching responses.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_submit, capture_job: true}
