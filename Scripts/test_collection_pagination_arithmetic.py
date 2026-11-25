@@ -58,9 +58,11 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
             if len(requests) == 3:
                 self.assertEqual(("GET", "/jobs"), (method, path))
                 rows = [{"jobDbId": "JOB_PAGE", "jobType": job_body["jobType"],
-                         "idempotencyKey": job_body["idempotencyKey"]}]
+                         "idempotencyKey": job_body["idempotencyKey"],
+                         "status": "SUBMITTED"}]
                 if include_unrelated:
-                    rows.append({"jobDbId": "OTHER", "jobType": "analysis"})
+                    rows.append({"jobDbId": "OTHER", "jobType": "analysis",
+                                 "status": "RUNNING"})
                 value = first_page(rows)
                 if modify:
                     value = modify("jobs", value)
@@ -237,7 +239,7 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
     @classmethod
     def append_unrelated_job(cls, kind, payload, job):
         if kind == "jobs":
-            payload["result"]["data"].append(job)
+            payload["result"]["data"].append({"status": "SUBMITTED", **job})
             cls.refresh_first_page(payload)
         return payload
 
@@ -246,9 +248,9 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
             if kind == "jobs":
                 data["result"]["data"].extend([
                     {"jobDbId": "UNRELATED", "jobType": "analysis",
-                     "idempotencyKey": "other-key-1"},
+                     "idempotencyKey": "other-key-1", "status": "SUBMITTED"},
                     {"jobDbId": "UNRELATED", "jobType": "analysis",
-                     "idempotencyKey": "other-key-2"},
+                     "idempotencyKey": "other-key-2", "status": "RUNNING"},
                 ])
                 self.refresh_first_page(data)
             return data
