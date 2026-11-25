@@ -3290,6 +3290,25 @@ def validate_probe_manifest(probes):
                     raise ValueError(
                         "probe L-28: two-page telemetry slice and source integrity required"
                     )
+            if probe_id == "L-26":
+                if (len(calls) != 3
+                        or calls[0].get("method") != "POST"
+                        or calls[0].get("path") != "/telemetry"
+                        or calls[0].get("body_fixture") != "live_telemetry_batch"
+                        or calls[0].get("capture_telemetry") is not True
+                        or calls[1].get("method") != "GET"
+                        or calls[1].get("path") !=
+                            "/telemetry?deviceDbId={telemetry_device}&sensorDbId=air-temp-01&aggregation=none"
+                        or calls[1].get("assert") != {
+                            "status": 200, "telemetry_original_intact": True}
+                        or calls[2].get("method") != "GET"
+                        or calls[2].get("path") !=
+                            "/telemetry?deviceDbId={telemetry_device}&sensorDbId=air-temp-01&aggregation=mean&windowSeconds=60"
+                        or calls[2].get("assert") != {
+                            "data_length": 3, "telemetry_window_partitions": True}):
+                    raise ValueError(
+                        "probe L-26: original telemetry source before window aggregation required"
+                    )
             if probe_id == "L-26" and not any(
                     call.get("method") == "GET"
                     and isinstance(call.get("assert"), dict)

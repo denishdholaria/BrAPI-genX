@@ -160,21 +160,51 @@ class LiveAssertionManifestTests(unittest.TestCase):
 
     def test_window_partition_assertion_must_remain_registered(self):
         self.assertIn(
-            "telemetry_window_partitions GET assertion required",
-            self.mutated("L-26", 1,
+            "original telemetry source before window aggregation required",
+            self.mutated("L-26", 2,
                          lambda s: s["assert"].pop("telemetry_window_partitions")))
 
     def test_window_partition_assertion_cannot_be_false(self):
         self.assertIn(
             "telemetry_window_partitions must be true",
-            self.mutated("L-26", 1,
+            self.mutated("L-26", 2,
                          lambda s: s["assert"].update(telemetry_window_partitions=False)))
 
     def test_window_partition_assertion_typo_rejected(self):
         self.assertIn(
             "unknown live assertion",
-            self.mutated("L-26", 1,
+            self.mutated("L-26", 2,
                          lambda s: s["assert"].update(telemetry_window_partition=True)))
+
+    def test_window_original_readback_cannot_be_removed(self):
+        self.assertIn(
+            "original telemetry source before window aggregation required",
+            self.mutated("L-26", 1,
+                         lambda s: s.update({"assert": {"status": 200}})))
+
+    def test_window_original_source_path_cannot_change(self):
+        self.assertIn(
+            "original telemetry source before window aggregation required",
+            self.mutated("L-26", 1,
+                         lambda s: s.update(path="/telemetry")))
+
+    def test_window_original_capture_is_required(self):
+        self.assertIn(
+            "original telemetry source before window aggregation required",
+            self.mutated("L-26", 0, lambda s: s.pop("capture_telemetry")))
+
+    def test_window_original_must_precede_mean_get(self):
+        self.assertIn(
+            "original telemetry source before window aggregation required",
+            self.mutated("L-26", 1,
+                         lambda s: s.update(path="/telemetry?deviceDbId={telemetry_device}&sensorDbId=air-temp-01&aggregation=mean&windowSeconds=60")))
+
+    def test_window_mean_query_must_remain_registered(self):
+        self.assertIn(
+            "original telemetry source before window aggregation required",
+            self.mutated("L-26", 2,
+                         lambda s: s.update(
+                             path="/telemetry?deviceDbId={telemetry_device}&sensorDbId=air-temp-01&aggregation=none")))
 
     def test_replay_flag_needs_explicit_same_job_identity_assertion(self):
         self.assertIn("same_jobDbId assertion",

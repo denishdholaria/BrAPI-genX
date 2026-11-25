@@ -21,14 +21,17 @@ class TelemetryWindowPartitionTests(unittest.TestCase):
         cls.probe = next(p for p in document["probes"] if p["id"] == "L-26")
 
     def test_registered_probe_checks_actual_partition_contents(self):
-        self.assertEqual(2, len(self.probe["calls"]))
-        request = self.probe["calls"][1]
+        self.assertEqual(3, len(self.probe["calls"]))
+        source, request = self.probe["calls"][1:]
+        self.assertEqual("GET", source["method"])
+        self.assertIn("aggregation=none", source["path"])
+        self.assertIs(True, source["assert"]["telemetry_original_intact"])
         self.assertEqual("GET", request["method"])
         self.assertIn("windowSeconds=60", request["path"])
         self.assertEqual(3, request["assert"]["data_length"])
         self.assertIs(True, request["assert"]["telemetry_window_partitions"])
 
-    def exercise(self, corrupt=None, status=200):
+    def exercise(self, corrupt=None, status=200, raw_mutate=None, raw_status=200):
         seen = []
         submitted = []
 
@@ -38,8 +41,18 @@ class TelemetryWindowPartitionTests(unittest.TestCase):
                 self.assertEqual(("POST", "/telemetry"), (method, path))
                 self.assertEqual(3, len(body))
                 submitted.extend(copy.deepcopy(body))
-                return 200, {"result": {"appended": 3, "replayed": 0, "conflicts": []}}
+                return 200, {"result": {
+                    "appended": 3, "replayed": 0, "conflicts": []}}
             if len(seen) == 2:
+                self.assertEqual("GET", method)
+                self.assertIn(f"deviceDbId={submitted[0]['deviceDbId']}", path)
+                self.assertIn("sensorDbId=air-temp-01", path)
+                self.assertIn("aggregation=none", path)
+                rows = copy.deepcopy(submitted)
+                if raw_mutate is not None:
+                    rows = raw_mutate(rows)
+                return raw_status, {"result": {"data": rows}}
+            if len(seen) == 3:
                 self.assertEqual("GET", method)
                 self.assertIn(f"deviceDbId={submitted[0]['deviceDbId']}", path)
                 self.assertIn("sensorDbId=air-temp-01", path)
@@ -59,7 +72,7 @@ class TelemetryWindowPartitionTests(unittest.TestCase):
             checker.run_live_probe(
                 "http://example.test/genx/v1", self.probe,
                 {"conformance_dir": str(CONF)}, outcome, None, None)
-        self.assertEqual(2, len(seen))
+        self.assertIn(len(seen), (2, 3))
         return outcome.failures
 
     def test_correct_one_sample_per_minute_passes(self):
@@ -141,6 +154,57 @@ class TelemetryWindowPartitionTests(unittest.TestCase):
 
     def test_unsuccessful_read_fails(self):
         self.assertEqual(1, self.exercise(status=404))
+
+
+    def test_source_readback_with_original_fields_passes(self):
+        self.assertEqual(0, self.exercise())
+
+    def test_missing_source_sample_fails_before_aggregation(self):
+        self.assertEqual(1, self.exercise(raw_mutate=lambda rows: rows[:2]))
+
+    def test_duplicated_source_sample_fails_before_aggregation(self):
+        self.assertEqual(1, self.exercise(
+            raw_mutate=lambda rows: [rows[0], rows[1], copy.deepcopy(rows[1])]))
+
+    def test_mutated_source_value_fails_before_aggregation(self):
+        def mutate(rows):
+            rows[1]["value"] += 4.0
+            return rows
+        self.assertEqual(1, self.exercise(raw_mutate=mutate))
+
+    def test_mutated_source_unit_fails_before_aggregation(self):
+        def mutate(rows):
+            rows[2]["unit"] = "kelvin"
+            return rows
+        self.assertEqual(1, self.exercise(raw_mutate=mutate))
+
+    def test_mutated_source_quality_fails_before_aggregation(self):
+        def mutate(rows):
+            rows[2]["quality"] = "good"
+            return rows
+        self.assertEqual(1, self.exercise(raw_mutate=mutate))
+
+    def test_mutated_nested_source_provenance_fails(self):
+        def mutate(rows):
+            rows[0]["provenance"]["algorithmVersion"] = "fabricated"
+            return rows
+        self.assertEqual(1, self.exercise(raw_mutate=mutate))
+
+    def test_wrong_source_sensor_fails_before_aggregation(self):
+        def mutate(rows):
+            rows[1]["sensorDbId"] = "unrelated-sensor"
+            return rows
+        self.assertEqual(1, self.exercise(raw_mutate=mutate))
+
+    def test_missing_source_record_field_fails(self):
+        def mutate(rows):
+            rows[1].pop("unit")
+            return rows
+        self.assertEqual(1, self.exercise(raw_mutate=mutate))
+
+    def test_failed_source_read_fails_before_aggregation(self):
+        self.assertEqual(1, self.exercise(raw_status=404))
+
 
 
 if __name__ == "__main__":
