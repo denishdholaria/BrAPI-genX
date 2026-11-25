@@ -186,3 +186,19 @@ These are **two additional, subset-specific executions** of registered live
 probes, not two newly registered probes, and do not validate the full GenX
 operation catalogue, durable multi-instance idempotency, authorization, or
 an external implementation. See [Mission 102 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-102-TYPESCRIPT-LIVE-PROBE-ASSURANCE.md).
+
+## TypeScript model-identity and rejection probes (Mission 104)
+
+The hosted TypeScript/Bun reference-server job now also executes existing
+registered probes **L-12** (exact model-version replay), **L-13** (reject a
+different artifact digest under the same published version), and **L-15**
+(reject inference on unknown or revoked models). Together with Mission 102's
+L-14/L-24 probes, these constrain the observable RFC-004 model/inference
+subset without introducing any new wire contracts or probe identifiers.
+
+The existing L-13 probe asserts the conflict response but does **not** itself
+re-fetch the stored artifact to verify unchanged bytes. That additional
+post-conflict state invariant remains an independent verification gap; a
+rejection response alone must not be described as proof of unchanged storage.
+The models are in-memory reference stubs, not scientifically validated models.
+See [Mission 104 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-104-TYPESCRIPT-MODEL-INTEGRITY-PROBES.md).
