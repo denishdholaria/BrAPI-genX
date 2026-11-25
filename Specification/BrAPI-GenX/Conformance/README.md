@@ -370,3 +370,17 @@ digest. This is exact *structured round-trip equality* within a project-owned
 reference server, **not** independent verification of the scientific source,
 field-specific preimages or the provenance's truth. See
 [Mission 115 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-115-PROVENANCE-STRUCTURAL-ROUNDTRIP.md).
+
+## Created-resource collection and pagination evidence (Mission 116)
+
+Registered **L-25** previously sent job and model collection GET requests but
+asserted only HTTP 200, even though its stated expectation required
+`result.data` arrays and pagination totals after creating both resources.
+It now checks structured nonempty collections, basic integer pagination
+metadata and the presence of the just-created job or model version. A success
+response with unrelated data, malformed pagination or no records fails.
+
+The negative regression suite is part of hosted static conformance. This
+checks the current in-memory reference service's observable list behavior,
+not a complete pagination protocol or third-party certification. See
+[Mission 116 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-116-COLLECTION-ENVELOPE-EVIDENCE.md).
