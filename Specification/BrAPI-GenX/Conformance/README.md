@@ -1329,3 +1329,26 @@ reject missing, nonstring, or out-of-enum statuses *before* the
 collection readback and include positive changing-status cases.
 
 See [Mission 173 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-173-REPLAY-CONCURRENT-JOB-STATUS.md).
+
+## Required Job status across complete stored collections (Mission 174)
+
+The shared complete jobs-collection validator used by **L-01**, **L-02**,
+**L-04**, **L-15**, and **L-24** now requires every visible stored Job
+to include a valid string `status` from the published six-value
+Job lifecycle enumeration. Previously a collection with correct
+pagination and unique identifiers could contain missing or
+out-of-enum statuses on unrelated records and still pass.
+
+The original negative-effect and identity assertions are unchanged.
+Legitimate existing jobs may be in different valid lifecycle phases,
+and the client-supplied `idempotencyKey` remains optional when the
+server did not receive one. Mandatory synthetic regressions now cover
+missing, unsupported and nonstring status values in original and
+unrelated jobs. Previously abbreviated synthetic collection rows
+have been aligned with the published schema so mutation tests still
+exercise their intended negative-effect and duplicate-identity checks.
+
+This is a **complete-collection** rule. The L-25 first-page-only
+probe has a separate pagination scope.
+
+See [Mission 174 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-174-COMPLETE-JOB-COLLECTION-STATUS.md).

@@ -99,7 +99,7 @@ class JobConflictCollectionUnchangedTests(unittest.TestCase):
     def test_server_generated_new_job_fails(self):
         def change(rows):
             rows.append({"jobDbId": "JOB_HIDDEN", "jobType": "analysis",
-                         "idempotencyKey": "another-key"})
+                         "idempotencyKey": "another-key", "status": "SUBMITTED"})
             return rows
         self.assertEqual(1, self.exercise(after_rows=change)[0])
 

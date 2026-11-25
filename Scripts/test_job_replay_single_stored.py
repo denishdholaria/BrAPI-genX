@@ -59,11 +59,13 @@ class JobReplaySingleStoredTests(unittest.TestCase):
                 self.assertEqual(("GET", "/jobs"), (method, path))
                 rows = [{"jobDbId": "JOB_ORIGINAL",
                          "jobType": original["jobType"],
-                         "idempotencyKey": original["idempotencyKey"]}]
+                         "idempotencyKey": original["idempotencyKey"],
+                         "status": "SUBMITTED"}]
                 if unrelated:
                     rows.append({"jobDbId": "JOB_UNRELATED",
                                  "jobType": "analysis",
-                                 "idempotencyKey": "unrelated-key"})
+                                 "idempotencyKey": "unrelated-key",
+                                 "status": "RUNNING"})
                 if change_rows is not None:
                     rows = change_rows(copy.deepcopy(rows))
                 pagination = {
@@ -85,6 +87,34 @@ class JobReplaySingleStoredTests(unittest.TestCase):
 
     def test_single_original_job_passes(self):
         self.assertEqual(0, self.exercise()[0])
+
+    def test_stored_job_missing_status_fails(self):
+        def change(rows):
+            del rows[0]["status"]
+            return rows
+        self.assertEqual(1, self.exercise(change_rows=change)[0])
+
+    def test_unrelated_stored_job_unknown_status_fails(self):
+        def change(rows):
+            rows[1]["status"] = "QUEUED"
+            return rows
+        self.assertEqual(1, self.exercise(
+            unrelated=True, change_rows=change)[0])
+
+    def test_unrelated_stored_job_nonstring_status_fails(self):
+        for wrong in (None, False, 0, [], {}):
+            with self.subTest(wrong=wrong):
+                def change(rows):
+                    rows[1]["status"] = wrong
+                    return rows
+                self.assertEqual(1, self.exercise(
+                    unrelated=True, change_rows=change)[0])
+
+    def test_stored_running_status_is_valid(self):
+        def change(rows):
+            rows[0]["status"] = "RUNNING"
+            return rows
+        self.assertEqual(0, self.exercise(change_rows=change)[0])
 
     def test_unrelated_historical_job_allowed(self):
         self.assertEqual(0, self.exercise(unrelated=True)[0])
@@ -336,9 +366,9 @@ class JobReplaySingleStoredTests(unittest.TestCase):
         def corrupt(rows):
             rows.extend([
                 {"jobDbId": "OTHER", "jobType": "analysis",
-                 "idempotencyKey": "key-1"},
+                 "idempotencyKey": "key-1", "status": "SUBMITTED"},
                 {"jobDbId": "OTHER", "jobType": "analysis",
-                 "idempotencyKey": "key-2"},
+                 "idempotencyKey": "key-2", "status": "SUBMITTED"},
             ])
             return rows
         self.assertEqual(1, self.exercise(change_rows=corrupt)[0])
@@ -346,18 +376,19 @@ class JobReplaySingleStoredTests(unittest.TestCase):
     def test_unrelated_job_with_blank_id_fails(self):
         self.assertEqual(1, self.exercise(
             change_rows=lambda rows: rows + [
-                {"jobDbId": "", "jobType": "analysis"}])[0])
+                {"jobDbId": "", "jobType": "analysis", "status": "SUBMITTED"}])[0])
 
     def test_unrelated_job_with_boolean_key_fails(self):
         self.assertEqual(1, self.exercise(
             change_rows=lambda rows: rows + [
                 {"jobDbId": "OTHER", "jobType": "analysis",
-                 "idempotencyKey": False}])[0])
+                 "idempotencyKey": False, "status": "SUBMITTED"}])[0])
 
     def test_unrelated_job_without_optional_key_allowed(self):
         self.assertEqual(0, self.exercise(
             change_rows=lambda rows: rows + [
-                {"jobDbId": "OTHER", "jobType": "analysis"}])[0])
+                {"jobDbId": "OTHER", "jobType": "analysis",
+                 "status": "SUBMITTED"}])[0])
 
 
 
