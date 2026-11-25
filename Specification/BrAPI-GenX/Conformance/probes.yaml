@@ -463,11 +463,11 @@ probes:
   object: telemetry
   title: Disagreeing value for a stored sample instant is rejected element-wise
   procedure:
-  - POST a batch; POST a point with the same natural key but a different value; verify the response names that exact rejected key.
-  expectation: The conflicting element is identified by its device/sensor/timestamp key, with nothing appended; all originally submitted stored fields remain unchanged on re-GET.
-  falsifier: A fabricated or unrelated conflict key, an overwritten original record or wholesale batch failure.
+  - POST a three-point batch and verify clean ingestion; POST a point with the same natural key but a different value; verify the response names that exact rejected key.
+  expectation: The first batch appends exactly three readings with no replay or conflicts; the conflicting element is then identified by its device/sensor/timestamp key with nothing appended, and all original stored fields remain unchanged on re-GET.
+  falsifier: A fabricated or unrelated conflict key, an unaccepted or contradictory initial batch, an overwritten original record or wholesale batch failure.
   calls:
-  - {method: POST, path: /telemetry, body_fixture: live_telemetry_batch, capture_telemetry: true}
+  - {method: POST, path: /telemetry, body_fixture: live_telemetry_batch, capture_telemetry: true, assert: {telemetry_counts: {appended: 3, replayed: 0}, telemetry_no_conflicts: true}}
   - {method: POST, path: /telemetry, body_fixture: live_telemetry_conflict, assert: {telemetry_counts: {appended: 0, replayed: 0}, telemetry_conflicts: 1}}
   - {method: GET, path: "/telemetry?deviceDbId={telemetry_device}&sensorDbId=air-temp-01&aggregation=none", assert: {telemetry_original_intact: true}}
 - id: L-23

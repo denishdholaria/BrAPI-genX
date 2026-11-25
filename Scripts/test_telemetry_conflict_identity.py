@@ -24,9 +24,14 @@ class TelemetryConflictIdentityTests(unittest.TestCase):
         self.assertEqual(3, len(self.probe["calls"]))
         self.assertEqual(1, self.probe["calls"][1]["assert"]["telemetry_conflicts"])
         self.assertIs(True, self.probe["calls"][2]["assert"]["telemetry_original_intact"])
+        self.assertEqual(
+            {"appended": 3, "replayed": 0},
+            self.probe["calls"][0]["assert"]["telemetry_counts"])
+        self.assertIs(True, self.probe["calls"][0]["assert"]["telemetry_no_conflicts"])
 
     def exercise(self, modify_conflicts=None, mutate_counts=None,
-                 post_status=200, alter_original=None):
+                 post_status=200, alter_original=None, first_counts=None,
+                 first_conflicts=(), first_status=200):
         calls = []
         submitted = []
 
@@ -35,8 +40,11 @@ class TelemetryConflictIdentityTests(unittest.TestCase):
             if len(calls) == 1:
                 self.assertEqual(("POST", "/telemetry"), (method, path))
                 submitted.extend(copy.deepcopy(body))
-                return 200, {"result": {"appended": 3, "replayed": 0,
-                                        "conflicts": []}}
+                counts = {"appended": 3, "replayed": 0}
+                if first_counts is not None:
+                    counts = first_counts
+                conflicts = [] if first_conflicts == () else first_conflicts
+                return first_status, {"result": {**counts, "conflicts": conflicts}}
             if len(calls) == 2:
                 self.assertEqual(("POST", "/telemetry"), (method, path))
                 self.assertEqual(1, len(body))
@@ -151,6 +159,42 @@ class TelemetryConflictIdentityTests(unittest.TestCase):
     def test_negative_conflict_counter_fails(self):
         self.assertEqual(1, self.exercise(
             mutate_counts={"replayed": -1})[0])
+
+
+    def test_initial_append_counter_inconsistent_fails(self):
+        self.assertEqual(1, self.exercise(first_counts={
+            "appended": 2, "replayed": 1})[0])
+
+    def test_initial_append_zero_boolean_fails(self):
+        self.assertEqual(1, self.exercise(first_counts={
+            "appended": 3, "replayed": False})[0])
+
+    def test_initial_append_fractional_count_fails(self):
+        self.assertEqual(1, self.exercise(first_counts={
+            "appended": 3.0, "replayed": 0})[0])
+
+    def test_initial_append_missing_counter_fails(self):
+        self.assertEqual(1, self.exercise(first_counts={
+            "appended": 3})[0])
+
+    def test_initial_append_claims_conflict_fails(self):
+        self.assertEqual(1, self.exercise(first_conflicts=[
+            "unrelated-device/other-sensor/2026-09-07T08:02:00Z"])[0])
+
+    def test_initial_append_null_conflicts_fails(self):
+        self.assertEqual(1, self.exercise(first_conflicts=None)[0])
+
+    def test_initial_append_string_conflicts_fails(self):
+        self.assertEqual(1, self.exercise(first_conflicts="none")[0])
+
+    def test_initial_append_error_status_fails(self):
+        self.assertEqual(1, self.exercise(first_status=409)[0])
+
+    def test_valid_initial_append_and_conflict_still_pass(self):
+        self.assertEqual(0, self.exercise(
+            first_counts={"appended": 3, "replayed": 0},
+            first_conflicts=[])[0])
+
 
 
 if __name__ == "__main__":
