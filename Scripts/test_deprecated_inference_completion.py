@@ -65,7 +65,7 @@ class DeprecatedInferenceCompletionTests(unittest.TestCase):
                 submitted_inference.update(copy.deepcopy(body))
                 accepted = {
                     "jobDbId": accepted_id, "jobType": body["jobType"],
-                    "idempotencyKey": body["idempotencyKey"],
+                    "idempotencyKey": body["idempotencyKey"], "status": "SUBMITTED",
                 }
                 if not include_id:
                     accepted.pop("jobDbId")
