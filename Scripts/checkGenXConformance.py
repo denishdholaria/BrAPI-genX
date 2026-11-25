@@ -2584,29 +2584,40 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                             probe["id"], probe["title"], "FAIL",
                             f"{dotted} is {node!r}, expected {expected!r}")
             if assertion.get("provenance_intact"):
-                submitted = (ctx.get("live_body") or {}).get("parameters", {}).get(
-                    "observation"
-                )
+                # L-07 exercises the analysis echo reference workflow.
+                # Comparing only provenance would accept a changed
+                # observation value or scientific identity with the original
+                # provenance copied onto an unrelated returned observation.
+                request_body = ctx.get("live_body")
+                parameters = (request_body.get("parameters")
+                              if isinstance(request_body, dict) else None)
+                submitted = (parameters.get("observation")
+                             if isinstance(parameters, dict) else None)
                 want = submitted.get("provenance") if isinstance(submitted, dict) else None
                 job = payload.get("result") if isinstance(payload, dict) else None
                 completed = job.get("result") if isinstance(job, dict) else None
                 observations = completed.get("data") if isinstance(completed, dict) else None
                 if (status != 200 or not isinstance(want, dict)
+                        or not isinstance(request_body, dict)
                         or not isinstance(job, dict)
                         or job.get("jobDbId") != ctx.get("live_job")
+                        or job.get("jobType") != request_body.get("jobType")
+                        or job.get("idempotencyKey") != request_body.get("idempotencyKey")
                         or job.get("status") != "COMPLETED"
                         or not isinstance(observations, list)
                         or len(observations) != 1
                         or not isinstance(observations[0], dict)):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        "completed job or observation missing for provenance comparison"
+                        "completed job or original observation identity missing"
                     )
-                got = observations[0].get("provenance")
-                if not isinstance(got, dict) or got != want:
+                returned = observations[0]
+                if (returned.get("provenance") != want
+                        or any(field not in returned or returned[field] != value
+                               for field, value in submitted.items())):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        "provenance differs from submitted source including evidenceLinks"
+                        "original observation value, identity or nested provenance changed"
                     )
         results.report(probe["id"], probe["title"], "PASS")
     except Exception as exc:
@@ -3017,6 +3028,19 @@ def validate_probe_manifest(probes):
                             is not True):
                     raise ValueError(
                         "probe L-27: bound deprecated inference completion and warning required"
+                    )
+            if probe_id == "L-07":
+                if (len(calls) != 2
+                        or calls[0].get("method") != "POST"
+                        or calls[0].get("path") != "/jobs"
+                        or calls[0].get("body_fixture") != "live_provenanced_submit"
+                        or calls[0].get("capture_job") is not True
+                        or calls[0].get("wait_terminal") is not True
+                        or calls[1].get("method") != "GET"
+                        or calls[1].get("path") != "/jobs/{jobDbId}"
+                        or calls[1].get("assert", {}).get("provenance_intact") is not True):
+                    raise ValueError(
+                        "probe L-07: original observation and provenance round-trip required"
                     )
             if probe_id == "L-25":
                 if (len(calls) != 4
