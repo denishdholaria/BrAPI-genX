@@ -29,7 +29,7 @@ class MatrixReplayStoredStateTests(unittest.TestCase):
         self.assertIs(True, final["assert"]["matrix_replay_single_record"])
 
     def exercise(self, mutate_rows=None, mutate_page=None, read_status=200,
-                 replay_identifier=None, unrelated=False, replay_status=200):
+                 replay_identifier=None, unrelated=False, replay_status=200, replay_mutate=None):
         calls = []
         original = {}
 
@@ -45,6 +45,8 @@ class MatrixReplayStoredStateTests(unittest.TestCase):
                 returned = copy.deepcopy(body)
                 if replay_identifier is not None:
                     returned["matrixDbId"] = replay_identifier
+                if replay_mutate is not None:
+                    returned = replay_mutate(returned)
                 return replay_status, {"result": returned}
             if len(calls) == 3:
                 self.assertEqual(("GET", "/variantmatrices"), (method, path))
@@ -163,6 +165,37 @@ class MatrixReplayStoredStateTests(unittest.TestCase):
         failures, calls = self.exercise(replay_status=500)
         self.assertEqual(1, failures)
         self.assertEqual(2, len(calls))
+
+
+    def test_replay_file_digest_corruption_fails_before_readback(self):
+        def change(row):
+            row.__setitem__('fileDigest', 'f' * 64)
+            return row
+        failures, calls = self.exercise(replay_mutate=change)
+        self.assertEqual(1, failures)
+        self.assertEqual(2, len(calls))
+
+    def test_replay_access_endpoint_corruption_fails_before_readback(self):
+        def change(row):
+            row['accessService'].__setitem__('endpoint', 'https://wrong.invalid')
+            return row
+        failures, calls = self.exercise(replay_mutate=change)
+        self.assertEqual(1, failures)
+        self.assertEqual(2, len(calls))
+
+    def test_replay_missing_index_digest_corruption_fails_before_readback(self):
+        def change(row):
+            row.pop('indexDigest')
+            return row
+        failures, calls = self.exercise(replay_mutate=change)
+        self.assertEqual(1, failures)
+        self.assertEqual(2, len(calls))
+
+    def test_replay_allows_additional_server_metadata(self):
+        failures, calls = self.exercise(
+            replay_mutate=lambda row: {**row, "serverAuditMarker": "verified"})
+        self.assertEqual(0, failures)
+        self.assertEqual(3, len(calls))
 
 
 
