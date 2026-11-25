@@ -55,7 +55,8 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
                 return 200, {"result": copy.deepcopy(body)}
             if len(requests) == 3:
                 self.assertEqual(("GET", "/jobs"), (method, path))
-                rows = [{"jobDbId": "JOB_PAGE", "jobType": job_body["jobType"]}]
+                rows = [{"jobDbId": "JOB_PAGE", "jobType": job_body["jobType"],
+                         "idempotencyKey": job_body["idempotencyKey"]}]
                 if include_unrelated:
                     rows.append({"jobDbId": "OTHER", "jobType": "analysis"})
                 value = first_page(rows)
@@ -180,6 +181,110 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
 
     def test_failed_collection_get_fails(self):
         self.assertEqual(1, self.exercise(status=500)[0])
+
+
+    @staticmethod
+    def refresh_first_page(target):
+        """Ensure malformed identity cases still have valid pagination arithmetic."""
+        rows = target["result"]["data"]
+        target["metadata"]["pagination"].update(
+            totalCount=len(rows), pageSize=max(len(rows), 1),
+            totalPages=1, currentPage=0)
+        return target
+
+    def test_created_job_type_changed_fails(self):
+        def change(kind, data):
+            if kind == "jobs":
+                data["result"]["data"][0]["jobType"] = "unrelated-job-type"
+            return data
+        self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_created_job_idempotency_key_changed_fails(self):
+        def change(kind, data):
+            if kind == "jobs":
+                data["result"]["data"][0]["idempotencyKey"] = "different-key"
+            return data
+        self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_created_job_idempotency_key_omitted_fails(self):
+        def change(kind, data):
+            if kind == "jobs":
+                data["result"]["data"][0].pop("idempotencyKey")
+            return data
+        self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_duplicate_job_identifier_fails_with_consistent_pagination(self):
+        def change(kind, data):
+            if kind == "jobs":
+                data["result"]["data"].append(
+                    copy.deepcopy(data["result"]["data"][0]))
+                self.refresh_first_page(data)
+            return data
+        self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_duplicate_job_key_on_distinct_identifier_fails(self):
+        def change(kind, data):
+            if kind == "jobs":
+                other = copy.deepcopy(data["result"]["data"][0])
+                other["jobDbId"] = "JOB_DIFFERENT"
+                data["result"]["data"].append(other)
+                self.refresh_first_page(data)
+            return data
+        self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_duplicate_model_version_fails_with_consistent_pagination(self):
+        def change(kind, data):
+            if kind == "models":
+                data["result"]["data"].append(
+                    copy.deepcopy(data["result"]["data"][0]))
+                self.refresh_first_page(data)
+            return data
+        self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_changed_model_artifact_digest_fails(self):
+        def change(kind, data):
+            if kind == "models":
+                data["result"]["data"][0]["artifactDigest"] = "0" * 64
+            return data
+        self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_changed_model_nested_metrics_fails(self):
+        def change(kind, data):
+            if kind == "models":
+                data["result"]["data"][0]["metrics"]["rmse"] = 2.3
+            return data
+        self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_changed_model_nested_provenance_fails(self):
+        def change(kind, data):
+            if kind == "models":
+                data["result"]["data"][0]["provenance"]["actor"] = "actor:other"
+            return data
+        self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_missing_model_original_field_fails(self):
+        def change(kind, data):
+            if kind == "models":
+                data["result"]["data"][0].pop("trainingDataDigest")
+            return data
+        self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_extra_server_managed_model_field_allowed(self):
+        def change(kind, data):
+            if kind == "models":
+                data["result"]["data"][0]["serverReviewedAt"] = "2026-11-25"
+            return data
+        self.assertEqual(0, self.exercise(modify=change)[0])
+
+    def test_unrelated_model_version_is_allowed(self):
+        def change(kind, data):
+            if kind == "models":
+                other = copy.deepcopy(data["result"]["data"][0])
+                other["modelVersion"] = "8"
+                data["result"]["data"].append(other)
+                self.refresh_first_page(data)
+            return data
+        self.assertEqual(0, self.exercise(modify=change)[0])
 
 
 if __name__ == "__main__":
