@@ -5,6 +5,7 @@ from __future__ import annotations
 import copy
 import hashlib
 from pathlib import Path
+from urllib.parse import quote
 from unittest import mock
 import unittest
 
@@ -22,7 +23,9 @@ class DeprecatedInferenceCompletionTests(unittest.TestCase):
         cls.probe = next(p for p in doc["probes"] if p["id"] == "L-27")
 
     def test_registered_probe_requires_completion_and_warning(self):
-        assertion = self.probe["calls"][1]["assert"]
+        self.assertEqual(3, len(self.probe["calls"]))
+        self.assertIs(True, self.probe["calls"][1]["assert"]["deprecated_model_persisted"])
+        assertion = self.probe["calls"][2]["assert"]
         self.assertIs(True, assertion["deprecated_inference_completed"])
         self.assertEqual("WARNING", assertion["status_message"])
 
@@ -30,7 +33,8 @@ class DeprecatedInferenceCompletionTests(unittest.TestCase):
                  submit_status=202, include_warning=True, include_id=True,
                  missing_terminal=False, ack_mutate=None,
                  reject_before_poll=False, model_ack_mutate=None,
-                 reject_before_inference=False):
+                 reject_before_inference=False, stored_model_mutate=None,
+                 stored_model_status=200, reject_after_readback=False):
         calls = []
         accepted_id = "JOB_DEPRECATED_TEST"
         model = {}
@@ -47,6 +51,14 @@ class DeprecatedInferenceCompletionTests(unittest.TestCase):
                     acknowledged = model_ack_mutate(acknowledged)
                 return 200, {"result": acknowledged}
             if len(calls) == 2:
+                expected = ("/models/" + quote(model["modelDbId"], safe=":")
+                            + "?version=" + quote(model["modelVersion"], safe=""))
+                self.assertEqual(("GET", expected), (method, path))
+                stored = copy.deepcopy(model)
+                if stored_model_mutate is not None:
+                    stored = stored_model_mutate(stored)
+                return stored_model_status, {"result": stored}
+            if len(calls) == 3:
                 self.assertEqual(("POST", "/jobs"), (method, path))
                 self.assertEqual(model["modelDbId"],
                                  body["parameters"]["modelDbId"])
@@ -94,9 +106,10 @@ class DeprecatedInferenceCompletionTests(unittest.TestCase):
             checker.run_live_probe(
                 "http://example.test/genx/v1", self.probe,
                 {"conformance_dir": str(CONF)}, outcome, None, None)
-        if reject_before_poll or reject_before_inference:
+        if reject_before_poll or reject_before_inference or reject_after_readback:
             wait_mock.assert_not_called()
-        self.assertEqual(1 if reject_before_inference else 2, len(calls))
+        self.assertEqual(1 if reject_before_inference else
+                         2 if reject_after_readback else 3, len(calls))
         return outcome
 
     def test_completed_deprecated_inference_with_warning_passes(self):
@@ -136,6 +149,46 @@ class DeprecatedInferenceCompletionTests(unittest.TestCase):
         self.assertEqual(0, self.exercise(
             model_ack_mutate=lambda m: {
                 **m, "serverReviewedAt": "2026-11-25T00:00:00Z"}
+        ).failures)
+
+    def test_deprecated_model_not_stored_fails_before_inference(self):
+        self.assertEqual(1, self.exercise(
+            stored_model_status=404, reject_after_readback=True).failures)
+
+    def test_deprecated_model_wrong_stored_status_fails_before_inference(self):
+        self.assertEqual(1, self.exercise(
+            stored_model_mutate=lambda m: {**m, "status": "active"},
+            reject_after_readback=True).failures)
+
+    def test_deprecated_model_changed_stored_digest_fails(self):
+        self.assertEqual(1, self.exercise(
+            stored_model_mutate=lambda m: {
+                **m, "artifactDigest": "f" * 64},
+            reject_after_readback=True).failures)
+
+    def test_deprecated_model_changed_stored_version_fails(self):
+        self.assertEqual(1, self.exercise(
+            stored_model_mutate=lambda m: {
+                **m, "modelVersion": "other"},
+            reject_after_readback=True).failures)
+
+    def test_deprecated_model_changed_stored_provenance_fails(self):
+        def change(model):
+            model["provenance"]["actor"] = "actor:other"
+            return model
+        self.assertEqual(1, self.exercise(
+            stored_model_mutate=change,
+            reject_after_readback=True).failures)
+
+    def test_deprecated_model_malformed_stored_result_fails(self):
+        self.assertEqual(1, self.exercise(
+            stored_model_mutate=lambda m: None,
+            reject_after_readback=True).failures)
+
+    def test_deprecated_model_extra_stored_metadata_allowed(self):
+        self.assertEqual(0, self.exercise(
+            stored_model_mutate=lambda m: {
+                **m, "serverReadAt": "2026-11-25T00:00:00Z"}
         ).failures)
 
     def test_running_job_fails(self):
