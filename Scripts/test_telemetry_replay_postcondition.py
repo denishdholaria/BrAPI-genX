@@ -91,6 +91,36 @@ class TelemetryReplayPostconditionTests(unittest.TestCase):
             return rows
         self.assertEqual(1, self.exercise(corrupt))
 
+    def test_changed_unit_after_replay_fails(self):
+        def change(rows):
+            rows[0]["unit"] = "degree_fahrenheit"
+            return rows
+        self.assertEqual(1, self.exercise(change))
+
+    def test_changed_quality_after_replay_fails(self):
+        def change(rows):
+            rows[2]["quality"] = "good"
+            return rows
+        self.assertEqual(1, self.exercise(change))
+
+    def test_changed_nested_provenance_after_replay_fails(self):
+        def change(rows):
+            rows[0]["provenance"]["actor"] = "actor:wrong"
+            return rows
+        self.assertEqual(1, self.exercise(change))
+
+    def test_missing_original_provenance_after_replay_fails(self):
+        def change(rows):
+            rows[0].pop("provenance")
+            return rows
+        self.assertEqual(1, self.exercise(change))
+
+    def test_extra_server_managed_field_is_allowed(self):
+        def change(rows):
+            rows[0]["auditSeen"] = True
+            return rows
+        self.assertEqual(0, self.exercise(change))
+
     def test_malformed_row_fails(self):
         self.assertEqual(1, self.exercise(lambda rows: [rows[0], None, rows[2]]))
 

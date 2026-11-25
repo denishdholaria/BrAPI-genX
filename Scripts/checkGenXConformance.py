@@ -2184,7 +2184,9 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                 original = ctx.get("live_batch")
                 result = payload.get("result") if isinstance(payload, dict) else None
                 rows = result.get("data") if isinstance(result, dict) else None
-                if status != 200 or not isinstance(original, list) or not isinstance(rows, list):
+                if (status != 200 or not isinstance(original, list)
+                        or not isinstance(rows, list)
+                        or not all(isinstance(point, dict) for point in original)):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
                         "original telemetry unavailable after replay or rejected conflict"
@@ -2193,7 +2195,12 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     point.get("deviceDbId"), point.get("sensorDbId"),
                     point.get("timestamp")
                 )
-                expected = {identity(point): point.get("value") for point in original}
+                expected = {identity(point): point for point in original}
+                if len(expected) != len(original):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "original telemetry contains duplicate source identities"
+                    )
                 actual = {}
                 for point in rows:
                     if not isinstance(point, dict):
@@ -2207,13 +2214,20 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                             probe["id"], probe["title"], "FAIL",
                             f"duplicate telemetry identity after replay or conflict: {key!r}"
                         )
-                    actual[key] = point.get("value")
-                if actual != expected or len(rows) != len(original):
+                    actual[key] = point
+                if set(actual) != set(expected) or len(rows) != len(original):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        "stored telemetry identity/value changed after replay or rejected conflict: "
-                        f"expected={expected!r}; observed={actual!r}"
+                        "stored telemetry identities were added, removed or reassigned"
                     )
+                for key, source in expected.items():
+                    stored = actual[key]
+                    if any(field not in stored or stored[field] != value
+                           for field, value in source.items()):
+                        return results.report(
+                            probe["id"], probe["title"], "FAIL",
+                            f"original telemetry field or nested provenance changed: {key!r}"
+                        )
             if "telemetry_counts" in assertion:
                 seen = payload.get("result", {})
                 want = assertion["telemetry_counts"]

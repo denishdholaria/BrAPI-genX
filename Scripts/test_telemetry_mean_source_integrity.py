@@ -91,6 +91,18 @@ class TelemetryMeanSourceIntegrityTests(unittest.TestCase):
         self.assertEqual(1, self.exercise(
             source_change=lambda rows: rows[:2])[0])
 
+    def test_changed_raw_source_unit_fails(self):
+        def change(rows):
+            rows[1]["unit"] = "degree_fahrenheit"
+            return rows
+        self.assertEqual(1, self.exercise(source_change=change)[0])
+
+    def test_changed_raw_source_provenance_fails(self):
+        def change(rows):
+            rows[0]["provenance"]["actor"] = "actor:unexpected"
+            return rows
+        self.assertEqual(1, self.exercise(source_change=change)[0])
+
     def test_wrong_raw_source_timestamp_fails(self):
         def change(rows):
             rows[0]["timestamp"] = "2026-09-07T08:10:00Z"

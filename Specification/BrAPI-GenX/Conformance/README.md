@@ -770,3 +770,19 @@ The manifest guard requires the three-step procedure, and
 `Scripts/test_telemetry_mean_source_integrity.py` runs in hosted static
 conformance. See
 [Mission 142 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-142-TELEMETRY-MEAN-SOURCE-INTEGRITY.md).
+
+## Telemetry full metadata retention (Mission 143)
+
+Existing registered `telemetry_original_intact` assertions in L-21,
+L-22 and L-23 now verify **all originally submitted telemetry fields** on
+readback, not only device/sensor/timestamp identity and numeric value.
+This includes units, quality flags and nested provenance. Additional
+server-managed fields are permitted, but originally submitted fields may
+not disappear or change.
+
+The regression cases were added to the already mandatory hosted suites
+`Scripts/test_telemetry_replay_postcondition.py`,
+`Scripts/test_telemetry_conflict_postcondition.py` and
+`Scripts/test_telemetry_mean_source_integrity.py`, avoiding a duplicate
+test command or unnecessary workflow wiring. See
+[Mission 143 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-143-TELEMETRY-METADATA-RETENTION.md).
