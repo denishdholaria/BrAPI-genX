@@ -88,6 +88,24 @@ class LiveAssertionManifestTests(unittest.TestCase):
         self.assertIn("must be paired",
             self.mutated("L-23", 1, lambda s: s["assert"].pop("telemetry_samples")))
 
+    def test_telemetry_page_slice_assertion_must_remain_registered(self):
+        self.assertIn(
+            "telemetry_page_slice GET assertion required",
+            self.mutated("L-28", 1,
+                         lambda s: s["assert"].pop("telemetry_page_slice")))
+
+    def test_telemetry_page_slice_assertion_cannot_be_false(self):
+        self.assertIn(
+            "telemetry_page_slice must be true",
+            self.mutated("L-28", 1,
+                         lambda s: s["assert"].update(telemetry_page_slice=False)))
+
+    def test_telemetry_page_slice_assertion_typo_rejected(self):
+        self.assertIn(
+            "unknown live assertion",
+            self.mutated("L-28", 1,
+                         lambda s: s["assert"].update(telemetry_page_slices=True)))
+
     def test_window_partition_assertion_must_remain_registered(self):
         self.assertIn(
             "telemetry_window_partitions GET assertion required",
