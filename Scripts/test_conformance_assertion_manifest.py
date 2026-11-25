@@ -86,7 +86,7 @@ class LiveAssertionManifestTests(unittest.TestCase):
 
     def test_telemetry_mean_without_samples_rejected(self):
         self.assertIn("must be paired",
-            self.mutated("L-23", 1, lambda s: s["assert"].pop("telemetry_samples")))
+            self.mutated("L-23", 2, lambda s: s["assert"].pop("telemetry_samples")))
 
     def test_telemetry_replay_readback_cannot_be_removed(self):
         self.assertIn(
@@ -146,6 +146,29 @@ class LiveAssertionManifestTests(unittest.TestCase):
                 s.pop("replay_capture"),
                 s.update(body_fixture="live_submit"),
             )))
+
+    def test_telemetry_mean_source_readback_cannot_be_removed(self):
+        self.assertIn(
+            "source telemetry GET and mean recomputation required",
+            self.mutated("L-23", 1,
+                         lambda s: s.update({"assert": {"status": 200}})))
+
+    def test_telemetry_mean_source_query_cannot_change(self):
+        self.assertIn(
+            "source telemetry GET and mean recomputation required",
+            self.mutated("L-23", 1,
+                         lambda s: s.update(path="/telemetry")))
+
+    def test_telemetry_mean_calculation_cannot_be_removed(self):
+        self.assertIn(
+            "source telemetry GET and mean recomputation required",
+            self.mutated("L-23", 2,
+                         lambda s: s.update({"assert": {"status": 200}})))
+
+    def test_telemetry_mean_source_capture_required(self):
+        self.assertIn(
+            "source telemetry GET and mean recomputation required",
+            self.mutated("L-23", 0, lambda s: s.pop("capture_telemetry")))
 
     def test_inference_complete_result_assertion_cannot_be_removed(self):
         self.assertIn(

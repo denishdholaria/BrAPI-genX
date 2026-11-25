@@ -753,3 +753,20 @@ post-completion readback. A dedicated negative regression suite,
 `Scripts/test_inference_result_identity_digest.py`, runs in hosted static
 conformance. See
 [Mission 141 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-141-INFERENCE-RESULT-IDENTITY-DIGEST.md).
+
+## Telemetry mean source readback integrity (Mission 142)
+
+Registered **L-23** now reads the three source telemetry records before
+retrieving their mean, using the existing
+`telemetry_original_intact` postcondition to verify that the stored
+device/sensor/timestamp/value identities match the submitted batch.
+The aggregate readback then requires a complete single-bucket response,
+the original anchor timestamp, a valid numeric result, an exact sample
+count and a mean recomputed from those original values.
+
+A plausible hardcoded mean without intact source records, a non-successful
+response with matching numbers, or malformed pagination no longer passes.
+The manifest guard requires the three-step procedure, and
+`Scripts/test_telemetry_mean_source_integrity.py` runs in hosted static
+conformance. See
+[Mission 142 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-142-TELEMETRY-MEAN-SOURCE-INTEGRITY.md).

@@ -307,6 +307,8 @@ jobs:
         run: python Scripts/test_deprecated_inference_result_binding.py
       - name: Test inference result identity and input digest
         run: python Scripts/test_inference_result_identity_digest.py
+      - name: Test telemetry mean source readback integrity
+        run: python Scripts/test_telemetry_mean_source_integrity.py
       - name: Test deprecated model inference reaches completed job
         run: python Scripts/test_deprecated_inference_completion.py
       - name: Run static GenX conformance probes
