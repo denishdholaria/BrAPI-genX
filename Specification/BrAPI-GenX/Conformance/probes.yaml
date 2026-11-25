@@ -338,12 +338,13 @@ probes:
   object: modelRegistry
   title: Model registration replays identical versions without duplication
   procedure:
-  - POST a ModelArtifactNewRequest under a fresh namespaced id; POST the identical body again.
-  expectation: Second response is 200 with the same (modelDbId, modelVersion) and no new version.
-  falsifier: A second version is created for the identical replay.
+  - POST a ModelArtifactNewRequest under a fresh namespaced id; POST the identical body again; GET all stored versions for that model identifier.
+  expectation: Second response is 200 with the same (modelDbId, modelVersion) and exactly one original unchanged stored version.
+  falsifier: A second version is created, original artifact metadata is changed, or collection evidence is incomplete.
   calls:
   - {method: POST, path: /models, body_fixture: live_model_submit, capture_model: true}
   - {method: POST, path: /models, body_fixture: live_model_submit, assert: {same_model: true}}
+  - {method: GET, path: "/models?modelDbId={modelDbId}", assert: {status: 200, model_replay_single_version: true}}
 - id: L-13
   tier: live
   object: modelRegistry

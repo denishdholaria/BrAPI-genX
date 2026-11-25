@@ -147,6 +147,30 @@ class LiveAssertionManifestTests(unittest.TestCase):
                 s.update(body_fixture="live_submit"),
             )))
 
+    def test_model_replay_readback_cannot_be_removed(self):
+        self.assertIn(
+            "model_replay_single_version GET after replay required",
+            self.mutated("L-12", 2,
+                         lambda s: s.update({"assert": {"status": 200}})))
+
+    def test_model_replay_readback_cannot_be_disabled(self):
+        self.assertIn(
+            "model_replay_single_version must be true",
+            self.mutated("L-12", 2,
+                         lambda s: s["assert"].update(model_replay_single_version=False)))
+
+    def test_model_replay_requires_filtered_collection(self):
+        self.assertIn(
+            "requires filtered model collection GET",
+            self.mutated("L-12", 2,
+                         lambda s: s.update(path="/models")))
+
+    def test_model_replay_must_use_identical_submission(self):
+        self.assertIn(
+            "model_replay_single_version GET after replay required",
+            self.mutated("L-12", 1,
+                         lambda s: s.update(body_fixture="live_model_conflict")))
+
     def test_package_replay_readback_cannot_be_removed(self):
         self.assertIn(
             "package_replay_single_record GET after replay required",

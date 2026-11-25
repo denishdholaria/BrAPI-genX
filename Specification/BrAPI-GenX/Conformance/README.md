@@ -552,3 +552,17 @@ duplicating the same validation logic. Manifest guards require this L-18
 readback, and the `Scripts/test_package_replay_stored_state.py`
 regression suite executes in hosted static conformance. See
 [Mission 127 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-127-PACKAGE-REPLAY-STORED-STATE.md).
+
+## Model replay version integrity (Mission 128)
+
+Registered **L-12** now performs a GET on the model collection filtered by
+its fresh `modelDbId` after replay. The test verifies a single original
+`modelVersion`, unchanged artifact and training digests, framework metrics,
+and nested provenance. Incomplete pagination, duplicate model versions,
+missing records and mutated metadata fail closed.
+
+This check shares the replay collection helper with Missions 126–127 and
+requires `model_replay_single_version` in the registered manifest. The
+negative regression suite `Scripts/test_model_replay_version_integrity.py`
+runs in hosted static conformance. See
+[Mission 128 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-128-MODEL-REPLAY-VERSION-INTEGRITY.md).
