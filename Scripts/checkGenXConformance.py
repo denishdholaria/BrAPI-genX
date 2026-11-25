@@ -1841,31 +1841,26 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     )
             if assertion.get("unknown_job_type_not_stored"):
                 original = ctx.get("live_unknown_type_request")
-                result = payload.get("result") if isinstance(payload, dict) else None
-                rows = result.get("data") if isinstance(result, dict) else None
-                metadata = payload.get("metadata") if isinstance(payload, dict) else None
-                page = metadata.get("pagination") if isinstance(metadata, dict) else None
-                if (status != 200 or not isinstance(original, dict)
+                # The absence of one rejected key/type is not trustworthy
+                # evidence if unrelated collection rows have missing or
+                # duplicated identities. Reuse the existing complete
+                # collection validator rather than trusting only row counts.
+                snapshot, problem = immutable_job_snapshot(status, payload)
+                if (problem or not isinstance(original, dict)
                         or not isinstance(original.get("idempotencyKey"), str)
                         or not original["idempotencyKey"]
                         or not isinstance(original.get("jobType"), str)
-                        or not original["jobType"]
-                        or not isinstance(rows, list)
-                        or not all(isinstance(row, dict) for row in rows)
-                        or not isinstance(page, dict)
-                        or any(type(page.get(field)) is not int
-                               for field in ("totalCount", "pageSize",
-                                             "totalPages", "currentPage"))
-                        or page["totalCount"] != len(rows)
-                        or page["pageSize"] < len(rows)
-                        or page["totalPages"] != 1
-                        or page["currentPage"] != 0):
+                        or not original["jobType"]):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        "unknown job-type rejection lacks complete jobs readback"
+                        "unknown job-type rejection lacks valid complete jobs "
+                        "readback: " + (problem or "original rejected request unavailable")
                     )
-                if any(row.get("idempotencyKey") == original["idempotencyKey"]
-                       or row.get("jobType") == original["jobType"] for row in rows):
+                if any(
+                        job_type == original["jobType"]
+                        or key == original["idempotencyKey"]
+                        for job_type, key in snapshot.values()
+                ):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
                         "unknown job type created a stored job despite HTTP 400"
