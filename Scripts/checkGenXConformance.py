@@ -1321,6 +1321,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
     if any(s.get("capture_model_revoked") for s in calls):
         ctx["live_model_revoked_id"] = None
         ctx["live_model_revoked"] = None
+        ctx["live_model_revoked_original"] = None
     if any(s.get("capture_model_deprecated") for s in calls):
         ctx["live_model_deprecated_id"] = None
         ctx["live_model_deprecated"] = None
@@ -1545,6 +1546,21 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                                           "no complete model baseline captured")
                 path = path.replace("{modelDbId}", quote(baseline[0], safe=":"))
                 path = path.replace("{modelVersion}", quote(baseline[1], safe=""))
+            if "{revokedModelDbId}" in path or "{revokedModelVersion}" in path:
+                original = ctx.get("live_model_revoked_original")
+                if (not isinstance(original, dict)
+                        or not isinstance(original.get("modelDbId"), str)
+                        or not original["modelDbId"]
+                        or not isinstance(original.get("modelVersion"), str)
+                        or not original["modelVersion"]):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "no original revoked model identity captured"
+                    )
+                path = path.replace("{revokedModelDbId}",
+                                    quote(original["modelDbId"], safe=":"))
+                path = path.replace("{revokedModelVersion}",
+                                    quote(original["modelVersion"], safe=""))
             if "{jobDbId}" in path:
                 if ctx.get("live_job") is None and "{expiredJobDbId}" not in path:
                     return results.report(probe["id"], probe["title"], "FAIL", "no captured job")
@@ -1733,6 +1749,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     )
                 seen = payload["result"]
                 ctx["live_model_revoked"] = (seen.get("modelDbId"), seen.get("modelVersion"))
+                ctx["live_model_revoked_original"] = copy.deepcopy(body)
             if step.get("capture_model_deprecated"):
                 if status not in (200, 202):
                     return results.report(
@@ -2026,6 +2043,24 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
                         "job replay missing, duplicated, or changed stored identity"
+                    )
+            if assertion.get("revoked_model_persisted"):
+                original = ctx.get("live_model_revoked_original")
+                identity = ctx.get("live_model_revoked")
+                expected_id = (identity[0] if isinstance(identity, tuple)
+                               and len(identity) == 2 else None)
+                problem = published_record_problem(
+                    status, payload, original, expected_id, "modelDbId"
+                )
+                if (problem or not isinstance(original, dict)
+                        or original.get("status") != "revoked"
+                        or not isinstance(identity, tuple) or len(identity) != 2
+                        or identity != (original.get("modelDbId"),
+                                        original.get("modelVersion"))):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "registered revoked model not persisted intact: " +
+                        (problem or "original revoked model version/status mismatch")
                     )
             if assertion.get("rejected_inference_not_stored"):
                 # Rejected inference is not proved absent by a collection
@@ -2914,6 +2949,7 @@ LIVE_BOOLEAN_ASSERTIONS = frozenset({
     "package_replay_single_record", "model_replay_single_version",
     "inference_intact", "single_effect",
     "concurrent_single_stored_job", "rejected_inference_not_stored",
+    "revoked_model_persisted",
     "job_replay_single_stored", "capture_job_collection",
     "job_conflict_collection_unchanged", "terminal_state_unchanged",
     "unknown_job_type_not_stored", "expired_result_withheld",
@@ -3378,7 +3414,7 @@ def validate_probe_manifest(probes):
                         "probe L-01: job_replay_single_stored GET after replay required"
                     )
             if probe_id == "L-15":
-                if (len(calls) != 4
+                if (len(calls) != 5
                         or calls[0].get("method") != "POST"
                         or calls[0].get("path") != "/jobs"
                         or calls[0].get("body_fixture") != "live_inference_unknown"
@@ -3387,16 +3423,25 @@ def validate_probe_manifest(probes):
                         or calls[1].get("path") != "/models"
                         or calls[1].get("body_fixture") != "live_model_revoked"
                         or calls[1].get("capture_model_revoked") is not True
-                        or calls[2].get("method") != "POST"
-                        or calls[2].get("path") != "/jobs"
-                        or calls[2].get("body_fixture") != "live_inference_revoked"
-                        or calls[2].get("assert", {}).get("status") != 400
-                        or calls[3].get("method") != "GET"
+                        or calls[3].get("method") != "POST"
                         or calls[3].get("path") != "/jobs"
-                        or calls[3].get("assert", {}).get("rejected_inference_not_stored")
+                        or calls[3].get("body_fixture") != "live_inference_revoked"
+                        or calls[3].get("assert", {}).get("status") != 400
+                        or calls[4].get("method") != "GET"
+                        or calls[4].get("path") != "/jobs"
+                        or calls[4].get("assert", {}).get("rejected_inference_not_stored")
                             is not True):
                     raise ValueError(
                         "probe L-15: rejected_inference_not_stored GET after both rejections required"
+                    )
+                if (calls[2].get("method") != "GET"
+                        or calls[2].get("path") !=
+                            "/models/{revokedModelDbId}?version={revokedModelVersion}"
+                        or calls[2].get("assert", {}).get("status") != 200
+                        or calls[2].get("assert", {}).get("revoked_model_persisted")
+                            is not True):
+                    raise ValueError(
+                        "probe L-15: revoked_model_persisted GET before rejected inference required"
                     )
             if probe_id == "L-13":
                 if (len(calls) != 3
