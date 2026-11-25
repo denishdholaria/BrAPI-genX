@@ -2109,6 +2109,24 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                             probe["id"], probe["title"], "FAIL",
                             "jobs original submission or accepted identity missing"
                         )
+                    # L-25 checks one first page, not necessarily the
+                    # complete collection. Validate every visible job's
+                    # schema identity without requiring totalPages == 1.
+                    visible_job_ids = set()
+                    for row in rows:
+                        job_id = row.get("jobDbId")
+                        if (not isinstance(job_id, str) or not job_id
+                                or not isinstance(row.get("jobType"), str)
+                                or not row["jobType"]
+                                or ("idempotencyKey" in row
+                                    and not isinstance(row["idempotencyKey"], str))
+                                or job_id in visible_job_ids):
+                            return results.report(
+                                probe["id"], probe["title"], "FAIL",
+                                "jobs first page contains malformed or duplicated "
+                                "job identities"
+                            )
+                        visible_job_ids.add(job_id)
                     same_id = [
                         row for row in rows if row.get("jobDbId") == expected_id
                     ]
