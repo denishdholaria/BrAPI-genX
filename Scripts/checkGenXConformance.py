@@ -1998,14 +1998,14 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         "job replay missing, duplicated, or changed stored identity"
                     )
             if assertion.get("rejected_inference_not_stored"):
-                # HTTP 400 alone is not proof that the rejected inference
-                # produced no persistent job. Read back the full collection.
+                # Rejected inference is not proved absent by a collection
+                # with duplicate or malformed identities, even when its
+                # page counters are internally consistent.
+                snapshot, problem = immutable_job_snapshot(status, payload)
                 result = payload.get("result") if isinstance(payload, dict) else None
                 rows = result.get("data") if isinstance(result, dict) else None
-                metadata = payload.get("metadata") if isinstance(payload, dict) else None
-                page = metadata.get("pagination") if isinstance(metadata, dict) else None
                 denied = ctx.get("live_rejected_inference")
-                if (status != 200
+                if (problem
                         or not isinstance(denied, dict)
                         or set(denied) != {"live_inference_unknown",
                                           "live_inference_revoked"}
@@ -2015,28 +2015,21 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                                or not isinstance(item.get("modelDbId"), str)
                                or not item["modelDbId"]
                                for item in denied.values())
-                        or len({item["key"] for item in denied.values()}) != 2
-                        or not isinstance(rows, list)
-                        or not all(isinstance(row, dict) for row in rows)
-                        or not isinstance(page, dict)
-                        or any(type(page.get(field)) is not int
-                               for field in ("totalCount", "pageSize",
-                                             "totalPages", "currentPage"))
-                        or page["totalCount"] != len(rows)
-                        or page["pageSize"] < len(rows)
-                        or page["totalPages"] != 1 or page["currentPage"] != 0):
+                        or len({item["key"] for item in denied.values()}) != 2):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        "rejected inference readback lacks complete jobs evidence"
+                        "rejected inference readback lacks valid, complete jobs "
+                        "evidence: " + (problem or "rejected input unavailable")
                     )
                 denied_keys = {item["key"] for item in denied.values()}
                 denied_models = {item["modelDbId"] for item in denied.values()}
-                if any(
-                        row.get("idempotencyKey") in denied_keys
-                        or (row.get("jobType") == "inference"
+                if (any(key in denied_keys for _, key in snapshot.values())
+                        or any(
+                            row["jobType"] == "inference"
                             and isinstance(row.get("parameters"), dict)
-                            and row["parameters"].get("modelDbId") in denied_models)
-                        for row in rows):
+                            and row["parameters"].get("modelDbId") in denied_models
+                            for row in rows
+                        )):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
                         "rejected inference created a stored job despite HTTP 400"

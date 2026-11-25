@@ -181,5 +181,54 @@ class RejectedInferenceNoStoredJobTests(unittest.TestCase):
         self.assertEqual(3, len(calls))
 
 
+    def test_duplicate_unrelated_job_identifiers_fail(self):
+        def change(rows, denied):
+            return rows + [
+                {"jobDbId": "JOB_OTHER", "jobType": "analysis",
+                 "idempotencyKey": "other-2"},
+                {"jobDbId": "JOB_OTHER", "jobType": "analysis",
+                 "idempotencyKey": "other-3"},
+            ]
+        self.assertEqual(1, self.exercise(create_job=change)[0])
+
+    def test_missing_unrelated_job_id_fails(self):
+        def change(rows, denied):
+            rows[0].pop("jobDbId")
+            return rows
+        self.assertEqual(1, self.exercise(create_job=change)[0])
+
+    def test_blank_unrelated_job_id_fails(self):
+        def change(rows, denied):
+            rows[0]["jobDbId"] = ""
+            return rows
+        self.assertEqual(1, self.exercise(create_job=change)[0])
+
+    def test_unrelated_job_missing_type_fails(self):
+        def change(rows, denied):
+            rows[0].pop("jobType")
+            return rows
+        self.assertEqual(1, self.exercise(create_job=change)[0])
+
+    def test_unrelated_job_boolean_idempotency_key_fails(self):
+        def change(rows, denied):
+            rows[0]["idempotencyKey"] = False
+            return rows
+        self.assertEqual(1, self.exercise(create_job=change)[0])
+
+    def test_unrelated_job_with_optional_missing_key_allowed(self):
+        def change(rows, denied):
+            rows[0].pop("idempotencyKey")
+            return rows
+        self.assertEqual(0, self.exercise(create_job=change)[0])
+
+    def test_unrelated_distinct_valid_job_allowed(self):
+        def change(rows, denied):
+            rows.append({"jobDbId": "JOB_OTHER", "jobType": "analysis",
+                         "idempotencyKey": "other-key-2"})
+            return rows
+        self.assertEqual(0, self.exercise(create_job=change)[0])
+
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -1147,3 +1147,21 @@ mandatory regression suites now reject duplicated or malformed
 unrelated identities and retain positive optional-key cases.
 
 See [Mission 164 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-164-JOB-COLLECTION-COMPLETE-IDENTITIES.md).
+
+## Valid stored-job identities for rejected inference requests (Mission 165)
+
+Registered **L-15** rejects inference on unknown and revoked models.
+Its final jobs-collection readback now uses the existing
+`immutable_job_snapshot` validator before asserting that neither
+rejected job key nor model identity was persisted. Previously, a
+collection containing duplicate or malformed unrelated job identities
+could pass because its page counters and rejected-key checks were
+internally consistent.
+
+The validator permits legitimate unrelated jobs, including those without
+optional idempotency keys. The mandatory
+`Scripts/test_rejected_inference_no_stored_job.py` regression suite now
+covers malformed or duplicated unrelated records and positive
+unrelated-job controls.
+
+See [Mission 165 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-165-REJECTED-INFERENCE-COLLECTION-IDENTITIES.md).
