@@ -50,6 +50,7 @@ REQUIRED_COMMANDS = {
     "python Scripts/test_ledger_replay_postcondition.py",
     "python Scripts/test_term_replay_version_uniqueness.py",
     "python Scripts/test_matrix_replay_stored_state.py",
+    "python Scripts/test_package_replay_stored_state.py",
     "python Scripts/test_deprecated_inference_completion.py",
     "python Scripts/test_model_conflict_postcondition.py",
     "python Scripts/test_publication_conflict_postconditions.py",

@@ -1182,6 +1182,33 @@ def wait_terminal(server, job_id, token):
     return last
 
 
+def replay_collection_problem(status, payload, original, expected_id, identity_field):
+    """Return a diagnostic when a replay's complete collection lacks one original."""
+    result = payload.get("result") if isinstance(payload, dict) else None
+    rows = result.get("data") if isinstance(result, dict) else None
+    metadata = payload.get("metadata") if isinstance(payload, dict) else None
+    pagination = metadata.get("pagination") if isinstance(metadata, dict) else None
+    if (status != 200 or not isinstance(original, dict)
+            or not isinstance(expected_id, str) or not expected_id
+            or original.get(identity_field) != expected_id
+            or not isinstance(rows, list) or not rows
+            or not all(isinstance(row, dict) for row in rows)
+            or not isinstance(pagination, dict)
+            or any(type(pagination.get(k)) is not int
+                   for k in ("totalCount", "pageSize", "totalPages", "currentPage"))
+            or pagination["totalCount"] != len(rows)
+            or pagination["pageSize"] < len(rows)
+            or pagination["totalPages"] != 1
+            or pagination["currentPage"] != 0):
+        return "replay collection malformed, incomplete, or unavailable"
+    matches = [row for row in rows if row.get(identity_field) == expected_id]
+    if (len(matches) != 1
+            or any(key not in matches[0] or matches[0][key] != value
+                   for key, value in original.items())):
+        return "original record missing, duplicated, or modified after replay"
+    return None
+
+
 def run_live_probe(server, probe, ctx, results, token, expired_job):
     conformance_dir = ctx["conformance_dir"]
     calls = probe.get("calls", [])
@@ -1212,6 +1239,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
         ctx["live_package_id"] = None
         ctx["live_package"] = None
         ctx["live_package_baseline"] = None
+        ctx["live_package_original"] = None
     if any(s.get("capture_telemetry") for s in calls):
         ctx["live_device"] = None
         ctx["live_batch"] = None
@@ -1534,6 +1562,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                 seen = payload.get("result", {})
                 ctx["live_package"] = seen.get("packageDbId")
                 ctx["live_package_baseline"] = (body.get("packageDbId"), body.get("license"))
+                ctx["live_package_original"] = copy.deepcopy(body)
             if step.get("capture_telemetry"):
                 if status not in (200, 202):
                     return results.report(
@@ -1762,40 +1791,22 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         f"status={status}, expected={expected}, observed={observed}",
                     )
             if assertion.get("matrix_replay_single_record"):
-                # Confirm one visible stored copy of the originally submitted
-                # matrix, rather than trusting matching POST identifiers.
-                result = payload.get("result") if isinstance(payload, dict) else None
-                rows = result.get("data") if isinstance(result, dict) else None
-                metadata = payload.get("metadata") if isinstance(payload, dict) else None
-                pagination = (metadata.get("pagination")
-                              if isinstance(metadata, dict) else None)
-                original = ctx.get("live_matrix_original")
-                expected_id = ctx.get("live_matrix")
-                if (status != 200 or not isinstance(original, dict)
-                        or not isinstance(expected_id, str) or not expected_id
-                        or original.get("matrixDbId") != expected_id
-                        or not isinstance(rows, list) or not rows
-                        or not all(isinstance(row, dict) for row in rows)
-                        or not isinstance(pagination, dict)
-                        or any(type(pagination.get(k)) is not int
-                               for k in ("totalCount", "pageSize", "totalPages",
-                                         "currentPage"))
-                        or pagination["totalCount"] != len(rows)
-                        or pagination["pageSize"] < len(rows)
-                        or pagination["totalPages"] != 1
-                        or pagination["currentPage"] != 0):
+                problem = replay_collection_problem(
+                    status, payload, ctx.get("live_matrix_original"),
+                    ctx.get("live_matrix"), "matrixDbId"
+                )
+                if problem:
                     return results.report(
-                        probe["id"], probe["title"], "FAIL",
-                        "matrix replay collection is malformed, truncated, or unavailable"
+                        probe["id"], probe["title"], "FAIL", "matrix: " + problem
                     )
-                matches = [row for row in rows
-                           if row.get("matrixDbId") == expected_id]
-                if (len(matches) != 1
-                        or any(key not in matches[0] or matches[0][key] != value
-                               for key, value in original.items())):
+            if assertion.get("package_replay_single_record"):
+                problem = replay_collection_problem(
+                    status, payload, ctx.get("live_package_original"),
+                    ctx.get("live_package"), "packageDbId"
+                )
+                if problem:
                     return results.report(
-                        probe["id"], probe["title"], "FAIL",
-                        "original matrix missing, duplicated, or modified after replay"
+                        probe["id"], probe["title"], "FAIL", "package: " + problem
                     )
             if assertion.get("same_matrix"):
                 seen = payload.get("result", {})
@@ -2173,6 +2184,7 @@ LIVE_BOOLEAN_ASSERTIONS = frozenset({
     "deprecated_inference_completed",
     "unchanged_package_license", "unchanged_term_record", "ledger_original_intact",
     "term_replay_single_version", "matrix_replay_single_record",
+    "package_replay_single_record",
     "inference_intact", "single_effect",
     "concurrent_single_stored_job", "capability_registry_match",
 })
@@ -2257,6 +2269,13 @@ def validate_live_step_assertions(probe_id, index, call):
         raise ValueError(
             f"probe {probe_id} call {index}: telemetry_mean and "
             "telemetry_samples must be paired"
+        )
+    if "package_replay_single_record" in assertion and (
+            call.get("method") != "GET"
+            or call.get("path") != "/fair-packages"):
+        raise ValueError(
+            f"probe {probe_id} call {index}: "
+            "package_replay_single_record requires GET /fair-packages"
         )
     if "matrix_replay_single_record" in assertion and (
             call.get("method") != "GET"
@@ -2344,6 +2363,19 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-18":
+                if (len(calls) != 3
+                        or calls[0].get("body_fixture") != "live_package_submit"
+                        or calls[0].get("capture_package") is not True
+                        or calls[1].get("body_fixture") != "live_package_submit"
+                        or calls[1].get("assert", {}).get("same_package") is not True
+                        or calls[2].get("method") != "GET"
+                        or calls[2].get("path") != "/fair-packages"
+                        or calls[2].get("assert", {}).get("package_replay_single_record")
+                            is not True):
+                    raise ValueError(
+                        "probe L-18: package_replay_single_record GET after replay required"
+                    )
             if probe_id == "L-16":
                 if (len(calls) != 3
                         or calls[0].get("body_fixture") != "live_matrix_submit"
