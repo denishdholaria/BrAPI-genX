@@ -993,3 +993,19 @@ suite includes negative cases for altered original identity, changed nested
 results and withheld results.
 
 See [Mission 155 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-155-TERMINAL-CANCEL-RESULT-INTEGRITY.md).
+
+## Terminal poll transport integrity (Mission 156)
+
+The shared `wait_terminal` helper now treats a non-200 job polling GET as
+a test failure, even if the failed response carries a JSON object claiming
+the job is `COMPLETED`. Previously, it returned that response unchanged,
+allowing a terminal-looking body to pass downstream assertions that had no
+visibility of the transport status.
+
+The existing mandatory `Scripts/test_terminal_cancel_retained_state.py`
+suite now includes direct helper regressions for HTTP 404, 503 and 302 with
+fabricated completed bodies, plus a successful HTTP 200 control. This
+enforcement is shared by every registered probe using the terminal-poll
+helper, with no change to the published job response schema.
+
+See [Mission 156 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-156-TERMINAL-POLL-STATUS.md).
