@@ -415,3 +415,17 @@ against the project-owned Python reference server. This check is restricted to
 the fixture's minute-aligned readings and does not prove generalized temporal
 window semantics, persistent data integrity or external interoperability. See
 [Mission 118 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-118-TELEMETRY-WINDOW-PARTITIONS.md).
+
+## Telemetry pagination slice evidence (Mission 119)
+
+Registered live **L-28** now verifies that page zero of three synthetic
+readings contains the first two timestamp-sorted records with their original
+device, sensor, timestamp and value, rather than only checking row and total
+counts. It also requires consistent first-page metadata (`currentPage: 0`,
+`pageSize: 2`, `totalCount: 3`, `totalPages: 2`).
+
+The registered assertion is fail-closed in manifest validation. Its negative
+tests in `Scripts/test_telemetry_pagination_slice.py` are required by hosted
+static conformance; the Python reference server exercises L-28 live. This
+does not certify snapshot isolation or arbitrary pagination policies. See
+[Mission 119 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-119-TELEMETRY-PAGINATION-SLICE.md).
