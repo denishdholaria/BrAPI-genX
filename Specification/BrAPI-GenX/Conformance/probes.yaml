@@ -463,9 +463,9 @@ probes:
   object: telemetry
   title: Disagreeing value for a stored sample instant is rejected element-wise
   procedure:
-  - POST a batch; POST a point with the same natural key but a different value.
-  expectation: The conflicting element is named in conflicts with nothing appended; the stored value is unchanged on re-GET.
-  falsifier: The stored value is overwritten or the batch fails wholesale.
+  - POST a batch; POST a point with the same natural key but a different value; verify the response names that exact rejected key.
+  expectation: The conflicting element is identified by its device/sensor/timestamp key, with nothing appended; all originally submitted stored fields remain unchanged on re-GET.
+  falsifier: A fabricated or unrelated conflict key, an overwritten original record or wholesale batch failure.
   calls:
   - {method: POST, path: /telemetry, body_fixture: live_telemetry_batch, capture_telemetry: true}
   - {method: POST, path: /telemetry, body_fixture: live_telemetry_conflict, assert: {telemetry_counts: {appended: 0, replayed: 0}, telemetry_conflicts: 1}}

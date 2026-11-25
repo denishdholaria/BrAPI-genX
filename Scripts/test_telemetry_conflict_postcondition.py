@@ -44,9 +44,12 @@ class TelemetryConflictPostconditionTests(unittest.TestCase):
                 self.assertEqual(("POST", "/telemetry"), (method, path))
                 self.assertEqual(1, len(body))
                 self.assertNotEqual(submitted[2]["value"], body[0]["value"])
+                rejected = body[0]
+                key = "/".join((rejected["deviceDbId"],
+                                rejected["sensorDbId"], rejected["timestamp"]))
                 return 200, {"result": {
                     "appended": 0, "replayed": 0,
-                    "conflicts": ["conflicting-value"]}}
+                    "conflicts": [key]}}
             if len(seen) == 3:
                 self.assertEqual("GET", method)
                 self.assertIn(f"deviceDbId={submitted[0]['deviceDbId']}", path)
