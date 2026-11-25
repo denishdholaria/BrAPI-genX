@@ -1242,3 +1242,25 @@ server-managed response metadata is permitted. The mandatory
 negative mutations, early failure and positive extra-field cases.
 
 See [Mission 169 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-169-MODEL-LIFECYCLE-ACK-SOURCE-INTEGRITY.md).
+
+## Persisted revoked model before negative inference evidence (Mission 170)
+
+Registered **L-15** now performs a version-specific
+`GET /models/{revokedModelDbId}?version={revokedModelVersion}`
+**after** a revoked model is registered and **before** submitting
+inference against it. The fetched record must exist and retain every
+originally submitted model field, including `status: revoked`,
+the model version, digests, metrics, and nested provenance.
+
+Previously, a server that acknowledged registration but did not persist
+the model could reject the subsequent inference as an *unknown*
+model. L-15 would then incorrectly report successful revoked-model
+enforcement. A failed GET or corrupted returned model now fails the
+probe before any revoked inference request. The original unknown-model
+rejection and complete jobs-collection negative evidence remain intact.
+
+The mandatory `Scripts/test_rejected_inference_no_stored_job.py`
+suite covers absent, altered, malformed and valid stored records.
+The manifest validator also makes this intervening readback mandatory.
+
+See [Mission 170 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-170-REVOKED-MODEL-PERSISTENCE-READBACK.md).

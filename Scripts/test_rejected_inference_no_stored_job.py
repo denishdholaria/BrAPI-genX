@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 from pathlib import Path
+from urllib.parse import quote
 from unittest import mock
 import unittest
 
@@ -21,16 +22,23 @@ class RejectedInferenceNoStoredJobTests(unittest.TestCase):
         cls.probe = next(p for p in manifest["probes"] if p["id"] == "L-15")
 
     def test_registered_readback_after_both_rejections(self):
-        self.assertEqual(4, len(self.probe["calls"]))
+        self.assertEqual(5, len(self.probe["calls"]))
         self.assertEqual(400, self.probe["calls"][0]["assert"]["status"])
-        self.assertEqual(400, self.probe["calls"][2]["assert"]["status"])
-        final = self.probe["calls"][3]
+        self.assertEqual(400, self.probe["calls"][3]["assert"]["status"])
+        stored = self.probe["calls"][2]
+        self.assertEqual("GET", stored["method"])
+        self.assertEqual(
+            "/models/{revokedModelDbId}?version={revokedModelVersion}",
+            stored["path"])
+        self.assertIs(True, stored["assert"]["revoked_model_persisted"])
+        final = self.probe["calls"][4]
         self.assertEqual(("GET", "/jobs"), (final["method"], final["path"]))
         self.assertIs(True, final["assert"]["rejected_inference_not_stored"])
 
     def exercise(self, create_job=None, mutate_page=None, read_status=200,
                  unknown_status=400, revoked_status=400,
-                 mutate_revoked_ack=None):
+                 mutate_revoked_ack=None, mutate_stored_revoked=None,
+                 stored_model_status=200):
         calls = []
         rejected = []
         accepted_revoked = []
@@ -51,6 +59,16 @@ class RejectedInferenceNoStoredJobTests(unittest.TestCase):
                     acknowledged = mutate_revoked_ack(acknowledged)
                 return 200, {"result": acknowledged}
             if len(calls) == 3:
+                original = accepted_revoked[0]
+                expected_path = (
+                    "/models/" + quote(original["modelDbId"], safe=":")
+                    + "?version=" + quote(original["modelVersion"], safe=""))
+                self.assertEqual(("GET", expected_path), (method, path))
+                stored = copy.deepcopy(original)
+                if mutate_stored_revoked is not None:
+                    stored = mutate_stored_revoked(stored)
+                return stored_model_status, {"result": stored}
+            if len(calls) == 4:
                 self.assertEqual(("POST", "/jobs"), (method, path))
                 rejected.append(copy.deepcopy(body))
                 self.assertEqual(accepted_revoked[0]["modelDbId"],
@@ -58,7 +76,7 @@ class RejectedInferenceNoStoredJobTests(unittest.TestCase):
                 self.assertNotEqual(rejected[0]["idempotencyKey"],
                                     rejected[1]["idempotencyKey"])
                 return revoked_status, {}
-            if len(calls) == 4:
+            if len(calls) == 5:
                 self.assertEqual(("GET", "/jobs"), (method, path))
                 rows = [{
                     "jobDbId": "JOB_UNRELATED",
@@ -90,7 +108,7 @@ class RejectedInferenceNoStoredJobTests(unittest.TestCase):
     def test_both_rejections_with_no_stored_jobs_pass(self):
         failures, calls = self.exercise()
         self.assertEqual(0, failures)
-        self.assertEqual(4, len(calls))
+        self.assertEqual(5, len(calls))
 
     def test_revoked_ack_changed_status_rejected_before_inference(self):
         failures, calls = self.exercise(
@@ -125,7 +143,45 @@ class RejectedInferenceNoStoredJobTests(unittest.TestCase):
         failures, calls = self.exercise(
             mutate_revoked_ack=lambda model: {
                 **model, "serverReviewedAt": "2026-11-25T00:00:00Z"})
-        self.assertEqual((0, 4), (failures, len(calls)))
+        self.assertEqual((0, 5), (failures, len(calls)))
+
+    def test_revoked_model_not_persisted_fails_before_rejected_submit(self):
+        failures, calls = self.exercise(stored_model_status=404)
+        self.assertEqual((1, 3), (failures, len(calls)))
+
+    def test_revoked_model_wrong_stored_status_fails_before_submit(self):
+        failures, calls = self.exercise(
+            mutate_stored_revoked=lambda m: {**m, "status": "active"})
+        self.assertEqual((1, 3), (failures, len(calls)))
+
+    def test_revoked_model_changed_stored_digest_fails_before_submit(self):
+        failures, calls = self.exercise(
+            mutate_stored_revoked=lambda m: {
+                **m, "artifactDigest": "f" * 64})
+        self.assertEqual((1, 3), (failures, len(calls)))
+
+    def test_revoked_model_wrong_stored_version_fails_before_submit(self):
+        failures, calls = self.exercise(
+            mutate_stored_revoked=lambda m: {**m, "modelVersion": "other"})
+        self.assertEqual((1, 3), (failures, len(calls)))
+
+    def test_revoked_model_missing_stored_provenance_fails_before_submit(self):
+        def change(model):
+            del model["provenance"]
+            return model
+        failures, calls = self.exercise(mutate_stored_revoked=change)
+        self.assertEqual((1, 3), (failures, len(calls)))
+
+    def test_revoked_model_malformed_stored_result_fails_before_submit(self):
+        failures, calls = self.exercise(
+            mutate_stored_revoked=lambda m: None)
+        self.assertEqual((1, 3), (failures, len(calls)))
+
+    def test_revoked_model_extra_readback_metadata_allowed(self):
+        failures, calls = self.exercise(
+            mutate_stored_revoked=lambda m: {
+                **m, "serverReadAt": "2026-11-25T00:00:00Z"})
+        self.assertEqual((0, 5), (failures, len(calls)))
 
     def test_empty_job_collection_allowed(self):
         self.assertEqual(0, self.exercise(create_job=lambda rows, denied: [])[0])
@@ -217,7 +273,7 @@ class RejectedInferenceNoStoredJobTests(unittest.TestCase):
     def test_revoked_model_inference_accepted_fails_before_readback(self):
         failures, calls = self.exercise(revoked_status=202)
         self.assertEqual(1, failures)
-        self.assertEqual(3, len(calls))
+        self.assertEqual(4, len(calls))
 
 
     def test_duplicate_unrelated_job_identifiers_fail(self):
