@@ -300,7 +300,7 @@ probes:
   falsifier: A second version is created for the identical replay.
   calls:
   - {method: POST, path: /variable-terms, body_fixture: live_term_submit, capture_term: true}
-  - {method: POST, path: /variable-terms, body_fixture: live_term_submit, assert: {same_term: true}}
+  - {method: POST, path: /variable-terms, body_fixture: live_term_submit, assert: {status: 200, same_term: true}}
   - {method: GET, path: "/variable-terms?variableDbId={variableDbId}", assert: {status: 200, term_replay_single_version: true}}
 - id: L-09
   tier: live
@@ -324,7 +324,7 @@ probes:
   falsifier: A second entry is appended for the identical replay.
   calls:
   - {method: POST, path: "/seedlots/{lotDbId}/ledger", body_fixture: live_ledger_submit, capture_ledger: true}
-  - {method: POST, path: "/seedlots/{lotDbId}/ledger", body_fixture: live_ledger_submit, assert: {same_ledger: true}}
+  - {method: POST, path: "/seedlots/{lotDbId}/ledger", body_fixture: live_ledger_submit, assert: {status: 200, same_ledger: true}}
   - {method: GET, path: "/seedlots/{lotDbId}/ledger", assert: {ledger_count: 1, ledger_original_intact: true}}
 - id: L-11
   tier: live
@@ -348,7 +348,7 @@ probes:
   falsifier: A second version is created, original artifact metadata is changed, or collection evidence is incomplete.
   calls:
   - {method: POST, path: /models, body_fixture: live_model_submit, capture_model: true}
-  - {method: POST, path: /models, body_fixture: live_model_submit, assert: {same_model: true}}
+  - {method: POST, path: /models, body_fixture: live_model_submit, assert: {status: 200, same_model: true}}
   - {method: GET, path: "/models?modelDbId={modelDbId}", assert: {status: 200, model_replay_single_version: true}}
 - id: L-13
   tier: live
@@ -397,7 +397,7 @@ probes:
   falsifier: A second record is stored, original matrix metadata or provenance changes, or the collection is incomplete.
   calls:
   - {method: POST, path: /variantmatrices, body_fixture: live_matrix_submit, capture_matrix: true}
-  - {method: POST, path: /variantmatrices, body_fixture: live_matrix_submit, assert: {same_matrix: true}}
+  - {method: POST, path: /variantmatrices, body_fixture: live_matrix_submit, assert: {status: 200, same_matrix: true}}
   - {method: GET, path: /variantmatrices, assert: {status: 200, matrix_replay_single_record: true}}
 - id: L-17
   tier: live
@@ -421,7 +421,7 @@ probes:
   falsifier: A second record is stored, original license, links or provenance changes, or collection evidence is incomplete.
   calls:
   - {method: POST, path: /fair-packages, body_fixture: live_package_submit, capture_package: true}
-  - {method: POST, path: /fair-packages, body_fixture: live_package_submit, assert: {same_package: true}}
+  - {method: POST, path: /fair-packages, body_fixture: live_package_submit, assert: {status: 200, same_package: true}}
   - {method: GET, path: /fair-packages, assert: {status: 200, package_replay_single_record: true}}
 - id: L-19
   tier: live
