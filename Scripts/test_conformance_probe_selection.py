@@ -7,7 +7,7 @@ import subprocess
 import sys
 import unittest
 
-from checkGenXConformance import select_probes
+from checkGenXConformance import select_probes, selected_probe_exit_code
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "Scripts" / "checkGenXConformance.py"
@@ -71,6 +71,27 @@ class SelectedProbeTests(unittest.TestCase):
         self.assertEqual(1, result.returncode, result.stdout + result.stderr)
         self.assertIn("live probe requires --server", result.stderr)
 
+
+
+    def test_explicit_expired_job_probe_without_fixture_fails_instead_of_skip_success(self):
+        # No network dependency: L-05 skips before issuing its expired-job GET.
+        result = subprocess.run(
+            [sys.executable, str(SCRIPT), "--only", "L-05",
+             "--server", "http://127.0.0.1:1/genx/v1"],
+            cwd=ROOT, capture_output=True, text=True, timeout=30,
+            check=False,
+        )
+        self.assertEqual(1, result.returncode, result.stdout + result.stderr)
+        self.assertIn("SKIP L-05", result.stdout)
+        self.assertIn("needs --expired-job", result.stdout)
+        self.assertIn("done: 0 failures, 1 skipped", result.stdout)
+
+    def test_unfiltered_run_still_allows_live_probe_skips(self):
+        # Isolate outcome policy without rerunning the full static suite here.
+        self.assertEqual(0, selected_probe_exit_code(0, 28, False))
+        self.assertEqual(0, selected_probe_exit_code(0, 0, True))
+        self.assertEqual(1, selected_probe_exit_code(0, 1, True))
+        self.assertEqual(1, selected_probe_exit_code(1, 0, False))
 
 if __name__ == "__main__":
     unittest.main()

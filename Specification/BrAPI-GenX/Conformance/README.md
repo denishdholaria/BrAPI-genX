@@ -96,7 +96,9 @@ Each probe reports `PASS`, `FAIL`, or `SKIP` (live without `--server` only).
 Any `FAIL` exits non-zero. When `--only` is used, the runner now requires
 exactly one registered probe identifier. An unknown, duplicate or malformed
 selection fails; selecting a live probe without `--server` also fails rather
-than silently reporting a skip. An unfiltered static run still reports `SKIP`
+than silently reporting a skip. **Any explicitly selected probe that reports
+`SKIP` now causes a non-zero process exit** (Mission 107), including L-05 when
+`--expired-job` is omitted. An unfiltered static run still reports `SKIP`
 for live probes when no server is provided. See the selection regression tests
 in `Scripts/test_conformance_probe_selection.py` (Mission 103).
 No probe may depend on another probe's side
@@ -230,3 +232,17 @@ These checks run against the Python in-memory reference server. They do not
 establish durable scientific-data integrity, real content-byte retrieval,
 third-party interoperability, licensing authority or deployment security.
 See [Mission 106 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-106-PUBLICATION-CONFLICT-POSTCONDITIONS.md).
+
+## Explicit selection cannot succeed with skipped evidence (Mission 107)
+
+The live L-05 expiry check needs a known expired job identifier supplied as
+`--expired-job`. Before Mission 107, `--only L-05 --server …` without that
+identifier exited successfully after reporting `SKIP`: an explicit request for
+conformance evidence produced no evidence. The exit policy now treats any
+`SKIP` from an explicitly selected probe as a failure, while retaining the
+unfiltered runner's historical optional-fixture skip behavior. Regression
+coverage is in `Scripts/test_conformance_probe_selection.py` and executes in
+hosted static conformance. This change does not assert new scientific behavior
+or amend the registered probe manifest.
+
+See [Mission 107 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-107-SELECTED-PROBE-SKIP-FAIL-CLOSED.md).

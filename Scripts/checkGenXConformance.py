@@ -1690,6 +1690,11 @@ def select_probes(probes, only=None, server=None):
     return matches
 
 
+def selected_probe_exit_code(failures, skips, explicit_selection):
+    """An explicit single-probe SKIP must fail even if no assertion failed."""
+    return 1 if failures or (explicit_selection and skips) else 0
+
+
 def main():
     parser = argparse.ArgumentParser(description="BrAPI-GenX conformance checks")
     parser.add_argument("--root", default=".")
@@ -1750,7 +1755,9 @@ def main():
             results.report(probe["id"], probe["title"], "SKIP", "needs --server")
 
     print(f"done: {results.failures} failures, {results.skips} skipped")
-    return 1 if results.failures else 0
+    # Explicitly requested probes must actually execute; a SKIP is not a pass.
+    # Unfiltered static-only runs retain their established live-SKIP behavior.
+    return selected_probe_exit_code(results.failures, results.skips, args.only is not None)
 
 
 if __name__ == "__main__":
