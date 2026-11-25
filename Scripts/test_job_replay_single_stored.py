@@ -41,7 +41,7 @@ class JobReplaySingleStoredTests(unittest.TestCase):
                 original.update(copy.deepcopy(body))
                 accepted = {
                     "jobDbId": "JOB_ORIGINAL", "jobType": body["jobType"],
-                    "idempotencyKey": body["idempotencyKey"]}
+                    "idempotencyKey": body["idempotencyKey"], "status": "SUBMITTED"}
                 if initial_mutate is not None:
                     accepted = initial_mutate(accepted)
                 return initial_status, {"result": accepted}
