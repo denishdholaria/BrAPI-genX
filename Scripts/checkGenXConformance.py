@@ -1815,17 +1815,31 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
             if assertion.get("terminal_state_unchanged"):
                 baseline = ctx.get("live_terminal_before_cancel")
                 saved = payload.get("result") if isinstance(payload, dict) else None
+                original = ctx.get("live_body")
                 terminal = {"COMPLETED", "FAILED", "CANCELLED", "EXPIRED"}
                 if (status != 200 or not isinstance(baseline, dict)
                         or not isinstance(saved, dict)
+                        or not isinstance(original, dict)
                         or not isinstance(ctx.get("live_job"), str)
+                        or not ctx["live_job"]
                         or baseline.get("jobDbId") != ctx["live_job"]
                         or saved.get("jobDbId") != ctx["live_job"]
                         or baseline.get("status") not in terminal
-                        or saved.get("status") != baseline["status"]):
+                        or saved.get("status") != baseline["status"]
+                        or any(
+                            not isinstance(original.get(field), str)
+                            or not original[field]
+                            or baseline.get(field) != original[field]
+                            or saved.get(field) != original[field]
+                            for field in ("jobType", "idempotencyKey")
+                        )
+                        or ("result" in baseline) != ("result" in saved)
+                        or (("result" in baseline)
+                            and saved["result"] != baseline["result"])):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        "terminal job identity or status changed after rejected DELETE"
+                        "terminal job original identity, status or result changed "
+                        "after rejected DELETE"
                     )
             if assertion.get("capture_job_collection"):
                 snapshot, problem = immutable_job_snapshot(status, payload)
