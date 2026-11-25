@@ -566,3 +566,18 @@ requires `model_replay_single_version` in the registered manifest. The
 negative regression suite `Scripts/test_model_replay_version_integrity.py`
 runs in hosted static conformance. See
 [Mission 128 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-128-MODEL-REPLAY-VERSION-INTEGRITY.md).
+
+## Matrix conflict full-record verification (Mission 129)
+
+Registered **L-17** has been strengthened from checking only the original
+matrix identifier and file digest to checking **all submitted fields** on its
+versioned record GET following a 409 conflict response. This includes
+`fileURL`, index digest, access service and nested provenance; additional
+server-managed fields are allowed.
+
+The runner-local `published_record_problem` helper carries the full
+record comparison for conflict readbacks without duplicating logic. The
+manifest validator requires the existing L-17 three-step sequence; the
+`Scripts/test_matrix_conflict_whole_record.py` mutation suite is mandatory
+in hosted static conformance. See
+[Mission 129 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-129-MATRIX-CONFLICT-WHOLE-RECORD.md).

@@ -399,8 +399,8 @@ probes:
   title: Mutated bytes under a published id are rejected
   procedure:
   - POST a matrix reference; POST the same matrixDbId with a different fileDigest.
-  expectation: Second call is rejected with 409 and the published record is unchanged on re-GET.
-  falsifier: The published digest is mutated or a conflicting record is stored.
+  expectation: Second call is rejected with 409 and all originally submitted matrix fields remain unchanged on re-GET.
+  falsifier: The published file, index, access-service or provenance metadata is mutated or a conflicting record is stored.
   calls:
   - {method: POST, path: /variantmatrices, body_fixture: live_matrix_submit, capture_matrix: true}
   - {method: POST, path: /variantmatrices, body_fixture: live_matrix_conflict, assert: {status: 409}}

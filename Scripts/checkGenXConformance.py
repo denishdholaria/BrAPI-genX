@@ -1182,6 +1182,21 @@ def wait_terminal(server, job_id, token):
     return last
 
 
+def published_record_problem(status, payload, original, expected_id, identity_field):
+    """Return a diagnostic if a rejected rewrite changed the submitted record."""
+    stored = payload.get("result") if isinstance(payload, dict) else None
+    if (status != 200 or not isinstance(original, dict)
+            or not isinstance(expected_id, str) or not expected_id
+            or original.get(identity_field) != expected_id
+            or not isinstance(stored, dict)
+            or stored.get(identity_field) != expected_id):
+        return "published record or original identity unavailable"
+    if any(key not in stored or stored[key] != value
+           for key, value in original.items()):
+        return "published record fields changed after rejected conflict"
+    return None
+
+
 def replay_collection_problem(status, payload, original, expected_id, identity_field):
     """Return a diagnostic when a replay's complete collection lacks one original."""
     result = payload.get("result") if isinstance(payload, dict) else None
@@ -1773,14 +1788,13 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         f"replay returned {(seen.get('modelDbId'), seen.get('modelVersion'))}, "
                         f"expected {ctx.get('live_model')}")
             if assertion.get("unchanged_matrix_digest"):
-                seen = payload.get("result", {}) if isinstance(payload, dict) else {}
-                expected = ctx.get("live_matrix_baseline")
-                observed = (seen.get("matrixDbId"), seen.get("fileDigest")) if isinstance(seen, dict) else None
-                if status != 200 or observed != expected:
+                problem = published_record_problem(
+                    status, payload, ctx.get("live_matrix_original"),
+                    ctx.get("live_matrix"), "matrixDbId"
+                )
+                if problem:
                     return results.report(
-                        probe["id"], probe["title"], "FAIL",
-                        f"matrix identity/digest changed or unavailable: "
-                        f"status={status}, expected={expected}, observed={observed}",
+                        probe["id"], probe["title"], "FAIL", "matrix: " + problem
                     )
             if assertion.get("unchanged_package_license"):
                 seen = payload.get("result", {}) if isinstance(payload, dict) else {}
@@ -2391,6 +2405,19 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-17":
+                if (len(calls) != 3
+                        or calls[0].get("body_fixture") != "live_matrix_submit"
+                        or calls[0].get("capture_matrix") is not True
+                        or calls[1].get("body_fixture") != "live_matrix_conflict"
+                        or calls[1].get("assert", {}).get("status") != 409
+                        or calls[2].get("method") != "GET"
+                        or calls[2].get("path") != "/variantmatrices/{matrixDbId}"
+                        or calls[2].get("assert", {}).get("unchanged_matrix_digest")
+                            is not True):
+                    raise ValueError(
+                        "probe L-17: full matrix original readback after conflict required"
+                    )
             if probe_id == "L-12":
                 if (len(calls) != 3
                         or calls[0].get("body_fixture") != "live_model_submit"
