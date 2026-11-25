@@ -196,6 +196,41 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
             totalPages=1, currentPage=0)
         return target
 
+    def test_created_job_missing_status_fails(self):
+        def change(kind, data):
+            if kind == "jobs":
+                data["result"]["data"][0].pop("status")
+            return data
+        self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_created_job_unknown_status_fails(self):
+        def change(kind, data):
+            if kind == "jobs":
+                data["result"]["data"][0]["status"] = "QUEUED"
+            return data
+        self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_unrelated_job_missing_status_fails(self):
+        def change(kind, data):
+            if kind == "jobs":
+                data = self.append_unrelated_job(kind, data, {
+                    "jobDbId": "OTHER", "jobType": "analysis"})
+                data["result"]["data"][-1].pop("status")
+            return data
+        self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_unrelated_job_invalid_status_fails(self):
+        for wrong in ("QUEUED", None, False, 0, [], {}):
+            with self.subTest(wrong=wrong):
+                def change(kind, data):
+                    return self.append_unrelated_job(kind, data, {
+                        "jobDbId": "OTHER", "jobType": "analysis",
+                        "status": wrong})
+                self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_valid_mixed_first_page_job_states_pass(self):
+        self.assertEqual(0, self.exercise(include_unrelated=True)[0])
+
     def test_created_job_type_changed_fails(self):
         def change(kind, data):
             if kind == "jobs":
