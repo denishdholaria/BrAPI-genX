@@ -291,11 +291,12 @@ probes:
   title: Versioned variable-term publication replays an identical version without duplication
   procedure:
   - POST a VariableTermNewRequest to /genx/v1/variable-terms under a fresh namespaced id; POST the identical body again.
-  expectation: Second response is 200 with the same (variableDbId, version) and no new version.
+  expectation: Second response is 200 with the same (variableDbId, version); the collection holds exactly one unchanged published version.
   falsifier: A second version is created for the identical replay.
   calls:
   - {method: POST, path: /variable-terms, body_fixture: live_term_submit, capture_term: true}
   - {method: POST, path: /variable-terms, body_fixture: live_term_submit, assert: {same_term: true}}
+  - {method: GET, path: "/variable-terms?variableDbId={variableDbId}", assert: {status: 200, term_replay_single_version: true}}
 - id: L-09
   tier: live
   object: variableTerms
