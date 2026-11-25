@@ -81,21 +81,26 @@ def main():
         "idempotencyKey": str(uuid.uuid4()),
     }
     steps = [
-        ("GET", "/serverinfo", None),
-        ("POST", "/jobs", submit),
-        ("POST", "/jobs", copy.deepcopy(submit)),
-        ("POST", "/jobs", conflict),
-        ("POST", "/jobs", {"jobType": "nope"}),
-        ("GET", f"/jobs/{args.expired_job}", None),
-        ("POST", "/models", model),
-        ("POST", "/models", copy.deepcopy(model)),
-        ("POST", "/jobs", inference),
+        ("GET", "/serverinfo", None, 200),
+        ("POST", "/jobs", submit, 202),
+        ("POST", "/jobs", copy.deepcopy(submit), 200),
+        ("POST", "/jobs", conflict, 409),
+        ("POST", "/jobs", {"jobType": "nope"}, 400),
+        ("GET", f"/jobs/{args.expired_job}", None, 200),
+        ("POST", "/models", model, 200),
+        ("POST", "/models", copy.deepcopy(model), 200),
+        ("POST", "/jobs", inference, 202),
     ]
 
     failures = 0
-    for method, path, body in steps:
+    for method, path, body, expected_status in steps:
         left = http_call(args.a, method, path, body=copy.deepcopy(body) if body else None)
         right = http_call(args.b, method, path, body=copy.deepcopy(body) if body else None)
+        # Two implementations returning the same incorrect status is not conformance.
+        if left[0] != expected_status or right[0] != expected_status:
+            failures += 1
+            print(f"DIVERGE {method} {path}: expected HTTP {expected_status}, got {left[0]} vs {right[0]}")
+            continue
         if path == "/serverinfo" and left[0] == right[0] == 200:
             # Capability lists legitimately differ by implementation scope:
             # the smaller set must be a subset, everything else byte-equal.
