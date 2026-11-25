@@ -1076,3 +1076,19 @@ job identifier and a missing job type are rejected. The mandatory
 those cases.
 
 See [Mission 160 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-160-UNKNOWN-JOB-COLLECTION-IDENTITY.md).
+
+## Identical asynchronous job replay response binding (Mission 161)
+
+Registered **L-01** now accepts only its documented HTTP **200 or 202**
+for an identical job replay, not arbitrary successful 2xx responses.
+It also requires the returned `jobType` and echoed `idempotencyKey`
+to match the original submitted request alongside the accepted
+`jobDbId`. Previously, a successful status and matching job identifier
+could pass despite the wrong job type, missing or changed request key,
+or a 201/204/206 response.
+
+The existing stored-collection single-effect assertion is unchanged.
+The mandatory `Scripts/test_job_replay_single_stored.py` regression suite
+now covers malformed/changed replay responses and both permitted statuses.
+
+See [Mission 161 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-161-JOB-REPLAY-RESPONSE-BINDING.md).
