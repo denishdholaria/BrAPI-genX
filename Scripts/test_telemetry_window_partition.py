@@ -22,6 +22,11 @@ class TelemetryWindowPartitionTests(unittest.TestCase):
 
     def test_registered_probe_checks_actual_partition_contents(self):
         self.assertEqual(3, len(self.probe["calls"]))
+        self.assertEqual(
+            {"appended": 3, "replayed": 0},
+            self.probe["calls"][0]["assert"]["telemetry_counts"])
+        self.assertIs(
+            True, self.probe["calls"][0]["assert"]["telemetry_no_conflicts"])
         source, request = self.probe["calls"][1:]
         self.assertEqual("GET", source["method"])
         self.assertIn("aggregation=none", source["path"])
@@ -31,7 +36,8 @@ class TelemetryWindowPartitionTests(unittest.TestCase):
         self.assertEqual(3, request["assert"]["data_length"])
         self.assertIs(True, request["assert"]["telemetry_window_partitions"])
 
-    def exercise(self, corrupt=None, status=200, raw_mutate=None, raw_status=200):
+    def exercise(self, corrupt=None, status=200, raw_mutate=None, raw_status=200,
+                 initial_mutate=None, initial_status=200):
         seen = []
         submitted = []
 
@@ -41,8 +47,10 @@ class TelemetryWindowPartitionTests(unittest.TestCase):
                 self.assertEqual(("POST", "/telemetry"), (method, path))
                 self.assertEqual(3, len(body))
                 submitted.extend(copy.deepcopy(body))
-                return 200, {"result": {
-                    "appended": 3, "replayed": 0, "conflicts": []}}
+                outcome = {"appended": 3, "replayed": 0, "conflicts": []}
+                if initial_mutate is not None:
+                    outcome = initial_mutate(outcome)
+                return initial_status, {"result": outcome}
             if len(seen) == 2:
                 self.assertEqual("GET", method)
                 self.assertIn(f"deviceDbId={submitted[0]['deviceDbId']}", path)
@@ -72,7 +80,10 @@ class TelemetryWindowPartitionTests(unittest.TestCase):
             checker.run_live_probe(
                 "http://example.test/genx/v1", self.probe,
                 {"conformance_dir": str(CONF)}, outcome, None, None)
-        self.assertIn(len(seen), (2, 3))
+        if initial_mutate is None and initial_status == 200:
+            self.assertIn(len(seen), (2, 3))
+        else:
+            self.assertIn(len(seen), (1, 2, 3))
         return outcome.failures
 
     def test_correct_one_sample_per_minute_passes(self):
@@ -204,6 +215,29 @@ class TelemetryWindowPartitionTests(unittest.TestCase):
 
     def test_failed_source_read_fails_before_aggregation(self):
         self.assertEqual(1, self.exercise(raw_status=404))
+
+
+
+    def test_initial_post_incorrect_append_count_fails(self):
+        self.assertEqual(1, self.exercise(
+            initial_mutate=lambda result: {**result, "appended": 2}))
+
+    def test_initial_post_boolean_replayed_count_fails(self):
+        self.assertEqual(1, self.exercise(
+            initial_mutate=lambda result: {**result, "replayed": False}))
+
+    def test_initial_post_fabricated_conflict_fails(self):
+        self.assertEqual(1, self.exercise(
+            initial_mutate=lambda result: {**result, "conflicts": ["fabricated"]}))
+
+    def test_initial_post_missing_conflict_array_fails(self):
+        self.assertEqual(1, self.exercise(
+            initial_mutate=lambda result: {
+                key: value for key, value in result.items()
+                if key != "conflicts"}))
+
+    def test_initial_post_non_success_status_fails(self):
+        self.assertEqual(1, self.exercise(initial_status=409))
 
 
 
