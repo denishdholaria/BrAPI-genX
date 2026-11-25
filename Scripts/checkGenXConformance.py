@@ -1153,10 +1153,15 @@ def http_call(server, method, path, body=None, token=None):
             payload = resp.read().decode("utf-8") or "{}"
             return resp.status, json.loads(payload)
     except HTTPError as exc:
-        try:
-            return exc.code, json.loads(exc.read().decode("utf-8") or "{}")
-        except Exception:
+        # Preserve text errors for confidentiality assertions: silently
+        # replacing a non-JSON 403 body with {} can hide leaked values.
+        raw = exc.read().decode("utf-8", errors="replace")
+        if not raw:
             return exc.code, {}
+        try:
+            return exc.code, json.loads(raw)
+        except ValueError:
+            return exc.code, {"error": raw}
 
 
 def fresh_submit(conformance_dir, job_type="germplasm_search", parameters=None):
@@ -1672,6 +1677,44 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
                         "deprecated inference did not complete as the accepted job"
+                    )
+            if assertion.get("embargo_denial_no_payload"):
+                # A 403 can still echo a whole protected record, including
+                # in plain-text errors. Compare against the original request.
+                original = ctx.get("live_package_original")
+                captured_id = ctx.get("live_package")
+                if (status != 403 or not isinstance(original, dict)
+                        or not isinstance(captured_id, str) or not captured_id
+                        or original.get("packageDbId") != captured_id
+                        or not isinstance(payload, dict)
+                        or "result" in payload or "data" in payload):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "embargo denial missing or contains a package data envelope"
+                    )
+                serialized = json.dumps(payload, ensure_ascii=False, sort_keys=True)
+                protected = [original.get("title"), original.get("license"),
+                             original.get("publisher"),
+                             original.get("embargoUntil")]
+                protected.extend(
+                    entry.get("value") for entry in original.get("identifiers", [])
+                    if isinstance(entry, dict)
+                )
+                protected.extend(
+                    value for value in original.get("creators", [])
+                    if isinstance(value, str)
+                )
+                for item in original.get("payloadRefs", []):
+                    if isinstance(item, dict):
+                        protected.extend(item.get(field) for field in (
+                            "endpoint", "responseDigest", "queryDigest"
+                        ))
+                if ("payloadRefs" in serialized
+                        or any(isinstance(value, str) and len(value) >= 5
+                               and value in serialized for value in protected)):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "embargo denial leaks protected package metadata or evidence"
                     )
             if assertion.get("expired_result_withheld"):
                 # A visible EXPIRED status does not prove the result data
@@ -2456,6 +2499,7 @@ LIVE_BOOLEAN_ASSERTIONS = frozenset({
     "job_replay_single_stored", "capture_job_collection",
     "job_conflict_collection_unchanged", "terminal_state_unchanged",
     "unknown_job_type_not_stored", "expired_result_withheld",
+    "embargo_denial_no_payload",
     "capability_registry_match",
 })
 LIVE_COUNT_ASSERTIONS = frozenset({
@@ -2582,6 +2626,13 @@ def validate_live_step_assertions(probe_id, index, call):
             f"probe {probe_id} call {index}: "
             "unchanged_term_record requires versioned term GET"
         )
+    if "embargo_denial_no_payload" in assertion and (
+            call.get("method") != "GET"
+            or call.get("path") != "/fair-packages/{packageDbId}"):
+        raise ValueError(
+            f"probe {probe_id} call {index}: "
+            "embargo_denial_no_payload requires embargoed package GET"
+        )
     if "expired_result_withheld" in assertion and (
             call.get("method") != "GET"
             or call.get("path") != "/jobs/{expiredJobDbId}"):
@@ -2680,6 +2731,20 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-20":
+                if (len(calls) != 2
+                        or calls[0].get("method") != "POST"
+                        or calls[0].get("path") != "/fair-packages"
+                        or calls[0].get("body_fixture") != "live_package_embargoed"
+                        or calls[0].get("capture_package") is not True
+                        or calls[1].get("method") != "GET"
+                        or calls[1].get("path") != "/fair-packages/{packageDbId}"
+                        or calls[1].get("assert", {}).get("status") != 403
+                        or calls[1].get("assert", {}).get("embargo_denial_no_payload")
+                            is not True):
+                    raise ValueError(
+                        "probe L-20: embargo_denial_no_payload on rejected package GET required"
+                    )
             if probe_id == "L-05":
                 if (len(calls) != 1
                         or calls[0].get("method") != "GET"

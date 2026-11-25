@@ -689,3 +689,22 @@ hosted static conformance. Full live execution of L-05 still requires a
 known-expired identifier supplied using `--expired-job`; otherwise
 the live runner marks L-05 **SKIP**. See
 [Mission 137 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-137-EXPIRED-JOB-RESULT-WITHHELD.md).
+
+## Embargo denial confidentiality check (Mission 138)
+
+Registered **L-20** now verifies that the individual-record embargo denial
+does not echo protected package content in its HTTP 403 body. The live
+runner compares the captured original package's title, license, publisher,
+embargo timestamp, citation identifiers, creators and evidence references
+against the denial response. Structured result envelopes also fail.
+
+Non-JSON HTTP error text is preserved for inspection rather than dropped
+as an empty mapping. The fail-closed manifest guard and mandatory mutation
+suite `Scripts/test_embargo_denial_no_payload.py` enforce this check.
+
+**Governance boundary:** RFC-006 intentionally distinguishes findable
+package *metadata* from protected payload bytes, and it leaves exact
+embargo-time metadata visibility unresolved. This mission only verifies
+the **individual denial response**, not whether metadata should appear on
+`GET /fair-packages`. It does not redesign that policy. See
+[Mission 138 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-138-EMBARGO-DENIAL-PAYLOAD-INTEGRITY.md).

@@ -147,6 +147,35 @@ class LiveAssertionManifestTests(unittest.TestCase):
                 s.update(body_fixture="live_submit"),
             )))
 
+    def test_embargo_denial_postcondition_cannot_be_removed(self):
+        self.assertIn(
+            "embargo_denial_no_payload on rejected package GET required",
+            self.mutated("L-20", 1,
+                         lambda s: s.update({"assert": {"status": 403}})))
+
+    def test_embargo_denial_postcondition_cannot_be_disabled(self):
+        self.assertIn(
+            "embargo_denial_no_payload must be true",
+            self.mutated("L-20", 1,
+                         lambda s: s["assert"].update(embargo_denial_no_payload=False)))
+
+    def test_embargo_denial_requires_package_get(self):
+        self.assertIn(
+            "embargo_denial_no_payload requires embargoed package GET",
+            self.mutated("L-20", 1, lambda s: s.update(path="/fair-packages")))
+
+    def test_embargo_denial_requires_embargoed_submission(self):
+        self.assertIn(
+            "embargo_denial_no_payload on rejected package GET required",
+            self.mutated("L-20", 0,
+                         lambda s: s.update(body_fixture="live_package_submit")))
+
+    def test_embargo_denial_requires_403(self):
+        self.assertIn(
+            "embargo_denial_no_payload on rejected package GET required",
+            self.mutated("L-20", 1,
+                         lambda s: s["assert"].update(status=200)))
+
     def test_expired_job_result_withheld_cannot_be_removed(self):
         self.assertIn(
             "expired_result_withheld on known-expired job required",
