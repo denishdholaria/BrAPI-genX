@@ -1709,13 +1709,30 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                             probe["id"], probe["title"], "FAIL",
                             f"{dotted} is {node!r}, expected {expected!r}")
             if assertion.get("provenance_intact"):
-                want = load_json(
-                    os.path.join(conformance_dir, "fixtures", "provenanced_observation.json")
-                )["provenance"]
-                echoed = json.dumps(payload)
-                if want["inputsDigest"] not in echoed:
+                submitted = (ctx.get("live_body") or {}).get("parameters", {}).get(
+                    "observation"
+                )
+                want = submitted.get("provenance") if isinstance(submitted, dict) else None
+                job = payload.get("result") if isinstance(payload, dict) else None
+                completed = job.get("result") if isinstance(job, dict) else None
+                observations = completed.get("data") if isinstance(completed, dict) else None
+                if (status != 200 or not isinstance(want, dict)
+                        or not isinstance(job, dict)
+                        or job.get("jobDbId") != ctx.get("live_job")
+                        or job.get("status") != "COMPLETED"
+                        or not isinstance(observations, list)
+                        or len(observations) != 1
+                        or not isinstance(observations[0], dict)):
                     return results.report(
-                        probe["id"], probe["title"], "FAIL", "inputsDigest not echoed")
+                        probe["id"], probe["title"], "FAIL",
+                        "completed job or observation missing for provenance comparison"
+                    )
+                got = observations[0].get("provenance")
+                if not isinstance(got, dict) or got != want:
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "provenance differs from submitted source including evidenceLinks"
+                    )
         results.report(probe["id"], probe["title"], "PASS")
     except Exception as exc:
         results.report(probe["id"], probe["title"], "FAIL", f"{type(exc).__name__}: {exc}")

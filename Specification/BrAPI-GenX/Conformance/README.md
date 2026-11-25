@@ -354,3 +354,19 @@ conflict response, and the check is mandatory in hosted Python live conformance.
 The TypeScript reference deliberately does not implement telemetry; this
 mission is not external production-data assurance. See
 [Mission 114 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-114-TELEMETRY-POSTCONFLICT-INTEGRITY.md).
+
+## Structural provenance round-trip verification (Mission 115)
+
+Registered live probe **L-07** already requires provenance digests and
+`evidenceLinks` to survive an analysis-job round trip. Previously the runner
+passed when the original `inputsDigest` appeared *anywhere* in a serialized
+response, without comparing the nested provenance or evidence links.
+
+L-07 now compares the actual returned observation's full provenance mapping
+to the submitted observation after confirming the expected completed job and
+identity. Mock-server tests include changed digest values, missing evidence
+links, changed actor, wrong job and injected unrelated copies of the original
+digest. This is exact *structured round-trip equality* within a project-owned
+reference server, **not** independent verification of the scientific source,
+field-specific preimages or the provenance's truth. See
+[Mission 115 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-115-PROVENANCE-STRUCTURAL-ROUNDTRIP.md).

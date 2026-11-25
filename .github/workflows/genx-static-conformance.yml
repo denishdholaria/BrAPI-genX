@@ -255,6 +255,8 @@ jobs:
         run: python Scripts/test_conformance_step_manifest.py
       - name: Test telemetry conflict retained-state postcondition
         run: python Scripts/test_telemetry_conflict_postcondition.py
+      - name: Test provenance structural roundtrip checks
+        run: python Scripts/test_provenance_roundtrip_integrity.py
       - name: Run static GenX conformance probes
         run: python Scripts/checkGenXConformance.py
       - name: Validate semantic endpoint catalogue
@@ -370,6 +372,7 @@ jobs:
             run_check python Scripts/test_capability_negotiation.py
             run_check python Scripts/test_job_idempotency.py
             run_check python Scripts/checkGenXConformance.py
+            run_check python Scripts/test_provenance_roundtrip_integrity.py
             run_check python Scripts/test_telemetry_conflict_postcondition.py
             run_check python Scripts/test_conformance_step_manifest.py
             run_check python Scripts/test_conformance_assertion_manifest.py
