@@ -64,6 +64,7 @@ REQUIRED_COMMANDS = {
     "python Scripts/test_embargo_denial_no_payload.py",
     "python Scripts/test_collection_pagination_arithmetic.py",
     "python Scripts/test_deprecated_inference_result_binding.py",
+    "python Scripts/test_inference_result_identity_digest.py",
     "python Scripts/test_deprecated_inference_completion.py",
     "python Scripts/test_model_conflict_postcondition.py",
     "python Scripts/test_publication_conflict_postconditions.py",

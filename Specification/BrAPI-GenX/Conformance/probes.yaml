@@ -367,9 +367,9 @@ probes:
   object: modelRegistry
   title: Inference on a registered model binds inputs by digest
   procedure:
-  - Register a model; submit an inference job naming it; on COMPLETED compare the echoed record.
-  expectation: The record names the registered (modelDbId, modelVersion) and inputsDigest equals SHA-256 over the canonical inputs.
-  falsifier: Missing model identity or an unverifiable inputsDigest.
+  - Register a model; submit an inference job naming it; on COMPLETED verify the exact stored job and complete inference record against the original model and inputs.
+  expectation: The completed job matches the submitted job identifier and idempotency key, and its sole result names the registered (modelDbId, modelVersion) with inputsDigest equal to SHA-256 over canonical original inputs.
+  falsifier: Wrong job identity, nonterminal job, changed model version, extra result, or an unverifiable inputsDigest.
   calls:
   - {method: POST, path: /models, body_fixture: live_model_submit, capture_model: true}
   - {method: POST, path: /jobs, body_fixture: live_inference_submit, capture_job: true, wait_terminal: true}

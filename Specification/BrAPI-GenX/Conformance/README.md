@@ -739,3 +739,17 @@ The required L-27 two-step procedure is guarded in manifest validation,
 and `Scripts/test_deprecated_inference_result_binding.py` runs in hosted
 static conformance. See
 [Mission 140 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-140-DEPRECATED-INFERENCE-RESULT-BINDING.md).
+
+## Inference result identity and input digest (Mission 141)
+
+Registered **L-14** now requires the completed job itself to match the
+original submitted jobDbId, jobType, idempotency key and terminal status,
+and its sole inference record to match the original model identifier and
+version with a fresh SHA-256 digest of the original canonical inputs.
+The previous check compared only the first record's modelDbId and digest.
+
+Manifest guards prevent dropping the model capture, job terminal wait, or
+post-completion readback. A dedicated negative regression suite,
+`Scripts/test_inference_result_identity_digest.py`, runs in hosted static
+conformance. See
+[Mission 141 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-141-INFERENCE-RESULT-IDENTITY-DIGEST.md).
