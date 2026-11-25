@@ -50,7 +50,8 @@ class ConcurrentJobStoredEffectTests(unittest.TestCase):
                           else "JOB_ONE")
                 accepted = {
                     "jobDbId": job_id, "jobType": body["jobType"],
-                    "idempotencyKey": body["idempotencyKey"]}
+                    "idempotencyKey": body["idempotencyKey"],
+                    "status": "SUBMITTED"}
                 if mutate_ack is not None:
                     accepted = mutate_ack(accepted, sequence)
                 return (202 if sequence == 1 else 200), {
