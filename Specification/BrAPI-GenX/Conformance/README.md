@@ -291,3 +291,18 @@ This demonstrates compatibility of one project-owned version 2.1-only server
 shape with the project's conformance runner, not comprehensive official BrAPI
 2.1 interoperability or external-vendor certification. See
 [Mission 110 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-110-TYPESCRIPT-V21-FALLBACK-HOSTED.md).
+
+## Legacy fallback server-info shape verification (Mission 111)
+
+The existing S-08 static fixture and L-06 live legacy-negotiation checks use
+a shared minimal shape validator. An HTTP 200 response must contain a nonempty
+`result.calls` array whose entries have a nonblank `service` and nonempty
+string arrays for `versions` and `methods`. The former check for merely the
+presence of the `calls` key incorrectly treated null, scalar or otherwise
+unusable data as sufficient negotiation evidence.
+
+Twelve mutation and execution-path regressions cover valid responses and
+malformed envelopes. The test is a subset-specific compatibility check of
+project-owned in-memory reference servers; it is not complete version 2.1
+schema certification, authenticated authorization or external conformance.
+See [Mission 111 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-111-V21-FALLBACK-SHAPE-VALIDATION.md).
