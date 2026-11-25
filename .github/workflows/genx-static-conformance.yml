@@ -6,6 +6,7 @@ on:
       # Source contracts, shared components, catalogues, and generated artefacts
       # all affect GenX verification; keep the complete Specification/ tree watched.
       - 'Specification/**'
+      - '.github/workflows/generate-schema.yml'
       # Governance and assessment files feed scientific/maturity assurance.
       - 'docs/governance/**'
       - 'docs/assessment/**'
@@ -85,6 +86,7 @@ on:
       # Source contracts, shared components, catalogues, and generated artefacts
       # all affect GenX verification; keep the complete Specification/ tree watched.
       - 'Specification/**'
+      - '.github/workflows/generate-schema.yml'
       # Governance and assessment files feed scientific/maturity assurance.
       - 'docs/governance/**'
       - 'docs/assessment/**'
@@ -251,6 +253,8 @@ jobs:
         run: python Scripts/test_specification_structure.py
       - name: Test CI workflow dependency coverage
         run: python Scripts/test_conformance_workflow_scope.py
+      - name: Guard schema-generator token permissions
+        run: python Scripts/test_generation_workflow_permissions.py
       - name: Validate master endpoint registry and semantic links
         run: python Scripts/checkEndpointRegistry.py
       - name: Audit descriptive registry metadata against source OpenAPI (report only)
@@ -355,6 +359,7 @@ jobs:
             run_check python Scripts/specification_structure.py
             run_check python Scripts/test_specification_structure.py
             run_check python Scripts/test_conformance_workflow_scope.py
+            run_check python Scripts/test_generation_workflow_permissions.py
             run_check python Scripts/checkGenXEndpointCatalog.py
             run_check python Scripts/checkEndpointRegistry.py
             run_check python Scripts/auditEndpointRegistrySourceConsistency.py --plan-json
