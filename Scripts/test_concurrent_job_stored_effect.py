@@ -94,6 +94,27 @@ class ConcurrentJobStoredEffectTests(unittest.TestCase):
         self.assertEqual(8, len([method for method, _ in calls if method == "POST"]))
         self.assertEqual(1, len([method for method, _ in calls if method == "GET"]))
 
+    def test_single_stored_job_missing_status_fails(self):
+        def change(rows):
+            del rows[0]["status"]
+            return rows
+        self.assertEqual(1, self.exercise(change_rows=change)[0])
+
+    def test_unrelated_stored_job_unknown_status_fails(self):
+        def change(rows):
+            rows[1]["status"] = "QUEUED"
+            return rows
+        self.assertEqual(1, self.exercise(
+            add_unrelated=True, change_rows=change)[0])
+
+    def test_stored_job_nonstring_status_fails(self):
+        for wrong in (None, False, 0, [], {}):
+            with self.subTest(wrong=wrong):
+                def change(rows):
+                    rows[0]["status"] = wrong
+                    return rows
+                self.assertEqual(1, self.exercise(change_rows=change)[0])
+
     def test_unrelated_existing_job_is_allowed(self):
         self.assertEqual(0, self.exercise(add_unrelated=True)[0])
 
