@@ -27,7 +27,7 @@ class LedgerReplayReadbackTests(unittest.TestCase):
         self.assertIs(True, self.probe["calls"][2]["assert"]["ledger_original_intact"])
 
     def exercise(self, mutate=None, mutate_page=None, get_status=200,
-                 replay_id="ENTRY_001", replay_status=200, replay_mutate=None):
+                 replay_id="ENTRY_001", replay_status=200, replay_mutate=None, first_mutate=None):
         calls = []
         original = {}
         lot = []
@@ -38,9 +38,12 @@ class LedgerReplayReadbackTests(unittest.TestCase):
                 self.assertEqual("POST", method)
                 lot.append(path.split("/")[2])
                 original.update(copy.deepcopy(body))
-                return 200, {"result": {
+                created = {
                     **copy.deepcopy(body), "seedLotDbId": lot[0],
-                    "entryDbId": "ENTRY_001", "position": 0}}
+                    "entryDbId": "ENTRY_001", "position": 0}
+                if first_mutate is not None:
+                    created = first_mutate(created)
+                return 200, {"result": created}
             if len(calls) == 2:
                 self.assertEqual(("POST", f"/seedlots/{lot[0]}/ledger"),
                                  (method, path))
@@ -179,6 +182,37 @@ class LedgerReplayReadbackTests(unittest.TestCase):
     def test_replay_allows_additional_server_metadata(self):
         failures, calls = self.exercise(
             replay_mutate=lambda row: {**row, "serverAuditMarker": "verified"})
+        self.assertEqual(0, failures)
+        self.assertEqual(3, len(calls))
+
+
+    def test_initial_publication_altered_submitted_field_fails(self):
+        def change(row):
+            row.__setitem__('quantity', '66.000')
+            return row
+        failures, calls = self.exercise(first_mutate=change)
+        self.assertEqual(1, failures)
+        self.assertEqual(1, len(calls))
+
+    def test_initial_publication_altered_nested_field_fails(self):
+        def change(row):
+            row['provenance'].__setitem__('actor','actor:other')
+            return row
+        failures, calls = self.exercise(first_mutate=change)
+        self.assertEqual(1, failures)
+        self.assertEqual(1, len(calls))
+
+    def test_initial_publication_missing_submitted_field_fails(self):
+        def change(row):
+            row.pop('units')
+            return row
+        failures, calls = self.exercise(first_mutate=change)
+        self.assertEqual(1, failures)
+        self.assertEqual(1, len(calls))
+
+    def test_initial_publication_allows_extra_server_field(self):
+        failures, calls = self.exercise(
+            first_mutate=lambda row: {**row, "publicationAudit": "present"})
         self.assertEqual(0, failures)
         self.assertEqual(3, len(calls))
 

@@ -28,7 +28,7 @@ class TermReplayVersionUniquenessTests(unittest.TestCase):
         self.assertIs(True, self.probe["calls"][2]["assert"]["term_replay_single_version"])
 
     def exercise(self, mutate=None, page_change=None, get_status=200,
-                 replay_version=None, replay_status=200, replay_mutate=None):
+                 replay_version=None, replay_status=200, replay_mutate=None, first_mutate=None):
         calls = []
         original = {}
 
@@ -37,7 +37,10 @@ class TermReplayVersionUniquenessTests(unittest.TestCase):
             if len(calls) == 1:
                 self.assertEqual(("POST", "/variable-terms"), (method, path))
                 original.update(copy.deepcopy(body))
-                return 200, {"result": copy.deepcopy(body)}
+                created = copy.deepcopy(body)
+                if first_mutate is not None:
+                    created = first_mutate(created)
+                return 200, {"result": created}
             if len(calls) == 2:
                 self.assertEqual(("POST", "/variable-terms"), (method, path))
                 self.assertEqual(original, body)
@@ -181,6 +184,37 @@ class TermReplayVersionUniquenessTests(unittest.TestCase):
     def test_replay_allows_additional_server_metadata(self):
         failures, calls = self.exercise(
             replay_mutate=lambda row: {**row, "serverAuditMarker": "verified"})
+        self.assertEqual(0, failures)
+        self.assertEqual(3, len(calls))
+
+
+    def test_initial_publication_altered_submitted_field_fails(self):
+        def change(row):
+            row.__setitem__('variableName', 'incorrect crop trait')
+            return row
+        failures, calls = self.exercise(first_mutate=change)
+        self.assertEqual(1, failures)
+        self.assertEqual(1, len(calls))
+
+    def test_initial_publication_altered_nested_field_fails(self):
+        def change(row):
+            row['provenance'].__setitem__('actor','actor:other')
+            return row
+        failures, calls = self.exercise(first_mutate=change)
+        self.assertEqual(1, failures)
+        self.assertEqual(1, len(calls))
+
+    def test_initial_publication_missing_submitted_field_fails(self):
+        def change(row):
+            row.pop('scaleDbId')
+            return row
+        failures, calls = self.exercise(first_mutate=change)
+        self.assertEqual(1, failures)
+        self.assertEqual(1, len(calls))
+
+    def test_initial_publication_allows_extra_server_field(self):
+        failures, calls = self.exercise(
+            first_mutate=lambda row: {**row, "publicationAudit": "present"})
         self.assertEqual(0, failures)
         self.assertEqual(3, len(calls))
 
