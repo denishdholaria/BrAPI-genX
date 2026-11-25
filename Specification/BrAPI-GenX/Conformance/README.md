@@ -323,3 +323,18 @@ The suite executes in hosted static conformance and is protected against
 workflow removal. The registered probe list, proposed application programming
 interface and scientific semantics remain unchanged. See
 [Mission 112 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-112-ASSERTION-FAIL-CLOSED.md).
+
+## Live call directives and body fixture integrity (Mission 113)
+
+The conformance manifest now rejects unknown `calls[]` directives, misspelled
+`body_fixture` values, disabled capture flags and POST calls that have
+neither a recognized body fixture nor a replay payload. Previously, unknown
+fixture names could fall through as an absent request body; a negative probe
+might then receive the expected rejection for a malformed request rather than
+for the specific scientific or lifecycle condition under test.
+
+The new regression suite covers these cases, along with the existing
+replay/wait and capture constraints, and is enforced by the static workflow.
+This protects the verification procedure; it does not modify production
+wire contracts or certify an external service. See
+[Mission 113 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-113-LIVE-STEP-FIXTURE-INTEGRITY.md).

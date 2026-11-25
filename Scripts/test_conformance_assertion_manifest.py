@@ -94,7 +94,10 @@ class LiveAssertionManifestTests(unittest.TestCase):
 
     def test_replay_identity_assertion_without_flag_rejected(self):
         self.assertIn("same_jobDbId assertion",
-            self.mutated("L-01", 1, lambda s: s.pop("replay_capture")))
+            self.mutated("L-01", 1, lambda s: (
+                s.pop("replay_capture"),
+                s.update(body_fixture="live_submit"),
+            )))
 
     def test_concurrent_submissions_require_single_effect(self):
         self.assertIn("single_effect assertion",

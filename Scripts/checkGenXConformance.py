@@ -1698,6 +1698,78 @@ REQUIRED_REGISTERED_PROBES = (
 
 
 
+
+# The live probe runner formerly ignored unrecognized call directives and
+# unknown fixture names. Both could silently change which request was sent.
+LIVE_BOOLEAN_DIRECTIVES = frozenset({
+    "capture_job", "capture_term", "capture_ledger", "capture_model",
+    "capture_model_revoked", "capture_model_deprecated",
+    "capture_matrix", "capture_package", "capture_telemetry",
+    "wait_terminal", "replay_capture",
+})
+LIVE_CALL_FIELDS = (LIVE_BOOLEAN_DIRECTIVES |
+                    {"method", "path", "assert", "body_fixture",
+                     "concurrent_posts"})
+LIVE_BODY_FIXTURES = frozenset({
+    "live_submit", "live_submit_conflict", "live_submit_unknown_type",
+    "live_provenanced_submit", "live_term_submit", "live_term_conflict",
+    "live_ledger_submit", "live_ledger_conflict", "live_model_submit",
+    "live_model_conflict", "live_model_revoked", "live_model_deprecated",
+    "live_matrix_submit", "live_matrix_conflict", "live_package_submit",
+    "live_package_conflict", "live_package_embargoed",
+    "live_telemetry_batch", "live_telemetry_conflict",
+    "live_inference_submit", "live_inference_revoked",
+    "live_inference_unknown", "live_inference_deprecated",
+})
+
+
+def validate_live_step_directives(probe_id, index, call):
+    """Reject directives the runner would otherwise silently disregard."""
+    unknown = set(call) - LIVE_CALL_FIELDS
+    if unknown:
+        raise ValueError(
+            f"probe {probe_id} call {index}: unknown live call directive(s): "
+            + ", ".join(sorted(map(str, unknown)))
+        )
+    for key in LIVE_BOOLEAN_DIRECTIVES & call.keys():
+        if call[key] is not True:
+            raise ValueError(
+                f"probe {probe_id} call {index}: {key} must be true"
+            )
+    method = call["method"]
+    fixture = call.get("body_fixture")
+    if "body_fixture" in call:
+        if not isinstance(fixture, str) or fixture not in LIVE_BODY_FIXTURES:
+            raise ValueError(
+                f"probe {probe_id} call {index}: unknown body_fixture {fixture!r}"
+            )
+        if method != "POST":
+            raise ValueError(
+                f"probe {probe_id} call {index}: body_fixture requires POST"
+            )
+    if method == "POST" and fixture is None and not call.get("replay_capture"):
+        raise ValueError(
+            f"probe {probe_id} call {index}: POST requires a known "
+            "body_fixture or replay_capture"
+        )
+    if call.get("replay_capture") and (fixture is not None or method != "POST"):
+        raise ValueError(
+            f"probe {probe_id} call {index}: replay_capture needs a "
+            "POST without an additional body_fixture"
+        )
+    if call.get("wait_terminal") and not call.get("capture_job"):
+        raise ValueError(
+            f"probe {probe_id} call {index}: wait_terminal requires capture_job"
+        )
+    if method != "POST" and (
+            any(call.get(flag) for flag in LIVE_BOOLEAN_DIRECTIVES
+                if flag.startswith("capture_"))
+            or "concurrent_posts" in call):
+        raise ValueError(
+            f"probe {probe_id} call {index}: capture/concurrent directives need POST"
+        )
+
+
 # A misspelled live assertion must not be silently ignored by the probe runner.
 # Keep this vocabulary synchronized with the registered conformance executor.
 LIVE_BOOLEAN_ASSERTIONS = frozenset({
@@ -1833,6 +1905,7 @@ def validate_probe_manifest(probes):
                         or not isinstance(call.get("path"), str)
                         or not call["path"].startswith("/")):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
+                validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
     missing = sorted(REQUIRED_REGISTERED_PROBES - observed)
     if missing:
