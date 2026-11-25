@@ -57,6 +57,36 @@ def main():
             lambda c: c["exactByteVectors"][0].update(expectedSha256="0" * 64),
         ),
         (
+            "binary digest modified",
+            lambda c: next(v for v in c["exactByteVectors"]
+                           if v["id"] == "binary-nul-high-bit-and-zip-header").update(
+                               expectedSha256="0" * 64),
+        ),
+        (
+            "binary base64 is invalid",
+            lambda c: next(v for v in c["exactByteVectors"]
+                           if v["id"] == "binary-nul-high-bit-and-zip-header").update(
+                               inputBase64="not%base64=="),
+        ),
+        (
+            "ambiguous binary and UTF-8 sources",
+            lambda c: next(v for v in c["exactByteVectors"]
+                           if v["id"] == "binary-nul-high-bit-and-zip-header").update(
+                               inputUtf8="different bytes"),
+        ),
+        (
+            "binary input bytes removed",
+            lambda c: next(v for v in c["exactByteVectors"]
+                           if v["id"] == "binary-nul-high-bit-and-zip-header").pop(
+                               "inputBase64"),
+        ),
+        (
+            "required binary vector removed",
+            lambda c: c["exactByteVectors"].pop(next(
+                i for i, v in enumerate(c["exactByteVectors"])
+                if v["id"] == "binary-leading-and-trailing-zero-are-significant")),
+        ),
+        (
             "required edge vector removed",
             lambda c: c["rejectionVectors"].pop(
                 next(i for i, v in enumerate(c["rejectionVectors"])
@@ -76,7 +106,7 @@ def main():
     if failures:
         print("FAIL digest vector mutation suite: " + ", ".join(failures))
         return 1
-    print("PASS digest vector mutation suite: 5 mutations rejected by both runtimes (10 checks)")
+    print(f"PASS digest vector mutation suite: {len(mutations)} mutations rejected by both runtimes ({2 * len(mutations)} checks)")
     return 0
 
 

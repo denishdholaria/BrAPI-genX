@@ -41,6 +41,21 @@ def run_ts(input_bytes: bytes, raw: bool = False) -> dict:
     return out
 
 
+def exact_vector_bytes(vector: dict) -> bytes:
+    """Resolve test-fixture byte representation; never hash base64 text."""
+    has_utf8 = isinstance(vector.get("inputUtf8"), str)
+    has_base64 = isinstance(vector.get("inputBase64"), str)
+    if has_utf8 == has_base64:
+        raise ValueError("expected exactly one of inputUtf8 or inputBase64")
+    if has_utf8:
+        return vector["inputUtf8"].encode("utf-8")
+    encoded = vector["inputBase64"]
+    raw = base64.b64decode(encoded, validate=True)
+    if base64.b64encode(raw).decode("ascii") != encoded:
+        raise ValueError("noncanonical base64 representation")
+    return raw
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--corpus", default=str(DEFAULT_CORPUS))
@@ -100,7 +115,11 @@ def main() -> int:
     # Exact-byte vectors: raw-byte digest (SHA-256 of input bytes).
     for v in corpus.get("exactByteVectors", []):
         vid = v["id"]
-        input_bytes = v["inputUtf8"].encode("utf-8")
+        try:
+            input_bytes = exact_vector_bytes(v)
+        except Exception as exc:
+            failures.append(f"{vid}: invalid exact-byte input: {exc}")
+            continue
         py_res = raw_byte_digest(input_bytes)
         ts = run_ts(input_bytes, raw=True)
         if not ts.get("ok"):
@@ -142,4 +161,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-PY

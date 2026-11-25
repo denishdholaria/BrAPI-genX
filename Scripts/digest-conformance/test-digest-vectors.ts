@@ -1,13 +1,14 @@
 #!/usr/bin/env bun
-/** Shared golden vectors for an RFC 8785 candidate. Does not ratify BrAPI D-02. */
+/** Shared RFC 8785 and exact-byte vectors; no field-specific digest guarantee. */
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import canonicalize from "canonicalize";
 
 type Vector = { id: string; inputJson: string; expectedCanonicalUtf8: string; expectedSha256: string };
+type ExactByteVector = { id: string; inputUtf8?: string; inputBase64?: string; expectedSha256: string };
 type Corpus = {
   structuredJsonVectors: Vector[];
-  exactByteVectors: Array<{ id: string; inputUtf8: string; expectedSha256: string }>;
+  exactByteVectors: ExactByteVector[];
   rejectionVectors: Array<{ id: string; inputJson: string; reasonClass: string; reason: string }>;
   legacyDiagnostics: Array<{ id: string; inputJson: string; typescriptLegacyCanonicalUtf8: string; pythonLegacyCanonicalUtf8: string }>;
 };
@@ -26,7 +27,8 @@ const REQUIRED_VECTOR_IDS: Array<{ section: keyof Corpus; ids: string[] }> = [
     "unicode-composed-form-preserved", "unicode-decomposed-form-preserved-without-normalization",
     "empty-object", "empty-array", "safe-integer-interoperability-boundary",
   ] },
-  { section: "exactByteVectors", ids: ["http-body-whitespace-preserved", "http-body-key-order-preserved"] },
+  { section: "exactByteVectors", ids: ["http-body-whitespace-preserved", "http-body-key-order-preserved",
+    "binary-nul-high-bit-and-zip-header", "binary-leading-and-trailing-zero-are-significant"] },
   { section: "rejectionVectors", ids: [
     "duplicate-property-name", "duplicate-property-name-after-unescaping", "non-json-nan-token",
     "lone-unicode-surrogate", "integer-outside-safe-interoperability-range",
@@ -58,6 +60,23 @@ for (const vector of corpus.rejectionVectors) {
 
 function sha256(text: string): string {
   return createHash("sha256").update(text, "utf8").digest("hex");
+}
+
+function exactBytes(vector: ExactByteVector): Uint8Array {
+  const hasUtf8 = typeof vector.inputUtf8 === "string";
+  const hasBase64 = typeof vector.inputBase64 === "string";
+  if (hasUtf8 === hasBase64) throw new Error("expected exactly one of inputUtf8 or inputBase64");
+  if (hasUtf8) return Buffer.from(vector.inputUtf8!, "utf8");
+  const encoded = vector.inputBase64!;
+  if (!/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(encoded)) {
+    throw new Error("invalid base64 alphabet or padding");
+  }
+  const decoded = Buffer.from(encoded, "base64");
+  if (decoded.toString("base64") !== encoded) throw new Error("noncanonical base64 representation");
+  return decoded;
+}
+function sha256Bytes(raw: Uint8Array): string {
+  return createHash("sha256").update(raw).digest("hex");
 }
 function skipWhitespace(raw: string, position: { value: number }): void {
   while (position.value < raw.length && /\s/.test(raw[position.value])) position.value++;
@@ -194,9 +213,13 @@ for (const vector of corpus.structuredJsonVectors) {
   }
 }
 for (const vector of corpus.exactByteVectors) {
-  const digest = sha256(vector.inputUtf8);
-  if (digest !== vector.expectedSha256) failures.push(vector.id + ": exact-byte SHA-256 differs (" + digest + ")");
-  exactCount++;
+  try {
+    const digest = sha256Bytes(exactBytes(vector));
+    if (digest !== vector.expectedSha256) failures.push(vector.id + ": exact-byte SHA-256 differs (" + digest + ")");
+    exactCount++;
+  } catch (error) {
+    failures.push(vector.id + ": invalid exact-byte input: " + String(error));
+  }
 }
 for (const vector of corpus.rejectionVectors) {
   try {
@@ -225,4 +248,4 @@ if (failures.length) {
 }
 console.log("PASS digest interoperability vectors: " + structuredCount + " structured JCS candidates, " +
   exactCount + " exact-byte cases, " + rejectionCount + " rejection-policy cases, " + legacyCount + " known legacy divergences");
-console.log("NOTE: RFC 8785 is evaluated as a candidate only; BrAPI decision D-02 remains open.");
+console.log("NOTE: D-02 accepts JCS-RFC8785 for generic canonical JSON; field-specific preimages and production conformance remain unresolved.");

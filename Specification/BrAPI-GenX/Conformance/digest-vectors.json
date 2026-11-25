@@ -1,8 +1,8 @@
 {
   "corpusVersion": 1,
   "status": "experimental-candidate-not-normative",
-  "candidateProfile": "RFC8785-JCS",
-  "decisionState": "D-02 remains open; these vectors evaluate a candidate and do not ratify it.",
+  "candidateProfile": "JCS-RFC8785",
+  "decisionState": "D-02 accepted JCS-RFC8785 for generic canonical JSON on 2026-11-03; these engineering vectors do not define field-specific digest preimages or prove production conformance.",
   "references": [
     "https://www.rfc-editor.org/rfc/rfc8785.html",
     "https://www.rfc-editor.org/rfc/rfc7493.html"
@@ -93,6 +93,18 @@
       "inputUtf8": "{\"b\":2,\"a\":1}",
       "expectedSha256": "3fb75453225c732a76b7899ea2096dda1455189c89817239732182f73fe5a09f",
       "meaning": "A byte-integrity digest differs from a semantic JSON digest."
+    },
+    {
+      "id": "binary-nul-high-bit-and-zip-header",
+      "inputBase64": "AP+AUEsDBAoNAA==",
+      "expectedSha256": "fde4dd1fce236f5a831d2807d298a075512922f1b492e41ec21f12a8abde2f3b",
+      "meaning": "Synthetic binary archive prefix with NUL, high bytes and CR/LF; hash decoded bytes, not the base64 text."
+    },
+    {
+      "id": "binary-leading-and-trailing-zero-are-significant",
+      "inputBase64": "AAECf4AA",
+      "expectedSha256": "2a7d41002d4a896f6b1ece89416420ed388abc4593f78753476782c76b3a4ae2",
+      "meaning": "Synthetic non-UTF-8 payload retaining leading and trailing zero octets."
     }
   ],
   "legacyDiagnostics": [
