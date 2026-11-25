@@ -253,11 +253,12 @@ probes:
   object: jobs
   title: Unknown jobType is rejected at submit
   procedure:
-  - POST a JobNewRequest with jobType this-door-does-not-exist.
-  expectation: Rejected with 400 and no job created.
-  falsifier: A job is accepted for an unadvertised type.
+  - POST a JobNewRequest with jobType this-door-does-not-exist; GET the complete jobs collection.
+  expectation: Rejected with 400 and no job exists for the rejected idempotency key or job type.
+  falsifier: A job is accepted or stored for the unadvertised type despite the rejection response.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_submit_unknown_type, assert: {status: 400}}
+  - {method: GET, path: /jobs, assert: {status: 200, unknown_job_type_not_stored: true}}
 - id: L-05
   tier: live
   object: jobs

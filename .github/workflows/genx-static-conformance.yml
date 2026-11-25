@@ -295,6 +295,8 @@ jobs:
         run: python Scripts/test_job_conflict_collection_unchanged.py
       - name: Test rejected terminal job cancel retains state
         run: python Scripts/test_terminal_cancel_retained_state.py
+      - name: Test unknown job type leaves no stored job
+        run: python Scripts/test_unknown_jobtype_no_stored_job.py
       - name: Test deprecated model inference reaches completed job
         run: python Scripts/test_deprecated_inference_completion.py
       - name: Run static GenX conformance probes

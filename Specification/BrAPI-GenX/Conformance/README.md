@@ -662,3 +662,16 @@ The manifest validator requires the captured terminal wait, rejected DELETE,
 and readback assertion. The regression suite
 `Scripts/test_terminal_cancel_retained_state.py` runs in hosted static
 conformance. See [Mission 135 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-135-TERMINAL-CANCEL-RETAINED-STATE.md).
+
+## Unknown job type leaves no stored job (Mission 136)
+
+Registered **L-04** now reads GET /jobs after rejecting an unknown job
+type with HTTP 400. It captures the originally submitted idempotency key
+and invalid jobType and requires the full collection to contain neither
+a job with that key nor a job with that unadvertised type.
+
+The `unknown_job_type_not_stored` assertion fails on incomplete
+pagination or malformed responses and is mandatory on the L-04 GET step.
+The negative regression suite `Scripts/test_unknown_jobtype_no_stored_job.py`
+runs in hosted static conformance. See
+[Mission 136 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-136-UNKNOWN-JOBTYPE-NO-STORED-JOB.md).

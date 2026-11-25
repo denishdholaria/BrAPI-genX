@@ -147,6 +147,36 @@ class LiveAssertionManifestTests(unittest.TestCase):
                 s.update(body_fixture="live_submit"),
             )))
 
+    def test_unknown_job_type_readback_is_required(self):
+        self.assertIn(
+            "unknown_job_type_not_stored GET after rejection required",
+            self.mutated("L-04", 1,
+                         lambda s: s.update({"assert": {"status": 200}})))
+
+    def test_unknown_job_type_readback_cannot_be_disabled(self):
+        self.assertIn(
+            "unknown_job_type_not_stored must be true",
+            self.mutated("L-04", 1,
+                         lambda s: s["assert"].update(unknown_job_type_not_stored=False)))
+
+    def test_unknown_job_type_readback_must_get_collection(self):
+        self.assertIn(
+            "unknown_job_type_not_stored requires GET /jobs",
+            self.mutated("L-04", 1,
+                         lambda s: s.update(path="/jobs/OTHER")))
+
+    def test_unknown_job_type_request_must_be_preserved(self):
+        self.assertIn(
+            "unknown_job_type_not_stored GET after rejection required",
+            self.mutated("L-04", 0,
+                         lambda s: s.update(body_fixture="live_submit")))
+
+    def test_unknown_job_type_rejection_status_must_remain_400(self):
+        self.assertIn(
+            "unknown_job_type_not_stored GET after rejection required",
+            self.mutated("L-04", 0,
+                         lambda s: s["assert"].update(status=202)))
+
     def test_terminal_cancel_readback_is_required(self):
         self.assertIn(
             "terminal_state_unchanged GET after rejected cancellation required",
