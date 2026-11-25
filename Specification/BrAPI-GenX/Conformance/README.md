@@ -581,3 +581,16 @@ manifest validator requires the existing L-17 three-step sequence; the
 `Scripts/test_matrix_conflict_whole_record.py` mutation suite is mandatory
 in hosted static conformance. See
 [Mission 129 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-129-MATRIX-CONFLICT-WHOLE-RECORD.md).
+
+## FAIR package conflict whole-record verification (Mission 130)
+
+Registered **L-19** is strengthened from license-only post-conflict
+readback to a complete comparison with all originally submitted package
+fields, including nested evidence links and provenance. The existing
+`unchanged_package_license` assertion now uses the same runner-local
+`published_record_problem` helper introduced for matrices in Mission 129.
+
+The manifest validator requires the three-step publish → conflicting POST
+→ readback sequence. The `Scripts/test_package_conflict_whole_record.py`
+regressions run in the mandatory hosted static conformance workflow. See
+[Mission 130 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-130-PACKAGE-CONFLICT-WHOLE-RECORD.md).

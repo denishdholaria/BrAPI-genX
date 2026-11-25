@@ -422,9 +422,9 @@ probes:
   object: fairPackages
   title: Mutated license under a published id is rejected
   procedure:
-  - POST a package; POST the same packageDbId with a different license.
-  expectation: Second call is rejected with 409 and the published record is unchanged on re-GET.
-  falsifier: The published license is mutated or a conflicting record is stored.
+  - POST a package; POST the same packageDbId with a different license; read back the original package.
+  expectation: Second call is rejected with 409 and all originally submitted package fields remain unchanged on re-GET.
+  falsifier: The license, access rights, evidence digests, provenance or other published metadata is mutated.
   calls:
   - {method: POST, path: /fair-packages, body_fixture: live_package_submit, capture_package: true}
   - {method: POST, path: /fair-packages, body_fixture: live_package_conflict, assert: {status: 409}}
