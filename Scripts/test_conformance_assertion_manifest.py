@@ -147,6 +147,39 @@ class LiveAssertionManifestTests(unittest.TestCase):
                 s.update(body_fixture="live_submit"),
             )))
 
+    def test_job_replay_stored_readback_cannot_be_removed(self):
+        self.assertIn(
+            "job_replay_single_stored GET after replay required",
+            self.mutated("L-01", 2,
+                         lambda s: s.update({"assert": {"status": 200}})))
+
+    def test_job_replay_stored_readback_cannot_be_disabled(self):
+        self.assertIn(
+            "job_replay_single_stored must be true",
+            self.mutated("L-01", 2,
+                         lambda s: s["assert"].update(job_replay_single_stored=False)))
+
+    def test_job_replay_stored_readback_requires_collection(self):
+        self.assertIn(
+            "job_replay_single_stored requires GET /jobs",
+            self.mutated("L-01", 2,
+                         lambda s: s.update(path="/jobs/JOB-OTHER")))
+
+    def test_job_replay_must_replay_original_capture(self):
+        self.assertIn(
+            "job_replay_single_stored GET after replay required",
+            self.mutated("L-01", 1,
+                         lambda s: (
+                             s.pop("replay_capture"),
+                             s.update({"assert": {"status": 200},
+                                       "body_fixture": "live_submit"}),
+                         )))
+
+    def test_job_replay_stored_readback_must_capture_initial_job(self):
+        self.assertIn(
+            "job_replay_single_stored GET after replay required",
+            self.mutated("L-01", 0, lambda s: s.pop("capture_job")))
+
     def test_rejected_inference_stored_job_readback_cannot_be_removed(self):
         self.assertIn(
             "rejected_inference_not_stored GET after both rejections required",

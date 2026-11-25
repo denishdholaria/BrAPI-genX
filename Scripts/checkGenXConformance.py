@@ -1627,6 +1627,44 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         probe["id"], probe["title"], "FAIL",
                         "deprecated inference did not complete as the accepted job"
                     )
+            if assertion.get("job_replay_single_stored"):
+                # A replay with one returned identifier can still create
+                # multiple stored records. Inspect the full job collection.
+                result = payload.get("result") if isinstance(payload, dict) else None
+                rows = result.get("data") if isinstance(result, dict) else None
+                metadata = payload.get("metadata") if isinstance(payload, dict) else None
+                page = metadata.get("pagination") if isinstance(metadata, dict) else None
+                expected_id = ctx.get("live_job")
+                submitted = ctx.get("live_body")
+                expected_key = ctx.get("live_key")
+                if (status != 200
+                        or not isinstance(expected_id, str) or not expected_id
+                        or not isinstance(expected_key, str) or not expected_key
+                        or not isinstance(submitted, dict)
+                        or submitted.get("idempotencyKey") != expected_key
+                        or not isinstance(submitted.get("jobType"), str)
+                        or not isinstance(rows, list) or not rows
+                        or not all(isinstance(row, dict) for row in rows)
+                        or not isinstance(page, dict)
+                        or any(type(page.get(k)) is not int
+                               for k in ("totalCount", "pageSize",
+                                         "totalPages", "currentPage"))
+                        or page["totalCount"] != len(rows)
+                        or page["pageSize"] < len(rows)
+                        or page["totalPages"] != 1 or page["currentPage"] != 0):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "job replay readback incomplete or malformed"
+                    )
+                by_key = [r for r in rows if r.get("idempotencyKey") == expected_key]
+                by_id = [r for r in rows if r.get("jobDbId") == expected_id]
+                if (len(by_key) != 1 or len(by_id) != 1
+                        or by_key[0] is not by_id[0]
+                        or by_key[0].get("jobType") != submitted["jobType"]):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "job replay missing, duplicated, or changed stored identity"
+                    )
             if assertion.get("rejected_inference_not_stored"):
                 # HTTP 400 alone is not proof that the rejected inference
                 # produced no persistent job. Read back the full collection.
@@ -2285,6 +2323,7 @@ LIVE_BOOLEAN_ASSERTIONS = frozenset({
     "package_replay_single_record", "model_replay_single_version",
     "inference_intact", "single_effect",
     "concurrent_single_stored_job", "rejected_inference_not_stored",
+    "job_replay_single_stored",
     "capability_registry_match",
 })
 LIVE_COUNT_ASSERTIONS = frozenset({
@@ -2411,6 +2450,12 @@ def validate_live_step_assertions(probe_id, index, call):
             f"probe {probe_id} call {index}: "
             "unchanged_term_record requires versioned term GET"
         )
+    if "job_replay_single_stored" in assertion and (
+            call.get("method") != "GET" or call.get("path") != "/jobs"):
+        raise ValueError(
+            f"probe {probe_id} call {index}: "
+            "job_replay_single_stored requires GET /jobs"
+        )
     if "rejected_inference_not_stored" in assertion and (
             call.get("method") != "GET" or call.get("path") != "/jobs"):
         raise ValueError(
@@ -2475,6 +2520,23 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-01":
+                if (len(calls) != 3
+                        or calls[0].get("method") != "POST"
+                        or calls[0].get("path") != "/jobs"
+                        or calls[0].get("body_fixture") != "live_submit"
+                        or calls[0].get("capture_job") is not True
+                        or calls[1].get("method") != "POST"
+                        or calls[1].get("path") != "/jobs"
+                        or calls[1].get("replay_capture") is not True
+                        or calls[1].get("assert", {}).get("same_jobDbId") is not True
+                        or calls[2].get("method") != "GET"
+                        or calls[2].get("path") != "/jobs"
+                        or calls[2].get("assert", {}).get("job_replay_single_stored")
+                            is not True):
+                    raise ValueError(
+                        "probe L-01: job_replay_single_stored GET after replay required"
+                    )
             if probe_id == "L-15":
                 if (len(calls) != 4
                         or calls[0].get("method") != "POST"
