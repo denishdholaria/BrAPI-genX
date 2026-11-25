@@ -28,7 +28,8 @@ class DeprecatedInferenceCompletionTests(unittest.TestCase):
 
     def exercise(self, *, terminal_status="COMPLETED", terminal_id=None,
                  submit_status=202, include_warning=True, include_id=True,
-                 missing_terminal=False):
+                 missing_terminal=False, ack_mutate=None,
+                 reject_before_poll=False):
         calls = []
         accepted_id = "JOB_DEPRECATED_TEST"
         model = {}
@@ -46,8 +47,16 @@ class DeprecatedInferenceCompletionTests(unittest.TestCase):
                 self.assertEqual(model["modelDbId"],
                                  body["parameters"]["modelDbId"])
                 submitted_inference.update(copy.deepcopy(body))
+                accepted = {
+                    "jobDbId": accepted_id, "jobType": body["jobType"],
+                    "idempotencyKey": body["idempotencyKey"],
+                }
+                if not include_id:
+                    accepted.pop("jobDbId")
+                if ack_mutate is not None:
+                    accepted = ack_mutate(accepted)
                 return submit_status, {
-                    "result": {"jobDbId": accepted_id} if include_id else {},
+                    "result": accepted,
                     "metadata": {"status": (
                         [{"messageType": "WARNING", "message": "deprecated"}]
                         if include_warning else []
@@ -76,10 +85,13 @@ class DeprecatedInferenceCompletionTests(unittest.TestCase):
 
         outcome = checker.Results()
         with (mock.patch.object(checker, "http_call", side_effect=fake_http),
-              mock.patch.object(checker, "wait_terminal", side_effect=fake_wait)):
+              mock.patch.object(checker, "wait_terminal", side_effect=fake_wait)
+              as wait_mock):
             checker.run_live_probe(
                 "http://example.test/genx/v1", self.probe,
                 {"conformance_dir": str(CONF)}, outcome, None, None)
+        if reject_before_poll:
+            wait_mock.assert_not_called()
         self.assertEqual(2, len(calls))
         return outcome
 
@@ -103,6 +115,44 @@ class DeprecatedInferenceCompletionTests(unittest.TestCase):
 
     def test_acceptance_missing_job_identifier_fails(self):
         self.assertEqual(1, self.exercise(include_id=False).failures)
+
+    def test_initial_ack_missing_job_type_fails_before_poll(self):
+        def change(accepted):
+            accepted.pop("jobType")
+            return accepted
+        self.assertEqual(1, self.exercise(
+            ack_mutate=change, reject_before_poll=True).failures)
+
+    def test_initial_ack_wrong_job_type_fails_before_poll(self):
+        self.assertEqual(1, self.exercise(
+            ack_mutate=lambda a: {**a, "jobType": "analysis"},
+            reject_before_poll=True).failures)
+
+    def test_initial_ack_missing_key_fails_before_poll(self):
+        def change(accepted):
+            accepted.pop("idempotencyKey")
+            return accepted
+        self.assertEqual(1, self.exercise(
+            ack_mutate=change, reject_before_poll=True).failures)
+
+    def test_initial_ack_wrong_key_fails_before_poll(self):
+        self.assertEqual(1, self.exercise(
+            ack_mutate=lambda a: {**a, "idempotencyKey": "other-key"},
+            reject_before_poll=True).failures)
+
+    def test_initial_ack_nonstring_key_fails_before_poll(self):
+        self.assertEqual(1, self.exercise(
+            ack_mutate=lambda a: {**a, "idempotencyKey": False},
+            reject_before_poll=True).failures)
+
+    def test_initial_ack_malformed_result_fails_before_poll(self):
+        self.assertEqual(1, self.exercise(
+            ack_mutate=lambda a: None, reject_before_poll=True).failures)
+
+    def test_initial_ack_additional_server_metadata_allowed(self):
+        self.assertEqual(0, self.exercise(
+            ack_mutate=lambda a: {**a, "createdAt": "2026-11-25T00:00:00Z"}
+        ).failures)
 
     def test_accepted_without_warning_fails(self):
         self.assertEqual(1, self.exercise(include_warning=False).failures)

@@ -55,8 +55,13 @@ class DeprecatedInferenceResultBindingTests(unittest.TestCase):
                                     "message": "model deprecated"}]}
                 if mutate_warning:
                     meta = mutate_warning(meta)
-                return acceptance_status, {"result": {"jobDbId": "JOB_WARNED"},
-                                           "metadata": meta["status"] and meta or meta}
+                return acceptance_status, {
+                    "result": {
+                        "jobDbId": "JOB_WARNED", "jobType": body["jobType"],
+                        "idempotencyKey": body["idempotencyKey"],
+                    },
+                    "metadata": meta["status"] and meta or meta,
+                }
             self.fail("unexpected request")
 
         def fake_wait(_server, job_id, _token):
