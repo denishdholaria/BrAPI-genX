@@ -68,7 +68,8 @@ class CollectionEnvelopeTests(unittest.TestCase):
                 self.assertEqual(("GET", "/jobs"), (method, path))
                 response = paged([{"jobDbId": job_id,
                                    "jobType": submitted_job["jobType"],
-                                   "idempotencyKey": submitted_job["idempotencyKey"]}])
+                                   "idempotencyKey": submitted_job["idempotencyKey"],
+                                   "status": "SUBMITTED"}])
                 return bad_status or 200, mutate("jobs", response) if mutate else response
             if len(calls) == 4:
                 self.assertEqual(("GET", "/models"), (method, path))
@@ -124,7 +125,7 @@ class CollectionEnvelopeTests(unittest.TestCase):
     def test_missing_created_job_rejected(self):
         def change(kind, payload):
             if kind == "jobs":
-                payload["result"]["data"] = [{"jobDbId": "OTHER"}]
+                payload["result"]["data"][0]["jobDbId"] = "OTHER"
             return payload
         self.assertEqual(1, self.exercise(change).failures)
 
