@@ -62,10 +62,12 @@ class ConcurrentJobStoredEffectTests(unittest.TestCase):
                 "jobDbId": "JOB_ONE",
                 "jobType": submitted[0]["jobType"],
                 "idempotencyKey": submitted[0]["idempotencyKey"],
+                "status": "SUBMITTED",
             }]
             if add_unrelated:
                 rows.append({"jobDbId": "JOB_UNRELATED",
-                             "jobType": "analysis", "idempotencyKey": "unrelated-key"})
+                             "jobType": "analysis", "idempotencyKey": "unrelated-key",
+                             "status": "RUNNING"})
             if change_rows is not None:
                 rows = change_rows(copy.deepcopy(rows))
             page = {
@@ -275,7 +277,8 @@ class ConcurrentJobStoredEffectTests(unittest.TestCase):
     def test_unrelated_job_optional_key_may_be_missing(self):
         self.assertEqual(0, self.exercise(
             change_rows=lambda rows: rows + [
-                {"jobDbId": "OTHER", "jobType": "analysis"}])[0])
+                {"jobDbId": "OTHER", "jobType": "analysis",
+                 "status": "SUBMITTED"}])[0])
 
 
 
