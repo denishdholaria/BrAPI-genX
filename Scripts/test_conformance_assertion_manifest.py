@@ -147,6 +147,34 @@ class LiveAssertionManifestTests(unittest.TestCase):
                 s.update(body_fixture="live_submit"),
             )))
 
+    def test_terminal_cancel_readback_is_required(self):
+        self.assertIn(
+            "terminal_state_unchanged GET after rejected cancellation required",
+            self.mutated("L-03", 2,
+                         lambda s: s.update({"assert": {"status": 200}})))
+
+    def test_terminal_cancel_readback_cannot_be_disabled(self):
+        self.assertIn(
+            "terminal_state_unchanged must be true",
+            self.mutated("L-03", 2,
+                         lambda s: s["assert"].update(terminal_state_unchanged=False)))
+
+    def test_terminal_cancel_requires_captured_job_get(self):
+        self.assertIn(
+            "terminal_state_unchanged requires captured job GET",
+            self.mutated("L-03", 2, lambda s: s.update(path="/jobs")))
+
+    def test_terminal_cancel_requires_terminal_wait(self):
+        self.assertIn(
+            "terminal_state_unchanged GET after rejected cancellation required",
+            self.mutated("L-03", 0, lambda s: s.pop("wait_terminal")))
+
+    def test_terminal_cancel_requires_rejected_delete(self):
+        self.assertIn(
+            "terminal_state_unchanged GET after rejected cancellation required",
+            self.mutated("L-03", 1,
+                         lambda s: s.update({"assert": {"status": 400}})))
+
     def test_job_conflict_initial_collection_is_required(self):
         self.assertIn(
             "complete job collection before and after conflict required",

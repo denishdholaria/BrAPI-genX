@@ -650,3 +650,15 @@ The dedicated regression suite
 `Scripts/test_job_conflict_collection_unchanged.py` is mandatory in hosted
 static conformance, and the manifest validator enforces the four-step
 procedure. See [Mission 134 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-134-JOB-CONFLICT-COLLECTION-UNCHANGED.md).
+
+## Rejected terminal-job cancellation readback (Mission 135)
+
+Registered **L-03** now captures the terminal job's identifier and status
+from the poll result before attempting cancellation. After the DELETE is
+rejected, the runner requires a GET of the same job and verifies that the
+terminal status is unchanged. An unobserved or nonterminal baseline fails.
+
+The manifest validator requires the captured terminal wait, rejected DELETE,
+and readback assertion. The regression suite
+`Scripts/test_terminal_cancel_retained_state.py` runs in hosted static
+conformance. See [Mission 135 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-135-TERMINAL-CANCEL-RETAINED-STATE.md).
