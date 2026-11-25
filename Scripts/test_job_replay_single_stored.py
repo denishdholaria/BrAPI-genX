@@ -366,9 +366,9 @@ class JobReplaySingleStoredTests(unittest.TestCase):
         def corrupt(rows):
             rows.extend([
                 {"jobDbId": "OTHER", "jobType": "analysis",
-                 "idempotencyKey": "key-1"},
+                 "idempotencyKey": "key-1", "status": "SUBMITTED"},
                 {"jobDbId": "OTHER", "jobType": "analysis",
-                 "idempotencyKey": "key-2"},
+                 "idempotencyKey": "key-2", "status": "SUBMITTED"},
             ])
             return rows
         self.assertEqual(1, self.exercise(change_rows=corrupt)[0])
@@ -376,13 +376,13 @@ class JobReplaySingleStoredTests(unittest.TestCase):
     def test_unrelated_job_with_blank_id_fails(self):
         self.assertEqual(1, self.exercise(
             change_rows=lambda rows: rows + [
-                {"jobDbId": "", "jobType": "analysis"}])[0])
+                {"jobDbId": "", "jobType": "analysis", "status": "SUBMITTED"}])[0])
 
     def test_unrelated_job_with_boolean_key_fails(self):
         self.assertEqual(1, self.exercise(
             change_rows=lambda rows: rows + [
                 {"jobDbId": "OTHER", "jobType": "analysis",
-                 "idempotencyKey": False}])[0])
+                 "idempotencyKey": False, "status": "SUBMITTED"}])[0])
 
     def test_unrelated_job_without_optional_key_allowed(self):
         self.assertEqual(0, self.exercise(
