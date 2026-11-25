@@ -29,7 +29,8 @@ class JobReplaySingleStoredTests(unittest.TestCase):
 
     def exercise(self, change_rows=None, change_page=None, read_status=200,
                  replay_id="JOB_ORIGINAL", unrelated=False,
-                 replay_status=200, replay_mutate=None):
+                 replay_status=200, replay_mutate=None,
+                 initial_status=202, initial_mutate=None):
         calls = []
         original = {}
 
@@ -38,9 +39,12 @@ class JobReplaySingleStoredTests(unittest.TestCase):
             if len(calls) == 1:
                 self.assertEqual(("POST", "/jobs"), (method, path))
                 original.update(copy.deepcopy(body))
-                return 202, {"result": {
+                accepted = {
                     "jobDbId": "JOB_ORIGINAL", "jobType": body["jobType"],
-                    "idempotencyKey": body["idempotencyKey"]}}
+                    "idempotencyKey": body["idempotencyKey"]}
+                if initial_mutate is not None:
+                    accepted = initial_mutate(accepted)
+                return initial_status, {"result": accepted}
             if len(calls) == 2:
                 self.assertEqual(("POST", "/jobs"), (method, path))
                 self.assertEqual(original, body)
@@ -208,6 +212,67 @@ class JobReplaySingleStoredTests(unittest.TestCase):
         self.assertEqual(0, self.exercise(
             replay_mutate=lambda row: {
                 **row, "serverLastSeen": "2026-11-25T00:00:00Z"})[0])
+
+
+
+    def test_initial_job_response_with_original_binding_passes(self):
+        self.assertEqual(0, self.exercise()[0])
+
+    def test_initial_job_allows_extra_server_metadata(self):
+        failures, calls = self.exercise(
+            initial_mutate=lambda row: {**row, "serverNote": "accepted"})
+        self.assertEqual(0, failures)
+        self.assertEqual(3, len(calls))
+
+    def test_initial_job_mismatched_type_fails_before_replay(self):
+        failures, calls = self.exercise(
+            initial_mutate=lambda row: {**row, "jobType": "wrong-type"})
+        self.assertEqual(1, failures)
+        self.assertEqual(1, len(calls))
+
+    def test_initial_job_missing_type_fails_before_replay(self):
+        failures, calls = self.exercise(
+            initial_mutate=lambda row: {k: v for k, v in row.items()
+                                        if k != "jobType"})
+        self.assertEqual(1, failures)
+        self.assertEqual(1, len(calls))
+
+    def test_initial_job_mismatched_key_fails_before_replay(self):
+        failures, calls = self.exercise(
+            initial_mutate=lambda row: {
+                **row, "idempotencyKey": "unrelated-key"})
+        self.assertEqual(1, failures)
+        self.assertEqual(1, len(calls))
+
+    def test_initial_job_missing_key_fails_before_replay(self):
+        failures, calls = self.exercise(
+            initial_mutate=lambda row: {k: v for k, v in row.items()
+                                        if k != "idempotencyKey"})
+        self.assertEqual(1, failures)
+        self.assertEqual(1, len(calls))
+
+    def test_initial_job_missing_id_fails_before_replay(self):
+        failures, calls = self.exercise(
+            initial_mutate=lambda row: {k: v for k, v in row.items()
+                                        if k != "jobDbId"})
+        self.assertEqual(1, failures)
+        self.assertEqual(1, len(calls))
+
+    def test_initial_job_empty_id_fails_before_replay(self):
+        failures, calls = self.exercise(
+            initial_mutate=lambda row: {**row, "jobDbId": ""})
+        self.assertEqual(1, failures)
+        self.assertEqual(1, len(calls))
+
+    def test_initial_job_nonobject_fails_before_replay(self):
+        failures, calls = self.exercise(initial_mutate=lambda row: [])
+        self.assertEqual(1, failures)
+        self.assertEqual(1, len(calls))
+
+    def test_initial_job_failed_http_status_fails_before_replay(self):
+        failures, calls = self.exercise(initial_status=500)
+        self.assertEqual(1, failures)
+        self.assertEqual(1, len(calls))
 
 
 

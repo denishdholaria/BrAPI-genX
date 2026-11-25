@@ -54,7 +54,9 @@ class CollectionEnvelopeTests(unittest.TestCase):
             if len(calls) == 1:
                 self.assertEqual(("POST", "/jobs"), (method, path))
                 submitted_job.update(copy.deepcopy(body))
-                return 202, {"result": {"jobDbId": job_id}}
+                return 202, {"result": {
+                    "jobDbId": job_id, "jobType": body["jobType"],
+                    "idempotencyKey": body["idempotencyKey"]}}
             if len(calls) == 2:
                 self.assertEqual(("POST", "/models"), (method, path))
                 model.update(copy.deepcopy(body))

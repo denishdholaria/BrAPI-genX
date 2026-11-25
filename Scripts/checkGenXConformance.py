@@ -1637,10 +1637,26 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                 continue
             status, payload = http_call(server, step["method"], path, body=body, token=token)
             if step.get("capture_job"):
-                if status not in (200, 202):
+                accepted = (payload.get("result")
+                            if isinstance(payload, dict) else None)
+                if (status not in (200, 202)
+                        or not isinstance(accepted, dict)
+                        or not isinstance(body, dict)
+                        or not isinstance(accepted.get("jobDbId"), str)
+                        or not accepted["jobDbId"]
+                        or not isinstance(body.get("jobType"), str)
+                        or not body["jobType"]
+                        or accepted.get("jobType") != body["jobType"]
+                        or not isinstance(body.get("idempotencyKey"), str)
+                        or not body["idempotencyKey"]
+                        or accepted.get("idempotencyKey")
+                            != body["idempotencyKey"]):
                     return results.report(
-                        probe["id"], probe["title"], "FAIL", f"submit returned {status}")
-                ctx["live_job"] = payload.get("result", {}).get("jobDbId")
+                        probe["id"], probe["title"], "FAIL",
+                        "initial job acceptance missing or changing original "
+                        "identifier, type or idempotency key"
+                    )
+                ctx["live_job"] = accepted["jobDbId"]
                 ctx["live_body"] = body
                 if step.get("wait_terminal"):
                     payload = wait_terminal(server, ctx["live_job"], token)

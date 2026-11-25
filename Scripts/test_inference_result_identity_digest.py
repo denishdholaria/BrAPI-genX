@@ -44,7 +44,9 @@ class InferenceResultIdentityDigestTests(unittest.TestCase):
             if len(calls) == 2:
                 self.assertEqual(("POST", "/jobs"), (method, path))
                 submitted.update(copy.deepcopy(body))
-                result = {"jobDbId": "JOB_INFERENCE"}
+                result = {"jobDbId": "JOB_INFERENCE",
+                          "jobType": body["jobType"],
+                          "idempotencyKey": body["idempotencyKey"]}
                 if mutate_submit_response:
                     result = mutate_submit_response(result)
                 return 202, {"result": result}

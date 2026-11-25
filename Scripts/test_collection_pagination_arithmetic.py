@@ -48,7 +48,9 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
             if len(requests) == 1:
                 self.assertEqual(("POST", "/jobs"), (method, path))
                 job_body.update(copy.deepcopy(body))
-                return 202, {"result": {"jobDbId": "JOB_PAGE"}}
+                return 202, {"result": {
+                    "jobDbId": "JOB_PAGE", "jobType": body["jobType"],
+                    "idempotencyKey": body["idempotencyKey"]}}
             if len(requests) == 2:
                 self.assertEqual(("POST", "/models"), (method, path))
                 submitted_model.update(copy.deepcopy(body))

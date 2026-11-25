@@ -1092,3 +1092,23 @@ The mandatory `Scripts/test_job_replay_single_stored.py` regression suite
 now covers malformed/changed replay responses and both permitted statuses.
 
 See [Mission 161 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-161-JOB-REPLAY-RESPONSE-BINDING.md).
+
+## Accepted job reply preserves submitted request identity (Mission 162)
+
+Every registered live `capture_job` step now validates the **first
+successful job submission response**, before recording the job identifier
+or polling for a terminal outcome. The response must include a nonempty
+`jobDbId` and echo the original submitted `jobType` and
+`idempotencyKey`. Previously a response with a matching identifier but
+wrong or missing type/key could be hidden by a later correct replay or
+collection readback; malformed responses could also cause avoidable
+attribute errors.
+
+This is a shared assertion across job replay, conflict, cancellation,
+provenance, model inference and collection probes. It preserves the
+existing accepted initial status allowance and allows server-managed
+metadata. The mandatory job replay synthetic suite now verifies failures
+occur *before* downstream calls when an initial acceptance is malformed
+or changes an original field.
+
+See [Mission 162 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-162-INITIAL-JOB-ACCEPTANCE-IDENTITY.md).
