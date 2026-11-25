@@ -5,6 +5,7 @@ from __future__ import annotations
 import copy
 import hashlib
 from pathlib import Path
+from urllib.parse import quote
 from unittest import mock
 import unittest
 
@@ -22,12 +23,13 @@ class DeprecatedInferenceResultBindingTests(unittest.TestCase):
         cls.probe = next(p for p in document["probes"] if p["id"] == "L-27")
 
     def test_registered_warned_inference_completion(self):
-        self.assertEqual(2, len(self.probe["calls"]))
+        self.assertEqual(3, len(self.probe["calls"]))
         self.assertEqual("live_model_deprecated", self.probe["calls"][0]["body_fixture"])
         self.assertIs(True, self.probe["calls"][0]["capture_model_deprecated"])
-        self.assertEqual("WARNING", self.probe["calls"][1]["assert"]["status_message"])
+        self.assertIs(True, self.probe["calls"][1]["assert"]["deprecated_model_persisted"])
+        self.assertEqual("WARNING", self.probe["calls"][2]["assert"]["status_message"])
         self.assertIs(True,
-                      self.probe["calls"][1]["assert"]["deprecated_inference_completed"])
+                      self.probe["calls"][2]["assert"]["deprecated_inference_completed"])
 
     def exercise(self, mutate_terminal=None, mutate_warning=None, acceptance_status=202,
                  mutate_model=None, modify_request=None):
@@ -45,6 +47,11 @@ class DeprecatedInferenceResultBindingTests(unittest.TestCase):
                     response = mutate_model(response)
                 return 200, {"result": response}
             if len(calls) == 2:
+                expected = ("/models/" + quote(original_model["modelDbId"], safe=":")
+                            + "?version=" + quote(original_model["modelVersion"], safe=""))
+                self.assertEqual(("GET", expected), (method, path))
+                return 200, {"result": copy.deepcopy(original_model)}
+            if len(calls) == 3:
                 self.assertEqual(("POST", "/jobs"), (method, path))
                 submitted.update(copy.deepcopy(body))
                 if modify_request is not None:
