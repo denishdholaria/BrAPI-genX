@@ -43,7 +43,7 @@ class LiveAssertionManifestTests(unittest.TestCase):
     def test_typo_replacing_only_assertion_detected(self):
         message = self.mutated(
             "L-13", 1,
-            lambda s: s.update(assertion={"status": 409}, **{"assert": {"statsu": 409}}),
+            lambda s: s.update({"assert": {"statsu": 409}}),
         )
         self.assertIn("statsu", message)
 
@@ -73,7 +73,7 @@ class LiveAssertionManifestTests(unittest.TestCase):
 
     def test_bad_count_rejected(self):
         self.assertIn("nonnegative integer",
-            self.mutated("L-28", 0, lambda s: s["assert"].update(data_length=-1)))
+            self.mutated("L-28", 1, lambda s: s["assert"].update(data_length=-1)))
 
     def test_bad_body_mapping_rejected(self):
         self.assertIn("nonempty path mapping",
@@ -86,7 +86,7 @@ class LiveAssertionManifestTests(unittest.TestCase):
 
     def test_telemetry_mean_without_samples_rejected(self):
         self.assertIn("must be paired",
-            self.mutated("L-23", 0, lambda s: s["assert"].pop("telemetry_samples")))
+            self.mutated("L-23", 1, lambda s: s["assert"].pop("telemetry_samples")))
 
     def test_replay_flag_needs_explicit_same_job_identity_assertion(self):
         self.assertIn("same_jobDbId assertion",
