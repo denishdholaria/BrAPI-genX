@@ -70,6 +70,25 @@ def scope_errors(document: dict) -> list[str]:
     for command in sorted(REQUIRED_COMMANDS):
         if command not in commands:
             errors.append(f"static-conformance job missing command: {command}")
+    differential = jobs.get("independent-runtime-differential")
+    if not isinstance(differential, dict):
+        errors.append("missing independent-runtime-differential job")
+    else:
+        steps = differential.get("steps") or []
+        commands = "\n".join(str(step.get("run", "")) for step in steps
+                             if isinstance(step, dict)
+                             and "failure()" not in str(step.get("if", "")))
+        for required in (
+            "python Scripts/genx_test_server.py --port 18080",
+            "bun Scripts/genx_test_server_ts.ts --port 18082",
+            "python Scripts/genx_differential_check.py --a http://127.0.0.1:18080/genx/v1 --b http://127.0.0.1:18082/genx/v1 --expired-job JOB_EXPIRED",
+        ):
+            if required not in commands:
+                errors.append(f"independent-runtime-differential missing command: {required}")
+        if not any(isinstance(step, dict)
+                   and step.get("uses") == "oven-sh/setup-bun@v2"
+                   for step in steps):
+            errors.append("independent-runtime-differential missing Bun setup")
     return errors
 
 
@@ -155,6 +174,53 @@ class WorkflowScopeTests(unittest.TestCase):
                     f"static-conformance job missing command: {required}",
                     scope_errors(damaged),
                 )
+
+
+    def test_missing_independent_differential_job_fails_closed(self):
+        damaged = copy.deepcopy(self.workflow)
+        damaged["jobs"].pop("independent-runtime-differential")
+        self.assertIn("missing independent-runtime-differential job",
+                      scope_errors(damaged))
+
+    def test_differential_execution_cannot_be_removed(self):
+        damaged = copy.deepcopy(self.workflow)
+        steps = damaged["jobs"]["independent-runtime-differential"]["steps"]
+        step = next(step for step in steps
+                    if str(step.get("run", "")).startswith(
+                        "python Scripts/genx_differential_check.py --a"))
+        step["run"] = "echo differential-skip"
+        self.assertTrue(any("missing command: python Scripts/genx_differential_check.py" in x
+                            for x in scope_errors(damaged)))
+
+    def test_differential_required_server_cannot_be_removed(self):
+        damaged = copy.deepcopy(self.workflow)
+        steps = damaged["jobs"]["independent-runtime-differential"]["steps"]
+        step = next(step for step in steps
+                    if "bun Scripts/genx_test_server_ts.ts --port 18082"
+                    in str(step.get("run", "")))
+        step["run"] = step["run"].replace(
+            "bun Scripts/genx_test_server_ts.ts --port 18082",
+            "echo TypeScript-server-disabled")
+        self.assertTrue(any("missing command: bun Scripts/genx_test_server_ts.ts" in x
+                            for x in scope_errors(damaged)))
+
+    def test_differential_only_in_diagnostics_cannot_pass(self):
+        damaged = copy.deepcopy(self.workflow)
+        steps = damaged["jobs"]["independent-runtime-differential"]["steps"]
+        step = next(step for step in steps
+                    if str(step.get("run", "")).startswith(
+                        "python Scripts/genx_differential_check.py --a"))
+        step["if"] = "failure()"
+        self.assertTrue(any("missing command: python Scripts/genx_differential_check.py" in x
+                            for x in scope_errors(damaged)))
+
+    def test_differential_bun_setup_required(self):
+        damaged = copy.deepcopy(self.workflow)
+        steps = damaged["jobs"]["independent-runtime-differential"]["steps"]
+        steps[:] = [step for step in steps
+                    if step.get("uses") != "oven-sh/setup-bun@v2"]
+        self.assertIn("independent-runtime-differential missing Bun setup",
+                      scope_errors(damaged))
 
 if __name__ == "__main__":
     unittest.main()

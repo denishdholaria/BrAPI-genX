@@ -134,3 +134,19 @@ The approved-candidate breeding contract has two additional static gates:
 - `python Scripts/check_breeding_pipeline_api_contract.py` checks the actual OpenAPI schema composition and source-server filter pairs against the endpoint registry.
 
 The corresponding fixtures are in `docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CANDIDATE-FIXTURES.json` and `docs/assessment/BRAPI-GENX-BREEDING-PIPELINE-CONTRACT-FIXTURES.json`. These gates are implementation-independent static checks; they do not prove production runtime behavior or promote RFC-154 from candidate status.
+
+## Hosted cross-runtime differential tier (Mission 100)
+
+The conformance workflow runs an additional `independent-runtime-differential`
+job that starts fresh Python and separately authored TypeScript/Bun reference
+servers. The existing `Scripts/genx_differential_check.py` compares **nine**
+RFC-001/RFC-004 subset requests, including job replay/conflict and model
+registration/inference. It strips volatile timestamps and server names, and
+allows a *subset* of advertised capabilities only when the remaining
+server-info envelope matches. A mismatch or server-start failure fails the job.
+
+These are **two project-owned reference implementations**, not independent
+external-vendor servers. Passing the comparison is not a comprehensive GenX
+interoperability certification, scientific validation, authorization proof
+or production-readiness guarantee. Non-ASCII and numerical boundary digest
+vectors are tested separately. See [Mission 100 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-100-CROSS-RUNTIME-DIFFERENTIAL-CI.md).

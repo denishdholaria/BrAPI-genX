@@ -456,3 +456,67 @@ jobs:
           if [ -f /tmp/genx-reference-server.pid ]; then
             kill "$(cat /tmp/genx-reference-server.pid)" || true
           fi
+
+  independent-runtime-differential:
+    # Separate project-owned reference implementations; not external certification.
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v5
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install Python reference dependencies
+        run: python -m pip install 'PyYAML==6.0.2' 'rfc8785==0.1.4'
+      - name: Set up Bun for independent TypeScript reference
+        uses: oven-sh/setup-bun@v2
+      - name: Install TypeScript canonicalization dependencies
+        run: |
+          cd Scripts/jcs-canonicalization
+          bun install --frozen-lockfile
+      - name: Start Python and TypeScript reference servers
+        run: |
+          set -euo pipefail
+          python Scripts/genx_test_server.py --port 18080 --delay 0.4 --profile genx > /tmp/genx-python-differential.log 2>&1 &
+          echo $! > /tmp/genx-python-differential.pid
+          bun Scripts/genx_test_server_ts.ts --port 18082 --delay 0.4 --profile genx > /tmp/genx-typescript-differential.log 2>&1 &
+          echo $! > /tmp/genx-typescript-differential.pid
+          python - <<'PY'
+          import time
+          from urllib.request import urlopen
+          for endpoint in (
+              "http://127.0.0.1:18080/genx/v1/serverinfo",
+              "http://127.0.0.1:18082/genx/v1/serverinfo",
+          ):
+              for attempt in range(40):
+                  try:
+                      with urlopen(endpoint, timeout=1) as response:
+                          if response.status == 200:
+                              break
+                  except Exception:
+                      pass
+                  time.sleep(0.25)
+              else:
+                  raise SystemExit(f"Reference server failed readiness: {endpoint}")
+          PY
+      - name: Compare independent reference behavior
+        run: python Scripts/genx_differential_check.py --a http://127.0.0.1:18080/genx/v1 --b http://127.0.0.1:18082/genx/v1 --expired-job JOB_EXPIRED
+      - name: Upload differential diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: genx-independent-runtime-differential-logs
+          path: |
+            /tmp/genx-python-differential.log
+            /tmp/genx-typescript-differential.log
+          if-no-files-found: warn
+      - name: Stop reference servers
+        if: always()
+        run: |
+          for name in python typescript; do
+            file="/tmp/genx-$name-differential.pid"
+            if [ -f "$file" ]; then
+              kill "$(cat "$file")" || true
+            fi
+          done
