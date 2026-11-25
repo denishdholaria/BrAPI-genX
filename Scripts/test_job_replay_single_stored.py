@@ -373,6 +373,26 @@ class JobReplaySingleStoredTests(unittest.TestCase):
         self.assertEqual(0, self.exercise(
             initial_mutate=lambda row: {**row, "status": "RUNNING"})[0])
 
+    def test_invalid_optional_job_timestamps_fail_before_replay(self):
+        bad = (None, "2026-11-25", "2026-11-25T12:00:00",
+               "2026-02-30T12:00:00Z", "2026-11-25 12:00:00Z")
+        for field in ("createdAt", "updatedAt", "expiresAt"):
+            for value in bad:
+                with self.subTest(field=field, value=value):
+                    failures, calls = self.exercise(
+                        initial_mutate=lambda row: {**row, field: value})
+                    self.assertEqual((1, 1), (failures, len(calls)))
+
+    def test_valid_optional_job_timestamp_offsets_allowed(self):
+        for stamp in ("2026-11-25T12:00:00Z",
+                      "2026-11-25T12:00:00+05:30",
+                      "2026-11-25T12:00:00-0600"):
+            with self.subTest(stamp=stamp):
+                self.assertEqual(0, self.exercise(
+                    initial_mutate=lambda row: {
+                        **row, "createdAt": stamp,
+                        "updatedAt": stamp, "expiresAt": stamp})[0])
+
     def test_initial_job_invalid_progress_fails_before_replay(self):
         for progress in (-0.01, 1.01, None, True, "0.4", float("inf")):
             with self.subTest(progress=progress):

@@ -77,6 +77,37 @@ def valid_job_status_and_progress(job):
             and math.isfinite(progress))
 
 
+# Accept UTC Z, extended ISO offsets and the HHMM offsets documented in
+# Specification/GeneralInfo/Date_Time_Encoding.md.
+JOB_TIMESTAMP_RE = re.compile(
+    r"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}"
+    r"(?:\.[0-9]+)?(?:Z|[+-][0-9]{2}:?[0-9]{2})"
+)
+
+
+def valid_optional_job_timestamps(job):
+    """Validate timezone-bearing date-times only when a Job supplies them."""
+    if not isinstance(job, dict):
+        return False
+    for field in ("createdAt", "updatedAt", "expiresAt"):
+        if field not in job:
+            continue
+        value = job[field]
+        if not isinstance(value, str) or not JOB_TIMESTAMP_RE.fullmatch(value):
+            return False
+        try:
+            parse_rfc3339(value)
+        except (TypeError, ValueError, OverflowError):
+            return False
+    return True
+
+
+def valid_job_wire_fields(job):
+    """Validate existing Job status, optional progress and timestamp fields."""
+    return (valid_job_status_and_progress(job)
+            and valid_optional_job_timestamps(job))
+
+
 def load_yaml(path):
     with open(path, "r", encoding="utf-8") as fh:
         return yaml.safe_load(fh)
@@ -1244,7 +1275,7 @@ def immutable_job_snapshot(status, payload):
                 or not row["jobDbId"]
                 or not isinstance(row.get("jobType"), str)
                 or not row["jobType"]
-                or not valid_job_status_and_progress(row)
+                or not valid_job_wire_fields(row)
                 or ("idempotencyKey" in row
                     and not isinstance(row["idempotencyKey"], str))
                 or row["jobDbId"] in snapshot):
@@ -1636,7 +1667,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                             if isinstance(payload, dict) else None)
                 if (status in (200, 202)
                         and isinstance(original, dict)
-                        and valid_job_status_and_progress(returned)
+                        and valid_job_wire_fields(returned)
                         and isinstance(ctx.get("live_job"), str)
                         and ctx["live_job"]
                         and returned.get("jobDbId") == ctx["live_job"]
@@ -1684,7 +1715,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         or not ids or not isinstance(ids[0], str) or not ids[0]
                         or any(job_id != ids[0] for job_id in ids)
                         or any(
-                            not valid_job_status_and_progress(record)
+                            not valid_job_wire_fields(record)
                             or record.get("jobType") != body["jobType"]
                             or record.get("idempotencyKey")
                                 != body["idempotencyKey"]
@@ -1712,7 +1743,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         or not isinstance(body, dict)
                         or not isinstance(accepted.get("jobDbId"), str)
                         or not accepted["jobDbId"]
-                        or not valid_job_status_and_progress(accepted)
+                        or not valid_job_wire_fields(accepted)
                         or not isinstance(body.get("jobType"), str)
                         or not body["jobType"]
                         or accepted.get("jobType") != body["jobType"]
@@ -1865,7 +1896,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         or submitted.get("jobType") != "inference"
                         or not isinstance(submitted.get("idempotencyKey"), str)
                         or not submitted["idempotencyKey"]
-                        or not valid_job_status_and_progress(accepted)
+                        or not valid_job_wire_fields(accepted)
                         or accepted.get("jobType") != submitted["jobType"]
                         or accepted.get("idempotencyKey")
                             != submitted["idempotencyKey"]):
@@ -2241,7 +2272,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         if (not isinstance(job_id, str) or not job_id
                                 or not isinstance(row.get("jobType"), str)
                                 or not row["jobType"]
-                                or not valid_job_status_and_progress(row)
+                                or not valid_job_wire_fields(row)
                                 or ("idempotencyKey" in row
                                     and not isinstance(row["idempotencyKey"], str))
                                 or job_id in visible_job_ids):
