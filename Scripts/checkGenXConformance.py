@@ -1572,14 +1572,31 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     return results.report(probe["id"], probe["title"], "FAIL", "no captured device")
                 path = path.replace("{telemetry_device}", ctx["live_device"])
             if step.get("replay_capture"):
-                # Replay the exact first submission body and key.
-                status, payload = http_call(server, "POST", "/jobs", body=ctx["live_body"], token=token)
-                same = payload.get("result", {}).get("jobDbId") == ctx.get("live_job")
-                if 200 <= status < 300 and same:
+                # A matching jobDbId alone cannot prove that the replay
+                # acknowledged the original job type and idempotency key.
+                # L-01 explicitly permits HTTP 200 or 202, not every 2xx.
+                original = ctx.get("live_body")
+                status, payload = http_call(
+                    server, "POST", "/jobs", body=original, token=token)
+                returned = (payload.get("result")
+                            if isinstance(payload, dict) else None)
+                if (status in (200, 202)
+                        and isinstance(original, dict)
+                        and isinstance(returned, dict)
+                        and isinstance(ctx.get("live_job"), str)
+                        and ctx["live_job"]
+                        and returned.get("jobDbId") == ctx["live_job"]
+                        and isinstance(original.get("jobType"), str)
+                        and returned.get("jobType") == original["jobType"]
+                        and isinstance(original.get("idempotencyKey"), str)
+                        and original["idempotencyKey"]
+                        and returned.get("idempotencyKey")
+                            == original["idempotencyKey"]):
                     continue
                 return results.report(
                     probe["id"], probe["title"], "FAIL",
-                    f"replay returned jobDbId {payload.get('result', {}).get('jobDbId')}",
+                    "job replay status or original job identity/type/key "
+                    "not preserved in response"
                 )
             if step.get("concurrent_posts"):
                 import concurrent.futures as futures
