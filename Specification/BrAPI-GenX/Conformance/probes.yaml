@@ -217,7 +217,7 @@ probes:
   procedure:
   - POST JobNewRequest with a fresh idempotencyKey; record jobDbId.
   - POST the identical body and key again; GET the complete jobs collection.
-  expectation: Second response is 200 or 202 with the same jobDbId, original jobType and echoed idempotencyKey, and exactly one stored job with that original key and identifier.
+  expectation: Initial acceptance echoes the original jobType and idempotencyKey with a nonempty jobDbId; the second response is 200 or 202 with the same identity and exactly one stored job for that original key and identifier.
   falsifier: A second jobDbId is issued or a duplicate/modified stored job exists despite matching responses.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_submit, capture_job: true}
@@ -499,7 +499,7 @@ probes:
   title: List endpoints return paged envelopes
   procedure:
   - GET job and model collections after creating one of each; validate first-page arithmetic and bind the listed records to the original submission.
-  expectation: Each returns a consistent first-page envelope and exactly one matching created identity; the job retains its original type/idempotency key, and the model retains all submitted fields including nested provenance.
+  expectation: Initial job acceptance echoes the original jobType and idempotencyKey; each collection returns a consistent first-page envelope and exactly one matching created identity, with original job request binding and all submitted model fields including nested provenance intact.
   falsifier: Missing or duplicate created identities, a mismatched job type or request key, changed model fields, inconsistent pagination or missing created records.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_submit, capture_job: true}
