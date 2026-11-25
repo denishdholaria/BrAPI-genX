@@ -264,6 +264,35 @@ class JobReplaySingleStoredTests(unittest.TestCase):
         self.assertEqual(1, failures)
         self.assertEqual(1, len(calls))
 
+    def test_initial_job_missing_status_fails_before_replay(self):
+        failures, calls = self.exercise(
+            initial_mutate=lambda row: {
+                key: value for key, value in row.items() if key != "status"})
+        self.assertEqual((1, 1), (failures, len(calls)))
+
+    def test_initial_job_unknown_status_fails_before_replay(self):
+        failures, calls = self.exercise(
+            initial_mutate=lambda row: {**row, "status": "QUEUED"})
+        self.assertEqual((1, 1), (failures, len(calls)))
+
+    def test_initial_job_nonstring_status_fails_before_replay(self):
+        for wrong in (None, False, 0, [], {}):
+            with self.subTest(wrong=wrong):
+                failures, calls = self.exercise(
+                    initial_mutate=lambda row: {**row, "status": wrong})
+                self.assertEqual((1, 1), (failures, len(calls)))
+
+    def test_initial_job_running_status_allowed(self):
+        self.assertEqual(0, self.exercise(
+            initial_mutate=lambda row: {**row, "status": "RUNNING"})[0])
+
+    def test_initial_job_status_enum_matches_published_schema(self):
+        schema = yaml.safe_load((
+            ROOT / "Specification" / "BrAPI-GenX" / "Core" / "Jobs" /
+            "Schemas" / "Job.yaml").read_text(encoding="utf-8"))
+        expected = schema["components"]["schemas"]["Job"]["properties"]["status"]["enum"]
+        self.assertEqual(set(expected), checker.JOB_LIFECYCLE_STATES)
+
     def test_initial_job_nonobject_fails_before_replay(self):
         failures, calls = self.exercise(initial_mutate=lambda row: [])
         self.assertEqual(1, failures)
