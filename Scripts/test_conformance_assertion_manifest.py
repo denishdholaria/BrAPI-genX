@@ -273,6 +273,66 @@ class LiveAssertionManifestTests(unittest.TestCase):
                          lambda s: s.update(
                              path="/telemetry?deviceDbId={telemetry_device}&sensorDbId=air-temp-01&aggregation=none")))
 
+    def test_L_08_publication_replay_202_rejected(self):
+        self.assertIn(
+            "term_replay_single_version GET after replay required",
+            self.mutated("L-08", 1,
+                         lambda call: call["assert"].update(status=202)))
+
+    def test_L_08_publication_replay_status_mandatory(self):
+        self.assertIn(
+            "term_replay_single_version GET after replay required",
+            self.mutated("L-08", 1,
+                         lambda call: call["assert"].pop("status")))
+
+    def test_L_10_publication_replay_202_rejected(self):
+        self.assertIn(
+            "ledger_original_intact GET after replay required",
+            self.mutated("L-10", 1,
+                         lambda call: call["assert"].update(status=202)))
+
+    def test_L_10_publication_replay_status_mandatory(self):
+        self.assertIn(
+            "ledger_original_intact GET after replay required",
+            self.mutated("L-10", 1,
+                         lambda call: call["assert"].pop("status")))
+
+    def test_L_12_publication_replay_202_rejected(self):
+        self.assertIn(
+            "model_replay_single_version GET after replay required",
+            self.mutated("L-12", 1,
+                         lambda call: call["assert"].update(status=202)))
+
+    def test_L_12_publication_replay_status_mandatory(self):
+        self.assertIn(
+            "model_replay_single_version GET after replay required",
+            self.mutated("L-12", 1,
+                         lambda call: call["assert"].pop("status")))
+
+    def test_L_16_publication_replay_202_rejected(self):
+        self.assertIn(
+            "matrix_replay_single_record GET after replay required",
+            self.mutated("L-16", 1,
+                         lambda call: call["assert"].update(status=202)))
+
+    def test_L_16_publication_replay_status_mandatory(self):
+        self.assertIn(
+            "matrix_replay_single_record GET after replay required",
+            self.mutated("L-16", 1,
+                         lambda call: call["assert"].pop("status")))
+
+    def test_L_18_publication_replay_202_rejected(self):
+        self.assertIn(
+            "package_replay_single_record GET after replay required",
+            self.mutated("L-18", 1,
+                         lambda call: call["assert"].update(status=202)))
+
+    def test_L_18_publication_replay_status_mandatory(self):
+        self.assertIn(
+            "package_replay_single_record GET after replay required",
+            self.mutated("L-18", 1,
+                         lambda call: call["assert"].pop("status")))
+
     def test_replay_flag_needs_explicit_same_job_identity_assertion(self):
         self.assertIn("same_jobDbId assertion",
             self.mutated("L-01", 1, lambda s: s.update({"assert": {"status": 202}})))
