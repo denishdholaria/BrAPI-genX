@@ -184,6 +184,18 @@ class RejectedInferenceNoStoredJobTests(unittest.TestCase):
                 **m, "serverReadAt": "2026-11-25T00:00:00Z"})
         self.assertEqual((0, 5), (failures, len(calls)))
 
+    def test_unrelated_stored_job_missing_status_fails(self):
+        def change(rows, denied):
+            rows[0].pop("status")
+            return rows
+        self.assertEqual(1, self.exercise(create_job=change)[0])
+
+    def test_unrelated_stored_job_unknown_status_fails(self):
+        def change(rows, denied):
+            rows[0]["status"] = "QUEUED"
+            return rows
+        self.assertEqual(1, self.exercise(create_job=change)[0])
+
     def test_empty_job_collection_allowed(self):
         self.assertEqual(0, self.exercise(create_job=lambda rows, denied: [])[0])
 
