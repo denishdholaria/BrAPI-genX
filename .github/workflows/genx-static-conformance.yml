@@ -255,6 +255,8 @@ jobs:
         run: python Scripts/test_conformance_step_manifest.py
       - name: Test telemetry conflict retained-state postcondition
         run: python Scripts/test_telemetry_conflict_postcondition.py
+      - name: Test telemetry replay retained-state postcondition
+        run: python Scripts/test_telemetry_replay_postcondition.py
       - name: Test telemetry window partition postcondition
         run: python Scripts/test_telemetry_window_partition.py
       - name: Test telemetry pagination slice postcondition

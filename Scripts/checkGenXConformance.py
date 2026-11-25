@@ -1657,7 +1657,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                 if status != 200 or not isinstance(original, list) or not isinstance(rows, list):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        "original telemetry unavailable after rejected conflict"
+                        "original telemetry unavailable after replay or rejected conflict"
                     )
                 identity = lambda point: (
                     point.get("deviceDbId"), point.get("sensorDbId"),
@@ -1669,19 +1669,19 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     if not isinstance(point, dict):
                         return results.report(
                             probe["id"], probe["title"], "FAIL",
-                            "malformed telemetry row after rejected conflict"
+                            "malformed telemetry row after replay or rejected conflict"
                         )
                     key = identity(point)
                     if key in actual:
                         return results.report(
                             probe["id"], probe["title"], "FAIL",
-                            f"duplicate telemetry identity after conflict: {key!r}"
+                            f"duplicate telemetry identity after replay or conflict: {key!r}"
                         )
                     actual[key] = point.get("value")
                 if actual != expected or len(rows) != len(original):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        "stored telemetry identity/value changed after rejected conflict: "
+                        "stored telemetry identity/value changed after replay or rejected conflict: "
                         f"expected={expected!r}; observed={actual!r}"
                     )
             if "telemetry_counts" in assertion:
@@ -2111,6 +2111,14 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-21" and not any(
+                    call.get("method") == "GET"
+                    and isinstance(call.get("assert"), dict)
+                    and call["assert"].get("telemetry_original_intact") is True
+                    for call in calls):
+                raise ValueError(
+                    "probe L-21: telemetry_original_intact GET assertion required"
+                )
             if probe_id == "L-28" and not any(
                     call.get("method") == "GET"
                     and isinstance(call.get("assert"), dict)

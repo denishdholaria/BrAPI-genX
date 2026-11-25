@@ -39,6 +39,7 @@ REQUIRED_COMMANDS = {
     "python Scripts/test_conformance_assertion_manifest.py",
     "python Scripts/test_conformance_step_manifest.py",
     "python Scripts/test_telemetry_conflict_postcondition.py",
+    "python Scripts/test_telemetry_replay_postcondition.py",
     "python Scripts/test_telemetry_window_partition.py",
     "python Scripts/test_telemetry_pagination_slice.py",
     "python Scripts/test_provenance_roundtrip_integrity.py",

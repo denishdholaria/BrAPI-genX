@@ -88,6 +88,18 @@ class LiveAssertionManifestTests(unittest.TestCase):
         self.assertIn("must be paired",
             self.mutated("L-23", 1, lambda s: s["assert"].pop("telemetry_samples")))
 
+    def test_telemetry_replay_readback_cannot_be_removed(self):
+        self.assertIn(
+            "telemetry_original_intact GET assertion required",
+            self.mutated("L-21", 2,
+                         lambda s: s.update({"assert": {"status": 200}})))
+
+    def test_telemetry_replay_readback_cannot_be_disabled(self):
+        self.assertIn(
+            "telemetry_original_intact must be true",
+            self.mutated("L-21", 2,
+                         lambda s: s["assert"].update(telemetry_original_intact=False)))
+
     def test_telemetry_page_slice_assertion_must_remain_registered(self):
         self.assertIn(
             "telemetry_page_slice GET assertion required",
