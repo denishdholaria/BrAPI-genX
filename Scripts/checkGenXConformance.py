@@ -2329,22 +2329,49 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         f"mean is {rows[0].get('value')}, "
                         f"expected {assertion['telemetry_mean']}")
             if assertion.get("inference_intact"):
-                rows = payload.get("result", {}).get("result", {}).get("data", [])
-                if not rows:
-                    return results.report(
-                        probe["id"], probe["title"], "FAIL", "no inference record")
-                seen = rows[0]
-                want_digest = hashlib.sha256(
-                    canonical(ctx["live_inference_inputs"]).encode("utf-8")).hexdigest()
-                if seen.get("modelDbId") != ctx.get("live_model_id"):
+                original_model = ctx.get("live_model_original")
+                expected_model = ctx.get("live_model")
+                request_body = ctx.get("live_body")
+                params = (request_body.get("parameters")
+                          if isinstance(request_body, dict) else None)
+                job = payload.get("result") if isinstance(payload, dict) else None
+                completed = job.get("result") if isinstance(job, dict) else None
+                rows = completed.get("data") if isinstance(completed, dict) else None
+                inputs = params.get("inputs") if isinstance(params, dict) else None
+                want_digest = (
+                    hashlib.sha256(canonical(inputs).encode("utf-8")).hexdigest()
+                    if isinstance(params, dict) and "inputs" in params else None
+                )
+                if (status != 200 or not isinstance(original_model, dict)
+                        or not isinstance(expected_model, tuple)
+                        or len(expected_model) != 2
+                        or expected_model != (
+                            original_model.get("modelDbId"),
+                            original_model.get("modelVersion"))
+                        or not isinstance(request_body, dict)
+                        or request_body.get("jobType") != "inference"
+                        or not isinstance(request_body.get("idempotencyKey"), str)
+                        or not request_body["idempotencyKey"]
+                        or not isinstance(params, dict)
+                        or (params.get("modelDbId"), params.get("modelVersion"))
+                            != expected_model
+                        or inputs != ctx.get("live_inference_inputs")
+                        or not isinstance(job, dict)
+                        or job.get("jobDbId") != ctx.get("live_job")
+                        or job.get("jobType") != "inference"
+                        or job.get("idempotencyKey")
+                            != request_body["idempotencyKey"]
+                        or job.get("status") != "COMPLETED"
+                        or not isinstance(rows, list) or len(rows) != 1
+                        or not isinstance(rows[0], dict)
+                        or (rows[0].get("modelDbId"),
+                            rows[0].get("modelVersion")) != expected_model
+                        or rows[0].get("inputsDigest") != want_digest):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        f"record names {seen.get('modelDbId')}, "
-                        f"expected {ctx.get('live_model_id')}")
-                if seen.get("inputsDigest") != want_digest:
-                    return results.report(
-                        probe["id"], probe["title"], "FAIL",
-                        f"inputsDigest {seen.get('inputsDigest')} != recomputed {want_digest}")
+                        "inference result not bound to original completed job, "
+                        "registered model version or canonical input digest"
+                    )
             if assertion.get("ledger_original_intact"):
                 # L-11 must prove the original entry survived rejection,
                 # not just that the ledger still has one record.
@@ -2779,6 +2806,24 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-14":
+                if (len(calls) != 3
+                        or calls[0].get("method") != "POST"
+                        or calls[0].get("path") != "/models"
+                        or calls[0].get("body_fixture") != "live_model_submit"
+                        or calls[0].get("capture_model") is not True
+                        or calls[1].get("method") != "POST"
+                        or calls[1].get("path") != "/jobs"
+                        or calls[1].get("body_fixture") != "live_inference_submit"
+                        or calls[1].get("capture_job") is not True
+                        or calls[1].get("wait_terminal") is not True
+                        or calls[2].get("method") != "GET"
+                        or calls[2].get("path") != "/jobs/{jobDbId}"
+                        or calls[2].get("assert", {}).get("inference_intact")
+                            is not True):
+                    raise ValueError(
+                        "probe L-14: bound inference result and completion GET required"
+                    )
             if probe_id == "L-27":
                 if (len(calls) != 2
                         or calls[0].get("method") != "POST"

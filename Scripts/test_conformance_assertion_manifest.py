@@ -147,6 +147,27 @@ class LiveAssertionManifestTests(unittest.TestCase):
                 s.update(body_fixture="live_submit"),
             )))
 
+    def test_inference_complete_result_assertion_cannot_be_removed(self):
+        self.assertIn(
+            "bound inference result and completion GET required",
+            self.mutated("L-14", 2,
+                         lambda s: s.update({"assert": {"status": 200}})))
+
+    def test_inference_original_model_capture_is_required(self):
+        self.assertIn(
+            "bound inference result and completion GET required",
+            self.mutated("L-14", 0, lambda s: s.pop("capture_model")))
+
+    def test_inference_terminal_wait_is_required(self):
+        self.assertIn(
+            "bound inference result and completion GET required",
+            self.mutated("L-14", 1, lambda s: s.pop("wait_terminal")))
+
+    def test_inference_get_must_use_captured_job_identity(self):
+        self.assertIn(
+            "bound inference result and completion GET required",
+            self.mutated("L-14", 2, lambda s: s.update(path="/jobs/JOB_OTHER")))
+
     def test_deprecated_completion_assertion_cannot_be_removed(self):
         self.assertIn(
             "bound deprecated inference completion and warning required",
