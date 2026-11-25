@@ -3276,6 +3276,7 @@ def validate_probe_manifest(probes):
                         or calls[0].get("body_fixture") != "live_model_submit"
                         or calls[0].get("capture_model") is not True
                         or calls[1].get("body_fixture") != "live_model_submit"
+                        or calls[1].get("assert", {}).get("status") != 200
                         or calls[1].get("assert", {}).get("same_model") is not True
                         or calls[2].get("method") != "GET"
                         or calls[2].get("path") != "/models?modelDbId={modelDbId}"
@@ -3289,6 +3290,7 @@ def validate_probe_manifest(probes):
                         or calls[0].get("body_fixture") != "live_package_submit"
                         or calls[0].get("capture_package") is not True
                         or calls[1].get("body_fixture") != "live_package_submit"
+                        or calls[1].get("assert", {}).get("status") != 200
                         or calls[1].get("assert", {}).get("same_package") is not True
                         or calls[2].get("method") != "GET"
                         or calls[2].get("path") != "/fair-packages"
@@ -3302,6 +3304,7 @@ def validate_probe_manifest(probes):
                         or calls[0].get("body_fixture") != "live_matrix_submit"
                         or calls[0].get("capture_matrix") is not True
                         or calls[1].get("body_fixture") != "live_matrix_submit"
+                        or calls[1].get("assert", {}).get("status") != 200
                         or calls[1].get("assert", {}).get("same_matrix") is not True
                         or calls[2].get("method") != "GET"
                         or calls[2].get("path") != "/variantmatrices"
@@ -3315,6 +3318,7 @@ def validate_probe_manifest(probes):
                         or calls[0].get("body_fixture") != "live_term_submit"
                         or calls[0].get("capture_term") is not True
                         or calls[1].get("body_fixture") != "live_term_submit"
+                        or calls[1].get("assert", {}).get("status") != 200
                         or calls[1].get("assert", {}).get("same_term") is not True
                         or calls[2].get("method") != "GET"
                         or calls[2].get("path")
@@ -3329,6 +3333,7 @@ def validate_probe_manifest(probes):
                         or calls[0].get("body_fixture") != "live_ledger_submit"
                         or calls[0].get("capture_ledger") is not True
                         or calls[1].get("body_fixture") != "live_ledger_submit"
+                        or calls[1].get("assert", {}).get("status") != 200
                         or calls[1].get("assert", {}).get("same_ledger") is not True
                         or calls[2].get("method") != "GET"
                         or calls[2].get("path") != "/seedlots/{lotDbId}/ledger"

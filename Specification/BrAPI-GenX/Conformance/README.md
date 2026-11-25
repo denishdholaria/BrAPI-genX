@@ -959,3 +959,20 @@ The existing mandatory
 `Scripts/test_terminal_cancel_retained_state.py` suites now reject
 server-side failures while accepting the already-supported client-error
 cases. See [Mission 153 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-153-REJECTION-IS-NOT-SERVER-ERROR.md).
+
+## Published-resource replay status integrity (Mission 154)
+
+The registered identical-publication replays for **L-08** (variable terms),
+**L-10** (seed-lot ledger), **L-12** (models), **L-16** (variant matrices)
+and **L-18** (FAIR packages) now explicitly assert HTTP **200** on
+the second POST, as their existing probe expectations already state.
+Previously, a server returning a newly accepted-write status (such as 202)
+could pass based only on an unchanged identifier and correct readback.
+
+Each probe retains its source-record integrity and duplicate-prevention
+readback. The manifest validator requires the documented replay status,
+and the existing mandatory regression suites reject 202 and 500 on the
+second submission. The separate **L-01** asynchronous-job replay remains
+unchanged: its documented contract permits 200 or 202.
+
+See [Mission 154 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-154-PUBLISHED-REPLAY-STATUS.md).
