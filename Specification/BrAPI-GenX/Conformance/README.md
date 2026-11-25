@@ -1130,3 +1130,20 @@ cases where only one of eight responses corrupts or drops fields;
 failure precedes the stored-collection readback.
 
 See [Mission 163 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-163-CONCURRENT-JOB-ACK-BINDING.md).
+
+## Complete collection identities for job replay and concurrency (Mission 164)
+
+The stored-job readbacks for **L-01** (identical replay) and **L-24**
+(concurrent identical submissions) now reuse the existing
+`immutable_job_snapshot` validator. Previously the probes checked a
+complete first-page count and exactly one row for the accepted identity,
+but duplicate or malformed **unrelated** jobs could still be accepted.
+
+The snapshot enforces unique, nonempty job identifiers, a nonempty
+job type, and correctly typed optional idempotency keys for every
+visible row. The original key must still identify exactly one accepted
+job, while unrelated legitimate records are allowed. Existing
+mandatory regression suites now reject duplicated or malformed
+unrelated identities and retain positive optional-key cases.
+
+See [Mission 164 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-164-JOB-COLLECTION-COMPLETE-IDENTITIES.md).
