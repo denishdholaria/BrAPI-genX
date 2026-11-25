@@ -6,6 +6,11 @@ on:
       # Source contracts, shared components, catalogues, and generated artefacts
       # all affect GenX verification; keep the complete Specification/ tree watched.
       - 'Specification/**'
+      # Governance and assessment files feed scientific/maturity assurance.
+      - 'docs/governance/**'
+      - 'docs/assessment/**'
+      # Include new assurance scripts without a separate manual allowlist update.
+      - 'Scripts/**'
       - 'Scripts/checkGenXConformance.py'
       - 'Scripts/checkGenXEndpointCatalog.py'
       - 'Scripts/checkEndpointRegistry.py'
@@ -80,6 +85,11 @@ on:
       # Source contracts, shared components, catalogues, and generated artefacts
       # all affect GenX verification; keep the complete Specification/ tree watched.
       - 'Specification/**'
+      # Governance and assessment files feed scientific/maturity assurance.
+      - 'docs/governance/**'
+      - 'docs/assessment/**'
+      # Include new assurance scripts without a separate manual allowlist update.
+      - 'Scripts/**'
       - 'Scripts/checkGenXConformance.py'
       - 'Scripts/checkGenXEndpointCatalog.py'
       - 'Scripts/checkEndpointRegistry.py'
