@@ -1187,7 +1187,15 @@ def wait_terminal(server, job_id, token):
             raise ValueError(
                 f"terminal job polling GET returned HTTP {status}"
             )
-        if last.get("result", {}).get("status") in TERMINAL:
+        returned = last.get("result") if isinstance(last, dict) else None
+        if (not isinstance(returned, dict)
+                or returned.get("jobDbId") != job_id):
+            # A successful GET for one accepted job must not use the
+            # terminal state of a different job as completion evidence.
+            raise ValueError(
+                f"terminal job polling GET did not return requested job {job_id}"
+            )
+        if returned.get("status") in TERMINAL:
             return last
         time.sleep(1)
     return last
