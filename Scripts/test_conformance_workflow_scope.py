@@ -37,6 +37,7 @@ REQUIRED_COMMANDS = {
     "python Scripts/checkGenXConformance.py",
     "python Scripts/test_conformance_probe_selection.py",
     "python Scripts/test_conformance_assertion_manifest.py",
+    "python Scripts/test_conformance_step_manifest.py",
     "python Scripts/test_model_conflict_postcondition.py",
     "python Scripts/test_publication_conflict_postconditions.py",
     "python Scripts/test_v21_fallback_envelope.py",
@@ -385,6 +386,18 @@ class WorkflowScopeTests(unittest.TestCase):
         command = "python Scripts/test_conformance_assertion_manifest.py"
         step = next(s for s in steps if s.get("run") == command)
         step["run"] = "echo ignore-bad-assertions"
+        self.assertIn(
+            "static-conformance job missing command: " + command,
+            scope_errors(damaged),
+        )
+
+
+    def test_live_step_manifest_validation_cannot_be_skipped(self):
+        damaged = copy.deepcopy(self.workflow)
+        steps = damaged["jobs"]["static-conformance"]["steps"]
+        command = "python Scripts/test_conformance_step_manifest.py"
+        step = next(s for s in steps if s.get("run") == command)
+        step["run"] = "echo ignore-unrecognized-body-fixtures"
         self.assertIn(
             "static-conformance job missing command: " + command,
             scope_errors(damaged),
