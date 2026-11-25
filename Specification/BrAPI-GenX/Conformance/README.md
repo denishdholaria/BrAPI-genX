@@ -1009,3 +1009,18 @@ enforcement is shared by every registered probe using the terminal-poll
 helper, with no change to the published job response schema.
 
 See [Mission 156 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-156-TERMINAL-POLL-STATUS.md).
+
+## Terminal poll response identity (Mission 157)
+
+The shared terminal-job polling helper now validates each HTTP 200 response
+against the `jobDbId` in its request path. A completed-looking or running
+response for a different job, or a missing or malformed job result, must not
+count as successful polling evidence for the accepted job.
+
+The existing mandatory `Scripts/test_terminal_cancel_retained_state.py`
+suite exercises wrong and absent identifiers, malformed job objects, and
+wrong identifiers even before terminal completion. Mission 156's strict
+HTTP response-status check remains in place; no new endpoint or protocol
+field is introduced.
+
+See [Mission 157 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-157-TERMINAL-POLL-IDENTITY.md).

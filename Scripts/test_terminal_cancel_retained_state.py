@@ -241,5 +241,44 @@ class TerminalCancelRetainedStateTests(unittest.TestCase):
 
 
 
+    def test_terminal_poll_rejects_wrong_completed_job_id(self):
+        different = {"result": {"jobDbId": "JOB_UNRELATED",
+                                "status": "COMPLETED"}}
+        with mock.patch.object(checker, "http_call",
+                               return_value=(200, different)) as call:
+            with self.assertRaisesRegex(
+                    ValueError, "did not return requested job JOB_TERMINAL"):
+                checker.wait_terminal("http://example.test/genx/v1",
+                                      "JOB_TERMINAL", None)
+        self.assertEqual(1, call.call_count)
+
+    def test_terminal_poll_rejects_missing_completed_job_id(self):
+        missing = {"result": {"status": "COMPLETED"}}
+        with mock.patch.object(checker, "http_call",
+                               return_value=(200, missing)):
+            with self.assertRaisesRegex(ValueError, "did not return requested job"):
+                checker.wait_terminal("http://example.test/genx/v1",
+                                      "JOB_TERMINAL", None)
+
+    def test_terminal_poll_rejects_malformed_job_object(self):
+        malformed = {"result": ["JOB_TERMINAL", "COMPLETED"]}
+        with mock.patch.object(checker, "http_call",
+                               return_value=(200, malformed)):
+            with self.assertRaisesRegex(ValueError, "did not return requested job"):
+                checker.wait_terminal("http://example.test/genx/v1",
+                                      "JOB_TERMINAL", None)
+
+    def test_terminal_poll_rejects_wrong_nonterminal_job_id(self):
+        different = {"result": {"jobDbId": "JOB_OTHER",
+                                "status": "RUNNING"}}
+        with mock.patch.object(checker, "http_call",
+                               return_value=(200, different)) as call:
+            with self.assertRaisesRegex(ValueError, "did not return requested job"):
+                checker.wait_terminal("http://example.test/genx/v1",
+                                      "JOB_TERMINAL", None)
+        self.assertEqual(1, call.call_count)
+
+
+
 if __name__ == "__main__":
     unittest.main()
