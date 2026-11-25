@@ -399,3 +399,19 @@ hosted static conformance. This is reference-server behavior evidence, not
 scientific model validation, authentication, persistence or third-party
 certification. See
 [Mission 117 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-117-DEPRECATED-INFERENCE-COMPLETION.md).
+
+## Telemetry window partition evidence (Mission 118)
+
+Registered live **L-26** now checks that the three synthetic one-minute-apart
+readings produce **three distinct 60-second mean buckets**, each with exactly
+one sample and the corresponding original timestamp and mean value. Merely
+returning three rows no longer passes. The assertion is required by the
+manifest validator; malformed or weakened probe declarations fail before
+running against a server.
+
+The negative regression suite is `Scripts/test_telemetry_window_partition.py`;
+it runs in hosted static conformance, and the registered L-26 live test runs
+against the project-owned Python reference server. This check is restricted to
+the fixture's minute-aligned readings and does not prove generalized temporal
+window semantics, persistent data integrity or external interoperability. See
+[Mission 118 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-118-TELEMETRY-WINDOW-PARTITIONS.md).
