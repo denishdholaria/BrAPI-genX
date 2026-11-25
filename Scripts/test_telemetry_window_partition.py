@@ -30,23 +30,24 @@ class TelemetryWindowPartitionTests(unittest.TestCase):
 
     def exercise(self, corrupt=None, status=200):
         seen = []
+        submitted = []
 
         def fake_http(_server, method, path, body=None, token=None):
             seen.append((method, path))
             if len(seen) == 1:
                 self.assertEqual(("POST", "/telemetry"), (method, path))
                 self.assertEqual(3, len(body))
-                readings = copy.deepcopy(body)
+                submitted.extend(copy.deepcopy(body))
                 return 200, {"result": {"appended": 3, "replayed": 0, "conflicts": []}}
             if len(seen) == 2:
                 self.assertEqual("GET", method)
-                self.assertIn(f"deviceDbId={readings[0]['deviceDbId']}", path)
+                self.assertIn(f"deviceDbId={submitted[0]['deviceDbId']}", path)
                 self.assertIn("sensorDbId=air-temp-01", path)
                 self.assertIn("windowSeconds=60", path)
                 buckets = [
                     {"windowStart": point["timestamp"], "aggregation": "mean",
                      "value": point["value"], "sampleCount": 1}
-                    for point in readings
+                    for point in submitted
                 ]
                 if corrupt is not None:
                     buckets = corrupt(buckets)
