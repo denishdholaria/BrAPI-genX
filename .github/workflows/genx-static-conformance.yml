@@ -493,12 +493,15 @@ jobs:
           echo $! > /tmp/genx-python-differential.pid
           bun Scripts/genx_test_server_ts.ts --port 18082 --delay 0.4 --profile genx > /tmp/genx-typescript-differential.log 2>&1 &
           echo $! > /tmp/genx-typescript-differential.pid
+          bun Scripts/genx_test_server_ts.ts --port 18083 --delay 0.4 --profile v21 > /tmp/genx-typescript-v21-differential.log 2>&1 &
+          echo $! > /tmp/genx-typescript-v21-differential.pid
           python - <<'PY'
           import time
           from urllib.request import urlopen
           for endpoint in (
               "http://127.0.0.1:18080/genx/v1/serverinfo",
               "http://127.0.0.1:18082/genx/v1/serverinfo",
+              "http://127.0.0.1:18083/genx/v1/serverinfo",
           ):
               for attempt in range(40):
                   try:
@@ -523,6 +526,8 @@ jobs:
         run: python Scripts/checkGenXConformance.py --server http://127.0.0.1:18082/genx/v1 --expired-job JOB_EXPIRED --only L-14
       - name: Verify TypeScript concurrent idempotent submit
         run: python Scripts/checkGenXConformance.py --server http://127.0.0.1:18082/genx/v1 --expired-job JOB_EXPIRED --only L-24
+      - name: Verify TypeScript V2.1-only fallback negotiation
+        run: python Scripts/checkGenXConformance.py --server http://127.0.0.1:18083/genx/v1 --only L-06
       - name: Upload differential diagnostics
         if: failure()
         uses: actions/upload-artifact@v4
@@ -531,11 +536,12 @@ jobs:
           path: |
             /tmp/genx-python-differential.log
             /tmp/genx-typescript-differential.log
+            /tmp/genx-typescript-v21-differential.log
           if-no-files-found: warn
       - name: Stop reference servers
         if: always()
         run: |
-          for name in python typescript; do
+          for name in python typescript typescript-v21; do
             file="/tmp/genx-$name-differential.pid"
             if [ -f "$file" ]; then
               kill "$(cat "$file")" || true

@@ -277,3 +277,17 @@ particular model archive, variant matrix or package digest actually binds to
 the authoritative production payload. File packaging, transport
 representation, field scope, scientific authority and durability remain
 outside this test. See [Mission 109 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-109-BINARY-EXACT-BYTE-VECTORS.md).
+
+## Hosted TypeScript version 2.1-only fallback probe (Mission 110)
+
+A third, separately started TypeScript/Bun reference process uses the existing
+`--profile v21` mode. The hosted cross-runtime job executes registered live
+probe **L-06** against that process on loopback port 18083, checking that its
+legacy `calls` server-info shape is accepted without new GenX capabilities.
+All three reference-server processes are readiness-checked, logged on failure
+and stopped. Workflow mutations protect the startup and active L-06 execution.
+
+This demonstrates compatibility of one project-owned version 2.1-only server
+shape with the project's conformance runner, not comprehensive official BrAPI
+2.1 interoperability or external-vendor certification. See
+[Mission 110 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-110-TYPESCRIPT-V21-FALLBACK-HOSTED.md).
