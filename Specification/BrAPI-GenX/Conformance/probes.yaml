@@ -295,7 +295,7 @@ probes:
   object: variableTerms
   title: Versioned variable-term publication replays an identical version without duplication
   procedure:
-  - POST a VariableTermNewRequest to /genx/v1/variable-terms under a fresh namespaced id; POST the identical body again.
+  - POST a VariableTermNewRequest to /genx/v1/variable-terms under a fresh namespaced id and verify the accepted source fields; POST the identical body again.
   expectation: Second response is 200 with the same (variableDbId, version), every original submitted term field intact, and exactly one unchanged published version.
   falsifier: A second version is created for the identical replay.
   calls:
@@ -319,7 +319,7 @@ probes:
   object: lotLedger
   title: Ledger append replays identical entries without duplication
   procedure:
-  - POST a LotLedgerEntryNewRequest under a fresh lot and idempotencyKey; POST the identical body again; re-GET the ledger.
+  - POST a LotLedgerEntryNewRequest under a fresh lot and idempotencyKey and verify the accepted source fields; POST the identical body again; re-GET the ledger.
   expectation: Second response is 200 with the same entryDbId and every original submitted ledger field intact; the ledger retains exactly one unchanged original entry with that key.
   falsifier: A second entry is appended for the identical replay.
   calls:
@@ -343,7 +343,7 @@ probes:
   object: modelRegistry
   title: Model registration replays identical versions without duplication
   procedure:
-  - POST a ModelArtifactNewRequest under a fresh namespaced id; POST the identical body again; GET all stored versions for that model identifier.
+  - POST a ModelArtifactNewRequest under a fresh namespaced id and verify the accepted source fields; POST the identical body again; GET all stored versions for that model identifier.
   expectation: Second response is 200 with the same (modelDbId, modelVersion), every original submitted model field intact, and exactly one unchanged stored version.
   falsifier: A second version is created, original artifact metadata is changed, or collection evidence is incomplete.
   calls:
@@ -392,7 +392,7 @@ probes:
   object: variantMatrices
   title: Matrix registration replays identical records without duplication
   procedure:
-  - POST a VariantMatrixNewRequest under a fresh namespaced id; POST the identical body again; GET the complete matrix collection.
+  - POST a VariantMatrixNewRequest under a fresh namespaced id and verify the accepted source fields; POST the identical body again; GET the complete matrix collection.
   expectation: Second response is 200 with the same matrixDbId, every original submitted matrix field intact, and exactly one unchanged stored reference for that id.
   falsifier: A second record is stored, original matrix metadata or provenance changes, or the collection is incomplete.
   calls:
@@ -416,7 +416,7 @@ probes:
   object: fairPackages
   title: Package registration replays identical records without duplication
   procedure:
-  - POST a FAIRPackageNewRequest under a fresh namespaced id; POST the identical body again; GET the complete package collection.
+  - POST a FAIRPackageNewRequest under a fresh namespaced id and verify the accepted source fields; POST the identical body again; GET the complete package collection.
   expectation: Second response is 200 with the same packageDbId, every original submitted package field intact, and exactly one unchanged stored package for that identifier.
   falsifier: A second record is stored, original license, links or provenance changes, or collection evidence is incomplete.
   calls:
