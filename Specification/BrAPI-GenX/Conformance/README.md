@@ -1375,3 +1375,24 @@ cover missing, unsupported and nonstring Job status, including
 unrelated rows, plus positive mixed-state evidence.
 
 See [Mission 175 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-175-L25-VISIBLE-JOB-STATUS.md).
+
+## Optional Job progress field conformance (Mission 176)
+
+The existing `Job.progress` field is **optional**. When returned,
+its published schema requires a finite number between **0 and 1
+inclusive**. The conformance runner now applies this constraint
+alongside the required lifecycle status in initial, replay and
+concurrent Job acknowledgments, warned-inference acceptance, complete
+jobs collections, and every visible Job in the L-25 first page.
+
+Missing progress remains valid. Boolean values, null, strings,
+out-of-range or non-finite numbers fail before downstream replay,
+polling or collection evidence can hide the malformed response.
+Distinct valid progress values across concurrent acknowledgments
+are permitted. This adds no new phase-transition policy.
+
+Mandatory replay, concurrent, deprecated-inference and pagination
+regression suites cover malformed progress and positive 0, fractional,
+and 1 values. The published wire schema is unchanged.
+
+See [Mission 176 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-176-OPTIONAL-JOB-PROGRESS-SCHEMA.md).
