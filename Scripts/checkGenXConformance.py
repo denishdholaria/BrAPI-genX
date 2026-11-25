@@ -2157,6 +2157,24 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                             probe["id"], probe["title"], "FAIL",
                             "models original submission or accepted version missing"
                         )
+                    # A correct newly published version does not prove
+                    # that unrelated visible model versions have unique,
+                    # well-formed identities. Do not require all pages.
+                    visible_model_versions = set()
+                    for row in rows:
+                        model_id = row.get("modelDbId")
+                        model_version = row.get("modelVersion")
+                        version_key = (model_id, model_version)
+                        if (not isinstance(model_id, str) or not model_id
+                                or not isinstance(model_version, str)
+                                or not model_version
+                                or version_key in visible_model_versions):
+                            return results.report(
+                                probe["id"], probe["title"], "FAIL",
+                                "models first page contains malformed or "
+                                "duplicated model-version identities"
+                            )
+                        visible_model_versions.add(version_key)
                     same_version = [
                         row for row in rows
                         if (row.get("modelDbId"), row.get("modelVersion"))
