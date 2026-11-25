@@ -296,7 +296,7 @@ probes:
   title: Versioned variable-term publication replays an identical version without duplication
   procedure:
   - POST a VariableTermNewRequest to /genx/v1/variable-terms under a fresh namespaced id; POST the identical body again.
-  expectation: Second response is 200 with the same (variableDbId, version); the collection holds exactly one unchanged published version.
+  expectation: Second response is 200 with the same (variableDbId, version), every original submitted term field intact, and exactly one unchanged published version.
   falsifier: A second version is created for the identical replay.
   calls:
   - {method: POST, path: /variable-terms, body_fixture: live_term_submit, capture_term: true}
@@ -320,7 +320,7 @@ probes:
   title: Ledger append replays identical entries without duplication
   procedure:
   - POST a LotLedgerEntryNewRequest under a fresh lot and idempotencyKey; POST the identical body again; re-GET the ledger.
-  expectation: Second response is 200 with the same entryDbId; the ledger retains exactly one unchanged original entry with that key.
+  expectation: Second response is 200 with the same entryDbId and every original submitted ledger field intact; the ledger retains exactly one unchanged original entry with that key.
   falsifier: A second entry is appended for the identical replay.
   calls:
   - {method: POST, path: "/seedlots/{lotDbId}/ledger", body_fixture: live_ledger_submit, capture_ledger: true}
@@ -344,7 +344,7 @@ probes:
   title: Model registration replays identical versions without duplication
   procedure:
   - POST a ModelArtifactNewRequest under a fresh namespaced id; POST the identical body again; GET all stored versions for that model identifier.
-  expectation: Second response is 200 with the same (modelDbId, modelVersion) and exactly one original unchanged stored version.
+  expectation: Second response is 200 with the same (modelDbId, modelVersion), every original submitted model field intact, and exactly one unchanged stored version.
   falsifier: A second version is created, original artifact metadata is changed, or collection evidence is incomplete.
   calls:
   - {method: POST, path: /models, body_fixture: live_model_submit, capture_model: true}
@@ -393,7 +393,7 @@ probes:
   title: Matrix registration replays identical records without duplication
   procedure:
   - POST a VariantMatrixNewRequest under a fresh namespaced id; POST the identical body again; GET the complete matrix collection.
-  expectation: Second response is 200 with the same matrixDbId and exactly one unchanged stored reference exists for that id.
+  expectation: Second response is 200 with the same matrixDbId, every original submitted matrix field intact, and exactly one unchanged stored reference for that id.
   falsifier: A second record is stored, original matrix metadata or provenance changes, or the collection is incomplete.
   calls:
   - {method: POST, path: /variantmatrices, body_fixture: live_matrix_submit, capture_matrix: true}
@@ -417,7 +417,7 @@ probes:
   title: Package registration replays identical records without duplication
   procedure:
   - POST a FAIRPackageNewRequest under a fresh namespaced id; POST the identical body again; GET the complete package collection.
-  expectation: Second response is 200 with the same packageDbId and exactly one unchanged stored package for that identifier.
+  expectation: Second response is 200 with the same packageDbId, every original submitted package field intact, and exactly one unchanged stored package for that identifier.
   falsifier: A second record is stored, original license, links or provenance changes, or collection evidence is incomplete.
   calls:
   - {method: POST, path: /fair-packages, body_fixture: live_package_submit, capture_package: true}

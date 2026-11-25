@@ -1024,3 +1024,20 @@ HTTP response-status check remains in place; no new endpoint or protocol
 field is introduced.
 
 See [Mission 157 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-157-TERMINAL-POLL-IDENTITY.md).
+
+## Original submitted fields in publication replay responses (Mission 158)
+
+Registered identical-publication replay probes **L-08** (variable terms),
+**L-10** (seed-lot ledger), **L-12** (models), **L-16** (variant matrices)
+and **L-18** (FAIR packages) now verify that the **second POST response**
+retains every submitted source field and its nested values. Previously, a
+response could report the correct identity and HTTP 200, yet return changed
+scientific fields or provenance, while the stored readback remained correct.
+
+A shared executor helper compares original fields but allows additional
+server-generated metadata. Each mandatory synthetic replay suite now
+rejects changed or missing original fields, including nested provenance,
+metrics or evidence, and permits harmless extra response metadata.
+
+The original stored-readback, identity, status and manifest assertions
+remain intact. See [Mission 158 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-158-PUBLICATION-REPLAY-RESPONSE-FIELDS.md).
