@@ -440,12 +440,12 @@ probes:
   object: fairPackages
   title: Embargoed packages are denied before expiry
   procedure:
-  - POST an embargoed package with a far-future embargoUntil; GET it back.
-  expectation: GET is denied with 403 while embargoed.
-  falsifier: An embargoed record is served with 200.
+  - POST an embargoed package with a far-future embargoUntil; GET it back; verify the denied response contains no protected package data.
+  expectation: GET is denied with 403 while embargoed and no submitted package metadata or payload references are echoed in the response.
+  falsifier: The request succeeds, a JSON denial contains protected fields, or a plain-text error echoes submitted package content.
   calls:
   - {method: POST, path: /fair-packages, body_fixture: live_package_embargoed, capture_package: true}
-  - {method: GET, path: "/fair-packages/{packageDbId}", assert: {status: 403}}
+  - {method: GET, path: "/fair-packages/{packageDbId}", assert: {status: 403, embargo_denial_no_payload: true}}
 - id: L-21
   tier: live
   object: telemetry
