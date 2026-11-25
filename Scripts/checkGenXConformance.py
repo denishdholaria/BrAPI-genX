@@ -1997,11 +1997,16 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                 if (status != 200 or not isinstance(expired, dict)
                         or not isinstance(expired_job, str) or not expired_job
                         or expired.get("jobDbId") != expired_job
+                        or not isinstance(expired.get("jobType"), str)
+                        or not expired["jobType"]
+                        or not valid_job_wire_fields(expired)
+                        or ("idempotencyKey" in expired
+                            and not isinstance(expired["idempotencyKey"], str))
                         or expired.get("status") != "EXPIRED"
                         or ("result" in expired and expired["result"] is not None)):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        "expired job identity/status invalid or result still exposed"
+                        "expired job identity/schema/status invalid or result exposed"
                     )
             if assertion.get("unknown_job_type_not_stored"):
                 original = ctx.get("live_unknown_type_request")
