@@ -246,3 +246,17 @@ hosted static conformance. This change does not assert new scientific behavior
 or amend the registered probe manifest.
 
 See [Mission 107 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-107-SELECTED-PROBE-SKIP-FAIL-CLOSED.md).
+
+## Registered-probe completeness and execution guard (Mission 108)
+
+The conformance runner validates its registry before dispatching any probe.
+The existing **21 static** and **28 live** registered identifiers are the
+minimum verification baseline. Missing identifiers, duplicates, a mismatched
+identifier/tier, an unknown static checker or absent/invalid live call steps
+now cause an error instead of allowing a reduced or zero-check run to pass.
+Additional correctly formed probe registrations remain possible; this guard
+does not ratify new probes or change existing scientific contracts.
+
+The mutation suite is included in the already-required
+`Scripts/test_conformance_probe_selection.py` hosted static step. See
+[Mission 108 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-108-PROBE-MANIFEST-COMPLETENESS.md).
