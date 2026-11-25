@@ -40,7 +40,8 @@ class UnknownJobTypeNoStoredJobTests(unittest.TestCase):
             if len(calls) == 2:
                 self.assertEqual(("GET", "/jobs"), (method, path))
                 rows = [{"jobDbId": "JOB_UNRELATED",
-                         "jobType": "analysis", "idempotencyKey": "other-key"}]
+                         "jobType": "analysis", "idempotencyKey": "other-key",
+                         "status": "SUBMITTED"}]
                 if add_jobs is not None:
                     rows = add_jobs(rows, original)
                 page = {"totalCount": len(rows) if isinstance(rows, list) else 1,
@@ -126,7 +127,8 @@ class UnknownJobTypeNoStoredJobTests(unittest.TestCase):
         def add(rows, req):
             return rows + [{"jobDbId": "JOB_OTHER",
                             "jobType": "germplasm_search",
-                            "idempotencyKey": "other-key-2"}]
+                            "idempotencyKey": "other-key-2",
+                            "status": "RUNNING"}]
         self.assertEqual(0, self.exercise(add_jobs=add)[0])
 
     def test_duplicate_unrelated_job_identity_fails(self):
