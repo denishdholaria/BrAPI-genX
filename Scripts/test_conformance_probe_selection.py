@@ -4,10 +4,14 @@ from __future__ import annotations
 
 from pathlib import Path
 import subprocess
+import copy
+import tempfile
+import yaml
 import sys
 import unittest
 
-from checkGenXConformance import select_probes, selected_probe_exit_code
+from checkGenXConformance import (select_probes, selected_probe_exit_code,
+                                  validate_probe_manifest)
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "Scripts" / "checkGenXConformance.py"
@@ -92,6 +96,93 @@ class SelectedProbeTests(unittest.TestCase):
         self.assertEqual(0, selected_probe_exit_code(0, 0, True))
         self.assertEqual(1, selected_probe_exit_code(0, 1, True))
         self.assertEqual(1, selected_probe_exit_code(1, 0, False))
+
+
+class RegistryIntegrityTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.doc = yaml.safe_load((ROOT / "Specification/BrAPI-GenX/Conformance/probes.yaml").read_text(encoding="utf-8"))
+        cls.probes = cls.doc["probes"]
+
+    def mutate(self, fn):
+        probes = copy.deepcopy(self.probes)
+        fn(probes)
+        with self.assertRaises(ValueError) as caught:
+            validate_probe_manifest(probes)
+        return str(caught.exception)
+
+    def test_checked_in_registry_has_required_static_and_live_baseline(self):
+        self.assertIsNone(validate_probe_manifest(self.probes))
+        self.assertEqual(49, len(self.probes))
+
+    def test_missing_static_probe_fails(self):
+        error = self.mutate(lambda x: x.__setitem__(slice(None), [
+            p for p in x if p["id"] != "S-01"
+        ]))
+        self.assertIn("missing baseline conformance probes: S-01", error)
+
+    def test_missing_live_probe_fails(self):
+        error = self.mutate(lambda x: x.__setitem__(slice(None), [
+            p for p in x if p["id"] != "L-28"
+        ]))
+        self.assertIn("L-28", error)
+
+    def test_complete_registry_removal_fails(self):
+        error = self.mutate(lambda x: x.clear())
+        self.assertIn("missing baseline conformance probes", error)
+
+    def test_duplicate_registration_fails(self):
+        error = self.mutate(lambda x: x.append(copy.deepcopy(x[0])))
+        self.assertIn("duplicate registered probe identifier", error)
+
+    def test_unknown_static_check_fails(self):
+        error = self.mutate(lambda x: x[0].__setitem__("check", "nonexistent"))
+        self.assertIn("unknown static check", error)
+
+    def test_live_probe_without_steps_fails(self):
+        error = self.mutate(lambda x: next(p for p in x if p["id"] == "L-05").__setitem__("calls", []))
+        self.assertIn("missing executable live calls", error)
+
+    def test_wrong_probe_tier_fails(self):
+        error = self.mutate(lambda x: x[0].__setitem__("tier", "live"))
+        self.assertIn("identifier and tier disagree", error)
+
+    def test_malformed_live_method_fails(self):
+        def change(probes):
+            live = next(p for p in probes if p["id"] == "L-05")
+            live["calls"][0]["method"] = "TRACE"
+        error = self.mutate(change)
+        self.assertIn("invalid live call", error)
+
+    def test_nonmapping_probe_fails(self):
+        error = self.mutate(lambda x: x.append("not a probe"))
+        self.assertIn("expected mapping", error)
+
+    def test_future_additional_probe_is_allowed(self):
+        probes = copy.deepcopy(self.probes)
+        probes.append({
+            "id": "S-99",
+            "tier": "static",
+            "check": self.probes[0]["check"],
+            "title": "future, pending governance",
+        })
+        self.assertIsNone(validate_probe_manifest(probes))
+
+    def test_command_line_empty_manifest_cannot_report_success(self):
+        with tempfile.TemporaryDirectory() as root:
+            directory = Path(root) / "Specification" / "BrAPI-GenX" / "Conformance"
+            directory.mkdir(parents=True)
+            (directory / "probes.yaml").write_text(
+                yaml.safe_dump({"version": 1, "probes": []}), encoding="utf-8",
+            )
+            result = subprocess.run(
+                [sys.executable, str(SCRIPT), "--root", root],
+                cwd=ROOT, capture_output=True, text=True, timeout=30,
+                check=False,
+            )
+        self.assertNotEqual(0, result.returncode, result.stdout + result.stderr)
+        self.assertIn("missing baseline conformance probes", result.stderr)
+
 
 if __name__ == "__main__":
     unittest.main()

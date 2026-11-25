@@ -1669,6 +1669,54 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
 
 
 
+
+# The manifest is the authority for currently registered probes. Preserve the
+# accepted verification baseline while allowing future new probe identifiers.
+REQUIRED_REGISTERED_PROBES = (
+    {f"S-{number:02d}" for number in range(1, 22)}
+    | {f"L-{number:02d}" for number in range(1, 29)}
+)
+
+
+def validate_probe_manifest(probes):
+    """Reject silently dropped, duplicated or unexecutable registered probes."""
+    if not isinstance(probes, list):
+        raise ValueError("conformance probe registry is not an array")
+    observed = set()
+    for position, probe in enumerate(probes):
+        if not isinstance(probe, dict):
+            raise ValueError(f"probe {position}: expected mapping")
+        probe_id = probe.get("id")
+        if not isinstance(probe_id, str) or not re.fullmatch(r"[SL]-[0-9]{2,}", probe_id):
+            raise ValueError(f"probe {position}: invalid identifier {probe_id!r}")
+        if probe_id in observed:
+            raise ValueError(f"duplicate registered probe identifier: {probe_id}")
+        observed.add(probe_id)
+        tier = probe.get("tier")
+        if tier not in ("static", "live"):
+            raise ValueError(f"probe {probe_id}: unrecognized tier {tier!r}")
+        if (probe_id.startswith("S-") and tier != "static"
+                or probe_id.startswith("L-") and tier != "live"):
+            raise ValueError(f"probe {probe_id}: identifier and tier disagree")
+        if tier == "static" and probe.get("check") not in STATIC:
+            raise ValueError(f"probe {probe_id}: unknown static check {probe.get('check')!r}")
+        if tier == "live":
+            calls = probe.get("calls")
+            if not isinstance(calls, list) or not calls:
+                raise ValueError(f"probe {probe_id}: missing executable live calls")
+            for index, call in enumerate(calls):
+                if (not isinstance(call, dict)
+                        or call.get("method") not in HTTP_METHODS
+                        or not isinstance(call.get("path"), str)
+                        or not call["path"].startswith("/")):
+                    raise ValueError(f"probe {probe_id}: invalid live call {index}")
+    missing = sorted(REQUIRED_REGISTERED_PROBES - observed)
+    if missing:
+        raise ValueError(
+            "missing baseline conformance probes: " + ", ".join(missing)
+        )
+
+
 def select_probes(probes, only=None, server=None):
     """Fail closed for explicit single-probe execution.
 
@@ -1709,7 +1757,8 @@ def main():
     conf = os.path.join(root, "Specification", "BrAPI-GenX", "Conformance")
     spec = load_yaml(os.path.join(conf, "probes.yaml"))
     try:
-        selected = select_probes(spec.get("probes", []), args.only, args.server)
+        validate_probe_manifest(spec.get("probes"))
+        selected = select_probes(spec["probes"], args.only, args.server)
     except ValueError as exc:
         print(f"FAIL: {exc}", file=sys.stderr)
         return 1
