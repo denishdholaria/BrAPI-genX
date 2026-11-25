@@ -1699,6 +1699,57 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
                         f"{len(seen)} conflicts, expected {assertion['telemetry_conflicts']}")
+            if assertion.get("telemetry_window_partitions"):
+                # L-26 must verify that each minute retains its own reading,
+                # not merely that an arbitrary three rows were returned.
+                result = payload.get("result") if isinstance(payload, dict) else None
+                rows = result.get("data") if isinstance(result, dict) else None
+                original = ctx.get("live_batch")
+                if (status != 200 or not isinstance(rows, list)
+                        or not isinstance(original, list) or not original
+                        or len(rows) != len(original)):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "windowed telemetry has missing or invalid buckets"
+                    )
+                expected = {}
+                for point in original:
+                    if (not isinstance(point, dict)
+                            or not isinstance(point.get("timestamp"), str)
+                            or type(point.get("value")) not in (int, float)
+                            or point["timestamp"] in expected):
+                        return results.report(
+                            probe["id"], probe["title"], "FAIL",
+                            "submitted telemetry cannot establish unique window expectations"
+                        )
+                    expected[point["timestamp"]] = point["value"]
+                seen = set()
+                for row in rows:
+                    if not isinstance(row, dict):
+                        return results.report(
+                            probe["id"], probe["title"], "FAIL",
+                            "windowed telemetry contains a malformed bucket"
+                        )
+                    stamp = row.get("windowStart")
+                    value = row.get("value")
+                    if (not isinstance(stamp, str) or stamp not in expected
+                            or stamp in seen
+                            or row.get("aggregation") != "mean"
+                            or type(row.get("sampleCount")) is not int
+                            or row["sampleCount"] != 1
+                            or type(value) not in (int, float)
+                            or not (-float("inf") < value < float("inf"))
+                            or abs(value - expected[stamp]) > 1e-9):
+                        return results.report(
+                            probe["id"], probe["title"], "FAIL",
+                            f"incorrect telemetry window bucket: {row!r}"
+                        )
+                    seen.add(stamp)
+                if seen != set(expected):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "telemetry window partition omitted a submitted minute"
+                    )
             if "telemetry_mean" in assertion:
                 rows = payload.get("result", {}).get("data", [])
                 if len(rows) != 1:
@@ -1887,7 +1938,8 @@ LIVE_BOOLEAN_ASSERTIONS = frozenset({
     "same_jobDbId", "rejected", "negotiable", "provenance_intact",
     "same_term", "same_ledger", "same_model", "same_matrix",
     "same_package", "unchanged_model_digest", "unchanged_matrix_digest",
-    "telemetry_original_intact", "deprecated_inference_completed",
+    "telemetry_original_intact", "telemetry_window_partitions",
+    "deprecated_inference_completed",
     "unchanged_package_license", "inference_intact", "single_effect",
     "capability_registry_match",
 })
@@ -2025,6 +2077,14 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-26" and not any(
+                    call.get("method") == "GET"
+                    and isinstance(call.get("assert"), dict)
+                    and call["assert"].get("telemetry_window_partitions") is True
+                    for call in calls):
+                raise ValueError(
+                    "probe L-26: telemetry_window_partitions GET assertion required"
+                )
     missing = sorted(REQUIRED_REGISTERED_PROBES - observed)
     if missing:
         raise ValueError(
