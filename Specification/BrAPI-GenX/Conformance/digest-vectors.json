@@ -1,8 +1,8 @@
 {
   "corpusVersion": 1,
   "status": "experimental-candidate-not-normative",
-  "candidateProfile": "RFC8785-JCS",
-  "decisionState": "D-02 remains open; these vectors evaluate a candidate and do not ratify it.",
+  "candidateProfile": "JCS-RFC8785",
+  "decisionState": "D-02 accepted JCS-RFC8785 for generic canonical JSON on 2026-11-03; these engineering vectors do not define field-specific digest preimages or prove production conformance.",
   "references": [
     "https://www.rfc-editor.org/rfc/rfc8785.html",
     "https://www.rfc-editor.org/rfc/rfc7493.html"
