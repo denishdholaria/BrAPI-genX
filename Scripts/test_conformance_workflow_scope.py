@@ -44,6 +44,7 @@ REQUIRED_COMMANDS = {
     "python Scripts/test_telemetry_pagination_slice.py",
     "python Scripts/test_provenance_roundtrip_integrity.py",
     "python Scripts/test_collection_envelope_integrity.py",
+    "python Scripts/test_concurrent_job_stored_effect.py",
     "python Scripts/test_deprecated_inference_completion.py",
     "python Scripts/test_model_conflict_postcondition.py",
     "python Scripts/test_publication_conflict_postconditions.py",

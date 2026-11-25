@@ -444,3 +444,19 @@ or mutated stored records. It is mandatory in hosted static conformance,
 while registered L-21 executes against the in-memory Python reference server.
 This does not establish durability, multi-server idempotency, or third-party
 interoperability. See [Mission 120 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-120-TELEMETRY-REPLAY-READBACK.md).
+
+## Concurrent job stored-effect verification (Mission 121)
+
+Registered **L-24** now fetches the complete jobs collection after eight
+identical concurrent submissions. Besides asserting one returned job identifier,
+the runner checks that exactly one stored job has the original unique
+idempotency key and that its identifier and job type match the submitted
+request. It rejects truncated collection evidence, malformed pagination, and
+duplicate or missing stored records; unrelated historical jobs may coexist.
+
+The manifest validator requires both the eight-way submission and its GET
+postcondition. The mutation suite at `Scripts/test_concurrent_job_stored_effect.py`
+is mandatory in hosted static conformance; L-24 executes against the Python
+and independent TypeScript/Bun in-memory reference servers. This is **not**
+a durable, distributed, or third-party exactly-once guarantee. See
+[Mission 121 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-121-CONCURRENT-JOB-STORED-EFFECT.md).

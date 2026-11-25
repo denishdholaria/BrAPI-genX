@@ -1213,6 +1213,10 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
     if any(s.get("capture_telemetry") for s in calls):
         ctx["live_device"] = None
         ctx["live_batch"] = None
+    if any("concurrent_posts" in s for s in calls):
+        ctx["live_concurrent_job"] = None
+        ctx["live_concurrent_key"] = None
+        ctx["live_concurrent_type"] = None
     captured = None
     try:
         for step in calls:
@@ -1426,15 +1430,33 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                                             body=copy.deepcopy(body), token=token),
                         range(count)))
                 statuses = [s for s, _ in outcomes]
-                ids = {p.get("result", {}).get("jobDbId") for _, p in outcomes}
-                if (len(statuses) != count or any(not (200 <= s < 300) for s in statuses)
-                        or len(ids) != 1 or None in ids):
+                ids = [
+                    response.get("result", {}).get("jobDbId")
+                    if isinstance(response, dict)
+                    and isinstance(response.get("result"), dict) else None
+                    for _, response in outcomes
+                ]
+                if (len(outcomes) != count
+                        or any(type(status) is not int or not (200 <= status < 300)
+                               for status in statuses)
+                        or not ids or not isinstance(ids[0], str) or not ids[0]
+                        or any(job_id != ids[0] for job_id in ids)):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        f"statuses {statuses}, jobDbIds {sorted(map(str, ids))}")
+                        f"concurrent statuses {statuses}, jobDbIds {ids}")
                 if not step.get("assert", {}).get("single_effect"):
                     return results.report(
                         probe["id"], probe["title"], "FAIL", "no assertion for concurrent step")
+                if (not isinstance(body, dict)
+                        or not isinstance(body.get("idempotencyKey"), str)
+                        or not body["idempotencyKey"].strip()
+                        or not isinstance(body.get("jobType"), str)):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "concurrent request lacks original identity and job type")
+                ctx["live_concurrent_job"] = ids[0]
+                ctx["live_concurrent_key"] = body["idempotencyKey"]
+                ctx["live_concurrent_type"] = body["jobType"]
                 continue
             status, payload = http_call(server, step["method"], path, body=body, token=token)
             if step.get("capture_job"):
@@ -1523,6 +1545,43 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
                         "deprecated inference did not complete as the accepted job"
+                    )
+            if assertion.get("concurrent_single_stored_job"):
+                # A uniform concurrent response is insufficient: independently
+                # read the stored jobs and check the original idempotency key.
+                result = payload.get("result") if isinstance(payload, dict) else None
+                rows = result.get("data") if isinstance(result, dict) else None
+                metadata = payload.get("metadata") if isinstance(payload, dict) else None
+                page = metadata.get("pagination") if isinstance(metadata, dict) else None
+                key = ctx.get("live_concurrent_key")
+                expected_id = ctx.get("live_concurrent_job")
+                expected_type = ctx.get("live_concurrent_type")
+                if (status != 200 or not key or not expected_id or not expected_type
+                        or not isinstance(rows, list) or not rows
+                        or not all(isinstance(row, dict) for row in rows)
+                        or not isinstance(page, dict)
+                        or any(type(page.get(field)) is not int
+                               for field in ("totalCount", "pageSize",
+                                             "totalPages", "currentPage"))
+                        or page["totalCount"] != len(rows)
+                        or page["pageSize"] < len(rows)
+                        or page["totalPages"] != 1 or page["currentPage"] != 0):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "concurrent job readback lacks complete unpaged collection")
+                matched_key = [
+                    row for row in rows if row.get("idempotencyKey") == key
+                ]
+                matched_id = [
+                    row for row in rows if row.get("jobDbId") == expected_id
+                ]
+                if (len(matched_key) != 1 or len(matched_id) != 1
+                        or matched_key[0] is not matched_id[0]
+                        or matched_key[0].get("jobType") != expected_type):
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "concurrent submissions created missing, duplicate, "
+                        "or mismatched stored jobs"
                     )
             if "collection_contains_created" in assertion:
                 kind = assertion["collection_contains_created"]
@@ -1975,7 +2034,7 @@ LIVE_BOOLEAN_ASSERTIONS = frozenset({
     "telemetry_page_slice",
     "deprecated_inference_completed",
     "unchanged_package_license", "inference_intact", "single_effect",
-    "capability_registry_match",
+    "concurrent_single_stored_job", "capability_registry_match",
 })
 LIVE_COUNT_ASSERTIONS = frozenset({
     "data_length", "total_count", "ledger_count", "telemetry_conflicts",
@@ -2059,6 +2118,12 @@ def validate_live_step_assertions(probe_id, index, call):
             f"probe {probe_id} call {index}: telemetry_mean and "
             "telemetry_samples must be paired"
         )
+    if "concurrent_single_stored_job" in assertion and (
+            call.get("method") != "GET" or call.get("path") != "/jobs"):
+        raise ValueError(
+            f"probe {probe_id} call {index}: "
+            "concurrent_single_stored_job requires GET /jobs"
+        )
     if bool(call.get("replay_capture")) != ("same_jobDbId" in assertion):
         raise ValueError(
             f"probe {probe_id} call {index}: replay_capture requires "
@@ -2111,6 +2176,22 @@ def validate_probe_manifest(probes):
                     raise ValueError(f"probe {probe_id}: invalid live call {index}")
                 validate_live_step_directives(probe_id, index, call)
                 validate_live_step_assertions(probe_id, index, call)
+            if probe_id == "L-24":
+                if not any(
+                        call.get("concurrent_posts") == 8
+                        and isinstance(call.get("assert"), dict)
+                        and call["assert"].get("single_effect") is True
+                        for call in calls):
+                    raise ValueError(
+                        "probe L-24: eight concurrent submissions required")
+                if not any(
+                        call.get("method") == "GET"
+                        and call.get("path") == "/jobs"
+                        and isinstance(call.get("assert"), dict)
+                        and call["assert"].get("concurrent_single_stored_job") is True
+                        for call in calls):
+                    raise ValueError(
+                        "probe L-24: concurrent_single_stored_job GET assertion required")
             if probe_id == "L-21" and not any(
                     call.get("method") == "GET"
                     and isinstance(call.get("assert"), dict)
