@@ -196,6 +196,33 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
             totalPages=1, currentPage=0)
         return target
 
+    def test_created_job_invalid_timestamp_fails(self):
+        for field in ("createdAt", "updatedAt", "expiresAt"):
+            with self.subTest(field=field):
+                def change(kind, data):
+                    if kind == "jobs":
+                        data["result"]["data"][0][field] = "2026-11-25T12:00:00"
+                    return data
+                self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_unrelated_visible_job_invalid_timestamp_fails(self):
+        def change(kind, data):
+            return self.append_unrelated_job(kind, data, {
+                "jobDbId": "OTHER", "jobType": "analysis",
+                "expiresAt": "2026-02-30T12:00:00Z"})
+        self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_visible_job_timestamps_with_valid_offsets_pass(self):
+        def change(kind, data):
+            if kind == "jobs":
+                data["result"]["data"][0]["createdAt"] = (
+                    "2026-11-25T12:00:00Z")
+                return self.append_unrelated_job(kind, data, {
+                    "jobDbId": "OTHER", "jobType": "analysis",
+                    "updatedAt": "2026-11-25T12:00:00-0600"})
+            return data
+        self.assertEqual(0, self.exercise(modify=change)[0])
+
     def test_created_job_optional_progress_rejects_invalid_values(self):
         for progress in (-0.01, 1.01, None, False, "0.8", float("inf")):
             with self.subTest(progress=progress):
