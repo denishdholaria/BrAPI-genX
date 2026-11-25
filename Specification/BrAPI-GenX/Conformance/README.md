@@ -1059,3 +1059,20 @@ now reject altered or missing first-response scientific fields while still
 allowing extra server-managed metadata.
 
 See [Mission 159 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-159-INITIAL-PUBLICATION-SOURCE-INTEGRITY.md).
+
+## Rejected unknown job type: complete collection identity (Mission 160)
+
+Registered **L-04** rejects an unknown job type and verifies that no job
+with the rejected type or idempotency key was stored. That negative
+evidence now also requires a complete, well-formed jobs collection with
+unique job identifiers. Previously, duplicate or malformed unrelated
+job rows could pass if pagination counters were internally consistent.
+
+The executor reuses the existing `immutable_job_snapshot` validator
+already exercised by L-02. Unrelated jobs may coexist, and an optional
+idempotency key may be absent; a missing, blank, malformed or duplicated
+job identifier and a missing job type are rejected. The mandatory
+`Scripts/test_unknown_jobtype_no_stored_job.py` regression suite covers
+those cases.
+
+See [Mission 160 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-160-UNKNOWN-JOB-COLLECTION-IDENTITY.md).
