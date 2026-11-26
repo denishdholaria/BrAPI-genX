@@ -88,6 +88,33 @@ class JobReplaySingleStoredTests(unittest.TestCase):
     def test_single_original_job_passes(self):
         self.assertEqual(0, self.exercise()[0])
 
+    def test_expired_original_collection_result_leak_rejected(self):
+        for leaked in ({"data": [42]}, {}, [], 0, False):
+            with self.subTest(leaked=leaked):
+                def change(rows):
+                    rows[0]["status"] = "EXPIRED"
+                    rows[0]["result"] = leaked
+                    return rows
+                self.assertEqual(1, self.exercise(change_rows=change)[0])
+
+    def test_expired_unrelated_collection_result_leak_rejected(self):
+        def change(rows):
+            rows[1]["status"] = "EXPIRED"
+            rows[1]["result"] = {"data": ["secret"]}
+            return rows
+        self.assertEqual(1, self.exercise(
+            unrelated=True, change_rows=change)[0])
+
+    def test_expired_collection_row_without_result_or_null_allowed(self):
+        for marker in ("absent", None):
+            with self.subTest(marker=marker):
+                def change(rows):
+                    rows[0]["status"] = "EXPIRED"
+                    if marker is None:
+                        rows[0]["result"] = None
+                    return rows
+                self.assertEqual(0, self.exercise(change_rows=change)[0])
+
     def test_stored_job_invalid_progress_fails(self):
         for progress in (-0.01, 1.01, None, True, "0.5", float("nan"),
                          float("inf")):
