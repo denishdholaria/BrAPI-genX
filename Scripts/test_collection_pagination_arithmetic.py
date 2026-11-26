@@ -28,7 +28,8 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
              for step in self.probe["calls"][-2:]],
         )
 
-    def exercise(self, modify=None, include_unrelated=False, status=200):
+    def exercise(self, modify=None, include_unrelated=False, status=200,
+                 job_pages=None):
         requests = []
         submitted_model = {}
         job_body = {}
@@ -67,8 +68,12 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
                 if modify:
                     value = modify("jobs", value)
                 return status, value
-            if len(requests) == 4:
-                self.assertEqual(("GET", "/models"), (method, path))
+            if method == "GET" and path.startswith("/jobs?page="):
+                index = int(path.split("page=", 1)[1].split("&", 1)[0])
+                if job_pages is None:
+                    return 404, {}
+                return copy.deepcopy(job_pages.get(index, (404, {})))
+            if method == "GET" and path == "/models":
                 rows = [copy.deepcopy(submitted_model)]
                 if include_unrelated:
                     rows.append({**copy.deepcopy(submitted_model),
@@ -409,15 +414,119 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
                 "jobDbId": "UNRELATED", "jobType": "analysis",
                 "idempotencyKey": "other-key"}))[0])
 
-    def test_valid_first_page_with_more_pages_allowed(self):
-        # L-25 only promises first-page evidence, unlike complete
-        # collection replay probes; later pages may exist legitimately.
-        def change(kind, data):
+    def paged_jobs(self, change_page=None, missing_page=None):
+        """Exercise real L-25 dispatch against three advertised Job pages."""
+        def first(kind, payload):
             if kind == "jobs":
-                data["metadata"]["pagination"].update(
+                payload["metadata"]["pagination"].update(
                     totalCount=3, pageSize=1, totalPages=3, currentPage=0)
-            return data
-        self.assertEqual(0, self.exercise(modify=change)[0])
+            return payload
+
+        pages = {
+            1: self.job_page(1, {
+                "jobDbId": "HISTORY_EXPIRED", "jobType": "analysis",
+                "status": "EXPIRED", "result": None}),
+            2: self.job_page(2, {
+                "jobDbId": "HISTORY_RUNNING", "jobType": "analysis",
+                "status": "RUNNING", "idempotencyKey": "unrelated-key"}),
+        }
+        if change_page:
+            change_page(pages)
+        if missing_page is not None:
+            pages.pop(missing_page)
+        return self.exercise(modify=first, job_pages=pages)
+
+    @staticmethod
+    def job_page(index, row):
+        return 200, {
+            "result": {"data": [row]},
+            "metadata": {"pagination": {
+                "totalCount": 3, "pageSize": 1, "totalPages": 3,
+                "currentPage": index,
+            }},
+        }
+
+    def test_multi_page_jobs_reconstructs_all_pages_and_withholds_expired(self):
+        failures, requests = self.paged_jobs()
+        self.assertEqual(0, failures)
+        self.assertEqual([
+            ("POST", "/jobs"), ("POST", "/models"), ("GET", "/jobs"),
+            ("GET", "/jobs?page=1&pageSize=1"),
+            ("GET", "/jobs?page=2&pageSize=1"), ("GET", "/models"),
+        ], requests)
+
+    def test_unread_job_tail_is_not_accepted(self):
+        for missing in (1, 2):
+            with self.subTest(missing=missing):
+                self.assertEqual(1, self.paged_jobs(missing_page=missing)[0])
+
+    def test_expired_result_leak_on_any_later_job_page_fails(self):
+        for page_index in (1, 2):
+            for leaked in ({"secret": [42]}, {}, [], False, 0):
+                with self.subTest(page=page_index, leaked=leaked):
+                    def change(pages):
+                        row = pages[page_index][1]["result"]["data"][0]
+                        row["status"] = "EXPIRED"
+                        row["result"] = leaked
+                    self.assertEqual(1, self.paged_jobs(change_page=change)[0])
+
+    def test_expired_tail_result_absent_is_allowed(self):
+        def change(pages):
+            pages[1][1]["result"]["data"][0].pop("result")
+            pages[2][1]["result"]["data"][0]["status"] = "EXPIRED"
+            pages[2][1]["result"]["data"][0]["result"] = None
+        self.assertEqual(0, self.paged_jobs(change_page=change)[0])
+
+    def test_duplicate_job_identity_across_pages_fails(self):
+        def change(pages):
+            pages[2][1]["result"]["data"][0]["jobDbId"] = "HISTORY_EXPIRED"
+        self.assertEqual(1, self.paged_jobs(change_page=change)[0])
+
+    def test_original_key_repeated_on_tail_page_fails(self):
+        # An otherwise well-formed later page must not repeat the created
+        # submission's key under another Job identifier.
+        pagination = {"totalCount": 3, "pageSize": 1, "totalPages": 3}
+        seen = {"JOB_PAGE"}
+        pages = {
+            1: self.job_page(1, {
+                "jobDbId": "OTHER_1", "jobType": "analysis", "status": "RUNNING",
+                "idempotencyKey": "submitted-key"}),
+            2: self.job_page(2, {
+                "jobDbId": "OTHER_2", "jobType": "analysis", "status": "RUNNING"}),
+        }
+        def read(_server, method, path, body=None, token=None):
+            return pages[int(path.split("page=", 1)[1].split("&")[0])]
+        with mock.patch.object(checker, "http_call", side_effect=read):
+            self.assertIsNotNone(checker.job_collection_tail_problem(
+                "http://example.test", None, pagination, seen,
+                "JOB_PAGE", "submitted-key"))
+
+    def test_later_page_pagination_and_transport_errors_fail(self):
+        for field, bad in (
+                ("totalCount", 4), ("pageSize", 2), ("totalPages", 2),
+                ("currentPage", 0), ("currentPage", True)):
+            with self.subTest(field=field, bad=bad):
+                def change(pages):
+                    pages[2][1]["metadata"]["pagination"][field] = bad
+                self.assertEqual(1, self.paged_jobs(change_page=change)[0])
+        for bad in ([], {}, None):
+            with self.subTest(bad=bad):
+                self.assertEqual(1, self.paged_jobs(
+                    change_page=lambda pages:
+                    pages.__setitem__(2, (200, bad)))[0])
+        self.assertEqual(1, self.paged_jobs(change_page=lambda pages:
+            pages.__setitem__(2, (500, {})))[0])
+
+    def test_later_page_malformed_job_or_missing_rows_fail(self):
+        for row in ({}, {"jobDbId": "ANOTHER", "jobType": "analysis"},
+                    {"jobDbId": "ANOTHER", "jobType": "analysis",
+                     "status": "QUEUED"}, None):
+            with self.subTest(row=row):
+                def change(pages):
+                    pages[2][1]["result"]["data"] = [row]
+                self.assertEqual(1, self.paged_jobs(change_page=change)[0])
+        self.assertEqual(1, self.paged_jobs(change_page=lambda pages:
+            pages[2][1]["result"].update(data=[]))[0])
 
     def test_duplicate_model_version_fails_with_consistent_pagination(self):
         def change(kind, data):
