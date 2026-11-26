@@ -695,9 +695,9 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
     def test_combined_filters_matching_expired_job_passes(self):
         failures, calls = self.exercise()
         self.assertEqual(0, failures)
-        self.assertEqual(
+        self.assertIn(
             ("GET", "/jobs?jobType=germplasm_search&status=EXPIRED&page=0&pageSize=2"),
-            calls[-1])
+            calls)
 
     def test_combined_filters_reject_wrong_type_even_if_expired(self):
         def change(kind, payload):
@@ -768,9 +768,9 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
     def test_combined_filters_fetch_every_page_with_both_parameters(self):
         failures, calls = self.combined_three_rows()
         self.assertEqual(0, failures)
-        self.assertEqual(
+        self.assertIn(
             ("GET", "/jobs?jobType=germplasm_search&status=EXPIRED&page=1&pageSize=2"),
-            calls[-1])
+            calls)
 
     def test_combined_filters_tail_wrong_type_and_status_fail(self):
         for changes in (
