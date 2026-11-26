@@ -202,6 +202,53 @@ class TerminalCancelRetainedStateTests(unittest.TestCase):
             row["idempotencyKey"] = "fabricated-key"
         self.assertEqual(1, self.exercise(baseline_mutation=mutate)[0])
 
+    def test_invalid_optional_progress_before_delete_rejected(self):
+        for invalid in (-0.1, 1.1, None, True, "0.5", float("nan")):
+            with self.subTest(invalid=invalid):
+                def mutate(row):
+                    row["progress"] = invalid
+                self.assertEqual(1, self.exercise(
+                    baseline_mutation=mutate)[0])
+
+    def test_invalid_optional_progress_after_delete_rejected(self):
+        for invalid in (-0.1, 1.1, None, False, "0.5", float("inf")):
+            with self.subTest(invalid=invalid):
+                def mutate(row):
+                    row["progress"] = invalid
+                self.assertEqual(1, self.exercise(
+                    readback_mutation=mutate)[0])
+
+    def test_invalid_optional_timestamp_before_delete_rejected(self):
+        for name in ("createdAt", "updatedAt", "expiresAt"):
+            with self.subTest(name=name):
+                def mutate(row):
+                    row[name] = "2026-11-25T12:00:00"
+                self.assertEqual(1, self.exercise(
+                    baseline_mutation=mutate)[0])
+
+    def test_invalid_optional_timestamp_after_delete_rejected(self):
+        for invalid in (None, False, "2026-02-30T12:00:00Z",
+                        "2026-11-25T12:00:00"):
+            with self.subTest(invalid=invalid):
+                def mutate(row):
+                    row["updatedAt"] = invalid
+                self.assertEqual(1, self.exercise(
+                    readback_mutation=mutate)[0])
+
+    def test_valid_optional_fields_before_and_after_delete_allowed(self):
+        def before(row):
+            row["progress"] = 0.4
+            row["createdAt"] = "2026-11-25T12:00:00Z"
+            row["updatedAt"] = "2026-11-25T12:00:10+05:30"
+
+        def after(row):
+            row["progress"] = 1.0
+            row["createdAt"] = "2026-11-25T12:00:00Z"
+            row["updatedAt"] = "2026-11-25T12:00:12-0600"
+
+        self.assertEqual(0, self.exercise(
+            baseline_mutation=before, readback_mutation=after)[0])
+
     def test_extra_server_metadata_allowed(self):
         def mutate(row):
             row["observedAt"] = "2026-11-25T10:00:00Z"

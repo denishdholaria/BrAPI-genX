@@ -2059,6 +2059,8 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         or saved.get("jobDbId") != ctx["live_job"]
                         or baseline.get("status") not in terminal
                         or saved.get("status") != baseline["status"]
+                        or not valid_job_wire_fields(baseline)
+                        or not valid_job_wire_fields(saved)
                         or any(
                             not isinstance(original.get(field), str)
                             or not original[field]
@@ -2071,8 +2073,8 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                             and saved["result"] != baseline["result"])):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
-                        "terminal job original identity, status or result changed "
-                        "after rejected DELETE"
+                        "terminal job original identity, status, schema or result "
+                        "changed after rejected DELETE"
                     )
             if assertion.get("capture_job_collection"):
                 snapshot, problem = immutable_job_snapshot(status, payload)
