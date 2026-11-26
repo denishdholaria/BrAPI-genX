@@ -499,9 +499,9 @@ probes:
   object: all
   title: List endpoints return paged envelopes
   procedure:
-  - GET job and model collections after creating one of each; validate first-page arithmetic and bind the listed records to the original submission.
-  expectation: Initial job acceptance echoes the original jobType and idempotencyKey without disclosing an EXPIRED result; each collection returns a consistent first-page envelope and exactly one matching created identity, with well-formed unique identities and valid required Job lifecycle statuses, schema-valid optional timestamps and no exposed EXPIRED results for all visible jobs, and unique well-formed (modelDbId, modelVersion) pairs for all visible models, original job request binding and all submitted model fields including nested provenance intact.
-  falsifier: Missing or duplicate created identities, a mismatched job type or request key, changed model fields, inconsistent pagination or missing created records.
+  - GET job and model collections after creating one of each; validate first-page arithmetic, then follow every advertised Job collection page and bind the original submission.
+  expectation: Initial job acceptance echoes the original jobType and idempotencyKey without disclosing an EXPIRED result; each collection returns a consistent first-page envelope and exactly one matching created identity, with well-formed unique identities and valid required Job lifecycle statuses, schema-valid optional timestamps and no exposed EXPIRED results across every advertised Job page (including unrelated historical Jobs), consistent Job pagination counters, and unique well-formed (modelDbId, modelVersion) pairs for first-page models, original job request binding and all submitted model fields including nested provenance intact.
+  falsifier: Missing, malformed, truncated or inaccessible Job pages, an EXPIRED result on any page, duplicate Job identities across pages, a mismatched job type or request key, changed model fields, inconsistent pagination or missing created records.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_submit, capture_job: true}
   - {method: POST, path: /models, body_fixture: live_model_submit, capture_model: true}
