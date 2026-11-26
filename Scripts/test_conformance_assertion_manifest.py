@@ -593,6 +593,35 @@ class LiveAssertionManifestTests(unittest.TestCase):
                 s["assert"].update(filtered_expired_jobs_withheld=False,
                                    filtered_expired_jobs_withold=True)))
 
+    def test_combined_job_filters_required_in_l25(self):
+        self.assertIn(
+            "paged job and model collection evidence required",
+            self.mutated("L-25", 5, lambda s: s.update(
+                {"assert": {"status": 200}})))
+
+    def test_combined_job_filters_must_be_true(self):
+        self.assertIn(
+            "filtered_expired_job_type_withheld must be true",
+            self.mutated("L-25", 5, lambda s: s["assert"].update(
+                filtered_expired_job_type_withheld=False)))
+
+    def test_combined_job_filters_must_retain_both_query_parts(self):
+        for path in ("/jobs?status=EXPIRED&page=0&pageSize=2",
+                     "/jobs?jobType=germplasm_search&page=0&pageSize=2",
+                     "/jobs?jobType=analysis&status=EXPIRED&page=0&pageSize=2"):
+            with self.subTest(path=path):
+                self.assertIn(
+                    "filtered_expired_job_type_withheld requires combined Job filters GET",
+                    self.mutated("L-25", 5,
+                        lambda s: s.update(path=path)))
+
+    def test_combined_job_filters_unknown_assertion_rejected(self):
+        self.assertIn(
+            "unknown live assertion",
+            self.mutated("L-25", 5, lambda s:
+                s["assert"].update(filtered_expired_job_type_withheld=True,
+                                   filtered_expired_job_type_withold=True)))
+
     def test_embargo_denial_postcondition_cannot_be_removed(self):
         self.assertIn(
             "embargo_denial_no_payload on rejected package GET required",
