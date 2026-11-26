@@ -1325,6 +1325,55 @@ def immutable_job_snapshot(status, payload):
     return snapshot, None
 
 
+def job_collection_tail_problem(server, token, pagination, seen_job_ids,
+                                original_job_id, original_key):
+    """Read every later /jobs page; first-page validation is done by L-25.
+
+    The full collection must be inspected before L-25 can certify that no
+    unrelated EXPIRED job on an unseen page disclosed its result. Preserve
+    the first-page size and counters to avoid accepting a truncated scan.
+    """
+    total = pagination["totalCount"]
+    size = pagination["pageSize"]
+    pages = pagination["totalPages"]
+    for index in range(1, pages):
+        status, payload = http_call(
+            server, "GET", f"/jobs?page={index}&pageSize={size}", token=token)
+        result = payload.get("result") if isinstance(payload, dict) else None
+        rows = result.get("data") if isinstance(result, dict) else None
+        metadata = payload.get("metadata") if isinstance(payload, dict) else None
+        page = metadata.get("pagination") if isinstance(metadata, dict) else None
+        if (status != 200 or not isinstance(rows, list)
+                or not isinstance(page, dict)
+                or any(type(page.get(k)) is not int for k in (
+                    "totalCount", "pageSize", "totalPages", "currentPage"))
+                or page != {**page, "totalCount": total, "pageSize": size,
+                            "totalPages": pages, "currentPage": index}
+                or len(rows) != min(size, total - size * index)):
+            return f"jobs page {index} missing, truncated or inconsistent"
+        for row in rows:
+            if not isinstance(row, dict):
+                return f"jobs page {index} has a non-object Job"
+            job_id = row.get("jobDbId")
+            if (not isinstance(job_id, str) or not job_id
+                    or not isinstance(row.get("jobType"), str)
+                    or not row["jobType"]
+                    or not valid_job_wire_fields(row)
+                    or (row.get("status") == "EXPIRED"
+                        and not expired_job_result_withheld(row))
+                    or ("idempotencyKey" in row
+                        and not isinstance(row["idempotencyKey"], str))
+                    or job_id in seen_job_ids
+                    or job_id == original_job_id
+                    or row.get("idempotencyKey") == original_key):
+                return (f"jobs page {index} exposes an expired result or "
+                        "has malformed, repeated or conflicting Job identity")
+            seen_job_ids.add(job_id)
+    if len(seen_job_ids) != total:
+        return "jobs collection not fully reconstructed across pages"
+    return None
+
+
 def published_record_problem(status, payload, original, expected_id, identity_field):
     """Return a diagnostic if a rejected rewrite changed the submitted record."""
     stored = payload.get("result") if isinstance(payload, dict) else None
@@ -2360,6 +2409,16 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                             probe["id"], probe["title"], "FAIL",
                             "jobs collection does not retain one original "
                             "job identity, idempotency key and type"
+                        )
+                    # The first page is not complete evidence when more
+                    # pages are advertised. Fetch every subsequent page and
+                    # withhold EXPIRED results for unrelated historical jobs.
+                    tail_problem = job_collection_tail_problem(
+                        server, token, pagination, visible_job_ids,
+                        expected_id, original["idempotencyKey"])
+                    if tail_problem:
+                        return results.report(
+                            probe["id"], probe["title"], "FAIL", tail_problem
                         )
                 else:
                     # The accepted version and the stored record must match
