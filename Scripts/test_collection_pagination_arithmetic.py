@@ -651,7 +651,8 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
                 def change(kind, payload):
                     if kind == "filtered_jobs":
                         payload["metadata"]["pagination"][bad] = (
-                            0 if bad != "totalCount" else 4)
+                            4 if bad == "totalCount" else
+                            1 if bad == "currentPage" else 0)
                     return payload
                 self.assertEqual(1, self.exercise(modify=change)[0])
 
