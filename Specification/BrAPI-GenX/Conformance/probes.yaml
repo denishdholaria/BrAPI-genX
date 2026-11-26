@@ -242,7 +242,7 @@ probes:
   title: Cancelling a terminal job is rejected
   procedure:
   - Submit a job, wait for a terminal state, attempt DELETE, and re-GET the original job.
-  expectation: Each terminal polling response and the post-rejection GET has schema-valid required Job fields and optional fields; DELETE is rejected, and the original job identifier, jobType, idempotencyKey, terminal state, and any completed result remain unchanged on readback.
+  expectation: Each terminal polling response is schema-valid and preserves the original submitted jobType/idempotencyKey as well as the jobDbId; the post-rejection GET also has schema-valid fields; DELETE is rejected, and the original identity, terminal state, and completed result remain unchanged.
   falsifier: The rejected DELETE changes job identity, request binding, status, or a terminal result (including nested evidence), or the readback is unavailable.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_submit, capture_job: true, wait_terminal: true}
@@ -525,7 +525,7 @@ probes:
   title: Deprecated models serve with a warning
   procedure:
   - Register a deprecated model; read back its exact stored version; submit inference naming the persisted deprecated model; verify completed output is bound to the originally registered version and canonical input digest.
-  expectation: Deprecated-model registration echoes all submitted fields; a versioned GET returns the same persisted deprecated record; inference is accepted with 202, echoes the original job type, idempotency key and required valid Job lifecycle status and schema-valid optional timestamps, and warns; the job completes with the original model identity, version and input digest.
+  expectation: Deprecated-model registration echoes all submitted fields; a versioned GET returns the same persisted deprecated record; inference is accepted with 202, echoes the original job type, idempotency key and required valid Job lifecycle status and schema-valid optional timestamps, and warns; every polling response retains the originally submitted jobType/idempotencyKey; the job completes with the original model identity, version and input digest.
   falsifier: Missing or corrupted stored deprecated model, silent acceptance, rejection, another job completing, changed model version, or unrelated inference output.
   calls:
   - {method: POST, path: /models, body_fixture: live_model_deprecated, capture_model_deprecated: true}
