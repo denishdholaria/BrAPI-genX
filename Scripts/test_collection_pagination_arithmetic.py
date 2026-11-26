@@ -223,6 +223,36 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
             return data
         self.assertEqual(0, self.exercise(modify=change)[0])
 
+    def test_created_expired_job_result_leak_rejected(self):
+        for leaked in ({"data": [42]}, {}, [], False, 0):
+            with self.subTest(leaked=leaked):
+                def change(kind, data):
+                    if kind == "jobs":
+                        row = data["result"]["data"][0]
+                        row["status"] = "EXPIRED"
+                        row["result"] = leaked
+                    return data
+                self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_unrelated_visible_expired_job_result_leak_rejected(self):
+        def change(kind, data):
+            return self.append_unrelated_job(kind, data, {
+                "jobDbId": "OTHER", "jobType": "analysis",
+                "status": "EXPIRED", "result": {"data": ["secret"]}})
+        self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_visible_expired_job_with_null_or_absent_result_allowed(self):
+        for marker in ("absent", None):
+            with self.subTest(marker=marker):
+                def change(kind, data):
+                    if kind == "jobs":
+                        row = data["result"]["data"][0]
+                        row["status"] = "EXPIRED"
+                        if marker is None:
+                            row["result"] = None
+                    return data
+                self.assertEqual(0, self.exercise(modify=change)[0])
+
     def test_created_job_optional_progress_rejects_invalid_values(self):
         for progress in (-0.01, 1.01, None, False, "0.8", float("inf")):
             with self.subTest(progress=progress):
