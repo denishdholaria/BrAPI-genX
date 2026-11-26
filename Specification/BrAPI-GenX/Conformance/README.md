@@ -1437,3 +1437,25 @@ now covers missing, blank or malformed job types; invalid optional
 fields; and positive valid schema-compliant expired records.
 
 See [Mission 178 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-178-EXPIRED-JOB-READBACK-SCHEMA.md).
+
+## Terminal and intermediate Job polling schema validation (Mission 179)
+
+The shared `wait_terminal` helper used by **L-03** and **L-27**
+now checks **every successful polling GET**, not only the final
+terminal response, against the published required Job fields and
+already enforced optional-field constraints. Polling must retain
+the requested `jobDbId`, provide a nonempty string `jobType`,
+and report a valid required lifecycle `status`; if supplied,
+`progress` must be bounded, timestamps must be timezone-bearing,
+and `idempotencyKey` must be a string.
+
+The existing HTTP status and requested identity checks run first.
+A malformed intermediate `RUNNING` or unknown lifecycle state
+fails immediately rather than being hidden by later completion.
+Valid `RUNNING` followed by `COMPLETED` remains permitted;
+no new lifecycle transition or phase/progress coupling is imposed.
+The mandatory `Scripts/test_terminal_cancel_retained_state.py`
+suite covers malformed terminal and intermediate responses and
+positive multi-poll completion.
+
+See [Mission 179 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-179-TERMINAL-POLL-JOB-INTEGRITY.md).
