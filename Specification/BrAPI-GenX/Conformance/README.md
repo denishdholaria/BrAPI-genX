@@ -1511,3 +1511,30 @@ L-15 regression suites now verify zero-size rejection and
 positive-size empty collection acceptance.
 
 See [Mission 182 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-182-EMPTY-JOBS-PAGESIZE-INTEGRITY.md).
+
+## Expired Job result confidentiality across readback paths (Mission 183)
+
+Registered **L-05** already requires the `result` field of an
+`EXPIRED` Job to be absent or explicitly null. L-03 terminal
+cancellation and the shared terminal polling helper previously
+accepted an `EXPIRED` Job with non-null result contents. In L-03,
+two matching leaked payloads could satisfy the unchanged-result
+comparison, giving a false conformance pass.
+
+All three paths now reuse the same fail-closed expired-result
+withholding predicate. A non-null result (including an empty object,
+empty list, false or zero) is rejected on an `EXPIRED` Job in
+terminal polling, the pre-DELETE baseline, the post-DELETE readback
+and the dedicated L-05 check. Absent and null results remain allowed.
+
+Other terminal Job statuses and existing original-request, schema,
+result-immutability and expiry checks remain unchanged. The published
+GenX Job schema and official BrAPI version 2.1 sources are untouched.
+
+Mandatory regressions in
+`Scripts/test_terminal_cancel_retained_state.py` prove that matching
+leaks on both sides of a rejected DELETE fail, and that terminal
+polling rejects an expired payload while permitting absent/null
+withheld results. The L-05 suite checks the shared policy as well.
+
+See [Mission 183 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-183-EXPIRED-TERMINAL-RESULT-CONFIDENTIALITY.md).

@@ -108,6 +108,13 @@ def valid_job_wire_fields(job):
             and valid_optional_job_timestamps(job))
 
 
+def expired_job_result_withheld(job):
+    """An EXPIRED Job may expose no result other than explicit null."""
+    return (isinstance(job, dict)
+            and job.get("status") == "EXPIRED"
+            and ("result" not in job or job["result"] is None))
+
+
 def load_yaml(path):
     with open(path, "r", encoding="utf-8") as fh:
         return yaml.safe_load(fh)
@@ -1270,6 +1277,13 @@ def wait_terminal(server, job_id, token,
             raise ValueError(
                 f"terminal job polling GET changed original type/key for {job_id}"
             )
+        # EXPIRED jobs must not disclose result contents, including
+        # through an otherwise schema-valid terminal polling response.
+        if (returned["status"] == "EXPIRED"
+                and not expired_job_result_withheld(returned)):
+            raise ValueError(
+                f"terminal job polling GET exposed expired result for {job_id}"
+            )
         if returned["status"] in TERMINAL:
             return last
         time.sleep(1)
@@ -2031,8 +2045,7 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         or not valid_job_wire_fields(expired)
                         or ("idempotencyKey" in expired
                             and not isinstance(expired["idempotencyKey"], str))
-                        or expired.get("status") != "EXPIRED"
-                        or ("result" in expired and expired["result"] is not None)):
+                        or not expired_job_result_withheld(expired)):
                     return results.report(
                         probe["id"], probe["title"], "FAIL",
                         "expired job identity/schema/status invalid or result exposed"
@@ -2079,6 +2092,9 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         or saved.get("status") != baseline["status"]
                         or not valid_job_wire_fields(baseline)
                         or not valid_job_wire_fields(saved)
+                        or (baseline["status"] == "EXPIRED"
+                            and (not expired_job_result_withheld(baseline)
+                                 or not expired_job_result_withheld(saved)))
                         or any(
                             not isinstance(original.get(field), str)
                             or not original[field]
