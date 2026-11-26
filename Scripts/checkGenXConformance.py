@@ -1227,7 +1227,8 @@ def fresh_submit(conformance_dir, job_type="germplasm_search", parameters=None):
     return body
 
 
-def wait_terminal(server, job_id, token):
+def wait_terminal(server, job_id, token,
+                  expected_job_type=None, expected_idempotency_key=None):
     import time
     deadline = time.time() + 30
     last = {}
@@ -1258,6 +1259,16 @@ def wait_terminal(server, job_id, token):
                     and not isinstance(returned["idempotencyKey"], str))):
             raise ValueError(
                 f"terminal job polling GET returned schema-invalid Job {job_id}"
+            )
+        # When supplied by the caller, the original request binding must
+        # hold on every intermediate and terminal GET, not only the final one.
+        if ((expected_job_type is not None
+             and returned["jobType"] != expected_job_type)
+                or (expected_idempotency_key is not None
+                    and returned.get("idempotencyKey")
+                    != expected_idempotency_key)):
+            raise ValueError(
+                f"terminal job polling GET changed original type/key for {job_id}"
             )
         if returned["status"] in TERMINAL:
             return last
@@ -1770,7 +1781,10 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                 ctx["live_job"] = accepted["jobDbId"]
                 ctx["live_body"] = body
                 if step.get("wait_terminal"):
-                    payload = wait_terminal(server, ctx["live_job"], token)
+                    payload = wait_terminal(
+                        server, ctx["live_job"], token,
+                        body["jobType"], body["idempotencyKey"]
+                    )
                     if "live_terminal_before_cancel" in ctx:
                         ctx["live_terminal_before_cancel"] = copy.deepcopy(
                             payload.get("result") if isinstance(payload, dict) else None
@@ -1916,7 +1930,10 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         "deprecated inference initial acknowledgment missing or "
                         "changing original job identifier, type, key or status"
                     )
-                terminal_payload = wait_terminal(server, job_id, token)
+                terminal_payload = wait_terminal(
+                    server, job_id, token,
+                    submitted["jobType"], submitted["idempotencyKey"]
+                )
                 terminal_job = (terminal_payload.get("result")
                                 if isinstance(terminal_payload, dict) else None)
                 original_model = ctx.get("live_model_deprecated_original")

@@ -71,8 +71,11 @@ class DeprecatedInferenceResultBindingTests(unittest.TestCase):
                 }
             self.fail("unexpected request")
 
-        def fake_wait(_server, job_id, _token):
+        def fake_wait(_server, job_id, _token,
+                      expected_type=None, expected_key=None):
             self.assertEqual("JOB_WARNED", job_id)
+            self.assertEqual(submitted["jobType"], expected_type)
+            self.assertEqual(submitted["idempotencyKey"], expected_key)
             inputs = submitted["parameters"]["inputs"]
             digest = hashlib.sha256(
                 checker.canonical(inputs).encode("utf-8")).hexdigest()

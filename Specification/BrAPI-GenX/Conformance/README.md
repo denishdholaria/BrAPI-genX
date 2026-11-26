@@ -1475,3 +1475,23 @@ regressions reject malformed optional fields on either side of DELETE
 while preserving positive valid differences.
 
 See [Mission 180 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-180-TERMINAL-POSTDELETE-SCHEMA.md).
+
+## Polling retains original submitted Job request binding (Mission 181)
+
+Registered **L-03** and **L-27** pass the original submitted
+`jobType` and `idempotencyKey` to `wait_terminal`. The helper now
+requires **each intermediate and terminal GET** to echo those
+original values, in addition to the previously enforced
+`jobDbId`, lifecycle enum and Job wire-field schema.
+
+A misleading intermediate `RUNNING` response with another type,
+a changed key, or a missing key fails immediately, even if a later
+terminal response would have matched the original submission.
+The test helper retains optional expected-binding parameters for
+unscoped direct polling tests. Existing mandatory regression suites
+assert the expected arguments are supplied by L-03 and L-27 and
+include early-failure cases plus valid transitions.
+
+This is not a new field or idempotency policy: the submitted
+idempotency key must already be echoed by the published Job schema.
+See [Mission 181 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-181-POLL-ORIGINAL-REQUEST-BINDING.md).
