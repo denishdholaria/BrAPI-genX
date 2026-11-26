@@ -260,6 +260,18 @@ class JobReplaySingleStoredTests(unittest.TestCase):
         self.assertEqual(0, self.exercise(
             replay_mutate=lambda row: {**row, "progress": 0.75})[0])
 
+    def test_replay_expired_job_cannot_return_result(self):
+        for leaked in ({"data": ["secret"]}, {}, [], 0, False):
+            with self.subTest(leaked=leaked):
+                failures, calls = self.exercise(
+                    replay_mutate=lambda row: {
+                        **row, "status": "EXPIRED", "result": leaked})
+                self.assertEqual((1, 2), (failures, len(calls)))
+
+    def test_replay_expired_job_without_result_allowed(self):
+        self.assertEqual(0, self.exercise(
+            replay_mutate=lambda row: {**row, "status": "EXPIRED"})[0])
+
     def test_replay_missing_status_rejected_before_collection(self):
         failures, calls = self.exercise(replay_mutate=lambda row: {
             key: value for key, value in row.items() if key != "status"})
@@ -377,6 +389,19 @@ class JobReplaySingleStoredTests(unittest.TestCase):
             initial_mutate=lambda row: {**row, "jobDbId": ""})
         self.assertEqual(1, failures)
         self.assertEqual(1, len(calls))
+
+    def test_initial_expired_job_cannot_return_result(self):
+        for leaked in ({"data": [42]}, {}, [], 0, False):
+            with self.subTest(leaked=leaked):
+                failures, calls = self.exercise(
+                    initial_mutate=lambda row: {
+                        **row, "status": "EXPIRED", "result": leaked})
+                self.assertEqual((1, 1), (failures, len(calls)))
+
+    def test_initial_expired_job_null_result_allowed(self):
+        self.assertEqual(0, self.exercise(
+            initial_mutate=lambda row: {
+                **row, "status": "EXPIRED", "result": None})[0])
 
     def test_initial_job_missing_status_fails_before_replay(self):
         failures, calls = self.exercise(
