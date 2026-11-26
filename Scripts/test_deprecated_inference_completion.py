@@ -80,8 +80,12 @@ class DeprecatedInferenceCompletionTests(unittest.TestCase):
                 }
             self.fail("unexpected HTTP request")
 
-        def fake_wait(_server, job_id, token):
+        def fake_wait(_server, job_id, token,
+                      expected_type=None, expected_key=None):
             self.assertEqual(accepted_id, job_id)
+            self.assertEqual("inference", expected_type)
+            self.assertEqual(
+                submitted_inference["idempotencyKey"], expected_key)
             if missing_terminal:
                 return {"result": {}}
             inputs = submitted_inference["parameters"]["inputs"]
