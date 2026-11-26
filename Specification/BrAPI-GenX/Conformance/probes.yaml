@@ -242,8 +242,8 @@ probes:
   title: Cancelling a terminal job is rejected
   procedure:
   - Submit a job, wait for a terminal state, attempt DELETE, and re-GET the original job.
-  expectation: Each terminal polling response is schema-valid and preserves the original submitted jobType/idempotencyKey as well as the jobDbId; the post-rejection GET also has schema-valid fields; DELETE is rejected, and the original identity, terminal state, and completed result remain unchanged.
-  falsifier: The rejected DELETE changes job identity, request binding, status, or a terminal result (including nested evidence), or the readback is unavailable.
+  expectation: Each terminal polling response is schema-valid, preserves the submitted jobType/idempotencyKey and jobDbId, and withholds any EXPIRED result; the post-rejection GET also has schema-valid fields and withholds EXPIRED results; DELETE is rejected, and the original identity, terminal state, and completed result remain unchanged.
+  falsifier: The rejected DELETE changes job identity, request binding, status, or a terminal result (including nested evidence), either EXPIRED readback exposes any non-null result, or the readback is unavailable.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_submit, capture_job: true, wait_terminal: true}
   - {method: DELETE, path: "/jobs/{jobDbId}", assert: {rejected: true}}
