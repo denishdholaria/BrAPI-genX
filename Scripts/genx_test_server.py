@@ -697,12 +697,24 @@ class Handler(BaseHTTPRequestHandler):
 
     def _job_list(self):
         store = self.server.store
+        query = self._query()
         with store.lock:
             jobs = sorted(store.jobs.values(), key=lambda j: j["jobDbId"])
+        if query.get("jobType"):
+            jobs = [job for job in jobs if job["jobType"] == query["jobType"]]
+        if query.get("status"):
+            jobs = [job for job in jobs if job["status"] == query["status"]]
+        try:
+            page = max(int(query.get("page", "0")), 0)
+            size = max(int(query.get("pageSize", str(max(len(jobs), 1)))), 1)
+        except ValueError:
+            return self._send_text(400, "page and pageSize must be integers")
+        total = len(jobs)
         return self._send_json(200, envelope(
-            data=jobs,
-            pagination={"totalCount": len(jobs), "pageSize": len(jobs),
-                        "totalPages": 1, "currentPage": 0},
+            data=jobs[page * size:(page + 1) * size],
+            pagination={"totalCount": total, "pageSize": size,
+                        "totalPages": max(1, (total + size - 1) // size),
+                        "currentPage": page},
         ))
 
     def _job_submit(self):
