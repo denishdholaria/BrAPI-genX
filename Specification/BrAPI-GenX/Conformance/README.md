@@ -1584,3 +1584,26 @@ Mandatory replay, concurrent and deprecated-inference regression
 suites check the negative leakage and positive withholding cases.
 
 See [Mission 185 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-185-EXPIRED-JOB-ACK-CONFIDENTIALITY.md).
+
+
+## Expired Job confidentiality in status-filtered collections (Mission 187)
+
+**L-25** now performs a separate `GET
+/jobs?status=EXPIRED&page=0&pageSize=2` after verifying the ordinary
+jobs and models collections. Every response row must have the
+`EXPIRED` lifecycle status, a nonempty Job identity/type, valid
+optional fields, and absent/null `result`. Every advertised
+subsequent filtered page is retrieved, checked for coherent pagination
+and unique Job identities, and subjected to the same confidentiality
+rule. Unexpected non-expired rows, non-null result contents,
+missing pages and inconsistent counts fail the probe.
+
+The reference Python and TypeScript servers now honor their existing
+Jobs `status`, `jobType`, `page` and `pageSize` query parameters
+instead of silently ignoring the filter. An empty filtered collection
+is valid, but cannot establish positive expired-row coverage.
+These checks add no new expiry policy or wire schema.
+
+The mandatory L-25 collection and manifest mutation suites include
+positive and negative filtered-list cases. See
+[Mission 187 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-187-FILTERED-EXPIRED-JOB-CONFIDENTIALITY.md).
