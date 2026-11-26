@@ -242,7 +242,7 @@ probes:
   title: Cancelling a terminal job is rejected
   procedure:
   - Submit a job, wait for a terminal state, attempt DELETE, and re-GET the original job.
-  expectation: Each terminal polling response has a schema-valid Job identity, required type/status and valid optional fields; DELETE is rejected, and the original job identifier, jobType, idempotencyKey, terminal state, and any completed result remain unchanged on readback.
+  expectation: Each terminal polling response and the post-rejection GET has schema-valid required Job fields and optional fields; DELETE is rejected, and the original job identifier, jobType, idempotencyKey, terminal state, and any completed result remain unchanged on readback.
   falsifier: The rejected DELETE changes job identity, request binding, status, or a terminal result (including nested evidence), or the readback is unavailable.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_submit, capture_job: true, wait_terminal: true}
