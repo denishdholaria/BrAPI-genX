@@ -77,6 +77,16 @@ class UnknownJobTypeNoStoredJobTests(unittest.TestCase):
     def test_empty_job_collection_allowed(self):
         self.assertEqual(0, self.exercise(add_jobs=lambda rows, req: [])[0])
 
+    def test_empty_collection_zero_page_size_fails(self):
+        self.assertEqual(1, self.exercise(
+            add_jobs=lambda rows, req: [],
+            page_mutation=lambda page: {**page, "pageSize": 0})[0])
+
+    def test_empty_collection_positive_page_size_allowed(self):
+        self.assertEqual(0, self.exercise(
+            add_jobs=lambda rows, req: [],
+            page_mutation=lambda page: {**page, "pageSize": 1})[0])
+
     def test_same_rejected_key_with_unknown_type_fails(self):
         def change(rows, req):
             return rows + [{"jobDbId": "JOB_FORBIDDEN",
