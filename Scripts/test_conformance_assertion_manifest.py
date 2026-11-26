@@ -568,6 +568,31 @@ class LiveAssertionManifestTests(unittest.TestCase):
             "paged job and model collection evidence required",
             self.mutated("L-25", 2, lambda s: s.update(path="/models")))
 
+    def test_expired_filtered_collection_assertion_cannot_be_removed(self):
+        self.assertIn(
+            "paged job and model collection evidence required",
+            self.mutated("L-25", 4, lambda s: s.update(
+                {"assert": {"status": 200}})))
+
+    def test_expired_filtered_collection_assertion_cannot_be_false(self):
+        self.assertIn(
+            "filtered_expired_jobs_withheld must be true",
+            self.mutated("L-25", 4, lambda s:
+                s["assert"].update(filtered_expired_jobs_withheld=False)))
+
+    def test_expired_filtered_collection_must_keep_status_filter(self):
+        self.assertIn(
+            "filtered_expired_jobs_withheld requires status-filtered jobs GET",
+            self.mutated("L-25", 4,
+                lambda s: s.update(path="/jobs")))
+
+    def test_expired_filtered_collection_assertion_cannot_be_misspelled(self):
+        self.assertIn(
+            "unknown live assertion",
+            self.mutated("L-25", 4, lambda s:
+                s["assert"].update(filtered_expired_jobs_withheld=False,
+                                   filtered_expired_jobs_withold=True)))
+
     def test_embargo_denial_postcondition_cannot_be_removed(self):
         self.assertIn(
             "embargo_denial_no_payload on rejected package GET required",

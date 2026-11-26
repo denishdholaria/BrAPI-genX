@@ -1374,6 +1374,76 @@ def job_collection_tail_problem(server, token, pagination, seen_job_ids,
     return None
 
 
+
+def filtered_expired_jobs_problem(server, token, status, payload):
+    """Audit the EXPIRED-filtered /jobs response and every advertised page.
+
+    A filtered collection is separate evidence from the unfiltered L-25 scan:
+    a server can honor ordinary lists while disclosing expired results from
+    the filtered route. No known-expired ID is required; zero results are
+    valid but provide only empty-collection shape/filter evidence.
+    """
+    size = 2  # The registered L-25 request explicitly uses pageSize=2.
+    if status != 200:
+        return "EXPIRED-filtered jobs collection GET failed"
+    seen = set()
+    first = payload
+    pagination = (first.get("metadata", {}).get("pagination")
+                  if isinstance(first, dict)
+                  and isinstance(first.get("metadata"), dict) else None)
+    if (not isinstance(pagination, dict)
+            or any(type(pagination.get(k)) is not int
+                   for k in ("totalCount", "pageSize", "totalPages", "currentPage"))):
+        return "EXPIRED-filtered jobs pagination missing or malformed"
+    total = pagination["totalCount"]
+    pages = pagination["totalPages"]
+    if (total < 0 or pagination["pageSize"] != size
+            or pagination["currentPage"] != 0
+            or (pages not in (0, 1) if total == 0
+                else pages != (total + size - 1) // size)):
+        return "EXPIRED-filtered jobs first-page arithmetic invalid"
+
+    for index in range(max(pages, 1)):
+        if index == 0:
+            response_status, current = status, first
+        else:
+            response_status, current = http_call(
+                server, "GET",
+                f"/jobs?status=EXPIRED&page={index}&pageSize={size}",
+                token=token)
+        result = current.get("result") if isinstance(current, dict) else None
+        rows = result.get("data") if isinstance(result, dict) else None
+        metadata = current.get("metadata") if isinstance(current, dict) else None
+        page = metadata.get("pagination") if isinstance(metadata, dict) else None
+        if (response_status != 200 or not isinstance(rows, list)
+                or not isinstance(page, dict)
+                or any(type(page.get(k)) is not int
+                       for k in ("totalCount", "pageSize", "totalPages", "currentPage"))
+                or any(page[k] != value for k, value in (
+                    ("totalCount", total), ("pageSize", size),
+                    ("totalPages", pages), ("currentPage", index)))
+                or len(rows) != min(size, max(total - index * size, 0))):
+            return f"EXPIRED-filtered jobs page {index} incomplete or inconsistent"
+        for row in rows:
+            if not isinstance(row, dict):
+                return f"EXPIRED-filtered jobs page {index} contains non-object row"
+            identity = row.get("jobDbId")
+            if (not isinstance(identity, str) or not identity
+                    or identity in seen
+                    or not isinstance(row.get("jobType"), str)
+                    or not row["jobType"]
+                    or not valid_job_wire_fields(row)
+                    or not expired_job_result_withheld(row)
+                    or ("idempotencyKey" in row
+                        and not isinstance(row["idempotencyKey"], str))):
+                return (f"EXPIRED-filtered jobs page {index} exposes result, "
+                        "wrong status, malformed Job or duplicate identity")
+            seen.add(identity)
+    if len(seen) != total:
+        return "EXPIRED-filtered jobs count not reconstructed across pages"
+    return None
+
+
 def published_record_problem(status, payload, original, expected_id, identity_field):
     """Return a diagnostic if a rejected rewrite changed the submitted record."""
     stored = payload.get("result") if isinstance(payload, dict) else None
@@ -2326,6 +2396,13 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         "concurrent submissions created missing, duplicate, "
                         "or mismatched stored jobs"
                     )
+            if assertion.get("filtered_expired_jobs_withheld"):
+                problem = filtered_expired_jobs_problem(
+                    server, token, status, payload)
+                if problem:
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL", problem
+                    )
             if "collection_contains_created" in assertion:
                 kind = assertion["collection_contains_created"]
                 result = payload.get("result") if isinstance(payload, dict) else None
@@ -3166,6 +3243,7 @@ LIVE_BOOLEAN_ASSERTIONS = frozenset({
     "job_replay_single_stored", "capture_job_collection",
     "job_conflict_collection_unchanged", "terminal_state_unchanged",
     "unknown_job_type_not_stored", "expired_result_withheld",
+    "filtered_expired_jobs_withheld",
     "embargo_denial_no_payload",
     "capability_registry_match",
 })
@@ -3299,6 +3377,13 @@ def validate_live_step_assertions(probe_id, index, call):
         raise ValueError(
             f"probe {probe_id} call {index}: "
             "embargo_denial_no_payload requires embargoed package GET"
+        )
+    if "filtered_expired_jobs_withheld" in assertion and (
+            call.get("method") != "GET"
+            or call.get("path") != "/jobs?status=EXPIRED&page=0&pageSize=2"):
+        raise ValueError(
+            f"probe {probe_id} call {index}: "
+            "filtered_expired_jobs_withheld requires status-filtered jobs GET"
         )
     if "expired_result_withheld" in assertion and (
             call.get("method") != "GET"
@@ -3522,7 +3607,7 @@ def validate_probe_manifest(probes):
                         "probe L-07: original observation and provenance round-trip required"
                     )
             if probe_id == "L-25":
-                if (len(calls) != 4
+                if (len(calls) != 5
                         or calls[0].get("method") != "POST"
                         or calls[0].get("path") != "/jobs"
                         or calls[0].get("body_fixture") != "live_submit"
@@ -3538,7 +3623,13 @@ def validate_probe_manifest(probes):
                         or calls[3].get("method") != "GET"
                         or calls[3].get("path") != "/models"
                         or calls[3].get("assert", {}).get(
-                            "collection_contains_created") != "models"):
+                            "collection_contains_created") != "models"
+                        or calls[4].get("method") != "GET"
+                        or calls[4].get("path") !=
+                            "/jobs?status=EXPIRED&page=0&pageSize=2"
+                        or calls[4].get("assert", {}).get("status") != 200
+                        or calls[4].get("assert", {}).get(
+                            "filtered_expired_jobs_withheld") is not True):
                     raise ValueError(
                         "probe L-25: paged job and model collection evidence required"
                     )
