@@ -25,7 +25,9 @@ class CollectionEnvelopeTests(unittest.TestCase):
         self.assertEqual(
             ["jobs", "models"],
             [step["assert"]["collection_contains_created"]
-             for step in self.probe["calls"][-2:]])
+             for step in self.probe["calls"][2:4]])
+        self.assertIs(True, self.probe["calls"][4]["assert"][
+            "filtered_expired_jobs_withheld"])
 
     def test_unknown_collection_selector_rejected(self):
         candidate = copy.deepcopy(self.probes)
@@ -75,6 +77,16 @@ class CollectionEnvelopeTests(unittest.TestCase):
                 self.assertEqual(("GET", "/models"), (method, path))
                 response = paged([copy.deepcopy(model)])
                 return bad_status or 200, mutate("models", response) if mutate else response
+            if len(calls) == 5:
+                self.assertEqual(
+                    ("GET", "/jobs?status=EXPIRED&page=0&pageSize=2"),
+                    (method, path))
+                response = paged([{"jobDbId": "JOB_EXPIRED",
+                                   "jobType": "analysis",
+                                   "status": "EXPIRED", "result": None}])
+                response["metadata"]["pagination"]["pageSize"] = 2
+                return bad_status or 200, (
+                    mutate("filtered_jobs", response) if mutate else response)
             self.fail("unexpected extra live request")
 
         results = checker.Results()
