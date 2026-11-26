@@ -21,7 +21,7 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
         cls.probe = next(p for p in document["probes"] if p["id"] == "L-25")
 
     def test_registered_collections_are_both_required(self):
-        self.assertEqual(6, len(self.probe["calls"]))
+        self.assertEqual(7, len(self.probe["calls"]))
         self.assertEqual(
             ["jobs", "models"],
             [step["assert"]["collection_contains_created"]
@@ -31,9 +31,12 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
             "filtered_expired_jobs_withheld"])
         self.assertIs(True, self.probe["calls"][5]["assert"][
             "filtered_expired_job_type_withheld"])
+        self.assertIs(True, self.probe["calls"][6]["assert"][
+            "filtered_job_type_integrity"])
 
     def exercise(self, modify=None, include_unrelated=False, status=200,
-                 job_pages=None, filtered_pages=None, combined_pages=None):
+                 job_pages=None, filtered_pages=None, combined_pages=None,
+                 type_only_pages=None):
         requests = []
         submitted_model = {}
         job_body = {}
@@ -103,6 +106,20 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
                 value["metadata"]["pagination"]["pageSize"] = 2
                 if modify:
                     value = modify("combined_jobs", value)
+                return status, value
+            if (method == "GET"
+                    and path.startswith("/jobs?jobType=germplasm_search&page=")):
+                index = int(path.split("page=", 1)[1].split("&", 1)[0])
+                if index > 0:
+                    return copy.deepcopy(
+                        (type_only_pages or {}).get(index, (404, {})))
+                value = first_page([
+                    {"jobDbId": "TYPE_EXPIRED", "jobType": "germplasm_search",
+                     "status": "EXPIRED", "result": None},
+                    {"jobDbId": "TYPE_COMPLETED", "jobType": "germplasm_search",
+                     "status": "COMPLETED", "result": {"value": 5}}])
+                if modify:
+                    value = modify("type_only_jobs", value)
                 return status, value
             if method == "GET" and path == "/models":
                 rows = [copy.deepcopy(submitted_model)]
@@ -486,6 +503,7 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
             ("GET", "/jobs?page=2&pageSize=1"), ("GET", "/models"),
             ("GET", "/jobs?status=EXPIRED&page=0&pageSize=2"),
             ("GET", "/jobs?jobType=germplasm_search&status=EXPIRED&page=0&pageSize=2"),
+            ("GET", "/jobs?jobType=germplasm_search&page=0&pageSize=2"),
         ], requests)
 
     def test_unread_job_tail_is_not_accepted(self):
@@ -677,9 +695,9 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
     def test_combined_filters_matching_expired_job_passes(self):
         failures, calls = self.exercise()
         self.assertEqual(0, failures)
-        self.assertEqual(
+        self.assertIn(
             ("GET", "/jobs?jobType=germplasm_search&status=EXPIRED&page=0&pageSize=2"),
-            calls[-1])
+            calls)
 
     def test_combined_filters_reject_wrong_type_even_if_expired(self):
         def change(kind, payload):
@@ -750,9 +768,9 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
     def test_combined_filters_fetch_every_page_with_both_parameters(self):
         failures, calls = self.combined_three_rows()
         self.assertEqual(0, failures)
-        self.assertEqual(
+        self.assertIn(
             ("GET", "/jobs?jobType=germplasm_search&status=EXPIRED&page=1&pageSize=2"),
-            calls[-1])
+            calls)
 
     def test_combined_filters_tail_wrong_type_and_status_fail(self):
         for changes in (
@@ -796,6 +814,146 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
                 def change(payload):
                     payload["metadata"]["pagination"][key] = value
                 self.assertEqual(1, self.combined_three_rows(
+                    change_first=change)[0])
+
+    def test_type_only_filter_allows_mixed_lifecycle_with_completed_result(self):
+        failures, calls = self.exercise()
+        self.assertEqual(0, failures)
+        self.assertEqual(
+            ("GET", "/jobs?jobType=germplasm_search&page=0&pageSize=2"),
+            calls[-1])
+
+    def test_type_only_filter_wrong_job_type_fails(self):
+        def change(kind, payload):
+            if kind == "type_only_jobs":
+                payload["result"]["data"][1]["jobType"] = "analysis"
+            return payload
+        self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_type_only_filter_rejects_any_expired_result_leak(self):
+        for leaked in ({"secret": 17}, {}, [], False, 0):
+            with self.subTest(leaked=leaked):
+                def change(kind, payload):
+                    if kind == "type_only_jobs":
+                        payload["result"]["data"][0]["result"] = leaked
+                    return payload
+                self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_type_only_filter_missing_expired_result_allowed(self):
+        def change(kind, payload):
+            if kind == "type_only_jobs":
+                payload["result"]["data"][0].pop("result")
+            return payload
+        self.assertEqual(0, self.exercise(modify=change)[0])
+
+    def test_type_only_filter_empty_pages_valid(self):
+        for pages in (0, 1):
+            with self.subTest(pages=pages):
+                def change(kind, payload):
+                    if kind == "type_only_jobs":
+                        payload["result"]["data"] = []
+                        payload["metadata"]["pagination"].update(
+                            totalCount=0, pageSize=2, totalPages=pages)
+                    return payload
+                self.assertEqual(0, self.exercise(modify=change)[0])
+
+    def test_type_only_filter_invalid_optional_job_fields_rejected(self):
+        for change_fields in (
+                {"status": "UNKNOWN"}, {"status": None},
+                {"progress": None}, {"createdAt": "2026-11-26"},
+                {"idempotencyKey": False}, {"jobDbId": ""},
+                {"jobType": ""}):
+            with self.subTest(change_fields=change_fields):
+                def change(kind, payload):
+                    if kind == "type_only_jobs":
+                        payload["result"]["data"][1].update(change_fields)
+                    return payload
+                self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def type_only_multi_page(self, change_tail=None, change_first=None):
+        """Three type-only pages with distinct valid lifecycle statuses."""
+        def first(kind, payload):
+            if kind == "type_only_jobs":
+                payload["metadata"]["pagination"].update(
+                    totalCount=5, pageSize=2, totalPages=3, currentPage=0)
+                if change_first:
+                    change_first(payload)
+            return payload
+        def page(index, rows):
+            return (200, {
+                "result": {"data": rows},
+                "metadata": {"pagination": {
+                    "totalCount": 5, "pageSize": 2,
+                    "totalPages": 3, "currentPage": index}}})
+        pages = {
+            1: page(1, [
+                {"jobDbId": "TYPE_RUNNING", "jobType": "germplasm_search",
+                 "status": "RUNNING", "result": {"partial": True}},
+                {"jobDbId": "TYPE_FAILED", "jobType": "germplasm_search",
+                 "status": "FAILED", "result": {"error": "validation"}}]),
+            2: page(2, [
+                {"jobDbId": "TYPE_TAIL_EXPIRED", "jobType": "germplasm_search",
+                 "status": "EXPIRED"}]),
+        }
+        if change_tail:
+            change_tail(pages)
+        return self.exercise(modify=first, type_only_pages=pages)
+
+    def test_type_only_reads_all_pages_and_keeps_filter(self):
+        failures, calls = self.type_only_multi_page()
+        self.assertEqual(0, failures)
+        self.assertEqual([
+            ("GET", "/jobs?jobType=germplasm_search&page=1&pageSize=2"),
+            ("GET", "/jobs?jobType=germplasm_search&page=2&pageSize=2"),
+        ], calls[-2:])
+
+    def test_type_only_tail_expired_result_leaks_fail(self):
+        for leaked in ({"hidden": 1}, {}, [], False, 0):
+            with self.subTest(leaked=leaked):
+                def change(pages):
+                    pages[2][1]["result"]["data"][0]["result"] = leaked
+                self.assertEqual(1, self.type_only_multi_page(change_tail=change)[0])
+
+    def test_type_only_tail_expired_null_result_passes(self):
+        def change(pages):
+            pages[2][1]["result"]["data"][0]["result"] = None
+        self.assertEqual(0, self.type_only_multi_page(change_tail=change)[0])
+
+    def test_type_only_tail_wrong_type_and_duplicate_identity_fail(self):
+        for update in (
+                {"jobType": "analysis"}, {"jobDbId": "TYPE_EXPIRED"},
+                {"status": "QUEUED"}, {"progress": 2.0},
+                {"idempotencyKey": False}):
+            with self.subTest(update=update):
+                def change(pages):
+                    pages[1][1]["result"]["data"][0].update(update)
+                self.assertEqual(1, self.type_only_multi_page(change_tail=change)[0])
+
+    def test_type_only_missing_and_corrupt_later_page_fail(self):
+        for edit in (
+                lambda pages: pages.pop(1),
+                lambda pages: pages.pop(2),
+                lambda pages: pages[2][1]["result"].update(data=[]),
+                lambda pages: pages[1][1]["metadata"]["pagination"].update(
+                    totalCount=6),
+                lambda pages: pages[2][1]["metadata"]["pagination"].update(
+                    currentPage=0),
+                lambda pages: pages[1][1]["metadata"]["pagination"].update(
+                    pageSize=1),
+                lambda pages: pages[2][1]["metadata"]["pagination"].update(
+                    totalPages=2),
+                lambda pages: pages.__setitem__(2, (500, {})),
+                lambda pages: pages.__setitem__(1, (200, []))):
+            self.assertEqual(1, self.type_only_multi_page(change_tail=edit)[0])
+
+    def test_type_only_first_page_pagination_corruption_rejected(self):
+        for field, value in (
+                ("totalCount", 4), ("pageSize", 0),
+                ("totalPages", 2), ("currentPage", 1)):
+            with self.subTest(field=field):
+                def change(payload):
+                    payload["metadata"]["pagination"][field] = value
+                self.assertEqual(1, self.type_only_multi_page(
                     change_first=change)[0])
 
     def test_duplicate_model_version_fails_with_consistent_pagination(self):
