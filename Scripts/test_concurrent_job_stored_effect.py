@@ -94,6 +94,29 @@ class ConcurrentJobStoredEffectTests(unittest.TestCase):
         self.assertEqual(8, len([method for method, _ in calls if method == "POST"]))
         self.assertEqual(1, len([method for method, _ in calls if method == "GET"]))
 
+    def test_expired_original_stored_job_cannot_expose_result(self):
+        def change(rows):
+            rows[0]["status"] = "EXPIRED"
+            rows[0]["result"] = {"data": ["expired-secret"]}
+            return rows
+        self.assertEqual(1, self.exercise(change_rows=change)[0])
+
+    def test_expired_unrelated_stored_job_cannot_expose_result(self):
+        def change(rows):
+            rows[1]["status"] = "EXPIRED"
+            rows[1]["result"] = {"data": [42]}
+            return rows
+        self.assertEqual(1, self.exercise(
+            add_unrelated=True, change_rows=change)[0])
+
+    def test_expired_unrelated_stored_job_null_result_allowed(self):
+        def change(rows):
+            rows[1]["status"] = "EXPIRED"
+            rows[1]["result"] = None
+            return rows
+        self.assertEqual(0, self.exercise(
+            add_unrelated=True, change_rows=change)[0])
+
     def test_stored_job_invalid_progress_fails(self):
         for progress in (-0.2, 1.2, None, True, "0.5", float("inf")):
             with self.subTest(progress=progress):
