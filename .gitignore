@@ -13,6 +13,7 @@ out.yaml
 __pycache__/
 *.py[cod]
 .pytest_cache/
+*.db
 brapi_blueprint.apib.json
 /generator/.gradle/
 /generator/build
