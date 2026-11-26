@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Mission 139: L-25 pagination counts must match returned first-page rows."""
+"""L-25 collection arithmetic, full Job scan and filtered expired confidentiality."""
 from __future__ import annotations
 
 import copy
@@ -21,15 +21,17 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
         cls.probe = next(p for p in document["probes"] if p["id"] == "L-25")
 
     def test_registered_collections_are_both_required(self):
-        self.assertEqual(4, len(self.probe["calls"]))
+        self.assertEqual(5, len(self.probe["calls"]))
         self.assertEqual(
             ["jobs", "models"],
             [step["assert"]["collection_contains_created"]
-             for step in self.probe["calls"][-2:]],
+             for step in self.probe["calls"][2:4]],
         )
+        self.assertIs(True, self.probe["calls"][4]["assert"][
+            "filtered_expired_jobs_withheld"])
 
     def exercise(self, modify=None, include_unrelated=False, status=200,
-                 job_pages=None):
+                 job_pages=None, filtered_pages=None):
         requests = []
         submitted_model = {}
         job_body = {}
@@ -73,6 +75,18 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
                 if job_pages is None:
                     return 404, {}
                 return copy.deepcopy(job_pages.get(index, (404, {})))
+            if method == "GET" and path.startswith("/jobs?status=EXPIRED&page="):
+                index = int(path.split("page=", 1)[1].split("&", 1)[0])
+                if index > 0:
+                    return copy.deepcopy(
+                        (filtered_pages or {}).get(index, (404, {})))
+                value = first_page([{
+                    "jobDbId": "JOB_EXPIRED", "jobType": "analysis",
+                    "status": "EXPIRED", "result": None}])
+                value["metadata"]["pagination"]["pageSize"] = 2
+                if modify:
+                    value = modify("filtered_jobs", value)
+                return status, value
             if method == "GET" and path == "/models":
                 rows = [copy.deepcopy(submitted_model)]
                 if include_unrelated:
@@ -453,6 +467,7 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
             ("POST", "/jobs"), ("POST", "/models"), ("GET", "/jobs"),
             ("GET", "/jobs?page=1&pageSize=1"),
             ("GET", "/jobs?page=2&pageSize=1"), ("GET", "/models"),
+            ("GET", "/jobs?status=EXPIRED&page=0&pageSize=2"),
         ], requests)
 
     def test_unread_job_tail_is_not_accepted(self):
@@ -527,6 +542,118 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
                 self.assertEqual(1, self.paged_jobs(change_page=change)[0])
         self.assertEqual(1, self.paged_jobs(change_page=lambda pages:
             pages[2][1]["result"].update(data=[]))[0])
+
+    def test_filtered_expired_result_leaks_are_rejected(self):
+        for leaked in ({"secret": [42]}, {}, [], False, 0):
+            with self.subTest(leaked=leaked):
+                def change(kind, payload):
+                    if kind == "filtered_jobs":
+                        payload["result"]["data"][0]["result"] = leaked
+                    return payload
+                self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_filtered_wrong_status_and_malformed_rows_rejected(self):
+        for row in (
+                {"jobDbId": "JOB_EXPIRED", "jobType": "analysis",
+                 "status": "COMPLETED", "result": None},
+                {"jobDbId": "JOB_EXPIRED", "jobType": "analysis"},
+                {"jobDbId": "", "jobType": "analysis", "status": "EXPIRED"},
+                {"jobDbId": "JOB_EXPIRED", "jobType": "",
+                 "status": "EXPIRED"},
+                {"jobDbId": "JOB_EXPIRED", "jobType": "analysis",
+                 "status": "EXPIRED", "progress": None},
+                None):
+            with self.subTest(row=row):
+                def change(kind, payload):
+                    if kind == "filtered_jobs":
+                        payload["result"]["data"] = [row]
+                    return payload
+                self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_empty_filtered_collection_is_valid_shape_only(self):
+        for total_pages in (0, 1):
+            with self.subTest(total_pages=total_pages):
+                def change(kind, payload):
+                    if kind == "filtered_jobs":
+                        payload["result"]["data"] = []
+                        payload["metadata"]["pagination"].update(
+                            totalCount=0, totalPages=total_pages)
+                    return payload
+                self.assertEqual(0, self.exercise(modify=change)[0])
+
+    def test_filtered_expired_absent_result_and_null_are_allowed(self):
+        def change(kind, payload):
+            if kind == "filtered_jobs":
+                payload["result"]["data"][0].pop("result")
+            return payload
+        self.assertEqual(0, self.exercise(modify=change)[0])
+
+    def filtered_three_rows(self, mutate=None):
+        def change(kind, payload):
+            if kind == "filtered_jobs":
+                payload["result"]["data"] = [
+                    {"jobDbId": "EXPIRED_1", "jobType": "analysis",
+                     "status": "EXPIRED", "result": None},
+                    {"jobDbId": "EXPIRED_2", "jobType": "analysis",
+                     "status": "EXPIRED"}]
+                payload["metadata"]["pagination"].update(
+                    totalCount=3, pageSize=2, totalPages=2, currentPage=0)
+            return payload
+        tail = (200, {
+            "result": {"data": [{"jobDbId": "EXPIRED_3",
+                                  "jobType": "analysis",
+                                  "status": "EXPIRED", "result": None}]},
+            "metadata": {"pagination": {"totalCount": 3, "pageSize": 2,
+                                       "totalPages": 2, "currentPage": 1}},
+        })
+        pages = {1: tail}
+        if mutate:
+            mutate(pages)
+        return self.exercise(modify=change, filtered_pages=pages)
+
+    def test_filtered_tail_page_is_retrieved_and_accepted(self):
+        failures, requests = self.filtered_three_rows()
+        self.assertEqual(0, failures)
+        self.assertIn(
+            ("GET", "/jobs?status=EXPIRED&page=1&pageSize=2"), requests)
+
+    def test_filtered_tail_leak_fails_even_with_clean_first_page(self):
+        for leaked in ({"data": ["secret"]}, [], {}, False, 0):
+            with self.subTest(leaked=leaked):
+                def change(pages):
+                    pages[1][1]["result"]["data"][0]["result"] = leaked
+                self.assertEqual(1, self.filtered_three_rows(change)[0])
+
+    def test_filtered_tail_wrong_status_or_duplicate_id_fails(self):
+        for changes in (
+                {"status": "COMPLETED"}, {"jobDbId": "EXPIRED_1"},
+                {"jobType": ""}, {"progress": "0.5"}):
+            with self.subTest(changes=changes):
+                def change(pages):
+                    pages[1][1]["result"]["data"][0].update(changes)
+                self.assertEqual(1, self.filtered_three_rows(change)[0])
+
+    def test_filtered_tail_missing_or_malformed_page_fails(self):
+        self.assertEqual(1, self.filtered_three_rows(lambda p: p.clear())[0])
+        for change in (
+                lambda p: p[1][1]["metadata"]["pagination"].update(
+                    totalPages=3),
+                lambda p: p[1][1]["metadata"]["pagination"].update(
+                    currentPage=0),
+                lambda p: p[1][1]["result"].update(data=[]),
+                lambda p: p.__setitem__(1, (500, {})),
+                lambda p: p.__setitem__(1, (200, []))):
+            self.assertEqual(1, self.filtered_three_rows(change)[0])
+
+    def test_filtered_first_page_bad_counts_and_truncation_fail(self):
+        for bad in ("pageSize", "totalPages", "totalCount", "currentPage"):
+            with self.subTest(field=bad):
+                def change(kind, payload):
+                    if kind == "filtered_jobs":
+                        payload["metadata"]["pagination"][bad] = (
+                            0 if bad != "totalCount" else 4)
+                    return payload
+                self.assertEqual(1, self.exercise(modify=change)[0])
 
     def test_duplicate_model_version_fails_with_consistent_pagination(self):
         def change(kind, data):
