@@ -1287,6 +1287,7 @@ def immutable_job_snapshot(status, payload):
             or any(type(page.get(field)) is not int
                    for field in ("totalCount", "pageSize", "totalPages", "currentPage"))
             or page["totalCount"] != len(rows)
+            or page["pageSize"] < 1
             or page["pageSize"] < len(rows)
             or page["totalPages"] != 1 or page["currentPage"] != 0):
         return None, "incomplete jobs collection or pagination"

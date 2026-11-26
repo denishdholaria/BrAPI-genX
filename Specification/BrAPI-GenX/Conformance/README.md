@@ -1495,3 +1495,19 @@ include early-failure cases plus valid transitions.
 This is not a new field or idempotency policy: the submitted
 idempotency key must already be echoed by the published Job schema.
 See [Mission 181 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-181-POLL-ORIGINAL-REQUEST-BINDING.md).
+
+## Empty complete Job collections must have positive pageSize (Mission 182)
+
+The shared complete jobs-collection snapshot used by **L-01**,
+**L-02**, **L-04**, **L-15** and **L-24** now rejects
+`pageSize: 0` even when a collection is empty. Previously its
+`pageSize >= returned row count` test let an empty collection with
+zero page size pass the assertion despite invalid pagination.
+
+This enforces the already-used positive page-size rule; it does not
+change the accepted empty collection representation, single-page
+evidence, total count or optional Job fields. Mandatory L-04 and
+L-15 regression suites now verify zero-size rejection and
+positive-size empty collection acceptance.
+
+See [Mission 182 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-182-EMPTY-JOBS-PAGESIZE-INTEGRITY.md).
