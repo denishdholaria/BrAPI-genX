@@ -233,6 +233,7 @@ class TerminalCancelRetainedStateTests(unittest.TestCase):
 
     def test_terminal_poll_accepts_completed_success(self):
         completed = {"result": {"jobDbId": "JOB_TERMINAL",
+                                "jobType": "germplasm_search",
                                 "status": "COMPLETED"}}
         with mock.patch.object(checker, "http_call",
                                return_value=(200, completed)) as call:
@@ -281,6 +282,127 @@ class TerminalCancelRetainedStateTests(unittest.TestCase):
                                       "JOB_TERMINAL", None)
         self.assertEqual(1, call.call_count)
 
+
+
+    @staticmethod
+    def _poll_job(job, responses=None):
+        if responses is None:
+            responses = [(200, {"result": job})]
+        with mock.patch.object(checker, "http_call", side_effect=responses) as call:
+            with mock.patch("time.sleep", return_value=None):
+                try:
+                    value = checker.wait_terminal(
+                        "http://example.test/genx/v1", "JOB_TERMINAL", None
+                    )
+                except ValueError as exc:
+                    return None, str(exc), call.call_count
+        return value, None, call.call_count
+
+    def test_terminal_poll_rejects_missing_or_invalid_required_job_type(self):
+        for wrong in (None, "", False, 2, []):
+            with self.subTest(wrong=wrong):
+                row = {"jobDbId": "JOB_TERMINAL", "status": "COMPLETED"}
+                if wrong is not None:
+                    row["jobType"] = wrong
+                value, error, count = self._poll_job(row)
+                self.assertIsNone(value)
+                self.assertIn("schema-invalid Job", error)
+                self.assertEqual(1, count)
+
+    def test_terminal_poll_rejects_missing_or_unknown_lifecycle_status(self):
+        for wrong in (None, "QUEUED", False, 5, {}):
+            with self.subTest(wrong=wrong):
+                row = {"jobDbId": "JOB_TERMINAL",
+                       "jobType": "germplasm_search"}
+                if wrong is not None:
+                    row["status"] = wrong
+                value, error, count = self._poll_job(row)
+                self.assertIsNone(value)
+                self.assertIn("schema-invalid Job", error)
+                self.assertEqual(1, count)
+
+    def test_terminal_poll_rejects_malformed_optional_progress(self):
+        for wrong in (None, False, "0.5", -0.1, 1.01,
+                      float("nan"), float("inf")):
+            with self.subTest(wrong=wrong):
+                row = {"jobDbId": "JOB_TERMINAL",
+                       "jobType": "germplasm_search",
+                       "status": "COMPLETED", "progress": wrong}
+                value, error, count = self._poll_job(row)
+                self.assertIsNone(value)
+                self.assertIn("schema-invalid Job", error)
+                self.assertEqual(1, count)
+
+    def test_terminal_poll_rejects_bad_optional_date_time(self):
+        for field in ("createdAt", "updatedAt", "expiresAt"):
+            for wrong in (None, "2026-11-25",
+                          "2026-11-25T12:00:00",
+                          "2026-02-30T12:00:00Z"):
+                with self.subTest(field=field, wrong=wrong):
+                    row = {"jobDbId": "JOB_TERMINAL",
+                           "jobType": "germplasm_search",
+                           "status": "COMPLETED", field: wrong}
+                    value, error, count = self._poll_job(row)
+                    self.assertIsNone(value)
+                    self.assertIn("schema-invalid Job", error)
+                    self.assertEqual(1, count)
+
+    def test_terminal_poll_rejects_nonstring_optional_key(self):
+        row = {"jobDbId": "JOB_TERMINAL",
+               "jobType": "germplasm_search",
+               "status": "COMPLETED", "idempotencyKey": True}
+        value, error, count = self._poll_job(row)
+        self.assertIsNone(value)
+        self.assertIn("schema-invalid Job", error)
+        self.assertEqual(1, count)
+
+    def test_intermediate_poll_rejects_invalid_status_before_retry(self):
+        row = {"jobDbId": "JOB_TERMINAL",
+               "jobType": "germplasm_search",
+               "status": "QUEUED"}
+        value, error, count = self._poll_job(row)
+        self.assertIsNone(value)
+        self.assertIn("schema-invalid Job", error)
+        self.assertEqual(1, count)
+
+    def test_intermediate_poll_rejects_bad_progress_before_retry(self):
+        row = {"jobDbId": "JOB_TERMINAL",
+               "jobType": "germplasm_search",
+               "status": "RUNNING", "progress": -1}
+        value, error, count = self._poll_job(row)
+        self.assertIsNone(value)
+        self.assertIn("schema-invalid Job", error)
+        self.assertEqual(1, count)
+
+    def test_intermediate_poll_accepts_valid_running_then_completed(self):
+        running = {"jobDbId": "JOB_TERMINAL",
+                   "jobType": "germplasm_search", "status": "RUNNING",
+                   "progress": 0.25, "createdAt": "2026-11-25T12:00:00Z"}
+        done = {"jobDbId": "JOB_TERMINAL",
+                "jobType": "germplasm_search", "status": "COMPLETED",
+                "progress": 1.0, "updatedAt": "2026-11-25T12:01:00-0600"}
+        terminal = (200, {"result": done})
+        value, error, count = self._poll_job(
+            None, [(200, {"result": running}), terminal]
+        )
+        self.assertIsNone(error)
+        self.assertEqual({"result": done}, value)
+        self.assertEqual(2, count)
+
+    def test_terminal_poll_allows_valid_optional_fields(self):
+        for progress in (0, 0.6, 1.0):
+            with self.subTest(progress=progress):
+                row = {"jobDbId": "JOB_TERMINAL",
+                       "jobType": "germplasm_search",
+                       "status": "COMPLETED", "progress": progress,
+                       "createdAt": "2026-11-25T12:00:00Z",
+                       "updatedAt": "2026-11-25T12:01:00+05:30",
+                       "expiresAt": "2026-11-25T12:02:00-0600",
+                       "idempotencyKey": "client-key"}
+                value, error, count = self._poll_job(row)
+                self.assertIsNone(error)
+                self.assertEqual({"result": row}, value)
+                self.assertEqual(1, count)
 
 
 if __name__ == "__main__":
