@@ -1248,7 +1248,18 @@ def wait_terminal(server, job_id, token):
             raise ValueError(
                 f"terminal job polling GET did not return requested job {job_id}"
             )
-        if returned.get("status") in TERMINAL:
+        # Each successful polling GET is an independent Job response.
+        # Do not let a later valid terminal result conceal malformed
+        # intermediate or terminal Job schema fields.
+        if (not isinstance(returned.get("jobType"), str)
+                or not returned["jobType"]
+                or not valid_job_wire_fields(returned)
+                or ("idempotencyKey" in returned
+                    and not isinstance(returned["idempotencyKey"], str))):
+            raise ValueError(
+                f"terminal job polling GET returned schema-invalid Job {job_id}"
+            )
+        if returned["status"] in TERMINAL:
             return last
         time.sleep(1)
     return last
