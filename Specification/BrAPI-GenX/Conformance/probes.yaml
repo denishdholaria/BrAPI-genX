@@ -499,15 +499,16 @@ probes:
   object: all
   title: List endpoints return paged envelopes
   procedure:
-  - GET job and model collections after creating one of each; validate first-page arithmetic, follow every advertised Job page, and independently query all pages of the EXPIRED-status-filtered Job collection.
-  expectation: Initial job acceptance echoes the original jobType and idempotencyKey without disclosing an EXPIRED result; each collection returns a consistent first-page envelope and exactly one matching created identity, with well-formed unique identities and valid required Job lifecycle statuses, schema-valid optional timestamps and no exposed EXPIRED results across every advertised Job page (including unrelated historical Jobs), consistent Job pagination counters; a status=EXPIRED filtered list (including later pages) contains only EXPIRED Jobs with withheld results, valid identities and consistent counts; and unique well-formed (modelDbId, modelVersion) pairs for first-page models, original job request binding and all submitted model fields including nested provenance intact.
-  falsifier: Missing, malformed, truncated or inaccessible Job pages, an EXPIRED result on any unfiltered or filtered page, mixed statuses under the EXPIRED filter, duplicate Job identities across pages, a mismatched job type or request key, changed model fields, inconsistent pagination or missing created records.
+  - GET job and model collections after creating one of each; validate unfiltered Job pagination, then independently audit EXPIRED-only and combined jobType=germplasm_search/status=EXPIRED filtered collections across every advertised page.
+  expectation: Initial job acceptance echoes the original jobType and idempotencyKey without disclosing an EXPIRED result; each collection returns a consistent first-page envelope and exactly one matching created identity, with well-formed unique identities and valid required Job lifecycle statuses, schema-valid optional timestamps and no exposed EXPIRED results across every advertised Job page (including unrelated historical Jobs), consistent Job pagination counters; a status=EXPIRED filtered list and a combined jobType=germplasm_search/status=EXPIRED list (including later pages) each contain only matching Jobs with withheld results, valid identities and consistent counts; and unique well-formed (modelDbId, modelVersion) pairs for first-page models, original job request binding and all submitted model fields including nested provenance intact.
+  falsifier: Missing, malformed, truncated or inaccessible Job pages, an EXPIRED result on any unfiltered or filtered page, mixed statuses or wrong job types under either filter, duplicate Job identities across pages, a mismatched job type or request key, changed model fields, inconsistent pagination or missing created records.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_submit, capture_job: true}
   - {method: POST, path: /models, body_fixture: live_model_submit, capture_model: true}
   - {method: GET, path: /jobs, assert: {status: 200, collection_contains_created: jobs}}
   - {method: GET, path: /models, assert: {status: 200, collection_contains_created: models}}
   - {method: GET, path: "/jobs?status=EXPIRED&page=0&pageSize=2", assert: {status: 200, filtered_expired_jobs_withheld: true}}
+  - {method: GET, path: "/jobs?jobType=germplasm_search&status=EXPIRED&page=0&pageSize=2", assert: {status: 200, filtered_expired_job_type_withheld: true}}
 - id: L-26
   tier: live
   object: telemetry

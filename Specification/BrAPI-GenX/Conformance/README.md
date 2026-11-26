@@ -83,7 +83,7 @@ conflict (L-13), inference digest binding (L-14), unknown/revoked model
 rejection (L-15), matrix replay (L-16), matrix conflict (L-17), package
 replay (L-18), package conflict (L-19), embargo denial (L-20), telemetry
 replay (L-21), telemetry conflict (L-22), aggregate recomputation (L-23),
-concurrent-submit single effect (L-24), list envelopes, every advertised Job page and EXPIRED-filtered collection pages (L-25), windowed
+concurrent-submit single effect (L-24), list envelopes, every advertised Job page and combined type/status filtered collection pages (L-25), windowed
 buckets (L-26), deprecated warning (L-27), and pagination slice (L-28).
 Historical L-29 results describe a branch-specific experimental live
 advertisement check, not a currently registered probe. Older static checks
@@ -1607,3 +1607,24 @@ These checks add no new expiry policy or wire schema.
 The mandatory L-25 collection and manifest mutation suites include
 positive and negative filtered-list cases. See
 [Mission 187 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-187-FILTERED-EXPIRED-JOB-CONFIDENTIALITY.md).
+
+
+## Combined Job type/status filtered confidentiality (Mission 188)
+
+**L-25** now independently queries
+`GET /jobs?jobType=germplasm_search&status=EXPIRED&page=0&pageSize=2`,
+in addition to the existing unfiltered and `status=EXPIRED` checks.
+Every returned row must match **both** filters, have a valid Job
+identity/lifecycle schema, and withhold its expired `result` (absent
+or null). When further pages are advertised, the runner fetches each
+one without dropping either filter and rejects inconsistent metadata,
+missing slices, repeated identities, wrong types/statuses or any
+non-null expired result.
+
+This is validation of existing query semantics, not a new wire
+schema or expired-result policy. Empty combined-filter lists are
+allowed but yield only limited shape evidence. The mandatory L-25 and
+assertion-manifest regressions cover tail-page leaks, wrong-type rows
+and incomplete pagination.
+
+See [Mission 188 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-188-COMBINED-JOB-FILTER-CONFORMANCE.md).

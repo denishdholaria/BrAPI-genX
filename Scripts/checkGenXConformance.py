@@ -1375,7 +1375,7 @@ def job_collection_tail_problem(server, token, pagination, seen_job_ids,
 
 
 
-def filtered_expired_jobs_problem(server, token, status, payload):
+def filtered_expired_jobs_problem(server, token, status, payload, job_type=None):
     """Audit the EXPIRED-filtered /jobs response and every advertised page.
 
     A filtered collection is separate evidence from the unfiltered L-25 scan:
@@ -1383,7 +1383,9 @@ def filtered_expired_jobs_problem(server, token, status, payload):
     the filtered route. No known-expired ID is required; zero results are
     valid but provide only empty-collection shape/filter evidence.
     """
-    size = 2  # The registered L-25 request explicitly uses pageSize=2.
+    size = 2  # Both registered L-25 filtered reads use pageSize=2.
+    if job_type is not None and (not isinstance(job_type, str) or not job_type):
+        return "combined filtered Job type missing"
     if status != 200:
         return "EXPIRED-filtered jobs collection GET failed"
     seen = set()
@@ -1407,9 +1409,10 @@ def filtered_expired_jobs_problem(server, token, status, payload):
         if index == 0:
             response_status, current = status, first
         else:
+            prefix = (f"/jobs?jobType={quote(job_type, safe='')}&status=EXPIRED"
+                      if job_type is not None else "/jobs?status=EXPIRED")
             response_status, current = http_call(
-                server, "GET",
-                f"/jobs?status=EXPIRED&page={index}&pageSize={size}",
+                server, "GET", f"{prefix}&page={index}&pageSize={size}",
                 token=token)
         result = current.get("result") if isinstance(current, dict) else None
         rows = result.get("data") if isinstance(result, dict) else None
@@ -1432,6 +1435,7 @@ def filtered_expired_jobs_problem(server, token, status, payload):
                     or identity in seen
                     or not isinstance(row.get("jobType"), str)
                     or not row["jobType"]
+                    or (job_type is not None and row["jobType"] != job_type)
                     or not valid_job_wire_fields(row)
                     or not expired_job_result_withheld(row)
                     or ("idempotencyKey" in row
@@ -2403,6 +2407,14 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                     return results.report(
                         probe["id"], probe["title"], "FAIL", problem
                     )
+            if assertion.get("filtered_expired_job_type_withheld"):
+                problem = filtered_expired_jobs_problem(
+                    server, token, status, payload, job_type="germplasm_search")
+                if problem:
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        "combined Job filters: " + problem
+                    )
             if "collection_contains_created" in assertion:
                 kind = assertion["collection_contains_created"]
                 result = payload.get("result") if isinstance(payload, dict) else None
@@ -3244,6 +3256,7 @@ LIVE_BOOLEAN_ASSERTIONS = frozenset({
     "job_conflict_collection_unchanged", "terminal_state_unchanged",
     "unknown_job_type_not_stored", "expired_result_withheld",
     "filtered_expired_jobs_withheld",
+    "filtered_expired_job_type_withheld",
     "embargo_denial_no_payload",
     "capability_registry_match",
 })
@@ -3384,6 +3397,14 @@ def validate_live_step_assertions(probe_id, index, call):
         raise ValueError(
             f"probe {probe_id} call {index}: "
             "filtered_expired_jobs_withheld requires status-filtered jobs GET"
+        )
+    if "filtered_expired_job_type_withheld" in assertion and (
+            call.get("method") != "GET"
+            or call.get("path") !=
+                "/jobs?jobType=germplasm_search&status=EXPIRED&page=0&pageSize=2"):
+        raise ValueError(
+            f"probe {probe_id} call {index}: "
+            "filtered_expired_job_type_withheld requires combined Job filters GET"
         )
     if "expired_result_withheld" in assertion and (
             call.get("method") != "GET"
@@ -3607,7 +3628,7 @@ def validate_probe_manifest(probes):
                         "probe L-07: original observation and provenance round-trip required"
                     )
             if probe_id == "L-25":
-                if (len(calls) != 5
+                if (len(calls) != 6
                         or calls[0].get("method") != "POST"
                         or calls[0].get("path") != "/jobs"
                         or calls[0].get("body_fixture") != "live_submit"
@@ -3629,7 +3650,13 @@ def validate_probe_manifest(probes):
                             "/jobs?status=EXPIRED&page=0&pageSize=2"
                         or calls[4].get("assert", {}).get("status") != 200
                         or calls[4].get("assert", {}).get(
-                            "filtered_expired_jobs_withheld") is not True):
+                            "filtered_expired_jobs_withheld") is not True
+                        or calls[5].get("method") != "GET"
+                        or calls[5].get("path") !=
+                            "/jobs?jobType=germplasm_search&status=EXPIRED&page=0&pageSize=2"
+                        or calls[5].get("assert", {}).get("status") != 200
+                        or calls[5].get("assert", {}).get(
+                            "filtered_expired_job_type_withheld") is not True):
                     raise ValueError(
                         "probe L-25: paged job and model collection evidence required"
                     )
