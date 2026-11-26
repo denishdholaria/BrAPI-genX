@@ -103,6 +103,43 @@ class TerminalCancelRetainedStateTests(unittest.TestCase):
         self.assertEqual(0, self.exercise(
             baseline_status="EXPIRED", retrieved_status="EXPIRED")[0])
 
+    def test_expired_job_with_null_result_allowed_both_readbacks(self):
+        def redact(row):
+            row["result"] = None
+        self.assertEqual(0, self.exercise(
+            baseline_status="EXPIRED", retrieved_status="EXPIRED",
+            baseline_mutation=redact, readback_mutation=redact)[0])
+
+    def test_expired_job_with_same_leaked_result_rejected(self):
+        # Both snapshots match exactly: unchanged-result checks alone
+        # previously accepted this confidential expired result.
+        def leak(row):
+            row["result"] = {"data": [{"secret": "expired-output"}]}
+        self.assertEqual(1, self.exercise(
+            baseline_status="EXPIRED", retrieved_status="EXPIRED",
+            baseline_mutation=leak, readback_mutation=leak)[0])
+
+    def test_expired_job_with_empty_object_result_rejected(self):
+        def leak(row):
+            row["result"] = {}
+        self.assertEqual(1, self.exercise(
+            baseline_status="EXPIRED", retrieved_status="EXPIRED",
+            baseline_mutation=leak, readback_mutation=leak)[0])
+
+    def test_expired_job_with_leak_only_before_delete_rejected(self):
+        def leak(row):
+            row["result"] = {"data": [1]}
+        self.assertEqual(1, self.exercise(
+            baseline_status="EXPIRED", retrieved_status="EXPIRED",
+            baseline_mutation=leak)[0])
+
+    def test_expired_job_with_leak_only_after_delete_rejected(self):
+        def leak(row):
+            row["result"] = {"data": [1]}
+        self.assertEqual(1, self.exercise(
+            baseline_status="EXPIRED", retrieved_status="EXPIRED",
+            readback_mutation=leak)[0])
+
     def test_terminal_to_cancelled_mutation_fails(self):
         self.assertEqual(1, self.exercise(retrieved_status="CANCELLED")[0])
 
@@ -348,6 +385,40 @@ class TerminalCancelRetainedStateTests(unittest.TestCase):
                 except ValueError as exc:
                     return None, str(exc), call.call_count
         return value, None, call.call_count
+
+    def test_terminal_poll_rejects_expired_result_disclosure(self):
+        for leaked in ({"data": [42]}, {}, [], "", 0, False):
+            with self.subTest(leaked=leaked):
+                row = {"jobDbId": "JOB_TERMINAL",
+                       "jobType": "germplasm_search", "status": "EXPIRED",
+                       "result": leaked}
+                value, error, count = self._poll_job(row)
+                self.assertIsNone(value)
+                self.assertIn("exposed expired result", error)
+                self.assertEqual(1, count)
+
+    def test_terminal_poll_accepts_expired_withheld_result(self):
+        for marker in ("absent", None):
+            with self.subTest(marker=marker):
+                row = {"jobDbId": "JOB_TERMINAL",
+                       "jobType": "germplasm_search", "status": "EXPIRED"}
+                if marker is None:
+                    row["result"] = None
+                value, error, count = self._poll_job(row)
+                self.assertIsNone(error)
+                self.assertEqual({"result": row}, value)
+                self.assertEqual(1, count)
+
+    def test_terminal_poll_with_valid_nonexpired_result_allowed(self):
+        for status in ("COMPLETED", "FAILED", "CANCELLED"):
+            with self.subTest(status=status):
+                row = {"jobDbId": "JOB_TERMINAL",
+                       "jobType": "germplasm_search", "status": status,
+                       "result": {"data": [42]}}
+                value, error, count = self._poll_job(row)
+                self.assertIsNone(error)
+                self.assertEqual({"result": row}, value)
+                self.assertEqual(1, count)
 
     def test_terminal_poll_rejects_missing_or_invalid_required_job_type(self):
         for wrong in (None, "", False, 2, []):
