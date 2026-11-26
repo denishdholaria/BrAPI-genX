@@ -199,6 +199,16 @@ class RejectedInferenceNoStoredJobTests(unittest.TestCase):
     def test_empty_job_collection_allowed(self):
         self.assertEqual(0, self.exercise(create_job=lambda rows, denied: [])[0])
 
+    def test_empty_collection_zero_page_size_fails(self):
+        self.assertEqual(1, self.exercise(
+            create_job=lambda rows, denied: [],
+            mutate_page=lambda page: {**page, "pageSize": 0})[0])
+
+    def test_empty_collection_positive_page_size_allowed(self):
+        self.assertEqual(0, self.exercise(
+            create_job=lambda rows, denied: [],
+            mutate_page=lambda page: {**page, "pageSize": 1})[0])
+
     def test_unknown_model_job_key_is_rejected(self):
         def create(rows, denied):
             return rows + [{"jobDbId": "JOB_FORBIDDEN",
