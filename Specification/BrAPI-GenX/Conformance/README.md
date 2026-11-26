@@ -83,7 +83,7 @@ conflict (L-13), inference digest binding (L-14), unknown/revoked model
 rejection (L-15), matrix replay (L-16), matrix conflict (L-17), package
 replay (L-18), package conflict (L-19), embargo denial (L-20), telemetry
 replay (L-21), telemetry conflict (L-22), aggregate recomputation (L-23),
-concurrent-submit single effect (L-24), list envelopes, every advertised Job page and EXPIRED-filtered collection pages (L-25), windowed
+concurrent-submit single effect (L-24), list envelopes, every advertised Job page and combined type/status filtered collection pages (L-25), windowed
 buckets (L-26), deprecated warning (L-27), and pagination slice (L-28).
 Historical L-29 results describe a branch-specific experimental live
 advertisement check, not a currently registered probe. Older static checks
