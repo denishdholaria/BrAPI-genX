@@ -1459,3 +1459,19 @@ suite covers malformed terminal and intermediate responses and
 positive multi-poll completion.
 
 See [Mission 179 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-179-TERMINAL-POLL-JOB-INTEGRITY.md).
+
+## Rejected terminal deletion pre/post-readback schema integrity (Mission 180)
+
+Registered **L-03** verifies that a rejected DELETE cannot mutate the
+original terminal Job identity, state or completed result. It now
+requires the pre-DELETE and post-DELETE Job records to satisfy the
+published required lifecycle status and optional progress/timestamp
+constraints, using the same validator as terminal polling.
+
+The test remains **identity and result preservation**, not forced
+equality of optional progress values or timestamps. Both records may
+contain different schema-valid server-managed fields. Mandatory
+regressions reject malformed optional fields on either side of DELETE
+while preserving positive valid differences.
+
+See [Mission 180 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-180-TERMINAL-POSTDELETE-SCHEMA.md).
