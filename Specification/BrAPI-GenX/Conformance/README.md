@@ -1628,3 +1628,24 @@ assertion-manifest regressions cover tail-page leaks, wrong-type rows
 and incomplete pagination.
 
 See [Mission 188 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-188-COMBINED-JOB-FILTER-CONFORMANCE.md).
+
+
+## Job-type-only collection integrity and expiry withholding (Mission 189)
+
+**L-25** now independently queries
+`GET /jobs?jobType=germplasm_search&page=0&pageSize=2`
+after the unfiltered, expired-only and combined-filter checks. Every
+Job must retain the requested `jobType`, and every `EXPIRED` Job
+must withhold its `result` (absent or null), including on later pages.
+Nonexpired Jobs may carry results, and valid lifecycle statuses may
+be mixed because no status filter is requested. Invalid optional
+fields, malformed identities, duplicated Jobs, inconsistent page
+counts, inaccessible pages and unfiltered tail requests all fail.
+
+The shared Job-filter validator is now parameterized for type-only,
+status-only and combined filters. No new wire or lifecycle policy is
+introduced. Empty filtered collections remain valid but provide
+limited discovery evidence. Mandatory L-25 collection and manifest
+mutation suites cover these distinctions.
+
+See [Mission 189 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-189-TYPE-ONLY-JOB-FILTER-INTEGRITY.md).
