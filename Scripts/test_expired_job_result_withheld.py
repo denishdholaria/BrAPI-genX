@@ -112,6 +112,21 @@ class ExpiredJobResultWithheldTests(unittest.TestCase):
                         "expiresAt": "2026-11-25T12:00:00-0600",
                         "idempotencyKey": "client-key"})[0])
 
+    def test_expired_result_scalar_boolean_and_zero_fail(self):
+        for value in (0, False, True, "", 0.0):
+            with self.subTest(value=value):
+                self.assertEqual(1, self.exercise(result_marker=value)[0])
+
+    def test_expired_result_policy_shared_with_terminal_checks(self):
+        self.assertFalse(checker.expired_job_result_withheld({
+            "jobDbId": "JOB_EXPIRED", "status": "EXPIRED",
+            "result": {"data": [42]}}))
+        self.assertTrue(checker.expired_job_result_withheld({
+            "jobDbId": "JOB_EXPIRED", "status": "EXPIRED"}))
+        self.assertTrue(checker.expired_job_result_withheld({
+            "jobDbId": "JOB_EXPIRED", "status": "EXPIRED",
+            "result": None}))
+
     def test_completed_job_response_fails(self):
         self.assertEqual(1, self.exercise(job_status="COMPLETED")[0])
 
