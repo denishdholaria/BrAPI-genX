@@ -217,7 +217,7 @@ probes:
   procedure:
   - POST JobNewRequest with a fresh idempotencyKey; record jobDbId.
   - POST the identical body and key again; GET the complete jobs collection.
-  expectation: Initial acceptance echoes the original jobType and idempotencyKey with a nonempty jobDbId and a valid required Job lifecycle status and schema-valid optional timestamps; the second response is 200 or 202 with the same identity and a valid Job lifecycle status and schema-valid optional timestamps, and a complete collection with unique well-formed job identities, valid required Job statuses and no exposed EXPIRED results contains exactly one stored job for that original key.
+  expectation: Initial acceptance echoes the original jobType and idempotencyKey with a nonempty jobDbId and a valid required Job lifecycle status, schema-valid optional timestamps and no disclosed EXPIRED result; the second response is 200 or 202 with the same identity, a valid Job lifecycle status, schema-valid optional timestamps and no disclosed EXPIRED result, and a complete collection with unique well-formed job identities, valid required Job statuses and no exposed EXPIRED results contains exactly one stored job for that original key.
   falsifier: A second jobDbId is issued or a duplicate/modified stored job exists despite matching responses.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_submit, capture_job: true}
@@ -489,7 +489,7 @@ probes:
   title: Concurrent identical submits yield exactly one job
   procedure:
   - POST the identical body and idempotency key from 8 threads at once; GET the complete jobs collection to inspect the stored effect.
-  expectation: All responses are 2xx with the same nonempty jobDbId, original jobType and echoed idempotencyKey, and each independently carries a valid required Job lifecycle status and schema-valid optional timestamps; a complete collection with unique well-formed job identities and required Job statuses and no exposed EXPIRED results contains exactly one stored job for that original type and key.
+  expectation: All responses are 2xx with the same nonempty jobDbId, original jobType and echoed idempotencyKey, and each independently carries a valid required Job lifecycle status, schema-valid optional timestamps and no disclosed EXPIRED result; a complete collection with unique well-formed job identities and required Job statuses and no exposed EXPIRED results contains exactly one stored job for that original type and key.
   falsifier: Two distinct response jobDbIds, missing stored identity, duplicate key, or incomplete collection evidence.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_submit, concurrent_posts: 8, assert: {single_effect: true}}
@@ -500,7 +500,7 @@ probes:
   title: List endpoints return paged envelopes
   procedure:
   - GET job and model collections after creating one of each; validate first-page arithmetic and bind the listed records to the original submission.
-  expectation: Initial job acceptance echoes the original jobType and idempotencyKey; each collection returns a consistent first-page envelope and exactly one matching created identity, with well-formed unique identities and valid required Job lifecycle statuses, schema-valid optional timestamps and no exposed EXPIRED results for all visible jobs, and unique well-formed (modelDbId, modelVersion) pairs for all visible models, original job request binding and all submitted model fields including nested provenance intact.
+  expectation: Initial job acceptance echoes the original jobType and idempotencyKey without disclosing an EXPIRED result; each collection returns a consistent first-page envelope and exactly one matching created identity, with well-formed unique identities and valid required Job lifecycle statuses, schema-valid optional timestamps and no exposed EXPIRED results for all visible jobs, and unique well-formed (modelDbId, modelVersion) pairs for all visible models, original job request binding and all submitted model fields including nested provenance intact.
   falsifier: Missing or duplicate created identities, a mismatched job type or request key, changed model fields, inconsistent pagination or missing created records.
   calls:
   - {method: POST, path: /jobs, body_fixture: live_submit, capture_job: true}
@@ -525,7 +525,7 @@ probes:
   title: Deprecated models serve with a warning
   procedure:
   - Register a deprecated model; read back its exact stored version; submit inference naming the persisted deprecated model; verify completed output is bound to the originally registered version and canonical input digest.
-  expectation: Deprecated-model registration echoes all submitted fields; a versioned GET returns the same persisted deprecated record; inference is accepted with 202, echoes the original job type, idempotency key and required valid Job lifecycle status and schema-valid optional timestamps, and warns; every polling response retains the originally submitted jobType/idempotencyKey; the job completes with the original model identity, version and input digest.
+  expectation: Deprecated-model registration echoes all submitted fields; a versioned GET returns the same persisted deprecated record; inference is accepted with 202, echoes the original job type, idempotency key and required valid Job lifecycle status and schema-valid optional timestamps without disclosing an EXPIRED result, and warns; every polling response retains the originally submitted jobType/idempotencyKey; the job completes with the original model identity, version and input digest.
   falsifier: Missing or corrupted stored deprecated model, silent acceptance, rejection, another job completing, changed model version, or unrelated inference output.
   calls:
   - {method: POST, path: /models, body_fixture: live_model_deprecated, capture_model_deprecated: true}

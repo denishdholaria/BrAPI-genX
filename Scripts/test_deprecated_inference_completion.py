@@ -241,6 +241,14 @@ class DeprecatedInferenceCompletionTests(unittest.TestCase):
                     ack_mutate=lambda row: {**row, "progress": progress}
                 ).failures)
 
+    def test_expired_inference_ack_with_exposed_result_fails_before_poll(self):
+        for leaked in ({"data": ["secret"]}, {}, [], 0, False):
+            with self.subTest(leaked=leaked):
+                self.assertEqual(1, self.exercise(
+                    ack_mutate=lambda row: {
+                        **row, "status": "EXPIRED", "result": leaked},
+                    reject_before_poll=True).failures)
+
     def test_initial_ack_missing_status_fails_before_poll(self):
         def drop_status(record):
             record.pop("status")

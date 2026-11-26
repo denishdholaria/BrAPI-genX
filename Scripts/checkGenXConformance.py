@@ -1707,6 +1707,8 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                 if (status in (200, 202)
                         and isinstance(original, dict)
                         and valid_job_wire_fields(returned)
+                        and (returned.get("status") != "EXPIRED"
+                             or expired_job_result_withheld(returned))
                         and isinstance(ctx.get("live_job"), str)
                         and ctx["live_job"]
                         and returned.get("jobDbId") == ctx["live_job"]
@@ -1755,6 +1757,8 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         or any(job_id != ids[0] for job_id in ids)
                         or any(
                             not valid_job_wire_fields(record)
+                            or (record.get("status") == "EXPIRED"
+                                and not expired_job_result_withheld(record))
                             or record.get("jobType") != body["jobType"]
                             or record.get("idempotencyKey")
                                 != body["idempotencyKey"]
@@ -1783,6 +1787,8 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         or not isinstance(accepted.get("jobDbId"), str)
                         or not accepted["jobDbId"]
                         or not valid_job_wire_fields(accepted)
+                        or (accepted.get("status") == "EXPIRED"
+                            and not expired_job_result_withheld(accepted))
                         or not isinstance(body.get("jobType"), str)
                         or not body["jobType"]
                         or accepted.get("jobType") != body["jobType"]
@@ -1939,6 +1945,8 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         or not isinstance(submitted.get("idempotencyKey"), str)
                         or not submitted["idempotencyKey"]
                         or not valid_job_wire_fields(accepted)
+                        or (accepted.get("status") == "EXPIRED"
+                            and not expired_job_result_withheld(accepted))
                         or accepted.get("jobType") != submitted["jobType"]
                         or accepted.get("idempotencyKey")
                             != submitted["idempotencyKey"]):

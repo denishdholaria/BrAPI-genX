@@ -1561,3 +1561,26 @@ with its permitted metadata and withheld result.
 Mandatory replay, concurrent and L-25 pagination suites now
 include positive and negative expired-row tests. See
 [Mission 184 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-184-EXPIRED-JOB-COLLECTION-CONFIDENTIALITY.md).
+
+## Expired result confidentiality in Job acknowledgments (Mission 185)
+
+Initial `POST /jobs` acknowledgments, identical replay replies,
+eight-way concurrent replies, and the specialized deprecated-inference
+acknowledgment now enforce the same result-withholding rule when a
+returned Job carries `status: EXPIRED`. Such a Job may omit
+`result` or supply explicit null; any non-null result is rejected.
+
+This closes a separate exposure from individual and collection GET
+readbacks: a response can preserve the correct identifier,
+idempotency key, valid lifecycle enum and optional fields while
+still disclosing expired output. The runner validates every
+concurrent acknowledgment independently and rejects a malformed
+initial or replay response before downstream collection or
+terminal evidence can conceal it.
+
+Required identity, response-code policies, existing concurrent
+lifecycle flexibility and the published Job schema are unchanged.
+Mandatory replay, concurrent and deprecated-inference regression
+suites check the negative leakage and positive withholding cases.
+
+See [Mission 185 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-185-EXPIRED-JOB-ACK-CONFIDENTIALITY.md).
