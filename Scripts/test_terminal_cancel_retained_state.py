@@ -46,7 +46,10 @@ class TerminalCancelRetainedStateTests(unittest.TestCase):
                 }
             return record
 
-        def terminal_reply(_server, _job_id, _token):
+        def terminal_reply(_server, _job_id, _token,
+                           expected_type=None, expected_key=None):
+            self.assertEqual(original["jobType"], expected_type)
+            self.assertEqual(original["idempotencyKey"], expected_key)
             row = terminal_record(baseline_id, baseline_status)
             if baseline_mutation is not None:
                 baseline_mutation(row)
