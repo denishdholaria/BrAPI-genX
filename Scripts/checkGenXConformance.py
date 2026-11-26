@@ -1313,6 +1313,8 @@ def immutable_job_snapshot(status, payload):
                 or not isinstance(row.get("jobType"), str)
                 or not row["jobType"]
                 or not valid_job_wire_fields(row)
+                or (row.get("status") == "EXPIRED"
+                    and not expired_job_result_withheld(row))
                 or ("idempotencyKey" in row
                     and not isinstance(row["idempotencyKey"], str))
                 or row["jobDbId"] in snapshot):
@@ -2325,6 +2327,8 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                                 or not isinstance(row.get("jobType"), str)
                                 or not row["jobType"]
                                 or not valid_job_wire_fields(row)
+                                or (row.get("status") == "EXPIRED"
+                                    and not expired_job_result_withheld(row))
                                 or ("idempotencyKey" in row
                                     and not isinstance(row["idempotencyKey"], str))
                                 or job_id in visible_job_ids):
