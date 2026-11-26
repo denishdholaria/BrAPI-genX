@@ -483,27 +483,20 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
         self.assertEqual(1, self.paged_jobs(change_page=change)[0])
 
     def test_original_key_repeated_on_tail_page_fails(self):
-        # Even if an implementation reuses an original submission's key
-        # under another job ID, L-25 cannot report a single created effect.
-        def change(pages):
-            pages[2][1]["result"]["data"][0]["idempotencyKey"] = (
-                "unused-placeholder")
-        # Replace with submitted original key from the first-page test fixture
-        # through a local wrapper around the HTTP transport.
-        original_http = checker.http_call
-        def with_duplicate_key(server, method, path, body=None, token=None):
-            return original_http(server, method, path, body=body, token=token)
-        # The helper itself verifies duplicate original keys when available;
-        # verify it independently with an explicit original key here.
+        # An otherwise well-formed later page must not repeat the created
+        # submission's key under another Job identifier.
         pagination = {"totalCount": 3, "pageSize": 1, "totalPages": 3}
         seen = {"JOB_PAGE"}
-        pages = {1: self.job_page(1, {
-            "jobDbId": "OTHER_1", "jobType": "analysis", "status": "RUNNING",
-            "idempotencyKey": "submitted-key"}), 2: self.job_page(2, {
-            "jobDbId": "OTHER_2", "jobType": "analysis", "status": "RUNNING"})}
-        with mock.patch.object(checker, "http_call", side_effect=lambda _, m, p,
-                               body=None, token=None: pages[int(
-                                   p.split("page=", 1)[1].split("&")[0])]):
+        pages = {
+            1: self.job_page(1, {
+                "jobDbId": "OTHER_1", "jobType": "analysis", "status": "RUNNING",
+                "idempotencyKey": "submitted-key"}),
+            2: self.job_page(2, {
+                "jobDbId": "OTHER_2", "jobType": "analysis", "status": "RUNNING"}),
+        }
+        def read(_server, method, path, body=None, token=None):
+            return pages[int(path.split("page=", 1)[1].split("&")[0])]
+        with mock.patch.object(checker, "http_call", side_effect=read):
             self.assertIsNotNone(checker.job_collection_tail_problem(
                 "http://example.test", None, pagination, seen,
                 "JOB_PAGE", "submitted-key"))
