@@ -227,14 +227,25 @@ const server = Bun.serve({
     }
 
     if (method === "GET" && route === "/jobs") {
-      const all = [...jobs.values()].sort((a, b) => (a.jobDbId < b.jobDbId ? -1 : 1));
+      let all = [...jobs.values()].sort((a, b) => (a.jobDbId < b.jobDbId ? -1 : 1));
+      const jobType = url.searchParams.get("jobType");
+      const status = url.searchParams.get("status");
+      if (jobType) all = all.filter((job) => job.jobType === jobType);
+      if (status) all = all.filter((job) => job.status === status);
+      const page = Number(url.searchParams.get("page") ?? "0");
+      const size = Number(url.searchParams.get("pageSize") ?? Math.max(all.length, 1));
+      if (!Number.isInteger(page) || page < 0 || !Number.isInteger(size) || size < 1) {
+        return text(400, "page and pageSize must be nonnegative/positive integers");
+      }
+      const total = all.length;
+      const totalPages = Math.max(1, Math.ceil(total / size));
       return json(200, {
         metadata: {
-          pagination: { totalCount: all.length, pageSize: all.length, totalPages: 1, currentPage: 0 },
+          pagination: { totalCount: total, pageSize: size, totalPages, currentPage: page },
           status: [],
           datafiles: [],
         },
-        result: { data: all },
+        result: { data: all.slice(page * size, (page + 1) * size) },
       });
     }
 
