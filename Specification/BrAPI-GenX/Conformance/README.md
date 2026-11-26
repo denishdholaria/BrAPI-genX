@@ -1538,3 +1538,26 @@ polling rejects an expired payload while permitting absent/null
 withheld results. The L-05 suite checks the shared policy as well.
 
 See [Mission 183 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-183-EXPIRED-TERMINAL-RESULT-CONFIDENTIALITY.md).
+
+## Expired Job result confidentiality in collection readbacks (Mission 184)
+
+The existing `GET /jobs` contract lists full `Job` objects,
+so an `EXPIRED` row with a non-null `result` would disclose data
+even when individual Job retrieval correctly withholds it.
+
+The shared complete jobs-collection validator used by L-01, L-02,
+L-04, L-15 and L-24 now applies the Mission 183 expired-result
+predicate to **each** row. The L-25 first-page list validator
+applies the same rule to **every visible job**, including unrelated
+previously accepted jobs. Each `EXPIRED` row must omit `result`
+or provide explicit null. Non-null contents—including empty
+objects, lists or false values—fail conformance.
+
+The change retains existing pagination, job identity,
+original-request binding, lifecycle validity and all accepted
+nonexpired output rules. A valid expired job can remain visible
+with its permitted metadata and withheld result.
+
+Mandatory replay, concurrent and L-25 pagination suites now
+include positive and negative expired-row tests. See
+[Mission 184 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-184-EXPIRED-JOB-COLLECTION-CONFIDENTIALITY.md).
