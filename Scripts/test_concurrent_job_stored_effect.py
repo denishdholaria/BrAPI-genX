@@ -264,6 +264,24 @@ class ConcurrentJobStoredEffectTests(unittest.TestCase):
         self.assertEqual(0, failures)
         self.assertEqual(1, sum(method == "GET" for method, _ in calls))
 
+    def test_one_expired_concurrent_ack_cannot_expose_result(self):
+        for leaked in ({"data": ["secret"]}, {}, [], 0, False):
+            with self.subTest(leaked=leaked):
+                failures, calls = self.exercise(
+                    mutate_ack=lambda row, index: (
+                        {**row, "status": "EXPIRED", "result": leaked}
+                        if index == 8 else row))
+                self.assertEqual(1, failures)
+                self.assertEqual(0, sum(method == "GET" for method, _ in calls))
+
+    def test_expired_concurrent_ack_null_result_allowed(self):
+        failures, calls = self.exercise(
+            mutate_ack=lambda row, index: (
+                {**row, "status": "EXPIRED", "result": None}
+                if index == 8 else row))
+        self.assertEqual(0, failures)
+        self.assertEqual(1, sum(method == "GET" for method, _ in calls))
+
     def test_one_missing_status_reply_fails_before_collection(self):
         failures, calls = self.exercise(
             mutate_ack=lambda row, index: (
