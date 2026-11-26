@@ -335,14 +335,15 @@ class TerminalCancelRetainedStateTests(unittest.TestCase):
 
 
     @staticmethod
-    def _poll_job(job, responses=None):
+    def _poll_job(job, responses=None, expected_type=None, expected_key=None):
         if responses is None:
             responses = [(200, {"result": job})]
         with mock.patch.object(checker, "http_call", side_effect=responses) as call:
             with mock.patch("time.sleep", return_value=None):
                 try:
                     value = checker.wait_terminal(
-                        "http://example.test/genx/v1", "JOB_TERMINAL", None
+                        "http://example.test/genx/v1", "JOB_TERMINAL", None,
+                        expected_type, expected_key
                     )
                 except ValueError as exc:
                     return None, str(exc), call.call_count
@@ -435,6 +436,62 @@ class TerminalCancelRetainedStateTests(unittest.TestCase):
         value, error, count = self._poll_job(
             None, [(200, {"result": running}), terminal]
         )
+        self.assertIsNone(error)
+        self.assertEqual({"result": done}, value)
+        self.assertEqual(2, count)
+
+    def test_terminal_poll_rejects_changed_original_type(self):
+        row = {"jobDbId": "JOB_TERMINAL", "jobType": "analysis",
+               "status": "COMPLETED", "idempotencyKey": "client-key"}
+        value, error, count = self._poll_job(
+            row, expected_type="germplasm_search", expected_key="client-key")
+        self.assertIsNone(value)
+        self.assertIn("changed original type/key", error)
+        self.assertEqual(1, count)
+
+    def test_terminal_poll_rejects_missing_or_changed_original_key(self):
+        for invalid in (None, "changed-key"):
+            with self.subTest(invalid=invalid):
+                row = {"jobDbId": "JOB_TERMINAL",
+                       "jobType": "germplasm_search", "status": "COMPLETED"}
+                if invalid is not None:
+                    row["idempotencyKey"] = invalid
+                value, error, count = self._poll_job(
+                    row, expected_type="germplasm_search",
+                    expected_key="client-key")
+                self.assertIsNone(value)
+                self.assertIn("changed original type/key", error)
+                self.assertEqual(1, count)
+
+    def test_intermediate_poll_changed_original_type_or_key_fails_early(self):
+        terminal = {"jobDbId": "JOB_TERMINAL",
+                    "jobType": "germplasm_search",
+                    "idempotencyKey": "client-key", "status": "COMPLETED"}
+        for corrupted in (
+            {**terminal, "status": "RUNNING", "jobType": "analysis"},
+            {**terminal, "status": "RUNNING", "idempotencyKey": "wrong-key"},
+            {k: v for k, v in {**terminal, "status": "RUNNING"}.items()
+             if k != "idempotencyKey"},
+        ):
+            with self.subTest(corrupted=corrupted):
+                value, error, count = self._poll_job(
+                    None,
+                    [(200, {"result": corrupted}), (200, {"result": terminal})],
+                    expected_type="germplasm_search",
+                    expected_key="client-key")
+                self.assertIsNone(value)
+                self.assertIn("changed original type/key", error)
+                self.assertEqual(1, count)
+
+    def test_polling_preserves_original_binding_across_valid_transition(self):
+        first = {"jobDbId": "JOB_TERMINAL",
+                 "jobType": "germplasm_search",
+                 "idempotencyKey": "client-key",
+                 "status": "RUNNING"}
+        done = {**first, "status": "COMPLETED"}
+        value, error, count = self._poll_job(
+            None, [(200, {"result": first}), (200, {"result": done})],
+            expected_type="germplasm_search", expected_key="client-key")
         self.assertIsNone(error)
         self.assertEqual({"result": done}, value)
         self.assertEqual(2, count)
