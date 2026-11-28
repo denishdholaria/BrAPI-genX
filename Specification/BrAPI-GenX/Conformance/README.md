@@ -1649,3 +1649,30 @@ limited discovery evidence. Mandatory L-25 collection and manifest
 mutation suites cover these distinctions.
 
 See [Mission 189 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-189-TYPE-ONLY-JOB-FILTER-INTEGRITY.md).
+
+
+## All non-EXPIRED Job status-only filters (Mission 190)
+
+Registered **L-25** now independently queries
+`GET /jobs?status=COMPLETED&page=0&pageSize=2`,
+`status=RUNNING`, `status=FAILED`, `status=CANCELLED`,
+and `status=SUBMITTED` using the same page size.
+These five requests complement the already mandatory
+`status=EXPIRED`, type-only, and combined-filter readbacks.
+
+A single parameterized assertion verifies the exact requested
+status on every returned Job and every advertised later page.
+It reuses the existing unique-identity, Job wire-field,
+pagination-count, full-slice and fail-closed request checks.
+Valid nonexpired results are allowed, including a completed Job
+with an object result, without requiring results to be present
+in statuses where the published schema does not require them.
+`EXPIRED` result confidentiality remains unchanged.
+
+Manifest validation requires all five filter requests with
+their exact expected statuses. Mandatory regression tests exercise
+first-page and tail-page mismatches, malformed Jobs, duplicates,
+truncation, pagination inconsistencies and valid empty results.
+
+These checks do not create new Job schema or lifecycle policy.
+See [Mission 190 assessment](../../../docs/assessment/BRAPI-GENX-MISSION-190-NONEXPIRED-JOB-STATUS-FILTER-INTEGRITY.md).
