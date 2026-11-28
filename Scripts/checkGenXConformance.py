@@ -1375,6 +1375,11 @@ def job_collection_tail_problem(server, token, pagination, seen_job_ids,
 
 
 
+NONEXPIRED_JOB_STATUS_FILTERS = (
+    "COMPLETED", "RUNNING", "FAILED", "CANCELLED", "SUBMITTED",
+)
+
+
 def filtered_job_collection_problem(server, token, status, payload,
                                     job_type=None, status_filter=None):
     """Audit all pages of an advertised Job collection with existing filters.
@@ -2442,6 +2447,15 @@ def run_live_probe(server, probe, ctx, results, token, expired_job):
                         probe["id"], probe["title"], "FAIL",
                         "type-only Job filter: " + problem
                     )
+            if "filtered_job_status_integrity" in assertion:
+                expected_status = assertion["filtered_job_status_integrity"]
+                problem = filtered_job_collection_problem(
+                    server, token, status, payload, status_filter=expected_status)
+                if problem:
+                    return results.report(
+                        probe["id"], probe["title"], "FAIL",
+                        f"{expected_status} status-filtered Jobs: " + problem
+                    )
             if "collection_contains_created" in assertion:
                 kind = assertion["collection_contains_created"]
                 result = payload.get("result") if isinstance(payload, dict) else None
@@ -3294,7 +3308,8 @@ LIVE_COUNT_ASSERTIONS = frozenset({
 })
 LIVE_ASSERTIONS = (LIVE_BOOLEAN_ASSERTIONS | LIVE_COUNT_ASSERTIONS |
                    {"status", "status_message", "telemetry_counts",
-                    "telemetry_mean", "body", "collection_contains_created"})
+                    "telemetry_mean", "body", "collection_contains_created",
+                    "filtered_job_status_integrity"})
 
 
 def validate_live_step_assertions(probe_id, index, call):
@@ -3434,6 +3449,23 @@ def validate_live_step_assertions(probe_id, index, call):
             f"probe {probe_id} call {index}: "
             "filtered_expired_job_type_withheld requires combined Job filters GET"
         )
+    if "filtered_job_status_integrity" in assertion:
+        expected = assertion["filtered_job_status_integrity"]
+        if (not isinstance(expected, str)
+                or expected not in NONEXPIRED_JOB_STATUS_FILTERS):
+            raise ValueError(
+                f"probe {probe_id} call {index}: "
+                "filtered_job_status_integrity requires a supported "
+                "non-EXPIRED Job status"
+            )
+        if (call.get("method") != "GET"
+                or call.get("path") !=
+                    f"/jobs?status={expected}&page=0&pageSize=2"):
+            raise ValueError(
+                f"probe {probe_id} call {index}: "
+                "filtered_job_status_integrity requires matching status-filtered "
+                "Job collection GET"
+            )
     if "filtered_job_type_integrity" in assertion and (
             call.get("method") != "GET"
             or call.get("path") !=
@@ -3664,7 +3696,7 @@ def validate_probe_manifest(probes):
                         "probe L-07: original observation and provenance round-trip required"
                     )
             if probe_id == "L-25":
-                if (len(calls) != 7
+                if (len(calls) != 12
                         or calls[0].get("method") != "POST"
                         or calls[0].get("path") != "/jobs"
                         or calls[0].get("body_fixture") != "live_submit"
@@ -3698,7 +3730,17 @@ def validate_probe_manifest(probes):
                             "/jobs?jobType=germplasm_search&page=0&pageSize=2"
                         or calls[6].get("assert", {}).get("status") != 200
                         or calls[6].get("assert", {}).get(
-                            "filtered_job_type_integrity") is not True):
+                            "filtered_job_type_integrity") is not True
+                        or any(
+                            calls[7 + offset].get("method") != "GET"
+                            or calls[7 + offset].get("path") !=
+                                f"/jobs?status={expected}&page=0&pageSize=2"
+                            or calls[7 + offset].get("assert", {}).get(
+                                "status") != 200
+                            or calls[7 + offset].get("assert", {}).get(
+                                "filtered_job_status_integrity") != expected
+                            for offset, expected
+                            in enumerate(NONEXPIRED_JOB_STATUS_FILTERS))):
                     raise ValueError(
                         "probe L-25: paged job and model collection evidence required"
                     )
