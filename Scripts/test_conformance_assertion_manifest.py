@@ -664,7 +664,7 @@ class LiveAssertionManifestTests(unittest.TestCase):
         for offset, expected in enumerate(checker.NONEXPIRED_JOB_STATUS_FILTERS):
             with self.subTest(expected=expected):
                 self.assertIn(
-                    "paged job and model collection evidence required",
+                    "filtered_job_status_integrity requires matching status-filtered",
                     self.mutated("L-25", 7 + offset, lambda s:
                         s["assert"].update(filtered_job_status_integrity="COMPLETED"
                                            if expected != "COMPLETED" else "RUNNING")))
