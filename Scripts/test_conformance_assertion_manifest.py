@@ -10,6 +10,7 @@ import tempfile
 import unittest
 
 import yaml
+import checkGenXConformance as checker
 from checkGenXConformance import validate_probe_manifest
 
 ROOT = Path(__file__).resolve().parents[1]
