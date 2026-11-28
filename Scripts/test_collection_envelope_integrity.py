@@ -32,6 +32,10 @@ class CollectionEnvelopeTests(unittest.TestCase):
             "filtered_expired_job_type_withheld"])
         self.assertIs(True, self.probe["calls"][6]["assert"][
             "filtered_job_type_integrity"])
+        self.assertEqual(
+            list(checker.NONEXPIRED_JOB_STATUS_FILTERS),
+            [step["assert"]["filtered_job_status_integrity"]
+             for step in self.probe["calls"][7:]])
 
     def test_unknown_collection_selector_rejected(self):
         candidate = copy.deepcopy(self.probes)
@@ -113,6 +117,19 @@ class CollectionEnvelopeTests(unittest.TestCase):
                      "status": "RUNNING", "result": {"progress": "partial"}}])
                 return bad_status or 200, (
                     mutate("type_only_jobs", response) if mutate else response)
+            if 8 <= len(calls) <= 12:
+                expected = checker.NONEXPIRED_JOB_STATUS_FILTERS[len(calls) - 8]
+                self.assertEqual(
+                    ("GET", f"/jobs?status={expected}&page=0&pageSize=2"),
+                    (method, path))
+                row = {"jobDbId": f"JOB_STATUS_{expected}",
+                       "jobType": "analysis", "status": expected}
+                if expected == "COMPLETED":
+                    row["result"] = {"score": 1}
+                response = paged([row])
+                response["metadata"]["pagination"]["pageSize"] = 2
+                return bad_status or 200, (
+                    mutate(f"status_{expected}", response) if mutate else response)
             self.fail("unexpected extra live request")
 
         results = checker.Results()
