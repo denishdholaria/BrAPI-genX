@@ -652,6 +652,55 @@ class LiveAssertionManifestTests(unittest.TestCase):
                 s["assert"].update(filtered_job_type_integrity=True,
                                    filtered_job_type_integrty=True)))
 
+    def test_nonexpired_status_filter_probes_required(self):
+        for offset, expected in enumerate(checker.NONEXPIRED_JOB_STATUS_FILTERS):
+            with self.subTest(expected=expected):
+                self.assertIn(
+                    "paged job and model collection evidence required",
+                    self.mutated("L-25", 7 + offset, lambda s:
+                        s.update({"assert": {"status": 200}})))
+
+    def test_nonexpired_status_filter_values_are_exact(self):
+        for offset, expected in enumerate(checker.NONEXPIRED_JOB_STATUS_FILTERS):
+            with self.subTest(expected=expected):
+                self.assertIn(
+                    "paged job and model collection evidence required",
+                    self.mutated("L-25", 7 + offset, lambda s:
+                        s["assert"].update(filtered_job_status_integrity="COMPLETED"
+                                           if expected != "COMPLETED" else "RUNNING")))
+
+    def test_nonexpired_status_filter_rejects_unsupported_status(self):
+        for value in ("EXPIRED", "UNKNOWN", "", None, False, 0, []):
+            with self.subTest(value=value):
+                self.assertIn(
+                    "filtered_job_status_integrity requires a supported non-EXPIRED",
+                    self.mutated("L-25", 7, lambda s:
+                        s["assert"].update(filtered_job_status_integrity=value)))
+
+    def test_nonexpired_status_filter_requires_matching_get_path(self):
+        for path in ("/jobs",
+                     "/jobs?status=EXPIRED&page=0&pageSize=2",
+                     "/jobs?status=RUNNING&page=0&pageSize=2",
+                     "/jobs?status=COMPLETED&page=1&pageSize=2",
+                     "/jobs?status=COMPLETED&page=0&pageSize=1"):
+            with self.subTest(path=path):
+                self.assertIn(
+                    "filtered_job_status_integrity requires matching status-filtered",
+                    self.mutated("L-25", 7, lambda s:
+                        s.update(path=path)))
+
+    def test_nonexpired_status_filter_requires_success_status(self):
+        self.assertIn(
+            "paged job and model collection evidence required",
+            self.mutated("L-25", 7, lambda s:
+                s["assert"].update(status=204)))
+
+    def test_nonexpired_status_filter_misspelling_rejected(self):
+        self.assertIn(
+            "unknown live assertion",
+            self.mutated("L-25", 7, lambda s:
+                s["assert"].update(filtered_job_status_integrty="COMPLETED")))
+
     def test_embargo_denial_postcondition_cannot_be_removed(self):
         self.assertIn(
             "embargo_denial_no_payload on rejected package GET required",
