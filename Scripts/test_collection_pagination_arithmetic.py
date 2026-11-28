@@ -21,7 +21,7 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
         cls.probe = next(p for p in document["probes"] if p["id"] == "L-25")
 
     def test_registered_collections_are_both_required(self):
-        self.assertEqual(7, len(self.probe["calls"]))
+        self.assertEqual(12, len(self.probe["calls"]))
         self.assertEqual(
             ["jobs", "models"],
             [step["assert"]["collection_contains_created"]
@@ -33,10 +33,14 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
             "filtered_expired_job_type_withheld"])
         self.assertIs(True, self.probe["calls"][6]["assert"][
             "filtered_job_type_integrity"])
+        self.assertEqual(
+            list(checker.NONEXPIRED_JOB_STATUS_FILTERS),
+            [step["assert"]["filtered_job_status_integrity"]
+             for step in self.probe["calls"][7:]])
 
     def exercise(self, modify=None, include_unrelated=False, status=200,
                  job_pages=None, filtered_pages=None, combined_pages=None,
-                 type_only_pages=None):
+                 type_only_pages=None, status_pages=None):
         requests = []
         submitted_model = {}
         job_body = {}
@@ -120,6 +124,23 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
                      "status": "COMPLETED", "result": {"value": 5}}])
                 if modify:
                     value = modify("type_only_jobs", value)
+                return status, value
+            if method == "GET" and path.startswith("/jobs?status="):
+                state = path.split("status=", 1)[1].split("&", 1)[0]
+                if state not in checker.NONEXPIRED_JOB_STATUS_FILTERS:
+                    self.fail(f"unknown non-EXPIRED status query: {state}")
+                index = int(path.split("page=", 1)[1].split("&", 1)[0])
+                if index > 0:
+                    return copy.deepcopy(
+                        (status_pages or {}).get(state, {}).get(index, (404, {})))
+                job = {"jobDbId": f"STATUS_{state}", "jobType": "analysis",
+                       "status": state}
+                if state == "COMPLETED":
+                    job["result"] = {"prediction": [0.5]}
+                value = first_page([job])
+                value["metadata"]["pagination"]["pageSize"] = 2
+                if modify:
+                    value = modify(f"status_{state}", value)
                 return status, value
             if method == "GET" and path == "/models":
                 rows = [copy.deepcopy(submitted_model)]
@@ -504,6 +525,9 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
             ("GET", "/jobs?status=EXPIRED&page=0&pageSize=2"),
             ("GET", "/jobs?jobType=germplasm_search&status=EXPIRED&page=0&pageSize=2"),
             ("GET", "/jobs?jobType=germplasm_search&page=0&pageSize=2"),
+        ] + [
+            ("GET", f"/jobs?status={state}&page=0&pageSize=2")
+            for state in checker.NONEXPIRED_JOB_STATUS_FILTERS
         ], requests)
 
     def test_unread_job_tail_is_not_accepted(self):
@@ -819,9 +843,9 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
     def test_type_only_filter_allows_mixed_lifecycle_with_completed_result(self):
         failures, calls = self.exercise()
         self.assertEqual(0, failures)
-        self.assertEqual(
+        self.assertIn(
             ("GET", "/jobs?jobType=germplasm_search&page=0&pageSize=2"),
-            calls[-1])
+            calls)
 
     def test_type_only_filter_wrong_job_type_fails(self):
         def change(kind, payload):
@@ -905,7 +929,10 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
         self.assertEqual([
             ("GET", "/jobs?jobType=germplasm_search&page=1&pageSize=2"),
             ("GET", "/jobs?jobType=germplasm_search&page=2&pageSize=2"),
-        ], calls[-2:])
+        ], [call for call in calls
+            if call[1].startswith("/jobs?jobType=germplasm_search&page=")
+            and call[1] !=
+                "/jobs?jobType=germplasm_search&page=0&pageSize=2"])
 
     def test_type_only_tail_expired_result_leaks_fail(self):
         for leaked in ({"hidden": 1}, {}, [], False, 0):
@@ -955,6 +982,148 @@ class CollectionPaginationArithmeticTests(unittest.TestCase):
                     payload["metadata"]["pagination"][field] = value
                 self.assertEqual(1, self.type_only_multi_page(
                     change_first=change)[0])
+
+    def test_all_nonexpired_status_filters_registered_and_called(self):
+        failures, calls = self.exercise()
+        self.assertEqual(0, failures)
+        for state in checker.NONEXPIRED_JOB_STATUS_FILTERS:
+            with self.subTest(state=state):
+                self.assertIn(
+                    ("GET", f"/jobs?status={state}&page=0&pageSize=2"),
+                    calls)
+
+    def test_nonexpired_status_filters_reject_wrong_lifecycle_state(self):
+        for state in checker.NONEXPIRED_JOB_STATUS_FILTERS:
+            for wrong in ("EXPIRED", "OTHER", None):
+                with self.subTest(state=state, wrong=wrong):
+                    def change(kind, payload):
+                        if kind == f"status_{state}":
+                            payload["result"]["data"][0]["status"] = wrong
+                            if wrong == "EXPIRED":
+                                payload["result"]["data"][0].pop("result", None)
+                        return payload
+                    self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def test_completed_status_filter_allows_result_object_null_and_absent(self):
+        for kind in ("present", "null", "absent"):
+            with self.subTest(kind=kind):
+                def change(which, payload):
+                    if which == "status_COMPLETED":
+                        row = payload["result"]["data"][0]
+                        if kind == "null":
+                            row["result"] = None
+                        elif kind == "absent":
+                            row.pop("result", None)
+                    return payload
+                self.assertEqual(0, self.exercise(modify=change)[0])
+
+    def test_nonexpired_status_filter_allows_empty_collection(self):
+        for state in checker.NONEXPIRED_JOB_STATUS_FILTERS:
+            for pages in (0, 1):
+                with self.subTest(state=state, pages=pages):
+                    def change(kind, payload):
+                        if kind == f"status_{state}":
+                            payload["result"]["data"] = []
+                            payload["metadata"]["pagination"].update(
+                                totalCount=0, pageSize=2, totalPages=pages)
+                        return payload
+                    self.assertEqual(0, self.exercise(modify=change)[0])
+
+    def test_nonexpired_filter_rejects_malformed_first_page(self):
+        for state in checker.NONEXPIRED_JOB_STATUS_FILTERS:
+            for update in (
+                    {"jobDbId": ""}, {"jobType": ""},
+                    {"progress": None}, {"createdAt": "2026-11-28"},
+                    {"idempotencyKey": False}):
+                with self.subTest(state=state, update=update):
+                    def change(kind, payload):
+                        if kind == f"status_{state}":
+                            payload["result"]["data"][0].update(update)
+                        return payload
+                    self.assertEqual(1, self.exercise(modify=change)[0])
+
+    def status_only_multi_page(self, state, change_tail=None, change_first=None):
+        """Two pages, three stable Jobs; no result disclosure requirement for non-EXPIRED."""
+        def first(kind, payload):
+            if kind == f"status_{state}":
+                payload["result"]["data"] = [
+                    {"jobDbId": f"{state}_ONE", "jobType": "analysis",
+                     "status": state, "result": {"value": 10}},
+                    {"jobDbId": f"{state}_TWO", "jobType": "germplasm_search",
+                     "status": state}]
+                payload["metadata"]["pagination"].update(
+                    totalCount=3, pageSize=2, totalPages=2, currentPage=0)
+                if change_first:
+                    change_first(payload)
+            return payload
+        pages = {state: {1: (200, {
+            "result": {"data": [
+                {"jobDbId": f"{state}_THREE", "jobType": "inference",
+                 "status": state, "result": {"value": 30}}]},
+            "metadata": {"pagination": {
+                "totalCount": 3, "pageSize": 2,
+                "totalPages": 2, "currentPage": 1}},
+        })}}
+        if change_tail:
+            change_tail(pages[state])
+        return self.exercise(modify=first, status_pages=pages)
+
+    def test_nonexpired_status_filter_tail_pages_retain_status(self):
+        for state in checker.NONEXPIRED_JOB_STATUS_FILTERS:
+            with self.subTest(state=state):
+                failures, calls = self.status_only_multi_page(state)
+                self.assertEqual(0, failures)
+                self.assertIn(
+                    ("GET", f"/jobs?status={state}&page=1&pageSize=2"),
+                    calls)
+
+    def test_nonexpired_status_filter_tail_mismatch_fails(self):
+        for state in checker.NONEXPIRED_JOB_STATUS_FILTERS:
+            with self.subTest(state=state):
+                def change(pages):
+                    row = pages[1][1]["result"]["data"][0]
+                    row["status"] = "EXPIRED"
+                    row["result"] = None
+                self.assertEqual(1, self.status_only_multi_page(
+                    state, change_tail=change)[0])
+
+    def test_nonexpired_status_filter_tail_duplicate_identity_fails(self):
+        for state in checker.NONEXPIRED_JOB_STATUS_FILTERS:
+            with self.subTest(state=state):
+                def change(pages):
+                    pages[1][1]["result"]["data"][0]["jobDbId"] = f"{state}_ONE"
+                self.assertEqual(1, self.status_only_multi_page(
+                    state, change_tail=change)[0])
+
+    def test_nonexpired_status_filter_truncation_and_bad_metadata_fail(self):
+        for state in checker.NONEXPIRED_JOB_STATUS_FILTERS:
+            for mutate in (
+                    lambda pages: pages.clear(),
+                    lambda pages: pages[1][1]["result"].update(data=[]),
+                    lambda pages: pages[1][1]["metadata"]["pagination"].update(
+                        totalCount=4),
+                    lambda pages: pages[1][1]["metadata"]["pagination"].update(
+                        pageSize=1),
+                    lambda pages: pages[1][1]["metadata"]["pagination"].update(
+                        currentPage=0),
+                    lambda pages: pages[1][1]["metadata"]["pagination"].update(
+                        totalPages=3),
+                    lambda pages: pages.__setitem__(1, (500, {})),
+                    lambda pages: pages.__setitem__(1, (200, []))):
+                with self.subTest(state=state, mutate=mutate):
+                    self.assertEqual(1, self.status_only_multi_page(
+                        state, change_tail=mutate)[0])
+
+    def test_nonexpired_status_filter_bad_first_page_metadata_fails(self):
+        for state in checker.NONEXPIRED_JOB_STATUS_FILTERS:
+            for field, wrong in (
+                    ("totalCount", 4), ("pageSize", 0),
+                    ("totalPages", 3), ("currentPage", 1)):
+                with self.subTest(state=state, field=field):
+                    def change(payload):
+                        payload["metadata"]["pagination"][field] = wrong
+                    self.assertEqual(1, self.status_only_multi_page(
+                        state, change_first=change)[0])
 
     def test_duplicate_model_version_fails_with_consistent_pagination(self):
         def change(kind, data):
